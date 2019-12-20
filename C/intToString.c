@@ -53,6 +53,7 @@ unsigned char int_to_astr(int val, char *pbuf, unsigned char validBits)
 
     pstr = &buf[BUF_SIZE - 1];
     len = 0;
+
     // val的值存储在buf[]数组中
     do
     {
