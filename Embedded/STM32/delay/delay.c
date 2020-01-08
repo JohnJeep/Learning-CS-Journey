@@ -39,7 +39,7 @@ void delay_init(uint16_t SystemClock)
 void delay_us(uint32_t us)
 {		
 	uint32_t temp;	    	 
-	SysTick->LOAD = us * param_us; 				   // 把延时的数换成SysTick的时钟数，写入到LOAD寄存器器中
+	SysTick->LOAD = (uint32_t)us*param_us;                     // 把延时的数换成SysTick的时钟数，写入到LOAD寄存器器中
 	SysTick->VAL = 0x00;        			           // 清空当前寄存器VAL 的内容
 	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk ;	           // 开启倒数功能	  
 	do
@@ -62,13 +62,13 @@ void delay_us(uint32_t us)
 void delay_ms(uint32_t ms)
 {	 		  	  
 	uint32_t temp;		   
-	SysTick->LOAD = (uint32_t)ms*param_ms;			   // 把延时的数换成SysTick的时钟数，写入到LOAD寄存器器中
+	SysTick->LOAD = (uint32_t)ms*param_ms;	                   // 把延时的数换成SysTick的时钟数，写入到LOAD寄存器器中
 	SysTick->VAL = 0x00;				           // 清空当前寄存器VAL 的内容
 	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;	           // 开启倒数功能 
 	do
 	{
 		temp = SysTick->CTRL;
-	}while((temp&0x01)&& !(temp&(1<<16)));	                   // 等待时间到达，即倒数结束   
-	SysTick->CTRL&=~SysTick_CTRL_ENABLE_Msk;	           // 关闭SysTick计数器
-	SysTick->VAL =0X00;       				   // 清空寄存器VAL的值	  	    
+	}while((temp&0x01) && !(temp&(1<<16)));	                   // 等待时间到达，即倒数结束   
+	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;	           // 关闭SysTick计数器
+	SysTick->VAL = 0X00;       				   // 清空寄存器VAL的值	  	    
 } 
