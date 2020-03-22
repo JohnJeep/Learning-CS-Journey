@@ -1,20 +1,23 @@
 ### 基本命令
-- 新建一个文本       `touch+文件名 `
-- 删除一个文本       `rm+文件名 `
-- 新建一个目录       `mkdir `
-- 移除一个目录       `rmdir `
-- 删除一个目录下的所有文件        ` rm -rf `
-- 查找/目录下的`filename.txt` 文件  ` find / -name filename.txt`
-- 查看所有包含`ls`命令的位置   `whereis ls`
-- ln(建立链接命令)
+- `touch 文件名 ` 新建一个文本
+- `rm 文件名 ` 删除一个文本
+- `mkdir ` 新建一个目录
+- `rmdir ` 移除一个目录
+- ` rm -rf ` 删除一个目录下的所有文件；尽量后面加上`-i`参数(interactive)，让系统在执行前确认一次。`r`参数表示递归(recursive)
+- ` mv  -v A B` 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
+- ` find / -name filename.txt`  查找/目录下的`filename.txt` 文件  
+- `whereis ls`  查看所有包含`ls`命令的位置  
+- `ln`(建立链接命令)
   - 软连接    `ln -s 原文件 新文件`
   - 硬链接    `ln 原文件 新文件 `
-- 查看一个程序是否运行 `ps –ef|grep tomcat`
-- cat    查看文件的内容
-- 查看隐藏的文件  ` ls -al`
-- 修改权限  `chmod`
-- 查看线程个数   ` ps -Lf 端口号|wc -l `
-
+- `ps –ef|grep tomcat` 查看一个程序是否运行 
+- ` ls -al` 查看隐藏的文件  
+- `chmod` 修改权限 
+- ` ps -Lf 端口号|wc -l `  查看线程个数   
+- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到`test.txt`中
+- `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件的 最后
+- `bg` 进程转到后台
+- `fg` 进程转到前台
 
 
 
