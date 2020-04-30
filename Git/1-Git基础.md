@@ -101,25 +101,43 @@
 
 
 ### Git branch命令
-- `git branch` 查看下当前分支情况
-- `git branch -v` 查看每一个分支的最后一次提交内容
-- `git branch --merge` 查看哪些分支已经合并到当前分支
-- ` git branch --no-merged` 查看所有包含未合并工作的分支
-- `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去
-- `get merge`合并分支：在分支`a`下写代码，与分支`master`上的代码合并
-  - 第一步，切换到分支`master`下`git chechout master`
-  - 第二步，与分支`a`合并`git merge a`
-- `git branch -d a` 把 a 分支删除
-- `git branch -D a` 强制把未合并的分支删除
+- 本地仓库分支
+  - `git branch` 查看本地仓库分支
+  - `git branch -v` 查看每个分支最后一次提交的内容
+  - `git reflog show --date=iso master`  查看指定分支的历次更改记录
+  - `git branch --merge` 查看哪些分支已经合并到当前分支
+  - `git branch --no-merged` 查看所有包含未合并工作的分支
+  - `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去
+  - `git merge`合并分支：在分支`a`下写代码，与分支`master`上的代码合并
+    - 第一步，切换到分支`master`下`git chechout master`
+    - 第二步，与分支`a`合并`git merge a`
+  - `git branch -d a` 删除指定分支 a 
+  - `git branch -D a` 强制把未合并的分支删除
+  - `git log --oneline --decorate --graph --all` 查看提交历史、各个分支的指向以及项目的分支分叉情况
+  - `git stash save` 切换分支之前保存要修改的文件，不想提交之前的工作
+  - `git stash list` 查看存储在栈上的文件
+  - `git stash apply` 将最近存储的文件重新使用
+  - `git stash apply stash_name`使用之前某次存储的文件
 
 
-- `git log --oneline --decorate --graph --all` 查看提交历史、各个分支的指向以及项目的分支分叉情况
-- `git stash save` 切换分支之前保存要修改的文件，不想提交之前的工作
-- `git stash list` 查看存储在栈上的文件
-- `git stash apply` 将最近存储的文件重新使用
-- `git stash apply stash_name`使用之前某次存储的文件
 
-常用分支命名：<font color="red">develop topic proposed hotfix(紧急分支) iss534  experiment</font>
+
+- 远程仓库分支
+  - `git branch --remote` 查看远程仓库分支
+
+
+
+
+- 常用分支命名：
+<font color="red"> <br>
+develop <br>
+topic <br>
+proposed <br>
+hotfix(紧急分支) <br>
+iss534  <br>
+experiment <br>
+</font>
+
 
 ### Git checkout命令
 - **切换或者新建分支**
