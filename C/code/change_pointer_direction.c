@@ -4,7 +4,6 @@
  * @LastEditTime : 2019-12-31 11:46:54
  * @LastEditors  : Please set LastEditors
  * @Description: 改变指针的指向；值传递与地址传递
- * @FilePath: \C\changePointerDirection.c
  */
 #include <stdio.h>
 #include <malloc.h>
