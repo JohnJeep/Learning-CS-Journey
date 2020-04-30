@@ -5,6 +5,8 @@
 - [廖雪峰官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [GitWeb上模拟训练](https://learngitbranching.js.org/)
 - [蚂蚁部落](http://www.softwhy.com/article-8535-1.html)
+- [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+
 
 
 ## Git基础
