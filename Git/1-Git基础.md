@@ -158,6 +158,18 @@ experiment <br>
     - `git checkout Develop -- readme.txt`  将对应分支中的文件(readme.txt)还原到当前分支(Develop)的工作区
 
 
+### Git rebase
+
+- `reword`: Change the commit message
+- `edit`: Amend this commit
+- `squash`: Meld commit into the previous commit
+- `fixup`:`Meld commit into the previous commit, without keeping the commit's log message
+- `exec`: Run a command on each commit we want to rebase
+- `drop`: Remove the commit
+
+
+
+
 ## 提交代码总结
 
 第一次提交：
