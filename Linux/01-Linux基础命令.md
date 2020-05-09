@@ -14,20 +14,14 @@
 - ` ls -al` 查看隐藏的文件  
 - `chmod` 修改权限 
 - ` ps -Lf 端口号|wc -l `  查看线程个数   
-- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到`test.txt`中
-- `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件的 最后
-- `bg` 进程转到后台
-- `fg` 进程转到前台
+- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并覆盖原来test.txt文件中的内容
+- `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，不会覆盖原来的文件，新加的文件保留到文本后面。
 
 
 
-### 用户名操作
-- 增加一个用户 ` useradd`
-- 删除用户 ` userdel+用户名 `
 
 ### 管道
-
-    定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
+定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
 
 - 用法：命令1|命令2|命令3|·····|命令n
 - grep（查文件中包含的一个相关命令)
@@ -67,12 +61,21 @@
 
 1. 控制命令
 - `Ctrl + d` : 退出当前终端（end of file）
-- `Ctrl + c` : 强制终止当前命令
+- `Ctrl + c` : 强制终止当前命令，终止的是前台进程
 - `Ctrl + z` : 将当前任务暂停并挂在后台
 - `Ctrl + s`: 冻结当前terminal的stdin，键盘输入的数据不会马上在terminal显示，而是恢复冻结后，在当前光标之前显示输入的数据。（Suspend）
- `Ctrl +  q`: 恢复当前terminal的stdin（Resume）
+- `Ctrl +  q`: 恢复当前terminal的stdin（Resume）
+- ` stop + job号` 将前台的进程挂起
+- ` fg ` 将后台中的命令调至前台继续运行
+  > `fg %jobnumber`将选中的命令调出，`%jobnumber`是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
+- `bg` 进程转到后台
+- 终止后台进程
+  - kill + job号
+  - kill + PID
 
-2. 大小写
+
+
+1. 大小写
 - `esc + u:`  将当前光标之后以空格隔开的单词或者字符转换为大写，包括当前光标(upper)
 - `esc + l:`  将当前光标之后以空格隔开的单词或者字符转换为大小，包括当前光标(lower)
 - `esc + c:`  将当前光标之后以空格隔开的单词首字母转换为大写
@@ -95,6 +98,15 @@
 - `fc - l`: 默认从最后往前显示 16 条历史记录。
 
 
+5. 其它命令
+- `cd - ` 返回上次没有切换目录名之前的目录
+- ` ; ` 在一条行中执行多条命令，采用 ; 实现
+- ` && ` 仅在上一个命令成功的情况下，才能执行后面的多个命令
+- `lsblk` 以树状的格式列出块设备
+
+
+
+
 
 ### wget命令
 参考:
@@ -104,38 +116,6 @@
 -  wget 下载单个文件下载：
    下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
-
-
-### 文件压缩与解压
--  仅打包，并非压缩
-    - tar -xvf FileName.tar         # 解包
-    - tar -cvf FileName.tar DirName # 将DirName和其下所有文件（夹）打包
-
-
-- .gz
-    - gunzip FileName.gz      # 解压1
-    - gzip -d FileName.gz       # 解压2
-    - gzip FileName                  # 压缩，只能压缩文件
-
-
--  .tar.gz 和 .tgz
-    - tar -zxvf FileName.tar.gz                                      # 解压
-    - tar -zcvf FileName.tar.gz DirName                  # 将DirName和其下所有文件（夹）压缩
-    - tar -C DesDirName -zxvf FileName.tar.gz     # 解压到目标路径
-
-
--  感觉.zip占用空间比.tar.gz大
-    - unzip -d /home/user/ FileName.zip	# 解压到指定文件目录/home/user
-    - zip FileName.zip DirName    		# 将DirName本身压缩
-    - zip -r FileName.zip DirName 		# 压缩，递归处理，将指定目录下的所有文件和子目录一并压缩
-    - unzip -n -d /temp test.zip              # 解压时，不想覆盖已经存在的文件，加上-n参数
-    - unzip -l test.zip			# 只查看zip压缩包中包含哪些文件，不进行解压缩
-    - unzip -t test.zip			# 检查zip文件是否损坏
-
-
--  mac和linux并没有自带rar，需要去下载
-   - rar x FileName.rar      # 解压
-   - rar a FileName.rar DirName # 压缩
 
 
 ### apt命令
