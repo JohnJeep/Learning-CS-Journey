@@ -28,10 +28,9 @@
 
 ### Git log命令
 - `git log` 查看历史记录。按提交时间列出所有的更新，最近的更新排在最上面。显示的有HASH散列码提交日期和提交的注释
-  - `HEAD`表示当前版本
+  - `HEAD`表示当前版本，下标从零开始。
   - 上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`,当然往上100个版本写100个^比较容易数不过来，所以写成`HEAD~100`
-
-
+- `git log -g`: 标准日志的格式输出引用日志（reflog）
 - `git log -p` 打印提交更新的所有内容，包括文件的内容
 - `git log -p -2` 显示最近两次提交的内容
 - `git log --stat` 每次提交的简略的统计信息，包括多少个文件改变、HASH码、日期、提交的注释等信息。
@@ -44,6 +43,20 @@
 - `gir log --name-status` 显示新增、修改、删除的文件清单。
 - `git log --since=2.weeks` 列出所有最近两周内的提交。since与until按照时间对提交的内容做筛选，后面可以直接跟特定的时间。`--since=2020-01-07`
 - `git log -S 筛选内容`  列出那些添加或移除了某些字符串的提交。
+
+
+- `git reflog`: 查看引用日志
+  - 每次提交或改变分支都会改变引用日志(reflog) 
+- `git fsck --full`: 显示出所有没有被其他对象指向的对象。`git fsck` 检查所有数据库的完整性。
+
+
+
+### Git rebase(变基)
+参考：[彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
+- 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的commit不能是已经push到远程仓库的记录。
+- 合并分支
+
+
 
 
 ### Git标签
@@ -61,6 +74,7 @@
 - `git push <remote> :refs/tags/<tagname> ` 更新并删除远程仓库标签
 - `git tag` 查看历史tag记录
 - `git checkout v1.0` 切换到某个tag，查看某个标签所指向的文件版本。
+  
   > 注意： 会导致仓库处于分离头指针(detacthed HEAD)状态.在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
@@ -74,7 +88,7 @@
 1. 概念
   - <font color="red">Git分支本质：指向提交对象的可变指针</font>
    > 包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）
-   
+
   - <font color="red">HEAD指针指向的当前所在分支，HEAD 分支随着提交操作自动向前移动。</font>
   - Git合并分支很快！就改改指针，工作区内容也不变！
 
@@ -233,7 +247,7 @@ experiment <br>
      - `rm` 删除文件。
      - 将此种改变提交暂存区。
      - 最后进行`commit`提交
-  
+
 
 2. 使用`git rm`命令删除
    - 不但将暂存区中的内容删除，并且工作区中对应的文件也会  被删除 `git rm filename`
@@ -245,8 +259,8 @@ experiment <br>
    - git rm filename
    - git commit -m "comment content"
    - git push origin master
-  
-  
+
+
 4. 删除暂存区并更新远程仓库
    - git rm --cached filename
    - git commit -m "comment content"
@@ -260,8 +274,8 @@ experiment <br>
 2. 恢复使用`git rm`删除的文件
     - 被`git rm`命令删除，对应暂存区的文件已经不存在，那么只能从`commit`提交记录中恢复 
     - `git checkout HEAD readme.txt`  将最后一次`commit`提交中的`readme.txt`文件恢复
-  
-  
+
+
 3. <font color="red">任何情况都可以恢复吗? </font>
   > 当然不是，如果你把`.gti`目录删除了，那肯定是无法再恢复。实质上，之所以能将删除的文件恢复，因为在`.git`目录中有备份，`Git`会将**暂存区**或者**历史提交**中内容来恢复
 
@@ -290,7 +304,11 @@ experiment <br>
 
 
 ### Git 修改已经提交的commit
-[Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
+参考：
+- [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
+- [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+- [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+
 
 1. 修改最近一次的注释
    - `git commit --amend` 修改最后一次提交的注释 
@@ -399,7 +417,7 @@ experiment <br>
    - 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
    - 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
    - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。    
+   
     
-    
-    
+   
     
