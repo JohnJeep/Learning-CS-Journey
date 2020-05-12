@@ -1,7 +1,14 @@
+```
+ * @Author: your name
+ * @Date: 2020-05-12 20:40:56
+ * @LastEditTime: 2020-05-12 21:14:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+```
 ### 地址转换（Address Translation）
 
 #### 问题
-1. 怎样在内存中重定位运行的进程，同时对该进程透明（tansparent）?
+1. 怎样在内存中重定位运行的进程，同时对该进程透明（transparent）?
 2. 怎样提供一种虚拟地址从零开始的假象，而实际上地址空间位于另外某个物理地址？
 
 
