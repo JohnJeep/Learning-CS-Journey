@@ -149,7 +149,7 @@ experiment <br>
 - `reword`: Change the commit message
 - `edit`: Amend this commit
 - `squash`: Meld commit into the previous commit
-- `fixup`:`Meld commit into the previous commit, without keeping the commit's log message
+- `fixup`: Meld commit into the previous commit, without keeping the commit's log message
 - `exec`: Run a command on each commit we want to rebase
 - `drop`: Remove the commit
 
@@ -191,29 +191,29 @@ experiment <br>
 
 
 ## 分支管理
-1. 概念
+- 概念
   - <font color="red">Git分支本质：指向提交对象的可变指针</font>
    > 包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）
 
   - <font color="red">HEAD指针指向的当前所在分支，HEAD 分支随着提交操作自动向前移动。</font>
   - Git合并分支很快！就改改指针，工作区内容也不变！
 
-2. 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是**指向**`master`，`master`才是**指向**提交的，所以`HEAD`指向的当前所在分支。
+- 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是**指向**`master`，`master`才是**指向**提交的，所以`HEAD`指向的当前所在分支。
 
-3. 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`**指向**`master`，就能确定当前分支，以及当前分支的提交点：
-![HEAD指针](./figure/HEAD指针.png)
+- 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`**指向**`master`，就能确定当前分支，以及当前分支的提交点：
+<center> <img src="./figure/HEAD指针.png" /></center>
 
-4. 每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。当我们创建新的分支，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上:
-![imge2](./figure/dev分支.png)
+- 每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。当我们创建新的分支，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上:
+<center> <img src="./figure/dev分支.png"/></center>
 
-5. Git创建一个分支很快，因为除了增加一个`dev`指针，改改`HEAD`的指向，工作区的文件都没有任何变化！不过，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
-![imge3](./figure/master指针.png)
+- Git创建一个分支很快，因为除了增加一个`dev`指针，改改`HEAD`的指向，工作区的文件都没有任何变化！不过，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
+<center> <img src="./figure/master指针.png"/></center>
 
-6. 假如我们在`dev`上的工作完成了，就可以把`dev`合并到`master`上。Git怎么合并呢？最简单的方法，就是直接把`master`指向`dev`的当前提交，就完成了合并：
-![imge4](./figure/master指向dev.png)
+- 假如我们在`dev`上的工作完成了，就可以把`dev`合并到`master`上。Git怎么合并呢？最简单的方法，就是直接把`master`指向`dev`的当前提交，就完成了合并：
+<center> <img src="./figure/master指向dev.png"/></center>
 
-7. 合并完分支后，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支：
-![imge5](./figure/删除dev.png)
+- 合并完分支后，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支：
+<center> <img src="./figure/删除dev.png"/></center>
 
 
 ### 分支管理策略(branching management scheme)
@@ -322,8 +322,7 @@ experiment <br>
 
 ## Git工作区、暂存区、Git仓库
 [参考文章--版本库](http://www.softwhy.com/article-8494-1.html)
-![地址](./figure/三区视图.png)
-
+<center> <img src="./figure/三区视图.png"/></center>
 
 1. Git不是存储每个文件与初始版本的差异，而是把数据看作是对小型文件系统的一组快照。
   >  每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。  
@@ -350,14 +349,17 @@ experiment <br>
 ### 工作区
 1. 概念
    - 工作区就是执行`git init`命令所在的目录，我们要修改的文件就在此目录，但是并不包括`.git`目录。
-![](./figure/工作区.png )
-2. 工作区目录下的每一个文件只有两种状态：已跟踪或未跟踪
+<center> <img src="./figure/工作区.png"/></center>
+
+1. 工作区目录下的每一个文件只有两种状态：已跟踪或未跟踪
 
 
 ### 暂存区
 1. 概念
    - **暂存区**仅仅是`.git`目录下的一个`index`文件，这也是为什么被称为index（索引）,是**指向**文件的索引。真正的文件存储在`.git/objects`目录中
-   - 当删除**暂存区**内容的时候，其实就是删除`index`文件中的内容，`.git/objects`目录中的内容不会被删除。![](./figure/暂存区.png)
+   - 当删除**暂存区**内容的时候，其实就是删除`index`文件中的内容，`.git/objects`目录中的内容不会被删除。
+<center> <img src="./figure/暂存区.png"/></center>
+
 2. Git清空暂存区
    - 暂存区实质是`.git`目录下的`index`文件，只要将此文件删除，那么就可以认为暂存区被清空`rm .git /index`
 3. 暂存区存在的必要性
