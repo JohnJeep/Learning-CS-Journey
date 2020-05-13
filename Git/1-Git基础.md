@@ -51,14 +51,6 @@
 
 
 
-### Git rebase(变基)
-参考：[彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
-- 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的commit不能是已经push到远程仓库的记录。
-- 合并分支
-
-
-
-
 ### Git标签
 - 两种类型
   - 轻量标签（lightweight）：很像一个不会改变的分支——它只是一个特定提交的引用。
@@ -114,6 +106,20 @@
 
 7. 合并完分支后，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支：
 ![imge5](./figure/删除dev.png)
+
+
+### Git rebase(变基)与merge解决冲突
+- 参考：
+  - [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
+  - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
+  - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
+
+
+- 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的commit不能是已经push到远程仓库的记录。
+- 合并分支
+
+
+
 
 
 ### Git branch命令
@@ -373,11 +379,20 @@ experiment <br>
 1. 概念
    - **暂存区**仅仅是`.git`目录下的一个`index`文件，这也是为什么被称为index（索引）,是**指向**文件的索引。真正的文件存储在`.git/objects`目录中
    - 当删除**暂存区**内容的时候，其实就是删除`index`文件中的内容，`.git/objects`目录中的内容不会被删除。![](./figure/暂存区.png)
-   - `git ls-files --stage` 查看暂存区的内容
 2. Git清空暂存区
    - 暂存区实质是`.git`目录下的`index`文件，只要将此文件删除，那么就可以认为暂存区被清空`rm .git /index`
 3. 暂存区存在的必要性
    - 有些朋友感觉暂存区多余，其实并非如此，通过这个过渡性区域可以使提交更加条理，避免无用琐碎提交
+
+- `git ls-files` 查看暂存区内容
+  - `--cached(-c)` 显示暂存区中的文件，`git ls-files`命令默认的参数
+  - `--deleted(-d)` 显示删除的文件
+  - `--modified(-m)` 显示修改过的文件
+  - `--other(-o)` 显示没有被git跟踪的文件
+  - `--stage(-s)` 显示mode以及文件对应的`Blob`对象，可以获取暂存区中对应文件里面的内容。
+
+
+
 
 
 ##  Git存储内容的位置与方式
