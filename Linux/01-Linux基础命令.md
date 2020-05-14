@@ -5,11 +5,9 @@
 - `rmdir ` 移除一个目录
 - ` rm -rf ` 删除一个目录下的所有文件；尽量后面加上`-i`参数(interactive)，让系统在执行前确认一次。`r`参数表示递归(recursive)
 - ` mv  -v A B` 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
-- ` find / -name filename.txt`  查找/目录下的`filename.txt` 文件  
-- `whereis ls`  查看所有包含`ls`命令的位置  
 - `ln`(建立链接命令)
-  - 软连接    `ln -s 原文件 新文件`
-  - 硬链接    `ln 原文件 新文件 `
+  -  `ln -s 原文件 新文件`    软连接
+  - `ln 原文件 新文件 `       硬链接
 - `ps –ef|grep tomcat` 查看一个程序是否运行 
 - ` ls -al` 查看隐藏的文件  
 - `chmod` 修改权限 
@@ -18,17 +16,30 @@
 - `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，不会覆盖原来的文件，新加的文件保留到文本后面。
 
 
+- find：查找文件或目录
+  - ` find / -name filename.txt`  查找/目录下的`filename.txt` 文件 
+- which：通过环境变量PATH到该路径内寻找可执行文件，用于查找可执行文
+- `whereis` 查找系统中包含可以找到的所有文件
+- eject：将光盘驱动器中的光盘轻轻弹出和收回
+- mount：设备装载常用命令：mount –t type dev dir
+  - `–t type` 是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
+  - `dev` 是挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
+  - `dir`表示挂载点，即挂载到的文件目录路径
+  - 例如：`mount -t iso9660 /dev/cdrom /media/drom`
+- `umout` 设备装载常用命令
+   - 例如：`umount dir device […]`
+
 
 
 ### 管道
 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
-
 - 用法：命令1|命令2|命令3|·····|命令n
 - grep（查文件中包含的一个相关命令)
-格式：        `grep "要搜索的内容" xxx.txt `
-   - grep  -n
+格式：`grep "要搜索的内容" xxx.txt `
+  - grep  -n
   - grep  -v 
-  -  开头` ^  `       结尾` $ `
+  -  开头` ^  `       
+  -  结尾` $ `
 
 
 ### 查看使用的端口
@@ -52,6 +63,7 @@
 
 - ` lsof ` 检查端口
   -  获取所有侦听 TCP 端口的列表 `lsof -nP -iTCP -sTCP:LISTEN `
+
 
 
 ### 常用 Bash终端快捷键
@@ -124,6 +136,8 @@
 Strace  - trace system calls and signals
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
+
+
 
 
 
