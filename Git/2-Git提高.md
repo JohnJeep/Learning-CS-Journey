@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-01 16:22:04
+ * @LastEditTime: 2020-05-14 21:49:46
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Learning-Computer-Journey\Git\2-Git提高.md
+ -->
 ```
  * @Author: JohnJeep
  * @Date: 2020-05-01 16:22:04
@@ -43,15 +51,22 @@
 
 ## Git内部原理
 - Git仓库中5个对象
-  - 三个blob对象：保存着文件快照
-  - 一个树对象：记录着目录结构和 blob 对象索引
-  - 一个提交对象：包含着指向树对象的指针和所有提交信息
+  - 三个数据对象(blob object)：保存着文件快照
+  - 一个树对象(tree object)：记录着目录结构和 blob 对象索引
+  - 一个提交对象(commit object)：包含着指向树对象的指针和所有提交信息
+
+
+- `hooks` 目录包含客户端或服务端的钩子脚本（hook scripts）
+- `objects` 目录存储所有数据内容
+- `refs` 目录存储指向数据（分支、远程仓库和标签等）的提交对象的指针
+- `HEAD` 文件指向目前被检出的分支
+- `index` 文件保存暂存区信息
 
 
 
 ## Git数据存储的位置
 1. `.git`目录中的`objects`子目录就是用来存储数据的，其中两个子目录是系统自动创建的，可以看到当前并没有存储任何数据。
-![](./figure/objects目录.png)
+<center> <img src="./figure/objects目录.png"/> </center>
 
 
 2. `git hash -object -w --stdin`  

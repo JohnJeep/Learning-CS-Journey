@@ -11,7 +11,6 @@
   - [Git commit](#git-commit)
 - [提交代码总结](#%e6%8f%90%e4%ba%a4%e4%bb%a3%e7%a0%81%e6%80%bb%e7%bb%93)
 - [分支管理](#%e5%88%86%e6%94%af%e7%ae%a1%e7%90%86)
-  - [分支管理策略(branching management scheme)](#%e5%88%86%e6%94%af%e7%ae%a1%e7%90%86%e7%ad%96%e7%95%a5branching-management-scheme)
 - [Git冲突问题](#git%e5%86%b2%e7%aa%81%e9%97%ae%e9%a2%98)
   - [采用`Git rebase(变基)`与`git merge`进行解决](#%e9%87%87%e7%94%a8git-rebase%e5%8f%98%e5%9f%ba%e4%b8%8egit-merge%e8%bf%9b%e8%a1%8c%e8%a7%a3%e5%86%b3)
   - [Git Bug](#git-bug)
@@ -198,12 +197,12 @@ experiment <br>
   - <font color="red">HEAD指针指向的当前所在分支，HEAD 分支随着提交操作自动向前移动。</font>
   - Git合并分支很快！就改改指针，工作区内容也不变！
 
-- 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即`master`分支。`HEAD`严格来说不是指向提交，而是**指向**`master`，`master`才是**指向**提交的，所以`HEAD`指向的当前所在分支。
+- 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。`HEAD` 不是指向提交，而是**指向** `master`，`master` 才是**指向**提交的，所以`HEAD` 指向当前所在分支。
 
 - 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`**指向**`master`，就能确定当前分支，以及当前分支的提交点：
 <center> <img src="./figure/HEAD指针.png" /></center>
 
-- 每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。当我们创建新的分支，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上:
+- 每次提交，`master` 分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。当创建一个新的分支 `dev`时，Git新建了一个指针叫`dev`，指向与`master` 相同的提交，再把 `HEAD` 指向 `dev`，就表示当前分支在`dev`上:
 <center> <img src="./figure/dev分支.png"/></center>
 
 - Git创建一个分支很快，因为除了增加一个`dev`指针，改改`HEAD`的指向，工作区的文件都没有任何变化！不过，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
@@ -216,12 +215,12 @@ experiment <br>
 <center> <img src="./figure/删除dev.png"/></center>
 
 
-### 分支管理策略(branching management scheme)
-- 通常，合并分支时，如果可能，Git会用`Fast forward`模式，但这种模式下，删除分支后，会丢掉分支信息。
-- 如果要强制禁用`Fast forward`模式，Git就会在`merge`时生
-  成一个新的`commit`，这样，从分支历史上就可以看出分支信息。
-- 合并分支时，加上`--no-ff`参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而`fast forward`合并就看不出来曾经做过合并。
-- 准备合并`dev`分支，请注意`--no-ff`参数，表示禁用`Fast forward`： `git merge --no-ff -m "merge with no-ff" dev` 
+
+- HEAD引用
+  - `git show HEAD` 查看HEAD信息
+  - 当前活跃的分支在哪儿，HEAD就指向哪儿，是git内部用来追踪当前位置的方式。 HEAD 并非只能指向分支的最顶端（时间节点距今最近的那个），它也可以指向任何一个节点。
+  - HEAD 文件通常是一个符号引用（symbolic reference）。符号引用，表示它是一个指向其他引用的指针。
+
 
 
 ## Git冲突问题
@@ -230,9 +229,24 @@ experiment <br>
   - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
   - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
 
+- 为什么会产冲突？
+  - 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
+  - 两个分支中修改了同一个文件的名称 
+
+
 ### 采用`Git rebase(变基)`与`git merge`进行解决
 - 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的commit不能是已经push到远程仓库的记录。
 - 合并分支
+
+- 什么时候用`rebase`？
+  - 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
+
+
+- 什么时候用`merge`?
+  - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看出分支信息，可以看出来曾经做过哪些合并；而`fast forward`合并，则看不出来曾经做过哪些合并，会丢掉分支信息。`git merge --no-ff -m "merge with no-ff" dev` 
+  - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
+
+
 
 
 ### Git Bug
