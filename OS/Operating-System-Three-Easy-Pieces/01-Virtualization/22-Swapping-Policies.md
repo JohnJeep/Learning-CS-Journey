@@ -43,5 +43,3 @@ $$AMAT = T_M + (P_Miss · T_D)$$
 
 - 采用时钟算法(clock algorithm)不是实现近似LRU的唯一方法。只要任何周期性的清除use bit，然后通过区分use bit 是0还是1来判断该替换哪个page。
 - 加入dirty bit后的时钟算法。扫描没有被使用又没有被修改的page首先踢出(evict)，若没有找到这种page，在查找被修改过且没有被使用的page。
-
-
