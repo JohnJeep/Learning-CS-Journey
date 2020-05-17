@@ -29,8 +29,10 @@ $$AMAT = T_M + (P_Miss · T_D)$$
 
 
 ### 基于历史信息的算法去实现一些策略 
-- LRU(Least-Recently-Used)：最少最近使用
+- **LRU**(Least-Recently-Used)：最少最近使用
 - LFU(Least-Frequently-Used): 最不经常使用
+- MFU(Most-Frequently-Used): 最经常使用
+- MRU(Most-Recently-Used): 最近使用
 - 时间局部性(temporal locality)：近期访问的页可能会在不久的将来再次被访问。
 - 空间局部性(spatial locality): 如果page P被访问，可能围绕它的page也会被访问。
 - 使用位(use bit)，也叫引用位(reference bit)

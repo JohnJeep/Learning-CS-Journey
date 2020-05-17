@@ -1,9 +1,9 @@
-```
+ ```
  * @Author: your name
  * @Date: 2020-05-16 16:04:55
  * @LastEditTime: 2020-05-16 16:04:55
  * @LastEditors: your name
- * @Description: In User Settings Edit
+ * @Description: VAX/VMS 虚拟内存系统
 ```
 ### VMS(virtual Memory System)
 - RSS(res-ident set size): 驻留集大小
@@ -62,4 +62,4 @@ table`(页缓存哈希表)中,一边在需要数据的时候快速的访问。
   - `spectreattack.com`
 
 
-- KPTI(kernel page table isolation): 内核页表隔离
+- `KPTI`(kernel page table isolation): 内核页表隔离

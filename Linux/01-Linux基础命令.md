@@ -1,23 +1,60 @@
+```
+ * @Author: JohnJeep
+ * @Date: 2020-04-04 09:46:51
+ * @LastEditTime: 2020-05-17 19:56:37
+ * @LastEditors: JohnJeep
+ * @Description: In User Settings Edit
+```
+<!-- TOC -->
+
+- [基本命令](#%e5%9f%ba%e6%9c%ac%e5%91%bd%e4%bb%a4)
+- [管道](#%e7%ae%a1%e9%81%93)
+- [查看使用的端口](#%e6%9f%a5%e7%9c%8b%e4%bd%bf%e7%94%a8%e7%9a%84%e7%ab%af%e5%8f%a3)
+- [常用 Bash终端快捷键](#%e5%b8%b8%e7%94%a8-bash%e7%bb%88%e7%ab%af%e5%bf%ab%e6%8d%b7%e9%94%ae)
+- [man命令](#man%e5%91%bd%e4%bb%a4)
+- [Strace](#strace)
+- [wget命令](#wget%e5%91%bd%e4%bb%a4)
+- [apt命令](#apt%e5%91%bd%e4%bb%a4)
+- [dpkg 命令](#dpkg-%e5%91%bd%e4%bb%a4)
+
+<!-- /TOC -->
+
+ 
 ### 基本命令
-- `touch 文件名 ` 新建一个文本
+- `touch 文件名 ` 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 - `rm 文件名 ` 删除一个文本
-- `mkdir ` 新建一个目录
+- `mkdir ` 新建一个目录，创建多层的目录加参数 `-p` (--parents)
 - `rmdir ` 移除一个目录
 - ` rm -rf ` 删除一个目录下的所有文件；尽量后面加上`-i`参数(interactive)，让系统在执行前确认一次。`r`参数表示递归(recursive)
-- ` mv  -v A B` 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
+- `mv  -v A B` 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
+- `cp src dest` 将文件src拷贝到当前目录下为dest文件；拷贝目录时，要加 `-r` 参数(recursive)
 - `ln`(建立链接命令)
-  -  `ln -s 原文件 新文件`    软连接
-  - `ln 原文件 新文件 `       硬链接
+  -  `ln -s 原文件  新文件`    软连接
+  - `ln 原文件 新文件 `       硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 - `ps –ef|grep tomcat` 查看一个程序是否运行 
 - ` ls -al` 查看隐藏的文件  
 - `chmod` 修改权限 
-- ` ps -Lf 端口号|wc -l `  查看线程个数   
+- `chown` 修改文件的所属者
+- `chgrp` 修改文件的用户组
+- `ps -Lf 端口号|wc -l `  查看线程个数  
+- `nslookup 域名` 查看域名对应的IP地址
+
+
 - `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并覆盖原来test.txt文件中的内容
 - `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，不会覆盖原来的文件，新加的文件保留到文本后面。
+- `pgrep -l xxxx`  查看某个进程的PID
 
 
-- find：查找文件或目录
-  - ` find / -name filename.txt`  查找/目录下的`filename.txt` 文件 
+- find：按照文件属性查找 
+  - 按文件名 ` find 查找目录 -name filename.txt`  查找指定目录下的`filename.txt` 文件 
+  - 按文件大小 `find 查找目录 -size 条件(+10k)` 查找指定目录下大于10k的文件
+  - 按文件类型 `find 查找目录 -type 类型`   类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
+
+
+- `grep` 按文件内容查找
+  - `grep -r 查找内容 查找路径 ` 
+
+
 - which：通过环境变量PATH到该路径内寻找可执行文件，用于查找可执行文
 - `whereis` 查找系统中包含可以找到的所有文件
 - eject：将光盘驱动器中的光盘轻轻弹出和收回
@@ -28,7 +65,11 @@
   - 例如：`mount -t iso9660 /dev/cdrom /media/drom`
 - `umout` 设备装载常用命令
    - 例如：`umount dir device […]`
-
+- `od` 查看二进制文件信息
+- `du` 查看文件使用空间大小 `-h` (human)以人类容易看懂的方式显示
+- `df` 查看磁盘情况 
+- `fdisk -l` 查看硬盘的情况
+- `mount 设备名字 挂在目录`
 
 
 ### 管道
@@ -55,12 +96,8 @@
     - Proto - 套接字使用的协议。
     - Local Address - 进程侦听的 IP 地址和端口号。
     - PID/Program name  - PID 和进程名称
-
-
 - ` ss ` 检查端口
   - `  ss -tunlp`
-
-
 - ` lsof ` 检查端口
   -  获取所有侦听 TCP 端口的列表 `lsof -nP -iTCP -sTCP:LISTEN `
 
@@ -82,11 +119,11 @@
   > `fg %jobnumber`将选中的命令调出，`%jobnumber`是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
 - `bg` 进程转到后台
 - 终止后台进程
-  - kill + job号
-  - kill + PID
+  - `kill + job号`
+  - `kill + PID`
 
 
-1. 大小写
+2. 大小写
 - `esc + u:`  将当前光标之后以空格隔开的单词或者字符转换为大写，包括当前光标(upper)
 - `esc + l:`  将当前光标之后以空格隔开的单词或者字符转换为大小，包括当前光标(lower)
 - `esc + c:`  将当前光标之后以空格隔开的单词首字母转换为大写
@@ -94,25 +131,31 @@
 
 3. 编辑
 >擦除：输入的数据还在缓冲内存中，没有被删除，可以复制
-- `Ctrl + u` : 擦除当前光标之前的字符，不包括当前光标
-- `Ctrl + k` : 擦除从当前光标之后到行尾的所有字符，包括当前光标
-- `Ctrl + y`: 从当前光标处粘贴之前擦除的字符
-- `Ctrl + w` : 删除当前光标之前以空格隔开的任意长度的字符，不包括当前光标
-- `Ctrl + t`: 当前光标处字符与前一个字符交换位置
-- `Ctrl + t`: 撤销之前擦除的所有字符
-- `Alt + d`: 擦除当前光标之后的一个单词，包括当前光标
-- `Alt + r`:取消当前所有改变的操作，若当前命令从历史记录中来，返回上一次历史记录的原始状态，若当前命令是手动输入，则会清空当前行
-- `Alt + t`: 当前光标处单词与前一个单词交换位置
+- `Ctrl + u` 擦除当前光标之前的字符，不包括当前光标
+- `Ctrl + k` 擦除从当前光标之后到行尾的所有字符，包括当前光标
+- `Ctrl + y` 从当前光标处粘贴之前擦除的字符
+- `Ctrl + w` 删除当前光标之前以空格隔开的任意长度的字符，不包括当前光标
+- `Ctrl + t` 当前光标处字符与前一个字符交换位置
+- `Ctrl + t` 撤销之前擦除的所有字符
+- `Alt + d`  擦除当前光标之后的一个单词，包括当前光标
+- `Alt + r`  取消当前所有改变的操作，若当前命令从历史记录中来，返回上一次历史记录的原始状态，若当前命令是手动输入，则会清空当前行
+- `Alt + t` 当前光标处单词与前一个单词交换位置
+- `Ctrl + h` 删除当前光标前面的字符，每次删除一个字符
+- `Ctrl + d` 删除当前光标后面的字符，每次删除一个字符
+- `Ctrl + b` 光标向后(backward)移动，与 `←` 等价
+- `Ctrl + f` 光标向前移动(forward)，与 `→` 等价
 
 
 4. 历史记录
 - `Ctrl + r`: 搜索历史记录
 - `Ctrl + g`: 退出当前搜索模式（在搜索历史记录下）
 - `fc - l`: 默认从最后往前显示 16 条历史记录。
+- `Ctrl + p` 向上查找历史命令，与 `↑` 等价
+- `Ctrl + n` 向下查找历史命令，与 `↓` 等价
 
 
 5. 其它命令
-- `cd - ` 返回上次没有切换目录名之前的目录
+- `cd - ` 在两个相邻的目录之间进行切换。
 - ` ; ` 在一条行中执行多条命令，采用 ; 实现
 - ` && ` 仅在上一个命令成功的情况下，才能执行后面的多个命令
 - `lsblk` 以树状的格式列出块设备
@@ -139,9 +182,6 @@ Strace  - trace system calls and signals
 
 
 
-
-
-
 ### wget命令
 参考:
 [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
@@ -162,15 +202,16 @@ Strace  - trace system calls and signals
 - apt-get remove #-----(package 删除包)
 - apt-get remove --purge # ------(package 删除包，包括删除配置文件等)
 - apt-get autoremove --purge # ----(package 删除包及其依赖的软件包+配置文件等
-- apt-get update #------更新源
-- apt-get upgrade #------更新已安装的包
+- `apt-get update`  更新源(软件列表)
+- `apt-get upgrade` 更新已安装的包
+- `apt-get clean && apt-get autoclean`  清理下载文件的缓存和只清理过时的包
 - apt-get dist-upgrade # ---------升级系统
 - apt-get dselect-upgrade #------使用 dselect 升级
 - apt-cache depends #-------(package 了解使用依赖)
 - apt-cache rdepends # ------(package 了解某个具体的依赖,当是查看该包被哪些包依赖吧...)
 - apt-get build-dep # ------(package 安装相关的编译环境)
 - apt-get source #------(package 下载该包的源代码)
-- apt-get clean && apt-get autoclean # --------清理下载文件的存档 && 只清理过时的包
+
 - apt-get check #-------检查是否有损坏的依赖
 - dpkg -S filename -----查找filename属于哪个软件包
 - apt-file search filename -----查找filename属于哪个软件包
