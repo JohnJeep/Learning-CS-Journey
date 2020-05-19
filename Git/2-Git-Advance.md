@@ -1,17 +1,9 @@
-<!--
- * @Author: your name
- * @Date: 2020-05-01 16:22:04
- * @LastEditTime: 2020-05-14 21:49:46
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Learning-Computer-Journey\Git\2-Git提高.md
- -->
 ```
  * @Author: JohnJeep
  * @Date: 2020-05-01 16:22:04
  * @LastEditTime: 2020-05-13 20:01:44
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
+ * @Description: Git内部原理剖析
 ```
 <!-- TOC -->
 
@@ -59,7 +51,31 @@
 - `hooks` 目录包含客户端或服务端的钩子脚本（hook scripts）
 - `objects` 目录存储所有数据内容
 - `refs` 目录存储指向数据（分支、远程仓库和标签等）的提交对象的指针
-- `HEAD` 文件指向目前被检出的分支
+
+
+- `HEAD`  是一个符号引用（symbolic reference），并不完全是指向目前所在的分支, 而是指向正在操作的 commit提交。
+  - **符号引用：**  表示它是一个指向其他引用的指针。 
+  - `cat .git/HEAD` 或者`git symbolic-ref HEAD`  查看HEAD文件中的内容
+  - `git show HEAD` 查看HEAD信息
+  - 当前活跃的分支在哪儿，`HEAD` 就指向哪儿，是git内部用来追踪当前位置的方式。 `HEAD` 并非只能指向分支的最顶端（时间节点距今最近的那个），它也可以指向任何一个节点。
+
+
+ - 当 HEAD 指针直接指向提交时，就会导致 `detached HEAD` 状态，即游离状态。在此状态下创建了新的提交，新提交的信息不属于任何分支。相对应的，现存的所有分支也不会受 `detached HEAD` 状态提交的影响。
+
+
+- 两种情况会导致`detached HEAD`，即游离状态。
+  - `git checkout --detach ` HEAD 直接脱离分支头指针，指向分支头指针指向的 commit
+  - `git checkout <commit id> ` 直接切换到commit id号
+
+
+- 其它几种HEAD文件
+  - `ORIG_HEAD` 当使用一些在 Git 看来比较危险的操作去移动 HEAD 指针的时候，ORIG_HEAD 就会被创建出来，记录危险操作之前的 HEAD，方便恢复HEAD。可以看作一个修改 HEAD 之前的简单备份。
+  - `FETCH_HEAD` 记录从远程仓库拉取的记录。
+  - `MERGE_HEAD` 当运行 `git merge` 时，`MERGE_HEAD` 记录你正在合并到你的分支中的提交。`MERGE_HEAD`在合并的时候会出现，合并结束时就删除了这个文件。
+  - `CHERRY_PICK_HEAD` 记录您在运行 `git cherry-pick` 时要合并的提交。这个文件只在 `cherry-pick` 期间存在。
+ 
+
+
 - `index` 文件保存暂存区信息
 
 
@@ -81,8 +97,8 @@
    - 查看`sha-1`值 里面的内容 `git cat-file -p`
 
 
-
-
+4. `git gc` 查看数据库占用了多少空间
+5. `git count-objects -v` 快速的查看占用空间大小
 
 
 
