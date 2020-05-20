@@ -1,3 +1,11 @@
+```
+ * @Author: JohnJeep
+ * @Date: 2020-04-04 23:28:59
+ * @LastEditTime: 2020-05-19 21:11:11
+ * @LastEditors: JohnJeep
+ * @Description: git基础命令学习
+```
+
 <!-- TOC -->
 
 - [Git基础](#git%e5%9f%ba%e7%a1%80)
@@ -9,10 +17,11 @@
   - [Git checkout](#git-checkout)
   - [Git rebase](#git-rebase)
   - [Git commit](#git-commit)
+  - [Git diff](#git-diff)
 - [提交代码总结](#%e6%8f%90%e4%ba%a4%e4%bb%a3%e7%a0%81%e6%80%bb%e7%bb%93)
 - [分支管理](#%e5%88%86%e6%94%af%e7%ae%a1%e7%90%86)
-- [Git冲突问题](#git%e5%86%b2%e7%aa%81%e9%97%ae%e9%a2%98)
-  - [采用`Git rebase(变基)`与`git merge`进行解决](#%e9%87%87%e7%94%a8git-rebase%e5%8f%98%e5%9f%ba%e4%b8%8egit-merge%e8%bf%9b%e8%a1%8c%e8%a7%a3%e5%86%b3)
+  - [基础原理](#%e5%9f%ba%e7%a1%80%e5%8e%9f%e7%90%86)
+  - [Git冲突](#git%e5%86%b2%e7%aa%81)
   - [Git Bug](#git-bug)
 - [远程仓库](#%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93)
   - [命令](#%e5%91%bd%e4%bb%a4)
@@ -23,9 +32,9 @@
   - [恢复删除的文件](#%e6%81%a2%e5%a4%8d%e5%88%a0%e9%99%a4%e7%9a%84%e6%96%87%e4%bb%b6)
   - [Git Reset](#git-reset)
 - [Git工作区、暂存区、Git仓库](#git%e5%b7%a5%e4%bd%9c%e5%8c%ba%e6%9a%82%e5%ad%98%e5%8c%bagit%e4%bb%93%e5%ba%93)
-  - [Git仓库(版本库)](#git%e4%bb%93%e5%ba%93%e7%89%88%e6%9c%ac%e5%ba%93)
   - [工作区](#%e5%b7%a5%e4%bd%9c%e5%8c%ba)
   - [暂存区](#%e6%9a%82%e5%ad%98%e5%8c%ba)
+  - [Git版本库](#git%e7%89%88%e6%9c%ac%e5%ba%93)
 
 <!-- /TOC -->
 
@@ -33,7 +42,9 @@
 - [廖雪峰官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [GitWeb上模拟训练](https://learngitbranching.js.org/)
 - [蚂蚁部落](http://www.softwhy.com/article-8535-1.html)
-- [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+- [**图解Git**](http://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+- [**高质量的Git中文教程 git-recipes**](https://github.com/geeeeeeeeek/git-recipes)
+
 
 ## Git基础
 ### Git常用命令
@@ -85,7 +96,6 @@
 - `git push <remote> :refs/tags/<tagname> ` 更新并删除远程仓库标签
 - `git tag` 查看历史tag记录
 - `git checkout v1.0` 切换到某个tag，查看某个标签所指向的文件版本。
-  
   > 注意： 会导致仓库处于分离头指针(detacthed HEAD)状态.在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
@@ -145,12 +155,13 @@ experiment <br>
 
 
 ### Git rebase
-- `reword`: Change the commit message
-- `edit`: Amend this commit
-- `squash`: Meld commit into the previous commit
-- `fixup`: Meld commit into the previous commit, without keeping the commit's log message
-- `exec`: Run a command on each commit we want to rebase
-- `drop`: Remove the commit
+- `pick` 使用这个参数，commit信息什么都不用做。
+- `reword` 修改commit信息。
+- `edit`  修改commit提交的内容。但是使用这个命令的时候，rebase 操作会停在commit提交处，等待修改完毕，使用`git add .` 和 `git commit --amend` 修改提交，`git rebase --continue`继续 rebase 进程。
+- `squash` 将当前需要改变的commit信息与之前commit提交的信息进行合并，把融合的信息保存到融合后的提交中。
+- `fixup` 放弃融合后提交的提交信息。
+- `exec` 在新的一行使用shell来运行commit信息。
+- `drop` 删除commit 提交信息。
 
 
 
@@ -174,6 +185,14 @@ experiment <br>
    - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
   
 
+### Git diff
+- `git diff` 比较工作区和暂存区之间的差异
+- `git diff HEAD` 比较工作区与最新本地仓库之间的差异
+- `git diff --cached`比较暂存区与最新本地仓库的差异 
+- `git diff master origin/master `  查看本地仓库中分支为 `master` 的文件与Github远程仓库中别名为`origin`下 `master` 分支文件的差异。
+
+
+
 ## 提交代码总结
 第一次提交：
 - `git init`  初始化
@@ -190,15 +209,15 @@ experiment <br>
 
 
 ## 分支管理
+### 基础原理
 - 概念
   - <font color="red">Git分支本质：指向提交对象的可变指针</font>
    > 包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）
-
   - <font color="red">HEAD指针指向的当前所在分支，HEAD 分支随着提交操作自动向前移动。</font>
   - Git合并分支很快！就改改指针，工作区内容也不变！
 
-- 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。`HEAD` 不是指向提交，而是**指向** `master`，`master` 才是**指向**提交的，所以`HEAD` 指向当前所在分支。
 
+- 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。`HEAD` 不是指向提交，而是**指向** `master`，`master` 才是**指向**提交的，所以`HEAD` 指向当前所在分支。
 - 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`**指向**`master`，就能确定当前分支，以及当前分支的提交点：
 <center> <img src="./figure/HEAD指针.png" /></center>
 
@@ -216,48 +235,44 @@ experiment <br>
 
 
 
-- HEAD引用
-  - `git show HEAD` 查看HEAD信息
-  - 当前活跃的分支在哪儿，HEAD就指向哪儿，是git内部用来追踪当前位置的方式。 HEAD 并非只能指向分支的最顶端（时间节点距今最近的那个），它也可以指向任何一个节点。
-  - HEAD 文件通常是一个符号引用（symbolic reference）。符号引用，表示它是一个指向其他引用的指针。
-
-
-
-## Git冲突问题
+### Git冲突
 - 参考：
   - [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
   - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
   - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
+
 
 - 为什么会产冲突？
   - 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
   - 两个分支中修改了同一个文件的名称 
 
 
-### 采用`Git rebase(变基)`与`git merge`进行解决
-- 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的commit不能是已经push到远程仓库的记录。
-- 合并分支
+-  采用`Git rebase(变基)`与`git merge`进行解决
+  - 什么时候用`rebase`？
+    - 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
+    - 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
+    - 合并分支
+    - <font color="red"> 注意: </font> 已经推送到github远程仓库的文件（多人开发的重要分支）不要，使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
 
-- 什么时候用`rebase`？
-  - 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
 
-
-- 什么时候用`merge`?
-  - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看出分支信息，可以看出来曾经做过哪些合并；而`fast forward`合并，则看不出来曾经做过哪些合并，会丢掉分支信息。`git merge --no-ff -m "merge with no-ff" dev` 
-  - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
-
+  - 什么时候用`merge`?
+    - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`  参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而`fast forward`合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
+    - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
 
 
 
 ### Git Bug
-1. Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：`git stash`,去解决Bug问题
-2. `git stash list`命令查看存储的工作现场 
-3. Git把`stash`内容存在某个地方了，但是需要恢复一下，有两个办法：一是用`git stash apply`恢复，但是恢复后，stash内容并不删除，你需要用`git stash drop`来删除；另一种方式是用`git stash pop`,恢复的同时把`stash`内容也删了：
+- Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：`git stash`,去解决Bug问题
+- `git stash list`命令查看存储的工作现场 
+- Git把`stash`内容存在某个地方了，但是需要恢复一下，有两个办法
+  - 一是用`git stash apply`恢复，但是恢复后，stash内容并不删除，你需要用`git stash drop`来删除
+  - 另一种方式是用`git stash pop`,恢复的同时把`stash`内容也删了。
+
 
 
 ## 远程仓库
 ### 命令
-- `git remote -v`显示GitHub远程仓库上使用 Git 保存的别名和对应的 URL
+- `git remote -v` 显示GitHub远程仓库上使用 Git 保存的别名和对应的 URL
 - `git remote show remote_name` 查看某个远程仓库
 - `git remote rename old_name new_name` 重命名原仓库名字
 - `git remote rm remote_name` 移除一个远程仓库
@@ -279,6 +294,7 @@ experiment <br>
 5. `git clone URL` 克隆一个仓库
 
 
+
 ## Git删除与恢复
 ### 删除指定文件
 1. 使用`linux`命令`rm`删除
@@ -287,17 +303,14 @@ experiment <br>
      - `rm` 删除文件。
      - 将此种改变提交暂存区。
      - 最后进行`commit`提交
-
 2. 使用`git rm`命令删除
    - 不但将暂存区中的内容删除，并且工作区中对应的文件也会  被删除 `git rm filename`
    - `git rm --cache filename` 删除暂存区文件
    - **特别说明**：处于未跟踪状态只是没有存在于暂存区，历史提交记录中的记录依然存在。
-
 3. 删除暂存区
    - git rm filename
    - git commit -m "comment content"
    - git push origin master
-
 4. 删除暂存区并更新远程仓库
    - git rm --cached filename
    - git commit -m "comment content"
@@ -339,7 +352,7 @@ experiment <br>
 <center> <img src="./figure/三区视图.png"/></center>
 
 1. Git不是存储每个文件与初始版本的差异，而是把数据看作是对小型文件系统的一组快照。
-  >  每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。  
+   > 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。  
 2. 几乎所有操作都是本地执行
 3. Git保证了数据的完整性。所有数据在存储前都计算校验和(SHA-1 散列)，然后以校验和来引用。Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。
 4. Git文件三种状态
@@ -348,24 +361,12 @@ experiment <br>
    - 已暂存(staged)：表示对一个已修改文件的当前版本做了标记，存储到暂存区中。
 
 
-### Git仓库(版本库)
-1. 概念
-   - 是 Git 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
-   - 工作区根目录下有一个默认隐藏的目录`.git`，它并不属于工作区，而是版本库（Repository）。版本库中内容很多，并且都很重要，有两个是我们实际操作中经常要遇到的，那就是暂存区（也可以称之为`stage`或者`index`）和分支，`HEAD`是一个指针，指向当前所在的分支（master）。
-2. 将文件最终提交到版本库基本流程如下：
-   - `git add`命令将工作区未跟踪和修改文件提交到暂存区。
-   - `git commit`命令将暂存区内容提交到当前版本。暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支。
-3. Git清空版本库
-   - `rm -rf .git` 删除当前目录下的版本库（`.git`目录）
-   - `git init` 重新初始化一个全新的版本库
-
-
 ### 工作区
-1. 概念
+- 概念
    - 工作区就是执行`git init`命令所在的目录，我们要修改的文件就在此目录，但是并不包括`.git`目录。
 <center> <img src="./figure/工作区.png"/></center>
 
-1. 工作区目录下的每一个文件只有两种状态：已跟踪或未跟踪
+- 工作区目录下的每一个文件只有两种状态：已跟踪（添加到暂存区）或未跟踪（没有添加都暂存区）。
 
 
 ### 暂存区
@@ -386,3 +387,13 @@ experiment <br>
   - `--stage(-s)` 显示mode以及文件对应的`Blob`对象，可以获取暂存区中对应文件里面的内容。
 
  
+### Git版本库
+1. 概念
+   - 是 Git 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
+   - 工作区根目录下有一个默认隐藏的目录`.git`，它并不属于工作区，而是版本库（Repository）。版本库中内容很多，并且都很重要，有两个是我们实际操作中经常要遇到的，那就是暂存区（也可以称之为`stage`或者`index`）和分支。
+2. 将文件最终提交到版本库基本流程如下：
+   - `git add`    将工作区未跟踪和修改文件提交到暂存区。
+   - `git commit` 将暂存区内容提交到版本库中。暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支中的版本库中。
+3. Git清空版本库
+   - `rm -rf .git` 删除当前目录下的版本库（`.git`目录）
+   - `git init`    重新初始化一个全新的版本库
