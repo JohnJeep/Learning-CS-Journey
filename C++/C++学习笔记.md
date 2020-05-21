@@ -1,37 +1,29 @@
+```
+ * @Author: your name
+ * @Date: 2020-04-12 16:30:47
+ * @LastEditTime: 2020-05-21 19:24:57
+ * @LastEditors: Please set LastEditors
+ * @Description: C++学习笔记.
+```
+
 1. endl与\n区别：
-- endl：换行和清除缓冲区到输出屏幕上
-- \n：仅仅只是换行
-2. 执行编译过程
-- 预处理：处理C、C++源代码[#include文件]-，生成预处理文件.i或者.ii文件
- - 编译：预处理文件编译成汇编代码.s文件
- - 汇编：汇编代码生成目标文件(二进制文件:.o或者.obj)
- - 链接：与C语言库函数链接生成可执行文件 
-   
-   > 例如：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
-3. float：有效数字是6~7位
-
-4. double：有效数字是15位
-
-5. char：8位数--》一个字节(空间)
-
-6. 取模场景：
+  - endl：换行和清除缓冲区到输出屏幕上
+  - \n：仅仅只是换行
+2. float：有效数字是6~7位
+3. double：有效数字是15位
+4. char：8位数--》一个字节(空间)
+5. 取模场景：
    - 取一个数的个位数
-   - 多少天是一个月的第几天
-   
-7. bool类型：C++中使用bool；java中使用boolean；使用boolalpha显示True或False；
-
-8. `<<`左移运算符：右侧空位补0
-
-9. `>>` 右移运算符：左侧空位补符号位，符号位正数部0，符号位为负数补1
-
-10. switch语句后的表达式只能为整型或字符类型
-
-11. 计算数组大小：对基本类型（不包括String类型）：`sizeof(array_var) / sizeof(array_type)`
-
+   - 多少天是一个月的第几天 
+6. bool类型：C++中使用bool；java中使用boolean；使用boolalpha显示True或False；
+7. `<<`左移运算符：右侧空位补0
+8. `>>` 右移运算符：左侧空位补符号位，符号位正数部0，符号位为负数补1
+9.  switch语句后的表达式只能为整型或字符类型
+10. 计算数组大小：对基本类型（不包括String类型）：`sizeof(array_var) / sizeof(array_type)`
     >   sizeof(nums) / sizeof(int) 
-12. break语句：执行循环体后，调出循环。可用于switch结构或者循环结构
-13. continue：只能用于循环结构，调出循环
-14. 指针：
+11. break语句：执行循环体后，调出循环。可用于switch结构或者循环结构
+12. continue：只能用于循环结构，调出循环
+13. 指针：
  > `int *ptr`  整型指针,结果是一个值
  > `int* ptr  int*`：指向整型的指针,结果是一个地址
  > 所有的指针都要初始化
