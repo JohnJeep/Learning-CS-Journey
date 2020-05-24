@@ -13,7 +13,7 @@
   - 静态连接(static linking): 将外部函数库拷贝到可执行文件
   - 动态链接(dynamic linking)：外部函数库不进入安装包，只在运行时动态引用
   > 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
-<center><img src="./pictures/gcc编译的四个阶段.png"></center>
+<div align="center"><img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png"></div>
 
 
 ### gcc 常用参数
@@ -26,7 +26,7 @@
 - `-O(Optimizations 大写)` 优化代码
 - `-I(dIr)`      指定include头文件
   > `gcc test.c -I ./include -o test.out`  使用 `-I` 链接指定目录下（`./include`）的头文件进行编译生成可执行文件。
-- `-D(Defn macro)`      指定相关的宏文件
+- `-D(Defn macro)`      指定相关的宏文件（控制日志log输出）
   > `gcc test.c -I ./include -o test.out -D DEBUG`  链接指定目录下（`./include`）的头文件进行编译生成可执行文件，并使用 `-D` 链接定义的 `DEBUG` 宏，生成调试信息。
 - `-L(link)` 链接库路径
 
@@ -36,10 +36,13 @@
   - Linux中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
   - `libtest.a` 静态库为test
 - 制作步骤
-  - 由`.c` 文件生成 `.o` 文件
+  - 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
   - 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。基本格式为  `ar rcs 静态库的名字(libtest.a) 所有的.o文件 `
-  - 例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
-<center><img src="./pictures/静态库.png"></center>
+    - `ar rcs libstatic_1.a *.o` 
+
+
+  - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
+<div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
 
 
 - `nm` 查看静态库或可执行文件里面的内容（list symbols from object files. 列出一个函数库文件中的符号表）
@@ -52,7 +55,7 @@
 
 ### 动态库也叫共享库(share library)
 > 只有在程序执行的过程中才会加载动态链接库。
-<center><img src="./pictures/虚拟地址空间.png"></center>
+<div align="center"><img width="90%" height="90%" src="./pictures/虚拟地址空间.png"></div>
 
 
 - 命名规则
@@ -68,18 +71,18 @@
   - `gcc main.c -L ./lib -l mytest -o main.out -I ./include`    这种方式实现，需要在系统中配置动态链接库的环境变量。
 
 
-- `ldd` 查看可执行文件在动态执行过程中所依赖的所有动态库。
-  - 在 ldd 执行的结果中，`=>` 左边的表示该程序需要连接的共享库之 so 名称，右边表示由 Linux 的共享库系统找到的对应的共享库在文件系统中的具体位置。
+- `ldd` 查看可执行文件(.out)在动态执行过程中所依赖的所有动态库。
+  - 在 `ldd` 执行的结果中，`=>` 左边的表示该程序需要连接共享库的名称，右边表示由 Linux 的共享库系统找到对应的共享库，在文件系统中的具体位置。
 
 
 程序加载动态库是从系统的环境变量中去查找的。
-- ① 开发过程中临时使用的一种方法，不是永久生效。
+- ① 开发过程中临时使用的一种方法，不是永久生效。每次关闭终端，都会将配置的环境变量清除。
   - 系统提供的动态链接库环境变量 `LD_LIBRARY_PATH`
   - 将自己制作的动态链接库路径导入到 `LD_LIBRARY_PATH` 路径中。`export  LD_LIBRARY_PATH = 制作的动态链接库路径`
 - ② 直接在 `.bashrc`文件中去配置 `export  LD_LIBRARY_PATH = 制作的动态链接库路径`。每次打开终端都会去读取配置的文件。
 - ③ 比较常用的方法 
   - 查找动态连接器的配置文件。查找 `/etc` 目录下的 `ld.so.conf`文件
-  - 将自己制作的动态链接库路径写到配置文件中
+  - 将自己制作的动态链接库路径写到配置文件中。要使用绝对路径，完整的动态库位置。
   - 更新配置文件。`sudo ldconfig -v`
 
 
