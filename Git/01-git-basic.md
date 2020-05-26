@@ -5,40 +5,43 @@
  * @LastEditors: JohnJeep
  * @Description: git基础命令学习
 ```
-
 <!-- TOC -->
 
-- [Git基础](#git%e5%9f%ba%e7%a1%80)
-  - [Git常用命令](#git%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4)
-  - [Git log](#git-log)
-  - [Git标签](#git%e6%a0%87%e7%ad%be)
-  - [Git别名](#git%e5%88%ab%e5%90%8d)
-  - [Git branch](#git-branch)
-  - [Git checkout](#git-checkout)
-  - [Git rebase](#git-rebase)
-  - [Git commit](#git-commit)
-  - [Git diff](#git-diff)
-- [提交代码总结](#%e6%8f%90%e4%ba%a4%e4%bb%a3%e7%a0%81%e6%80%bb%e7%bb%93)
-- [分支管理](#%e5%88%86%e6%94%af%e7%ae%a1%e7%90%86)
-  - [基础原理](#%e5%9f%ba%e7%a1%80%e5%8e%9f%e7%90%86)
-  - [Git冲突](#git%e5%86%b2%e7%aa%81)
-  - [Git Bug](#git-bug)
-- [远程仓库](#%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93)
-  - [命令](#%e5%91%bd%e4%bb%a4)
-  - [Git pull与Git fetch区别](#git-pull%e4%b8%8egit-fetch%e5%8c%ba%e5%88%ab)
-  - [远程仓库与本地的关联](#%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e4%b8%8e%e6%9c%ac%e5%9c%b0%e7%9a%84%e5%85%b3%e8%81%94)
-- [Git删除与恢复](#git%e5%88%a0%e9%99%a4%e4%b8%8e%e6%81%a2%e5%a4%8d)
-  - [删除指定文件](#%e5%88%a0%e9%99%a4%e6%8c%87%e5%ae%9a%e6%96%87%e4%bb%b6)
-  - [恢复删除的文件](#%e6%81%a2%e5%a4%8d%e5%88%a0%e9%99%a4%e7%9a%84%e6%96%87%e4%bb%b6)
-  - [Git Reset](#git-reset)
-- [Git工作区、暂存区、Git仓库](#git%e5%b7%a5%e4%bd%9c%e5%8c%ba%e6%9a%82%e5%ad%98%e5%8c%bagit%e4%bb%93%e5%ba%93)
-  - [工作区](#%e5%b7%a5%e4%bd%9c%e5%8c%ba)
-  - [暂存区](#%e6%9a%82%e5%ad%98%e5%8c%ba)
-  - [Git版本库](#git%e7%89%88%e6%9c%ac%e5%ba%93)
+- [1. Git基本原理笔记](#1-git基本原理笔记)
+  - [1.1. 学习参考](#11-学习参考)
+  - [1.2. Git基础](#12-git基础)
+    - [1.2.1. Git常用命令](#121-git常用命令)
+    - [1.2.2. Git log](#122-git-log)
+    - [1.2.3. Git标签](#123-git标签)
+    - [1.2.4. Git别名](#124-git别名)
+    - [1.2.5. Git branch](#125-git-branch)
+    - [1.2.6. Git checkout](#126-git-checkout)
+    - [1.2.7. Git rebase](#127-git-rebase)
+    - [1.2.8. Git commit](#128-git-commit)
+    - [1.2.9. Git diff](#129-git-diff)
+  - [1.3. 提交代码总结](#13-提交代码总结)
+  - [1.4. 分支管理](#14-分支管理)
+    - [1.4.1. 基础原理](#141-基础原理)
+    - [1.4.2. Git冲突](#142-git冲突)
+    - [1.4.3. Git Bug](#143-git-bug)
+  - [1.5. 远程仓库](#15-远程仓库)
+    - [1.5.1. 命令](#151-命令)
+    - [1.5.2. Git pull与Git fetch区别](#152-git-pull与git-fetch区别)
+    - [1.5.3. 远程仓库与本地的关联](#153-远程仓库与本地的关联)
+  - [1.6. Git删除与恢复](#16-git删除与恢复)
+    - [1.6.1. 删除指定文件](#161-删除指定文件)
+    - [1.6.2. 恢复删除的文件](#162-恢复删除的文件)
+    - [1.6.3. Git Reset](#163-git-reset)
+  - [1.7. Git工作区、暂存区、Git仓库](#17-git工作区暂存区git仓库)
+    - [1.7.1. 工作区](#171-工作区)
+    - [1.7.2. 暂存区](#172-暂存区)
+    - [1.7.3. Git版本库](#173-git版本库)
 
 <!-- /TOC -->
 
-学习参考：
+# 1. Git基本原理笔记
+
+## 1.1. 学习参考
 - [廖雪峰官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [GitWeb上模拟训练](https://learngitbranching.js.org/)
 - [蚂蚁部落](http://www.softwhy.com/article-8535-1.html)
@@ -46,8 +49,8 @@
 - [**高质量的Git中文教程 git-recipes**](https://github.com/geeeeeeeeek/git-recipes)
 
 
-## Git基础
-### Git常用命令
+## 1.2. Git基础
+### 1.2.1. Git常用命令
 - `git init`初始化一个Git仓库 
 - 添加文件到Git仓库，分两步：
   - `git add <file>` 添加文件到暂存区
@@ -62,7 +65,7 @@
 - `git help <verb>` 查看帮助，verb为Git的关键字
 
 
-### Git log
+### 1.2.2. Git log
 - `git log` 查看历史记录。按提交时间列出所有的更新，最近的更新排在最上面。显示的有HASH散列码、提交日期、提交的注释等。
   - `HEAD` 表示当前版本，下标从零开始。
   - `HEAD^` 上一个版本就是，`HEAD^^` 上上一个版本就是,当然往上100个版本写100个^比较容易数不过来，所以写成`HEAD~100`
@@ -81,7 +84,7 @@
 
 
 
-### Git标签
+### 1.2.3. Git标签
 - 两种类型
   - 轻量标签（lightweight）：很像一个不会改变的分支——它只是一个特定提交的引用。
     - 本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。 
@@ -99,11 +102,11 @@
   > 注意： 会导致仓库处于分离头指针(detacthed HEAD)状态.在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
-### Git别名
+### 1.2.4. Git别名
 - `git config --global alias.unstage 'reset HEAD --'`  给取消暂存取一个别名
 
 
-### Git branch
+### 1.2.5. Git branch
 - 本地仓库分支
   - `git branch` 查看本地仓库分支
   - `git branch -v` 查看每个分支最后一次提交的内容
@@ -138,7 +141,7 @@ experiment <br>
 </font>
 
 
-### Git checkout
+### 1.2.6. Git checkout
 - 切换或者新建分支
   - `git checkout  branch_name`   切换到branch_name分支下
   - `git branch Develop`  新建Develop分支
@@ -154,7 +157,7 @@ experiment <br>
     - `git checkout Develop -- readme.txt`  将对应分支中的文件(readme.txt)还原到当前分支(Develop)的工作区
 
 
-### Git rebase
+### 1.2.7. Git rebase
 - `pick` 使用这个参数，commit信息什么都不用做。
 - `reword` 修改commit信息。
 - `edit`  修改commit提交的内容。但是使用这个命令的时候，rebase 操作会停在commit提交处，等待修改完毕，使用`git add .` 和 `git commit --amend` 修改提交，`git rebase --continue`继续 rebase 进程。
@@ -165,7 +168,7 @@ experiment <br>
 
 
 
-### Git commit
+### 1.2.8. Git commit
 参考：
 - [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
 - [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
@@ -185,7 +188,7 @@ experiment <br>
    - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
   
 
-### Git diff
+### 1.2.9. Git diff
 - `git diff` 比较工作区和暂存区之间的差异
 - `git diff HEAD` 比较工作区与最新本地仓库之间的差异
 - `git diff --cached`比较暂存区与最新本地仓库的差异 
@@ -193,7 +196,7 @@ experiment <br>
 
 
 
-## 提交代码总结
+## 1.3. 提交代码总结
 第一次提交：
 - `git init`  初始化
 - `git add README.md`   提交到暂存库
@@ -209,8 +212,8 @@ experiment <br>
 
 
 
-## 分支管理
-### 基础原理
+## 1.4. 分支管理
+### 1.4.1. 基础原理
 - 概念
   - <font color="red">Git分支本质：指向提交对象的可变指针</font>
    > 包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）
@@ -236,7 +239,7 @@ experiment <br>
 
 
 
-### Git冲突
+### 1.4.2. Git冲突
 - 参考：
   - [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
   - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
@@ -262,7 +265,7 @@ experiment <br>
 
 
 
-### Git Bug
+### 1.4.3. Git Bug
 - Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：`git stash`,去解决Bug问题
 - `git stash list`命令查看存储的工作现场 
 - Git把`stash`内容存在某个地方了，但是需要恢复一下，有两个办法
@@ -271,8 +274,8 @@ experiment <br>
 
 
 
-## 远程仓库
-### 命令
+## 1.5. 远程仓库
+### 1.5.1. 命令
 - `git remote -v` 显示GitHub远程仓库上使用 Git 保存的别名和对应的 URL
 - `git remote show remote_name` 查看某个远程仓库
 - `git remote rename old_name new_name` 重命名原仓库名字
@@ -280,12 +283,12 @@ experiment <br>
 - `git remote add <alias_name> <url>` 添加一个新的远程 Git 仓库，同时给远程仓库起个别名 alias_name
 
 
-### Git pull与Git fetch区别
+### 1.5.2. Git pull与Git fetch区别
 1. `Git pull`: 查找当前分支所跟踪的服务器与服务器上的分支，从服务器上抓取数据，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
 2. `git fetch`: 从服务器上抓取本地没有的数据时，它并不会修改工作目录中的内容。它只会获取数据然后让你自己合并。
 
 
-### 远程仓库与本地的关联
+### 1.5.3. 远程仓库与本地的关联
 1. `git remote add origin   git@github.com:michaelliao/learngit.git` 将本地仓库添加到远程Git仓库，默认别名为 `origin`
 2. 当前分支的内容就会被推送给远程仓库`origin` 的`master` 分支:`git push -u origin master`
    - **-u** 参数可以在推送的同时，将`origin` 仓库的`master` 分支设置为本地仓库当前分支的**upstream（上游）**。添加了这个参数，将来运行`git pull`命令从远程仓库获取内容时，本地仓库的这个分支就可以直接从`origin`的`master` 分支获取内容，省去了另外添加参数的麻烦。 
@@ -296,8 +299,8 @@ experiment <br>
 
 
 
-## Git删除与恢复
-### 删除指定文件
+## 1.6. Git删除与恢复
+### 1.6.1. 删除指定文件
 1. 使用`linux`命令`rm`删除
    - 删除本地目录文件，但是提交到暂存区的文件不会删除 `rm filename`  
    - 纯粹的linux命令删除一个文件需要三个步骤：
@@ -318,7 +321,7 @@ experiment <br>
    - git push origin master --force
 
 
-### 恢复删除的文件
+### 1.6.2. 恢复删除的文件
 1. 恢复`rm`删除的文件:
      - rm只是将工作区中的文件删除，暂存区相应的文件依然存在，只要将暂存区内容恢复到工作区即可
      - `git checkout filename`
@@ -329,7 +332,7 @@ experiment <br>
   > 当然不是，如果你把`.gti`目录删除了，那肯定是无法再恢复。实质上，之所以能将删除的文件恢复，因为在`.git`目录中有备份，`Git`会将**暂存区**或者**历史提交**中内容来恢复
 
 
-### Git Reset
+### 1.6.3. Git Reset
 1. `git reset`命令是Git提供的后悔药之一，它可以帮我们把内容恢复到指定的`commit`提交版本。
 2. `reset`翻译成中文有**重置**的意思，恰如起名，`git reset`命令可以重置当前分支所指向提交的位置，很多教程说此命令的作用是删除分支或者提交，其实这是完全错误的，`commit`提交依然存在，只是当前分支所指向的`commit`提交进行了重置，分支所指向的新`commit`提交之后的提交就像消失了一样（`git log`无法查询到）
 3. 命令后面紧跟参数
@@ -348,7 +351,7 @@ experiment <br>
    - 假如`commit`已经被`push`到远程仓库上，那么其他开发人员可能会基于对应的`commit`提交进行开发产生新的`commit`，如果此时进行`reset`操作，会造成其他开发人员的提交历史丢失，这可能会产生严重后果。
 
 
-## Git工作区、暂存区、Git仓库
+## 1.7. Git工作区、暂存区、Git仓库
 [参考文章--版本库](http://www.softwhy.com/article-8494-1.html)
 <div align="center"> <img width="80%" hight="80%" src="./figure/三区视图.png"/></div>
 
@@ -362,7 +365,7 @@ experiment <br>
    - 已暂存(staged)：表示对一个已修改文件的当前版本做了标记，存储到暂存区中。
 
 
-### 工作区
+### 1.7.1. 工作区
 - 概念
    - 工作区就是执行`git init`命令所在的目录，我们要修改的文件就在此目录，但是并不包括`.git`目录。
 <div align="center"> <img width="80%" hight="80%" src="./figure/工作区.png"/></div>
@@ -370,7 +373,7 @@ experiment <br>
 - 工作区目录下的每一个文件只有两种状态：已跟踪（添加到暂存区）或未跟踪（没有添加都暂存区）。
 
 
-### 暂存区
+### 1.7.2. 暂存区
 1. 概念
    - **暂存区**仅仅是`.git`目录下的一个`index`文件，这也是为什么被称为index（索引）,是**指向**文件的索引。真正的文件存储在`.git/objects`目录中
    - 当删除**暂存区**内容的时候，其实就是删除`index`文件中的内容，`.git/objects`目录中的内容不会被删除。
@@ -389,7 +392,7 @@ experiment <br>
   - `--stage(-s)` 显示mode以及文件对应的`Blob`对象，可以获取暂存区中对应文件里面的内容。
 
  
-### Git版本库
+### 1.7.3. Git版本库
 1. 概念
    - 是 Git 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
    - 工作区根目录下有一个默认隐藏的目录`.git`，它并不属于工作区，而是版本库（Repository）。版本库中内容很多，并且都很重要，有两个是我们实际操作中经常要遇到的，那就是暂存区（也可以称之为`stage`或者`index`）和分支。

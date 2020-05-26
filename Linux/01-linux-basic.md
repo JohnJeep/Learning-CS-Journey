@@ -7,20 +7,22 @@
 ```
 <!-- TOC -->
 
-- [基本命令](#%e5%9f%ba%e6%9c%ac%e5%91%bd%e4%bb%a4)
-- [管道](#%e7%ae%a1%e9%81%93)
-- [查看使用的端口](#%e6%9f%a5%e7%9c%8b%e4%bd%bf%e7%94%a8%e7%9a%84%e7%ab%af%e5%8f%a3)
-- [常用 Bash终端快捷键](#%e5%b8%b8%e7%94%a8-bash%e7%bb%88%e7%ab%af%e5%bf%ab%e6%8d%b7%e9%94%ae)
-- [man命令](#man%e5%91%bd%e4%bb%a4)
-- [Strace](#strace)
-- [wget命令](#wget%e5%91%bd%e4%bb%a4)
-- [apt命令](#apt%e5%91%bd%e4%bb%a4)
-- [dpkg 命令](#dpkg-%e5%91%bd%e4%bb%a4)
+- [1. Vim基础用法](#1-vim基础用法)
+  - [1.1. 基本命令](#11-基本命令)
+  - [1.2. 管道](#12-管道)
+  - [1.3. 查看使用的端口](#13-查看使用的端口)
+  - [1.4. 常用 Bash终端快捷键](#14-常用-bash终端快捷键)
+  - [1.5. man命令](#15-man命令)
+  - [1.6. Strace](#16-strace)
+  - [1.7. wget命令](#17-wget命令)
+  - [1.8. apt命令](#18-apt命令)
+  - [1.9. dpkg 命令](#19-dpkg-命令)
 
 <!-- /TOC -->
 
- 
-### 基本命令
+# 1. Vim基础用法
+
+## 1.1. 基本命令
 - `touch 文件名 ` 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 - `rm 文件名 ` 删除一个文本
 - `mkdir ` 新建一个目录，创建多层的目录加参数 `-p` (--parents)
@@ -85,7 +87,7 @@
 - 输入`b` 将显示上一屏的文件内容
 
 
-### 管道
+## 1.2. 管道
 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
 - 用法：命令1|命令2|命令3|·····|命令n
 - grep（查文件中包含的一个相关命令)
@@ -96,7 +98,7 @@
   -  结尾` $ `
 
 
-### 查看使用的端口
+## 1.3. 查看使用的端口
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
 - 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
 - ` netstat` 检查端口
@@ -112,11 +114,11 @@
 - ` ss ` 检查端口
   - `  ss -tunlp`
 - ` lsof ` 检查端口
-  -  获取所有侦听 TCP 端口的列表 `lsof -nP -iTCP -sTCP:LISTEN `
+  - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
 
 
 
-### 常用 Bash终端快捷键
+## 1.4. 常用 Bash终端快捷键
 参考：[Bash 快捷键大全](https://linux.cn/article-5660-1.html)
 
     Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
@@ -175,7 +177,7 @@
 
 
 
-### man命令
+## 1.5. man命令
 `man -n 命令`：n为数字
 - 1：普通应用程序或shell命令
 - 2：系统调用
@@ -188,14 +190,14 @@
 - 9：非标准的内核程序
 
 
-### Strace
+## 1.6. Strace
 Strace  - trace system calls and signals
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
 
-### wget命令
+## 1.7. wget命令
 参考:
 [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
@@ -206,7 +208,7 @@ Strace  - trace system calls and signals
 
 
 
-### apt命令
+## 1.8. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -241,7 +243,7 @@ Strace  - trace system calls and signals
 
 
 
-### dpkg 命令
+## 1.9. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
