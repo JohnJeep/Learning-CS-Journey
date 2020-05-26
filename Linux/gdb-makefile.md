@@ -5,7 +5,15 @@
  * @LastEditors: JohnJeep
  * @Description: GDB使用剖析
 ```
-### GDB调试
+<!-- TOC -->
+
+- [0.1. GDB调试](#01-gdb调试)
+- [0.2. 内存相关](#02-内存相关)
+- [0.3. makefile](#03-makefile)
+
+<!-- /TOC -->
+
+## 0.1. GDB调试
 在进行GDB调试之前需要先打断点。
 
 - `gcc xxx.c -g -o xxx.out` 使用 gdb 调试程序之前,必须使用 `-g` 或 `–ggdb`编译选项编译源文件。
@@ -47,7 +55,7 @@
 
 
 
-### 内存相关
+## 0.2. 内存相关
 - `back trace(bt)` 打印当前函数调用栈的所有信息
 - `examine(x)` 查看内存地址中的值
   - `n` 是一个正整数，表示显示内存的长度，也就是说从当前地址向后显示几个地址的内容。 
@@ -56,7 +64,7 @@
 
 
 
-### makefile
+## 0.3. makefile
 - 参考
   - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
   - [CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)

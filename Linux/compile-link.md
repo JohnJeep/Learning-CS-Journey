@@ -5,7 +5,19 @@
  * @LastEditors: Please set LastEditors
  * @Description: 预处理、编译、汇编、链接过程
 ```
-### 处理过程
+<!-- TOC -->
+
+- [0.1. 程序处理过程](#01-程序处理过程)
+  - [0.1.1. 预处理编译汇编链接过程](#011-预处理编译汇编链接过程)
+  - [0.1.2. gcc 常用参数](#012-gcc-常用参数)
+  - [0.1.3. 静态库](#013-静态库)
+  - [0.1.4. 动态库也叫共享库(share library)](#014-动态库也叫共享库share-library)
+
+<!-- /TOC -->
+
+## 0.1. 程序处理过程 
+
+### 0.1.1. 预处理编译汇编链接过程
 - 预处理(Preprocessing): 处理C、C++源代码 `#include` 文件生成预处理文件 `.i` 或者 `.ii` 文件
 - 编译(Compile): 将预处理文件编译成汇编代码 `.s` 文件
 - 汇编(Assemble): 汇编代码生成目标文件(`.o` 或者 `.obj`)
@@ -16,7 +28,7 @@
 <div align="center"><img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png"></div>
 
 
-### gcc 常用参数
+### 0.1.2. gcc 常用参数
 - `-g(gdb)` 生成调试信息
 - `-Wall`   编译时生成调试信息
 - `-o(output 小写)` 生成可执行的二进制文件(类似于Windows中的.exe文件)
@@ -31,7 +43,7 @@
 - `-L(link)` 链接库路径
 
 
-### 静态库
+### 0.1.3. 静态库
 - 命名规则
   - Linux中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
   - `libtest.a` 静态库为test
@@ -53,7 +65,7 @@
   - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
 
 
-### 动态库也叫共享库(share library)
+### 0.1.4. 动态库也叫共享库(share library)
 > 只有在程序执行的过程中才会加载动态链接库。
 <div align="center"><img width="90%" height="90%" src="./pictures/虚拟地址空间.png"></div>
 
