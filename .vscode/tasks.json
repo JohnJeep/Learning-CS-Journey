@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	// C++编译配置信息
+        {
+            "label": "Compile C++",                               // 任务名称，与launch.json的preLaunchTask相对应
+            "command": "D:/mingw64/bin/g++.exe",       // 要使用的编译器，若编译器为clang，则C++使用用clang++；使用MinGW-W64为gcc或g++
+           "type": "shell",                                     // process是vsc把预定义变量和转义解析后直接全部传给command；shell相当于先打开shell再输入命令，所以args还会经过shell再解析一遍
+            "args": [                                            
+                // 编译命令相关参数
+                "-g",                                            // 生成和调试有关的信息
+                "-Wall",                                         // 开启额外警告
+                "-O0",                                          // 优化级别
+                "-ggdb3",                                       // 生成和调试有关的信息
+                "-static-libgcc",                               // 静态链接
+                "-std=c++17",
+                "-lm",         
+                //"-fexec-charset=GBK",                            //使用g++编译后，程序为GBK编码
+                "-finput-charset=UTF-8",                        //输入编译器文本编码 默认为UTF-8
+                "-fexec-charset=GB18030",                       //输出exe文件的编码
+                "-D _USE_MATH_DEFINES",
+                "\"${file}\"",                                   // 指定编译源代码文件
+                "-o",                                            // 指定输出文件名，不加该参数则默认输出a.exe，Linux下默认a.out
+                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",  // 输出文件地址
+
+                // 直接设置命令行字符集为 utf-8：
+                //chcp 65001
+            ],
+            "presentation": {                                   // 定义如何在用户界面中处理任务输出
+                "reveal": "always",                             // 在“终端”中显示编译信息的策略，可以为always，silent，never
+                "echo": true,
+                "focus": true,                                  // 设为true后可以使执行task时焦点聚集在终端，但对编译c和c++来说，设为true没有意义
+                "panel": "shared"                               // 不同的文件的编译信息共享一个终端面板
+            },
+            "problemMatcher": {
+                "owner": "cpp",                                 // 代码内问题的所有者为 cpp 语言服务
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],                                              // 定义应如何解释问题面板中报告的文件名
+
+                // 在输出中匹配问题的实际模式。
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,                                  // 第一个匹配组匹配文件的相对文件名
+                    "line": 2,                                  // 第二个匹配组匹配问题出现的行
+                    "column": 3,                                // 第三个匹配组匹配问题出现的列
+                    "severity": 4,                             // 第四个匹配组匹配问题的严重性，如果忽略，所有问题都被捕获为错误
+                    "message": 5                               // 第五个匹配组匹配消息
+                }
+            },
+            "group": {                                         // 定义此任务属于的执行组
+                "kind": "build",
+                "isDefault": true                                // 设为false可做到一个tasks.json配置多个编译指令，需要自己修改本文件
+            }
+        },
+	]
+}

@@ -5,47 +5,49 @@
  * @LastEditors: Please set LastEditors
  * @Description: C++学习笔记.
 ```
-
-1. endl与\n区别：
+## 基本概念
+-  endl与\n区别：
   - endl：换行和清除缓冲区到输出屏幕上
   - \n：仅仅只是换行
-2. float：有效数字是6~7位
-3. double：有效数字是15位
-4. char：8位数--》一个字节(空间)
-5. 取模场景：
+-  float：有效数字是6~7位
+-  double：有效数字是15位
+-  char：8位数--》一个字节(空间)
+-  取模场景：
    - 取一个数的个位数
    - 多少天是一个月的第几天 
-6. bool类型：C++中使用bool；java中使用boolean；使用boolalpha显示True或False；
-7. `<<`左移运算符：右侧空位补0
-8. `>>` 右移运算符：左侧空位补符号位，符号位正数部0，符号位为负数补1
-9.  switch语句后的表达式只能为整型或字符类型
-10. 计算数组大小：对基本类型（不包括String类型）：`sizeof(array_var) / sizeof(array_type)`
+- bool类型：C++中使用bool；java中使用boolean；使用boolalpha显示True或False；
+- `<<`左移运算符：右侧空位补0
+- `>>` 右移运算符：左侧空位补符号位，符号位正数部0，符号位为负数补1
+-  switch语句后的表达式只能为整型或字符类型
+-  计算数组大小：对基本类型（不包括String类型）：`sizeof(array_var) / sizeof(array_type)`
     >   sizeof(nums) / sizeof(int) 
-11. break语句：执行循环体后，调出循环。可用于switch结构或者循环结构
-12. continue：只能用于循环结构，调出循环
-13. 指针：
- > `int *ptr`  整型指针,结果是一个值
- > `int* ptr  int*`：指向整型的指针,结果是一个地址
- > 所有的指针都要初始化
-> `void* `指针存放一个内存地址，地址的内容是什么类型不能确定 
-- 不配对地使用new和delete，将发生内存泄漏（memory
-leak），被分配的内存再也无法使用了，如果内存泄漏严重，则程序将由于不断寻找更多内存而终止。
-- new：动态分配内存 
-  - `typeName* pointer_name = new typeName `
-- delete：释放内存，与new配对使用
-  - 不要尝试释放已经释放的内存块 
-  - 不是用new分配的动态内存空间，不能用delete释放
-- new创建动态数组
-  - `typeName* pointer_name = new typeName[num_elements];`  
-  - 二维数组：降维
-    - `typeName (*ptr)[col_num] = new typeName[row_num][col_num];`
-    - `int (*ptr)[2] = new int[4][2];`
+- break语句：执行循环体后，调出循环。可用于switch结构或者循环结构
+- continue：只能用于循环结构，调出循环
+- 指针：
+  - `int *ptr`  整型指针,结果是一个值
+  - `int* ptr  int*`：指向整型的指针,结果是一个地址
+  - 所有的指针都要初始化
+  - `void* `指针存放一个内存地址，地址的内容是什么类型不能确定 
+
+
+- 不配对地使用new和delete，将发生内存泄漏（memory leak），被分配的内存再也无法使用了，如果内存泄漏严重，则程序将由于不断寻找更多内存而终止。
+  - new：动态分配内存 
+    - `typeName* pointer_name = new typeName `
+  - delete：释放内存，与new配对使用
+    - 不要尝试释放已经释放的内存块 
+    - 不是用new分配的动态内存空间，不能用delete释放
+  - new创建动态数组
+    - `typeName* pointer_name = new typeName[num_elements];`  
+    - 二维数组：降维
+      - `typeName (*ptr)[col_num] = new typeName[row_num][col_num];`
+      - `int (*ptr)[2] = new int[4][2];`
   - 静态联编：数组是在编译时加入到程序中，必须在编写程序时指定数组的长度。
   - 动态联编：程序在运行阶段是否需要创建数组，在程序运行时选择数组的长度
 
-15. vector(向量)
-- 模板：``template <typename T> void Show(T arrNum[], int len);``
-- 动态数组，在运行阶段执行
+
+## vector(向量)
+- 模板：`template <typename T> void Show(T arrNum[], int len);`
+- 动态数组，在运行阶段执行。
 - 操作接口
   - `size()`: 返回容器中元素的个数
   - `get(r)`:获取秩（索引）为r的元素
@@ -68,8 +70,7 @@ leak），被分配的内存再也无法使用了，如果内存泄漏严重，�
   - `swap()`:交换两个容器的内容
 
 
-
-16. 函数 
+## 函数 
 - 内联函数（`inline void func(){}`）
   - 用于函数内容比较简单的地方
   - 编译器使用函数代码替换函数调用
@@ -93,7 +94,8 @@ leak），被分配的内存再也无法使用了，如果内存泄漏严重，�
   - 函数定义时不指定具体的数据类型
   - 函数调用时，根据实际参数反推数据类型，即类型的参数化
   
-17. 面向对象
+
+## 面向对象
 - .hpp文件包含实现的内联函数，通常用于模板类中声明与实现共存的情况
 - 只要不是纯模板，一律使用.h文件为头文件的后缀，使用.cpp文件为函数的实现文件
 - 头文件名包含在尖括号中，则C++编译器将在存储标准头文件的主机系统的文件系统中查找；但如果文件名包含在双引号中，则编译器将首先查找当前的工作目录或源代码目录（或其他目录，这取决于编译器）
@@ -107,7 +109,6 @@ leak），被分配的内存再也无法使用了，如果内存泄漏严重，�
     - 无参构造：一般为栈内存空间，自动释放内存空间
     - 一般构造(重载构造)：一般为堆内存空间，需要使用delete释放内存空间；使用new关键字
     - 拷贝构造
-
 - 析构函数
   - 一般用于完成清理工作（释放内存）
 
