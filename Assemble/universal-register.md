@@ -16,7 +16,7 @@ Inter 8086架构有16个处理器，可供程序员使用的有14个16位的寄�
 - 8个通用寄存器：
   - 4个数据寄存器
     - `EAX(Extended Accumulator X)`	 累加寄存器
-    - `EBP(Extended Base Register)`	 基址寄存器
+    - `EBP(Extended Base Register X)`	 基址寄存器
     - `ECX(Extended Counting X	 )`  计数寄存器
     - `EDX(Extended Data Register)`  数据寄存器
     
@@ -43,10 +43,66 @@ Inter 8086架构有16个处理器，可供程序员使用的有14个16位的寄�
 - `EA(Effective Address)` 有效地址
 
 
+### 基础语法
+- 参考
+  - [Assembly language primer](http://www.unige.ch/medecine/nouspikel/ti99/assembly.htm#JUMPs) 
+
+
+- 格式 `[标号:] 操作码 [操作数] [;注释]`
+  > 带有 [] 的部分为可选项。
+
+
+- mov
+  - 格式：`mov dest, src` 
+  - 功能：将src中的内容复制到dest中。
+- add
+  - 格式：`add dest src`
+  - 功能：`dest ← dest + src`
+- sub
+  - 格式：`sub dest src`
+  - 功能：`dest ← dest - src`
+- xchg
+  - 格式：`xchg dest src`
+  - 功能：将src中的内容与dest内容经行交换。
+- test
+  - 格式：`test dest src`
+  - 功能：`dest ^ src` dest和src进行逻辑与运算
+- and
+  - 格式：`and dest src`
+  - 功能：`dest ← dest ^ src` dest和src进行逻辑与运算
+- dec
+  - 格式：`add dest`
+  - 功能：`dest ← dest - 1`
+
+- push
+- pop 
+- call
+
+
+- je 等于零
+- jgt 大于则跳（Jump if Greater Than）
+- jg  大于（jump greater）
+- jge(或jgte) 大于等于（jump greater than or equal）
+- jl  小于（jump less）
+- jle 小于等于（jump less equal）
+- jne 不等于（jump not equal）
 
 
 
+标志位
+- CF - carry flag
+  > Set on high-order bit carry or borrow; cleared otherwise
 
+- PF - parity flag
+  > Set if low-order eight bits of result contain an even number of "1" bits; cleared otherwise
 
+- ZF - zero flags
+  > Set if result is zero; cleared otherwise
+
+- SF - sign flag
+  > Set equal to high-order bit of result (0 if positive 1 if negative)
+
+- OF - overflow flag
+  > Set if result is too large a positive number or too small a negative number (excluding sign bit) to fit in destination operand; cleared otherwise
 
 
