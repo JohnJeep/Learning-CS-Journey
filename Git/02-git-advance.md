@@ -7,14 +7,16 @@
 ```
 <!-- TOC -->
 
-- [Git协议](#git%e5%8d%8f%e8%ae%ae)
-  - [SSH(Secure Shell)协议](#sshsecure-shell%e5%8d%8f%e8%ae%ae)
-- [Git内部原理](#git%e5%86%85%e9%83%a8%e5%8e%9f%e7%90%86)
-- [Git数据存储的位置](#git%e6%95%b0%e6%8d%ae%e5%ad%98%e5%82%a8%e7%9a%84%e4%bd%8d%e7%bd%ae)
+- [1. Git提高部分](#1-git提高部分)
+  - [1.1. Git协议](#11-git协议)
+    - [1.1.1. SSH(Secure Shell)协议](#111-sshsecure-shell协议)
+  - [1.2. Git内部原理](#12-git内部原理)
+  - [1.3. Git数据存储的位置](#13-git数据存储的位置)
 
 <!-- /TOC -->
+# 1. Git提高部分
 
-## Git协议
+## 1.1. Git协议
 - 四种协议传输资料
   - 本地(Local)协议
   - Git协议
@@ -22,7 +24,7 @@
   - SSH(Secure Shell)协议
 
 
-### SSH(Secure Shell)协议
+### 1.1.1. SSH(Secure Shell)协议
 1. 概念
    - SSH 协议支持口令与密钥两种安全验证模式，但无论那种模式，最终都需要使用密钥来加密数据以确保安全，而 SSH 密钥通常使用的算法为 RSA 和 DSA。
 
@@ -41,7 +43,7 @@
    - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
 
 
-## Git内部原理
+## 1.2. Git内部原理
 - Git仓库中5个对象
   - 三个数据对象(blob object)：保存着文件快照
   - 一个树对象(tree object)：记录着目录结构和 blob 对象索引
@@ -80,7 +82,7 @@
 
 
 
-## Git数据存储的位置
+## 1.3. Git数据存储的位置
 1. `.git`目录中的`objects`子目录就是用来存储数据的，其中两个子目录是系统自动创建的，可以看到当前并没有存储任何数据。
 <center> <img src="./figure/objects目录.png"/> </center>
 
