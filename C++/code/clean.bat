@@ -1,0 +1,3 @@
+del *.exe /s
+exit
+
