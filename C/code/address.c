@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-25 13:41:47
- * @LastEditTime: 2019-12-13 08:41:22
+ * @LastEditTime: 2020-05-28 15:54:28
  * @LastEditors: Please set LastEditors
  */
 #include "stdio.h"
@@ -20,7 +20,7 @@ int main()
     int c[5];
     c[0] = 1;
     c[1] = 3;
-    int *d = c[0];
+    int *d = &c[0];
     int *e;
     e = &c[1];
 

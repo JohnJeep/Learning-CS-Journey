@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-05-27 15:10:18
- * @LastEditTime: 2020-05-27 23:05:27
+ * @LastEditTime: 2020-05-28 09:08:09
  * @LastEditors: Please set LastEditors
  * @Description: // 声明相关的函数
  */
 #ifndef __01_COMPLEX_H
 #define __01_COMPLEX_H
 class complex;
-complex& __doapl(complex *th, const complex &r); // 定义__doapl()函数
+complex& __doapl(complex *th, const complex& r); // 定义__doapl()函数
 
 class complex
 {
@@ -16,7 +16,7 @@ private:
     /* data */
     double re, im; // 实部和虚部
 
-    friend complex &__doapl(complex *, const complex &); // __doapl()函数可以调用
+    friend complex& __doapl(complex *, const complex&); // __doapl()函数可以调用
 
 public:
     // 构造函数
@@ -28,7 +28,7 @@ public:
     }
 
     // 对构造的函数要进行哪些操作？
-    complex &operator+=(const complex&);
+    complex& operator+=(const complex&);
 
     double real() const // 实部和实部相加
     {
@@ -40,7 +40,7 @@ public:
     }
 };
 
-inline complex &__doapl(complex *th, const complex &r) // 定义__doapl()函数
+inline complex& __doapl(complex *th, const complex& r) // 定义__doapl()函数
 {
     // 进行加运算
     th->re += r.re;
@@ -48,7 +48,7 @@ inline complex &__doapl(complex *th, const complex &r) // 定义__doapl()函数
     return *th;
 }
 
-inline complex& complex ::operator+=(const complex &r) // 定义重载操作符运算函数
+inline complex& complex ::operator+=(const complex& r) // 定义重载操作符运算函数
 {
     return __doapl(this, r);
 }
@@ -66,7 +66,7 @@ inline double image(const complex& y)
 
 
 // 函数返回值不是传递的引用
-inline complex operator+(const complex &x, const complex &y) // 怎样去加操作
+inline complex operator+(const complex& x, const complex& y) // 怎样去加操作
 {
     // 返回值为临时对象
     return complex(real(x) + real(y), image(x) + image(y)); // 实部和实部相加
