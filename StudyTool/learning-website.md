@@ -1,8 +1,40 @@
-参考
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-04-12 15:13:31
+ * @LastEditTime: 2020-06-01 21:29:44
+ * @LastEditors: Please set LastEditors
+ * @Description: 积累一些学习的网站。
+--> 
+<!-- TOC -->
+
+- [1. Website reference](#1-website-reference)
+  - [1.1. 参考](#11-参考)
+  - [1.2. 博客和知识社区](#12-博客和知识社区)
+  - [1.3. 编程和刷题网站](#13-编程和刷题网站)
+  - [1.4. 公开课和在线视频学习](#14-公开课和在线视频学习)
+  - [1.5. 产品](#15-产品)
+  - [1.6. 工具箱](#16-工具箱)
+  - [1.7. 人文](#17-人文)
+  - [1.8. 科学](#18-科学)
+  - [1.9. 英语](#19-英语)
+  - [1.10. 考研](#110-考研)
+  - [1.11. PPT](#111-ppt)
+  - [1.12. 图片](#112-图片)
+  - [1.13. 图标](#113-图标)
+  - [1.14. 电子图书](#114-电子图书)
+  - [1.15. 免费下载各种外文科技论文](#115-免费下载各种外文科技论文)
+  - [1.16. 二次元](#116-二次元)
+  - [1.17. 装B](#117-装b)
+
+<!-- /TOC -->
+
+# 1. Website reference
+
+## 1.1. 参考
 - [国外：These 62 Websites Will Make You Incredibly Smarter](https://medium.com/the-mission/these-62-websites-will-make-you-incredibly-smarter-7eb89f122c2e#.7jdomoyo7)
 
 
-## 博客和知识社区
+## 1.2. 博客和知识社区
 - [CSDN](https://www.csdn.net/) :国内主流的博客，平常访问的比较多。
 - [Stack overflow](https://stackoverflow.com/) ：国外很好的技术社区，平时遇见的问题90%以上都可以在上面找到。
 - [知乎](https://www.zhihu.com/)：国内很好的技术知识问答社区，在上面可以找到许多学习的资料和诸多大咖分享的知识经验。
@@ -15,7 +47,7 @@
 
 
 
-### 编程和刷题网站
+## 1.3. 编程和刷题网站
 - [WolframAlpha](https://www.wolframalpha.com/): WolframAlpha是开发计算数学应用软件的沃尔夫勒姆研究公司开发出的新一代的搜索引擎，能根据问题直接给出答案的网站，而不是返回一大堆网页链接，其数据来源包括学术网站和出版物、商业网站和公司、科学机构等等。
 - [谷歌 oppia 开源项目](https://www.oppia.org/splash): 谷歌推出的开源在线教育项目，可以交互式的学习
 - [代码规范大全](https://github.com/SalGnt/cscs): 一份代码规范大全，列表中包含了大多数主流编程语言的代码规范。
@@ -31,7 +63,7 @@
 - [IBM developerWorks](https://www.ibm.com/developerworks/cn/): IT教程，工具，社区
 
 
-### 公开课和在线视频学习
+## 1.4. 公开课和在线视频学习
 - 国内平台
     - [网易公开课](https://open.163.com/): 网易旗下的，包含了国内的和国外的高校的各种公开课，优质资源太多了。
     - [网易云课堂](https://study.163.com/): 同样也是网易旗下的，是一个在线学习的平台，与国外的Coursera类似。
@@ -60,10 +92,11 @@
    - [Curious](https://curious.com/): Get a customized CQ Workout™ delivered to your inbox or mobile, every day.
 
 
-### 产品
+## 1.5. 产品
 - [人人都是产品经理](http://www.woshipm.com/): 人人都是产品经理是中国最大、最活跃的以产品经理为核心的学习、交流、分享社群，集媒体、教育、招聘、社群活动为一体，全方位服务产品经理。
 
-### 工具箱
+
+## 1.6. 工具箱
 - [AlteredQualia](https://alteredqualia.com/): 在无需安装任何硬件的情况下，我们仅通过浏览器就能查看各种3D影像的技术。
 - [全球电视直播](http://bddn.cn/zb.htm): 全国电视直播是一个功能非常强大的电视直播网站，它支持几百个电视直播的网站，几乎拥有一般电视直播网站拥有的所有频道，它还支持港澳台卫视，国外电视等等。
 - [x Photopea 在线PS工具](https://ps.gaoding.com/#/): 是一个完全免费在线 PS 网站，是一个与 PS 电脑软件相似度非常高的在线 PS 网站，让你无需下载软件，也可以拥有和 PS 电脑软件一样的操作和体验。
@@ -82,20 +115,20 @@
 - [ProcessOn](https://www.processon.com/): 在线画流程图
 
 
-### 人文
+## 1.7. 人文
 - [全历史](https://www.allhistory.com/):
 - [Psychology Today](https://www.psychologytoday.com/intl): 心理学网站，告诉你，你是谁。
 - [nautil](http://nautil.us/): 一本出于对智慧的探索，关于科学，文化和哲学的杂志
 - [aeon(永旺)](https://aeon.co/): 涉及哲学、科学、心理学、文化等不同领域的内容。
 
 
-### 科学
+## 1.8. 科学
 - [重 现 化 学](http://www.envisioningchemistry.cn/):微观的角度展示神奇的化学世界。
 - [医学微视](https://www.mvyxws.com/): 它是中国医学科学院健康科普研究中心监制的一个网站，并且不提供销售任何产品，它以短视频的形式帮助你了解各种疾病，通俗易懂，让你轻松了解各种医学知识；当我们遇到不懂的医学知识或者健康问题，直接利用这个网站，找到对应的疾病，就可以轻松找到对应的视频。
 - [BBC — Future](http://www.bbc.com/future): 深入报道科学，生命科技
 
 
-### 英语
+## 1.9. 英语
 - [VOA美国之音](https://www.51voa.com/): 一个让你免费学英语的网站，每周服务全球1.64亿的民众。每一条都是由美国本土资深专业播音员录制，让你戴上耳机，就能听到最标准的英语发音。分为常速和慢速，更有针对性的听力模式，适用于不同阶段的英语学习者。
 - [chicagotribune](https://www.chicagotribune.com/)
 - [omaha](https://www.omaha.com/news/)
@@ -103,18 +136,14 @@
 - [popsci](https://www.popsci.com/)
 
 
-
-
-
-
-### 考研
+## 1.10. 考研
 - [网易考研](https://edu.163.com/): 网易考研频道专题，第一时间解读考研行业热点事件，全景呈现事件背后的深刻原因。
 - [中国教育在线考研](http://kaoyan.eol.cn/): 中国教育在线考研频道是一个专业的考研教育服务网络平台，目前国内最具品牌影响力的权威考研门户。
 - [中国研究生招生信息网](https://yz.chsi.com.cn/): 中国研究生招生信息网是隶属于教育部的以考研为主题的官方网站，是教育部唯一指定的研究生入学考试网上报名及调剂网站，主要提供研究生网上报名及调剂、专业目录查询、在线咨询、院校信息、报考指南和考试辅导等多方面的服务和信息指导。
 - [考研帮](http://www.kaoyan.com/): 中国最大的考研论坛。
 
 
-### PPT
+## 1.11. PPT
 - [PPTfans PPT设计](http://www.pptfans.cn/): 是一个提供PPT文档制作的教学网站，提供专业PPT设计服务
 - [OfficePlus 微软PPT官方模板库](http://www.officeplus.cn/Template/Home.shtml): 微软旗下的官网,该网站涵盖各类精品PPT模板、PPT实用模块、Word求职简历、Excel图表、图片素材等资源 ，为全球Office用户提供丰富的高品质原创PPT资源。
 - [PoweredTemplate 商务PPT模板](https://poweredtemplate.com/): 提供PPT模版、网页模版、简报模版、商务图表模版、等丰富资源的站点，但是它的重点是在商务范畴
@@ -124,7 +153,7 @@
 - [PowerPoint Templates](https://www.presentationload.com/): 国外的PPT模版网站
 
 
-### 图片
+## 1.12. 图片
 - [Stock Photos](https://stockphotos.io/): 是一个以Creative Commons 授权为主的相册共享社群，也是摄影爱好者们的交流社区。内存约2.5w 张各类优质图片，所有图片都是以Pinterest 瀑布流的形式显示，亦可用于商业用途
 - [Gratisography](https://gratisography.com/): 它为用户提供免费高品质摄影图片，而且所有的图片都可以用于个人或者商业用途。每周更新图片你只需要点击即可下载
 - [Stockvault](https://www.stockvault.net/): 该网站的图片可以免费用于个人和非商业设计项目呢！
@@ -133,7 +162,7 @@
 - [Pexels](https://www.pexels.com/)：免费高品质图片网
 
 
-### 图标
+## 1.13. 图标
 - [阿里巴巴矢量图标素材库](https://www.iconfont.cn/): 首页的搜索框就可以输入你想要找的图标，也可以在图标库去寻找。选好你想要的图标之后还可以根据你的需要在线修改颜色，并提供SVG/PNG/AI 图片格式的下载。
 - [icons8](https://icons8.com/): 网站也提供各种格式，各种尺寸和配色。Icons8除了将图示按照类别分类外，还利用不同平台的设计风格准则加以区隔，例如有iOS10、Windows、Android、Google、Office。
 - [Iconninja](http://www.iconninja.com/): 海量免费图标素材，支持关键词搜索，所有的素材图片均提供详细的如格式、宽度、高度、文件大小等信息，根据自己需要下载合适的尺寸。
@@ -141,7 +170,7 @@
 
 
 
-### 电子图书
+## 1.14. 电子图书
 [参考文章](https://www.zhihu.com/question/21202757/answer/646131444)
 
 - [SoBooks](https://sobooks.cc/)
@@ -160,31 +189,27 @@
 - [SemanticScholar 免费学术](https://www.semanticscholar.org/): 该网站是由微软联合创始人 Paul Allen 做的免费学术搜索引擎，其检索结果来自于期刊、学术会议资料或者是学术机构的文献。这个搜索引擎能检索到 80% 的免费论文文献，大约有 300 万份，另外它直接提供图表预览，看起来能方便研究人员省下更多筛选的工作。
 
 
-## 免费下载各种外文科技论文      
+## 1.15. 免费下载各种外文科技论文      
 [参考网址](http://blog.sciencenet.cn/blog-752541-821254.html)
 
 1. [Z-Library](http://b-ok.org/)
 2. [Booksee](http://en.booksee.org/): 下载最新的电子图书。
 3. [Library Genesis2M](http://gen.lib.rus.ec/) : 适合下载较新的论文,只要是外文书籍和论文基本上都可以搜到并下载，最近几年的论文也可以下载`
-4. [sci-hub](https://mg.scihub.ltd/): Sci-Hub是一个在线数据库，其上提供7600万篇科学学术论文和文章.
-   
+4. [sci-hub](https://mg.scihub.ltd/): Sci-Hub是一个在线数据库，其上提供7600万篇科学学术论文和文章. 
     > 适合下载最新的论文,文献资源下载网站https://scihub.org/是哈萨克斯坦牛人(Alexandra Elbakyan)开发的可以下载任意谷歌上有电子版链接文献杂志的网站，只要输入你想要下载的文献链接就可以获取到该文献的真实地址并在线浏览，当然更重要的是可以下载。这个是俄罗斯的某黑客给弄的. 原理好像是类似于RVPN, 借用有权限的学校的IP给我们下载相关文献. 适用于所有杂志, 只有极少数的还是不能下载
 5. [google学术网](https://scholar.google.com/)
 6. [国内可以山寨访问Google](https://github.com/greatfire/wiki)
 7. [中国版sci-hub](http://www.sci-hub.ac.cn/): 国外文献免费下载，中国版SCI-HUB网址
-8.  [videolectures](http://videolectures.net/) : VideoLectures.net是世界上最大的英文学术网络视频，中文最大的是超星学术视频，需要校园网权限，可以观看最新学术演讲或PHD答辩视频。
-    
+8.  [videolectures](http://videolectures.net/) : VideoLectures.net是世界上最大的英文学术网络视频，中文最大的是超星学术视频，需要校园网权限，可以观看最新学术演讲或PHD答辩视频。 
     > 它的总部设在斯洛文尼亚的约瑟夫斯蒂芬研究所。网站最初是提供计算机科学的视频，后来拓宽到各类学科。自2006年以来，已有10763个人的14251视频讲座资源库。它提供众多免费教学视频，分类广阔，包括了各种自然科学（数学，物理，化学，生物、医学等）、社会科学（商学、哲学、体育等），高质量交流论坛为广大用户提供高质量学习内容。VideoLectures.NET 是一个自由和开放接入教育视频讲座库。包括高校的学术演讲或者PhD答辩。这些讲座是由学者在会议，暑期学校，讲习班和科学的许多领域的科学宣传活动。这些讲座都是很前沿的方向的很深入的学术讨论，对不是那个行业方向的人来说很难明白。网站是关于各个领域研究方向的报告视频及slides，其中不乏很多数据挖掘、机器学习方面的讲解视频，Slides(也就是ppt)可以下载
 9. [ScienceHUβ](https://scihub.org/): ScienceHUβ是一家全球性的科学技术出版商，可免费提供研究文章和最新研究信息，而对科学界没有任何障碍。
 
 
-
-
-### 二次元
+## 1.16. 二次元
 - [tunefind](https://www.tunefind.com/movie/zootopia-2016):  快速找到热门影视剧的BGM！
 - [KonaChan 动漫ACG壁纸](https://konachan.net/): KonaChan 网站是一个致力于动漫、游戏壁纸图片搜索的站点，喜欢动漫的用户可以根据关键词来搜索自己想要的图片壁纸。想要找个性化的动漫壁纸，只有这种专业的动漫图片网站才有的。
 
 
-### 装B
+## 1.17. 装B
 - [HackerTyper Neo](http://geektyper.com/#): 伪装成特工，让网吧里围观的小学生们膜拜你的神器！
 - [File Destructor 2.0](http://www.xnet.se/fd/): 此网站可以随意伪造任意文件格式，任意文件大小的文档,如果你的死线就在明天而你到现在还什么都没做，那么你可以用它来拖延至少1天的时间。

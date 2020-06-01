@@ -1,0 +1,16 @@
+文件系统调用
+	write
+	read
+	lseek: 文件定位
+	fsync
+
+
+
+
+
+
+
+
+
+
+
