@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 14:09:24
- * @LastEditTime: 2020-06-01 15:48:38
+ * @LastEditTime: 2020-06-01 19:35:44
  * @LastEditors: Please set LastEditors
  * @Description: 圆类的声明
  */ 
@@ -26,14 +26,6 @@ public:
     Circular(/* args */);
     ~Circular();
 };
-
-Circular::Circular(/* args */)
-{
-}
-
-Circular::~Circular()
-{
-}
 
 #endif // !__CIRCULAR_H
 

@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-01 14:09:46
- * @LastEditTime: 2020-06-01 15:51:41
+ * @LastEditTime: 2020-06-01 20:01:45
  * @LastEditors: Please set LastEditors
  * @Description: 点类的声明
  */ 
@@ -22,14 +22,6 @@ public:
     Point(/* args */);
     ~Point();
 };
-
-Point::Point(/* args */)
-{
-}
-
-Point::~Point()
-{
-}
 
 #endif // !__POINT_H
 

@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-01 14:08:57
- * @LastEditTime: 2020-06-01 15:49:27
+ * @LastEditTime: 2020-06-01 20:04:06
  * @LastEditors: Please set LastEditors
  * @Description: 圆类的实现
  */ 
@@ -32,6 +32,14 @@ int Circular::judgePosition(Point& p)
     }
     else
     {
-        return 0;
+        return 0; // 圆外
     }
+}
+
+Circular::Circular(/* args */)  // 构造函数 
+{
+}
+
+Circular::~Circular()          // 析构函数
+{
 }
