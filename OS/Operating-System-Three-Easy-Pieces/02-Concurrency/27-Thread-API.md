@@ -1,10 +1,11 @@
-```
+<!--
  * @Author: your name
  * @Date: 2020-05-18 22:01:10
- * @LastEditTime: 2020-05-18 22:01:11
+ * @LastEditTime: 2020-06-01 13:39:02
  * @LastEditors: Please set LastEditors
  * @Description: 线程(thread)的API接口
-```
+--> 
+
 如何构建并发程序的逻辑？
 
 `man -k pthread` 查看所有线程接口的API

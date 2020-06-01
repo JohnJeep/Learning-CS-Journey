@@ -1,10 +1,10 @@
- ```
- * @Author: your name
- * @Date: 2020-05-30 15:45:34
- * @LastEditTime: 2020-05-30 18:03:22
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-06-01 08:42:34
+ * @LastEditTime: 2020-06-01 13:40:57
  * @LastEditors: Please set LastEditors
  * @Description: 讨论常见的并发问题
-```
+--> 
 
 # 1. 并发编程中出现的缺陷（bugs）
 

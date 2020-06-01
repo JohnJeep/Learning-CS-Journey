@@ -1,10 +1,11 @@
-```
- * @Author: JohnJeep
+<!--
+ * @Author: your name
  * @Date: 2020-05-20 22:25:04
- * @LastEditTime: 2020-05-20 22:25:05
+ * @LastEditTime: 2020-06-01 13:39:30
  * @LastEditors: Please set LastEditors
  * @Description: 线程锁问题
-```
+--> 
+
 ### 什么是锁(lock)?
 - 是一个某种类型的变量。
 - 这个锁变量(简称锁)保持了锁在某一刻的状态。要么是可用的(available or or unlocked or free)，表示当前没有线程持有锁，线程可以使用该锁；要么是被占用的(acquired or locked or held)，表示当前有线程在临界区( critical section)使用锁。

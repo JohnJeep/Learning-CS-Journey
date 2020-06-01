@@ -1,11 +1,19 @@
- ```
- * @Author: your name
- * @Date: 2020-05-16 16:04:55
- * @LastEditTime: 2020-05-16 16:04:55
- * @LastEditors: your name
- * @Description: VAX/VMS 虚拟内存系统
-```
-### VMS(virtual Memory System)
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-19 08:16:21
+ * @LastEditTime: 2020-06-01 13:51:01
+ * @LastEditors: Please set LastEditors
+ * @Description:  VAX/VMS 虚拟内存系统
+--> 
+
+<!-- TOC -->
+
+- [0.0.1. VMS(virtual Memory System)](#001-vmsvirtual-memory-system)
+- [0.0.2. The Page Cache](#002-the-page-cache)
+
+<!-- /TOC -->
+
+### 0.0.1. VMS(virtual Memory System)
 - RSS(res-ident set size): 驻留集大小
 - demand zeroing：按需置零
 - COW(copy-on-write): 写时赋值
@@ -46,7 +54,7 @@
 <center> <img src="../figures/23-64-bit-address.png" /> </center>
 
 
-### The Page Cache
+### 0.0.2. The Page Cache
 三个主要来源
 - memory-mapped files(内存映射文件)
 - file data(来自设备的文件数据)

@@ -1,10 +1,11 @@
-```
- * @Author: John Jeep
+<!--
+ * @Author: JohnJeep
  * @Date: 2020-05-12 21:34:44
- * @LastEditTime: 2020-05-12 21:34:44
- * @LastEditors: John Jeep
+ * @LastEditTime: 2020-06-01 13:52:00
+ * @LastEditors: Please set LastEditors
  * @Description: 物理内存之外: 策略部分(Policies)
-```
+--> 
+
 ### 问题(crux of the problem)
 - OS如何决定从内存中踢出哪个页？
 

@@ -3,7 +3,7 @@ inc = -I ./include
 src = $(wildcard ./*.cpp)                        # 查找指定目录 ./ 下所有.cpp 的文件，并将函数的返回值赋值给 src 变量
 # obj = main.o add.o sub.o multi.o
 obj = $(patsubst ./%.cpp, ./%.o, $(src))         # 将src目录下所有的 .cpp 替换为 .o 文件
-target = app_4
+target = app
 $(target): $(obj) 
 	$(CC) $(obj) $(inc) -o $(target) 
 
