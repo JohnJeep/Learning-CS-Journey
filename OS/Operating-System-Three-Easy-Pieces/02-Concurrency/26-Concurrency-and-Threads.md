@@ -1,10 +1,10 @@
-```
- * @Author: JohnJeep
+<!--
+ * @Author: your name
  * @Date: 2020-05-18 18:49:26
- * @LastEditTime: 2020-05-18 18:49:27
- * @LastEditors: JohnJeep
+ * @LastEditTime: 2020-06-01 13:38:21
+ * @LastEditors: Please set LastEditors
  * @Description: Concurrency: 并发问题
-```
+--> 
 
 ### 为什么要使用线程（Thread)？
 - 实现并发性(parallelism)。多个CPU处理多个线程.

@@ -1,10 +1,11 @@
-```
- * @Author: your name
- * @Date: 2020-05-25 23:01:38
- * @LastEditTime: 2020-05-25 23:01:39
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-27 08:29:51
+ * @LastEditTime: 2020-06-01 13:40:16
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
-``` 
+ * @Description: 锁的并发数据结构笔记
+--> 
+
 ### 锁的并发数据结构
 - 并发计数器（Concurrent Counters）
 - 并发链表（Concurrent Linked Lists）

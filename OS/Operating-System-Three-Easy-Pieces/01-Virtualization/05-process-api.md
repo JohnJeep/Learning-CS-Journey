@@ -1,10 +1,11 @@
-```
- * @Author: your name
+<!--
+ * @Author: JohnJeep
  * @Date: 2020-05-24 23:06:36
- * @LastEditTime: 2020-05-24 23:06:50
- * @LastEditors: your name
+ * @LastEditTime: 2020-06-01 13:41:42
+ * @LastEditors: Please set LastEditors
  * @Description: 进程API调用
-``` 
+--> 
+
 - 上下文切换（context switch）：当进程停止时，它的寄存器的值被保存到内存中，通过恢复这些寄存器，操作系统（OS）可以恢复运行该进程。
 - 僵尸态（zombie state）：一个进程处于已退出但未清理的状态。
   > 允许其他的进程（通常是创建的父进程）检查进程的返回代码，并查看刚刚完成的进程是否成功执行。  

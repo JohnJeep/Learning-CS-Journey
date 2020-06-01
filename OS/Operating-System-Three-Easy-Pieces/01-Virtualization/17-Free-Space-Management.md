@@ -1,4 +1,12 @@
-### 空间管理(free space management)
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-13 10:25:24
+ * @LastEditTime: 2020-06-01 13:47:24
+ * @LastEditors: Please set LastEditors
+ * @Description: 空闲空间管理
+--> 
+
+### 空闲空间管理(free space management)
 
 #### 问题？
 1. 如果空闲空间是由大小不同的单元构成，如何管理空间？

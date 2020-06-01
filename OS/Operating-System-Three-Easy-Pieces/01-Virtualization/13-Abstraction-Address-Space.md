@@ -1,3 +1,11 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-13 10:25:24
+ * @LastEditTime: 2020-06-01 13:42:43
+ * @LastEditors: Please set LastEditors
+ * @Description: 抽象的地址空间笔记
+--> 
+
 ### 抽象的地址空间 (Abstraction Address Space)
 
 #### 问题？
