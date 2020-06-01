@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-01 14:08:38
- * @LastEditTime: 2020-06-01 15:55:04
+ * @LastEditTime: 2020-06-01 19:57:28
  * @LastEditors: Please set LastEditors
  * @Description: 面向对象实现判断点在圆外还是在圆内？
  */ 
@@ -21,11 +21,11 @@ int main(int argc, char* argv[])
     int tag = c1.judgePosition(p1);
     if (tag == 1)
     {
-        cout << "点在圆内" << endl;
+        cout << "point in circle" << endl;
     }
     else
     {
-        cout << "点在圆内" << endl;
+        cout << "point out circle" << endl;
     }
     
     return 0;
