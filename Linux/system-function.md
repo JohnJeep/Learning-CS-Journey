@@ -1,11 +1,10 @@
-```
+<!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-05-23 23:12:17
- * @LastEditors: JohnJeep
+ * @LastEditTime: 2020-06-01 22:35:13
+ * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
- ```
-
+--> 
 
 # 1. System function
 ## 1.1. 概念
@@ -57,6 +56,28 @@
   - `F_SETFL` 设置文件状态参数
    
 
+## 环境变量
+- 常见的环境变量
+  - `PATH ` 指定可执行文件搜索路径
+  - `SHELL` 指定当前所使用的命令解析器
+  - `TERM ` 当前终端类型
+  - `LANG ` 指定语言环境
+  - `HOME ` 用户主目录
+
+
+- 常见的环境变量函数 
+  - `getenv()` 获取环境变量值
+  - `setenv()` 设置环境变量值
+	  - 3个参数
+			- `1`  覆盖原值
+			- `0`  不覆盖
+			- `-1` 出错
+  - `unsetenv()` 删除环境变量
+
+
+
+## fork函数
+- 创建一个子进程。一个进程调用 `fork()` 函数，变为两个进程，各自的进程都有一个返回值。父进程返回值为子进程的 `PID`（返回值大于0），子进程的返回值为 `0`，执行成功。
 
 
 

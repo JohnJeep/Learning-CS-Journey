@@ -1,10 +1,11 @@
-```
+<!--
  * @Author: JohnJeep
  * @Date: 2020-05-24 10:10:40
- * @LastEditTime: 2020-05-24 10:10:41
+ * @LastEditTime: 2020-06-01 21:56:17
  * @LastEditors: Please set LastEditors
  * @Description: cygwin使用笔记
-```
+--> 
+
 参考：
 - [silaoA的博客: Cygwin学习路线](https://silaoa.github.io/2019/2019-06-16-Cygwin%E7%B3%BB%E5%88%97%EF%BC%88%E4%B9%9D%EF%BC%89%EF%BC%9ACygwin%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.html)
 - [Cygwin的使用方法](https://blog.csdn.net/springone/article/details/676667)
@@ -17,7 +18,7 @@
 - POSIX (Portable Operating System Interface) 
 
 
-##### 文件概念
+## 文件概念
 
 类型符 | 文件类型
 ---|---
@@ -55,7 +56,7 @@ s | 套接文件(socket)
   - 用户定义函数（function）、别名（alias）
 
 
-##### 命令
+## 命令
 - `man` 是POSIX规定的帮助手册程序
 - `info` Info手册页按照节点（node）组织，每个手册页文件是一个节点，手册页内支持链接到其他节点，如此组织犹如一张网，和网页类似 
 - ` locale -a` 列出系统支持的所有语言环境
@@ -64,7 +65,7 @@ s | 套接文件(socket)
 
 
 
-##### 终端换行
+## 终端换行
 - 关于打印
   > 在机械打字机时代，打字机上有个“打印头（print head）”的零部件，打印时从左往右自动移动，满一行时需要手动推到最左边，这个动作叫“回车（Carriage Return）”，同时卷轴需要向上卷使纸张上移一行，打印头相对于纸张就是下移一行，这个动作叫做“移行（Line Feed）”。
   - ANSI标准规定，转义字符“\r”指代CR，“\n”指代LF，计算机系统早期广泛采用` CR+LF`指示换行。
@@ -76,13 +77,13 @@ s | 套接文件(socket)
   > C语言中虽然也有转义字符‘\r’、‘\n’，但并不保证与ASCII码CR、LF等价，在文本模式下，写入‘\n’由系统底层翻译成换行符，读入文本时换行符再由系统底层翻译为‘\n’。UNIX系统正是C语言写出来的，系统底层就使用LF作换行符，系统内外表示一致不需翻译；而MS-DOS、Windows系统底层，则在系统内外需要进行‘\n’与CR+LF的转换工作。
 
 
-##### 两种编译构建方式
+## 两种编译构建方式
 - ①原生（native）编译构建，即编译构建命令所运行（host）的系统环境和编译构建输出目标（target）的系统环境一致；
 - ②交叉（cross）编译构建，上述target和host不一致，即在A系统环境构建出在B系统上运行的目标，这在嵌入式开发中尤为多见。
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
-##### 软件仓库
+## 软件仓库
 - Windows
   > 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
 - Linux或Unix

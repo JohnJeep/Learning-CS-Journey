@@ -1,3 +1,11 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-04-04 09:46:51
+ * @LastEditTime: 2020-06-01 21:57:34
+ * @LastEditors: Please set LastEditors
+ * @Description: iNode的理解
+--> 
+
 参考
 - [linux中inode包含什么内容？](https://mp.weixin.qq.com/s/u9t6QtYCRJAJVpEgxC8t0Q)
 

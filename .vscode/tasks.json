@@ -15,9 +15,9 @@
                 "-static-libgcc",                               // 静态链接
                 "-std=c++17",
                 "-lm",         
-                //"-fexec-charset=GBK",                            //使用g++编译后，程序为GBK编码
-                "-finput-charset=UTF-8",                        //输入编译器文本编码 默认为UTF-8
-                "-fexec-charset=GB18030",                       //输出exe文件的编码
+                "-fexec-charset=GBK",                            //使用g++编译后，程序为GBK编码
+                "-finput-charset=UTF-8",                        //输入编译器文本编码 默认为UTF-8词典
+                // "-fexec-charset=GB18030",                       //输出exe文件的编码
                 "-D _USE_MATH_DEFINES",
                 "\"${file}\"",                                   // 指定编译源代码文件
                 "-o",                                            // 指定输出文件名，不加该参数则默认输出a.exe，Linux下默认a.out
@@ -70,7 +70,7 @@
                 "-std=c11",                                  // 使用c11标准
                 "-Wno-format",
                 "-finput-charset=UTF-8",                      //输入编译器文本编码 默认为UTF-8
-                "-fexec-charset=GBK",
+                // "-fexec-charset=GBK",
                 "-D _USE_MATH_DEFINES"
             ],
             
@@ -102,19 +102,6 @@
                     "message": 5                               // 第五个匹配组匹配消息
                 }
             },
-        },
-
-        {
-            "label": "build-make",
-            "command": "make",
-            "args": ["default"],
-            "type": "shell"
-        },
-        {
-            "label": "build-clean",
-            "command": "clean",
-            "args": ["clean"],
-            "type": "shell"
         },
 	]
 }
