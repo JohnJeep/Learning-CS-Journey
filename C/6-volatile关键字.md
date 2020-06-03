@@ -1,10 +1,9 @@
 <!--
  * @Author: your name
  * @Date: 2019-08-22 11:50:29
- * @LastEditTime: 2020-06-03 15:42:03
+ * @LastEditTime: 2020-06-03 19:06:46
  * @LastEditors: Please set LastEditors
  * @Description: volatile 关键字
- * @FilePath: \Learning-Computer\C\6-volatile关键字.md
 --> 
 
 <!-- TOC -->
