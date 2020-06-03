@@ -1,25 +1,58 @@
-```
-Description: MySQL基础知识学习，作为一个使用者的角度
-Author: JohnJeep
-Date: 2019-08-02 22:17:14
-LastEditTime: 2019-09-15 19:22:15
-LastEditors: JohnJeep
-```
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-08-02 22:17:14
+ * @LastEditTime: 2020-06-03 11:54:07
+ * @LastEditors: Please set LastEditors
+ * @Description:  MySQL基础知识学习，作为一个使用者的角度
+-->
 
- 参考文章
+<!-- TOC -->
+
+- [1. 数据库（MySQL）](#1-数据库mysql)
+  - [1.1. 参考文章](#11-参考文章)
+  - [1.2. RDBMS（关系型数据库）](#12-rdbms关系型数据库)
+  - [1.3. 语句规范](#13-语句规范)
+  - [1.4. 安装操作](#14-安装操作)
+  - [1.5. 数值类型](#15-数值类型)
+  - [1.6. 日期和时间类型](#16-日期和时间类型)
+  - [1.7. 字符串](#17-字符串)
+  - [1.8. SHOW命令](#18-show命令)
+  - [1.9. 数据库操作](#19-数据库操作)
+  - [1.10. 数据表操作](#110-数据表操作)
+    - [1.10.1. 创建数据表(create)](#1101-创建数据表create)
+    - [1.10.2. 查看数据表(show)](#1102-查看数据表show)
+    - [1.10.3. 删除数据表(drop)](#1103-删除数据表drop)
+    - [1.10.4. 统计数据表](#1104-统计数据表)
+    - [1.10.5. 修改数表(alter)](#1105-修改数表alter)
+  - [1.11. 数据操作](#111-数据操作)
+    - [1.11.1. 插入数据(insert)](#1111-插入数据insert)
+    - [1.11.2. 更新表数据(update)](#1112-更新表数据update)
+    - [1.11.3. 删除表数据(delete)](#1113-删除表数据delete)
+    - [1.11.4. 查询(检索)表数据(select)](#1114-查询检索表数据select)
+      - [1.11.4.1. 子查询](#11141-子查询)
+      - [1.11.4.2. 连接](#11142-连接)
+  - [1.12. 函数](#112-函数)
+  - [1.13. 视图(View)](#113-视图view)
+    - [1.13.1. 视图创建](#1131-视图创建)
+    - [1.13.2. 视图删除](#1132-视图删除)
+  - [1.14. 编码问题](#114-编码问题)
+  - [1.15. 引擎](#115-引擎)
+  - [1.16. 事务四个特性](#116-事务四个特性)
+  - [1.17. 数据的导入与导出](#117-数据的导入与导出)
+    - [1.17.1. 导入和导出txt文件](#1171-导入和导出txt文件)
+
+<!-- /TOC -->
+
+# 1. 数据库（MySQL）
+## 1.1. 参考文章
 - [MySQL安装教程参考文章](https://blog.csdn.net/u013235478/article/details/50623693)
 - [MySQL压缩包安装参考](https://www.cnblogs.com/laumians-notes/p/9069498.html)
 - [MySQL卸载参考](https://www.cnblogs.com/zimo-jing/p/7931866.html)
 - [MySQL 5.1安装和配置过程中遇到的问题](https://www.cnblogs.com/suiy-160428/p/5552463.html)
-
-
-学习网站和博客
-- 网站
+- 学习网站
   - [MySQL Tutorial 英文档](http://www.mysqltutorial.org/)
   - [国外的Planet MySQL](https://planet.mysql.com/)
   - [W3school SQL教程](https://www.w3school.com.cn/sql/sql_syntax.asp)
-
-
 - 博客
   - [万乐荣MySQL讲解](http://www.notedeep.com/note/38/page/328)
   - [何登成的技术博客](http://hedengcheng.com/)
@@ -31,7 +64,7 @@ LastEditors: JohnJeep
 
 
 
-# RDBMS（关系型数据库）
+## 1.2. RDBMS（关系型数据库）
 > 一个关系型数据库由一个或数个表格组成
 
 - 冗余：存储两倍数据，冗余降低了性能，但提高了数据的安全性
@@ -44,14 +77,15 @@ LastEditors: JohnJeep
 - DML（Data Manipulation Language）语句：数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性，常用的语句关键字主要包括insert、delete、udpate 和select 等。
 - DCL（Data Control Language）语句：数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括grant、revoke 等。
 
-## 语句规范
+
+## 1.3. 语句规范
 - 关键字与函数名称全部大写
 - 数据库名、表名称、字段名称全部小写
 - SQL语句默认是以分号结尾,SQL是不区分大小写
 - 每个表保存一个实体信息
 
 
-## 安装操作
+## 1.4. 安装操作
 - 初始化：以管理员身份运行cmd，进入到MySQL的bin目录，执行初始化命令：
 `mysqld --initialize --user=mysql --console`
 - 执行命令进行MySQL服务安装：`mysqld –install mysql`
@@ -70,7 +104,7 @@ LastEditors: JohnJeep
 
 
 
-### 数值类型
+## 1.5. 数值类型
 - TINYIN：1字节    范围：-128~127
 - SMALLINT: 2字节  范围：-32768~32767
 - MEDIUMINT: 3字节
@@ -83,21 +117,21 @@ LastEditors: JohnJeep
 - DOUBLE: 8字节
 
 
-### 日期和时间类型
+## 1.6. 日期和时间类型
 - DATE: 3字节  日期值  YYYY-MM-DD
 - TIME: 3字节  时间值或持续时间  HH:MM:SS
 - YEAR: 1字节  年份值  YYYY
 - DATETIME: 8字节  混合日期和时间值  YYYY-MM-DD HH:MM:SS
 
 
-### 字符串
+## 1.7. 字符串
 - CHAR: 0-255
 - VARCHAR: 0-65535
 - TINYBLOB: 0-255  不超过 255 个字符的二进制字符串
 > MySQL 5.0 以上的版本：1、一个汉字占多少长度与编码有关：2、UTF－8：一个汉字＝3个字节; 3、GBK：一个汉字＝2个字节
 
 
-### SHOW命令
+## 1.8. SHOW命令
 - USE 数据库名: 选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库
 - SHOW DATABASES:  列出 MySQL 数据库管理系统的数据库列表
 - SHOW TABLES:  显示指定数据库的所有表
@@ -106,7 +140,7 @@ LastEditors: JohnJeep
 - SHOW INDEX FROM 数据表:  显示数据表的详细索引信息，包括PRIMARY KEY（主键）
 
 
-### 数据库操作
+## 1.9. 数据库操作
 - 查看当前数据库： `select database();`
 - 显示当前时间、用户名、数据库版本: `select now(), user(), version();`
 - 创建库:  `create database[ if not exists] 数据库名 数据库选项`
@@ -119,12 +153,8 @@ LastEditors: JohnJeep
 - 删除库(同时删除该数据库相关的目录及其目录内容): `drop database[ if exists] 数据库名`       
 
 
-
-
-
-### 数据表操作
-
-#### 创建数据表(create)
+## 1.10. 数据表操作
+### 1.10.1. 创建数据表(create)
 - 创建数据表 `CREATE TABLE [temporary] [IF NOT EXISTS] table_name(column_name data_type, ...);`
   - table_name可以为`[库名].表名`
   - 每个字段必须有数据类型
@@ -135,7 +165,7 @@ LastEditors: JohnJeep
   - `temporary`为临时表，会话结束时表自动消失  
 
 
-#### 查看数据表(show)
+### 1.10.2. 查看数据表(show)
 - 查看数据表列表 `SHOW TABLES [FROM db_name]` 使用FROM db_name可以查看该数据库中所有的表
 - 查看数据表结构 
   - `SHOW COLUMNS FROM tab_nmae`
@@ -147,7 +177,7 @@ LastEditors: JohnJeep
 - 查看记录（数据表内容） `SELECT expr, ... FROM tabl_name`
 
 
-#### 删除数据表(drop)
+### 1.10.3. 删除数据表(drop)
 - 删除数据表：`DROP TABLE table_name;`
 - 清空数据表： `TRUNCATE [TABLE] tab_name`
 - 复制表结构: `CREATE TABLE 新表名称 LIKE 要复制的表名`
@@ -158,16 +188,14 @@ LastEditors: JohnJeep
 - 分析表: `ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...`
 
 
-#### 统计数据表
+### 1.10.4. 统计数据表
 - 查询数据采用SELECT命令
   - 查询数据表中不重复的行：`SELECT DISTINCT col_name FROM tab_name`
   - 从行 5 开始曲 4 行：`SELECT col_name FROM tab_name LIMIT 5, 4`
-
-
 - 统计某个数据库中有多少张表：`SELECT count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;`
 
 
-#### 修改数表(alter)
+### 1.10.5. 修改数表(alter)
 - 修改数据表
   - 对表进行重命名
     - `RENAME TABLE 原表名 TO 新表名`
@@ -199,9 +227,8 @@ LastEditors: JohnJeep
       - 对字段名修改: `ALTER TABLE tab_name CHANGE[ COLUMN] 原字段名 新字段名 新字段属性 新参数`
 
 
-### 数据操作
-
-#### 插入数据(insert)
+## 1.11. 数据操作
+### 1.11.1. 插入数据(insert)
   - 单条插入数据：`INSERT INTO table_name ( field1, field2,...fieldN )
                         VALUES
                         ( value1, value2,...valueN );`
@@ -214,7 +241,7 @@ LastEditors: JohnJeep
   - 多条数据的插入，节省了网络开销、提高了插入效率
 
 
-#### 更新表数据(update)
+### 1.11.2. 更新表数据(update)
   - 单表更新记录: `UPDATE tab_name SET 字段名=新值1 [, 字段名=新值N]... WHERE [where_condition]`  
     - 若省略`WHERE`语句，表里面的内容都要更新
     - 组成
@@ -230,27 +257,26 @@ LastEditors: JohnJeep
   > 常用于根据一个表的字段来动态的更新另外一个表的字段属性
 
 
-#### 删除表数据(delete)
+### 1.11.3. 删除表数据(delete)
   - 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
     - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
   - 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
   - 删除原来的表并重新创建一个表，而不是逐行删除表中的数据: `TRUNCATE`
 
 
-删除表信息的方式有两种 :
-truncate table table_name;
-delete * from table_name;
-注 : truncate操作中的table可以省略，delete操作中的*可以省略
-
-truncate、delete 清空表数据的区别 :
-1> truncate 是整体删除 (速度较快)，delete是逐条删除 (速度较慢)
-2> truncate 不写服务器 log，delete 写服务器 log，也就是 truncate 效率比 delete高的原因
-3> truncate 不激活trigger (触发器)，但是会重置Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从1开始记录，而不是接着原来的 ID数。而 delete 删除以后，identity 依旧是接着被删除的最近的那一条记录ID加1后进行记录。如果只需删除表中的部分记录，只能使用 DELETE语句配合 where条件
+- 删除表信息的方式有两种
+  - truncate table table_name;
+  - delete * from table_name;
+  > 注 : truncate操作中的table可以省略，delete操作中的*可以省略
 
 
+- truncate、delete 清空表数据的区别
+  - truncate 是整体删除 (速度较快)，delete是逐条删除 (速度较慢)
+  - truncate 不写服务器 log，delete 写服务器 log，也就是 truncate 效率比 delete高的原因
+  - truncate 不激活trigger (触发器)，但是会重置Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从1开始记录，而不是接着原来的 ID数。而 delete 删除以后，identity 依旧是接着被删除的最近的那一条记录ID加1后进行记录。如果只需删除表中的部分记录，只能使用 DELETE语句配合 where条件
 
 
-#### 查询(检索)表数据(select)
+### 1.11.4. 查询(检索)表数据(select)
   - 查看表中所有数据: `SELECT * FROM tab_name WHERE [CONDITION]`
   - 去掉重复数据显示：关键字`distinct`: `SELECT DISTINCT (co_name1, col_name2, ..., col_nameN) FROM tab_name WHERE [CONDITION]`
 
@@ -301,18 +327,16 @@ truncate、delete 清空表数据的区别 :
   > 使用的顺序：where---group by---having---order by---limit
 
 
-##### 子查询
+#### 1.11.4.1. 子查询
 - where型子查询: 内层查询的结果作为外层的条件
 - from型子查询：内层SQL查询的结果当成一张临时表，供外层的SQL再次查询。
 - exist型子查询：把外层SQL查询的结果拿到内层SQL中去测试，如果内层SQL成立，则该行取出。
-
-
 - <font color=red> NULL说用 </font>
   
   > null是一种类型，比较时只能用 `is null` 或 `is not null`;碰见运算符时，一律返回为null。使用null效率不高，影响索引的效果
 
 
-##### 连接
+#### 1.11.4.2. 连接
 - 使用两表相乘生成第三个表的方法，再进行查询。这样做的方法效率很低，对内存的开销很大。
 - mysql中不支持外链接
 - 左连接: `A left join B on 条件`:
@@ -336,19 +360,17 @@ truncate、delete 清空表数据的区别 :
 
 
 
-### 函数
+## 1.12. 函数
 - `cancat()函数`: 拼接两个列:
 - `RTrim()函数`: 去掉值右边的所有空格
 - `LTrim()函数`: 去掉值左边的所有空格
 - `Upper()`: 将文本转换为大写
 
 
+## 1.13. 视图(View)
+可以看成一张虚拟的表，是表通过某种运算得到的一个投影。
 
-
-### 视图(View)
-> 可以看成一张虚拟的表，是表通过某种运算得到的一个投影。
-
-#### 创建
+### 1.13.1. 视图创建
 - 创建视图` create view 视图名 as select语句`
 - 作用：
   - 简化查询：统计复杂的结果时，先用视图生成一个中间结果，再查询视图。
@@ -364,13 +386,13 @@ truncate、delete 清空表数据的区别 :
     - temptable：创建临时表
 
 
-#### 删除
+### 1.13.2. 视图删除
 - ` drop view view_name` 删除视图时，只能删除视图的定义，不会删除数据，删除一个或多个视图时，视图中间使用逗号分隔开
 
 
 
 
-### 编码问题
+## 1.14. 编码问题
 - 字符集: `CHARSET = charset_name`
 - 四个概念
   - client(客户端)
@@ -386,7 +408,7 @@ truncate、delete 清空表数据的区别 :
   - 正确选择返回内容的编码
 
 
-### 引擎
+## 1.15. 引擎
 - 存储引擎: `ENGINE = engine_name`
   - 表在管理数据时采用的不同的数据结构，结构不同会导致处理方式、提供的特性操作等不同
   - 常见的引擎：InnoDB MyISAM Memory/Heap BDB Merge Example CSV MaxDB Archive
@@ -403,16 +425,16 @@ truncate、delete 清空表数据的区别 :
 
 
 
-- 事务四个特性
-
-参考：[数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
-  - 概念:每一个SQL语句就是一个事务。`start transaction`：开启事务  `commit`：提交 
-
-
-  - 原子性（Atomicity）：用于保证数据的一致性，由一组相关的DML语句组成，改组的语句要么全部成功，要么全部失败。（失败的时候要进行回滚操作[rollback]）
-  - 一致性（Consistency）：一个事务执行之前和执行之后都必须处于一致性状态，即操作前后值得变化，逻辑上保持一致。
-  - 隔离性（Isolation）：如果多个事务同时并发执行，但每个事务会各自独立执行，不能被其他事务的操作所干扰。
-  - 持久性（Durability）：事务一旦完成，无法撤销。一个事务一旦被提交了，对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作
+## 1.16. 事务四个特性
+- 参考：
+  - [数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
+  
+  
+- 概念:每一个SQL语句就是一个事务。`start transaction`：开启事务  `commit`：提交 
+- 原子性（Atomicity）：用于保证数据的一致性，由一组相关的DML语句组成，改组的语句要么全部成功，要么全部失败。（失败的时候要进行回滚操作[rollback]）
+- 一致性（Consistency）：一个事务执行之前和执行之后都必须处于一致性状态，即操作前后值得变化，逻辑上保持一致。
+- 隔离性（Isolation）：如果多个事务同时并发执行，但每个事务会各自独立执行，不能被其他事务的操作所干扰。
+- 持久性（Durability）：事务一旦完成，无法撤销。一个事务一旦被提交了，对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作
 
 
 - 数据文件目录: `DATA DIRECTORY = '目录'`
@@ -421,9 +443,7 @@ truncate、delete 清空表数据的区别 :
 - 分区选项: `PARTITION BY ...` (详细见手册)
 
 
-
-
-### 数据的导入与导出
+## 1.17. 数据的导入与导出
 [Mysql备份还原数据库之mysqldump实例及参数详细说明](https://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html)
 
 - `mysqldump`导出固定条件的数据库
@@ -449,7 +469,7 @@ truncate、delete 清空表数据的区别 :
 ```
 
 
-##### 导入和导出txt文件
+### 1.17.1. 导入和导出txt文件
 - 导入txt文件
 ```
 mysql> load data infile 'd.txt' into table table_name 
