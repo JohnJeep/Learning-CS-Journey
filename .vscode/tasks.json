@@ -82,7 +82,7 @@
             "presentation": {
                 "echo": true,
                 "reveal": "always",                             // 在“终端”中显示编译信息的策略，可以为always，silent，never
-                 "focus": false,                             
+                 "focus": true,                             
                  "panel": "shared"                              // 不同的文件的编译信息共享一个终端面板
             },
             "problemMatcher": {
