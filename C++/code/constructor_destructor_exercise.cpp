@@ -1,11 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 20:16:08
- * @LastEditTime: 2020-06-03 21:16:34
+ * @LastEditTime: 2020-06-04 09:25:51
  * @LastEditors: Please set LastEditors
  * @Description: 构造函数、析构函数、组合对象混合一起练习。
  */ 
-
 #include <iostream>
 using namespace std;
 
@@ -29,6 +28,33 @@ public:
     }
 };
 
+Dog::Dog()
+{
+    cout << "执行无参数构造" << endl;
+}
+
+Dog::Dog(int a, int b, int c)
+{
+    this->m_a = a;
+    this->m_b = b;
+    this->m_c = c;
+    cout << "执行Dog类的三个参数构造函数：" 
+         << this->m_a << ", "
+         << this->m_b << ", "
+         << this->m_c << ", "
+         << endl;
+}
+
+Dog::~Dog()
+{
+    cout << "执行Dog类的析构函数: " 
+         << this->m_a << ", "
+         << this->m_b << ", "
+         << this->m_c << ", "
+         << endl;
+}
+
+
 class Bird
 {
 private:
@@ -50,7 +76,7 @@ Bird::Bird()
     cout << "执行Bird类的构造函数" << endl;
 }
 
-Bird::Bird(const Bird& parrot)
+Bird::Bird(const Bird& parrot)                                // 拷贝构造函数
 : smallBlack(01, 02, 03), smallWhite(04, 05, 06), age(10)     // 初始化列表
 {
     cout << "执行Bird类带有 const Bird& parrot 参数的构造函数" << endl;
@@ -62,48 +88,20 @@ Bird::~Bird()
 }
 
 
-
-Dog::Dog(/* args */)
-{
-    cout << "执行无参数构造" << endl;
-}
-
-Dog::Dog(int a, int b, int c)
-{
-    this->m_a = a;
-    this->m_b = b;
-    this->m_c = c;
-    cout << "执行三个参数构造函数：" 
-         << this->m_a
-         << this->m_b
-         << this->m_c
-         << endl;
-}
-
-Dog::~Dog()
-{
-    cout << "执行析构函数" 
-         << this->m_a
-         << this->m_b
-         << this->m_c
-         << endl;
-}
-
-
 // 调用函数
 int doSomething(Bird pp)
 {
-    cout << "调用getOne()函数" << pp.smallBlack.getOne() << endl;
+    cout << "调用getOne()函数: " << pp.smallBlack.getOne() << endl;
     return 0;
 }   
 
 
-
 int main(int argc, char *argv[])
 {
-    Bird magpie;
-    doSomething(magpie); 
+    Bird magpie;           // 默认去调用无参数的构造函数
+    doSomething(magpie);   // 默认去调用有参数的构造函数
 
+    system("pause");
     return 0;
 }
 
