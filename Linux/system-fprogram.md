@@ -1,21 +1,22 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-06-02 22:52:42
+ * @LastEditTime: 2020-06-04 22:28:47
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
 <!-- TOC -->
 
-- [1. System function](#1-system-function)
+- [1. System program](#1-system-program)
   - [1.1. 概念](#11-概念)
   - [1.2. 函数](#12-函数)
   - [1.3. 环境变量](#13-环境变量)
   - [1.4. fork函数](#14-fork函数)
+  - [exec函数家族](#exec函数家族)
 
 <!-- /TOC -->
 
-# 1. System function
+# 1. System program
 ## 1.1. 概念
 - 文件函数包括三部分内容
   - `file descriptor`  文件描述符
@@ -121,7 +122,15 @@
   - `getegid()` 获取当前进程有效用户组ID号
 
 
+## exec函数家族
+执行exec()家族的函数后，将当前进程的内存空间数据替换为要执行函数的内存空间数据。
 
+- `execlp` 加载一个进程，通过环境变量加载。
+- `execl` 加载一个进程，通过路径 + 程序名称来加载。
+- `execle`
+- `execv`
+- `execvp`
+- `execvpe`
 
 
 

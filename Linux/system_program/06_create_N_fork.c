@@ -1,8 +1,10 @@
-/**
-  * 创建N个子进程例子
-  *
-  */
-
+/*
+ * @Author: JohnJeep
+ * @Date: 2020-06-02 22:02:36
+ * @LastEditTime: 2020-06-04 22:25:13
+ * @LastEditors: Please set LastEditors
+ * @Description: 创建N个子进程例子
+ */ 
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -10,7 +12,7 @@
 
 #define  N           5 
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	pid_t pd;
 	int i = 0;
@@ -26,14 +28,12 @@ int main(int argc, char* argv[])
 		}
 		if (pd == 0)
 		{
-			// printf("I am %d child. pid=%d, ppid=%d \n", i+1, getpid(), getppid());
 			break;
 		}
-		if (pd > 0)
-		{
-			printf("I am %d parent. pid=%d, ppid=%d, pd=%d \n", i+1, getpid(), getppid(), pd);
-		}
-		
+		// if (pd > 0)
+		// {
+		// 	printf("I am %d parent. pid=%d, ppid=%d, pd=%d \n", i+1, getpid(), getppid(), pd);
+		// }	
 	}
 	if (i < 5)
 	{
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		sleep(i);
-		printf("I am %d parent. pid=%d, ppid=%d \n", i+1, getpid(), getppid());
+		printf("I am %d parent. pid=%d, ppid=%d \n", i, getpid(), getppid());
 	}
 	
 	// printf("fork create after.\n");
