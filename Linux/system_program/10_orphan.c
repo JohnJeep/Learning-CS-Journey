@@ -16,14 +16,17 @@ int main(int argc, char* argv[])
 	}
 	else if (pd == 0)
 	{
-		printf("I am child. pid=%d, ppid=%d \n", getpid(), getppid());
-		sleep(3);
-		printf("I am child. pid=%d, ppid=%d \n", getpid(), getppid());
+		while(1)
+		{
+			printf("I am child. pid=%d, ppid=%d \n", getpid(), getppid());
+			sleep(5);
+			printf("--------------parent process died-------------\n");
+		}
 	}
 	else
 	{
 		printf("I am parent. pid=%d, ppid=%d \n", getpid(), getppid());
-//		sleep(3);
+		sleep(1);
 	}
 	printf("fork create after.\n");
 
