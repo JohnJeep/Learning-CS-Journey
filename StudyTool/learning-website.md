@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2020-06-01 21:29:44
+ * @LastEditTime: 2020-06-05 22:03:13
  * @LastEditors: Please set LastEditors
  * @Description: 积累一些学习的网站。
 --> 
+
 <!-- TOC -->
 
 - [1. Website reference](#1-website-reference)
@@ -65,31 +66,36 @@
 
 ## 1.4. 公开课和在线视频学习
 - 国内平台
-    - [网易公开课](https://open.163.com/): 网易旗下的，包含了国内的和国外的高校的各种公开课，优质资源太多了。
-    - [网易云课堂](https://study.163.com/): 同样也是网易旗下的，是一个在线学习的平台，与国外的Coursera类似。
-    - [中国大学mooc](https://www.icourse163.org/):国内好的大学都在上面推出了各自高校的厉害学科的课程，为大学生和自学的人提供的平台。
-    - [MeTel 国道多媒体](http://www.metel.cn)：主要面向科研、教学、情报机构提供在线服务学习的平台。在校大学生可以通过学校的网上图书馆免费登录。
-    - [学堂在线](http://www.xuetangx.com):由清华大学推出的全球首个中文大规模开放在线课堂平台。
-    - [慕课网](https://www.imooc.com/)：是一个IT技能学习的平台，讲的课程还不错，平常用的较少。
+  - [网易公开课](https://open.163.com/): 网易旗下的，包含了国内的和国外的高校的各种公开课，优质资源太多了。
+  - [网易云课堂](https://study.163.com/): 同样也是网易旗下的，是一个在线学习的平台，与国外的Coursera类似。
+  - [中国大学mooc](https://www.icourse163.org/):国内好的大学都在上面推出了各自高校的厉害学科的课程，为大学生和自学的人提供的平台。
+  - [MeTel 国道多媒体](http://www.metel.cn)：主要面向科研、教学、情报机构提供在线服务学习的平台。在校大学生可以通过学校的网上图书馆免费登录。
+  - [学堂在线](http://www.xuetangx.com):由清华大学推出的全球首个中文大规模开放在线课堂平台。
+  - [慕课网](https://www.imooc.com/)：是一个IT技能学习的平台，讲的课程还不错，平常用的较少。
 - 国外平台
-   - [学术演讲或PHD答辩视频网站](http://videolectures.net/)：VideoLectures.net是世界上最大的英文学术网络视频，也是一个自由和开放接入教育视频讲座库。
-   - [Coursera](https://www.coursera.org/): 国外一个非常好的在线学习网站，中文和英文的课程都有。
-   - [edx](): 由麻省理工学院和哈佛大学创建的大规模开放在线课堂平台。课程是英文的，英文不好的学习起来有点吃力，但是课程非常好，老外讲课就是不一样。
-   - [udemy](https://www.udemy.com)：国外的在线学习平台，有许多优秀的工程和教授推出了很多的课程，有免费的也有付费的。平时使用的比较少。
-   - [Udacity 优达学城](https://cn.udacity.com): 由Sebastian Thrun, David Stavens和Mike Sokolsky注资的一个私立教育组织，它的目标是实现自主学习。上面也有许多的中文和英文课程。平常访问的比较少。
-   - [一席演讲](https://yixi.tv/speech/280)
-   - [TED](https://www.ted.com/): TED是一个美国创建的机构，宗旨就是“传播一些值得传播的创意”！这里有非常多的演讲视频，来自各界人士，内容也是五花八门！让你拥有最广的视角，了解更大的世界！
-   - [HowCast 话题式视频分享网](https://www.howcast.com/): 只需在网站上输入“how to”就会找到各种解决问题方式，全都是通过视频的方式传播的，内容包含生活技能、日常常见的问题等成千上百个问题解决方式
-   - [LiveStream 免费视频直播平台](https://livestream.com/): 是一个免费在线直播站点，供各行业的用户使用。其中所涵盖的栏目有：新闻、游戏、音乐、体育等。Livestream是这个行业的首个价格相对便宜的，无限制的，没有广告的平台。
-   - [Metacafe 在线视频网](https://www.metacafe.com/)： 美国著名的在线视频网站，全球最大在线视频网站之一，在该网站你可以获得最新最好的电影、图片、游戏等，也可以与网友共享你所了解的信息。
-   - [美国HBO家庭影院频道](https://www.hbo.com/): HBO获得好莱坞主要的知名电影公司授予独家播映权，包括华纳兄弟、环球片场、梦工厂等，为亚洲的观众提供超级强片。同时它还提供高品质的自制电影、影集和纪录片。为了加强电影的类别，HBO亦向其他独立发行商搜罗不同的影片，其中包括宝丽金、New Line及Castle Rock等。
-   - [ShortFilm 互联网短视频分享网](https://shortfil.ms/): 这是一个收集和整理互联网中最佳视频短片的目录站点，每天都会从互联网中筛选出最值得推荐的有趣短片，主要栏目包括影视、流行、动漫、纪录片、科幻等
-   - [The Verge](https://www.theverge.com/)：-最受欢迎的科技媒体之一
-   - [TV Shows and Movies](https://www.hulu.com/welcome)：正版影视作品和电视节目视频网站
-   - [IMDB](https://www.imdb.com/): 互联网电影资料库:
-   - [Vice](https://www.vice.com/en_us)：国外新锐媒体，年轻人的内容
-   - [Brain Pump](http://brainpump.net/): 每天学习新东西的地方。
-   - [Curious](https://curious.com/): Get a customized CQ Workout™ delivered to your inbox or mobile, every day.
+  - [学术演讲或PHD答辩视频网站](http://videolectures.net/)：VideoLectures.net是世界上最大的英文学术网络视频，也是一个自由和开放接入教育视频讲座库。
+  - [Coursera](https://www.coursera.org/): 国外一个非常好的在线学习网站，中文和英文的课程都有。
+  - [edx](): 由麻省理工学院和哈佛大学创建的大规模开放在线课堂平台。课程是英文的，英文不好的学习起来有点吃力，但是课程非常好，老外讲课就是不一样。
+  - [udemy](https://www.udemy.com)：国外的在线学习平台，有许多优秀的工程和教授推出了很多的课程，有免费的也有付费的。平时使用的比较少。
+  - [Udacity 优达学城](https://cn.udacity.com): 由Sebastian Thrun, David Stavens和Mike Sokolsky注资的一个私立教育组织，它的目标是实现自主学习。上面也有许多的中文和英文课程。平常访问的比较少。
+  - [一席演讲](https://yixi.tv/speech/280)
+  - [TED](https://www.ted.com/): TED是一个美国创建的机构，宗旨就是“传播一些值得传播的创意”！这里有非常多的演讲视频，来自各界人士，内容也是五花八门！让你拥有最广的视角，了解更大的世界！
+  - [HowCast 话题式视频分享网](https://www.howcast.com/): 只需在网站上输入“how to”就会找到各种解决问题方式，全都是通过视频的方式传播的，内容包含生活技能、日常常见的问题等成千上百个问题解决方式
+  - [LiveStream 免费视频直播平台](https://livestream.com/): 是一个免费在线直播站点，供各行业的用户使用。其中所涵盖的栏目有：新闻、游戏、音乐、体育等。Livestream是这个行业的首个价格相对便宜的，无限制的，没有广告的平台。
+  - [Metacafe 在线视频网](https://www.metacafe.com/)： 美国著名的在线视频网站，全球最大在线视频网站之一，在该网站你可以获得最新最好的电影、图片、游戏等，也可以与网友共享你所了解的信息。
+  - [美国HBO家庭影院频道](https://www.hbo.com/): HBO获得好莱坞主要的知名电影公司授予独家播映权，包括华纳兄弟、环球片场、梦工厂等，为亚洲的观众提供超级强片。同时它还提供高品质的自制电影、影集和纪录片。为了加强电影的类别，HBO亦向其他独立发行商搜罗不同的影片，其中包括宝丽金、New Line及Castle Rock等。
+  - [ShortFilm 互联网短视频分享网](https://shortfil.ms/): 这是一个收集和整理互联网中最佳视频短片的目录站点，每天都会从互联网中筛选出最值得推荐的有趣短片，主要栏目包括影视、流行、动漫、纪录片、科幻等
+  - [The Verge](https://www.theverge.com/)：-最受欢迎的科技媒体之一
+  - [TV Shows and Movies](https://www.hulu.com/welcome)：正版影视作品和电视节目视频网站
+  - [IMDB](https://www.imdb.com/): 互联网电影资料库:
+  - [Vice](https://www.vice.com/en_us)：国外新锐媒体，年轻人的内容
+  - [Brain Pump](http://brainpump.net/): 每天学习新东西的地方。
+  - [Curious](https://curious.com/): Get a customized CQ Workout™ delivered to your inbox or mobile, every day.
+  - [howstuffworks](https://computer.howstuffworks.com/)  计算机类的网站，涵盖软件、硬件网络与安全的方方面面。
+  - [tldp.org](https://www.tldp.org/) 向书籍一样的阅读计算机类相关的文章，每篇文章都有深度，只不过全是英文的，需要点耐心阅读。
+  - [codescracker](https://codescracker.com/) 简洁的编程语言学习平台网站。
+  - [nptel](https://nptel.ac.in/) 印度各大名校联合推出的免费学习网站，可以免费下载相应视频中的PDF文件进行学习。
+  - [Tutorials Library](https://www.tutorialspoint.com/tutorialslibrary.htm) 各种编程语言的教程文档。
 
 
 ## 1.5. 产品
@@ -160,6 +166,9 @@
 - [视觉中国](https://www.vcg.com/)：视觉不仅是个图库网站，它还包含了音乐、视频等素材资源，用户可根据个人需求搜索图片资源。
 - [GIF动画](https://ezgif.com/)：GIF动画制作网站
 - [Pexels](https://www.pexels.com/)：免费高品质图片网
+- [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
+- [emojiisland](https://emojiisland.com/) 下载emoji表情库
+
 
 
 ## 1.13. 图标
@@ -187,6 +196,9 @@
 - [仿知网](https://www.cn-ki.net/): 仿知网是一个完全可以代替知网的精品网站；是一个非常强大的论文搜索网站。
 - [国专利论文下载](https://www.drugfuture.com/cnpat/cn_patent.asp): 中国专利全文打包下载
 - [SemanticScholar 免费学术](https://www.semanticscholar.org/): 该网站是由微软联合创始人 Paul Allen 做的免费学术搜索引擎，其检索结果来自于期刊、学术会议资料或者是学术机构的文献。这个搜索引擎能检索到 80% 的免费论文文献，大约有 300 万份，另外它直接提供图表预览，看起来能方便研究人员省下更多筛选的工作。
+- [shudan.vip](http://pan.shudan.vip/) 下载各种格式的电子书籍。
+- [读书小站](https://ibooks.org.cn/) 简洁清新的网站，下载各种文学类的电子书。
+
 
 
 ## 1.15. 免费下载各种外文科技论文      
@@ -208,8 +220,16 @@
 ## 1.16. 二次元
 - [tunefind](https://www.tunefind.com/movie/zootopia-2016):  快速找到热门影视剧的BGM！
 - [KonaChan 动漫ACG壁纸](https://konachan.net/): KonaChan 网站是一个致力于动漫、游戏壁纸图片搜索的站点，喜欢动漫的用户可以根据关键词来搜索自己想要的图片壁纸。想要找个性化的动漫壁纸，只有这种专业的动漫图片网站才有的。
+- [dova](https://dova-s.jp/) 免费的日文BGM下载。
+- [nico](https://www.nicovideo.jp/) 日文BGM下载。
+
 
 
 ## 1.17. 装B
 - [HackerTyper Neo](http://geektyper.com/#): 伪装成特工，让网吧里围观的小学生们膜拜你的神器！
 - [File Destructor 2.0](http://www.xnet.se/fd/): 此网站可以随意伪造任意文件格式，任意文件大小的文档,如果你的死线就在明天而你到现在还什么都没做，那么你可以用它来拖延至少1天的时间。
+- [FakeUpdate](http://fakeupdate.net/)  模拟多种系统的安装过程，让你上班愉快的摸鱼。
+- [zwcsm](https://www.zwcsm.com/)  帮你解决今天想要吃什么的难题。
+- [suulnnka.github.io](https://suulnnka.github.io/BullshitGenerator/index.html) 沙雕文章生成器，搅乱你的脑袋瓜子吧！
+
+

@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-05-17 19:56:37
- * @LastEditors: JohnJeep
+ * @LastEditTime: 2020-06-07 15:02:34
+ * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
 
@@ -10,14 +10,19 @@
 
 - [1. Linux Basic](#1-linux-basic)
   - [1.1. 基本命令](#11-基本命令)
-  - [1.2. 管道](#12-管道)
-  - [1.3. 查看使用的端口](#13-查看使用的端口)
-  - [1.4. 常用 Bash终端快捷键](#14-常用-bash终端快捷键)
-  - [1.5. man命令](#15-man命令)
-  - [1.6. Strace](#16-strace)
-  - [1.7. wget命令](#17-wget命令)
-  - [1.8. apt命令](#18-apt命令)
-  - [1.9. dpkg 命令](#19-dpkg-命令)
+  - [1.2. 查看文件内容](#12-查看文件内容)
+  - [1.3. 重定向](#13-重定向)
+  - [1.4. 用户权限与链接](#14-用户权限与链接)
+  - [1.5. find与grep](#15-find与grep)
+  - [1.6. PID](#16-pid)
+  - [1.7. 管道](#17-管道)
+  - [1.8. 查看使用的端口](#18-查看使用的端口)
+  - [1.9. 常用 Bash终端快捷键](#19-常用-bash终端快捷键)
+  - [1.10. man命令](#110-man命令)
+  - [1.11. Strace](#111-strace)
+  - [1.12. wget命令](#112-wget命令)
+  - [1.13. apt命令](#113-apt命令)
+  - [1.14. dpkg 命令](#114-dpkg-命令)
 
 <!-- /TOC -->
 
@@ -31,31 +36,61 @@
 - ` rm -rf ` 删除一个目录下的所有文件；尽量后面加上`-i`参数(interactive)，让系统在执行前确认一次。`r`参数表示递归(recursive)
 - `mv  -v A B` 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
 - `cp src dest` 将文件src拷贝到当前目录下为dest文件；拷贝目录时，要加 `-r` 参数(recursive)
-- `ln`(建立链接命令)
-  -  `ln -s 原文件  新文件`    软连接
-  - `ln 原文件 新文件 `       硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 - `ps –ef|grep tomcat` 查看一个程序是否运行 
 - ` ls -al` 查看隐藏的文件  
+- `ps -Lf 端口号|wc -l `  查看线程个数  
+
+
+- which：通过环境变量PATH到该路径内寻找可执行文件，用于查找可执行文
+- `whereis` 查找系统中包含可以找到的所有文件
+- `eject` 将光盘驱动器中的光盘轻轻弹出和收回
+- `mount 设备名字 挂在目录`
+  - `mount` 设备装载常用命令：`mount –t type dev dir`
+  - `–t type` 是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
+  - `dev` 是挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
+  - `dir`表示挂载点，即挂载到的文件目录路径
+  - 例如：`mount -t iso9660 /dev/cdrom /media/drom`
+- `umout` 设备装载常用命令
+   - 例如：`umount dir device […]`
+
+
+- `od` 查看二进制文件信息
+- `du` 查看文件使用空间大小 `-h` (human)以人类容易看懂的方式显示
+- `df` 查看磁盘情况 
+- `fdisk -l` 查看硬盘的情况
 - `uname -a` 查看Linux版本
 - `lscpu` 查看系统CPU情况
+- `nslookup 域名` 查看域名对应的IP地址
+
+
+## 1.2. 查看文件内容
+- `more` (`-n`：可以显示行号)
+- `less` (`-N`：可以显示行号)
+- `cat`
+- `tac`
+- `nl` 查看文件时可以显示行号
+- `more`命令中输入`h`会显示帮助信息
+- 输入`b` 将显示上一屏的文件内容
+
+
+## 1.3. 重定向 
+- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并`覆盖原`来test.txt文件中的内容
+- `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，`不会覆盖原`来的文件，新加的文件保留到文本后面。
 
 
 
+## 1.4. 用户权限与链接
 - 用户权限修改
   - `chmod` 修改文件模式权限 
   - `chown` 修改文件的所属者
   - `chgrp` 修改文件的用户组
 
-
-- `ps -Lf 端口号|wc -l `  查看线程个数  
-- `nslookup 域名` 查看域名对应的IP地址
-
-
-- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并覆盖原来test.txt文件中的内容
-- `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，不会覆盖原来的文件，新加的文件保留到文本后面。
-- `pgrep -l xxxx`  查看某个进程的PID
+- `ln`(建立链接命令)
+  -  `ln -s 原文件  新文件`    软连接
+  - `ln 原文件 新文件 `       硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 
 
+## 1.5. find与grep
 - find：按照文件属性查找 
   - 按文件名 ` find 查找目录 -name filename.txt`  查找指定目录下的`filename.txt` 文件 
   - 按文件大小 `find 查找目录 -size 条件(+10k)` 查找指定目录下大于10k的文件
@@ -66,36 +101,14 @@
   - `grep -r 查找内容 查找路径 ` 
 
 
-- which：通过环境变量PATH到该路径内寻找可执行文件，用于查找可执行文
-- `whereis` 查找系统中包含可以找到的所有文件
-- eject：将光盘驱动器中的光盘轻轻弹出和收回
-- mount：设备装载常用命令：mount –t type dev dir
-  - `–t type` 是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
-  - `dev` 是挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
-  - `dir`表示挂载点，即挂载到的文件目录路径
-  - 例如：`mount -t iso9660 /dev/cdrom /media/drom`
-- `umout` 设备装载常用命令
-   - 例如：`umount dir device […]`
-- `od` 查看二进制文件信息
-- `du` 查看文件使用空间大小 `-h` (human)以人类容易看懂的方式显示
-- `df` 查看磁盘情况 
-- `fdisk -l` 查看硬盘的情况
-- `mount 设备名字 挂在目录`
-
-
--  查看文件内容命令：
-   - `more` (`-n`：可以显示行号)
-   - `less` (`-N`：可以显示行号)
-   - `cat`
-   - `tac`
-   - `nl` 查看文件时可以显示行号
-- `more`命令中输入`h`会显示帮助信息
-- 输入`b` 将显示上一屏的文件内容
-
-
+## 1.6. PID
+- `pgrep -l xxxx(程序名称)`  只显示某个进程的PID
+- `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
+- `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
-## 1.2. 管道
+
+## 1.7. 管道
 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
 - 用法：命令1|命令2|命令3|·····|命令n
 - grep（查文件中包含的一个相关命令)
@@ -106,7 +119,7 @@
   -  结尾` $ `
 
 
-## 1.3. 查看使用的端口
+## 1.8. 查看使用的端口
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
 - 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
 - ` netstat` 检查端口
@@ -126,7 +139,7 @@
 
 
 
-## 1.4. 常用 Bash终端快捷键
+## 1.9. 常用 Bash终端快捷键
 参考：[Bash 快捷键大全](https://linux.cn/article-5660-1.html)
 
     Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
@@ -185,7 +198,7 @@
 
 
 
-## 1.5. man命令
+## 1.10. man命令
 `man -n 命令`：n为数字
 - 1：普通应用程序或shell命令
 - 2：系统调用
@@ -198,14 +211,14 @@
 - 9：非标准的内核程序
 
 
-## 1.6. Strace
+## 1.11. Strace
 Strace  - trace system calls and signals
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
 
-## 1.7. wget命令
+## 1.12. wget命令
 参考:
 [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
@@ -216,7 +229,7 @@ Strace  - trace system calls and signals
 
 
 
-## 1.8. apt命令
+## 1.13. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -251,7 +264,7 @@ Strace  - trace system calls and signals
 
 
 
-## 1.9. dpkg 命令
+## 1.14. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
