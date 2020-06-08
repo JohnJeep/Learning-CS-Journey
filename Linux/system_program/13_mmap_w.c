@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-07 22:45:49
- * @LastEditTime: 2020-06-07 23:37:09
+ * @LastEditTime: 2020-06-08 20:57:44
  * @LastEditors: Please set LastEditors
  * @Description: 两个文件之间实现共享：mmap_w.c和mmap_r.c，
  *               即两个无血缘关系进程之间的通信。
@@ -26,17 +26,17 @@ typedef struct
 int main(int argc, char *argv[])
 {
     STU student = {"lucy", 18, 1};
-    int fd;
-    char *p;
+    int fd = 0;
+    char *p = NULL;
     int len = sizeof(student);
-
+    
     fd = open("./m_w.txt", O_CREAT | O_RDWR, 0644);
     if (fd == -1)
     {
         perror("open file failed.\n");
         exit(1);
     }
-    ftruncate(fd, len);
+    ftruncate(fd, len);      // 参数fd指定的文件大小改为参数len指定的大小
 
     p = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     if (p == MAP_FAILED)
@@ -50,10 +50,11 @@ int main(int argc, char *argv[])
     {
         memcpy(p, &student, len);
         student.id++;
+        printf("name: %s, id: %d, sex: %d\n", student.name, student.id, student.sex);
         sleep(1);
     }
 
-    int mup = munmap(NULL, len);    // 释放内核映射区
+    int mup = munmap(p, len);    // 释放内核映射区
     if (mup == -1)
     {
         perror("delete munmap failed.\n");

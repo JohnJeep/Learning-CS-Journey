@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-07 22:45:49
- * @LastEditTime: 2020-06-07 23:32:55
+ * @LastEditTime: 2020-06-08 20:40:33
  * @LastEditors: Please set LastEditors
  * @Description: 两个文件之间实现共享：mmap_w.c和mmap_r.c，
  *               即两个无血缘关系进程之间的通信。
@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
     // char *p = NULL;
     int len = sizeof(student);
 
-    fd = open("./m_w.txt", O_CREAT | O_RDONLY, 0644);
+    fd = open("./m_w.txt", O_RDONLY);
+    // fd = open(argv[1], O_RDONLY);
     if (fd == -1)
     {
         perror("open file failed.\n");
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
     }
     ftruncate(fd, len);
 
-    p = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    p = mmap(NULL, len, PROT_READ, MAP_SHARED, fd, 0);
     if (p == MAP_FAILED)
     {
         printf("mmap failed,\n");
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
         sleep(1);
     }
 
-    int mup = munmap(NULL, len);    // 释放内核映射区
+    int mup = munmap(p, len);    // 释放内核映射区
     if (mup == -1)
     {
         perror("delete munmap failed.\n");

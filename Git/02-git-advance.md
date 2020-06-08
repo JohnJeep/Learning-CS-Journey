@@ -1,10 +1,12 @@
-```
- * @Author: JohnJeep
+<!--
+ * @Author: your name
  * @Date: 2020-05-01 16:22:04
- * @LastEditTime: 2020-05-13 20:01:44
- * @LastEditors: JohnJeep
+ * @LastEditTime: 2020-06-08 19:30:09
+ * @LastEditors: your name
  * @Description: Git内部原理剖析
-```
+ * @FilePath: /Git/02-git-advance.md
+--> 
+
 <!-- TOC -->
 
 - [1. Git提高部分](#1-git提高部分)
