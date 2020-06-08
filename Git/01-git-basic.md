@@ -1,10 +1,11 @@
-```
+<!--
  * @Author: JohnJeep
- * @Date: 2020-04-04 23:28:59
- * @LastEditTime: 2020-05-19 21:11:11
- * @LastEditors: JohnJeep
+ * @Date: 2019-04-04 23:28:59
+ * @LastEditTime: 2020-06-08 19:09:37
+ * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
-```
+--> 
+
 <!-- TOC -->
 
 - [1. Git基本原理笔记](#1-git基本原理笔记)
