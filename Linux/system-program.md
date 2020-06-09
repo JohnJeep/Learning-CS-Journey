@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-06-08 22:57:32
+ * @LastEditTime: 2020-06-09 08:32:08
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
@@ -16,8 +16,8 @@
   - [1.6. wait函数](#16-wait函数)
   - [1.7. 进程间通信（IPC）](#17-进程间通信ipc)
     - [1.7.1. 管道](#171-管道)
-    - [共享映射区(mmap)](#共享映射区mmap)
-    - [1.7.2. 信号](#172-信号)
+    - [1.7.2. 共享映射区(mmap)](#172-共享映射区mmap)
+    - [1.7.3. 信号](#173-信号)
 
 <!-- /TOC -->
 
@@ -256,7 +256,7 @@ else if (WIFCONTINUED(wstatus))
 - FIFO 有名管道
 
 
-### 共享映射区(mmap)
+### 1.7.2. 共享映射区(mmap)
 - 当标志位flags等于 `MAP_SHARED` 时，创建映射区的权限要小于等于打开文件的权限。
 - 当标志位flags等于 `MAP_PRIVATE` 时，对映射区的权限没有要求，因为 mmap中的权限是对内存的限制。
 - 创建映射区的过程中隐含的有对映射区的 `读操作权限`。
@@ -287,7 +287,7 @@ else if (WIFCONTINUED(wstatus))
   
 
 
-### 1.7.2. 信号
+### 1.7.3. 信号
 - `man 7 signal` 查看信号的帮助文档
 
 - 进程控制块(PCB)信息
