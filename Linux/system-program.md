@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-06-09 08:32:08
+ * @LastEditTime: 2020-06-10 20:51:42
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
@@ -314,6 +314,11 @@ else if (WIFCONTINUED(wstatus))
 
 - 信号的处理方式
   - 执行默认动作 
+    - 终止进程 
+    - 终止进程并产生core文件，方便调试
+    - 忽略信号
+    - 暂停（stop）
+    - 继续（continue） 
   - 忽略(丢弃) ，并不是不处理信号，而是将信号处理后再进行忽略或丢弃。
   - 捕捉(调用户处理函数)
 <img src="./pictures/信号处理过程.png">
@@ -331,3 +336,44 @@ else if (WIFCONTINUED(wstatus))
   - 信号的编号
   - 事件
   - 默认处理动作
+
+- 两个特殊的信号（9----SIGKILL，19----SIGSTOP）不允许信号的忽略和捕捉，只能允许执行默认动作。
+- 向进程发送信号的函数
+  - `kill()` 给指定的进程发送指定的信号。
+  - `raise()` 给当前进程发送指定的信号。 
+  - `abort()` 给当前进程发送异常终止信号 `6)SIGABRT`，并产生core文件。
+
+
+- `alarm()` 函数
+  - 定时精度为 ms 级别 
+  - 函数的返回值为：上一次闹钟定时剩余的次数。 
+  - 每个进程有且只有一个定时器 
+- 查看系统的进程运行的时间 `time` 命令
+- 进行实际运行的时间 = 系统态运行时间 + 用户态运行时间 + 系统等待事件
+
+- `setitimer()`函数
+  - 定时器的精度为 us 级别
+  - 可以设置周期性的定时 
+
+- 信号集合
+  - 信号集设定
+    - `int sigemptyset(sigset_t *set);` 将信号位清空（置0）
+    - `int sigfillset(sigset_t *set);`  将某个信号集置1
+    - `int sigaddset(sigset_t *set, int signum);`  将某个信号加入信号集
+    - `int sigdelset(sigset_t *set, int signum);` 将某个信号清出信号集
+    - `int sigismember(const sigset_t *set, int signum);` 判断某个信号是否在信号集中
+  - `sigprocmask()函数` 屏蔽信号或解除屏蔽
+  - `sigpending()函数` 读取当前进程的 `未决信号集`
+
+
+- 信号的捕捉
+  - `signal()函数`  注册一个信号捕捉函数
+  - `sigaction()`  修改信号处理动作，即注册一个信号捕捉函数。
+    - `sa_handler` 指定信号捕捉后的处理函数名(即注册函数)。也可赋值为 `SIG_IGN` 表忽略 或 `SIG_DFL` 表执行默认动作
+    - `sa_mask` 调用信号处理函数时，所要屏蔽的信号集合(信号屏蔽字)。注意：仅在处理函数被调用期间屏蔽生效，是临时性设置。
+    - `sa_flags` 通常设置为0，表使用默认属性。
+   
+
+
+
+
