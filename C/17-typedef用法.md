@@ -1,22 +1,41 @@
-参考
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-09-06 9:18:29
+ * @LastEditTime: 2020-06-11 10:08:42
+ * @LastEditors: Please set LastEditors
+ * @Description: typedef基础用法
+ * @FilePath: /C/17-typedef用法.md
+--> 
 
-[百度百科typedef用法](https://baike.baidu.com/item/typedef/9558154?fr=aladdin)
+<!-- TOC -->
+
+- [0.1. 参考](#01-参考)
+- [0.2. 为什么使用typedef](#02-为什么使用typedef)
+- [0.3. 基本语法](#03-基本语法)
+- [0.4. typedef与数组](#04-typedef与数组)
+- [0.5. typedef与函数指针](#05-typedef与函数指针)
+- [0.6. 与#define比较](#06-与define比较)
+
+<!-- /TOC -->
+
+## 0.1. 参考
+- [百度百科typedef用法](https://baike.baidu.com/item/typedef/9558154?fr=aladdin)
 
 
-#### 为什么使用typedef
+## 0.2. 为什么使用typedef
 - 使用 typedef来编写更美观和可读的代码。所谓美观，意指 typedef 能隐藏笨拙的语法构造以及平台相关的数据类型，从而增强可移植性和以及未来的可维护性。 
 - 给变量取一个好记且意义明确的新名字，
 - 简化一些比较复杂的类型声明。
 
 
-#### 基本用法 
+## 0.3. 基本语法 
 - typedef
   - typedef：为现有类型取一个新的名称
   - 语法规则：`typedef  现有数据类型名称 新类型名称`
   - `typedef a b;`  给原类型a取一个别名为b
 
 
-#### typedef与数组
+## 0.4. typedef与数组
 - 定义相同类型和大小的数组
 ```
 typedef char arr[50];
@@ -24,11 +43,13 @@ arr text, data;  // 声明了一个text数组和一个data数组
 ```
 
 
-#### typedef与函数指针
+## 0.5. typedef与函数指针
 ```
 typedef void (*PrintHelloHandle)(int); 
+
 PrintHelloHandle pFunc;  // 声明一个函数指针为 pFunc 的别名
 pFunc = printHello;      // 初始化函数指针，将 printHello 的函数的地址赋值给函数指针  pFunc
+
 (*pFunc)(110);           // 调用函数指针，两种方式：(*pFunc)(110) 或 pFunc(110)
  
  //在其它地方的程序需要声明类似的函数指针，只需要简单使用
@@ -39,7 +60,7 @@ pFunc = printHello;      // 初始化函数指针，将 printHello 的函数的�
   - 在多个地方声明同一个类型的函数指针变量，简化代码
 
 
-#### 与#define比较
+## 0.6. 与#define比较
 - #define只是简单的字符串替换而typedef则是为一个类型起新名字
 - 通常讲，typedef要比#define要好，特别是在有指针的场合。
 
