@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-05-31 10:21:49
+ * @LastEditTime: 2020-06-15 20:53:18
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -16,3 +16,8 @@ Like the spring torrent flowing eastward, without tarry.
 
 Let life be beautiful like summer flowers and death like autumn leaves. 
 生如夏花般绚烂，死如秋叶般静美。
+
+The joy of living comes from what we put into living, not from what we seek to get from it.
+生活的乐趣来自我们对生活所做的投入，而非所求。
+
+
