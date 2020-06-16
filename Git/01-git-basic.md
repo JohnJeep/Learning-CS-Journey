@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-06-08 19:09:37
+ * @LastEditTime: 2020-06-16 15:16:30
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -323,13 +323,18 @@ experiment <br>
 
 
 ### 1.6.2. 恢复删除的文件
-1. 恢复`rm`删除的文件:
-     - rm只是将工作区中的文件删除，暂存区相应的文件依然存在，只要将暂存区内容恢复到工作区即可
-     - `git checkout filename`
-2. 恢复使用`git rm`删除的文件
-    - 被`git rm`命令删除，对应暂存区的文件已经不存在，那么只能从`commit`提交记录中恢复 
-    - `git checkout HEAD readme.txt`  将最后一次`commit`提交中的`readme.txt`文件恢复
-3. <font color="red">任何情况都可以恢复吗? </font>
+- 恢复工作区中被删除的文件   
+  - `rm` 指令只是将工作区中的文件删除，暂存区相应的文件依然存在，只要将暂存区内容恢复到工作区即可。
+  - `git checkout filename` 恢复误删除的单个文件
+  - 恢复误删除的多个个文件 
+    - 查看误删除的有哪些文件 `git ls-files -d` 
+    - 进行文件的恢复 `git ls-files -d | xargs -i git checkout {}`
+
+- 恢复暂存区中误删除的文件
+  - 被`git rm`命令删除，对应暂存区的文件已经不存在，那么只能从`commit`提交记录中恢复 
+  - `git checkout HEAD readme.txt`  将最后一次`commit`提交中的`readme.txt`文件恢复
+
+- <font color="red">任何情况都可以恢复吗? </font>
   > 当然不是，如果你把`.gti`目录删除了，那肯定是无法再恢复。实质上，之所以能将删除的文件恢复，因为在`.git`目录中有备份，`Git`会将**暂存区**或者**历史提交**中内容来恢复
 
 
@@ -344,7 +349,7 @@ experiment <br>
    - 最后的参数`--hard`
    - `^`当前分支所指向提交的前一个提交，`^^`表示当前分支所指向提交的前一个分支的前一个分支，以此类推；`^^`过多自然不太方便，可以使用`HEAD~2`表示
    - 使用分支名称作为参数`git reset master^ --hard`
-4. **mixed**、**soft**和**hard**区别
+4. `mixed`、`soft` 和 `hard` 区别
     - `--mixed`：默认值，当重置分支所指向`commit`提交位置时，暂存区中的内容会被新指向的`commit`提交内容所替换，工作区内容不变。
     - `--soft`：暂存区和工作区的内容都保持原样，不会被替换。
     - `--hard`：暂存区和工作区的内容都会被新指向的`commit`提交内容所替换；`git reset --hard`只影响被跟踪的文件，如果工作区有新增的文件，并不会被影响。
