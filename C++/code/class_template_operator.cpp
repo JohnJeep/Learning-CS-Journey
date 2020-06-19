@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-17 15:35:43
- * @LastEditTime: 2020-06-17 16:19:49
+ * @LastEditTime: 2020-06-18 09:02:10
  * @LastEditors: Please set LastEditors
  * @Description: 类模板中的操作符运算操作
  * @FilePath: /C++/code/class_template_operator.cpp
@@ -20,7 +20,9 @@ public:
     Complex(T real, T img);
     ~Complex();
     Complex<T> operator+(Complex<T>& cp);
-    friend ostream& operator<< <T>(ostream& out, Complex<T>& obj);
+    
+    template <typename u>
+    friend ostream& operator<<(ostream& out, Complex<u>& obj);
 };
 
 template <typename T>
@@ -45,9 +47,9 @@ Complex<T> Complex<T>::operator+(Complex<T>& cp)
     return Complex<T>(m_real + cp.m_real, m_img + cp.m_img); 
 }
 
-// 重载operator<< 运算符
-template <typename T>
-ostream& operator<<(ostream& out, Complex<T>& obj)
+// 重载operator<< 运算符，单独配一个类模板
+template <typename u>
+ostream& operator<<(ostream& out, Complex<u>& obj)
 {
     return out << obj.m_real << obj.m_img << endl;
 }
@@ -62,7 +64,6 @@ int main()
     cout << "c1: " << c1 << endl;
     cout << "c2: " << c2 << endl;
     cout << "c3: " << c3 << endl;
-
 
     return 0;
 }
