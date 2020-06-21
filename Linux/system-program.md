@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-06-16 22:54:30
+ * @LastEditTime: 2020-06-21 12:12:48
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
+
 <!-- TOC -->
 
 - [1. System function](#1-system-function)
@@ -24,6 +25,12 @@
   - [2.7. 进程组](#27-进程组)
   - [2.8. 守护进程（daemon）](#28-守护进程daemon)
 - [3. 线程](#3-线程)
+  - [3.1. 基础概念](#31-基础概念)
+  - [3.2. 线程相关函数](#32-线程相关函数)
+  - [3.3. 线程属性设置](#33-线程属性设置)
+  - [3.4. 注意事项](#34-注意事项)
+  - [线程同步](#线程同步)
+  - [线程互斥](#线程互斥)
 
 <!-- /TOC -->
 
@@ -446,6 +453,8 @@ else if (WIFCONTINUED(wstatus))
 
 
 # 3. 线程
+## 3.1. 基础概念
+
 - 进程：独享一块地址空间，有属于自己的PCB，与父进程共享进程地址空间。
 - 线程：共享地址空间。在Linux中，线程是轻量级的进程(LWP: light weight process)，可以看做是寄存器和栈的集合。
 - 在Linux下，`进程` 是最小的资源分配单元，`线程` 是最小的执行单元。
@@ -458,7 +467,7 @@ else if (WIFCONTINUED(wstatus))
   - 共享当前线程的工作路径
   - 共享信号的处理方式。（信号与线程混合在一起比较复杂，尽量将两者分开，单独实现）
   - 共享用户ID和组ID
-  - 共享内存空间（.text/.data/.bss/heap/共享库，唯独不共享栈空间）
+  - 共享内存空间（.text/.data/.bss/heap/共享库，唯独不共享栈空间）。线程之间共享全局变量，进程之间不共享全局变量。
 
 
 - 线程哪些资源不是共享的？
@@ -469,6 +478,90 @@ else if (WIFCONTINUED(wstatus))
   - 信号屏蔽字
   - 线程调度的优先级
 
-- 线程相关函数
+## 3.2. 线程相关函数
   - `pthread_self()`    获得线程的ID号
   - `pthread_create()`  创建一个线程 
+  - `pthread_exit()`   将单个线程退出
+    - `exit()` 将进程退出
+    - `return语句` 函数返回到调用者处 
+  - `pthread_join()` 将子线程回收，回收的是线程的资源。
+    - 线程没有结束，会一直阻塞等待。 
+
+  - `pthread_detach()` 实现线程的分离。
+    - 一般情况下，线程终止后，它的终止状态一直保留到其它线程调用 `pthread_join()` 获取它的状态为止。
+    - 不能对已经处于 `detach` 状态的线程调用 `pthread_join()` 函数，因为处于 `detach` 状态的线程终止后，就会立刻回收它占用的资源，而不是保留终止的状态。
+    - 作用：线程结束时自动清理进程控制块PCB资源。
+
+  - `pthread_cannel()` 杀死或取消线程。
+    - 线程的取消并不是实时的，有一定的延时性，需要等待线程达到某个取消点。若子线程中没有使用系统调用，`pthread_cannel()` 函数无法到达取消点，则 `pthread_cannel()` 不会执行，需要手动添加一个取消点函数 `pthread_testcancel()`。
+    - 取消点：粗略的理解为是一个系统调用。
+
+
+## 3.3. 线程属性设置
+- 主要用的属性
+  - 线程属性的初始化 `pthread_attr_init()`
+  - 线程属性的销毁   `pthread_attr_destory()`
+  - 修改线程的属性分离 `pthread_attr_setdetachstate()`
+  - 修改线程的栈空间地址和大小 `pthread_attr_setstack() `
+  - 只修改线程的栈空间大小 `pthread_attr_setstacksize()`
+
+  
+## 3.4. 注意事项
+- 查看当前线程库版本（NPTL） `getconf GNU_LIBPTHREAD_VERSION`
+- 主线程退出而子线程不退，则主线程调用 `pthread_exit()`
+- 避免僵尸线程的方法
+  - 调用 `pthread_join()`
+  - 直接将线程设置为分离态 `pthread_detach()`
+  - 在创建子线程之前，将线程的属性设置为分离属性，即创建线程时就指定其属性。
+- 应该避免在多线程中使用 `fork()` 函数。因为使用 `fork()` 函数会创建一个新的进程，而在新创建的进程中，只有采用 `fork()` 函数创建进程的线程会存在，其它的线程都会调用 `pthread_exit()` 函数而直接退出。
+- 应尽量少将线程和信号结合在一起使用，否则会变得非常复杂。
+- 采用 `malloc()` 和 `mmap()` 函数申请的空间，可以在多个线程中进行释放。
+
+
+## 线程同步
+- 多个线程访问同一个资源，导致数据混乱的原因
+  - 共享数据
+  - 竞争
+  - 多个线程之间没有统一的调度（竞争）机制。 
+
+- 互斥
+  - 产生的原因：解决多个线程之间没有统一的调度（竞争）机制。 
+ 
+
+## 线程互斥
+- 线程访问共享数据之前需加锁，访问共享数据之后应立即解锁，不能有延迟时间，即锁的 `粒度` 应越小越好。
+- 常见函数
+  - `pthread_mutex_init` 函数
+  - `pthread_mutex_destroy` 函数
+  - `pthread_mutex_lock` 函数
+  - `pthread_mutex_trylock` 函数
+  - `pthread_mutex_unlock` 函数
+
+
+- 读写锁常见函数
+  - `pthread_rwlock_init` 函数
+  - `pthread_rwlock_destroy` 函数
+  - `pthread_rwlock_rdlock` 函数  
+  - `pthread_rwlock_wrlock` 函数
+  - `pthread_rwlock_tryrdlock` 函数
+  - `pthread_rwlock_trywrlock` 函数
+  - `pthread_rwlock_unlock` 函数
+
+
+- 条件变量常见函数
+  - `pthread_cond_init` 函数
+  - `pthread_cond_destroy` 函数
+  - `pthread_cond_wait` 函数
+    - 阻塞一个条件变量
+    - 释放已经获得的互斥锁
+    - 当线程被唤醒时，`pthread_cond_wait` 会返回并解除阻塞，重新申请获得互斥锁。
+  - `pthread_cond_timedwait` 函数
+    - 限时等待一个条件变量 
+  - `pthread_cond_signal` 函数
+    - 唤醒至少一个阻塞在条件变量上的线程 
+  - `pthread_cond_broadcast` 函数
+    - 唤醒全部阻塞在条件变量上的线程 
+
+
+
+
