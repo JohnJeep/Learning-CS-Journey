@@ -1,8 +1,8 @@
 <!--
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-05-01 16:22:04
- * @LastEditTime: 2020-06-08 19:30:09
- * @LastEditors: your name
+ * @LastEditTime: 2020-06-22 22:07:19
+ * @LastEditors: Please set LastEditors
  * @Description: Git内部原理剖析
  * @FilePath: /Git/02-git-advance.md
 --> 
@@ -43,6 +43,7 @@
    - 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
    - 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
    - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+  - Git支持多种协议，包括`https`，但通过`ssh`支持的原生git协议速度最快。
 
 
 ## 1.2. Git内部原理
@@ -77,11 +78,7 @@
   - `FETCH_HEAD` 记录从远程仓库拉取的记录。
   - `MERGE_HEAD` 当运行 `git merge` 时，`MERGE_HEAD` 记录你正在合并到你的分支中的提交。`MERGE_HEAD`在合并的时候会出现，合并结束时就删除了这个文件。
   - `CHERRY_PICK_HEAD` 记录您在运行 `git cherry-pick` 时要合并的提交。这个文件只在 `cherry-pick` 期间存在。
- 
-
-
 - `index` 文件保存暂存区信息
-
 
 
 ## 1.3. Git数据存储的位置

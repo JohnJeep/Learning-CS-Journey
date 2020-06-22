@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-06-16 15:16:30
+ * @LastEditTime: 2020-06-22 21:10:27
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -27,7 +27,7 @@
     - [1.4.3. Git Bug](#143-git-bug)
   - [1.5. 远程仓库](#15-远程仓库)
     - [1.5.1. 命令](#151-命令)
-    - [1.5.2. Git pull与Git fetch区别](#152-git-pull与git-fetch区别)
+    - [1.5.2. Git pull与Git fetch](#152-git-pull与git-fetch)
     - [1.5.3. 远程仓库与本地的关联](#153-远程仓库与本地的关联)
   - [1.6. Git删除与恢复](#16-git删除与恢复)
     - [1.6.1. 删除指定文件](#161-删除指定文件)
@@ -37,6 +37,7 @@
     - [1.7.1. 工作区](#171-工作区)
     - [1.7.2. 暂存区](#172-暂存区)
     - [1.7.3. Git版本库](#173-git版本库)
+  - [1.8. 其它问题](#18-其它问题)
 
 <!-- /TOC -->
 
@@ -246,11 +247,9 @@ experiment <br>
   - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
   - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
 
-
 - 为什么会产冲突？
   - 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
   - 两个分支中修改了同一个文件的名称 
-
 
 -  采用`Git rebase(变基)`与`git merge`进行解决
   - 什么时候用`rebase`？
@@ -259,11 +258,9 @@ experiment <br>
     - 合并分支
     - <font color="red"> 注意: </font> 已经推送到github远程仓库的文件（多人开发的重要分支）不要，使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
 
-
   - 什么时候用`merge`?
     - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`  参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而`fast forward`合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
     - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
-
 
 
 ### 1.4.3. Git Bug
@@ -284,19 +281,28 @@ experiment <br>
 - `git remote add <alias_name> <url>` 添加一个新的远程 Git 仓库，同时给远程仓库起个别名 alias_name
 
 
-### 1.5.2. Git pull与Git fetch区别
-1. `Git pull`: 查找当前分支所跟踪的服务器与服务器上的分支，从服务器上抓取数据，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
-2. `git fetch`: 从服务器上抓取本地没有的数据时，它并不会修改工作目录中的内容。它只会获取数据然后让你自己合并。
+### 1.5.2. Git pull与Git fetch
+
+- `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
+- `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，它并不会修改本地仓库中的内容，需要自己手动进行合并。
+
+- 合并分支步骤
+  - 从远程仓库拉取数据 `git fetch origin master` 
+  - 查看远程仓库的版本 `git remote -v`
+  - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
+  - 手动解决冲突，提交（commit）信息
+  - 合并冲突，将远程仓库与本地仓库合并 `git merge origin master`
 
 
 ### 1.5.3. 远程仓库与本地的关联
-1. `git remote add origin   git@github.com:michaelliao/learngit.git` 将本地仓库添加到远程Git仓库，默认别名为 `origin`
-2. 当前分支的内容就会被推送给远程仓库`origin` 的`master` 分支:`git push -u origin master`
-   - **-u** 参数可以在推送的同时，将`origin` 仓库的`master` 分支设置为本地仓库当前分支的**upstream（上游）**。添加了这个参数，将来运行`git pull`命令从远程仓库获取内容时，本地仓库的这个分支就可以直接从`origin`的`master` 分支获取内容，省去了另外添加参数的麻烦。 
-   - Git支持多种协议，包括`https`，但通过`ssh`支持的原生git协议速度最快。
-3. 把当前分支`master`推送到远程。由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
-4. `git push origin master` 本地仓库推送到远程仓库
-5. `git clone URL` 克隆一个仓库
+
+- `git remote add origin   git@github.com:michaelliao/learngit.git` 将本地仓库添加到远程Git仓库，默认别名为 `origin`
+- `git push origin master` 本地仓库推送到远程仓库
+- `git clone URL` 克隆一个仓库
+- `git push -u origin master` 将当前分支的内容推送给远程仓库 `origin` 的 `master` 分支
+  -  参数 `-u`，推送的同时将 `origin` 仓库的 `master` 分支设置为本地仓库当前分支的 `upstream（上游）`。
+  - git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
 
 
 
@@ -408,3 +414,17 @@ experiment <br>
 3. Git清空版本库
    - `rm -rf .git` 删除当前目录下的版本库（`.git`目录）
    - `git init`    重新初始化一个全新的版本库
+
+
+
+## 1.8. 其它问题
+- Git中文乱码
+  - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
+
+
+- Git代理配置 
+  - [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
+
+
+- git windows 更新 `git update-git-for-windows`
+
