@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-06-15 20:53:18
+ * @LastEditTime: 2020-06-22 11:16:00
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -20,4 +20,14 @@ Let life be beautiful like summer flowers and death like autumn leaves.
 The joy of living comes from what we put into living, not from what we seek to get from it.
 生活的乐趣来自我们对生活所做的投入，而非所求。
 
+Actions speak louder than words.
+行胜于言。
 
+ Let us accept new challenges, think beyond our limits and keep in mind the ethics of life.
+ 让我们迎接新的挑战，打破常规、创新思维，并坚守道德。
+
+I wish you all the best in your future prospects and endeavors.
+ 祝愿大家前程似锦，一帆风顺。
+
+Love alters not with his brief hours and weeks, but bears it out even to the edge of doom. 
+爱情时光虽短暂，却不会变迁，直到世界末日，直到天长地久。
