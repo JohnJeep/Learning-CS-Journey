@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-06-22 21:10:27
+ * @LastEditTime: 2020-06-23 19:38:47
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -112,6 +112,7 @@
 - 本地仓库分支
   - `git branch` 查看本地仓库分支
   - `git branch -v` 查看每个分支最后一次提交的内容
+  - `git branch -r` 查看远程仓库的所有分支
   - `git reflog show --date=iso master`  查看指定分支的历次更改记录
   - `git branch --merge` 查看哪些分支已经合并到当前分支
   - `git branch --no-merged` 查看所有包含未合并工作的分支
