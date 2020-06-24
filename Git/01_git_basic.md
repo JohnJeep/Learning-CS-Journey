@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-06-23 19:38:47
+ * @LastEditTime: 2020-06-24 11:31:33
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -45,10 +45,10 @@
 
 ## 1.1. 学习参考
 - [廖雪峰官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
-- [GitWeb上模拟训练](https://learngitbranching.js.org/)
+- [Learn Git Branching](https://learngitbranching.js.org/)：通过玩游戏的方式来学习Git。
 - [蚂蚁部落](http://www.softwhy.com/article-8535-1.html)
 - [**图解Git**](http://marklodato.github.io/visual-git-guide/index-zh-cn.html)
-- [**高质量的Git中文教程 git-recipes**](https://github.com/geeeeeeeeek/git-recipes)
+- [**git-recipes**](https://github.com/geeeeeeeeek/git-recipes)：github上开源的git中文食谱，收集了许多国外优秀的文章，质量很高。
 
 
 ## 1.2. Git基础
