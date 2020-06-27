@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-06-22 11:16:00
+ * @LastEditTime: 2020-06-27 16:14:43
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
+
 Books are the ever-burning lamps Of accumulated  wisdom. 
 书籍是积累智慧的长明灯。 
 
@@ -31,3 +32,15 @@ I wish you all the best in your future prospects and endeavors.
 
 Love alters not with his brief hours and weeks, but bears it out even to the edge of doom. 
 爱情时光虽短暂，却不会变迁，直到世界末日，直到天长地久。
+
+Life is only an illusion.
+浮生若梦。
+
+I like for you to be still, it is as though you were absent. And you hear me from far away and my voice does not touch you. 
+我喜欢你是寂静的，仿佛你消失了一样。你从远处聆听我，我的声音却无法触及你。
+
+With utmost sincerity no difficulty is insurmountable. 
+精诚所至，金石为开。 
+
+My love for you will always grow, with every passing year.
+时光流转，我对你的爱历久弥新。

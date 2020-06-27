@@ -41,6 +41,8 @@
 - [Linux命令大全--vim学习](https://ipcmen.com/)
 - [Vim的哲学](https://segmentfault.com/a/1190000000458565)
 - [vim常用命令总结](https://www.cnblogs.com/yangjig/p/6014198.html)
+- [vim-adventures](https://vim-adventures.com/) 通过玩游戏的方式来学习Vim。
+
 
 
 ### 0.1.2. 三种模式
