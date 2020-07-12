@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-06-27 16:14:43
+ * @LastEditTime: 2020-07-11 23:54:54
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -44,3 +44,7 @@ With utmost sincerity no difficulty is insurmountable.
 
 My love for you will always grow, with every passing year.
 时光流转，我对你的爱历久弥新。
+
+The possibilities are limited only by our imagination.
+只有想不到，没有做不到。
+

@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-17 10:56:48
- * @LastEditTime: 2020-06-17 12:18:35
+ * @LastEditTime: 2020-07-11 09:49:06
  * @LastEditors: Please set LastEditors
  * @Description: 派生模板类和普通类继承父类的模板类
- * @FilePath: /C++/code/drive_class_template.cpp
+ * @FilePath: /C++/code/derive_class_template.cpp
  */ 
 #include <iostream>
 using namespace std;
