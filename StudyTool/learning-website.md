@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2020-06-05 22:03:13
+ * @LastEditTime: 2020-07-11 23:59:34
  * @LastEditors: Please set LastEditors
  * @Description: 积累一些学习的网站。
 --> 
@@ -144,6 +144,9 @@
 - [omaha](https://www.omaha.com/news/)
 - [usnews](https://www.usnews.com/)
 - [popsci](https://www.popsci.com/)
+- [stackexchange](https://english.stackexchange.com/)
+- [painintheenglish](https://painintheenglish.com/)
+
 
 
 ## 1.10. 考研
@@ -172,6 +175,7 @@
 - [Pexels](https://www.pexels.com/)：免费高品质图片网
 - [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
 - [emojiisland](https://emojiisland.com/) 下载emoji表情库
+- [photomosh](https://photomosh.com/) 炫酷的图片制作
 
 
 

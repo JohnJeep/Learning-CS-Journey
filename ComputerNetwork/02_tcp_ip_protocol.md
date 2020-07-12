@@ -89,15 +89,23 @@
     - ESP：50
     - AH：51
   - 端口号
-    - FTP：20、21
     - SSH：22
     - Telnet：23
-    - SMTP：25
     - TACACS：49
-    - HTTP：80
-    - HTTPS：443
     - IKE：500
     - Radius：1645、1646、1812、1813
+    - TCP
+      - FTP：20、21
+      - SMTP：25
+      - HTTP：80
+      - HTTPS：443
+    - UDP
+      - DNS
+      - TFTP: 69
+      - RIP: 520
+      - DHCP: 547, 546
+      - SNMP: 162、161
+      - NFS: 2049
   - 端口号
     - TCP和UDP采用 `16bit` 的端口号来识别应用程序
     - 端口号用来标识互相通信的应用程序。
