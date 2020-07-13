@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-06-24 11:31:33
+ * @LastEditTime: 2020-07-13 09:24:51
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -286,6 +286,8 @@ experiment <br>
 
 - `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
 - `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，它并不会修改本地仓库中的内容，需要自己手动进行合并。
+- `git fetch 远程仓库名(origin master):temp` 拉取远程仓库master分支的数据到本地新建的 temp 分支中。
+
 
 - 合并分支步骤
   - 从远程仓库拉取数据 `git fetch origin master` 
@@ -296,7 +298,6 @@ experiment <br>
 
 
 ### 1.5.3. 远程仓库与本地的关联
-
 - `git remote add origin   git@github.com:michaelliao/learngit.git` 将本地仓库添加到远程Git仓库，默认别名为 `origin`
 - `git push origin master` 本地仓库推送到远程仓库
 - `git clone URL` 克隆一个仓库

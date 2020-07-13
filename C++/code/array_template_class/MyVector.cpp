@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-11 09:50:29
- * @LastEditTime: 2020-07-12 18:18:40
+ * @LastEditTime: 2020-07-13 14:06:37
  * @LastEditors: Please set LastEditors
  * @Description: 数组模板类的实现
  * @FilePath: /MyVector.cpp
@@ -63,6 +63,7 @@ MyVector<T>& MyVector<T>::operator= (const MyVector<T>& obj)
     if (m_array != NULL)
     {
         delete []m_array; 
+        m_array = nullptr;
         m_len = 0;
     }
 
