@@ -1,11 +1,10 @@
 /*
- * @Description: 顺序栈的实现：栈的初始化、判栈为空、取栈顶元素、进栈、出栈
- * @Author: John
+ * @Author: JohnJeep
  * @Date: 2019-07-30 21:08:43
- * @LastEditTime: 2019-08-01 20:26:02
+ * @LastEditTime: 2020-07-14 21:58:01
+ * @Description: 顺序栈的实现：栈的初始化、判栈为空、取栈顶元素、进栈、出栈
  * @LastEditors: Please set LastEditors
  */
-
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -54,7 +53,6 @@ int main()
     popStack(s);
     freeStack(s);
 
-    // system("pause");
     return 0;
 }
 

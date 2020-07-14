@@ -1,11 +1,10 @@
 /*
- * @Description: 实现双向链表：双向链表的插入、双向链表的删除
- * @Author: John
+ * @Author: JohnJeep
  * @Date: 2019-07-29 21:10:25
- * @LastEditTime: 2019-07-29 23:07:37
+ * @LastEditTime: 2020-07-14 21:53:34
+ * @Description: 实现双向链表：双向链表的插入、双向链表的删除
  * @LastEditors: Please set LastEditors
  */
-
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -52,8 +51,6 @@ int main()
 
     delteDLink(head, 3);
 
-
-    system("pause");
     return 0;
 }
 
@@ -109,12 +106,3 @@ DLinkNode delteDLink(dLinkList *head, int i)
     }
     return p;
 }
-
-
-
-
-
-
-
-
-

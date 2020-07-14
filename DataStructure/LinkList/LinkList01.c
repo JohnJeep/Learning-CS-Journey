@@ -1,15 +1,12 @@
 /*
- * @Description: 简单实现单链表的增删、改、查
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-07-18 22:30:28
- * @LastEditTime: 2019-07-29 21:09:52
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-07-14 21:45:54
+ * @Description: 简单实现单链表的增删、改、查
  */
-
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
-
 
 // 定义结点结构体
 typedef struct node{
@@ -17,27 +14,6 @@ typedef struct node{
     struct node *next; //下一个结点
 
 }ListNode, *PList;
-
-ListNode *createLinkList(int a[], int n);
-
-
-int main()
-{
-    int len;
-    int a[] = {2, 4, 6, 8, 10};
-    printf("请输入结点值：");
-    scanf('%d', len);
-    for (size_t i = 0; i < len; i++)
-    {
-
-        /* code */
-    }
-    
-    createLinkList(a, 5);
-
-    system("pause");
-    return 0;
-}
 
 ListNode *createLinkList(int a[], int n)    // 指针函数，返回值为一个地址
 {
@@ -55,4 +31,22 @@ ListNode *createLinkList(int a[], int n)    // 指针函数，返回值为一个
     p->next = NULL;   // 尾节点指针域置NULL 
     return head;
 }
+
+int main()
+{
+    int len;
+    int a[] = {2, 4, 6, 8, 10};
+    printf("请输入结点值：");
+    scanf("%d", &len);
+    for (size_t i = 0; i < len; i++)
+    {
+
+        /* code */
+    }
+    
+    createLinkList(a, 5);
+
+    return 0;
+}
+
 

@@ -1,12 +1,9 @@
 /*
- * @Description: 数据结构单链表的实现
  * @Author: John
  * @Date: 2019-07-21 21:20:59
- * @LastEditTime: 2019-07-29 21:04:59
- * @LastEditors: Please set LastEditors
+ * @Description: 数据结构单链表的实现
+ * @LastEditTime: 2020-07-14 21:48:16
  */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -39,7 +36,6 @@ int main()
     insertLink01(head, 4, 1);
     deleteList(head, 4);
 
-    system("pause");
     return 0;
 }
 

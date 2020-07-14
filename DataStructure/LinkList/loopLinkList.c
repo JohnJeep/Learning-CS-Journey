@@ -1,7 +1,10 @@
 /*
-双链表实现
-*/
-
+ * @Author: your name
+ * @Date: 2019-07-28 23:35:45
+ * @LastEditTime: 2020-07-14 21:33:16
+ * @LastEditors: Please set LastEditors
+ * @Description: 双链表实现
+ */ 
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -10,29 +13,6 @@ typedef struct node{
     int data;
     struct node *next;
 }ListLode, *PtrNode;
-
-PtrNode creatList(int a[], int n);
-void linkLoopList(ListLode *Ta, ListLode *Tb);
-void traverseList(PtrNode head);
-
-
-int main()
-{
-    int N = 5;
-    int a[] = {3, 6, 7, 5, 8};
-    int b[] = {2, 4, 9, 1, 10};
-    ListLode *Ta, *Tb, *head;
-    //head = (PtrNode)malloc(sizeof(PtrNode));
-    Ta = creatList(a, N);
-    Tb = creatList(b, N);
-    linkLoopList(Ta, Tb);
-    printf("结束运行！");
-    //traverseList(head);
-
-
-//    system("pause");
-    return 0;
-}
 
 // 创建单循环链表
 // 函数输入：链表结点数组，结点数
@@ -78,3 +58,23 @@ void traverseList(PtrNode head)
     }
     printf("\n");
 }
+
+
+int main()
+{
+    int N = 5;
+    int a[] = {3, 6, 7, 5, 8};
+    int b[] = {2, 4, 9, 1, 10};
+    
+    ListLode *Ta, *Tb, *head;
+    //head = (PtrNode)malloc(sizeof(PtrNode));
+    Ta = creatList(a, N);
+    Tb = creatList(b, N);
+    linkLoopList(Ta, Tb);
+    printf("结束运行！");
+    //traverseList(head);
+
+    return 0;
+}
+
+

@@ -1,16 +1,13 @@
 /*
- * @Description: 循环链表实现：；两个循环链表相连接
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-07-28 14:49:47
- * @LastEditTime: 2019-07-29 21:06:44
+ * @LastEditTime: 2020-07-14 21:52:10
+ * @Description: 循环链表实现：；两个循环链表相连接
  * @LastEditors: Please set LastEditors
  */
-
-
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
-
 
 typedef struct node{
     int data;
@@ -27,13 +24,12 @@ int main()
     int N = 5;
     int a[] = {3, 6, 7, 5, 8};
     int b[] = {2, 4, 9, 1, 10};
-    ListLode *Ta, *Tb, *head;
+    ListLode *Ta, *Tb;
     //head = (PtrNode)malloc(sizeof(PtrNode));
     Ta = creatList(a, N);
     Tb = creatList(b, N);
     linkLoopList(Ta, Tb);
 
-    system("pause");
     return 0;
 }
 
