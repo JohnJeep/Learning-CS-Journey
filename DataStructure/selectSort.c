@@ -1,14 +1,12 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-12-03 20:52:08
- * @LastEditTime: 2019-12-03 21:19:41
+ * @LastEditTime: 2020-07-14 21:50:17
  * @LastEditors: Please set LastEditors
- * @Description: 书写选择排序           
- * @FilePath: \C\C Advance\selectSort.c
+ * @Description: 选择排序算法实现           
+ * @FilePath: /selectSort.c
  */
-
 #include "stdio.h"
-
 
 // 数组作为形参传入，等价于一个指针的的传入
 // int buf[5];
@@ -50,7 +48,5 @@ int main()
     }
     printf("\n");
 
-
-    getchar();
     return 0;
 }

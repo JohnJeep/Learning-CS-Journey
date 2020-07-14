@@ -54,6 +54,7 @@
                 "isDefault": true                                // 设为false可做到一个tasks.json配置多个编译指令，需要自己修改本文件
             }
         },
+        
          //C编译配置
          {
             "label": "compile C",

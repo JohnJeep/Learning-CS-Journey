@@ -54,7 +54,6 @@ int main()
     clearLinkStack(s);
     traverseLinkStack(s);
 
-    system("pause");
     return 0;
 }
 
@@ -120,7 +119,7 @@ void clearLinkStack(Stack *s)
 {
     if (emptyLinkStack(s))    // s中存放的本身就是s的地址
     {
-        return true;
+        return;
     }
     else
     {
