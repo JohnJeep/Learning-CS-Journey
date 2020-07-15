@@ -1,13 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-05-28 14:09:10
- * @LastEditTime: 2020-06-11 15:58:00
+ * @LastEditTime: 2020-07-15 14:46:49
  * @LastEditors: Please set LastEditors
  * @Description: C++实现有指针的类
  */ 
 
 #include <iostream>
-#include "02-mystring.h"
+#include "02_mystring.h"
 using namespace std;
 
 ostream& operator<<(ostream& os, MyString& sp)
