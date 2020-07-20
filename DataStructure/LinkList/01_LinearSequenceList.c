@@ -1,9 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-15 19:57:19
- * @LastEditTime: 2020-07-16 22:02:32
+ * @LastEditTime: 2020-07-20 22:23:58
  * @LastEditors: Please set LastEditors
- * @Description: 线性表顺序存储
+ * @Description: 线性表顺序存储-----------------没有通过
  * @FilePath: /01_LinearSequenceList.c
  */ 
 #include <stdio.h>
@@ -146,7 +146,7 @@ int sqListInsert(SqList *list, SqListNode* node, int pos)
     {
         list->node[i] = list->node[i-1];
     }
-    list->node[i] = (unsigned int*)node;// 向节点处插入元素
+    list->node[i] = node;// 向节点处插入元素
 
     list->length++;
     return 0;
