@@ -1,8 +1,8 @@
 /*
  * @Author: John
  * @Date: 2019-07-21 21:20:59
- * @Description: 数据结构单链表的实现
- * @LastEditTime: 2020-07-14 21:48:16
+ * @Description: 数据结构单链表的实现-----------没有通过
+ * @LastEditTime: 2020-07-21 20:37:56
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -68,7 +68,6 @@ PtrList createList()
         scanf("%d", &value);
         if (q == NULL)
         {
-            /* code */
             printf("程序退出！\n");
             exit(0);
         }

@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-16 22:03:51
- * @LastEditTime: 2020-07-20 23:50:28
+ * @LastEditTime: 2020-07-21 22:50:00
  * @LastEditors: Please set LastEditors
  * @Description: 线性表的链式实现函数主体
  * @FilePath: /02_LinearChainList.c
@@ -36,13 +36,15 @@ int main(int argc, char *argv[])
         return -1;
     }
     len = linkListLength(list);
-    printf("link list length: %d\n", len);
+    printf("insert before link list length: %d\n", len);
 
     ret = linkListInsert(list, (LinKListNode*) &t1, 0);
     ret = linkListInsert(list, (LinKListNode*) &t2, 0);
     ret = linkListInsert(list, (LinKListNode*) &t3, 0);
     ret = linkListInsert(list, (LinKListNode*) &t4, 0);
     printf("ret = %d\n", ret);
+    len = linkListLength(list);
+    printf("insert after link list length: %d\n", len);
 
     // 获取链表中的节点
     printf("遍历链表中的节点: ");
@@ -68,6 +70,9 @@ int main(int argc, char *argv[])
         printf("del->age:%d \t", del->age);
     }
     printf("\n");
+    
+    len = linkListLength(list);
+    printf("delete after link list length: %d\n", len);
     
     return 0;
 }
@@ -136,7 +141,6 @@ int linkListLength(LinkList* list)
     {
         return -1;
     }
-    
 }       
 
 /**
@@ -183,7 +187,7 @@ LinKListNode* linkListGet(LinkList* list, int pos)
     }
     
     s_list = (S_LinkList*)list;
-    current = &(s_list->header);    // 指向头结点的地址
+    current = &(s_list->header);    // 辅助指针变量指向头结点的地址
     for (int i = 0; (i < pos) && (current->next != NULL); i++)
     {
         current = current->next;
