@@ -44,6 +44,10 @@
         "cstring": "cpp",
         "list": "cpp",
         "queue": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "functional": "cpp",
+        "map": "cpp",
+        "iomanip": "cpp",
+        "iterator": "cpp"
     }
 }
