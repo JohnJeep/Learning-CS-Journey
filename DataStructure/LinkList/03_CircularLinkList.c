@@ -1,9 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-21 21:23:51
- * @LastEditTime: 2020-07-21 23:42:48
+ * @LastEditTime: 2020-07-22 20:52:19
  * @LastEditors: Please set LastEditors
- * @Description: 循环链表的实现
+ * @Description: 循环链表的实现-------------------没有调通
  * @FilePath: /03_CircularLinkList.c
  */ 
 #include <stdio.h>
@@ -12,18 +12,67 @@
 #include <memory.h>
 #include "03_circularLinkList.h"
 
+typedef struct tag_circularList
+{
+    int data;
+    CircularListNode header;
+}circular;
+
+
 int main(int argc, char *argv[])
 {
     // 测试用例：解决约瑟夫问题
-    
+    circular c1, c2, c3, c4, c5, c6, c7, c8;
+
     CircularList *cirList = NULL;
     cirList = CircularListCreate();
     if (cirList == NULL)
     {
+        printf("链表创建失败...\n");
         return -1;
     }
-    
+    c1.data = 1;
+    c2.data = 2;
+    c3.data = 3;
+    c4.data = 4;
+    c5.data = 5;
+    c6.data = 6;
+    c7.data = 7;
+    c8.data = 8;
 
+    CircularListInsert(cirList, (CircularListNode*)&c1, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c2, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c3, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c4, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c5, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c6, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c7, CircularListLength(cirList));
+    CircularListInsert(cirList, (CircularListNode*)&c8, CircularListLength(cirList));
+    printf("length = %d\n", CircularListLength(cirList));
+
+    for (int i = 0; i < CircularListLength(cirList); i++)
+    {
+        circular* ret = (circular*)CircularListNext(cirList);
+        printf("%d\n", ret->data);
+    }
+
+    CircularListReset(cirList);
+    while (CircularListLength(cirList) > 0)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            CircularListNext(cirList);
+        }
+        circular* current = (circular*)CircularListCurrent(cirList);   // 获取游标所指向的位置
+        if (current == NULL)
+        {
+            printf("current pointer error.\n");
+        }
+        printf("%d \n", current->data);  // 打印当前游标所指向的值
+        CircularListDeleteNode(cirList, (CircularListNode*)current);  // 通过节点的值删除节点
+        CircularListDelete(cirList, CircularListLength(cirList));
+    }
+    CircularListDestory(cirList);
 
     return 0;
 }
@@ -38,19 +87,18 @@ CircularList* CircularListCreate()
         return NULL;
     }
     memset(list, 0 , sizeof(C_CircularList));
-
+    
     return list;
 }
 
 
 void CircularListDestory(CircularList* list)
 {
-    if (list == NULL)
+    if (list != NULL)
     {
-        return NULL;
+        free(list); 
+        list = NULL;
     }
-    free(list); 
-    list = NULL;
 }               
 
 void CircularListClear(CircularList* list)
@@ -66,25 +114,33 @@ void CircularListClear(CircularList* list)
 int CircularListLength(CircularList* list)
 {
     C_CircularList *cirList = (C_CircularList*)list;
-    if (cirList != NULL)
+    if (cirList == NULL)
     {
-        return cirList->length;
+        return -1;
     }
+    return cirList->length;
 }   
 
+/**
+ * @description: 循环链表的插入
+ * @param {type} list: 链表
+ * @param {type} node: 节点
+ * @param {type} pos: 插入的位置
+ * @return: 
+ */
 int CircularListInsert(CircularList* list, CircularListNode* node, int pos)
 {
     C_CircularList *cirList = (C_CircularList*)list;
     CircularListNode *current = NULL;
-    
+
     if (cirList == NULL || node == NULL || pos < 0)
     {
         return -1;
     }
-    current = &(cirList->header);
+    current = &(cirList->header);    // 当前指针指向头指针
     for (int i = 0; (i < pos) && (current->next != NULL); i++)
     {
-        current = current->next;    // 移动节点
+        current = current->next;     // 移动节点
     }
     node->next = current->next;
     current->next = node;
@@ -92,12 +148,12 @@ int CircularListInsert(CircularList* list, CircularListNode* node, int pos)
     // 第一次插入节点
     if (cirList->length == 0)
     {
-        cirList->slider = node;
+        cirList->slider = node;     // 游标指向插入的节点
     }
     cirList->length++;
 
     // 采用头插法向循环链表中插入，current节点指向链表的头部，需要获取最后一个元素
-    if (current == cirList)
+    if (current == (CircularListNode*)cirList)
     {
         CircularListNode* last = CircularListGet(cirList, cirList->length - 1);  // 获取最后一个元素
         last->next = current->next;
@@ -120,7 +176,7 @@ CircularListNode* CircularListGet(CircularList* list, int pos)
     {
         return NULL;
     }
-    current = &(cirList->header);
+    // current = &(cirList->header);
     for (int i = 0; (i < pos) && (current->next != NULL); i++)
     {
         current = current->next;    // 移动节点
@@ -129,7 +185,7 @@ CircularListNode* CircularListGet(CircularList* list, int pos)
 }
 
 /**
- * @description: 删除循环链表中的普通节点和头节点
+ * @description: 通过节点的位置，删除循环链表中的普通节点和头节点
  * @param {type} 
  * @return: 
  */
@@ -169,7 +225,7 @@ CircularListNode* CircularListDelete(CircularList* list, int pos)
     }
     
     // 删除的元素为游标所指向的元素
-    if (cirList->slider = cache)
+    if (cirList->slider == cache)
     {
         cirList->slider = cache->next;
     }
@@ -185,7 +241,7 @@ CircularListNode* CircularListDelete(CircularList* list, int pos)
 }
 
 /**
- * @description: 删除链表中的指定节点
+ * @description: 通过节点的值，删除链表中的节点
  * @param {type} 
  * @return: 
  */
@@ -195,7 +251,7 @@ CircularListNode* CircularListDeleteNode(CircularList* list, CircularListNode* n
     CircularListNode *ret = NULL;
     int i = 0;
 
-    if ((list != NULL) && (node != NULL))
+    if ((cirList != NULL) && (node != NULL))
     {
         CircularListNode* current = (CircularListNode*)cirList;
         for (i = 0; i < cirList->length; i++)
@@ -213,6 +269,7 @@ CircularListNode* CircularListDeleteNode(CircularList* list, CircularListNode* n
     {
         CircularListDelete(cirList, i);
     }
+    return ret;
 }
 
 /**
@@ -262,7 +319,7 @@ CircularListNode* CircularListNext(CircularList* list)
     C_CircularList *cirList = (C_CircularList*)list;
     CircularListNode *ret = NULL;
 
-    if (cirList == NULL || ret == NULL)
+    if (cirList == NULL || cirList->slider == NULL)
     {
         return NULL;
     }
