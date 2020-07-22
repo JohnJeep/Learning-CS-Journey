@@ -48,6 +48,7 @@
         "functional": "cpp",
         "map": "cpp",
         "iomanip": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "numeric": "cpp"
     }
 }
