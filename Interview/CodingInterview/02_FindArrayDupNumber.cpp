@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-07-08 19:15:04
  * @LastEditors: Please set LastEditors
  * @Description: 找出数组中重复的数字
- * @FilePath: /Interview/CodingInterview/01_ArrayDuplicate.cpp
+ * @FilePath: /Interview/CodingInterview/02_FindArrayDupNumber.cpp
  */ 
 #include <iostream>
 using namespace std;
