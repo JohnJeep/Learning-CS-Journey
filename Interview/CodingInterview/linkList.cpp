@@ -4,9 +4,9 @@
  * @LastEditTime: 2020-07-26 15:32:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /list.cpp
+ * @FilePath: /linkList.cpp
  */ 
-#include "list.h"
+#include "linkList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
