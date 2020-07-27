@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-06 9:18:29
- * @LastEditTime: 2020-06-11 10:08:42
+ * @LastEditTime: 2020-07-27 16:00:26
  * @LastEditors: Please set LastEditors
  * @Description: typedef基础用法
  * @FilePath: /C/17-typedef用法.md
@@ -63,5 +63,3 @@ pFunc = printHello;      // 初始化函数指针，将 printHello 的函数的�
 ## 0.6. 与#define比较
 - #define只是简单的字符串替换而typedef则是为一个类型起新名字
 - 通常讲，typedef要比#define要好，特别是在有指针的场合。
-
-
