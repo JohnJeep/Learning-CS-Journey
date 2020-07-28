@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-26 14:49:05
- * @LastEditTime: 2020-07-27 21:01:30
+ * @LastEditTime: 2020-07-28 22:07:50
  * @LastEditors: Please set LastEditors
  * @Description: 题目：输入一链表的头结点，从头到尾打印出链表每个节点的值。
  *               思路：链表从头到尾遍历，输出为从尾到头，需要用到栈的思想。

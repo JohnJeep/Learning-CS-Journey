@@ -1,14 +1,14 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-08 20:20:58
- * @LastEditTime: 2020-07-26 10:22:58
+ * @LastEditTime: 2020-07-28 22:06:48
  * @LastEditors: Please set LastEditors
  * @Description: 二维数组中的查找
  *               思路：关键找出二维数组最右上脚数组的下标关系，index = row * columns + col
  *                     当前查找的number小于数组右上角的数，剔除数组右上角数所在的 column，
  *                     当前查找的number大于数组右上角的数，剔除数组右上角数所在的 row，
  * 
- * @FilePath: /Interview/CodingInterview/03_TwoDimensionalArrayFind.cpp
+ * @FilePath: /04_TwoDimensionalArrayFind.cpp
  */ 
 #include <iostream>
 #include <stdbool.h>
