@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-27 22:33:14
- * @LastEditTime: 2020-07-27 22:54:55
+ * @LastEditTime: 2020-07-28 22:12:54
  * @LastEditors: Please set LastEditors
  * @Description: 斐波拉数列: 输入一个数，求斐波那契数列的第 n 项
- * @FilePath: /07_Fibonacci.cpp
+ * @FilePath: /10_Fibonacci.cpp
  */ 
 #include <iostream>
 #include <stdlib.h>
@@ -47,7 +47,7 @@ long long loopFibonacci(int n)
 
 void test01()
 {
-    int num = 2;
+    int num = 4;
     long long result = recursiveFibonacci(num);
     cout << "recursive result: " << result << endl;
 
@@ -58,5 +58,6 @@ void test01()
 int main(int argc, char *argv[])
 {
     test01();
+    
     return 0;
 }
