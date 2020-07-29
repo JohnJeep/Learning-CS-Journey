@@ -1,13 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-08 19:18:18
- * @LastEditTime: 2020-07-08 20:20:16
+ * @LastEditTime: 2020-07-28 22:17:04
  * @LastEditors: Please set LastEditors
  * @Description: 不能修改数组，找出重复的数字
  * 
  * 
  * 
- * @FilePath: /Interview/CodingInterview/02_DuplicateNoEdit.cpp
+ * @FilePath: /50_DuplicateNoEdit.cpp
  */ 
 #include <iostream>
 #include <stdbool.h>
@@ -95,7 +95,6 @@ void test1()
 
 int main()
 {
-
     test1();
 
     return 0;
