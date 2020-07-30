@@ -1,11 +1,11 @@
-```
-Description: VSCode常用快捷键说明
-Author: JohnJeep
-Date: 2019-09-11 13:46:17
-LastEditTime: 2019-09-11 14:31:09
-LastEditors: JohnJeep
-```
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-09-11 13:46:17
+ * @LastEditTime: 2020-07-30 14:45:05
+ * @LastEditors: Please set LastEditors
+ * @Description: VSCode常用快捷键说明
+ * @FilePath: /VSCode-ShortCuts.md
+--> 
 -  `Ctrl+K Ctrl+S` 打开快捷键面板
 - 搜索 `process explorer` 查看进程资源管理
 - `Ctrl + P` 快速打开文件
