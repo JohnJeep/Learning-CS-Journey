@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-22 22:17:04
- * @LastEditTime: 2020-07-30 14:34:41
+ * @LastEditTime: 2020-07-30 20:14:31
  * @LastEditors: Please set LastEditors
  * @Description: 二叉树
  * @FilePath: /binaryTree.c
@@ -43,7 +43,7 @@ void preOrderTraverse(BinTreeNode *Tree)
 
     if (Tree == NULL)
     {   
-        printf("binay tree is empty.\n");
+        printf("binary tree is empty.\n");
         return;
     }
     else
@@ -91,7 +91,7 @@ void inOrderTraverse(BinTreeNode *Tree)
 
     if (Tree == NULL)
     {   
-        printf("binay tree is empty.\n");
+        printf("binary tree is empty.\n");
         return;
     }
     else
@@ -145,7 +145,7 @@ void postOrderTraverse(BinTreeNode *Tree)
 
     if (Tree == NULL)
     {   
-        printf("binay tree is empty.\n");
+        printf("binary tree is empty.\n");
         return;
     }
     do
