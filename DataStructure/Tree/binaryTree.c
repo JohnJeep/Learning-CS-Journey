@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-22 22:17:04
- * @LastEditTime: 2020-07-30 20:14:31
+ * @LastEditTime: 2020-07-31 16:19:51
  * @LastEditors: Please set LastEditors
  * @Description: 二叉树
  * @FilePath: /binaryTree.c
@@ -11,10 +11,28 @@
 #include <string.h>
 #include <malloc.h>
 
+// 二叉链表结点表示
 typedef struct tag_binNode{
     int data;
     struct tag_binNode *left, *right;
 }BinTreeNode;
+
+// 双亲链表结点表示
+#define MAX_TREE_NODE    32
+typedef struct tag_node
+{
+    int data;
+    int parentPosition;  // 指向双亲的指针
+    char lfTag;          // 左右孩子标志域
+}BPNode;
+typedef struct tag_tree
+{
+    BPNode nodes[MAX_TREE_NODE];    // 将结点存储在数组中
+    int m_node;                     // 结点数
+    int root;                       // 根节点位置，存储父结点所在的数组下标的位置
+}BPTree;
+
+
 
 /*
  *                             前序遍历思路
