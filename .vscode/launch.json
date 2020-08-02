@@ -41,8 +41,8 @@
             "externalConsole": true,                    // 调试时是否显示控制台窗口，一般设置为true显示控制台
             "internalConsoleOptions": "neverOpen",      // 如果不设为neverOpen，调试时会跳到“调试控制台”选项卡",
             "MIMode": "gdb",                            // 指定连接的调试器
-            // "miDebuggerPath": "F:/mingw-w64/mingw64/bin/gdb.exe", // 调试器路径
-            "miDebuggerPath": "D:/mingw64/bin/gdb.exe", // 调试器路径
+            "miDebuggerPath": "F:/mingw-w64/mingw64/bin/gdb.exe", // 调试器路径
+            // "miDebuggerPath": "D:/mingw64/bin/gdb.exe", // 调试器路径
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for GDB",
