@@ -1,52 +1,50 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-03 20:52:08
- * @LastEditTime: 2020-07-14 21:50:17
+ * @LastEditTime: 2020-08-02 12:30:17
  * @LastEditors: Please set LastEditors
- * @Description: 选择排序算法实现           
- * @FilePath: /selectSort.c
+ * @Description: 选择排序算法实现    
+ *               无序序列逐渐减少，有序序列逐渐增多       
+ * @FilePath: /SelectSort.c
  */
 #include "stdio.h"
 
-// 数组作为形参传入，等价于一个指针的的传入
-// int buf[5];
-// func(int a, buf);  ----------- func(int a, *p);
-
-int main() 
+void selectSort(int* array, int len)
 {
-    int a[] = {9, 8, 3, 5, 6, 2, 10, 1};
-    int i, j, temp;
-
-
-    int n = sizeof(a) / sizeof(a[0]);
     printf("选择排序前：");;
-    for(i = 0; i < n; i++)
+    for(int i = 0; i < len; i++)
     {
-        printf("%d ", a[i]);
+        printf("%d ", array[i]);
     }
     printf("\n");
 
-    for ( i = 0; i < n-1; i++)
+    for (int i = 0; i < len-1; i++)
     {
-        for ( j = i+1; j < n; j++)
+        for (int j = i+1; j < len; j++)
         {
-            if(a[i] > a[j])
+            if(array[i] > array[j])
             {
-                temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
-            
         }
-        
     }
     
     printf("选择排序后：");;
-    for(i = 0; i < n; i++)
+    for(int i = 0; i < len; i++)
     {
-        printf("%d ", a[i]);
+        printf("%d ", array[i]);
     }
     printf("\n");
+}
+
+int main() 
+{
+    int array[] = {9, 8, 3, 5, 6, 2, 10, 1};
+    int length = sizeof(array) / sizeof(array[0]);
+
+    selectSort(array, length);
 
     return 0;
 }
