@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-13 21:23:24
- * @LastEditTime: 2020-08-02 12:58:24
+ * @LastEditTime: 2020-08-03 22:03:58
  * @LastEditors: Please set LastEditors
  * @Description: 在1-100中某些数字组成的数组中，每个数字出现的次数可能是零次或多次，计算出现次数最多的数字。
  * @FilePath: /FindNumberArray.c
@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
 {
     int array[] = {1, 3, 3, 4, 6, 3, 5, 6, 99, 6, 23, 44, 55, 6};   
     int len = sizeof(array)/sizeof(int);
+    
     search(array, len);
     
     return 0;
