@@ -1,8 +1,8 @@
 /*
- * @Description: In User Settings Edit
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-09-25 13:41:47
- * @LastEditTime: 2020-05-28 15:54:28
+ * @LastEditTime: 2020-08-03 08:37:27
+ * @Description: C语言中指针取值与地址之间的联系
  * @LastEditors: Please set LastEditors
  */
 #include "stdio.h"
@@ -48,9 +48,6 @@ int main()
     } check_info;
     printf("%d\n", sizeof(check_info));
 
-
-
-    getchar();
     return 0;
 }
 

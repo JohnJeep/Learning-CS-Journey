@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-02 12:30:03
- * @LastEditTime: 2020-08-02 12:55:49
+ * @LastEditTime: 2020-08-03 15:50:42
  * @LastEditors: Please set LastEditors
  * @Description: 插入法排序实现
  *               思路：1、将需要插入的元素拿出来，留出空位
@@ -13,7 +13,7 @@
 
 void insertSort(int* array, int len)
 {
-    printf("插入排序前：");;
+    printf("插入排序前：");
     for(int i = 0; i < len; i++)
     {
         printf("%d ", array[i]);
@@ -22,17 +22,17 @@ void insertSort(int* array, int len)
 
     for (int i = 1; i < len; i++)
     {
-        int k = i;             // 需要插入的位置
-        int temp = array[i];
-        for (int j = i -1; (j >= 0)&&(array[j] > temp); j--)
+        int k = i; 
+        int temp = array[i];                // 需要插入的位置
+        for (int j = i - 1; (j >= 0)&&(array[j] > temp); j--)   // 按照从小到大的顺序排序
         {
             array[j+1] = array[j]; // 元素后移
-            k = j;// 插入的位置
+            k = j;                 // 插入的位置
         }
-        array[k] = temp;   // 元素插入
+        array[k] = temp;           // 元素插入
     }
 
-    printf("插入排序后：");;
+    printf("插入排序后：");
     for(int i = 0; i < len; i++)
     {
         printf("%d ", array[i]);
@@ -42,8 +42,9 @@ void insertSort(int* array, int len)
 
 int main(int argc, char *argv[])
 {
-    int data[] = {49, 38, 65, 97, 76, 13, 27};
+    int data[] = {38, 65, 49, 97, 76, 13, 27};
     int length = sizeof(data) / sizeof(data[0]);
+    
     insertSort(data, length);
 
     return 0;

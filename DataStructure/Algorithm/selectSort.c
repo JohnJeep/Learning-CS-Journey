@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-03 20:52:08
- * @LastEditTime: 2020-08-02 12:30:17
+ * @LastEditTime: 2020-08-03 15:40:21
  * @LastEditors: Please set LastEditors
  * @Description: 选择排序算法实现    
  *               无序序列逐渐减少，有序序列逐渐增多       
@@ -11,7 +11,7 @@
 
 void selectSort(int* array, int len)
 {
-    printf("选择排序前：");;
+    printf("选择排序前：");
     for(int i = 0; i < len; i++)
     {
         printf("%d ", array[i]);
@@ -31,7 +31,7 @@ void selectSort(int* array, int len)
         }
     }
     
-    printf("选择排序后：");;
+    printf("选择排序后：");
     for(int i = 0; i < len; i++)
     {
         printf("%d ", array[i]);
@@ -39,7 +39,7 @@ void selectSort(int* array, int len)
     printf("\n");
 }
 
-int main() 
+int main(int argc, char *argv[])
 {
     int array[] = {9, 8, 3, 5, 6, 2, 10, 1};
     int length = sizeof(array) / sizeof(array[0]);
