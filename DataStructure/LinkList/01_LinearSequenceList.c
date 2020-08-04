@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-15 19:57:19
- * @LastEditTime: 2020-07-20 22:23:58
+ * @LastEditTime: 2020-08-04 08:46:28
  * @LastEditors: Please set LastEditors
  * @Description: 线性表顺序存储-----------------没有通过
  * @FilePath: /01_LinearSequenceList.c
@@ -188,9 +188,6 @@ int sqListDelete(SqList* list, int pos)
     list->length--;
     return 0;
 }
- 
-
-
 #endif 
 
 
