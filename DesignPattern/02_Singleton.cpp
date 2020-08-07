@@ -3,7 +3,7 @@
  * @Date: 2020-08-06 22:19:11
  * @LastEditTime: 2020-08-06 23:07:52
  * @LastEditors: Please set LastEditors
- * @Description: 单例模式：此单利模式为饿汉式模式，即在类的全局区中一开始开辟空间为其创建对象
+ * @Description:饿汉式单利模式，即在类的全局区中一开始开辟空间为其创建对象
  * @FilePath: /02_Singleton.cpp
  */
 #include <iostream>
