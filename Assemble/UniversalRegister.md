@@ -1,17 +1,19 @@
-```
- * @Author: your name
+<!--
+ * @Author: JohnJeep
  * @Date: 2020-05-18 21:33:28
- * @LastEditTime: 2020-05-18 21:34:14
+ * @LastEditTime: 2020-08-10 11:48:50
  * @LastEditors: Please set LastEditors
  * @Description: 常用的通用寄存器
-```
-### 指令(instruction)
+ * @FilePath: /UniversalRegister.md
+-->
+
+## 0.1. 指令(instruction)
 - **DCD**  指令可分配一个或多个字的内存，在四个字节的边界上对齐，并定义内存的运行时初值
 - **DCDU** 与之相同，不过内存对齐是任意的
 - 分段：在实模式下通过偏移一个段寄存器的4位再加上16位偏移量，形成一个20位的物理地址
 
 
-### 寄存器 
+## 0.2. 寄存器 
 Inter 8086架构有16个处理器，可供程序员使用的有14个16位的寄存器；有16位宽数据总线和地址总线，20位宽的外部地址总线
 - 8个通用寄存器：
   - 4个数据寄存器
@@ -43,7 +45,7 @@ Inter 8086架构有16个处理器，可供程序员使用的有14个16位的寄�
 - `EA(Effective Address)` 有效地址
 
 
-### 基础语法
+## 0.3. 基础语法
 - 参考
   - [Assembly language primer](http://www.unige.ch/medecine/nouspikel/ti99/assembly.htm#JUMPs) 
 

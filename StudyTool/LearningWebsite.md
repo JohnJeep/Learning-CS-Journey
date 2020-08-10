@@ -123,6 +123,8 @@
 - [RegExPal](https://www.regexpal.com): 在线正则表达式练习工具
 - [vim-adventures](https://vim-adventures.com/): 在线练习VIM的一款游戏
 - [ProcessOn](https://www.processon.com/): 在线画流程图
+- [uigradients](https://uigradients.com) 根据自己的喜好来搭配各种样式的渐变色
+
 
 
 ## 1.7. 人文
@@ -176,7 +178,7 @@
 - [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
 - [emojiisland](https://emojiisland.com/) 下载emoji表情库
 - [photomosh](https://photomosh.com/) 炫酷的图片制作
-
+- [openmoji](https://www.openmoji.org)  提供源代码的表情符号库，可免费下载使用。
 
 
 ## 1.13. 图标
@@ -184,7 +186,7 @@
 - [icons8](https://icons8.com/): 网站也提供各种格式，各种尺寸和配色。Icons8除了将图示按照类别分类外，还利用不同平台的设计风格准则加以区隔，例如有iOS10、Windows、Android、Google、Office。
 - [Iconninja](http://www.iconninja.com/): 海量免费图标素材，支持关键词搜索，所有的素材图片均提供详细的如格式、宽度、高度、文件大小等信息，根据自己需要下载合适的尺寸。
 - [asyicon](https://www.easyicon.net/): 支持PNG、ICO、ICNS格式图标搜索、图标下载服务。
-
+- [shareicon](https://www.shareicon.net) 提供超过25万种ICON矢量图素材库
 
 
 ## 1.14. 电子图书
