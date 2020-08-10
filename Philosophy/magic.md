@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-07 11:01:20
- * @LastEditTime: 2020-08-07 11:59:08
+ * @LastEditTime: 2020-08-08 21:56:54
  * @LastEditors: Please set LastEditors
  * @Description 玄幻修真类美词
 -->
@@ -114,6 +114,8 @@
 - 绫清竹
 - 诗静依
 - 秦妖娆
+- 南宫婉
+- 紫菱
 
 
 ### 0.2.2. 男性 

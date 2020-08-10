@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-01 22:08:51
- * @LastEditTime: 2020-08-02 00:12:48
+ * @LastEditTime: 2020-08-08 23:55:38
  * @LastEditors: Please set LastEditors
  * @Description: 典型的二叉树中序遍历非递归实现
  * @FilePath: /InOrderTraverse.cpp
@@ -81,7 +81,7 @@ int main()
     memset(&t3, 0, sizeof(BinTreeNode));
     memset(&t4, 0, sizeof(BinTreeNode));
     memset(&t5, 0, sizeof(BinTreeNode));
-
+     
     t1.data = 1; 
     t2.data = 2; 
     t3.data = 3; 
