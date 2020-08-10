@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-05-28 14:08:52
- * @LastEditTime: 2020-06-11 15:59:44
+ * @LastEditTime: 2020-08-08 23:21:24
  * @LastEditors: Please set LastEditors
  * @Description: MyString 头文件声明
 */ 
@@ -73,19 +73,50 @@ inline MyString::MyString(const MyString& str)
  *               把参数声明为引用可以避免这样的无谓消耗，从而提高代码效率
  * @return:      对象的自身引用
  */
+// 1、初级程序员的写法
+#if 0
 inline MyString& MyString::operator=(const MyString& str)
 {
-    if(this == &str) // 自拷贝
+    if(this == &str) // 自拷贝，判断传入的参数和当前的实例是不是同一个实例
     {
         return *this;
     }
 
     delete[] data;
-    data = new char[strlen(str.data)];
+    data = nullptr;
+    data = new char[strlen(str.data) + 1];
     strcpy(data, str.data);
+
     return *this;
 } 
+#endif 
 
+/**
+ * @description: 高级程序员的写法
+ *               可能会出现的问题：在new一块新的内存是时，有可能内存不足，导致new char时，会抛出异常，违背了异常安全性的原则。
+ *                解决方法：法一、先用new分配除一块新的内存（在构造函数中已经申请），再用delete释放已有的内存，
+ *                               保证在当内存分配失败时，确保类的实例不会被修改。
+ * 
+ *                         法二、创建一个临时实例，再交换临时实例和原来的实例。
+ * @param {type} 
+ * @return {type} 
+ */
+#if 1
+inline MyString& MyString::operator=(const MyString& str)
+{
+    if(this == &str) // 自拷贝，判断传入的参数和当前的实例是不是同一个实例
+    {
+        return *this;
+    }
+
+    MyString temp(str);
+    char* ptr = temp.data;
+    temp.data = data;
+    data = ptr;   // 运行完后，自动调用析构函数把temp.data指向的内存释放调
+
+    return *this;
+} 
+#endif
 
 // 重载数组operator[]，返回数组的下标
 char& MyString::operator[](const int index)
