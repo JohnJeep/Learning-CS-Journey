@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-27 22:32:08
- * @LastEditTime: 2020-07-05 14:39:12
+ * @LastEditTime: 2020-08-10 16:15:30
  * @LastEditors: Please set LastEditors
  * @Description: 网络数据相关协议学习
  * @FilePath: /ComputerNetwork/2.tcp-ip协议.md
@@ -476,6 +476,11 @@
 - TCP包的长度最大可达 `60字节`，最小为 `20字节`。 
 - TCP能在两个方向上进行传输，属于全双工传输。
 - TCP传递给IP的信息称为报文段。
+- 序号（Squencen umber）：占32位，用来标识从TCP源端向目的端发送的字节流，发起方发送数据时对此进行标记。
+- 确认号（acknowledge number）：Ack号，占32位，只有ACK标志位为1时，确认序号字段才有效，Ack=Seq+1。
+  > 注意：不要将 `确认序号Ack` 与 `标志位中的ACK` 搞混了。 
+
+
 - TCP的首部
   - TCP数据在IP数据报中的封装
   
@@ -488,11 +493,11 @@
 
 
   - TCP首部中的 `6个bit标志位`
-    - `URG` 紧急指针(urgent pointer)，是一个正的偏移量。
-    - `ACK` 确认序号。
-    - `PSH` 接收方应该尽快将这个报文段交给应用层。
-    - `RST` 重建连接。
-    - `SYN` 同步序号用来发起一个连接。
+    - `URG(urgent)` 紧急指针(urgent pointer)，是一个正的偏移量。
+    - `ACK(acknowledgement)` 确认序号。
+    - `PSH(push)` 接收方应该尽快将这个报文段交给应用层。
+    - `RST(reset)` 重建连接。
+    - `SYN(synchronous)` 同步序号用来发起一个连接。
     - `FIN(FINish)` 发送方完成数据发送 
 
 - TCP流量控制：由连接的每一方通过窗口大小来确认。 窗口大小是一个 `16bit` 的字节数。
@@ -500,6 +505,14 @@
 
 
 ### 0.12.1. TCP的建立与终止
+- 参考
+  - [详解 TCP 连接的“ 三次握手 ”与“ 四次挥手 ”](https://baijiahao.baidu.com/s?id=1654225744653405133&wfr=spider&for=pc)
+  - [TCP/IP三次握手四次挥手常见面试题](https://www.jianshu.com/p/b8a3dde775cd)
+  - [理解TCP/IP三次握手与四次挥手的正确姿势](https://www.cnblogs.com/lms0755/p/9053119.html)
+  - [简述TCP的三次握手过程](https://blog.csdn.net/sssnmnmjmf/article/details/68486261)
+  - [TCP/IP三次握手详解](https://blog.csdn.net/metasearch/article/details/2147213)
+
+
 - 建立：需要三次握手
   1. 请求端（客户端）发送一个 `SYN` 字段指明客户端要连接的服务器的端口和初始值序号。
   2. 服务器发回包含 ACK号和序列号初始值。
