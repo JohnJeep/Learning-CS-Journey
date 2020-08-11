@@ -49,6 +49,8 @@
         "map": "cpp",
         "iomanip": "cpp",
         "iterator": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp"
     }
 }
