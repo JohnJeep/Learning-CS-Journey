@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-07-11 23:54:54
+ * @LastEditTime: 2020-08-11 13:59:44
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -13,7 +13,7 @@ Seemingly meaningless little thought or ideas When acted upon have a potential t
 看似无足轻重的小想法或念头一旦得以实施，就具有演变成伟大事业的潜能。
 
 Like the spring torrent flowing eastward, without tarry. 
-恰似一江春水向东流 。 
+恰似一江春水向东流。 
 
 Let life be beautiful like summer flowers and death like autumn leaves. 
 生如夏花般绚烂，死如秋叶般静美。
@@ -24,11 +24,11 @@ The joy of living comes from what we put into living, not from what we seek to g
 Actions speak louder than words.
 行胜于言。
 
- Let us accept new challenges, think beyond our limits and keep in mind the ethics of life.
- 让我们迎接新的挑战，打破常规、创新思维，并坚守道德。
+Let us accept new challenges, think beyond our limits and keep in mind the ethics of life.
+让我们迎接新的挑战，打破常规、创新思维，并坚守道德。
 
 I wish you all the best in your future prospects and endeavors.
- 祝愿大家前程似锦，一帆风顺。
+祝愿大家前程似锦，一帆风顺。
 
 Love alters not with his brief hours and weeks, but bears it out even to the edge of doom. 
 爱情时光虽短暂，却不会变迁，直到世界末日，直到天长地久。
@@ -48,3 +48,5 @@ My love for you will always grow, with every passing year.
 The possibilities are limited only by our imagination.
 只有想不到，没有做不到。
 
+The heart is not conquered by force, but by love and tolerance.
+心不是靠武力征服，而是靠爱和宽容大度。
