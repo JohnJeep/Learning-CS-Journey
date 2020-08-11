@@ -1,13 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-06-01 08:42:34
- * @LastEditTime: 2020-06-01 13:40:57
+ * @LastEditTime: 2020-08-11 20:42:26
  * @LastEditors: Please set LastEditors
  * @Description: 讨论常见的并发问题
 --> 
 
 # 1. 并发编程中出现的缺陷（bugs）
-
 ## 1.1. non-deadlock(非死锁)
 - Atomicity-Violation Bugs(违反原子性)
   - 违反了多个内存之间访问所需的可串行性（serializability）。

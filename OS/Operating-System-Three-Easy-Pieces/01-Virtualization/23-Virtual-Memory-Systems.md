@@ -1,26 +1,17 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-19 08:16:21
- * @LastEditTime: 2020-06-01 13:51:01
+ * @LastEditTime: 2020-08-11 20:35:10
  * @LastEditors: Please set LastEditors
  * @Description:  VAX/VMS 虚拟内存系统
 --> 
-
-<!-- TOC -->
-
-- [0.0.1. VMS(virtual Memory System)](#001-vmsvirtual-memory-system)
-- [0.0.2. The Page Cache](#002-the-page-cache)
-
-<!-- /TOC -->
-
-### 0.0.1. VMS(virtual Memory System)
+# Virtual-Memory-Systems
+## VMS(virtual Memory System)
 - RSS(res-ident set size): 驻留集大小
 - demand zeroing：按需置零
 - COW(copy-on-write): 写时赋值
-
 - 一个真实的VAX/VMS地址空间
 <center> <img src="../figures/23-The-VAX-VMS-Address-Space.png" /> </center>
-
 
 
 - virtual address space: 由用户部分和内核部分
@@ -54,20 +45,18 @@
 <center> <img src="../figures/23-64-bit-address.png" /> </center>
 
 
-### 0.0.2. The Page Cache
-三个主要来源
-- memory-mapped files(内存映射文件)
-- file data(来自设备的文件数据)
-- metadata(来自设备的元数据)
+## The Page Cache
+- 三个主要来源
+  - memory-mapped files(内存映射文件)
+  - file data(来自设备的文件数据)
+  - metadata(来自设备的元数据)
 
-文件系统调用的读read()和写write()，以及每个进程的堆(heap)和栈(stack)页都保存在`page cache hash
+
+- 文件系统调用的读read()和写write()，以及每个进程的堆(heap)和栈(stack)页都保存在`page cache hash
 table`(页缓存哈希表)中,一边在需要数据的时候快速的访问。
-
 - mmap():  memory-mapped files(内存映射文件)函数。可以使用`pmap`命令查看。
 - ASLR(address space layout randomization)：地址空间布局随机化。物理地址与虚拟地址之间的映射地址，在以前的系统中，是固定的地址，但现代操作系统中不是固定的，保证了系统的安全。每次运行，地址会不一样。
 - Meltdown And Spectre(熔断和幽灵)
   - `meltdownattack.com`
   - `spectreattack.com`
-
-
 - `KPTI`(kernel page table isolation): 内核页表隔离
