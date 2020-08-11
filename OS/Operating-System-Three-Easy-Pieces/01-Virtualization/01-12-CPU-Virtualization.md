@@ -1,33 +1,20 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2020-06-09 22:03:15
+ * @LastEditTime: 2020-08-11 20:36:26
  * @LastEditors: Please set LastEditors
  * @Description: CPU虚拟化
 --> 
-
-<!-- TOC -->
-
-- [1. CPU Virtualization](#1-cpu-virtualization)
-  - [1.1. 进程API调用](#11-进程api调用)
-  - [进程调度（process schedule）](#进程调度process-schedule)
-  - [1.2. 多级反馈队列（Multi-Level Feedback Queue）](#12-多级反馈队列multi-level-feedback-queue)
-  - [1.3. Proportional Share（比例份额）](#13-proportional-share比例份额)
-  - [1.4. Multiprocessor Scheduling](#14-multiprocessor-scheduling)
-
-<!-- /TOC -->
-
 # 1. CPU Virtualization
-两种CPU模式
-- 特权模式(privileged mode)，也叫内核模式(kernel mode)
-- 用户模式(user mode)
+- 两种CPU模式
+  - 特权模式(privileged mode)，也叫内核模式(kernel mode)
+  - 用户模式(user mode)
 
 
-## 1.1. 进程API调用
+## 进程API调用
 - 上下文切换（context switch）：当进程停止时，它的寄存器的值被保存到内存中，通过恢复这些寄存器，操作系统（OS）可以恢复运行该进程。
 - 僵尸态（zombie state）：一个进程处于已退出但未清理的状态。
   > 允许其他的进程（通常是创建的父进程）检查进程的返回代码，并查看刚刚完成的进程是否成功执行。  
-
 
 - `fork()` 创建一个进程
   - 创建的进程称为子进程（child）
@@ -62,7 +49,7 @@
 - SJF, STCF调度算法优化了周转时间（turnaround time），响应时间不好。RR(Round Robin)优化了响应时间，但周转时间不好。
 
 
-## 1.2. 多级反馈队列（Multi-Level Feedback Queue）
+## 多级反馈队列（Multi-Level Feedback Queue）
 - MLFO(Multi-Level Feedback Queue)：利用反馈信息来决定任务的优先级。
 - MLFQ中有许多独立的队列，每个队列有不同的优先级。任何时刻，一个工作只能存在一个队列中，MLFQ总是优先执行高优先级的工作。
 - MLFQ调度的规则
@@ -78,8 +65,7 @@
 - 使用 `nice` 命令行工具，可以增加或降低工作的优先级，从而增加或降低任务在某个时刻运行的机会。
 
 
-
-## 1.3. Proportional Share（比例份额）
+## Proportional Share（比例份额）
 - proportional-share scheduler（比例份额调度器）也叫fair-share scheduler（公平份额调度器）。
 - 原理：调度器确保每个任务获得一定比例的CPU时间，而不是优化周转时间或响应时间。
 
@@ -88,7 +74,7 @@
   - 彩票调度（ticket scheduling）：分配票数的方法采用随机数的方式。不需要对每个进程记录全局的状态，只需要记录总票数就可以了。
 
 
-## 1.4. Multiprocessor Scheduling 
+## Multiprocessor Scheduling 
 - CPU从缓存中读取数据的原则
   - 程序第一次读取数据时，数据时放在内存中，花费的时间比较长。处理器期望该数据也许会再次使用，将数据放在缓存中。如果之后的时间程序再次使用同样的数据，CPU会先查找缓存。如果找到的数据就在缓存中，得到的数据块的多，程序运行的也很快。
 
@@ -102,12 +88,6 @@
 - 缓存亲和度（Cache Affinity）
   > 当在特定CPU上运行时，在CPU的缓存中建立一个公平位状态（fair bit of state）。下次运行该进程在相同的CPU上时，由于缓存的数据而执行的更快。相反，在不同的CPU上执行，由于需要重新加载数据而变得较慢。因此，多处理调度器考虑到缓存的这种亲和性，并尽可能得将进程保持在同一个CPU上。
 
+
 - 单队列调度（Single-Queue Scheduling）
-
-
 - 多队列调度（Multi-Queue Scheduling）
-
-
-
-
-
