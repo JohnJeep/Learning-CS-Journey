@@ -1,11 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-02 12:30:03
- * @LastEditTime: 2020-08-03 15:50:42
+ * @LastEditTime: 2020-08-12 19:01:21
  * @LastEditors: Please set LastEditors
  * @Description: 插入法排序实现
  *               思路：1、将需要插入的元素拿出来，留出空位
  *                     2、将拿出的元素与序列中在此元素之前的所有元素进行对比，符合条件的元素依次向后移动
+ *             
+ *               复杂度：n * n
  * @FilePath: /InsertSort.c
  */ 
 #include <stdio.h>
