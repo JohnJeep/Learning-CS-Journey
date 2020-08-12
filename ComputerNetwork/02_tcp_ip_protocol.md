@@ -38,6 +38,8 @@
   - [0.12.5. TCP坚持定时器](#0125-tcp坚持定时器)
   - [0.12.6. TCP保活定时器](#0126-tcp保活定时器)
 - [0.13. 常用网络命令](#013-常用网络命令)
+- [0.14. socket编程](#014-socket编程)
+  - [0.14.1. 多路IO转接模型](#0141-多路io转接模型)
 
 <!-- /TOC -->
 
@@ -707,3 +709,46 @@ NAT映射
 - `inet_ntop()` 将网络字节序转化为点分十进制的IP地址
 - `inet_htonl()` 将点分十进制以字符串类型的IP地址转化为网络字节序
 
+
+## 0.14. socket编程
+- `accept()` 建立连接请求
+
+
+- 端口复用函数
+  - `setsockopt()` :一般插入在 `socket()` 函数与 `bind()` 函数之间。
+
+### 0.14.1. 多路IO转接模型
+- 原理：不再由应用程序（服务器）直接监听客户端，而是通过内核替代应用程序进行监听文件。
+
+- select
+  - 监听所有文件描述符中最大的文件描述符
+  - 数据请求事件
+    - read
+    - write
+    - error
+  - 返回值：返回监听的文件描述符总数。
+  - 缺点
+    - Linux中select监听文件描述符的的最大值为 1024 
+    - 需要自定一个数据结构（数组）去遍历哪些文件描述符满足条件。
+    - 每次进行操作的时候，需要将监听的集合和满足条件监听的集合进行保存，因为每次的操作会修改原有集合的值。
+
+- poll
+  - 函数原型：`int poll(struct pollfd *fds, nfds_t nfds, int timeout);` 
+  - 参数
+    - `fds` 数组的首地址  
+    - `nfds` 数组中元素的个数
+    - `timeout` 超时时间
+  - 优点
+    - 监听文件描述符的返回值可以超过 1024
+    - 实现了监听集合与返回集合的分离
+    - 仅在数组中搜索，范围变小了，但是效率还是比较低
+  
+- epoll
+  - 函数
+    - `epoll_create(int size);`   创建一个epoll，返回值指向Linux内核中的平衡二叉树（红黑树）的树根。
+    - `epoll_ctl(int epfd, in op, in fd, struct epoll_event *event);` 控制某个epoll监听的文件描符上的事件：注册、删除、修改。
+      - `op`: EPOLL_CTL_ADD/ EPOLL_CTL_MOD/ EPOLL_CTL_DEL
+      - `event`: EPOLL_IN/ EPOLL_OUT / EPOLL_ERR
+    - `epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout);` 等待所有监控文件描述符上的事件的产生
+      - `struct epoll_event *event` event为传出参数，是一个数组。
+      - `int maxevents` 数组的最大值  

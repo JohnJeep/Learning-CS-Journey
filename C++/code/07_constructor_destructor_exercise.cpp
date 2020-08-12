@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-06-03 20:16:08
- * @LastEditTime: 2020-06-04 09:25:51
+ * @LastEditTime: 2020-08-12 14:10:07
  * @LastEditors: Please set LastEditors
  * @Description: 构造函数、析构函数、组合对象混合一起练习。
  */ 

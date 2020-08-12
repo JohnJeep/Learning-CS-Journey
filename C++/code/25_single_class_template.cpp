@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-16 15:40:32
- * @LastEditTime: 2020-06-16 16:17:49
+ * @LastEditTime: 2020-08-12 14:14:59
  * @LastEditors: Please set LastEditors
  * @Description: 单个类模板
- * @FilePath: /C++/code/signal_class_template.cpp
+ * @FilePath: /single_class_template.cpp
  */ 
 #include <iostream>
 using namespace std;
