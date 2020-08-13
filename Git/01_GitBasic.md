@@ -13,8 +13,8 @@
   - [1.2. Git基础](#12-git基础)
     - [1.2.1. Git常用命令](#121-git常用命令)
     - [1.2.2. Git log](#122-git-log)
-    - [1.2.3. Git标签](#123-git标签)
-    - [1.2.4. Git别名](#124-git别名)
+    - [1.2.3. Git tag](#123-git-tag)
+    - [1.2.4. Git alias](#124-git-alias)
     - [1.2.5. Git branch](#125-git-branch)
     - [1.2.6. Git checkout](#126-git-checkout)
     - [1.2.7. Git rebase](#127-git-rebase)
@@ -35,7 +35,7 @@
     - [1.6.3. Git Reset](#163-git-reset)
   - [1.7. Git工作区、暂存区、Git仓库](#17-git工作区暂存区git仓库)
     - [1.7.1. 工作区](#171-工作区)
-    - [1.7.2. 暂存区](#172-暂存区)
+    - [1.7.2. 暂存区（index）](#172-暂存区index)
     - [1.7.3. Git版本库](#173-git版本库)
   - [1.8. 其它问题](#18-其它问题)
 
@@ -65,6 +65,7 @@
 - `git reset --hard HEAD^` 回退到 `HEAD^`版本
 - `git config --list` 列出所有 Git 当时能找到的配置
 - `git help <verb>` 查看帮助，verb为Git的关键字
+- `git add -p(patch)` 依次存储每一个文件的改动，包括文件中做的哪些些改动
 
 
 ### 1.2.2. Git log
@@ -85,8 +86,7 @@
 - `git fsck --full`: 显示出所有没有被其他对象指向的对象。`git fsck` 检查所有数据库的完整性。
 
 
-
-### 1.2.3. Git标签
+### 1.2.3. Git tag
 - 两种类型
   - 轻量标签（lightweight）：很像一个不会改变的分支——它只是一个特定提交的引用。
     - 本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。 
@@ -104,7 +104,7 @@
   > 注意： 会导致仓库处于分离头指针(detacthed HEAD)状态.在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
-### 1.2.4. Git别名
+### 1.2.4. Git alias
 - `git config --global alias.unstage 'reset HEAD --'`  给取消暂存取一个别名
 
 
@@ -127,7 +127,6 @@
   - `git stash list` 查看存储在栈上的文件
   - `git stash apply` 将最近存储的文件重新使用
   - `git stash apply stash_name`使用之前某次存储的文件
-
 
 - 远程仓库分支
   - `git branch --remote` 查看远程仓库分支
@@ -170,33 +169,66 @@ experiment <br>
 - `drop` 删除commit 提交信息。
 
 
-
 ### 1.2.8. Git commit
-参考：
-- [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
-- [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
-- [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+- 参考
+  - [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
+  - [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+  - [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+  - [如何规范你的Git commit？](https://mp.weixin.qq.com/s/vzgST0ko-HZVkFFiSZ2xGg)
 
-1. 修改最近一次的注释
-   - `git commit --amend` 修改最后一次提交的注释 
-   - `git rebase --continue` 执行修改的commit
-   - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
+- 修改最近一次的注释
+  - `git commit --amend` 修改最后一次提交的注释 
+  - `git rebase --continue` 执行修改的commit
+  - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
 
-2. 修改历史提交的注释
-   - `git log -n 4` 查看最近4次操作的日志
-   - `git rabase -i HEAD~n` 修改倒数第n次的commit
-   - 将`pick`修改为`edit`
-   - `git commit --amend`修改commit的内容
-   - `git rebase --continue` 执行修改的commit
-   - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
+- 修改历史提交的注释
+  - `git log -n 4` 查看最近4次操作的日志
+  - `git rabase -i HEAD~n` 修改倒数第n次的commit
+  - 将`pick`修改为`edit`
+  - `git commit --amend`修改commit的内容
+  - `git rebase --continue` 执行修改的commit
+  - push到远程GitHub，若有冲突，需要将远程repository的代码pull到本地，然后再push到远程repository。
+
+- Git commit 提交规范
+  - `commit message`格式
+    ```
+      <type>(<scope>): <subject>
+    ```
+  - type(必须): 用于说明git commit的类别，只允许使用下面的标识。
+    - feat：新功能（feature）。
+    - fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。
+    - fix：产生diff并自动修复此问题。适合于一次提交直接修复问题
+    - to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix
+    - docs：文档（documentation）。
+    - style：格式（不影响代码运行的变动）。
+    - refactor：重构（即不是新增功能，也不是修改bug的代码变动）。
+    - perf：优化相关，比如提升性能、体验。
+    - test：增加测试。
+    - chore：构建过程或辅助工具的变动。
+    - revert：回滚到上一个版本。
+    - merge：代码合并。
+    - sync：同步主线或分支的Bug。
   
+  - scope(可选)
+    - scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
+
+  - subject(必须)
+    - subject是commit目的的简短描述，不超过50个字符。
+    - 建议使用中文（感觉中国人用中文描述问题能更清楚一些）。
+    - 结尾不加句号或其他标点符号。
+ 
+  - 提交的例子
+    ```
+    fix(DAO):用户查询缺少username属性 
+    feat(Controller):用户查询接口开发
+    ```  
+
 
 ### 1.2.9. Git diff
 - `git diff` 比较工作区和暂存区之间的差异
 - `git diff HEAD` 比较工作区与最新本地仓库之间的差异
 - `git diff --cached`比较暂存区与最新本地仓库的差异 
 - `git diff master origin/master `  查看本地仓库中分支为 `master` 的文件与Github远程仓库中别名为`origin`下 `master` 分支文件的差异。
-
 
 
 ## 1.3. 提交代码总结
@@ -222,7 +254,6 @@ experiment <br>
    > 包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）
   - <font color="red">HEAD指针指向的当前所在分支，HEAD 分支随着提交操作自动向前移动。</font>
   - Git合并分支很快！就改改指针，工作区内容也不变！
-
 
 - 每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。`HEAD` 不是指向提交，而是**指向** `master`，`master` 才是**指向**提交的，所以`HEAD` 指向当前所在分支。
 - 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`**指向**`master`，就能确定当前分支，以及当前分支的提交点：
@@ -272,7 +303,6 @@ experiment <br>
   - 另一种方式是用`git stash pop`,恢复的同时把`stash`内容也删了。
 
 
-
 ## 1.5. 远程仓库
 ### 1.5.1. 命令
 - `git remote -v` 显示GitHub远程仓库上使用 Git 保存的别名和对应的 URL
@@ -283,14 +313,12 @@ experiment <br>
 
 
 ### 1.5.2. Git pull与Git fetch
-
 - `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
 - `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，它并不会修改本地仓库中的内容，需要自己手动进行合并。
 - `git fetch 远程仓库名(origin master):temp` 拉取远程仓库master分支的数据到本地新建的 temp 分支中。
-
-
 - 合并分支步骤
   - 从远程仓库拉取数据 `git fetch origin master` 
+    > 将远程仓库分支的数据拉取到本地临时分支 `git fetch origin master:temp`
   - 查看远程仓库的版本 `git remote -v`
   - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
   - 手动解决冲突，提交（commit）信息
@@ -304,8 +332,6 @@ experiment <br>
 - `git push -u origin master` 将当前分支的内容推送给远程仓库 `origin` 的 `master` 分支
   -  参数 `-u`，推送的同时将 `origin` 仓库的 `master` 分支设置为本地仓库当前分支的 `upstream（上游）`。
   - git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
-
-
 
 
 ## 1.6. Git删除与恢复
@@ -366,7 +392,9 @@ experiment <br>
 
 
 ## 1.7. Git工作区、暂存区、Git仓库
-[参考文章--版本库](http://www.softwhy.com/article-8494-1.html)
+- 参考文章
+  - [Git工作区和暂存区](http://www.softwhy.com/article-8494-1.html)
+
 <div align="center"> <img width="80%" hight="80%" src="./figure/三区视图.png"/></div>
 
 1. Git不是存储每个文件与初始版本的差异，而是把数据看作是对小型文件系统的一组快照。
@@ -387,17 +415,17 @@ experiment <br>
 - 工作区目录下的每一个文件只有两种状态：已跟踪（添加到暂存区）或未跟踪（没有添加都暂存区）。
 
 
-### 1.7.2. 暂存区
+### 1.7.2. 暂存区（index）
 1. 概念
    - **暂存区**仅仅是`.git`目录下的一个`index`文件，这也是为什么被称为index（索引）,是**指向**文件的索引。真正的文件存储在`.git/objects`目录中
    - 当删除**暂存区**内容的时候，其实就是删除`index`文件中的内容，`.git/objects`目录中的内容不会被删除。
 <div align="center"> <img width="80%" hight="80%" src="./figure/暂存区.png"/></div>
 
-
 2. Git清空暂存区
    - 暂存区实质是`.git`目录下的`index`文件，只要将此文件删除，那么就可以认为暂存区被清空`rm .git /index`
 3. 暂存区存在的必要性
-   - 有些朋友感觉暂存区多余，其实并非如此，通过这个过渡性区域可以使提交更加条理，避免无用琐碎提交
+   - 有些朋友感觉暂存区多余，其实并非如此，通过这个过渡性区域可以使提交更加条理，避免无用琐碎提交。
+   - 暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支中的版本库中。
 4. `git ls-files` 查看暂存区内容
   - `--cached(-c)` 显示暂存区中的文件，`git ls-files`命令默认的参数
   - `--deleted(-d)` 显示删除的文件
@@ -408,25 +436,25 @@ experiment <br>
  
 ### 1.7.3. Git版本库
 1. 概念
-   - 是 Git 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
+   - Git版本库是 `Git` 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
    - 工作区根目录下有一个默认隐藏的目录`.git`，它并不属于工作区，而是版本库（Repository）。版本库中内容很多，并且都很重要，有两个是我们实际操作中经常要遇到的，那就是暂存区（也可以称之为`stage`或者`index`）和分支。
+
 2. 将文件最终提交到版本库基本流程如下：
    - `git add`    将工作区未跟踪和修改文件提交到暂存区。
-   - `git commit` 将暂存区内容提交到版本库中。暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支中的版本库中。
+   - `git commit` 将暂存区内容提交到版本库中，并执行更新 HEAD 指向的指针，这样就完成了引用与提交、提交与改动快照的——对应了。
+<div align="center"> <img width="80%" hight="80%" src="./figure/git本地仓库存储过程.png"/></div>
+
 3. Git清空版本库
    - `rm -rf .git` 删除当前目录下的版本库（`.git`目录）
    - `git init`    重新初始化一个全新的版本库
-
 
 
 ## 1.8. 其它问题
 - Git中文乱码
   - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
 
-
 - Git代理配置 
   - [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
-
 
 - git windows 更新 `git update-git-for-windows`
 

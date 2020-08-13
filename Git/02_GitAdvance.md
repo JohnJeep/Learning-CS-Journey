@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-01 16:22:04
- * @LastEditTime: 2020-06-22 22:07:19
+ * @LastEditTime: 2020-08-13 08:57:52
  * @LastEditors: Please set LastEditors
  * @Description: Git内部原理剖析
  * @FilePath: /Git/02-git-advance.md
@@ -27,30 +27,36 @@
 
 
 ### 1.1.1. SSH(Secure Shell)协议
-1. 概念
-   - SSH 协议支持口令与密钥两种安全验证模式，但无论那种模式，最终都需要使用密钥来加密数据以确保安全，而 SSH 密钥通常使用的算法为 RSA 和 DSA。
+- 概念
+  - SSH 协议支持口令与密钥两种安全验证模式，但无论那种模式，最终都需要使用密钥来加密数据以确保安全，而 SSH 密钥通常使用的算法为 RSA 和 DSA。
+
+- 命令　
+  - SSH1：只支持RSAS算法
+  - SSH2：支持RSA和DSA算法  
+  - `ssh -T git@github.com`查看SSHkey
+  - `sssh-keygen -t rsa` 使用RSA算法创建密钥
+  - `id_rsa` 密钥 和 `id_rsa.pub` 公钥
 
 
-2. 命令　
-   - SSH1：只支持RSAS算法
-   - SSH2：支持RSA和DSA算法  
-   - `ssh -T git@github.com`查看SSHkey
-   - `sssh-keygen -t rsa` 使用RSA算法创建密钥
-   - `id_rsa` 密钥 和 `id_rsa.pub` 公钥
-
-
-3. 为什么要用SSH？
-   - 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
-   - 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
-   - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+- 为什么要用SSH？
+  - 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
+  - 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
+  - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
   - Git支持多种协议，包括`https`，但通过`ssh`支持的原生git协议速度最快。
 
 
 ## 1.2. Git内部原理
 - Git仓库中5个对象
   - 三个数据对象(blob object)：保存着文件快照
+
   - 一个树对象(tree object)：记录着目录结构和 blob 对象索引
+
   - 一个提交对象(commit object)：包含着指向树对象的指针和所有提交信息
+    > 提交对象(git commit object)：每一个提交在 Git 中都通过 git commit object 存储，对象具有一个全局唯一的名称，叫做 revision hash。它的名字是由 SHA-1 算法生成，形如"998622294a6c520db718867354bf98348ae3c7e2"，我们通常会取其缩写方便使用，如"9986222"。
+    - 对象构成：commit 对象包含了 author + commit message 的基本信息。
+    - 对象存储：git commit object 保存一次变更提交内的所有变更内容，而不是增量变化的数据 delta (很多人都理解错了这一点)，所以 Git 对于每次改动存储的都是全部状态的数据。
+    - 大对象存储：因对于大文件的修改和存储，同样也是存储全部状态的数据，所以可能会影响 Git 使用时的性能(glfs 可以改进这一点）。
+    - 提交树：多个 commit 对象会组成一个提交树，它让我们可以轻松的追溯 commit 的历史，也能对比树上 commit 与 commit 之间的变更差异。
 
 
 - `hooks` 目录包含客户端或服务端的钩子脚本（hook scripts）
