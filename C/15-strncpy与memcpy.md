@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 15:56:29
- * @LastEditTime: 2020-07-27 15:53:06
+ * @LastEditTime: 2020-08-13 21:00:05
  * @LastEditors: Please set LastEditors
  * @Description: strncpy()与memcpy()函数用法
  * @FilePath: /15-strncpy与memcpy.md
@@ -53,7 +53,7 @@
    - strcpy不需要指定长度，它遇到被复制字符的串结束符"\0"才结束，所以容易溢出。memcpy则是根据其第3个参数决定复制的长度。
 - 用途不同。
    - 通常在复制字符串时用strcpy，而需要复制其他类型数据时则一般用memcpy
-- memcpy()是内存到内存之间拷贝最快的，相比strcpy()和memmove() 
+- `memcpy()`是内存到内存之间拷贝最快的，相比`strcpy()` 和 `memmove()`
 
 
 
