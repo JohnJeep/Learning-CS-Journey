@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-27 22:32:08
- * @LastEditTime: 2020-08-11 21:17:28
+ * @LastEditTime: 2020-08-14 16:03:21
  * @LastEditors: Please set LastEditors
  * @Description: 网络数据相关协议学习
  * @FilePath: /ComputerNetwork/02_tcp_ip_protocol.md
@@ -749,6 +749,31 @@ NAT映射
     - `epoll_ctl(int epfd, in op, in fd, struct epoll_event *event);` 控制某个epoll监听的文件描符上的事件：注册、删除、修改。
       - `op`: EPOLL_CTL_ADD/ EPOLL_CTL_MOD/ EPOLL_CTL_DEL
       - `event`: EPOLL_IN/ EPOLL_OUT / EPOLL_ERR
-    - `epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout);` 等待所有监控文件描述符上的事件的产生
+    - `epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout);` 等待所有监控文件描述符上事件的产生，即监听epoll红黑树上事件的发生。
       - `struct epoll_event *event` event为传出参数，是一个数组。
       - `int maxevents` 数组的最大值  
+ 
+  - 三种触发模式
+    - `epoll ET` 边沿触发
+      - 只有client发送数据时，才会触发。
+      - 调用：`event = EPOLLIN | EPOLLET`
+      - client将大量的数据存到epoll的缓冲区中时，server只从epoll中读取一部分的数据，这部分的数据概括了缓冲区中所有数据的信息，缓冲区中剩余的数据根据需求来进行取舍。
+    
+    - `epoll LT` 水平触发  
+      - 系统不做任何的声明，一般默认是水平触发。
+      - 一次性对 `read()` 函数进行操作，只有 `read()` 函数执行完后，才会进行水平触发。
+
+  - 非阻塞IO方式
+    - 优点：减少 `epoll_wait` 函数调用的次数，提高效率。
+    - `open()` 函数，在socket套接字中不适用。
+    - 结合 `fcntl()` 函数和 `readn()` 函数一起使用。 `readn()` 一次性读取 `n` 个字节后才返回。
+    - 如何使用？
+      - 使用边沿触发方式 
+      - 执行过程中使用 `while(read())`
+      - 调用 `fcntl(0_NOBLOCK)`
+
+  - 应用场景：不仅可以用于socket套接字 ，还可以用于管道和文件中。
+
+- epoll反应堆模型
+  - 核心思想：调用了 `libevent` 库
+    > 使用 `libevent` 库优点：库的底层大量采用了回调的思想，即函数指针的使用，同时也是跨平台的。
