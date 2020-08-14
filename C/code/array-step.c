@@ -1,11 +1,11 @@
 /*
  * @Author: JonJeep
  * @Date: 2020-08-12 10:33:24
- * @LastEditTime: 2020-08-12 11:37:37
+ * @LastEditTime: 2020-08-14 11:04:13
  * @LastEditors: Please set LastEditors
  * @Description: 数组名+1和数组名的地址+1
- *               结论：①数组名+1，是+数组元素大小的字节数；数组名的地址+1，是+整个数组大小的字节数
- *                    ②指针+1，是+指针类型对应字节数；指针的地址+1，是+8
+ *               结论: ①数组名+1，是+数组元素大小的字节数；数组名的地址+1，是+整个数组大小的字节数
+ *                     ②指针+1，是+指针类型对应字节数；指针的地址+1，是+8
  * @FilePath: /array-step.c
  */
 #include <stdio.h>
@@ -22,8 +22,8 @@ int main()
 
     printf("array address: %d\n", array);
     printf("&array[1] address: %d\n", &array[1]);
-    printf("array + 1 address: %d\n", array + 1);     // address + sizeof(short) * 1
-    printf("&array + 1 address: %d\n", &array + 1);   // address + sizeof(array) * 1
+    printf("array + 2 address: %d\n", array + 2);     // address + sizeof(short) * 2
+    printf("&array + 2 address: %d\n", &array + 2);   // address + sizeof(array) * 2
     printf("\n");
 
     short *p = array;
