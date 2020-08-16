@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-06-07 15:02:34
+ * @LastEditTime: 2020-08-15 19:11:13
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -19,7 +19,7 @@
   - [1.8. 查看使用的端口](#18-查看使用的端口)
   - [1.9. 常用 Bash终端快捷键](#19-常用-bash终端快捷键)
   - [1.10. man命令](#110-man命令)
-  - [1.11. Strace](#111-strace)
+  - [1.11. strace](#111-strace)
   - [1.12. wget命令](#112-wget命令)
   - [1.13. apt命令](#113-apt命令)
   - [1.14. dpkg 命令](#114-dpkg-命令)
@@ -61,6 +61,20 @@
 - `uname -a` 查看Linux版本
 - `lscpu` 查看系统CPU情况
 - `nslookup 域名` 查看域名对应的IP地址
+
+
+- 查看CPU的使用率：`top`命令
+  - 使用：`top -bn 1 -i -c` 
+  - 参数 
+    - `%us` 表示用户空间程序的cpu使用率（没有通过nice调度）
+    - `%sy` 表示系统空间的cpu使用率，主要是内核程序。
+    - `%ni` 表示用户空间且通过nice调度过的程序的cpu使用率。
+    - `%id` 空闲cpu
+    - `%wa` cpu运行时在等待io的时间
+    - `%hi` cpu处理硬中断的数量
+    - `%si` cpu处理软中断的数量
+    - `%st` 被虚拟机偷走的cpu 
+
 
 
 ## 1.2. 查看文件内容
@@ -140,9 +154,11 @@
 
 
 ## 1.9. 常用 Bash终端快捷键
-参考：[Bash 快捷键大全](https://linux.cn/article-5660-1.html)
+- 参考
+  - [Bash 快捷键大全](https://linux.cn/article-5660-1.html)
 
-    Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
+
+> Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
 
 1. 控制命令
 - `Ctrl + d` : 退出当前终端（end of file）
@@ -199,7 +215,7 @@
 
 
 ## 1.10. man命令
-`man -n 命令`：n为数字
+`man -n 命令参数`：n为数字
 - 1：普通应用程序或shell命令
 - 2：系统调用
 - 3：库函数
@@ -211,21 +227,21 @@
 - 9：非标准的内核程序
 
 
-## 1.11. Strace
-Strace  - trace system calls and signals
+## 1.11. strace
+strace  - trace system calls and signals
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
 
 ## 1.12. wget命令
-参考:
-[wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
+- 参考
+  - [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
 
 - 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置
--  wget 下载单个文件下载：
-   下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
+-  wget 下载单个文件下载
+  - 下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
 
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-08-11 13:59:44
+ * @LastEditTime: 2020-08-16 23:55:22
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -50,3 +50,6 @@ The possibilities are limited only by our imagination.
 
 The heart is not conquered by force, but by love and tolerance.
 心不是靠武力征服，而是靠爱和宽容大度。
+
+Create your own life and then go out and live it with absolutely no regrets.
+创造你自己的人生，并无怨无悔地去过这一生吧。
