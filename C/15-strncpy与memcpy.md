@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 15:56:29
- * @LastEditTime: 2020-08-13 21:00:05
+ * @LastEditTime: 2020-08-15 20:03:05
  * @LastEditors: Please set LastEditors
  * @Description: strncpy()与memcpy()函数用法
  * @FilePath: /15-strncpy与memcpy.md
@@ -19,9 +19,9 @@
   - src：源字符数组；
   - count：要复制的最大字符数
 - 功能
-  - 把src所指向的字符串中以src地址开始的前n个字节(不包括\0，\0得自己手动加在*destin被复制之后)复制到dest所指的数组中，并返回被复制后的dest
+  - 把src所指向的字符串中以src地址开始的前n个字节(不包括\0，\0得自己手动加在*dest被复制之后)复制到dest所指的数组中，并返回被复制后的dest
 - 注意事项
-  - src和dest所指内存区域不可以重叠，且dest必须有足够的空间来容纳src的字符长度+'\0'
+  - src和dest所指内存区域不可以重叠，且dest必须有足够的空间来容纳src的字符长度 + `\0'`
   - strcpy只是复制字符串，但不限制复制的数量，很容易造成缓冲溢出。strncpy要安全一些。
   - memcpy能够选择一段字符输出，strcpy复制全部的字符串。
   - 执行完strncpy()后，会覆盖原先dest字符数组中的数据。
