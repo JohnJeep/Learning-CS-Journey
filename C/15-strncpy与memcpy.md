@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 15:56:29
- * @LastEditTime: 2020-08-15 20:03:05
+ * @LastEditTime: 2020-08-17 15:07:52
  * @LastEditors: Please set LastEditors
  * @Description: strncpy()与memcpy()函数用法
  * @FilePath: /15-strncpy与memcpy.md
@@ -31,8 +31,8 @@
 - 定义
 ` void *memcpy(void *dest, void *src, size_t count); `
   - 参数
-     - dest: 指向用于存储复制内容的目标数组，类型强制转换为 void* 指针。
-     - src: 指向要复制的数据源，类型强制转换为 void* 指针。
+     - dest: 指向用于存储复制内容的目标数组，类型强制转换为 `void*` 指针。
+     - src: 指向要复制的数据源，类型强制转换为 `void*` 指针。
      - count: 要被复制的 `字节数`。
   - 返回值
     - 返回一个指向目标存储区dest的指针
@@ -42,8 +42,8 @@
 - 注意事项
   - 指针src和指针dest所指的内存区域不能重叠
   - src和dest都不一定是数组，任意的可读写的空间均可。
-  - 两个不同的数组之间拷贝，用sizeof()得到 `字节数 n，不是传入数组的长度len`.
-  - 执行完memcpy()后，会覆盖原先dest字符数组中的数据。
+  - 两个不同的数组之间拷贝，用 `sizeof()` 得到 `字节数 n，不是传入数组的长度len`.
+  - 执行完 `memcpy()` 后，会覆盖原先 `dest` 字符数组中的数据。
 
 
 ## strcpy()与memcpy()区别
@@ -54,6 +54,7 @@
 - 用途不同。
    - 通常在复制字符串时用strcpy，而需要复制其他类型数据时则一般用memcpy
 - `memcpy()`是内存到内存之间拷贝最快的，相比`strcpy()` 和 `memmove()`
+  > `memmove()` 函数也是将 src 指向的内存中的 `count` 个字符拷贝到 dest 指向的内存区域中。若目标区域(dest)和源区域(src)有重叠的话，`memmove` 能够保证源串(src)在被覆盖之前将 `重叠区域` 的字节拷贝到目标区域中，但 **复制后源内容会被更改**。但是当目标区域与源区域没有重叠则和 `memcpy()`函数功能相同。
 
 
 

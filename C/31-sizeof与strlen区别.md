@@ -1,7 +1,7 @@
 <!--
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-08-13 21:14:28
- * @LastEditTime: 2020-08-13 21:27:09
+ * @LastEditTime: 2020-08-17 16:06:01
  * @LastEditors: Please set LastEditors
  * @Description: sizeof与strlen区别
  * @FilePath: /31-sizeof与strlen区别.md

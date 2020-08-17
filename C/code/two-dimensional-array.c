@@ -1,11 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-01-16 14:47:48
- * @LastEditTime : 2020-01-16 16:20:35
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-08-17 11:07:24
+ * @LastEditors: Please set LastEditors
  * @Description: 二维数组第 i 行地址与 数组第 i 行 j 列的地址区别
  *               二维数组首行地址与首行元素的地址
- * @FilePath: \C\array.c
  */
 #include <stdio.h>
 #include <string.h>
@@ -55,14 +54,11 @@ int main()
 
     printArray(arr);
 
-   getchar();
    return 0;
 }
 
 
 // 数组指针做形参，转化为指针，但做指针的步长与传数组时步长不一样
-
-
 void printArray(P pArr)
 {
     int i, j;
@@ -74,7 +70,6 @@ void printArray(P pArr)
         }
         printf("\n");
     }
-
 }
 
 
