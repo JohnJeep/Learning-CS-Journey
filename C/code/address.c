@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-09-25 13:41:47
- * @LastEditTime: 2020-08-03 08:37:27
+ * @LastEditTime: 2020-08-17 11:10:36
  * @Description: C语言中指针取值与地址之间的联系
  * @LastEditors: Please set LastEditors
  */
@@ -38,21 +38,6 @@ int main()
     printf("%x\n", e);
     printf("%x\n", &e);
     printf("%x\n", *e);
-
-    typedef struct tag_check_info 
-    {
-        char   x;
-        short    crc16;
-        short    sig;
-        int    rsvd;
-    } check_info;
-    printf("%d\n", sizeof(check_info));
-
+    
     return 0;
 }
-
-
-
-
-
-
