@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-16 17:18:59
- * @LastEditTime: 2020-08-16 17:48:36
+ * @LastEditTime: 2020-08-18 19:32:52
  * @LastEditors: Please set LastEditors
  * @Description: 数据结构与算法刷题参考
  * @FilePath: /Reference.md
@@ -14,3 +14,6 @@
 - [heAlgorithms/C](https://github.com/TheAlgorithms/C)   Collection of various algorithms in mathematics, machine learning, computer science, physics, etc implemented in C for educational purposes.
 - [fucking-algorithm](https://github.com/labuladong/fucking-algorithm)  刷算法全靠套路，认准 labuladong 就够了！English version supported! Crack LeetCode, not only how, but also why.
 - [coding-interview-university](https://github.com/jwasham/coding-interview-university)  A complete computer science study plan to become a software engineer. Coding Interview University 一套完整的学习手册帮助自己准备 Google 的面试
+- [LeetcodeTop](https://github.com/afatcoder/LeetcodeTop)  汇总各大互联网公司容易考察的高频leetcode题🔥
+- [soulmachine/leetcode](https://github.com/soulmachine/leetcode) LeetCode题解，151道题完整版
+- [LeetCode All In One](https://github.com/grandyang/leetcode) 提供所有LeetCode题目的讲解

@@ -51,6 +51,7 @@
         "iterator": "cpp",
         "numeric": "cpp",
         "mutex": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "ratio": "cpp"
     }
 }
