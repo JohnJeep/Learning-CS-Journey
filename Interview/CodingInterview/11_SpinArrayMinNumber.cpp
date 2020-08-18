@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-07-28 21:57:34
- * @LastEditTime: 2020-07-29 22:44:03
+ * @LastEditTime: 2020-08-18 23:23:34
  * @LastEditors: Please set LastEditors
  * @Description: 旋转数组的最小数字：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
  *                                  输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。
