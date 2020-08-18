@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-08-15 19:11:13
+ * @LastEditTime: 2020-08-18 19:39:04
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -155,7 +155,8 @@
 
 ## 1.9. 常用 Bash终端快捷键
 - 参考
-  - [Bash 快捷键大全](https://linux.cn/article-5660-1.html)
+  - [Bash快捷键大全](https://linux.cn/article-5660-1.html)
+  - [Terminator The robot future of terminals](https://gnometerminator.blogspot.com/p/introduction.html)
 
 
 > Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
