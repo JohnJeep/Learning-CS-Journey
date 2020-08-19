@@ -2,7 +2,7 @@
  * @Author: John
  * @Date: 2019-07-21 21:20:59
  * @Description: 数据结构单链表的实现-----------没有通过
- * @LastEditTime: 2020-07-21 20:37:56
+ * @LastEditTime: 2020-08-19 14:05:19
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -111,7 +111,6 @@ bool isListEmpty(PtrList head)
     head = (PtrList)malloc(sizeof(PtrList));
     if (head->next == NULL) // 头指针的指针域是否为空
     {
-        /* code */
         return 0;
     }
     else

@@ -1,9 +1,11 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-03 20:52:19
- * @LastEditTime: 2020-08-03 22:03:05
+ * @LastEditTime: 2020-08-19 09:15:06
  * @LastEditors: Please set LastEditors
  * @Description: 归并排序算法实现
+ *               算法复杂度：n * log(n)   空间复杂度：n
+ * 
  * @FilePath: /MergeSort.c
  */
 #include <stdio.h>
