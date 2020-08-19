@@ -52,6 +52,7 @@
         "numeric": "cpp",
         "mutex": "cpp",
         "thread": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "unordered_set": "cpp"
     }
 }
