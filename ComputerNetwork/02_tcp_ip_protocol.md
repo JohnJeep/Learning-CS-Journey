@@ -1,11 +1,10 @@
 <!--
  * @Author: JohnJeep
- * @Date: 2019-12-27 22:32:08
- * @LastEditTime: 2020-08-19 19:27:49
+ * @Date: 2020-04-04 21:22:08
+ * @LastEditTime: 2020-08-20 23:44:37
  * @LastEditors: Please set LastEditors
  * @Description: 网络数据相关协议学习
- * @FilePath: /ComputerNetwork/02_tcp_ip_protocol.md
---> 
+-->
 
 <!-- TOC -->
 
@@ -705,9 +704,9 @@
 
 
 - IP地址转换函数
-  - `inet_pton()` 将点分十进制的IP地址转化为网络字节序
+  - `inet_pton()` 将点分十进制以字符串类型的IP地址转化为网络字节序
   - `inet_ntop()` 将网络字节序转化为点分十进制的IP地址
-  - `inet_htonl()` 将点分十进制以字符串类型的IP地址转化为网络字节序
+  - `inet_htonl()` 
   - `htons()` 将本地套接字转化为网络字节序。本地套接字一般按照 `小端法` 存储。
 
 - `struct sockaddr` 数据结构
