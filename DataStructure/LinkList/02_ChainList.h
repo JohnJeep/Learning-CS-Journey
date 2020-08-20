@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-20 22:44:25
- * @LastEditTime: 2020-07-20 23:50:06
+ * @LastEditTime: 2020-08-20 11:06:59
  * @LastEditors: Please set LastEditors
  * @Description: 线性表的链式实现头文件
- * @FilePath: /02_LinearChainList.h
  */ 
 typedef void LinkList;
 
