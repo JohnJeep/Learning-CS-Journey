@@ -136,19 +136,22 @@
 ## 1.8. 查看使用的端口
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
 - 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
-- ` netstat` 检查端口
+- `netstat` 检查端口
   - ` -t `  显示 TCP 端口。
   - ` -u `  显示 UDP 端口。
   - ` -n `  显示数字地址而不是主机名。
   - ` -l `  仅显示侦听端口。
-  - ` -p `  显示进程的 PID 和名称
-    - ` netstat -tunlp ` 列出正在侦听的所有 TCP 或   UDP 端口
+  - ` -p `  显示进程的 `PID和名称`
+    - ` netstat -tunlp ` 列出正在侦听的所有TCP或UDP端口
     - Proto - 套接字使用的协议。
     - Local Address - 进程侦听的 IP 地址和端口号。
     - PID/Program name  - PID 和进程名称
-- ` ss ` 检查端口
-  - `  ss -tunlp`
-- ` lsof ` 检查端口
+    > 列出指定端口的所有进程：`netstat -apn | grep 端口号`
+    
+- `ss` 检查端口
+  - `ss -tunlp`
+
+- `lsof` 检查端口
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
 
 
