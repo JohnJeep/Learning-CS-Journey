@@ -685,6 +685,9 @@
 
 
 ## 0.14. socket编程
+- 参考
+  - [深入理解基本套接字编程](https://www.cnblogs.com/luoxn28/p/5819798.html)
+
 - NAT映射
   - 作用对象
     - 公网---私网
@@ -693,26 +696,58 @@
 - 打洞机制
   - 作用对象
     - 私网---私网
-  
+
+- 大端法（Big-Endians）：高地址存低字节数据，低地址存储高字节数据
+- 小端法（Small-Endins）：高地址存高字节数据，低地址存储低字节数据
+
+
+- `inet_pton`和`inet_ntop`函数
+  - `inet_pton()` 将点分十进制字符串类型的IP地址转化为网络二进制字节序
+  - `inet_ntop()` 将网络二进制字节序转化为点分十进制字符串类型的IP地址
+  > 注意缩写：`p` presentation：表达式； `n` numeric：数值
+
+
+- `htons、ntohs、htonl和ntohl`函数
+  - 主机字节序（本地）与网络字节序之间相互转换的几组API函数，本地套接字一般按照 `小端法` 存储，网络字节序一般按照 `大端法` 存储。 
+  - 注意缩写：`h`：host，`n`：net，`l`：long，`s`：short
+    ```
+    #include <netinet/in.h>
+    uint16_t htons(uint16_t host16bitvalue);
+    uint32_t htonl(uint32_t host32bitvalue);
+    uint16_t ntohs(uint16_t net16bitvalue);
+    uint32_t ntohl(uint32_t net32bitvalue);
+    ```
+
+- 套接字地址结构
+  ```
+  struct in_addr {
+      in_addr_t  s_addr;  // 32-bit IPv4 address
+                          // network byte ordered
+  }
+  struct sockaddr_in {
+      sa_family_t  sin_family;          // AF_INET
+      in_port_t    sin_port;            // 16-bit TCP or UDP port nummber, network byte ordered
+      struct in_addr    sin_addr;       // 32-bit IPv4 address, network byte ordered
+      char     sin_zero[8];             // unused
+  }
+
+  struct sockaddr {
+    sa_family_t  sa_family;             // address family: AF_XXX value
+    char        sa_data[14];            // protocol-specific address
+  }
+  ```
+
+  - `struct sockaddr_in` 
+    - 是网络套接字地址结构，大小为 `16字节`，定义在<netinet/in>头文件中，可用 `man 7 ip` 命令查看位置。
+    - 一般我们在程序中是使用该结构体时，作为参数传递给套接字函数时需要强转为 `sockaddr` 类型，注意该结构体中 `port`和 `addr` 成员是网络序的(大端结构)。即定义时需要定义为 `struct sockaddr_in `;在调用时，需要强制转化为 `(struct sockaddr *)` 结构体类型
+  - `struct sockaddr`
+    - 是套接字地址结构，当作为参数传递给套接字函数时，套接字地址结构总是以指针方式来使用，比如bind/accept/connect函数等。
+
+
 - 套接字（socket）
   - 网络中成对出现
   - 一个文件描述符指向两个内核缓冲区（一个读、一个写）
   - 包含一个IP地址和一个端口号，指定IP和端口号
-
-
-- 网络数据流采用的是大端法（高地址存低字节数据，低地址存字节数据）存储数据。
-
-
-- IP地址转换函数
-  - `inet_pton()` 将点分十进制以字符串类型的IP地址转化为网络字节序
-  - `inet_ntop()` 将网络字节序转化为点分十进制的IP地址
-  - `inet_htonl()` 
-  - `htons()` 将本地套接字转化为网络字节序。本地套接字一般按照 `小端法` 存储。
-
-- `struct sockaddr` 数据结构
-  - 用于描述IPv4的地址。
-  - `struct sockaddr_in` 可用 `man 7 ip` 命令查看位置。 
-  - 定义时需要定义为 `struct sockaddr_in `;在调用时，需要强制转化为 `(struct sockaddr *)` 结构体类型，因为在现代的网络中 `struct sockaddr` 的定义被舍弃了。
 
 
 - 网络套接字函数

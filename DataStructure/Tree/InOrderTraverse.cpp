@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-01 22:08:51
- * @LastEditTime: 2020-08-08 23:55:38
+ * @LastEditTime: 2020-08-21 15:29:20
  * @LastEditors: Please set LastEditors
  * @Description: 典型的二叉树中序遍历非递归实现
  * @FilePath: /InOrderTraverse.cpp
@@ -26,9 +26,9 @@ typedef struct tag_binNode{
  */
 BinTreeNode* traverseLeft(BinTreeNode* tree, stack<BinTreeNode*>& st)
 {
-    if (tree != NULL)
+    if (tree != nullptr)
     {
-        while (tree->left != NULL)    
+        while (tree->left != nullptr)    
         {
             st.push(tree);               // 左子树可能是子树的集合
             tree = tree->left;
@@ -45,30 +45,30 @@ BinTreeNode* traverseLeft(BinTreeNode* tree, stack<BinTreeNode*>& st)
  */
 void inOrderTraverse(BinTreeNode* tree)
 {
-    BinTreeNode* p = NULL;
+    BinTreeNode* p = nullptr;
     stack<BinTreeNode*> s;
 
-    if (tree == NULL)
+    if (tree == nullptr)  
     {
-        printf("Binary is NULL.\n");
+        printf("Binary is nullptr.\n");
     }
     
     p = traverseLeft(tree, s);
     while (p)
     {
-        printf("%d\n", p->data);   // 1、得到中序遍历的根结点
-        if (p->right != NULL)      // 2、若有右子树集，重复一直向左遍历的步骤，得到右子树集合中序遍历的起点
+        printf("%d\n", p->data);      // 1、得到中序遍历的根结点
+        if (p->right != nullptr)      // 2、若有右子树集，重复一直向左遍历的步骤，得到右子树集合中序遍历的起点
         {
             p = traverseLeft(p->right, s);
         }
-        else if (!s.empty())       // 3、若没有右子树集，根据栈顶指针进行相应的出栈操作
+        else if (!s.empty())          // 3、若没有右子树集，根据栈顶指针进行相应的出栈操作
         {
             p = s.top();
             s.pop();
         }
         else
         {
-            p = NULL;              // 4、若没有右子树集且栈为空时，整个中序遍历结束
+            p = nullptr;              // 4、若没有右子树集且栈为空时，整个中序遍历结束
         }
     }
 } 

@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-20 14:45:32
- * @LastEditTime: 2020-08-20 16:15:00
+ * @LastEditTime: 2020-08-21 15:26:03
  * @LastEditors: Please set LastEditors
  * @Description: 题目：二叉搜索树的第 k 个结点
  *               描述：给定一棵二叉搜索树，请找出其中的第k小的结点。例如，(5，3，7，2，4，6，8)中，按结点数值大小顺序第三小结点的值为4。
@@ -23,7 +23,7 @@ struct TreeNode
             }
 };
 
-// 递归实现
+// 递归实现，k是一个全局的变量，存储的是当前需要搜索的结点
 TreeNode* InorderTraverse(TreeNode* pRoot, unsigned int& k)   // 注意  unsigned int& k 中的&符号
 {
     TreeNode* target = nullptr;
