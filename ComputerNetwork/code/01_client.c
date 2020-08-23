@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-20 23:10:57
- * @LastEditTime: 2020-08-21 08:46:34
+ * @LastEditTime: 2020-08-22 13:02:57
  * @LastEditors: Please set LastEditors
  * @Description: 客户端程序编写
  * @FilePath: /network_programming/01_client.c
@@ -16,8 +16,8 @@
 #include <stdio.h>
 
 #define SERVER_PORT          9527
-#define SERVER_IP            "127.0.0.1"           
-// #define SERVER_IP            "192.168.24.1"           
+// #define SERVER_IP            "127.0.0.1"           
+#define SERVER_IP            "192.168.1.71"          
 
 int main(int argc, char *argv[])
 {
@@ -44,8 +44,8 @@ int main(int argc, char *argv[])
 
 	while(1)
 	{
-		fgets(buf, sizeof(buf), stdin);        // 输入：hello word ---->读取：hello word\n\0
-		write(cfd, buf, strlen(buf));          // 不能使用sizeof(buf)，strlen()以 \0 为结束标志
+		fgets(buf, sizeof(buf), stdin);
+		write(cfd, buf, strlen(buf));             // 不能使用sizeof(buf)
 		int ret = read(cfd, buf, sizeof(buf));
 		write(STDOUT_FILENO, buf, ret);
 	}

@@ -1,12 +1,12 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-19 21:03:19
- * @LastEditTime: 2020-08-20 23:25:47
+ * @LastEditTime: 2020-08-23 12:24:13
  * @LastEditors: Please set LastEditors
  * @Description: socket编程服务器端编写
  * @FilePath: /01_server.c
  */
-#include <memory.h>
+#include <string.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -16,8 +16,9 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-// #define SERVER_IP       "192.168.24.1"
-#define SERVER_PORT     9527    // 端口号小于65535
+#define SERVER_IP       "192.168.1.71"  // 绑定指定的网卡IP地址  
+#define SERVER_PORT     9527            // 端口号小于65535
+const char* IP = "192.168.1.71";
 
 int main(int argc, char *agv[])
 {
@@ -35,12 +36,21 @@ int main(int argc, char *agv[])
         exit(1);
     }
 
+    // 新增一个端口复用，当client处于TIME_WAIT状态时，server也能重新启动，与客户端进行通信
+    int opt = 1;
+    if(setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1)
+    {
+        perror("setsockopt error.\n");
+        exit(1);
+    }
+
     // INADDR_ANY: 自动获取网卡对应的有效的IP地址
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;   
     server_addr.sin_port = htons(SERVER_PORT);          // 将本地小端序的套接字转化为网络字节序
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);    // 将点分十进制以字符串类型的IP地址转化为网络字节序
-   	// inet_pton(AF_INET, SERVER_IP, &server_addr.sin_port);
+    // server_addr.sin_addr.s_addr = inet_addr(IP);    
+   	// inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr.s_addr);
 	if(bind(sfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
     {
         perror("bind error.\n");
@@ -49,7 +59,7 @@ int main(int argc, char *agv[])
     
     if(listen(sfd, 128) == -1)   // 128为系统默认的最大值
     {
-        perror("bind error.\n"); 
+        perror("listen error.\n"); 
         exit(1);
     }
 
@@ -59,7 +69,7 @@ int main(int argc, char *agv[])
     cfd = accept(sfd, (struct sockaddr * restrict)&client_addr, &client_add_len);
     if (cfd == -1)
     {
-        perror("bind error.\n"); 
+        perror("accept error.\n"); 
         exit(1);
     }
 
