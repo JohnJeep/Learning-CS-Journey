@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-16 17:18:59
- * @LastEditTime: 2020-08-18 19:32:52
+ * @LastEditTime: 2020-08-24 23:25:18
  * @LastEditors: Please set LastEditors
  * @Description: 数据结构与算法刷题参考
  * @FilePath: /Reference.md
@@ -17,3 +17,4 @@
 - [LeetcodeTop](https://github.com/afatcoder/LeetcodeTop)  汇总各大互联网公司容易考察的高频leetcode题🔥
 - [soulmachine/leetcode](https://github.com/soulmachine/leetcode) LeetCode题解，151道题完整版
 - [LeetCode All In One](https://github.com/grandyang/leetcode) 提供所有LeetCode题目的讲解
+- [algorithm-pattern](https://github.com/greyireland/algorithm-pattern) 算法模板，最科学的刷题方式，最快速的刷题路径。
