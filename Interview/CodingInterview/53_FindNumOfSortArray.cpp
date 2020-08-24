@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-08-20 15:25:15
- * @LastEditTime: 2020-08-21 16:15:14
+ * @LastEditTime: 2020-08-24 09:15:18
  * @LastEditors: Please set LastEditors
  * @Description: 题目：在排序数组中查找数字
  *               描述：统计一个数字在排序数组中出现的次数。例如，输入数序树组{1, 2, 3, 3, 3, 3, 4, 5}和数字3，
@@ -22,7 +22,7 @@
 
 using namespace std;
 
-int getBeforeK()
+int getFirstK()
 {
     
 }
