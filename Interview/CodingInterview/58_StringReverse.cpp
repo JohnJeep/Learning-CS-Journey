@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-24 10:43:14
- * @LastEditTime: 2020-08-24 16:17:44
+ * @LastEditTime: 2020-08-25 08:26:29
  * @LastEditors: Please set LastEditors
  * @Description: 题目：翻转字符串
  *               描述：翻转单词顺序
@@ -90,12 +90,12 @@ string ReverseSentenceString(string str)
 {
     if (str.empty())
     {
-        return nullptr;
+        return {};
     }
-    
+    reverseString(str, 0, str.size() - 1);    // 翻转这个句子
+
     int begin = 0;
     int end = 0;
-
     // 翻转句子中的单词
     while (end <= str.length())
     {
@@ -107,8 +107,6 @@ string ReverseSentenceString(string str)
         end++;    
     }
 
-    // 翻转这个句子
-    reverseString(str, 0, str.size() - 1);    
     return str;   
 }
 
