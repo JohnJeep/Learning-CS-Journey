@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-05 08:30:53
- * @LastEditTime: 2020-06-05 10:13:40
+ * @LastEditTime: 2020-08-28 15:22:53
  * @LastEditors: Please set LastEditors
  * @Description: 友元关键字例子：友元函数和友元类
  */ 
@@ -22,8 +22,7 @@ public:
     int getB();
 };
 
-Pen::Pen(int s = 0, int t = 0)
-:m_a(s), m_b(t)
+Pen::Pen(int s = 0, int t = 0) :m_a(s), m_b(t)
 {
     this->m_a = s;
     this->m_b = t;
@@ -35,7 +34,7 @@ Pen::~Pen()
 }
 
 /**
- * @description: 外部函数去访问类内部的成员变量
+ * @description: 友元函数：外部函数去访问类内部的成员变量
  * @param:       类的指针 
  * @return:      null
  */
@@ -58,7 +57,7 @@ int Pen::getB()  // 成员函数
 class Book
 {
 private:
-    Pen painting;
+    Pen painting;         // 友元类 
 public:
     void getB(int m);
     void show();
@@ -99,6 +98,6 @@ int main(int argc, char *argv[])
     Book recie;
     recie.getB(200);
     recie.show();
-    system("pause");
+    
     return 0;
 }
