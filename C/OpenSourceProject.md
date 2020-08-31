@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2020-06-03 15:57:57
- * @LastEditors: your name
+ * @LastEditTime: 2020-08-31 22:24:20
+ * @LastEditors: Please set LastEditors
  * @Description: GitHub开源项目
 --> 
 
@@ -32,12 +32,16 @@
 
 
 ## 1.2. C++项目
-1.  [JSON for Modern C++](https://github.com/nlohmann/json)
-2.  [C++ 风格指南 - 内容目录](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
-3.  [现代 C++ 教程](https://github.com/changkun/modern-cpp-tutorial)
-4.  [ThreadPool](https://github.com/progschj/ThreadPool)：一个简单的 C++11 线程池实现
-5.  [indicators](https://github.com/p-ranav/indicators)：一个使用 C++ 编写的进度条库，你可以用它在命令行中实现美观的进度条。
-6.  [modern-cpp-features](https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md)：该项目介绍了现代 C++（C++11 以及之后的版本）语言和库的新特性。
+1. [JSON for Modern C++](https://github.com/nlohmann/json)
+2. [现代 C++ 教程](https://github.com/changkun/modern-cpp-tutorial)
+3. [C++ 风格指南 - 内容目录](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
+4. [modern-cpp-features](https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md)：该项目介绍了现代 C++（C++11 以及之后的版本）语言和库的新特性。
+5. [ThreadPool](https://github.com/progschj/ThreadPool)：一个简单的 C++11 线程池实现
+6. [indicators](https://github.com/p-ranav/indicators)：一个使用 C++ 编写的进度条库，你可以用它在命令行中实现美观的进度条。
+7. [Flameshot](https://github.com/lupoDharkael/flameshot) 开源的截图工具，使用C++和Qt工具开发的。
+8. [notepanda](https://github.com/ChungZH/notepanda)  简单的Notepanda编辑器的实现，采用C++和Qt工具开发。
+
+
 
 
 ## 1.3. Linux项目
