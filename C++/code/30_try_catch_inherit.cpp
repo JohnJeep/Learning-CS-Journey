@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-14 09:21:50
- * @LastEditTime: 2020-07-14 15:09:35
+ * @LastEditTime: 2020-09-01 10:46:57
  * @LastEditors: Please set LastEditors
  * @Description: 继承中异常的层次结构
- * @FilePath: /C++/code/30_try_catch_inherit.cpp
+ * 
  */ 
 #include <iostream>
 using namespace std;

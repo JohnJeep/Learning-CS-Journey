@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-13 15:01:32
- * @LastEditTime: 2020-07-13 15:47:17
+ * @LastEditTime: 2020-09-01 10:47:26
  * @LastEditors: Please set LastEditors
  * @Description: C++异常机制
- * @FilePath: /C++/code/29_try_catch.cpp
+ * 
  */ 
 #include <iostream>
 using namespace std;
@@ -86,10 +86,70 @@ void test02()
     }
 }
 
+int add(int x, int y)
+{
+    if (y == 0)
+    {
+        throw "y equal 0";
+        // throw y;
+    }
+
+    return x / y;
+}
+
+// 处理普通的异常
+void test03()
+{
+    try
+    {
+        int ret = add(4, 2);
+        cout << "ret = " << ret << endl;
+        int re = add(4, 0);
+        cout << "re = " << re << endl;
+    }
+    catch (int e)   // 捕获的类型由throw后面表达式的内容决定
+    {
+        cout << e << endl;
+    }
+    catch(const char* e)
+    {
+        cout << e << endl;
+    }
+    catch (...)
+    {
+        cout << "execute ..." << endl;
+    }
+}
+
+// 在继承中使用异常
+struct MyStruct : public exception 
+{
+    const char* what() const throw()
+    {
+        return "C++ exception";
+    }
+};
+
+void test04()
+{
+    try
+    {
+        throw MyStruct();
+    }
+    catch(MyStruct& e)
+    {
+        cout << "catch MyStruct" << endl;
+        cout << e.what() << endl;  // what() 是异常类提供的一个公共方法，它已被所有子异常类重载，这是返回异常产生的原因。
+    }
+    
+}
+
 
 int main(int argc, char *argv[])
 {
     test01();
     test02();
+    test03();
+    test04();
     return 0;
 }

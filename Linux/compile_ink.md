@@ -32,10 +32,10 @@
 ### 0.1.2. gcc 常用参数
 - `-g(gdb)` 生成调试信息
 - `-Wall`   编译时生成调试信息
-- `-o(output 小写)` 生成可执行的二进制文件(类似于Windows中的.exe文件)
 - `-E(prEprocessed)`      源文件文件 `.c` 生成 预处理文件 `.i`
 - `-S(aSsembler)`      预处理文件 `.i` 生成汇编文件 `.s`
 - `-c(compile小写)` 汇编文件 `.s` 生成可执行文件 `.o` 
+- `-o(output 小写)` 生成可执行的二进制文件(类似于Windows中的.exe文件)
 - `-O(Optimizations 大写)` 优化代码
 - `-I(dIr)`      指定include头文件
   > `gcc test.c -I ./include -o test.out`  使用 `-I` 链接指定目录下（`./include`）的头文件进行编译生成可执行文件。
