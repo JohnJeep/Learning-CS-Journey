@@ -1,9 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-04 09:55:07
- * @LastEditTime: 2020-06-08 16:06:49
+ * @LastEditTime: 2020-09-01 15:09:44
  * @LastEditors: Please set LastEditors
  * @Description: static：静态成员变量
+ * 
  */ 
 #include <iostream>
 using namespace std;
@@ -35,7 +36,7 @@ void Stu::getNum()
 
 void Stu::setNum(int t_num)
 {
-    num = t_num;
+    num = t_num;     // 初始值列中不能初始化静态成员数据
     cout << "setNum: " << num << endl;
 }
 
