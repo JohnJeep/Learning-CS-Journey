@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-22 16:12:54
- * @LastEditTime: 2020-08-23 02:52:58
+ * @LastEditTime: 2020-09-01 21:29:35
  * @LastEditors: Please set LastEditors
  * @Description: 多线程并发编程实现
  * @FilePath: /network_programming/03_multithread_server.c
@@ -22,7 +22,7 @@
 #include "wrap.h"
 
 #define MAX             8192
-#define SERVER_PORT     8000
+#define SERVER_PORT     9527
 
 struct s_info
 {

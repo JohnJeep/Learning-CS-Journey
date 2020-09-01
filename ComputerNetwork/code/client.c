@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-20 23:10:57
- * @LastEditTime: 2020-08-22 13:02:57
+ * @LastEditTime: 2020-09-01 23:53:29
  * @LastEditors: Please set LastEditors
  * @Description: 客户端程序编写
  * @FilePath: /network_programming/01_client.c
@@ -16,8 +16,8 @@
 #include <stdio.h>
 
 #define SERVER_PORT          9527
-// #define SERVER_IP            "127.0.0.1"           
-#define SERVER_IP            "192.168.1.71"          
+#define SERVER_IP            "127.0.0.1"           
+// #define SERVER_IP            "192.168.1.71"          
 
 int main(int argc, char *argv[])
 {

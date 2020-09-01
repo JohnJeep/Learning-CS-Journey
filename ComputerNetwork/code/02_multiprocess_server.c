@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-22 16:12:07
- * @LastEditTime: 2020-08-23 01:27:24
+ * @LastEditTime: 2020-09-01 21:29:09
  * @LastEditors: Please set LastEditors
  * @Description: 多进程并发服务器端编写
  * @FilePath: /network_programming/02_multiprocess_server.c
@@ -19,7 +19,7 @@
 #include <errno.h>
 #include "wrap.h"
 
-#define SERVER_PORT        5600
+#define SERVER_PORT        9527
 
 void sig_handler(int signum)
 {
