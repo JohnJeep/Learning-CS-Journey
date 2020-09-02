@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-19 19:37:29
- * @LastEditTime: 2020-08-19 19:38:45
+ * @LastEditTime: 2020-09-02 14:24:11
  * @LastEditors: Please set LastEditors
  * @Description: Linux kernel学习
  * @FilePath: /linux_kernel.md
@@ -11,3 +11,7 @@
 - 先框架再细节
 - 低版本理解原理，高版本理解实现
 - 动手总结，形成自己的智慧
+
+
+## 参考
+- [Linux内核中双向链表的经典实现](https://www.cnblogs.com/skywang12345/p/3562146.html#a1)
