@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-09-03 20:47:28
+ * @LastEditTime: 2020-09-05 13:10:21
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -178,14 +178,15 @@
     - Proto - 套接字使用的协议。
     - Local Address - 进程侦听的 IP 地址和端口号。
     - PID/Program name  - PID 和进程名称
-    > 列出指定端口的所有进程：`netstat -apn | grep 端口号`
-    
+  
+- 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
+  - `netstat -apn | grep 端口号`
+
 - `ss` 检查端口
   - `ss -tunlp`
 
 - `lsof` 检查端口
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
-
 
 
 ## 1.11. 常用 Bash终端快捷键
