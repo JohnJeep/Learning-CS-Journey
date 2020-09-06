@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-07 11:01:20
- * @LastEditTime: 2020-08-08 21:56:54
+ * @LastEditTime: 2020-09-06 21:17:23
  * @LastEditors: Please set LastEditors
  * @Description 玄幻修真类美词
 -->
@@ -135,6 +135,8 @@
 - 星绝空
 - 逆玄
 - 劫渊
+- 清茗
+- 洛劫
 
 
 ## 0.3. 人物称号
