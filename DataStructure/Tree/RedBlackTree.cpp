@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-09-04 08:50:31
- * @LastEditTime: 2020-09-07 16:18:09
+ * @LastEditTime: 2020-09-07 22:37:12
  * @LastEditors: Please set LastEditors
  * @Description: 红黑树的理解
  * 
@@ -11,7 +11,6 @@
 #include <cassert>
 
 using namespace std;
-
 
 enum rb_color
 {
@@ -26,13 +25,6 @@ struct Node
     Node* right;
     enum rb_color color;
     int key;
-};
-
-struct rb_node
-{
-    struct rb_node *rb_link[2];  // Subtree
-    void *rb_data;               // Pointer to data
-    unsigned char rb_color;
 };
 
 Node* getParent(Node* p)
@@ -356,44 +348,50 @@ void deleteCase4(Node* p)
 
 void deleteCase5(Node* p)
 {
-    Node* s = getSibling(p);
-    // This if statement is trivial, due to case 2 (even though case 2 changed
-    // the sibling to a sibling's child, the sibling's child can't be red, since
-    // no red parent can have a red child).
-    if (s->color == BLACK) {
-    // The following statements just force the red to be on the left of the
-    // left of the parent, or right of the right, so case six will rotate
-    // correctly.
-    if ((n == n->parent->left) && (s->right->color == BLACK) &&
-    (s->left->color == RED)) {
-    // This last test is trivial too due to cases 2-4.
-    s->color = RED;
-    s->left->color = BLACK;
-    rotateRight(s);
-    } else if ((n == n->parent->right) && (s->left->color == BLACK) &&
-    (s->right->color == RED)) {
-    // This last test is trivial too due to cases 2-4.
-    s->color = RED;
-    s->right->color = BLACK;
-    RotateLeft(s);
+    // 当前结点颜色是黑色，兄弟结点是黑色，兄弟的左子结点是红色，右子结点是黑色
+    Node* sNode = getSibling(p);
+
+    if (sNode->color == RB_BLACK) 
+    {
+        if ((p == p->parent->left) && (sNode->right->color == RB_BLACK) &&
+            (sNode->left->color == RB_RED)) 
+        {
+            sNode->color = RB_RED;  // 变色处理
+            sNode->left->color = RB_BLACK;
+            rotateRight(sNode);
+        } 
+        else if ((p == p->parent->right) && (sNode->left->color == RB_BLACK) &&
+                 (sNode->right->color == RB_RED)) 
+        {
+            // 变色处理
+            sNode->color = RB_RED;
+            sNode->right->color = RB_BLACK;
+            rotateLeft(sNode);
+        }
     }
-    }
-    DeleteCase6(n);    
+    DeleteCase6(p);    
 }
 
-void DeleteCase6(Node* n) 
+void DeleteCase6(Node* p) 
 {
-    Node* s = GetSibling(n);
-    s->color = n->parent->color;
-    n->parent->color = BLACK;
-    if (n == n->parent->left) {
-    s->right->color = BLACK;
-    RotateLeft(n->parent);
-    } else {
-    s->left->color = BLACK;
-    RotateRight(n->parent);
+    // 当前结点颜色是黑色且为父结点的左子结点，兄弟结点是黑色，
+    // 兄弟结点的右子结点是红色，兄弟结点的左子结点颜色是任意色
+    Node* sNode = getSibling(p);
+
+    sNode->color = p->parent->color;
+    p->parent->color = RB_BLACK;
+    if (p == p->parent->left) 
+    {
+        sNode->right->color = RB_BLACK; // 变色
+        rotateLeft(p->parent);   // 旋转
+    } 
+    else
+    {
+        sNode->left->color = RB_BLACK;
+        rotateRight(p->parent);
+    }
 }
-}
+
 int main(int argc, char *argv[])
 {
 
