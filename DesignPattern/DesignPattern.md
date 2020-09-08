@@ -1,11 +1,47 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2020-08-07 16:00:28
+ * @LastEditTime: 2020-09-08 16:17:19
  * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
  * @FilePath: /DesignPattern.md
 -->
+
+## 设计模式概括
+三大类型设计模式，共22种
+- 创建型模式：处理对象的创建过程，共5种。
+  - 工厂方法模式（factory method pattern）
+  - 抽象工厂模式（abstract factory pattern）
+  - 建造者模式（builder pattern）
+  - 单例模式（singleton pattern）
+  - 原型模式（prototype pattern） 
+- 结构型模式：处理组合类或对象以获得更大的结构，共7种。
+  - 代理模式（proxy pattern）  
+  - 装饰者模式（decorator pattern）
+  - 适配器模式（adapter pattern）
+  - 桥接模式（bridge pattern）
+  - 组合模式（composite pattern）
+  - 外观模式（facade pattern）
+  - 享元模式（flyweight pattern）
+- 行为型模式：对类或对象怎样交互和怎样分配职责进行描述，共11种。
+  - 模板模式（template pattern） 
+  - 命令模式（command pattern）
+  - 责任链模式（chain of responsibility pattern）
+  - 策略模式（strategy pattern）
+  - 中介者模式（mediator pattern）
+  - 观察者模式（observer pattern）
+  - 备忘录模式（memento pattern）
+  - 访问者模式（visitor pattern）
+  - 状态模式（state pattern）
+  - 解释模式（interpreter pattern）
+  - 迭代模式（iterator pattern）
+
+- 使用设计模式的最终目的：高内聚，低耦合。
+- 基本原则
+  - 开放封闭原则（OCP）：类的改动是通过增加代码来进行的，而不是修改源代码。
+  - 依赖倒置原则（DIP: dependence inversion principle）：依赖于抽象接口，不要依赖于具体的类，即针对接口编程。
+  - 迪米特原则（LOD：low of demeter）：一个对象应该对其它的对象尽可能少的了解，从而降低各个对象之间的耦合，提高系统的可维护性。
+    > 例如：在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现，使其它的模块不需要了解另一个模块的内部实现，这样当一个模块发生改变时，其它的模块不会受到影响。
 
 
 ## 单例模式
@@ -39,7 +75,7 @@
 - 多线程下实现单例模式
   - 多线程下，懒汉式的实现时不安全的，饿汉式方法实现是安全的。
   - 如何解决线程不安全的问题？
-    - 使用 `synchronized方法`
+    - Java中使用 `synchronized方法`
       ```
       // 线程安全的懒汉式单例
       public class Singleton2 {
