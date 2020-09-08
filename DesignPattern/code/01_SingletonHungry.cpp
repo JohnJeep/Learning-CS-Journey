@@ -1,10 +1,12 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2020-08-06 23:07:52
+ * @LastEditTime: 2020-09-08 16:01:04
  * @LastEditors: Please set LastEditors
- * @Description:饿汉式单利模式，即在类的全局区中一开始开辟空间为其创建对象
- * @FilePath: /02_Singleton.cpp
+ * @Description: 饿汉式单利模式，在类的全局区中一开始开辟空间为其创建对象
+ *               在多个线程中，不存在资源竞争的问题。
+ *             
+ * 
  */
 #include <iostream>
 #include <stdlib.h>

@@ -1,16 +1,16 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2020-08-07 15:59:39
+ * @LastEditTime: 2020-09-08 16:09:43
  * @LastEditors: Please set LastEditors
- * @Description: 单例模式：此单利模式为懒汉式模式，即在创建对象时，才分配内存
- * @FilePath: /01_Singleton.cpp
+ * @Description: 单例模式：此单利模式为懒汉式模式，即在new一个对象时，才分配内存
+ *               在多个线程中，存在资源竞争的问题。
+ *
  */
 #include <iostream>
 #include <stdlib.h>
 #include <pthread.h>
 #include <mutex>
-
 
 using namespace std;
 
@@ -24,6 +24,7 @@ private:
 public:
     ~Singleton();
     static Singleton* getInstance();
+    static Singleton* getInstance1();
     static Singleton* freeInstance();
 
 };
@@ -57,13 +58,13 @@ Singleton* Singleton::getInstance()
 }
 
 // 添加同步锁后保证了多个线程同时访问时安全的
-Singleton* Singleton::getInstance()
+Singleton* Singleton::getInstance1()
 {
     if (spl == nullptr)    // 双重检测机制
     {
         unique_lock<std::mutex> m_lock;  // 加同步锁，锁住整个类，防止new Singleton被执行多次
         {
-            // 进入Synchronized 临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
+            // 进入临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
             if (spl == nullptr)
             {
                 spl = new Singleton;     
@@ -72,9 +73,6 @@ Singleton* Singleton::getInstance()
     }
     return spl;
 }
-
-
-
 
 Singleton* Singleton::freeInstance()
 {
