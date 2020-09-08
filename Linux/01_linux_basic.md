@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-09-05 13:10:21
+ * @LastEditTime: 2020-09-08 22:22:02
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -23,8 +23,12 @@
   - [1.12. man命令](#112-man命令)
   - [1.13. strace](#113-strace)
   - [1.14. wget命令](#114-wget命令)
-  - [1.15. apt命令](#115-apt命令)
-  - [1.16. dpkg 命令](#116-dpkg-命令)
+  - [1.15. 包管理](#115-包管理)
+    - [1.15.1. apt命令](#1151-apt命令)
+    - [1.15.2. dpkg 命令](#1152-dpkg-命令)
+  - [1.16. 防火墙](#116-防火墙)
+    - [1.16.1. ubuntu下默认的防火墙](#1161-ubuntu下默认的防火墙)
+    - [1.16.2. CentOS下默认的防火墙](#1162-centos下默认的防火墙)
 
 <!-- /TOC -->
 
@@ -281,8 +285,12 @@ strace  - trace system calls and signals
   - 下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
 
+## 1.15. 包管理
+Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
 
-## 1.15. apt命令
+CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
+
+### 1.15.1. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -300,7 +308,6 @@ strace  - trace system calls and signals
 - apt-cache rdepends # ------(package 了解某个具体的依赖,当是查看该包被哪些包依赖吧...)
 - apt-get build-dep # ------(package 安装相关的编译环境)
 - apt-get source #------(package 下载该包的源代码)
-
 - apt-get check #-------检查是否有损坏的依赖
 - dpkg -S filename -----查找filename属于哪个软件包
 - apt-file search filename -----查找filename属于哪个软件包
@@ -316,8 +323,7 @@ strace  - trace system calls and signals
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-
-## 1.16. dpkg 命令
+### 1.15.2. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -330,3 +336,43 @@ strace  - trace system calls and signals
 - dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
 - dpkg -reconfigure 重新配置
 
+
+## 1.16. 防火墙
+### 1.16.1. ubuntu下默认的防火墙
+- `sudo ufw status` 查看防火墙当前状态
+- `sudo ufw enable` 开启防火墙
+- `sudo ufw disable` 关闭防火墙
+- `sudo ufw version` 查看防火墙版本
+- `sudo ufw default allow` 默认允许外部访问本机
+- `sudo ufw default deny` 默认拒绝外部访问主机
+- `sudo ufw allow 53` 允许外部访问53端口
+- `sudo ufw deny 53` 拒绝外部访问53端口
+- `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
+
+
+### 1.16.2. CentOS下默认的防火墙
+> CentOS下默认的防火墙为 `firewalld` 
+```
+参数解释
+1、firwall-cmd：是Linux提供的操作firewall的一个工具；
+2、–permanent：表示设置为持久；
+3、–add-port：标识添加的端口
+```
+- 启动： systemctl start firewalld
+- 关闭： systemctl stop firewalld
+- 查看系统防火墙状态： systemctl status firewalld
+- 开机禁用 ： systemctl disable firewalld
+- 开机启用 ： systemctl enable firewalld
+- 查看firewall状态：firewall-cmd --state
+- 重启防火墙：firewall-cmd --reload
+- 查看版本： firewall-cmd --version
+- 查看帮助： firewall-cmd --help
+- 查看区域信息: firewall-cmd --get-active-zones
+- 查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0
+- 拒绝所有包：firewall-cmd --panic-on
+- 取消拒绝状态： firewall-cmd --panic-off
+- 查看是否拒绝： firewall-cmd --query-panic
+- 查看开放的端口：firewall-cmd --list-ports
+- 查询 `8080` 端口是否开放  firewall-cmd --query-port=8080/tcp
+- 开放 `8080` 端口 firewall-cmd --permanent --add-port=8080/tcp
+- 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
