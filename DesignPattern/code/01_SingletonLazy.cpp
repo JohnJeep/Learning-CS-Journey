@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2020-09-08 16:09:43
+ * @LastEditTime: 2020-09-09 14:56:27
  * @LastEditors: Please set LastEditors
  * @Description: 单例模式：此单利模式为懒汉式模式，即在new一个对象时，才分配内存
  *               在多个线程中，存在资源竞争的问题。
@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <mutex>
+#include <unistd.h>
 
 using namespace std;
 
@@ -18,17 +19,18 @@ class Singleton
 {
 private:
     static Singleton* spl;
-    static mutex m_lock;
-
     Singleton();
-public:
     ~Singleton();
-    static Singleton* getInstance();
-    static Singleton* getInstance1();
+public:
+    static int count;
+    static Singleton* getInstance();        // 第一种方法
+    static Singleton* getInstanceLock();    // 第二种方法
+    static Singleton* getInstanceStatic();  // 第三种方法
     static Singleton* freeInstance();
-
+    void show() {cout << "实例地址：" << this << endl;};
 };
 
+int Singleton::count = 0;
 Singleton* Singleton::spl = nullptr; // 静态全局变量初始化
 
 Singleton::Singleton()
@@ -39,39 +41,6 @@ Singleton::Singleton()
 Singleton::~Singleton()
 {
     cout << "执行析构函数" << endl;
-}
-
-
-/**
- * @description: 懒汉式单例模式
- * @param {type} 
- * @return {type} 
- * @notice: 懒汉式或饿汉式单例模式在多个线程操作时，是不安全的。
- */
-Singleton* Singleton::getInstance()
-{
-    if (spl == nullptr)
-    {
-        spl = new Singleton;     // 只有在创建对象时，才分配内存
-    }
-    return spl;
-}
-
-// 添加同步锁后保证了多个线程同时访问时安全的
-Singleton* Singleton::getInstance1()
-{
-    if (spl == nullptr)    // 双重检测机制
-    {
-        unique_lock<std::mutex> m_lock;  // 加同步锁，锁住整个类，防止new Singleton被执行多次
-        {
-            // 进入临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
-            if (spl == nullptr)
-            {
-                spl = new Singleton;     
-            }
-        }
-    }
-    return spl;
 }
 
 Singleton* Singleton::freeInstance()
@@ -86,21 +55,77 @@ Singleton* Singleton::freeInstance()
 }
 
 
+// 第一种方法：懒汉式单例模式
+Singleton* Singleton::getInstance()
+{
+    if (spl == nullptr)
+    {
+        spl = new Singleton;     // 只有在创建对象时，才分配内存
+    }
+    count++;
+
+    return spl;
+}
+
+// 第二种方法添加同步锁后保证了多个线程同时访问时安全的
+Singleton* Singleton::getInstanceLock()
+{
+    if (spl == nullptr)    // 双重检测机制
+    {
+        unique_lock<std::mutex> m_mutex;
+        m_mutex.lock();  // 加同步锁，锁住整个类，防止new Singleton被执行多次
+        // 进入临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
+        if (spl == nullptr)
+        {
+            spl = new Singleton;     
+        }
+        m_mutex.unlock();
+    }
+    return spl;
+}
+
+// 第三种方法：利用静态构造函数
+Singleton* Singleton::getInstanceStatic()
+{
+    // 运行时确保只调用一次静态构造函数
+    static Singleton *instance = new Singleton;
+    return instance;
+}
+
+void *deal_thread(void * arg)
+{
+    pthread_t tid = pthread_self();
+    pthread_t pid = getpid();
+    cout << "tid = " << tid << "\t" << "pid = " << pid << endl;
+    pthread_detach(tid);   // 主线程与子线程分离，两者相互不干涉，子线程结束同时子线程的资源自动回收
+    
+
+    Singleton::getInstance()->show();
+    // cout << "count = " << tmp->count << endl;
+
+    // Singleton *tmp = Singleton::getInstanceLock();
+    // cout << "count = " << tmp->count << endl;
+
+    // Singleton::getInstanceStatic()->show();
+
+}
+
 int main(int argc, char *argv[])
 {
     cout << "执行懒汉式的单例模式" << endl;
 
-    Singleton *s1 = Singleton::getInstance();
-    Singleton *s2 = Singleton::getInstance();
-    if (s1 == s2)
+    pthread_t tid;
+    for (int i = 0; i < 5; i++)
     {
-        cout << "是同一个对象" << endl;
+        // int ret = pthread_create(&tid, NULL, deal_thread, (void*)i);
+        int ret = pthread_create(&tid, NULL, deal_thread, NULL);
+        if (ret)
+        {
+            perror("pthread create error.");
+        }
+        sleep(2);
     }
-    else
-    {
-        cout << "不是同一个对象" << endl;
-    }
-    
+
     Singleton::freeInstance();
 
     return 0;
