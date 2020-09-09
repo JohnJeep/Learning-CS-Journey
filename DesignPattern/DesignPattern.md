@@ -1,11 +1,16 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2020-09-08 16:17:19
+ * @LastEditTime: 2020-09-09 23:45:08
  * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
  * @FilePath: /DesignPattern.md
 -->
+## 参考
+- [学习并理解 23 种设计模式](https://juejin.im/post/6844903795017646094#heading-8)
+- [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/#)
+
+
 
 ## 设计模式概括
 三大类型设计模式，共22种
@@ -47,7 +52,7 @@
 ## 单例模式
 - 参考
   - [java单例模式](https://blog.csdn.net/czqqqqq/article/details/80451880)
-  - [C++ 线程安全的单例模式总结](https://www.cnblogs.com/xiaolincoding/p/11437231.html)
+  - [设计模式之单例模式(c++版)](https://segmentfault.com/a/1190000015950693)
 
 
 - 定义：保证一个类只能生成一个唯一的实例对象，同时提供该实例访问的全局方法。
@@ -74,7 +79,7 @@
 
 - 多线程下实现单例模式
   - 多线程下，懒汉式的实现时不安全的，饿汉式方法实现是安全的。
-  - 如何解决线程不安全的问题？
+  - Java中如何解决线程不安全的问题？
     - Java中使用 `synchronized方法`
       ```
       // 线程安全的懒汉式单例

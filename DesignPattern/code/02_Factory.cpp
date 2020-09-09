@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-09-09 15:08:06
- * @LastEditTime: 2020-09-09 16:17:31
+ * @LastEditTime: 2020-09-09 23:17:24
  * @LastEditors: Please set LastEditors
  * @Description: 工厂模式实现
- * 
  */
 #include <iostream>
 #include <cstdio>
@@ -18,7 +17,7 @@ class Fruit
 private:
     /* data */
 public:
-    Fruit(/* args */) {}
+    Fruit() {}
     virtual ~Fruit() {}
     virtual void getShape() = 0;
 };
@@ -28,12 +27,21 @@ class Apple : public Fruit
 private:
     /* data */
 public:
-    Apple(/* args */) {}
+    Apple() {}
     ~Apple() {}
     void getShape()
     {
-        cout << "I am round." << endl;
+        cout << "Apple is circular." << endl;
     }
+};
+
+class BadFruit
+{
+private:
+    /* data */
+public:
+    BadFruit(/* args */) {cout << "bad fruit." << endl;}
+    ~BadFruit() {}
 };
 
 // 抽象的父类
@@ -42,9 +50,9 @@ class Factory
 private:
     /* data */
 public:
-    Factory(/* args */){};
+    Factory(){};
     virtual ~Factory(){};
-    virtual Fruit* crate(string pstr) = 0;
+    virtual Fruit* produce(string pstr) = 0;
 };
 
 // 具体的子类工厂
@@ -53,9 +61,9 @@ class AppleFactory : public Factory
 private:
     /* data */
 public:
-    AppleFactory(/* args */) {}
+    AppleFactory() {}
     ~AppleFactory() {}
-    virtual Fruit* crate(string pstr)
+    virtual Fruit* produce(string pstr)
     {
         if (pstr == "apple")
         {
@@ -63,7 +71,7 @@ public:
         }
         else
         {
-            cout << "not crate." << endl;
+            throw "Not apple not produce.";
         }
     }
 };
@@ -74,11 +82,11 @@ class MutatePear : public Fruit
 private:
     /* data */
 public:
-    MutatePear(/* args */) {}
+    MutatePear() {}
     ~MutatePear() {}
     virtual void getShape()
     {
-        cout << "I am triangle." << endl;
+        cout << "MutatePear is triangle." << endl;
     }
 };
 
@@ -87,12 +95,12 @@ class MutateFactory : public Factory
 private:
     /* data */
 public:
-    MutateFactory(/* args */) {}
+    MutateFactory() {}
     ~MutateFactory() {}
-    virtual Fruit* crate(string str);
+    virtual Fruit* produce(string pstr);
 };
 
-Fruit* MutateFactory::crate(string pstr)
+Fruit* MutateFactory::produce(string pstr)
 {
     if (pstr == "Mutatepear")
     {
@@ -100,32 +108,39 @@ Fruit* MutateFactory::crate(string pstr)
     }
     else
     {
-        cout << "not crate." << endl;
+        throw "Not mutatepear not produce.";
     }  
 }
 
 int main(int argc, char *argv[])
 {
-    Factory *myfactory = nullptr;
-    Fruit *myfruit = nullptr;
+    Factory *myFactory = nullptr;   // 定义Factory抽象类的指针，但不能实例化对象
+    Fruit *myFruit = nullptr;
 
-    myfactory = new AppleFactory;   // 父类对象指向子类对象
-    myfruit = myfactory->crate("apple");
-    myfruit->getShape();    // 使用多态，父类指针指向子类指针
-    delete myfruit;
-    delete myfactory;
+    try
+    {
+        myFactory = new AppleFactory;   // 父类对象指向子类对象
+        myFruit = myFactory->produce("apple");
+        myFruit->getShape();    // 使用多态，父类指针指向子类指针
+        delete myFruit;
+        delete myFactory;
 
-    myfactory = new AppleFactory;
-    myfruit = myfactory->crate("tomato");
-    myfruit->getShape();    // 使用多态，父类指针指向子类指针
-    delete myfruit;
-    delete myfactory;
+        myFactory = new MutateFactory;
+        myFruit = myFactory->produce("Mutatepear");
+        myFruit->getShape();
+        delete myFruit;
+        delete myFactory;
 
-    myfactory = new MutateFactory;
-    myfruit = myfactory->crate("Mutatepear");
-    myfruit->getShape();
-    delete myfruit;
-    delete myfactory;
+        myFactory = new AppleFactory;
+        myFruit = myFactory->produce("tomato");
+        myFruit->getShape();    // 使用多态，父类指针指向子类指针
+        delete myFruit;
+        delete myFactory;        
+    }
+    catch(const char* e)
+    {
+        cout << e << endl;
+    }
 
     return 0;
 }

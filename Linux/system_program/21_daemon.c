@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-15 23:09:40
- * @LastEditTime: 2020-06-15 23:36:21
+ * @LastEditTime: 2020-09-09 21:56:20
  * @LastEditors: Please set LastEditors
  * @Description: 守护进程的创建
  * @FilePath: /system_program/21_daemon.c
@@ -31,7 +31,6 @@ void create_daemon()
         exit(1);
     }
 
-
     // 2、子进程创建会话、
     sid = setsid();
     if ((sid == -1) )
@@ -59,8 +58,6 @@ void create_daemon()
 
 }
 
-
-
 int main(int argc, char *argv[])
 {
     create_daemon();
@@ -69,6 +66,5 @@ int main(int argc, char *argv[])
         /* code */
     }
     
-
     return 0;
 }
