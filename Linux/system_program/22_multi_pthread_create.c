@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-16 21:05:45
- * @LastEditTime: 2020-06-16 22:52:06
+ * @LastEditTime: 2020-09-09 14:45:03
  * @LastEditors: Please set LastEditors
  * @Description: 创建多个子线程
  * @FilePath: /system_program/22_pthread_create.c
@@ -17,7 +17,7 @@ void *showPthreadID(void *arg)
     long id;
     int t;
 
-    t = (int)arg;
+    t = *(int*)arg;
     id = pthread_self();
     printf("%d th pthread id %lu, pid=%d\n", t, id, getpid());
 }
