@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-16 21:05:45
- * @LastEditTime: 2020-09-09 14:45:03
+ * @LastEditTime: 2020-06-16 22:52:06
  * @LastEditors: Please set LastEditors
  * @Description: 创建多个子线程
- * @FilePath: /system_program/22_pthread_create.c
  */ 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,14 +11,14 @@
 #include <pthread.h>
 #include <string.h>
 
-void *showPthreadID(void *arg)
+void *thread_func(void *arg)
 {
-    long id;
-    int t;
-
-    t = *(int*)arg;
-    id = pthread_self();
-    printf("%d th pthread id %lu, pid=%d\n", t, id, getpid());
+	// 子线程内部需要处理的部分
+    int t = (int)arg;
+	sleep(1);
+    printf("%dth pthread id %lu, pid=%u\n", t+1, pthread_self(), getpid());
+	pthread_exit(NULL);  /* 子线程退出 */
+	//return NULL;
 }
 
 int main(int argc, char *argv[])
@@ -27,11 +26,10 @@ int main(int argc, char *argv[])
     pthread_t tid;
     int ret, i;
 
-    // printf("pthread create before, pthread id=%lu, pid=%d\n", pthread_self(), getpid());
-
+    printf("pthread create before, pthread id=%lu, pid=%d\n", pthread_self(), getpid());
     for (i = 0; i < 5; i++)
     {
-        ret = pthread_create(&tid, NULL, showPthreadID, (void *)i);
+        ret = pthread_create(&tid, NULL, thread_func, (void *)i);
         if (ret != 0)
         {      
             char *err = strerror(ret);     // 线程出错时，通过strerror判断
@@ -40,12 +38,7 @@ int main(int argc, char *argv[])
         }        
         sleep(2);
     }
-    
-
-    printf("pthread create after, pthread id=%lu, pid=%d\n", pthread_self(), getpid());
-
-
-    return 0;
+    printf("I am main pthread, pthread id=%lu, pid=%d\n", pthread_self(), getpid());
+	pthread_exit(NULL);
+//    return 0;  /*  进程退出 */
 }
-
-

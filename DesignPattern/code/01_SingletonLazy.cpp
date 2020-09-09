@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2020-09-09 14:56:27
+ * @LastEditTime: 2020-09-09 23:34:36
  * @LastEditors: Please set LastEditors
  * @Description: 单例模式：此单利模式为懒汉式模式，即在new一个对象时，才分配内存
  *               在多个线程中，存在资源竞争的问题。
@@ -18,6 +18,7 @@ using namespace std;
 class Singleton
 {
 private:
+    static pthread_mutex_t mutex;
     static Singleton* spl;
     Singleton();
     ~Singleton();
@@ -30,7 +31,7 @@ public:
     void show() {cout << "实例地址：" << this << endl;};
 };
 
-int Singleton::count = 0;
+pthread_mutex_t mutex;
 Singleton* Singleton::spl = nullptr; // 静态全局变量初始化
 
 Singleton::Singleton()
@@ -72,14 +73,14 @@ Singleton* Singleton::getInstanceLock()
 {
     if (spl == nullptr)    // 双重检测机制
     {
-        unique_lock<std::mutex> m_mutex;
-        m_mutex.lock();  // 加同步锁，锁住整个类，防止new Singleton被执行多次
+        // unique_lock<std::mutex> m_mutex;
+        pthread_mutex_lock(&mutex);  // 加同步锁，锁住整个类，防止new Singleton被执行多次
         // 进入临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
         if (spl == nullptr)
         {
             spl = new Singleton;     
         }
-        m_mutex.unlock();
+        pthread_mutex_unlock(&mutex);
     }
     return spl;
 }

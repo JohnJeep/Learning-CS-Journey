@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-06-21 12:12:48
+ * @LastEditTime: 2020-09-09 21:20:32
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
@@ -485,13 +485,15 @@ else if (WIFCONTINUED(wstatus))
   - 线程调度的优先级
 
 ## 3.2. 线程相关函数
-  - `pthread_self()`    获得调用线程的ID号
+  - `pthread_self()`    获得调用线程的线程ID号
   - `pthread_create()`  创建一个线程 
-  - `pthread_exit()`   将单个线程退出
-    - `exit()` 将进程退出
-    - `return语句` 函数返回到调用者处 
-  - `pthread_join()` 将子线程回收，回收的是线程的资源。线程没有结束，会一直阻塞等待。 
+  - 退出相关的函数
+    - `pthread_exit()`  将单个线程退出
+    - `exit()`          将进程退出
+    - `return语句`      函数返回到调用者处 
 
+
+  - `pthread_join()` 将子线程回收，回收的是线程的资源。线程没有结束，会一直阻塞等待。 
   - `pthread_detach()` 实现线程的分离。
     - 返回值：成功返回 `0`，失败返回失败的错误码。 
     - 一般情况下，线程终止后，它的终止状态一直保留到其它线程调用 `pthread_join()` 获取它的状态为止。
