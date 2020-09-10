@@ -4,7 +4,6 @@
  * @LastEditTime: 2020-06-09 10:33:53
  * @LastEditors: Please set LastEditors
  * @Description: 实现多态的例子
- * @FilePath: \Learning-Computer\C++\code\polymorphism.cpp
  */ 
 #include <iostream>
 using namespace std;

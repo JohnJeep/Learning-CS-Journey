@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-10 09:26:56
- * @LastEditTime: 2020-09-09 22:07:22
+ * @LastEditTime: 2020-09-10 13:53:03
  * @LastEditors: Please set LastEditors
  * @Description: 虚函数实现抽象类
- * @FilePath: /C++/code/abstract.cpp
  */ 
 #include <iostream>
 using namespace std;

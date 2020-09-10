@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-09-09 15:08:06
- * @LastEditTime: 2020-09-09 23:17:24
+ * @LastEditTime: 2020-09-10 11:36:10
  * @LastEditors: Please set LastEditors
  * @Description: 工厂模式实现
  */
@@ -52,6 +52,8 @@ private:
 public:
     Factory(){};
     virtual ~Factory(){};
+
+    // 抽象的工厂类只能生产一个系列的产品
     virtual Fruit* produce(string pstr) = 0;
 };
 

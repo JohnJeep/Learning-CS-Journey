@@ -1,18 +1,19 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2020-09-09 23:45:08
+ * @LastEditTime: 2020-09-10 16:14:46
  * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
- * @FilePath: /DesignPattern.md
 -->
-## 参考
-- [学习并理解 23 种设计模式](https://juejin.im/post/6844903795017646094#heading-8)
-- [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/#)
+## 0.1. 参考
+- [史上最全设计模式导学目录（完整版）](https://blog.csdn.net/lovelion/article/details/17517213)：推荐指数五颗星；刘伟老师力作，讲的非常好，通俗易懂，而且举例的应用场景也非常恰当。
+- [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/#) 推荐指数四颗星；利用许多的图例去描述每一种设计模式的过程，值得参考学习。
+- [Github: 学习并理解 23 种设计模式](https://github.com/xietao3/Study-Plan/tree/master/DesignPatterns) 推荐指数四颗星；Github上笔者记录自己学习设计模式的笔记。
+- [Trip-to-iOS-Design-Patterns](https://github.com/skyming/Trip-to-iOS-Design-Patterns)：推荐指数三颗星；Github上笔者从设计模式、架构、实践三个方面梳理了 iOS 架构的设计，推荐了许多不错的学习设计模式的书籍和诸多实战的项目。
 
 
 
-## 设计模式概括
+## 0.2. 设计模式概括
 三大类型设计模式，共22种
 - 创建型模式：处理对象的创建过程，共5种。
   - 工厂方法模式（factory method pattern）
@@ -49,10 +50,10 @@
     > 例如：在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现，使其它的模块不需要了解另一个模块的内部实现，这样当一个模块发生改变时，其它的模块不会受到影响。
 
 
-## 单例模式
+## 0.3. 单例模式
 - 参考
   - [java单例模式](https://blog.csdn.net/czqqqqq/article/details/80451880)
-  - [设计模式之单例模式(c++版)](https://segmentfault.com/a/1190000015950693)
+  - [设计模式之单例模式](https://segmentfault.com/a/1190000015950693)：segmentfault上面使用C++实现的单例模式。
 
 
 - 定义：保证一个类只能生成一个唯一的实例对象，同时提供该实例访问的全局方法。
@@ -202,6 +203,9 @@
 枚举       | 是 | 否 | 是
 
 
-## 工厂模式
-- 简单工厂模式
+## 0.4. 工厂模式
+工厂模式与抽象工厂模式的区别：工厂模式只能生产一个产品；而抽象工厂模式可以产生一列的产品。
+
+
+原型模式为每个对象提供一个接口，让一个复杂的对象具有自我复制的功能，统一一套接口。
   
