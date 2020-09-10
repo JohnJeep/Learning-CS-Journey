@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-19 19:37:29
- * @LastEditTime: 2020-09-02 14:24:11
+ * @LastEditTime: 2020-09-10 23:39:30
  * @LastEditors: Please set LastEditors
  * @Description: Linux kernel学习
  * @FilePath: /linux_kernel.md
@@ -15,3 +15,5 @@
 
 ## 参考
 - [Linux内核中双向链表的经典实现](https://www.cnblogs.com/skywang12345/p/3562146.html#a1)
+- [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/): 官方Linux kernel英文API手册。
+- [Linux source code Bootlin](https://elixir.bootlin.com/linux/latest/source): 在线查看Linux kernel源码。
