@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-09-14 10:05:54
- * @LastEditTime: 2020-09-14 16:16:47
+ * @LastEditTime: 2020-09-15 08:44:18
  * @LastEditors: Please set LastEditors
  * @Description: 原型模式 
  */
@@ -9,7 +9,6 @@
 #include <cstdio>
 
 using namespace std;
-
 
 class Person
 {
@@ -30,21 +29,15 @@ Person::~Person()
 {
 }
 
-
 class Stu : public Person
 {
 private:
     string m_name;
     int m_age;
 public:
-    // Stu() : m_name(" "), m_age(0)
-    // {
-
-    // }
-    Stu() 
+    Stu() : m_name(" "), m_age(0)
     {
-        this->m_name = "";
-        this->m_age = 0;
+
     }
     Stu(string name, int age) 
     {
@@ -61,8 +54,8 @@ public:
     }
     virtual Person* Study()
     {
-        Stu* tmp = new Stu();
-        *tmp = *this;
+        Stu* tmp = new Stu;
+        *tmp = *this;      // 父类对象的值赋给子类
         return tmp;
     }
 };
@@ -73,7 +66,7 @@ int main(int argc, char *argv[])
     collageOne->getInfo();
 
     // Person* collageTwo = collageOne;  // 执行浅拷贝
-    Person* collageTwo = collageTwo->Study();  
+    Person* collageTwo = collageOne->Study();  
     collageTwo->getInfo();
 
     return 0;
