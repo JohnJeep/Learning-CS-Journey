@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-09-15 14:59:48
- * @LastEditTime: 2020-09-15 16:19:40
+ * @LastEditTime: 2020-09-16 09:00:04
  * @LastEditors: Please set LastEditors
  * @Description: 组合模式的实现
- *               描述：文件中创建子文件
+ *               描述：文件中创建子文件。在目录下面添加不同的文件夹和文件。
  * 
  */
 #include <iostream>
@@ -92,6 +92,8 @@ public:
     }    
 };
 
+// 递归显示目录下的文件：1、显示根节点 
+// 2、若目录下有孩子，判断孩子是文件还是目录，若孩子是文件，则显示文件，若孩子是目录，则显示子目录。
 void  showFileTree(File* fp, int len)
 {
     list<File*> *f = nullptr;
@@ -101,7 +103,7 @@ void  showFileTree(File* fp, int len)
     {
         printf("\t");
     }
-    fp->display();  // 目录下面没有文件
+    fp->display();  // 显示根目录
 
     // 目录下面有文件
     f = fp->getSubfiles();
@@ -111,7 +113,7 @@ void  showFileTree(File* fp, int len)
         {
             if ((*it)->getSubfiles() == nullptr)
             {
-                for (i = 0; i < len; i++)
+                for (i = 0; i <= len; i++)
                 {
                     printf("\t");
                 }
@@ -128,26 +130,17 @@ void  showFileTree(File* fp, int len)
 int main(int argc, char *argv[])
 {
     Dir* rootDir = new Dir("/C");
-    rootDir->display();
-    
     Dir* dirA = new Dir("A");
     SubFile* file_a = new SubFile("a.txt");
     rootDir->add(dirA);
-    rootDir->add(file_a);
-    
-    // 获取根目录下的所有文件
-    list<File*> *myList = rootDir->getSubfiles();
-    for (list<File*>::iterator iter = myList->begin(); iter != myList->end(); iter++)
-    {
-        (*iter)->display();
-    }
+    dirA->add(file_a);
     
     Dir *dirB = new Dir("B");
     File* file_b = new SubFile("b.txt");
+    rootDir->add(dirB);
     dirB->add(file_b);
     dirB->add(file_a);
-
-
+    
     showFileTree(rootDir, 0);
     
     return 0;
