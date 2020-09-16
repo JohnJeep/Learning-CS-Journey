@@ -72,18 +72,23 @@
 - `git log` 查看历史记录。按提交时间列出所有的更新，最近的更新排在最上面。显示的有HASH散列码、提交日期、提交的注释等。
   - `HEAD` 表示当前版本，下标从零开始。
   - `HEAD^` 上一个版本就是，`HEAD^^` 上上一个版本就是,当然往上100个版本写100个^比较容易数不过来，所以写成`HEAD~100`
-- `git log -g`: 按照标准日志的格式输出引用日志（reflog）
+- `git log -g`: 按照标准日志的格式输出引用日志 `reflog`
 - `git log -p` 打印提交更新的所有内容，包括文件的内容
 - `git log -p -2` 显示最近两次提交的内容
-- `git log --stat` 每次提交的简略的统计信息，包括多少个文件改变、HASH码、日期、提交的注释等信息。
+- `git log --stat` 显示每次提交的简略统计信息，包括多少个文件改变、HASH码、日期、提交的注释等信息。
 - `git log --pretty=keyword` 指定使用不同于默认格式的方式展示提交历史。keyword 有以下内建的子选项
   - online：将每个提交放在一行显示，查看的提交数很大时非常有用。
   - format：定制自己要显示的记录格式。
 - `git log --graph`：显示 ASCII 图形表示的分支合并历史，常与`--pretty=format`结合使用。例如：`git log --pretty=format:"%h %s" --graph`
-- `gir log --name-status` 显示新增、修改、删除的文件清单。
 - `git log --since=2.weeks` 列出所有最近两周内的提交。since与until按照时间对提交的内容做筛选，后面可以直接跟特定的时间。`--since=2020-01-07`
 - `git log -S 筛选内容`  列出那些添加或移除了某些字符串的提交。
 - `git fsck --full`: 显示出所有没有被其他对象指向的对象。`git fsck` 检查所有数据库的完整性。
+- `gir log --name-status` 显示每次修改的文件列表及修改状态：新增、修改、删除。
+- `git log --name-only` 只显示每次修改的文件列表
+- `git whatchanged`  显示每次修改的文件列表
+- `git whatchanged --stat` 显示每次修改的文件列表及统计信息
+- `git show` 显示最后一次文件改变的具体内容
+- `git reflog expire --expire=now --all` 清除所有 `reflog` 的引用
 
 
 ### 1.2.3. Git tag
