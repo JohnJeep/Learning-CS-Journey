@@ -1,15 +1,14 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-08 20:20:58
- * @LastEditTime: 2020-07-28 22:06:48
+ * @LastEditTime: 2020-09-20 18:34:34
  * @LastEditors: Please set LastEditors
  * @Description: 二维数组中的查找
  *               思路：关键找出二维数组最右上脚数组的下标关系，index = row * columns + col
  *                     当前查找的number小于数组右上角的数，剔除数组右上角数所在的 column，
  *                     当前查找的number大于数组右上角的数，剔除数组右上角数所在的 row，
  * 
- * @FilePath: /04_TwoDimensionalArrayFind.cpp
- */ 
+ */
 #include <iostream>
 #include <stdbool.h>
 #include <vector>
@@ -53,11 +52,12 @@ bool findTwoDimensionArray(int *matrix, int rows, int columns, int number)
 }
 
 // 采用vector方式实现
-bool Find(int target, vector<vector<int> > array) {
+bool Find(int target, vector<vector<int>> array)
+{
     int row = 0;
     int col = array[0].size() - 1;
-    
-    if(!array.empty())
+
+    if (!array.empty())
     {
         while (row < array.size() && col >= 0)
         {
@@ -69,21 +69,19 @@ bool Find(int target, vector<vector<int> > array) {
             {
                 col--;
             }
-            else 
+            else
             {
                 row++;
-            }            
-        }            
+            }
+        }
     }
     return false;
 }
 
-
-
 int main()
 {
     int array[][5] = {{1, 2, 8, 9, 11}, {2, 4, 9, 12, 11}, {4, 7, 10, 13, 11}, {6, 8, 11, 15, 11}, {6, 8, 11, 15, 11}};
-    
+
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
@@ -96,21 +94,21 @@ int main()
     int row = sizeof(array) / sizeof(array[0]);
     cout << "row = " << row << endl;
 
-    int column = sizeof(array[0]) / sizeof(array[0][0]); 
-    cout << "column = " << column << endl; 
+    int column = sizeof(array[0]) / sizeof(array[0][0]);
+    cout << "column = " << column << endl;
 
     int len = sizeof(array) / sizeof(array[0][0]);
-    cout << "len = " << len << endl;     
+    cout << "len = " << len << endl;
 
     cout << sizeof(array[0]) << endl;
     cout << array[0] << endl;
     cout << array[0][0] << endl;
 
-    show((int *)array, 11);  //测试代码
+    show((int *)array, 11); //测试代码
 
     findTwoDimensionArray((int *)array, row, column, 7);
     findTwoDimensionArray((int *)array, row, column, 8);
-    findTwoDimensionArray((int *)array, row, column, 22);  // 没查到
-    
+    findTwoDimensionArray((int *)array, row, column, 22); // 没查到
+
     return 0;
 }

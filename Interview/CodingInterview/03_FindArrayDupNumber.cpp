@@ -1,11 +1,11 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-07 19:24:35
- * @LastEditTime: 2020-07-28 22:06:26
+ * @LastEditTime: 2020-09-20 18:34:00
  * @LastEditors: Please set LastEditors
  * @Description: 找出数组中重复的数字
  * @FilePath: /03_FindArrayDupNumber.cpp
- */ 
+ */
 #include <iostream>
 using namespace std;
 
@@ -35,29 +35,25 @@ bool duplicate(int data[], int len, int *duplication)
             }
             int temp = data[i];
             data[i] = data[temp];
-            data[temp] = temp; 
+            data[temp] = temp;
             for (int i = 0; i < len; i++)
             {
                 printf(" %d", data[i]);
-                
             }
-            printf("\n");           
+            printf("\n");
         }
-
     }
 
     return false;
 }
 
-
-
 int main()
 {
     int array[] = {2, 3, 1, 0, 2, 5, 3};
-    int length = sizeof(array)/sizeof(int);
+    int length = sizeof(array) / sizeof(int);
     int dup[] = {2, 3};
 
     duplicate(array, length, dup);
-    
+
     return 0;
 }

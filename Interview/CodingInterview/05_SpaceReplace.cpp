@@ -1,11 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-09 19:03:55
- * @LastEditTime: 2020-07-28 22:07:22
+ * @LastEditTime: 2020-09-20 18:34:51
  * @LastEditors: Please set LastEditors
  * @Description: 空格替换：把字符串中的每个空格替换为 %20
- * @FilePath: /05_SpaceReplace.cpp
- */ 
+ */
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +17,7 @@ void replaceBlank(char pstr[], int len)
     {
         return;
     }
-    
+
     // 遍历字符串，得到空格数
     int i = 0;
     int oldLen = 0;
@@ -32,15 +31,15 @@ void replaceBlank(char pstr[], int len)
         }
         ++i;
     }
-    
+
     // 将空格替换为 %20
     int newLen = len + blankLen * 2;
     if (newLen < len)
     {
         return;
     }
-    int indexNew = newLen;   // 新字符串数组索引，索引下标从零开始
-    int indexOld = oldLen;   // 旧字符串数组索引
+    int indexNew = newLen; // 新字符串数组索引，索引下标从零开始
+    int indexOld = oldLen; // 旧字符串数组索引
     while ((indexOld >= 0) && (indexNew > indexOld))
     {
         if (pstr[indexOld] == ' ')
@@ -53,7 +52,7 @@ void replaceBlank(char pstr[], int len)
         {
             pstr[indexNew--] = pstr[indexOld]; // 将原来字符串从后向前依次复制到新的字符串中，同样是从后向前
         }
-        --indexOld;    // 每遍历一次，旧字符串数组索引减一
+        --indexOld; // 每遍历一次，旧字符串数组索引减一
     }
 }
 
@@ -63,7 +62,7 @@ void test1()
     char str[] = "we are happy";
     // int len = sizeof(str);
     int len = strlen(str);
-    
+
     cout << str << endl;
     replaceBlank(str, len);
     cout << str << endl;
@@ -74,7 +73,7 @@ void test2()
 {
     char str[] = " we are very  happy ";
     int len = strlen(str);
-    
+
     cout << str << endl;
     replaceBlank(str, len);
     cout << str << endl;
@@ -85,7 +84,7 @@ void test3()
 {
     char str[] = " ";
     int len = strlen(str);
-    
+
     cout << "空格字符: " << str << endl;
     replaceBlank(str, len);
     cout << "空格字符: " << str << endl;
@@ -95,18 +94,17 @@ void test4()
 {
     char str[] = "";
     int len = 10;
-    
+
     cout << "空字符串: " << str << endl;
     replaceBlank(str, len);
     cout << "空字符串: " << str << endl;
 }
 
-
 void test5()
 {
     // char str[] = nullptr;
     int len = 0;
-    
+
     cout << "字符串是nullptr指针: " << endl;
     replaceBlank(nullptr, len);
     cout << "字符串是nullptr指针: " << endl;
@@ -121,4 +119,4 @@ int main(int argc, char *argv[])
     test5();
 
     return 0;
-}  
+}
