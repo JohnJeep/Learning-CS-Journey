@@ -1,13 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-08 19:18:18
- * @LastEditTime: 2020-07-28 22:17:04
+ * @LastEditTime: 2020-09-20 18:32:34
  * @LastEditors: Please set LastEditors
  * @Description: 不能修改数组，找出重复的数字
  * 
- * 
- * 
- * @FilePath: /50_DuplicateNoEdit.cpp
  */ 
 #include <iostream>
 #include <stdbool.h>
