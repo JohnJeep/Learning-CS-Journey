@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2020-09-12 00:05:23
+ * @LastEditTime: 2020-09-21 16:06:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -21,6 +21,11 @@
 
 
 ## View
+- Northbridge(北桥)：为了协调CPU、内存和高速的图形设备，人们设计了一个高速的北桥芯片，使它们之间高速的交换数据。
+- Southbridge(南桥)：为了解决北桥既要处理高速设备又要处理低速的设备，人们设计了专门处理低速设备的南桥芯片，磁盘、USB、键盘、鼠标等设备都连接在南桥上。
+
+
+
 
 ### 典型的计算机底层硬件组织架构
 - CPU: central processing unit
