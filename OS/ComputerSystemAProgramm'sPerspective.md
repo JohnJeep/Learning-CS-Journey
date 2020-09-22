@@ -1,12 +1,25 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2020-09-21 16:06:06
+ * @LastEditTime: 2020-09-22 14:14:53
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 深入理解计算机系统学习笔记
 -->
-# Computer System: A Programmer's Perspective 学习笔记
-## 参考
+# 1. Computer System: A Programmer's Perspective
+<!-- TOC -->
+
+- [1. Computer System: A Programmer's Perspective](#1-computer-system-a-programmers-perspective)
+  - [1.1. 参考](#11-参考)
+  - [1.2. Program Structure & Execution](#12-program-structure--execution)
+    - [1.2.1. 典型的计算机底层硬件组织架构](#121-典型的计算机底层硬件组织架构)
+    - [1.2.2. 一个 `hello` 可执行程序的底层调用过程](#122-一个-hello-可执行程序的底层调用过程)
+    - [1.2.3. cache(缓存)](#123-cache缓存)
+  - [1.3. Machine-Level Representation](#13-machine-level-representation)
+
+<!-- /TOC -->
+
+
+## 1.1. 参考
 - [Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e)](https://csapp.cs.cmu.edu/): 官方英文书籍网站。
 - [Lab Assignments](http://csapp.cs.cmu.edu/3e/labs.html): 书籍中实验的部分。
 - [18-613/14-513: Computer Systems, Summer 2020](https://www.andrew.cmu.edu/course/18-613/schedule.html) 2020学期新版讲义的网站，在2016学期的基础上增添了一些内容。
@@ -15,19 +28,20 @@
 - [2015 CMU 15-213 CSAPP 深入理解计算机系统 课程视频](https://www.bilibili.com/video/BV1iW411d7hd): B站对该课程的翻译。
 - [深入理解计算机系统（英文版·第3版）](https://book.douban.com/subject/27000879/): 豆瓣网对该书籍的评价。
 
-
+<font color="red">
 每一章节的内容至少阅读三遍，达到熟悉的程度。
+</font>
 
 
+## 1.2. Program Structure & Execution
 
-## View
 - Northbridge(北桥)：为了协调CPU、内存和高速的图形设备，人们设计了一个高速的北桥芯片，使它们之间高速的交换数据。
 - Southbridge(南桥)：为了解决北桥既要处理高速设备又要处理低速的设备，人们设计了专门处理低速设备的南桥芯片，磁盘、USB、键盘、鼠标等设备都连接在南桥上。
 
+- Relocation(重定位)：重新计算各个目标地址的的过程。
 
 
-
-### 典型的计算机底层硬件组织架构
+### 1.2.1. 典型的计算机底层硬件组织架构
 - CPU: central processing unit
 - ALU: arithmetic/logic unit
 - PC: program counter
@@ -62,7 +76,7 @@
   - Jump: Extract a word from the instruction itself and copy that word into the program counter (PC), overwriting the previous value of the PC.
 
 
-### 一个 `hello` 可执行程序的底层调用过程
+### 1.2.2. 一个 `hello` 可执行程序的底层调用过程
 1. 初始时，shell程序执行它的指令，等待我们输人一个命令。在键盘上输人字符串 `./hello` 后，shell程序将字符逐一读入register，再把它存放到memory中。
    <p><img src="./figures/hello可执行读取.png"> </p>
 
@@ -73,7 +87,7 @@
    <p><img src="./figures/hello可执行显示.png"> </p>
 
 
-### cache(缓存)
+### 1.2.3. cache(缓存)
 <p><img src="./figures/内存分层结构.png"> </p>
 <p><img src="./figures/cache-memories.png"> </p>
 
@@ -87,3 +101,15 @@
 > 当操作系统决定要把控制权从当前进程转移到某个新的进程时，就会进行上下文切换，即保存当前进程的上下文、恢复新进程的上下文，然后将控制权传递到新的进程，新进程就会从它上次停止的地方开始。
 
 
+## 1.3. Machine-Level Representation
+- 反汇编器(disassembler): 根据机器代码产生一种类似于汇编代码的程序。
+- GCC和Objdump工具产生的汇编代码默认使用的是 `AT&T公司` 拟定的格式。
+- 在GCC中使用一些参数可以产生Intel公司拟定的汇编代码格式：` gcc test.c -S  -masm=intel`
+
+
+- pushq: push quad word(每次压栈按4字为单位进行压栈)
+- movb: move byte(移动字节)
+- movw: move word(移动字)
+- movl: move double word(32 bit 数据被看成是long word，因此用后缀“l” 表示双字)
+- movq: move quad word(移动四字)
+<p><img src="./figures/C语言数据类型.png"></p>
