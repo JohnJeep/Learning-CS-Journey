@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2020-09-22 14:14:53
+ * @LastEditTime: 2020-09-23 10:04:19
  * @LastEditors: Please set LastEditors
  * @Description: 深入理解计算机系统学习笔记
 -->
@@ -14,7 +14,6 @@
     - [1.2.1. 典型的计算机底层硬件组织架构](#121-典型的计算机底层硬件组织架构)
     - [1.2.2. 一个 `hello` 可执行程序的底层调用过程](#122-一个-hello-可执行程序的底层调用过程)
     - [1.2.3. cache(缓存)](#123-cache缓存)
-  - [1.3. Machine-Level Representation](#13-machine-level-representation)
 
 <!-- /TOC -->
 
@@ -100,16 +99,3 @@
 
 > 当操作系统决定要把控制权从当前进程转移到某个新的进程时，就会进行上下文切换，即保存当前进程的上下文、恢复新进程的上下文，然后将控制权传递到新的进程，新进程就会从它上次停止的地方开始。
 
-
-## 1.3. Machine-Level Representation
-- 反汇编器(disassembler): 根据机器代码产生一种类似于汇编代码的程序。
-- GCC和Objdump工具产生的汇编代码默认使用的是 `AT&T公司` 拟定的格式。
-- 在GCC中使用一些参数可以产生Intel公司拟定的汇编代码格式：` gcc test.c -S  -masm=intel`
-
-
-- pushq: push quad word(每次压栈按4字为单位进行压栈)
-- movb: move byte(移动字节)
-- movw: move word(移动字)
-- movl: move double word(32 bit 数据被看成是long word，因此用后缀“l” 表示双字)
-- movq: move quad word(移动四字)
-<p><img src="./figures/C语言数据类型.png"></p>

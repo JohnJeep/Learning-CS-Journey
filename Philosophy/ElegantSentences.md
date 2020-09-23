@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-08-16 23:55:22
+ * @LastEditTime: 2020-09-23 16:13:23
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -53,3 +53,6 @@ The heart is not conquered by force, but by love and tolerance.
 
 Create your own life and then go out and live it with absolutely no regrets.
 创造你自己的人生，并无怨无悔地去过这一生吧。
+
+Happiness is a butterfly, which when pursued, is always just beyond your grasp, but whic, if you will sit down quietly, may alight upon you.
+幸福犹如蝴蝶，当你追逐它时，你永远捕捉不到，当你静坐下来时，它却可能落在你的身上。
