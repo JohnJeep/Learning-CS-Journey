@@ -33,6 +33,10 @@
 <!-- /TOC -->
 
 # 1. Linux Basic
+- 参考
+  - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
+
+
 ## 1.1. 基础命令
 - `touch 文件名 ` 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 - `rm 文件名 ` 删除一个文本
