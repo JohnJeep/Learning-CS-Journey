@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2020-09-25 08:21:33
+ * @LastEditTime: 2020-09-28 10:02:10
  * @LastEditors: Please set LastEditors
  * @Description: redis学习
 -->
@@ -31,7 +31,6 @@
 - [0.8. redis连接](#08-redis连接)
 - [0.9. redis服务器](#09-redis服务器)
 - [0.10. HyperLogLog](#010-hyperloglog)
-- [0.11. 数据备份与恢复](#011-数据备份与恢复)
 
 <!-- /TOC -->
 
@@ -678,6 +677,8 @@ OK
 
 
 ## 0.8. redis连接
+>  Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数据库默认编号是0
+
 - `select index`：切换到指定的index数据库
 - `quit`：关闭当前连接
 - `ping`：查看服务是否运行
@@ -687,6 +688,83 @@ OK
 
 
 ## 0.9. redis服务器
+- `dbsize`：返回当前数据库中所有key的数目
+- `flushdb`：删除当前数据库中的所有key
+- `flushall`：清空所有数据库中的所有key
+- `bgsave`：在后台异步保存当前数据库的数据到磁盘，会立即返回 OK 状态码。edis forks, 父进程继续提供服务以供客户端调用，子进程将DB数据保存到磁盘然后退出。如果操作成功，可以通过客户端命令 `lastsave` 来检查操作结果。
+- `client list`：列出所有已连接客户端信息和统计数据。
+  - `id`: 唯一的64位的客户端ID(Redis 2.8.12加入)。
+  - `addr`: 客户端的地址和端口
+  - `fd`: 套接字所使用的文件描述符
+    - r: 客户端套接字（在事件 loop 中）是可读的（readable）
+    - w: 客户端套接字（在事件 loop 中）是可写的（writeable） 
+  - `age`: 以秒计算的已连接时长
+  - `idle`: 以秒计算的空闲时长
+  - `flags`: 客户端 flag。
+  - `db`: 该客户端正在使用的数据库 ID
+  - `sub`: 已订阅频道的数量
+  - `psub`: 已订阅模式的数量
+  - `multi`: 在事务中被执行的命令数量
+  - `qbuf`: 查询缓冲区的长度（字节为单位， 0 表示没有分配查询缓冲区）
+  - `qbuf-free`: 查询缓冲区剩余空间的长度（字节为单位， 0 表示没有剩余空间）
+  - `obl`: 输出缓冲区的长度（字节为单位， 0 表示没有分配输出缓冲区）
+  - `oll`: 输出列表包含的对象数量（当输出缓冲区没有剩余空间时，命令回复会以字符串对象的形式被入队到这个队列里）
+  - `omem`: 输出缓冲区和输出列表占用的内存总量
+  - `events`: 文件描述符事件
+  - `cmd`: 最近一次执行的命令
+
+客户端 flag 可以由以下部分组成：
+```
+O: 客户端是 MONITOR 模式下的附属节点（slave）
+S: 客户端是一般模式下（normal）的附属节点
+M: 客户端是主节点（master）
+x: 客户端正在执行事务
+b: 客户端正在等待阻塞事件
+i: 客户端正在等待 VM I/O 操作（已废弃）
+d: 一个受监视（watched）的键已被修改， EXEC 命令将失败
+c: 在将回复完整地写出之后，关闭链接
+u: 客户端未被阻塞（unblocked）
+U: 通过Unix套接字连接的客户端
+r: 客户端是只读模式的集群节点
+A: 尽可能快地关闭连接
+N: 未设置任何 flag
+```
+
+- `client id`：返回当前连接的ID；Redis 5 新增的命令。
+- `client setname connection-name`：为当前连接分配一个名字connection-name，这个名字会显示在CLIENT LIST命令的结果中，用于识别当前正在与服务器进行连接的客户端。
+- `client getname`：返回当前连接由 CLIENT SETNAME设置的名字。如果没有用CLIENT SETNAME设置名字，将返回一个空的值。
+- `client kill addr:port`：关闭指定地址和端口号的客户端
+- `client pause timeout`：将所有客户端的访问暂停给定的毫秒数
+  > 可以在MULTI/EXEC中一起使用CLIENT PAUSE 和INFO replication以在阻塞的同时获取当前master的偏移量。用这种方法，可以让slaves处理至给定的复制偏移节点。
+- `info [section]`：返回关于Redis服务器的各种信息和统计数值。通过给定可选的参数 section ，可以让命令只返回某一部分的信息:
+  - server: Redis服务器的一般信息
+  - clients: 客户端的连接部分
+  - memory: 内存消耗相关信息
+  - persistence: RDB和AOF相关信息
+  - stats: 一般统计
+  - replication: 主/从复制信息
+  - cpu: 统计CPU的消耗
+  - commandstats: Redis命令统计
+  - cluster: Redis集群信息
+  - keyspace: 数据库的相关统计
+
+- `save`：执行一个同步操作，以RDB文件的方式保存所有数据的快照 很少在生产环境直接使用SAVE 命令，因为它会阻塞所有的客户端的请求，可以使用BGSAVE 命令代替。
+- `lastsave`：获得租后一次磁盘同步的时间。执行成功时返回UNIX时间戳。客户端执行 BGSAVE 命令时，可以通过每N秒发送一个 LASTSAVE 命令来查看BGSAVE 命令执行的结果，由 LASTSAVE 返回结果的变化可以判断执行结果。
+- `shutsown [nosave] [save]`：关闭服务器
+- 恢复数据：只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 `CONFIG` 命令。
+  ```
+  127.0.0.1:6379> save
+  OK
+  127.0.0.1:6379> config get dir
+  1) "dir"
+  2) "D:\\Redis-x64-3.0.504"
+  127.0.0.1:6379> bgsave
+  Background saving started
+  ```
+
+- `command`：以数组的形式返回有关所有Redis命令的详细信息。
+- `command count`：返回Redis服务器命令的总数。
+
 
 
 ## 0.10. HyperLogLog
@@ -716,6 +794,3 @@ OK
 127.0.0.1:6379> pfcount all_log
 (integer) 8
 ```
-
-## 0.11. 数据备份与恢复
-
