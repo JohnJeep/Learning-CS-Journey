@@ -18,6 +18,7 @@
     - [0.3.4.1. lea(load effective address)：加载有效地址](#0341-leaload-effective-address加载有效地址)
     - [0.3.4.2. unary && binary](#0342-unary--binary)
     - [0.3.4.3. shifts](#0343-shifts)
+  - [Control Instruction(控制指令)](#control-instruction控制指令)
   - [0.3.5. Jump Instruction(跳转指令)](#035-jump-instruction跳转指令)
 
 <!-- /TOC -->
@@ -227,11 +228,26 @@ subq %rdx,%rax            // 结果为：0xFD
 
 
 
+### Control Instruction(控制指令)
+- single-bit condition code registers(单个位的条件码寄存器)
+  - CF(carry flag 进位标志): Set on high-order bit carry or borrow; cleared otherwise
+  - PF(parity flag 奇偶校验标志): Set if low-order eight bits of result contain an even number of "1" bits; cleared otherwise
+  - ZF(zero flags 零标志): Set if result is zero; cleared otherwise
+  - SF(sign flag 符号标志): Set equal to high-order bit of result (0 if positive 1 if negative)
+  - OF(overflow flag 溢出标志): Set if result is too large a positive number or too small a negative number (excluding sign bit) to fit in destination operand; cleared otherwise
 
 
 
 
 ### 0.3.5. Jump Instruction(跳转指令)
+
+- `je`: 等于
+- `jgt`: 大于则跳（Jump if Greater Than）
+- `jg`:  大于（jump greater）
+- `jge(或jgte)`: 大于等于（jump greater than or equal）
+- `jl`:  小于（jump less）
+- `jle`: 小于等于（jump less equal）
+- `jne`: 不等于（jump not equal）
 
 
 - add
@@ -252,38 +268,5 @@ subq %rdx,%rax            // 结果为：0xFD
 - dec
   - 格式：`add dest`
   - 功能：`dest ← dest - 1`
-
-
-
-
 - call
-
-
-- je 等于零
-- jgt 大于则跳（Jump if Greater Than）
-- jg  大于（jump greater）
-- jge(或jgte) 大于等于（jump greater than or equal）
-- jl  小于（jump less）
-- jle 小于等于（jump less equal）
-- jne 不等于（jump not equal）
-
-
-
-标志位
-- CF - carry flag
-  > Set on high-order bit carry or borrow; cleared otherwise
-
-- PF - parity flag
-  > Set if low-order eight bits of result contain an even number of "1" bits; cleared otherwise
-
-- ZF - zero flags
-  > Set if result is zero; cleared otherwise
-
-- SF - sign flag
-  > Set equal to high-order bit of result (0 if positive 1 if negative)
-
-- OF - overflow flag
-  > Set if result is too large a positive number or too small a negative number (excluding sign bit) to fit in destination operand; cleared otherwise
-
-
 
