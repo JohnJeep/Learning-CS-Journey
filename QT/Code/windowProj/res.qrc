@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Pictures/alert.png</file>
+        <file>Pictures/annotation.jpg</file>
+        <file>Pictures/category.gif</file>
+        <file>Pictures/cg_list.png</file>
+        <file>Pictures/voice.png</file>
+        <file>Pictures/action.gif</file>
+        <file>Pictures/waiticon.gif</file>
+    </qresource>
+</RCC>
