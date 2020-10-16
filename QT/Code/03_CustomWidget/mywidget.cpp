@@ -8,7 +8,7 @@ MyWidget::MyWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // 自定义控件的实现
+    /* 自定义控件的实现  */
     void (QSpinBox:: *spSignal)(int) = &QSpinBox::valueChanged;
     connect(ui->spinBox, spSignal, ui->horizontalScrollBar, &QSlider::setValue);
     connect(ui->horizontalScrollBar, &QSlider::valueChanged, ui->spinBox, &QSpinBox::setValue);
