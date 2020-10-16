@@ -1,5 +1,6 @@
 #include "mylabel.h"
-#include <QMouseEvent>
+
+// 功能：通过自定义Label来捕获鼠标事件处理
 
 MyLabel::MyLabel(QWidget *parent) : QLabel(parent)
 {

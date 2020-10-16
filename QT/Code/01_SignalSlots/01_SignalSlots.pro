@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     student.cpp \
+    subwindow.cpp \
     teacher.cpp \
     widget.cpp
 
 HEADERS += \
     student.h \
+    subwindow.h \
     teacher.h \
     widget.h
 

@@ -16,7 +16,6 @@ Widget::Widget(QWidget *parent)
         qDebug() << ui->widget->getNum();
     });
 
-
     // 启动定时器
     timerId1 = startTimer(1000);   // 时间间隔，单位为ms
     timerId2 = startTimer(500);
@@ -47,9 +46,12 @@ void Widget::timerEvent(QTimerEvent *tev)
     }
 }
 
+// 键盘事件
+void Widget::keyPressEvent(QKeyEvent* ev)
+{
+    qDebug() << ev->key();
+}
 
-
-// 事件分发器
 
 Widget::~Widget()
 {

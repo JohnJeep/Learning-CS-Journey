@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -16,6 +17,8 @@ public:
     ~Widget();
     void timerEvent(QTimerEvent *tev);
 
+    // 键盘捕获事件
+    void keyPressEvent(QKeyEvent* ev);
 
 private:
     Ui::Widget *ui;

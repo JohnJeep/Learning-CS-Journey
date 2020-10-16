@@ -11,7 +11,7 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QMovie>
-
+#include <QCompleter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,6 +20,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->actionNew_File->setIcon(QIcon(":/Pictures/alert.png"));      // 添加图标
     ui->actionOpen_File->setIcon(QIcon(":/Pictures/category.gif"));
+
+    // 设置LineEdit显示为密码显示的方式
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+
+   // 设置行编辑时，输入有提示
+    QStringList list;
+    list << "I love you" << "very good" << "pretty girl";
+    QCompleter* cp = new QCompleter(list, this);
+    cp->setCaseSensitivity(Qt::CaseInsensitive);  //不区分大小写
+    ui->lineEdit->setCompleter(cp);
 
     // ①创建一个对话框，点击后弹出一个新的窗口
     connect(ui->actionNew_File, &QAction::triggered, this, [=](){
@@ -110,11 +120,16 @@ MainWindow::MainWindow(QWidget *parent)
     // 下拉框 Combo box
     // QLabel可以显示文字和图片（静态图和动态图）
     ui->label_img_static->setPixmap(QPixmap(":/Pictures/category.gif"));
+    ui->label_img->setScaledContents(true);        // 让图片自动适应Label内容的大小
 
     // 利用QLabel显示gif动态图片
     QMovie* mv = new QMovie(":/Pictures/waiticon.gif");
     ui->label_img->setMovie(mv);
     mv->start(); // 播放动图
+
+    // Label与HTML标签结合
+    ui->label_html->setText("<h1><a href=\"https://www.baidu.com\">百度一下 </a></h1>");
+    ui->label_html->setOpenExternalLinks(true);   // 在外部打开连接
 }
 
 MainWindow::~MainWindow()

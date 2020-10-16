@@ -345,10 +345,10 @@
    <widget class="QLabel" name="label_img">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>410</y>
-      <width>72</width>
-      <height>15</height>
+      <x>60</x>
+      <y>400</y>
+      <width>31</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -358,14 +358,40 @@
    <widget class="QLabel" name="label_img_static">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>410</y>
-      <width>72</width>
-      <height>15</height>
+      <x>170</x>
+      <y>400</y>
+      <width>41</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>静图</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_html">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>390</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>450</y>
+      <width>118</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
     </property>
    </widget>
   </widget>
