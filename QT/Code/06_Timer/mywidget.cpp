@@ -1,13 +1,14 @@
 #include "mywidget.h"
 #include "ui_mywidget.h"
 #include <QDebug>
-#include <QThread>
 
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MyWidget)
 {
     ui->setupUi(this);
+
+    // QT库中封装好的QTimer定时器库，优先选择使用
     myTimer = new QTimer(this);
     connect(myTimer, &QTimer::timeout, this, &MyWidget::deal);
 }
@@ -25,15 +26,19 @@ MyWidget::~MyWidget()
     delete ui;
 }
 
-
-void MyWidget::on_pushButton_clicked()
+void MyWidget::on_pushButtonStart_clicked()
 {
-    if (myTimer->isActive() == false)   // 定时器没有工作
+    if (myTimer->isActive() == false)   // 定时器没有激活才会启动定时器
     {
-        myTimer->start(1000);
+        myTimer->start(500);
     }
+    qDebug() << "定时器工作中...";
+}
 
-//    QThread::sleep(3);
-    qDebug() << "定时器处理过程";
-//    tim->stop();
+void MyWidget::on_pushButtonStop_clicked()
+{
+    if (myTimer->isActive() == true)
+    {
+        myTimer->stop(); // 定时器只有激活了才会关闭定时器
+    }
 }

@@ -19,7 +19,8 @@ public:
     void keyPressEvent(QKeyEvent* ev);
     void closeEvent(QCloseEvent* event);
     void mousePressEvent(QMouseEvent *ev);
-    bool event(QEvent* et);
+    bool event(QEvent* ev);
+    bool eventFilter(QObject* obj, QEvent* event);   // 重写事件过滤器
 private:
     Ui::MyWidget *ui;
 };
