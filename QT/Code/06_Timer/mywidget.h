@@ -19,7 +19,8 @@ public:
     void deal();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButtonStart_clicked();
+    void on_pushButtonStop_clicked();
 
 private:
     Ui::MyWidget *ui;

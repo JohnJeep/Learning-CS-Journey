@@ -37,16 +37,20 @@ void MyWidget::mousePressEvent(QMouseEvent *ev)
     qDebug() << "hello";
 }
 
-bool MyWidget::event(QEvent *et)
+// 事件函数使用
+bool MyWidget::event(QEvent *ev)
 {
-    switch (et->type()) {
-        case QEvent::Close:
-            closeEvent(et);
-        break;
-         case QEvent::MouseMove:
-            moveEvent(et);
-        break;
+    QKeyEvent* event = static_cast<QKeyEvent*>(ev);
+    if (event->key() == Qt::Key_Q)
+    {
+        return QWidget::event(ev);
     }
+    return true;
+}
+
+bool MyWidget::eventFilter(QObject *obj, QEvent *event)
+{
+
 }
 
 
