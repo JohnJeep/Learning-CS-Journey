@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-03 22:07:49
- * @LastEditTime: 2020-09-05 00:24:29
+ * @LastEditTime: 2020-10-30 15:25:48
  * @LastEditors: Please set LastEditors
  * @Description: 英语学习记录
  * 
@@ -22,6 +22,8 @@
 - [popsci](https://www.popsci.com/)
 - [stackexchange](https://english.stackexchange.com/)
 - [painintheenglish](https://painintheenglish.com/)
+- [多邻国](https://www.duolingo.com/)：闯关式的学习各种不同的语言。
+
 
 
 ## 1.2. YouTube video
