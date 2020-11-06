@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-09-08 22:22:02
+ * @LastEditTime: 2020-11-06 12:20:45
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -10,25 +10,26 @@
 
 - [1. Linux Basic](#1-linux-basic)
   - [1.1. 基础命令](#11-基础命令)
-  - [1.2. top](#12-top)
-  - [1.3. ps (process status)](#13-ps-process-status)
-  - [1.4. 查看文件内容](#14-查看文件内容)
-  - [1.5. 重定向](#15-重定向)
-  - [1.6. 用户权限与链接](#16-用户权限与链接)
-  - [1.7. find与grep](#17-find与grep)
-  - [1.8. PID](#18-pid)
-  - [1.9. 管道](#19-管道)
-  - [1.10. 查看使用的端口](#110-查看使用的端口)
-  - [1.11. 常用 Bash终端快捷键](#111-常用-bash终端快捷键)
-  - [1.12. man命令](#112-man命令)
-  - [1.13. strace](#113-strace)
-  - [1.14. wget命令](#114-wget命令)
-  - [1.15. 包管理](#115-包管理)
-    - [1.15.1. apt命令](#1151-apt命令)
-    - [1.15.2. dpkg 命令](#1152-dpkg-命令)
-  - [1.16. 防火墙](#116-防火墙)
-    - [1.16.1. ubuntu下默认的防火墙](#1161-ubuntu下默认的防火墙)
-    - [1.16.2. CentOS下默认的防火墙](#1162-centos下默认的防火墙)
+  - [1.2. wc](#12-wc)
+  - [1.3. top](#13-top)
+  - [1.4. ps (process status)](#14-ps-process-status)
+  - [1.5. 查看文件内容](#15-查看文件内容)
+  - [1.6. 重定向](#16-重定向)
+  - [1.7. 用户权限与链接](#17-用户权限与链接)
+  - [1.8. find与grep](#18-find与grep)
+  - [1.9. PID](#19-pid)
+  - [1.10. 管道](#110-管道)
+  - [1.11. 查看使用的端口](#111-查看使用的端口)
+  - [1.12. 常用 Bash终端快捷键](#112-常用-bash终端快捷键)
+  - [1.13. man命令](#113-man命令)
+  - [1.14. strace](#114-strace)
+  - [1.15. wget命令](#115-wget命令)
+  - [1.16. 包管理](#116-包管理)
+    - [1.16.1. apt命令](#1161-apt命令)
+    - [1.16.2. dpkg 命令](#1162-dpkg-命令)
+  - [1.17. 防火墙](#117-防火墙)
+    - [1.17.1. ubuntu下默认的防火墙](#1171-ubuntu下默认的防火墙)
+    - [1.17.2. CentOS下默认的防火墙](#1172-centos下默认的防火墙)
 
 <!-- /TOC -->
 
@@ -66,7 +67,15 @@
 - `nslookup 域名` 查看域名对应的IP地址
 
 
-## 1.2. top
+## 1.2. wc
+- 作用：print newline, word, and byte counts for each file.用来计算一个文件或者指定的多个文件中的行数，单词数和字符数。
+- 选项参数
+  - `-c`: 打印字节数
+  - `-l`: 打印列数
+  - `-w`:  打印word counts
+
+
+## 1.3. top
 - 查看CPU的使用率：`top`
 - 使用：`top -bn 1 -i -c` 
 - 参数 
@@ -80,7 +89,7 @@
   - `%st` 被虚拟机偷走的cpu 
 
 
-## 1.3. ps (process status)
+## 1.4. ps (process status)
 - 显示格式参数
   - `USER ` 用户名
   - `%CPU ` 进程占用的CPU百分比
@@ -117,7 +126,7 @@
 - `ps -Lf 端口号|wc -l `：  查看线程个数  
   
 
-## 1.4. 查看文件内容
+## 1.5. 查看文件内容
 - `more` (`-n`：可以显示行号)
 - `less` (`-N`：可以显示行号)
 - `cat`
@@ -127,52 +136,83 @@
 - 输入`b` 将显示上一屏的文件内容
 
 
-## 1.5. 重定向 
+## 1.6. 重定向 
 - `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并`覆盖原`来test.txt文件中的内容
 - `命令 >> 文件名` 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，`不会覆盖原`来的文件，新加的文件保留到文本后面。
 
 
-
-## 1.6. 用户权限与链接
+## 1.7. 用户权限与链接
 - 用户权限修改
   - `chmod` 修改文件模式权限 
   - `chown` 修改文件的所属者
   - `chgrp` 修改文件的用户组
-
 - `ln`(建立链接命令)
   -  `ln -s 原文件  新文件`    软连接
   - `ln 原文件 新文件 `       硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 
 
-## 1.7. find与grep
+## 1.8. find与grep
 - find：按照文件属性查找 
-  - 按文件名 ` find 查找目录 -name filename.txt`  查找指定目录下的`filename.txt` 文件 
-  - 按文件大小 `find 查找目录 -size 条件(+10k)` 查找指定目录下大于10k的文件
-  - 按文件类型 `find 查找目录 -type 类型`   类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
+  - 选项参数
+    - `-name`: 例子：find /usr/src -name filename.txt
+    - `-type`: 例子：find /usr/src -type f filename.txt
+      > 类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
+    - `-size`: 默认单位为512byte，一个扇区的大小
+      - 例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
+      - 例子：find /usr/src -size +10k -size -20k
+    - `-maxdepth`: 例子： find /usr -maxdepth 2 -type d | wc -l  统计/usr 目录下深度为2的所有目录文件
+    - `-exec`: 例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
+    - `-print`: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有“./”字符串；
+    - `print0`: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；  
+    - `xargs`
+      -  以空格或`\0` 作为分隔符拆分解析的命令。每次从缓冲区读取的数据有限，而exec则是一次性将查到的内容读到缓冲区内。
+      - 例子：find ./ -name "*.sh" -print | xargs ls -l  结合管道一起使用，用法与exec一样。 
+    - `-atime`: 访问时间， `+7` 七天以前，`-7` 最近七天以内访问过的
+    - `-amin`: 访问时间（按照分钟）
+    - `-mtime`: 修改时间（按照天数）
+    - `-mmin `: 修改时间（按照分钟）
+    - `ctime`: 文件属性修改时间
+    - `cmin`: 文件属性修改时间（按照分钟）
 
 
-- `grep` 按文件内容查找
-  - `grep -r 查找内容 查找路径 ` 
+- `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
+  - 三种形式的grep命令
+    - gerp:标准格式
+    - egrep:扩展grep命令，其实和grep -E等价，支持基本和扩展的正则表达式。
+    - fgrep: 快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
+  - 选项参数
+    - `-n`：列出所有的匹配行，显示行号
+    - `-r`: 递归搜索
+    - `-R`：  
+    - `-i`: 搜索时，忽略大小写
+    - `-c`: 只输出匹配行的数量
+    - `-l`: 只列出符合匹配的文件名，不列出具体的匹配行
+    - `-h`: 查询多文件时不显示文件名
+    - `-s`: 不显示不存在、没有匹配文本的错误信息
+    - `-v`: 显示不包含匹配文本的所有行
+    - `-w`: 匹配整个单词
+    - `-x`: 匹配整行
+    - `-q`: 禁止输出任何结果，已退出状态表示搜索是否成功
+    - `-b`: 打印匹配行距文件头部的偏移量，以字节为单位
+    - `-o`: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
+    ```
+    grep -r  "struct task {" /usr/src/ -n     // 搜索/usr/src/目录下包含 struct task { 的字符，并显示字符所在的行号
+    ```
 
 
-## 1.8. PID
+## 1.9. PID
 - `pgrep -l xxxx(程序名称)`  只显示某个进程的PID
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
 
-## 1.9. 管道
-> 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入
-- grep：查文件中包含的一个相关命令
-- 用法：grep 命令1|命令2|命令3|·····|命令n；格式：`grep "要搜索的内容" xxx.txt `
-  - `grep -n`
-  - `grep -v`
-  - `^` 开头       
-  - `$` 结尾
+## 1.10. 管道
+> 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入，常用 `|` 表示。
+- 与grep命令组合：`grep 命令1|命令2|命令3|·····|命令n`
 
 
-## 1.10. 查看使用的端口
+## 1.11. 查看使用的端口
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
 - 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
 - `netstat` 检查端口
@@ -196,7 +236,7 @@
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
 
 
-## 1.11. 常用 Bash终端快捷键
+## 1.12. 常用 Bash终端快捷键
 - 参考
   - [Bash快捷键大全](https://linux.cn/article-5660-1.html)
   - [Terminator The robot future of terminals](https://gnometerminator.blogspot.com/p/introduction.html)
@@ -218,12 +258,10 @@
   - `kill + job号`
   - `kill + PID`
 
-
 2. 大小写
 - `esc + u:`  将当前光标之后以空格隔开的单词或者字符转换为大写，包括当前光标(upper)
 - `esc + l:`  将当前光标之后以空格隔开的单词或者字符转换为大小，包括当前光标(lower)
 - `esc + c:`  将当前光标之后以空格隔开的单词首字母转换为大写
-
 
 3. 编辑
 >擦除：输入的数据还在缓冲内存中，没有被删除，可以复制
@@ -241,14 +279,12 @@
 - `Ctrl + b` 光标向后(backward)移动，与 `←` 等价
 - `Ctrl + f` 光标向前移动(forward)，与 `→` 等价
 
-
 4. 历史记录
 - `Ctrl + r` 搜索历史记录
 - `Ctrl + g` 退出当前搜索模式（在搜索历史记录下）
 - `fc - l`   默认从最后往前显示 16 条历史记录。
 - `Ctrl + p` 向上查找历史命令，与 `↑` 等价
 - `Ctrl + n` 向下查找历史命令，与 `↓` 等价
-
 
 5. 其它命令
 - `cd - ` 在两个相邻的目录之间进行切换。
@@ -257,8 +293,7 @@
 - `lsblk` 以树状的格式列出块设备
 
 
-
-## 1.12. man命令
+## 1.13. man命令
 `man -n 命令参数`：n为数字
 - 1：普通应用程序或shell命令
 - 2：系统调用
@@ -271,29 +306,28 @@
 - 9：非标准的内核程序
 
 
-## 1.13. strace
+## 1.14. strace
 strace  - trace system calls and signals
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
-
-## 1.14. wget命令
+## 1.15. wget命令
 - 参考
   - [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
-
 
 - 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置
 -  wget 下载单个文件下载
   - 下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
 
-## 1.15. 包管理
+## 1.16. 包管理
 Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
 
 CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
-### 1.15.1. apt命令
+
+### 1.16.1. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -326,7 +360,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-### 1.15.2. dpkg 命令
+### 1.16.2. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -340,8 +374,8 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - dpkg -reconfigure 重新配置
 
 
-## 1.16. 防火墙
-### 1.16.1. ubuntu下默认的防火墙
+## 1.17. 防火墙
+### 1.17.1. ubuntu下默认的防火墙
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -353,14 +387,16 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-### 1.16.2. CentOS下默认的防火墙
+### 1.17.2. CentOS下默认的防火墙
 > CentOS下默认的防火墙为 `firewalld` 
+
 ```
 参数解释
 1、firwall-cmd：是Linux提供的操作firewall的一个工具；
 2、–permanent：表示设置为持久；
 3、–add-port：标识添加的端口
 ```
+
 - 启动： systemctl start firewalld
 - 关闭： systemctl stop firewalld
 - 查看系统防火墙状态： systemctl status firewalld
