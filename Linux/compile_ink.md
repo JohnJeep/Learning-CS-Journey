@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2020-09-22 10:22:26
+ * @LastEditTime: 2020-11-16 20:39:01
  * @LastEditors: Please set LastEditors
  * @Description: 预处理、编译、汇编、链接过程
 -->
@@ -15,6 +15,7 @@
   - [0.2.3. 静态库](#023-静态库)
   - [0.2.4. 动态库也叫共享库(share library)](#024-动态库也叫共享库share-library)
 - [0.3. 工具](#03-工具)
+- [0.4. 两种编译构建方式](#04-两种编译构建方式)
 
 <!-- /TOC -->
 
@@ -66,7 +67,6 @@
 
   - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
 <div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
-
 
 - 优缺点
   - 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
@@ -265,4 +265,10 @@
       @file 
       可以将选项集中到一个文件中，然后使用这个@file选项载入。
       ``` 
+
+
+## 0.4. 两种编译构建方式
+- ①原生（native）编译构建，即编译构建命令所运行（host）的系统环境和编译构建输出目标（target）的系统环境一致；
+- ②交叉（cross）编译构建，上述target和host不一致，即在A系统环境构建出在B系统上运行的目标，这在嵌入式开发中尤为多见。
+  > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
