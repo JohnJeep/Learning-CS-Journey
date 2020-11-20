@@ -1,46 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-11-17 22:42:28
+ * @LastEditTime: 2020-11-19 14:20:19
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
 
-<!-- TOC -->
-
-- [1. Linux Basic](#1-linux-basic)
-  - [1.1. 基础知识](#11-基础知识)
-    - [1.1.1. MBR](#111-mbr)
-    - [1.1.2. GPT](#112-gpt)
-    - [1.1.3. BIOS与UEFI](#113-bios与uefi)
-    - [1.1.4. 分区](#114-分区)
-  - [1.2. 文件操作](#12-文件操作)
-  - [1.3. 磁盘](#13-磁盘)
-  - [1.4. wc](#14-wc)
-  - [1.5. top](#15-top)
-  - [1.6. ps (process status)](#16-ps-process-status)
-  - [1.7. 重定向](#17-重定向)
-  - [1.8. 用户权限与链接](#18-用户权限与链接)
-  - [1.9. find与grep](#19-find与grep)
-  - [1.10. PID](#110-pid)
-  - [1.11. 管道](#111-管道)
-  - [1.12. 绝对路径与相对路径](#112-绝对路径与相对路径)
-  - [1.13. 查看使用的端口](#113-查看使用的端口)
-  - [1.14. 解压与压缩](#114-解压与压缩)
-    - [1.14.1. 文件类型](#1141-文件类型)
-    - [1.14.2. tar文件打包](#1142-tar文件打包)
-  - [1.15. man命令](#115-man命令)
-  - [1.16. strace](#116-strace)
-  - [1.17. wget命令](#117-wget命令)
-  - [1.18. 包管理](#118-包管理)
-    - [1.18.1. 软件仓库](#1181-软件仓库)
-    - [1.18.2. apt命令](#1182-apt命令)
-    - [1.18.3. dpkg 命令](#1183-dpkg-命令)
-  - [1.19. 防火墙](#119-防火墙)
-    - [1.19.1. ubuntu下默认的防火墙](#1191-ubuntu下默认的防火墙)
-    - [1.19.2. CentOS下默认的防火墙](#1192-centos下默认的防火墙)
-
-<!-- /TOC -->
 
 # 1. Linux Basic
 - 参考
@@ -346,7 +311,6 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
 
 
-
 ## 1.14. 解压与压缩
 ### 1.14.1. 文件类型
 - `gzip`: 压缩文件后缀(*.gz)
@@ -356,12 +320,12 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 ### 1.14.2. tar文件打包     
 - 参数
-	- `-c(create)`: 打包文件
-	- `-t(list)`: 察看打包文件的内容含有哪些文件名
-	- `-x(extract)`: 解压打包文件 
+	- `-c(Create)`: 打包文件
+	- `-t(lisT)`: 察看打包文件的内容含有哪些文件名
+	- `-x(eXtract)`: 解压打包文件 
       > 注意：`-c, -t, -x` 不可同时出现在一串命令行中。
-	- `-v(verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
-	- `-f(filename)`:  后面要立刻接要被处理的文件名！
+	- `-v(Verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
+	- `-f(Filename)`:  后面要立刻接要被处理的文件名！
 	- `-C(direCtory: 目录)`: 将文件解压在特定的目录
 	- `-p(小写)`:  保存原本文件的权限与属性，不包含根目录(/)。
 	- `-P(大写)`：保留绝对路径，即允许备份的数据中中包含根目录。解压后的数据直接从根目录(/)开始。
@@ -371,23 +335,55 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 	   > 注意：`-z, -j, -J` 不可以同时出现在一串命令行中
 
 
-- 打包压缩所有文件
-  - `tar -zcvf 自己创建的文件名(xxx.tar.gz)  要打包压缩的路径(/etc/)`: 这样压缩的文件连要压缩文件的目录也一起给压缩了。
+#### 1.14.2.1. 打包文件或目录
+  - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
+   - 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
 
-- 打包压缩所有文件不包含打包文件的路径：
-  - `tar -zcvf tmp4.tar.gz -C etc/ .`    将etc下所有文件打包为tmp4.tar.gz 不包含etc包的路径。
 
-- 打包一个目录，但不含该目录下的某些文件
-  - `tar -zcvf bb.tar.gz --exclude=etc/apt etc`   将etc目录下除去apt文件的所有文件打包压缩为 bb.tar.gz，打包压缩时包含etc的路径。
-	  1.  一定要注意排除目录的最后不要带"/", 否则exclude目录将不起作用
-	  2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
+#### 1.14.2.2. 解包文件或目录
+-  格式：`tar -xvf 解压的文件  -C 文件解压后的路径`
+-  注意：若后面不跟 `-C 文件解压后的路径` ，则会默认解包到当前路径下
+-  `tar -xvf test.tar -C /tmp` ：将test.tar打包的文件解包到 /tmp 路径下
 
-- 解压所有文件
-  - `tar -zxf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 -C ~/Exercise_Linux/tmp 则只是解压到当前目录下。
+
+#### 1.14.2.3. 解压缩文件
+- 解多个文件
+  > `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
+  
   > 注意：指定解压的目录必须要首先存在，否则会出错，tar命令不会自动创建不存在的文件夹。
 
 - 解压单一文件
   - `tar -zxvf etc.tar.gz etc/gdb`   将 etc.tar.gz压缩包中gdb文件夹解压 到当前目录下。
+
+
+#### 1.14.2.4. 打包压缩
+- 打包压缩所有文件
+  >  `tar -zcvf 自己创建的文件名(xxx.tar.gz)  要打包压缩的路径(/etc/)`: 这样压缩的文件连要压缩文件的目录也一起给压缩了。
+
+- 打包压缩所有文件不包含打包文件的路径
+  > `tar -zcvf tmp4.tar.gz -C etc/ .`    将etc下所有文件打包为tmp4.tar.gz 不包含etc包的路径。
+
+- 打包并压缩一个目录，但不含该目录下的某些文件
+  > `tar -zcvf bb.tar.gz --exclude=etc/apt etc`   将etc目录下除去apt文件的所有文件打包压缩为 bb.tar.gz，打包压缩时包含etc的路径。
+	  
+    1.  一定要注意排除目录的最后不要带"/", 否则exclude目录将不起作用
+    2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
+
+
+
+
+### 1.14.3. zip
+> zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
+
+- zip  -r  yasuo.zip  demo.txt   mydir　　//该命令是将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
+zip -r  mydir.zip  mydir　　        //  压缩当前目录下的子目录mydir
+- unzip   yasuo.zip　　                 //  解压yasuo.zip文件到当前目录
+- unzip -d  /mydir  yasuo.zip　  //  把压缩文件解压到指定的mydir目录
+- unzip -t  yasuo.zip　　               //  检查压缩文件是否损坏
+- unzip  -l  demo.zip　　              //  显示demo.zip压缩包中有哪些文件，不进行解压
+- unzip  -n  demo.zip　　             // 解压时不覆盖已存在的文件
+
+> 注意：直接使用unzip指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。
 
 
 
@@ -429,7 +425,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
   SEE ALSO - 功能或操作对象相近的其它命令
   ```
 
-> man中的一些快捷操作：
+man中的一些快捷操作:
 
 名称 | 用法
 ---|---
