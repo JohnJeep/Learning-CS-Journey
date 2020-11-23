@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-09-23 16:13:23
+ * @LastEditTime: 2020-11-23 18:20:19
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -56,3 +56,9 @@ Create your own life and then go out and live it with absolutely no regrets.
 
 Happiness is a butterfly, which when pursued, is always just beyond your grasp, but whic, if you will sit down quietly, may alight upon you.
 幸福犹如蝴蝶，当你追逐它时，你永远捕捉不到，当你静坐下来时，它却可能落在你的身上。
+
+You need to recognize each step of progress you take towards achieving your goals.
+你成功路上的每一点进步都值得自己的认可。
+
+Your joy for life, transmitted wherever you took your smile, and the sparkle in those unforgettable eyes.
+你对生活的欣喜，通过你的微笑和你令人难忘的双眸中的闪光，传遍了你的所到之处。
