@@ -128,13 +128,13 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 ## 1.2. 文件操作
 - `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
-- `rm fileName`: 删除一个文本
-- `mkdir `: 新建一个目录，创建多层的目录加参数 `-p` (--parents)
+- `rm fileName(remove)`: 删除一个文本
+- `mkdir(make directory) `: 新建一个目录，创建多层的目录加参数 `-p` (--parents)
 - `rmdir `: 移除一个目录
 - `rm -rf `: 删除一个目录下的所有文件；以下为两个常用的参数
   - `-i(interactive)`：让系统在执行前确认。
   - `-r(recursive)`：表示递归
-- `mv  -v A B`: 文件A移到B处，并重名为B，`-v`显示系统执行的操作。
+- `mv  -v A B`: 文件A移到B处，并重名为B，`-v`显示系统执行的操作(move)。
 - `cp src dest`: 将文件src拷贝到当前目录下为dest文件；
   - 注意：拷贝目录时，要加 `-r` 参数(recursive)
   - 拷贝操作会复制执行者的属性和权限。
@@ -150,19 +150,51 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
   - 只能用于搜索程序名和二进制文件（参数-b）
   - 示例：`whereis gcc`
 - `eject`: 将光盘驱动器中的光盘轻轻弹出和收回
-- `od(Octal Dump)`
-  - 将指定文件内容以八进制、十进制、十六进制、浮点格式或 ASCII 编码字符方式显示，通常用于显示或查看文件中不能直接显示在终端的字符。`od` 命令系统默认的显示方式是八进制。
-  - `-N BYTES`   --read-bytes=BYTES: 输出指定字节数
-  - `-t` TYPE
-  -  示例：`od -tx testfile`，以十六进制输出testfile，默认以四字节为一组（一列）显示。
+
+
 - 查看文件内容
-  - `more` (`-n`：可以显示行号)
-  - `less` (`-N`：可以显示行号)
-  - `cat`
-  - `tac`
-  - `nl` 查看文件时可以显示行号
-  - `more`命令中输入`h`会显示帮助信息
-  - 输入`b` 将显示上一屏的文件内容
+  - `cat(concatenate)`：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
+  - `tac`：从最后一行开始显示文件内容。
+  - `nl` ：查看文件时可以显示行号。
+  - `more`：(`-n`：可以显示行号)一页一页的显示文件内容，只能往后翻。
+  - `less`：(`-n`：可以显示行号)一页一页的显示文件内容，既可以往后翻又可以往前翻。一般用的最多。
+    - 空格键：向下翻一页。一般使用上下箭头进行翻页。
+    - /字符串：向下查找字符串。
+    - ?字符串：向上查找字符串。
+    - n：重复前一个查找。
+    - N：反向重复前一个查找。
+    - g：进到这个数据的第一行。
+    - G：进到这个数据的最后一行。
+    - q：退出less程序。
+  - `od(Octal Dump)`：默认以二进制的方式读取文件内容。
+    - 将指定文件内容以八进制、十进制、十六进制、浮点格式或 ASCII 编码字符方式显示，通常用于显示或查看文件中不能直接显示在终端的字符。
+    - 格式：`od -t TYPE` 文件
+    - 参数
+      ```
+      -A RADIX   --address-radix=RADIX   选择以何种基数表示地址偏移
+      -j BYTES   --skip-bytes=BYTES      跳过指定数目的字节
+      -N BYTES   --read-bytes=BYTES      输出指定字节数
+      -S [BYTES] --strings[=BYTES]       输出长度不小于指定字节数的字符串，BYTES 缺省为 3
+      -v         --output-duplicates     输出时不省略重复的数据
+      -w [BYTES] --width[=BYTES]         设置每行显示的字节数，BYTES 缺省为 32 字节
+      -t TYPE    --format=TYPE           指定输出格式，格式包括 a、c、d、f、o、u 和 x，各含义如下：
+        a：利用默认的字符来输出。
+        c：利用ASCII字符来输出。
+        d[SIZE]：利用有符号的十进制(decimal)来输出数据。每个整数占用 SIZE bytes。
+        f[SIZE]：利用浮点数(floating)来输出数据。每个浮点数占用 SIZE bytes。
+        o[SIZE]：利用八进制(octal)来输出数据。每个整数占用 SIZE bytes。
+        u[SIZE]：利用无符号的十进制(decimal)来输出数据。每个整数占用 SIZE bytes。
+        x[SIZE]：利用十六进制(hexadecimal)来输出数据。每个整数占用 SIZE bytes。
+        
+        SIZE 可以为数字，也可以为大写字母。如果 TYPE 是 [doux] 中的一个，那么 SIZE 可以为 C  = sizeof(char)，S = sizeof(short)，I = sizeof(int)，L = sizeof(long)。如果 TYPE 是 f，那么 SIZE 可以为 F = sizeof(float)，D = sizeof(double) ，L = sizeof(long double)
+      ```
+    - 示例
+      - `od -t x testfile`，以十六进制输出testfile，默认以四字节为一组（一列）显示。
+      - 利用 od 命令来查看字符的ASCII表：`echo abc | od -t dCc`
+
+  - head、tail：取出文件前几行或最后几行的数据。
+    > 示例：在屏幕上列出 `/etc/man_db.conf` 文件中的第11行到22行之间的内容，并且显示行号。 `cat -n /etc/man_db.conf | head -n 20 | tail -n 10`
+
 
 
 ## 1.3. 磁盘
