@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-11-23 18:20:19
+ * @LastEditTime: 2020-11-25 21:20:41
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -62,3 +62,6 @@ You need to recognize each step of progress you take towards achieving your goal
 
 Your joy for life, transmitted wherever you took your smile, and the sparkle in those unforgettable eyes.
 你对生活的欣喜，通过你的微笑和你令人难忘的双眸中的闪光，传遍了你的所到之处。
+
+
+satisfy the demands of the marketplace. 满足市场需求
