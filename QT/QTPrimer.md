@@ -1,13 +1,23 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2020-10-27 14:49:11
+ * @LastEditTime: 2020-11-27 16:06:34
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
 -->
-## 参考
-- [Qt Creator 的下载与安装](https://www.cnblogs.com/arxive/p/11669034.html)
+## 参考资源
+
+### 总体学习
+- [关于QT的系统总结（非常全面，非常好）](https://www.cnblogs.com/findumars/p/5529526.html)
+- [Qt 学习之路 2](https://www.bookstack.cn/read/qt-study-road-2/da83aa582cd34d4d.md)：简单些了Qt一些主要的学习内容。
+
+
+### 文件
+- [QT读取和写入文件](https://blog.csdn.net/qq_40732350/article/details/86774306)：讲解了QFile、QFileInfo、QTemporaryFile、QDir的相关用法。
+- [QT学习笔记8：QDir类及其用法总结](https://www.cnblogs.com/aiguona/p/10298226.html)：QDir类提供了访问系统目录结构及其内容的与平台无关的方式。
+- [Qt拷贝文件、文件夹、创建文件夹、删除文件夹操作](https://blog.csdn.net/ljt350740378/article/details/71381705)
+
 
 
 ## 快捷键
