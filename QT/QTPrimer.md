@@ -1,7 +1,7 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2020-11-27 16:06:34
+ * @LastEditTime: 2020-11-30 10:36:40
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
@@ -118,3 +118,77 @@
 - 注意：
   - 必须要指定父类对象，否则就需要手动释放。
   - 父对象直接或间接继承于 `QObject` 类。
+
+
+
+## QString
+- 参考：[QString, Std::string, char *相互转换](https://www.cnblogs.com/zxbilly/p/9195411.html)
+
+Qt 库中对字符串类型进行了封装，QString 类提供了所有字符串操作方法，给开发带来了便利。 由于第三方库的类型基本上都是标准的类型，即使用std::string或char *来表示字符 (串) 类型，因此在Qt框架下需要将QString转换成标准字符 (串) 类型。
+
+
+### std::string和char *的相互转换
+- 将char *或char[]转换为std::string
+  ```
+  std::string ss,str;
+  const char *y="hello";
+  const char z[]="hello world";
+  ss=y;
+  str=z;
+  ```
+
+- 将std::string转换为char *或char[]，有3种方法，推荐第二种方法
+  - 1)尾部不会附加结束符'\0'
+    ```
+    std::string str="abc";
+    char *p=str.data();
+    ```
+
+  - 2)尾部附加结束符'\0'
+    ```
+    std::string str="Pigman";
+    char ch[10];
+    strcpy(ch,str.c_str());
+    ```
+  - 3)尾部不会附加结束符'\0'，第二个参数为复制字符个数，第三个为复制位置
+    ```
+    std::string str("pig can fly");
+    char *p;
+    str.copy(p,3,0);
+    *(p+3)='\0';　　//　手动添加结束符
+    ```
+
+
+### QString和std::string相互转换，以及避免出现乱码
+```
+QString qstr;
+std::string str;
+//　　QString转std::string
+str=qstr.toStdString();
+str=(const char*)qstr.toLocal8bit();　　　　　　//　中文字符串避免出现乱码
+//　　std::string转QString
+qstr=QString::fromStdString(str);
+qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现乱码
+```
+
+
+### QString和char *相互转换
+- QString转为char *
+  ```
+  两种方法
+    1) 先转为std::string，再转为char *，如上所示
+    2) 先转为QByteArray，再转为char *
+    
+  QString ss("Flying without wings");
+  QByteArray sr=ss.toLocal8Bit();
+  char ch[10];
+  strcpy(ch,sr.data());
+  ```
+
+
+- char *转为QString
+  ```
+  char *ch="westlife";
+  QString str(ch);   // Qt5     
+  QString str = QString::fromUtf8(ch));    //  Qt4
+  ```
