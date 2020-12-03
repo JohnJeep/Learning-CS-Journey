@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-12-02 21:16:48
+ * @LastEditTime: 2020-12-03 08:38:20
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -491,7 +491,7 @@ s | 套接文件(socket) | null
     - nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
     - 如何调整nice值？
       - 进程刚开始时就给指定一个特定的nice值。`nice -n -5 vim &` 启动vim时，给定一个nice值，并将vim放在后台执行。
-      - 调整已存在的进程的nice值，需要用 `renice` 命令：`renice 4 2366` 将PID=2366进程的nice值 为4
+      - 调整已存在的进程的nice值，需要用 `renice` 命令：`renice 4 2366` 将PID=2366进程的nice值调整为4
   - `ADDR`：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 `-` 表示
   - `SZ`：表示此进程用掉多少内存
   - `WCHAN`：表示目前进程是否在运行，如果为 `-`，则表示正在运行。
