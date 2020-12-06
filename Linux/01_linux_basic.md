@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-12-03 08:38:20
+ * @LastEditTime: 2020-12-06 14:54:24
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -33,6 +33,8 @@
   - [1.12. 管道](#112-管道)
   - [1.13. 绝对路径与相对路径](#113-绝对路径与相对路径)
   - [1.14. 查看使用的端口](#114-查看使用的端口)
+  - [dmesg: 分析内核产生的信息](#dmesg-分析内核产生的信息)
+  - [vmstat](#vmstat)
   - [1.15. 解压与压缩](#115-解压与压缩)
     - [1.15.1. 文件类型](#1151-文件类型)
     - [1.15.2. tar文件打包](#1152-tar文件打包)
@@ -51,6 +53,7 @@
   - [1.20. 防火墙](#120-防火墙)
     - [1.20.1. ubuntu下默认的防火墙](#1201-ubuntu下默认的防火墙)
     - [1.20.2. CentOS下默认的防火墙](#1202-centos下默认的防火墙)
+  - [SELinux](#selinux)
 
 <!-- /TOC -->
 
@@ -580,6 +583,9 @@ s | 套接文件(socket) | null
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
+- `pidof program_name`：找出某个正在执行的进程的PID
+
+
 
 
 ## 1.12. 管道
@@ -620,6 +626,14 @@ s | 套接文件(socket) | null
 
 - `lsof` 检查端口
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
+
+
+## dmesg: 分析内核产生的信息
+系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
+
+
+## vmstat
+可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
 
 
 ## 1.15. 解压与压缩
@@ -867,3 +881,11 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - 查询 `8080` 端口是否开放  firewall-cmd --query-port=8080/tcp
 - 开放 `8080` 端口 firewall-cmd --permanent --add-port=8080/tcp
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
+
+
+
+## SELinux
+- 什么是SELinux？
+  > SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
+
+- SELinux是通过MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
