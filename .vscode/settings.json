@@ -54,6 +54,10 @@
         "thread": "cpp",
         "ratio": "cpp",
         "unordered_set": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "ctime": "cpp",
+        "future": "cpp"
     }
 }
