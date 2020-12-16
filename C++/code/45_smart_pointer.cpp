@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-13 11:12:26
- * @LastEditTime: 2020-08-13 15:45:34
+ * @LastEditTime: 2020-12-14 17:08:22
  * @LastEditors: Please set LastEditors
  * @Description: 智能指针知识
  * @FilePath: /45_smart_pointer.cpp
@@ -74,14 +74,17 @@ void test01()
 // unique_ptr pointer
 void test02()
 {
+
     unique_ptr<string> up1(new string("I am unique pointer."));
     unique_ptr<string> up2;
     cout << *up1 << endl;
     // up2 = up1;      // 此时会报错！！编译不通过
 
-    // 采用std::move()函数
-    up2 = std::move(up1);
+    // 采用std::move()函数，up1将assignment的拥有权转移给up2，up1 对象不再拥有
+    up2 = std::move(up1);   // assignment
     cout << *up2 << endl;
+    unique_ptr<string> up3(std::move(up2));   // copy construct
+    cout << *up3 << endl;
 
     // 将unique指针指向的值赋给一个临时对象temp_up
     // 临时对象的生命周期不应该太长，否则编译器会禁止。
