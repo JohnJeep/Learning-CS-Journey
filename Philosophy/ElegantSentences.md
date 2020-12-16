@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-11-25 21:20:41
+ * @LastEditTime: 2020-12-15 11:36:58
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -63,5 +63,23 @@ You need to recognize each step of progress you take towards achieving your goal
 Your joy for life, transmitted wherever you took your smile, and the sparkle in those unforgettable eyes.
 你对生活的欣喜，通过你的微笑和你令人难忘的双眸中的闪光，传遍了你的所到之处。
 
-
 satisfy the demands of the marketplace. 满足市场需求
+
+It can be so much more than just memorization and retention.
+学习知识不应该只是透过死记硬背的方式。
+
+That is the most beautiful moonrise I've seen in my entire life.
+那是我这辈子见过的最美丽的月出时分。
+
+With a lot of hard work and a good education, angthing is possible.
+只要你愿意努力工作，努力接收教育，任何事情都是可能的。
+
+You need to recognize each step of progress you take towards achieving your goals.
+你成功路上的每一点进步都值得自己的认可。
+
+Though there is much to be concerned about, there is far, far more for which to be thankful.
+尽管有很多事让人忧虑，但相比而言，值得感激的事要多得多。
+
+Limiting your options is the same as hanging on to old ideas.
+限制自己选择的机会等同于固守陈旧的观念。
+
