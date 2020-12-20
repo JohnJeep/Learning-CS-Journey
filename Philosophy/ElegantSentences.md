@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-12-15 11:36:58
+ * @LastEditTime: 2020-12-20 22:09:57
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -82,4 +82,15 @@ Though there is much to be concerned about, there is far, far more for which to 
 
 Limiting your options is the same as hanging on to old ideas.
 限制自己选择的机会等同于固守陈旧的观念。
+
+When you slow yourself down, you'll gain more time, you'll accomplish more.
+舒缓身心时，你能驾驭时间，成就就更多。
+
+The distant rims of the world and of the firmament seemed to be a division in time no less than a division in matter.
+远处天地交接的界限，是物质的分界，似乎也是时间的分界。
+
+Life calls each of us, average human beings, to acts of extraordinary courage.
+生活促使我们每一个普普通通的人，都能拥有做出非凡举动的勇气。
+
+
 
