@@ -1,14 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2020-12-22 22:00:19
+ * @LastEditTime: 2020-12-24 22:53:52
  * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
 -->
 <!-- TOC -->
 
 - [0.1. 参考](#01-参考)
-- [0.2. 思考](#02-思考)
+- [## 0.2. 思考](#-02-思考)
 - [0.3. 设计模式概括](#03-设计模式概括)
 - [0.4. 设计模式原则](#04-设计模式原则)
 - [0.5. 创建型模式](#05-创建型模式)
@@ -43,6 +43,8 @@
 ## 0.1. 参考
 - [Wiki解释设计模式](https://en.wikipedia.org/wiki/Software_design_pattern)：具有权威性和系统性。
 - [设计模式：可复用面向对象软件的基础](https://en.wikipedia.org/wiki/Design_Patterns)：Wiki中关于GOF这本设计模式数据的描述，很有权威性。
+- [GoF Design Patterns reference](http://w3sdesign.com/index0100.php): Learning Object-Oriented Design & Programming。
+- [Design Patterns](https://refactoring.guru/design-patterns): 这是一本关于设计模式及其背后原则的电子书籍。比较详细的介绍了设计模式的用法，很通俗易懂。
 - [史上最全设计模式导学目录（完整版）](https://blog.csdn.net/lovelion/article/details/17517213)：推荐指数五颗星；刘伟老师力作，讲的非常好，通俗易懂，而且举例的应用场景也非常恰当。
 - [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/#) 推荐指数四颗星；利用许多的图例去描述每一种设计模式的过程，值得参考学习。
 - [Github: 学习并理解 23 种设计模式](https://github.com/xietao3/Study-Plan/tree/master/DesignPatterns) 推荐指数四颗星；Github上笔者记录自己学习设计模式的笔记。
@@ -53,17 +55,19 @@
 
 
 ## 0.2. 思考
-Elements of Reusable Object-Oriented Software(可复用面向对象软件)
+---------------
+* Elements of Reusable Object-Oriented Software(可复用面向对象软件)
+* 只有理解了模式，你才能清楚代码中的运行时刻结构。
+* 建立一套思维和一套模型
+* 设计模式：在变化和稳定中寻找一个平衡点。
 
-只有理解了模式，你才能清楚代码中的运行时刻结构。
-
-建立一套思维和一套模型
+---------------
 
 
 1. 设计模式是做什么的？
 2. 它的基本原理和意图是什么？
 3. 它解决的是什么样的特定设计问题？
-4. 什么情况下可以使用该设计模式？
+4. 什么时候、什么地方去使用该设计模式？
 5. 该设计模式可用来改良哪些不良的设计？
 6. 你怎样识别这些情况？
 7. 参与者：设计模式中的类或对象以及它们各自的职责？
@@ -450,12 +454,16 @@ Elements of Reusable Object-Oriented Software(可复用面向对象软件)
 
 ## 0.7. 行为型模式
 ### 0.7.1. **模板方法模式(Template Method)**
-- 什么是 Template Method？
-  > 定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+- 参考
+  - [Six common uses of the Template Design Pattern: Design Pattern series](https://www.codeproject.com/Articles/307452/common-use-of-Template-Design-pattern-Design-pat)
+
 
 
 - 模板模式概述
   >  模板方法模式是最简单的行为型设计模式，在其结构中只存在父类与子类之间的继承关系。通过使用模板方法模式，可以将一些复杂流程的实现步骤封装在一系列基本方法中，在抽象父类中提供一个称之为模板方法的方法来定义这些基本方法的执行次序，而通过其子类来覆盖某些步骤，从而使得相同的算法框架可以有不同的执行结果。模板方法模式提供了一个模板方法来定义算法框架，而某些具体步骤的实现可以在其子类中完成。
+
+- 什么是 Template Method？
+  > 定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义（override: 重写）该算法的某些特定步骤。延迟：子类实现父类的虚函数
 
 
 - UML图
@@ -470,6 +478,7 @@ Elements of Reusable Object-Oriented Software(可复用面向对象软件)
 
 - 缺点
   - 需要为每一个基本方法的不同实现提供一个子类，如果父类中可变的基本方法太多，将会导致类的个数增加，系统更加庞大，设计也更加抽象，此时，可结合桥接模式来进行设计。
+
 
 - 应用场景
   - (1) 对一些复杂的算法进行分割，将其算法中固定不变的部分设计为模板方法和父类具体方法，而一些可以改变的细节由其子类来实现。即：一次性实现一个算法的不变部分，并将可变的行为留给子类来实现。
