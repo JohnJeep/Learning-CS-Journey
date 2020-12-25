@@ -14,37 +14,39 @@
   - [1.3. 语句规范](#13-语句规范)
   - [1.4. 安装操作](#14-安装操作)
   - [1.5. 密码与用户](#15-密码与用户)
-  - [1.6. 数值类型](#16-数值类型)
-  - [1.7. 日期和时间类型](#17-日期和时间类型)
-  - [1.8. 字符串](#18-字符串)
-  - [1.9. SHOW命令](#19-show命令)
-  - [1.10. 数据库操作](#110-数据库操作)
-  - [1.11. 数据表操作](#111-数据表操作)
-    - [1.11.1. 创建数据表(create)](#1111-创建数据表create)
-    - [1.11.2. 查看数据表(show)](#1112-查看数据表show)
-    - [1.11.3. 删除数据表(drop)](#1113-删除数据表drop)
-    - [1.11.4. 统计数据表](#1114-统计数据表)
-    - [1.11.5. 修改数表(alter)](#1115-修改数表alter)
-  - [1.12. 数据操作](#112-数据操作)
-    - [1.12.1. 插入数据(insert)](#1121-插入数据insert)
-    - [1.12.2. 更新表数据(update)](#1122-更新表数据update)
-    - [1.12.3. 删除表数据(delete)](#1123-删除表数据delete)
-    - [1.12.4. 查询(检索)表数据(select)](#1124-查询检索表数据select)
-      - [1.12.4.1. 子查询](#11241-子查询)
-      - [1.12.4.2. 连接](#11242-连接)
-  - [1.13. function](#113-function)
-  - [1.14. 视图(View)](#114-视图view)
-    - [1.14.1. 视图创建](#1141-视图创建)
-    - [1.14.2. 视图删除](#1142-视图删除)
-  - [1.15. 编码问题](#115-编码问题)
-  - [1.16. 引擎](#116-引擎)
-  - [1.17. table](#117-table)
-  - [1.18. index](#118-index)
-  - [1.19. lock](#119-lock)
-  - [1.20. transaction](#120-transaction)
-  - [1.21. 文件](#121-文件)
-  - [1.22. 数据的导入与导出](#122-数据的导入与导出)
-    - [1.22.1. 导入和导出txt文件](#1221-导入和导出txt文件)
+  - [1.6. MySQL配置文件](#16-mysql配置文件)
+  - [1.7. 存储架构](#17-存储架构)
+  - [1.8. 数值类型](#18-数值类型)
+  - [1.9. 日期和时间类型](#19-日期和时间类型)
+  - [1.10. 字符串](#110-字符串)
+  - [1.11. SHOW命令](#111-show命令)
+  - [1.12. 数据库操作](#112-数据库操作)
+  - [1.13. 数据表操作](#113-数据表操作)
+    - [1.13.1. 创建数据表(create)](#1131-创建数据表create)
+    - [1.13.2. 查看数据表(show)](#1132-查看数据表show)
+    - [1.13.3. 删除数据表(drop)](#1133-删除数据表drop)
+    - [1.13.4. 统计数据表](#1134-统计数据表)
+    - [1.13.5. 修改数表(alter)](#1135-修改数表alter)
+  - [1.14. 数据操作](#114-数据操作)
+    - [1.14.1. 插入数据(insert)](#1141-插入数据insert)
+    - [1.14.2. 更新表数据(update)](#1142-更新表数据update)
+    - [1.14.3. 删除表数据(delete)](#1143-删除表数据delete)
+    - [1.14.4. 查询(检索)表数据(select)](#1144-查询检索表数据select)
+      - [1.14.4.1. 子查询](#11441-子查询)
+      - [1.14.4.2. 连接](#11442-连接)
+  - [1.15. function](#115-function)
+  - [1.16. 视图(View)](#116-视图view)
+    - [1.16.1. 视图创建](#1161-视图创建)
+    - [1.16.2. 视图删除](#1162-视图删除)
+  - [1.17. 编码问题](#117-编码问题)
+  - [1.18. 引擎](#118-引擎)
+  - [1.19. table](#119-table)
+  - [1.20. index](#120-index)
+  - [1.21. lock](#121-lock)
+  - [1.22. transaction](#122-transaction)
+  - [1.23. 文件](#123-文件)
+  - [1.24. 数据的导入与导出](#124-数据的导入与导出)
+    - [1.24.1. 导入和导出txt文件](#1241-导入和导出txt文件)
 
 <!-- /TOC -->
 
@@ -114,7 +116,25 @@
 - 显示当前服务器版本：`select version();`
 
 
-## 1.6. 数值类型
+## 1.6. MySQL配置文件
+ - `.frm` 文件：存放表结构
+ - `.myd` 文件：存放表数据
+ - `.myi` 文件：存放表索引
+ -  innodb 引擎下 `.ibd` 文件存放索引和表数据；MyiSAM引擎下索引和数据的存放是分开的，在不同的文件夹中。
+ -  二进制日志：log-bin
+ -  错误日志：log-error 
+  
+## 1.7. 存储架构
+- Connectors
+- Connection Pool
+- Pluggable Storage Engines. 插件式的存储引擎架构将查询处理和其它的系统任务以及数据的存储提取分离。这种架构可以根据业务的需求和实际需求选择合适的存储引擎。
+- File System
+
+
+
+
+
+## 1.8. 数值类型
 - TINYIN：1字节    范围：-128~127
 - SMALLINT: 2字节  范围：-32768~32767
 - MEDIUMINT: 3字节
@@ -130,7 +150,7 @@
 
 
 
-## 1.7. 日期和时间类型
+## 1.9. 日期和时间类型
 - DATE(3字节)；表示：日期值  YYYY-MM-DD
 - TIME(3字节)；表示：时间值或持续时间  HH:MM:SS
 - YEAR(1字节)；表示：年份值  YYYY
@@ -140,7 +160,7 @@
 
 
 
-## 1.8. 字符串
+## 1.10. 字符串
 - CHAR: 固定长度的字符类型，范围：0-255
 - VARCHAR: 可变长度的字符类型，范围：0-65535
 - TINYBLOB: 0-255  不超过 255 个字符的二进制字符串
@@ -159,7 +179,7 @@
 
 
 
-## 1.9. SHOW命令
+## 1.11. SHOW命令
 - `USE 数据库名`: 选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库操作。
 - `SHOW DATABASES`:  列出 MySQL 数据库管理系统的所有数据库列表。
 - `SHOW TABLES`:  显示指定数据库的所有表。
@@ -168,7 +188,7 @@
 - `SHOW INDEX FROM 数据表`:  显示数据表的详细索引信息，包括 PRIMARY KEY（主键）
 
 
-## 1.10. 数据库操作
+## 1.12. 数据库操作
 - 查看当前数据库： `select database();`
 - 显示当前时间、用户名、数据库版本: `select now(), user(), version();`
 - 创建库:  `create database[ if not exists] 数据库名 数据库选项`
@@ -181,8 +201,8 @@
 - 删除库(同时删除该数据库相关的目录及其目录内容): `drop database[ if exists] 数据库名`       
 
 
-## 1.11. 数据表操作
-### 1.11.1. 创建数据表(create)
+## 1.13. 数据表操作
+### 1.13.1. 创建数据表(create)
 - 创建数据表 `CREATE TABLE [temporary] [IF NOT EXISTS] table_name(column_name data_type, ...);`
   - table_name可以为`[库名].表名`
   - 每个字段必须有数据类型
@@ -193,7 +213,7 @@
   - `temporary`为临时表，会话结束时表自动消失  
 
 
-### 1.11.2. 查看数据表(show)
+### 1.13.2. 查看数据表(show)
 - 查看数据表列表 `SHOW TABLES [FROM db_name]` 使用FROM db_name可以查看该数据库中所有的表
 - 查看数据表结构 
   - `SHOW COLUMNS FROM tab_nmae`
@@ -205,7 +225,7 @@
 - 查看记录（数据表内容） `SELECT expr, ... FROM tabl_name`
 
 
-### 1.11.3. 删除数据表(drop)
+### 1.13.3. 删除数据表(drop)
 - 删除数据表：`DROP TABLE table_name;`
 - 清空数据表： `TRUNCATE [TABLE] tab_name`
 - 复制表结构: `CREATE TABLE 新表名称 LIKE 要复制的表名`
@@ -216,14 +236,14 @@
 - 分析表: `ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...`
 
 
-### 1.11.4. 统计数据表
+### 1.13.4. 统计数据表
 - 查询数据采用SELECT命令
   - 查询数据表中不重复的行：`SELECT DISTINCT col_name FROM tab_name`
   - 从行 5 开始曲 4 行：`SELECT col_name FROM tab_name LIMIT 5, 4`
 - 统计某个数据库中有多少张表：`SELECT count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;`
 
 
-### 1.11.5. 修改数表(alter)
+### 1.13.5. 修改数表(alter)
 - 修改数据表
   - 对表进行重命名
     - `RENAME TABLE 原表名 TO 新表名`
@@ -257,8 +277,8 @@
   - 对字段名修改: `ALTER TABLE tab_name CHANGE[ COLUMN] 原字段名 新字段名 新字段属性 新参数`
 
 
-## 1.12. 数据操作
-### 1.12.1. 插入数据(insert)
+## 1.14. 数据操作
+### 1.14.1. 插入数据(insert)
 - 单条插入数据：`INSERT INTO table_name ( field1, field2,...fieldN )
                       VALUES
                       ( value1, value2,...valueN );`
@@ -271,7 +291,7 @@
 - 多条数据的插入，节省了网络开销、提高了插入效率
 
 
-### 1.12.2. 更新表数据(update)
+### 1.14.2. 更新表数据(update)
 - 单表更新记录: `UPDATE tab_name SET 字段名=新值1 [, 字段名=新值N]... WHERE [where_condition]`  
   - 若省略`WHERE`语句，表里面的内容都要更新
   - 组成
@@ -285,7 +305,7 @@
   > 常用于根据一个表的字段来动态的更新另外一个表的字段属性
 
 
-### 1.12.3. 删除表数据(delete)
+### 1.14.3. 删除表数据(delete)
   - 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
     - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
   - 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
@@ -304,7 +324,7 @@
   - truncate 不激活trigger (触发器)，但是会重置Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从1开始记录，而不是接着原来的 ID数。而 delete 删除以后，identity 依旧是接着被删除的最近的那一条记录ID加1后进行记录。如果只需删除表中的部分记录，只能使用 DELETE语句配合 where条件
 
 
-### 1.12.4. 查询(检索)表数据(select)
+### 1.14.4. 查询(检索)表数据(select)
 - 查看表中所有数据: `SELECT * FROM tab_name WHERE [CONDITION]`
 - 去掉重复数据显示使用关键字 `distinct`
   > `SELECT DISTINCT (co_name1, col_name2, ..., col_nameN) FROM tab_name WHERE [CONDITION]`
@@ -362,7 +382,7 @@
   > 使用的顺序：where---group by---having---order by---limit
 
 
-#### 1.12.4.1. 子查询
+#### 1.14.4.1. 子查询
 - where型子查询: 内层查询的结果作为外层的条件
 - from型子查询：内层SQL查询的结果当成一张临时表，供外层的SQL再次查询。
 - exist型子查询：把外层SQL查询的结果拿到内层SQL中去测试，如果内层SQL成立，则该行取出。
@@ -370,7 +390,7 @@
   > null是一种类型，比较时只能用 `is null` 或 `is not null`;碰见运算符时，一律返回为null。使用null效率不高，影响索引的效果
 
 
-#### 1.12.4.2. 连接
+#### 1.14.4.2. 连接
 - 使用两表相乘生成第三个表的方法，再进行查询。这样做的方法效率很低，对内存的开销很大。
 - mysql中不支持外链接
 - 左连接: `A left join B on 条件`:
@@ -394,19 +414,19 @@
 
 
 
-## 1.13. function
+## 1.15. function
 - `cancat()函数`: 拼接两个列:
 - `RTrim()函数`: 去掉值右边的所有空格
 - `LTrim()函数`: 去掉值左边的所有空格
 - `Upper()`: 将文本转换为大写
 
 
-## 1.14. 视图(View)
+## 1.16. 视图(View)
 - 什么是视图？
   > 可以看成一张虚拟的表，是表通过某种运算得到的一个投影。
 
 
-### 1.14.1. 视图创建
+### 1.16.1. 视图创建
 - 创建视图` create view 视图名 as select语句`
 - 作用：
   - 简化查询：统计复杂的结果时，先用视图生成一个中间结果，再查询视图。
@@ -422,29 +442,31 @@
     - temptable：创建临时表
 
 
-### 1.14.2. 视图删除
+### 1.16.2. 视图删除
 - ` drop view view_name` 删除视图时，只能删除视图的定义，不会删除数据，删除一个或多个视图时，视图中间使用逗号分隔开
 
 
 
 
-## 1.15. 编码问题
+## 1.17. 编码问题
 - 字符集: `CHARSET = charset_name`
+-  查看数据库的编码方式：`show variables like '%char%';`
+
 - 四个概念
   - client(客户端)
   - connection(连接器)
   - server(服务器)
   - result(返回客户端的结果)
-- 如果client、connection、result三者的编码都为GBK，则可以简写为：`set names gbk;`
 
 
 - 解决不想乱码
   - 正确选择客户端的编码
   - 合理选择连接器的编码
   - 正确选择返回内容的编码
+  -  如果client、connection、result三者的编码都为GBK，则可以简写为：`set names gbk;`
 
 
-## 1.16. 引擎
+## 1.18. 引擎
 - 存储引擎: `ENGINE = engine_name`
   - 表在管理数据时采用的不同的数据结构，结构不同会导致处理方式、提供的特性操作等不同
 - 常见的引擎：InnoDB, MyISAM, Memory/Heap, BDB, Merge, Example, CSV, MaxDB, Archive
@@ -458,11 +480,11 @@
 - 修改表引擎方法: ` alter table table_name engine=InnoDB; `
 
 
-## 1.17. table
+## 1.19. table
 - 在InnoDB引擎中，表都是根据主键顺序组织存放的，这种存储方式称为索引组织表(index organized table)。
 
 
-## 1.18. index
+## 1.20. index
 - Innodb引擎支持下面的几种引擎？
   - B+树：是关系型数据库职工查找最为常用和最有效的索引。
   - 全文索引
@@ -470,7 +492,7 @@
 
 
 
-## 1.19. lock
+## 1.21. lock
 - 什么是latch？
   > latch一般叫为闩锁（轻量级的锁）。在innodb 引擎中，latch有分为mutex 和rwlock。目的是：用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。
 
@@ -487,7 +509,7 @@
   - `show engine innodb status \G;`  查看当前数据库中锁的请求。
 
 
-## 1.20. transaction
+## 1.22. transaction
 - 参考：
   - [数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
   
@@ -517,14 +539,14 @@
   - `set transaction`：设置事务的隔离级别
 
 
-## 1.21. 文件
+## 1.23. 文件
 - 数据文件目录: `DATA DIRECTORY = '目录'`
 - 索引文件目录: `INDEX DIRECTORY = '目录'`
 - 表注释: `COMMENT = 'string'`
 - 分区选项: `PARTITION BY ...` (详细见手册)
 
 
-## 1.22. 数据的导入与导出
+## 1.24. 数据的导入与导出
 [Mysql备份还原数据库之mysqldump实例及参数详细说明](https://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html)
 
 - `mysqldump`导出固定条件的数据库
@@ -550,7 +572,7 @@
 ```
 
 
-### 1.22.1. 导入和导出txt文件
+### 1.24.1. 导入和导出txt文件
 - 导入txt文件
 ```
 mysql> load data infile 'd.txt' into table table_name 
