@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-12-06 14:54:24
+ * @LastEditTime: 2020-12-25 11:24:49
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -44,6 +44,7 @@
       - [1.15.2.4. 打包压缩](#11524-打包压缩)
     - [1.15.3. zip](#1153-zip)
   - [1.16. man命令](#116-man命令)
+  - [ntsysv](#ntsysv)
   - [1.17. strace](#117-strace)
   - [1.18. wget命令](#118-wget命令)
   - [1.19. 包管理](#119-包管理)
@@ -533,7 +534,7 @@ s | 套接文件(socket) | null
 - find：按照文件属性查找 
   - 选项参数
     - `-name`: 例子：find /usr/src -name filename.txt
-    - `-type`: 例子：find /usr/src -type f filename.txt
+    - `-type`: 例子：find /usr/src -type filename.txt
       > 类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
     - `-size`: 默认单位为512byte，一个扇区的大小
       - 例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
@@ -574,7 +575,7 @@ s | 套接文件(socket) | null
     - `-b`: 打印匹配行距文件头部的偏移量，以字节为单位
     - `-o`: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
     ```
-    grep -r  "task_struct {" /usr/src/ -n     // 搜索/usr/src/目录下包含 task_struct { 的字符，并显示字符所在的行号
+    grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
     ```
 
 
@@ -759,6 +760,9 @@ man中的一些快捷操作:
 n |	继续下一个搜寻
 N |	反向查询 
 
+
+## ntsysv
+- CentOS下图形界面查看系统中有哪些启动的项。
 
 
 ## 1.17. strace
