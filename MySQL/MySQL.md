@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2020-12-29 22:46:34
+ * @LastEditTime: 2020-12-30 20:12:38
  * @LastEditors: Please set LastEditors
  * @Description:  MySQL基础知识学习，作为一个使用者的角度
 -->
@@ -595,7 +595,7 @@
   - 导出一个数据库结构: `mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql` 
   
     > #-d 不导出数据只导出结构 --add-drop-table 在每个create语句之前增加一个drop table  
-  - 批量导出多个数据库：`mysqldump  -uroot -p --databases db_1 db_2` 
+  - 批量导出多个数据库：`mysqldump  -u root -p --databases db_1 db_2` 
   
 - 使用`source`命令导入数据库
 ```
