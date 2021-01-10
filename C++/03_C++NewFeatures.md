@@ -1,0 +1,241 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-01-10 18:21:43
+ * @LastEditTime: 2021-01-10 18:27:47
+ * @LastEditors: Please set LastEditors
+ * @Description: 解释C++相关的新特性
+-->
+
+<!-- TOC -->
+
+- [1. C++11新特性](#1-c11新特性)
+  - [1.1. Template表达式内的空格](#11-template表达式内的空格)
+  - [1.2. 初始值列 initialize list](#12-初始值列-initialize-list)
+  - [1.3. 指针空值](#13-指针空值)
+  - [1.4. for 循环](#14-for-循环)
+  - [1.5. Lambda表达式](#15-lambda表达式)
+  - [1.6. decltype](#16-decltype)
+  - [1.7. explicit](#17-explicit)
+  - [1.8. auto](#18-auto)
+  - [1.9. noexception](#19-noexception)
+  - [1.10. noexcept](#110-noexcept)
+  - [1.11. constexpr](#111-constexpr)
+  - [1.12. enable_shared_from_this](#112-enable_shared_from_this)
+
+<!-- /TOC -->
+
+# 1. C++11新特性
+## 1.1. Template表达式内的空格
+
+
+## 1.2. 初始值列 initialize list
+- 引入了初值列和一致性初始化（Uniform Initialization）。
+- `初始值列` 赋值是在对象创建成功之前完成的，而 `函数体内赋值` 是你的对象成员都已经创建好后再对成员进行赋值。
+- 在带参构造函数的函数体外面，第一行进行初始化。
+- 语法
+  ```
+  //  将成员变量设置为 re=r, im=i
+  : re(r), im(i)
+  ```
+- 这种初始化并不是必须的，但是在以下几种情况时是必须进行初始化的
+  - 成员是 `const` 类型。
+  - 成员是`引用类型`。
+  - 有一个成员是类型的对象（不是默认的构造函数）  
+- 初始化列表的顺序并不限定初始化的执行顺序，成员的初始化顺序是与类中定义的顺序保持一致。最好让构造函数初始值的顺序与成员声明的顺序保持一致。
+
+
+## 1.3. 指针空值
+- 用 `nullptr` 关键字取代 `0或 NULL`，表示一个指针指向没有存在的值。
+ 
+
+## 1.4. for 循环
+- 引入了一种崭新的 `for` 循环：逐一迭代给定的某个区间、数组、集合内的每一个元素。
+  ```
+  for (auto i : {1, 3, 5, 7})
+  {
+      cout << i <<endl;
+  }
+  ```
+
+
+## 1.5. Lambda表达式
+- 支持Lambda表达式：`[](){}`
+
+
+
+
+## 1.6. decltype
+- 是C++11 增加的一个关键字，作为类型推导，操作过程是在编译时进行的。 
+- 应用
+  - 常常与 `typdef/using` 关键字结合起来使用。
+  - 可以处理匿名的类型。比如：`union`, `struct `结构中出现的匿名数据，可以使用这个来解决。
+  - 泛型模板中使用，增加模板使用的范围。 
+    ```
+    template<typename T1, typename T2>
+    void sum(T1& t1, T2& t2, decltype(t1 + t2)& s) {
+      s = t1 + t2;
+    }
+    ```
+  - 最重要的一个作用：推导函数的返回类型。
+
+
+## 1.7. explicit
+- 被 `explicit` 关键字修饰的类构造函数，不能进行自动地隐式类型转换，只能显式地进行类型转换。
+- 当类的声明和定义分别在两个文件中时，explicit 只能写在在声明中，不能写在定义中。
+
+
+## 1.8. auto
+- C++11中新增的一个关键字，让编译器通过初始值去分析所属类的类型。`auto` 完成类型自动推导：根据初始值自动推导变量的类型，因此必须需要将变量初始化。
+- `auto` 一般会忽略掉顶层的 const，但底层的const会保留下来。
+  ```
+  cosnt int ci = i;
+  const auto f = ci;  // ci的推演类型是int，f是const int
+  ```
+- auto : 从变量声明的初始化表达式获得变量的类型。
+
+
+## 1.9. noexception
+- 表明使用该关键字时，指定某个函数不会抛出异常。
+- `void add(int) noexception;`   // 表明add()不会抛出异常
+- 注意
+  - 函数指针的声明和定义中可以指定 noexception
+  - `typedef或类型的别名` 中不能使用noexception
+  - 成员函数中，noexception需要跟在 `const或引用` 限定符之后，但是跟在 `final、override或虚函数=0` 这些限定符之前。
+
+
+
+## 1.10. noexcept
+- 参考
+  - [C++中的移动构造与noexcept](https://www.yhspy.com/2019/11/22/C-%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E4%B8%8E-noexcept/) 
+
+
+- C++11 引入了关键字 `noexcept`。该关键字告诉编译器，函数中不会发生异常,这有利于编译器对程序做更多的优化。英文名叫 move assignment，又称为移动赋值函数。与早期版本中的复制赋值函数对应。在c++11以后，可以直接将临时变量b中的内存指针直接传递给a，由于避免了多余的内存分配操作，因此大大提高了程序效率。
+
+- 如果在运行时，noexecpt函数向外抛出了异常（如果函数内部捕捉了异常并完成处理，这种情况不算抛出异常），程序会直接终止，调用std::terminate()函数，该函数内部会调用std::abort()终止程序。
+
+- C++中的异常处理是在运行时而不是编译时检测的。为了实现运行时检测，编译器创建额外的代码，然而这会妨碍程序优化。
+
+- 什么时候用noexcept？
+  - 移动构造函数（move constructor）：在对象进行“复制”时，来直接“窃取”拷贝对象所保有的一些资源。比如，已经在原对象中分配的堆内存、文件描述符，以及 IO 流等。
+  - 移动分配函数（move assignment）
+  - 析构函数（destructor）。在新版本的编译器中，析构函数是默认加上关键字noexcept的。
+
+
+## 1.11. constexpr
+- 常量表达式（const expression）：表示值不会改变，并且在编译过程中就能得到计算的结果的表达式。
+- 为什么要使用constexpr？
+  > 提高程序的执行效率，允许一些计算发生在编译时，而不是在运行的时候，因而采用常量表达式。`constexpr` 关键字在 C++11 中引入，而在 C++14 中得到改善，它表示允许将变量声明为 `constexpr` 类型，让编译器来验证变量的值是否是一个常数表达式。
+- const与constexpr的区别：
+  - const变量的初始化可以延迟到程序运行时 
+  - constexpr变量的初始化必须在编译时进行
+  - constexpr指针：限定符constexpr仅对指针有效，对指针所指向的对象无关。
+    ```
+    const int* p = nullpter;      // p是一个指向整型常量的指针
+    constexpr int* q = nullptr;   // q是一个指向整数的常量指针 
+    ```
+
+- constexpr函数
+  - 函数体中必须只有一条 `return` 返回语句。 `constexpr int func() {return 100;}`
+  - 在编译时，constexpr函数被隐式的指定为内联函数。
+  - 内联函数和constexpr函数一般定义在头文件中。
+
+
+## 1.12. enable_shared_from_this
+- 什么是 `enable_shared_from_this`?
+  
+  下面摘自 cpp reference 中概述
+  > C++11开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： ` template< class T > class enable_shared_from_this;`
+
+  > std::enable_shared_from_this 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt1, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
+
+  > 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
+
+
+- 为什么要用 `enable_shared_from_this`？
+  - 需要在类对象的内部中获得一个指向当前对象的 shared_ptr 对象。
+  - 如果一个程序中，对象内存的生命周期的全部由智能指针来管理。在这种情况下，要在一个类的成员函数中，对外部返回this指针成了一个很棘手的问题。
+
+
+- 什么时候用？
+  - 当一个类被 `share_ptr` 管理，且在类的成员函数里需要把当前类对象作为参数传给其他函数时，这时就需要传递一个指向自身的 `share_ptr`。
+
+
+- 如何安全地将 this 指针返回给调用者?
+  - 一般来说，我们不能直接将this指针返回。如果函数将 this 指针返回到外部某个变量保存，然后这个对象自身已经析构了，但外部变量并不知道，此时如果外部变量再使用这个指针，就会使得程序崩溃。
+
+
+- 标准库中的源码
+```
+  template<typename _Tp>
+    class enable_shared_from_this
+    {
+    protected:
+      constexpr enable_shared_from_this() noexcept { }
+
+      enable_shared_from_this(const enable_shared_from_this&) noexcept { }
+
+      enable_shared_from_this&
+      operator=(const enable_shared_from_this&) noexcept
+      { return *this; }
+
+      ~enable_shared_from_this() { }
+
+    public:
+      shared_ptr<_Tp>
+      shared_from_this()
+      { return shared_ptr<_Tp>(this->_M_weak_this); }
+
+      shared_ptr<const _Tp>
+      shared_from_this() const
+      { return shared_ptr<const _Tp>(this->_M_weak_this); }
+
+#if __cplusplus > 201402L || !defined(__STRICT_ANSI__) // c++1z or gnu++11
+#define __cpp_lib_enable_shared_from_this 201603
+      weak_ptr<_Tp>
+      weak_from_this() noexcept
+      { return this->_M_weak_this; }
+
+      weak_ptr<const _Tp>
+      weak_from_this() const noexcept
+      { return this->_M_weak_this; }
+#endif
+
+    private:
+      template<typename _Tp1>
+	void
+	_M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept
+	{ _M_weak_this._M_assign(__p, __n); }
+
+      // Found by ADL when this is an associated class.
+      friend const enable_shared_from_this*
+      __enable_shared_from_this_base(const __shared_count<>&,
+				     const enable_shared_from_this* __p)
+      { return __p; }
+
+      template<typename, _Lock_policy>
+	friend class __shared_ptr;
+
+      mutable weak_ptr<_Tp>  _M_weak_this;
+    };
+```
+- 成员函数
+  - constructor：构造 enable_shared_from_this 对象，protected受保护成员函数。
+  - destructor：销毁 enable_shared_from_this 对象，protected护成员函数。
+  - operator=：返回到 this 的引用，受保护成员函数。
+  - shared_from_this：返回共享 *this 所有权的 shared_ptr，public成员函数。
+  - weak_from_this(C++17)：返回共享 *this 所有权的 weak_ptr，public成员函数
+ 
+
+- 使用注意事项
+  - enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用（例如 std::weak_ptr )。 std::shared_ptr 的构造函数检测无歧义且可访问的 (C++17 起) enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的 std::shared_ptr 为内部存储的弱引用。为另一个 std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined behavior)。
+  
+  - 只允许在先前已被std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++17 前)抛出 std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的 weak_this 的构造函数） (自C++17 起)。
+
+  - enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
+
+
+- 参考
+  - [cpp reference解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
+  - [enable_shared_from_this用法分析](https://bbs.huaweicloud.com/blogs/136194)
+  - [enable_shared_from_this类的作用和实现](https://www.shuzhiduo.com/A/l1dyNmW9ze/)
+  - [C++11标准库的一个工具类enable_shared_from_this<T>的作用及原理分析](https://www.cnblogs.com/jo3yzhu/p/11358400.html)

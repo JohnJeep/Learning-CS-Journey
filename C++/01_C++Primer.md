@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
- * @LastEditTime: 2020-12-22 22:01:15
+ * @LastEditTime: 2021-01-10 18:27:12
  * @LastEditors: Please set LastEditors
  * @Description: C++基础学习笔记
 --> 
@@ -34,6 +34,7 @@
   - [1.14. const](#114-const)
   - [1.15. static](#115-static)
   - [1.16. this](#116-this)
+  - [mutable](#mutable)
   - [1.17. 参数传递与返回值传递](#117-参数传递与返回值传递)
   - [1.18. friend(友元)](#118-friend友元)
   - [1.19. 操作运算符重载(operator overloading)](#119-操作运算符重载operator-overloading)
@@ -49,27 +50,23 @@
   - [1.22. typename](#122-typename)
   - [1.23. 类型转换](#123-类型转换)
   - [1.24. 异常处理](#124-异常处理)
-  - [1.25. C++11新特性](#125-c11新特性)
-    - [1.25.1. 初始值列 initialize list](#1251-初始值列-initialize-list)
-    - [1.25.2. 指针空值](#1252-指针空值)
-    - [1.25.3. for 循环](#1253-for-循环)
-    - [1.25.4. Lambda表达式](#1254-lambda表达式)
-    - [1.25.5. decltype](#1255-decltype)
-    - [1.25.6. explicit](#1256-explicit)
-    - [1.25.7. auto](#1257-auto)
-    - [1.25.8. noexception](#1258-noexception)
-    - [1.25.9. noexcept](#1259-noexcept)
-    - [1.25.10. constexpr](#12510-constexpr)
 
 <!-- /TOC -->
 
 # 1. C++基础
 编程----写出大家风范。
 
+胸中自有丘壑。
+
+勿在浮沙筑高楼。
+
+
+
 ## 1.1. 学习参考网站
-- [cppreference](https://en.cppreference.com/w/): C++标准官方参考文档。
+- [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
+- [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
+- [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
 - [learncpp](https://www.learncpp.com/)
-- [cpluscplus](https://www.cplusplus.com/)
 - [TutorialsPoint](https://www.tutorialspoint.com/index.htm)
 - [C++ shell](http://cpp.sh/) 在线的C++编译器，在线编辑代码。
 - [C++ Standards Committee Papers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
@@ -578,6 +575,61 @@ public:
     ```
 
 
+## mutable
+- 参考
+  - [cppreference官网解释mutable关键字](https://en.cppreference.com/w/cpp/language/cv)
+  - [C++ mutable 的用法](https://blog.csdn.net/K346K346/article/details/48030597) 
+  - [C++中的mutable关键字](https://blog.csdn.net/starlee/article/details/1430387?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control)
+
+
+- mutable是什么？
+  - mutable的中文译为 “可变的，易变的”，是constant（即C++中的const）的反义词。
+  - C++中为了突破 const 的限制而采用的，被 mutable 修饰的变量将永远处于可变的状态。
+
+- 为什么要用mutable？
+  - 我们知道，如果类的成员函数不会改变对象的状态，那么这个成员函数一般会声明成const的。但是，有些时候，我们需要在const的函数里面修改一些跟类状态无关的数据成员，那么这个数据成员就应该被 mutable 来修饰。
+  - mutable 常用于指定不影响类的外部可观察状态的成员（通常用于互斥体[mutexes]、记忆缓存[memo caches]、惰性求值[lazy evaluation]和访问指令[access instrumentation]等）。
+    
+  ```
+  class ThreadsafeCounter {
+    mutable std::mutex m; // mutable 和 mutex 用在一起情况
+    int data = 0;
+  public:
+    int get() const {
+      std::lock_guard<std::mutex> lk(m);
+      return data;
+    }
+    void inc() {
+      std::lock_guard<std::mutex> lk(m);
+      ++data;
+    }
+  };
+  ```
+
+
+- 使用mutable的注意事项
+  - mutable只能作用于类的非静态和非常量数据成员。mutable不能修饰static数据成员，因为static数据成员存储在Data段或BSS段，属于类，不属于类对象，因此类的static数据成员不需要 mutable 的修饰。但常对象和常函数可以对其任意地修改，对于常对象的数据成员一般不可以被修改，若想修改，则需要 mutable 的修饰。
+  - 在一个类中，应尽量或者不用 mutable，大量使用 mutable表示程序设计存在缺陷。
+  
+  ```
+  class Student
+  {
+    string name;
+    mutable int getNum;             // ok
+    mutable const int test;         // 编译出错
+    //mutable static int static1;   // 编译出错
+  }
+  ```
+
+
+- 什么是常函数？
+  - 常函数就是带const修饰的函数。
+
+- 为什么要有常函数这个概念？
+  - 为了封装的良好性，有时我们用到的一些函数并不需要我们去改变类中的参数和成员变量，仅仅只是为了显示和输出的作用，因此才引进常函数。
+
+
+
 ## 1.17. 参数传递与返回值传递
 - pass by value 和 pass by reference
   - 传值是将整个的数据传递给调用者
@@ -942,117 +994,4 @@ public:
 
 
 
-## 1.25. C++11新特性
-- Template表达式内的空格
 
-
-### 1.25.1. 初始值列 initialize list
-- 引入了初值列和一致性初始化（Uniform Initialization）。
-- `初始值列` 赋值是在对象创建成功之前完成的，而 `函数体内赋值` 是你的对象成员都已经创建好后再对成员进行赋值。
-- 在带参构造函数的函数体外面，第一行进行初始化。
-- 语法
-  ```
-  //  将成员变量设置为 re=r, im=i
-  : re(r), im(i)
-  ```
-- 这种初始化并不是必须的，但是在以下几种情况时是必须进行初始化的
-  - 成员是 `const` 类型。
-  - 成员是`引用类型`。
-  - 有一个成员是类型的对象（不是默认的构造函数）  
-- 初始化列表的顺序并不限定初始化的执行顺序，成员的初始化顺序是与类中定义的顺序保持一致。最好让构造函数初始值的顺序与成员声明的顺序保持一致。
-
-
-### 1.25.2. 指针空值
-- 用 `nullptr` 关键字取代 `0或 NULL`，表示一个指针指向没有存在的值。
- 
-
-### 1.25.3. for 循环
-- 引入了一种崭新的 `for` 循环：逐一迭代给定的某个区间、数组、集合内的每一个元素。
-  ```
-  for (auto i : {1, 3, 5, 7})
-  {
-      cout << i <<endl;
-  }
-  ```
-
-
-### 1.25.4. Lambda表达式
-- 支持Lambda表达式：`[](){}`
-
-
-
-
-### 1.25.5. decltype
-- 是C++11 增加的一个关键字，作为类型推导，操作过程是在编译时进行的。 
-- 应用
-  - 常常与typdef/using 关键字结合起来使用。
-  - 可以处理匿名的类型。比如：union, struct结构中出现的匿名数据，可以使用这个来解决。
-  - 泛型模板中使用，增加模板使用的范围。 
-    ```
-    template<typename T1, typename T2>
-    void sum(T1& t1, T2& t2, decltype(t1 + t2)& s) {
-      s = t1 + t2;
-    }
-    ```
-  - 最重要的一个作用：推导函数的返回类型。
-
-
-### 1.25.6. explicit
-- 被 `explicit` 关键字修饰的类构造函数，不能进行自动地隐式类型转换，只能显式地进行类型转换。
-- 当类的声明和定义分别在两个文件中时，explicit 只能写在在声明中，不能写在定义中。
-
-
-### 1.25.7. auto
-- C++11中新增的一个关键字，让编译器通过初始值去分析所属类的类型。`auto` 完成类型自动推导：根据初始值自动推导变量的类型，因此必须需要将变量初始化。
-- `auto` 一般会忽略掉顶层的 const，但底层的const会保留下来。
-  ```
-  cosnt int ci = i;
-  const auto f = ci;  // ci的推演类型是int，f是const int
-  ```
-- auto : 从变量声明的初始化表达式获得变量的类型。
-
-
-### 1.25.8. noexception
-- 表明使用该关键字时，指定某个函数不会抛出异常。
-- `void add(int) noexception;`   // 表明add()不会抛出异常
-- 注意
-  - 函数指针的声明和定义中可以指定 noexception
-  - `typedef或类型的别名` 中不能使用noexception
-  - 成员函数中，noexception需要跟在 `const或引用` 限定符之后，但是跟在 `final、override或虚函数=0` 这些限定符之前。
-
-
-
-### 1.25.9. noexcept
-- 参考
-  - [C++中的移动构造与noexcept](https://www.yhspy.com/2019/11/22/C-%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E4%B8%8E-noexcept/) 
-
-
-- C++11 引入了关键字 `noexcept`。该关键字告诉编译器，函数中不会发生异常,这有利于编译器对程序做更多的优化。英文名叫 move assignment，又称为移动赋值函数。与早期版本中的复制赋值函数对应。在c++11以后，可以直接将临时变量b中的内存指针直接传递给a，由于避免了多余的内存分配操作，因此大大提高了程序效率。
-
-- 如果在运行时，noexecpt函数向外抛出了异常（如果函数内部捕捉了异常并完成处理，这种情况不算抛出异常），程序会直接终止，调用std::terminate()函数，该函数内部会调用std::abort()终止程序。
-
-- C++中的异常处理是在运行时而不是编译时检测的。为了实现运行时检测，编译器创建额外的代码，然而这会妨碍程序优化。
-
-- 什么时候用noexcept？
-  - 移动构造函数（move constructor）：在对象进行“复制”时，来直接“窃取”拷贝对象所保有的一些资源。比如，已经在原对象中分配的堆内存、文件描述符，以及 IO 流等。
-  - 移动分配函数（move assignment）
-  - 析构函数（destructor）。在新版本的编译器中，析构函数是默认加上关键字noexcept的。
-
-
-### 1.25.10. constexpr
-- 常量表达式（const expression）：表示值不会改变，并且在编译过程中就能得到计算的结果的表达式。
-- 为什么要使用constexpr？
-  > 提高程序的执行效率，允许一些计算发生在编译时，而不是在运行的时候，因而采用常量表达式。`constexpr` 关键字在 C++11 中引入，而在 C++14 中得到改善，它表示允许将变量声明为 `constexpr` 类型，让编译器来验证变量的值是否是一个常数表达式。
-- const与constexpr的区别：
-  - const变量的初始化可以延迟到程序运行时 
-  - constexpr变量的初始化必须在编译时进行
-  - constexpr指针：限定符constexpr仅对指针有效，对指针所指向的对象无关。
-    ```
-    const int* p = nullpter;      // p是一个指向整型常量的指针
-    constexpr int* q = nullptr;   // q是一个指向整数的常量指针 
-    ```
-
-- constexpr函数
-  - 函数体中必须只有一条 `return` 返回语句。 `constexpr int func() {return 100;}`
-  - 在编译时，constexpr函数被隐式的指定为内联函数。
-  - 内联函数和constexpr函数一般定义在头文件中。
