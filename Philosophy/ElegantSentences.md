@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2020-12-20 22:09:57
+ * @LastEditTime: 2021-01-11 19:10:45
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -92,5 +92,8 @@ The distant rims of the world and of the firmament seemed to be a division in ti
 Life calls each of us, average human beings, to acts of extraordinary courage.
 生活促使我们每一个普普通通的人，都能拥有做出非凡举动的勇气。
 
+It's true: if the dream is big enough, the facts don't count.
+是的，心中有目标，风雨不折腰。
 
-
+When we're held back, we'll go farther and harder.
+当受到阻碍时，我们就越发坚持与努力。
