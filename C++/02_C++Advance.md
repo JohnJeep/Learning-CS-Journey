@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
- * @LastEditTime: 2020-12-20 22:58:35
+ * @LastEditTime: 2021-01-12 22:32:18
  * @LastEditors: Please set LastEditors
  * @Description: C++提高部分
  * 
@@ -77,24 +77,45 @@
 
 - C++中类与类之间的关系主要归为三大类：复合、委托、继承。
 
+
+
 ### 0.3.1. 功能复用技术
 #### 0.3.1.1. 复合(composition)
 - 什么是复合？
-  > 每当一个类的对象作为另一个类的成员变量时，就实现了复合。
+  > 每当一个类的对象作为另一个类的成员变量时，就实现了复合。当一个类中包含(`has-a`)另一个类时，将其它类的对象作为当前类的成员使用，当前类的成员变量不再是简单的基础类型，而是变为复杂的其它类的对象。
+  <p><img src="./figures/composition.png"></p>
 
-- 当一个类中包含另一个类时，将其它类的对象作为当前类的成员使用，当前类的成员变量不再是简单的基础类型，而是变为复杂的其它类的对象。
+  ```C++
+  // queue类中包含deque类
+  Template <class T>
+  class queue {
+    ...
 
-- 复合中的构造与析构
+    protected:
+      deque<T> C;
+    
+    public:
+      ...
+  };
+  ```
+
+
+- 内存角度理解复合中的构造与析构
   - 构造（由内而外）：编译器默认先调用当前类中包含的类的默认构造函数，然后再调用当前类的构造函数。
   - 析构（由外而内）：编译器默认先调用调用当前类的析构函数，然后再调用当前类中包含的类的析构函数。
+  <p><img src="./figures/composition-memory.png"></p>
+
+
+- 类与类之间的生命周期两者是同步的。
 
 
 #### 0.3.1.2. 委托(delegation)
-> 委托(delegation)也叫Composition by reference
-- 两个类之间通过指针相连。
-  ```
-  // MyString类指向Stu类
+- 什么是delegation？
+  > 委托(delegation)也叫Composition by reference。两个类之间通过指针相连。
+  <p><img src="./figures/delegation.png"></p>
 
+  ```C++
+  // MyString类指向Stu类
   class MyString
   {
   private:
@@ -114,9 +135,22 @@
       ~Stu() {}
   };
   ```
+- 类与类之间的生命周期两者是不同步的。
 
-MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，指针m_data指向的数据 `hello`。如果实例 `a` 想要修改 `hello` 这个数据，则需要先拷贝一份，然后再修改拷贝的数据，这种实现的方法称为 `copy on write`
-<p><img src="./figures/委托实现.png"></p>
+
+- copy on write
+  > MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，指针 `rep` 指向数据 `hello`。如果实例 `a` 想要修改 `hello` 这个数据，则需要先拷贝一份，然后再修改拷贝的数据，这种实现的方法称为 `copy on write(写时复制)`
+  <p><img src="./figures/referenceCounting.png"></p>
+
+
+
+- pImpl
+  - pImpl(Pointer to implementation, 指向实现的指针)是一种常用的，也叫`handle/body`或者叫防火墙编译，用来对 `类的接口与实现` 进行解耦的方法。这个技巧可以避免在头文件中暴露私有细节，是促进API接口与实现保持完全分离的重要机制。但是pImpl并不是严格意义上的设计模式(它是受制于C++特定限制的变通方案)，这种惯用法可以看作桥接设计模式的一种特例。
+  - 优点
+    - 降低耦合
+    - 信息隐藏
+    - 降低编译依赖，提高编译速度
+    - 接口与实现分离
 
 
 #### 0.3.1.3. 继承(Inheritance)
@@ -124,8 +158,12 @@ MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，�
   - [C++：继承访问属性（public/protected/private）](https://www.cnblogs.com/duwenxing/p/7476469.html) 
   - [c++父类和子类的关系](https://blog.csdn.net/limengjuhanxin/article/details/90582443)
 
+- 什么是Inheritance？
+  > 继承（英语：inheritance）是面向对象软件技术当中的一个概念。如果一个类别B“继承自”另一个类别A，就把这个B称为“A的子类”，而把A称为“B的父类别”也可以称“A是B的超类”。继承可以使得子类具有父类别的各种属性和方法，而不需要再次编写相同的代码。在令子类别继承父类别的同时，可以重新定义某些属性，并重写某些方法，即覆盖父类别的原有属性和方法，使其获得与父类别不同的功能。另外，为子类追加新的属性和方法也是常见的做法。 一般静态的面向对象编程语言，继承属于静态的，意即在子类的行为在编译期就已经决定，无法在运行期扩展。
 
-- C++中支持多继承的方式。三种继承方式：public、private、protect
+- 从内存的角度看继承
+  <img src="./figures/Inheritance.png">
+
 - 子类（派生类）可以从父类（基类）继承哪些方法和成员?
   - 数据的继承：子类继承的是父类内存中的数据。
   - 函数的继承：子类继承的是父类的调用权利。
@@ -141,6 +179,7 @@ MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，�
   - 看父类的访问级别？ 
 
 
+- C++中支持多继承的方式。常见的三种继承方式：public、private、protected
 - `public继承`  
   - 父类成员在子类中保持原有的访问级别。
   - 类的对象的公共数据成员可以使用直接成员访问运算符 `.` 来访问；但私有的成员和受保护的成员不能使用直接成员访问运算符 `.` 来直接访问。
@@ -154,6 +193,7 @@ MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，�
   - 父类中为 `public` 成员属性，在子类中变为 `protected`
   - 父类中为 `private` 成员属性，在子类中为 `private`
   - 父类中为 `protected` 成员属性，在子类中为 `protected`
+
 
 - public、protect、private三个关键字的访问范围
   - public: 能被类成员函数、子类函数、友元访问，也能被类的对象访问。
