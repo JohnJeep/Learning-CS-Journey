@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:21:43
- * @LastEditTime: 2021-01-10 18:27:47
+ * @LastEditTime: 2021-01-11 14:13:52
  * @LastEditors: Please set LastEditors
  * @Description: 解释C++相关的新特性
 -->
@@ -21,6 +21,7 @@
   - [1.10. noexcept](#110-noexcept)
   - [1.11. constexpr](#111-constexpr)
   - [1.12. enable_shared_from_this](#112-enable_shared_from_this)
+  - [override](#override)
 
 <!-- /TOC -->
 
@@ -128,7 +129,7 @@
 - const与constexpr的区别：
   - const变量的初始化可以延迟到程序运行时 
   - constexpr变量的初始化必须在编译时进行
-  - constexpr指针：限定符constexpr仅对指针有效，对指针所指向的对象无关。
+  - constexpr指针：限定符constexpr仅对指针有效，与指针所指向的对象无关。
     ```
     const int* p = nullpter;      // p是一个指向整型常量的指针
     constexpr int* q = nullptr;   // q是一个指向整数的常量指针 
@@ -141,6 +142,13 @@
 
 
 ## 1.12. enable_shared_from_this
+- 参考
+  - [cpp reference解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
+  - [enable_shared_from_this用法分析](https://bbs.huaweicloud.com/blogs/136194)
+  - [enable_shared_from_this类的作用和实现](https://www.shuzhiduo.com/A/l1dyNmW9ze/)
+  - [C++11标准库的一个工具类enable_shared_from_this<T>的作用及原理分析](https://www.cnblogs.com/jo3yzhu/p/11358400.html)
+
+
 - 什么是 `enable_shared_from_this`?
   
   下面摘自 cpp reference 中概述
@@ -234,8 +242,16 @@
   - enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
 
 
-- 参考
-  - [cpp reference解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
-  - [enable_shared_from_this用法分析](https://bbs.huaweicloud.com/blogs/136194)
-  - [enable_shared_from_this类的作用和实现](https://www.shuzhiduo.com/A/l1dyNmW9ze/)
-  - [C++11标准库的一个工具类enable_shared_from_this<T>的作用及原理分析](https://www.cnblogs.com/jo3yzhu/p/11358400.html)
+## override
+- 什么是override？
+  - override 是C++11引进的一个说明符，翻译为 `覆盖` 的意思。C++11 中的 override 关键字，可以显式的在派生类中声明，哪些成员函数需要被重写，如果没被重写，则编译器会报错。
+
+
+- override有什么用?
+  - 在我们C++编程过程中，最熟悉的就是对接口方法的实现，在接口中一般只是对方法进行了声明(declaration)，而我们在实现时，就需要实现接口声明的所有方法。
+  - 在程序中加override 关键字，可以避免派生类中忘记重写虚函数的错误。
+  - 另一个典型应用就是在继承中使用，在子类中覆盖实现父类的方法。
+
+
+- 注意事项
+  - 在派生类的成员函数中使用override时，如果基类中无此函数，或基类中的函数并不是虚函数，编译器会给出相关错误信息。 
