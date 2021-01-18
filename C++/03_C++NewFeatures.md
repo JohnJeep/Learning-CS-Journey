@@ -21,7 +21,8 @@
   - [1.10. noexcept](#110-noexcept)
   - [1.11. constexpr](#111-constexpr)
   - [1.12. enable_shared_from_this](#112-enable_shared_from_this)
-  - [override](#override)
+  - [1.13. override](#113-override)
+  - [1.14. variadic template(模板参数可变化)](#114-variadic-template模板参数可变化)
 
 <!-- /TOC -->
 
@@ -245,7 +246,7 @@
   - enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
 
 
-## override
+## 1.13. override
 - 什么是override？
   - override 是C++11引进的一个说明符，翻译为 `覆盖` 的意思。C++11 中的 override 关键字，可以显式的在派生类中声明，哪些成员函数需要被重写，如果没被重写，则编译器会报错。
 
@@ -258,3 +259,6 @@
 
 - 注意事项
   - 在派生类的成员函数中使用override时，如果基类中无此函数，或基类中的函数并不是虚函数，编译器会给出相关错误信息。 
+
+
+## 1.14. variadic template(模板参数可变化)

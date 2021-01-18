@@ -27,9 +27,10 @@
 - [0.4. 耦合与解耦的概念](#04-耦合与解耦的概念)
 - [0.5. 函数模板(function template)](#05-函数模板function-template)
 - [0.6. 类模板(class template)](#06-类模板class-template)
-- [成员模板(member template)](#成员模板member-template)
-- [specialization 模板特化](#specialization-模板特化)
-- [0.7. 输入输出流](#07-输入输出流)
+- [0.7. 成员模板(member template)](#07-成员模板member-template)
+- [0.8. specialization 模板特化](#08-specialization-模板特化)
+- [0.9. template template template](#09-template-template-template)
+- [0.10. 输入输出流](#010-输入输出流)
 
 <!-- /TOC -->
 
@@ -416,7 +417,7 @@ c1.Child::shoe();
   - 类模板可以派生 `类模板`
 
 
-## 成员模板(member template)
+## 0.7. 成员模板(member template)
 - 为什么要使用 `member template`?
   - STL 标准库中很多的构造函数都使用了，为了让模板类更加有弹性，支持更多的数据类型。
 <img src="./figures/member-template.png">
@@ -424,7 +425,7 @@ c1.Child::shoe();
 
 
 
-## specialization 模板特化
+## 0.8. specialization 模板特化
 - 模板全特化
 <img src="./figures/specialization.png">
 
@@ -437,7 +438,16 @@ c1.Child::shoe();
 
 
 
-## 0.7. 输入输出流
+## 0.9. template template template
+模板中再使用模板。
+
+<img src="./figures/template-template-template1.png">
+<img src="./figures/template-template-template2.png">
+<img src="./figures/template-template-template3.png">
+
+
+
+## 0.10. 输入输出流
 - 输入流 `cin`
   - `getline()` 终端输入缓冲区中时可以输入 `空格`。
   - `ignore()` 忽略缓冲区指定的数据
