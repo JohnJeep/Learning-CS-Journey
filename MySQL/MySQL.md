@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2020-12-28 09:13:02
+ * @LastEditTime: 2021-01-18 09:56:00
  * @LastEditors: Please set LastEditors
  * @Description:  MySQL基础知识学习，作为一个使用者的角度
 -->
@@ -296,13 +296,10 @@
     - `RENAME TABLE 原表名 TO 新表名`
     - `RENAME TABLE 原表名 TO 库名.表名`    （可将表移动到另一个数据库）
     - 尽量少去更改表和列的名称，在某些情况下可能导致一些视图不能使用
-
-
   - 修改表的字段结构：` ALTER TABLE 表名 操作名`
     - 添加单列 `ALTER TABLE tab_name ADD [COLUMN] column_name column_definition[FIRST | AFTER col_name]`
     - 添加多列 `ALTER TABLE tab_name ADD [COLUMN] (col_name col_definition, ...)` 不能指定位置关系，只能在列的最下方
     - 删除列 `ALTER TABLE tab_name DROP [COLUMN] col_name_1,DROP [COLUMN] col_name_2`
-
       - 增加主键：`ALTER TABLE tab_name ADD [CONSRTAINT [symbol]] PRIMARY KEY [index_type](index_col_name)`
       - 删除主键约束(删除主键前需删除其AUTO_INCREMENT属性): `ALTER TABLE tab_name DROP PRIMARY KEY`
       - 创建唯一索引: `ALTER TABLE tab_name ADD UNIQUE [索引名] (字段名)`
@@ -310,14 +307,9 @@
       - 创建普通索引: `ALTER TABLE tab_name ADD INDEX [索引名] (字段名) ` 
       - 删除索引: `ALTER TABLE tab_name DROP INDEX 索引名`
       - 添加外键约束 `ALTER TABLE tab_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name] (index_col_name, ...) reference_definition`
-        
         > 例如：`ALTER TABLE county ADD FOREIGN KEY(pid) REFERENCES provinces(id);` pid为子键，id为父键
       - 删除外键约束 `ALTER TABLE tab_name DROP FOREIGN KEY 约束名称`
-
-
 - 添加和删除默认约束 `ALTER TABLE tab_name ALTER [COLUMN] col_name {SET DEFAULT 设置的值 | DROP DEFAULT}`
-
-
 - 修改列属性和参数 `ALTER TABLE tab_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]`
   - 改变列的位置和数据类型，数据类型的改变会导致数据的丢失。
 - 对字段属性进行修改，不能修改字段名(所有原有属性也需写上)。  
@@ -353,10 +345,10 @@
 
 
 ### 1.15.3. 删除表数据(delete)
-  - 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
-    - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
-  - 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
-  - 删除原来的表并重新创建一个表，而不是逐行删除表中的数据: `TRUNCATE`
+- 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
+  - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
+- 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
+- 删除原来的表并重新创建一个表，而不是逐行删除表中的数据: `TRUNCATE`
 
 
 - 删除表信息的方式有两种
@@ -606,7 +598,7 @@
   - 导出一个数据库结构: `mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql` 
   
     > #-d 不导出数据只导出结构 --add-drop-table 在每个create语句之前增加一个drop table  
-  - 批量导出多个数据库：`mysqldump  -uroot -p --databases db_1 db_2` 
+  - 批量导出多个数据库：`mysqldump  -u root -p --databases db_1 db_2` 
   
 - 使用`source`命令导入数据库
 ```
