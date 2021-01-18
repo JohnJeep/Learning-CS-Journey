@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2020-12-26 19:03:57
+ * @LastEditTime: 2020-12-28 09:13:02
  * @LastEditors: Please set LastEditors
  * @Description:  MySQL基础知识学习，作为一个使用者的角度
 -->
@@ -233,7 +233,10 @@
 
 
 ## 1.13. 数据库操作
-- 查看当前数据库： `select database();`
+- 三种方式查看当前数据库
+  - `select database();`
+  - `status;`
+  -  `select tables;`
 - 显示当前时间、用户名、数据库版本: `select now(), user(), version();`
 - 创建库:  `create database[ if not exists] 数据库名 数据库选项`
   - 数据库选项：
