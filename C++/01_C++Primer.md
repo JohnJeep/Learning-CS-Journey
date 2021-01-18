@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
- * @LastEditTime: 2021-01-10 18:27:12
+ * @LastEditTime: 2021-01-18 23:19:48
  * @LastEditors: Please set LastEditors
  * @Description: C++基础学习笔记
 --> 
@@ -191,7 +191,7 @@
 ### 仿函数
 - 什么是仿函数？
   > 一个 class 类中重载了函数调用操作运算符 `()`，任何一个东西能接受 `()` 操作运算符，这个东西就叫 `像函数` 或者叫 `仿函数`。
-<img src="./figures/Auxiliary-Functions.png"><>
+<img src="./figures/functor.png"><>
 
 
 - 思考：为什么C++中要把 class 设计成 pointer(智能指针)和 function(仿函数)？
