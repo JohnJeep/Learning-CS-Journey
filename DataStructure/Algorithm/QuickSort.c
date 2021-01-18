@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-03 15:35:55
- * @LastEditTime: 2020-08-17 23:25:44
+ * @LastEditTime: 2021-01-13 22:19:39
  * @LastEditors: Please set LastEditors
  * @Description: 快速排序算法实现
  *               思想：1、将数据分成两部分，即二分法划分
@@ -11,7 +11,6 @@
  *               注意：当初始序列是有序时，快速排序可能是不稳定的
  * 
  *              快速排序优化：https://www.cnblogs.com/ttltry-air/archive/2012/08/06/2625512.html
- * @FilePath: /quickSort.c
  */
 #include <stdio.h>
 #include <string.h>
@@ -34,8 +33,8 @@ void swap(int array[], int low, int high)
 }
 
 /**
- * @description:  // 使用两个索引low和high，分别从左右两端进行扫描，low扫描到大于等于pivot的元素就停止，high扫描到小于等于pivot的元素也停止，
- *                   交换两个元素，持续这个过程直到两个索引相遇，此时的pivot的位置就落在了low，然后交换pivot和low的位置
+ * @description:  使用两个索引low和high，分别从左右两端进行扫描，low扫描到大于等于pivot的元素就停止，high扫描到小于等于pivot的元素也停止，
+ *                交换两个元素，持续这个过程直到两个索引相遇，此时的pivot的位置就落在了low，然后交换pivot和low的位置
  * @param {type} 
  * @return {type}  low, high为索引下标
  */
