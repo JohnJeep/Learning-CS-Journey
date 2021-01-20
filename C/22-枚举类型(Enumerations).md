@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-21 19:00:34
+ * @LastEditTime: 2021-01-20 23:19:12
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Learning-Computer-Science-Journey\C\22-枚举类型(Enumerations).md
+-->
 #### 定义
 - 概念： enum 关键字用于声明枚举，即一种由一组称为枚举数列表的命名常数组成的独特类型。每种枚举类型都有基础类型，该类型可以是除 char 以外的任何整型。枚举元素的默认基础类型为 int。默认情况下，第一个枚举数的值为 0，后面每个枚举数的值依次递增
 
@@ -7,12 +15,13 @@
 
 #### 初始化
 - 定义枚举型的同时定义变量。
-    ```
+    ```C
     enum color { black, blue, green=10, cyan, red ,magenta };
     这时， black和blue的值仍然分别是0和1，但green和其后的各项的值则为10， 11，12和13。
     ```
+
 - 不给初始值，变量的值从0开始依次增加一。
-    ``` 
+    ``` C
     enum color { black, blue, green, cyan, red, magenta }; 
     枚举类型中的每个项都是一个整数值。 其中black的值为0， blue的值为1， green的值为2， cyan为3， 依次类推。
     ```
