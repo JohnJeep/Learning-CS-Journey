@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-12-27 23:03:44
+ * @LastEditTime: 2021-01-20 09:24:18
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -642,6 +642,9 @@ s | 套接文件(socket) | null
 - `gzip`: 压缩文件后缀(*.gz)
 - `bzip2`: 压缩文件后缀(*.bz2)
 - `xz`: 压缩文件后缀(*.xz)
+<br>
+<img src="./pictures/compress.png">
+
 
 
 ### 1.17.2. tar文件打包     
@@ -696,18 +699,16 @@ s | 套接文件(socket) | null
     2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
 
 
-
-
 ### 1.17.3. zip
 > zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
-- zip  -r  yasuo.zip  demo.txt   mydir　　//该命令是将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
-zip -r  mydir.zip  mydir　　        //  压缩当前目录下的子目录mydir
-- unzip   yasuo.zip　　                 //  解压yasuo.zip文件到当前目录
-- unzip -d  /mydir  yasuo.zip　  //  把压缩文件解压到指定的mydir目录
-- unzip -t  yasuo.zip　　               //  检查压缩文件是否损坏
-- unzip  -l  demo.zip　　              //  显示demo.zip压缩包中有哪些文件，不进行解压
-- unzip  -n  demo.zip　　             // 解压时不覆盖已存在的文件
+- zip -r yasuo.zip demo.txt mydir  // 将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
+- zip -r  mydir.zip  mydir         // 压缩当前目录下的子目录mydir
+- unzip   yasuo.zip                // 解压yasuo.zip文件到当前目录
+- unzip -d /mydir yasuo.zip        // 把压缩文件解压到指定的mydir目录
+- unzip -t  yasuo.zip              // 检查压缩文件是否损坏
+- unzip  -l  demo.zip              // 显示demo.zip压缩包中有哪些文件，不进行解压
+- unzip  -n  demo.zip              // 解压时不覆盖已存在的文件
 
 > 注意：直接使用unzip指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。
 
