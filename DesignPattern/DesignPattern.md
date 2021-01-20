@@ -192,7 +192,7 @@
   - 多线程下，懒汉式的实现时不安全的，饿汉式方法实现是安全的。
   - Java中如何解决线程不安全的问题？
     - Java中使用 `synchronized方法`
-      ```
+      ```Java
       // 线程安全的懒汉式单例
       public class Singleton2 {
           private static Singleton2 singleton2;
@@ -211,7 +211,7 @@
          2、保证了对临界资源的同步访问
       ```
     - Java中使用 `synchronized块`
-      ```
+      ```Java
       // 线程安全的懒汉式单例
       public class Singleton2 {
           private static Singleton2 singleton2;
@@ -229,7 +229,7 @@
       // 行效率仍然比较低，事实上，和使用synchronized方法的版本相比，基本没有任何效率上的提高。
       ```
     - 使用 `内部类的懒汉式`
-      ```
+      ```Java
       // 线程安全的懒汉式单例
       public class Singleton5 {
           // 私有内部类，按需加载，用时加载，也就是延迟加载
@@ -246,7 +246,7 @@
         // 效率比较高
       ```
     - 使用 `双重检测机制`
-    ```
+    ```Java
       // 线程安全的懒汉式单例
       public class Singleton3 {
       
@@ -274,7 +274,7 @@
       // 必须使用volatile关键字修饰单例引用。目的：解决指令重排序的问题
     ``` 
   - 借助 ` ThreadLocal`
-    ```
+    ```Java
     // 线程安全的懒汉式单例
     public class Singleton4 {
     

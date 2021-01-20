@@ -21,8 +21,8 @@
     - [1.5.1. 内联函数(inline)](#151-内联函数inline)
     - [1.5.2. 函数参数](#152-函数参数)
     - [1.5.3. 模板函数（建立一个通用函数）](#153-模板函数建立一个通用函数)
-    - [conversion function](#conversion-function)
-    - [仿函数](#仿函数)
+    - [1.5.4. conversion function](#154-conversion-function)
+    - [1.5.5. 仿函数](#155-仿函数)
   - [1.6. 命名空间（namespace）](#16-命名空间namespace)
   - [1.7. 头文件](#17-头文件)
   - [1.8. 构造函数](#18-构造函数)
@@ -122,6 +122,10 @@
   - 指针的引用做函数参数
   - 函数二级指针作为输出变量
 
+  <img src="./figures/reference.png">
+  <img src="./figures/reference-function.png">
+
+
 ### 1.4.2. 左值引用(lvalue reference)
 - `引用` 作为 `左值`时，返回的是变量的本身，是变量而不是值（value）。变量只能是全局变量或静态变量，不能是局部变量，否则会出现 `Segmentation fault`。
 - 函数的返回值作为一个 `左值`时，应该返回的是一个引用`(reference)`。
@@ -182,13 +186,13 @@
 
 
 
-### conversion function
+### 1.5.4. conversion function
 - 函数没有返回值，没有参数，函数的类型为需要转换的类型。通常转换函数中的内容都是不应该改变的，可以设置为 `const`。
 <img src="./figures/conversion-function.png">
 
 
 
-### 仿函数
+### 1.5.5. 仿函数
 - 什么是仿函数？
   > 一个 class 类中重载了函数调用操作运算符 `()`，任何一个东西能接受 `()` 操作运算符，这个东西就叫 `像函数` 或者叫 `仿函数`。
 <img src="./figures/functor.png"><>

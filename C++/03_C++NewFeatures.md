@@ -22,7 +22,7 @@
   - [1.11. constexpr](#111-constexpr)
   - [1.12. enable_shared_from_this](#112-enable_shared_from_this)
   - [1.13. override](#113-override)
-  - [1.14. variadic template(模板参数可变化)](#114-variadic-template模板参数可变化)
+  - [1.14. variadic templates(模板参数可变化)](#114-variadic-templates模板参数可变化)
 
 <!-- /TOC -->
 
@@ -35,7 +35,7 @@
 - `初始值列` 赋值是在对象创建成功之前完成的，而 `函数体内赋值` 是你的对象成员都已经创建好后再对成员进行赋值。
 - 在带参构造函数的函数体外面，第一行进行初始化。
 - 语法
-  ```
+  ```C++
   //  将成员变量设置为 re=r, im=i
   : re(r), im(i)
   ```
@@ -52,13 +52,14 @@
 
 ## 1.4. for 循环
 - 引入了一种崭新的 `for` 循环：逐一迭代给定的某个区间、数组、集合内的每一个元素。
-  ```
-  for (auto i : {1, 3, 5, 7})
+  ```C++
+  for (auto i : {1, 3, 5, 7})   // 注意: {} 是一个容器
   {
-      cout << i <<endl;
+      cout << i << endl;
   }
   ```
 
+  <img src="./figures/range-base-for.png">
 
 ## 1.5. Lambda表达式
 - 支持Lambda表达式：`[](){}`
@@ -72,7 +73,7 @@
   - 常常与 `typdef/using` 关键字结合起来使用。
   - 可以处理匿名的类型。比如：`union`, `struct `结构中出现的匿名数据，可以使用这个来解决。
   - 泛型模板中使用，增加模板使用的范围。 
-    ```
+    ```C++
     template<typename T1, typename T2>
     void sum(T1& t1, T2& t2, decltype(t1 + t2)& s) {
       s = t1 + t2;
@@ -91,12 +92,11 @@
 
 ## 1.8. auto
 - C++11中新增的一个关键字，让编译器通过初始值去分析所属类的类型。`auto` 完成类型自动推导：根据初始值自动推导变量的类型，因此必须需要将变量初始化。
-- `auto` 一般会忽略掉顶层的 const，但底层的const会保留下来。
-  ```
-  cosnt int ci = i;
+- `auto` 一般会忽略掉顶层的 const，但底层的const会保留下来。从变量声明的初始化表达式处获得变量的类型。
+  ```C++
+  const int ci = i;
   const auto f = ci;  // ci的推演类型是int，f是const int
-  ```
-- auto : 从变量声明的初始化表达式获得变量的类型。
+  ``` 
 
 
 ## 1.9. noexception
@@ -134,7 +134,7 @@
   - const变量的初始化可以延迟到程序运行时 
   - constexpr变量的初始化必须在编译时进行
   - constexpr指针：限定符constexpr仅对指针有效，与指针所指向的对象无关。
-    ```
+    ```C++
     const int* p = nullpter;      // p是一个指向整型常量的指针
     constexpr int* q = nullptr;   // q是一个指向整数的常量指针 
     ```
@@ -177,7 +177,7 @@
 
 
 - 标准库中的源码
-```
+```C++
   template<typename _Tp>
     class enable_shared_from_this
     {
@@ -261,4 +261,8 @@
   - 在派生类的成员函数中使用override时，如果基类中无此函数，或基类中的函数并不是虚函数，编译器会给出相关错误信息。 
 
 
-## 1.14. variadic template(模板参数可变化)
+## 1.14. variadic templates(模板参数可变化)
+variadic templates是C++新增的一个非常重要的特性。
+<img src="./figures/variadic-templates.png">
+
+

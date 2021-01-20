@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-06 9:18:29
- * @LastEditTime: 2020-07-27 16:00:26
+ * @LastEditTime: 2021-01-20 23:18:27
  * @LastEditors: Please set LastEditors
  * @Description: typedef基础用法
  * @FilePath: /C/17-typedef用法.md
@@ -37,14 +37,14 @@
 
 ## 0.4. typedef与数组
 - 定义相同类型和大小的数组
-```
+```C
 typedef char arr[50];
 arr text, data;  // 声明了一个text数组和一个data数组
 ```
 
 
 ## 0.5. typedef与函数指针
-```
+```C
 typedef void (*PrintHelloHandle)(int); 
 
 PrintHelloHandle pFunc;  // 声明一个函数指针为 pFunc 的别名

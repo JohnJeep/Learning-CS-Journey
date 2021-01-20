@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 15:05:29
- * @LastEditTime: 2020-09-22 15:29:46
+ * @LastEditTime: 2021-01-20 23:17:59
  * @LastEditors: Please set LastEditors
  * @Description: static和extern关键字
 -->
@@ -16,7 +16,7 @@
 - Ｃ++与c互相调用问题
   - C++中调用C函数：使用 extern "C" 关键字
   - C如何调用C++函数：需要使用预处理宏和extern "C" 关键字
-    ```
+    ```C
     #ifdef __cplusplus
     extern "C"
     {
