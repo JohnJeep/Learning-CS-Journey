@@ -1,13 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2020-11-26 08:34:24
+ * @LastEditTime: 2021-01-20 15:10:30
  * @LastEditors: Please set LastEditors
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
 <!-- TOC -->
 
+- [参考](#参考)
 - [0.1. 缩写](#01-缩写)
 - [0.2. 程序处理过程](#02-程序处理过程)
   - [0.2.1. 程序运行的过程](#021-程序运行的过程)
@@ -16,17 +17,23 @@
   - [0.2.4. gcc 常用参数](#024-gcc-常用参数)
   - [0.2.5. 静态库](#025-静态库)
   - [0.2.6. 动态库也叫共享库(share library)](#026-动态库也叫共享库share-library)
+    - [Linux平台](#linux平台)
+    - [Windows平台](#windows平台)
 - [0.3. ELF relocatable](#03-elf-relocatable)
 - [0.4. 工具](#04-工具)
 - [0.5. 两种编译构建方式](#05-两种编译构建方式)
 
 <!-- /TOC -->
 
+## 参考
+- [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
+
+
 ## 0.1. 缩写
-- PE(Portable Executable)：可移植可执行
-- ELF(Executable Linkable Format)：可执行可链接格式
-- DLL(Dynamic ALinking Library): windows的 `.dll`，Linux的 `.so`
-- SLL(Static ALinking Library): windows的 `.lib`，Linux的 `.a`
+- PE(Portable Executable)：可移植可执行。
+- ELF(Executable Linkable Format)：可执行可链接格式。
+- DLL(Dynamic ALinking Library): windows下的以 `.dll` 方式命名，Linux下的以 `.so` 方式命名。
+- SLL(Static ALinking Library): windows下的以 `.lib` 方式命名，Linux的以 `.a` 方式命名。
 - BSS(Block Started by Symbol): 未初始化的全局变量和局部静态变量的区域。
 
 
@@ -132,8 +139,13 @@
   - 如果不知道数据量大小（可能需要占用较大内存），最好用堆（因为这样保险些）
   - 如果需要动态创建数组，则用堆
 
+-----------------------
+- BSS段(Block Started by Symbol)：属于静态内存分配，用来存放程序中未初始化的全局变量的一块内存区域。
+- 数据段(data segment): 通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。
+- 代码段(code segment/text segment): 通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。 
+<div align="center"><img width="90%" height="90%" src="./pictures/虚拟地址空间.png"></div>
 
-
+-----------------------
 
 
 ### 0.2.4. gcc 常用参数
@@ -172,12 +184,7 @@
 ### 0.2.6. 动态库也叫共享库(share library)
 > 只有在程序执行的过程中才会加载动态链接库。
 
-- BSS段(Block Started by Symbol)：属于静态内存分配，用来存放程序中未初始化的全局变量的一块内存区域。
-- 数据段(data segment): 通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。
-- 代码段(code segment/text segment): 通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。 
-<div align="center"><img width="90%" height="90%" src="./pictures/虚拟地址空间.png"></div>
-
-
+#### Linux平台
 - 命名规则
   - Linux中以 `.so` 结尾。形如：`lib + 库的名字 + .so`
   - 例如：`libtest.so`
@@ -213,6 +220,11 @@
   - 缺点 
     - 发布程序的时候，需要将动态库发布给用户。
     - 加载的速度相对静态库比较慢。 
+
+
+#### Windows平台
+- C++在调用Dll中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h\.lib\.dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
+还有一点是 dll是在调试的时候使用的，lib是编译的时候使用的，两者是不同时期使用的工具
 
 
 ## 0.3. ELF relocatable

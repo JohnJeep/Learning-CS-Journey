@@ -1,13 +1,15 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-11-20 10:59:05
- * @LastEditTime: 2020-11-20 16:13:24
+ * @LastEditTime: 2021-01-20 14:22:49
  * @LastEditors: Please set LastEditors
  * @Description: SVN学习笔记
 -->
 
 ## 0.1. 参考
 - [linux下svn命令使用大全](http://blog.chinaunix.net/uid-22566367-id-1965771.html)
+- [Linux下常用svn命令](https://www.cnblogs.com/jaspersong/p/9277720.html)
+
 
 ## 0.2. 概念
 - 什么是Subversion?
@@ -102,7 +104,7 @@
 
 
 ### 0.4.7. cat
-- `svn cat`望检查一个过去的版本而不希望察看它们的区别
+- `svn cat` 检查一个过去的版本而不希望察看它们的区别
 ```
 $ svn cat -r 2 rules.txt
 Be kind to others
