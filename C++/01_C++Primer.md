@@ -8,77 +8,82 @@
 
 <!-- TOC -->
 
-- [1. C++基础](#1-c基础)
-  - [1.1. 学习参考网站](#11-学习参考网站)
+- [1. C++ 基础](#1-c-基础)
+  - [1.1. reference by website(学习参考网站)](#11-reference-by-website学习参考网站)
   - [1.2. 基本规范](#12-基本规范)
   - [1.3. 基本概念](#13-基本概念)
-  - [1.4. 引用(reference)](#14-引用reference)
+  - [1.4. reference(引用)](#14-reference引用)
     - [1.4.1. 普通引用](#141-普通引用)
-    - [1.4.2. 左值引用(lvalue reference)](#142-左值引用lvalue-reference)
-    - [1.4.3. 右值引用(rvalue reference)](#143-右值引用rvalue-reference)
-    - [1.4.4. 常量引用](#144-常量引用)
-  - [1.5. 函数](#15-函数)
-    - [1.5.1. 内联函数(inline)](#151-内联函数inline)
-    - [1.5.2. 函数参数](#152-函数参数)
-    - [1.5.3. 模板函数（建立一个通用函数）](#153-模板函数建立一个通用函数)
-    - [1.5.4. conversion function](#154-conversion-function)
-    - [1.5.5. 仿函数](#155-仿函数)
-  - [1.6. 命名空间（namespace）](#16-命名空间namespace)
-  - [1.7. 头文件](#17-头文件)
-  - [1.8. 构造函数](#18-构造函数)
-    - [1.8.1. 拷贝构造(copy constructor)](#181-拷贝构造copy-constructor)
-    - [1.8.2. 拷贝赋值（copy assignment operator）](#182-拷贝赋值copy-assignment-operator)
-  - [1.9. 析构函数(destructor)](#19-析构函数destructor)
-  - [1.10. 类对象与类指针的区别](#110-类对象与类指针的区别)
-  - [1.11. new和delete](#111-new和delete)
-  - [1.12. 重载(overloading)](#112-重载overloading)
-  - [1.13. 重写(overwrite)](#113-重写overwrite)
+    - [1.4.2. lvalue reference(左值引用)](#142-lvalue-reference左值引用)
+    - [1.4.3. rvalue reference(右值引用)](#143-rvalue-reference右值引用)
+    - [1.4.4. const reference(常量引用)](#144-const-reference常量引用)
+  - [1.5. function(函数)](#15-function函数)
+    - [1.5.1. inline(内联函数)](#151-inline内联函数)
+    - [1.5.2. function parameter(函数参数)](#152-function-parameter函数参数)
+    - [1.5.3. template function(模板函数)](#153-template-function模板函数)
+    - [1.5.4. conversion function(转换函数)](#154-conversion-function转换函数)
+    - [1.5.5. functor(仿函数)](#155-functor仿函数)
+  - [1.6. namespace(命名空间)](#16-namespace命名空间)
+  - [1.7. header file(头文件)](#17-header-file头文件)
+  - [1.8. constructor(构造函数)](#18-constructor构造函数)
+    - [1.8.1. copy constructor(拷贝构造)](#181-copy-constructor拷贝构造)
+    - [1.8.2. copy assignment operator(拷贝赋值)](#182-copy-assignment-operator拷贝赋值)
+  - [1.9. destructor(析构函数)](#19-destructor析构函数)
+  - [1.10. class object && class pointer(类对象与类指针的区别)](#110-class-object--class-pointer类对象与类指针的区别)
+  - [1.11. new && delete](#111-new--delete)
+  - [1.12. overloading(重载)](#112-overloading重载)
+  - [1.13. overwrite(重写)](#113-overwrite重写)
   - [1.14. const](#114-const)
   - [1.15. static](#115-static)
   - [1.16. this](#116-this)
   - [1.17. mutable](#117-mutable)
-  - [1.18. 参数传递与返回值传递](#118-参数传递与返回值传递)
+  - [1.18. pass by value && pass by reference(参数传递与返回值传递)](#118-pass-by-value--pass-by-reference参数传递与返回值传递)
   - [1.19. friend(友元)](#119-friend友元)
-  - [1.20. 操作运算符重载(operator overloading)](#120-操作运算符重载operator-overloading)
+  - [1.20. operator overloading(操作运算符重载)](#120-operator-overloading操作运算符重载)
   - [1.21. C++典型问题](#121-c典型问题)
     - [1.21.1. `.h`与 `.hpp` 文件区别](#1211-h与-hpp-文件区别)
     - [1.21.2. ++i与i++效率问题](#1212-i与i效率问题)
     - [1.21.3. 传值、传引用、传指针三者的区别](#1213-传值传引用传指针三者的区别)
-  - [1.22. 智能指针](#122-智能指针)
+  - [1.22. smart pointer(智能指针)](#122-smart-pointer智能指针)
     - [1.22.1. auto_ptr](#1221-auto_ptr)
     - [1.22.2. unique_ptr](#1222-unique_ptr)
     - [1.22.3. shared_ptr](#1223-shared_ptr)
     - [1.22.4. weak_ptr](#1224-weak_ptr)
   - [1.23. typename](#123-typename)
   - [1.24. 类型转换](#124-类型转换)
-  - [1.25. 异常处理](#125-异常处理)
+  - [1.25. exception(异常处理)](#125-exception异常处理)
 
 <!-- /TOC -->
 
-# 1. C++基础
+# 1. C++ 基础
+
+## 1.1. reference by website(学习参考网站)
+- [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
+- [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
+- [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
+- [C++ shell](http://cpp.sh/) 在线的C++编译器，在线编辑代码。
+- [C++ Standards Committee Papers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
+- [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
+- [learncpp](https://www.learncpp.com/)
+- [TutorialsPoint](https://www.tutorialspoint.com/index.htm)
+
+
+
+## 1.2. 基本规范
+
+-----------------------
 编程----写出大家风范。
 
 胸中自有丘壑。
 
 勿在浮沙筑高楼。
 
+-----------------------
 
-
-## 1.1. 学习参考网站
-- [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
-- [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
-- [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
-- [learncpp](https://www.learncpp.com/)
-- [TutorialsPoint](https://www.tutorialspoint.com/index.htm)
-- [C++ shell](http://cpp.sh/) 在线的C++编译器，在线编辑代码。
-- [C++ Standards Committee Papers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
-- [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
-
-
-## 1.2. 基本规范
 - 每个独立的类应单独放在一个文件里
 - 变量一般声明为 private，采用间接访问
 
+-----------------------
 
 
 ## 1.3. 基本概念
@@ -92,7 +97,7 @@
 - 取模场景：
   - 取一个数的个位数
   - 多少天是一个月的第几天 
-- `<<`左移运算符：右侧空位补0
+- `<<`左移运算符：右侧空位补 0
 - `>>` 右移运算符：左侧空位补符号位，符号位正数部0，符号位为负数补1
 - switch语句后的表达式只能为整型或字符类型
 - break语句：执行循环体后，调出循环。可用于switch结构或者循环结构
@@ -106,7 +111,7 @@
   - `void* ` 指针存放的是一个内存地址，地址的内容是什么类型不能确定 
 
 
-## 1.4. 引用(reference)
+## 1.4. reference(引用)
 ### 1.4.1. 普通引用
 - 给对象起了一个别名，使用 `&` 符号表示
 - 单独定义引用时，必须要 `初始化`。
@@ -126,14 +131,14 @@
   <img src="./figures/reference-function.png">
 
 
-### 1.4.2. 左值引用(lvalue reference)
+### 1.4.2. lvalue reference(左值引用)
 - `引用` 作为 `左值`时，返回的是变量的本身，是变量而不是值（value）。变量只能是全局变量或静态变量，不能是局部变量，否则会出现 `Segmentation fault`。
 - 函数的返回值作为一个 `左值`时，应该返回的是一个引用`(reference)`。
 - 左值表达式表示的是一个对象的身份。
 - 变量表达式是一个左值，作用的时间比较长，右值的作用时间比较短暂。 
 
 
-### 1.4.3. 右值引用(rvalue reference) 
+### 1.4.3. rvalue reference(右值引用) 
 - 何为右值引用？
   - 必须绑定到右值的引用，采用 `&&` 来获得右值引用，而不是 `&` 
   - 右值表达式表示的是对象的值。
@@ -143,7 +148,7 @@
   - 使用 `move()` 函数时告诉编译器，处理左值时像右值一样去处理它；对左值进行赋值或销毁外，不再使用它。
 
 
-### 1.4.4. 常量引用
+### 1.4.4. const reference(常量引用)
 - 让变量的引用拥有只读的属性。
   ```
   int x = 10;
@@ -155,12 +160,12 @@
 - 使用常量引用进行初始化时，C++编译器会为常量值分配空间，并将引用名作为当前分配空间的别名。
 
 
-## 1.5. 函数
+## 1.5. function(函数)
 - C++对函数的检查更严格。
 - C++支持bool类型：C++中的 `bool`，只占 1 个字节；java中使用 `boolean`；采用 `boolalpha`显示True或False；
 
 
-### 1.5.1. 内联函数(inline)
+### 1.5.1. inline(内联函数)
 - 函数定义时，加 `inline` 关键字，例如 `inline void func(){}`。内联函数的关键字 `inline` 与函数体的实现在一起，不需额外的声明。 
 - 实现机制
   - C++编译器直接将函数体插入函数调用的地方。
@@ -172,7 +177,7 @@
   - 内联函数省去了普通函数调用时的压栈、跳转、返回操作。
 
 
-### 1.5.2. 函数参数
+### 1.5.2. function parameter(函数参数)
 - 默认参数
   - 函数的参数有一个默认的值。
   - 函数带有参数列表，参数列表的右边必须有默认的值，左边可以不给默认参数赋值。
@@ -180,19 +185,18 @@
  - 只有函数类型声明，没有函数变量声明。`int func(int a, int b, int)`
 
 
-### 1.5.3. 模板函数（建立一个通用函数）
-- 函数定义时不指定具体的数据类型
-- 函数调用时，根据实际参数反推数据类型，即类型的参数化
+### 1.5.3. template function(模板函数)
+- 什么是模板函数？
+  - 函数定义时不指定具体的数据类型，建立一个通用函数。函数调用时，根据实际的参数反推数据类型，即类型的参数化。
 
 
-
-### 1.5.4. conversion function
+### 1.5.4. conversion function(转换函数)
 - 函数没有返回值，没有参数，函数的类型为需要转换的类型。通常转换函数中的内容都是不应该改变的，可以设置为 `const`。
 <img src="./figures/conversion-function.png">
 
 
 
-### 1.5.5. 仿函数
+### 1.5.5. functor(仿函数)
 - 什么是仿函数？
   > 一个 class 类中重载了函数调用操作运算符 `()`，任何一个东西能接受 `()` 操作运算符，这个东西就叫 `像函数` 或者叫 `仿函数`。
 <img src="./figures/functor.png"><>
@@ -201,7 +205,7 @@
 - 思考：为什么C++中要把 class 设计成 pointer(智能指针)和 function(仿函数)？
 
 
-## 1.6. 命名空间（namespace）
+## 1.6. namespace(命名空间)
 - C中的命名空间
   - 只有一个全局的作用域，所有的全局标识符共用一个作用域。同名的标识符之间会发生冲突。
 - C++的命名空间
@@ -251,15 +255,15 @@
 
 
 
-## 1.7. 头文件
+## 1.7. header file(头文件)
 - 头文件采用防御式声明 
-    ```
-    #ifndef __TEST_H
-    #define __TEST_H
-      ...
-      
-    #endif
-    ```
+  ```C++
+  #ifndef __TEST_H
+  #define __TEST_H
+    ...
+    
+  #endif
+  ```
 
 - 头文件名包含在尖括号 `<>` 中，则C++编译器将在存储标准头文件的主机系统的文件系统中查找；但如果文件名包含在双引号 `""` 中，则编译器将首先查找当前的工作目录或源代码目录（或其他目录，这取决于编译器）
 
@@ -267,7 +271,9 @@
   - `.h` 文件只作类的声明
   - `.cpp` 文件进行类的实现 
 
-## 1.8. 构造函数
+
+
+## 1.8. constructor(构造函数)
 - 为什么要用构造函数？
   - 被用来初始化类的对象。  
   - 类对象被创建时，编译器为对象(object)分配内存空间，并自动调用构造函数，完成成员的初始化 
@@ -296,7 +302,7 @@
     - 一般需要初始化构造的参数
     - 有默认值参数的构造函数，需要在类的声明中指定默认参数值，一般只能指定一次，在构造函数实现时不需要再给出默认值，否则会报错。
   - 拷贝构造
-    ```
+    ```C++
     // 声明一个类
     class String()
     {
@@ -326,7 +332,7 @@
   - 当父类为有参构造函数时
     - 父类的有参构造函数有默认的值时，子类中不需要显式地调用父类的构造，C++编译器会默认的调用父类的有参构造函数。
     - 父类的有参构造函数没有默认的值时，子类中需要显式地调用父类的构造
-      ```
+      ```C++
       class Parent
       {
        private:
@@ -344,7 +350,7 @@
     - 父类中既有无参默认构造又有带参默认构造函数时，子类继承父类时，需要子类显示的指定到底该调用哪一个构造函数。
 
 
-### 1.8.1. 拷贝构造(copy constructor)
+### 1.8.1. copy constructor(拷贝构造)
 - 参考
   - [c++拷贝构造函数详解](https://www.cnblogs.com/alantu2018/p/8459250.html)
 
@@ -376,9 +382,9 @@
   - 当类的成员中有指针时，如果采用简单的浅拷贝，则两类中的两个指针将指向同一个地址，当对象快结束时，会调用两次析构函数，而导致指针悬挂现象，因此必须要用深拷贝。
   
 
-### 1.8.2. 拷贝赋值（copy assignment operator） 
-  ```
-  将对象s1拷贝赋值给对象s2，内部处理过程分3步：
+### 1.8.2. copy assignment operator(拷贝赋值) 
+  ```C++
+  // 将对象s1拷贝赋值给对象s2，内部处理过程分3步：
 
   class MyString
   {
@@ -408,7 +414,7 @@
   // 不能重新分配内存空间，导致程序出错。
   ``` 
 
-## 1.9. 析构函数(destructor)
+## 1.9. destructor(析构函数)
 - 表示：在类名称之前加 `~`。例如：`string::~string()` 
 - 作用：类的对象离开作用域后释放对象使用的资源，在类死亡之前的前一刻调用，用于清除类中的资源（比如：释放内存）。
 - `一个类只能有一个析构函数，多个类有多个析构函数`，如果没有显式的定义，系统会自动生成一个默认的析构函数。
@@ -418,8 +424,8 @@
 
 
 
-## 1.10. 类对象与类指针的区别
-```
+## 1.10. class object && class pointer(类对象与类指针的区别)
+```C++
 class Stu
 {
 private:
@@ -435,18 +441,18 @@ public:
   - 定义 `*s2` 的时候没有分配内存，只有执行 `new` 后才会在堆上分配内存，是个永久的变量，需要用 `delete` 关键字手动去释放它。
 
 
-## 1.11. new和delete
+## 1.11. new && delete
 - windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则填充为最靠近 16 的倍数的大小。 
 - `new` 动态分配内存 
   - 先分配memory，再调用构造函数 
   - new创建一维动态数据
-    ```
+    ```C++
     // 普通类型
     根据哪种数据类型来分配内存？根据数据类型来确定分配多少内存？找到这样的内存，并返回其地址。
     格式：typeName* pointer_name = new typeName 
     例如：int *p = new int;
 
-    p指向的内存没有名称，如何称呼它呢？我们说p指向一个数据对象， 这里的“对象”不是“面向对象编程”中的对象， 而是一种“东西”，它指的是为数据项分配的内存块。 
+    指针 p 指向的内存没有名称，那么要如何称呼它呢？我们说指针 p 指向一个数据对象， 这里的“对象”不是“面向对象编程”中的对象， 而是一种“东西”，它指的是为数据项分配的内存块。 
     数据对象：可以是复杂的结构类型，也可以是基本类型。
 
     // 一维数组
@@ -456,12 +462,12 @@ public:
 
     ```  
   - 创建二维数组
-    ```
+    ```C++
     格式：typeName (*ptr)[col_num] = new typeName[row_num][col_num];
     例子：int (*ptr)[2] = new int[4][2];
     ```
   - 创建对象
-    ```
+    ```C++
     class Airplane
     {
       ...
@@ -470,6 +476,7 @@ public:
     Airplane *ap = new Airplane;
     ```
 
+
 - `delete` 释放内存，与new配对使用 
   - 先调用析构函数，再释放memory  
   - 注意
@@ -477,12 +484,23 @@ public:
     - 不是用new分配的动态内存空间，不能用delete释放
     - 对空指针使用delete是安全的。
 
+
 - 注意：
   - 采用 `array new` 的方式创建一块内存空间，则一定要采用 ` array delete` 方式去释放内存，否则在涉及指针的时候可能会导致内存泄漏。泄漏的并不是整个分配的内存空间，而是分配的空间中数组没有被释放的部分。
   - 不配对地使用new和delete，将发生内存泄漏（memory leak），被分配的内存再也无法使用了，如果内存泄漏严重，则程序将由于不断寻找更多内存而终止。
 
 
-## 1.12. 重载(overloading)
+--------------
+- class member operator new()
+<img src="./figures/placement-new-delete-1.png">
+<img src="./figures/placement-new-delete-2.png">
+<img src="./figures/placement-new-delete-3.png">
+
+- 标准库中使用 `placement arguments new` 的例子
+<img src="./figures/basic-string-new.png">
+
+
+## 1.12. overloading(重载)
 - 必须在一个类中进行。C++中构造函数也可以重载。
 - 函数名称相同，函数参数不同 `（参数个数，参数类型）`。
 - 函数的 `返回值` 不是函数重载判断的标准。
@@ -492,7 +510,7 @@ public:
   - 当子类中没有与父类相同参数的函数，只有名称相同的函数时，而子类去调用父类中重载的函数，则C++编译器会将子类中有相同函数名称的函数去覆盖掉父类中相同名称的函数，从而将当前子类调用父类的函数当做子类中一个新的重载函数，但是编译器发现子类中并没有该函数的重载，因此会报错。
 
 
-## 1.13. 重写(overwrite)
+## 1.13. overwrite(重写)
 - 子类对父类同名函数的重新定义。
 - 必须发生在子类与父类之间，并且父类与子类的函数具有完全相同的原型。
 - 使用 `virtual` 关键字声明后，能够产生多态，没有使用 `virtual` 关键字，只能叫重定义，不叫虚函数重写。
@@ -502,9 +520,6 @@ public:
   - 重载是在编译期间根据参数列表决定，重写是在 `运行期间` 根据具体对象类型来决定调用的函数。
 
 
-
-
-
 ## 1.14. const
 - C语言中，`const` 是只读的变量，有自己的存储空间。
 - C++中，`const` 可能分配存储空间，也可能不分配存储空间。
@@ -512,21 +527,23 @@ public:
   - 采用 `&` 地址运算符去取 `const` 变量的地址时，会分配存储空间。
 - 加 `const` 后，不会改变数据的内容，不加`const`，则会改变数据的内容，一般数据的内容定义在 `private`中。
 - 在类中采用 `const`修饰函数，需要在类调用时必须加 `const`
-  ```
+  ```C++
   // const对象只能调用const成员函数，const类对象成员的数据在类对象的生命周期内不能改变。
   // const成员函数是对 const 对象的限制；const 成员函数只能读类对象成员的数据，不能修改类对象成员的数据。
   // 定义const成员函数时，把const关键字放在函数的参数表和函数体之间。
   // 为什么不将const放在函数声明前呢？因为这样做表明函数的返回值是常量，意义完全不同。
 
-  声明：
-  double real() const
-  {
+  // 声明：
+  double real() const {
       return re;
   }
 
-  调用：
+  // 调用：
   const complex fx(1, 2);
   ```
+  
+  <img src="./figures/const.png">
+
 - `const` 常量由 `编译器`处理的，提供作用域检查和类型检查。而 `宏定义（#define）` 仅仅只是单纯的文本替换，在 `预处理` 阶段处理的。
 
 
@@ -556,13 +573,19 @@ public:
 
 
 ## 1.16. this
+- C++中的成员函数和成员变量是分开存储的。
 - 什么叫成员函数：在类（class）中声明的函数。
 - 什么叫非成员函数：没有在类（class）中声明的函数，非成员函数也叫全局函数。
-- C++中的成员函数和成员变量是分开存储的。
-- 哪个对象调用非静态成员函数，`this` 就指向哪个对象。 
+- 什么是 `this`?
+  > `this` 是C++中的一个关键字，是一个 pointer。在面向对象中，哪个对象调用非静态成员函数，`this` 指针就指向哪个对象。 
+<img src="./figures/this.png">
+
+
 - 静态成员函数中不包含 `this` 指针，非静态成员函数中包含 `this` 指针
+
+
 - 成员函数中 `const` 修饰的是谁？
-  ```
+  ```C++
   class TT
   {
   private:
@@ -576,25 +599,26 @@ public:
   void func(TT *this, int a, int b) const
   {}
   
-  // const修饰的是this指针指向的内存空间。
+  // const 修饰的是this指针指向的内存空间。
   ```
+
 - 类名后直接加括号，不创建一个对象，代表一个临时对象（temp object）。
-    ```
-    //声明类
-    class complex
-    {
-        public:
-            // 主要放置函数
-            ........
+  ```C++
+  //声明类
+  class complex
+  {
+      public:
+          // 主要放置函数
+          ........
 
-        private:
-            // 定义数据
-            ........
-    }
+      private:
+          // 定义数据
+          ........
+  }
 
-    // 调用临时对象
-    complex();
-    ```
+  // 调用临时对象
+  complex();
+  ```
 
 
 ## 1.17. mutable
@@ -612,7 +636,7 @@ public:
   - 我们知道，如果类的成员函数不会改变对象的状态，那么这个成员函数一般会声明成const的。但是，有些时候，我们需要在const的函数里面修改一些跟类状态无关的数据成员，那么这个数据成员就应该被 mutable 来修饰。
   - mutable 常用于指定不影响类的外部可观察状态的成员（通常用于互斥体[mutexes]、记忆缓存[memo caches]、惰性求值[lazy evaluation]和访问指令[access instrumentation]等）。
     
-  ```
+  ```C++
   class ThreadsafeCounter {
     mutable std::mutex m; // mutable 和 mutex 用在一起情况
     int data = 0;
@@ -652,15 +676,14 @@ public:
 
 
 
-## 1.18. 参数传递与返回值传递
-- pass by value 和 pass by reference
-  - 传值是将整个的数据传递给调用者
-  - 传引用本质是 `传指针`。
-    - 采用一个 `&` 符号表示。
-    - 希望调用者对传递的数据不能进行修改，在数据前加 `const` 限制。
+## 1.18. pass by value && pass by reference(参数传递与返回值传递)
+- 传值(pass by value)是将整个的数据传递给调用者
+- 传引用(pass by reference)本质是 `传指针`。
+  - 采用一个 `&` 符号表示。
+  - 希望调用者对传递的数据不能进行修改，在数据前加 `const` 限制。
+
 - 参数传递时：在能使用传reference的前提下，一般优先使用 `传引用` 而尽量少使用传值，并不是必须的。`传引用` 的速度比 `传值` 速度快。
 - 函数返回 `值传递` 时：在能使用传reference的前提下，一般优先使用 `传引用` 而尽量少使用传值，并不是必须的。 
-
 
 - 什么情况下不能使用 `引用传递（reference）`？
   - 当一个函数参数的变量为局部变量时，不能使用传引用。因为变量在函数结束时，变量就被销毁了，不存在，若再传递引用，调用者则不能得到值，会出错。
@@ -672,10 +695,9 @@ public:
   - 重载运算符 `<<` 和 `>>` 一般使用友元函数，其它的函数一般定义为 `类的成员函数`。
   - `类模板` 中一般不要滥用友元函数，使用会很复杂，若将 `.h` 文件与 `.cpp` 文件分开实现，将会更加的复杂。
 
-
 - 同一个 class 中的各个对象(object) 互为友元。
-  ```
-  函数定义：
+  ```C++
+  // 函数定义：
   int func(const complex& param)
   {
       return param.value;
@@ -700,7 +722,7 @@ public:
     - 一个类将对其非公有成员的访问权限授予其他函数或者类，会破坏该类的封装性，降低该类的可靠性和可维护性。
 
 
-## 1.20. 操作运算符重载(operator overloading)
+## 1.20. operator overloading(操作运算符重载)
 - 为什么要操作符重载？
   > 普通的运算规则不能满足复杂的数据类型，像 `类（class）`数据类型，需要编程人员自定义运算规则去实现。
 - 操作运算符重载的本质是个 `函数`。
@@ -769,7 +791,7 @@ public:
 
 
 
-## 1.22. 智能指针
+## 1.22. smart pointer(智能指针)
 - 参考
   - [详解C++11智能指针](https://www.cnblogs.com/WindSun/p/11444429.html)
   - [【C++】智能指针详解](https://blog.csdn.net/flowing_wind/article/details/81301001)
@@ -881,7 +903,7 @@ public:
 ## 1.23. typename
 - 概念
   - 从属名称(dependent names)：类模板中出现的名称依赖于某个参数。
-    ```
+    ```C++
     template<typename T>
     void show(const T& var)
     {
@@ -891,7 +913,7 @@ public:
   - 嵌套从属名称(nested depended name)：从属名称在 class 内嵌套。
 
 - 为什么要用 `typename` ?
-  ```
+  ```C++
   template<typename T>
   void show(const T& var)
   {
@@ -902,7 +924,7 @@ public:
 
 
 - 在类模板中 `class` 关键字与 `typename` 关键字的用法一样，都是定义一个类。
-  ```
+  ```C++
   // 两者声明的效果一样
 
   template<typename T> class Stu{};
@@ -913,7 +935,7 @@ public:
   - 任何时候你要在 `template` 模板类中使用一个嵌套从属类型名称，就必须在它的前边放置 `typename` 关键字。
   - C++编译器有个解析的规则：如果解析器在 `template` 中遇到一个嵌套从属名称，它便假设这个名称不是类型，除非你要告诉编译器，这是一个类型。
 
-  ```
+  ```C++
   // 未使用typename，可能在编译时出现问题
   template<typename T>
   void show(const T& var)
@@ -935,18 +957,16 @@ public:
   ```
 
 - 注意点
-  <p align="center">
-    <img src="./figures/typename.png">
-  </p>
+  <img src="./figures/typename.png">
 
 
 
 ## 1.24. 类型转换
-4种类型转换
+C++中的类型转换有4种。
 
 - `static_cast` 静态类型转换。
   - 格式
-    ```
+    ```C++
     static_cast<>()，
     例如：
     double a1 = 12.0;
@@ -959,9 +979,9 @@ public:
 - `const_cast<>()` const类型转换，去除类型的只读属性。
 
 
-## 1.25. 异常处理
+## 1.25. exception(异常处理)
 - C++中使用 `throw` 抛出异常，`try...catch` 等关键字来捕获异常。
-  ```
+  ```C++
   // 语法
   try
   {
@@ -997,9 +1017,8 @@ public:
   - 按照引用传递异常，在异常中使用虚函数。
 
 - 标准程序库中所有基类的异常为 `Exception()` 
-  <p align="center">
-    <img src="./figures/C++异常.png">
-  </p>
+<img src="./figures/exception.png">
+ 
 
 
 - 异常的优缺点
