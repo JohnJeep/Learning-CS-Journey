@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-01-24 12:47:29
+ * @LastEditTime: 2021-01-27 09:14:36
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -195,6 +195,8 @@ Level 3: 扩充C++标准库
 
 
 ### 1.4.2. Associative containers(关联性容器)
+关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
+
 
 #### 1.4.2.1. set
 - set 是一个 `集合` 容器，包含的元素是唯一的，集合中的元素按照一定的顺序排列，不能随意指定位置插入元素。
@@ -245,6 +247,12 @@ Level 3: 扩充C++标准库
 ```
 - map的查找操作需要做异常判断处理
 
+- `at(key)`
+  -  `at()` 函数会根据它收到的 `key` 得到元素的 `value`，如果不存在这样的元素，则抛出 `out_of_range` 异常。
+
+- `operator []`
+  - `operator []` 的索引就是 `key`，其类型可能属于任何的类型，不一定是整数。
+  - 如果你选择某 `key` 作为索引，容器内没有相应的元素，那么 map 会自动安插一个新元素，其 value 将被其类型的 default 构造函数初始化。因此你不可以指定一个 `不具 default 构造函数的 value 类型`。一般基础类型都有一个 `default 构造函数` ,设初值为 0。
 
 #### 1.4.2.3. multiset
 collection of keys, sorted by keys
@@ -358,8 +366,12 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 - `stable_partition()`函数
 - `upper_bound()` 函数
 - `lower_bound()` 函数
+- `std::floor` 和 `std::ceil`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
+  - `std::floor` -->向下取整数。`5.88   std::floor(5.88) = 5;`
+  - `std::ceil ` -->向上取整数。`std::ceil(5.88)   = 6;`
 
 
+     
 
 ## 1.6. Adaptor(适配器)
 - 函数适配器
