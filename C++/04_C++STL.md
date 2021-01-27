@@ -18,7 +18,7 @@
       - [1.4.1.2. vector（单端的动态数组）](#1412-vector单端的动态数组)
       - [1.4.1.3. deque（双端数组）](#1413-deque双端数组)
       - [1.4.1.4. list（双向链表）](#1414-list双向链表)
-      - [1.4.1.5. forword list](#1415-forword-list)
+      - [1.4.1.5. forword list(单向链表)](#1415-forword-list单向链表)
     - [1.4.2. Associative containers(关联性容器)](#142-associative-containers关联性容器)
       - [1.4.2.1. set](#1421-set)
       - [1.4.2.2. map](#1422-map)
@@ -68,7 +68,7 @@ Level 3: 扩充C++标准库
 
 ## 1.2. Reference by website(参考网站)
 - [cpprocks](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
-
+- [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
 
 
 ## 1.3. STL（Standard Template Library）标准模板库
@@ -118,6 +118,8 @@ Level 3: 扩充C++标准库
   <img src="./figures/container-arrays.png">
 
 
+- 不能扩容。
+
 
 #### 1.4.1.2. vector（单端的动态数组）
 - 动态数组实现机制：
@@ -129,6 +131,8 @@ Level 3: 扩充C++标准库
 - 内部结构图
 
   <img src="./figures/container-vectors.png">
+
+- 一般每次扩容为原来的  2 倍。
 
 
 - 模板：`template <typename T> void Show(T arrNum[], int len);`
@@ -164,9 +168,12 @@ Level 3: 扩充C++标准库
 - `pop_back()`: 删除最后一个元素
 
 - 内部结构图
+  
   <img src="./figures/container-deques.png">
   <img src="./figures/container-deques-internal-structure.png">
+  <img src="./figures/deque.png">
 
+- 每次扩容的大小为一个 buffer。
 
 
 #### 1.4.1.4. list（双向链表）
@@ -184,15 +191,15 @@ Level 3: 扩充C++标准库
   <img src="./figures/container-lists.png">
   <img src= "./figures/container-lists-internal-structure.png">
 
+- 每次只能扩充一个结点，效率低，但空间浪费是最小的。
 
-
-#### 1.4.1.5. forword list
+#### 1.4.1.5. forword list(单向链表)
 - forword list链表是C++11新加的功能，比list的效率要快，是单向的链表。
 
 - 内部结构图  
   <img src="./figures/container-forward-lists.png">
 
-
+- 只能扩充一个结点。
 
 ### 1.4.2. Associative containers(关联性容器)
 关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
@@ -255,7 +262,7 @@ Level 3: 扩充C++标准库
   - 如果你选择某 `key` 作为索引，容器内没有相应的元素，那么 map 会自动安插一个新元素，其 value 将被其类型的 default 构造函数初始化。因此你不可以指定一个 `不具 default 构造函数的 value 类型`。一般基础类型都有一个 `default 构造函数` ,设初值为 0。
 
 #### 1.4.2.3. multiset
-collection of keys, sorted by keys
+collection of keys, sorted by keys.容器中的 key 可以重复。
 
 
 #### 1.4.2.4. mutimap
@@ -302,6 +309,9 @@ collection of key-value pairs, sorted by keys
 
 
 #### 1.4.4.1. stack
+<img src="./figures/stack.png">
+
+
 - `push()` 入栈
 - `pop()` 出栈
 - `top()` 获取栈顶元素
@@ -310,10 +320,13 @@ collection of key-value pairs, sorted by keys
 
 
 #### 1.4.4.2. queue
+<img src="./figures/queue.png">
+
 - `push()` 入队列
 - `pop()` 出队列
 - `empty()` 对列为空
 - `front()` 队列头部元素
+  
 
 
 #### 1.4.4.3. priority_queue(优先级队列)
@@ -419,3 +432,5 @@ predicate: 判断这个条件是真还是假
 
 
 ## 1.9. Allocator(分配器)
+containers(容器)有默认的分配器。
+
