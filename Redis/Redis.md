@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2020-09-28 10:02:10
+ * @LastEditTime: 2021-01-27 21:43:35
  * @LastEditors: Please set LastEditors
  * @Description: redis学习
 -->
@@ -713,22 +713,22 @@ OK
   - `events`: 文件描述符事件
   - `cmd`: 最近一次执行的命令
 
-客户端 flag 可以由以下部分组成：
-```
-O: 客户端是 MONITOR 模式下的附属节点（slave）
-S: 客户端是一般模式下（normal）的附属节点
-M: 客户端是主节点（master）
-x: 客户端正在执行事务
-b: 客户端正在等待阻塞事件
-i: 客户端正在等待 VM I/O 操作（已废弃）
-d: 一个受监视（watched）的键已被修改， EXEC 命令将失败
-c: 在将回复完整地写出之后，关闭链接
-u: 客户端未被阻塞（unblocked）
-U: 通过Unix套接字连接的客户端
-r: 客户端是只读模式的集群节点
-A: 尽可能快地关闭连接
-N: 未设置任何 flag
-```
+  > 客户端 flag 可以由以下部分组成：
+  ```
+  O: 客户端是 MONITOR 模式下的附属节点（slave）
+  S: 客户端是一般模式下（normal）的附属节点
+  M: 客户端是主节点（master）
+  x: 客户端正在执行事务
+  b: 客户端正在等待阻塞事件
+  i: 客户端正在等待 VM I/O 操作（已废弃）
+  d: 一个受监视（watched）的键已被修改， EXEC 命令将失败
+  c: 在将回复完整地写出之后，关闭链接
+  u: 客户端未被阻塞（unblocked）
+  U: 通过Unix套接字连接的客户端
+  r: 客户端是只读模式的集群节点
+  A: 尽可能快地关闭连接
+  N: 未设置任何 flag
+  ```
 
 - `client id`：返回当前连接的ID；Redis 5 新增的命令。
 - `client setname connection-name`：为当前连接分配一个名字connection-name，这个名字会显示在CLIENT LIST命令的结果中，用于识别当前正在与服务器进行连接的客户端。
@@ -780,17 +780,17 @@ N: 未设置任何 flag
   - `pfcount key [key ..]`：返回给定 HyperLogLog 的基数估算值。
   - `pfmerge destkey sourcekey [sourcekey]`： 将多个 HyperLogLog 合并（merge）为一个 HyperLogLog ， 合并后的 HyperLogLog 的基数接近于所有输入 HyperLogLog 的可见集合（observed set）的并集.
 
-```
-127.0.0.1:6379> pfadd my_log 11 22 33 44
-(integer) 1
-127.0.0.1:6379> pfadd you_log 99 88 77 66
-(integer) 1
-127.0.0.1:6379> pfcount my_log you_log
-(integer) 8
-127.0.0.1:6379> pfcount my_log
-(integer) 4
-127.0.0.1:6379> pfmerge all_log you_log my_log
-OK
-127.0.0.1:6379> pfcount all_log
-(integer) 8
-```
+  ```
+  127.0.0.1:6379> pfadd my_log 11 22 33 44
+  (integer) 1
+  127.0.0.1:6379> pfadd you_log 99 88 77 66
+  (integer) 1
+  127.0.0.1:6379> pfcount my_log you_log
+  (integer) 8
+  127.0.0.1:6379> pfcount my_log
+  (integer) 4
+  127.0.0.1:6379> pfmerge all_log you_log my_log
+  OK
+  127.0.0.1:6379> pfcount all_log
+  (integer) 8
+  ```
