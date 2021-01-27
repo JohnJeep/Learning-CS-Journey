@@ -29,7 +29,7 @@
 - [0.6. 类模板(class template)](#06-类模板class-template)
 - [0.7. 成员模板(member template)](#07-成员模板member-template)
 - [0.8. specialization 模板特化](#08-specialization-模板特化)
-- [0.9. template template template](#09-template-template-template)
+- [0.9. template template parameter](#09-template-template-parameter)
 - [0.10. 输入输出流](#010-输入输出流)
 
 <!-- /TOC -->
@@ -452,7 +452,7 @@ c1.Child::shoe();
 
 
 
-## 0.9. template template template
+## 0.9. template template parameter
 模板中再使用模板。
 
 <img src="./figures/template-template-template1.png">

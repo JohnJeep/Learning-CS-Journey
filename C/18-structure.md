@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-16 20:47:29
- * @LastEditTime: 2021-01-20 23:16:02
+ * @LastEditTime: 2021-01-25 11:04:04
  * @LastEditors: Please set LastEditors
  * @Description: C语言结构体
 --> 
@@ -103,7 +103,7 @@ struct Student{
 - 为什么要字节对齐？
   - 现代计算机中内存的存储理论上都是按照 `byte` 大小来存储的，但实际上是按照 `字长（word size）` 为单位存储的。
   - 是减少CPU访问内存的次数，加大CPU访问内存的吞吐量。比如同样读取8个字节的数据，一次读取4个字节那么只需要读取2次。
-    <p align="center"> <img src="./figure/内存字节对齐.png"></p>
+    <p align="center"> <img src="./figures/内存字节对齐.png"></p>
 
 
 - 字节对齐方法
