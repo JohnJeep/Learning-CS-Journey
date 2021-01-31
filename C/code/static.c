@@ -2,7 +2,7 @@
  * @Description: 简单static的用法
  * @Author: JohnJeep
  * @Date: 2019-08-20 20:59:41
- * @LastEditTime: 2019-09-13 11:13:49
+ * @LastEditTime: 2021-01-31 17:34:29
  * @LastEditors: Please set LastEditors
  */
 #include "stdio.h"
@@ -23,29 +23,17 @@ int getTwo()
     return i;
 }
 
-
-int main() 
+int main()
 {
-    int j =0;
-    while ( j < 10)
+    int j = 0;
+    while (j < 10)
     {
         getOne();
         getTwo();
         printf("\n");
         j++;
     }
-    
+
     getchar();
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
