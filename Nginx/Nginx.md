@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:42:59
- * @LastEditTime: 2020-09-24 22:37:32
+ * @LastEditTime: 2021-01-31 16:10:34
  * @LastEditors: Please set LastEditors
  * @Description: Nginx学习
  * 
@@ -12,7 +12,7 @@
 - [Nginx 入门指南](https://wiki.jikexueyuan.com/project/nginx/)：介绍nginx的是使用
 - [Ubuntu安装Nginx](https://www.howtoing.com/how-to-install-nginx-on-ubuntu-18-04)：如何在Ubuntu 18.04上安装Nginx
 - [16张图入门Nginx——（前端够用，运维入门）](https://segmentfault.com/a/1190000023648269?utm_source=sf-related)：介绍Nginx的使用
-
+- [高性能 Nginx HTTPS 调优 - 如何为 HTTPS 提速 30%](https://kalasearch.cn/blog/high-performance-nginx-tls-tuning/)：介绍了Nginx调优的技巧。
 
 
 ## Nginx常用命令
