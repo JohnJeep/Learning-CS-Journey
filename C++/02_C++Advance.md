@@ -453,7 +453,13 @@ c1.Child::shoe();
 
 
 ## 0.9. template template parameter
-模板中再使用模板。
+- 参考
+  - [【C++】template template argument 模板参数模板](https://www.cnblogs.com/visayafan/archive/2011/11/29/2268041.html) 
+
+
+- 什么是模板参数模板？
+  - 模板参数列表里面可以存在模板，称之为模板参数模板。
+
 
 <img src="./figures/template-template-template1.png">
 <img src="./figures/template-template-template2.png">
