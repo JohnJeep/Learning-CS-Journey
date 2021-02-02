@@ -1,12 +1,27 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2020-08-23 00:43:21
+ * @LastEditTime: 2021-02-02 22:50:48
  * @LastEditors: Please set LastEditors
  * @Description: GDB使用剖析
 --> 
 # 1. GDB与Makefile
 ## 1.1. GDB调试
+- 参考
+  - [用图文带你彻底弄懂GDB调试原理](https://mp.weixin.qq.com/s?__biz=MzA3MzAwODYyNQ==&mid=2247483895&idx=1&sn=ba35d1823c259a959b72a310e0a92068&scene=21#wechat_redirect)
+
+### 1.1.1. 基础理论
+- ptrace系统函数是Linux内核提供的一个用于进程跟踪的系统调用，通过它，一个进程(gdb)可以读写另外一个进程(test)的指令空间、数据空间、堆栈和寄存器的值。而且gdb进程接管了test进程的所有信号，也就是说系统向test进程发送的所有信号，都被gdb进程接收到，这样一来，test进程的执行就被gdb控制了，从而达到调试的目的。
+
+- gdb底层的调试机制是怎样的？
+  > 系统首先会启动gdb进程，这个进程会调用系统函数fork()来创建一个子进程，这个子进程做两件事情：
+  > 1. 调用系统函数ptrace；
+  > 2. 通过execc来加载、执行可执行程序 test，那么test程序就在这个子进程中开始执行了。
+<img src="./pictures/gdb-ptrace.png">
+
+
+
+### 1.1.2. 命令
 > 在进行GDB调试之前需要先打断点。
 
 - `gcc xxx.c -g -o xxx.out` 使用 gdb 调试程序之前,必须使用 `-g` 或 `–ggdb`编译选项编译源文件。
