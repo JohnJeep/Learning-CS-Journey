@@ -1,26 +1,27 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-19 19:37:29
- * @LastEditTime: 2020-11-23 17:22:23
+ * @LastEditTime: 2021-02-02 22:50:30
  * @LastEditors: Please set LastEditors
  * @Description: Linux kernel学习
  * @FilePath: /linux_kernel.md
 -->
-## 理解内核的秘籍
+## 0.1. 理解内核的秘籍
 - 以一个设计者的角度来阅读内核
 - 先框架再细节
 - 低版本理解原理，高版本理解实现
 - 动手总结，形成自己的智慧
 
 
-## 参考
+## 0.2. 参考
 - [Linux内核中双向链表的经典实现](https://www.cnblogs.com/skywang12345/p/3562146.html#a1)
 - [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/): 官方Linux kernel英文API手册。
 - [Linux source code Bootlin](https://elixir.bootlin.com/linux/latest/source): 在线查看Linux kernel源码。
+- [What every programmer should know about memory](https://lwn.net/Articles/250967/)：博客写了关于Memory、CPU caches、Virtual memory、NUMA systems、cache optimization、multi-threaded optimizations、Memory performance tools等各个方面的知识，质量很高，需要细细的琢磨。
 
 
 
-## 基础概念
+## 0.3. 基础概念
 - Linux是一个单内核，运行在单独的内核空间上。具有模块化设计、抢占式内核、支持内核线程、动态装载内核模块的能力，让所有事情都运行在内核态，直接调用函数，无须消息传递。
 
 - 内核开发者通常把那些对时间要求比较高，而本身长度又比较短的函数定义成内联函数。若果一个函数较大，会被反复调用，且没有特别的时间上的限制，并赞成把它做成内联函数。
@@ -36,7 +37,7 @@
 <img src="./pictures/内核源码结构.png">
 
 
-## 进程
+## 0.4. 进程
 - [task_struct(进程描述符)](https://blog.csdn.net/lf_2016/article/details/54347820)
 
 
