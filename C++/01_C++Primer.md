@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
- * @LastEditTime: 2021-01-28 08:56:36
+ * @LastEditTime: 2021-02-02 15:44:08
  * @LastEditors: Please set LastEditors
  * @Description: C++基础学习笔记
 --> 
@@ -957,7 +957,23 @@ public:
   ```
 
 - 注意点
-  <img src="./figures/typename.png">
+  - `typename` 不可以出现在 `base classes list` 内的嵌套从属名称之前，也不可以在 `member initialization list(成员初值列)` 中作为 `base class` 修饰符。例如：
+  ```c++
+  template<typename T>
+  class Derived : public Base<T>::Nested {  // base class list 中不允许 typename
+  public:
+    explicit Derived (int x)
+    : Base<T>::Nested(x)                    // mem.init.list中不允许typename
+    {
+      // 嵌套从属类型名称既不在base class list 中也不在 mem.init.list 中，
+      // 作为一个 base class 修饰符则需要加上 typename
+      typename Base<T>::Nested temp;       
+      ...
+
+    }
+
+  };
+  ```
 
 
 
