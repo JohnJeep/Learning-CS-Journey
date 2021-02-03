@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2021-01-11 19:10:45
+ * @LastEditTime: 2021-02-03 08:22:34
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -97,3 +97,7 @@ It's true: if the dream is big enough, the facts don't count.
 
 When we're held back, we'll go farther and harder.
 当受到阻碍时，我们就越发坚持与努力。
+
+A few morning gleams infiltrated the liquid strata.
+几缕晨光渗进水里
+
