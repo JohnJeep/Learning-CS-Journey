@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-01-27 09:14:36
+ * @LastEditTime: 2021-02-04 10:21:38
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -10,36 +10,35 @@
 
 - [1. Standard Template Library](#1-standard-template-library)
   - [1.1. Thinking(思考)](#11-thinking思考)
-  - [1.2. Reference by website(参考网站)](#12-reference-by-website参考网站)
-  - [1.3. STL（Standard Template Library）标准模板库](#13-stlstandard-template-library标准模板库)
-  - [1.4. Container(容器)](#14-container容器)
-    - [1.4.1. Sequence containers(有序容器)](#141-sequence-containers有序容器)
-      - [1.4.1.1. Array](#1411-array)
-      - [1.4.1.2. vector（单端的动态数组）](#1412-vector单端的动态数组)
-      - [1.4.1.3. deque（双端数组）](#1413-deque双端数组)
-      - [1.4.1.4. list（双向链表）](#1414-list双向链表)
-      - [1.4.1.5. forword list(单向链表)](#1415-forword-list单向链表)
-    - [1.4.2. Associative containers(关联性容器)](#142-associative-containers关联性容器)
-      - [1.4.2.1. set](#1421-set)
-      - [1.4.2.2. map](#1422-map)
-      - [1.4.2.3. multiset](#1423-multiset)
-      - [1.4.2.4. mutimap](#1424-mutimap)
-    - [1.4.3. Unordered associative containers(无序关联容器)](#143-unordered-associative-containers无序关联容器)
-      - [1.4.3.1. unordered_set](#1431-unordered_set)
-      - [1.4.3.2. unordered_map](#1432-unordered_map)
-      - [1.4.3.3. unordered_multisert](#1433-unordered_multisert)
-      - [1.4.3.4. unordered_multimap](#1434-unordered_multimap)
-    - [1.4.4. Container adaptors(容器适配器)](#144-container-adaptors容器适配器)
-      - [1.4.4.1. stack](#1441-stack)
-      - [1.4.4.2. queue](#1442-queue)
-      - [1.4.4.3. priority_queue(优先级队列)](#1443-priority_queue优先级队列)
-  - [1.5. Algorithm](#15-algorithm)
-    - [1.5.1. heap](#151-heap)
-    - [1.5.2. 其它函数](#152-其它函数)
-  - [1.6. Adaptor(适配器)](#16-adaptor适配器)
-  - [1.7. Functor(仿函数)](#17-functor仿函数)
-  - [1.8. Iterator(迭代器)](#18-iterator迭代器)
-  - [1.9. Allocator(分配器)](#19-allocator分配器)
+  - [1.2. STL（Standard Template Library）标准模板库](#12-stlstandard-template-library标准模板库)
+  - [1.3. Container(容器)](#13-container容器)
+    - [1.3.1. Sequence containers(有序容器)](#131-sequence-containers有序容器)
+      - [1.3.1.1. Array](#1311-array)
+      - [1.3.1.2. vector（单端的动态数组）](#1312-vector单端的动态数组)
+      - [1.3.1.3. deque（双端数组）](#1313-deque双端数组)
+      - [1.3.1.4. list（双向链表）](#1314-list双向链表)
+      - [1.3.1.5. forword list(单向链表)](#1315-forword-list单向链表)
+    - [1.3.2. Associative containers(关联性容器)](#132-associative-containers关联性容器)
+      - [1.3.2.1. set](#1321-set)
+      - [1.3.2.2. map](#1322-map)
+      - [1.3.2.3. multiset](#1323-multiset)
+      - [1.3.2.4. mutimap](#1324-mutimap)
+    - [1.3.3. Unordered associative containers(无序关联容器)](#133-unordered-associative-containers无序关联容器)
+      - [1.3.3.1. unordered_set](#1331-unordered_set)
+      - [1.3.3.2. unordered_map](#1332-unordered_map)
+      - [1.3.3.3. unordered_multisert](#1333-unordered_multisert)
+      - [1.3.3.4. unordered_multimap](#1334-unordered_multimap)
+    - [1.3.4. Container adaptors(容器适配器)](#134-container-adaptors容器适配器)
+      - [1.3.4.1. stack](#1341-stack)
+      - [1.3.4.2. queue](#1342-queue)
+      - [1.3.4.3. priority_queue(优先级队列)](#1343-priority_queue优先级队列)
+  - [1.4. Algorithm](#14-algorithm)
+    - [1.4.1. heap](#141-heap)
+    - [1.4.2. 其它函数](#142-其它函数)
+  - [1.5. Adaptor(适配器)](#15-adaptor适配器)
+  - [1.6. Functor(仿函数)](#16-functor仿函数)
+  - [1.7. Iterator(迭代器)](#17-iterator迭代器)
+  - [1.8. Allocator(分配器)](#18-allocator分配器)
 
 <!-- /TOC -->
 
@@ -68,12 +67,8 @@ Level 3: 扩充C++标准库
 ---------------------------
 
 
-## 1.2. Reference by website(参考网站)
-- [cpprocks](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
-- [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
 
-
-## 1.3. STL（Standard Template Library）标准模板库
+## 1.2. STL（Standard Template Library）标准模板库
 - generic programming(泛型编程): 就是利用模板为主要工具来进行编写程序。STL是泛型编程(GP)最成功的一个作品。
 - STL的核心思想：算法和数据结构的实现是分离的。
 
@@ -103,16 +98,16 @@ Level 3: 扩充C++标准库
 
 
 
-## 1.4. Container(容器)
+## 1.3. Container(容器)
 - 容器是一个一个的模板类，里面放的是元素。
 
 - STL标准库中 `容器` 内存储的元素都必须能够拷贝，而C++编译器默认提供的是浅拷贝，程序在执行时，则会出现问题。因此需要 `重写构造函数` 和重载 `=` 操作运算符，执行深拷贝。
 
 
 
-### 1.4.1. Sequence containers(有序容器)
+### 1.3.1. Sequence containers(有序容器)
 
-#### 1.4.1.1. Array
+#### 1.3.1.1. Array
 - fixed number of elements(固定数量的元素)
 
 - 内部结构图
@@ -123,7 +118,7 @@ Level 3: 扩充C++标准库
 - 不能扩容。
 
 
-#### 1.4.1.2. vector（单端的动态数组）
+#### 1.3.1.2. vector（单端的动态数组）
 - 动态数组实现机制：
   > 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
   - 注意：使用动态数组时，尽量减少改变数组容量大小的次数，可以减少时间性能的消耗。
@@ -162,7 +157,7 @@ Level 3: 扩充C++标准库
   - `swap()`: 交换两个容器的内容
 
 
-#### 1.4.1.3. deque（双端数组）
+#### 1.3.1.3. deque（双端数组）
 - 与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
 - `push_back()`: 在容器末尾插入一个元素
 - `push_front()` 容器头部插入一个元素
@@ -178,7 +173,7 @@ Level 3: 扩充C++标准库
 - 每次扩容的大小为一个 buffer。
 
 
-#### 1.4.1.4. list（双向链表）
+#### 1.3.1.4. list（双向链表）
 - 是一个双向链表的容器，可以高效的进行插入和删除元素。
 - 不支持随机存储元素，即不支持 `at.(pos)` 函数和 `[]` 操作符。
 - 链表的插入操作：在 pos 位置插入新的节点，新插入的数据存放在 pos 位置之前。
@@ -195,7 +190,7 @@ Level 3: 扩充C++标准库
 
 - 每次只能扩充一个结点，效率低，但空间浪费是最小的。
 
-#### 1.4.1.5. forword list(单向链表)
+#### 1.3.1.5. forword list(单向链表)
 - forword list链表是C++11新加的功能，比list的效率要快，是单向的链表。
 
 - 内部结构图  
@@ -203,11 +198,11 @@ Level 3: 扩充C++标准库
 
 - 只能扩充一个结点。
 
-### 1.4.2. Associative containers(关联性容器)
+### 1.3.2. Associative containers(关联性容器)
 关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
 
 
-#### 1.4.2.1. set
+#### 1.3.2.1. set
 - set 是一个 `集合` 容器，包含的元素是唯一的，集合中的元素按照一定的顺序排列，不能随意指定位置插入元素。
 - set 底层采用红黑树的数据结构实现的。
 - set 支持唯一的键值，容器里面的元素值只能出现一次，而 `multiset` 集合容器中同一个元素值可以出现多次。
@@ -232,7 +227,7 @@ Level 3: 扩充C++标准库
 
 
 
-#### 1.4.2.2. map
+#### 1.3.2.2. map
 - map 是关联式容器，一个 map 就是一个键值对。map 中的 `key` 值唯一，容器中的元素按照一定的顺序排列，不能在任意指定的位置插入元素。
 - map 的底层原理是按照平衡二叉树的数据结构来实现的，在插入和删除的操作上比 `vector` 容器快。
 - map 支持唯一的键值，每个 `key` 只能出现一次，支持 `[]` 操作，形如：`map[key] = value`。 `multimap` 不支持唯一的键值，容器中的每个 `key` 可以出现相同的多次，不支持 `[]` 操作。
@@ -263,16 +258,16 @@ Level 3: 扩充C++标准库
   - `operator []` 的索引就是 `key`，其类型可能属于任何的类型，不一定是整数。
   - 如果你选择某 `key` 作为索引，容器内没有相应的元素，那么 map 会自动安插一个新元素，其 value 将被其类型的 default 构造函数初始化。因此你不可以指定一个 `不具 default 构造函数的 value 类型`。一般基础类型都有一个 `default 构造函数` ,设初值为 0。
 
-#### 1.4.2.3. multiset
+#### 1.3.2.3. multiset
 collection of keys, sorted by keys.容器中的 key 可以重复。
 
 
-#### 1.4.2.4. mutimap
+#### 1.3.2.4. mutimap
 collection of key-value pairs, sorted by keys
 
 
-### 1.4.3. Unordered associative containers(无序关联容器)
-#### 1.4.3.1. unordered_set
+### 1.3.3. Unordered associative containers(无序关联容器)
+#### 1.3.3.1. unordered_set
 - `unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
 - STL无序容器存储状态，hash表存储结构图
 <img src="./figures/unordered-containers.png">
@@ -295,22 +290,22 @@ collection of key-value pairs, sorted by keys
 
 
 
-#### 1.4.3.2. unordered_map
+#### 1.3.3.2. unordered_map
 - 内部结构图
   
   <img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
-#### 1.4.3.3. unordered_multisert
+#### 1.3.3.3. unordered_multisert
 
 
-#### 1.4.3.4. unordered_multimap
+#### 1.3.3.4. unordered_multimap
 
 
-### 1.4.4. Container adaptors(容器适配器)
+### 1.3.4. Container adaptors(容器适配器)
 容器适配器为有序的容器提供了不同的接口。
 
 
-#### 1.4.4.1. stack
+#### 1.3.4.1. stack
 <img src="./figures/stack.png">
 
 
@@ -321,7 +316,7 @@ collection of key-value pairs, sorted by keys
 - `empty()` 栈为空
 
 
-#### 1.4.4.2. queue
+#### 1.3.4.2. queue
 <img src="./figures/queue.png">
 
 - `push()` 入队列
@@ -331,7 +326,7 @@ collection of key-value pairs, sorted by keys
   
 
 
-#### 1.4.4.3. priority_queue(优先级队列)
+#### 1.3.4.3. priority_queue(优先级队列)
 ```C++
 // 最大或最小优先级队列变量的声明 
 priority_queue<int> g_priq;                            // 默认为最大值优先队列
@@ -339,14 +334,14 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 ```
 
 
-## 1.5. Algorithm
+## 1.4. Algorithm
 - STL算法的核心思想
   - STL通过类模板技术，实现了数据类型与容器模型的分离。
   - 通过函数对象实现了自定义数据类型与底层算法的分离。
   - 通过迭代器的方式统一的去遍历容器，向容器中读数据和写数据。
 
 
-### 1.5.1. heap
+### 1.4.1. heap
 堆（heap）的STL库中函数
 
 - `make_heap(first, last, comp);` 建立一个空堆；
@@ -356,7 +351,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
 
 
-### 1.5.2. 其它函数
+### 1.4.2. 其它函数
 - `for_each()` 遍历容器中的所有元素。
 - `transform()` 将容器中的数据进行某种转换的运算。
   - 两个算法的区别
@@ -388,7 +383,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
      
 
-## 1.6. Adaptor(适配器)
+## 1.5. Adaptor(适配器)
 - 函数适配器
   - bind adaptor(绑定适配器)
   - composite adaptor(组合适配器)
@@ -398,7 +393,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 predicate: 判断这个条件是真还是假
 
 
-## 1.7. Functor(仿函数)
+## 1.6. Functor(仿函数)
 - 什么是仿函数？
   > 仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数。 
 
@@ -422,7 +417,7 @@ predicate: 判断这个条件是真还是假
 
 
 
-## 1.8. Iterator(迭代器)
+## 1.7. Iterator(迭代器)
 - 迭代器就是一种泛化的指针。
 
 - 前闭后开区间
@@ -433,6 +428,6 @@ predicate: 判断这个条件是真还是假
 
 
 
-## 1.9. Allocator(分配器)
+## 1.8. Allocator(分配器)
 containers(容器)有默认的分配器。
 
