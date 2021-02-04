@@ -61,11 +61,24 @@
 - [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
 - [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
 - [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
-- [C++ shell](http://cpp.sh/) 在线的C++编译器，在线编辑代码。
-- [C++ Standards Committee Papers](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
+- [open-std.org](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
+- [isocpp.org](https://isocpp.org/): 标准委员会官方站点，近期的会议、行程、活动、计划等等都会发布在这里。这里也会推荐一些比较好的文章、教程、书籍等等内容，供C++程序员阅读。
+- [cpprocks.com](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
+- [stroustrup.com](https://www.stroustrup.com/index.html): C++之父的主页，确定不来看看吗？好东西贼多。
 - [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
-- [learncpp](https://www.learncpp.com/)
-- [TutorialsPoint](https://www.tutorialspoint.com/index.htm)
+- [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软C++团队的博客，没事的话也可以看看。 
+- [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
+- [reddit cpp版块](https://www.reddit.com/r/cpp): reddit的cpp版块也不错，可以了解最新的C++消息，也可以提问题，也有人在这里写一些文章教程。
+- [herbsutter.com](https://herbsutter.com/): Herb Sutter的博客，Herb Sutter是C++核心人物之一，早期The Free Lunch Is Over这篇文章就出自他手，他还写过Exceptional系列C++图书.
+- [stepanovpapers.com](http://stepanovpapers.com/): 收录了泛型编程的祖师Alex Stepanov的论文网站，STL便是其杰作。可以说没人比他更懂泛型编程，而且这位大牛中的大牛竟然还仿照欧几里得的《几何原本》写了本《编程原本》，试图以公理化方法演绎编程。
+- [modernescpp.com/](https://www.modernescpp.com/index.php): 一个开发者个人的网站，网站上的文章质量很高。值得一读。
+- [Preshing on Programming](https://preshing.com/): 自由开发者撰写的博客，内容质量很不错。
+- [arne-mertz.de](https://arne-mertz.de/): 同样是自由开发者撰写的博客，内容质量很不错。
+- [learncpp](https://www.learncpp.com/): 该网站主要是叫你如何使用C++，成为一个master。
+- [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
+- [C++ shell](http://cpp.sh/): 在线的C++编译器，在线编辑代码。
+
+
 
 
 
