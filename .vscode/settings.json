@@ -58,6 +58,7 @@
         "chrono": "cpp",
         "condition_variable": "cpp",
         "ctime": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "forward_list": "cpp"
     }
 }
