@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-02-07 15:58:54
+ * @LastEditTime: 2021-02-08 09:53:40
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -59,11 +59,12 @@
 
 所谓剖析源码，其目的在于明理、解惑，提高自身水平，并不是要穷经皓首，倒背如流。
 
-STL学习境界：会用，明理，能扩展。
-
 
 
 ---------------------------
+STL学习境界：会用，明理，能扩展。
+
+
 
 目标
 
@@ -79,6 +80,12 @@ Level 3: 扩充C++标准库
 
 ## 1.2. History(历史)
 STL创始人：Alexander Stepanov
+
+GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与修改GPL软件的源代码，但如果使用者要传播借助GPL软件而完成的软件，他们必须也同意GPL规范。这种精神主要是强迫人们分享并回馈他们对GPL软件的改善。得之于人，舍于人。
+
+
+
+
 
 
 
