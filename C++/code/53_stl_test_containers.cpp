@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-01-25 20:06:45
- * @LastEditTime: 2021-02-05 16:15:33
+ * @LastEditTime: 2021-02-08 14:08:55
  * @LastEditors: Please set LastEditors
  * @Description: 标准库中容器的一些测试
  */
@@ -360,43 +360,234 @@ auto pItem = find(deq.begin(), deq.end(), target);
 /**
  *  stack 测试
  */
+#include <stack>
+#include <string>
+#include <ctime>
+
+namespace my_stack
+{
+void test_stack(long& value)
+{
+    cout << "test_stack() ..." << endl;
+    
+std::stack<string> st;   
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            st.push(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "st.size() : " << st.size() << endl;    
+    cout << "st.top() : " << st.top() << endl;    
+    cout << "st.pop() : ";
+    st.pop();    
+    cout << "\nst.size() : " << st.size() << endl;    
+    cout << "st.top() : " << st.top() << endl;    
+}
+}
+
 
 /**
  *  queue 测试
  */
+#include <queue>
+#include <string>
+#include <ctime>
+
+namespace my_queue
+{
+void test_queue(long& value)
+{
+    cout << "test_queue() ..." << endl;
+    
+std::queue<string> qu;   
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            qu.push(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "qu.size() : " << qu.size() << endl;    
+    cout << "qu.front() : " << qu.front() << endl;    
+    cout << "qu.back() : " << qu.back() << endl;    
+    cout << "qu.pop() : ";
+    qu.pop();    
+    cout << "\nqu.size() : " << qu.size() << endl;    
+    cout << "qu.front() : " << qu.front() << endl;    
+    cout << "qu.back() : " << qu.back() << endl;    
+}
+}
+
 
 /**
  *  set 测试
  */
+#include <set>
+#include <ctime>
+#include <string>
+
+namespace my_set 
+{
+void test_set(long& value)
+{
+    cout << "test_set() ..." << endl;
+
+std::set<string> st;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            st.insert(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+    
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "st.size() : " << st.size() << endl;   
+    cout << "st.max_size() : " << st.max_size() << endl;   
+
+string target = get_a_target_string();
+
+    timeStart = clock();
+auto pIten = find(st.begin(), st.end(), target);    
+    cout << "find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIten != st.end()) {
+        cout << "find : " << *pIten << endl;
+    }
+    else {
+        cout << "not find" << endl;
+    }
+
+    // 使用set()库中封装的find() 函数
+    timeStart = clock();
+auto pIt = st.find(target);    
+    cout << "st.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIt != st.end()) {
+        cout << "set() find : " << *pIt << endl;
+    }
+    else {
+        cout << "set() not find" << endl;
+    }    
+}    
+}
 
 /**
  *  map 测试
  */
+#include <map>
+#include <ctime>
+#include <string>
+namespace my_map
+{
+void test_map(long& value)
+{
+    cout << "test_map() ..." << endl;
 
+std::map<long, string> mp;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            mp[i] = string(buf);
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+    
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "mp.size() : " << mp.size() << endl;   
+    cout << "mp.max_size() : " << mp.max_size() << endl;   
+
+long target = get_a_target_long();
+    timeStart = clock();
+auto pIt = mp.find(target);    
+    cout << "mp.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIt != mp.end()) {
+        cout << "map() find : " << (*pIt).second << endl;
+    }
+    else {
+        cout << "map() not find" << endl;
+    }    
+}    
+}
 
 /**
  *  multiset 测试
  */
+#include <set>
+#include <ctime>
+#include <string>
+
+
 
 /**
  *  multimap 测试
  */
+#include <map>
+#include <ctime>
+#include <string>
+
+
 
 /**
  *  unordered-multiset 测试
  */
+#include <unordered_set>
+#include <ctime>
+#include <string>
+
 
 /**
  *  unordered-multimap 测试
  */
+#include <unordered_map>
+#include <ctime>
+#include <string>
+
+
 
 /**
  *  unordered-set 测试
  */
+#include <unordered_set>
+#include <ctime>
+#include <string>
+
 
 /**
  *  unordered-map 测试
  */
+#include <unordered_map>
+#include <ctime>
+#include <string>
+
 
 /**
  *  alloctor 测试
@@ -422,7 +613,15 @@ int main(int arg, char* argv[])
 
     // my_slist::test_slist(value);
 
-    my_deque::test_deque(value);
+    // my_deque::test_deque(value);
+
+    // my_stack::test_stack(value);
+
+    // my_queue::test_queue(value);
+
+    // my_set::test_set(value);
+
+    my_map::test_map(value);
     
     return 0;
 }
