@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-01-25 20:06:45
- * @LastEditTime: 2021-02-08 14:08:55
+ * @LastEditTime: 2021-02-09 16:07:16
  * @LastEditors: Please set LastEditors
  * @Description: 标准库中容器的一些测试
  */
@@ -495,6 +495,188 @@ auto pIt = st.find(target);
 }
 
 /**
+ *  multiset 测试
+ */
+#include <set>
+#include <ctime>
+#include <string>
+namespace my_multiset 
+{
+void test_multiset(long& value)
+{
+    cout << "test_multiset() ..." << endl;
+
+std::multiset<string> mst;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            mst.insert(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+    
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "mst.size() : " << mst.size() << endl;   
+    cout << "mst.max_size() : " << mst.max_size() << endl;   
+
+string target = get_a_target_string();
+
+    timeStart = clock();
+auto pIten = find(mst.begin(), mst.end(), target);    
+    cout << "find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIten != mst.end()) {
+        cout << "find : " << *pIten << endl;
+    }
+    else {
+        cout << "not find" << endl;
+    }
+
+    // 使用mltiset()库中封装的find() 函数
+    timeStart = clock();
+auto pIt = mst.find(target);    
+    cout << "mst.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIt != mst.end()) {
+        cout << "multiset() find : " << *pIt << endl;
+    }
+    else {
+        cout << "multiset() not find" << endl;
+    }    
+}    
+}
+
+/**
+ *  unordered-set 测试
+ */
+#include <unordered_set>
+#include <ctime>
+#include <string>
+namespace my_unordered_set
+{
+void test_unordered_set(long& value)
+{
+    cout << "test_unordered_set() ..." << endl;
+
+std::unordered_set<string> ust;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            ust.insert(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "unordered_set.size()" << ust.size() << endl;    
+    cout << "unordered_set.max_size()" << ust.max_size() << endl;    
+    cout << "unordered_set.bucket_count()" << ust.bucket_count() << endl;    
+    cout << "unordered_set.load_factor()" << ust.load_factor() << endl;    
+    cout << "unordered_set.max_load_factor()" << ust.max_load_factor() << endl;    
+    cout << "unordered_set.max_bucket_count()" << ust.max_bucket_count() << endl;    
+
+    for (unsigned i = 0; i< 20; ++i) {
+        cout << "bucket " << i << " has " << ust.bucket_size(i) << " element" << endl;
+    }
+
+string target = get_a_target_string();
+    timeStart = clock();
+auto pItem = find(ust.begin(), ust.end(), target);         
+    cout << "::find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pItem != ust.end()) {
+        cout << "find number : " << *pItem << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }
+
+    // 使用 unordered_set中的find()
+    timeStart = clock();
+auto pt = ust.find(target);         
+    cout << "unordered_set.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pt != ust.end()) {
+        cout << "find number : " << *pItem << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }       
+}
+}
+
+/**
+ *  unordered-multiset 测试
+ */
+#include <unordered_set>
+#include <ctime>
+#include <string>
+namespace my_unordered_multiset
+{
+void test_unordered_multiset(long& value)
+{
+    cout << "test_unordered_multiset() ..." << endl;
+
+std::unordered_multiset<string> must;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; ++i) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            must.insert(string(buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "unordered_multiset.size() : " << must.size() << endl;    
+    cout << "unordered_multiset.max_size() : " << must.max_size() << endl;    
+    cout << "unordered_multiset.bucket_count() : " << must.bucket_count() << endl;    
+    cout << "unordered_multiset.load_factor() : " << must.load_factor() << endl;    
+    cout << "unordered_multiset.max_load_factor() : " << must.max_load_factor() << endl;    
+    cout << "unordered_multiset.max_bucket_count() : " << must.max_bucket_count() << endl;    
+
+    for (unsigned i = 0; i< 20; ++i) {
+        cout << "bucket #" << i << " has " << must.bucket_size(i) << " element" << endl;
+    }
+
+string target = get_a_target_string();
+    timeStart = clock();
+auto pItem = find(must.begin(), must.end(), target);         
+    cout << "::find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pItem != must.end()) {
+        cout << "find number : " << *pItem << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }
+
+    // 使用 unordered_multiset中的find()
+    timeStart = clock();
+auto pt = must.find(target);         
+    cout << "unordered_multiset.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pt != must.end()) {
+        cout << "find number : " << *pItem << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }    
+}
+}
+
+/**
  *  map 测试
  */
 #include <map>
@@ -538,14 +720,6 @@ auto pIt = mp.find(target);
 }    
 }
 
-/**
- *  multiset 测试
- */
-#include <set>
-#include <ctime>
-#include <string>
-
-
 
 /**
  *  multimap 测试
@@ -553,16 +727,90 @@ auto pIt = mp.find(target);
 #include <map>
 #include <ctime>
 #include <string>
+namespace my_multimap
+{
+void test_multimap(long& value)
+{
+    cout << "test_multimap() ..." << endl;
 
+std::multimap<long, string> mp;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            // mp[i] = string(buf);   multimap() 中不能使用 [] 操作符
+            mp.insert(std::pair<long, string>(i, buf));
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+    
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "multimap.size() : " << mp.size() << endl;   
+    cout << "multimap.max_size() : " << mp.max_size() << endl;   
+
+long target = get_a_target_long();
+    timeStart = clock();
+auto pIt = mp.find(target);    
+    cout << "multimap.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pIt != mp.end()) {
+        cout << "multimap() find : " << (*pIt).second << endl;
+    }
+    else {
+        cout << "multimap() not find" << endl;
+    }    
+}    
+}
 
 
 /**
- *  unordered-multiset 测试
+ *  unordered-map 测试
+ *  不能使用STL中find()，只能用本数据结构中 find() 算法
  */
-#include <unordered_set>
+#include <unordered_map>
 #include <ctime>
 #include <string>
+namespace my_unordered_map
+{
+void test_unordered_map(long& value)
+{
+    cout << "test_unordered_map() ..." << endl;
 
+std::unordered_map<long, string> ump;
+char buf[10];
+
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            ump[i] = string(buf);
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
+
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "unordered_map.size() : " << ump.size() << endl;    
+    cout << "unordered_map.max_size() : " << ump.max_size() << endl;    
+
+long target = get_a_target_long(); 
+    timeStart = clock();
+auto pt = ump.find(target);         
+    cout << "unordered_map.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pt != ump.end()) {
+        cout << "find number : " << (*pt).second << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }       
+}
+}
 
 /**
  *  unordered-multimap 测试
@@ -570,29 +818,49 @@ auto pIt = mp.find(target);
 #include <unordered_map>
 #include <ctime>
 #include <string>
+namespace my_unordered_multimap
+{
+void test_unordered_multimap(long& value)
+{
+    cout << "test_unordered_multimap() ..." << endl;
 
+std::unordered_multimap<long, string> umlp;
+char buf[10];
 
+clock_t timeStart = clock();
+    for (long i = 0; i < value; i++) {
+        try {
+            snprintf(buf, 10, "%d", rand());
+            umlp.insert(std::pair<long, string>(i, buf));
+            // ump[i] = string(buf);   unordered_multimap()中不能使用 []  
+        }
+        catch(const std::exception& e) {
+            cout << "i=" << i << " " << e.what() << endl;
+            abort();
+        }
+    }
 
-/**
- *  unordered-set 测试
- */
-#include <unordered_set>
-#include <ctime>
-#include <string>
+    cout << "milli-seconds : " << clock()-timeStart << endl;
+    cout << "unordered_multimap.size() : " << umlp.size() << endl;    
+    cout << "unordered_multimap.max_size() : " << umlp.max_size() << endl;    
 
-
-/**
- *  unordered-map 测试
- */
-#include <unordered_map>
-#include <ctime>
-#include <string>
+long target = get_a_target_long();
+    timeStart = clock();
+auto pt = umlp.find(target);         
+    cout << "unordered_multimap.find(), milli-seconds : " << clock()-timeStart << endl;
+    if (pt != umlp.end()) {
+        cout << "find number : " << (*pt).second << endl;
+    }
+    else {
+        cout << "not find number" << endl;
+    }       
+}
+}
 
 
 /**
  *  alloctor 测试
  */
-
 void elapsed_time()
 {
     printf("Elapsed time:%u secs.\n",clock()/CLOCKS_PER_SEC);
@@ -621,7 +889,22 @@ int main(int arg, char* argv[])
 
     // my_set::test_set(value);
 
-    my_map::test_map(value);
+    // my_multiset::test_multiset(value);
+
+    // my_unordered_set::test_unordered_set(value);
+
+    // my_unordered_multiset::test_unordered_multiset(value);
+
+    // my_map::test_map(value);
+
+    // my_multimap::test_multimap(value);
+
+    // my_unordered_map::test_unordered_map(value);
+
+    my_unordered_multimap::test_unordered_multimap(value);
+
+
+
     
     return 0;
 }
