@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2020-07-13 09:24:51
+ * @LastEditTime: 2021-02-10 11:10:09
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -38,6 +38,8 @@
     - [1.7.2. 暂存区（index）](#172-暂存区index)
     - [1.7.3. Git版本库](#173-git版本库)
   - [1.8. 其它问题](#18-其它问题)
+    - [Git中文乱码](#git中文乱码)
+    - [Git代理配置](#git代理配置)
 
 <!-- /TOC -->
 
@@ -447,7 +449,9 @@ experiment <br>
 2. 将文件最终提交到版本库基本流程如下：
    - `git add`    将工作区未跟踪和修改文件提交到暂存区。
    - `git commit` 将暂存区内容提交到版本库中，并执行更新 HEAD 指向的指针，这样就完成了引用与提交、提交与改动快照的——对应了。
-<div align="center"> <img width="80%" hight="80%" src="./figure/git本地仓库存储过程.png"/></div>
+<div align="center"> 
+  <img width="60%" hight="60%" src="./figure/git本地仓库存储过程.png"/>
+</div>
 
 3. Git清空版本库
    - `rm -rf .git` 删除当前目录下的版本库（`.git`目录）
@@ -455,11 +459,35 @@ experiment <br>
 
 
 ## 1.8. 其它问题
-- Git中文乱码
-  - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
+### Git中文乱码
+- [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
 
-- Git代理配置 
-  - [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
+### Git代理配置 
+- [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
+
+
+- 只对github进行代理，不影响国内的仓库
+  ```
+  git config --global http.https//github.com.proxy http://127.0.0.1:8001
+  git config --global https.https//github.com.proxy https://127.0.0.1:8001
+  ```
+
+- 设置全局代理，国内的仓库速度也会收到一定的影响。
+  ```
+  git config --global http.proxy http://127.0.0.1:1080
+  git config --global https.proxy https://127.0.0.1:1080
+
+  // 取消全局代理
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy
+  ```
+ 
+- Windows下修改Host文件
+  ```
+  192.30.253.112 github.com
+  192.30.253.113 github.com
+  151.101.185.194 github.global.ssl.fastly.net
+  ```
 
 - git windows 更新 `git update-git-for-windows`
 
