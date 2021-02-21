@@ -1,10 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2020-09-09 23:34:36
+ * @LastEditTime: 2021-02-21 17:16:36
  * @LastEditors: Please set LastEditors
  * @Description: 单例模式：此单利模式为懒汉式模式，即在new一个对象时，才分配内存
  *               在多个线程中，存在资源竞争的问题。
+ *               
+ *               可以参考：https://zhuanlan.zhihu.com/p/62014096
+ *               注意：Windows下MinGW编译器编译可能需要配置<Mutex>的环境
  *
  */
 #include <iostream>
@@ -14,75 +17,80 @@
 #include <unistd.h>
 
 using namespace std;
+std::mutex m_mutex;
 
 class Singleton
 {
 private:
-    static pthread_mutex_t mutex;
-    static Singleton* spl;
     Singleton();
     ~Singleton();
+    static Singleton* m_singleton;
+
 public:
-    static int count;
     static Singleton* getInstance();        // 第一种方法
     static Singleton* getInstanceLock();    // 第二种方法
     static Singleton* getInstanceStatic();  // 第三种方法
     static Singleton* freeInstance();
-    void show() {cout << "实例地址：" << this << endl;};
+
+    void show() 
+    {
+        cout << "Instance address: " << this << endl;
+    }
 };
 
-pthread_mutex_t mutex;
-Singleton* Singleton::spl = nullptr; // 静态全局变量初始化
+// 静态全局变量初始化
+Singleton* Singleton::m_singleton = nullptr; 
 
 Singleton::Singleton()
 {
-    cout << "执行构造函数" << endl;
+    cout << "Execute constructor." << endl;
 }
 
 Singleton::~Singleton()
 {
-    cout << "执行析构函数" << endl;
+    cout << "Execute destructor." << endl;
 }
 
 Singleton* Singleton::freeInstance()
 {
-    if (spl != nullptr)
-    {
-        delete spl;
-        spl = nullptr;
+    if (m_singleton != nullptr) {
+        delete m_singleton;
+        m_singleton = nullptr;
     }
-    cout << "释放对象内存" << endl;
-    return spl;
+    cout << "Free instance memory." << endl;
+    return m_singleton;
 }
-
 
 // 第一种方法：懒汉式单例模式
 Singleton* Singleton::getInstance()
 {
-    if (spl == nullptr)
-    {
-        spl = new Singleton;     // 只有在创建对象时，才分配内存
+    if (m_singleton == nullptr) {
+        m_singleton = new Singleton;     // 只有在创建对象时，才分配内存
     }
-    count++;
 
-    return spl;
+    return m_singleton;
 }
 
-// 第二种方法添加同步锁后保证了多个线程同时访问时安全的
+/**
+ * @description: 第二种方法添加同步锁后保证了多个线程同时访问时安全的
+ *               两次变量判断。双重检测机制，进入临界区以后，两个线程同时访问时，
+ *               需要保证一个时间内只有一个线程在创建对象
+ * @param {type} 
+ * @return {type}: m_singleton
+ */
 Singleton* Singleton::getInstanceLock()
 {
-    if (spl == nullptr)    // 双重检测机制
+    if (m_singleton == nullptr)    
     {
-        // unique_lock<std::mutex> m_mutex;
-        pthread_mutex_lock(&mutex);  // 加同步锁，锁住整个类，防止new Singleton被执行多次
-        // 进入临界区以后，两个线程同时访问时，需要保证一个时间内只有一个线程在创建对象
-        if (spl == nullptr)
+        // 加同步锁，锁住整个类，防止new Singleton被执行多次
+        m_mutex.lock();
+        if (m_singleton == nullptr)                                           
         {
-            spl = new Singleton;     
+            m_singleton = new Singleton;     
         }
-        pthread_mutex_unlock(&mutex);
+        m_mutex.unlock();
     }
-    return spl;
+    return m_singleton;
 }
 
 // 第三种方法：利用静态构造函数
@@ -93,6 +101,7 @@ Singleton* Singleton::getInstanceStatic()
     return instance;
 }
 
+// 线程处理函数
 void *deal_thread(void * arg)
 {
     pthread_t tid = pthread_self();
@@ -100,28 +109,22 @@ void *deal_thread(void * arg)
     cout << "tid = " << tid << "\t" << "pid = " << pid << endl;
     pthread_detach(tid);   // 主线程与子线程分离，两者相互不干涉，子线程结束同时子线程的资源自动回收
     
-
-    Singleton::getInstance()->show();
-    // cout << "count = " << tmp->count << endl;
-
-    // Singleton *tmp = Singleton::getInstanceLock();
-    // cout << "count = " << tmp->count << endl;
-
-    // Singleton::getInstanceStatic()->show();
-
+    Singleton* singleton = Singleton::getInstance();
+    singleton->show();
+    
+    Singleton *tmp = Singleton::getInstanceLock();
+    Singleton::getInstanceStatic()->show();
 }
 
 int main(int argc, char *argv[])
 {
-    cout << "执行懒汉式的单例模式" << endl;
+    cout << "Execute lazy singleton..." << endl;
 
     pthread_t tid;
-    for (int i = 0; i < 5; i++)
-    {
-        // int ret = pthread_create(&tid, NULL, deal_thread, (void*)i);
-        int ret = pthread_create(&tid, NULL, deal_thread, NULL);
-        if (ret)
-        {
+
+    for (int i = 0; i < 5; i++) {
+        int ret = pthread_create(&tid, NULL, deal_thread, (void*)i);
+        if (ret) {
             perror("pthread create error.");
         }
         sleep(2);
@@ -131,6 +134,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-
 
