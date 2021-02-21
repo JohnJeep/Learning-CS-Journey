@@ -49,9 +49,9 @@
 
 ## 0.1. 参考
 - [Wiki解释设计模式](https://en.wikipedia.org/wiki/Software_design_pattern)：具有权威性和系统性。
+- [refactoring.guru](https://refactoring.guru/design-patterns): 这是一本关于设计模式及其背后原则的电子书籍。比较详细的介绍了设计模式的用法，很通俗易懂。
 - [设计模式：可复用面向对象软件的基础](https://en.wikipedia.org/wiki/Design_Patterns)：Wiki中关于GOF这本设计模式数据的描述，很有权威性。
 - [GoF Design Patterns reference](http://w3sdesign.com/index0100.php): Learning Object-Oriented Design & Programming。
-- [Design Patterns](https://refactoring.guru/design-patterns): 这是一本关于设计模式及其背后原则的电子书籍。比较详细的介绍了设计模式的用法，很通俗易懂。
 - [史上最全设计模式导学目录（完整版）](https://blog.csdn.net/lovelion/article/details/17517213)：刘伟老师力作，讲的非常好，通俗易懂，而且举例的应用场景也非常恰当。
 - [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/#) 利用许多的图例去描述每一种设计模式的过程，值得参考学习。
 - [Github: 学习并理解 23 种设计模式](https://github.com/xietao3/Study-Plan/tree/master/DesignPatterns) Github上笔者记录自己学习设计模式的笔记。

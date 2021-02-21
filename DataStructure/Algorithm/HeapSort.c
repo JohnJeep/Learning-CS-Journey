@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-18 20:22:11
- * @LastEditTime: 2020-08-18 21:07:53
+ * @LastEditTime: 2021-02-20 12:10:19
  * @LastEditors: Please set LastEditors
  * @Description: 堆排序实现
  * @FilePath: /HeapSort.c
@@ -21,7 +21,7 @@ void maxHeap(int *array, int len, int n)
 {
     int left = 2 * n + 1;           // 数组的下标从零开始，当前结点的左子结点
     int right = 2 * n + 2;          // 当前结点的右子结点
-    int max;
+    int max;                        // max、left、right均为数组的下标
 
     if (left < len && array[left] > array[n])
     {
@@ -29,7 +29,7 @@ void maxHeap(int *array, int len, int n)
     }
     else
     {
-        max = n;
+        max = n;                     // 根结点大
     }
 
     if (right < len && array[right] > array[max])
@@ -42,7 +42,7 @@ void maxHeap(int *array, int len, int n)
         int temp = array[n];
         array[n] = array[max];
         array[max] = temp;
-        maxHeap(array, len, max);
+        maxHeap(array, len, max);  // 保证最大堆
     }
 }
 
@@ -52,7 +52,7 @@ void heapSort(int *array, int len)
 
     for (i = (len / 2) - 1; i >= 0; --i)
     {
-        maxHeap(array, len, i);
+        maxHeap(array, len, i);     // 建立最大堆
     }
     for (i = len - 1; i >= 0; --i)  // 数组下标索引从零开始，最大为 len-1
     {
