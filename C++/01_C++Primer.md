@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
- * @LastEditTime: 2021-02-21 22:38:47
+ * @LastEditTime: 2021-02-22 09:42:24
  * @LastEditors: Please set LastEditors
  * @Description: C++基础学习笔记
 --> 
@@ -539,13 +539,14 @@ public:
   - 当 `const` 作为全局变量，并在其它的文件中到调用时，会分配存储空间。
   - 采用 `&` 地址运算符去取 `const` 变量的地址时，会分配存储空间。
 - 加 `const` 后，不会改变数据的内容，不加`const`，则会改变数据的内容，一般数据的内容定义在 `private`中。
-- 在类中采用 `const`修饰函数，需要在类调用时必须加 `const`
-  ```
-  // 调用：
-  const complex fx(1, 2);
-  ```
 
 - 为什么不将const放在函数声明前呢？因为这样做表明函数的 `返回值是常量`。
+  ```c++
+  const int add(int x, int y)
+  {
+    return x+y;
+  }
+  ```
 
 - 定义const成员函数时，把const关键字放在函数的参数表和函数体之间作用：表用该函数的数据成员不能被改变，`const` 修饰的是 `this` 指针指向的内存空间。如果在编写const 成员函数时，不慎修改了数据成员，或者调用了其它非const 成员函数，编译器则将报错。
   ```C++
@@ -570,14 +571,24 @@ public:
       return re;
     }
 
-  }
+  };
   ```  
+- 在类中采用 `const`修饰函数，需要在类调用时必须加 `const`
+  ```c++
+  // definition
+  const class complex
+  {
 
+  };
+  
+  // 调用：
+  const complex fx(1, 2);
+  ```
 - const对象只能调用const成员函数，const类对象成员的数据在类对象的生命周期内不能改变。
 - const成员函数是对 const 对象的限制；const 成员函数只能读类对象成员的数据，不能修改类对象成员的数据。  
   <img src="./figures/const.png">
 
-- `const` 常量由 `编译器`处理的，提供作用域检查和类型检查。而 `宏定义（#define）` 仅仅只是单纯的文本替换，在 `预处理` 阶段处理的。
+- `const常量` 由 `编译器`处理的，提供作用域检查和类型检查。而 `宏定义（#define）` 仅仅只是单纯的文本替换，在 `预处理` 阶段处理的。
 
 
 ## 1.15. static
