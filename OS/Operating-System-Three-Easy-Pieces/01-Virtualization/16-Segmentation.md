@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2020-08-11 20:07:55
+ * @LastEditTime: 2021-02-23 23:23:36
  * @LastEditors: Please set LastEditors
  * @Description: 分段问题
 --> 
@@ -25,7 +25,7 @@
 
 ## 分段处理
 - 硬件在地址转换是使用段寄存器，是如何知道段内偏移量？虚拟地址引用了哪几个段？
-  - 显式方法(explicit approach): 用虚拟地址的开头几位来标识不同的段。![](./figures/标识不同的段.png)
+  - 显式方法(explicit approach): 用虚拟地址的开头几位来标识不同的段。![](../figures/标识不同的段.png)
    前两位告诉硬件引用了哪个段，后12位表示段内偏移。
   - 隐式方法( implicit approach)：硬件通过地址产生的方式来确定段。例如：地址由程序计数器产生，那么地址在代码段。
 
