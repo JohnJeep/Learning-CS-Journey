@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2020-09-09 21:20:32
+ * @LastEditTime: 2021-02-24 20:16:45
  * @LastEditors: Please set LastEditors
  * @Description: 系统函数的使用
 --> 
@@ -616,3 +616,12 @@ else if (WIFCONTINUED(wstatus))
 	- `sem_trywait` 函数	
 	- `sem_timedwait` 函数	
 	- `sem_post` 函数
+
+
+消息队列
+
+消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，
+消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。
+
+
+消息队列常常保存在链表结构中。拥有权限的进程可以向消息队列中写入或读取消息。
