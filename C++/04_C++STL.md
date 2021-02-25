@@ -39,6 +39,7 @@
   - [1.6. Adaptor(适配器)](#16-adaptor适配器)
   - [1.7. Functor(仿函数)](#17-functor仿函数)
   - [1.8. Iterator(迭代器)](#18-iterator迭代器)
+    - [1.8.1. 迭代器生效的原因？](#181-迭代器生效的原因)
   - [1.9. Allocator(分配器)](#19-allocator分配器)
 
 <!-- /TOC -->
@@ -456,6 +457,29 @@ predicate: 判断这个条件是真还是假
   - begin: 指向容器中的第一个元素的位置。
   - end: 指向容器中最后一个元素的下一个位置。
 <img src="./figures/begin-end.png">
+
+### 1.8.1. 迭代器生效的原因？
+- 参考
+  - [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763) 
+  - [聊聊map和vector的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+
+
+- 何为迭代器失效？
+  - STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
+
+
+
+-  对于序列式容器，比如vector，删除当前的iterator会使后面所有元素的iterator都失效。因为序列式容器中内存是连续分配的（分配一个数组作为内存），删除一个元素导致后面所有的元素会向前移动一个位置。删除了一个元素，该元素后面的所有元素都要挪位置，所以，删除一个数据后，其他数据的地址发生了变化，之前获取的迭代器根据原有的信息就访问不到正确的数据。
+
+- 数组型数据结构的元素是分配在连续的内存中，`insert` 和 `erase` 操作，会使删除点和插入点之后的元素挪位置。所以，插入点和删除掉之后的迭代器全部失效，也就是说 `insert(*iter)(或erase(*iter))`，然后再 `iter++`，是没有意义的。
+  - 解决方法：`erase(*iter)`的返回值是下一个有效迭代器的值 `iter =cont.erase(iter);`
+
+- list型的数据结构，使用了不连续分配的内存，删除运算使指向删除位置的迭代器失效，但是不会失效其他迭代器。
+  - 解决办法两种，`erase(*iter)` 会返回下一个有效迭代器的值，或者`erase(iter++)`。
+
+- 红黑树存储的数据，插入操作不会使任何迭代器失效；删除操作使指向删除位置的迭代器失效，但不会失效其他迭代器。`erase` 迭代器只是被删元素的迭代器失效，但是返回值为 `void`，所以要采用 `erase(iter++)`的方式删除迭代器。
+
+<font color=red>注意：</font>  经过 `erase(iter)` 之后的迭代器完全失效，该迭代器 `iter` 不能参与任何运算，包括 `iter++和*ite`。
 
 
 
