@@ -1,43 +1,49 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-02-24 20:16:45
+ * @LastEditTime: 2021-02-25 22:35:29
  * @LastEditors: Please set LastEditors
- * @Description: 系统函数的使用
+ * @Description: Linux环境编程基础知识
 --> 
 
 <!-- TOC -->
 
 - [1. System function](#1-system-function)
-  - [1.1. 概念](#11-概念)
-  - [1.3. 终端换行](#13-终端换行)
-  - [1.4. 函数](#14-函数)
-  - [1.5. 环境变量](#15-环境变量)
-- [2. 进程](#2-进程)
-  - [2.1. fork函数](#21-fork函数)
-  - [2.2. exec函数家族](#22-exec函数家族)
-  - [2.3. wait函数](#23-wait函数)
-  - [2.4. 进程间通信（IPC）](#24-进程间通信ipc)
-    - [2.4.1. 管道](#241-管道)
-    - [2.4.2. 共享映射区(mmap)](#242-共享映射区mmap)
-    - [2.4.3. 信号](#243-信号)
-  - [2.5. 时序竞态](#25-时序竞态)
-  - [2.6. 终端](#26-终端)
-  - [2.7. 进程组](#27-进程组)
-  - [2.8. 守护进程（daemon）](#28-守护进程daemon)
-- [3. 线程](#3-线程)
-  - [3.1. 基础概念](#31-基础概念)
-  - [3.2. 线程相关函数](#32-线程相关函数)
+  - [1.1. Core concept(概念)](#11-core-concept概念)
+  - [1.2. Carriage Return && Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
+  - [1.3. File I/O(文件 I/O)](#13-file-io文件-io)
+  - [1.4. Environment variables(环境变量)](#14-environment-variables环境变量)
+- [2. Process(进程)](#2-process进程)
+  - [2.1. fork()](#21-fork)
+  - [2.2. exec()家族](#22-exec家族)
+  - [2.3. wait()](#23-wait)
+  - [2.4. IPC(Inter Process Communication: 进程间通信)](#24-ipcinter-process-communication-进程间通信)
+    - [2.4.1. 参考](#241-参考)
+    - [2.4.2. Pipe(管道)](#242-pipe管道)
+      - [2.4.2.1. Named pipe](#2421-named-pipe)
+      - [2.4.2.2. Unnamed pipe](#2422-unnamed-pipe)
+    - [2.4.3. Mmap(shared memory map: 共享映射区)()](#243-mmapshared-memory-map-共享映射区)
+    - [2.4.4. Signal(信号)](#244-signal信号)
+    - [2.4.5. Semaphore(信号量)](#245-semaphore信号量)
+    - [2.4.6. Message queues(消息队列)](#246-message-queues消息队列)
+    - [2.4.7. Socket(套接字)](#247-socket套接字)
+  - [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
+  - [2.6. Terminal(终端)](#26-terminal终端)
+  - [2.7. Process group(进程组)](#27-process-group进程组)
+  - [2.8. Daemon(守护进程)](#28-daemon守护进程)
+- [3. Thread(线程)](#3-thread线程)
+  - [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
+  - [3.2. function(线程相关函数)](#32-function线程相关函数)
   - [3.3. 线程属性设置](#33-线程属性设置)
   - [3.4. 注意事项](#34-注意事项)
   - [3.5. 线程同步](#35-线程同步)
-  - [3.6. 线程互斥](#36-线程互斥)
-  - [3.7. 信号量](#37-信号量)
+  - [3.6. Mutex(线程互斥)](#36-mutex线程互斥)
 
 <!-- /TOC -->
 
 # 1. System function
-## 1.1. 概念
+
+## 1.1. Core concept(概念)
 - 文件函数包括三部分内容
   - `file descriptor`  文件描述符
   - `file pointer(fp)` 文件指针
@@ -49,12 +55,12 @@
   - `2` 错误
   - `3` 文件指针
 
-- 全部的错误变量 errno 在Linux中存放的位置： `/usr/include`
+- 全部的错误变量 `errno` 在Linux中存放的位置： `/usr/include`
 - `perror()`:  打印错误的信息
 - 文件的实际权限 = 用户给定的权限和本地的掩码取反做位与（&）操作
 
 
-## 1.3. 终端换行
+## 1.2. Carriage Return && Line Feed(终端换行)
 - 关于打印
   > 在机械打字机时代，打字机上有个“打印头（print head）”的零部件，打印时从左往右自动移动，满一行时需要手动推到最左边，这个动作叫“回车（Carriage Return）”，同时卷轴需要向上卷使纸张上移一行，打印头相对于纸张就是下移一行，这个动作叫做“移行（Line Feed）”。
   - ANSI标准规定，转义字符“\r”指代CR，“\n”指代LF，计算机系统早期广泛采用` CR+LF`指示换行。
@@ -67,7 +73,7 @@
 
 
 
-## 1.4. 函数
+## 1.3. File I/O(文件 I/O)
 - `open()` 函数
   - 创建：`O_CREAT` 或采用 `截断为0的方式创建 O_TRUNC`
   - 读写：`O_RDWR`
@@ -85,24 +91,24 @@
   - 移动文件指针
   - 文件拓展（只能向文件的中间或尾部扩展，不能向前端扩展）
 
-- `stat()` 查看文件的所有状态信息。进行追踪或穿透，显示追踪到的文件或软连接指定的文件信息。
-- `lstat()` 查看文件的状态信息。不进行追踪或穿透，直接显示当前文件或软连接的信息。
-- `access()` 测试指定文件是否拥有某种权限。 
-- `chmod()` 改变文件的权限
+- `stat()`: 查看文件的所有状态信息。进行追踪或穿透，显示追踪到的文件或软连接指定的文件信息。
+- `lstat()`: 查看文件的状态信息。不进行追踪或穿透，直接显示当前文件或软连接的信息。
+- `access()`: 测试指定文件是否拥有某种权限。 
+- `chmod()`: 改变文件的权限
 
 - `truncate()` 将指定文件的大小由指定参数 `length` 长度确定，
   - `length` 长度大于当前文件，文件将被拓展
   - `length` 长度小于当前文件，文件截取，截取值为 `length` 值
 
-- `readlink()` 读一个软链接的值
+- `readlink()`: 读一个软链接的值
 
 - `unlink()` 
   - 删除一个硬链接数
   - 可以读取临时文件的内容。先创建文件，向文件写，然后读文件中写的内容并将读出的数据写到另外的一个文件中。
 
-- `opendir()` 打开一个目录
-- `readdir()` 读一个目录
-- `closedir()` 关闭一个目录
+- `opendir()`: 打开一个目录
+- `readdir()`: 读一个目录
+- `closedir()`: 关闭一个目录
 
 - `dup()` 或 `dup2()` 复制文件描述符
   ```
@@ -115,7 +121,7 @@
   - `F_SETFL` 设置文件状态参数
    
 
-## 1.5. 环境变量
+## 1.4. Environment variables(环境变量)
 - 常见的环境变量
   - `PATH ` 指定可执行文件搜索路径
   - `SHELL` 指定当前所使用的命令解析器
@@ -133,12 +139,12 @@
   - `unsetenv()` 删除环境变量
 
 
-# 2. 进程
+# 2. Process(进程)
 - 什么是进程？
   > 在计算中，进程是由一个或多个线程执行的计算机程序的实例。它包含程序代码（code）和运行指令（activity）。取决于操作系统（OS），一个进程可能由多个并行执行指令的执行线程组成。程序本身只是指令、数据及其组织形式的描述，相当于一个名词，进程才是程序（那些指令和数据）的真正运行实例。 
 
 
-## 2.1. fork函数
+## 2.1. fork()
 - 创建一个子进程。一个进程调用 `fork()` 函数，变为两个进程，各自的进程都有一个返回值。父进程返回值为子进程的 `PID`（返回值大于0），子进程的返回值为 `0`，进程创建成功。
 - 父子进程之间遵循原则：`读时共享写时复制`。例如：一个全局变量，子进程只读时，则父子进程共享变量；若子进程对全局变量写操作时，则不共享全局变量。
 - 父子进程共享
@@ -174,29 +180,28 @@
   - `getegid()` 获取当前进程有效用户组ID号
 
 
-## 2.2. exec函数家族
-- 执行exec()家族的函数后，将当前进程的内存空间数据替换为要执行函数的内存空间数据。
+## 2.2. exec()家族
+- 执行 `exec()` 家族的函数后，将当前进程的内存空间数据替换为要执行函数的内存空间数据。
 - exec()家族函数只有失败时才返回，返回值为 -1，程序执行成功时，含食宿不会返回。
-
-```
+  ```
   l (list)			   命令行参数列表
   p (path)			   搜素file时使用path变量
   v (vector)			 使用命令行参数数组
   e (environment)	使用环境变量数组,不使用进程原有的环境变量，设置新加载程序运行的环境变量
-```
-- `execlp` 加载一个进程，通过环境变量加载。
-- `execl` 加载一个进程，通过路径 + 程序名称来加载。
-- `execle` 加载一个进程，通过路径 + 程序名称来加载，使用自定义环境变量env。
-- `execv` 加载一个进程，使用命令行参数数组。
-- `execvp` 加载一个进程，使用自定义环境变量env
-- `execvpe` 加载一个进程，使用命令行参数数组，并加上自定义环境变量env。
+  ```
+  <img src="./pictures/exec函数家族.png" >
+- `execlp()`: 加载一个进程，通过环境变量加载。
+- `execl()`: 加载一个进程，通过路径 + 程序名称来加载。
+- `execle()`: 加载一个进程，通过路径 + 程序名称来加载，使用自定义环境变量env。
+- `execv()`: 加载一个进程，使用命令行参数数组。
+- `execvp()`: 加载一个进程，使用自定义环境变量env
+- `execvpe()`: 加载一个进程，使用命令行参数数组，并加上自定义环境变量env。
 
-<img src="./pictures/exec函数家族.png" >
 
-
-## 2.3. wait函数
+## 2.3. wait()
 - 什么是孤儿进程？
   > 父进程先与子进程死亡，子进程就成为了孤儿进程，此时子进程的父进程的变为 `init` 进程，`init` 进程也称为init进程领养孤儿进程。
+
 - 什么是僵尸进程
   > 子进程结束了，父进程没有回收子进程的内存空间，而子进程的进程控制块（PCB）还存留于操作系统的内核之中，此时的子进程称为僵尸进程（zombie）。
 
@@ -204,28 +209,28 @@
   - 阻塞等待子进程退出
   - 回收子进程的PCB内存空间资源
   - 获取子进程死亡的原因 
-```
-// 子进程退出的几种常见的宏
+  ```c
+  // 子进程退出的几种常见的宏
 
-if (WIFEXITED(wstatus))         // 进程正常结束
-{
-    printf("exited, status=%d\n", WEXITSTATUS(wstatus));
-} 
-else if (WIFSIGNALED(wstatus))  // 进程异常终止
-{
-    printf("killed by signal %d\n", WTERMSIG(wstatus));
-}
-else if (WIFSTOPPED(wstatus))   // 进程处于暂停状态
-{
-    printf("stopped by signal %d\n", WSTOPSIG(wstatus));
-} 
-else if (WIFCONTINUED(wstatus)) 
-{
-    printf("continued\n");
-}
-```
+  if (WIFEXITED(wstatus))         // 进程正常结束
+  {
+      printf("exited, status=%d\n", WEXITSTATUS(wstatus));
+  } 
+  else if (WIFSIGNALED(wstatus))  // 进程异常终止
+  {
+      printf("killed by signal %d\n", WTERMSIG(wstatus));
+  }
+  else if (WIFSTOPPED(wstatus))   // 进程处于暂停状态
+  {
+      printf("stopped by signal %d\n", WSTOPSIG(wstatus));
+  } 
+  else if (WIFCONTINUED(wstatus)) 
+  {
+      printf("continued\n");
+  }
+  ```
+
 - 一个 `waitpid()` 或`wait()` 函数只能回收一个僵尸进程。回收多个僵尸进程需要循环调用 `waitpid()` 或`wait()` 函数。
-
 
 - `waitpid()` 函数
   - 函数原型 `pid_t waitpid(pid_t pid, int *wstatus, int options);`
@@ -240,17 +245,10 @@ else if (WIFCONTINUED(wstatus))
     - 正常运行：pid
     - 失败：-1
     - 当 `options=WNOHAGN`时，子进程为非阻塞状态且子进程尚未结束时，返回值为 0
-
   - 函数作用：指定特定的进程PID 进行僵尸进程的回收。子进程的状态可以设置为不阻塞，使用宏 `WNOHAGN`
 
 
-## 2.4. 进程间通信（IPC）
-- 四种方式
-  - 管道（最简单）
-  - 信号（开销最小）
-  - 共享映射区（无血缘关系）
-  - 本地套接字（最稳定） 
-
+## 2.4. IPC(Inter Process Communication: 进程间通信)
 - Linux中七种文件类型
   - 非伪文件：占用磁盘的存储空间
     - `-` 普通文件
@@ -264,12 +262,42 @@ else if (WIFCONTINUED(wstatus))
     - `p(pipe)  `管道
 
 
-### 2.4.1. 管道
-- 本质：是一个伪文件，内核创建的缓冲区
-- 由两个文件描述符引用，一个表示读端，一个表示写端。
+- 6种方式
+  - Pipe(管道：最简单)
+  - Signal(信号：开销最小)
+  - Mmap(共享映射区：无血缘关系)
+  - Socket(本地套接字：最稳定) 
+  - Message queue(消息队列)
+  - Semaphore(信号量)
+
+### 2.4.1. 参考
+- [进程间的通信方式——pipe（管道）](https://blog.csdn.net/skyroben/article/details/71513385)
+- [进程间通信--管道](http://blog.chinaunix.net/uid-26833883-id-3227144.html)
+- [基于Internet的Linux客户机/服务器系统通讯设计与实现](https://blog.csdn.net/violet_echo_0908/article/details/50277537)
+- [Linux进程间套接字（Socket）通信](https://blog.csdn.net/violet_echo_0908/article/details/49670901)
+- [Linux下socket编程实现客户机服务器通信的例子](https://blog.csdn.net/violet_echo_0908/article/details/49539593)
+- [信号量与互斥锁](https://www.cnblogs.com/diyingyun/archive/2011/12/04/2275229.html)
+- [信号量](http://blog.chinaunix.net/uid-23193900-id-3194924.html)
+- [Linux进程间通信——使用共享内存](https://blog.csdn.net/ljianhui/article/details/10253345)
+- [Linux进程间通信(四) - 共享内存](https://www.cnblogs.com/linuxbug/p/4882776.html)
+- [UNIX/Linux进程间通信IPC系列（四）消息队列](https://blog.csdn.net/yang_yulei/article/details/19772649)
+- [进程间通信的方式——信号、管道、消息队列、共享内存](https://www.cnblogs.com/luo77/p/5816326.html)
+
+
+
+### 2.4.2. Pipe(管道)
+- 分类
+  - 匿名管道(named pipe)
+  - 有名管道(unnamed pipe) 
+  
+- 管道本质：是一个伪文件，从内核创建的一个缓冲区。有两个文件描述符引用，一个表示Read(读端)，一个表示Write(写端)。
   - `fd[0]`---------------管道的 read 端
   - `fd[1]`---------------管道的 write 端
-- pipe 匿名管道：用于非血缘关系之间的进程通信
+
+
+#### 2.4.2.1. Named pipe
+- pipe 匿名管道：用于非血缘关系之间的进程通信。
+
 - 原理
   - 通过环形队列，借助内核缓冲区（4k大小）来实现的，数据从写端流入管道，从读端流出，这样就实现了进程间通信。 
 - 局限性
@@ -292,12 +320,13 @@ else if (WIFCONTINUED(wstatus))
     - 管道读端没有全部关闭
       - 管道已满，write阻塞。
       - 管道未满，write将数据写入，并返回实际写入的字节数。
-   
-
-- FIFO 有名管道
 
 
-### 2.4.2. 共享映射区(mmap)
+#### 2.4.2.2. Unnamed pipe
+有名管道中 `FIFO`是典型的有名管道。
+
+
+### 2.4.3. Mmap(shared memory map: 共享映射区)()
 - 参考
   - [认真分析mmap：是什么 为什么 怎么用](https://www.cnblogs.com/huxiao-tee/p/4660352.html) 
 
@@ -334,7 +363,7 @@ else if (WIFCONTINUED(wstatus))
   
 
 
-### 2.4.3. 信号
+### 2.4.4. Signal(信号)
 - `man 7 signal` 查看信号的帮助文档
 - `信号`：只能携带固定大小量的信息。
 
@@ -384,18 +413,17 @@ else if (WIFCONTINUED(wstatus))
   - 默认处理动作
 
 - 两个特殊的信号（9----SIGKILL，19----SIGSTOP）不允许信号的忽略和捕捉，只能允许执行默认动作。
+- 查看系统的进程运行的时间 `time` 命。进程实际运行的时间 = 系统态运行时间 + 用户态运行时间 + 系统等待事件
+
 - 向进程发送信号的函数
   - `kill()` 给指定的进程发送指定的信号。
   - `raise()` 给当前进程发送指定的信号。 
   - `abort()` 给当前进程发送异常终止信号 `6)SIGABRT`，并产生core文件。
 
-
 - `alarm()` 函数
   - 定时精度为 ms 级别 
   - 函数的返回值为：上一次闹钟定时剩余的次数。 
   - 每个进程有且只有一个定时器 
-- 查看系统的进程运行的时间 `time` 命令
-- 进行实际运行的时间 = 系统态运行时间 + 用户态运行时间 + 系统等待事件
 
 - `setitimer()`函数
   - 定时器的精度为 us 级别
@@ -413,8 +441,8 @@ else if (WIFCONTINUED(wstatus))
 
 
 - 信号的捕捉
-  - `signal()函数`  注册一个信号捕捉函数
-  - `sigaction()`  检测或修改信号处理动作，即注册一个信号捕捉函数。
+  - `signal()`：注册一个信号捕捉函数
+  - `sigaction()`： 检测或修改信号处理动作，即注册一个信号捕捉函数。
     - `sigaction()` 函数默认使系统调用中断后不再重新启动。
     - `sa_handler` 指定信号捕捉后的处理函数名(即注册函数)。也可赋值为 `SIG_IGN` 表忽略 或 `SIG_DFL` 表执行默认动作
     - `sa_mask` 一个信号集在调用信号捕捉函数之前，要将这个信号集加到进程的信号屏蔽字中，仅当从信号捕捉函数返回时，再将进程的信号屏蔽字恢复为原先值。这样，在调用信号处理程序时就能阻塞某些信号。
@@ -431,7 +459,41 @@ else if (WIFCONTINUED(wstatus))
   - `sigwait()`: sigwait是同步的等待信号的到来，而不是像进程中那样是异步的等待信号的到来。
 
 
-## 2.5. 时序竞态 
+
+### 2.4.5. Semaphore(信号量)
+- 是互斥量的加强版。
+- 信号量的初值，决定了信号量占用的线程个数。
+- 信号量相关函数
+  -	`sem_init` 函数
+	- `sem_destroy`函数
+	- `sem_wait` 函数
+	- `sem_trywait` 函数	
+	- `sem_timedwait` 函数	
+	- `sem_post` 函数
+
+
+### 2.4.6. Message queues(消息队列)
+- 什么是消息队列？
+  > 消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。消息队列常常保存在链表结构中。拥有权限的进程可以向消息队列中写入或读取消息。
+
+- 消息队列特点
+  - （1）消息队列是消息的链表,具有特定的格式,存放在内存中并由消息队列标识符标识.
+  - （2）消息队列允许一个或多个进程向它写入与读取消息.
+  - （3）管道和消息队列的通信数据都是先进先出的原则。
+  - （4）消息队列可以实现消息的随机查询，消息不一定要以先进先出的次序读取，也可以按消息的类型读取。比FIFO更有优势。
+  - （5）消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺。
+  - （6）目前主要有两种类型的消息队列：POSIX消息队列以及System V消息队列。System V消息队列目前被大量使用。系统V消息队列是随内核持续的，只有在内核重起或者人工删除时，该消息队列才会被删除。
+
+
+
+### 2.4.7. Socket(套接字)
+
+
+
+
+## 2.5. Race condition(时序竞态)
+> 时序竞态也叫竞态条件。
+
 - `pause()` 函数
   - 作用：将进程主动挂起，等待信号唤醒。调用该函数的进程将被阻塞，直到有信号递达将其唤醒。
 - `sigsuspend()` 函数
@@ -451,16 +513,19 @@ else if (WIFCONTINUED(wstatus))
   - 子进程接收到 `SIGSTOP` 信号停止，子进程处在停止态时，接受到 `SIGCONT` 后唤醒
 
 
-## 2.6. 终端
+## 2.6. Terminal(终端)
 - 分类
   - 字符终端
   - 网络终端
   - 伪终端(Pseudo Terminal) 
+
 - linux系统启动流程
-`init--->fork--->exec--->getty--->用户输入账号--->login--->输入密码--->exec--->bash`
+  ```
+  init--->fork--->exec--->getty--->用户输入账号--->login--->输入密码--->exec--->bash
+  ```
 
 
-## 2.7. 进程组
+## 2.7. Process group(进程组)
 - 每个进程都有一个进程组，当父进程，创建子进程的时候，默认子进程与父进程属于同一进程组。
 - 进程组生存期：进程组创建到最后一个进程离开(终止或转移到另一个进程组)。
 - 相关函数
@@ -469,7 +534,7 @@ else if (WIFCONTINUED(wstatus))
   - `setpgid()` 改变进程默认所属的进程组
 
 
-## 2.8. 守护进程（daemon）
+## 2.8. Daemon(守护进程)
 - 通常独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件。
 - 创建守护进程模型
   - 创建子进程，父进程退出。所有工作在子进程中进行形式上脱离了控制终端
@@ -484,9 +549,8 @@ else if (WIFCONTINUED(wstatus))
 - 安装man posix page `sudo apt-get install manpages-posix-dev`
 
 
-# 3. 线程
-## 3.1. 基础概念
-
+# 3. Thread(线程)
+## 3.1. Core concepts(基础概念)
 - 进程：独享一块地址空间，有属于自己的PCB，与父进程共享进程地址空间。
 - 线程：共享地址空间。在Linux中，线程是轻量级的进程(LWP: light weight process)，可以看做是寄存器和栈的集合。
 - 在Linux下，`进程` 是最小的资源分配单元，`线程` 是最小的执行单元。
@@ -510,25 +574,25 @@ else if (WIFCONTINUED(wstatus))
   - 信号屏蔽字
   - 线程调度的优先级
 
-## 3.2. 线程相关函数
-  - `pthread_self()`    获得调用线程的线程ID号
-  - `pthread_create()`  创建一个线程 
-  - 退出相关的函数
-    - `pthread_exit()`  将单个线程退出
-    - `exit()`          将进程退出
-    - `return语句`      函数返回到调用者处 
+## 3.2. function(线程相关函数)
+- `pthread_self()`    获得调用线程的线程ID号
+- `pthread_create()`  创建一个线程 
+- 退出相关的函数
+  - `pthread_exit()`  将单个线程退出
+  - `exit()`          将进程退出
+  - `return语句`      函数返回到调用者处 
 
 
-  - `pthread_join()` 将子线程回收，回收的是线程的资源。线程没有结束，会一直阻塞等待。 
-  - `pthread_detach()` 实现线程的分离。
-    - 返回值：成功返回 `0`，失败返回失败的错误码。 
-    - 一般情况下，线程终止后，它的终止状态一直保留到其它线程调用 `pthread_join()` 获取它的状态为止。
-    - 不能对已经处于 `detach` 状态的线程调用 `pthread_join()` 函数，因为处于 `detach` 状态的线程终止后，就会立刻回收它占用的资源，而不是保留终止的状态。
-    - 作用：线程结束时自动清理进程控制块PCB资源。
+- `pthread_join()` 将子线程回收，回收的是线程的资源。线程没有结束，会一直阻塞等待。 
+- `pthread_detach()` 实现线程的分离。
+  - 返回值：成功返回 `0`，失败返回失败的错误码。 
+  - 一般情况下，线程终止后，它的终止状态一直保留到其它线程调用 `pthread_join()` 获取它的状态为止。
+  - 不能对已经处于 `detach` 状态的线程调用 `pthread_join()` 函数，因为处于 `detach` 状态的线程终止后，就会立刻回收它占用的资源，而不是保留终止的状态。
+  - 作用：线程结束时自动清理进程控制块PCB资源。
 
-  - `pthread_cannel()` 杀死或取消线程。
-    - 线程的取消并不是实时的，有一定的延时性，需要等待线程达到某个取消点。若子线程中没有使用系统调用，`pthread_cannel()` 函数无法到达取消点，则 `pthread_cannel()` 不会执行，需要手动添加一个取消点函数 `pthread_testcancel()`。
-    - 取消点：粗略的理解为是一个系统调用。
+- `pthread_cannel()` 杀死或取消线程。
+  - 线程的取消并不是实时的，有一定的延时性，需要等待线程达到某个取消点。若子线程中没有使用系统调用，`pthread_cannel()` 函数无法到达取消点，则 `pthread_cannel()` 不会执行，需要手动添加一个取消点函数 `pthread_testcancel()`。
+  - 取消点：粗略的理解为是一个系统调用。
 
 
 ## 3.3. 线程属性设置
@@ -562,7 +626,7 @@ else if (WIFCONTINUED(wstatus))
   - 产生的原因：解决多个线程之间没有统一的调度（竞争）机制。 
  
 
-## 3.6. 线程互斥
+## 3.6. Mutex(线程互斥)
 - 线程访问共享数据之前需加锁，访问共享数据之后应立即解锁，不能有延迟时间，即锁的 `粒度` 应越小越好。
 - 常见函数
   - `pthread_mutex_init` 函数
@@ -597,31 +661,10 @@ else if (WIFCONTINUED(wstatus))
     - 唤醒全部阻塞在条件变量上的线程 
 
 
-- Linux绝对时间相对于1970:00:00:00
-- 如何操作？
-  ```
+- Linux绝对时间是相对于 `1970:00:00:00` 这个时间的；如何操作？
+  ```c
   time_t cur = time(NULL);                     // 获取当前时间
   struct timespec t;
   t.tv_sec = cur + 10;                         // 在1970:00:00:00这个时间点上偏移10秒
   pthread_cond_timedwait(&cond, &mutex, &t)    // 调用pthread_cond_timedwait()函数
   ```
-
-## 3.7. 信号量
-- 是互斥量的加强版
-- 信号量的初值，决定了信号量占用的线程个数。
-- 信号量相关函数
-  -	`sem_init` 函数
-	- `sem_destroy`函数
-	- `sem_wait` 函数
-	- `sem_trywait` 函数	
-	- `sem_timedwait` 函数	
-	- `sem_post` 函数
-
-
-消息队列
-
-消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，
-消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。
-
-
-消息队列常常保存在链表结构中。拥有权限的进程可以向消息队列中写入或读取消息。
