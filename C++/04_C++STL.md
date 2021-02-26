@@ -39,7 +39,7 @@
   - [1.6. Adaptor(适配器)](#16-adaptor适配器)
   - [1.7. Functor(仿函数)](#17-functor仿函数)
   - [1.8. Iterator(迭代器)](#18-iterator迭代器)
-    - [1.8.1. 迭代器生效的原因？](#181-迭代器生效的原因)
+    - [1.8.1. 迭代器失效的原因？](#181-迭代器失效的原因)
   - [1.9. Allocator(分配器)](#19-allocator分配器)
 
 <!-- /TOC -->
@@ -451,18 +451,21 @@ predicate: 判断这个条件是真还是假
 
 
 ## 1.8. Iterator(迭代器)
-- 迭代器就是一种泛化的指针。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
+- 什么是迭代器？
+  > 表示元素在容器中的位置，这种对象的概念就称为迭代器。(STL标准库中的解释：we need a concept of an object that represents positions of elements in a container. This concept exists.Objects that fulfill this concept are called iterators.  
+  > 迭代器就是一种泛化的指针。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
 
 - 前闭后开区间
   - begin: 指向容器中的第一个元素的位置。
   - end: 指向容器中最后一个元素的下一个位置。
 <img src="./figures/begin-end.png">
 
-### 1.8.1. 迭代器生效的原因？
+
+### 1.8.1. 迭代器失效的原因？
 - 参考
   - [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763) 
   - [聊聊map和vector的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
-
+  - [C++ STL 迭代器失效问题](https://www.cnblogs.com/qiaoconglovelife/p/5370396.html)
 
 - 何为迭代器失效？
   - STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 

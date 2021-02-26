@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-02-25 22:35:29
+ * @LastEditTime: 2021-02-26 08:36:29
  * @LastEditors: Please set LastEditors
  * @Description: Linux环境编程基础知识
 --> 
@@ -33,7 +33,7 @@
   - [2.8. Daemon(守护进程)](#28-daemon守护进程)
 - [3. Thread(线程)](#3-thread线程)
   - [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
-  - [3.2. function(线程相关函数)](#32-function线程相关函数)
+  - [3.2. Function(线程相关函数)](#32-function线程相关函数)
   - [3.3. 线程属性设置](#33-线程属性设置)
   - [3.4. 注意事项](#34-注意事项)
   - [3.5. 线程同步](#35-线程同步)
@@ -574,10 +574,10 @@
   - 信号屏蔽字
   - 线程调度的优先级
 
-## 3.2. function(线程相关函数)
+## 3.2. Function(线程相关函数)
 - `pthread_self()`    获得调用线程的线程ID号
 - `pthread_create()`  创建一个线程 
-- 退出相关的函数
+- 线程退出相关的函数
   - `pthread_exit()`  将单个线程退出
   - `exit()`          将进程退出
   - `return语句`      函数返回到调用者处 
@@ -597,11 +597,11 @@
 
 ## 3.3. 线程属性设置
 - 主要用的属性
-  - 线程属性的初始化 `pthread_attr_init()`
-  - 线程属性的销毁   `pthread_attr_destory()`
-  - 修改线程的属性分离 `pthread_attr_setdetachstate()`
-  - 修改线程的栈空间地址和大小 `pthread_attr_setstack() `
-  - 只修改线程的栈空间大小 `pthread_attr_setstacksize()`
+  - `pthread_attr_init()` : 线程属性的初始化
+  - `pthread_attr_destory()` : 线程属性的销毁
+  - `pthread_attr_setdetachstate()` : 修改线程的属性分离
+  - `pthread_attr_setstack()` : 修改线程的栈空间地址和大小
+  - `pthread_attr_setstacksize()` : 只修改线程的栈空间大小
 
   
 ## 3.4. 注意事项
@@ -628,36 +628,36 @@
 
 ## 3.6. Mutex(线程互斥)
 - 线程访问共享数据之前需加锁，访问共享数据之后应立即解锁，不能有延迟时间，即锁的 `粒度` 应越小越好。
-- 常见函数
-  - `pthread_mutex_init` 函数
-  - `pthread_mutex_destroy` 函数
-  - `pthread_mutex_lock` 函数
-  - `pthread_mutex_trylock` 函数
-  - `pthread_mutex_unlock` 函数
+- 互斥量(mutex)常见函数
+  - `pthread_mutex_init()`
+  - `pthread_mutex_destroy()`
+  - `pthread_mutex_lock()`
+  - `pthread_mutex_trylock()`
+  - `pthread_mutex_unlock()`
 
 
-- 读写锁常见函数
-  - `pthread_rwlock_init` 函数
-  - `pthread_rwlock_destroy` 函数
-  - `pthread_rwlock_rdlock` 函数  
-  - `pthread_rwlock_wrlock` 函数
-  - `pthread_rwlock_tryrdlock` 函数
-  - `pthread_rwlock_trywrlock` 函数
-  - `pthread_rwlock_unlock` 函数
+- 读写锁(read-write lock)常见函数
+  - `pthread_rwlock_init()`
+  - `pthread_rwlock_destroy()`
+  - `pthread_rwlock_rdlock()`  
+  - `pthread_rwlock_wrlock()`
+  - `pthread_rwlock_tryrdlock()`
+  - `pthread_rwlock_trywrlock()`
+  - `pthread_rwlock_unlock()`
 
 
-- 条件变量常见函数
-  - `pthread_cond_init` 函数
-  - `pthread_cond_destroy` 函数
-  - `pthread_cond_wait` 函数
+- 条件变量(condition)常见函数
+  - `pthread_cond_init()`
+  - `pthread_cond_destroy()`
+  - `pthread_cond_wait()`
     - 阻塞一个条件变量
     - 释放已经获得的互斥锁
-    - 当线程被唤醒时，`pthread_cond_wait` 会返回并解除阻塞，重新申请获得互斥锁。
-  - `pthread_cond_timedwait` 函数
+    - 当线程被唤醒时，`pthread_cond_wait()` 会返回并解除阻塞，重新申请获得互斥锁。
+  - `pthread_cond_timedwait()`
     - 限时等待一个条件变量 
-  - `pthread_cond_signal` 函数
+  - `pthread_cond_signal()`
     - 唤醒至少一个阻塞在条件变量上的线程 
-  - `pthread_cond_broadcast` 函数
+  - `pthread_cond_broadcast()`
     - 唤醒全部阻塞在条件变量上的线程 
 
 
