@@ -16,10 +16,12 @@ int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr)
 
 again:
 	if ((n = accept(fd, sa, salenptr)) < 0) {
-		if ((errno == ECONNABORTED) || (errno == EINTR))
+		if ((errno == ECONNABORTED) || (errno == EINTR)) {
 			goto again;
-		else
+		}
+		else {
 			perr_exit("accept error");
+		}
 	}
 	return n;
 }
@@ -28,8 +30,9 @@ int Bind(int fd, const struct sockaddr *sa, socklen_t salen)
 {
     int n;
 
-	if ((n = bind(fd, sa, salen)) < 0)
+	if ((n = bind(fd, sa, salen)) < 0) {
 		perr_exit("bind error");
+	}
 
     return n;
 }
@@ -38,6 +41,7 @@ int Connect(int fd, const struct sockaddr *sa, socklen_t salen)
 {
     int n;
     n = connect(fd, sa, salen);
+
 	if (n < 0) {
 		perr_exit("connect error");
     }
@@ -49,8 +53,9 @@ int Listen(int fd, int backlog)
 {
     int n;
 
-	if ((n = listen(fd, backlog)) < 0)
+	if ((n = listen(fd, backlog)) < 0) {
 		perr_exit("listen error");
+	}
 
     return n;
 }
@@ -59,8 +64,9 @@ int Socket(int family, int type, int protocol)
 {
 	int n;
 
-	if ((n = socket(family, type, protocol)) < 0)
+	if ((n = socket(family, type, protocol)) < 0) {
 		perr_exit("socket error");
+	}
 
 	return n;
 }
@@ -71,10 +77,12 @@ ssize_t Read(int fd, void *ptr, size_t nbytes)
 
 again:
 	if ( (n = read(fd, ptr, nbytes)) == -1) {
-		if (errno == EINTR)
+		if (errno == EINTR) {
 			goto again;
-		else
+		}
+		else {
 			return -1;
+		}
 	}
 
 	return n;
@@ -86,10 +94,12 @@ ssize_t Write(int fd, const void *ptr, size_t nbytes)
 
 again:
 	if ((n = write(fd, ptr, nbytes)) == -1) {
-		if (errno == EINTR)
+		if (errno == EINTR) {
 			goto again;
-		else
+		}
+		else {
 			return -1;
+		}
 	}
 	return n;
 }
@@ -97,8 +107,9 @@ again:
 int Close(int fd)
 {
     int n;
-	if ((n = close(fd)) == -1)
+	if ((n = close(fd)) == -1) {
 		perr_exit("close error");
+	}
 
     return n;
 }
@@ -115,12 +126,16 @@ ssize_t Readn(int fd, void *vptr, size_t n)
 
 	while (nleft > 0) {
 		if ((nread = read(fd, ptr, nleft)) < 0) {
-			if (errno == EINTR)
+			if (errno == EINTR) {
 				nread = 0;
-			else
+			}
+			else {
 				return -1;
-		} else if (nread == 0)
+			}
+		} 
+		else if (nread == 0) {
 			break;
+		}
 
 		nleft -= nread;   //nleft = nleft - nread 
 		ptr += nread;
@@ -138,10 +153,12 @@ ssize_t Writen(int fd, const void *vptr, size_t n)
 	nleft = n;
 	while (nleft > 0) {
 		if ( (nwritten = write(fd, ptr, nleft)) <= 0) {
-			if (nwritten < 0 && errno == EINTR)
+			if (nwritten < 0 && errno == EINTR) {
 				nwritten = 0;
-			else
+			}
+			else {
 				return -1;
+			}
 		}
 		nleft -= nwritten;
 		ptr += nwritten;
@@ -161,8 +178,10 @@ again:
 			if (errno == EINTR)
 				goto again;
 			return -1;
-		} else if (read_cnt == 0)
+		} 
+		else if (read_cnt == 0) {
 			return 0;
+		}
 
 		read_ptr = read_buf;
 	}
@@ -181,15 +200,18 @@ ssize_t Readline(int fd, void *vptr, size_t maxlen)
 	ptr = vptr;
 
 	for (n = 1; n < maxlen; n++) {
-		if ((rc = my_read(fd, &c)) == 1) {   //ptr[] = hello\n
+		if ((rc = my_read(fd, &c)) == 1) {   // ptr[] = hello\n
 			*ptr++ = c;
 			if (c == '\n')
 				break;
-		} else if (rc == 0) {
+		} 
+		else if (rc == 0) {
 			*ptr = 0;
 			return n-1;
-		} else
+		} 
+		else {
 			return -1;
+		}
 	}
 	*ptr = 0;
 

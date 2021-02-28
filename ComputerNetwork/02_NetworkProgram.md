@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 21:22:08
- * @LastEditTime: 2020-11-24 22:21:46
+ * @LastEditTime: 2021-02-27 09:57:13
  * @LastEditors: Please set LastEditors
  * @Description: 网络数据相关协议学习
 -->
@@ -776,7 +776,7 @@
 - `htons、ntohs、htonl和ntohl`函数
   - 主机字节序（本地）与网络字节序之间相互转换的几组API函数，本地套接字一般按照 `小端法` 存储，网络字节序一般按照 `大端法` 存储。 
   - 注意缩写：`h`：host，`n`：net，`l`：long，`s`：short
-    ```
+    ```c
     #include <netinet/in.h>
     uint16_t htons(uint16_t host16bitvalue);
     uint32_t htonl(uint32_t host32bitvalue);
@@ -785,21 +785,21 @@
     ```
 
 - 套接字地址结构
-  ```
+  ```c
   struct in_addr {
-      in_addr_t  s_addr;  // 32-bit IPv4 address
-                          // network byte ordered
+      in_addr_t  s_addr;           // 32-bit IPv4 address
+                                   // network byte ordered
   }
   struct sockaddr_in {
-      sa_family_t  sin_family;          // AF_INET
-      in_port_t    sin_port;            // 16-bit TCP or UDP port nummber, network byte ordered
-      struct in_addr    sin_addr;       // 32-bit IPv4 address, network byte ordered
-      char     sin_zero[8];             // unused
+      sa_family_t  sin_family;     // AF_INET
+      in_port_t    sin_port;       // 16-bit TCP or UDP port nummber, network byte ordered
+      struct in_addr    sin_addr;  // 32-bit IPv4 address, network byte ordered
+      char     sin_zero[8];        // unused
   }
 
   struct sockaddr {
-    sa_family_t  sa_family;             // address family: AF_XXX value
-    char        sa_data[14];            // protocol-specific address
+    sa_family_t  sa_family;        // address family: AF_XXX value
+    char        sa_data[14];       // protocol-specific address
   }
   ```
 
@@ -859,7 +859,7 @@
       - 在多进程的通信中，若一个进程调用了 `shutdown(sfd, SHUT_RDWR)`，则其它的进程不能进行通信；若一个进程调用了 `close(sfd)`，将不会影响其它进程的通信。
 
 
-- `nc(netcat)` 命令使用
+- `nc(netcat)` 命令
   - 作用：从命令行跨网络读取和写入数据。 
   - 用途
     - 侦听任意端口，以TCP/UDP 方式

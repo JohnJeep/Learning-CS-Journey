@@ -1,21 +1,17 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-03 20:16:08
- * @LastEditTime: 2020-08-12 14:10:07
+ * @LastEditTime: 2021-02-28 17:15:14
  * @LastEditors: Please set LastEditors
- * @Description: 构造函数、析构函数、组合对象混合一起练习。
+ * @Description: 构造函数、copy constructor、const类型变量初始化
+ *               析构函数、组合对象混合等一起练习。
+ *               
  */ 
 #include <iostream>
 using namespace std;
 
-
 class Dog
 {
-private:
-   int m_a;
-   int m_b;
-   int m_c;
-
 public:
     Dog();                      // 无参构造
     Dog(int a, int b, int c);   // 有参构造
@@ -26,6 +22,11 @@ public:
     {
         return this->m_a;
     }
+
+private:
+   int m_a;
+   int m_b;
+   int m_c;
 };
 
 Dog::Dog()
@@ -54,30 +55,32 @@ Dog::~Dog()
          << endl;
 }
 
-
+/**
+ * @brief: Bird类中组合了Dog类，并对Dog类进行初始化，创建了Bird类的copy constructor function
+ */
 class Bird
 {
-private:
-    int num;
-
 public:
     Bird();
     Bird(const Bird& parrot);
     ~Bird();
 
-    Dog smallBlack;    // 在Bird类中实例化一个对象
+    Dog smallBlack;    // 对Bird类进行实例化，实例化对象为smallBlack
     Dog smallWhite;
-    const int age;
+    const int age;    // const类型变量在初始值列中完成初始化
+
+private:
+    int num;
 };
 
 Bird::Bird()
-: smallBlack(11, 22, 33), smallWhite(44, 55, 66), age(3)     // 初始化列表
+    : smallBlack(11, 22, 33), smallWhite(44, 55, 66), age(3)     // 初始化列表
 {
     cout << "执行Bird类的构造函数" << endl;
 }
 
-Bird::Bird(const Bird& parrot)                                // 拷贝构造函数
-: smallBlack(01, 02, 03), smallWhite(04, 05, 06), age(10)     // 初始化列表
+Bird::Bird(const Bird& parrot)                                    // 拷贝构造函数
+    : smallBlack(01, 02, 03), smallWhite(04, 05, 06), age(10)     // 初始化列表
 {
     cout << "执行Bird类带有 const Bird& parrot 参数的构造函数" << endl;
 }
@@ -101,11 +104,8 @@ int main(int argc, char *argv[])
     Bird magpie;           // 默认去调用无参数的构造函数
     doSomething(magpie);   // 默认去调用有参数的构造函数
 
-    system("pause");
+    cout << "\nExecute copy constructor" << endl;
+    Bird bd = magpie;     // 调用copy constructor，将magpie对象中的数据copy给bd对象
+
     return 0;
 }
-
-
-
-
-
