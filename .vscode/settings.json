@@ -59,6 +59,8 @@
         "condition_variable": "cpp",
         "ctime": "cpp",
         "future": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "string.h": "c",
+        "slist": "cpp"
     }
 }

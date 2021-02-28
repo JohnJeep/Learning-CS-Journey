@@ -1,10 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-20 23:10:57
- * @LastEditTime: 2020-09-01 23:53:29
+ * @LastEditTime: 2021-02-28 13:03:46
  * @LastEditors: Please set LastEditors
- * @Description: 客户端程序编写
- * @FilePath: /network_programming/01_client.c
+ * @Description: Socket客户端程序的编写
+ *               注意：客户端的Port是随机的，Server端的IP、Port是特定的
  */
 #include <unistd.h>
 #include <stdlib.h>
@@ -16,8 +16,7 @@
 #include <stdio.h>
 
 #define SERVER_PORT          9527
-#define SERVER_IP            "127.0.0.1"           
-// #define SERVER_IP            "192.168.1.71"          
+#define SERVER_IP            "192.168.1.71"          
 
 int main(int argc, char *argv[])
 {
@@ -26,24 +25,22 @@ int main(int argc, char *argv[])
 	char buf[BUFSIZ];
 
 	cfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (cfd == -1)
-	{
-		perror("socket error.\n");
+	if (cfd == -1) {
+		perror("socket error");
 		exit(1);
 	}
+
 	memset(&server_addr, 0, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(SERVER_PORT);
 	inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr.s_addr);  // 将字符串类型的点分十进制转化为网络大端字节序
 
-	if(connect(cfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1)
-	{
-		perror("connect error.\n");
+	if(connect(cfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
+		perror("connect error");
 		exit(1);
 	}
 
-	while(1)
-	{
+	while(1) {
 		fgets(buf, sizeof(buf), stdin);
 		write(cfd, buf, strlen(buf));             // 不能使用sizeof(buf)
 		int ret = read(cfd, buf, sizeof(buf));

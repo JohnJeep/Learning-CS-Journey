@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 15:56:29
- * @LastEditTime: 2020-08-17 15:07:52
+ * @LastEditTime: 2021-02-27 21:49:18
  * @LastEditors: Please set LastEditors
  * @Description: strncpy()与memcpy()函数用法
  * @FilePath: /15-strncpy与memcpy.md
@@ -14,7 +14,7 @@
 
 ## strncpy函数
 - 定义
-` char *strncpy(char *dest, const char *src, size_t count ); `
+`char *strncpy(char *dest, const char *src, size_t count); `
   - dest：目标字符数组；
   - src：源字符数组；
   - count：要复制的最大字符数

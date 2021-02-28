@@ -1,10 +1,9 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-08-20 00:19:58
- * @LastEditTime: 2020-08-20 00:25:20
+ * @LastEditTime: 2021-02-28 13:39:12
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /undefined/home/steve/develop/network_programming/server.c
+ * @Description: server端实现的简单版本，绑定的是任意网卡的IP，Port为3333
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,38 +22,36 @@ main()
     int sockfd, client_fd;            /*sock_fd：监听socket；client_fd：数据传输socket */
     struct sockaddr_in my_addr;     /* 本机地址信息 */
     struct sockaddr_in remote_addr; /* 客户端地址信息 */
-    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {
-        perror("socket创建出错！");
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        perror("socket创建出错！\n");
         exit(1);
     }
+
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(SERVPORT);
     my_addr.sin_addr.s_addr = INADDR_ANY;
     bzero(&(my_addr.sin_zero), 8);
-    if (bind(sockfd, (struct sockaddr *)&my_addr, sizeof(struct sockaddr))  == -1)
-    {
-        perror("bind出错！");
+    if (bind(sockfd, (struct sockaddr *)&my_addr, sizeof(struct sockaddr))  == -1) {
+        perror("bind出错！\n");
         exit(1);
     }
-    if (listen(sockfd, BACKLOG) == -1)
-    {
-        perror("listen出错！");
+
+    if (listen(sockfd, BACKLOG) == -1) {
+        perror("listen出错！\n");
         exit(1);
     }
-    while (1)
-    {
+    while (1) {
         socklen_t sin_size = sizeof(struct sockaddr_in);
-        if ((client_fd = accept(sockfd, (struct sockaddr *)&remote_addr, & sin_size)) == -1)
-        {
-            perror("accept出错");
+        if ((client_fd = accept(sockfd, (struct sockaddr *)&remote_addr, & sin_size)) == -1) {
+            perror("accept出错！\n");
             continue;
         }
         printf("received a connection from %s ", inet_ntoa(remote_addr.sin_addr));
-        if (!fork())
-        { /* 子进程代码段 */
-            if (send(client_fd, "Hello, you are connected! ", 26, 0) == -1) 
-            perror("send出错！");
+        if (!fork()) { 
+            // 子进程代码段 
+            if (send(client_fd, "Hello, you are connected! ", 26, 0) == -1) {
+                perror("send出错！\n");
+            }
             close(client_fd);
             exit(0);
         }

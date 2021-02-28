@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-22 16:12:54
- * @LastEditTime: 2020-09-01 21:29:35
+ * @LastEditTime: 2021-02-28 13:40:23
  * @LastEditors: Please set LastEditors
  * @Description: 多线程并发编程实现
- * @FilePath: /network_programming/03_multithread_server.c
  */
 #include <unistd.h>
 #include <stdio.h>
@@ -38,11 +37,9 @@ void *do_work(void *argv)
     char str[INET_ADDRSTRLEN];
     int i, ret;
 
-    while (1)
-    {
+    while (1) {
         ret = Read(ts->confd, buf, sizeof(buf));
-        if (ret == 0)
-        {
+        if (ret == 0) {
             printf("the client %d closed...\n", ts->confd);   // 关闭客户端
             break;
         }
@@ -50,8 +47,7 @@ void *do_work(void *argv)
         //        inet_ntop(AF_INET, &(*ts).client_addr.sin_addr, str, sizeof(str)),
         //        ntohs((*ts).client_addr.sin_port));
 
-        for (size_t i = 0; i < ret; i++)
-        {
+        for (size_t i = 0; i < ret; i++) {
             buf[i] = toupper(buf[i]);
         }
         Writen(ts->confd, buf, ret);
@@ -82,8 +78,7 @@ int main(int argc, char *argv[])
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);    // 指定客户端任意的IP
     Bind(sfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
     Listen(sfd, 128);
-    while (1)
-    {
+    while (1) {
         client_addr_len = sizeof(client_addr);
         cfd = Accept(sfd, (struct sockaddr*)&client_addr, &client_addr_len);        
         printf("client IP: %s, client port: %d\n", 
