@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-02-08 09:53:40
+ * @LastEditTime: 2021-03-01 12:18:28
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -91,7 +91,7 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 
 
 ## 1.3. STL（Standard Template Library）标准模板库
-- Generic Programming(泛型编程): 就是利用模板为主要工具来进行编写程序。STL是泛型编程(GP)最成功的一个作品。
+- Generic Programming(泛型编程): 操作(operations)使用相同的接口，但是其类型(type)不相同，即使用模板(template)将泛型操作公式化。其中STL是泛型编程(GP)最成功的一个作品。
 
 - STL所实现的是依据泛型思维架设起来的概念结构。STL的核心思想：算法和数据结构的实现是分离的。
 
@@ -453,12 +453,28 @@ predicate: 判断这个条件是真还是假
 ## 1.8. Iterator(迭代器)
 - 什么是迭代器？
   > 表示元素在容器中的位置，这种对象的概念就称为迭代器。(STL标准库中的解释：we need a concept of an object that represents positions of elements in a container. This concept exists.Objects that fulfill this concept are called iterators.  
-  > 迭代器就是一种泛化的指针。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
+  > 迭代器就是一种泛化的指针，是一个可遍历STL容器中全部或部分元素的对象。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
 
-- 前闭后开区间
-  - begin: 指向容器中的第一个元素的位置。
-  - end: 指向容器中最后一个元素的下一个位置。
+
+- 基本操作
+  - `operator *`: 返回当前位置上元素的值。
+  - `operator ++ 或 operator --`: 让迭代器指向下一个或上一个元素。
+  - `operator == 或 operator !=`: 判断两个迭代器是否指向同一个位置。
+  - `operator =`: 赋值给迭代器  
+
+  > 不同的迭代器也许是 `smart pointers`，具有遍历复杂数据结构的能力，其内部运作机制取决于所遍历的数据结构。每一种容器都必须提供自己的迭代器。事实上每一种容器的确都将其迭代器以嵌套方式定义与 class 内部，因此各种迭代器的接口（interface）虽然相同，但类型（type）却是各不相同。
+
+
+- half-open range(前闭后开区间)
+  - begin: 返回一个迭代器，指向容器中第一个元素的位置。
+  - end: 返回一个迭代器，指向容器的终点，终点位于最后一个元素的下一个位置。
 <img src="./figures/begin-end.png">
+  - 采用半开区间的优点？
+    - 给遍历元素时，循环（loop）结束的时候，提供一个简单的判断依据。只要尚未达 `end()`，loop就继续执行。
+    - 避免对空区间（empty ranges）采取特殊的处理。对于 `empty ranges` 而言，`begin()` 就等于 `end()`。
+
+
+
 
 
 ### 1.8.1. 迭代器失效的原因？
