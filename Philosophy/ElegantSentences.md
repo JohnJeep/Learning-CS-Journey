@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2021-02-03 08:22:34
+ * @LastEditTime: 2021-03-02 09:16:20
  * @LastEditors: Please set LastEditors
  * @Description: 积累优雅的英文句子。
 --> 
@@ -101,3 +101,14 @@ When we're held back, we'll go farther and harder.
 A few morning gleams infiltrated the liquid strata.
 几缕晨光渗进水里
 
+That little thought or idea is the begining of great things if you decide to follow it through.
+如果你下定决心坚持到底，那个小小的想法或念头就会是你成就伟大事业的开始。
+
+Even the failure to do something is in itself a deed.
+及时做某件事没有成功，失败本身也是功绩。
+
+That life is too short to be little!.
+人生苦短休斤斤计较。
+
+The shroud that covers me is a shroud of dust and death; I hate it, yet hug it in love.
+我身上披的是灰尘与死亡之衣；我恨它，却又热爱地把它抱紧。

@@ -1,26 +1,52 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2020-11-30 10:36:40
+ * @LastEditTime: 2021-03-02 10:27:37
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
 -->
-## 参考资源
 
-### 总体学习
+<!-- TOC -->
+
+- [0.1. 参考资源](#01-参考资源)
+  - [0.1.1. 总体学习](#011-总体学习)
+  - [0.1.2. 文件](#012-文件)
+- [0.2. 快捷键](#02-快捷键)
+- [0.3. 信号与槽函数](#03-信号与槽函数)
+- [0.4. lambda表达式](#04-lambda表达式)
+- [0.5. 对话框](#05-对话框)
+- [0.6. Qt内存回收机制](#06-qt内存回收机制)
+- [0.7. QString](#07-qstring)
+  - [0.7.1. std::string和char *的相互转换](#071-stdstring和char-的相互转换)
+  - [0.7.2. QString和std::string相互转换，以及避免出现乱码](#072-qstring和stdstring相互转换以及避免出现乱码)
+  - [0.7.3. QString和char *相互转换](#073-qstring和char-相互转换)
+- [0.8. Qt常用类](#08-qt常用类)
+  - [0.8.1. QFrame](#081-qframe)
+  - [0.8.2. QBoxLayout](#082-qboxlayout)
+  - [0.8.3. QComboBox](#083-qcombobox)
+  - [0.8.4. Spacer](#084-spacer)
+  - [0.8.5. QStackedWidget](#085-qstackedwidget)
+
+<!-- /TOC -->
+
+## 0.1. 参考资源
+
+### 0.1.1. 总体学习
 - [关于QT的系统总结（非常全面，非常好）](https://www.cnblogs.com/findumars/p/5529526.html)
 - [Qt 学习之路 2](https://www.bookstack.cn/read/qt-study-road-2/da83aa582cd34d4d.md)：简单些了Qt一些主要的学习内容。
+- [Qt 资料大全](https://waleon.blog.csdn.net/article/details/51752029)：一去丶二三里 CSDN博主总结的Qt学习的资料。
 
 
-### 文件
+
+### 0.1.2. 文件
 - [QT读取和写入文件](https://blog.csdn.net/qq_40732350/article/details/86774306)：讲解了QFile、QFileInfo、QTemporaryFile、QDir的相关用法。
 - [QT学习笔记8：QDir类及其用法总结](https://www.cnblogs.com/aiguona/p/10298226.html)：QDir类提供了访问系统目录结构及其内容的与平台无关的方式。
 - [Qt拷贝文件、文件夹、创建文件夹、删除文件夹操作](https://blog.csdn.net/ljt350740378/article/details/71381705)
 
 
 
-## 快捷键
+## 0.2. 快捷键
 - `F1      `  查看帮助
 - `F2      `  跳转到函数定义（和Ctrl+鼠标左键一样的效果）
 - `Shift+F2`    声明和定义之间切换
@@ -56,7 +82,7 @@
 
 
 
-## 信号与槽函数
+## 0.3. 信号与槽函数
 - QT中使用 `connect()`来操作信号与槽
   > `connect()` 中的第五个参数作用：只有在多线程处理时才有意义。如果是多线程，默认使用队列，如果是单线程，默认使用直接的方式。队列：槽函数所在线程和接收者一样；直接连接：槽函数所在线程与发送者一样。
 
@@ -87,7 +113,7 @@
 
 
 
-## lambda表达式
+## 0.4. lambda表达式
 - lambda表达式也叫匿名函数表达式，其中函数没有名称。
 - 格式：`[](){}`，需要在项目配置文件中加入 `CONFIG += c++11`，才有效，现在高版本Qt已经默认将该项添加到配置文件中了。
 - []标识符，匿名函数
@@ -103,12 +129,12 @@
   - 一般使用 `->`来表示返回值：`[]()->int{}`
 
 
-## 对话框
+## 0.5. 对话框
 - 模态对话框（阻塞对话框）：创建对话框后不可以对其它的对话框进行操作。
 - 非模态对话框：创建对话框后可以对其它的对话框进行操作。
 
 
-## Qt内存回收机制
+## 0.6. Qt内存回收机制
 - 指定父对象
   - 如果不指定父对象，子控件与父控件之间没有任何的关系。若指定父对象后，对象上的子对象自动显示。
   - 两种方式指定父对象：
@@ -121,13 +147,13 @@
 
 
 
-## QString
+## 0.7. QString
 - 参考：[QString, Std::string, char *相互转换](https://www.cnblogs.com/zxbilly/p/9195411.html)
 
 Qt 库中对字符串类型进行了封装，QString 类提供了所有字符串操作方法，给开发带来了便利。 由于第三方库的类型基本上都是标准的类型，即使用std::string或char *来表示字符 (串) 类型，因此在Qt框架下需要将QString转换成标准字符 (串) 类型。
 
 
-### std::string和char *的相互转换
+### 0.7.1. std::string和char *的相互转换
 - 将char *或char[]转换为std::string
   ```
   std::string ss,str;
@@ -159,7 +185,7 @@ Qt 库中对字符串类型进行了封装，QString 类提供了所有字符串
     ```
 
 
-### QString和std::string相互转换，以及避免出现乱码
+### 0.7.2. QString和std::string相互转换，以及避免出现乱码
 ```
 QString qstr;
 std::string str;
@@ -172,7 +198,7 @@ qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现�
 ```
 
 
-### QString和char *相互转换
+### 0.7.3. QString和char *相互转换
 - QString转为char *
   ```
   两种方法
@@ -192,3 +218,34 @@ qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现�
   QString str(ch);   // Qt5     
   QString str = QString::fromUtf8(ch));    //  Qt4
   ```
+
+
+## 0.8. Qt常用类
+### 0.8.1. QFrame 
+- QFrame与QWidget的区别：
+  - QWidget类是所有用户界面对象的基类。QFrame是基本控件的基类，QWidget是QFrame基类。其关系如下 `QPushButton,QLabel… -> QFrame ->QWidget`
+  
+  - Widget是用户界面的基本单元：它从窗口系统接收鼠标，键盘和其他事件，并在屏幕上绘制自己。每个Widget都是矩形的，它们按照Z-order进行排序。
+
+
+### 0.8.2. QBoxLayout
+- QBoxLayout 可以在水平方向或垂直方向上排列控件，由QHBoxLayout、QVBoxLayout所继承。
+  - QHBoxLayout：水平布局，在水平方向上排列控件，即：左右排列。
+  - QVBoxLayout：垂直布局，在垂直方向上排列控件，即：上下排列。
+
+
+
+### 0.8.3. QComboBox
+QComboBox 是下拉列表框组件类，它提供一个下拉列表供用户选择，也可以直接当作一个 QLineEdit 用作输入。QComboBox 除了显示可见下拉列表外，每个项（item，或称列表项）还可以关联一个 QVariant 类型的变量，用于存储一些不可见数据。
+
+
+### 0.8.4. Spacer
+QSpacerItem类为布局提供了一个空白区。
+
+
+### 0.8.5. QStackedWidget
+QStackedWidget继承自 QFrame。QStackedWidget类提供了多页面切换的布局，一次只能看到一个界面。QStackedWidget可用于创建类似 QTabWidget提供的用户界面。
+
+
+
+
