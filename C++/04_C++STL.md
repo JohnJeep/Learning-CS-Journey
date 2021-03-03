@@ -20,15 +20,12 @@
       - [1.4.1.4. list（双向链表）](#1414-list双向链表)
       - [1.4.1.5. forword list(单向链表)](#1415-forword-list单向链表)
     - [1.4.2. Associative containers(关联性容器)](#142-associative-containers关联性容器)
-      - [1.4.2.1. set](#1421-set)
-      - [1.4.2.2. map](#1422-map)
-      - [1.4.2.3. multiset](#1423-multiset)
-      - [1.4.2.4. mutimap](#1424-mutimap)
+      - [1.4.2.1. set && multiset](#1421-set--multiset)
+      - [1.4.2.2. map && mutimap](#1422-map--mutimap)
+      - [1.4.2.3. Difference(差异)](#1423-difference差异)
     - [1.4.3. Unordered associative containers(无序关联容器)](#143-unordered-associative-containers无序关联容器)
-      - [1.4.3.1. unordered_set](#1431-unordered_set)
-      - [1.4.3.2. unordered_map](#1432-unordered_map)
-      - [1.4.3.3. unordered_multisert](#1433-unordered_multisert)
-      - [1.4.3.4. unordered_multimap](#1434-unordered_multimap)
+      - [1.4.3.1. unordered_set && unordered_multiset](#1431-unordered_set--unordered_multiset)
+      - [1.4.3.2. unordered_map && unordered_multimap](#1432-unordered_map--unordered_multimap)
     - [1.4.4. Container adaptors(容器适配器)](#144-container-adaptors容器适配器)
       - [1.4.4.1. stack](#1441-stack)
       - [1.4.4.2. queue](#1442-queue)
@@ -229,8 +226,12 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
 
 
-#### 1.4.2.1. set
-- set 是一个 `集合` 容器，包含的元素是唯一的，集合中的元素按照一定的顺序排列，不能随意指定位置插入元素。
+#### 1.4.2.1. set && multiset
+> set 是一个 `集合` 容器，包含的元素是唯一的，集合中的元素按照一定的顺序排列，不能随意指定位置插入元素。
+
+> collection of keys, sorted by keys. 容器中的 key 可以重复。
+
+
 - set 底层采用红黑树的数据结构实现的。
 - set 支持唯一的键值，容器里面的元素值只能出现一次，而 `multiset` 集合容器中同一个元素值可以出现多次。
 - 不可以直接修改 set和multiset集合容器中元素的值，因为集合容器是自动排序的。修改集合容器中元素的值，必须先删除原先元素的值，再插入新元素的值。
@@ -254,15 +255,22 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 
 
 
-#### 1.4.2.2. map
-- map 是关联式容器，一个 map 就是一个键值对。map 中的 `key` 值唯一，容器中的元素按照一定的顺序排列，不能在任意指定的位置插入元素。
+
+#### 1.4.2.2. map && mutimap
+> map 是关联式容器，一个 map 就是一个键值对。map 中的 `key` 值唯一，容器中的元素按照一定的顺序排列，不能在任意指定的位置插入元素。
+
+> multimap (collection of key-value pairs, sorted by keys.)
+
+
 - map 的底层原理是按照平衡二叉树的数据结构来实现的，在插入和删除的操作上比 `vector` 容器快。
 - map 支持唯一的键值，每个 `key` 只能出现一次，支持 `[]` 操作，形如：`map[key] = value`。 `multimap` 不支持唯一的键值，容器中的每个 `key` 可以出现相同的多次，不支持 `[]` 操作。
 
-- 内部结构图  
+- map和multimap会根据元素的 `key` 自动对元素排序。这么一来，根据已知的 `key` 查找某个元素时就能够有很好的效率，而根据己知 `value` 查找元素时，效率就很糟糕。“自动排序"这一性质使得 map 和 multimap 本身有了一条重要限制：你不可以直接改变元素的 `key`。因为这样做会损坏正确的次序。想要修改元素的 `key` ，必须先移除拥有该 `key` 的元素，然后插人拥有新 `key/value` 的元素。从迭代器的视角看，元素的 `key` 是常量。然而直接修改元素的 `value` 是可能的，提供的值的类型不能是 `constant`。
+
+
+- map与multimap内部结构图  
   <img src="./figures/map-multimap.png">
   <img src="./figures/map-multimap-internal-structure.png">
-
 
 ```C++
   // 四种map容器的插入方法
@@ -274,28 +282,32 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 
   // 方法一到方法三向容器中插入相同的键值时，不会插入成功。
   // 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
-
 ```
-- map的查找操作需要做异常判断处理
+
+- <font color=red>注意:</font> 
+  - map的查找操作需要做异常判断处理
+  - key 与 value 两个值必须是可拷贝的(copyable)和可移动的(movable)。
+  - 指定的排序准则下，key 必须是可比较的(comparable)。
+
 
 - `at(key)`
-  -  `at()` 函数会根据它收到的 `key` 得到元素的 `value`，如果不存在这样的元素，则抛出 `out_of_range` 异常。
+  > `at()` 函数会根据它收到的 `key` 得到元素的 `value`，如果不存在这样的元素，则抛出 `out_of_range` 异常。
 
 - `operator []`
   - `operator []` 的索引就是 `key`，其类型可能属于任何的类型，不一定是整数。
-  - 如果你选择某 `key` 作为索引，容器内没有相应的元素，那么 map 会自动安插一个新元素，其 value 将被其类型的 default 构造函数初始化。因此你不可以指定一个 `不具 default 构造函数的 value 类型`。一般基础类型都有一个 `default 构造函数` ,设初值为 0。
-
-#### 1.4.2.3. multiset
-collection of keys, sorted by keys.容器中的 key 可以重复。
+  - 如果你选择某 `key` 作为索引，容器内没有相应的元素，那么 map 会自动安插一个新元素，其 value 将被其类型的 default 构造函数初始化。因此你不可以指定一个 `不具 default 构造函数的 value 类型`。一般基础类型都有一个 `default 构造函数`，设初值为 `0`。
 
 
-#### 1.4.2.4. mutimap
-collection of key-value pairs, sorted by keys
+
+
+#### 1.4.2.3. Difference(差异)
+和其他所有关联式容器一样，`map/multimap` 底层是以平衡二叉树完成的。C++ standard 并未明定这一点，但是从map和multimap各项操作的复杂度自然可以得出这一结念。通常set、multiset、map和multimp都使用相同的内部结构，因此，你可以把set和multiset视为特殊的map和multimp，只不过set元素的 `value和key是同一对象`。因此，map和multimap拥有set和multiset的所有能力和所有操作。当然，某些细微差异还是有的：首先，它们的元素是key/value pair，其次，map可作为关联式数组(associative array)来使用。
 
 
 ### 1.4.3. Unordered associative containers(无序关联容器)
-#### 1.4.3.1. unordered_set
-- `unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
+#### 1.4.3.1. unordered_set && unordered_multiset
+> `unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
+
 - STL无序容器存储状态，hash表存储结构图
 <img src="./figures/unordered-containers.png">
 <img src="./figures/unordered-sets-multisets-internal-structure.png">
@@ -317,15 +329,11 @@ collection of key-value pairs, sorted by keys
 
 
 
-#### 1.4.3.2. unordered_map
+#### 1.4.3.2. unordered_map && unordered_multimap
 - 内部结构图
-  
-  <img src="./figures/unordered-maps-multimsps-internal-structure.png">
-
-#### 1.4.3.3. unordered_multisert
+- <img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
 
-#### 1.4.3.4. unordered_multimap
 
 
 ### 1.4.4. Container adaptors(容器适配器)
@@ -333,29 +341,33 @@ collection of key-value pairs, sorted by keys
 
 
 #### 1.4.4.1. stack
-<img src="./figures/stack.png">
+- 内部结构图
+- <img src="./figures/stack.png">
 
-
-- `push()` 入栈
-- `pop()` 出栈
-- `top()` 获取栈顶元素
-- `size()` 获取栈大小
-- `empty()` 栈为空
+- 函数接口
+  - `push()` 入栈
+  - `pop()` 出栈
+  - `top()` 获取栈顶元素
+  - `size()` 获取栈大小
+  - `empty()` 栈为空
 
 
 #### 1.4.4.2. queue
-<img src="./figures/queue.png">
+- 内部结构图
+- <img src="./figures/queue.png">
 
-- `push()` 入队列
-- `pop()` 出队列
-- `empty()` 对列为空
-- `front()` 队列头部元素
+- 函数接口
+  - `push()` 入队列
+  - `pop()` 出队列
+  - `empty()` 对列为空
+  - `front()` 队列头部元素
   
 
 
 #### 1.4.4.3. priority_queue(优先级队列)
 ```C++
 // 最大或最小优先级队列变量的声明 
+
 priority_queue<int> g_priq;                            // 默认为最大值优先队列
 priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 ```
@@ -371,12 +383,11 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
 
 ### 1.5.1. heap
-堆（heap）的STL库中函数
-
-- `make_heap(first, last, comp);` 建立一个空堆；
-- `push_heap(first, last, comp);` 向堆中插入一个新元素；
-- `top_heap(first, last, comp); ` 获取当前堆顶元素的值；
-- `sort_heap(first, last, comp);` 对当前堆进行排序；
+- heap(堆)的STL库中函数
+  - `make_heap(first, last, comp);` 建立一个空堆；
+  - `push_heap(first, last, comp);` 向堆中插入一个新元素；
+  - `top_heap(first, last, comp); ` 获取当前堆顶元素的值；
+  - `sort_heap(first, last, comp);` 对当前堆进行排序；
 
 
 
