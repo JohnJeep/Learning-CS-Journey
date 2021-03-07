@@ -1,10 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-04 11:42:29
- * @LastEditTime: 2020-07-27 15:52:33
+ * @LastEditTime: 2021-03-07 22:17:28
  * @LastEditors: Please set LastEditors
  * @Description: memset()函数用法
- * @FilePath: /14-memset.md
 --> 
 
 ## 参考

@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-13 21:23:24
- * @LastEditTime: 2020-08-03 22:03:58
+ * @LastEditTime: 2021-03-07 22:24:36
  * @LastEditors: Please set LastEditors
  * @Description: 在1-100中某些数字组成的数组中，每个数字出现的次数可能是零次或多次，计算出现次数最多的数字。
- * @FilePath: /FindNumberArray.c
  */ 
 #include <stdio.h>
 #include <stdlib.h>
