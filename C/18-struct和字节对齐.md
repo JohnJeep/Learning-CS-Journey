@@ -1,15 +1,16 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-16 20:47:29
- * @LastEditTime: 2021-03-07 22:00:07
+ * @LastEditTime: 2021-03-09 23:00:04
  * @LastEditors: Please set LastEditors
- * @Description: C语言结构体
+ * @Description: C语言结构体与字节对齐的理解
 --> 
 
 ## 结构体定义（3种）
 - 声明结构体包括两步
   - 定义结构体
   - 声明相应结构体类型的变量（结构体能包含C语言允许的所有类型变量）
+
 - 法一：在定义结构体类型的同时说明结构体变量
 ```
 struct 结构体标识符
@@ -17,6 +18,7 @@ struct 结构体标识符
     成员变量列表;
 }变量名列表;
 ```
+
 - 法二:直接说明结构体变量
 ```
 struct
@@ -24,6 +26,7 @@ struct
     成员变量列表;
 }变量名列表;
 ```
+
 - 法三：先定义结构体，再说明结构体变量
 ```
 struct 结构体标识符
@@ -85,12 +88,6 @@ struct Student{
 
 
 ## 结构体填充与数据对齐
-- 参考
-  - [C语言#pragma预处理](http://c.biancheng.net/cpp/html/469.html)
-  - [百度百科字长解释](https://baike.baidu.com/item/%E5%AD%97%E9%95%BF)
-  - [C语言字节对齐](https://www.lagou.com/lgeduarticle/96362.html)
-
-
 - 结构变量的大小等于它包含所有变量的总大小。
 - 结构体填充：是编译器用来对齐内存偏移数据。
 - 字段填充：为了提高性能，编译器在结构体中利用 `结构体填充` 方法进行数据对齐。
@@ -117,6 +114,11 @@ struct Student{
    - 结构体的总大小为结构体最宽基本类型成员大小的整数倍，如有需要编译器会在最末一个成员之后加上填充字节 `trailing padding`。
 
 
-### 传递结构体指针变量
-- 为什么要用传递结构体指针变量？
-  > 结构体中数据成员变量的数据非常大，采用 `结构体指针变量` 比 `传递值` 的效率要高，花费的时间少。
+### 为什么要用传递结构体指针变量？
+> 结构体中数据成员变量的数据非常大，采用 `结构体指针变量` 比 `传递值` 的效率要高，花费的时间少。
+
+
+### 参考
+- [C语言#pragma预处理](http://c.biancheng.net/cpp/html/469.html)
+- [百度百科字长解释](https://baike.baidu.com/item/%E5%AD%97%E9%95%BF)
+- [C语言字节对齐](https://www.lagou.com/lgeduarticle/96362.html)
