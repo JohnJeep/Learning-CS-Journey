@@ -1,7 +1,7 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2021-03-02 10:27:37
+ * @LastEditTime: 2021-03-10 11:50:10
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
@@ -27,6 +27,7 @@
   - [0.8.3. QComboBox](#083-qcombobox)
   - [0.8.4. Spacer](#084-spacer)
   - [0.8.5. QStackedWidget](#085-qstackedwidget)
+  - [QPushButton](#qpushbutton)
 
 <!-- /TOC -->
 
@@ -247,5 +248,8 @@ QSpacerItem类为布局提供了一个空白区。
 QStackedWidget继承自 QFrame。QStackedWidget类提供了多页面切换的布局，一次只能看到一个界面。QStackedWidget可用于创建类似 QTabWidget提供的用户界面。
 
 
+### QPushButton
+setCheckable(true)为属性，表示可以选中
 
+setChecked（true）为属性的值，表示已经选中
 
