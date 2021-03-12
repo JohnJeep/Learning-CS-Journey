@@ -1,7 +1,7 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2021-03-10 11:50:10
+ * @LastEditTime: 2021-03-12 10:02:45
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
@@ -28,6 +28,7 @@
   - [0.8.4. Spacer](#084-spacer)
   - [0.8.5. QStackedWidget](#085-qstackedwidget)
   - [QPushButton](#qpushbutton)
+  - [QString](#qstring)
 
 <!-- /TOC -->
 
@@ -253,3 +254,8 @@ setCheckable(true)为属性，表示可以选中
 
 setChecked（true）为属性的值，表示已经选中
 
+
+### QString
+`QString QString::trimmed() const`   返回值为去除了字符串中的开头和结尾的空字符，不能去除掉字符串内部的空字符。
+
+`QString QString::simplified() const`  返回值为去除了字符串开头和结尾空的字符，并且字符串内部的空字符也去掉。

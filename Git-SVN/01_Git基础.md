@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2021-02-10 11:10:09
+ * @LastEditTime: 2021-03-12 08:50:03
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -29,6 +29,7 @@
     - [1.5.1. 命令](#151-命令)
     - [1.5.2. Git pull与Git fetch](#152-git-pull与git-fetch)
     - [1.5.3. 远程仓库与本地的关联](#153-远程仓库与本地的关联)
+      - [git远程仓库更换名称，本地如何修改？](#git远程仓库更换名称本地如何修改)
   - [1.6. Git删除与恢复](#16-git删除与恢复)
     - [1.6.1. 删除指定文件](#161-删除指定文件)
     - [1.6.2. 恢复删除的文件](#162-恢复删除的文件)
@@ -339,6 +340,15 @@ experiment <br>
 - `git push -u origin master` 将当前分支的内容推送给远程仓库 `origin` 的 `master` 分支
   -  参数 `-u`，推送的同时将 `origin` 仓库的 `master` 分支设置为本地仓库当前分支的 `upstream（上游）`。
   - git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+
+#### git远程仓库更换名称，本地如何修改？
+- 适用于本地和远程的代码没得任何问题，就是远程仓库改了个名称，直接在本地修改远程仓库地址即可： `git remote set-url origin new_address`
+- 另外还可以先删除，然后添加地址：
+  ```
+  git remote rm origin
+  git remote add origin new_address
+  ```
 
 
 ## 1.6. Git删除与恢复
