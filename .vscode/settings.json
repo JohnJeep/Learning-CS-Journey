@@ -62,5 +62,6 @@
         "forward_list": "cpp",
         "string.h": "c",
         "slist": "cpp"
-    }
+    },
+    "jupyter.jupyterServerType": "local"
 }

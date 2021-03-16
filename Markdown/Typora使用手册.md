@@ -1,6 +1,6 @@
-# Typora使用手册
+# 1. Typora使用手册
 
-## Markdown语法
+## 1.1. Markdown语法
 
 -  段落：`Ctrl + 0`
 
@@ -113,7 +113,7 @@
     -   
 
 
-## 基本操作
+## 1.2. 基本操作
 - 撤销： `Ctrl/Cmd + Z`
 
 -   切换原文和语法：`Ctrl/Cmd + /`
@@ -133,3 +133,23 @@
 -   搜索并替换： `Ctrl + H`
 
     
+## 1.3. 表格
+<table><tr><td bgcolor="violet"> 
+  背景色 浅紫色
+</td></tr></table>
+
+
+<table border="10">
+<tr>
+<th>表头1</th>
+<th>表头2</th>
+</tr>
+<tr>
+<td>row 1, cell 1</td>
+<td>row 1, cell 2</td>
+</tr>
+<tr>
+<td>row 2, cell 1</td>
+<td>row 2, cell 2</td>
+</tr>
+</table>
