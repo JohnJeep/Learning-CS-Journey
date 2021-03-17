@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-03-13 16:33:23
+ * @LastEditTime: 2021-03-17 18:29:32
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -387,7 +387,7 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 ##### 1.4.2.2.4. 优点
-插入键值的元素不允许重复，比较函数只对元素的键值进行比较，元素的各项数据可通过key值检索。
+插入键值的元素不允许重复，只对元素的键值进行比较，元素的各项数据可以通过 key 值进行检索。 
 
 ##### 1.4.2.2.5. 缺点
 
