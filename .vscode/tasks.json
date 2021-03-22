@@ -1,9 +1,10 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-	// C++编译配置信息
+        /*
+	    // Windows C++编译配置信息
         {
-            "label": "Compile C++",                                               // 任务名称，与launch.json的preLaunchTask相对应
+            "label": "Windows Compile C++",                                       // 任务名称，与launch.json的preLaunchTask相对应
             "command": "g++",                                                     // 要使用的编译器，若编译器为clang，则C++使用用clang++；使用MinGW-W64为gcc或g++
             "type": "shell",                                                      // process是vsc把预定义变量和转义解析后直接全部传给command；
                                                                                   // shell相当于先打开shell再输入命令，所以args还会经过shell再解析一遍
@@ -56,8 +57,8 @@
             }
         },
         
-         //C编译配置
-         {
+        //C编译配置
+        {
             "label": "compile C",
             "command": "gcc",
             "type": "shell",
@@ -105,5 +106,37 @@
                 }
             },
         },
+        */
+
+        // linux C++ compile
+        {
+            "label": "linux compile",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }            
 	]
 }
