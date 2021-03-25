@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-13 11:12:26
- * @LastEditTime: 2020-12-14 17:08:22
+ * @LastEditTime: 2021-03-25 09:27:53
  * @LastEditors: Please set LastEditors
  * @Description: 智能指针知识
- * @FilePath: /45_smart_pointer.cpp
  */
 #include <iostream>
 #include <cstdio>
@@ -129,7 +128,7 @@ void test03()
 // weak_ptr pointer
 void test04()
 {
-    cout << endl << "test04" << endl;
+    cout << "\n" << "test04" << endl;
     shared_ptr<SmartPointerA> pa(new SmartPointerA());
     shared_ptr<SmartPointerB> pb(new SmartPointerB());
     cout << "pa.use_count(): " << pa.use_count() << endl;
@@ -148,9 +147,9 @@ void test04()
 
 int main(int argc, char *argv[])
 {
-    test01();
-    test02();
-    test03();
+    // test01();
+    // test02();
+    // test03();
     test04();
 
     return 0;

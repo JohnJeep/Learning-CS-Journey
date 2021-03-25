@@ -9,29 +9,37 @@
 <!-- TOC -->
 
 - [1. C++11新特性](#1-c11新特性)
-  - [1.1. Template表达式内的空格](#11-template表达式内的空格)
-  - [1.2. 初始值列 initialize list](#12-初始值列-initialize-list)
-  - [1.3. 指针空值](#13-指针空值)
+  - [1.1. Important Minor Syntax Cleanups(语法的改进)](#11-important-minor-syntax-cleanups语法的改进)
+    - [1.1.1. Template表达式内的空格](#111-template表达式内的空格)
+  - [1.2. Initializer lists(初值列)](#12-initializer-lists初值列)
+  - [1.3. nullptr](#13-nullptr)
   - [1.4. for 循环](#14-for-循环)
   - [1.5. Lambda表达式](#15-lambda表达式)
-  - [1.6. decltype](#16-decltype)
-  - [1.7. explicit](#17-explicit)
-  - [1.8. auto](#18-auto)
-  - [1.9. noexception](#19-noexception)
-  - [1.10. noexcept](#110-noexcept)
-  - [1.11. constexpr](#111-constexpr)
-  - [1.12. enable_shared_from_this](#112-enable_shared_from_this)
-  - [1.13. override](#113-override)
-  - [1.14. variadic templates(模板参数可变化)](#114-variadic-templates模板参数可变化)
+  - [1.6. Keyword decltype](#16-keyword-decltype)
+  - [1.7. Keyword explicit](#17-keyword-explicit)
+  - [1.8. Automatic Type Deduction with auto](#18-automatic-type-deduction-with-auto)
+  - [1.9. Keyword noexcept](#19-keyword-noexcept)
+  - [1.10. Keyword constexpr](#110-keyword-constexpr)
+  - [1.11. enable_shared_from_this](#111-enable_shared_from_this)
+  - [1.12. override](#112-override)
+  - [1.13. New Function Declaration Syntax(新的函数声明语法)](#113-new-function-declaration-syntax新的函数声明语法)
+  - [1.14. Scoped Enumerations(带作用域的枚举)](#114-scoped-enumerations带作用域的枚举)
+  - [1.15. New Template Features](#115-new-template-features)
+    - [1.15.1. variadic templates](#1151-variadic-templates)
+    - [1.15.2. Alias Templates (Template Typedef)](#1152-alias-templates-template-typedef)
+    - [1.15.3. Function template](#1153-function-template)
+  - [1.16. Move Semantics and Rvalue References](#116-move-semantics-and-rvalue-references)
 
 <!-- /TOC -->
 
 # 1. C++11新特性
-## 1.1. Template表达式内的空格
+
+## 1.1. Important Minor Syntax Cleanups(语法的改进)
+### 1.1.1. Template表达式内的空格
 
 
-## 1.2. 初始值列 initialize list
-- 引入了初值列和一致性初始化（Uniform Initialization）。
+## 1.2. Initializer lists(初值列)
+- C++11 引入了初值列和一致性初始化（Uniform Initialization）。
 - `初始值列` 赋值是在对象创建成功之前完成的，而 `函数体内赋值` 是你的对象成员都已经创建好后再对成员进行赋值。
 - 在带参构造函数的函数体外面，第一行进行初始化。
 - 语法
@@ -46,7 +54,7 @@
 - 初始化列表的顺序并不限定初始化的执行顺序，成员的初始化顺序是与类中定义的顺序保持一致。最好让构造函数初始值的顺序与成员声明的顺序保持一致。
 
 
-## 1.3. 指针空值
+## 1.3. nullptr
 - 用 `nullptr` 关键字取代 `0或 NULL`，表示一个指针指向没有存在的值。
  
 
@@ -62,12 +70,12 @@
   <img src="./figures/range-base-for.png">
 
 ## 1.5. Lambda表达式
-- 支持Lambda表达式：`[](){}`
+支持Lambda表达式：`[](){}`
 
 
 
 
-## 1.6. decltype
+## 1.6. Keyword decltype
 - 是C++11 增加的一个关键字，作为类型推导，操作过程是在编译时进行的。 
 - 应用
   - 常常与 `typdef/using` 关键字结合起来使用。
@@ -82,7 +90,7 @@
   - 最重要的一个作用：推导函数的返回类型。
 
 
-## 1.7. explicit
+## 1.7. Keyword explicit
 - 被 `explicit` 关键字修饰的类构造函数，不能进行自动地隐式类型转换，只能显式地进行类型转换。
 - 当类的声明和定义分别在两个文件中时，`explicit` 只能写在在声明(`declaration`)中，不能写在定义(`definition`)中。
 - 大部分情况下 `explicit` 关键字使用在构造函数中，还有少部分是用在模板中。
@@ -91,7 +99,7 @@
 
 
 
-## 1.8. auto
+## 1.8. Automatic Type Deduction with auto
 - C++11中新增的一个关键字，让编译器通过初始值去分析所属类的类型。`auto` 完成类型自动推导：根据初始值自动推导变量的类型，因此必须需要将变量初始化。
 - `auto` 一般会忽略掉顶层的 const，但底层的const会保留下来。从变量声明的初始化表达式处获得变量的类型。
   ```C++
@@ -100,35 +108,34 @@
   ``` 
 
 
-## 1.9. noexception
-- 表明使用该关键字时，指定某个函数不会抛出异常。
-- `void add(int) noexception;`   // 表明add()不会抛出异常
-- 注意
-  - 函数指针的声明和定义中可以指定 noexception
-  - `typedef或类型的别名` 中不能使用noexception
-  - 成员函数中，noexception需要跟在 `const或引用` 限定符之后，但是跟在 `final、override或虚函数=0` 这些限定符之前。
-
-
-
-## 1.10. noexcept
+## 1.9. Keyword noexcept
 - 参考
   - [C++中的移动构造与noexcept](https://www.yhspy.com/2019/11/22/C-%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E4%B8%8E-noexcept/) 
 
 
-- C++11 引入了关键字 `noexcept`。该关键字告诉编译器，函数中不会发生异常,这有利于编译器对程序做更多的优化。英文名叫 move assignment，又称为移动赋值函数。与早期版本中的复制赋值函数对应。在c++11以后，可以直接将临时变量b中的内存指针直接传递给a，由于避免了多余的内存分配操作，因此大大提高了程序效率。
+- C++11 引入了关键字 `noexcept`。该关键字告诉编译器，指定某个函数不会或不准备抛出异常。
+  ```C++  
+  void add(int) noexcept;`   // 表明add() 函数不会抛出异常
+  ```
 
-- 如果在运行时，noexecpt函数向外抛出了异常（如果函数内部捕捉了异常并完成处理，这种情况不算抛出异常），程序会直接终止，调用std::terminate()函数，该函数内部会调用std::abort()终止程序。
+- 优点
+  - 这有利于编译器对程序做更多的优化。英文名叫 `move assignment`，又称为移动赋值函数。与早期版本中的复制赋值函数对应。在c++11以后，可以直接将临时变量b中的内存指针直接传递给a，由于避免了多余的内存分配操作，因此大大提高了程序效率。
 
-- C++中的异常处理是在运行时而不是编译时检测的。为了实现运行时检测，编译器创建额外的代码，然而这会妨碍程序优化。
-
-- 什么时候用noexcept？
-  - 移动构造函数（move constructor）：在对象进行“复制”时，来直接“窃取”拷贝对象所保有的一些资源。比如，已经在原对象中分配的堆内存、文件描述符，以及 IO 流等。
-  - 移动分配函数（move assignment）
-  - 析构函数（destructor）。在新版本的编译器中，析构函数是默认加上关键字noexcept的。
+  - 如果在运行时，noexecpt函数向外抛出了异常（如果函数内部捕捉了异常并完成处理，这种情况不算抛出异常），程序会直接终止，调用 `std::terminate()` 函数，该函数内部会调用`std::abort()` 终止程序。
+  > C++中的异常处理是在程序运行时检测，而不是编译时检测的。为了实现运行时检测，编译器创建额外的代码，然而这会妨碍程序优化。
 
 
-## 1.11. constexpr
-- 常量表达式（const expression）：表示值不会改变，并且在编译过程中就能得到计算的结果的表达式。
+- 注意点
+  - 函数指针的声明和定义中可以指定 noexcept
+  - `typedef或类型的别名` 中不能使用noexcept
+  - 成员函数中，noexcept 需要跟在 `const或引用` 限定符之后，但是跟在 `final、override或虚函数=0` 这些限定符之前。
+  - 移动构造函数(move constructor)：在对象进行“复制”时，来直接“窃取”拷贝对象所保有的一些资源。比如，已经在原对象中分配的堆内存、文件描述符，以及 IO 流等。
+  - 移动分配函数(move assignment)
+  - 析构函数(destructor)。在新版本的编译器中，析构函数是默认加上关键字 `noexcept`的。
+
+
+## 1.10. Keyword constexpr
+- 常量表达式(const expression)：表示值不会改变，并且在编译过程中就能得到计算的结果的表达式。
 - 为什么要使用constexpr？
   > 提高程序的执行效率，允许一些计算发生在编译时，而不是在运行的时候，因而采用常量表达式。`constexpr` 关键字在 C++11 中引入，而在 C++14 中得到改善，它表示允许将变量声明为 `constexpr` 类型，让编译器来验证变量的值是否是一个常数表达式。
 - const与constexpr的区别：
@@ -146,7 +153,7 @@
   - 内联函数和constexpr函数一般定义在头文件中。
 
 
-## 1.12. enable_shared_from_this
+## 1.11. enable_shared_from_this
 - 参考
   - [cpp reference解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
   - [enable_shared_from_this用法分析](https://bbs.huaweicloud.com/blogs/136194)
@@ -247,7 +254,7 @@
   - enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
 
 
-## 1.13. override
+## 1.12. override
 - 什么是override？
   - override 是C++11引进的一个说明符，翻译为 `覆盖` 的意思。C++11 中的 override 关键字，可以显式的在派生类中声明，哪些成员函数需要被重写，如果没被重写，则编译器会报错。
 
@@ -262,8 +269,20 @@
   - 在派生类的成员函数中使用override时，如果基类中无此函数，或基类中的函数并不是虚函数，编译器会给出相关错误信息。 
 
 
-## 1.14. variadic templates(模板参数可变化)
-variadic templates是C++新增的一个非常重要的特性。
+## 1.13. New Function Declaration Syntax(新的函数声明语法)
+
+
+## 1.14. Scoped Enumerations(带作用域的枚举)
+
+
+
+## 1.15. New Template Features
+### 1.15.1. variadic templates
+variadic templates(模板参数可变化)是C++新增的一个非常重要的特性。
 <img src="./figures/variadic-templates.png">
 
+### 1.15.2. Alias Templates (Template Typedef)
 
+### 1.15.3. Function template
+
+## 1.16. Move Semantics and Rvalue References
