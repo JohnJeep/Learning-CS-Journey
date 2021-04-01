@@ -8,47 +8,51 @@
 
 <!-- TOC -->
 
-- [1. Vim基础用法](#1-vim基础用法)
-  - [1.1. Normal mode](#11-normal-mode)
-    - [1.1.1. cursor move(光标移动)](#111-cursor-move光标移动)
-    - [1.1.2. yank(复制)](#112-yank复制)
-    - [1.1.3. paste(粘贴)](#113-paste粘贴)
-    - [1.1.4. delete(删除)](#114-delete删除)
-    - [1.1.5. undo(撤销)](#115-undo撤销)
-    - [1.1.6. find(查找)](#116-find查找)
-  - [1.2. Visual mode](#12-visual-mode)
-  - [1.3. Visual line mode](#13-visual-line-mode)
-  - [1.4. Visual block mode](#14-visual-block-mode)
-  - [1.5. Replace mode](#15-replace-mode)
-  - [1.6. Insert mode](#16-insert-mode)
-  - [1.7. Command line mode](#17-command-line-mode)
-    - [1.7.1. 文件操作](#171-文件操作)
-    - [1.7.2. replace(替换)](#172-replace替换)
+- [1. Basics(基础)](#1-basics基础)
+  - [1.1. Normal Mode](#11-normal-mode)
+    - [1.1.1. Cursor Move(光标移动)](#111-cursor-move光标移动)
+    - [1.1.2. Yank(复制)](#112-yank复制)
+    - [1.1.3. Paste(粘贴)](#113-paste粘贴)
+    - [1.1.4. Delete(删除)](#114-delete删除)
+    - [1.1.5. Undo(撤销)](#115-undo撤销)
+    - [1.1.6. Find(查找)](#116-find查找)
+  - [1.2. Visual Mode](#12-visual-mode)
+  - [1.3. Visual Line Mode](#13-visual-line-mode)
+  - [1.4. Visual Block Mode](#14-visual-block-mode)
+  - [1.5. Replace Mode](#15-replace-mode)
+  - [1.6. Insert Mode](#16-insert-mode)
+  - [1.7. Command Line Mode](#17-command-line-mode)
+    - [1.7.1. File](#171-file)
+    - [1.7.2. Replace(替换)](#172-replace替换)
     - [1.7.3. Window(窗口)](#173-window窗口)
-    - [1.7.4. shell](#174-shell)
-    - [1.7.5. help(帮助)](#175-help帮助)
-    - [1.7.6. comment(注释)](#176-comment注释)
-  - [1.8. vim配置文件](#18-vim配置文件)
+    - [1.7.4. Shell](#174-shell)
+    - [1.7.5. Help(帮助)](#175-help帮助)
+    - [1.7.6. Comment(注释)](#176-comment注释)
+  - [1.8. Vim配置文件](#18-vim配置文件)
   - [1.9. 恢复文件](#19-恢复文件)
-  - [1.10. 参考](#110-参考)
+  - [1.10. Reference](#110-reference)
 
 <!-- /TOC -->
 
-# 1. Vim基础用法
+# 1. Basics(基础)
 vim 是一种编程语言，各种按键可以组合，可以看成是不同程序的接口。
 
-我们思考的有多快，这个工具使用的就有多快！
+--------------------------------------------
+我们思考的有多快，这个工具使用的就有多快！（编程的速度跟上思考的速度！！！）
 
+使用它就是为了偷懒儿，编程时减少按键按下的次数，因为使用鼠标很费时，影响编程的效率，不使用鼠标，完全用键盘去编程。
 
+技巧感悟：每一次在按键上敲击时，想一想能否有更简单的方法去替代当前的操作。
 
+--------------------------------------------
 
-## 1.1. Normal mode
+## 1.1. Normal Mode
 普通模式(Normal mode)。控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode或者到 command line mode下。
 
 <div align="center"><img width="50%" height="50%" src="./pictures/光标方向.png" /> </div>
 
 
-### 1.1.1. cursor move(光标移动)
+### 1.1.1. Cursor Move(光标移动)
 - `k` 向上移动光标
 - `h` 向左移动光标
 - `l` 向右移动光标
@@ -63,7 +67,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `^`	  移动光标至本行第一个非空字符处
 - `w(word)`	  向前（往右）移动一个词 （上一个字母和数字组成的词之后）
 - `5w`  向前移动五个词
-- `b(beginning of word)`   从当前光标处 `向后(向左)` 跳到每个单词的开头，遇见 `,` 会停止
+- `b(back)`   从当前光标处 `向后(向左)` 跳到每个单词的开头，遇见 `,` 会停止
 - `e(end of word)`   从当前光标处 `向前(向右)` 跳到每个单词的末尾
 - `B`	  从当前光标处 `向后(向左)` 跳到每个单词的开头，只认以空格分隔的词。
 - `5b`  向后移动五个词
@@ -81,7 +85,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `%` 匹配括号，如果光标在"(" 上，它移动到对应的 ")" 上，反之，如果它在 ")"上，它移动到对应的"(" 上。
 
 
-### 1.1.2. yank(复制)
+### 1.1.2. Yank(复制)
 - 字符操作
   - `yw`  复制当前光标所在位置到单词尾字符的内容到 vi 缓存区，相当于复制一个单词
   - `y$`  复制光标所在位置到行尾内容到缓存区
@@ -93,7 +97,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
   - 复制第 m 行到第 n 行之间的内容，在命令行模式中输入`m，ny` 例如：3，5y 复制第三行到第五行内容到缓存区。
 
 
-### 1.1.3. paste(粘贴)
+### 1.1.3. Paste(粘贴)
 - `p(小写)` 将缓冲区内容粘贴光到标所在行的下面一行 
   > 目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴
 - `P(大写)` 将缓冲区内(buffer)容粘贴到光标所在行的上面一行
@@ -102,7 +106,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `xp` 交换当前字符和其后一个字符
 
 
-### 1.1.4. delete(删除)
+### 1.1.4. Delete(删除)
 - 字符操作(word)
   - `x`   从当前光标处向 `前` 每次删除一个字符，包括当前光标。
   - `X`   从当前光标处向 `后` 每次删除一个字符，不包括当前光标。
@@ -129,14 +133,14 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
   - `:1,10d` 将1-10行剪切
 
 
-### 1.1.5. undo(撤销)
+### 1.1.5. Undo(撤销)
 - `u(undo 小写)` 命撤销最近一次的操作，可以使用多次来恢复原有的操作
 - `U(大写)` 撤销对整行的操作
 - `Ctrl+R(Redo)` 可以恢复对撤消 `u(小写)` 命令的操作
 - `. (小数点)` 重复前一个动作的意思
 
 
-### 1.1.6. find(查找)
+### 1.1.6. Find(查找)
 - `/word`	向光标之下寻找一个名称为 word 的字符串
 - `?word`	向光标之上寻找一个字符串名称为 word 的字符串
 - 在 `/` 或 `?` 之后，使用 `n` 向下查找，`N` 从当前字符向上查找。
@@ -149,7 +153,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `t(to)`: 跳至。tw: 跳转到以 w 开头的单词。
 
 
-## 1.2. Visual mode
+## 1.2. Visual Mode
 `Normal mode` 下按 `V(小写)` 键进入到 `Visual mode`，再根据需要进行复制、粘贴、删除、多光标等不同的操作。
 
 - `d` 删除 
@@ -160,11 +164,11 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 
 
 
-## 1.3. Visual line mode
+## 1.3. Visual Line Mode
 `Normal mode` 下按 `Shift + v` 组合键或者 `V(大写)` 键进入到 `Visual line mode`，再根据需要对行(line)进行复制、粘贴、删除、多光标等不同的操作。
 
 
-## 1.4. Visual block mode
+## 1.4. Visual Block Mode
 `Normal mode` 下按 `Ctrl + v` 组合键进入到 `Visual block mode`，再根据需要进行复制、粘贴、删除、多光标等不同的操作。
 
 - `d` 删除所选中的字符
@@ -175,7 +179,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
   > 光标定位到要操作的地方，按下 `Ctrl+v` 组合键进入 `VISUAL BLOCK` 模式，通过h（左），j（下），k（上），l（右）选取行和列，按下 `Shift+i` 组合键后，进入 `Insert mode` 下的 `Multi cursor` 操作，输入要插入的内容，此时你发现在 `Insert mode` 下只有一行改变了，而不是多行同时改变了，此时需要你连续按两次 `Esc` 键，你会看到多行改变后的内容，并回到 `Normal mode` 。 
 
 
-## 1.5. Replace mode
+## 1.5. Replace Mode
 Normal mode 下进行替换操作。
 
 - `R` 在命令行模式下，替换无限多个字符，执行后进入`insert mode`。
@@ -183,7 +187,7 @@ Normal mode 下进行替换操作。
 - `~` 进行大小写字母转换，执行后还是在 `Normal mode` 。
 
 
-## 1.6. Insert mode
+## 1.6. Insert Mode
 插入模式(Insert mode)下，可以做文字输入，按「ESC」键可回到命令行模式
 
 
@@ -196,11 +200,13 @@ Normal mode 下进行替换操作。
 
 
 
-## 1.7. Command line mode
+## 1.7. Command Line Mode
 Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行对文件、窗口以及字符的替换等一系列的操作。
 
 
-### 1.7.1. 文件操作
+### 1.7.1. File
+Comnand line mode 下对文件进行操作。
+
 - `:w [filename]`	将编辑的数据储存成另一个档案（类似另存新档）
 - `:r [filename]`	在编辑的数据中，读入另一个档案的数据。将 `filename` 这个档案内容加到光标所在行后面
 - `:n1,n2 w [filename]`	将 n1 到 n2 的内容储存成 filename 这个档案。
@@ -213,7 +219,7 @@ Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行�
 - `:e ftp://192.168.10.76/abc.txt`  打开远程文件，比如ftp或者share folder
 
 
-### 1.7.2. replace(替换)
+### 1.7.2. Replace(替换)
 - `:s/old/new` 用new 替换行中首次出现的old
 - `:s/old/new/g` 用new 替换行中所有出现的old
 - `:n1,n2 s/old/new/g` 用new 替换从第n1行到第n2行中出现的old
@@ -233,7 +239,7 @@ Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行�
 
 
 
-### 1.7.4. shell
+### 1.7.4. Shell
 使用 `!` 可以执行命令行的操作，暂时离开 vim, 显示执行命令行的内容。
 
 - `:!ls` 列出当前目录下文件
@@ -242,7 +248,7 @@ Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行�
 - `:suspend` 或 `Ctrl - Z` 挂起vim，回到shell，按fg可以返回vim。
 
 
-### 1.7.5. help(帮助)
+### 1.7.5. Help(帮助)
 - `:help` or `F1` 显示整个帮助
 - `:help xxx` 显示xxx的帮助，比如 `:help i`, `:help CTRL-[`（即Ctrl+[的帮助）。
 - `:help 'number'` Vim选项的帮助用单引号括起
@@ -251,7 +257,7 @@ Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行�
 - `:help i_<Esc>` 插入模式下Esc的帮助，某个模式下的帮助用模式_主题的模式帮助文件中位于||之间的内容是超链接，可以用Ctrl+]进入链接，Ctrl+o（Ctrl + t）返回
 
 
-### 1.7.6. comment(注释)
+### 1.7.6. Comment(注释)
 perl程序中`#` 开始的行为注释，所以要注释某些行，只需在行首加入 `#`
 
 - `:3,5 s/^/#/g` 注释第3-5行
@@ -260,7 +266,7 @@ perl程序中`#` 开始的行为注释，所以要注释某些行，只需在行
 - `:%s/^/#/g` 注释整个文档，此法更快。
 
 
-## 1.8. vim配置文件
+## 1.8. Vim配置文件
 - 系统级配置文件目录：`/etc/vim/vimrc`
 - 用户级配置文件目录：`~/.vim/vimrc`
 - 设置Tab的大小 
@@ -284,7 +290,7 @@ perl程序中`#` 开始的行为注释，所以要注释某些行，只需在行
 
 
 
-## 1.10. 参考
+## 1.10. Reference
 - [vim学习手册](https://linux.cn/article-8144-1.html)
 - [Linux命令大全--vim学习](https://ipcmen.com/)
 - [Vim的哲学](https://segmentfault.com/a/1190000000458565)
