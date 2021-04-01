@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-03-25 22:56:15
+ * @LastEditTime: 2021-04-01 09:21:03
  * @LastEditors: Please set LastEditors
  * @Description: Vim编辑器使用
 --> 
@@ -172,7 +172,7 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `p` 粘贴所选中的字符
 
 - 如何一次性改变多行的内容(Multi cursor)？
-  > 光标定位到要操作的地方，按下 `Ctrl+v` 组合键进入 `VISUAL BLOCK` 模式，通过h（左），j（下），k（上），l（右）选取行和列，按下 `Shift+i` 组合键后，进入 `Insert mode` 下的 `Multi cursor` 操作，输入要插入的内容，按 `Esc` 回到 `Normal mode` 。 
+  > 光标定位到要操作的地方，按下 `Ctrl+v` 组合键进入 `VISUAL BLOCK` 模式，通过h（左），j（下），k（上），l（右）选取行和列，按下 `Shift+i` 组合键后，进入 `Insert mode` 下的 `Multi cursor` 操作，输入要插入的内容，此时你发现在 `Insert mode` 下只有一行改变了，而不是多行同时改变了，此时需要你连续按两次 `Esc` 键，你会看到多行改变后的内容，并回到 `Normal mode` 。 
 
 
 ## 1.5. Replace mode
