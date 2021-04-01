@@ -1,16 +1,27 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2021-02-02 22:50:48
+ * @LastEditTime: 2021-04-01 14:54:54
  * @LastEditors: Please set LastEditors
- * @Description: GDB使用剖析
+ * @Description: GDB、Makefile使用剖析
 --> 
-# 1. GDB与Makefile
-## 1.1. GDB调试
-- 参考
-  - [用图文带你彻底弄懂GDB调试原理](https://mp.weixin.qq.com/s?__biz=MzA3MzAwODYyNQ==&mid=2247483895&idx=1&sn=ba35d1823c259a959b72a310e0a92068&scene=21#wechat_redirect)
 
-### 1.1.1. 基础理论
+<!-- TOC -->
+
+- [1. GDB调试](#1-gdb调试)
+  - [1.1. 基础理论](#11-基础理论)
+  - [1.2. 基础命令](#12-基础命令)
+  - [1.3. 参考](#13-参考)
+- [2. Makefile](#2-makefile)
+  - [2.1. 概念](#21-概念)
+  - [2.2. 三个基本要素](#22-三个基本要素)
+  - [2.3. 参考](#23-参考)
+
+<!-- /TOC -->
+
+# 1. GDB调试
+
+## 1.1. 基础理论
 - ptrace系统函数是Linux内核提供的一个用于进程跟踪的系统调用，通过它，一个进程(gdb)可以读写另外一个进程(test)的指令空间、数据空间、堆栈和寄存器的值。而且gdb进程接管了test进程的所有信号，也就是说系统向test进程发送的所有信号，都被gdb进程接收到，这样一来，test进程的执行就被gdb控制了，从而达到调试的目的。
 
 - gdb底层的调试机制是怎样的？
@@ -21,7 +32,7 @@
 
 
 
-### 1.1.2. 命令
+## 1.2. 基础命令
 > 在进行GDB调试之前需要先打断点。
 
 - `gcc xxx.c -g -o xxx.out` 使用 gdb 调试程序之前,必须使用 `-g` 或 `–ggdb`编译选项编译源文件。
@@ -81,32 +92,33 @@
     - `f` 按浮点数格式显示变量。  
     - `u` 从当前地址往后请求的字节数，如果不指定的话，GDB默认是4个bytes。b表示单字节，h表示双字节，w表示四字节，g表示八字节。
 
-
-## 1.2. makefile
-- 参考
-  - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
-  - [CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)
-  - [在 linux 下使用 CMake 构建应用程序](https://www.ibm.com/developerworks/cn/linux/l-cn-cmake/index.html)
-  - [CMake官网](http://www.cmake.org/)
-  - [cmake常用命令](https://cmake.org/cmake/help/v2.8.8/cmake.html#section_Commands)
-  - [Cmake大型项目设置指南](https://oldpan.me/archives/cmake-meta-project-use)
-  - [CLoin与CMake详细教程](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html)
-  - [VSCode运行多文件C++教程：使用CMake](https://blog.csdn.net/frostime/article/details/86756983)
+## 1.3. 参考
+- [用图文带你彻底弄懂GDB调试原理](https://mp.weixin.qq.com/s?__biz=MzA3MzAwODYyNQ==&mid=2247483895&idx=1&sn=ba35d1823c259a959b72a310e0a92068&scene=21#wechat_redirect)
 
 
+
+# 2. Makefile
+## 2.1. 概念
 - 记录编译记录的文件。
 - 名称两种规则：全小写（makefile）或首字母大写（Makefile）
 - 直接使用 `make` 指令，会生成Makefile文件中定义的最终目标文件。
 - 使用 `make 自定义变量名`，会执行自定义变量名下面定义的规则指令。
 
 
-- 三个基本要素
-  - 目标
-  - 依赖
-  - 命令
-<div align="center"> <img width="80%" height="80%" src="./pictures/makefile三要素.png" /></div>
-<div align="center"> <img width="80%" height="80%" src="./pictures/makefile工作原理-1.png" /></div>
-<div align="center"> <img width="80%" height="80%" src="./pictures/makefile工作原理-2.png" /></div>
+## 2.2. 三个基本要素
+- 目标
+- 依赖
+- 命令
+
+<div align="center"> 
+  <img width="80%" height="80%" src="./pictures/makefile三要素.png" />
+</div>
+<div align="center">
+  <img width="80%" height="80%" src="./pictures/makefile工作原理-1.png" />
+</div>
+<div align="center"> 
+  <img width="80%" height="80%" src="./pictures/makefile工作原理-2.png" />
+</div>
 
 
 - 一个规则
@@ -131,8 +143,18 @@
   - `-` 表示当前指令执行不成功则忽略当前指令。
 
 - 模式规则
-    ```
-    给相同的命令指定一个规则
-    %.o: %c
-        gcc -c $< -o $@
-    ```
+  ```makefile
+  // 给相同的命令指定一个规则
+  %.o: %c
+      gcc -c $< -o $@
+  ```
+
+## 2.3. 参考
+- [CMake 入门实战](https://www.hahack.com/codes/cmake/)
+- [CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)
+- [在 linux 下使用 CMake 构建应用程序](https://www.ibm.com/developerworks/cn/linux/l-cn-cmake/index.html)
+- [CMake官网](http://www.cmake.org/)
+- [cmake常用命令](https://cmake.org/cmake/help/v2.8.8/cmake.html#section_Commands)
+- [Cmake大型项目设置指南](https://oldpan.me/archives/cmake-meta-project-use)
+- [CLoin与CMake详细教程](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html)
+- [VSCode运行多文件C++教程：使用CMake](https://blog.csdn.net/frostime/article/details/86756983)
