@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-16 17:18:59
- * @LastEditTime: 2021-03-11 23:03:09
+ * @LastEditTime: 2021-04-02 00:43:42
  * @LastEditors: Please set LastEditors
  * @Description: 数据结构与算法刷题参考
 -->
@@ -14,6 +14,8 @@
 - [fucking-algorithm](https://github.com/labuladong/fucking-algorithm)  刷算法全靠套路，认准 labuladong 就够了！English version supported! Crack LeetCode, not only how, but also why.
 - [coding-interview-university](https://github.com/jwasham/coding-interview-university)  A complete computer science study plan to become a software engineer. Coding Interview University 一套完整的学习手册帮助自己准备 Google 的面试
 - [LeetcodeTop](https://github.com/afatcoder/LeetcodeTop)  汇总各大互联网公司容易考察的高频leetcode题🔥
-- [soulmachine/leetcode](https://github.com/soulmachine/leetcode) LeetCode题解，151道题完整版
+- <font color="red">[soulmachine/leetcode](https://github.com/soulmachine/leetcode) LeetCode题解，151道题完整版</font>
 - [LeetCode All In One](https://github.com/grandyang/leetcode) 提供所有LeetCode题目的讲解
-- [algorithm-pattern](https://github.com/greyireland/algorithm-pattern) 算法模板，最科学的刷题方式，最快速的刷题路径。
+- <font color="red">[algorithm-pattern](https://github.com/greyireland/algorithm-pattern) 算法模板，最科学的刷题方式，最快速的刷题路径。</font>
+- [程序员如何准备面试中的算法](https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/00.01.html) 讲解了面试中一些常见的算法题。
+- <font color="red">[即时通讯网](http://www.52im.net/forum-105-1.html)：网站内容很丰富，很全面，各种资料都有，平时重点学习。</font>
