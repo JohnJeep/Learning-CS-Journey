@@ -1,10 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-30 13:36:34
- * @LastEditTime: 2020-06-21 15:28:02
+ * @LastEditTime: 2021-04-02 13:50:54
  * @LastEditors: Please set LastEditors
  * @Description: C语言中restrict关键字用法
- * @FilePath: /C/11-restrict.md
 --> 
 - C99新增一个限定符：`restrict` 
 - 作用
