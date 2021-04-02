@@ -4,19 +4,18 @@
  * @LastEditTime: 2020-08-13 08:57:52
  * @LastEditors: Please set LastEditors
  * @Description: Git内部原理剖析
- * @FilePath: /Git/02-git-advance.md
 --> 
 
 <!-- TOC -->
 
-- [1. Git提高部分](#1-git提高部分)
+- [1. Git高级板块](#1-git高级板块)
   - [1.1. Git协议](#11-git协议)
     - [1.1.1. SSH(Secure Shell)协议](#111-sshsecure-shell协议)
   - [1.2. Git内部原理](#12-git内部原理)
-  - [1.3. Git数据存储的位置](#13-git数据存储的位置)
+  - [1.3. Git数据存储位置](#13-git数据存储位置)
 
 <!-- /TOC -->
-# 1. Git提高部分
+# 1. Git高级板块
 
 ## 1.1. Git协议
 - 四种协议传输资料
@@ -87,25 +86,22 @@
 - `index` 文件保存暂存区信息
 
 
-## 1.3. Git数据存储的位置
-1. `.git`目录中的`objects`子目录就是用来存储数据的，其中两个子目录是系统自动创建的，可以看到当前并没有存储任何数据。
+## 1.3. Git数据存储位置
+- `.git`目录中的`objects`子目录就是用来存储数据的，其中两个子目录是系统自动创建的，可以看到当前并没有存储任何数据。
 <center> <img src="./figure/objects目录.png"/> </center>
 
-
-2. `git hash -object -w --stdin`  
+- `git hash -object -w --stdin`  
    - `git hash-object`命令用来存储数据对象
    - `-w`表示不仅计算出内容的`sha-1`值，而且会将数据存储，否则只会给出`sha-1`值。
    - `--stdin`表示内容是通过标准输入设备获取的，比如我通过键盘输入
 
-
-3. 内容存储位置总结如下：
+- 内容存储位置总结如下：
    - 存储于`.git/objects`目录中。
    - 以`sha-1`值的前**2**作为子目录名称，存储内容的文件名字为`sha-1`值的后**38**位。
    - 查看`sha-1`值 里面的内容 `git cat-file -p`
 
-
-4. `git gc` 查看数据库占用了多少空间
-5. `git count-objects -v` 快速的查看占用空间大小
+- `git gc` 查看数据库占用了多少空间
+- `git count-objects -v` 快速的查看占用空间大小
 
 
 
