@@ -1,16 +1,16 @@
 <!--
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-10-21 19:00:34
- * @LastEditTime: 2020-06-02 20:53:40
+ * @LastEditTime: 2021-04-02 13:51:38
  * @LastEditors: Please set LastEditors
  * @Description: C语言const关键字
 --> 
 
 - C90新增两个限定符：`const` ` volatile`
 - C99新增一个限定符：`restrict` 
--  C11新增一个限定符：`_Atmoic`
-- C语言中， 用const类型限定符声明的是变量， 不是常量
-- 用于限定一个变量为只读,数值不能通过赋值或递增、 递减来修改
+- C11新增一个限定符：`_Atmoic`
+- C语言中，用const类型限定符声明的是变量，不是常量
+- 用于限定一个变量为只读,数值不能通过赋值或递增、递减来修改
 
 
 ## 例子

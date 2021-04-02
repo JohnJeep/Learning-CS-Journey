@@ -1,8 +1,10 @@
-参考：
-- [百度百科--ASCII](https://baike.baidu.com/item/ASCII/309296?fromtitle=ascii%E7%A0%81%E8%A1%A8&fromid=19660475&fr=aladdin)
-- [C语言转义字符表和ASCII码表](https://www.cnblogs.com/kanhaoniao/p/11323166.html)
-
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-21 15:05:29
+ * @LastEditTime: 2021-04-02 11:38:51
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+-->
 
 说明 | 转义字符 | 十六进制(hex) | 十进制(dec)
 ---|---|---|---
@@ -18,8 +20,6 @@
 - 并不是所有的控制字符都可用相应的字母或者数字表示，不能表示的要用转义字符。任何一个转义字符都对应一个字符。
 
 
-
-
-
-
-
+参考
+- [百度百科--ASCII](https://baike.baidu.com/item/ASCII/309296?fromtitle=ascii%E7%A0%81%E8%A1%A8&fromid=19660475&fr=aladdin)
+- [C语言转义字符表和ASCII码表](https://www.cnblogs.com/kanhaoniao/p/11323166.html)
