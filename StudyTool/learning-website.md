@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2021-01-22 19:33:51
+ * @LastEditTime: 2021-04-05 11:28:57
  * @LastEditors: Please set LastEditors
  * @Description: 积累一些学习的网站。
 --> 
@@ -9,38 +9,35 @@
 <!-- TOC -->
 
 - [1. Website reference](#1-website-reference)
-  - [1.1. 参考](#11-参考)
-  - [1.2. 博客和知识社区](#12-博客和知识社区)
-  - [1.3. 编程和刷题网站](#13-编程和刷题网站)
-  - [1.4. 公开课和在线视频学习](#14-公开课和在线视频学习)
-  - [1.5. 字幕下载](#15-字幕下载)
-  - [1.6. 在线视频下载](#16-在线视频下载)
-  - [1.7. 产品](#17-产品)
-  - [1.8. 工具箱](#18-工具箱)
-  - [1.9. 人文](#19-人文)
-  - [1.10. 科学](#110-科学)
-  - [1.11. 考研](#111-考研)
-  - [1.12. PPT](#112-ppt)
-  - [1.13. 图片](#113-图片)
-  - [1.14. 图标](#114-图标)
-  - [1.15. 电子图书](#115-电子图书)
-    - [1.15.1. 文学类](#1151-文学类)
-    - [1.15.2. 科技类](#1152-科技类)
-    - [1.15.3. 漫画类](#1153-漫画类)
-    - [1.15.4. 其它](#1154-其它)
-  - [1.16. 免费下载各种外文科技论文](#116-免费下载各种外文科技论文)
-  - [1.17. 二次元](#117-二次元)
-  - [1.18. 装B](#118-装b)
+  - [1.1. 博客和知识社区](#11-博客和知识社区)
+  - [1.2. 编程和刷题网站](#12-编程和刷题网站)
+  - [1.3. 公开课和在线视频学习](#13-公开课和在线视频学习)
+  - [1.4. 字幕下载](#14-字幕下载)
+  - [1.5. YouTube在线视频下载](#15-youtube在线视频下载)
+  - [1.6. 产品](#16-产品)
+  - [1.7. 工具箱](#17-工具箱)
+  - [1.8. 人文](#18-人文)
+  - [1.9. 科学](#19-科学)
+  - [1.10. 考研](#110-考研)
+  - [1.11. PPT](#111-ppt)
+  - [1.12. 图片](#112-图片)
+  - [1.13. 图标](#113-图标)
+  - [1.14. 电子图书](#114-电子图书)
+    - [1.14.1. 文学](#1141-文学)
+    - [1.14.2. 科技](#1142-科技)
+    - [1.14.3. 漫画](#1143-漫画)
+    - [1.14.4. 其它](#1144-其它)
+  - [1.15. 免费下载各种外文科技论文](#115-免费下载各种外文科技论文)
+  - [1.16. 二次元](#116-二次元)
+  - [1.17. 装B](#117-装b)
+  - [1.18. 参考](#118-参考)
 
 <!-- /TOC -->
 
 # 1. Website reference
 
-## 1.1. 参考
-- [国外：These 62 Websites Will Make You Incredibly Smarter](https://medium.com/the-mission/these-62-websites-will-make-you-incredibly-smarter-7eb89f122c2e#.7jdomoyo7)
 
-
-## 1.2. 博客和知识社区
+## 1.1. 博客和知识社区
 - [CSDN](https://www.csdn.net/) :国内主流的博客，平常访问的比较多。
 - [Stack overflow](https://stackoverflow.com/) ：国外很好的技术社区，平时遇见的问题90%以上都可以在上面找到。
 - [知乎](https://www.zhihu.com/)：国内很好的技术知识问答社区，在上面可以找到许多学习的资料和诸多大咖分享的知识经验。
@@ -53,7 +50,7 @@
 
 
 
-## 1.3. 编程和刷题网站
+## 1.2. 编程和刷题网站
 - [WolframAlpha](https://www.wolframalpha.com/): WolframAlpha是开发计算数学应用软件的沃尔夫勒姆研究公司开发出的新一代的搜索引擎，能根据问题直接给出答案的网站，而不是返回一大堆网页链接，其数据来源包括学术网站和出版物、商业网站和公司、科学机构等等。
 - [谷歌 oppia 开源项目](https://www.oppia.org/splash): 谷歌推出的开源在线教育项目，可以交互式的学习
 - [代码规范大全](https://github.com/SalGnt/cscs): 一份代码规范大全，列表中包含了大多数主流编程语言的代码规范。
@@ -69,7 +66,7 @@
 - [IBM developerWorks](https://www.ibm.com/developerworks/cn/): IT教程，工具，社区
 
 
-## 1.4. 公开课和在线视频学习
+## 1.3. 公开课和在线视频学习
 - 国内平台
   - [网易公开课](https://open.163.com/): 网易旗下的，包含了国内的和国外的高校的各种公开课，优质资源太多了。
   - [网易云课堂](https://study.163.com/): 同样也是网易旗下的，是一个在线学习的平台，与国外的Coursera类似。
@@ -104,20 +101,22 @@
   - [中央研究院Academia Sinica](https://www.youtube.com/channel/UCPk594oZYMU4Eak7By5wHyQ/videos): 中央研究的YouTube频道，里面有许多非常优质的内容。 
 
 
-## 1.5. 字幕下载
+## 1.4. 字幕下载
 - [downsub](https://downsub.com/)：DownSub是免费的网络应用程序，可以直接从Youtube, VIU, Viki, Vlive 等下载字幕。我们支持下载所有字幕格式, 例如：SRT, TXT, VTT。
 - [zhuwei.me](https://zhuwei.me/y2b/)：也可以下YouTube网站上的视频，但比DownSub功能相对弱一些。
 
 
-## 1.6. 在线视频下载
-- [QDownloader.io](https://qdownloader.io/)：可以从YouTube，Instagram，Facebook，Twitter和许多其他网站下载任意的视频。
+## 1.5. YouTube在线视频下载
+- [QDownloader.io](https://qdownloader.io/)：可以从YouTube，Instagram，Facebook，Twitter和许多其他网站下载任意的视频。优点是将URL粘贴到页面下载时，自动会获取专栏的视频播放列表，不用每次都复制URL再下载，很方便。缺点是在线下载时只能下载720P的视频，下载1080P的视频需要安装客户端，并且客户端下载时需要代理，下载速度很慢。
+- [YuTube 4K Downloader](https://youtube4kdownloader.com/en/)：支持1080P视频的在线下载，只不过下载的速度优点慢，需要忍耐一下。
+- [Youtube: Converter](https://notube.net/en/web)：支持很多格式的下载，不支持自己手动选择下载是720P还是1080P。
 
 
-## 1.7. 产品
+## 1.6. 产品
 - [人人都是产品经理](http://www.woshipm.com/): 人人都是产品经理是中国最大、最活跃的以产品经理为核心的学习、交流、分享社群，集媒体、教育、招聘、社群活动为一体，全方位服务产品经理。
 
 
-## 1.8. 工具箱
+## 1.7. 工具箱
 - [AlteredQualia](https://alteredqualia.com/): 在无需安装任何硬件的情况下，我们仅通过浏览器就能查看各种3D影像的技术。
 - [全球电视直播](http://bddn.cn/zb.htm): 全国电视直播是一个功能非常强大的电视直播网站，它支持几百个电视直播的网站，几乎拥有一般电视直播网站拥有的所有频道，它还支持港澳台卫视，国外电视等等。
 - [x Photopea 在线PS工具](https://ps.gaoding.com/#/): 是一个完全免费在线 PS 网站，是一个与 PS 电脑软件相似度非常高的在线 PS 网站，让你无需下载软件，也可以拥有和 PS 电脑软件一样的操作和体验。
@@ -136,27 +135,27 @@
 - [ProcessOn](https://www.processon.com/): 在线画流程图
 
 
-## 1.9. 人文
+## 1.8. 人文
 - [全历史](https://www.allhistory.com/):
 - [Psychology Today](https://www.psychologytoday.com/intl): 心理学网站，告诉你，你是谁。
 - [nautil](http://nautil.us/): 一本出于对智慧的探索，关于科学，文化和哲学的杂志
 - [aeon(永旺)](https://aeon.co/): 涉及哲学、科学、心理学、文化等不同领域的内容。
 
 
-## 1.10. 科学
+## 1.9. 科学
 - [重 现 化 学](http://www.envisioningchemistry.cn/):微观的角度展示神奇的化学世界。
 - [医学微视](https://www.mvyxws.com/): 它是中国医学科学院健康科普研究中心监制的一个网站，并且不提供销售任何产品，它以短视频的形式帮助你了解各种疾病，通俗易懂，让你轻松了解各种医学知识；当我们遇到不懂的医学知识或者健康问题，直接利用这个网站，找到对应的疾病，就可以轻松找到对应的视频。
 - [BBC — Future](http://www.bbc.com/future): 深入报道科学，生命科技
 
 
-## 1.11. 考研
+## 1.10. 考研
 - [网易考研](https://edu.163.com/): 网易考研频道专题，第一时间解读考研行业热点事件，全景呈现事件背后的深刻原因。
 - [中国教育在线考研](http://kaoyan.eol.cn/): 中国教育在线考研频道是一个专业的考研教育服务网络平台，目前国内最具品牌影响力的权威考研门户。
 - [中国研究生招生信息网](https://yz.chsi.com.cn/): 中国研究生招生信息网是隶属于教育部的以考研为主题的官方网站，是教育部唯一指定的研究生入学考试网上报名及调剂网站，主要提供研究生网上报名及调剂、专业目录查询、在线咨询、院校信息、报考指南和考试辅导等多方面的服务和信息指导。
 - [考研帮](http://www.kaoyan.com/): 中国最大的考研论坛。
 
 
-## 1.12. PPT
+## 1.11. PPT
 - [PPTfans PPT设计](http://www.pptfans.cn/): 是一个提供PPT文档制作的教学网站，提供专业PPT设计服务
 - [OfficePlus 微软PPT官方模板库](http://www.officeplus.cn/Template/Home.shtml): 微软旗下的官网,该网站涵盖各类精品PPT模板、PPT实用模块、Word求职简历、Excel图表、图片素材等资源 ，为全球Office用户提供丰富的高品质原创PPT资源。
 - [PoweredTemplate 商务PPT模板](https://poweredtemplate.com/): 提供PPT模版、网页模版、简报模版、商务图表模版、等丰富资源的站点，但是它的重点是在商务范畴
@@ -166,7 +165,7 @@
 - [PowerPoint Templates](https://www.presentationload.com/): 国外的PPT模版网站
 
 
-## 1.13. 图片
+## 1.12. 图片
 - [Stock Photos](https://stockphotos.io/): 是一个以Creative Commons 授权为主的相册共享社群，也是摄影爱好者们的交流社区。内存约2.5w 张各类优质图片，所有图片都是以Pinterest 瀑布流的形式显示，亦可用于商业用途
 - [Gratisography](https://gratisography.com/): 它为用户提供免费高品质摄影图片，而且所有的图片都可以用于个人或者商业用途。每周更新图片你只需要点击即可下载
 - [Stockvault](https://www.stockvault.net/): 该网站的图片可以免费用于个人和非商业设计项目呢！
@@ -179,7 +178,7 @@
 
 
 
-## 1.14. 图标
+## 1.13. 图标
 - [阿里巴巴矢量图标素材库](https://www.iconfont.cn/): 首页的搜索框就可以输入你想要找的图标，也可以在图标库去寻找。选好你想要的图标之后还可以根据你的需要在线修改颜色，并提供SVG/PNG/AI 图片格式的下载。
 - [icons8](https://icons8.com/): 网站也提供各种格式，各种尺寸和配色。Icons8除了将图示按照类别分类外，还利用不同平台的设计风格准则加以区隔，例如有iOS10、Windows、Android、Google、Office。
 - [Iconninja](http://www.iconninja.com/): 海量免费图标素材，支持关键词搜索，所有的素材图片均提供详细的如格式、宽度、高度、文件大小等信息，根据自己需要下载合适的尺寸。
@@ -187,10 +186,10 @@
 
 
 
-## 1.15. 电子图书
+## 1.14. 电子图书
 [参考文章](https://www.zhihu.com/question/21202757/answer/646131444)
 
-### 1.15.1. 文学类
+### 1.14.1. 文学
 - [我的小书屋](http://mebook.cc/)：这是一个个人开发者建的电子书资源网站
 - [书格](https://www.shuge.org/)：主要提供的是古籍图书
 - [读书小站](https://ibooks.org.cn/) 简洁清新的网站，下载各种文学类的电子书。
@@ -199,15 +198,15 @@
 - [书山有路](http://www.ssylu.com/)  收集各类文学书籍，提供mobi,azw3,epub等格式电子书下载。
 
 
-### 1.15.2. 科技类
+### 1.14.2. 科技
 - [计算机书籍控](http://bestcbooks.com/)：这个网站有计算机专业的书籍，不是很新，有一部分的书籍。
 - [明明三省的网站](https://www.iizhi.cn/book/category/c)
 
 
-### 1.15.3. 漫画类
+### 1.14.3. 漫画
 - [Vol.moe](http://vol.moe/)：要提供漫画类电子书资源的网站，无论从内容的质量还是数量上来讲，都是比较令人惊喜的
 
-### 1.15.4. 其它
+### 1.14.4. 其它
 - [Owllook](https://www.owllook.net/)：免费下载各类小说的搜索引擎， 页面清新简洁，无广告，直接输入书名即可搜索
 - [盘搜搜](http://www.pansoso.com/)：一个老牌网盘搜索工具，功能非常强大。非常简洁的界面。每天都有更新，不同达人分享自己的“盘中资源”！盘搜不存储任何网盘内容，无论是工作还是学习都必备。
 - [中国国家图书馆](http://www.nlc.cn/): 一个国家总书库网站。教育资源怎么能少的了书籍资源？这个网站不仅是供国家机关使用，而且还是面对社会大众的，你可以在这里搜索书籍、论文、报刊、甚至古籍、音乐、影视！
@@ -218,7 +217,7 @@
 
 
 
-## 1.16. 免费下载各种外文科技论文      
+## 1.15. 免费下载各种外文科技论文      
 [参考网址](http://blog.sciencenet.cn/blog-752541-821254.html)
 
 1. [Z-Library](http://b-ok.org/)
@@ -235,7 +234,7 @@
 
 
 
-## 1.17. 二次元
+## 1.16. 二次元
 - [tunefind](https://www.tunefind.com/movie/zootopia-2016):  快速找到热门影视剧的BGM！
 - [KonaChan 动漫ACG壁纸](https://konachan.net/): KonaChan 网站是一个致力于动漫、游戏壁纸图片搜索的站点，喜欢动漫的用户可以根据关键词来搜索自己想要的图片壁纸。想要找个性化的动漫壁纸，只有这种专业的动漫图片网站才有的。
 - [dova](https://dova-s.jp/) 免费的日文BGM下载。
@@ -243,7 +242,7 @@
 
 
 
-## 1.18. 装B
+## 1.17. 装B
 - [HackerTyper Neo](http://geektyper.com/#): 伪装成特工，让网吧里围观的小学生们膜拜你的神器！
 - [File Destructor 2.0](http://www.xnet.se/fd/): 此网站可以随意伪造任意文件格式，任意文件大小的文档,如果你的死线就在明天而你到现在还什么都没做，那么你可以用它来拖延至少1天的时间。
 - [FakeUpdate](http://fakeupdate.net/)  模拟多种系统的安装过程，让你上班愉快的摸鱼。
@@ -251,3 +250,6 @@
 - [suulnnka.github.io](https://suulnnka.github.io/BullshitGenerator/index.html) 沙雕文章生成器，搅乱你的脑袋瓜子吧！
 
 
+
+## 1.18. 参考
+- [国外：These 62 Websites Will Make You Incredibly Smarter](https://medium.com/the-mission/these-62-websites-will-make-you-incredibly-smarter-7eb89f122c2e#.7jdomoyo7)

@@ -15,7 +15,7 @@
                 "-O0",                                                            // 优化级别
                 "-ggdb3",                                                         // 生成和调试有关的信息
                 "-static-libgcc",                                                 // 静态链接
-                "-std=c++11",
+                "-std=c++17",
                 "-lm",         
                 "-fexec-charset=GBK",                                             // 使用g++编译后，程序为GBK编码
                 "-finput-charset=UTF-8",                                          // 输入编译器文本编码 默认为UTF-8词典
