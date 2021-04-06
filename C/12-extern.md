@@ -11,7 +11,6 @@
 - [1. 术语(Terminology)](#1-术语terminology)
 - [2. extern](#2-extern)
 - [3. extern "C"](#3-extern-c)
-- [4. static](#4-static)
 
 <!-- /TOC -->
 # 1. 术语(Terminology)
@@ -125,6 +124,5 @@
     ```
 
 
-# 4. static
-- `static` 修饰的全局变量和函数只能在本模块中使用，不能在其它的模块中使用。因此，一个函数或变量只可能在本模块使用时，其不可能被 `extern “C”` 修饰。
+
 

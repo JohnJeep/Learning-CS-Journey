@@ -1,39 +1,26 @@
 /*
- * @Description: 简单static的用法
  * @Author: JohnJeep
  * @Date: 2019-08-20 20:59:41
- * @LastEditTime: 2021-01-31 17:34:29
+ * @LastEditTime: 2021-04-06 15:50:08
  * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
  */
-#include "stdio.h"
+#include <stdio.h>
+#include <string.h>
 
-int getOne()
+int sub()
 {
-    int t = 0;
-    t++;
-    printf("t的值为：%d \n", t);
-    return t;
+    static int count = 10;   // count变量在内存中位于全局区域，直到程序结束时，该变量才会被释放
+    // int count = 10;       // count变量申请的内存空间位于栈区，当前函数体执行完成后，变量就被释放了
+    return count--;
 }
 
-int getTwo()
-{
-    static int i = 0;
-    i++;
-    printf("i的值为：%d \n", i);
-    return i;
-}
 
-int main()
+int main(int argc, char *argv[])
 {
-    int j = 0;
-    while (j < 10)
-    {
-        getOne();
-        getTwo();
-        printf("\n");
-        j++;
+    for (int i = 0; i < 10; i++) {
+        printf("%d\n",sub()); 
     }
-
-    getchar();
     return 0;
 }
+

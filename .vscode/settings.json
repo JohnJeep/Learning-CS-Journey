@@ -63,5 +63,6 @@
         "string.h": "c",
         "slist": "cpp"
     },
-    "jupyter.jupyterServerType": "local"
+    "jupyter.jupyterServerType": "local",
+    "C_Cpp.errorSquiggles": "Disabled"
 }
