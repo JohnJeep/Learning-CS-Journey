@@ -5,21 +5,31 @@
  * @LastEditors: Please set LastEditors
  * @Description: iNode的理解
 --> 
-## 0.1. 参考
-- [linux中inode包含什么内容？](https://mp.weixin.qq.com/s/u9t6QtYCRJAJVpEgxC8t0Q)
 
+<!-- TOC -->
 
-## 0.2. 有关iNode的命令
+- [1. 查看iNode的命令](#1-查看inode的命令)
+- [2. 什么是iNode?](#2-什么是inode)
+- [3. iNode包含内容](#3-inode包含内容)
+- [4. 操作系统是如何打开文件的？](#4-操作系统是如何打开文件的)
+- [5. 目录文件](#5-目录文件)
+- [6. iNode的应用](#6-inode的应用)
+- [7. 硬链接与符号链接](#7-硬链接与符号链接)
+- [8. 参考](#8-参考)
+
+<!-- /TOC -->
+
+# 1. 查看iNode的命令
 - 查看每个硬盘分区的iNode总数和已经使用的数量 `df -i`
 - 查看当前路径下每个iNode的节点号  `ls  -li`
 - 查看某个文件的iNode信息  `stat test.txt`
 
 
-## 0.3. 什么是iNode?
+# 2. 什么是iNode?
 概念：存储文件的元数据的区域叫iNode，也叫"索引节点"
 
 
-## 0.4. iNode包含内容
+# 3. iNode包含内容
 - 文件的字节数
 - 文件的read、write、execute权限
 - 文件的ID（User ID、Group ID）
@@ -32,20 +42,20 @@
 - 创建时间
 
 
-## 0.5. 操作系统是如何打开文件的？
+# 4. 操作系统是如何打开文件的？
 - 操作系统用iNode号码来识别不同的文件。分为三步：
   1.  系统找到这个文件名对应的iNode号
   2. 通过iNode号得到iNode中存储的信息
   3. 根据iNode中的信息，找到文件数据所在的block区，读出数据
 
 
-## 0.6. 目录文件
+# 5. 目录文件
 - Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。
 - 每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的iNode号。
 - 根目录`/`的iNode号是固定的
 
 
-## 0.7. iNode的应用
+# 6. iNode的应用
 1. 有时，文件名包含特殊字符，无法正常删除。这时，直接删除inode节点，就能起到删除文件的作用。
 2. 移动文件或重命名文件，只是改变文件名，不影响inode号码。
 3. 打开一个文件以后，系统就以inode号码来识别这个文件，不再考虑文件名。因此，通常来说，系统无法从inode号码得知文件名。
@@ -57,7 +67,7 @@
 > 软件更新的机制：在不关闭软件的情况下进行更新，不需要重启。因为系统通过inode号码，识别运行中的文件，不通过文件名。更新的时候，新版文件以同样的文件名，生成一个新的inode，不会影响到运行中的文件。等到下一次运行这个软件的时候，文件名就自动指向新版文件，旧版文件的inode则被回收。
 
 
-## 0.8. 硬链接与符号链接
+# 7. 硬链接与符号链接
 1. 创建硬链接：`ln source  dest_hard_link_file`
 2. 创建符号链接：`ln -s  source  dest_symbolic_link_file`
 
@@ -68,3 +78,6 @@
   - 文件A指向的是文件B的文件名，而不是文件B的iNode号，因此。文件B的iNode连接数不会改变。
   - source和destination都必须指定完整的路径，才创建成功，否则创建的是个文本文件。source必须是已存在的文件，destination是没有创建的文件，需要自己指定。
 
+
+# 8. 参考
+- [linux中inode包含什么内容？](https://mp.weixin.qq.com/s/u9t6QtYCRJAJVpEgxC8t0Q)
