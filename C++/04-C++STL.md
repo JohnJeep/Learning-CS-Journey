@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-03-17 18:29:32
+ * @LastEditTime: 2021-04-07 09:54:17
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -421,8 +421,8 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 #### 1.4.3.2. unordered_map && unordered_multimap
-- 内部结构图
-- <img src="./figures/unordered-maps-multimsps-internal-structure.png">
+内部结构图
+<img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
 
 
