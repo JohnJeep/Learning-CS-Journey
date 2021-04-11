@@ -296,3 +296,4 @@ perl程序中`#` 开始的行为注释，所以要注释某些行，只需在行
 - [Vim的哲学](https://segmentfault.com/a/1190000000458565)
 - [vim常用命令总结](https://www.cnblogs.com/yangjig/p/6014198.html)
 - [vim-adventures](https://vim-adventures.com/) 通过玩游戏的方式来学习Vim。
+- [MIT2020年missing-semester lectures vim section](https://missing.csail.mit.edu/2020/editors/)
