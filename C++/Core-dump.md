@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-18 22:30:09
- * @LastEditTime: 2021-03-18 23:36:49
+ * @LastEditTime: 2021-04-12 19:22:55
  * @LastEditors: Please set LastEditors
  * @Description: Core dump 的使用描述 
 -->
@@ -53,7 +53,8 @@ echo "/corefile/core-%e-%p-%t" > core_pattern
     %e - insert coredumping executable name into filename 添加命令名
 
 
-
+## 打开方式
+core文件也是二进制文件，可以使用gdb、readelf、objdump或者windows下的windebug、solaris下的mdb进行打开，分析里面具体内容。
 
 
 
@@ -65,6 +66,6 @@ echo "/corefile/core-%e-%p-%t" > core_pattern
 
 ## 参考
 - https://zhuanlan.zhihu.com/p/98700797
-- https://www.cnblogs.com/bodhitree/p/5850212.html
 - https://blog.csdn.net/sunxiaopengsun/article/details/72974548
 - https://blog.csdn.net/p942005405/article/details/102059719
+- [Linux Core Dump](https://www.cnblogs.com/hazir/p/linxu_core_dump.html)
