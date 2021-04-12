@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-04-09 22:12:25
+ * @LastEditTime: 2021-04-12 14:34:41
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -607,12 +607,12 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 - STAT状态位常见的状态字符
-  - `D` 无法中断的休眠状态（通常 IO 的进程）；
+  - `D(uninterruptible sleep)` 无法中断的休眠状态（通常 IO 相关的进程）；
   - `R(running)` 正在运行可中在队列中可过行的；
   - `S(大写：sleep)` 处于休眠状态；
   - `T(stop)` 停止或被追踪状态；
   - `W` 进入内存交换 （从内核2.6开始无效）；
-  - `X` 死掉的进程 （基本很少见）；
+  - `X(dead)` 死掉的进程 （基本很少看见）；
   - `Z(zombie)` 僵尸状态，进程已被终止，但无法被删除；
   - `<` 优先级高的进程
   - `N` 优先级较低的进程
