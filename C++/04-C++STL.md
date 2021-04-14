@@ -602,14 +602,8 @@ predicate: 判断这个条件是真还是假
 
 
 ### 1.8.4. 迭代器失效的原因？
-- 参考
-  - [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763) 
-  - [聊聊map和vector的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
-  - [C++ STL 迭代器失效问题](https://www.cnblogs.com/qiaoconglovelife/p/5370396.html)
-
 - 何为迭代器失效？
   - STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
-
 
 
 -  对于序列式容器，比如vector，删除当前的iterator会使后面所有元素的iterator都失效。因为序列式容器中内存是连续分配的（分配一个数组作为内存），删除一个元素导致后面所有的元素会向前移动一个位置。删除了一个元素，该元素后面的所有元素都要挪位置，所以，删除一个数据后，其他数据的地址发生了变化，之前获取的迭代器根据原有的信息就访问不到正确的数据。
@@ -624,11 +618,30 @@ predicate: 判断这个条件是真还是假
 
 <font color=red>注意：</font>  经过 `erase(iter)` 之后的迭代器完全失效，该迭代器 `iter` 不能参与任何运算，包括 `iter++和*ite`。
 
-
+- 参考
+  - [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763) 
+  - [聊聊map和vector的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+  - [C++ STL 迭代器失效问题](https://www.cnblogs.com/qiaoconglovelife/p/5370396.html)
 
 
 ## 1.9. Allocator(分配器)
 - 什么是Allocator？
   > 负责内存空间的分配与管理。分配器是一个实现了动态空间配置、空间管理、空间释放的 `class template`。
   
+
+C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
+Allocator代表的是一种特殊内存模型(memorymodel)，被当做一种把需要使用的内存转换为“内存低级调用"的抽象层。如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
+
+最初，allocator只是作为STL的一部分而引人的，用来处理像PC上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存(shared memory）、垃圾回收（garbagecollection）、面向对象数据库(object-oriented database)等解决方案能保特一致接。
+
+C++标准定了一个default allocator如下：
+
+
+
+这个default allocator可在 "allocator得以被当作实参使用”的任何地方允许当默认值，它会执行内存分配和回收的一般用法。也是说，它会调用new和delete操作符。但C++并没有对“在什么时候以什么方式调用这些操作符"给予明确规定。因此，default allocator甚至可能在其内部对分配所得的内存采用缓存(cache)的手法。
+
+绝人多数都使川defaultallocator,但有时其他程也可能提供些allocator满
+只有少钕情况卜才需要自行写、
+足特定需求。这种情况卜需简单地将它们当作即allocator，现实中最常使Ill的还是defaultallocator。
+
 
