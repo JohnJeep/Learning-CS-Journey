@@ -59,7 +59,7 @@
         - [1.4.5.3.1. 什么是优先级队列](#14531-什么是优先级队列)
         - [1.4.5.3.2. 标准库接口](#14532-标准库接口)
   - [1.5. Algorithm](#15-algorithm)
-    - [1.5.1. heap](#151-heap)
+    - [1.5.1. Heap(堆)](#151-heap堆)
     - [1.5.2. 其它函数](#152-其它函数)
   - [1.6. Adaptor(适配器)](#16-adaptor适配器)
     - [1.6.1. 什么是适配器？](#161-什么是适配器)
@@ -112,6 +112,11 @@ Level 2: 良好使用C++标准库
 Level 3: 扩充C++标准库
 
 ---------------------------
+
+源码版本：gnu 2.91, gnu 4.9
+
+
+
 
 ## 1.2. History(历史)
 STL创始人：Alexander Stepanov
@@ -493,8 +498,9 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
   - 通过函数对象实现了自定义数据类型与底层算法的分离。
   - 通过迭代器的方式统一的去遍历容器，向容器中读数据和写数据。
 
+**所有的Algorithms内部最本质的操作无非就是比大小。**
 
-### 1.5.1. heap
+### 1.5.1. Heap(堆)
 - heap(堆)的STL库中函数
   - `make_heap(first, last, comp);` 建立一个空堆；
   - `push_heap(first, last, comp);` 向堆中插入一个新元素；
@@ -625,23 +631,36 @@ predicate: 判断这个条件是真还是假
 
 
 ## 1.9. Allocator(分配器)
-- 什么是Allocator？
+什么是Allocator？
   > 负责内存空间的分配与管理。分配器是一个实现了动态空间配置、空间管理、空间释放的 `class template`。
   
+分配器我们一般不直接使用它，它是给容器使用的。容器的内存分配是通过分配器来管理的。
 
 C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
-Allocator代表的是一种特殊内存模型(memorymodel)，被当做一种把需要使用的内存转换为“内存低级调用"的抽象层。如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
+**Allocator代表的是一种特殊内存模型(memorymodel)，并提供一种抽象的概念，将对内存的索求(need to use memory)转变为对内存的直接调用(raw call for memory)。** 如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
 
 最初，allocator只是作为STL的一部分而引人的，用来处理像PC上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存(shared memory）、垃圾回收（garbagecollection）、面向对象数据库(object-oriented database)等解决方案能保特一致接。
 
 C++标准定了一个default allocator如下：
+```cpp
+namespace std {
+  template < typename T>
+  class allocator;
+}
+```
 
 
+这个default allocator可在 "allocator得以被当作实参使用”的任何地方允许当默认值，它会执行内存分配和回收的一般用法。也是说，它会调用new和delete操作符。但C++并没有对“在什么时候以什么方式调用这些操作符"给予明确规定。因此，default allocator甚至可能在内部对分配内存采用缓存(cache)的手法。
 
-这个default allocator可在 "allocator得以被当作实参使用”的任何地方允许当默认值，它会执行内存分配和回收的一般用法。也是说，它会调用new和delete操作符。但C++并没有对“在什么时候以什么方式调用这些操作符"给予明确规定。因此，default allocator甚至可能在其内部对分配所得的内存采用缓存(cache)的手法。
+绝人多数程序都使用 default allocator，但有时其它程序库也可能提供些 allocator 满
+足特定需求。这种情况下只需简单地将它们当做实参即可。只有少数情况下才需要自行写一个 allocator，现实中最常使用的还是default allocator。
 
-绝人多数都使川defaultallocator,但有时其他程也可能提供些allocator满
-只有少钕情况卜才需要自行写、
-足特定需求。这种情况卜需简单地将它们当作即allocator，现实中最常使Ill的还是defaultallocator。
+allocator底层的操作都是采用 malloc 和free来分配和释放内存。
 
+malloc分配内存时，会有额外的外开销(overhead)，使程序变慢。使内存分配的效率高，需要减少cookie的开销。
+
+
+`operator new()`
+
+`malloc() `
 
