@@ -53,6 +53,7 @@
   - [5.3. Unordered associative containers(无序关联容器)](#53-unordered-associative-containers无序关联容器)
     - [5.3.1. unordered_set && unordered_multiset](#531-unordered_set--unordered_multiset)
     - [5.3.2. unordered_map && unordered_multimap](#532-unordered_map--unordered_multimap)
+  - [成员函数](#成员函数)
   - [5.4. Containers Difference(容器之间的差异性)](#54-containers-difference容器之间的差异性)
   - [5.5. Container adaptors(容器适配器)](#55-container-adaptors容器适配器)
     - [5.5.1. stack](#551-stack)
@@ -489,6 +490,9 @@ multimap (collection of key-value pairs, sorted by keys.)
 ### 5.3.2. unordered_map && unordered_multimap
 内部结构图
 <img src="./figures/unordered-maps-multimsps-internal-structure.png">
+
+## 成员函数
+- `count(key)` : 对multimap而言，返回 key 在multimap 中出现的次数；对 map 而言，返回结果为：当前key在map中，返回结果为 1，没在返回结果就为 0；
 
 
 
