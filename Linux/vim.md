@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-04-01 22:23:59
+ * @LastEditTime: 2021-04-21 16:15:46
  * @LastEditors: Please set LastEditors
  * @Description: Vim编辑器使用
 --> 
@@ -35,7 +35,7 @@
 <!-- /TOC -->
 
 # 1. Basics(基础)
-vim 是一种编程语言，各种按键可以组合，可以看成是不同程序的接口。
+vim 可以看成是一种编程语言。其中，各种按键任意的组合，可以看成是不同程序的接口。
 
 --------------------------------------------
 我们思考的有多快，这个工具使用的就有多快！（编程的速度跟上思考的速度！！！）
@@ -59,6 +59,8 @@ vim 是一种编程语言，各种按键可以组合，可以看成是不同程�
 - `j` 向下移动光标
 - `Ctrl d(down)`	屏幕『向下』移动半页
 - `Ctrl u(up)`	屏幕『向上』移动半页
+- `Ctrl o` 后退到上一个位置
+- `Ctrl i` 前进到上一个位置
 - `+`	光标移动到非空格符的下一行；等价于 `↓`
 - `–`	光标移动到非空格符的上一行；等价于 `↑`
 - `n<space>`  按下数字后再按空格键，光标会向右移动这一行的 n 个字符
@@ -297,3 +299,4 @@ perl程序中`#` 开始的行为注释，所以要注释某些行，只需在行
 - [vim常用命令总结](https://www.cnblogs.com/yangjig/p/6014198.html)
 - [vim-adventures](https://vim-adventures.com/) 通过玩游戏的方式来学习Vim。
 - [MIT2020年missing-semester lectures vim section](https://missing.csail.mit.edu/2020/editors/)
+- [Vim 快捷键大全](https://www.cnblogs.com/codehome/p/10214801.html)
