@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-03-25 08:07:47
+ * @LastEditTime: 2021-04-25 22:10:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -39,6 +39,7 @@
     - [1.6.4. 其他特殊字符](#164-其他特殊字符)
   - [1.7. sed用法](#17-sed用法)
   - [1.8. awk用法](#18-awk用法)
+  - [1.9. Reference](#19-reference)
 
 <!-- /TOC -->
 
@@ -425,3 +426,5 @@ sed俗称做流编辑器，以行单位进行字符处理。
     - ORS：输出字段的行分隔符，默认是换行符
     - RS：输入文件的行分隔符，默认是换行符
 
+## 1.9. Reference
+[十分钟学会 tmux](https://www.cnblogs.com/kaiye/p/6275207.html)
