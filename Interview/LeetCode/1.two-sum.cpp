@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-03-20 00:03:46
- * @LastEditTime: 2021-04-04 18:16:39
+ * @LastEditTime: 2021-04-23 23:33:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  */
@@ -15,23 +15,6 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        // int left = 0;
-        // int right = nums.size() - 1;
-        // std::sort(nums.begin(), nums.end());
-        // while (left < right) {
-        //     int sum = nums[left] + nums[right];
-        //     if (sum == target) {
-        //         break;
-        //     }
-        //     if (sum < target) {
-        //         left++;
-        //     }
-        //     else {
-        //         right--;
-        //     }            
-        // }
-        // return vector<int>{left, right};
-
         // 法一：暴力解法
         // int len = nums.size();
         // for (int i = 0; i < len; i++) {
@@ -43,16 +26,18 @@ public:
         // }
         // return {};
 
-        // hash table
-        unordered_map<int, int> hashtable;
-        for (int i = 0; i < nums.size(); ++i) {
-            auto it = hashtable.find(target - nums[i]);
-            if (it != hashtable.end()) {
-                return {it->second, i};
+        // 利用hashtable实现
+        unordered_map<int, int> mp;
+        vector<int>result;
+        for (int i = 0; i < nums.size(); i++) {
+            // mp[nums[i]] = i;
+            auto it = mp.find(target - nums[i]);
+            if (it != mp.end()) {
+                result = {{it->second, i}}; 
             }
-            hashtable[nums[i]] = i;
+            mp[nums[i]] = i; 
         }
-        return {};
+        return result;
     }
 };
 // @lc code=end
