@@ -61,7 +61,8 @@
         "future": "cpp",
         "forward_list": "cpp",
         "string.h": "c",
-        "slist": "cpp"
+        "slist": "cpp",
+        "bitset": "cpp"
     },
     "jupyter.jupyterServerType": "local",
     "C_Cpp.errorSquiggles": "Disabled"
