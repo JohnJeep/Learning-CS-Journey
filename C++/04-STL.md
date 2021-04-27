@@ -29,12 +29,13 @@
       - [5.1.3.3. 优点](#5133-优点)
       - [5.1.3.4. 缺点](#5134-缺点)
     - [5.1.4. list（双向链表）](#514-list双向链表)
-      - [5.1.4.1. list插入](#5141-list插入)
-      - [5.1.4.2. list 的删除](#5142-list-的删除)
+      - [5.1.4.1. list insert](#5141-list-insert)
+      - [5.1.4.2. list delete](#5142-list-delete)
       - [5.1.4.3. 内部结构图](#5143-内部结构图)
       - [5.1.4.4. 优点](#5144-优点)
       - [5.1.4.5. 缺点](#5145-缺点)
-      - [5.1.4.6. 源码分析](#5146-源码分析)
+      - [5.1.4.6. 成员函数](#5146-成员函数)
+      - [5.1.4.7. 源码分析](#5147-源码分析)
     - [5.1.5. forword list(单向链表)](#515-forword-list单向链表)
       - [5.1.5.1. 内部结构图](#5151-内部结构图)
       - [5.1.5.2. 缺点](#5152-缺点)
@@ -53,14 +54,14 @@
   - [5.3. Unordered associative containers(无序关联容器)](#53-unordered-associative-containers无序关联容器)
     - [5.3.1. unordered_set && unordered_multiset](#531-unordered_set--unordered_multiset)
     - [5.3.2. unordered_map && unordered_multimap](#532-unordered_map--unordered_multimap)
-  - [成员函数](#成员函数)
-  - [5.4. Containers Difference(容器之间的差异性)](#54-containers-difference容器之间的差异性)
-  - [5.5. Container adaptors(容器适配器)](#55-container-adaptors容器适配器)
-    - [5.5.1. stack](#551-stack)
-    - [5.5.2. queue](#552-queue)
-    - [5.5.3. priority_queue(优先级队列)](#553-priority_queue优先级队列)
-      - [5.5.3.1. 什么是优先级队列](#5531-什么是优先级队列)
-      - [5.5.3.2. 标准库接口](#5532-标准库接口)
+  - [5.4. 成员函数](#54-成员函数)
+  - [5.5. Containers Difference(容器之间的差异性)](#55-containers-difference容器之间的差异性)
+  - [5.6. Container adaptors(容器适配器)](#56-container-adaptors容器适配器)
+    - [5.6.1. stack](#561-stack)
+    - [5.6.2. queue](#562-queue)
+    - [5.6.3. priority_queue(优先级队列)](#563-priority_queue优先级队列)
+      - [5.6.3.1. 什么是优先级队列](#5631-什么是优先级队列)
+      - [5.6.3.2. 标准库接口](#5632-标准库接口)
 - [6. Algorithm](#6-algorithm)
   - [6.1. Heap(堆)](#61-heap堆)
   - [6.2. 其它函数](#62-其它函数)
@@ -200,15 +201,16 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 
 动态数组实现机制：
   > 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
-  - 注意：使用动态数组时，尽量减少改变数组容量大小的次数，可以减少时间性能的消耗。 一般每次扩容为原来的  2 倍。
 
+
+- <font color=red> 注意：</font>
+  - 使用动态数组时，尽量减少改变数组容量大小的次数，可以减少时间性能的消耗。 一般每次扩容为原来的  2 倍。
+  - 当vector 扩容时，会调用 `move constructor` 和 `move destructor`，并且移动构造和移动析构函数在执行期间是不会抛出异常的，用 `noexcept` 关键字修饰。因为它不能确保异常发生后，移动构造和移动析构函数还能满足标准库的要求，所以是禁止抛异常的。
+  - <font color=red> 成长型的容器（需要发生 memory reallocation）在标准库中只有两种：`vector` 和 `deque`。</font>
 
 
 #### 5.1.2.1. 内部结构图
 <img src="./figures/container-vectors.png">
-
-
-- 模板：`template <typename T> void Show(T arrNum[], int len);`
 
 
 #### 5.1.2.2. 成员函数
@@ -250,11 +252,11 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 - 当动态添加的数据超过vector默认分配的大小时要进行整体的重新分配、拷贝与释放。
 
 #### 5.1.2.5. 源码分析
-GUN 2.9版源码UML图
+GNU 2.9版源码UML图
 ![](./figures/vector-2.9.png)
 
 
-GUN 4.9版源码UML图
+GNU 4.9版源码UML图
 ![](./figures/vector-4.9.png)
 
 
@@ -298,11 +300,11 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 
 
 
-#### 5.1.4.1. list插入
+#### 5.1.4.1. list insert
 - 链表的插入操作：在 pos 位置插入新的节点，新插入的数据存放在 pos 位置之前。
 
 
-#### 5.1.4.2. list 的删除
+#### 5.1.4.2. list delete
 - `clear()` 移除容器中所有的数据
 - `erase(begin, end)` 删除区间 `[begin, end)` 的数据，返回下一个元素的位置。
 - `erase(pos)` 删除指定 pos 位置的数据，返回下一个元素的位置。
@@ -324,7 +326,9 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 - 不能进行内部的随机访问，即不支持 `at.(pos)` 函数和 `[]` 操作符。
 - 相对于verctor占用内存多。
 
-#### 5.1.4.6. 源码分析
+#### 5.1.4.6. 成员函数
+
+#### 5.1.4.7. 源码分析
 ```cpp
     _Self&
     operator++() _GLIBCXX_NOEXCEPT      // 前置++
@@ -491,12 +495,12 @@ multimap (collection of key-value pairs, sorted by keys.)
 内部结构图
 <img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
-## 成员函数
+## 5.4. 成员函数
 - `count(key)` : 对multimap而言，返回 key 在multimap 中出现的次数；对 map 而言，返回结果为：当前key在map中，返回结果为 1，没在返回结果就为 0；
 
 
 
-## 5.4. Containers Difference(容器之间的差异性)
+## 5.5. Containers Difference(容器之间的差异性)
 和其他所有关联式容器一样，`map/multimap` 底层是以平衡二叉树完成的。C++ standard 并未明定这一点，但是从map和multimap各项操作的复杂度自然可以得出这一结念。通常set、multiset、map和multimp都使用相同的内部结构，因此，你可以把set和multiset视为特殊的map和multimp，只不过set元素的 `value和key是同一对象`。因此，map和multimap拥有set和multiset的所有能力和所有操作。当然，某些细微差异还是有的：首先，它们的元素是key/value pair，其次，map可作为关联式数组(associative array)来使用。
 
 vector list map set容器如何选择？
@@ -514,11 +518,11 @@ vector list map set容器如何选择？
 
 
 
-## 5.5. Container adaptors(容器适配器)
+## 5.6. Container adaptors(容器适配器)
 容器适配器为有序的容器提供了不同的接口。queue和stack底层完全借助 deque实现的。
 
 
-### 5.5.1. stack
+### 5.6.1. stack
 - 内部结构图
 - <img src="./figures/stack.png">
 
@@ -530,7 +534,7 @@ vector list map set容器如何选择？
   - `empty()` 栈为空
 
 
-### 5.5.2. queue
+### 5.6.2. queue
 - 内部结构图
 - <img src="./figures/queue.png">
 
@@ -542,11 +546,11 @@ vector list map set容器如何选择？
   
 
 
-### 5.5.3. priority_queue(优先级队列)
-#### 5.5.3.1. 什么是优先级队列
+### 5.6.3. priority_queue(优先级队列)
+#### 5.6.3.1. 什么是优先级队列
 
 
-#### 5.5.3.2. 标准库接口
+#### 5.6.3.2. 标准库接口
 ```C++
 // 最大或最小优先级队列变量的声明 
 
