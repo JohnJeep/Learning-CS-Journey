@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-04-21 16:15:46
+ * @LastEditTime: 2021-04-29 10:29:06
  * @LastEditors: Please set LastEditors
  * @Description: Vim编辑器使用
 --> 
@@ -189,15 +189,15 @@ Normal mode 下进行替换操作。
 
 
 ## 1.6. Insert Mode
-插入模式(Insert mode)下，可以做文字输入，按「ESC」键可回到命令行模式
+插入模式(Insert mode)下，可以做文字输入，按「ESC」键可回到 `normal` 模式
 
 
-- `a(around)` 从当前光标所在的下一个字符处开始插入
-- `A` 从光标所在行的最后一个字符处开始插入
-- `I` 在当前所在行的第一个非空格符处开始插入
-- `i(inside)` 从当前光标所在处插入
-- `o(open)` 目前光标所在的下一行处插入新的一行
-- `O(大写字母)` 在目前光标所在处上一行插入新的一行
+- `a(append)` 从当前光标所在的下一个字符处开始插入
+- `A(append after a line)` 从光标所在行的最后一个字符处开始插入
+- `I(insert before line)` 在当前所在行的第一个非空格符处开始插入
+- `i(insert after line)` 当前光标所在位置之前插入
+- `o(open a line below)` 当前光标所在的下一行处插入新的一行
+- `O(大写字母: open a line above)` 当前光标所在处上一行插入新的一行
 
 
 
