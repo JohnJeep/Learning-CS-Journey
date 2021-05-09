@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-04-07 09:54:17
+ * @LastEditTime: 2021-05-08 20:56:28
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -186,7 +186,7 @@ https://cloud.tencent.com/developer/article/1052125
 ## 5.1. Sequence containers(有序容器)
 
 ### 5.1.1. Array
-Array是fixed number of elements(固定数量的元素)。
+Array是C++11标准之后新增的一个容器，表示固定数量的元素(fixed number of elements)。
 
 #### 5.1.1.1. 内部结构
 <img src="./figures/container-arrays.png">
@@ -253,21 +253,23 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 
 #### 5.1.2.5. 源码分析
 GNU 2.9版源码UML图
-![](./figures/vector-2.9.png)
+<img src="./figures/vector-2.9.png">
 
 
 GNU 4.9版源码UML图
-![](./figures/vector-4.9.png)
+<img src="./figures/vector-4.9.png">
 
 
 **Vector类与其基类之间的关系**
-![](./figures/UMLClassDiagram-_Vector_base.png)
+<img src="./figures/UMLClassDiagram-_Vector_base.png">
 
 **Vector_base内部类与其它类之间的关系**
-![](./figures/UMLClassDiagram-_Vector_impl.png)
+<img src="./figures/UMLClassDiagram-_Vector_impl.png">
+
 
 **迭代器之间的关系**
-![](./figures/UMLClassDiagram-reverse_iterator.png)
+<img src="./figures/UMLClassDiagram-reverse_iterator.png">
+
 
 ### 5.1.3. deque（双端数组）
 deque是在功能上合并了vector和list。与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
@@ -350,19 +352,19 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 **```_M_node = _M_node->_M_next;``` 这一行为++操作的具体实现过程：**
 > 移动结点。过程：将当前结点next域的值取出来赋给_M_node，而_M_node本身指向当前的结点，_M_node->_M_next 指到下一个结点的prev域。此时_M_node 与_M_node->_M_next指向的内容是一样的，所以把_M_node移动到 _M_node->_M_next 指向的位置，这一过程就是结点的++操作。
 
-![](./figures/node++.png)
+<img src="./figures/node++.png">
 
 
 
 **思考：为什么前置++与后置++两者的返回值是不一样的？**
 > 为了与整数的++操作保持一致，操作运算符重载持有的操作应该向整数的操作看起，拥有类似的功。保证不能进行两次的++运算操作。
-![](./figures/self.png)
+<img src="./figures/self.png">
 
 
 源码中list的UML图分析
-![](./figures/UMLClassDiagram-_List_base.png)
+<img src="./figures/UMLClassDiagram-_List_base.png">
 
-![](./figures/UMLClassDiagram-_List_node_base.png)
+<img src="./figures/UMLClassDiagram-_List_node_base.png">
 
 
 
@@ -510,7 +512,6 @@ vector list map set容器如何选择？
 - Map、Set属于关联性容器，底层是采用红黑树实现的，它的插入、删除效率比其他序列容器高，因为它不需要做内存拷贝和内存移动，而是改变指向节点的指针。
 - Set和Vector的区别在于Set容器不包含重复的数据。Set和Map的区别在于Set只含有Key，而Map有一个Key和Key所对应的Value两个元素。
 - Map和Hash_Map的区别是Hash_Map使用了Hash算法来加快查找过程，但是需要更多的内存来存放这些Hash桶元素，因此可以算得上是采用空间来换取时间策略。
-
 
    1 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector 
      2 如果你需要大量的插入和删除，而不关心随即存取，则应使用list 
@@ -677,9 +678,9 @@ predicate: 判断这个条件是真还是假
 
 
 ## 9.4. iterator遵循的原则
+iterator 是算法 (Algorithms) 与容器 (containers) 之间的桥梁。
 
-
-
+<img src="./figures/iterator-types.png">
 
 ## 9.5. 迭代器失效的原因？
 - 何为迭代器失效？
@@ -741,10 +742,11 @@ malloc分配内存时，会有额外的外开销(overhead)，使程序变慢。�
 ## 11.1. iterator_traits
 trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征。这个有点不好理解，可以把它理解成一个 `萃取机`，用来区分传入迭代器中的类型是 `class iterators` 还是 `non class iterators，即native pointer`。可以利用 `类模板中的partial specialization` 可以得到目标。
 
+<img src="./figures/iterator-traits.png">
+
 位于 `../C++/bits/stl_iterators.h>` 头文件中。
 
-
-![](./figures/traits.png)
+<img src="./figures/traits.png">
 
 
 ## 11.2. type traits
