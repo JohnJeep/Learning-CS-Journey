@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-04-17 17:51:56
+ * @LastEditTime: 2021-05-11 00:18:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -132,7 +132,7 @@
 
 如何把复杂的东西描绘成最简单的东西？让一个门外汉也能看懂自己写的文章。
 
-
+学习知识形成体系结构，脑海里有概念，对计算机专业学科的一些专业术语要有了解，这样看英文源文档，才看得懂，看的速度才快。
 
 
 # 23. 自学指导
