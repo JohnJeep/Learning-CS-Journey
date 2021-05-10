@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-05-08 20:56:28
+ * @LastEditTime: 2021-05-10 21:12:33
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -17,6 +17,7 @@
     - [5.1.1. Array](#511-array)
       - [5.1.1.1. 内部结构](#5111-内部结构)
       - [5.1.1.2. 缺点](#5112-缺点)
+      - [5.1.1.3. 源码分析](#5113-源码分析)
     - [5.1.2. vector（单端的动态数组）](#512-vector单端的动态数组)
       - [5.1.2.1. 内部结构图](#5121-内部结构图)
       - [5.1.2.2. 成员函数](#5122-成员函数)
@@ -39,6 +40,7 @@
     - [5.1.5. forword list(单向链表)](#515-forword-list单向链表)
       - [5.1.5.1. 内部结构图](#5151-内部结构图)
       - [5.1.5.2. 缺点](#5152-缺点)
+      - [5.1.5.3. 源码分析](#5153-源码分析)
   - [5.2. Associative containers(关联性容器)](#52-associative-containers关联性容器)
     - [5.2.1. set && multiset](#521-set--multiset)
       - [5.2.1.1. 内部结构图](#5211-内部结构图)
@@ -186,14 +188,18 @@ https://cloud.tencent.com/developer/article/1052125
 ## 5.1. Sequence containers(有序容器)
 
 ### 5.1.1. Array
-Array是C++11标准之后新增的一个容器，表示固定数量的元素(fixed number of elements)。
+Array是C++11标准之后新增的一个容器，表示固定数量的元素(fixed number of elements)。为了模拟数组的相关特性。
 
 #### 5.1.1.1. 内部结构
 <img src="./figures/container-arrays.png">
 
+STL源码中实现，没有构造和析构函数。
+
 #### 5.1.1.2. 缺点
 - 不能扩容。
 
+#### 5.1.1.3. 源码分析
+<img src="./figures/array.png">
 
 ### 5.1.2. vector（单端的动态数组）
 vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。
@@ -277,7 +283,9 @@ deque是在功能上合并了vector和list。与 `vector` 容器类似，但是�
 
 #### 5.1.3.1. 内部结构图
 <img src="./figures/container-deques.png">
+
 <img src="./figures/container-deques-internal-structure.png">
+
 <img src="./figures/deque.png">
 
 #### 5.1.3.2. 成员函数
@@ -377,7 +385,8 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 #### 5.1.5.2. 缺点
 - 只能扩充一个结点。
 
-
+#### 5.1.5.3. 源码分析
+<img src="./figures/forward-list.png">
 
 ## 5.2. Associative containers(关联性容器)
 关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
@@ -422,7 +431,10 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 - map 的底层原理是按照平衡二叉树的数据结构来实现的，在插入和删除的操作上比 `vector` 容器快。
+
 - map 支持唯一的键值，每个 `key` 只能出现一次，支持 `[]` 操作，形如：`map[key] = value`。 `multimap` 不支持唯一的键值，容器中的每个 `key` 可以出现相同的多次，不支持 `[]` 操作。
+> set 和 map 中的 key 不能重复，而 multiset 和 multimap 中的 key 却能重复的原因：set 和 map 底层调用的是红黑树的 `insert_unique()`，而 multiset 和 multimap 底层调用的是红黑树中的 `insert_equal()` 去进行 `insert` 操作的。
+
 
 - map和multimap会根据元素的 `key` 自动对元素排序。这么一来，根据已知的 `key` 查找某个元素时就能够有很好的效率，而根据己知 `value` 查找元素时，效率就很糟糕。“自动排序"这一性质使得 map 和 multimap 本身有了一条重要限制：你不可以直接改变元素的 `key`。因为这样做会损坏正确的次序。想要修改元素的 `key` ，必须先移除拥有该 `key` 的元素，然后插人拥有新 `key/value` 的元素。从迭代器的视角看，元素的 `key` 是常量。然而直接修改元素的 `value` 是可能的，提供的值的类型不能是 `constant`。
 
@@ -627,9 +639,9 @@ predicate: 判断这个条件是真还是假
 
 # 8. Functor(仿函数)
 ## 8.1. 什么是仿函数？
-仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`。一般函数指针可视为狭义的仿函数。 
+仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`。一般函数指针可视为狭义的仿函数。 
 
-
+<img src="./figures/functors.png">
 
 ## 8.2. 分类
   - 预定义函数对象：标准STL模板库中提前预定义了很多的函数对象。
