@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-05-11 00:18:05
+ * @LastEditTime: 2021-05-11 20:57:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -111,19 +111,19 @@
 # 16. Nginx
 
 # 17. 分布式
-# 18. MIT 6.824
+## 17.1. MIT 6.824
 - 视频：
   - B站：[MIT 6.824](https://www.bilibili.com/video/BV1qk4y197bB)
 - 书籍：《数据密集型应用系统设计》
 
-# 19. Qt
+# 18. Qt
 
-# 20. 汇编语言
+# 19. 汇编语言
 
-# 21. Markdown
+# 20. Markdown
 
 
-# 22. 哲学
+# 21. 哲学
 自己本身对哲学十分感兴趣，记下自己平时生活中的一些哲学思想。
 
 
@@ -135,6 +135,6 @@
 学习知识形成体系结构，脑海里有概念，对计算机专业学科的一些专业术语要有了解，这样看英文源文档，才看得懂，看的速度才快。
 
 
-# 23. 自学指导
+# 22. 自学指导
 - [cs_study_plan](https://github.com/spring2go/cs_study_plan): Github上一份硬核计算机科学CS自学计划
 - [TeachYourselfCS-CN](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md): 自学计算机科学课程，推荐一些比较好的书籍和课程。
