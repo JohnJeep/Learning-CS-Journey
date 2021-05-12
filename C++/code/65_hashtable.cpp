@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-05-07 19:47:39
- * @LastEditTime: 2021-05-11 23:32:52
+ * @LastEditTime: 2021-05-12 23:26:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  */
@@ -23,6 +23,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    
+    #if defined(__GNUC__)
+    cout << __GNUC__ << endl;
+    #endif
+        
     return 0;
 }

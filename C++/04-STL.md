@@ -135,7 +135,9 @@ Level 3: 扩充C++标准库
 
 
 # 3. History(历史)
-STL创始人：Alexander Stepanov
+C++创始人：比尼亚·斯特鲁斯特鲁普（Bjarne Stroustrup）
+
+STL创始人：Alexander Stepanov(亚历山大·斯蒂芬诺夫)
 
 GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与修改GPL软件的源代码，但如果使用者要传播借助GPL软件而完成的软件，他们必须也同意GPL规范。这种精神主要是强迫人们分享并回馈他们对GPL软件的改善。得之于人，舍于人。
 
@@ -452,16 +454,16 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 #### 5.2.2.2. map insert
-```C++
-  // 四种map容器的插入方法
-  map<int, string> mp;
-  mp.insert(pair<int, string>(101, "赵云"));                   // 法一
-  mp.insert(make_pair<int, string>(102, "关羽"));              // 法二
-  mp.insert(map<int, string>::value_type(103, "曹操"));        // 发三
-  mp[104] = "张飞";                                            // 法四
+```cpp
+// 四种map容器的插入方法
+map<int, string> mp;
+mp.insert(pair<int, string>(101, "赵云"));                   // 法一
+mp.insert(make_pair<int, string>(102, "关羽"));              // 法二
+mp.insert(map<int, string>::value_type(103, "曹操"));        // 法三
+mp[104] = "张飞";                                            // 法四
 
-  // 方法一到方法三向容器中插入相同的键值时，不会插入成功。
-  // 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
+// 方法一到方法三向容器中插入相同的键值时，不会插入成功。
+// 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
 ```
 
 - <font color=red>注意:</font> 
@@ -489,7 +491,7 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 ### 5.3.1. unordered_set && unordered_multiset
-> `unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
+`unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
 
 - STL无序容器存储状态，hash表存储结构图
 <img src="./figures/unordered-containers.png">
@@ -544,7 +546,8 @@ vector list map set容器如何选择？
 
 ### 5.5.1. stack
 - 内部结构图
-- <img src="./figures/stack.png">
+
+ <img src="./figures/stack.png">
 
 - 函数接口
   - `push()` 入栈
@@ -556,7 +559,8 @@ vector list map set容器如何选择？
 
 ### 5.5.2. queue
 - 内部结构图
-- <img src="./figures/queue.png">
+
+<img src="./figures/queue.png">
 
 - 函数接口
   - `push()` 入队列
@@ -571,7 +575,7 @@ vector list map set容器如何选择？
 
 
 #### 5.5.3.2. 标准库接口
-```C++
+```cpp
 // 最大或最小优先级队列变量的声明 
 
 priority_queue<int> g_priq;                            // 默认为最大值优先队列
@@ -658,7 +662,7 @@ predicate: 判断这个条件是真还是假
 ## 8.3. 函数对象调用
   - 函数对象可以做函数参数。 
   - 函数对象可以做返回值。 
-  ```C++
+  ```cpp
   class Stu
   {
     private:
@@ -762,6 +766,7 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 分配器我们一般不直接使用它，它是给容器使用的。容器的内存分配是通过分配器来管理的。
 
 C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
+
 **Allocator代表的是一种特殊内存模型(memorymodel)，并提供一种抽象的概念，将对内存的索求(need to use memory)转变为对内存的直接调用(raw call for memory)。** 如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
 
 最初，allocator只是作为STL的一部分而引人的，用来处理像PC上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存(shared memory）、垃圾回收（garbagecollection）、面向对象数据库(object-oriented database)等解决方案能保特一致接。
