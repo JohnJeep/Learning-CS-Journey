@@ -1,12 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-05-12 23:37:17
- * @LastEditTime: 2021-05-12 23:49:02
+ * @LastEditTime: 2021-05-15 18:38:34
  * @LastEditors: Please set LastEditors
  * @Description: 模拟实现仿函数机制
  */
 #include <iostream>
 #include <cstdlib>
+#include <functional>
 
 using namespace std;
 
