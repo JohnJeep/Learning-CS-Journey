@@ -64,7 +64,8 @@
         "slist": "cpp",
         "bitset": "cpp",
         "hash_map": "cpp",
-        "hash_set": "cpp"
+        "hash_set": "cpp",
+        "complex": "cpp"
     },
     "jupyter.jupyterServerType": "local",
     "C_Cpp.errorSquiggles": "Disabled"
