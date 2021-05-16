@@ -74,6 +74,7 @@
   - [8.1. 什么是仿函数？](#81-什么是仿函数)
   - [8.2. 分类](#82-分类)
   - [8.3. 函数对象调用](#83-函数对象调用)
+  - [8.4. Predefined Function Objects (预定义函数对象)](#84-predefined-function-objects-预定义函数对象)
 - [9. Iterator(迭代器)](#9-iterator迭代器)
   - [9.1. 什么是迭代器？](#91-什么是迭代器)
   - [9.2. 基本操作](#92-基本操作)
@@ -650,18 +651,20 @@ predicate: 判断这个条件是真还是假
 
 # 8. Functor(仿函数)
 ## 8.1. 什么是仿函数？
-仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`。一般函数指针可视为狭义的仿函数。 
+仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
 
 <img src="./figures/functors.png">
 
 ## 8.2. 分类
-  - 预定义函数对象：标准STL模板库中提前预定义了很多的函数对象。
-  - 用户自定义的函数对象 。
-    > Function object(函数对象): 需要重载 `()` 操作运算符。函数对象的调用与 `回调函数` 的调用类似。
+- 函数指针 (function pointer)
+- 带有成员函数 `operator()` 创建的 object。
+- 带有转换函数可将自己转换为 pointer to function 的 class 所创建的 object。
+- lambda 表达式。
 
 ## 8.3. 函数对象调用
-  - 函数对象可以做函数参数。 
-  - 函数对象可以做返回值。 
+- 函数对象可以做函数参数。 
+- 函数对象可以做返回值。 
+- 函数对象的调用与 `回调函数` 的调用类似。 
   ```cpp
   class Stu
   {
@@ -670,7 +673,10 @@ predicate: 判断这个条件是真还是假
       void operator() (Stu& T) {}
   }
   ``` 
+## 8.4. Predefined Function Objects (预定义函数对象)
+> 标准STL模板库中提前预定义了很多的函数对象。
 
+标准库预定义函数对象的头文件是 `<functional>`。
 
 
 # 9. Iterator(迭代器)
