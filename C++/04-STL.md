@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-05-11 20:07:43
+ * @LastEditTime: 2021-05-17 23:53:19
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -610,7 +610,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
     - `for_each()` 使用的函数对象可以没有 `返回值`，参数一般传 `reference`，因此速度较快，不是很灵活。
     - `transform()` 使用的函数对象必须要有 `返回值`，参数一般传 `value`，因此速度较慢，但是很灵活。
 - `adjacent()` 查找一对相邻位置重复的元素，找到则返回指向这对元素的第一个元素的迭代器值。
-- `distance()` 迭代器下标的位置。
+- `distance()` 返回两个迭代器之间的距离，两个迭代器必须指向同一个容器。
 - `binary_search()` 采用二分法在有序序列中查找 value，找到则返回 true。在无序的序列中不能使用。
 - `count()` 计数容器中指定元素的个数。
 - `count_if()` 使用 `谓词` 计数容器中指定条件元素的个数。
@@ -625,10 +625,10 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 - `replace_if()` 将指定范围内的 `oldValue` 替换为 `newValue`，需要指定 `函数对象`（是自定义的函数对象或STL预定义的函数对象）。
 - `swap()`  交换两个容器
 - `accumulate()` 累加遍历容器中指定范围内的元素，并在结果上加一个指定的值。
-- `stable_partition()`函数
-- `upper_bound()` 函数
-- `lower_bound()` 函数
-- `std::floor` 和 `std::ceil`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
+- `stable_partition()`
+- `upper_bound()` 
+- `lower_bound()` 
+- `std::floor()` 和 `std::ceil()`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
   - `std::floor()` -->向下取整数。`5.88   std::floor(5.88) = 5;`
   - `std::ceil()` -->向上取整数。`std::ceil(5.88)   = 6;`
 
@@ -647,6 +647,8 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 - member function adaptor(成员函数适配器) 
 
 predicate: 判断这个条件是真还是假
+
+
 
 
 # 8. Functor(仿函数)
@@ -714,9 +716,22 @@ iterator 是算法 (Algorithms) 与容器 (containers) 之间的桥梁。
 ## 9.5. Iterator 分类
 <img src="./figures/iterator-category.png">
 
+istream_iterator 的 iterator_category
 <img src="./figures/istream-iterator.png">
 
+ostream_iterator 的 iterator_category
 <img src="./figures/ostream-iterator.png">
+
+父类中没有data 和 function，子类继承于父类的 typedef。
+
+**Iterator分类对算法的影响**
+
+<img src="./figures/iterator-category-copy.png">
+
+<img src="./figures/iterator-category-destory.png">
+
+<img src="./figures/iterator-category-destory-2.png">
+
 
 ## 9.6. 源码分析
 位于标准库的 `stl_iterator_base_types.h` 文件中。
