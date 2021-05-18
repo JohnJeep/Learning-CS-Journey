@@ -1,14 +1,14 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-03 23:07:02
- * @LastEditTime: 2021-03-07 22:21:20
+ * @LastEditTime: 2021-05-18 15:18:02
  * @LastEditors: Please set LastEditors
  * @Description: 使用Git时，中文路径和中文名称乱码问题
  */
 
 [user]
-	email = JohnJeep1985@gmail.com
-	name = JohnJeep
+	email = xxxxxx@gmail.com
+	name = xxxxx
 [color]
 	ui = auto
 [gui]  
