@@ -20,13 +20,13 @@
       - [5.1.1.3. 源码分析](#5113-源码分析)
     - [5.1.2. vector(单端的动态数组)](#512-vector单端的动态数组)
       - [5.1.2.1. 内部结构图](#5121-内部结构图)
-      - [5.1.2.2. 成员函数](#5122-成员函数)
+      - [5.1.2.2. API接口](#5122-api接口)
       - [5.1.2.3. 优点](#5123-优点)
       - [5.1.2.4. 缺点](#5124-缺点)
       - [5.1.2.5. 源码分析](#5125-源码分析)
     - [5.1.3. deque(双端数组)](#513-deque双端数组)
       - [5.1.3.1. 内部结构图](#5131-内部结构图)
-      - [5.1.3.2. 成员函数](#5132-成员函数)
+      - [5.1.3.2. API接口](#5132-api接口)
       - [5.1.3.3. 优点](#5133-优点)
       - [5.1.3.4. 缺点](#5134-缺点)
     - [5.1.4. list(双向链表)](#514-list双向链表)
@@ -35,7 +35,7 @@
       - [5.1.4.3. 内部结构图](#5143-内部结构图)
       - [5.1.4.4. 优点](#5144-优点)
       - [5.1.4.5. 缺点](#5145-缺点)
-      - [5.1.4.6. 成员函数](#5146-成员函数)
+      - [5.1.4.6. API接口](#5146-api接口)
       - [5.1.4.7. 源码分析](#5147-源码分析)
     - [5.1.5. forword list(单向链表)](#515-forword-list单向链表)
       - [5.1.5.1. 内部结构图](#5151-内部结构图)
@@ -56,20 +56,25 @@
   - [5.3. Unordered associative containers(无序关联容器)](#53-unordered-associative-containers无序关联容器)
     - [5.3.1. unordered_set && unordered_multiset](#531-unordered_set--unordered_multiset)
     - [5.3.2. unordered_map && unordered_multimap](#532-unordered_map--unordered_multimap)
-    - [5.3.3. 成员函数](#533-成员函数)
+    - [5.3.3. API 接口](#533-api-接口)
   - [5.4. Containers Difference(容器之间的差异性)](#54-containers-difference容器之间的差异性)
   - [5.5. Container adaptors(容器适配器)](#55-container-adaptors容器适配器)
     - [5.5.1. stack](#551-stack)
     - [5.5.2. queue](#552-queue)
+      - [5.5.2.1. API 接口](#5521-api-接口)
     - [5.5.3. priority_queue(优先级队列)](#553-priority_queue优先级队列)
       - [5.5.3.1. 什么是优先级队列](#5531-什么是优先级队列)
       - [5.5.3.2. 标准库接口](#5532-标准库接口)
 - [6. Algorithm](#6-algorithm)
   - [6.1. Heap(堆)](#61-heap堆)
-  - [6.2. 其它函数](#62-其它函数)
+  - [6.2. API 接口](#62-api-接口)
 - [7. Adaptor(适配器)](#7-adaptor适配器)
   - [7.1. 什么是适配器？](#71-什么是适配器)
-  - [7.2. 函数适配器](#72-函数适配器)
+    - [7.1.1. 函数适配器](#711-函数适配器)
+    - [7.1.2. bind adaptor(绑定适配器)](#712-bind-adaptor绑定适配器)
+    - [7.1.3. composite adaptor(组合适配器)](#713-composite-adaptor组合适配器)
+    - [7.1.4. pointer adaptor(指针适配器)](#714-pointer-adaptor指针适配器)
+    - [7.1.5. member function adaptor(成员函数适配器)](#715-member-function-adaptor成员函数适配器)
 - [8. Functor(仿函数)](#8-functor仿函数)
   - [8.1. 什么是仿函数？](#81-什么是仿函数)
   - [8.2. 分类](#82-分类)
@@ -133,6 +138,7 @@ Level 3: 扩充C++标准库
 源码版本：GNU 2.91, GNU 4.9
 
 
+---------------------------
 
 
 # 3. History(历史)
@@ -212,10 +218,10 @@ STL源码中实现，没有构造和析构函数。
 <img src="./figures/array.png">
 
 ### 5.1.2. vector(单端的动态数组)
-vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。
+- vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。
 
 
-动态数组实现机制：
+- 动态数组实现机制：
   > 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
 
 
@@ -229,7 +235,7 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 <img src="./figures/container-vectors.png">
 
 
-#### 5.1.2.2. 成员函数
+#### 5.1.2.2. API接口
 - `size()`: 返回容器中元素的个数
 - `get(r)`: 获取秩（索引）为r的元素
 - `put(r, e)`: 用e替换秩为r元素的数值
@@ -298,7 +304,7 @@ deque是在功能上合并了vector和list。与 `vector` 容器类似，但是�
 
 <img src="./figures/deque.png">
 
-#### 5.1.3.2. 成员函数
+#### 5.1.3.2. API接口
 - `push_back()`: 在容器末尾插入一个元素
 - `push_front()` 容器头部插入一个元素
 - `pop_front()`: 容器头部删除一个元素
@@ -333,6 +339,7 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 
 #### 5.1.4.3. 内部结构图
 <img src="./figures/container-lists.png">
+
 <img src= "./figures/container-lists-internal-structure.png">
 
 #### 5.1.4.4. 优点
@@ -346,14 +353,14 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 - 不能进行内部的随机访问，即不支持 `at.(pos)` 函数和 `[]` 操作符。
 - 相对于verctor占用内存多。
 
-#### 5.1.4.6. 成员函数
+#### 5.1.4.6. API接口
 
 #### 5.1.4.7. 源码分析
 ```cpp
     _Self&
     operator++() _GLIBCXX_NOEXCEPT      // 前置++
     {
-_M_node = _M_node->_M_next;            // 移动结点
+_M_node = _M_node->_M_next;             // 移动结点
 return *this;
     }
 
@@ -414,6 +421,7 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 
 #### 5.2.1.1. 内部结构图  
 <img src="./figures/set-multiset.png">
+
 <img src="./figures/set-multiset-internal-structure.png">
 
 
@@ -430,6 +438,8 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 - `equal_range(ele)`返回容器中等于查找元素的两个上下限的迭代器位置（第一个：大于等于ele元素的位置，第二个：大于 ele元素的位置）
 
 #### 5.2.1.3. 优点
+
+
 #### 5.2.1.4. 缺点
 
 
@@ -451,6 +461,7 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 #### 5.2.2.1. map与multimap内部结构图  
 <img src="./figures/map-multimap.png">
+
 <img src="./figures/map-multimap-internal-structure.png">
 
 
@@ -484,6 +495,7 @@ mp[104] = "张飞";                                            // 法四
 #### 5.2.2.4. 优点
 插入键值的元素不允许重复，只对元素的键值进行比较，元素的各项数据可以通过 key 值进行检索。 
 
+
 #### 5.2.2.5. 缺点
 
 
@@ -496,11 +508,12 @@ mp[104] = "张飞";                                            // 法四
 
 - STL无序容器存储状态，hash表存储结构图
 <img src="./figures/unordered-containers.png">
+
 <img src="./figures/unordered-sets-multisets-internal-structure.png">
   
 
 - `unordered_set` 模板类中的定义
-  ```C++
+  ```cpp
   template<typename _Value,                        // 容器中存储元素的类型
           typename _Hash = hash<_Value>,           // 确定元素存储位置的哈希函数
           typename _Pred = std::equal_to<_Value>,  // 判断各个元素是否相等
@@ -519,7 +532,7 @@ mp[104] = "张飞";                                            // 法四
 内部结构图
 <img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
-### 5.3.3. 成员函数
+### 5.3.3. API 接口 
 - `count(key)` : 对multimap而言，返回 key 在multimap 中出现的次数；对 map 而言，返回结果为：当前key在map中，返回结果为 1，没在返回结果就为 0；
 
 
@@ -546,11 +559,11 @@ vector list map set容器如何选择？
 
 
 ### 5.5.1. stack
-- 内部结构图
+内部结构图
 
  <img src="./figures/stack.png">
 
-- 函数接口
+- API 接口
   - `push()` 入栈
   - `pop()` 出栈
   - `top()` 获取栈顶元素
@@ -559,11 +572,12 @@ vector list map set容器如何选择？
 
 
 ### 5.5.2. queue
-- 内部结构图
+内部结构图
 
 <img src="./figures/queue.png">
 
-- 函数接口
+
+#### 5.5.2.1. API 接口
   - `push()` 入队列
   - `pop()` 出队列
   - `empty()` 对列为空
@@ -603,7 +617,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
 
 
-## 6.2. 其它函数
+## 6.2. API 接口
 - `for_each()` 遍历容器中的所有元素。
 - `transform()` 将容器中的数据进行某种转换的运算。
   - 两个算法的区别
@@ -640,11 +654,17 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 > 一种用来修饰容器(containers)或仿函数(functor)或迭代器(iterators)接口的东西。改变 `functor` 接口者，称为 `function adaptor`；改变 `container` 接口者，称为 `container adaptor`；改变 `iterator` 接口者，称为 `iterator adaptor`。
 
 
-## 7.2. 函数适配器
-- bind adaptor(绑定适配器)
-- composite adaptor(组合适配器)
-- pointer adaptor(指针适配器)
-- member function adaptor(成员函数适配器) 
+### 7.1.1. 函数适配器
+### 7.1.2. bind adaptor(绑定适配器)
+
+
+### 7.1.3. composite adaptor(组合适配器)
+
+
+### 7.1.4. pointer adaptor(指针适配器)
+
+
+### 7.1.5. member function adaptor(成员函数适配器) 
 
 predicate: 判断这个条件是真还是假
 
