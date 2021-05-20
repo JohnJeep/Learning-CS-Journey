@@ -44,12 +44,14 @@ vim 可以看成是一种编程语言。其中，各种按键任意的组合，�
 
 技巧感悟：每一次在按键上敲击时，想一想能否有更简单的方法去替代当前的操作。
 
+诀窍：学会偷懒。其核心在于 “懒”，键盘上能按一次就能完成的工作，绝不按两次。
+
 --------------------------------------------
 
 ## 1.1. Normal Mode
 普通模式(Normal mode)。控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode或者到 command line mode下。
 
-<div align="center"><img width="50%" height="50%" src="./pictures/光标方向.png" /> </div>
+<div align="center"><img width="50%" height="50%" src="../pictures/光标方向.png" /> </div>
 
 
 ### 1.1.1. Cursor Move(光标移动)
@@ -189,15 +191,15 @@ Normal mode 下进行替换操作。
 
 
 ## 1.6. Insert Mode
-插入模式(Insert mode)下，可以做文字输入，按「ESC」键可回到 `normal` 模式
+插入模式(Insert mode)下，可以做文字输入，按「ESC」键可回到 `normal` 模式。
 
 
-- `a(append)` 从当前光标所在的下一个字符处开始插入
-- `A(append after a line)` 从光标所在行的最后一个字符处开始插入
-- `I(insert before line)` 在当前所在行的第一个非空格符处开始插入
-- `i(insert after line)` 当前光标所在位置之前插入
-- `o(open a line below)` 当前光标所在的下一行处插入新的一行
-- `O(大写字母: open a line above)` 当前光标所在处上一行插入新的一行
+- `a(append)` 从当前光标所在的下一个字符处开始插入。
+- `A(append after a line)` 从光标所在行的最后一个字符处开始插入。
+- `I(insert before line)` 在当前所在行的第一个非空格符处开始插入。
+- `i(insert after line)` 当前光标所在位置之前插入。
+- `o(open a line below)` 当前光标所在的下一行处插入新的一行。
+- `O(大写字母: open a line above)` 当前光标所在处上一行插入新的一行。
 
 
 
@@ -206,7 +208,7 @@ Normal mode 模式下按下 `:` 键后进入 command line mode 模式，进行�
 
 
 ### 1.7.1. File
-Comnand line mode 下对文件进行操作。
+Command line mode 下对文件进行操作。
 
 - `:w [filename]`	将编辑的数据储存成另一个档案（类似另存新档）
 - `:r [filename]`	在编辑的数据中，读入另一个档案的数据。将 `filename` 这个档案内容加到光标所在行后面

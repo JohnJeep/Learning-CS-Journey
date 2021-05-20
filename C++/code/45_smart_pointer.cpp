@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-13 11:12:26
- * @LastEditTime: 2021-03-25 09:27:53
+ * @LastEditTime: 2021-05-19 23:49:37
  * @LastEditors: Please set LastEditors
  * @Description: 智能指针知识
  */
@@ -96,7 +96,7 @@ void test03()
 {
     shared_ptr<string> sp1(new string("I am shared pointer."));
     shared_ptr<string> sp2;
-    sp2 = sp1;
+    sp2 = sp1;                // copy assignment
     cout << *sp1 << endl;
     cout << *sp2 << endl;
 
@@ -119,10 +119,17 @@ void test03()
     swap(sp3, sp2);
     cout << "swap after sp2: " << *sp2 << "\t" << "sp3: " << *sp3 << endl;
 
-    cout << "reset brfore sp2.use_count(): " << sp2.use_count() << endl;
+    cout << "reset before sp2.use_count(): " << sp2.use_count() << endl;
     sp2.reset();        // 放弃sp2的所有权，引用计数减一
     cout << "reset after sp2.use_count(): " << sp2.use_count() << endl;
 
+    // 定义一个自己的 deleter
+    shared_ptr<string> str(new string("Implement my deleter"),
+                          [](string* p) {
+                              cout << "deleter: " << *p << endl;
+                              delete p;
+                          });
+    str = nullptr;
 }
 
 // weak_ptr pointer
@@ -149,8 +156,8 @@ int main(int argc, char *argv[])
 {
     // test01();
     // test02();
-    // test03();
-    test04();
+    test03();
+    // test04();
 
     return 0;
 }

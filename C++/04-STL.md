@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-04-07 09:54:17
+ * @LastEditTime: 2021-05-17 23:53:19
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -11,34 +11,36 @@
 - [1. Standard Template Library](#1-standard-template-library)
 - [2. Thinking(思考)](#2-thinking思考)
 - [3. History(历史)](#3-history历史)
-- [4. STL（Standard Template Library）标准模板库](#4-stlstandard-template-library标准模板库)
+- [4. STL(Standard Template Library)标准模板库](#4-stlstandard-template-library标准模板库)
 - [5. Container(容器)](#5-container容器)
   - [5.1. Sequence containers(有序容器)](#51-sequence-containers有序容器)
     - [5.1.1. Array](#511-array)
       - [5.1.1.1. 内部结构](#5111-内部结构)
       - [5.1.1.2. 缺点](#5112-缺点)
-    - [5.1.2. vector（单端的动态数组）](#512-vector单端的动态数组)
+      - [5.1.1.3. 源码分析](#5113-源码分析)
+    - [5.1.2. vector(单端的动态数组)](#512-vector单端的动态数组)
       - [5.1.2.1. 内部结构图](#5121-内部结构图)
-      - [5.1.2.2. 成员函数](#5122-成员函数)
+      - [5.1.2.2. API接口](#5122-api接口)
       - [5.1.2.3. 优点](#5123-优点)
       - [5.1.2.4. 缺点](#5124-缺点)
       - [5.1.2.5. 源码分析](#5125-源码分析)
-    - [5.1.3. deque（双端数组）](#513-deque双端数组)
+    - [5.1.3. deque(双端数组)](#513-deque双端数组)
       - [5.1.3.1. 内部结构图](#5131-内部结构图)
-      - [5.1.3.2. 成员函数](#5132-成员函数)
+      - [5.1.3.2. API接口](#5132-api接口)
       - [5.1.3.3. 优点](#5133-优点)
       - [5.1.3.4. 缺点](#5134-缺点)
-    - [5.1.4. list（双向链表）](#514-list双向链表)
+    - [5.1.4. list(双向链表)](#514-list双向链表)
       - [5.1.4.1. list insert](#5141-list-insert)
       - [5.1.4.2. list delete](#5142-list-delete)
       - [5.1.4.3. 内部结构图](#5143-内部结构图)
       - [5.1.4.4. 优点](#5144-优点)
       - [5.1.4.5. 缺点](#5145-缺点)
-      - [5.1.4.6. 成员函数](#5146-成员函数)
+      - [5.1.4.6. API接口](#5146-api接口)
       - [5.1.4.7. 源码分析](#5147-源码分析)
     - [5.1.5. forword list(单向链表)](#515-forword-list单向链表)
       - [5.1.5.1. 内部结构图](#5151-内部结构图)
       - [5.1.5.2. 缺点](#5152-缺点)
+      - [5.1.5.3. 源码分析](#5153-源码分析)
   - [5.2. Associative containers(关联性容器)](#52-associative-containers关联性容器)
     - [5.2.1. set && multiset](#521-set--multiset)
       - [5.2.1.1. 内部结构图](#5211-内部结构图)
@@ -54,30 +56,38 @@
   - [5.3. Unordered associative containers(无序关联容器)](#53-unordered-associative-containers无序关联容器)
     - [5.3.1. unordered_set && unordered_multiset](#531-unordered_set--unordered_multiset)
     - [5.3.2. unordered_map && unordered_multimap](#532-unordered_map--unordered_multimap)
-  - [5.4. 成员函数](#54-成员函数)
-  - [5.5. Containers Difference(容器之间的差异性)](#55-containers-difference容器之间的差异性)
-  - [5.6. Container adaptors(容器适配器)](#56-container-adaptors容器适配器)
-    - [5.6.1. stack](#561-stack)
-    - [5.6.2. queue](#562-queue)
-    - [5.6.3. priority_queue(优先级队列)](#563-priority_queue优先级队列)
-      - [5.6.3.1. 什么是优先级队列](#5631-什么是优先级队列)
-      - [5.6.3.2. 标准库接口](#5632-标准库接口)
+    - [5.3.3. API 接口](#533-api-接口)
+  - [5.4. Containers Difference(容器之间的差异性)](#54-containers-difference容器之间的差异性)
+  - [5.5. Container adaptors(容器适配器)](#55-container-adaptors容器适配器)
+    - [5.5.1. stack](#551-stack)
+    - [5.5.2. queue](#552-queue)
+      - [5.5.2.1. API 接口](#5521-api-接口)
+    - [5.5.3. priority_queue(优先级队列)](#553-priority_queue优先级队列)
+      - [5.5.3.1. 什么是优先级队列](#5531-什么是优先级队列)
+      - [5.5.3.2. 标准库接口](#5532-标准库接口)
 - [6. Algorithm](#6-algorithm)
   - [6.1. Heap(堆)](#61-heap堆)
-  - [6.2. 其它函数](#62-其它函数)
+  - [6.2. API 接口](#62-api-接口)
 - [7. Adaptor(适配器)](#7-adaptor适配器)
   - [7.1. 什么是适配器？](#71-什么是适配器)
-  - [7.2. 函数适配器](#72-函数适配器)
+    - [7.1.1. 函数适配器](#711-函数适配器)
+    - [7.1.2. bind adaptor(绑定适配器)](#712-bind-adaptor绑定适配器)
+    - [7.1.3. composite adaptor(组合适配器)](#713-composite-adaptor组合适配器)
+    - [7.1.4. pointer adaptor(指针适配器)](#714-pointer-adaptor指针适配器)
+    - [7.1.5. member function adaptor(成员函数适配器)](#715-member-function-adaptor成员函数适配器)
 - [8. Functor(仿函数)](#8-functor仿函数)
   - [8.1. 什么是仿函数？](#81-什么是仿函数)
   - [8.2. 分类](#82-分类)
   - [8.3. 函数对象调用](#83-函数对象调用)
+  - [8.4. Predefined Function Objects (预定义函数对象)](#84-predefined-function-objects-预定义函数对象)
 - [9. Iterator(迭代器)](#9-iterator迭代器)
   - [9.1. 什么是迭代器？](#91-什么是迭代器)
   - [9.2. 基本操作](#92-基本操作)
   - [9.3. half-open range(前闭后开区间)](#93-half-open-range前闭后开区间)
   - [9.4. iterator遵循的原则](#94-iterator遵循的原则)
-  - [9.5. 迭代器失效的原因？](#95-迭代器失效的原因)
+  - [9.5. Iterator 分类](#95-iterator-分类)
+  - [9.6. 源码分析](#96-源码分析)
+  - [9.7. 迭代器失效的原因？](#97-迭代器失效的原因)
 - [10. Allocator(分配器)](#10-allocator分配器)
 - [11. Traits(萃取机)](#11-traits萃取机)
   - [11.1. iterator_traits](#111-iterator_traits)
@@ -125,13 +135,16 @@ Level 3: 扩充C++标准库
 
 ---------------------------
 
-源码版本：gnu 2.91, gnu 4.9
+源码版本：GNU 2.91, GNU 4.9
 
 
+---------------------------
 
 
 # 3. History(历史)
-STL创始人：Alexander Stepanov
+C++创始人：比尼亚·斯特鲁斯特鲁普（Bjarne Stroustrup）
+
+STL创始人：Alexander Stepanov(亚历山大·斯蒂芬诺夫)
 
 GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与修改GPL软件的源代码，但如果使用者要传播借助GPL软件而完成的软件，他们必须也同意GPL规范。这种精神主要是强迫人们分享并回馈他们对GPL软件的改善。得之于人，舍于人。
 
@@ -141,23 +154,28 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 
 
 
-# 4. STL（Standard Template Library）标准模板库
+# 4. STL(Standard Template Library)标准模板库
 - Generic Programming(泛型编程): 操作(operations)使用相同的接口，但是其类型(type)不相同，即使用模板(template)将泛型操作公式化。其中STL是泛型编程(GP)最成功的一个作品。
 
 - STL所实现的是依据泛型思维架设起来的概念结构。STL的核心思想：算法和数据结构的实现是分离的。
 
 
 - STL六大部件
-  - 算法（Algorithm）
-  - 容器（Container）
-  - 迭代器（Iterator）
-  - 仿函数（Functor）
-  - 适配器（Adaptor）
-  - 分配器（Alloctor） 
+  - 算法 (Algorithm)
+  - 容器 (Container）
+  - 迭代器 (Iterator)
+  - 仿函数 (Functor)
+  - 适配器 (Adaptor)
+  - 分配器 (Alloctor)
+  
+  > 从语言实现的层面分析，Algorithm 采用 function template 实现的，而 Container、Iterator、Functor、Adaptor、Alloctor 都是采用 class template 实现的。
 
 - **六大部件之间的关系**
-  > Container 通过 Allocator 取得数据存储空间，Algorithm 通过 Iterator 存取 Container 内容，iterator 可以看做是算法与容器之间沟通的桥梁，Functor 可以协助 Algorithm 完成不同的策略变化，Adaptor 可以修饰或套接 Functor。
-  <img src="./figures/stl-component.png">
+  - Container 通过 Allocator 取得数据存储的空间；
+  - Algorithm 通过 Iterator 访问 Container 中的内容，Container 与 Algorithm 之间不能直接访问，需要借助 iterator，可以把 Iterator 看做是算法与容器之间沟通的桥梁；
+  - Functor 协助 Algorithm 完成不同的策略变化；
+  - Adaptor 修饰或套接 Functor；
+<img src="./figures/stl-component.png">
 
 
 
@@ -176,9 +194,9 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
 
 
 # 5. Container(容器)
-容器是一个一个的模板类，里面放的是元素。
+容器是一个一个的类模板 (class template)，里面放的是元素。
 
-STL标准库中 `容器` 内存储的元素都必须能够拷贝，而C++编译器默认提供的是浅拷贝，程序在执行时，则会出现问题。因此需要 `重写构造函数` 和重载 `=` 操作运算符，执行深拷贝。
+STL标准库中 **容器**** 内存储的元素都必须能够拷贝，而C++编译器默认提供的是浅拷贝，程序在执行时，则会出现问题。因此需要 **重写构造函数** 和重载 **=** 操作运算符，执行深拷贝。
 
 
 https://cloud.tencent.com/developer/article/1052125
@@ -186,20 +204,24 @@ https://cloud.tencent.com/developer/article/1052125
 ## 5.1. Sequence containers(有序容器)
 
 ### 5.1.1. Array
-Array是fixed number of elements(固定数量的元素)。
+Array是C++11标准之后新增的一个容器，表示固定数量的元素(fixed number of elements)。为了模拟数组的相关特性。
 
 #### 5.1.1.1. 内部结构
 <img src="./figures/container-arrays.png">
 
+STL源码中实现，没有构造和析构函数。
+
 #### 5.1.1.2. 缺点
 - 不能扩容。
 
+#### 5.1.1.3. 源码分析
+<img src="./figures/array.png">
 
-### 5.1.2. vector（单端的动态数组）
-vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。
+### 5.1.2. vector(单端的动态数组)
+- vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。
 
 
-动态数组实现机制：
+- 动态数组实现机制：
   > 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
 
 
@@ -213,7 +235,7 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 <img src="./figures/container-vectors.png">
 
 
-#### 5.1.2.2. 成员函数
+#### 5.1.2.2. API接口
 - `size()`: 返回容器中元素的个数
 - `get(r)`: 获取秩（索引）为r的元素
 - `put(r, e)`: 用e替换秩为r元素的数值
@@ -253,32 +275,36 @@ vector是C++标准模板库中的部分内容，它是一个多功能的，能�
 
 #### 5.1.2.5. 源码分析
 GNU 2.9版源码UML图
-![](./figures/vector-2.9.png)
+<img src="./figures/vector-2.9.png">
 
 
 GNU 4.9版源码UML图
-![](./figures/vector-4.9.png)
+<img src="./figures/vector-4.9.png">
 
 
 **Vector类与其基类之间的关系**
-![](./figures/UMLClassDiagram-_Vector_base.png)
+<img src="./figures/UMLClassDiagram-_Vector_base.png">
 
 **Vector_base内部类与其它类之间的关系**
-![](./figures/UMLClassDiagram-_Vector_impl.png)
+<img src="./figures/UMLClassDiagram-_Vector_impl.png">
+
 
 **迭代器之间的关系**
-![](./figures/UMLClassDiagram-reverse_iterator.png)
+<img src="./figures/UMLClassDiagram-reverse_iterator.png">
 
-### 5.1.3. deque（双端数组）
+
+### 5.1.3. deque(双端数组)
 deque是在功能上合并了vector和list。与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
 
 
 #### 5.1.3.1. 内部结构图
 <img src="./figures/container-deques.png">
+
 <img src="./figures/container-deques-internal-structure.png">
+
 <img src="./figures/deque.png">
 
-#### 5.1.3.2. 成员函数
+#### 5.1.3.2. API接口
 - `push_back()`: 在容器末尾插入一个元素
 - `push_front()` 容器头部插入一个元素
 - `pop_front()`: 容器头部删除一个元素
@@ -295,7 +321,7 @@ deque是在功能上合并了vector和list。与 `vector` 容器类似，但是�
 - 占用内存多。
 
 
-### 5.1.4. list（双向链表）
+### 5.1.4. list(双向链表)
 list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除` 元素。每一个结点都包括一个信息快Info、一个前驱指针Pre、一个后驱指针Post。可以不分配固定的内存大小，方便的进行添加和删除操作，使用的是非连续的内存空间进行存储。
 
 
@@ -313,6 +339,7 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 
 #### 5.1.4.3. 内部结构图
 <img src="./figures/container-lists.png">
+
 <img src= "./figures/container-lists-internal-structure.png">
 
 #### 5.1.4.4. 优点
@@ -326,14 +353,14 @@ list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除`
 - 不能进行内部的随机访问，即不支持 `at.(pos)` 函数和 `[]` 操作符。
 - 相对于verctor占用内存多。
 
-#### 5.1.4.6. 成员函数
+#### 5.1.4.6. API接口
 
 #### 5.1.4.7. 源码分析
 ```cpp
     _Self&
     operator++() _GLIBCXX_NOEXCEPT      // 前置++
     {
-_M_node = _M_node->_M_next;            // 移动结点
+_M_node = _M_node->_M_next;             // 移动结点
 return *this;
     }
 
@@ -350,19 +377,19 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 **```_M_node = _M_node->_M_next;``` 这一行为++操作的具体实现过程：**
 > 移动结点。过程：将当前结点next域的值取出来赋给_M_node，而_M_node本身指向当前的结点，_M_node->_M_next 指到下一个结点的prev域。此时_M_node 与_M_node->_M_next指向的内容是一样的，所以把_M_node移动到 _M_node->_M_next 指向的位置，这一过程就是结点的++操作。
 
-![](./figures/node++.png)
+<img src="./figures/node++.png">
 
 
 
 **思考：为什么前置++与后置++两者的返回值是不一样的？**
 > 为了与整数的++操作保持一致，操作运算符重载持有的操作应该向整数的操作看起，拥有类似的功。保证不能进行两次的++运算操作。
-![](./figures/self.png)
+<img src="./figures/self.png">
 
 
 源码中list的UML图分析
-![](./figures/UMLClassDiagram-_List_base.png)
+<img src="./figures/UMLClassDiagram-_List_base.png">
 
-![](./figures/UMLClassDiagram-_List_node_base.png)
+<img src="./figures/UMLClassDiagram-_List_node_base.png">
 
 
 
@@ -375,7 +402,8 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 #### 5.1.5.2. 缺点
 - 只能扩充一个结点。
 
-
+#### 5.1.5.3. 源码分析
+<img src="./figures/forward-list.png">
 
 ## 5.2. Associative containers(关联性容器)
 关联式容器并不提供元素的直接访问，需要依靠迭代器访问。map 是个例外，提供了subscript(下标)操作符，支持元素的直接访问。
@@ -393,6 +421,7 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 
 #### 5.2.1.1. 内部结构图  
 <img src="./figures/set-multiset.png">
+
 <img src="./figures/set-multiset-internal-structure.png">
 
 
@@ -409,6 +438,8 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 - `equal_range(ele)`返回容器中等于查找元素的两个上下限的迭代器位置（第一个：大于等于ele元素的位置，第二个：大于 ele元素的位置）
 
 #### 5.2.1.3. 优点
+
+
 #### 5.2.1.4. 缺点
 
 
@@ -420,27 +451,31 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 - map 的底层原理是按照平衡二叉树的数据结构来实现的，在插入和删除的操作上比 `vector` 容器快。
+
 - map 支持唯一的键值，每个 `key` 只能出现一次，支持 `[]` 操作，形如：`map[key] = value`。 `multimap` 不支持唯一的键值，容器中的每个 `key` 可以出现相同的多次，不支持 `[]` 操作。
+> set 和 map 中的 key 不能重复，而 multiset 和 multimap 中的 key 却能重复的原因：set 和 map 底层调用的是红黑树的 `insert_unique()`，而 multiset 和 multimap 底层调用的是红黑树中的 `insert_equal()` 去进行 `insert` 操作的。
+
 
 - map和multimap会根据元素的 `key` 自动对元素排序。这么一来，根据已知的 `key` 查找某个元素时就能够有很好的效率，而根据己知 `value` 查找元素时，效率就很糟糕。“自动排序"这一性质使得 map 和 multimap 本身有了一条重要限制：你不可以直接改变元素的 `key`。因为这样做会损坏正确的次序。想要修改元素的 `key` ，必须先移除拥有该 `key` 的元素，然后插人拥有新 `key/value` 的元素。从迭代器的视角看，元素的 `key` 是常量。然而直接修改元素的 `value` 是可能的，提供的值的类型不能是 `constant`。
 
 
 #### 5.2.2.1. map与multimap内部结构图  
 <img src="./figures/map-multimap.png">
+
 <img src="./figures/map-multimap-internal-structure.png">
 
 
 #### 5.2.2.2. map insert
-```C++
-  // 四种map容器的插入方法
-  map<int, string> mp;
-  mp.insert(pair<int, string>(101, "赵云"));                   // 法一
-  mp.insert(make_pair<int, string>(102, "关羽"));              // 法二
-  mp.insert(map<int, string>::value_type(103, "曹操"));        // 发三
-  mp[104] = "张飞";                                            // 法四
+```cpp
+// 四种map容器的插入方法
+map<int, string> mp;
+mp.insert(pair<int, string>(101, "赵云"));                   // 法一
+mp.insert(make_pair<int, string>(102, "关羽"));              // 法二
+mp.insert(map<int, string>::value_type(103, "曹操"));        // 法三
+mp[104] = "张飞";                                            // 法四
 
-  // 方法一到方法三向容器中插入相同的键值时，不会插入成功。
-  // 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
+// 方法一到方法三向容器中插入相同的键值时，不会插入成功。
+// 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
 ```
 
 - <font color=red>注意:</font> 
@@ -460,6 +495,7 @@ multimap (collection of key-value pairs, sorted by keys.)
 #### 5.2.2.4. 优点
 插入键值的元素不允许重复，只对元素的键值进行比较，元素的各项数据可以通过 key 值进行检索。 
 
+
 #### 5.2.2.5. 缺点
 
 
@@ -468,15 +504,16 @@ multimap (collection of key-value pairs, sorted by keys.)
 
 
 ### 5.3.1. unordered_set && unordered_multiset
-> `unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
+`unordered_set` 是一种无序的容器集合。底层采用哈希表实现的。
 
 - STL无序容器存储状态，hash表存储结构图
 <img src="./figures/unordered-containers.png">
+
 <img src="./figures/unordered-sets-multisets-internal-structure.png">
   
 
 - `unordered_set` 模板类中的定义
-  ```C++
+  ```cpp
   template<typename _Value,                        // 容器中存储元素的类型
           typename _Hash = hash<_Value>,           // 确定元素存储位置的哈希函数
           typename _Pred = std::equal_to<_Value>,  // 判断各个元素是否相等
@@ -495,12 +532,12 @@ multimap (collection of key-value pairs, sorted by keys.)
 内部结构图
 <img src="./figures/unordered-maps-multimsps-internal-structure.png">
 
-## 5.4. 成员函数
+### 5.3.3. API 接口 
 - `count(key)` : 对multimap而言，返回 key 在multimap 中出现的次数；对 map 而言，返回结果为：当前key在map中，返回结果为 1，没在返回结果就为 0；
 
 
 
-## 5.5. Containers Difference(容器之间的差异性)
+## 5.4. Containers Difference(容器之间的差异性)
 和其他所有关联式容器一样，`map/multimap` 底层是以平衡二叉树完成的。C++ standard 并未明定这一点，但是从map和multimap各项操作的复杂度自然可以得出这一结念。通常set、multiset、map和multimp都使用相同的内部结构，因此，你可以把set和multiset视为特殊的map和multimp，只不过set元素的 `value和key是同一对象`。因此，map和multimap拥有set和multiset的所有能力和所有操作。当然，某些细微差异还是有的：首先，它们的元素是key/value pair，其次，map可作为关联式数组(associative array)来使用。
 
 vector list map set容器如何选择？
@@ -511,22 +548,22 @@ vector list map set容器如何选择？
 - Set和Vector的区别在于Set容器不包含重复的数据。Set和Map的区别在于Set只含有Key，而Map有一个Key和Key所对应的Value两个元素。
 - Map和Hash_Map的区别是Hash_Map使用了Hash算法来加快查找过程，但是需要更多的内存来存放这些Hash桶元素，因此可以算得上是采用空间来换取时间策略。
 
-
    1 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector 
      2 如果你需要大量的插入和删除，而不关心随即存取，则应使用list 
      3 如果你需要随即存取，而且关心两端数据的插入和删除，则应使用deque
 
 
 
-## 5.6. Container adaptors(容器适配器)
+## 5.5. Container adaptors(容器适配器)
 容器适配器为有序的容器提供了不同的接口。queue和stack底层完全借助 deque实现的。
 
 
-### 5.6.1. stack
-- 内部结构图
-- <img src="./figures/stack.png">
+### 5.5.1. stack
+内部结构图
 
-- 函数接口
+ <img src="./figures/stack.png">
+
+- API 接口
   - `push()` 入栈
   - `pop()` 出栈
   - `top()` 获取栈顶元素
@@ -534,11 +571,13 @@ vector list map set容器如何选择？
   - `empty()` 栈为空
 
 
-### 5.6.2. queue
-- 内部结构图
-- <img src="./figures/queue.png">
+### 5.5.2. queue
+内部结构图
 
-- 函数接口
+<img src="./figures/queue.png">
+
+
+#### 5.5.2.1. API 接口
   - `push()` 入队列
   - `pop()` 出队列
   - `empty()` 对列为空
@@ -546,12 +585,12 @@ vector list map set容器如何选择？
   
 
 
-### 5.6.3. priority_queue(优先级队列)
-#### 5.6.3.1. 什么是优先级队列
+### 5.5.3. priority_queue(优先级队列)
+#### 5.5.3.1. 什么是优先级队列
 
 
-#### 5.6.3.2. 标准库接口
-```C++
+#### 5.5.3.2. 标准库接口
+```cpp
 // 最大或最小优先级队列变量的声明 
 
 priority_queue<int> g_priq;                            // 默认为最大值优先队列
@@ -578,14 +617,14 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
 
 
-## 6.2. 其它函数
+## 6.2. API 接口
 - `for_each()` 遍历容器中的所有元素。
 - `transform()` 将容器中的数据进行某种转换的运算。
   - 两个算法的区别
     - `for_each()` 使用的函数对象可以没有 `返回值`，参数一般传 `reference`，因此速度较快，不是很灵活。
     - `transform()` 使用的函数对象必须要有 `返回值`，参数一般传 `value`，因此速度较慢，但是很灵活。
 - `adjacent()` 查找一对相邻位置重复的元素，找到则返回指向这对元素的第一个元素的迭代器值。
-- `distance()` 迭代器下标的位置。
+- `distance()` 返回两个迭代器之间的距离，两个迭代器必须指向同一个容器。
 - `binary_search()` 采用二分法在有序序列中查找 value，找到则返回 true。在无序的序列中不能使用。
 - `count()` 计数容器中指定元素的个数。
 - `count_if()` 使用 `谓词` 计数容器中指定条件元素的个数。
@@ -600,12 +639,12 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 - `replace_if()` 将指定范围内的 `oldValue` 替换为 `newValue`，需要指定 `函数对象`（是自定义的函数对象或STL预定义的函数对象）。
 - `swap()`  交换两个容器
 - `accumulate()` 累加遍历容器中指定范围内的元素，并在结果上加一个指定的值。
-- `stable_partition()`函数
-- `upper_bound()` 函数
-- `lower_bound()` 函数
-- `std::floor` 和 `std::ceil`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
-  - `std::floor` -->向下取整数。`5.88   std::floor(5.88) = 5;`
-  - `std::ceil ` -->向上取整数。`std::ceil(5.88)   = 6;`
+- `stable_partition()`
+- `upper_bound()` 
+- `lower_bound()` 
+- `std::floor()` 和 `std::ceil()`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
+  - `std::floor()` -->向下取整数。`5.88   std::floor(5.88) = 5;`
+  - `std::ceil()` -->向上取整数。`std::ceil(5.88)   = 6;`
 
 
      
@@ -615,30 +654,40 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 > 一种用来修饰容器(containers)或仿函数(functor)或迭代器(iterators)接口的东西。改变 `functor` 接口者，称为 `function adaptor`；改变 `container` 接口者，称为 `container adaptor`；改变 `iterator` 接口者，称为 `iterator adaptor`。
 
 
-## 7.2. 函数适配器
-- bind adaptor(绑定适配器)
-- composite adaptor(组合适配器)
-- pointer adaptor(指针适配器)
-- member function adaptor(成员函数适配器) 
+### 7.1.1. 函数适配器
+### 7.1.2. bind adaptor(绑定适配器)
+
+
+### 7.1.3. composite adaptor(组合适配器)
+
+
+### 7.1.4. pointer adaptor(指针适配器)
+
+
+### 7.1.5. member function adaptor(成员函数适配器) 
 
 predicate: 判断这个条件是真还是假
 
 
+
+
 # 8. Functor(仿函数)
 ## 8.1. 什么是仿函数？
-仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`。一般函数指针可视为狭义的仿函数。 
+仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
 
-
+<img src="./figures/functors.png">
 
 ## 8.2. 分类
-  - 预定义函数对象：标准STL模板库中提前预定义了很多的函数对象。
-  - 用户自定义的函数对象 。
-    > Function object(函数对象): 需要重载 `()` 操作运算符。函数对象的调用与 `回调函数` 的调用类似。
+- 函数指针 (function pointer)
+- 带有成员函数 `operator()` 创建的 object。
+- 带有转换函数可将自己转换为 pointer to function 的 class 所创建的 object。
+- lambda 表达式。
 
 ## 8.3. 函数对象调用
-  - 函数对象可以做函数参数。 
-  - 函数对象可以做返回值。 
-  ```C++
+- 函数对象可以做函数参数。 
+- 函数对象可以做返回值。 
+- 函数对象的调用与 `回调函数` 的调用类似。 
+  ```cpp
   class Stu
   {
     private:
@@ -646,7 +695,10 @@ predicate: 判断这个条件是真还是假
       void operator() (Stu& T) {}
   }
   ``` 
+## 8.4. Predefined Function Objects (预定义函数对象)
+> 标准STL模板库中提前预定义了很多的函数对象。
 
+标准库预定义函数对象的头文件是 `<functional>`。
 
 
 # 9. Iterator(迭代器)
@@ -677,11 +729,55 @@ predicate: 判断这个条件是真还是假
 
 
 ## 9.4. iterator遵循的原则
+iterator 是算法 (Algorithms) 与容器 (containers) 之间的桥梁。
+
+<img src="./figures/iterator-types.png">
+
+## 9.5. Iterator 分类
+<img src="./figures/iterator-category.png">
+
+istream_iterator 的 iterator_category
+<img src="./figures/istream-iterator.png">
+
+ostream_iterator 的 iterator_category
+<img src="./figures/ostream-iterator.png">
+
+父类中没有data 和 function，子类继承于父类的 typedef。
+
+**Iterator分类对算法的影响**
+
+<img src="./figures/iterator-category-copy.png">
+
+<img src="./figures/iterator-category-destory.png">
+
+<img src="./figures/iterator-category-destory-2.png">
+
+
+## 9.6. 源码分析
+位于标准库的 `stl_iterator_base_types.h` 文件中。
+
+```cpp
+///  Marking input iterators.
+struct input_iterator_tag { };
+
+///  Marking output iterators.
+struct output_iterator_tag { };
+
+/// Forward iterators support a superset of input iterator operations.
+struct forward_iterator_tag : public input_iterator_tag { };
+
+/// Bidirectional iterators support a superset of forward iterator
+/// operations.
+struct bidirectional_iterator_tag : public forward_iterator_tag { };
+
+/// Random-access iterators support a superset of bidirectional
+/// iterator operations.
+struct random_access_iterator_tag : public bidirectional_iterator_tag { };
+```
 
 
 
-
-## 9.5. 迭代器失效的原因？
+## 9.7. 迭代器失效的原因？
 - 何为迭代器失效？
   - STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
 
@@ -711,6 +807,7 @@ predicate: 判断这个条件是真还是假
 分配器我们一般不直接使用它，它是给容器使用的。容器的内存分配是通过分配器来管理的。
 
 C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
+
 **Allocator代表的是一种特殊内存模型(memorymodel)，并提供一种抽象的概念，将对内存的索求(need to use memory)转变为对内存的直接调用(raw call for memory)。** 如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
 
 最初，allocator只是作为STL的一部分而引人的，用来处理像PC上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存(shared memory）、垃圾回收（garbagecollection）、面向对象数据库(object-oriented database)等解决方案能保特一致接。
@@ -741,10 +838,11 @@ malloc分配内存时，会有额外的外开销(overhead)，使程序变慢。�
 ## 11.1. iterator_traits
 trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征。这个有点不好理解，可以把它理解成一个 `萃取机`，用来区分传入迭代器中的类型是 `class iterators` 还是 `non class iterators，即native pointer`。可以利用 `类模板中的partial specialization` 可以得到目标。
 
+<img src="./figures/iterator-traits.png">
+
 位于 `../C++/bits/stl_iterators.h>` 头文件中。
 
-
-![](./figures/traits.png)
+<img src="./figures/traits.png">
 
 
 ## 11.2. type traits

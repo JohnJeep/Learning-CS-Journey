@@ -18,7 +18,7 @@
                 "-std=c++17",
                 "-lm",         
                 "-fexec-charset=GBK",                                             // 使用g++编译后，程序为GBK编码
-                "-finput-charset=UTF-8",                                          // 输入编译器文本编码 默认为UTF-8词典
+                "-finput-charset=UTF-8",                                          // 输入编译器文本编码 默认为 UTF-8 编码
                 // "-fexec-charset=GB18030",                                      // 输出exe文件的编码
                 "-D _USE_MATH_DEFINES",
                 "\"${file}\"",                                                    // 指定编译源代码文件
