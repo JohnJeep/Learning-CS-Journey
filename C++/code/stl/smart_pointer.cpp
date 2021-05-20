@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-13 11:12:26
- * @LastEditTime: 2021-05-19 23:49:37
+ * @LastEditTime: 2021-05-20 22:25:21
  * @LastEditors: Please set LastEditors
  * @Description: 智能指针知识
  */
@@ -150,6 +150,36 @@ void test04()
     shared_ptr<SmartPointerB> fp = pa->sp_b.lock();  // 获取SmartPointerB对象的强引用
     fp->pFun();
 }
+
+
+#include <memory>     // shared_ptr
+#include <sys/mman.h> // shared memory
+#include <fcntl.h>
+#include <unistd.h>
+#include <cstring>    // strerror
+#include <cerrno>     // error
+#include <cstring>
+#include <iostream>
+
+namespace shared_memory
+{
+    class SharedMemoryDetacher
+    {
+    private:
+        /* data */
+    public:
+        SharedMemoryDetacher(/* args */) {}
+        ~SharedMemoryDetacher() {}
+
+        void operator() (int* p) 
+        {
+            cout << "unlink /temp1234" << endl;
+            if (shm_unlink("/tmp1234") != 0) {
+                std::cerr << "OOPs: shm_unlink() failed" << std::endl;
+            }
+        }
+    };
+} // namespace shared_memory
 
 
 int main(int argc, char *argv[])
