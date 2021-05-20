@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-15 09:06:47
- * @LastEditTime: 2020-06-15 09:36:40
+ * @LastEditTime: 2021-05-20 22:26:53
  * @LastEditors: Please set LastEditors
  * @Description: 模板函数用例
- * @FilePath: /C++/code/template_func.cpp
  */ 
 #include <iostream>
 using namespace std;

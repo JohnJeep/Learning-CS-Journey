@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-11 09:50:29
- * @LastEditTime: 2020-07-13 14:06:37
+ * @LastEditTime: 2021-05-20 22:29:55
  * @LastEditors: Please set LastEditors
  * @Description: 数组模板类的实现
- * @FilePath: /MyVector.cpp
  */ 
 #include <iostream>
 #include "MyVector.h"

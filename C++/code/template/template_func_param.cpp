@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-15 10:13:51
- * @LastEditTime: 2020-06-15 11:13:10
+ * @LastEditTime: 2021-05-20 22:27:17
  * @LastEditors: Please set LastEditors
  * @Description: 函数模板做函数参数
- * @FilePath: /C++/code/template_func_param.cpp
  */ 
 #include <iostream>
 using namespace std;
