@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-12 09:05:46
- * @LastEditTime: 2020-07-12 18:40:08
+ * @LastEditTime: 2021-05-20 22:13:03
  * @LastEditors: Please set LastEditors
  * @Description: 数组模板类的主体
- * @FilePath: /array_template_class/main.cpp
  */ 
 #include <iostream>
 #include "MyVector.cpp"
