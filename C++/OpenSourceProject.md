@@ -8,17 +8,20 @@
 
 <!-- TOC -->
 
-- [1. GitHub开源项目](#1-github开源项目)
-  - [1.1. C项目](#11-c项目)
-  - [1.2. C++项目](#12-c项目)
-  - [1.3. 网络](#13-网络)
-  - [1.4. Linux项目](#14-linux项目)
-  - [1.5. 其它项目](#15-其它项目)
+- [GitHub开源项目](#github开源项目)
+- [1. C项目](#1-c项目)
+- [2. C++项目](#2-c项目)
+- [3. 网络](#3-网络)
+- [4. Linux项目](#4-linux项目)
+- [5. Go语言](#5-go语言)
+- [6. 数据结构与算法](#6-数据结构与算法)
+- [7. 其它项目](#7-其它项目)
 
 <!-- /TOC -->
 
-# 1. GitHub开源项目
-## 1.1. C项目
+
+# GitHub开源项目
+# 1. C项目
 1.  [ip2region](https://github.com/lionsoul2014/ip2region)：准确率99.9%的离线IP地址定位库，0.0x毫秒级查询
 2.  [explainshell](https://www.explainshell.com/)：解析 Linux 命令的网站
 3.  [Tinyhttpd](https://github.com/EZLippi/Tinyhttpd)：一个不到 500 行的超轻量型 HTTP Server
@@ -32,7 +35,7 @@
 11.  [libhv](https://github.com/ithewei/libhv)：快速的编写 HTTP 客户端/服务端，简单易用的非阻塞 IO 事件循环库
 
 
-## 1.2. C++项目
+# 2. C++项目
 1. [JSON for Modern C++](https://github.com/nlohmann/json)
 2. [现代 C++ 教程](https://github.com/changkun/modern-cpp-tutorial)
 3. [C++ 风格指南 - 内容目录](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
@@ -45,7 +48,7 @@
 
 
 
-## 1.3. 网络
+# 3. 网络
 1. [WebServer](https://github.com/linyacool/WebServer)：牛客大佬健康成长天线宝宝写的『HTTP』的服务器。
 2. [NetServer](https://github.com/chenshuaihao/NetServer)：本项目为C++11编写的基于『epoll』的多线程网络服务器框架，应用层实现了简单的HTTP服务器HttpServer和一个回显服务器EchoServer，其中『HTTP』服务器实现了HTTP的解析和get方法请求，目前支持静态资源访问，支持HTTP长连接；该框架不限于这两类服务器，用户可根据需要编写应用层服务。通过该项目你可以了解到部分C++11的语法和编码规范、学习巩固网络编程、网络IO模型、多线程、git使用、Linux命令、性能分析、TCP/IP、HTTP协议等知识。
 3. [Sylar](https://github.com/sylar-yin/sylar)：这是一个『C++』高性能分布式服务器框架 的项目。该项目主要有 13 大模块组成，分别是日志模块、配置模块、线程模块、协程模块、协程调度模块、IO协程调度模块、Hook模块、Socket模块、ByteArray序列化模块、TcpServer模块、Stream模块、HTTP模块、Servlet模块。
@@ -56,14 +59,24 @@
 
 
 
-## 1.4. Linux项目
+# 4. Linux项目
 1. [Linux内核揭秘](https://github.com/MintCN/linux-insides-zh)：分享对 Linux 内核内在机理的一点知识，帮助对 Linux 内核内在机理感兴趣的人，和其他低级话题。
 2. [命令行的艺术](https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8)：常用命令行总结
 3. [Commit messages guide](https://github.com/RomuloOliveira/commit-messages-guide/blob/master/README_zh-CN.md)：git 提交信息说明
 4. **[Netdata](https://github.com/netdata/netdata)**：Linux 系统性能实时监控工具
 
 
-## 1.5. 其它项目
+# 5. Go语言
+- [Go语言高级编程](https://github.com/chai2010/advanced-go-programming-book)  《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题。
+- [Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
+
+
+# 6. 数据结构与算法
+- [The-Art-Of-Programming-By-July](https://github.com/julycoding/The-Art-Of-Programming-By-July) 七月博主开源的《编程之法：面试和算法心得》，文章比较有深度，值得慢慢读。
+
+
+
+# 7. 其它项目
 1.  [annie](https://github.com/iawia002/annie)：Go 编写的快速、简单、干净的视频下载程序
     [most-frequent-technology-english-words](https://github.com/Wei-Xia/most-frequent-technology-english-words)：程序员工作中常见的英语词汇	
 2.  [NPS](https://github.com/ehang-io/nps)：一款功能强大、轻量级的内网穿透代理服务器。
@@ -71,3 +84,5 @@
 4.  [manim](https://github.com/3b1b/manim)：一个生成数学教学视频的动画引擎。它用编程的方式创建精美的数学动画，让数学更加易懂。
 5.  [AutoPiano](https://github.com/WarpPrism/AutoPiano))：利用HTML5技术开发的在线钢琴应用，致力于为钢琴爱好者、音乐爱好者以及其他所有的创造者提供一个优雅、简洁的平台，在学习工作之余可以享受钢琴、音乐的美好。
 6.  [微信公众号排版编辑器](https://github.com/lyricat/wechat-format)：转化 Markdown 到给微信特制的 HTML
+
+

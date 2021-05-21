@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-17 11:40:43
- * @LastEditTime: 2020-07-22 08:44:41
+ * @LastEditTime: 2021-05-21 16:20:51
  * @LastEditors: Please set LastEditors
  * @Description: STL标准库list容器
  * @FilePath: /37_stl_list.cpp
@@ -12,9 +12,8 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+void test01()
 {
-    
     list<int> st;
     list<int>::iterator index;
     st.push_back(77);
@@ -52,6 +51,18 @@ int main(int argc, char *argv[])
         cout << *it << " ";
     }
     cout << endl;
+}
+
+// list element pass into vector 
+void test04() 
+{
+    list<int> lt = {1, 3, 4, 5, 7, 11, 13, 21};
+    vector<int> v(lt.begin(), lt.end());  //将list中的元素一次传入到vector中 
+
+}
+int main(int argc, char *argv[])
+{
+    test01();    
 
     return 0;
 }
