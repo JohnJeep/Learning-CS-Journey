@@ -4,7 +4,6 @@
  * @LastEditTime: 2020-08-12 14:14:59
  * @LastEditors: Please set LastEditors
  * @Description: 单个类模板
- * @FilePath: /single_class_template.cpp
  */ 
 #include <iostream>
 using namespace std;

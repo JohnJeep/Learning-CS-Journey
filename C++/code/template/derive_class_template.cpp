@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-17 10:56:48
- * @LastEditTime: 2020-07-11 09:49:06
+ * @LastEditTime: 2021-05-20 22:27:28
  * @LastEditors: Please set LastEditors
  * @Description: 派生模板类和普通类继承父类的模板类
- * @FilePath: /C++/code/derive_class_template.cpp
  */ 
 #include <iostream>
 using namespace std;

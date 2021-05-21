@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-14 15:09:12
- * @LastEditTime: 2020-07-15 10:42:43
+ * @LastEditTime: 2021-05-20 22:20:24
  * @LastEditors: Please set LastEditors
  * @Description: 输入输出流
- * @FilePath: /31_input_output_stream.cpp
  */ 
 #include <iostream>
 #include <cstdio>

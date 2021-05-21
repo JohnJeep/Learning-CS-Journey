@@ -1,10 +1,9 @@
 /*
  * @Author: your name
  * @Date: 2020-07-22 09:16:43
- * @LastEditTime: 2020-07-22 16:19:28
+ * @LastEditTime: 2021-05-20 22:24:40
  * @LastEditors: Please set LastEditors
  * @Description: STL标准库综合案例：24名选手参加演讲比赛，选出比赛的前三名
- * @FilePath: /42_stl_comprehensive_example.cpp
  */ 
 #include <iostream>
 #include <cstdio>

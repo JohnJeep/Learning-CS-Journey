@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-17 15:35:43
- * @LastEditTime: 2020-06-18 09:02:10
+ * @LastEditTime: 2021-05-20 22:27:36
  * @LastEditors: Please set LastEditors
  * @Description: 类模板中的操作符运算操作
- * @FilePath: /C++/code/class_template_operator.cpp
  */ 
 #include <iostream>
 using namespace std;

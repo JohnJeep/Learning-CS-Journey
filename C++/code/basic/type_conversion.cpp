@@ -4,7 +4,6 @@
  * @LastEditTime: 2020-07-13 14:17:39
  * @LastEditors: Please set LastEditors
  * @Description: C++类型转换
- * @FilePath: /C++/code/28_type_cast.cpp
  */ 
 #include <iostream>
 #include <cstdio>
