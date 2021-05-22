@@ -10,31 +10,27 @@
 
 - [1. 概念](#1-概念)
 - [2. subversion 常用流程](#2-subversion-常用流程)
-  - [2.1. 常用命令](#21-常用命令)
-  - [2.2. add](#22-add)
-  - [2.3. checkout](#23-checkout)
-  - [2.4. commit](#24-commit)
-  - [2.5. lock/unlock](#25-lockunlock)
-  - [2.6. update](#26-update)
-  - [2.7. status](#27-status)
-  - [2.8. delete](#28-delete)
-  - [2.9. cat](#29-cat)
-  - [2.10. list](#210-list)
-  - [2.11. diff](#211-diff)
-  - [2.12. copy](#212-copy)
-  - [2.13. merge](#213-merge)
-  - [2.14. log](#214-log)
-  - [2.15. info](#215-info)
-  - [2.16. resolved](#216-resolved)
-  - [2.17. switch](#217-switch)
-  - [2.18. revert](#218-revert)
-- [3. 参考](#3-参考)
+- [3. 常用命令](#3-常用命令)
+  - [3.1. add](#31-add)
+  - [3.2. checkout](#32-checkout)
+  - [3.3. commit](#33-commit)
+  - [3.4. lock/unlock](#34-lockunlock)
+  - [3.5. update](#35-update)
+  - [3.6. status](#36-status)
+  - [3.7. delete](#37-delete)
+  - [3.8. cat](#38-cat)
+  - [3.9. list](#39-list)
+  - [3.10. diff](#310-diff)
+  - [3.11. copy](#311-copy)
+  - [3.12. merge](#312-merge)
+  - [3.13. log](#313-log)
+  - [3.14. info](#314-info)
+  - [3.15. resolved](#315-resolved)
+  - [3.16. switch](#316-switch)
+  - [3.17. revert](#317-revert)
+- [4. 参考](#4-参考)
 
 <!-- /TOC -->
-
-
-
-
 # 1. 概念
 - 什么是Subversion?
 > Subversion的版本库是一种特别的文件版本库，它会记录每一次改变：每个文件的改变，甚至是目
@@ -86,32 +82,32 @@
    - `svn commit`
 
 
-## 2.1. 常用命令
+# 3. 常用命令
 最重要的是帮助命令，遇见不会的命令，需要自己查看帮助文档：`svn help subcommand`，其中 subcommand 为 subversion 的内建命令。
 
-## 2.2. add
+## 3.1. add
 - 往版本库中添加新的文件 
 - `svn add *.php` 添加当前目录下所有后缀名为 `.php` 的文件。
 
-## 2.3. checkout
+## 3.2. checkout
 - 将从SVN版本库中拷贝项目到本地工作目录中，得到一个本地拷贝，这个拷贝包括了命令行指定版本库中的HEAD(最新的)版本。
 -  例如：`svn checkout svn://192.168.1.131/45dian/brand`
 
 
-## 2.4. commit
+## 3.3. commit
 - 将本地版本库中改变的文件提交到SVN版本库中
 - `svn commit -m “LogMessage“ [-N] [--no-unlock] PATH` (如果选择了保持锁，就使用–no-unlock开关)
  - 例如：`svn commit -m “add test file for my test“ test.php`
 
 
-## 2.5. lock/unlock
+## 3.4. lock/unlock
 lock/unlock 表示 加锁  与解锁。
 
 - `svn lock -m “LockMessage“ [--force] PATH`
  - 例如：`svn lock -m “lock test file“ test.php`
 
 
-## 2.6. update
+## 3.5. update
 更新你的工作拷贝 
 
 - `svn update`： 会把版本库的修改带到工作拷贝,如果没有给定修订版本,它会把你的工作拷贝更新到 HEAD 修订版本,否则,它会把工作拷贝更新到你用 `--revision` 指定的修订版本。为了保持同步, `svn update` 也会删除所有在工作拷贝发现的无效锁定
@@ -140,16 +136,16 @@ lock/unlock 表示 加锁  与解锁。
   - 不小心删错了文件，想把文件恢复回来（已经把删除提交到服务器）`svn update -r 版本号` 
 
 
-## 2.7. status
+## 3.6. status
 - `svn status`: 打印所有本地修改的文件，默认情况下，不会联系版本库.
 -  `svn status -v`: 显示所有版本控制下的文件。
 
-## 2.8. delete
+## 3.7. delete
 - `svn delete aa.txt` 删除工作区远程库中的 aa.txt 文件；若只是在工程中删除 `aa.txt` 文件，不使用 `svn delete` 指令，则远程版本库中还存在 `aa.txt` 文件，使用 `svn update` 命令后，原先已存在 `aa.txt` 文件会再次更新到工作区中。
 
 
 
-## 2.9. cat
+## 3.8. cat
 - `svn cat`: 检查一个过去的版本而不希望察看它们的区别
 ```
 $ svn cat -r 2 rules.txt
@@ -159,7 +155,7 @@ Everything in moderation
 Chew with your mouth open
 ```
 
-## 2.10. list
+## 3.9. list
 - `svn list`  可以在不下载文件到本地目录的情况下来察看服务器远程库目录中的文件
 ```
 $ svn list http://svn.collab.net/repos/svn
@@ -171,7 +167,7 @@ trunk/
 ```
 
 
-## 2.11. diff
+## 3.10. diff
 - `svn diff file` 将修改的 file 文件与基础版本比较。
   - 例如：`svn diff test.php`
 
@@ -179,25 +175,25 @@ trunk/
   - 例如：`svn diff -r 200:201 test.php`
   - 简写：svn di
 
-## 2.12. copy
+## 3.11. copy
 - 从主干上创建分支: `svn cp -m "create branch"  http://svn_server/xxx_repository/trunk  http://svn_server/xxx_repository/branches/br_feature001 `
 
 - 获得分支: `svn checkout http://svn_server/xxx_repository/branches/br_feature001`
 
 
-## 2.13. merge
+## 3.12. merge
 - `svn merge -r m:n path`
 - 例如：`svn merge -r 200:205 test.cpp`（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
 
 
-## 2.14. log 
+## 3.13. log 
 - `svn log -l 10`: 查看最近提交的10条记录
 - `svn log test.cpp`: 显示这个文件的所有修改记录，及其版本号的变化。
 - `svn log -r {2018-07-03}:{2018-07-09}`: 查看一段时间的日志
 - `svn log -r r196674 -v`: 查看某一版本所修改的文件列表及说明
 
 
-## 2.15. info
+## 3.14. info
 - `svn info test.cpp`：查看test.cpp文件的详细信息。
   ```
   Path: xxx.cpp
@@ -217,18 +213,18 @@ trunk/
   Checksum: fa59dd9a5472e6ad5cdd17968c9b8952dcf107c5
   ```
 
-## 2.16. resolved
+## 3.15. resolved
 - `svn resolved`: 移除工作副本的目录或文件的“冲突”状态。
 - 用法: `svn resolved PAT`
 - 注意: 本命令不会依语法来解决冲突或是移除冲突标记，它只是移除冲突的相关文件，然后让 PATH 可以再次提交。
 
 
-## 2.17. switch
+## 3.16. switch
 - `svn switch (sw)`: 更新工作副本至不同的URL。
   - 1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。
   - 2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系
 
-## 2.18. revert
+## 3.17. revert
 - 本地文件发生改变后，想要恢复到未改变之前的状态，可以用 `svn revert` 命令。
 - `svn revert files` 将 files 恢复到未改变之前的状态。
 - `svn revert --recursive build/xxx/file` 将 build/xxx/ 路径下的多个 file 恢复到未改变之前的状态。
@@ -236,6 +232,6 @@ trunk/
 
 
 
-# 3. 参考
+# 4. 参考
 - [linux下svn命令使用大全](http://blog.chinaunix.net/uid-22566367-id-1965771.html)
 - [Linux下常用svn命令](https://www.cnblogs.com/jaspersong/p/9277720.html)
