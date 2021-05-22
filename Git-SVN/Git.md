@@ -42,7 +42,7 @@
   - [1.19. Git代理配置](#119-git代理配置)
   - [1.20. Git update](#120-git-update)
   - [1.21. 提交代码总结](#121-提交代码总结)
-  - [1.22. Github 开源项目搜索](#122-github-开源项目搜索)
+  - [1.22. Github 开源项目搜索技巧](#122-github-开源项目搜索技巧)
 - [2. Git高级板块](#2-git高级板块)
   - [2.1. Git协议](#21-git协议)
     - [2.1.1. SSH(Secure Shell)协议](#211-sshsecure-shell协议)
@@ -105,6 +105,7 @@ Git tag 有两种类型。
 - `git push <remote> :refs/tags/<tagname> ` 更新并删除远程仓库标签
 - `git tag` 查看历史tag记录
 - `git checkout v1.0` 切换到某个tag，查看某个标签所指向的文件版本。
+  
   > 注意： 会导致仓库处于分离头指针(detacthed HEAD)状态.在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
@@ -219,12 +220,12 @@ Git tag 有两种类型。
     - subject是commit目的的简短描述，不超过50个字符。
     - 建议使用中文（感觉中国人用中文描述问题能更清楚一些）。
     - 结尾不加句号或其他标点符号。
- 
+
   - 提交的例子
     ```
     fix(DAO):用户查询缺少username属性 
     feat(Controller):用户查询接口开发
-    ```  
+    ```
 
 
 - 参考
@@ -359,6 +360,7 @@ Git tag 有两种类型。
   - `git rm` 命令会删除已经提交到本地版本库中的内容，同时暂存区中的内容也会被删除。若要想恢复删除的内容，那么只能从 `commit` 提交记录中恢复。使用 `git checkout HEAD readme.txt` 命令， 将最后一次 `commit` 提交的 `readme.txt` 文件从本地仓库中恢复。
 
 - <font color="red">任何情况都可以恢复吗? </font>
+  
   > 当然不是，如果你把`.gti`目录删除了，那肯定是无法再恢复。实质上，之所以能将删除的文件恢复，因为在`.git`目录中有备份，`Git`会将**暂存区**或者**历史提交**中内容来恢复。
 
 
@@ -389,6 +391,7 @@ Git tag 有两种类型。
 ## 1.17. Git 四区详解 
 
 <img width="80%" hight="80%" src="./figure/四区过程.png"/>
+
 Git 与 GitHub 使用，有四个区，需要理解。
 - Workspace: 名为工作区，也可以称为 Working Directory (工作目录)，是你电脑存放代码的地方。
 - Index: 名为暂存区，是 `.git` 目录下的一个 `index` 文件，它是 **指向** 文件的一个索引。
@@ -429,7 +432,7 @@ Git 与 GitHub 使用，有四个区，需要理解。
    - `--other(-o)` 显示没有被git跟踪的文件
    - `--stage(-s)` 显示mode以及文件对应的 `Blob` 对象，可以获取暂存区中对应文件里面的内容。
 
- 
+
 ### 1.17.3. Local repository
 
 - Git本地版本库是 `Git` 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
@@ -466,6 +469,7 @@ Git 与 GitHub 使用，有四个区，需要理解。
 - `git fetch 远程仓库名(origin master):temp` 拉取远程仓库master分支的数据到本地新建的 temp 分支中。
 - 合并分支步骤
   - 从远程仓库拉取数据 `git fetch origin master` 
+    
     > 将远程仓库分支的数据拉取到本地临时分支 `git fetch origin master:temp`
   - 查看远程仓库的版本 `git remote -v`
   - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
@@ -491,8 +495,6 @@ Git 与 GitHub 使用，有四个区，需要理解。
 
 #### 1.17.4.4. git远程仓库更换名称，本地如何修改？
 
-<img src="./figure/修改远程仓库名.png">
-
 - 适用于本地和远程的代码没得任何问题，就是远程仓库改了个名称，直接在本地修改远程仓库地址即可： `git remote set-url origin new_address`
 - 另外还可以先删除，然后添加地址：
   ```
@@ -500,6 +502,7 @@ Git 与 GitHub 使用，有四个区，需要理解。
   git remote add origin new_address
   ```
 
+  <img src="./figure/修改远程仓库名.png">
 
 
 ## 1.18. Git中文乱码
@@ -518,12 +521,12 @@ Git 与 GitHub 使用，有四个区，需要理解。
   ```
   git config --global http.proxy http://127.0.0.1:1080
   git config --global https.proxy https://127.0.0.1:1080
-
+  
   // 取消全局代理
   git config --global --unset http.proxy
   git config --global --unset https.proxy
   ```
- 
+
 - Windows下修改Host文件
   ```
   192.30.253.112 github.com
@@ -570,11 +573,20 @@ Git 与 GitHub 使用，有四个区，需要理解。
 - `git help <verb>` 查看帮助，verb为Git的关键字
 - `git add -p(patch)` 依次存储每一个文件的改动，包括文件中做的哪些些改动
 
+## 1.22. Github 开源项目搜索技巧
 
-## 1.22. Github 开源项目搜索
+| 搜索名字   | in:name xxx           |
+| ---------- | --------------------- |
+| 搜索描述   | in:description xxx    |
+| 搜索readme | in:readme xxx         |
+| 按stars    | stars:>2000           |
+| 按fork     | fork:>3000            |
+| 按仓库大小 | size:>=5000  (5000KB) |
+| 按更新时间 | pushed:>2021-02-06    |
+| 按语言     | language:xxx          |
+| 按作者名   | user:xxx              |
 
-<img src="./figure/GitHub搜索要点.png">
-
+参考：https://github.com/search/advanced
 
 # 2. Git高级板块
 
@@ -658,6 +670,7 @@ Git 与 GitHub 使用，有四个区，需要理解。
 
 ## 2.3. Git数据存储位置
 - `.git`目录中的`objects`子目录就是用来存储数据的，其中两个子目录是系统自动创建的，可以看到当前并没有存储任何数据。
+
 <center> <img src="./figure/objects目录.png"/> </center>
 
 - `git hash -object -w --stdin`  
