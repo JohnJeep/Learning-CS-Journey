@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-05-23 09:57:22
- * @LastEditTime: 2021-05-23 20:47:19
+ * @LastEditTime: 2021-05-24 00:30:19
  * @LastEditors: Please set LastEditors
  * @Description: using 关键字的用法
  */
@@ -54,8 +54,7 @@ public:
     using Parent::getK;
 };
 
-
-int main()
+void test01()
 {
     ChildOne c1(520, 13.14, "i love you");
 
@@ -68,6 +67,37 @@ int main()
     cout << "int: " << c2.getI() << "\n"
          << "double: " << c2.getJ() << "\n"
          << "string: " << c2.getK() << endl;
+}
+
+int add(int x, int y)
+{
+    return x + y;
+}
+
+typedef int(*func1)(int, int);
+using func2 = int(*)(int, int);
+
+void test02()
+{
+    // 指针指向函数的首地址
+    func1 f1 = add;   
+    func2 f2 = add;
+
+    // 函数指针调用
+    int val1 = f1(100, 200);
+    int val2 = f2(300, 400);
+    `
+    cout << "f1: " << *f1 << endl;
+    cout << "f1: " << *f1 << endl;
+    cout << "val1: " << val1 << endl;
+    cout << "val: " << val2 << endl;
+}
+
+
+int main()
+{
+    // test01();
+    test02();
 
     return 0;
 }
