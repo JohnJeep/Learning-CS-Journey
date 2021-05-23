@@ -1,14 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-05-31 10:55:48
- * @LastEditTime: 2020-06-01 10:09:25
+ * @LastEditTime: 2021-05-23 10:14:37
  * @LastEditors: Please set LastEditors
  * @Description: 引用的简单例子
  */ 
 #include <iostream>
 #include <stdio.h>
 using namespace std;
-
 
 typedef struct reference
 {
@@ -80,14 +79,5 @@ int main()
     cout << "leftValue() value:" << val << endl;
     // cout << endl;
 
-
     return 0;
 }
-
-
-
-
-
-
-
-

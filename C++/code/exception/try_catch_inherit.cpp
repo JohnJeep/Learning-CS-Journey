@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-14 09:21:50
- * @LastEditTime: 2020-09-01 10:46:57
+ * @LastEditTime: 2021-05-23 13:19:49
  * @LastEditors: Please set LastEditors
  * @Description: 继承中异常的层次结构
  * 
@@ -44,9 +44,9 @@ public:
     private:
         int c_data;
     public:
-        Cloth(int c_sise):Dimension(m_size = 0)
+        Cloth(int c_size):Dimension(m_size = 0)
         {
-            this->c_data = c_sise;
+            this->c_data = c_size;
         }
         virtual void showSize()
         {
@@ -96,24 +96,20 @@ Nurse::Nurse(int len)
     this->m_len = len;
     this->m_name = new char[m_len];
 
-    if (len < 10)
-    {
+    if (len < 10) {
         throw Cloth(len);   // 通过类来抛出异常
     }
-    else if (len > 10 && len < 50)
-    {
+    else if (len > 10 && len < 50) {
         throw Stature(len);
     }
-    else if (len >50)
-    {
+    else if (len >50) {
         throw Work(len);
     }
 }
 
 Nurse::~Nurse()
 {
-    if (m_name != nullptr)
-    {
+    if (m_name != nullptr) {
         delete []m_name;
         m_name = nullptr;
         m_len = 0;
@@ -135,20 +131,17 @@ int Nurse::getLen()
 
 int main(int argc, char *argv[])
 {
-    try
-    {
+    try {
         Nurse tang(20);   
         
         // 有异常跳过下面的部分
         cout << tang.getLen() << endl;
-        for (int i = 0; i < tang.getLen(); i++)
-        {
+        for (int i = 0; i < tang.getLen(); i++) {
             tang[i] = i + 1;
             printf("%d ", tang[i]);
         }       
     }
-    catch(Nurse::Dimension& e)   // 异常捕获，传递的是类的引用
-    {
+    catch(Nurse::Dimension& e) {  // 异常捕获，传递的是类的引用
         e.showSize();
     }
      

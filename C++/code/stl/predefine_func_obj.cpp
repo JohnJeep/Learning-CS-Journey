@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-21 10:27:26
- * @LastEditTime: 2020-07-21 12:03:02
+ * @LastEditTime: 2021-05-23 10:06:31
  * @LastEditors: Please set LastEditors
  * @Description: 预定义函数对象
- * @FilePath: /41_predefine_func_obj.cpp
  */ 
 #include <iostream>
 #include <cstdio>
@@ -44,8 +43,8 @@ void test01()
     vt.push_back(1);
     vt.push_back(3);
     sort(vt.begin(), vt.end(), greater<int>());  // 从大到小排序
-    for (it = vt.begin(); it != vt.end(); it++)
-    {
+
+    for (it = vt.begin(); it != vt.end(); it++) {
         cout << *it << " ";
     }
     cout << endl;
@@ -66,12 +65,10 @@ public:
     ~CompareNum();
     bool operator() (int n)
     {
-        if (n > m_num)
-        {
+        if (n > m_num) {
             return true;
         }
-        else
-        {
+        else {
             return false;
         }
     }
@@ -93,12 +90,11 @@ void test02()
     vector<int> vor;
     vector<int>::iterator it;
     
-    for (int i = 0; i <= 10; i++)
-    {
+    for (int i = 0; i <= 10; i++) {
         vor.push_back(i + 1);
     }
-    for (it = vor.begin(); it != vor.end(); it++)
-    {
+
+    for (it = vor.begin(); it != vor.end(); it++) {
         cout << *it << " ";
     }
     cout << endl;
@@ -124,5 +120,6 @@ int main(int argc, char *argv[])
 {
     test01();
     test02();
+
     return 0;
 }

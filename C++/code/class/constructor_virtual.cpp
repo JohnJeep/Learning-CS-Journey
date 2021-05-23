@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-09 15:36:36
- * @LastEditTime: 2020-06-09 16:04:09
+ * @LastEditTime: 2021-05-23 16:31:44
  * @LastEditors: Please set LastEditors
  * @Description: 构造函数中调用虚函数
- * @FilePath: /C++/code/constructor_virtual.cpp
  */ 
 #include <iostream>
 using namespace std;
@@ -23,7 +22,7 @@ public:
 };
 
 Parent::Parent(/* args */)
-:m_id(100)
+  : m_id(100)
 {
     show();  // 构造函数中调用虚函数
 }
@@ -47,13 +46,14 @@ public:
 };
 
 Child::Child(/* args */)
-:m_id(20)
+  :m_id(20)
 {
-    show();    // 虚指针 vptr 是分布初始化完成的。
+    show();    // 虚指针 vptr 分布在初始化时
 }
 
 Child::~Child()
 {
+
 }
 
 

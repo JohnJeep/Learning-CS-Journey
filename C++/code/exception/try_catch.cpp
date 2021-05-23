@@ -1,14 +1,13 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-13 15:01:32
- * @LastEditTime: 2020-09-01 10:47:26
+ * @LastEditTime: 2021-05-23 13:17:56
  * @LastEditors: Please set LastEditors
  * @Description: C++异常机制
  * 
  */ 
 #include <iostream>
 using namespace std;
-
 
 class Stu
 {
@@ -34,10 +33,10 @@ Stu::~Stu()
 
 int divide(int x, int y)
 {
-    if (y == 0)
-    {
+    if (y == 0) {
         throw x;
     }
+
     return x / y; 
 }
 
@@ -45,18 +44,15 @@ int divide(int x, int y)
 // 测试用例1
 void test01()
 {
-    try
-    {
+    try {
         int result = divide(10, 0);
         // int result = divide(10, 2);
         cout << "result: " << result << endl;
     }
-    catch(const std::exception& e)
-    {
+    catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
     }
-    catch(...)
-    {
+    catch(...) {
         cout << "test01未知异常" << endl;
     }
 
@@ -72,24 +68,20 @@ void except()
 
 void test02()
 {
-    try
-    {
+    try {
         except();
     }
-    catch(int t)
-    {
+    catch(int t) {
         cout << "int类型异常" << endl;
     }
-    catch(...)
-    {
+    catch(...) {
         cout << "test02未知异常" << endl;
     }
 }
 
 int add(int x, int y)
 {
-    if (y == 0)
-    {
+    if (y == 0) {
         throw "y equal 0";
         // throw y;
     }
@@ -100,23 +92,19 @@ int add(int x, int y)
 // 处理普通的异常
 void test03()
 {
-    try
-    {
+    try {
         int ret = add(4, 2);
         cout << "ret = " << ret << endl;
         int re = add(4, 0);
         cout << "re = " << re << endl;
     }
-    catch (int e)   // 捕获的类型由throw后面表达式的内容决定
-    {
+    catch (int e) {   // 捕获的类型由throw后面表达式的内容决定
         cout << e << endl;
     }
-    catch(const char* e)
-    {
+    catch(const char* e) {
         cout << e << endl;
     }
-    catch (...)
-    {
+    catch (...) {
         cout << "execute ..." << endl;
     }
 }
@@ -132,18 +120,17 @@ struct MyStruct : public exception
 
 void test04()
 {
-    try
-    {
+    try {
         throw MyStruct();
     }
-    catch(MyStruct& e)
-    {
+    catch(MyStruct& e) {
         cout << "catch MyStruct" << endl;
-        cout << e.what() << endl;  // what() 是异常类提供的一个公共方法，它已被所有子异常类重载，这是返回异常产生的原因。
+
+        // what() 是异常类提供的一个公共方法，它已被所有子异常类重载，这是返回异常产生的原因。
+        cout << e.what() << endl;  
     }
     
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -151,5 +138,6 @@ int main(int argc, char *argv[])
     test02();
     test03();
     test04();
+
     return 0;
 }

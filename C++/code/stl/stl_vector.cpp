@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-16 10:48:40
- * @LastEditTime: 2021-05-21 16:20:59
+ * @LastEditTime: 2021-05-23 10:29:35
  * @LastEditors: Please set LastEditors
  * @Description: STL标准库中vector常见用法
  */ 
@@ -92,7 +92,7 @@ void test03()
     cout << endl;
 
     // 删除vector中指定的元素值
-    for (vector<int>::iterator it = vct2.begin(); it != vct2.end()) {
+    for (vector<int>::iterator it = vct2.begin(); it != vct2.end();) {
         if (*it == 5) {
            it = vct2.erase(it);   // 返回值为下一个元素的首地址
         }

@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-06-10 09:26:56
- * @LastEditTime: 2020-06-10 15:04:30
+ * @LastEditTime: 2021-05-23 16:28:11
  * @LastEditors: Please set LastEditors
  * @Description: 子类继承父类中带有参数的构造函数
  * @FilePath: 
@@ -87,7 +87,7 @@ public:
 
 // 父类有参构造函数设置有默认值时，子类不能调用默认有参构造，设置为没有默认值时才可以调用
 Rectangle::Rectangle(int a, int b)
-:Shape()        // 初始化参数列表
+  :Shape()        // 初始化参数列表
 {
     this->ra = a;
     this->rb = b;
