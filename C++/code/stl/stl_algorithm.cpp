@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-20 10:41:42
- * @LastEditTime: 2020-07-21 15:51:10
+ * @LastEditTime: 2021-05-23 10:04:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /40_stl_algorithm.cpp
  */ 
 #include <iostream>
 #include <cstdio>
@@ -19,8 +18,7 @@ using namespace std;
 void showVector(vector<int>& vct)
 {
     vector<int>::iterator it;
-    for (it = vct.begin(); it != vct.end(); it++)
-    {
+    for (it = vct.begin(); it != vct.end(); it++) {
         cout << *it << " ";
     }
     cout << endl;    
@@ -58,12 +56,11 @@ void test01()
     cout << "test01 case!" << endl;
     vector<int> v1, v2, v3;
 
-    for (int i = 0; i < 5; i++)
-    {
+    for (int i = 0; i < 5; i++) {
         v1.push_back(i + 1);
     }
-    for (int j = 5; j < 10; j++)
-    {
+
+    for (int j = 5; j < 10; j++) {
         v2.push_back(j + 1);
     } 
 
@@ -123,8 +120,7 @@ void test02()
     cout << endl;
     cout << "test02 case!" << endl;
     vector<int> vor;
-    for (int i = 0; i < 8; i++)
-    {
+    for (int i = 0; i < 8; i++) {
         vor.push_back(i + 1);
     }
     cout << "iterator traverse element: ";
