@@ -78,9 +78,11 @@
 - [8. Functor(仿函数)](#8-functor仿函数)
   - [8.1. 什么是仿函数？](#81-什么是仿函数)
   - [8.2. 分类](#82-分类)
-  - [8.3. 函数对象调用](#83-函数对象调用)
-  - [8.4. Predefined Function Objects (预定义函数对象)](#84-predefined-function-objects-预定义函数对象)
-  - [8.5. 其它](#85-其它)
+  - [8.3. 可调用对象](#83-可调用对象)
+  - [8.4. 函数对象调用](#84-函数对象调用)
+  - [8.5. 可调用对象包装器](#85-可调用对象包装器)
+  - [8.6. Predefined Function Objects (预定义函数对象)](#86-predefined-function-objects-预定义函数对象)
+  - [8.7. 其它](#87-其它)
 - [9. Iterator(迭代器)](#9-iterator迭代器)
   - [9.1. 什么是迭代器？](#91-什么是迭代器)
   - [9.2. 基本操作](#92-基本操作)
@@ -716,7 +718,8 @@ predicate: 判断这个条件是真还是假
   > And, Or 属于二元运算，Not 属于一元运算。 
 
 
-哪些可以是仿函数？
+## 8.3. 可调用对象
+哪些可以是可调用对象？
 - 函数指针 (function pointer)
 - 带有成员函数 `operator()` 创建的 object。
 - 带有转换函数可将自己转换为 pointer to function 的 class 所创建的 object。
@@ -724,7 +727,7 @@ predicate: 判断这个条件是真还是假
 
 
 
-## 8.3. 函数对象调用
+## 8.4. 函数对象调用
 - 函数对象可以做函数参数。 
 - 函数对象可以做返回值。 
 - 函数对象的调用与 `回调函数` 的调用类似。 
@@ -738,13 +741,16 @@ predicate: 判断这个条件是真还是假
   ``` 
 
 
-## 8.4. Predefined Function Objects (预定义函数对象)
+## 8.5. 可调用对象包装器
+
+
+## 8.6. Predefined Function Objects (预定义函数对象)
 标准STL模板库中提前预定义了很多的函数对象。任何应用程序想要使用 STL 内建的仿函数，都必须包含标准库预定义函数对象的头文件 `<functional>`。
 
 仿函数的主要作用就是为了搭配 STL 算法，在算法中进行使用。
 
 
-## 8.5. 其它
+## 8.7. 其它
 - 证同函数(identity_function): 任何数值通过此函数后，不会有任何改变。标准库 `stl_function.h` 中用 `identity` 来指定 RB-tree 所需的 KeyOfValue。
 
 - 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的 KeyOfValue。
