@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-05-17 23:53:19
+ * @LastEditTime: 2021-05-24 12:21:07
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -80,6 +80,7 @@
   - [8.2. 分类](#82-分类)
   - [8.3. 函数对象调用](#83-函数对象调用)
   - [8.4. Predefined Function Objects (预定义函数对象)](#84-predefined-function-objects-预定义函数对象)
+  - [8.5. 其它](#85-其它)
 - [9. Iterator(迭代器)](#9-iterator迭代器)
   - [9.1. 什么是迭代器？](#91-什么是迭代器)
   - [9.2. 基本操作](#92-基本操作)
@@ -120,9 +121,12 @@
 
 ---------------------------
 STL学习境界：会用，明理，能扩展。
+- 会用：熟练使用 STL 的各种 API 接口。
+- 明理：明白 STL 设计的思想，各种 API 的底层实现原理。
+- 能扩展：对 STL 添加自己实现的各种接口，扩充 STL 的功能。 
 
 
-
+---------------------------
 目标
 
 Level 0: 使用C++标准库
@@ -675,13 +679,50 @@ predicate: 判断这个条件是真还是假
 ## 8.1. 什么是仿函数？
 仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
 
+
 <img src="./figures/functors.png">
 
 ## 8.2. 分类
+
+按操作数个数划分
+- 一元运算 (unary_function)
+- 二元运算 (binary_function)
+
+按功能划分
+- 算术运算 (Arithmetic)
+  - 加： plus<T>
+  - 减: minus<T>
+  - 乘: multiplies<T>
+  - 除: divides<T>
+  - 取模: modulus<T>  
+  - 否定: negate<T> 
+  > negate 属于一元运算，其余的都属于二元运算。
+
+
+- 关系运算 (Ratioanl)
+  - 等于: equal_to<T> 
+  - 不等于: not_equal_to<T>
+  - 大于: greater<T>
+  - 大于等于: greater_equal<T>
+  - 小于: less<T>
+  - 小于等于: less_equal<T>
+  > 六种都属于二元运算。 
+  
+
+- 逻辑运算 (Logical)
+  - 逻辑 And: logical_and<T> 
+  - 逻辑 Or: logical_or<T>
+  - 逻辑 Not: logical_not<T>
+  > And, Or 属于二元运算，Not 属于一元运算。 
+
+
+哪些可以是仿函数？
 - 函数指针 (function pointer)
 - 带有成员函数 `operator()` 创建的 object。
 - 带有转换函数可将自己转换为 pointer to function 的 class 所创建的 object。
 - lambda 表达式。
+
+
 
 ## 8.3. 函数对象调用
 - 函数对象可以做函数参数。 
@@ -695,10 +736,24 @@ predicate: 判断这个条件是真还是假
       void operator() (Stu& T) {}
   }
   ``` 
-## 8.4. Predefined Function Objects (预定义函数对象)
-> 标准STL模板库中提前预定义了很多的函数对象。
 
-标准库预定义函数对象的头文件是 `<functional>`。
+
+## 8.4. Predefined Function Objects (预定义函数对象)
+标准STL模板库中提前预定义了很多的函数对象。任何应用程序想要使用 STL 内建的仿函数，都必须包含标准库预定义函数对象的头文件 `<functional>`。
+
+仿函数的主要作用就是为了搭配 STL 算法，在算法中进行使用。
+
+
+## 8.5. 其它
+- 证同函数(identity_function): 任何数值通过此函数后，不会有任何改变。标准库 `stl_function.h` 中用 `identity` 来指定 RB-tree 所需的 KeyOfValue。
+
+- 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的 KeyOfValue。
+  - select1st: 接受一个pair，传回它的第一个元素。
+  - select2nd: 接受一个pair，传回它的第二个元素。
+
+- 投射函数
+  - project1st: 传回第一参数，忽略第二参数。
+  - project2nd: 传回第二参数，忽略第1参数。
 
 
 # 9. Iterator(迭代器)
