@@ -1,13 +1,18 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-05-12 23:37:17
- * @LastEditTime: 2021-05-15 18:38:34
+ * @LastEditTime: 2021-05-24 12:21:15
  * @LastEditors: Please set LastEditors
  * @Description: 模拟实现仿函数机制
  */
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 #include <functional>
+#include <map>
+#include <vector>
+#include <set>
+#include <new>
 
 using namespace std;
 
@@ -27,7 +32,7 @@ struct fminus
     }
 };
 
-
+std::function
 
 int main(int argc, char *argv[])
 {

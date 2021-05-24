@@ -1,14 +1,14 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-17 11:40:43
- * @LastEditTime: 2021-05-21 16:20:51
+ * @LastEditTime: 2021-05-24 14:44:50
  * @LastEditors: Please set LastEditors
  * @Description: STL标准库list容器
- * @FilePath: /37_stl_list.cpp
  */ 
 #include <iostream>
 #include <cstdio>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -54,15 +54,21 @@ void test01()
 }
 
 // list element pass into vector 
-void test04() 
+void test02() 
 {
+    cout << "Test02..." << endl;
     list<int> lt = {1, 3, 4, 5, 7, 11, 13, 21};
-    vector<int> v(lt.begin(), lt.end());  //将list中的元素一次传入到vector中 
+    vector<int> v(lt.begin(), lt.end());  //将list中的元素依次传入到vector中 
+
+    for (const auto& iter : v) {
+        cout << iter << " ";
+    }
 
 }
 int main(int argc, char *argv[])
 {
-    test01();    
+    // test01();    
+    test02();    
 
     return 0;
 }
