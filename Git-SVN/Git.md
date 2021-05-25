@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2021-05-22 17:43:13
+ * @LastEditTime: 2021-05-25 12:03:03
  * @LastEditors: Please set LastEditors
  * @Description: git基础命令学习
 --> 
@@ -35,7 +35,7 @@
     - [1.17.3. Local repository](#1173-local-repository)
     - [1.17.4. Remote repository](#1174-remote-repository)
       - [1.17.4.1. Git remote](#11741-git-remote)
-      - [1.17.4.2. Git pull与Git fetch](#11742-git-pull与git-fetch)
+      - [1.17.4.2. Git pull Git fetch](#11742-git-pull-git-fetch)
       - [1.17.4.3. 远程仓库与本地的关联](#11743-远程仓库与本地的关联)
       - [1.17.4.4. git远程仓库更换名称，本地如何修改？](#11744-git远程仓库更换名称本地如何修改)
   - [1.18. Git中文乱码](#118-git中文乱码)
@@ -310,12 +310,19 @@ Git tag 有两种类型。
     - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`  参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而`fast forward`合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
     - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
 
+- 分支合并步骤
+  - 从远程仓库拉取数据 `git fetch origin master` 
+    > 将远程仓库分支的数据拉取到本地临时分支 `git fetch origin master:temp`
+  - 查看远程仓库的版本 `git remote -v`
+  - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
+  - 手动解决冲突，提交（commit）信息
+  - 合并冲突，将远程仓库与本地仓库合并 `git merge origin master`
+
 
 - 参考
   - [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
   - [Git冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html) 
   - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
-
 
 
 
@@ -462,19 +469,18 @@ Git 与 GitHub 使用，有四个区，需要理解。
 - `git remote add <alias_name> <url>` 本地仓库与仓库地址为 URL，别名为 `alias_name` 的远程仓库进行关联。
 
 
-#### 1.17.4.2. Git pull与Git fetch
+#### 1.17.4.2. Git pull Git fetch
 
-- `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，然后自动合并远程分支与本地仓库的分支(相当于 `git fetch` 和`git merge`两者的叠加)
-- `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，它并不会修改本地仓库中的内容，需要自己手动进行合并。
-- `git fetch 远程仓库名(origin master):temp` 拉取远程仓库master分支的数据到本地新建的 temp 分支中。
-- 合并分支步骤
-  - 从远程仓库拉取数据 `git fetch origin master` 
-    
-    > 将远程仓库分支的数据拉取到本地临时分支 `git fetch origin master:temp`
-  - 查看远程仓库的版本 `git remote -v`
-  - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
-  - 手动解决冲突，提交（commit）信息
-  - 合并冲突，将远程仓库与本地仓库合并 `git merge origin master`
+- `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，并自动合并远程分支与本地仓库的分支，`git pull` 相当于 `git fetch` 和 `git merge` 两步操作的叠加。
+
+- `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，不修改本地仓库中的内容，需要自己手动进行合并。
+- `git fetch <远程仓库名> <分支名> : <目标分支>`
+  - 远程仓库名可以是仓库的别名，也可以直接是仓库的 URL 地址。 
+  - `git fetch origin master : temp` 拉取远程 origin 仓库中 master 分支的数据到本地新建的 temp 分支。
+
+- `git push <远程主机名> <本地分支名> : <远程分支名>`
+  - `git push origin main : main` 将本地 main 分支中的数据推送到远程 origin 仓库的 main 分支上。若后面不指定 `: <远程分支名>`，git 会默认将当前本地的分支提交到远程仓库的默认分支中。
+
 
 
 #### 1.17.4.3. 远程仓库与本地的关联
