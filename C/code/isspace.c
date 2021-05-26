@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-01-06 09:14:19
- * @LastEditTime : 2020-01-06 11:12:41
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2021-05-26 22:17:50
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \C\isspace.c
  */
@@ -30,7 +30,6 @@ int main()
     printf("%d \n", strlen(p));
     printf("%d \n", n);
 
-   getchar();
    return 0;
 }
 

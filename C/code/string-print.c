@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2019-12-31 13:35:51
- * @LastEditTime: 2020-08-17 11:01:41
+ * @LastEditTime: 2021-05-26 22:34:19
  * @LastEditors: Please set LastEditors
  * @Description: 字符串提高
  *                1. C语言中，没有直接的字符串类型，用数组和指针表示字符串，以字符\0结尾
@@ -38,8 +38,7 @@ int main()
     // 三种方法打印字符串中的字符
     char *p = NULL;
     p = buf3;
-    for (int j = 0; j < strlen(buf3); j++)
-    {
+    for (int j = 0; j < strlen(buf3); j++) {
         // printf("buf3[%d]=%c \n", j, p[j]);
         printf("buf3[%d]=%c \n", j, *(p + j));
         //printf("buf3[%d]=%c \n", j, *(buf3 + j));

@@ -2,7 +2,7 @@
  * @Description: 变量在内存中分配的顺序
  * @Author: JohnJeep
  * @Date: 2019-09-06 09:40:47
- * @LastEditTime: 2019-09-06 13:33:01
+ * @LastEditTime: 2021-05-26 22:27:21
  * @LastEditors: Please set LastEditors
  */
 
@@ -46,7 +46,6 @@ int main()
 
     printf("n value of array: %d\n", sizeof(n));
 
-    system("pause");
     return 0;
 }
 

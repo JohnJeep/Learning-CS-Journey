@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-03-02 15:38:07
- * @LastEditTime: 2021-05-23 17:50:51
+ * @LastEditTime: 2021-05-26 22:23:24
  * @LastEditors: Please set LastEditors
  * @Description: 结构体中字节对齐
  */
@@ -30,7 +30,6 @@ int main()
 {
     printf("%d\n", sizeof(nurse));
     printf("%d\n", sizeof(nurse_1));
-    getchar();
 
     return 0;
 }

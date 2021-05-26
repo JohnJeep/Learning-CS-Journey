@@ -1,30 +1,15 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-13 10:36:49
- * @LastEditTime: 2019-12-13 11:56:31
+ * @LastEditTime: 2021-05-26 22:17:39
  * @LastEditors: Please set LastEditors
  * @Description: 整型类的数据转化为字符串，显示为浮点型的
- * @FilePath: \C\intToString copy.c
  */
 
 #include "stdio.h"
 #include "string.h"
+
 #define BUF_SIZE 16
-
-unsigned char int_to_astr(int val, char *pbuf, unsigned char validBits);
-
-int main()
-{
-    int data = -8765;
-    char arr[10] = {0};
-
-    int temp = int_to_astr(data, arr, 0);
-    printf("%s \n", arr);
-    printf("%d \n", temp);
-
-    getchar();
-    return 0;
-}
 
 /**
  * @description: 整型类的数据转化为字符串，显示为浮点型的 
@@ -108,4 +93,16 @@ unsigned char int_to_astr(int val, char *pbuf, unsigned char validBits)
         pbuf[validBits] = 0;         
     }
     return cnt;
+}
+
+int main()
+{
+    int data = -8765;
+    char arr[10] = {0};
+
+    int temp = int_to_astr(data, arr, 0);
+    printf("%s \n", arr);
+    printf("%d \n", temp);
+
+    return 0;
 }

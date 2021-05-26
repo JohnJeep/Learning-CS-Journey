@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-25 16:08:35
- * @LastEditTime : 2019-12-28 11:12:43
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2021-05-26 22:19:48
+ * @LastEditors: Please set LastEditors
  * @Description: 关于void * 指针的进一步的理解
  * @FilePath: \C\voidFunction.c
  */
@@ -50,6 +50,5 @@ int main()
     strcpy(sDest,  "1234");
     printf("sDest=%s \n", sDest);
 
-    getchar();
     return 0;
 }
