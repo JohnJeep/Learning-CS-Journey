@@ -62,7 +62,9 @@
   - [25.1. ubuntu下默认的防火墙](#251-ubuntu下默认的防火墙)
   - [25.2. CentOS下默认的防火墙](#252-centos下默认的防火墙)
 - [26. SELinux](#26-selinux)
-- [27. 参考](#27-参考)
+- [27. 共性问题](#27-共性问题)
+  - [27.1. Linux与Windows相差8小时处理](#271-linux与windows相差8小时处理)
+- [28. 参考](#28-参考)
 
 <!-- /TOC -->
 
@@ -967,6 +969,22 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - SELinux是通过MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 27. 参考
+# 27. 共性问题
+## 27.1. Linux与Windows相差8小时处理
+新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
+`$sudo timedatectl set-local-rtc 1`
+重启完成将硬件时间UTC改为CST，双系统时间保持一致。
+
+先在ubuntu下更新一下时间，确保时间无误：
+```bash
+$sudo apt-get install utpdate
+$sudo ntpdate time.windows.com
+```
+然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
+
+
+
+
+# 28. 参考
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
