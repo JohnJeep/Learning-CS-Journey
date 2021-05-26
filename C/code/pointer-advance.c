@@ -1,10 +1,9 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-28 14:28:20
- * @LastEditTime : 2019-12-30 15:38:51
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2021-05-26 22:23:50
+ * @LastEditors: Please set LastEditors
  * @Description: C language pointer advance.
- * @FilePath: \C\pointerAdvance.c
  */
 #include <stdio.h>
 

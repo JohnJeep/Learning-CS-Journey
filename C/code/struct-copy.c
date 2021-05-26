@@ -1,10 +1,9 @@
 /*
- * @Author: your name
+ * @Author: JohNJeep
  * @Date: 2020-03-02 09:57:05
- * @LastEditTime: 2020-03-02 11:21:42
+ * @LastEditTime: 2021-05-26 22:35:24
  * @LastEditors: Please set LastEditors
  * @Description: 关于结构体的相互赋值问题
- * @FilePath: \C\struct_copy.c
  */
 
 #include <stdio.h>
@@ -59,7 +58,6 @@ int main()
     copyStruct(&Dest, &Zhao);
     printf("age: %d, name: %s \n", Dest.age, Dest.name);
 
-    getchar();
     return 0;
 }
 

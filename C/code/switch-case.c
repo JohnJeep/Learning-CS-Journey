@@ -2,7 +2,7 @@
  * @Description: switch case语句简单实现
  * @Author: JohnJeep
  * @Date: 2019-08-25 12:08:51
- * @LastEditTime: 2019-09-13 14:01:11
+ * @LastEditTime: 2021-05-26 22:22:12
  * @LastEditors: Please set LastEditors
  */
 #include "stdio.h"
@@ -12,12 +12,11 @@ int main()
     int num;
     printf("请输入一个数：");
     scanf("%d", &num);
-    if(num > 0)  // 非零值包括正数和负数
-    {
+
+    if(num > 0) {  // 非零值包括正数和负数
         for(int i = 1; i <= num;)
         {
-            switch (num)
-            {
+            switch (num) {
             case 1:
                 printf("数字1! \n");
                 continue;      // 会进入一个死循环
@@ -31,15 +30,15 @@ int main()
                 printf("其他数字！ \n");
                 break;
             }
+
         printf("请继续输入一个数：");
         scanf("%d", &num);
         }
     }
-    else
-    {
-        printf("出错！ \n");
+    else {
+        printf("出错\n");
     }
-    getchar();
+
     return 0;
 }
 

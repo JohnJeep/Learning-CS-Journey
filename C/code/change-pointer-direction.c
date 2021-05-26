@@ -1,17 +1,32 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-12-30 16:02:12
- * @LastEditTime : 2019-12-31 11:46:54
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2021-05-26 22:15:01
+ * @LastEditors: Please set LastEditors
  * @Description: 改变指针的指向；值传递与地址传递
  */
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
 
-void changeRealValue(int *p);
-void transferValue(int s);
-void transferAddress(int *p);
+void changeRealValue(int *p)
+{
+    *p = 100;
+}
+
+void transferValue(int s)
+{
+    printf("值传递前，s=%d \n", s);
+    s = 11;
+    printf("值传递中，s=%d \n", s);
+}
+
+void transferAddress(int *p)
+{    
+    printf("地址传递前，*p=%d \n", *p);
+    *p = 22;
+    printf("地址传递中，*p=%d \n", *p);
+}
 
 int main()
 {
@@ -71,23 +86,5 @@ int main()
     return 0;
 }
 
-void changeRealValue(int *p)
-{
-    *p = 100;
-}
-
-void transferValue(int s)
-{
-    printf("值传递前，s=%d \n", s);
-    s = 11;
-    printf("值传递中，s=%d \n", s);
-}
-
-void transferAddress(int *p)
-{    
-    printf("地址传递前，*p=%d \n", *p);
-    *p = 22;
-    printf("地址传递中，*p=%d \n", *p);
-}
 
  

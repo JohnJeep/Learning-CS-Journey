@@ -1,10 +1,9 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-03-02 11:49:36
- * @LastEditTime: 2020-03-02 15:35:43
+ * @LastEditTime: 2021-05-26 22:22:57
  * @LastEditors: Please set LastEditors
  * @Description: 结构体与一级指针的结合
- * @FilePath: \C\struct_pointer.c
  */
 
 #include <stdio.h>
@@ -17,9 +16,6 @@ typedef struct struct_pointer
     int age;
     char *color;
 }flower;
-
-
-
 
 int main()
 {
@@ -57,8 +53,6 @@ int main()
         p = NULL;
     }
     
-
-    getchar();
     return 0;
 }
 

@@ -1,10 +1,9 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2020-01-17 15:10:53
- * @LastEditTime: 2020-03-02 11:49:16
+ * @LastEditTime: 2021-05-26 22:35:00
  * @LastEditors: Please set LastEditors
  * @Description: 结构体与数组
- * @FilePath: \C\struct_array.c
  */
 #include <stdio.h>
 #include <string.h>
@@ -16,8 +15,6 @@ typedef struct T
     int age;
     char name[10];   // 用数组的方式存放字符串，且字符的长度为 10
 }stu, *p;
-
-
 
 int main()
 {
@@ -31,8 +28,7 @@ int main()
     // A.age = 24;
     // A.name[0] = "John";
     // A.name[1] = "jack";
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         printf("%d %s \n", A[i].age, A[i].name);
 
     }
@@ -40,12 +36,10 @@ int main()
     // 动态定义结构体数组
     p pArray = (p *)malloc(N * sizeof(p));
 
-    if(pArray != NULL)
-    {
+    if(pArray != NULL) {
         free(pArray);
         pArray = NULL;
     }
 
-   getchar();
    return 0;
 }

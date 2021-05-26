@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2019-08-20 20:59:41
- * @LastEditTime: 2021-04-06 15:50:08
+ * @LastEditTime: 2021-05-26 22:33:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  */
@@ -15,12 +15,12 @@ int sub()
     return count--;
 }
 
-
 int main(int argc, char *argv[])
 {
     for (int i = 0; i < 10; i++) {
         printf("%d\n",sub()); 
     }
+
     return 0;
 }
 

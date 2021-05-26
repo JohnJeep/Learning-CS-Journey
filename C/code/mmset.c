@@ -1,9 +1,9 @@
 /*
- * @Description: memset函数的用法实现
  * @Author: JohnJeep
  * @Date: 2019-09-02 09:04:14
- * @LastEditTime: 2019-09-13 14:10:35
+ * @LastEditTime: 2021-05-26 22:24:23
  * @LastEditors: Please set LastEditors
+ * @Description: memset函数的用法实现
  */
 
 #include "stdio.h"
@@ -12,7 +12,6 @@
 
 int main() 
 {
- 
     printf("hello C!\n");
 
     char buf[] = {"set memset !"};
@@ -42,11 +41,11 @@ int main()
         int iSeq;
         int iType;
     }test;
+
     printf("结构体使用memset前：%d \n", test.iSeq);
     memset(&test,0,sizeof(test));
     printf("结构体使用memset后：%d \n", test.iSeq);
 
-    system("pause");
     return 0;
 }
 

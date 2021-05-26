@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-01-16 14:47:48
- * @LastEditTime: 2020-08-17 11:07:24
+ * @LastEditTime: 2021-05-26 22:19:27
  * @LastEditors: Please set LastEditors
  * @Description: 二维数组第 i 行地址与 数组第 i 行 j 列的地址区别
  *               二维数组首行地址与首行元素的地址
@@ -11,7 +11,25 @@
 #include <malloc.h>
 
 typedef int (*P)[4];   // 定义一个数组指针类型
-void printArray(P pArr);
+
+/**
+ * @description: 数组指针做形参，转化为指针，但做指针的步长与传数组时步长不一样
+ * @param {*}
+ * @return {*}
+ */
+void printArray(P pArr)
+{
+    int i, j;
+    for ( i = 0; i < 3; i++)
+    {
+        for ( j = 0; j < 4; j++)
+        {
+            printf("%d", pArr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int main()
 {
     int arr[][4] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -51,25 +69,7 @@ int main()
         printf("\n");   
     }
     
-
     printArray(arr);
 
    return 0;
 }
-
-
-// 数组指针做形参，转化为指针，但做指针的步长与传数组时步长不一样
-void printArray(P pArr)
-{
-    int i, j;
-    for ( i = 0; i < 3; i++)
-    {
-        for ( j = 0; j < 4; j++)
-        {
-            printf("%d", pArr[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-
