@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-05-24 12:21:07
+ * @LastEditTime: 2021-05-28 20:26:53
  * @LastEditors: Please set LastEditors
  * @Description: 剖析C++标准库
 -->
@@ -81,8 +81,9 @@
   - [8.3. 可调用对象](#83-可调用对象)
   - [8.4. 函数对象调用](#84-函数对象调用)
   - [8.5. 可调用对象包装器](#85-可调用对象包装器)
-  - [8.6. Predefined Function Objects (预定义函数对象)](#86-predefined-function-objects-预定义函数对象)
-  - [8.7. 其它](#87-其它)
+  - [8.6. 可调用对象绑定器](#86-可调用对象绑定器)
+  - [8.7. Predefined Function Objects (预定义函数对象)](#87-predefined-function-objects-预定义函数对象)
+  - [8.8. 其它](#88-其它)
 - [9. Iterator(迭代器)](#9-iterator迭代器)
   - [9.1. 什么是迭代器？](#91-什么是迭代器)
   - [9.2. 基本操作](#92-基本操作)
@@ -692,7 +693,7 @@ predicate: 判断这个条件是真还是假
 
 按功能划分
 - 算术运算 (Arithmetic)
-  - 加： plus<T>
+  - 加：plus<T>
   - 减: minus<T>
   - 乘: multiplies<T>
   - 除: divides<T>
@@ -722,7 +723,7 @@ predicate: 判断这个条件是真还是假
 哪些可以是可调用对象？
 - 函数指针 (function pointer)
 - 带有成员函数 `operator()` 创建的 object。
-- 带有转换函数可将自己转换为 pointer to function 的 class 所创建的 object。
+- 带有转换函数，可将自己转换为函数指针的 类 所创建的 object。
 - lambda 表达式。
 
 
@@ -742,15 +743,40 @@ predicate: 判断这个条件是真还是假
 
 
 ## 8.5. 可调用对象包装器
+包含头文件：`#include <functional>`
+
+语法
+`std::function<返回值类型(参数列表)> obj_name = 可调用对象`
+
+包装器可包装哪些东西？
+- 包装类的普通成员函数
+- 包装类的静态函数
+- 包装仿函数
+- 包装转化为函数指针的函数对象
+
+类的成员函数不能直接使用可调用对象包装器，还需要结合绑定器一起使用。
 
 
-## 8.6. Predefined Function Objects (预定义函数对象)
+## 8.6. 可调用对象绑定器
+std::bind()
+
+绑定器作用
+- 将可调用对象与其参数一起绑定成为仿函数。
+- 将多元可调用转化为一元可调用对象
+
+
+两种方式
+- 绑定非类的成员变量。
+- 绑定类的成员变量或成员函数。
+
+
+## 8.7. Predefined Function Objects (预定义函数对象)
 标准STL模板库中提前预定义了很多的函数对象。任何应用程序想要使用 STL 内建的仿函数，都必须包含标准库预定义函数对象的头文件 `<functional>`。
 
 仿函数的主要作用就是为了搭配 STL 算法，在算法中进行使用。
 
 
-## 8.7. 其它
+## 8.8. 其它
 - 证同函数(identity_function): 任何数值通过此函数后，不会有任何改变。标准库 `stl_function.h` 中用 `identity` 来指定 RB-tree 所需的 KeyOfValue。
 
 - 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的 KeyOfValue。
