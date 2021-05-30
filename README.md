@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-05-26 22:48:29
+ * @LastEditTime: 2021-05-30 11:42:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -73,13 +73,20 @@
 - 课程官方网站  
   - [CS 144: Introduction to Computer Networking, Fall 2020](https://cs144.github.io/)：为主。
   - [CS144: Introduction to Computer Networking, Fall 2010](https://www.scs.stanford.edu/10au-cs144/): 可选。
+
+
 - 书籍
   - 《计算机网络：自顶向下方法》
-  - [Computer Networking: a Top Down Approach 8th edition](http://gaia.cs.umass.edu/kurose_ross/) 《计算机网络：自顶向下方法》的英文版，这个最新的版本，第八版。[PEGASUS1993 Computer-Networking-A-Top-Down-Approach-8th-Edtion](https://github.com/PEGASUS1993/Computer-Networking-A-Top-Down-Approach-8th-Edtion) Github上一位学习者收集的这本书的一些资料，非常的好，具有参考价值。
+  - [Computer Networking: a Top Down Approach 8th edition](http://gaia.cs.umass.edu/kurose_ross/):《计算机网络：自顶向下方法》原书的英文版，最新版本为第八版。
+  - [Wireshark Labs](http://gaia.cs.umass.edu/kurose_ross/wireshark.htm): 书籍配套的 Wireshark 实验
+  - [Instructor Resources](http://gaia.cs.umass.edu/kurose_ross/instructor.htm): 与该书籍配套的一些重要学习指导资源。
+  - [Online presentations Video](http://gaia.cs.umass.edu/kurose_ross/online_lectures.htm): 由于新冠病毒的影响，原书作者之一 Jim Kurose 通过在线学习的方式，给学生授课。每章节不仅包含了授课的PPT、视频，还有知识点检测以及授课中问题的汇总，总之，质量是非常的好。
+  - [Computer-Networking-A-Top-Down-Approach-8th-Edtion](https://github.com/PEGASUS1993/Computer-Networking-A-Top-Down-Approach-8th-Edtion) Github上一位学习者收集的这本书的一些资料，非常的好。
 
 
 - 视频
   - B站：[斯坦福大学 Introduction to Computer Networking (CS 144)](https://www.bilibili.com/video/BV137411Z7LR) 
+
 
 - 他人笔记
   - [知乎：CS144: 什么，你学不会TCP？那就来自己写一个吧！](https://zhuanlan.zhihu.com/p/175998415)  
