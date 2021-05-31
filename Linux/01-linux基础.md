@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-05-20 11:54:09
+ * @LastEditTime: 2021-05-31 12:21:38
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -24,7 +24,7 @@
   - [3.8. 用户权限修改](#38-用户权限修改)
   - [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
   - [3.10. 文件目录](#310-文件目录)
-  - [3.11. 链接](#311-链接)
+  - [3.11. link(链接)](#311-link链接)
   - [3.12. 重定向](#312-重定向)
   - [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
 - [4. tar](#4-tar)
@@ -54,18 +54,20 @@
 - [21. vmstat](#21-vmstat)
 - [22. man](#22-man)
 - [23. ntsysv](#23-ntsysv)
-- [24. wget命令](#24-wget命令)
-- [25. 包管理](#25-包管理)
-  - [25.1. 软件仓库](#251-软件仓库)
-  - [25.2. apt命令](#252-apt命令)
-  - [25.3. dpkg 命令](#253-dpkg-命令)
-- [26. 防火墙](#26-防火墙)
-  - [26.1. ubuntu下默认的防火墙](#261-ubuntu下默认的防火墙)
-  - [26.2. CentOS下默认的防火墙](#262-centos下默认的防火墙)
-- [27. SELinux](#27-selinux)
-- [28. 共性问题](#28-共性问题)
-  - [28.1. Linux与Windows相差8小时处理](#281-linux与windows相差8小时处理)
-- [29. 参考](#29-参考)
+- [24. wget](#24-wget)
+- [25. md5 sha](#25-md5-sha)
+- [26. ldconfig](#26-ldconfig)
+- [27. 包管理](#27-包管理)
+  - [27.1. 软件仓库](#271-软件仓库)
+  - [27.2. apt命令](#272-apt命令)
+  - [27.3. dpkg 命令](#273-dpkg-命令)
+- [28. 防火墙](#28-防火墙)
+  - [28.1. ubuntu下默认的防火墙](#281-ubuntu下默认的防火墙)
+  - [28.2. CentOS下默认的防火墙](#282-centos下默认的防火墙)
+- [29. SELinux](#29-selinux)
+- [30. 共性问题](#30-共性问题)
+  - [30.1. Linux与Windows相差8小时处理](#301-linux与windows相差8小时处理)
+- [31. 参考](#31-参考)
 
 <!-- /TOC -->
 
@@ -469,17 +471,20 @@ s      | 套接文件(socket)               | null
 
 
 
-## 3.11. 链接
-> `ln`: 建立链接命令
--  `ln -s source  destination` 软连接
-- `ln 原文件 新文件 ` 硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
+## 3.11. link(链接)
+Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
+
+- 建立软连接: `ln -s source  destination` 
+- 建立硬链接: `ln 原文件 新文件` 
+
+硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 
 
 ## 3.12. 重定向 
-- `>` 重定向：`ls > test.txt` 将`ls`列出的所有文件放到test.txt中，并`覆盖原`来test.txt文件中的内容
-- `>>`
+- `>` 是重定向的命令。`ls > test.txt` 表示将 `ls` 命令列出当前目录下所有的文件放到test.txt 中，并`覆盖`原来 test.txt 文件中的内容。
+
+- `>>` 是一个追加(append)命令，将使用 `命令` 输出的数据追加到 `文件`中。
   - 用法：`命令 >> 文件名` 
-  - `>>` 是一个追加(append)命令，将使用 `命令` 输出的数据追加到 `文件`中。
   - 例如：`pwd >> text.tct`将用`pwd`生成的数据放到`test.txt`文件中，`不会覆盖原`来的文件，新加的文件保留到文本后面。
 
 
@@ -517,8 +522,8 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.3. 打包文件或目录
-  - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
-   - 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
+- 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
+- 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
 
 
 ## 4.4. 解包文件或目录
@@ -844,15 +849,60 @@ N       |	反向查询
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 24. wget命令
+# 24. wget
 
-- 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置
--  wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
+支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
-- 参考
-  - [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
-# 25. 包管理
+
+参考: [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
+
+
+# 25. md5 sha
+
+SHA
+- SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
+
+- SHA家族的五个算法，分别是SHA-1、SHA-224、SHA-256、SHA-384，和SHA-512，由美国国家安全局（NSA）所设计，并由美国国家标准与技术研究院（NIST）发布，是美国的政府标准。后四者有时并称为SHA-2。SHA-1在许多安全协定中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5（更早之前被广为使用的杂凑函数）的后继者。
+
+- 生成 hash 校验: `sha1sum filename`
+
+  直接生成 hash 校验后的结果
+  ```bash
+  Tim@computer:~/Downloads$ sha1sum feeds-master.zip 
+  751420b576570fcbfb24e80e47e18168342541e0  feeds-master.zip
+  ```
+  feeds-master.zip 文件生成的 hash1 校验码为 `751420b576570fcbfb24e80e47e18168342541e0`。
+
+- 为了检验 hash 结果的值是否真确，需要对 hash 结果进行校验。可以将生成 hash 的校验值存入到一个文件中，方便校验，对生成的结果进行校验时，需要加 `-c(check)` 参数。
+  ```bash
+  Tim@computer:~/Downloads$ sha1sum feeds-master.zip > a.txt
+  Tim@computer:~/Downloads$ sha1sum -c a.txt 
+  feeds-master.zip: OK
+  ```
+
+md5
+- md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
+
+
+- MD5 校验的用法与 SHA 校验的用法一样。下面是 MD5 校验的用法
+  ```
+  Tim@computer:~/Downloads$ md5sum feeds-master.zip > md.txt
+  Tim@computer:~/Downloads$ cat md.txt 
+  f273a8295e2c28e598764ed04898a742  feeds-master.zip
+  Tim@computer:~/Downloads$ md5sum -c md.txt 
+  feeds-master.zip: OK
+  ```
+
+# 26. ldconfig
+ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
+
+主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序连接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
+
+
+参考：[linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+
+# 27. 包管理
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
 Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
@@ -860,7 +910,7 @@ Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线�
 CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 25.1. 软件仓库
+## 27.1. 软件仓库
 - 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
 - Windows
@@ -871,7 +921,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
    - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
 
-## 25.2. apt命令
+## 27.2. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -904,7 +954,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 25.3. dpkg 命令
+## 27.3. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -918,8 +968,8 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - dpkg -reconfigure 重新配置
 
 
-# 26. 防火墙
-## 26.1. ubuntu下默认的防火墙
+# 28. 防火墙
+## 28.1. ubuntu下默认的防火墙
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -931,7 +981,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 26.2. CentOS下默认的防火墙
+## 28.2. CentOS下默认的防火墙
 - 参考
   - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 
@@ -964,14 +1014,14 @@ CentOS7下默认的防火墙为 `firewalld`
 
 
 
-# 27. SELinux
+# 29. SELinux
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 28. 共性问题
-## 28.1. Linux与Windows相差8小时处理
+# 30. 共性问题
+## 30.1. Linux与Windows相差8小时处理
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
@@ -986,6 +1036,6 @@ $sudo ntpdate time.windows.com
 
 
 
-# 29. 参考
+# 31. 参考
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
