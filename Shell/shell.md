@@ -1,9 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-04-25 22:10:37
+ * @LastEditTime: 2021-06-08 10:58:40
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: shall 学习笔记
 -->
 
 <!-- TOC -->
@@ -394,14 +394,24 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 - `[]`: 匹配括号中的任意一个字符
 - `-`: 在[] 括号内表示字符范围。eg: `[0-9]`
 - `^`: 位于[] 括号的开头，匹配除括号中的字符之外的任意一个字符。eg: `[^abf]` 匹配除abf字符以外的所有字符。
-- `[[:xxx:]]`: grep工具转给你预定义的一些字符类
+- `\s`: 匹配任意空白字符。
+- `\S`: 匹配任意非空白字符。
+- `\d`: 匹配任意数字。
+- `\D`: 匹配非任意数字。
+- `w`: 匹配任意单字字符（字母、数字、下划线）。
+- `W`: 匹配任意非单字字符。
+- 
+
+
+
+- `[[:xxx:]]`: grep工具转给你预定义的一些字符类。
 
 
 ## 7.2. 数量限定符
 
-- `?`: 匹配零次或一次
-- `+`: 匹配一次或多次
-- `*`: 匹配零次或多次
+- `?`: 匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。
+- `+`: 匹配前面的子表达式一次或多次。
+- `*`: 匹配前面的子表达式零次或多次。
 - `{N}`: 精确匹配N次
 - `{N,}`: 至少匹配N次
 - `{,N}`: 最多匹配N次
@@ -415,7 +425,7 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 - `xxx\<`: 匹配以xxx字符开头的单词 
 - `xxx\>`: 匹配以xxx字符结尾的单词
 - `\b`: 匹配以xxx字符开始或结尾的单词
-- `\B`: 匹配不包含以xxx字符开始或结尾的单词。eg: \Bth\B----->mythed
+- `\B`: 匹配不包含以xxx字符开始或结尾的单词。eg: `\Bth\B----->mythed`
 
 
 ## 7.4. 其他特殊字符
@@ -469,4 +479,5 @@ sed俗称做流编辑器，以行单位进行字符处理。
 - [十分钟学会 tmux](https://www.cnblogs.com/kaiye/p/6275207.html)
 - [Bash快捷键大全](https://linux.cn/article-5660-1.html)
 - [Terminator The robot future of terminals](https://gnometerminator.blogspot.com/p/introduction.html)
+- [如何在QT中使用正则表达式](https://blog.csdn.net/Hyc_cheng/article/details/112132963#t5)
 
