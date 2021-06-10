@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-05-31 12:21:38
+ * @LastEditTime: 2021-06-10 10:12:51
  * @LastEditors: Please set LastEditors
  * @Description: Linux基础用法笔记
 --> 
@@ -9,65 +9,68 @@
 
 - [1. Linux Basic](#1-linux-basic)
 - [2. 硬件基础知识](#2-硬件基础知识)
-  - [2.1. MBR](#21-mbr)
-  - [2.2. GPT](#22-gpt)
-  - [2.3. BIOS与UEFI](#23-bios与uefi)
-  - [2.4. 分区](#24-分区)
+	- [2.1. MBR](#21-mbr)
+	- [2.2. GPT](#22-gpt)
+	- [2.3. BIOS与UEFI](#23-bios与uefi)
+	- [2.4. 分区](#24-分区)
 - [3. 文件I/O](#3-文件io)
-  - [3.1. 常用命令](#31-常用命令)
-  - [3.2. 查看文件内容](#32-查看文件内容)
-  - [3.3. 磁盘](#33-磁盘)
-  - [3.4. 文件权限与链接](#34-文件权限与链接)
-  - [3.5. 默认文件权限 umask](#35-默认文件权限-umask)
-  - [3.6. 文件隐藏属性](#36-文件隐藏属性)
-  - [3.7. 用户与用户组](#37-用户与用户组)
-  - [3.8. 用户权限修改](#38-用户权限修改)
-  - [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
-  - [3.10. 文件目录](#310-文件目录)
-  - [3.11. link(链接)](#311-link链接)
-  - [3.12. 重定向](#312-重定向)
-  - [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
+	- [3.1. 常用命令](#31-常用命令)
+	- [3.2. 查看文件内容](#32-查看文件内容)
+	- [3.3. 磁盘](#33-磁盘)
+	- [3.4. 文件权限与链接](#34-文件权限与链接)
+	- [3.5. 默认文件权限 umask](#35-默认文件权限-umask)
+	- [3.6. 文件隐藏属性](#36-文件隐藏属性)
+	- [3.7. 用户与用户组](#37-用户与用户组)
+	- [3.8. 用户权限修改](#38-用户权限修改)
+	- [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
+	- [3.10. 文件目录](#310-文件目录)
+	- [3.11. link(链接)](#311-link链接)
+	- [3.12. 重定向](#312-重定向)
+	- [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
 - [4. tar](#4-tar)
-  - [4.1. 文件类型](#41-文件类型)
-  - [4.2. tar文件打包](#42-tar文件打包)
-  - [4.3. 打包文件或目录](#43-打包文件或目录)
-  - [4.4. 解包文件或目录](#44-解包文件或目录)
-  - [4.5. 解压缩文件](#45-解压缩文件)
-  - [4.6. 打包压缩](#46-打包压缩)
-  - [4.7. zip](#47-zip)
+	- [4.1. 文件类型](#41-文件类型)
+	- [4.2. tar文件打包](#42-tar文件打包)
+	- [4.3. 打包文件或目录](#43-打包文件或目录)
+	- [4.4. 解包文件或目录](#44-解包文件或目录)
+	- [4.5. 解压缩文件](#45-解压缩文件)
+	- [4.6. 打包压缩](#46-打包压缩)
+	- [4.7. zcat zless](#47-zcat-zless)
+	- [4.8. zip](#48-zip)
 - [5. pipe](#5-pipe)
 - [6. tee](#6-tee)
 - [7. wc](#7-wc)
 - [8. top](#8-top)
-- [9. ps (process status)](#9-ps-process-status)
-- [10. pstree](#10-pstree)
-- [11. strace](#11-strace)
-- [12. pstack](#12-pstack)
-- [13. find](#13-find)
-- [14. grep](#14-grep)
-- [15. PID](#15-pid)
-- [16. netstat](#16-netstat)
-- [17. netcat](#17-netcat)
-- [18. socat](#18-socat)
-- [19. traceroute](#19-traceroute)
-- [20. dmesg](#20-dmesg)
-- [21. vmstat](#21-vmstat)
-- [22. man](#22-man)
-- [23. ntsysv](#23-ntsysv)
-- [24. wget](#24-wget)
-- [25. md5 sha](#25-md5-sha)
-- [26. ldconfig](#26-ldconfig)
-- [27. 包管理](#27-包管理)
-  - [27.1. 软件仓库](#271-软件仓库)
-  - [27.2. apt命令](#272-apt命令)
-  - [27.3. dpkg 命令](#273-dpkg-命令)
-- [28. 防火墙](#28-防火墙)
-  - [28.1. ubuntu下默认的防火墙](#281-ubuntu下默认的防火墙)
-  - [28.2. CentOS下默认的防火墙](#282-centos下默认的防火墙)
-- [29. SELinux](#29-selinux)
-- [30. 共性问题](#30-共性问题)
-  - [30.1. Linux与Windows相差8小时处理](#301-linux与windows相差8小时处理)
-- [31. 参考](#31-参考)
+- [9. ps](#9-ps)
+- [10. pgrep](#10-pgrep)
+- [11. killall pkill](#11-killall-pkill)
+- [12. pstree](#12-pstree)
+- [13. strace](#13-strace)
+- [14. pstack](#14-pstack)
+- [15. find](#15-find)
+- [16. grep](#16-grep)
+- [17. PID](#17-pid)
+- [18. netstat](#18-netstat)
+- [19. netcat](#19-netcat)
+- [20. socat](#20-socat)
+- [21. traceroute](#21-traceroute)
+- [22. dmesg](#22-dmesg)
+- [23. vmstat](#23-vmstat)
+- [24. man](#24-man)
+- [25. ntsysv](#25-ntsysv)
+- [26. wget](#26-wget)
+- [27. md5 sha](#27-md5-sha)
+- [28. ldconfig](#28-ldconfig)
+- [29. 包管理](#29-包管理)
+	- [29.1. 软件仓库](#291-软件仓库)
+	- [29.2. apt命令](#292-apt命令)
+	- [29.3. dpkg 命令](#293-dpkg-命令)
+- [30. 防火墙](#30-防火墙)
+	- [30.1. ubuntu下默认的防火墙](#301-ubuntu下默认的防火墙)
+	- [30.2. CentOS下默认的防火墙](#302-centos下默认的防火墙)
+- [31. SELinux](#31-selinux)
+- [32. 共性问题](#32-共性问题)
+	- [32.1. Linux与Windows相差8小时处理](#321-linux与windows相差8小时处理)
+- [33. 参考](#33-参考)
 
 <!-- /TOC -->
 
@@ -235,7 +238,6 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
     - 利用 od 命令来查看字符的ASCII表：`echo abc | od -t dCc`
 - head、tail：取出文件前几行或最后几行的数据。
   > 示例：在屏幕上列出 `/etc/man_db.conf` 文件中的第11行到22行之间的内容，并且显示行号。 `cat -n /etc/man_db.conf | head -n 20 | tail -n 10`
-
 
 
 ## 3.3. 磁盘
@@ -474,10 +476,11 @@ s      | 套接文件(socket)               | null
 ## 3.11. link(链接)
 Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
 
+> 硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
+
 - 建立软连接: `ln -s source  destination` 
 - 建立硬链接: `ln 原文件 新文件` 
 
-硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 
 
 ## 3.12. 重定向 
@@ -556,7 +559,19 @@ tar 用于的文件的打包和解压。
     2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
 
 
-## 4.7. zip
+## 4.7. zcat zless 
+zcat、zless 命令直接查看压缩文件中的内容。
+
+```sh
+john@ubuntu:~$ zcat test.gz
+hello word
+
+john@ubuntu:~$ zless test.gz
+hello word
+```
+
+
+## 4.8. zip
 > zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
 - zip -r yasuo.zip demo.txt mydir  // 将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
@@ -568,6 +583,11 @@ tar 用于的文件的打包和解压。
 - unzip  -n  demo.zip              // 解压时不覆盖已存在的文件
 
 > 注意：直接使用unzip指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。
+
+
+
+
+
 
 
 # 5. pipe
@@ -610,8 +630,8 @@ man手册英文原意：`tee - read from standard input and write to standard ou
   - `%st` 被虚拟机偷走的cpu 
 
 
-# 9. ps (process status)
-ps 在 Linux 系统中是 `process status` 的缩写。
+# 9. ps
+ps 是 `process status` 的缩写。
 
 - 显示格式参数
   - `USER `：用户名
@@ -666,13 +686,46 @@ ps 在 Linux 系统中是 `process status` 的缩写。
 - `ps aux`：查看系统运行的所有进程，默认按照PID的顺序排序。
 - `ps axjf`：查看系统运行的所有进程，并带有PPID项
 
+- 查看某个进程已运行的时间
+  ```sh
+  john@ubuntu:~$ ps -p 3578 -o lstart,etime
+                 STARTED     ELAPSED
+  Thu Jun 10 08:33:04 2021       33:48
+  ```
 
-# 10. pstree 
-- 查找各个进程之间的相关性
+
+# 10. pgrep
+根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
+
+- `pgrep -l program_name)`  只显示某个进程的PID
+- `pidof program_name`：找出某个正在执行的进程的PID
+  ```sh
+  pgrep bash
+  3528
+  
+  pidof bash 
+  3528
+  ```
+
+
+# 11. killall pkill
+根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
+
+```
+killall bash
+
+pkill bash
+```
+
+
+
+
+# 12. pstree 
+- 查找各个进程之间的相关性。
 - Linux系统中内核调用的第一个进程为 `systemd`，该进程的PID为 `1`
 
 
-# 11. strace
+# 13. strace
 strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
 
 
@@ -680,11 +733,11 @@ strace指令跟踪程序使用的底层系统调用，可输出系统调用被�
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
-# 12. pstack
+# 14. pstack
 pstack工具跟踪指定进程的栈信息。
 
 
-# 13. find
+# 15. find
 find：按照文件属性查找 
  
 - 选项参数
@@ -709,7 +762,7 @@ find：按照文件属性查找
   - `cmin(change minute)`: 最近文件的状态被改变的时间（按照分钟）
 
 
-# 14. grep
+# 16. grep
 `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
 
 - 三种形式的grep命令
@@ -739,16 +792,14 @@ grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 ta
 ```
 
 
-# 15. PID
-- `pgrep -l xxxx(程序名称)`  只显示某个进程的PID
+# 17. PID
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
-- `pidof program_name`：找出某个正在执行的进程的PID
 
 
 
-# 16. netstat
+# 18. netstat
 netstat是一个查看系统中端口使用情况的一个命令。
 
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
@@ -773,34 +824,33 @@ netstat是一个查看系统中端口使用情况的一个命令。
 - `lsof` 检查端口
   - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
 
-# 17. netcat
+# 19. netcat
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
 
-# 18. socat
+# 20. socat
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
 
-# 19. traceroute
+# 21. traceroute
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
 
-# 20. dmesg 
+# 22. dmesg 
 dmesg是分析内核产生的一些信息。
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
 
-# 21. vmstat
+# 23. vmstat
 可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
 
 
-# 22. man
+# 24. man
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
-`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
 
 `man -n 命令参数`：n为数字
 - 1：普通应用程序或shell命令
@@ -813,27 +863,43 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 - 8：root管理命令
 - 9：非标准的内核程序
 <img src="./pictures/man代号.png">
+  ```
+  man 2 socket
+  ```
 
-- man手册中的一些关键字
-  ```
-  NAME - 命令名
-  SYNOPSIS - 使用方法大纲
-  CONFIGURATION - 配置
-  DESCRIPTION - 功能说明
-  OPTIONS - 可选参数说明
-  EXIT STATUS - 退出状态, 这是一个返回给父进程的值
-  RETURN VALUE - 返回值
-  ERRORS - 可能出现的错误类型
-  ENVIRONMENT - 环境变量
-  FILES - 相关配置文件
-  VERSIONS - 版本
-  CONFORMING TO - 符合的规范
-  NOTES - 使用注意事项
-  BUGS - 已经发现的bug
-  EXAMPLE - 一些例子
-  AUTHORS - 作者
-  SEE ALSO - 功能或操作对象相近的其它命令
-  ```
+`man -k keyword` 按照关键字搜索与之匹配的相似命令。
+  ```bash
+  john@ubuntu:~$ man -k what
+  git-blame (1)        - Show what revision and author last modified each line of a file
+  git-receive-pack (1) - Receive what is pushed into the repository
+  git-whatchanged (1)  - Show logs with difference each commit introduces
+  imgtoppm (1)         - convert an Img-whatnot file into a portable pixmap
+  lwp-dump (1p)        - See what headers and content is returned for a URL
+  w (1)                - Show who is logged on and what they are doing.
+  w.procps (1)         - Show who is logged on and what they are doing.
+  whatis (1)           - display one-line manual page descriptions
+  ``` 
+
+
+man手册中的一些关键字
+  - NAME - 命令名
+  - SYNOPSIS - 使用方法大纲
+  - CONFIGURATION - 配置
+  - DESCRIPTION - 功能说明
+  - OPTIONS - 可选参数说明
+  - EXIT STATUS - 退出状态, 这是一个返回给父进程的值
+  - RETURN VALUE - 返回值
+  - ERRORS - 可能出现的错误类型
+  - ENVIRONMENT - 环境变量
+  - FILES - 相关配置文件
+  - VERSIONS - 版本
+  - CONFORMING TO - 符合的规范
+  - NOTES - 使用注意事项
+  - BUGS - 已经发现的bug
+  - EXAMPLE - 一些例子
+  - AUTHORS - 作者
+  - SEE ALSO - 功能或操作对象相近的其它命令
+
 
 man 中的一些快捷操作:
 
@@ -845,11 +911,13 @@ n       |	继续下一个搜寻
 N       |	反向查询 
 
 
-# 23. ntsysv
+与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
+
+# 25. ntsysv
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 24. wget
+# 26. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
@@ -858,7 +926,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 参考: [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
 
-# 25. md5 sha
+# 27. md5 sha
 
 SHA
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
@@ -894,7 +962,7 @@ md5
   feeds-master.zip: OK
   ```
 
-# 26. ldconfig
+# 28. ldconfig
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序连接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
@@ -902,7 +970,7 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
 
 参考：[linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
 
-# 27. 包管理
+# 29. 包管理
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
 Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
@@ -910,7 +978,7 @@ Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线�
 CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 27.1. 软件仓库
+## 29.1. 软件仓库
 - 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
 - Windows
@@ -921,7 +989,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
    - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
 
-## 27.2. apt命令
+## 29.2. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -954,7 +1022,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 27.3. dpkg 命令
+## 29.3. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -968,8 +1036,8 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - dpkg -reconfigure 重新配置
 
 
-# 28. 防火墙
-## 28.1. ubuntu下默认的防火墙
+# 30. 防火墙
+## 30.1. ubuntu下默认的防火墙
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -981,7 +1049,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 28.2. CentOS下默认的防火墙
+## 30.2. CentOS下默认的防火墙
 - 参考
   - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 
@@ -1014,14 +1082,14 @@ CentOS7下默认的防火墙为 `firewalld`
 
 
 
-# 29. SELinux
+# 31. SELinux
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 30. 共性问题
-## 30.1. Linux与Windows相差8小时处理
+# 32. 共性问题
+## 32.1. Linux与Windows相差8小时处理
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
@@ -1036,6 +1104,6 @@ $sudo ntpdate time.windows.com
 
 
 
-# 31. 参考
+# 33. 参考
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
