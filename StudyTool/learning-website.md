@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2021-04-05 11:28:57
+ * @LastEditTime: 2021-06-04 21:01:51
  * @LastEditors: Please set LastEditors
  * @Description: 积累一些学习的网站。
 --> 
@@ -175,7 +175,7 @@
 - [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
 - [emojiisland](https://emojiisland.com/) 下载emoji表情库
 - [photomosh](https://photomosh.com/) 炫酷的图片制作
-
+- [Emoji Cheat Sheet](https://www.webfx.com/tools/emoji-cheat-sheet/): 各种表情包下载库。
 
 
 ## 1.13. 图标

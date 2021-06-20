@@ -68,5 +68,6 @@
         "complex": "cpp"
     },
     "jupyter.jupyterServerType": "local",
-    "C_Cpp.errorSquiggles": "Disabled"
+"C_Cpp.errorSquiggles": "Disabled",
+"editor.lineNumbers": "relative"
 }
