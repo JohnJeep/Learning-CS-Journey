@@ -1,16 +1,16 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-22 19:04:41
- * @LastEditTime: 2021-03-22 19:24:58
+ * @LastEditTime: 2021-07-07 11:27:13
  * @LastEditors: Please set LastEditors
  * @Description: 积累Linux下常用的开发工具
 -->
 
+# 1. 通用
 - DBeaver：一款基于Java 开发，免费开源的通用数据库管理和开发工具。DBeaver适用于所有开发人员、SQL程序员、数据库管理员和分析人员等，它支持任何具有JDBC驱动程序的数据库，EE版本还支持非JDBC数据源（MongoDB，Cassandra，Redis，DynamoDB等）。
-
 - SysMonTask: 可视化的任务管理器。
 
-## 日志框架
+# 2. 日志框架
 - log4cxx：Java 社区著名的 Log4j 的 C++ 移植版，用于为 C++ 程序提供日志功能，以便开发者对目标程序进行调试和审计。
 - log4cplus：一个简单易用的 C++ 日志记录 API，它提供了对日志管理和配置的线程安全、灵活和任意粒度控制（也基于 Log4j）。
 - Log4cpp：一个 C++ 类库，可以灵活地记录到文件、syslog、IDSA 和其他目的地（也基于 Log4j）。
@@ -23,3 +23,19 @@
 - G3log：一个开源、支持跨平台的异步 C++ 日志框架，支持自定义日志格式。基于 g2log 构建，提升了性能，支持自定义格式。
 - Plog：可移植、简单和可扩展的 C++ 日志库。
 - spdlog：一个快速的 C++ 日志库，只包含头文件，兼容 C++11。
+
+
+# 3. 内存泄漏检测工具
+- valgrind
+- mtrace
+- AddressSanitizer(ASan) : 该工具为 gcc 自带，4.8以上版本都可以使用，支持Linux、OS、Android等多种平台，不止可以检测内存泄漏，它其实是一个内存错误检测具，可以检测的问题有：内存泄漏、堆栈和全局内存越界访问、free后继续使用、局部内存被外层使用、Initialization order bugs。
+
+
+# 4. Linux 性能分析
+参考：[Linux Performance](http://www.brendangregg.com/linuxperf.html)
+
+<img src="./pictures/linux_observability_tools.png">
+
+- gprof: gprof是GNU工具之一，编译的时候，它在每个函数的出入口加入了profiling的代码，运行时统计程序在用户态的执行信息，可以得到每个函数的调用次数，执行时间，调用关系等信息，简单易懂。适合于查找用户级程序的性能瓶颈，然而对于很多耗时在内核态执行的程序，gprof不适合。
+- Oprofile: Oprofile也是一个开源的profiling工具，它使用硬件调试寄存器来统计信息，进行profiling的开销比较小，而且可以对内核进行profiling。它统计的信息非常多，可以得到cache的缺失率，memory的访存信息，分支预测错误率等等，这些信息gprof得不到，但是对于函数调用次数，它无能为力。
+- gperftools: Google出品，值得信赖，提供整个程序的热点分布图，找到性能瓶颈，然后可以针对性的进行性能优化。
