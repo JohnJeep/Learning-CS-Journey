@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-28 21:24:43
- * @LastEditTime: 2021-04-28 21:26:45
+ * @LastEditTime: 2021-07-20 15:54:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
@@ -18,12 +18,11 @@
 
 <!-- /TOC -->
 # 1. 什么是 `enable_shared_from_this`?
-  下面摘自 cpp reference 中概述
-  > C++10开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： ` template< class T > class enable_shared_from_this;`
-  
-  > std::enable_shared_from_this 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
-  
-  > 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
+
+下面摘自 cpp reference 中概述
+- C++10开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： ` template< class T > class enable_shared_from_this;`
+- std::enable_shared_from_this 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
+- 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
 
 # 2. 为什么要用 `enable_shared_from_this`？
 - 需要在类对象的内部中获得一个指向当前对象的 shared_ptr 对象。
@@ -63,7 +62,7 @@
       shared_from_this() const
       { return shared_ptr<const _Tp>(this->_M_weak_this); }
 
-#if __cplusplus > 201401L || !defined(__STRICT_ANSI__) // c++1z or gnu++11
+#if __cplusplus > 201401L || !defined(__STRICT_ANSI__) // c++11 or gnu++11
 #define __cpp_lib_enable_shared_from_this 201602
       weak_ptr<_Tp>
       weak_from_this() noexcept
@@ -127,36 +126,36 @@ struct Bad
 int main()
 {
     // 正确的用法: 两个 shared_ptr 共享同一个对象
-    std::shared_ptr<Good> gp0 = std::make_shared<Good>();
-    std::shared_ptr<Good> gp1 = gp1->getptr();
-    std::cout << "gp1.use_count() = " << gp2.use_count() << '\n';
+    std::shared_ptr<Good> gp1 = std::make_shared<Good>();
+    std::shared_ptr<Good> gp2 = gp1->getptr();
+    std::cout << "gp2.use_count() = " << gp2.use_count() << '\n';
  
     // 错误的用法: 调用 shared_from_this 但其没有被 std::shared_ptr 占有 
     try {
         Good not_so_good;
-        std::shared_ptr<Good> gp0 = not_so_good.getptr();
+        std::shared_ptr<Good> gp1 = not_so_good.getptr();
     } 
     catch(std::bad_weak_ptr& e) {
-        // 在 C++16 之前，编译器不能捕获 enable_shared_from_this 抛出的std::bad_weak_ptr 异常
-        // 这是在C++16之后才有的特性
+        // 在 C++17 之前，编译器不能捕获 enable_shared_from_this 抛出的std::bad_weak_ptr 异常
+        // 这是在C++17之后才有的特性
         std::cout << e.what() << '\n';    
     }
  
     // 错误的用法，每个 shared_ptr 都认为自己是对象的唯一拥有者
     // 调用错误的用法，会导致两次析构 Bad的对象，第二次析构时，指针指向的空间已经被析构，
     // 会导致程序出错
-    std::shared_ptr<Bad> bp0 = std::make_shared<Bad>();
-    std::shared_ptr<Bad> bp1 = bp1->getptr();
-    std::cout << "bp1.use_count() = " << bp2.use_count() << '\n';
+    std::shared_ptr<Bad> bp1 = std::make_shared<Bad>();
+    std::shared_ptr<Bad> bp2 = bp1->getptr();
+    std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
 
-    return -1;
+    return 0;
 }  
 ```
 
 # 7. 使用注意事项
 - enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用（例如 std::weak_ptr )。 std::shared_ptr 的构造函数检测无歧义且可访问的 (C++16 起) enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的 std::shared_ptr 为内部存储的弱引用。为另一个 std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined behavior)。
   
-- 只允许在先前已被std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++16 前)抛出 std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的 weak_this 的构造函数） (自C++17 起)。
+- 只允许在先前已被std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++17 前)抛出 std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的 weak_this 的构造函数） (自C++17 起)。
 
 - enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
 
