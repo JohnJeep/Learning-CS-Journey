@@ -19,13 +19,13 @@
 - [8. QString和std::string相互转换，以及避免出现乱码](#8-qstring和stdstring相互转换以及避免出现乱码)
 - [9. QString和char *相互转换](#9-qstring和char-相互转换)
 - [10. Qt常用类](#10-qt常用类)
-	- [10.1. QFrame](#101-qframe)
-	- [10.2. QBoxLayout](#102-qboxlayout)
-	- [10.3. QComboBox](#103-qcombobox)
-	- [10.4. Spacer](#104-spacer)
-	- [10.5. QStackedWidget](#105-qstackedwidget)
-	- [10.6. QPushButton](#106-qpushbutton)
-	- [10.7. QString](#107-qstring)
+  - [10.1. QFrame](#101-qframe)
+  - [10.2. QBoxLayout](#102-qboxlayout)
+  - [10.3. QComboBox](#103-qcombobox)
+  - [10.4. Spacer](#104-spacer)
+  - [10.5. QStackedWidget](#105-qstackedwidget)
+  - [10.6. QPushButton](#106-qpushbutton)
+  - [10.7. QString](#107-qstring)
 - [11. 多线程](#11-多线程)
 - [12. 快捷键](#12-快捷键)
 - [13. 参考](#13-参考)
@@ -217,6 +217,48 @@ setChecked（true）为属性的值，表示已经选中
 
 # 11. 多线程
 多线程编程也使用回调函数作为新线程里的任务函数。
+
+TCP Client 接口
+
+connectToHost(IP, Port)函数连接服务端
+
+readyRead()信号是否被触发来判断是否有数据传入，如果该信号被触发，则调用自定义函数（如：ClientRecvData()）来保存接收到的数据。通过connect()函数，将信号readyRead()与槽函数ClientRecvData()建立映射关系。在槽函数ClientRecvData()中通过read()函数接收数据
+
+
+
+
+关闭 TCP 连接
+void QAbstractSocket::disconnectFromHost()
+void QAbstractSocket::close()
+void QAbstractSocket::abort(
+
+
+TCP Server 接口 
+
+
+
+QHostAddress::Null表示一个空地址；
+
+QHostAddress::LocalHost表示IPv4的本机地址127.0.0.1；
+
+QHostAddress::LocalHostIPv6表示IPv6的本机地址；
+
+QHostAddress::Broadcast表示广播地址255.255.255.255；
+
+QHostAddress::Any表示IPv4的任意地址；
+
+QHostAddress::AnyIPv6表示IPv6的任意地址。
+
+ewConnection() 来判断是否接收到了新的连接，当服务端接收到一个客户端的连接时，就会触发信 newConnection()
+
+nextPendingConnection() 函数获得连接客户端的SOCKET套接字：
+
+readyRead()来判断是否有数据传入，当客户端向服务端成功发送数据之后，就会在服务端触发readyRead()信号
+
+
+
+参考： [QT创建TCP Socket通信](https://www.cnblogs.com/stones-dream/p/9700660.html)
+
 
 
 # 12. 快捷键
