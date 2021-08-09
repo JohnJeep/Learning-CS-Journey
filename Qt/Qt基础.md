@@ -1,7 +1,7 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2021-08-03 15:04:27
+ * @LastEditTime: 2021-08-09 12:24:02
  * @LastEditors: Please set LastEditors
  * @Description: QT基础知识
  * 
@@ -19,13 +19,13 @@
 - [8. QString和std::string相互转换，以及避免出现乱码](#8-qstring和stdstring相互转换以及避免出现乱码)
 - [9. QString和char *相互转换](#9-qstring和char-相互转换)
 - [10. Qt常用类](#10-qt常用类)
-  - [10.1. QFrame](#101-qframe)
-  - [10.2. QBoxLayout](#102-qboxlayout)
-  - [10.3. QComboBox](#103-qcombobox)
-  - [10.4. Spacer](#104-spacer)
-  - [10.5. QStackedWidget](#105-qstackedwidget)
-  - [10.6. QPushButton](#106-qpushbutton)
-  - [10.7. QString](#107-qstring)
+	- [10.1. QFrame](#101-qframe)
+	- [10.2. QBoxLayout](#102-qboxlayout)
+	- [10.3. QComboBox](#103-qcombobox)
+	- [10.4. Spacer](#104-spacer)
+	- [10.5. QStackedWidget](#105-qstackedwidget)
+	- [10.6. QPushButton](#106-qpushbutton)
+	- [10.7. QString](#107-qstring)
 - [11. 多线程](#11-多线程)
 - [12. 快捷键](#12-快捷键)
 - [13. 参考](#13-参考)
@@ -257,8 +257,9 @@ readyRead()来判断是否有数据传入，当客户端向服务端成功发送
 
 
 
-参考： [QT创建TCP Socket通信](https://www.cnblogs.com/stones-dream/p/9700660.html)
-
+参考： 
+- [QT创建TCP Socket通信](https://www.cnblogs.com/stones-dream/p/9700660.html)
+- https://cryfeifei.top/2020/05/30/qt-ji-chu-jiao-cheng/
 
 
 # 12. 快捷键
