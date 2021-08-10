@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-05-30 11:42:03
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-10 16:52:57
+ * @LastEditors: Windows10
  * @Description: In User Settings Edit
 -->
 # 1. Learning Computer Science Journey
@@ -11,7 +11,60 @@
 
 
 
-# 2. C语言
+# 2. C 语言
+C 语言是自己接触的第一门语言，基本的语法在大学时就已经学过，这里不再讲基础的语法，仅仅只是记录自己在工作中对 C 语言知识点的补充。包括底层的一些知识点，字符编码、指针、函数指针、结构体、内存分配等常见的点。
+
+[字符编码](C/2-字符编码.md)
+
+[内存存放顺序](C/3-内存存放顺序.md)
+
+[断点调试](C/4-断点调试.md)
+
+[变量与数据类型](C/5-变量与数据类型.md)
+
+[Volatile 关键字用法解释](C/6-volatile.md)
+
+[为什么会出现段错误](C/7-segment-fault.md)
+
+[C 语言中常见的基础语法的补充](C/8-基础知识补充.md)
+
+[C 语言中精髓之一：指针函数和函数指针](C/9-指针函数和函数指针.md)
+
+[Const 关键字](C/10-const.md)
+
+[restrict 关键字](C/11-restrict.md)
+
+[exteren 关键字](C/12-extern.md)
+
+[最常见得 void 含义和用法](C/13-void.md)
+
+[内存初始化函数 memset](C/14-memset.md)
+
+[memcpy 与 strcpy 函数的区别及用法](C/15-strncpy与memcpy.md)
+
+[memcmp 与 strcmp 函数的区别及用法](C/16-memcmp与strcmp.md)
+
+[typedef 用法剖析](C/17-typedef.md)
+
+[C 语言中精髓之一：结构体和字节对齐](C/18-struct和字节对齐.md)
+
+[word, half word, double word用法及区别](C/20-字、半字、双字.md)
+
+[C 语言中精髓之一：指针](C/21-指针.md)
+
+[枚举类型](C/22-枚举类型(Enumerations).md)
+
+[C 语言中的状态机](C/23-状态机.md)
+
+[C 语言中精髓之一：数组与指针的结合](C/24-数组与指针组合.md)
+
+用到的比较生僻的库函数：[atoi()](C/25-atoi().md)、 [fprintf()](C/26-fprintf().md)
+
+[常见的转义字符和ASCII码](C/29-转义字符与ASCII码.md)
+
+[C 语言中最重要的部分：内存分布](C/30-内存.md)
+
+
 
 # 3. C++
 这部分主要是C++
