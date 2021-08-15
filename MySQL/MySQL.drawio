@@ -1,1 +1,103 @@
-<mxfile host="Electron" modified="2021-01-04T08:53:58.066Z" agent="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/12.6.5 Chrome/80.0.3987.86 Electron/8.0.0 Safari/537.36" etag="JWlRh2S0RGrqawfc0VWz" version="12.6.5" type="device"><diagram id="GiaKUBYWjl3_sKobao7V" name="第 1 页">5ZlNc6M4EIZ/jY6TAn2AdAR/zO5hqqY2u7XZIwMamxpsXCDHdn79SiAMEqRiO9iezBziSA1qwdMvUtMANFntPxfRZvklT3gGoJPsAZoCCF0HYvlPWQ61hTCvNiyKNKlNTmt4TF94M1Jbt2nCS22rTSLPM5FuTGOcr9c8FoYtKop8Z572Pc8Sw7CJFrxneIyjrG/9N03EsrZS6Lf2P3i6WDYzux6rj6yi5mR9J+UySvJdx4RmAE2KPBd1a7Wf8EzBM7nMXzl6vLCCr8UpAyb533/9Gfvo8z7Dz08l+ycOXz5BfbXPUbbVdwxmGIQBoCGYEUADEOiZSnFooEjHkr/shLtlKvjjJorVkZ2UgLQtxSqTPVc2v6dZNsmzvKjGIYQYm8vrC/WkvBB8/+rtuEdIUl08X3FRHOQpzQCC6iFaWNDXnHdtmIi+u2UnQhhqcWhhLI6eW3ayofGdgRI5AygZYAFgGMx8EHgglEw9QB0Q+OMzjbJ0sZa2WALkxTiQkcMMyC5Dd4bsDuuVKqoz+euDEH9wyJC4d4YMByDLtWAG2Fw1gilgzgeHfOzfDTIagCyRTgB1K0kzQMlHh+z5d4aMB5Us2YZeJek5YG4FeaYgKwtVh8aiPZ+HyPPGgYubzKlZJiDswaXOAFx6LbhkUMFMbnWkojxXbQXXBUHFPcCATn9KuMRxTOXifjbhewNw2bXgen24Nrh4WzzzRMPh6yRQ+a56pLOoLNPYhFeP5kkv3X0TUffhHdBXYyt4Fon02XQ/xEXP8DVP5cTt2uGbEYAuNl2U+baIuR7VzXMtR5hZiSGyHImoWHDRcyTpRYfOaRt1Qvn6BWNkzuNSYkW99thq4Mj0HbLwf3dZNFvK+bKwHOErycKFg8v0dWVBR5aFDH5xeJIdp+n8pzoPUL4wasN03z08PXR7X3mRyntSeUVlPFVl8uW+isKbu8795Gg+9Ahau+upciSOtUoxaycZS47YumDs3UCOA1WF98lxn4qnTrsWI9G9VomqYwhxQMLkDQGfrtU61ifk+D+5qDEyl0YMyYVrLLWyKN9yNJqozTUWUXp9UeOB+s7vtfX6F2ZkxHHNcKErrXUEW2vqDbZePFCR6r3hfHAlHHPxBiz1LlMCcqx3WNfaPl9RwmjBgrcL1gn7Q119v1tUiVWtaWCcH1WrgOnD20Z1oJR2blQvyTB+ISVQUwnNt5XzlWA5gt5tlTBQ7/v1FmPrBZNduC0jh5jBoqdla6MFq18/XAqhvusGai443+12D/H6W5Yvyoc4X0mLiH5sV2m8l82N/GOMUYrxQxU9O86C74UZ2V7JW5UM0zjKAn1glSaJGh4WvExfom+VK/Wk68xD+iUhIFPlayvysv5a3YrmfR80rboVbrKkjqygP1A9t/fQE2qQstt+eK7j2X6+R7P/AQ==</diagram></mxfile>
+<mxfile host="65bd71144e">
+    <diagram id="GiaKUBYWjl3_sKobao7V" name="第 1 页">
+        <mxGraphModel dx="545" dy="863" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-29" value="事务" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="153" y="270" width="59" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-30" value="隔离性" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3399FF;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="309" y="193" width="59" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-31" value="一致性" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3399FF;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="309" y="251" width="59" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-32" value="原子性" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3399FF;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="309" y="309" width="59" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-33" value="持久性" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3399FF;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="309" y="367" width="59" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-34" value="并发控制" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFB366;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="207" width="80" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-35" value="日志恢复" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFB366;" parent="1" vertex="1">
+                    <mxGeometry x="487" y="321" width="76" height="49" as="geometry"/>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-36" value="" style="curved=1;endArrow=classic;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" parent="1" edge="1" target="CoTRIc73Gxl4vXs9UcBz-34" source="CoTRIc73Gxl4vXs9UcBz-30">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="214" as="sourcePoint"/>
+                        <mxPoint x="493" y="234" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="433" y="185"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-37" value="" style="curved=1;endArrow=classic;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" edge="1" target="CoTRIc73Gxl4vXs9UcBz-34">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="267" as="sourcePoint"/>
+                        <mxPoint x="490" y="244" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="430" y="275"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-38" value="" style="curved=1;endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="CoTRIc73Gxl4vXs9UcBz-35" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="373" y="328" as="sourcePoint"/>
+                        <mxPoint x="503" y="299" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="443" y="346"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-39" value="" style="curved=1;endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="CoTRIc73Gxl4vXs9UcBz-33" target="CoTRIc73Gxl4vXs9UcBz-35" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="430" y="425" as="sourcePoint"/>
+                        <mxPoint x="480" y="375" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="442" y="388"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-40" value="" style="curved=1;endArrow=classic;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="CoTRIc73Gxl4vXs9UcBz-35">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="274" as="sourcePoint"/>
+                        <mxPoint x="501" y="339" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="454" y="292"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-41" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="214" y="286" as="sourcePoint"/>
+                        <mxPoint x="306" y="218" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-42" value="" style="endArrow=classic;html=1;" parent="1" source="CoTRIc73Gxl4vXs9UcBz-29" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="259" y="322" as="sourcePoint"/>
+                        <mxPoint x="309" y="272" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-43" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="CoTRIc73Gxl4vXs9UcBz-29" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="258" y="353" as="sourcePoint"/>
+                        <mxPoint x="308" y="326" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-44" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="212" y="294" as="sourcePoint"/>
+                        <mxPoint x="305" y="385" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CoTRIc73Gxl4vXs9UcBz-45" value="https://www.cnblogs.com/takumicx/p/9998844.html" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="193" y="439" width="279" height="18" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
