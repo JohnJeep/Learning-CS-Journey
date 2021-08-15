@@ -1,17 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-25 09:18:04
- * @LastEditTime: 2021-01-27 21:30:21
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-15 16:22:51
+ * @LastEditors: Windows10
  * @Description: Xml学习记录
 -->
-
-## 0.1. 参考
-- [菜鸟Xml教程](https://www.runoob.com/xml/xml-syntax.html)
-
-
-
-## 0.2. 概念
+# 1. 概念
 - 什么是XML？
   > XML一般是指可扩展标记语言，标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。
 
@@ -19,7 +13,7 @@
   - XML做为数据交换的载体，用于数据的存储与传输
   - XML做为配置文件
 
-## 0.3. 书写规范
+# 2. 书写规范
 - xml必须有根元素(只有一个)
 - xml标签必须有关闭标签
 - xml标签对大小写敏感
@@ -29,14 +23,14 @@
 - 空格/回车/制表符在xml中都是文本节点
 - xml必须正确地嵌套
 
-## 0.4. XML文件的优点：
+# 3. XML文件的优点：
 1. XML文档内容和结构完全分离。
 2. 互操作性强。
 3. 规范统一。
 4. 支持多种编码。
 5. 可扩展性强。
 
-## 0.5. 解析XML文件及优缺点：
+# 4. 解析XML文件及优缺点：
 一般有DOM解析和SAX解析。
 
 DOM解析优缺点
@@ -46,3 +40,6 @@ DOM解析优缺点
 - 缺点
   - 通常需要加载整个XML文档来构造层次结构，消耗资源大。
 
+
+# 5. 参考
+- [菜鸟Xml教程](https://www.runoob.com/xml/xml-syntax.html)

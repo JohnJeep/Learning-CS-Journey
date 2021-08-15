@@ -1,38 +1,22 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2020-09-23 10:04:19
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-15 16:02:56
+ * @LastEditors: Windows10
  * @Description: 深入理解计算机系统学习笔记
 -->
+
 # 1. Computer System: A Programmer's Perspective
-<!-- TOC -->
-
-- [1. Computer System: A Programmer's Perspective](#1-computer-system-a-programmers-perspective)
-  - [1.1. 参考](#11-参考)
-  - [1.2. Program Structure & Execution](#12-program-structure--execution)
-    - [1.2.1. 典型的计算机底层硬件组织架构](#121-典型的计算机底层硬件组织架构)
-    - [1.2.2. 一个 `hello` 可执行程序的底层调用过程](#122-一个-hello-可执行程序的底层调用过程)
-    - [1.2.3. cache(缓存)](#123-cache缓存)
-
-<!-- /TOC -->
 
 
-## 1.1. 参考
-- [Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e)](https://csapp.cs.cmu.edu/): 官方英文书籍网站。
-- [Lab Assignments](http://csapp.cs.cmu.edu/3e/labs.html): 书籍中实验的部分。
-- [18-613/14-513: Computer Systems, Summer 2020](https://www.andrew.cmu.edu/course/18-613/schedule.html) 2020学期新版讲义的网站，在2016学期的基础上增添了一些内容。
-- [15-213: Intro to Computer Systems, Spring 2016](http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/schedule.html): CMU(卡耐基梅隆大学) 2016 年的 CS:APP 课程资源。包括在线视频、课件，资源不是最新的。
-- [15-213: Intro to Computer Systems, Spring 2016-video](https://www.youtube.com/watch?v=hs3wRnQUh0o&list=PLbY-cFJNzq7z_tQGq-rxtq_n2QQDf5vnM&index=3):  YouTube上一个UP主上传的课程视频。
-- [2015 CMU 15-213 CSAPP 深入理解计算机系统 课程视频](https://www.bilibili.com/video/BV1iW411d7hd): B站对该课程的翻译。
-- [深入理解计算机系统（英文版·第3版）](https://book.douban.com/subject/27000879/): 豆瓣网对该书籍的评价。
+
 
 <font color="red">
 每一章节的内容至少阅读三遍，达到熟悉的程度。
 </font>
 
 
-## 1.2. Program Structure & Execution
+## 1.1. Program Structure & Execution
 
 - Northbridge(北桥)：为了协调CPU、内存和高速的图形设备，人们设计了一个高速的北桥芯片，使它们之间高速的交换数据。
 - Southbridge(南桥)：为了解决北桥既要处理高速设备又要处理低速的设备，人们设计了专门处理低速设备的南桥芯片，磁盘、USB、键盘、鼠标等设备都连接在南桥上。
@@ -40,7 +24,7 @@
 - Relocation(重定位)：重新计算各个目标地址的的过程。
 
 
-### 1.2.1. 典型的计算机底层硬件组织架构
+### 1.1.1. 典型的计算机底层硬件组织架构
 - CPU: central processing unit
 - ALU: arithmetic/logic unit
 - PC: program counter
@@ -75,7 +59,7 @@
   - Jump: Extract a word from the instruction itself and copy that word into the program counter (PC), overwriting the previous value of the PC.
 
 
-### 1.2.2. 一个 `hello` 可执行程序的底层调用过程
+### 1.1.2. 一个 `hello` 可执行程序的底层调用过程
 1. 初始时，shell程序执行它的指令，等待我们输人一个命令。在键盘上输人字符串 `./hello` 后，shell程序将字符逐一读入register，再把它存放到memory中。
    <p><img src="./figures/hello可执行读取.png"> </p>
 
@@ -86,7 +70,7 @@
    <p><img src="./figures/hello可执行显示.png"> </p>
 
 
-### 1.2.3. cache(缓存)
+### 1.1.3. cache(缓存)
 <p><img src="./figures/内存分层结构.png"> </p>
 <p><img src="./figures/cache-memories.png"> </p>
 
@@ -99,3 +83,12 @@
 
 > 当操作系统决定要把控制权从当前进程转移到某个新的进程时，就会进行上下文切换，即保存当前进程的上下文、恢复新进程的上下文，然后将控制权传递到新的进程，新进程就会从它上次停止的地方开始。
 
+
+## 1.2. 参考
+- [Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e)](https://csapp.cs.cmu.edu/): 官方英文书籍网站。
+- [Lab Assignments](http://csapp.cs.cmu.edu/3e/labs.html): 书籍中实验的部分。
+- [18-613/14-513: Computer Systems, Summer 2020](https://www.andrew.cmu.edu/course/18-613/schedule.html) 2020学期新版讲义的网站，在2016学期的基础上增添了一些内容。
+- [15-213: Intro to Computer Systems, Spring 2016](http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/schedule.html): CMU(卡耐基梅隆大学) 2016 年的 CS:APP 课程资源。包括在线视频、课件，资源不是最新的。
+- [15-213: Intro to Computer Systems, Spring 2016-video](https://www.youtube.com/watch?v=hs3wRnQUh0o&list=PLbY-cFJNzq7z_tQGq-rxtq_n2QQDf5vnM&index=3):  YouTube上一个UP主上传的课程视频。
+- [2015 CMU 15-213 CSAPP 深入理解计算机系统 课程视频](https://www.bilibili.com/video/BV1iW411d7hd): B站对该课程的翻译。
+- [深入理解计算机系统（英文版·第3版）](https://book.douban.com/subject/27000879/): 豆瓣网对该书籍的评价。
