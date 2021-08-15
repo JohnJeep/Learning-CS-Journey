@@ -1,16 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-04 11:42:29
- * @LastEditTime: 2021-03-07 22:17:28
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-14 10:08:50
+ * @LastEditors: Windows10
  * @Description: memset()函数用法
 --> 
-
-## 参考
-- [memset百度百科](https://baike.baidu.com/item/memset/4747579?fr=aladdin#reference-[1]-982208-wrap)
-
-
-## 函数
+# 函数
 - 定义 `void *memset(void *s, int ch, size_t n);`
   - 函数解释：将s中当前位置后面的n个字节 （typedef unsigned int size_t ）用 ch 替换并返回 s 
   - 该函数只能取ch的后八位赋值给你所输入的范围的每个字节，无论ch多大只有后八位二进制有效
@@ -29,3 +24,11 @@
 - 内存操作都是按照字节为单位进行处理，即 1字节
 - 填充的数 count 按照字节为单位设置。
 - 定义数组为int类型时，传入的数为`sizeof(int)`的整数倍，而不是数组的长度。
+
+
+# 代码示例
+[memset() 代码示例](C/code/../../14-memset.md)
+
+
+# 参考
+- [memset百度百科](https://baike.baidu.com/item/memset/4747579?fr=aladdin#reference-[1]-982208-wrap)

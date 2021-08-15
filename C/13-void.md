@@ -1,20 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-02 09:28:29
- * @LastEditTime: 2020-07-27 15:56:20
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-14 09:13:52
+ * @LastEditors: Windows10
  * @Description: void用法
 --> 
-
-<!-- TOC -->
-
-- [1. Void Keywords](#1-void-keywords)
-  - [1.1. 函数用法](#11-函数用法)
-  - [1.2. 注意](#12-注意)
-  - [1.3. 参考](#13-参考)
-
-<!-- /TOC -->
-
 # 1. Void Keywords 
 ## 1.1. 函数用法
 - 使用规则
@@ -32,7 +22,7 @@
 
 ## 1.2. 注意
 - 不能对 `void` 指针进行算法操作
-- ` void* `不能转化为其它类型的数据，否则会报错;但是其它类型的数据可以转化为` void *`类型
+- `void*` 不能转化为其它类型的数据，否则会报错;但是其它类型的数据可以转化为 `void*` 类型
 - `void` 的出现只是为了一种抽象的需要，像在面向对象中，不能给 `抽象基类` 定义一个实例，因此不能定义一个void变量。
 
 
