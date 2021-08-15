@@ -1,17 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-07 23:25:09
- * @LastEditTime: 2021-04-07 23:30:52
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-15 16:42:08
+ * @LastEditors: Windows10
  * @Description: In User Settings Edit
 -->
-<!-- TOC -->
 
-- [1. 概念](#1-概念)
-- [2. 三个基本要素](#2-三个基本要素)
-- [3. 参考](#3-参考)
-
-<!-- /TOC -->
 # 1. 概念
 - 记录编译记录的文件。
 - 名称两种规则：全小写（makefile）或首字母大写（Makefile）
@@ -25,13 +19,13 @@
 - 命令
 
 <div align="center"> 
-  <img width="80%" height="80%" src="./pictures/makefile三要素.png" />
+  <img width="80%" height="80%" src="../pictures/makefile三要素.png" />
 </div>
 <div align="center">
-  <img width="80%" height="80%" src="./pictures/makefile工作原理-1.png" />
+  <img width="80%" height="80%" src="../pictures/makefile工作原理-1.png" />
 </div>
 <div align="center"> 
-  <img width="80%" height="80%" src="./pictures/makefile工作原理-2.png" />
+  <img width="80%" height="80%" src="../pictures/makefile工作原理-2.png" />
 </div>
 
 
