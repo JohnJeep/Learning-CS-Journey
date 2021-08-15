@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50
- * @LastEditTime: 2021-05-22 23:14:01
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-15 16:27:58
+ * @LastEditors: Windows10
  * @Description: 数据结构与算法学习笔记
 --> 
 
@@ -392,6 +392,7 @@ data | next
 
 
 ## 7.8. 红黑树（Red black tree）
+
 ### 7.8.1. 参考
 - [维基百科英文解释红黑树](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) 讲解最全面，重点掌握。
 - [维基百科中文解释红黑树](https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91)
