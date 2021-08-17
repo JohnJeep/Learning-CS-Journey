@@ -1,44 +1,44 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-08-16 15:49:20
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-17 23:15:39
+ * @LastEditors: Windows10
  * @Description: Linux环境编程基础知识
 --> 
 
 <!-- TOC -->
 
 - [1. System function](#1-system-function)
-	- [1.1. Core concept(概念)](#11-core-concept概念)
-	- [1.2. Carriage Return && Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
-	- [1.3. File I/O(文件 I/O)](#13-file-io文件-io)
-	- [1.4. Environment variables(环境变量)](#14-environment-variables环境变量)
+  - [1.1. Core concept(概念)](#11-core-concept概念)
+  - [1.2. Carriage Return && Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
+  - [1.3. File I/O(文件 I/O)](#13-file-io文件-io)
+  - [1.4. Environment variables(环境变量)](#14-environment-variables环境变量)
 - [2. Process(进程)](#2-process进程)
-	- [2.1. fork()](#21-fork)
-	- [2.2. exec()家族](#22-exec家族)
-	- [2.3. wait()](#23-wait)
-	- [2.4. IPC(Inter Process Communication: 进程间通信)](#24-ipcinter-process-communication-进程间通信)
-		- [2.4.1. 参考](#241-参考)
-		- [2.4.2. Pipe(管道)](#242-pipe管道)
-			- [2.4.2.1. Named pipe](#2421-named-pipe)
-			- [2.4.2.2. Unnamed pipe](#2422-unnamed-pipe)
-		- [2.4.3. Mmap(shared memory map: 共享映射区)()](#243-mmapshared-memory-map-共享映射区)
-		- [2.4.4. Signal(信号)](#244-signal信号)
-		- [2.4.5. Semaphore(信号量)](#245-semaphore信号量)
-		- [2.4.6. Message queues(消息队列)](#246-message-queues消息队列)
-		- [2.4.7. Socket(套接字)](#247-socket套接字)
-	- [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
-	- [2.6. Terminal(终端)](#26-terminal终端)
-	- [2.7. Process group(进程组)](#27-process-group进程组)
-	- [2.8. Daemon(守护进程)](#28-daemon守护进程)
+  - [2.1. fork()](#21-fork)
+  - [2.2. exec()家族](#22-exec家族)
+  - [2.3. wait()](#23-wait)
+  - [2.4. IPC(Inter Process Communication: 进程间通信)](#24-ipcinter-process-communication-进程间通信)
+    - [2.4.1. 参考](#241-参考)
+    - [2.4.2. Pipe(管道)](#242-pipe管道)
+      - [2.4.2.1. Named pipe](#2421-named-pipe)
+      - [2.4.2.2. Unnamed pipe](#2422-unnamed-pipe)
+    - [2.4.3. Mmap(shared memory map: 共享映射区)()](#243-mmapshared-memory-map-共享映射区)
+    - [2.4.4. Signal(信号)](#244-signal信号)
+    - [2.4.5. Semaphore(信号量)](#245-semaphore信号量)
+    - [2.4.6. Message queues(消息队列)](#246-message-queues消息队列)
+    - [2.4.7. Socket(套接字)](#247-socket套接字)
+  - [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
+  - [2.6. Terminal(终端)](#26-terminal终端)
+  - [2.7. Process group(进程组)](#27-process-group进程组)
+  - [2.8. Daemon(守护进程)](#28-daemon守护进程)
 - [3. Thread(线程)](#3-thread线程)
-	- [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
-	- [3.2. Function(线程相关函数)](#32-function线程相关函数)
-	- [3.3. 线程属性设置](#33-线程属性设置)
-	- [3.4. 注意事项](#34-注意事项)
-	- [3.5. 线程同步](#35-线程同步)
-	- [3.6. 线程之间死锁的原因](#36-线程之间死锁的原因)
-	- [3.7. Mutex(线程互斥)](#37-mutex线程互斥)
+  - [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
+  - [3.2. Function(线程相关函数)](#32-function线程相关函数)
+  - [3.3. 线程属性设置](#33-线程属性设置)
+  - [3.4. 注意事项](#34-注意事项)
+  - [3.5. 线程同步](#35-线程同步)
+  - [3.6. 线程之间死锁的原因](#36-线程之间死锁的原因)
+  - [3.7. Mutex(线程互斥)](#37-mutex线程互斥)
 
 <!-- /TOC -->
 
@@ -475,7 +475,8 @@
 
 ### 2.4.6. Message queues(消息队列)
 - 什么是消息队列？
-  > 消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。消息队列常常保存在链表结构中。拥有权限的进程可以向消息队列中写入或读取消息。
+  > 维基百科解释：在计算机科学中，消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，软件的贮列用来处理一系列的输入，通常是来自用户。消息队列提供了异步的通信协议，每一个贮列中的纪录包含详细说明的资料，包含发生的时间，输入设备的种类，以及特定的输入参数，也就是说：消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。
+  
 
 - 消息队列特点
   1. 消息队列是消息的链表，具有特定的格式，存放在内存中并由消息队列标识符标识。
@@ -483,9 +484,25 @@
   3. 管道和消息队列的通信数据都是先进先出的原则。
   4. 消息队列可以实现消息的随机查询，消息不一定要以先进先出的次序读取，也可以按消息的类型读取。比 FIFO 更有优势。
   5. 消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺。
+  6. 消息队列常常保存在链表结构中，拥有权限的进程可以向消息队列中写入或读取消息。
+
+分类
+- 目前主要有两种类型的消息队列：POSIX 消息队列以及 System V 消息队列。
+- System V 消息队列目前被大量使用，系统V消息队列是随内核持续的，只有在内核重起或者人工删除时，该消息队列才会被删除。
+
+两种模式
+- 点对点模式
+- 发布与订阅者模式
 
 
-- 目前主要有两种类型的消息队列：POSIX 消息队列以及 System V 消息队列。System V 消息队列目前被大量使用。系统V消息队列是随内核持续的，只有在内核重起或者人工删除时，该消息队列才会被删除。
+
+- 用途
+  - 异步处理：处理如短信下发、状态推送、用户注册、数据同步等功能，提高系统的并发能力，集中力量处理重要的部分（同步处理），将非核心功能丢给MQ。
+  - 系统解耦：可在模块、服务、接口等不同粒度上实现解耦。
+  - 重试补偿：在跨机器数据传输的整个过程中，只要任意一个环节出错，都会导致问题的产生。可以通过MQ的重试补偿机制去尽可能的处理掉这些异常。
+  - 流量削锋：对于秒杀场景下的下单处理。服务器收到消息后，首先写入消息队列，然后按照自己的消息处理能力做处理。
+  - 日志处理：可以定时将日志写入MQ，并且主动订阅日志记录。
+
 
 
 
@@ -553,6 +570,7 @@
 
 
 # 3. Thread(线程)
+
 ## 3.1. Core concepts(基础概念)
  
 - 进程与线程的区别？
