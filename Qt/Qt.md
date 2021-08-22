@@ -1,8 +1,8 @@
 <!--
  * @Author: JOhnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2021-08-09 12:24:02
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-21 16:03:21
+ * @LastEditors: Windows10
  * @Description: QT基础知识
  * 
 -->
@@ -19,15 +19,15 @@
 - [8. QString和std::string相互转换，以及避免出现乱码](#8-qstring和stdstring相互转换以及避免出现乱码)
 - [9. QString和char *相互转换](#9-qstring和char-相互转换)
 - [10. Qt常用类](#10-qt常用类)
-	- [10.1. QFrame](#101-qframe)
-	- [10.2. QBoxLayout](#102-qboxlayout)
-	- [10.3. QComboBox](#103-qcombobox)
-	- [10.4. Spacer](#104-spacer)
-	- [10.5. QStackedWidget](#105-qstackedwidget)
-	- [10.6. QPushButton](#106-qpushbutton)
-	- [10.7. QString](#107-qstring)
+  - [10.1. QFrame](#101-qframe)
+  - [10.2. QBoxLayout](#102-qboxlayout)
+  - [10.3. QComboBox](#103-qcombobox)
+  - [10.4. Spacer](#104-spacer)
+  - [10.5. QStackedWidget](#105-qstackedwidget)
+  - [10.6. QPushButton](#106-qpushbutton)
+  - [10.7. QString](#107-qstring)
 - [11. 多线程](#11-多线程)
-- [12. 快捷键](#12-快捷键)
+- [12. Qt Creator 快捷键](#12-qt-creator-快捷键)
 - [13. 参考](#13-参考)
 
 <!-- /TOC -->
@@ -178,6 +178,7 @@ qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现�
 
 
 # 10. Qt常用类
+
 ## 10.1. QFrame 
 - QFrame与QWidget的区别：
   - QWidget类是所有用户界面对象的基类。QFrame是基本控件的基类，QWidget是QFrame基类。其关系如下 `QPushButton,QLabel… -> QFrame ->QWidget`
@@ -262,37 +263,36 @@ readyRead()来判断是否有数据传入，当客户端向服务端成功发送
 - https://cryfeifei.top/2020/05/30/qt-ji-chu-jiao-cheng/
 
 
-# 12. 快捷键
-- `F1      `  查看帮助
-- `F2      `  跳转到函数定义（和Ctrl+鼠标左键一样的效果）
+# 12. Qt Creator 快捷键
+- `F1`  查看帮助
+- `F2`  跳转到函数定义（和Ctrl+鼠标左键一样的效果）
 - `Shift+F2`    声明和定义之间切换
 - `F4`: 同名.h与.cpp文件之间快速的切换 
-- `ctr + i`: 自动对齐 
 - `ctrl + shift + ↑或↓`: 整行向上或向下移动
 - `ctrl + alt + ↑或↓`: 将当前行整行向上或向下复制
-- `shift + F5`: 停止调试
-- `F5`: 启动调试
-- `Ctrl+1`         欢迎模式
+- `shift + F5`:   停止调试
+- `F5`:           启动调试
+- `Ctrl+1`        欢迎模式
 - `Ctrl+2`        编辑模式
 - `Ctrl+3`        调试模式
 - `Ctrl+4`        项目设置模式
 - `Ctrl+5`        帮助模式    
 - `Ctrl+6`        输出模式
-- `ESc   `     切换到编辑模式
+- `ESc`           切换到编辑模式
 - `Ctrl+B`        编译工程
 - `Ctrl+R`        运行工程
 - `Ctrl+I`        自动对齐
 - `Ctrl+/`        注释行，取消注释行
-- `Ctrl+F`       查找替换当前选中的内容
+- `Ctrl+F`        查找替换当前选中的内容
 - `Ctrl+I`        自动对齐
 - `Ctrl+Shift+F`  查找内容
 - `F5`            开始调试
-- `Shift+F5`   停止调试
-- `F9       `     设置和取消断点
-- `F10      `    单步前进
-- `F11      `    单步进入函数
-- `Shift + F11`  单步跳出函数
-- `Ctrl+ Tab` 快速切换已打开的文件
+- `Shift+F5`      停止调试
+- `F9`            设置和取消断点
+- `F10`           单步前进
+- `F11`           单步进入函数
+- `Shift + F11`   单步跳出函数
+- `Ctrl+ Tab`     快速切换已打开的文件
 - 快速在(.cpp)文件中添加方法的实体：将光标移动到 .h 文件中的方法声明，先按 `Alt(按住)+ Enter`，再按 `回车键` 将在 .cpp 中添加该函数的声明。
 - `Ctrl + Shift + R` 一次性修改多个变量
 
