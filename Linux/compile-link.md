@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2021-04-08 11:28:13
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-22 00:48:07
+ * @LastEditors: Windows10
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
@@ -16,7 +16,7 @@
     - [1.2.3. 内存四区](#123-内存四区)
     - [1.2.4. gcc 常用参数](#124-gcc-常用参数)
     - [1.2.5. 静态库](#125-静态库)
-    - [1.2.6. 动态库也叫共享库(share library)](#126-动态库也叫共享库share-library)
+    - [1.2.6. 动态库](#126-动态库)
       - [1.2.6.1. Linux平台](#1261-linux平台)
       - [1.2.6.2. Windows平台](#1262-windows平台)
   - [1.3. ELF relocatable](#13-elf-relocatable)
@@ -163,24 +163,32 @@
 
 
 ### 1.2.5. 静态库
-- 命名规则
-  - Linux中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
-  - `libtest.a` 静态库为test
-- 制作步骤
-  - 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
-  - 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。基本格式为  `ar rcs 静态库的名字(libtest.a) 所有的.o文件 `
-    - `ar rcs libstatic_1.a *.o` 
+
+所有编译器都提供一种机制，将所有相关的目标模块打包成一个单独的文件，成为静态库（static library），它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
 
-  - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
+命名规则
+- Linux中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
+- `libtest.a` 静态库为test
+
+
+制作步骤
+- 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
+- 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。基本格式为  `ar rcs 静态库的名字(libtest.a) 所有的.o文件 `
+  - `ar rcs libstatic_1.a *.o` 
+- 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
 <div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
 
-- 优缺点
-  - 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
-  - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
+
+优缺点
+- 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
+- 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
 
 
-### 1.2.6. 动态库也叫共享库(share library)
+### 1.2.6. 动态库
+
+动态库也叫共享库(share library)，它是一个目标模块，在运行或加载时，能加载到任意的内存地址，并链接一个内存中的程序，这个过程就叫动态链接（dynamic linking），它是由一个叫动态链接器（dynamic linker）的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下以 `.dll` 后缀。
+
 > 只有在程序执行的过程中才会加载动态链接库。
 
 #### 1.2.6.1. Linux平台
@@ -222,11 +230,13 @@
 
 
 #### 1.2.6.2. Windows平台
-- C++在调用Dll中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h\.lib\.dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
+
+C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h\.lib\.dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
 还有一点是 dll是在调试的时候使用的，lib是编译的时候使用的，两者是不同时期使用的工具
 
 
 ## 1.3. ELF relocatable
+
 <img src="./pictures/ELF-relocatable.png">
 
 

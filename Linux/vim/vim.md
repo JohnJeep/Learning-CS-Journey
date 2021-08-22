@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-04-29 10:29:06
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-21 16:23:19
+ * @LastEditors: Windows10
  * @Description: Vim编辑器使用
 --> 
 
@@ -30,7 +30,8 @@
     - [1.7.6. Comment(注释)](#176-comment注释)
   - [1.8. Vim配置文件](#18-vim配置文件)
   - [1.9. 恢复文件](#19-恢复文件)
-  - [1.10. Reference](#110-reference)
+  - [1.10. Vim 命令缩图](#110-vim-命令缩图)
+  - [1.11. Reference](#111-reference)
 
 <!-- /TOC -->
 
@@ -293,9 +294,11 @@ Command line mode 下对文件进行操作。
 - `D(delete)` 删除.swp 文件或者使用 `vi -r 文件名` 来恢复未保存的内容。
 
 
+## 1.10. Vim 命令缩图
+<img src="./pictures/../../pictures/vim-cmd.png">
 
 
-## 1.10. Reference
+## 1.11. Reference
 - [vim学习手册](https://linux.cn/article-8144-1.html)
 - [Linux命令大全--vim学习](https://ipcmen.com/)
 - [Vim的哲学](https://segmentfault.com/a/1190000000458565)
