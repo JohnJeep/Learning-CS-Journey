@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-08-15 23:53:02
+ * @LastEditTime: 2021-08-26 12:17:04
  * @LastEditors: Windows10
  * @Description: In User Settings Edit
 -->
@@ -233,7 +233,7 @@ Currency(并发)
 
 # 6. 计算机网络
 
-[计算机网络基础知识知识](ComputerNetwork/网络基础.md)
+[计算机网络基础知识](ComputerNetwork/网络基础.md)
 
 <img src="./ComputerNetwork/figure/toc-net-1.png">
 <img src="./ComputerNetwork/figure/toc-net-2.png">
