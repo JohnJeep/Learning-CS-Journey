@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-08-17 16:30:58
+ * @LastEditTime: 2021-08-27 09:20:03
  * @LastEditors: Please set LastEditors
  * @Description: Linux环境编程基础知识
 --> 
@@ -17,16 +17,16 @@
 	- [2.1. fork()](#21-fork)
 	- [2.2. exec()家族](#22-exec家族)
 	- [2.3. wait()](#23-wait)
-	- [2.4. IPC(Inter Process Communication: 进程间通信)](#24-ipcinter-process-communication-进程间通信)
-		- [2.4.1. 参考](#241-参考)
-		- [2.4.2. Pipe(管道)](#242-pipe管道)
-			- [2.4.2.1. Named pipe](#2421-named-pipe)
-			- [2.4.2.2. Unnamed pipe](#2422-unnamed-pipe)
-		- [2.4.3. Mmap(shared memory map: 共享映射区)()](#243-mmapshared-memory-map-共享映射区)
-		- [2.4.4. Signal(信号)](#244-signal信号)
-		- [2.4.5. Semaphore(信号量)](#245-semaphore信号量)
-		- [2.4.6. Message queues(消息队列)](#246-message-queues消息队列)
-		- [2.4.7. Socket(套接字)](#247-socket套接字)
+	- [2.4. IPC](#24-ipc)
+		- [2.4.1. Pipe(管道)](#241-pipe管道)
+			- [2.4.1.1. unamed pipe](#2411-unamed-pipe)
+			- [2.4.1.2. named pipe](#2412-named-pipe)
+		- [2.4.2. mmap](#242-mmap)
+		- [2.4.3. Signal(信号)](#243-signal信号)
+		- [2.4.4. Semaphore(信号量)](#244-semaphore信号量)
+		- [2.4.5. Message queues(消息队列)](#245-message-queues消息队列)
+		- [2.4.6. Socket(套接字)](#246-socket套接字)
+		- [2.4.7. 参考](#247-参考)
 	- [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
 	- [2.6. Terminal(终端)](#26-terminal终端)
 	- [2.7. Process group(进程组)](#27-process-group进程组)
@@ -62,8 +62,10 @@
 
 
 ## 1.2. Carriage Return && Line Feed(终端换行)
+
 - 关于打印
   > 在机械打字机时代，打字机上有个“打印头（print head）”的零部件，打印时从左往右自动移动，满一行时需要手动推到最左边，这个动作叫“回车（Carriage Return）”，同时卷轴需要向上卷使纸张上移一行，打印头相对于纸张就是下移一行，这个动作叫做“移行（Line Feed）”。
+
   - ANSI标准规定，转义字符“\r”指代CR，“\n”指代LF，计算机系统早期广泛采用` CR+LF`指示换行。
   - UNIX系统时代存储资源很贵，仅采用1个字符“\n”指示换行，而MS-DOS出于兼容性采用“\r\n”指示换行，后来搬到了Windows上，而Mac系统则采用“\r”指示换行，Linux、Cygwin照搬了“\n”
   - “\r\n”换行的文本文件在Windows显示正常，在UNIX、Linux、Cygwin中行末多出1个“^M”，“^M”指真实的Ctrl-M组合字符；“\n”换行的文本文件在UNIX、Linux、Cygwin显示正常，在Windows中整个文件显示为一行。
@@ -75,19 +77,19 @@
 
 
 ## 1.3. File I/O(文件 I/O)
-- `open()` 函数
+- `open()` 
   - 创建：`O_CREAT` 或采用 `截断为0的方式创建 O_TRUNC`
   - 读写：`O_RDWR`
   - 只读：`O_RDONLY`
   - 只写：`O_WRONLY`
   - 文件是否存在：`O_EXCL`
 
-- `read()/write()` 函数
+- `read()/write()` 
   - `-1` 读/写文件失败
   - `0`  文件读完了或文件写成完了
   - `>0` 读/写文件的字节数
 
-- `lseek()` 函数 
+- `lseek()` 
   - 获取文件的长度
   - 移动文件指针
   - 文件拓展（只能向文件的中间或尾部扩展，不能向前端扩展）
@@ -112,12 +114,13 @@
 - `closedir()`: 关闭一个目录
 
 - `dup()` 或 `dup2()` 复制文件描述符
-  ```
+  ```c
   int dup(int fd);  //复制fd对应的文件表指针，返回下一个可用的文件描述符
   int dup2(int fd1, int fd2); //将fd2对应的文件表指针修改为fd1对应的文件表指针
   ```
 
-- `fcntl` 改变已经打开文件的属性，即获取或设置文件的状态标记。
+- `fcntl()` 
+  - 改变已经打开文件的属性，即获取或设置文件的状态标记。
   - `F_GETFL` 获取文件状态参数
   - `F_SETFL` 设置文件状态参数
    
@@ -141,18 +144,24 @@
 
 
 # 2. Process(进程)
-- 什么是进程？
-  > 在计算中，进程是由一个或多个线程执行的计算机程序的实例。它包含程序代码（code）和运行指令（activity）。取决于操作系统（OS），一个进程可能由多个并行执行指令的执行线程组成。程序本身只是指令、数据及其组织形式的描述，相当于一个名词，进程才是程序（那些指令和数据）的真正运行实例。 
+什么是进程？
+> 在计算中，进程是由一个或多个线程执行的计算机程序的实例。它包含程序代码（code）和运行指令（activity）。取决于操作系统（OS），一个进程可能由多个并行执行指令的执行线程组成。程序本身只是指令、数据及其组织形式的描述，相当于一个名词，进程才是程序（那些指令和数据）的真正运行实例。 
 
 
 ## 2.1. fork()
-- 创建一个子进程。一个进程调用 `fork()` 函数，变为两个进程，各自的进程都有一个返回值。父进程返回值为子进程的 `PID`（返回值大于0），子进程的返回值为 `0`，进程创建成功。
+
+- 创建一个子进程过程。一个进程调用 `fork()` 函数，变为两个进程，各自的进程都有一个返回值。父进程返回值为子进程的 `PID`（返回值大于0），子进程的返回值为 `0`，进程创建成功。
+
+> 执行 `fork` 操作之后，是父进程先执行还是子进程先执行，是不确定的，取决于系统内的调度算法。
+
 - 父子进程之间遵循原则：`读时共享写时复制`。例如：一个全局变量，子进程只读时，则父子进程共享变量；若子进程对全局变量写操作时，则不共享全局变量。
+
 - 父子进程共享
   - 共享文件描述符。
   - 共享 `mmap` 建立的映射区。
-- 执行 `fork` 操作之后，是父进程先执行还是子进程先执行，是不确定的，取决于系统内的调度算法。
-- 子进程与父进程异同点
+
+
+子进程与父进程异同点
   - 相同
     - 全局变量 
     - .data
@@ -172,16 +181,17 @@
     - 进程运行时间 
 
 
-- 可能用到的函数
-  - `getpid()`  获取子进程PID号
-  - `getppid()` 获取父进程PID号
-  - `getuid()`  获取当前进程实际用户ID号
-  - `geteuid()` 获取当前进程有效用户ID号
-  - `getgid()`  获取当前进程实际用户组ID号
-  - `getegid()` 获取当前进程有效用户组ID号
+可能用到的函数
+- `getpid()`  获取子进程PID号
+- `getppid()` 获取父进程PID号
+- `getuid()`  获取当前进程实际用户ID号
+- `geteuid()` 获取当前进程有效用户ID号
+- `getgid()`  获取当前进程实际用户组ID号
+- `getegid()` 获取当前进程有效用户组ID号
 
 
 ## 2.2. exec()家族
+
 - 执行 `exec()` 家族的函数后，将当前进程的内存空间数据替换为要执行函数的内存空间数据。
 - exec()家族函数只有失败时才返回，返回值为 -1，程序执行成功时，含食宿不会返回。
   ```
@@ -200,6 +210,7 @@
 
 
 ## 2.3. wait()
+
 - 什么是孤儿进程？
   > 父进程先与子进程死亡，子进程就成为了孤儿进程，此时子进程的父进程的变为 `init` 进程，`init` 进程也称为init进程领养孤儿进程。
 
@@ -231,7 +242,7 @@
   }
   ```
 
-- 一个 `waitpid()` 或`wait()` 函数只能回收一个僵尸进程。回收多个僵尸进程需要循环调用 `waitpid()` 或`wait()` 函数。
+> 一个 `waitpid()` 或`wait()` 函数只能回收一个僵尸进程。回收多个僵尸进程需要循环调用 `waitpid()` 或`wait()` 函数。
 
 - `waitpid()` 函数
   - 函数原型 `pid_t waitpid(pid_t pid, int *wstatus, int options);`
@@ -249,8 +260,10 @@
   - 函数作用：指定特定的进程PID 进行僵尸进程的回收。子进程的状态可以设置为不阻塞，使用宏 `WNOHAGN`
 
 
-## 2.4. IPC(Inter Process Communication: 进程间通信)
-- Linux中七种文件类型
+## 2.4. IPC
+IPC(Inter Process Communication) 叫进程间通信。
+
+- Linux 中七种文件类型
   - 非伪文件：占用磁盘的存储空间
     - `-` 普通文件
     - `d(directory)` 目录
@@ -271,36 +284,23 @@
   - Message queue(消息队列)
   - Semaphore(信号量)
 
-### 2.4.1. 参考
-- [进程间的通信方式——pipe（管道）](https://blog.csdn.net/skyroben/article/details/71513385)
-- [进程间通信--管道](http://blog.chinaunix.net/uid-26833883-id-3227144.html)
-- [基于Internet的Linux客户机/服务器系统通讯设计与实现](https://blog.csdn.net/violet_echo_0908/article/details/50277537)
-- [Linux进程间套接字（Socket）通信](https://blog.csdn.net/violet_echo_0908/article/details/49670901)
-- [Linux下socket编程实现客户机服务器通信的例子](https://blog.csdn.net/violet_echo_0908/article/details/49539593)
-- [信号量与互斥锁](https://www.cnblogs.com/diyingyun/archive/2011/12/04/2275229.html)
-- [信号量](http://blog.chinaunix.net/uid-23193900-id-3194924.html)
-- [Linux进程间通信——使用共享内存](https://blog.csdn.net/ljianhui/article/details/10253345)
-- [Linux进程间通信(四) - 共享内存](https://www.cnblogs.com/linuxbug/p/4882776.html)
-- [UNIX/Linux进程间通信IPC系列（四）消息队列](https://blog.csdn.net/yang_yulei/article/details/19772649)
-- [进程间通信的方式——信号、管道、消息队列、共享内存](https://www.cnblogs.com/luo77/p/5816326.html)
 
-
-
-### 2.4.2. Pipe(管道)
-- 分类
-  - 匿名管道(named pipe)
-  - 有名管道(unnamed pipe) 
+### 2.4.1. Pipe(管道)
+分类
+- 匿名管道(named pipe)
+- 有名管道(unnamed pipe) 
   
-- 管道本质：是一个伪文件，从内核创建的一个缓冲区。有两个文件描述符引用，一个表示Read(读端)，一个表示Write(写端)。
-  - `fd[0]`---------------管道的 read 端
-  - `fd[1]`---------------管道的 write 端
+
+管道本质：是一个伪文件，从内核创建的一个缓冲区。有两个文件描述符引用，一个表示Read(读端)，一个表示Write(写端)。
+- `fd[0]`---------------管道的 read 端
+- `fd[1]`---------------管道的 write 端
 
 
-#### 2.4.2.1. Named pipe
-- pipe 匿名管道：用于非血缘关系之间的进程通信。
+#### 2.4.1.1. unamed pipe
 
-- 原理
-  - 通过环形队列，借助内核缓冲区（4k大小）来实现的，数据从写端流入管道，从读端流出，这样就实现了进程间通信。 
+pipe 匿名管道：用于非血缘关系之间的进程通信。
+
+- 原理: 通过环形队列，借助内核缓冲区（4k大小）来实现的，数据从写端流入管道，从读端流出，这样就实现了进程间通信。 
 - 局限性
   - 数据不能自己读写
   - 数据一旦被读走，管道中就没有了，不能反复读取。
@@ -323,13 +323,14 @@
       - 管道未满，write将数据写入，并返回实际写入的字节数。
 
 
-#### 2.4.2.2. Unnamed pipe
+#### 2.4.1.2. named pipe
+
 有名管道中 `FIFO`是典型的有名管道。
 
 
-### 2.4.3. Mmap(shared memory map: 共享映射区)()
-- 参考
-  - [认真分析mmap：是什么 为什么 怎么用](https://www.cnblogs.com/huxiao-tee/p/4660352.html) 
+### 2.4.2. mmap
+
+mmap(shared memory map)叫共享内存映射。
 
   
 - 当标志位flags等于 `MAP_SHARED` 时，创建映射区的权限要小于等于打开文件的权限。
@@ -354,7 +355,7 @@
   - 注意：只适用于类Linux操作系统中，对其它的操作系统（freeBSD）不适用。 
 
 
-- 通用的方法
+- 通用方法
   - 通过 `/dev/zero` 目录中系统自带的伪文件 `zero`，去操作 mmap，实现内存映射。
 
 
@@ -364,9 +365,8 @@
   
 
 
-### 2.4.4. Signal(信号)
-- `man 7 signal` 查看信号的帮助文档
-- `信号`：只能携带固定大小量的信息。
+### 2.4.3. Signal(信号)
+> `信号`：只能携带固定大小量的信息。Linux 系统下通过 `man 7 signal` 查看信号的帮助文档。
 
 - 进程控制块(PCB)信息
   - 进程pid
@@ -380,6 +380,7 @@
 - 产生信号的机制
   - 通过软件的方式实现的，有一定的延迟性（对CPU而言），对用户来说，延时很短，不易察觉。
   - 每个进程收到的所有信号，都是由内核负责发送，内核进行处理。
+
 
 - 产生信号的几种方式
   - 按键产生，如：`Ctrl+c(SIGINT信号)`、`Ctrl+z(SIGTSTP信号)`、`Ctrl+\(SIGQUIT信号)`
@@ -461,21 +462,23 @@
 
 
 
-### 2.4.5. Semaphore(信号量)
-- 是互斥量的加强版。
-- 信号量的初值，决定了信号量占用的线程个数。
-- 信号量相关函数
-  -	`sem_init` 函数
-	- `sem_destroy`函数
-	- `sem_wait` 函数
-	- `sem_trywait` 函数	
-	- `sem_timedwait` 函数	
-	- `sem_post` 函数
+### 2.4.4. Semaphore(信号量)
+信号量是互斥量的加强版。信号量的初值，决定了信号量占用的线程个数。
 
 
-### 2.4.6. Message queues(消息队列)
+信号量相关函数
+-	`sem_init` 函数
+- `sem_destroy`函数
+- `sem_wait` 函数
+- `sem_trywait` 函数	
+- `sem_timedwait` 函数	
+- `sem_post` 函数
+
+
+### 2.4.5. Message queues(消息队列)
 - 什么是消息队列？
-  > 消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。消息队列常常保存在链表结构中。拥有权限的进程可以向消息队列中写入或读取消息。
+  > 维基百科解释：在计算机科学中，消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式，软件的贮列用来处理一系列的输入，通常是来自用户。消息队列提供了异步的通信协议，每一个贮列中的纪录包含详细说明的资料，包含发生的时间，输入设备的种类，以及特定的输入参数，也就是说：消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。
+  
 
 - 消息队列特点
   1. 消息队列是消息的链表，具有特定的格式，存放在内存中并由消息队列标识符标识。
@@ -483,15 +486,45 @@
   3. 管道和消息队列的通信数据都是先进先出的原则。
   4. 消息队列可以实现消息的随机查询，消息不一定要以先进先出的次序读取，也可以按消息的类型读取。比 FIFO 更有优势。
   5. 消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺。
+  6. 消息队列常常保存在链表结构中，拥有权限的进程可以向消息队列中写入或读取消息。
+
+分类
+- 目前主要有两种类型的消息队列：POSIX 消息队列以及 System V 消息队列。
+- System V 消息队列目前被大量使用，系统V消息队列是随内核持续的，只有在内核重起或者人工删除时，该消息队列才会被删除。
+
+两种模式
+- 点对点模式
+- 发布与订阅者模式
 
 
-- 目前主要有两种类型的消息队列：POSIX 消息队列以及 System V 消息队列。System V 消息队列目前被大量使用。系统V消息队列是随内核持续的，只有在内核重起或者人工删除时，该消息队列才会被删除。
+
+用途
+- 异步处理：处理如短信下发、状态推送、用户注册、数据同步等功能，提高系统的并发能力，集中力量处理重要的部分（同步处理），将非核心功能丢给MQ。
+- 系统解耦：可在模块、服务、接口等不同粒度上实现解耦。
+- 重试补偿：在跨机器数据传输的整个过程中，只要任意一个环节出错，都会导致问题的产生。可以通过MQ的重试补偿机制去尽可能的处理掉这些异常。
+- 流量削锋：对于秒杀场景下的下单处理。服务器收到消息后，首先写入消息队列，然后按照自己的消息处理能力做处理。
+- 日志处理：可以定时将日志写入MQ，并且主动订阅日志记录。
 
 
 
-### 2.4.7. Socket(套接字)
+
+### 2.4.6. Socket(套接字)
 
 
+
+### 2.4.7. 参考
+- [进程间的通信方式——pipe（管道）](https://blog.csdn.net/skyroben/article/details/71513385)
+- [进程间通信--管道](http://blog.chinaunix.net/uid-26833883-id-3227144.html)
+- [基于Internet的Linux客户机/服务器系统通讯设计与实现](https://blog.csdn.net/violet_echo_0908/article/details/50277537)
+- [Linux进程间套接字（Socket）通信](https://blog.csdn.net/violet_echo_0908/article/details/49670901)
+- [Linux下socket编程实现客户机服务器通信的例子](https://blog.csdn.net/violet_echo_0908/article/details/49539593)
+- [信号量与互斥锁](https://www.cnblogs.com/diyingyun/archive/2011/12/04/2275229.html)
+- [信号量](http://blog.chinaunix.net/uid-23193900-id-3194924.html)
+- [Linux进程间通信——使用共享内存](https://blog.csdn.net/ljianhui/article/details/10253345)
+- [Linux进程间通信(四) - 共享内存](https://www.cnblogs.com/linuxbug/p/4882776.html)
+- [UNIX/Linux进程间通信IPC系列（四）消息队列](https://blog.csdn.net/yang_yulei/article/details/19772649)
+- [进程间通信的方式——信号、管道、消息队列、共享内存](https://www.cnblogs.com/luo77/p/5816326.html)
+- [认真分析mmap：是什么 为什么 怎么用](https://www.cnblogs.com/huxiao-tee/p/4660352.html) 
 
 
 ## 2.5. Race condition(时序竞态)
@@ -502,7 +535,6 @@
 - `sigsuspend()` 函数
   - 作用：通过传递的参数mask进程信号屏蔽字解决使用 `pause()` 函数导致的时序竞争的问题。
 
-- 多个进程之间使用 `全局变量` 时，可能会导致进程卡死的情况，尽量少使用全局变量或者在访问之前需要加锁。
 
 - 可重入函数
   - 定义：函数内不能含有 `static`变量和 `全局变量`。反之就是不可重入函数。
@@ -516,7 +548,11 @@
   - 子进程接收到 `SIGSTOP` 信号停止，子进程处在停止态时，接受到 `SIGCONT` 后唤醒
 
 
+> 多个进程之间使用 `全局变量` 时，可能会导致进程卡死的情况，尽量少使用全局变量或者在访问之前需要加锁。
+
+
 ## 2.6. Terminal(终端)
+
 - 分类
   - 字符终端
   - 网络终端
@@ -553,6 +589,7 @@
 
 
 # 3. Thread(线程)
+
 ## 3.1. Core concepts(基础概念)
  
 - 进程与线程的区别？
