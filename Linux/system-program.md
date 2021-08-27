@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-08-16 15:49:20
+ * @LastEditTime: 2021-08-17 16:30:58
  * @LastEditors: Please set LastEditors
  * @Description: Linux环境编程基础知识
 --> 
@@ -588,7 +588,11 @@
 
 ## 3.2. Function(线程相关函数)
 - `pthread_self()`    获得调用线程的线程ID号
+
+
 - `pthread_create()`  创建一个线程 
+
+
 - 线程退出相关的函数
   - `pthread_exit()`  将单个线程退出
   - `exit()`          将进程退出
@@ -659,41 +663,42 @@
 
 
 ## 3.7. Mutex(线程互斥)
-- 线程访问共享数据之前需加锁，访问共享数据之后应立即解锁，不能有延迟时间，即锁的 `粒度` 应越小越好。
-- 互斥量(mutex)常见函数
-  - `pthread_mutex_init()`
-  - `pthread_mutex_destroy()`
-  - `pthread_mutex_lock()`
-  - `pthread_mutex_trylock()`
-  - `pthread_mutex_unlock()`
+
+互斥操作，就是对某段代码或某个变量修改的时候只能有一个线程在执行这段代码，其他线程不能同时进入这段代码或同时修改该变量，这个代码或变量称为临界资源。
+
+线程访问共享数据之前需加锁，访问共享数据之后应立即解锁，不能有延迟时间，即锁的 `粒度` 应越小越好。
+
+互斥量(mutex)常见函数
+- `pthread_mutex_init()`
+- `pthread_mutex_destroy()`
+- `pthread_mutex_lock()`
+- `pthread_mutex_trylock()`
+- `pthread_mutex_unlock()`
 
 
-- 读写锁(read-write lock)常见函数
-  - `pthread_rwlock_init()`
-  - `pthread_rwlock_destroy()`
-  - `pthread_rwlock_rdlock()`  
-  - `pthread_rwlock_wrlock()`
-  - `pthread_rwlock_tryrdlock()`
-  - `pthread_rwlock_trywrlock()`
-  - `pthread_rwlock_unlock()`
+读写锁(read-write lock)常见函数
+- `pthread_rwlock_init()`
+- `pthread_rwlock_destroy()`
+- `pthread_rwlock_rdlock()`  
+- `pthread_rwlock_wrlock()`
+- `pthread_rwlock_tryrdlock()`
+- `pthread_rwlock_trywrlock()`
+- `pthread_rwlock_unlock()`
 
 
-- 条件变量(condition)常见函数
-  - `pthread_cond_init()`
-  - `pthread_cond_destroy()`
-  - `pthread_cond_wait()`
-    - 阻塞一个条件变量
-    - 释放已经获得的互斥锁
-    - 当线程被唤醒时，`pthread_cond_wait()` 会返回并解除阻塞，重新申请获得互斥锁。
-  - `pthread_cond_timedwait()`
-    - 限时等待一个条件变量 
-  - `pthread_cond_signal()`
-    - 唤醒至少一个阻塞在条件变量上的线程 
-  - `pthread_cond_broadcast()`
-    - 唤醒全部阻塞在条件变量上的线程 
+条件变量(condition)常见函数
+- `pthread_cond_init()`
+- `pthread_cond_destroy()`
+- `pthread_cond_wait()`
+  - 阻塞一个条件变量
+  - 释放已经获得的互斥锁
+  - 当线程被唤醒时，`pthread_cond_wait()` 会返回并解除阻塞，重新申请获得互斥锁。
+- `pthread_cond_timedwait()` 限时等待一个条件变量 
+- `pthread_cond_signal()` 唤醒至少一个阻塞在条件变量上的线程 
+- `pthread_cond_broadcast()` 唤醒全部阻塞在条件变量上的线程 
 
 
-- Linux绝对时间是相对于 `1970:00:00:00` 这个时间的；如何操作？
+Linux绝对时间是相对于 `1970:00:00:00` 这个时间的；如何操作？
   ```c
   time_t cur = time(NULL);                     // 获取当前时间
   struct timespec t;
