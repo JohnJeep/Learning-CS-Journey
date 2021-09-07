@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2021-08-27 09:20:03
+ * @LastEditTime: 2021-09-07 10:28:48
  * @LastEditors: Please set LastEditors
  * @Description: Linux环境编程基础知识
 --> 
@@ -56,6 +56,8 @@
   - `2` 错误
   - `3` 文件指针
 
+<img src="./pictures/库函数与系统函数的关系_3.png">
+
 - 全部的错误变量 `errno` 在Linux中存放的位置： `/usr/include`
 - `perror()`:  打印错误的信息
 - 文件的实际权限 = 用户给定的权限和本地的掩码取反做位与（&）操作
@@ -77,6 +79,12 @@
 
 
 ## 1.3. File I/O(文件 I/O)
+
+库函数与系统函数的关系
+<img src="./pictures/库函数与系统函数的关系_1.png">
+
+<img src="./pictures/库函数与系统函数的关系_2.png">
+
 - `open()` 
   - 创建：`O_CREAT` 或采用 `截断为0的方式创建 O_TRUNC`
   - 读写：`O_RDWR`
