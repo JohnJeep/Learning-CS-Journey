@@ -1,39 +1,39 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-08-26 12:14:25
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-08-27 09:27:53
+ * @LastEditors: Please set LastEditors
  * @Description: Vim编辑器使用
 --> 
 
 <!-- TOC -->
 
 - [1. Basics(基础)](#1-basics基础)
-  - [1.1. Normal mode](#11-normal-mode)
-    - [1.1.1. Cursor move(光标移动)](#111-cursor-move光标移动)
-    - [1.1.2. Yank(复制)](#112-yank复制)
-    - [1.1.3. Paste(粘贴)](#113-paste粘贴)
-    - [1.1.4. Delete(删除)](#114-delete删除)
-    - [1.1.5. Undo(撤销)](#115-undo撤销)
-    - [1.1.6. Find(查找)](#116-find查找)
-    - [1.1.7. Mark(标记)](#117-mark标记)
-    - [1.1.8. Making corrections and moving text(修正和移动文本)](#118-making-corrections-and-moving-text修正和移动文本)
-  - [1.2. Visual mode](#12-visual-mode)
-  - [1.3. Visual line mode](#13-visual-line-mode)
-  - [1.4. Visual block mode](#14-visual-block-mode)
-  - [1.5. Replace mode](#15-replace-mode)
-  - [1.6. Insert mode](#16-insert-mode)
-  - [1.7. Command line mode](#17-command-line-mode)
-    - [1.7.1. File](#171-file)
-    - [1.7.2. Replace(替换)](#172-replace替换)
-    - [1.7.3. Window(窗口)](#173-window窗口)
-    - [1.7.4. Shell](#174-shell)
-    - [1.7.5. Help(帮助)](#175-help帮助)
-    - [1.7.6. Comment(注释)](#176-comment注释)
-  - [1.8. Vim配置文件](#18-vim配置文件)
-  - [1.9. 恢复文件](#19-恢复文件)
-  - [1.10. Vim 命令缩图](#110-vim-命令缩图)
-  - [1.11. Reference](#111-reference)
+	- [1.1. Normal mode](#11-normal-mode)
+		- [1.1.1. Cursor move(光标移动)](#111-cursor-move光标移动)
+		- [1.1.2. Yank(复制)](#112-yank复制)
+		- [1.1.3. Paste(粘贴)](#113-paste粘贴)
+		- [1.1.4. Delete(删除)](#114-delete删除)
+		- [1.1.5. Undo(撤销)](#115-undo撤销)
+		- [1.1.6. Find(查找)](#116-find查找)
+		- [1.1.7. Mark(标记)](#117-mark标记)
+		- [1.1.8. Making corrections and moving text(修正和移动文本)](#118-making-corrections-and-moving-text修正和移动文本)
+	- [1.2. Visual mode](#12-visual-mode)
+	- [1.3. Visual line mode](#13-visual-line-mode)
+	- [1.4. Visual block mode](#14-visual-block-mode)
+	- [1.5. Replace mode](#15-replace-mode)
+	- [1.6. Insert mode](#16-insert-mode)
+	- [1.7. Command line mode](#17-command-line-mode)
+		- [1.7.1. File](#171-file)
+		- [1.7.2. Replace(替换)](#172-replace替换)
+		- [1.7.3. Window(窗口)](#173-window窗口)
+		- [1.7.4. Shell](#174-shell)
+		- [1.7.5. Help(帮助)](#175-help帮助)
+		- [1.7.6. Comment(注释)](#176-comment注释)
+	- [1.8. Vim配置文件](#18-vim配置文件)
+	- [1.9. 恢复文件](#19-恢复文件)
+	- [1.10. Vim 命令缩图](#110-vim-命令缩图)
+	- [1.11. Reference](#111-reference)
 
 <!-- /TOC -->
 
@@ -238,8 +238,17 @@ text-objects(文本对象)
 Normal mode 下进行替换操作。
 
 - `R` 在命令行模式下，替换无限多个字符，执行后进入`insert mode`。
-- `r(小写)` 替换一个字符，执行后还是在 `Normal mode` 。
-- `~` 进行大小写字母转换，执行后还是在 `Normal mode` 。
+- `r(小写)` 替换一个字符，执行后还是在 `Normal mode`。
+- `~` 将光标下的字母进行大小写转换，执行后还是在 `Normal mode`。
+- `3~`      将光标位置开始的3个字母改变其大小写
+- `g~~`     改变当前行字母的大小写
+- `U`       将可视模式下选择的字母全改成大写字母
+- `u`       将可视模式下选择的字母全改成小写
+- `gUU`     将当前行的字母改成大写
+- `3gUU`    将从光标开始到下面3行字母改成大写
+- `guu`     将当前行的字母全改成小写
+- `gUw`     将光标下的单词改成大写。
+- `guw`     将光标下的单词改成小写。
 
 
 ## 1.6. Insert mode
