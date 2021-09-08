@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50
- * @LastEditTime: 2021-08-15 16:27:58
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-09-08 14:31:37
+ * @LastEditors: Please set LastEditors
  * @Description: 数据结构与算法学习笔记
 --> 
 
@@ -12,36 +12,36 @@
 - [2. 代码的规范性](#2-代码的规范性)
 - [3. 结构体定义（3种）](#3-结构体定义3种)
 - [4. 链表](#4-链表)
-  - [4.1. 线性表](#41-线性表)
-  - [4.2. 循环链表](#42-循环链表)
+	- [4.1. 线性表](#41-线性表)
+	- [4.2. 循环链表](#42-循环链表)
 - [5. 栈](#5-栈)
 - [6. 队列](#6-队列)
 - [7. 树](#7-树)
-  - [7.1. 树的存储](#71-树的存储)
-  - [7.2. 树的创建](#72-树的创建)
-  - [7.3. 二叉树（binary tree）](#73-二叉树binary-tree)
-  - [7.4. 遍历二叉树（traverse binary tree）](#74-遍历二叉树traverse-binary-tree)
-  - [7.5. DFS与BFS](#75-dfs与bfs)
-  - [7.6. 二叉搜索树(binary search tree)](#76-二叉搜索树binary-search-tree)
-  - [7.7. 平衡二叉树（AVL树）](#77-平衡二叉树avl树)
-  - [7.8. 红黑树（Red black tree）](#78-红黑树red-black-tree)
-    - [7.8.1. 参考](#781-参考)
-    - [7.8.2. 概念](#782-概念)
-    - [7.8.3. 红黑树特点](#783-红黑树特点)
-    - [7.8.4. 旋转](#784-旋转)
-    - [7.8.5. 插入](#785-插入)
-    - [7.8.6. 删除](#786-删除)
-  - [7.9. 字典数（trie树）](#79-字典数trie树)
-  - [7.10. 堆树](#710-堆树)
-  - [7.11. B树](#711-b树)
-  - [7.12. B+树](#712-b树)
+	- [7.1. 树的存储](#71-树的存储)
+	- [7.2. 树的创建](#72-树的创建)
+	- [7.3. 二叉树（binary tree）](#73-二叉树binary-tree)
+	- [7.4. 遍历二叉树（traverse binary tree）](#74-遍历二叉树traverse-binary-tree)
+	- [7.5. DFS与BFS](#75-dfs与bfs)
+	- [7.6. 二叉搜索树(binary search tree)](#76-二叉搜索树binary-search-tree)
+	- [7.7. 平衡二叉树（AVL树）](#77-平衡二叉树avl树)
+	- [7.8. 红黑树（Red black tree）](#78-红黑树red-black-tree)
+		- [7.8.1. 概念](#781-概念)
+		- [7.8.2. 红黑树特点](#782-红黑树特点)
+		- [7.8.3. 旋转](#783-旋转)
+		- [7.8.4. 插入](#784-插入)
+		- [7.8.5. 删除](#785-删除)
+		- [7.8.6. 参考](#786-参考)
+	- [7.9. 字典数（trie树）](#79-字典数trie树)
+	- [7.10. 堆树](#710-堆树)
+	- [7.11. B树](#711-b树)
+	- [7.12. B+树](#712-b树)
 - [8. 算法](#8-算法)
-  - [8.1. 快速排序](#81-快速排序)
-  - [8.2. 桶排序](#82-桶排序)
-  - [8.3. 堆排序](#83-堆排序)
-  - [8.4. 递归](#84-递归)
-  - [8.5. 动态规划](#85-动态规划)
-  - [8.6. KMP(字符串查找)](#86-kmp字符串查找)
+	- [8.1. 快速排序](#81-快速排序)
+	- [8.2. 桶排序](#82-桶排序)
+	- [8.3. 堆排序](#83-堆排序)
+	- [8.4. 递归](#84-递归)
+	- [8.5. 动态规划](#85-动态规划)
+	- [8.6. KMP(字符串查找)](#86-kmp字符串查找)
 - [9. 编写程序需要思考的问题](#9-编写程序需要思考的问题)
 - [10. 参考资源](#10-参考资源)
 
@@ -127,13 +127,13 @@
 
 
 # 4. 链表
-- 参考
-  - [数组、单链表和双链表介绍 以及 双向链表的C/C++/Java实现](https://www.cnblogs.com/skywang12345/p/3561803.html) 
-
 
 - 链表是一种动态的数据结构，每添加一个结点分配一次内存，占用的内存是连续的，没有闲置的内存
 - 数组的内存是一次性分配内存
-<p align="center"><img src="./figures/链表.png"></p>
+
+<p align="center">
+	<img src="./figures/链表.png">
+</p>
 
 
 ## 4.1. 线性表
@@ -191,8 +191,7 @@ data | next
 
 
 # 6. 队列
-- 定义
-  - 只允许在一端（队尾）进行插入操作，在另一端（队头）进行删除操作的线性表
+- 定义：只允许在一端（队尾）进行插入操作，在另一端（队头）进行删除操作的线性表
 - 特点： `先入先出` 方式管理的线性表，一般用于数据的缓存。
 - 分类
   - 顺序队列：队列的顺序存储结构
@@ -209,7 +208,10 @@ data | next
   - 队满状态：`rear+1 = front`
   - 队空状态：`rear = front`
   - 队列中少用一个元素的空间，达到使队满和队空的条件不一样
-<p align="center"><img src="./figures/队列.png"></p>
+
+<p align="center">
+	<img src="./figures/队列.png">
+</p>
 
 
 - 链队列
@@ -226,8 +228,8 @@ data | next
   - 每一个非根结点有且只有一个父结点
   - 树是非线性结构 
 - 树的术语
-  - 结点层：规定： 树中根结点的层定义为 1，其余结点的层等于其双亲结点的层加1；根的孩子为第二层结点。
-  - **结点的度（degree）**：一个结点拥有的子树个数。作用对象是 结结点`。
+  - 结点层：规定树中根结点的层定义为 1，其余结点的层等于其双亲结点的层加1；根的孩子为第二层结点。
+  - **结点的度（degree）**：一个结点拥有的子树个数。作用对象是 结结点。
   - **树的度**：树中结点度的最大值，即拥有子树个数的最大值。
   - **树的深度（depth）**：也叫数的高度，树中结点的最大层数值
   - 分支结点：也叫非终端结点，度大于 0 的结点
@@ -338,9 +340,6 @@ data | next
   - 通过 `先序遍历` 和 `后序遍历` 不能确定一棵树。
 
 ## 7.5. DFS与BFS
-- 参考
-  - [DFS与BFS对比](https://www.cnblogs.com/wzl19981116/p/9397203.html)
-
 
 - `DFS(Deep First Search)` 深度优先搜索
 - `BFS(Breath First Search)` 广度优先搜索
@@ -352,7 +351,7 @@ data | next
 - 性质
   - 树中的任意一个结点都大于等于它左子树中的结点，小于等于它右子树中的结点。 
   - 在一棵高度为 h 的二叉搜索树上，动态集合上的操作 Search、Minimum、Maximum、Successor、Predecessor可以在 `O(h)` 时间内完成。
-  - 在一棵高度为 h 的二叉搜索树上，动态集合操作Insertion、Deletion的运行时间均为 `O(h)` 或 `lg(n)`
+  - 在一棵高度为 h 的二叉搜索树上，动态集合操作 Insertion、Deletion 的运行时间均为 `O(h)` 或 `lg(n)`
 
 
 - 查找
@@ -383,31 +382,20 @@ data | next
 
 
 ## 7.7. 平衡二叉树（AVL树）
-- 参考
-  - [维基百科解释AVL树](https://zh.wikipedia.org/wiki/AVL%E6%A0%91)  
 
-
-- 概念：平衡二叉树是一颗空树或者左右两个子树的高度差的绝对值不超过 1，并且左右两个子树都是一颗平衡二叉树。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道 AVL 树适合用于插入与删除次数比较少，但查找多的情况。
+- 概念
+  > 平衡二叉树是一颗空树或者左右两个子树的高度差的绝对值不超过 1，并且左右两个子树都是一颗平衡二叉树。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道 AVL 树适合用于插入与删除次数比较少，但查找多的情况。
 
 
 
 ## 7.8. 红黑树（Red black tree）
 
-### 7.8.1. 参考
-- [维基百科英文解释红黑树](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) 讲解最全面，重点掌握。
-- [维基百科中文解释红黑树](https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91)
-- [Github详解：教你透彻了解红黑树](https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md)
-- [A complete and working implementation in C](https://web.archive.org/web/20140328232325/http://en.literateprograms.org/Red-black_tree_(C))
-- [James Paton. "Red-Black Trees"](http://pages.cs.wisc.edu/~paton/readings/Red-Black-Trees/#intro)
-- [红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)
-
-
-### 7.8.2. 概念
+### 7.8.1. 概念
 - 什么是红黑树？
   > 红黑树是一颗二叉搜索树，它在每个结点上增加了一个存储位来表示结点的颜色，结点的颜色为红色或黑色。通过对任何一条从根结点到叶子结点路径上各个结点的颜色进行约束，确保红黑树上没有一条路径会比其它的路径长出 2 倍，使红黑树近似是平衡的。
 
 
-### 7.8.3. 红黑树特点
+### 7.8.2. 红黑树特点
 1. 每个结点是红色或黑色。
 2. 根结点是黑色。
 3. 所有叶子都是黑色（叶子是指针为空的的结点）。
@@ -429,7 +417,7 @@ data | next
   - Linux中epoll机制的实现
 
 
-### 7.8.4. 旋转
+### 7.8.3. 旋转
 - 为什么红黑树要旋转？
   > 添加或删除红黑树中的结点之后，红黑树的结构发生了变化，可能不满足红黑树的5条性质，也就不再是一颗红黑树了，而是一颗普通的树。通过旋转，可以使这颗树重新成为红黑树。为了维护这些特性，必须要改变树中某些结点的颜色和指针结构。
 
@@ -442,7 +430,7 @@ data | next
 > 红黑树旋转和变色的核心思想：将红色结点移动到根结点，再将根结点设置为黑色。
 
 
-### 7.8.5. 插入
+### 7.8.4. 插入
 - 为什么红黑树中新插入的结点必须是红色？
 > 一颗正常的红黑树中新插入的结点不是红色时，否则就违反了红黑树的性质 4：每个叶子结点到根结点的所有路径上不能有两个连续的红色结点。
 - 插入前需要找到结点插入的位置，如果插入结点小于当前遍历到的结点，则到当前结点的左子树中继续查找；如果插入结点大于当前结点，则到当前结点的右子树中继续查找。
@@ -470,7 +458,7 @@ data | next
         <p align="center"><img src="./figures/红黑树插入3.png"></p>
 
 
-### 7.8.6. 删除
+### 7.8.5. 删除
 - 将红黑树当作一颗二叉查找树，待删除的结点按照儿子的个数，删除时分为3种情况。
   1. 被删除结点没有儿子，即为叶子结点。那么，直接将该结点删除就OK了 
   2. 若果被删除结点只有一个儿子，那么直接删除该结点，并用该结点的唯一子结点顶替它的位置。
@@ -504,6 +492,15 @@ data | next
     - 将兄弟结点染成当前结点的父结点颜色，兄弟结点右子结点染成黑色，再以当前结点的父结点为支点进行左旋转操作。 
     <p align="center"><img src="./figures/红黑树插入删除6.png"></p>  
 
+### 7.8.6. 参考
+- [维基百科英文解释红黑树](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) 讲解最全面，重点掌握。
+- [维基百科中文解释红黑树](https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91)
+- [Github详解：教你透彻了解红黑树](https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md)
+- [A complete and working implementation in C](https://web.archive.org/web/20140328232325/http://en.literateprograms.org/Red-black_tree_(C))
+- [James Paton. "Red-Black Trees"](http://pages.cs.wisc.edu/~paton/readings/Red-Black-Trees/#intro)
+- [红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)
+
+
 
 ## 7.9. 字典数（trie树）
 - 是一种专门处理字符串匹配的数据结构，用来解决在一组字符串集合中快速查找某个字符串的问题
@@ -524,12 +521,6 @@ data | next
 
 
 ## 7.10. 堆树
-- 参考
-  - [堆树（最大堆、最小堆）详解](https://blog.csdn.net/guoweimelon/article/details/50904346)
-  - [彻底弄懂最大堆的四种操作(图解+程序)（JAVA）](https://www.iteye.com/blog/128kj-1728555)
-  - [堆排序](https://www.cnblogs.com/dolphin0520/archive/2011/10/06/2199741.html)
-  - [算法】堆，最大堆（大顶堆）及最小堆（小顶堆）的实现](https://blog.csdn.net/cdnight/article/details/11650983?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
-
 
 - 堆是一种特殊的二叉树。
 - 当树根值为最大值，则为最大堆；
@@ -548,11 +539,15 @@ data | next
    - 删除元素时，一般默认删除第一个根结点，将数组的最后一个元素放到根结点的位置，之后通过自上而下重排序，使删除元素后的二叉树也满足堆数据结构的特性。
 
 
-## 7.11. B树
 - 参考
-  - [从B树、B+树、B*树谈到R 树](https://blog.csdn.net/v_july_v/article/details/6530142)
-  - [维基百科解释B树](https://zh.wikipedia.org/wiki/B%E6%A0%91)
+  - [堆树（最大堆、最小堆）详解](https://blog.csdn.net/guoweimelon/article/details/50904346)
+  - [彻底弄懂最大堆的四种操作(图解+程序)（JAVA）](https://www.iteye.com/blog/128kj-1728555)
+  - [堆排序](https://www.cnblogs.com/dolphin0520/archive/2011/10/06/2199741.html)
+  - [算法】堆，最大堆（大顶堆）及最小堆（小顶堆）的实现](https://blog.csdn.net/cdnight/article/details/11650983?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
 
+
+
+## 7.11. B树
 
 - 什么是B Tree？
   > 在计算机科学中，B树（英语：B-tree）是一种自平衡的树，能够保持数据有序。这种数据结构能够让查找数据、顺序访问、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树（binary search tree）一个节点可以拥有2个以上的子节点。与自平衡二叉查找树不同，B树适用于读写相对大的数据块的存储系统，例如磁盘。B树减少定位记录时所经历的中间过程，从而加快存取速度。B树这种数据结构可以用来描述外部存储。这种数据结构常被应用在数据库和文件系统的实现上。
@@ -563,12 +558,11 @@ data | next
   - 主要用于文件系统以及部分数据库索引（MongoDB） 而Mysql是用B+树的。
 
 
+- 参考
+  - [从B树、B+树、B*树谈到R 树](https://blog.csdn.net/v_july_v/article/details/6530142)
+  - [维基百科解释B树](https://zh.wikipedia.org/wiki/B%E6%A0%91)
 
 ## 7.12. B+树
-- 参考
-  - [B树和B+树的插入、删除图文详解](https://www.cnblogs.com/nullzx/p/8729425.html)
-  - [维基百科解释B+树](https://zh.wikipedia.org/wiki/B+%E6%A0%91)
-
 
 - 什么是B++ Tree？
 
@@ -586,10 +580,13 @@ data | next
   - 将索引存放在磁盘，让检索技术摆脱了内存的限制，通过将索引和数据分离的方式，使索引的数组大小保持在较小的范围内。
 
 
-# 8. 算法
 - 参考
-  - [排序算法时间复杂度、空间复杂度、稳定性比较](https://blog.csdn.net/yushiyi6453/article/details/76407640) 
+  - [B树和B+树的插入、删除图文详解](https://www.cnblogs.com/nullzx/p/8729425.html)
+  - [维基百科解释B+树](https://zh.wikipedia.org/wiki/B+%E6%A0%91)
 
+  
+  
+# 8. 算法
 
 排序算法时间复杂度、空间复杂度、稳定性比较。
 <p align="center"><img src="./figures/算法复杂度.png"></p>
@@ -603,15 +600,11 @@ data | next
 
 
 ## 8.2. 桶排序
-- 参考
-  - [桶排序详解](https://www.cnblogs.com/skywang12345/p/3602737.html) 
+
+- [桶排序详解](https://www.cnblogs.com/skywang12345/p/3602737.html) 
 
 
 ## 8.3. 堆排序
-- 参考
-  - [堆排序详解 ](https://www.cnblogs.com/skywang12345/p/3602162.html)
-  - 《数据结构与算法分析新视角》
-
 
 - 什么是堆排序？
   > 堆排序是一种结合二叉树，采用一个辅助记录空间进行排序的算法。对于一个完全二叉树来说，如果所有结点（除叶子结点外）的值都大于或小于其左右孩子结点的值，那么这颗完全二叉树就被称为一个堆。由堆的定义可知，若堆顶结点（二叉树的根节点）一定对应整个序列中最大或最小的记录。若每次将堆顶的记录输出，同时调整剩余的记录，使它们重新排成一个堆，重复以上的过程，最终得到一个有序的序列，完成排序的过程，这种排序的方法，称为堆排序。
@@ -626,6 +619,9 @@ data | next
   - 在最坏的情况下，时间复杂度为 $\Omicron(n*log_2 n)$
 
 
+- 参考
+  - [堆排序详解 ](https://www.cnblogs.com/skywang12345/p/3602162.html)
+  - 《数据结构与算法分析新视角》
 
 ## 8.4. 递归
 - 函数自己调用自己。
@@ -641,11 +637,13 @@ data | next
 
 
 ## 8.6. KMP(字符串查找)
-- 参考
-  - [从头到尾彻底理解KMP（2014年8月22日版）](https://blog.csdn.net/v_JULY_v/article/details/7041827) 
+
+
+- [从头到尾彻底理解KMP（2014年8月22日版）](https://blog.csdn.net/v_JULY_v/article/details/7041827) 
 
 
 # 9. 编写程序需要思考的问题 
+
 - 它容易读懂吗？
 - 它有完善的文档吗？
 - 它容易修改吗？
@@ -656,8 +654,13 @@ data | next
 
 
 # 10. 参考资源
+
 - [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) San Francisco大学计算机学院提供一个可视化的教学资源 
 - [visualgo](https://visualgo.net/en/sorting) 是一款可视化学习算法的工具，从简单的排序算法到复杂的图形数据结构和算法都有 
 - [algorithm-visualizer](https://algorithm-visualizer.org/) 支持的语言有：Java，C++，JS 等，还有控制台也会输出整个执行的过程，能帮你更好的理解算法。
 - [实验楼上实现了LeetCode中一些经典的算法](https://www.shiyanlou.com/courses/492)
 - [LeetCode英文版](https://leetcode.com/)
+- [数组、单链表和双链表介绍 以及 双向链表的C/C++/Java实现](https://www.cnblogs.com/skywang12345/p/3561803.html) 
+- [DFS与BFS对比](https://www.cnblogs.com/wzl19981116/p/9397203.html)
+- [维基百科解释AVL树](https://zh.wikipedia.org/wiki/AVL%E6%A0%91)  
+- [排序算法时间复杂度、空间复杂度、稳定性比较](https://blog.csdn.net/yushiyi6453/article/details/76407640) 
