@@ -1,9 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-17 13:59:25
- * @LastEditTime: 2021-05-26 22:35:51
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-09-09 23:27:49
+ * @LastEditors: Windows10
  * @Description: 手写memcpy()函数，不用底层的库函数
+ * https://www.cxyzjd.com/article/wyk71456/108424816
  */
 #include <stdio.h>
 #include <string.h>
@@ -43,6 +44,8 @@ void *my_memcpy(void* dest, const void* src, size_t len)
     
     return dest;    
 }
+
+// 优化版本
 
 int main()
 {
