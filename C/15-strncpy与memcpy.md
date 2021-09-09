@@ -1,20 +1,20 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 15:56:29
- * @LastEditTime: 2021-04-02 11:43:58
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-09-09 22:38:46
+ * @LastEditors: Windows10
  * @Description: strncpy()与memcpy()函数用法
 --> 
 <!-- TOC -->
 
-- [0.1. strncpy()](#01-strncpy)
-- [0.2. memcpy()](#02-memcpy)
-- [0.3. strcpy()与memcpy()区别](#03-strcpy与memcpy区别)
-- [0.4. 参考](#04-参考)
+- [1. strncpy()](#1-strncpy)
+- [2. memcpy()](#2-memcpy)
+- [3. strcpy()与memcpy()区别](#3-strcpy与memcpy区别)
+- [4. 参考](#4-参考)
 
 <!-- /TOC -->
 
-## 0.1. strncpy()
+# 1. strncpy()
 - 定义
 `char *strncpy(char *dest, const char *src, size_t count); `
   - dest：目标字符数组；
@@ -29,7 +29,7 @@
   - 执行完strncpy()后，会覆盖原先dest字符数组中的数据。
 
 
-## 0.2. memcpy()
+# 2. memcpy()
 - 定义
 ` void *memcpy(void *dest, void *src, size_t count); `
   - 参数
@@ -48,7 +48,7 @@
   - 执行完 `memcpy()` 后，会覆盖原先 `dest` 字符数组中的数据。
 
 
-## 0.3. strcpy()与memcpy()区别
+# 3. strcpy()与memcpy()区别
 - 复制的内容不同。
    - strcpy只能复制字符串，而memcpy可以复制任意内容，例如字符数组、整型、结构体、类等。
 - 复制的方法不同。
@@ -59,6 +59,6 @@
   > `memmove()` 函数也是将 src 指向的内存中的 `count` 个字符拷贝到 dest 指向的内存区域中。若目标区域(dest)和源区域(src)有重叠的话，`memmove` 能够保证源串(src)在被覆盖之前将 `重叠区域` 的字节拷贝到目标区域中，但 **复制后源内容会被更改**。但是当目标区域与源区域没有重叠则和 `memcpy()`函数功能相同。
 
 
-## 0.4. 参考
+# 4. 参考
 - [百度百科strncpy讲解](https://baike.baidu.com/item/strncpy/8491017?fr=aladdin)
 - [百度百科memcpy讲解](https://baike.baidu.com/item/memcpy/659918?fr=aladdin)
