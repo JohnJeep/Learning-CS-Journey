@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-08-26 12:17:04
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-09-29 11:34:36
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
 -->
 
@@ -180,9 +180,13 @@ C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的
 > NOte: 6.828 and 6.S081 will be offered as two separate classes. 6.S081 (Introduction to Operating Systems) will be taught as a stand-alone AUS subject for undergraduates, and will provide an introduction to operating systems. 6.828 will be offered as a graduate-level seminar-style class focused on research in operating systems. 6.828 will assume you have taken 6.S081 or an equivalent class. See the [6.828 web site](https://abelay.github.io/6828seminar/schedule.html) for more detail about 6.828.
 
 
-他人课程笔记
+参考
 - [知乎：MIT6.828-神级OS课程-要是早遇到，我还会是这种 five 系列](https://zhuanlan.zhihu.com/p/74028717) 
 - [二十八画生征友：一起来通关6.S081/6.828吧](https://zhuanlan.zhihu.com/p/251366985)
+- [MIT6.S081 肖宏辉翻译的课程](https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081/)
+- [胡津铭 Github计算机基础学习笔记](https://github.com/conanhujinming/comments-for-awesome-courses)
+
+
 
 
 
@@ -217,6 +221,7 @@ Currency(并发)
 - [基于事件的并发问题](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/33-Event-based-Concurrency.md)
 
 
+----------------------------
 [很多经典的论点引证](OS/Operating-System-Three-Easy-Pieces/reference.md)
 
 
