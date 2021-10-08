@@ -99,8 +99,10 @@ Cache 与 Main Memory 的分布情况如下
 
 <img src="./figures/cache-main-memory.png">
 
+<img src="./figures/cache-main-memory-structure.png">
 
 
+<img src="./figures/Computer-Hardware-and-Software-Structure.png">
 
 
 
