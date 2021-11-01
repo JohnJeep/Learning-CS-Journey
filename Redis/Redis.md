@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2021-08-15 16:06:51
+ * @LastEditTime: 2021-11-02 00:36:34
  * @LastEditors: Windows10
  * @Description: redis学习
 -->
@@ -9,32 +9,34 @@
 <!-- TOC -->
 
 - [1. 概念](#1-概念)
-- [2. 启动客户端与服务器](#2-启动客户端与服务器)
-- [3. KEYS命令](#3-keys命令)
-  - [3.1. KEYS pattern](#31-keys-pattern)
-  - [3.2. EXISTS命令](#32-exists命令)
-  - [3.3. DEL命令](#33-del命令)
-  - [3.4. DUMP命令](#34-dump命令)
-  - [3.5. MOVE命令](#35-move命令)
-  - [3.6. TYPE命令](#36-type命令)
-  - [3.7. RENAME命令](#37-rename命令)
-  - [3.8. 生存时间](#38-生存时间)
-- [4. 基本数据类型](#4-基本数据类型)
-  - [4.1. string(字符串)](#41-string字符串)
-  - [4.2. hash(哈希)](#42-hash哈希)
-  - [4.3. list(列表)](#43-list列表)
-  - [4.4. set(集合)](#44-set集合)
-  - [4.5. zset(sorted set 有序集合)](#45-zsetsorted-set-有序集合)
-- [5. pub/sub(订阅与发布模式)](#5-pubsub订阅与发布模式)
-- [6. 事务](#6-事务)
-- [7. redis连接](#7-redis连接)
-- [8. redis服务器](#8-redis服务器)
-- [9. HyperLogLog](#9-hyperloglog)
-- [10. 参考](#10-参考)
+- [2. 配置](#2-配置)
+- [3. 启动客户端与服务器](#3-启动客户端与服务器)
+- [4. KEYS命令](#4-keys命令)
+  - [4.1. KEYS pattern](#41-keys-pattern)
+  - [4.2. EXISTS命令](#42-exists命令)
+  - [4.3. DEL命令](#43-del命令)
+  - [4.4. DUMP命令](#44-dump命令)
+  - [4.5. MOVE命令](#45-move命令)
+  - [4.6. TYPE命令](#46-type命令)
+  - [4.7. RENAME命令](#47-rename命令)
+  - [4.8. 生存时间](#48-生存时间)
+- [5. 基本数据类型](#5-基本数据类型)
+  - [5.1. string(字符串)](#51-string字符串)
+  - [5.2. hash(哈希)](#52-hash哈希)
+  - [5.3. list(列表)](#53-list列表)
+  - [5.4. set(集合)](#54-set集合)
+  - [5.5. zset(sorted set 有序集合)](#55-zsetsorted-set-有序集合)
+- [6. pub/sub(订阅与发布模式)](#6-pubsub订阅与发布模式)
+- [7. 事务](#7-事务)
+- [8. redis连接](#8-redis连接)
+- [9. redis服务器](#9-redis服务器)
+- [10. HyperLogLog](#10-hyperloglog)
+- [11. 参考](#11-参考)
 
 <!-- /TOC -->
 
 # 1. 概念
+
 - 什么是redis？
   > Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、key-Value 的数据库、并提供多种语言的API。通常，Redis 将数据存储于内存中，或被配置为使用虚拟内存。
   
@@ -46,11 +48,27 @@
   - Redis支持数据的备份，即master-slave模式的数据备份。
 
 
+# 2. 配置
 
-# 2. 启动客户端与服务器
+Redis/src/ 目录相关文件功能描述
+
+- redis-server  : redis 服务器
+- redis-cli  : redis 命令行客户端
+- redis-benchmark : redis 性能测试工具
+- redis-check-aof : aof 文件修复工具
+- redis-check-rdb : 文件检查工具 
+
+
+/usr/lib/systemd/system/ 目录下存放的都是开机自启动服务。
+
+
+
+# 3. 启动客户端与服务器
+
 - `redis-cli`：启动Redis 客户端
 - `redis-cli -h host -p port -a password`：远程机器上启动Redis 客户端
 - `redis-server`：启动Redis 服务器
+
 ```
 $redis-cli -h 127.0.0.1 -p 6379 -a "mypass"
 redis 127.0.0.1:6379>
@@ -60,10 +78,10 @@ PONG
 ```
 
 
-# 3. KEYS命令
+# 4. KEYS命令
 > Redis 键命(key)令用于管理 redis 的键。
 
-## 3.1. KEYS pattern
+## 4.1. KEYS pattern
 - `key pattern`: 查找所有匹配给定模式的键。
 - 示例：`keys *` : 查询数据库中所有的键。
 - 常用的符号
@@ -73,7 +91,7 @@ PONG
   - `\*` : 匹配字符x,用于转义符号；若要匹配 ？，则使用 `\?`
 
 
-## 3.2. EXISTS命令
+## 4.2. EXISTS命令
 - `exists key`：判断一个按键是否存在，如果按键存在，则返回整数类型1，否则返回0
   ```
   127.0.0.1:6379> exists li
@@ -83,7 +101,7 @@ PONG
   ```
 
 
-## 3.3. DEL命令
+## 4.3. DEL命令
 - `del key1, key2 ...`: 删除一个或多个按键，返回值是删除的键的个数。
   ```
   127.0.0.1:6379> del match_rank s_set
@@ -91,7 +109,7 @@ PONG
   ```
 
 
-## 3.4. DUMP命令
+## 4.4. DUMP命令
 - `dump key`：序列化给定的key ，如果 key 不存在，那么返回 nil； 否则，返回序列化之后的值。
 - 序列化生成的值有以下几个特点：
   - 它带有 64 位的校验和，用于检测错误，RESTORE 在进行反序列化之前会先检查校验和。
@@ -109,12 +127,12 @@ PONG
   ```
 
 
-## 3.5. MOVE命令
+## 4.5. MOVE命令
 - `move key db`：将当前数据库的键值 key 移动到给定的数据库 db 当中，移动成功返回 1，失败则返回 0。
 - 如果当前数据库(源数据库)和给定数据库(目标数据库)有相同名字的给定 key ，或者 key 不存在于当前数据库，那么 MOVE 没有任何效果。
 
 
-## 3.6. TYPE命令
+## 4.6. TYPE命令
 - `type key1, key2, ...`: 获取按键的数据类型
   - 数据类型可以是string、hash、list、set、zset。
 
@@ -131,7 +149,7 @@ PONG
 9) "key1"
 ```
 
-## 3.7. RENAME命令
+## 4.7. RENAME命令
 - `rename key key1`：将键值key修改为key1
 - `renamenx key key1`：仅当键值key1不存在当前数据库中时，才可以将key修改为key1
 - `randomkey`：从当前数据库中随机返回一个 key 。
@@ -155,7 +173,7 @@ OK
 ```
 
 
-## 3.8. 生存时间
+## 4.8. 生存时间
 - redis在实际使用过程中一般用作缓存，然而缓存的数据一般都需要设置生存时间，也就是到期后销毁数据。
 - `expire key seconds`：键值对的生存时间为 seconds，时间到后，销毁键值对中的数据
 - `TTL key`：以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。
@@ -209,9 +227,9 @@ OK
 
 
 
-# 4. 基本数据类型
+# 5. 基本数据类型
 
-## 4.1. string(字符串)
+## 5.1. string(字符串)
 - string类型是Redis最基本的数据类型，一个 `key`对应一个 `value` ，一个键最大能存储512MB。
 
 - 基础命令
@@ -283,7 +301,7 @@ OK
   ```
 
 
-## 4.2. hash(哈希)
+## 5.2. hash(哈希)
 - Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个键值对集合，hash特别适合用于存储对象。
 <img src="./figures/redis-hash结构.png">
 
@@ -372,7 +390,7 @@ OK
   ```
 
 
-## 4.3. list(列表)
+## 5.3. list(列表)
 - Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。
 - 列表最多可存储 $2^{32} - 1$ 元素 (4294967295, 每个列表可存储40多亿)。
 
@@ -497,7 +515,7 @@ OK
   ```
 
 
-## 4.4. set(集合)
+## 5.4. set(集合)
 - Redis Set是string类型的无序集合。集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 在 Redis 可以添加，删除和测试成员存在的时间复杂度为 O（1）。
 - 集合中最大的成员数为 $2^{32} - 1$ (4294967295, 每个集合可存储40多亿个成员)。
 -  Redis 非常人性化的为集合提供了 求交集、并集、差集等操作, 那么就可以非常方便的实现如共同关注、共同喜好、二度好友等功能, 对上面的所有集合操作,你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
@@ -578,7 +596,7 @@ OK
   - 3.好友推荐的时候,根据 tag 求交集,大于某个 临界值 就可以推荐
 
 
-## 4.5. zset(sorted set 有序集合)
+## 5.5. zset(sorted set 有序集合)
 - Redis 有序集合和集合一样也是string类型元素的集合，且不允许重复的成员。redis通过 `score` 来为集合中的成员进行从小到大的排序。有序集合的成员(member)是唯一的,但分数(score)却可以重复。
 
 - 命令
@@ -621,7 +639,7 @@ OK
   - 2 排行榜
 
 
-# 5. pub/sub(订阅与发布模式)
+# 6. pub/sub(订阅与发布模式)
 > Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(publish)发送消息，订阅者(subscribe)接收消息。 Redis 客户端可以订阅任意数量的频道。
 
 - Redis 发布订阅命令
@@ -635,7 +653,7 @@ OK
 
 
 
-# 6. 事务
+# 7. 事务
 - Redis事务允许一组命令在单一步骤中执行。事务具有两个属性
   - 事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。
   - Redis事务是原子的。原子意味着要么所有的命令都执行，要么都不执行；
@@ -668,7 +686,7 @@ OK
 
 
 
-# 7. redis连接
+# 8. redis连接
 >  Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数据库默认编号是0
 
 - `select index`：切换到指定的index数据库
@@ -679,7 +697,7 @@ OK
 - `swapdb index1 index2`：交换同一Redis服务器上两个数据库的数据，执行成功返回OK 。
 
 
-# 8. redis服务器
+# 9. redis服务器
 - `dbsize`：返回当前数据库中所有key的数目
 - `flushdb`：删除当前数据库中的所有key
 - `flushall`：清空所有数据库中的所有key
@@ -759,7 +777,7 @@ OK
 
 
 
-# 9. HyperLogLog
+# 10. HyperLogLog
 - Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
 
 - 在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 $2^{64}$ 个不同元素的基 数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。
@@ -787,9 +805,11 @@ OK
   (integer) 8
   ```
 
-# 10. 参考
+
+# 11. 参考
 - [redis.io](https://redis.io/) : Redis官方网站
 - [redis.cn-commands](http://redis.cn/commands.html)：redis中文版相关命令用法
 - [Redis学习教程](https://piaosanlang.gitbooks.io/redis/content/index.html)：比较全面的介绍了有关redis的使用。
 - [W3Cschool Redis教程](https://www.w3cschool.cn/redis/redis-intro.html)
 - [CSN: Redis教程](https://blog.csdn.net/hellozpc/article/details/81267030)
+- [Redis 开机自启动](https://www.jianshu.com/p/a73e0565e2a1)
