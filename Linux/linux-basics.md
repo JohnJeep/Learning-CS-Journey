@@ -1,41 +1,41 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-06-10 10:12:51
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-02 00:36:42
+ * @LastEditors: Windows10
  * @Description: Linux基础用法笔记
 --> 
 <!-- TOC -->
 
 - [1. Linux Basic](#1-linux-basic)
 - [2. 硬件基础知识](#2-硬件基础知识)
-	- [2.1. MBR](#21-mbr)
-	- [2.2. GPT](#22-gpt)
-	- [2.3. BIOS与UEFI](#23-bios与uefi)
-	- [2.4. 分区](#24-分区)
+  - [2.1. MBR](#21-mbr)
+  - [2.2. GPT](#22-gpt)
+  - [2.3. BIOS与UEFI](#23-bios与uefi)
+  - [2.4. 分区](#24-分区)
 - [3. 文件I/O](#3-文件io)
-	- [3.1. 常用命令](#31-常用命令)
-	- [3.2. 查看文件内容](#32-查看文件内容)
-	- [3.3. 磁盘](#33-磁盘)
-	- [3.4. 文件权限与链接](#34-文件权限与链接)
-	- [3.5. 默认文件权限 umask](#35-默认文件权限-umask)
-	- [3.6. 文件隐藏属性](#36-文件隐藏属性)
-	- [3.7. 用户与用户组](#37-用户与用户组)
-	- [3.8. 用户权限修改](#38-用户权限修改)
-	- [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
-	- [3.10. 文件目录](#310-文件目录)
-	- [3.11. link(链接)](#311-link链接)
-	- [3.12. 重定向](#312-重定向)
-	- [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
+  - [3.1. 常用命令](#31-常用命令)
+  - [3.2. 查看文件内容](#32-查看文件内容)
+  - [3.3. 磁盘](#33-磁盘)
+  - [3.4. 文件权限与链接](#34-文件权限与链接)
+  - [3.5. 默认文件权限 umask](#35-默认文件权限-umask)
+  - [3.6. 文件隐藏属性](#36-文件隐藏属性)
+  - [3.7. 用户与用户组](#37-用户与用户组)
+  - [3.8. 用户权限修改](#38-用户权限修改)
+  - [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
+  - [3.10. 文件目录](#310-文件目录)
+  - [3.11. link(链接)](#311-link链接)
+  - [3.12. 重定向](#312-重定向)
+  - [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
 - [4. tar](#4-tar)
-	- [4.1. 文件类型](#41-文件类型)
-	- [4.2. tar文件打包](#42-tar文件打包)
-	- [4.3. 打包文件或目录](#43-打包文件或目录)
-	- [4.4. 解包文件或目录](#44-解包文件或目录)
-	- [4.5. 解压缩文件](#45-解压缩文件)
-	- [4.6. 打包压缩](#46-打包压缩)
-	- [4.7. zcat zless](#47-zcat-zless)
-	- [4.8. zip](#48-zip)
+  - [4.1. 文件类型](#41-文件类型)
+  - [4.2. tar文件打包](#42-tar文件打包)
+  - [4.3. 打包文件或目录](#43-打包文件或目录)
+  - [4.4. 解包文件或目录](#44-解包文件或目录)
+  - [4.5. 解压缩文件](#45-解压缩文件)
+  - [4.6. 打包压缩](#46-打包压缩)
+  - [4.7. zcat zless](#47-zcat-zless)
+  - [4.8. zip](#48-zip)
 - [5. pipe](#5-pipe)
 - [6. tee](#6-tee)
 - [7. wc](#7-wc)
@@ -60,17 +60,18 @@
 - [26. wget](#26-wget)
 - [27. md5 sha](#27-md5-sha)
 - [28. ldconfig](#28-ldconfig)
-- [29. 包管理](#29-包管理)
-	- [29.1. 软件仓库](#291-软件仓库)
-	- [29.2. apt命令](#292-apt命令)
-	- [29.3. dpkg 命令](#293-dpkg-命令)
-- [30. 防火墙](#30-防火墙)
-	- [30.1. ubuntu下默认的防火墙](#301-ubuntu下默认的防火墙)
-	- [30.2. CentOS下默认的防火墙](#302-centos下默认的防火墙)
-- [31. SELinux](#31-selinux)
-- [32. 共性问题](#32-共性问题)
-	- [32.1. Linux与Windows相差8小时处理](#321-linux与windows相差8小时处理)
-- [33. 参考](#33-参考)
+- [29. chkconfig](#29-chkconfig)
+- [30. 包管理](#30-包管理)
+  - [30.1. 软件仓库](#301-软件仓库)
+  - [30.2. apt命令](#302-apt命令)
+  - [30.3. dpkg 命令](#303-dpkg-命令)
+- [31. 防火墙](#31-防火墙)
+  - [31.1. ubuntu下默认的防火墙](#311-ubuntu下默认的防火墙)
+  - [31.2. CentOS下默认的防火墙](#312-centos下默认的防火墙)
+- [32. SELinux](#32-selinux)
+- [33. 共性问题](#33-共性问题)
+  - [33.1. Linux与Windows相差8小时处理](#331-linux与windows相差8小时处理)
+- [34. 参考](#34-参考)
 
 <!-- /TOC -->
 
@@ -149,6 +150,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 # 3. 文件I/O
+
 ## 3.1. 常用命令
 - `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 
@@ -970,7 +972,17 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
 
 参考：[linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
 
-# 29. 包管理
+
+
+# 29. chkconfig
+
+chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
+
+
+
+
+
+# 30. 包管理
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
 Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
@@ -978,7 +990,7 @@ Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线�
 CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 29.1. 软件仓库
+## 30.1. 软件仓库
 - 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
 - Windows
@@ -989,7 +1001,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
    - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
 
-## 29.2. apt命令
+## 30.2. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -1022,7 +1034,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 29.3. dpkg 命令
+## 30.3. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -1036,8 +1048,17 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - dpkg -reconfigure 重新配置
 
 
-# 30. 防火墙
-## 30.1. ubuntu下默认的防火墙
+-----------------------------------------------------------------
+CentOS7 安装高版本 gcc/g++
+- 安装软件仓库包 scl: `yum install centos-release-scl`
+- 安装 gcc/g++，数字 8 对应的是 gcc/g++8: `yum install devtoolset-8-gcc devtoolset-8-gcc-c++`
+- shell 终端临时设置默认版本，重启后失效: `scl enable devtoolset-8 -- bash`；长期有效设置：`vim /etc/profile` 文件中的最后一行加入: `source /opt/rh/devtoolset-8/enable`
+
+
+
+# 31. 防火墙
+
+## 31.1. ubuntu下默认的防火墙
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -1049,7 +1070,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 30.2. CentOS下默认的防火墙
+## 31.2. CentOS下默认的防火墙
 - 参考
   - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 
@@ -1082,14 +1103,15 @@ CentOS7下默认的防火墙为 `firewalld`
 
 
 
-# 31. SELinux
+# 32. SELinux
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 32. 共性问题
-## 32.1. Linux与Windows相差8小时处理
+# 33. 共性问题
+
+## 33.1. Linux与Windows相差8小时处理
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
@@ -1104,6 +1126,6 @@ $sudo ntpdate time.windows.com
 
 
 
-# 33. 参考
+# 34. 参考
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
