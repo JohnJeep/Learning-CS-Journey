@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# chkconfig: 2345 10 90  
+# description: Start and Stop redis 
+
+PATH=/usr/local/bin                     # redis-server存放目录  
+REDISPORT=6379                          # redis的默认端口
+EXEC=${PATH}/redis-server               # redis服务端的命令
+REDIS_CLI=${PATH}/src/redis-cli         # redis客户端的命令
+PIDFILE=/var/run/redis.pid              # reids进程文件生成的位置
+CONF="${PATH}/redis.conf"               # redis的配置文件所在的目录 
+
+case "$1" in
+    start) 
+      if [ -f $PIDFILE ] 
+      then 
+        echo "$PIDFILE exists, process is already running or crashed."  
+      else  
+        echo "Starting Redis server..."  
+        $EXEC $CONF 
+      fi 
+      if [ "$?"="0" ] 
+      then 
+        echo "Redis is running..."  
+      fi 
+      ;; 
+    stop) 
+      if [ ! -f $PIDFILE ] 
+      then 
+        echo "$PIDFILE exists, process is not running."  
+      else  
+        PID=$(cat $PIDFILE) 
+        echo "Stopping..."  
+         $REDIS_CLI -p $REDISPORT  SHUTDOWN  
+        sleep 2  
+         while [ -x $PIDFILE ] 
+         do  
+            echo "Waiting for Redis to shutdown..."  
+           sleep 1  
+        done 
+        echo "Redis stopped"  
+      fi 
+      ;; 
+    restart|force-reload) 
+      ${0} stop 
+      ${0} start 
+      ;; 
+    *) 
+     echo "Usage: /etc/init.d/redis {start|stop|restart|force-reload}" >&2  
+      exit 1  
+esac
+
