@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-02 00:36:42
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-11-08 14:02:00
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux基础用法笔记
 --> 
 <!-- TOC -->
@@ -633,6 +633,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 # 9. ps
+
 ps 是 `process status` 的缩写。
 
 - 显示格式参数
