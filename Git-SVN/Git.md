@@ -1,56 +1,56 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2021-06-20 15:22:06
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-02 22:17:02
+ * @LastEditors: Windows10
  * @Description: git基础命令学习
 --> 
 
 <!-- TOC -->
 
 - [1. Git 基础板块](#1-git-基础板块)
-	- [1.1. Git init](#11-git-init)
-	- [1.2. Git add](#12-git-add)
-	- [1.3. Git log](#13-git-log)
-	- [1.4. Git tag](#14-git-tag)
-	- [1.5. Git alias](#15-git-alias)
-	- [1.6. Git checkout](#16-git-checkout)
-	- [1.7. Git rebase](#17-git-rebase)
-	- [1.8. Git commit](#18-git-commit)
-	- [1.9. Git diff](#19-git-diff)
-	- [1.10. Git stash](#110-git-stash)
-	- [1.11. Git blame](#111-git-blame)
-	- [1.12. Git bisect](#112-git-bisect)
-	- [1.13. Git branch](#113-git-branch)
-		- [1.13.1. Branch Command](#1131-branch-command)
-		- [1.13.2. Branches Principle](#1132-branches-principle)
-		- [1.13.3. Branches conflict](#1133-branches-conflict)
-	- [1.14. Git删除与恢复](#114-git删除与恢复)
-		- [1.14.1. 删除指定文件](#1141-删除指定文件)
-		- [1.14.2. 恢复删除的文件](#1142-恢复删除的文件)
-	- [1.15. Git Reset](#115-git-reset)
-	- [1.16. Git 四区详解](#116-git-四区详解)
-		- [1.16.1. Workspace](#1161-workspace)
-		- [1.16.2. Index](#1162-index)
-		- [1.16.3. Local repository](#1163-local-repository)
-		- [1.16.4. Remote repository](#1164-remote-repository)
-			- [1.16.4.1. Git remote](#11641-git-remote)
-			- [1.16.4.2. Git pull Git fetch](#11642-git-pull-git-fetch)
-			- [1.16.4.3. 远程仓库与本地的关联](#11643-远程仓库与本地的关联)
-			- [1.16.4.4. git远程仓库更换名称，本地如何修改？](#11644-git远程仓库更换名称本地如何修改)
-	- [1.17. Git中文乱码](#117-git中文乱码)
-	- [1.18. Git代理配置](#118-git代理配置)
-	- [1.19. Git update](#119-git-update)
-	- [1.20. 提交代码总结](#120-提交代码总结)
-	- [1.21. Github 开源项目搜索技巧](#121-github-开源项目搜索技巧)
+  - [1.1. Git init](#11-git-init)
+  - [1.2. Git add](#12-git-add)
+  - [1.3. Git log](#13-git-log)
+  - [1.4. Git tag](#14-git-tag)
+  - [1.5. Git alias](#15-git-alias)
+  - [1.6. Git checkout](#16-git-checkout)
+  - [1.7. Git rebase](#17-git-rebase)
+  - [1.8. Git commit](#18-git-commit)
+  - [1.9. Git diff](#19-git-diff)
+  - [1.10. Git stash](#110-git-stash)
+  - [1.11. Git blame](#111-git-blame)
+  - [1.12. Git bisect](#112-git-bisect)
+  - [1.13. Git branch](#113-git-branch)
+    - [1.13.1. Branch Command](#1131-branch-command)
+    - [1.13.2. Branches Principle](#1132-branches-principle)
+    - [1.13.3. Branches conflict](#1133-branches-conflict)
+  - [1.14. Git删除与恢复](#114-git删除与恢复)
+    - [1.14.1. 删除指定文件](#1141-删除指定文件)
+    - [1.14.2. 恢复删除的文件](#1142-恢复删除的文件)
+  - [1.15. Git Reset](#115-git-reset)
+  - [1.16. Git 四区详解](#116-git-四区详解)
+    - [1.16.1. Workspace](#1161-workspace)
+    - [1.16.2. Index](#1162-index)
+    - [1.16.3. Local repository](#1163-local-repository)
+    - [1.16.4. Remote repository](#1164-remote-repository)
+      - [1.16.4.1. Git remote](#11641-git-remote)
+      - [1.16.4.2. Git pull Git fetch](#11642-git-pull-git-fetch)
+      - [1.16.4.3. 远程仓库与本地的关联](#11643-远程仓库与本地的关联)
+      - [1.16.4.4. git远程仓库更换名称，本地如何修改？](#11644-git远程仓库更换名称本地如何修改)
+  - [1.17. Git中文乱码](#117-git中文乱码)
+  - [1.18. Git代理配置](#118-git代理配置)
+  - [1.19. Git update](#119-git-update)
+  - [1.20. 提交代码总结](#120-提交代码总结)
+  - [1.21. Github 开源项目搜索技巧](#121-github-开源项目搜索技巧)
 - [2. Git高级板块](#2-git高级板块)
-	- [2.1. Git协议](#21-git协议)
-		- [2.1.1. SSH(Secure Shell)协议](#211-sshsecure-shell协议)
-	- [2.2. Git内部原理](#22-git内部原理)
-		- [2.2.1. Git文件状态](#221-git文件状态)
-		- [2.2.2. Git目录组成](#222-git目录组成)
-		- [2.2.3. Git objects](#223-git-objects)
-		- [2.2.4. Git Reference](#224-git-reference)
+  - [2.1. Git协议](#21-git协议)
+    - [2.1.1. SSH(Secure Shell)协议](#211-sshsecure-shell协议)
+  - [2.2. Git内部原理](#22-git内部原理)
+    - [2.2.1. Git文件状态](#221-git文件状态)
+    - [2.2.2. Git目录组成](#222-git目录组成)
+    - [2.2.3. Git objects](#223-git-objects)
+    - [2.2.4. Git Reference](#224-git-reference)
 - [3. 学习参考](#3-学习参考)
 
 <!-- /TOC -->
@@ -778,4 +778,5 @@ Git 仓库中有五个对象：三个 blob 对象（保存着文件快照）、�
 - [Git for Computer Scientists](https://eagain.net/articles/git-for-computer-scientists/): 简短的解释Git的数据模型，有很多的图来阐述。
 - [How to explain git in simple words?](https://xosh.org/explain-git-in-simple-words/): 解释了Git底层实现的一些过程。
 - [Git from the Bottom Up](https://jwiegley.github.io/git-from-the-bottom-up/): 不仅解释了Git的数据模型，还解释了其实现的细节。
+- [Git PAT 使用](https://blog.csdn.net/yjw123456/article/details/119696726): Github 支持 personal access token de 用法。
 
