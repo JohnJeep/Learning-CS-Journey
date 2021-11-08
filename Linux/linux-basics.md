@@ -1,8 +1,6 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-02 00:36:42
- * @LastEditors: Windows10
  * @Description: Linux基础用法笔记
 --> 
 <!-- TOC -->
@@ -60,29 +58,35 @@
 - [26. wget](#26-wget)
 - [27. md5 sha](#27-md5-sha)
 - [28. ldconfig](#28-ldconfig)
-- [29. chkconfig](#29-chkconfig)
-- [30. 包管理](#30-包管理)
-  - [30.1. 软件仓库](#301-软件仓库)
-  - [30.2. apt命令](#302-apt命令)
-  - [30.3. dpkg 命令](#303-dpkg-命令)
-- [31. 防火墙](#31-防火墙)
-  - [31.1. ubuntu下默认的防火墙](#311-ubuntu下默认的防火墙)
-  - [31.2. CentOS下默认的防火墙](#312-centos下默认的防火墙)
-- [32. SELinux](#32-selinux)
-- [33. 共性问题](#33-共性问题)
-  - [33.1. Linux与Windows相差8小时处理](#331-linux与windows相差8小时处理)
-- [34. 参考](#34-参考)
+- [29. ldd](#29-ldd)
+- [30. chkconfig](#30-chkconfig)
+- [31. 包管理](#31-包管理)
+  - [31.1. 软件仓库](#311-软件仓库)
+  - [31.2. apt命令](#312-apt命令)
+  - [31.3. dpkg 命令](#313-dpkg-命令)
+- [32. 防火墙](#32-防火墙)
+  - [32.1. ubuntu下默认的防火墙](#321-ubuntu下默认的防火墙)
+  - [32.2. CentOS下默认的防火墙](#322-centos下默认的防火墙)
+- [33. SELinux](#33-selinux)
+- [34. 共性问题](#34-共性问题)
+  - [34.1. Linux与Windows相差8小时处理](#341-linux与windows相差8小时处理)
+- [35. 参考](#35-参考)
 
 <!-- /TOC -->
 
 # 1. Linux Basic
+
 介绍 Linux 系统的基础使用，包括计算机的硬件知识、Linux常见基础命令的用法。
 
+
+
 # 2. 硬件基础知识
+
 - 磁盘阵列（RAID）：利用硬件技术将数个硬盘整合成为一个大硬盘的方法， 操作系统只会看到最后被整合起来的大硬盘。 由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。 
 
 
 ## 2.1. MBR
+
 > MBR(Master Boot Record): 主引导记录
 - 引导启动程序记录区与分区表通常放在磁盘的第一个扇区，这个扇区通常大小为 512 bytes。
   - 446字节的**MBR**安装启动引导程序，64 字节的**分区表**记录整块硬盘分区的状态。
@@ -113,6 +117,7 @@
   - MBR 内存放的启动引导程序最大为 446Bytes， 无法容纳较多的程序码。
 
 ## 2.2. GPT
+
 > GPT: GUID Partition Table，源自EFI标准的一种较新的磁盘分区表结构的标准，支持64位的寻址。
 - LBA(Logical Block Address): 逻辑区块位址
   - LBA0(MBR兼容区块)：储存了第一阶段的启动引导程序。
@@ -123,6 +128,7 @@
 
 
 ## 2.3. BIOS与UEFI
+
 - BIOS：是一个写入到主板上的一个软件程序（仅有16位），采用汇编语言编写的。 
 - Boot loader的主要任务
   - 提供加载项：用户可以选择不同的启动选项，这也是多重引导的重要功能。
@@ -141,7 +147,9 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 > 
 > 因为使用secure boot会使将要启动的操作系统，必须要被UEFI验证，否则就无法启动。
 
+
 ## 2.4. 分区
+
 - 挂载：利用一个目录当成进入点，将磁盘分区的数据放置在该目录下。其中根目录（/）必须挂载到某个分区，其它的目录可以依据用户的的需求挂载到不同的分区。
 
 - 操作系统开机的流程：BIOS--->MBR--->引导启动程序--->内核文件
@@ -152,6 +160,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 # 3. 文件I/O
 
 ## 3.1. 常用命令
+
 - `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 
 - `rm fileName(remove)`: 删除一个文本
@@ -199,6 +208,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.2. 查看文件内容
+
 - `cat(concatenate)`：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
   > `cat < hello.txt > hello2.txt` 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 `cp` 指令的一个副本。  
 - `tac`：从最后一行开始显示文件内容。
@@ -243,6 +253,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.3. 磁盘
+
 - `du(disk usage)`: 显示指定的目录或文件所占用的磁盘空间大小
   - `-h(human)`：以人类容易看懂的方式显示
   - `-M(megabytes)`: 以1MB为单位
@@ -267,6 +278,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.4. 文件权限与链接
+
 > CentOS使用的是 xfs 作为默认的文件系统。
 
 文件权限分为
@@ -287,6 +299,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.5. 默认文件权限 umask
+
 - umask: 指定目前用户在建立文件或目录时的默认权限值。
 - 查看当前系统的umask值：`0002` ;第一个数值为特殊权限值，后面三个分别对应为 `rwx` 的值。
   > 一般文件通常用于记录数据，则用户建立的文件默认没有 `x` 可执行权限，只有 `rw` 权限，即 `-rw-rw-rw-`
@@ -302,6 +315,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.6. 文件隐藏属性
+
 - 修改文件的隐藏属性：`chattr [+-=] [ASacdistu]` 该命令一般用于对数据的安全性比较高的地方
   ```
   选项与参数
@@ -340,6 +354,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.7. 用户与用户组
+
 说明 | 用户(owner) | 用户组(group) | 其它用户(other)
 --- | --- | --- |---
 权限 | 读  写  执行 | 读  写  执行| 读  写  执行
@@ -357,6 +372,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.8. 用户权限修改
+
 - `chown`: 修改文件的拥有者（用户）
 - `chgrp`: 修改文件的用户组
 - `chmod`: 修改文件的模式权限，SUID、SGID、SBIT等特性
@@ -423,6 +439,7 @@ s      | 套接文件(socket)               | null
 
 
 ## 3.10. 文件目录
+
 > FHS(Filesystem Hierarchy Standard)：文件系统分层标准
 
 - boot：开机启动配置文件。Linux kernel常用的文件名为：vmlinuz，如果使用的是grub2这个开机管理程序， 则还会存在/boot/grub2/这个目录。
@@ -476,6 +493,7 @@ s      | 套接文件(socket)               | null
 
 
 ## 3.11. link(链接)
+
 Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
 
 > 硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
@@ -486,6 +504,7 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 
 
 ## 3.12. 重定向 
+
 - `>` 是重定向的命令。`ls > test.txt` 表示将 `ls` 命令列出当前目录下所有的文件放到test.txt 中，并`覆盖`原来 test.txt 文件中的内容。
 
 - `>>` 是一个追加(append)命令，将使用 `命令` 输出的数据追加到 `文件`中。
@@ -495,13 +514,19 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 
 
 ## 3.13. 绝对路径与相对路径
+
 - 绝对路径：一定由跟目录(`/`)写起。例如：`/usr/share/doc`  在shell脚本中一般使用绝对路径，防止因为不同的工作环境导致一些问题的发生。
 - 相对路径：不是由根目录(`/`)写起。例如：`../man`  相对路径只是相对于当前的工作路径。
 
+
+
 # 4. tar
+
 tar 用于的文件的打包和解压。
 
+
 ## 4.1. 文件类型
+
 - `gzip`: 压缩文件后缀(*.gz)
 - `bzip2`: 压缩文件后缀(*.bz2)
 - `xz`: 压缩文件后缀(*.xz)
@@ -510,6 +535,7 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.2. tar文件打包     
+
 - 参数
 	- `-c(Create)`: 打包文件
 	- `-t(lisT)`: 察看打包文件的内容含有哪些文件名
@@ -527,17 +553,20 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.3. 打包文件或目录
+
 - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
 - 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
 
 
 ## 4.4. 解包文件或目录
+
 -  格式：`tar -xvf 解压的文件  -C 文件解压后的路径`
 -  注意：若后面不跟 `-C 文件解压后的路径` ，则会默认解包到当前路径下
 -  `tar -xvf test.tar -C /tmp` ：将test.tar打包的文件解包到 /tmp 路径下
 
 
 ## 4.5. 解压缩文件
+
 - 解多个文件
   > `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
   
@@ -548,6 +577,7 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.6. 打包压缩
+
 - 打包压缩所有文件
   >  `tar -zcvf 自己创建的文件名(xxx.tar.gz)  要打包压缩的路径(/etc/)`: 这样压缩的文件连要压缩文件的目录也一起给压缩了。
 
@@ -562,6 +592,7 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.7. zcat zless 
+
 zcat、zless 命令直接查看压缩文件中的内容。
 
 ```sh
@@ -589,10 +620,8 @@ hello word
 
 
 
-
-
-
 # 5. pipe
+
 pipe中文翻译过来是管道的意思。用 `|` 表示。
 
 > 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入，常用 `|` 表示。管道常与grep命令组合使用：`grep 命令1|命令2|命令3|·····|命令n`
@@ -604,6 +633,7 @@ pipe中文翻译过来是管道的意思。用 `|` 表示。
   - `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
 
 # 6. tee
+
 man手册英文原意：`tee - read from standard input and write to standard output and files`
 
 功能：从标准输入读数据，写到标准输出和文件中。
@@ -611,6 +641,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 用法：`echo hello | tee file` 将 hello 字符写到file文件中并显示在标准输出上。
 
 # 7. wc
+
 - 作用：print newline, word, and byte counts for each file.用来计算一个文件或者指定的多个文件中的行数，单词数和字符数。
 - 选项参数
   - `-c`: 打印字节数
@@ -619,6 +650,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 # 8. top
+
 - 动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
 - 使用：`top -bn 1 -i -c` 
 - 参数 
@@ -633,6 +665,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 # 9. ps
+
 ps 是 `process status` 的缩写。
 
 - 显示格式参数
@@ -697,6 +730,7 @@ ps 是 `process status` 的缩写。
 
 
 # 10. pgrep
+
 根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
 
 - `pgrep -l program_name)`  只显示某个进程的PID
@@ -711,6 +745,7 @@ ps 是 `process status` 的缩写。
 
 
 # 11. killall pkill
+
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
 
 ```
@@ -720,14 +755,14 @@ pkill bash
 ```
 
 
-
-
 # 12. pstree 
+
 - 查找各个进程之间的相关性。
 - Linux系统中内核调用的第一个进程为 `systemd`，该进程的PID为 `1`
 
 
 # 13. strace
+
 strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
 
 
@@ -965,16 +1000,44 @@ md5
   ```
 
 # 28. ldconfig
+
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
-主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序连接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
+主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
 
-参考：[linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+参考
+- [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+
+
+# 29. ldd
+
+作用：判断某个可执行的二进制文件含有什么动态库。
+
+```
+[root@zk_190 etc]# ldd -v /usr/bin/cat
+        linux-vdso.so.1 =>  (0x00007ffe11572000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007f8996748000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f8996b16000)
+
+        Version information:
+        /usr/bin/cat:
+                libc.so.6 (GLIBC_2.3) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.3.4) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.14) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.4) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.2.5) => /lib64/libc.so.6
+        /lib64/libc.so.6:
+                ld-linux-x86-64.so.2 (GLIBC_2.3) => /lib64/ld-linux-x86-64.so.2
+                ld-linux-x86-64.so.2 (GLIBC_PRIVATE) => /lib64/ld-linux-x86-64.so.2
+        /lib64/ld-linux-x86-64.so.2 (0x00007faf69eef000)
+
+      // 参数 -v 表示该函数来自于哪一个软件
+```
 
 
 
-# 29. chkconfig
+# 30. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
@@ -982,7 +1045,7 @@ chkconfig 命令用来更新（启动或停止）和查询系统服务的运行�
 
 
 
-# 30. 包管理
+# 31. 包管理
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
 Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
@@ -990,7 +1053,7 @@ Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线�
 CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 30.1. 软件仓库
+## 31.1. 软件仓库
 - 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
 - Windows
@@ -1001,7 +1064,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
    - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
 
-## 30.2. apt命令
+## 31.2. apt命令
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
@@ -1034,7 +1097,7 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 30.3. dpkg 命令
+## 31.3. dpkg 命令
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -1056,9 +1119,9 @@ CentOS7 安装高版本 gcc/g++
 
 
 
-# 31. 防火墙
+# 32. 防火墙
 
-## 31.1. ubuntu下默认的防火墙
+## 32.1. ubuntu下默认的防火墙
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -1070,9 +1133,7 @@ CentOS7 安装高版本 gcc/g++
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 31.2. CentOS下默认的防火墙
-- 参考
-  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+## 32.2. CentOS下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```
@@ -1102,18 +1163,23 @@ CentOS7下默认的防火墙为 `firewalld`
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
+- 参考
+  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 
-# 32. SELinux
+
+
+# 33. SELinux
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 33. 共性问题
+# 34. 共性问题
 
-## 33.1. Linux与Windows相差8小时处理
+## 34.1. Linux与Windows相差8小时处理
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
+
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
 
 先在ubuntu下更新一下时间，确保时间无误：
@@ -1126,6 +1192,6 @@ $sudo ntpdate time.windows.com
 
 
 
-# 34. 参考
+# 35. 参考
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
