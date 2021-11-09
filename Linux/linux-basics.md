@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-09 13:48:53
+ * @LastEditTime: 2021-11-09 14:02:19
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux 基础用法笔记
 --> 
@@ -64,18 +64,19 @@
 - [28. SHA](#28-sha)
 - [29. md5](#29-md5)
 - [30. ldconfig](#30-ldconfig)
-- [31. chkconfig](#31-chkconfig)
-- [32. 包管理](#32-包管理)
-  - [32.1. 软件仓库](#321-软件仓库)
-  - [32.2. apt命令](#322-apt命令)
-  - [32.3. dpkg 命令](#323-dpkg-命令)
-- [33. 防火墙](#33-防火墙)
-  - [33.1. ubuntu下默认的防火墙](#331-ubuntu下默认的防火墙)
-  - [33.2. CentOS下默认的防火墙](#332-centos下默认的防火墙)
-- [34. SELinux](#34-selinux)
-- [35. 共性问题](#35-共性问题)
-  - [35.1. Linux与Windows相差8小时处理](#351-linux与windows相差8小时处理)
-- [36. 参考](#36-参考)
+- [31. ldd](#31-ldd)
+- [32. chkconfig](#32-chkconfig)
+- [33. 包管理](#33-包管理)
+  - [33.1. 软件仓库](#331-软件仓库)
+  - [33.2. apt命令](#332-apt命令)
+  - [33.3. dpkg 命令](#333-dpkg-命令)
+- [34. 防火墙](#34-防火墙)
+  - [34.1. ubuntu下默认的防火墙](#341-ubuntu下默认的防火墙)
+  - [34.2. CentOS下默认的防火墙](#342-centos下默认的防火墙)
+- [35. SELinux](#35-selinux)
+- [36. 共性问题](#36-共性问题)
+  - [36.1. Linux与Windows相差8小时处理](#361-linux与windows相差8小时处理)
+- [37. 参考](#37-参考)
 
 <!-- /TOC -->
 
@@ -154,7 +155,6 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 > 因为使用secure boot会使将要启动的操作系统，必须要被UEFI验证，否则就无法启动。
 
 
-
 ## 2.4. 分区
 
 - 挂载：利用一个目录当成进入点，将磁盘分区的数据放置在该目录下。其中根目录（/）必须挂载到某个分区，其它的目录可以依据用户的的需求挂载到不同的分区。
@@ -166,6 +166,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 # 3. 文件I/O
 
 ## 3.1. 常用命令
+
 - `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
 - `rm fileName(remove)`: 删除一个文本
 - `mkdir(make directory) `: 新建一个目录，创建多层的目录加参数 `-p` (--parents)
@@ -198,6 +199,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.2. 查看文件内容
+
 - `cat(concatenate)`：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
   > `cat < hello.txt > hello2.txt` 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 `cp` 指令的一个副本。  
 - `tac`：从最后一行开始显示文件内容。
@@ -242,6 +244,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.3. 磁盘
+
 - `du(disk usage)`: 显示指定的目录或文件所占用的磁盘空间大小
   - `-h(human)`：以人类容易看懂的方式显示
   - `-M(megabytes)`: 以1MB为单位
@@ -266,6 +269,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.4. 文件权限与链接
+
 > CentOS使用的是 xfs 作为默认的文件系统。
 
 文件权限分为
@@ -286,6 +290,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.5. 默认文件权限 umask
+
 - umask: 指定目前用户在建立文件或目录时的默认权限值。
 - 查看当前系统的umask值：`0002` ;第一个数值为特殊权限值，后面三个分别对应为 `rwx` 的值。
   > 一般文件通常用于记录数据，则用户建立的文件默认没有 `x` 可执行权限，只有 `rw` 权限，即 `-rw-rw-rw-`
@@ -301,6 +306,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.6. 文件隐藏属性
+
 - 修改文件的隐藏属性：`chattr [+-=] [ASacdistu]` 该命令一般用于对数据的安全性比较高的地方
   ```
   选项与参数
@@ -339,6 +345,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.7. 用户与用户组
+
 说明 | 用户(owner) | 用户组(group) | 其它用户(other)
 --- | --- | --- |---
 权限 | 读  写  执行 | 读  写  执行| 读  写  执行
@@ -356,6 +363,7 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 
 ## 3.8. 用户权限修改
+
 - `chown`: 修改文件的拥有者（用户）
 - `chgrp`: 修改文件的用户组
 - `chmod`: 修改文件的模式权限，SUID、SGID、SBIT等特性
@@ -422,6 +430,7 @@ s      | 套接文件(socket)               | null
 
 
 ## 3.10. 文件目录
+
 > FHS(Filesystem Hierarchy Standard)：文件系统分层标准
 
 - boot：开机启动配置文件。Linux kernel常用的文件名为：vmlinuz，如果使用的是grub2这个开机管理程序， 则还会存在/boot/grub2/这个目录。
@@ -612,7 +621,6 @@ hello word
 - unzip  -n  demo.zip              // 解压时不覆盖已存在的文件
 
 > 注意：直接使用unzip指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。
-
 
 
 # 5. pipe
@@ -1013,19 +1021,45 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   ```
 
 
-
 # 30. ldconfig
 
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
-主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序连接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
+主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
 
-参考：[linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+参考
+- [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+
+
+# 31. ldd
+
+作用：判断某个可执行的二进制文件含有什么动态库。
+
+```
+[root@zk_190 etc]# ldd -v /usr/bin/cat
+        linux-vdso.so.1 =>  (0x00007ffe11572000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007f8996748000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f8996b16000)
+
+        Version information:
+        /usr/bin/cat:
+                libc.so.6 (GLIBC_2.3) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.3.4) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.14) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.4) => /lib64/libc.so.6
+                libc.so.6 (GLIBC_2.2.5) => /lib64/libc.so.6
+        /lib64/libc.so.6:
+                ld-linux-x86-64.so.2 (GLIBC_2.3) => /lib64/ld-linux-x86-64.so.2
+                ld-linux-x86-64.so.2 (GLIBC_PRIVATE) => /lib64/ld-linux-x86-64.so.2
+        /lib64/ld-linux-x86-64.so.2 (0x00007faf69eef000)
+
+      // 参数 -v 表示该函数来自于哪一个软件
+```
 
 
 
-# 31. chkconfig
+# 32. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
@@ -1033,7 +1067,7 @@ chkconfig 命令用来更新（启动或停止）和查询系统服务的运行�
 
 
 
-# 32. 包管理
+# 33. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
@@ -1042,7 +1076,7 @@ Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线
 CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 32.1. 软件仓库
+## 33.1. 软件仓库
 
 - Windows
   > 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
@@ -1055,7 +1089,7 @@ CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进�
 
 
 
-## 32.2. apt命令
+## 33.2. apt命令
 
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
@@ -1089,7 +1123,7 @@ CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进�
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 32.3. dpkg 命令
+## 33.3. dpkg 命令
 
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
@@ -1112,9 +1146,9 @@ CentOS7 安装高版本 gcc/g++
 
 
 
-# 33. 防火墙
+# 34. 防火墙
 
-## 33.1. ubuntu下默认的防火墙
+## 34.1. ubuntu下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -1127,8 +1161,7 @@ CentOS7 安装高版本 gcc/g++
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 33.2. CentOS下默认的防火墙
-
+## 34.2. CentOS下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```
@@ -1158,21 +1191,24 @@ CentOS7下默认的防火墙为 `firewalld`
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
+- 参考
+  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 
 
-# 34. SELinux
+# 35. SELinux
 
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 35. 共性问题
+# 36. 共性问题
 
-## 35.1. Linux与Windows相差8小时处理
+## 36.1. Linux与Windows相差8小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
+
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
 
 先在ubuntu下更新一下时间，确保时间无误：
@@ -1185,7 +1221,7 @@ $sudo ntpdate time.windows.com
 
 
 
-# 36. 参考
+# 37. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)

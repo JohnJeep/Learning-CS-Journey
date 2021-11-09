@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2021-08-15 00:37:55
+ * @LastEditTime: 2021-10-29 23:33:49
  * @LastEditors: Windows10
  * @Description: GitHub开源项目
 --> 
@@ -47,6 +47,11 @@
 7. [Flameshot](https://github.com/lupoDharkael/flameshot) 开源的截图工具，使用C++和Qt工具开发的。
 8. [notepanda](https://github.com/ChungZH/notepanda)  简单的Notepanda编辑器的实现，采用C++和Qt工具开发。
 9. [MyTinySTL](https://github.com/Alinshans/MyTinySTL) 基于C++11的tinySTL，其中实现了大部分STL中的容器与函数。
+10. [libevent](https://github.com/libevent/libevent) libevent 是广泛应用的 C++ 网络库，也是现在很多 C/C++ 网络库的雏形，想了解 C/C++ 网络库最初的形态、设计与演化思想一定要好好学习一下这个库。
+11. [uWebSocket](https://github.com/uNetworking/uWebSockets) uWebSocket 是一款开源的 WebSocket 库，最新版使用了大量 C++17 的语法，代码量非常少。
+
+
+
 
 
 
@@ -87,7 +92,7 @@
 - [asio](https://think-async.com/Asio/): 一个跨平台的C++网络编程框架，通过先进的C++方法为开发人员提供连续异步模型。
 
 
-- [POCO](https://github.com/pocoproject/poco): POCO是一个开源的C++类库的集合，它主要提供简单的、快速的网络和可移植应用程序的C++开发，这个类库和C++标准库可以很好的集成并填补C++标准库的功能空缺。POCO库的模块化、高效的设计及实现使得特别适合嵌入式开发。
+- **[POCO](https://github.com/pocoproject/poco):** POCO是一个开源的C++类库的集合，它主要提供简单的、快速的网络和可移植应用程序的C++开发，这个类库和C++标准库可以很好的集成并填补C++标准库的功能空缺。POCO库的模块化、高效的设计及实现使得特别适合嵌入式开发。
 - [libevent](https://github.com/libevent/libevent): Libevent 是一个用C语言编写的、轻量级的开源高性能事件通知库，主要有以下几个亮点：事件驱动，高性能，轻量级，专注于网络，不如 ACE 那么臃肿庞大；源代码相当精炼、易读；跨平台；支持多种 I/O 多路复用技术：epoll、poll、select 和 kqueue 等；支持 I/O，定时器和信号等事件；注册事件优先级等。
 
 - [workflow](https://github.com/sogou/workflow): 搜狗公司C++服务器引擎，支撑搜狗几乎所有后端C++在线服务，包括所有搜索服务，云输入法，在线广告等，每日处理超百亿请求。这是一个设计轻盈优雅的企业级程序引擎，可以满足大多数C++后端开发需求。
