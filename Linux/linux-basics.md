@@ -1,9 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-08 14:02:00
+ * @LastEditTime: 2021-11-09 13:48:53
  * @LastEditors: DESKTOP-0S33AUT
- * @Description: Linux基础用法笔记
+ * @Description: Linux 基础用法笔记
 --> 
 <!-- TOC -->
 
@@ -11,7 +11,7 @@
 - [2. 硬件基础知识](#2-硬件基础知识)
   - [2.1. MBR](#21-mbr)
   - [2.2. GPT](#22-gpt)
-  - [2.3. BIOS与UEFI](#23-bios与uefi)
+  - [2.3. BIOS 与 UEFI](#23-bios-与-uefi)
   - [2.4. 分区](#24-分区)
 - [3. 文件I/O](#3-文件io)
   - [3.1. 常用命令](#31-常用命令)
@@ -25,6 +25,8 @@
   - [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
   - [3.10. 文件目录](#310-文件目录)
   - [3.11. link(链接)](#311-link链接)
+    - [3.11.1. hard links](#3111-hard-links)
+    - [3.11.2. symbolic  links](#3112-symbolic--links)
   - [3.12. 重定向](#312-重定向)
   - [3.13. 绝对路径与相对路径](#313-绝对路径与相对路径)
 - [4. tar](#4-tar)
@@ -42,7 +44,7 @@
 - [8. top](#8-top)
 - [9. ps](#9-ps)
 - [10. pgrep](#10-pgrep)
-- [11. killall pkill](#11-killall-pkill)
+- [11. killall 与 pkill](#11-killall-与-pkill)
 - [12. pstree](#12-pstree)
 - [13. strace](#13-strace)
 - [14. pstack](#14-pstack)
@@ -50,39 +52,46 @@
 - [16. grep](#16-grep)
 - [17. PID](#17-pid)
 - [18. netstat](#18-netstat)
-- [19. netcat](#19-netcat)
-- [20. socat](#20-socat)
-- [21. traceroute](#21-traceroute)
-- [22. dmesg](#22-dmesg)
-- [23. vmstat](#23-vmstat)
-- [24. man](#24-man)
-- [25. ntsysv](#25-ntsysv)
-- [26. wget](#26-wget)
-- [27. md5 sha](#27-md5-sha)
-- [28. ldconfig](#28-ldconfig)
-- [29. chkconfig](#29-chkconfig)
-- [30. 包管理](#30-包管理)
-  - [30.1. 软件仓库](#301-软件仓库)
-  - [30.2. apt命令](#302-apt命令)
-  - [30.3. dpkg 命令](#303-dpkg-命令)
-- [31. 防火墙](#31-防火墙)
-  - [31.1. ubuntu下默认的防火墙](#311-ubuntu下默认的防火墙)
-  - [31.2. CentOS下默认的防火墙](#312-centos下默认的防火墙)
-- [32. SELinux](#32-selinux)
-- [33. 共性问题](#33-共性问题)
-  - [33.1. Linux与Windows相差8小时处理](#331-linux与windows相差8小时处理)
-- [34. 参考](#34-参考)
+- [19. lsof](#19-lsof)
+- [20. netcat](#20-netcat)
+- [21. socat](#21-socat)
+- [22. traceroute](#22-traceroute)
+- [23. dmesg](#23-dmesg)
+- [24. vmstat](#24-vmstat)
+- [25. man](#25-man)
+- [26. ntsysv](#26-ntsysv)
+- [27. wget](#27-wget)
+- [28. SHA](#28-sha)
+- [29. md5](#29-md5)
+- [30. ldconfig](#30-ldconfig)
+- [31. chkconfig](#31-chkconfig)
+- [32. 包管理](#32-包管理)
+  - [32.1. 软件仓库](#321-软件仓库)
+  - [32.2. apt命令](#322-apt命令)
+  - [32.3. dpkg 命令](#323-dpkg-命令)
+- [33. 防火墙](#33-防火墙)
+  - [33.1. ubuntu下默认的防火墙](#331-ubuntu下默认的防火墙)
+  - [33.2. CentOS下默认的防火墙](#332-centos下默认的防火墙)
+- [34. SELinux](#34-selinux)
+- [35. 共性问题](#35-共性问题)
+  - [35.1. Linux与Windows相差8小时处理](#351-linux与windows相差8小时处理)
+- [36. 参考](#36-参考)
 
 <!-- /TOC -->
 
 # 1. Linux Basic
+
 介绍 Linux 系统的基础使用，包括计算机的硬件知识、Linux常见基础命令的用法。
 
+
+
 # 2. 硬件基础知识
-- 磁盘阵列（RAID）：利用硬件技术将数个硬盘整合成为一个大硬盘的方法， 操作系统只会看到最后被整合起来的大硬盘。 由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。 
+
+磁盘阵列（RAID）：利用硬件技术将数个硬盘整合成为一个大硬盘的方法， 操作系统只会看到最后被整合起来的大硬盘。 由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。 
 
 
 ## 2.1. MBR
+
 > MBR(Master Boot Record): 主引导记录
 - 引导启动程序记录区与分区表通常放在磁盘的第一个扇区，这个扇区通常大小为 512 bytes。
   - 446字节的**MBR**安装启动引导程序，64 字节的**分区表**记录整块硬盘分区的状态。
@@ -112,7 +121,9 @@
   - MBR 仅有一个区块，若被破坏后，经常无法或很难救援。
   - MBR 内存放的启动引导程序最大为 446Bytes， 无法容纳较多的程序码。
 
+
 ## 2.2. GPT
+
 > GPT: GUID Partition Table，源自EFI标准的一种较新的磁盘分区表结构的标准，支持64位的寻址。
 - LBA(Logical Block Address): 逻辑区块位址
   - LBA0(MBR兼容区块)：储存了第一阶段的启动引导程序。
@@ -122,7 +133,8 @@
 > GPT 分区已经没有所谓的主、 扩展、 逻辑分区的概念，既然每组纪录都可以独立存在，当然每个都可以视为是主分区， 每一个分区都可以拿来格式化使用。
 
 
-## 2.3. BIOS与UEFI
+## 2.3. BIOS 与 UEFI
+
 - BIOS：是一个写入到主板上的一个软件程序（仅有16位），采用汇编语言编写的。 
 - Boot loader的主要任务
   - 提供加载项：用户可以选择不同的启动选项，这也是多重引导的重要功能。
@@ -141,9 +153,11 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 > 
 > 因为使用secure boot会使将要启动的操作系统，必须要被UEFI验证，否则就无法启动。
 
-## 2.4. 分区
-- 挂载：利用一个目录当成进入点，将磁盘分区的数据放置在该目录下。其中根目录（/）必须挂载到某个分区，其它的目录可以依据用户的的需求挂载到不同的分区。
 
+
+## 2.4. 分区
+
+- 挂载：利用一个目录当成进入点，将磁盘分区的数据放置在该目录下。其中根目录（/）必须挂载到某个分区，其它的目录可以依据用户的的需求挂载到不同的分区。
 - 操作系统开机的流程：BIOS--->MBR--->引导启动程序--->内核文件
 - swap分区：磁盘模拟内存的交换分区，当有数据被存放在物理内存里面，但这些数据又不是常被CPU使用时，这些不常被使用的数据将会被扔到硬盘的交换分区当中去，而速度较快的物理内存将被释放出来给真正需要的程序使用。交换分区不会使用目录树的挂载，所有交换分区就不需要指定挂载点。
 
@@ -153,46 +167,31 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 ## 3.1. 常用命令
 - `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
-
 - `rm fileName(remove)`: 删除一个文本
-
 - `mkdir(make directory) `: 新建一个目录，创建多层的目录加参数 `-p` (--parents)
-
 - `rmdir `: 移除一个目录
-
 - `rm -rf `: 删除一个目录下的所有文件；以下为两个常用的参数
   - `-i(interactive)`：让系统在执行前确认。
   - `-r(recursive)`：表示递归
-
 - `mv source dest`: 将文件源文件或目录 (source) 移到 目标文件或目录处 (dest)，并重名为 `dest`。`mv` 用来将文件或目录改名或将文件由一个目录移入另一个目录中。
   - 移动文件： `mv a.txt /home/Desptop/` 将当前目录下的 `a.txt` 文件移动到 `/home/Desktop/` 路径下
   - 移动目录： `mv /usr/lib/* /home` 将 `/usr/lib/` 路径下的所有文件都移动到 `/home/` 路径下。
   - 参数选项：`-v(verbose)` 显示 move 命令执行的过程。
-
 - `cp src dest`: 将文件src拷贝到当前目录下为dest文件；
   - 注意：拷贝目录时，要加 `-r` 参数(recursive)
   - 拷贝操作会复制执行者的属性和权限。
-
 - `ls -al`: 查看所有隐藏的文件  
-
 - `uname -a`: 查看Linux版本
-
 - `lscpu`: 查看系统CPU情况
-
 - `locale -a`： 列出系统支持的所有语言环境
-
 - `nslookup 域名` 查看域名对应的IP地址
-
 - `which`
   - 在 `PATH` 变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。
   - 示例：`which gcc`
-
 - `whereis`: 查找系统中包含可以找到的所有文件
   - 只能用于搜索程序名和二进制文件（参数-b）
   - 示例：`whereis gcc`
-
 - `eject`: 将光盘驱动器中的光盘轻轻弹出和收回
-
 - 修改主机名
   - 修改 `/etc/hostname` 这个文件，重启后永久有效。
   - 直接在终端使用命令 `hostname xxx` 修改，修改后仅仅是本次有效，重启后就失效了。 
@@ -476,16 +475,31 @@ s      | 套接文件(socket)               | null
 
 
 ## 3.11. link(链接)
+
 Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
 
-> 硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
 
-- 建立软连接: `ln -s source  destination` 
+### 3.11.1. hard links
+
+硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
+
+硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。要创建硬链接，原始文件也必须事先存在，只不过这次使用ln命令时不再需要加入额外的参数了。
 - 建立硬链接: `ln 原文件 新文件` 
 
 
 
+### 3.11.2. symbolic  links
+
+符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件。这两个通过符号链接在一起的文件，彼此的内容并不相同。
+
+要为一个文件创建符号链接，原始文件必须事先存在。然后可以使用 `ln` 命令以及 `-s`选项来创建符号链接。
+
+- 建立软连接: `ln -s source  destination` 
+
+
+
 ## 3.12. 重定向 
+
 - `>` 是重定向的命令。`ls > test.txt` 表示将 `ls` 命令列出当前目录下所有的文件放到test.txt 中，并`覆盖`原来 test.txt 文件中的内容。
 
 - `>>` 是一个追加(append)命令，将使用 `命令` 输出的数据追加到 `文件`中。
@@ -495,13 +509,19 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 
 
 ## 3.13. 绝对路径与相对路径
+
 - 绝对路径：一定由跟目录(`/`)写起。例如：`/usr/share/doc`  在shell脚本中一般使用绝对路径，防止因为不同的工作环境导致一些问题的发生。
 - 相对路径：不是由根目录(`/`)写起。例如：`../man`  相对路径只是相对于当前的工作路径。
 
+
+
 # 4. tar
+
 tar 用于的文件的打包和解压。
 
+
 ## 4.1. 文件类型
+
 - `gzip`: 压缩文件后缀(*.gz)
 - `bzip2`: 压缩文件后缀(*.bz2)
 - `xz`: 压缩文件后缀(*.xz)
@@ -509,35 +529,39 @@ tar 用于的文件的打包和解压。
 <img src="./pictures/compress.png">
 
 
-## 4.2. tar文件打包     
-- 参数
-	- `-c(Create)`: 打包文件
-	- `-t(lisT)`: 察看打包文件的内容含有哪些文件名
-	- `-x(eXtract)`: 解压打包文件 
-      > 注意：`-c, -t, -x` 不可同时出现在一串命令行中。
-	- `-v(Verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
-	- `-f(Filename)`:  后面要立刻接要被处理的文件名！
-	- `-C(direCtory: 目录)`: 将文件解压在特定的目录
-	- `-p(小写)`:  保存原本文件的权限与属性，不包含根目录(/)。
-	- `-P(大写)`：保留绝对路径，即允许备份的数据中中包含根目录。解压后的数据直接从根目录(/)开始。
-	- `-z`：通过 gzip 的支持进行压缩/解压，此时文件名最好为  `*.tar.gz`
-	- `-j`：通过 bzip2 的支持进行压缩/解压，此时文件名最好为 `*.tar.bz2`
-	- `-J` ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 `*.tar.xz`
-	   > 注意：`-z, -j, -J` 不可以同时出现在一串命令行中
+## 4.2. tar文件打包    
+
+参数
+- `-c(Create)`: 打包文件
+- `-t(lisT)`: 察看打包文件的内容含有哪些文件名
+- `-x(eXtract)`: 解压打包文件 
+    > 注意：`-c, -t, -x` 不可同时出现在一串命令行中。
+- `-v(Verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
+- `-f(Filename)`:  后面要立刻接要被处理的文件名！
+- `-C(direCtory: 目录)`: 将文件解压在特定的目录
+- `-p(小写)`:  保存原本文件的权限与属性，不包含根目录(/)。
+- `-P(大写)`：保留绝对路径，即允许备份的数据中中包含根目录。解压后的数据直接从根目录(/)开始。
+- `-z`：通过 gzip 的支持进行压缩/解压，此时文件名最好为  `*.tar.gz`
+- `-j`：通过 bzip2 的支持进行压缩/解压，此时文件名最好为 `*.tar.bz2`
+- `-J` ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 `*.tar.xz`
+  > 注意：`-z, -j, -J` 不可以同时出现在一串命令行中
 
 
 ## 4.3. 打包文件或目录
+
 - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
 - 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
 
 
 ## 4.4. 解包文件或目录
+
 -  格式：`tar -xvf 解压的文件  -C 文件解压后的路径`
 -  注意：若后面不跟 `-C 文件解压后的路径` ，则会默认解包到当前路径下
 -  `tar -xvf test.tar -C /tmp` ：将test.tar打包的文件解包到 /tmp 路径下
 
 
 ## 4.5. 解压缩文件
+
 - 解多个文件
   > `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
   
@@ -548,6 +572,7 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.6. 打包压缩
+
 - 打包压缩所有文件
   >  `tar -zcvf 自己创建的文件名(xxx.tar.gz)  要打包压缩的路径(/etc/)`: 这样压缩的文件连要压缩文件的目录也一起给压缩了。
 
@@ -562,6 +587,7 @@ tar 用于的文件的打包和解压。
 
 
 ## 4.7. zcat zless 
+
 zcat、zless 命令直接查看压缩文件中的内容。
 
 ```sh
@@ -574,6 +600,7 @@ hello word
 
 
 ## 4.8. zip
+
 > zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
 - zip -r yasuo.zip demo.txt mydir  // 将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
@@ -588,11 +615,8 @@ hello word
 
 
 
-
-
-
-
 # 5. pipe
+
 pipe中文翻译过来是管道的意思。用 `|` 表示。
 
 > 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入，常用 `|` 表示。管道常与grep命令组合使用：`grep 命令1|命令2|命令3|·····|命令n`
@@ -603,14 +627,19 @@ pipe中文翻译过来是管道的意思。用 `|` 表示。
   - `| `: 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'hello' | wc -l
   - `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
 
+
+
 # 6. tee
+
 man手册英文原意：`tee - read from standard input and write to standard output and files`
 
-功能：从标准输入读数据，写到标准输出和文件中。
+- 功能：从标准输入读数据，写到标准输出和文件中。
+- 用法：`echo hello | tee file` 将 hello 字符写到file文件中并显示在标准输出上。
 
-用法：`echo hello | tee file` 将 hello 字符写到file文件中并显示在标准输出上。
+
 
 # 7. wc
+
 - 作用：print newline, word, and byte counts for each file.用来计算一个文件或者指定的多个文件中的行数，单词数和字符数。
 - 选项参数
   - `-c`: 打印字节数
@@ -619,6 +648,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 # 8. top
+
 - 动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
 - 使用：`top -bn 1 -i -c` 
 - 参数 
@@ -636,68 +666,71 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 ps 是 `process status` 的缩写。
 
-- 显示格式参数
-  - `USER `：用户名
-  - `%CPU `：该进程用掉的CPU百分比
-  - `%MEM `：进程占用内存的百分比
-  - `VSZ  `：该进程使用的虚拟內存量（KB）
-  - `RSS  `：该进程占用的固定內存量（KB）（驻留中页的数量）
-  - `TTY  `：表示该进程在那个终端上运行，若与终端无关，则显示? 若为pts/n，则表示由网络连接进入主机的进程，tty1-tty6 表示是本机上面的登录进程。
-  - `STAT `：该进程目前的状态
-  - `START`：该进程被触发启动的时间
-  - `TIME `：该进程实际使用CPU运行的时间
-  - `CMD(command)`：执行此进程触发的命令是什么
-  - `UID  `：用户ID、但输出的是用户名
-  - `PID  `：进程的ID
-  - `PPID `：父进程ID
-  - `C    `：CPU使用率，单位为百分比
-  - `STIME`：进程启动到现在的时间
-  - `PRI(priority)`：进程被CPU执行的优先级，数值越小，代表该进程被CPU执行的越快。这个值由内核动态调整，用户无法直接调整PRI的值。
-  - `NI(nice)`：调整进程的优先级。
-    - nice值的可调整的范围在 -20~19 之间。
-    - root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
-    - 一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
-    - PRI与NI之间的关系：`PRI(new) = PRI(old) + nice`
-    - nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
-    - 如何调整nice值？
-      - 进程刚开始时就给指定一个特定的nice值。`nice -n -5 vim &` 启动vim时，给定一个nice值，并将vim放在后台执行。
-      - 调整已存在的进程的nice值，需要用 `renice` 命令：`renice 4 2366` 将PID=2366进程的nice值调整为4
-  - `ADDR`：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 `-` 表示
-  - `SZ`：表示此进程用掉多少内存
-  - `WCHAN`：表示目前进程是否在运行，如果为 `-`，则表示正在运行。
+显示格式参数
+- `USER `：用户名
+- `%CPU `：该进程用掉的CPU百分比
+- `%MEM `：进程占用内存的百分比
+- `VSZ  `：该进程使用的虚拟內存量（KB）
+- `RSS  `：该进程占用的固定內存量（KB）（驻留中页的数量）
+- `TTY  `：表示该进程在那个终端上运行，若与终端无关，则显示? 若为pts/n，则表示由网络连接进入主机的进程，tty1-tty6 表示是本机上面的登录进程。
+- `STAT `：该进程目前的状态
+- `START`：该进程被触发启动的时间
+- `TIME `：该进程实际使用CPU运行的时间
+- `CMD(command)`：执行此进程触发的命令是什么
+- `UID  `：用户ID、但输出的是用户名
+- `PID  `：进程的ID
+- `PPID `：父进程ID
+- `C    `：CPU使用率，单位为百分比
+- `STIME`：进程启动到现在的时间
+- `PRI(priority)`：进程被CPU执行的优先级，数值越小，代表该进程被CPU执行的越快。这个值由内核动态调整，用户无法直接调整PRI的值。
+- `NI(nice)`：调整进程的优先级。
+  - nice值的可调整的范围在 -20~19 之间。
+  - root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
+  - 一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
+  - PRI与NI之间的关系：`PRI(new) = PRI(old) + nice`
+  - nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
+  - 如何调整nice值？
+    - 进程刚开始时就给指定一个特定的nice值。`nice -n -5 vim &` 启动vim时，给定一个nice值，并将vim放在后台执行。
+    - 调整已存在的进程的nice值，需要用 `renice` 命令：`renice 4 2366` 将PID=2366进程的nice值调整为4
+- `ADDR`：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 `-` 表示
+- `SZ`：表示此进程用掉多少内存
+- `WCHAN`：表示目前进程是否在运行，如果为 `-`，则表示正在运行。
 
 
-- STAT状态位常见的状态字符
-  - `D(uninterruptible sleep)` 无法中断的休眠状态（通常 IO 相关的进程）；
-  - `R(running)` 正在运行可中在队列中可过行的；
-  - `S(大写：sleep)` 处于休眠状态；
-  - `T(stop)` 停止或被追踪状态；
-  - `W` 进入内存交换 （从内核2.6开始无效）；
-  - `X(dead)` 死掉的进程 （基本很少看见）；
-  - `Z(zombie)` 僵尸状态，进程已被终止，但无法被删除；
-  - `<` 优先级高的进程
-  - `N` 优先级较低的进程
-  - `L` 有些页被锁进内存；
-  - `s` 进程的领导者（在它之下有子进程）；
-  - `l` 多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）；
-  - `+` 位于后台的进程组；
+STAT状态位常见的状态字符
+- `D(uninterruptible sleep)` 无法中断的休眠状态（通常 IO 相关的进程）；
+- `R(running)` 正在运行可中在队列中可过行的；
+- `S(大写：sleep)` 处于休眠状态；
+- `T(stop)` 停止或被追踪状态；
+- `W` 进入内存交换 （从内核2.6开始无效）；
+- `X(dead)` 死掉的进程 （基本很少看见）；
+- `Z(zombie)` 僵尸状态，进程已被终止，但无法被删除；
+- `<` 优先级高的进程
+- `N` 优先级较低的进程
+- `L` 有些页被锁进内存；
+- `s` 进程的领导者（在它之下有子进程）；
+- `l` 多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）；
+- `+` 位于后台的进程组；
 
 
+参数命令组合
 - `ps –ef|grep 程序名称`：查看一个程序是否运行 
 - `ps -Lf 端口号|wc -l `：查看线程个数  
 - `ps -l`：查看当前用户的bash进程
 - `ps aux`：查看系统运行的所有进程，默认按照PID的顺序排序。
 - `ps axjf`：查看系统运行的所有进程，并带有PPID项
 
-- 查看某个进程已运行的时间
-  ```sh
-  john@ubuntu:~$ ps -p 3578 -o lstart,etime
-                 STARTED     ELAPSED
-  Thu Jun 10 08:33:04 2021       33:48
-  ```
+
+```sh
+# 查看某个进程已运行的时间
+john@ubuntu:~$ ps -p 3578 -o lstart,etime
+                STARTED     ELAPSED
+Thu Jun 10 08:33:04 2021       33:48
+```
 
 
 # 10. pgrep
+
 根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
 
 - `pgrep -l program_name)`  只显示某个进程的PID
@@ -711,26 +744,26 @@ ps 是 `process status` 的缩写。
   ```
 
 
-# 11. killall pkill
+# 11. killall 与 pkill
+
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
 
-```
+```sh
 killall bash
 
 pkill bash
 ```
 
 
-
-
 # 12. pstree 
+
 - 查找各个进程之间的相关性。
 - Linux系统中内核调用的第一个进程为 `systemd`，该进程的PID为 `1`
 
 
 # 13. strace
-strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
 
+strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
 
 - 监控用户进程与内核进程的交互
 - 追踪进程的系统调用、信号传递、状态变化。
@@ -766,29 +799,31 @@ find：按照文件属性查找
 
 
 # 16. grep
+
 `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
 
-- 三种形式的grep命令
-  - gerp:标准格式
-  - egrep:扩展grep命令，其实和grep -E等价，支持基本和扩展的正则表达式。
-  - fgrep: 快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
+三种形式的grep命令
+- gerp:标准格式
+- egrep:扩展grep命令，其实和grep -E等价，支持基本和扩展的正则表达式。
+- fgrep: 快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
 
-- 选项参数
-  - `-n`：列出所有的匹配行，显示行号
-  - `-r`: 递归搜索
-  - `-R`：  
-  - `-i`: 搜索时，忽略大小写
-  - `-c`: 只输出匹配行的数量
-  - `-l`: 只列出符合匹配的文件名，不列出具体的匹配行
-  - `-h`: 查询多文件时不显示文件名
-  - `-s`: 不显示不存在、没有匹配文本的错误信息
-  - `-v`: 显示不包含匹配文本的所有行
-  - `-w`: 匹配整个单词
-  - `-x`: 匹配整行
-  - `-q`: 禁止输出任何结果，已退出状态表示搜索是否成功
-  - `-b`: 打印匹配行距文件头部的偏移量，以字节为单位
-  - `-o`: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
+选项参数
+- `-n`：列出所有的匹配行，显示行号
+- `-r`: 递归搜索
+- `-R`：  
+- `-i`: 搜索时，忽略大小写
+- `-c`: 只输出匹配行的数量
+- `-l`: 只列出符合匹配的文件名，不列出具体的匹配行
+- `-h`: 查询多文件时不显示文件名
+- `-s`: 不显示不存在、没有匹配文本的错误信息
+- `-v`: 显示不包含匹配文本的所有行
+- `-w`: 匹配整个单词
+- `-x`: 匹配整行
+- `-q`: 禁止输出任何结果，已退出状态表示搜索是否成功
+- `-b`: 打印匹配行距文件头部的偏移量，以字节为单位
+- `-o`: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
   
+
 示例：
 ```
 grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
@@ -796,6 +831,7 @@ grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 ta
 
 
 # 17. PID
+
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
@@ -803,7 +839,8 @@ grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 ta
 
 
 # 18. netstat
-netstat是一个查看系统中端口使用情况的一个命令。
+
+netstat 是一个查看系统中端口使用情况的一个命令。
 
 - 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
 - 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
@@ -818,40 +855,51 @@ netstat是一个查看系统中端口使用情况的一个命令。
     - Local Address - 进程侦听的 IP 地址和端口号。
     - PID/Program name  - PID 和进程名称
   
-- 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
-  - `netstat -apn | grep 端口号`
+- 查看指定端口号的所有进程在TCP、UDP传输中的所有状态：`netstat -apn | grep 端口号`
+- `ss` 检查端口： `ss -tunlp`
 
-- `ss` 检查端口
-  - `ss -tunlp`
 
-- `lsof` 检查端口
-  - `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
+# 19. lsof
 
-# 19. netcat
+`lsof` 列出整个 Linux 系统打开的所有文件描述符。
+
+- `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
+- 参数
+  - `-p`： 指定进程ID（ PID）。
+  - `-d`：允许指定要显示的文件描述符编号。 
+
+
+# 20. netcat
+
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
 
-# 20. socat
-Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。
+# 21. socat
 
-Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
+Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站：http://www.dest-unreach.org/socat/ 
+
+Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
 
-# 21. traceroute
+# 22. traceroute
+
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
 
-# 22. dmesg 
+# 23. dmesg 
+
 dmesg是分析内核产生的一些信息。
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
 
-# 23. vmstat
+# 24. vmstat
+
 可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
 
 
-# 24. man
+# 25. man
+
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
 
@@ -885,23 +933,23 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
 
 man手册中的一些关键字
-  - NAME - 命令名
-  - SYNOPSIS - 使用方法大纲
-  - CONFIGURATION - 配置
-  - DESCRIPTION - 功能说明
-  - OPTIONS - 可选参数说明
-  - EXIT STATUS - 退出状态, 这是一个返回给父进程的值
-  - RETURN VALUE - 返回值
-  - ERRORS - 可能出现的错误类型
-  - ENVIRONMENT - 环境变量
-  - FILES - 相关配置文件
-  - VERSIONS - 版本
-  - CONFORMING TO - 符合的规范
-  - NOTES - 使用注意事项
-  - BUGS - 已经发现的bug
-  - EXAMPLE - 一些例子
-  - AUTHORS - 作者
-  - SEE ALSO - 功能或操作对象相近的其它命令
+- NAME - 命令名
+- SYNOPSIS - 使用方法大纲
+- CONFIGURATION - 配置
+- DESCRIPTION - 功能说明
+- OPTIONS - 可选参数说明
+- EXIT STATUS - 退出状态, 这是一个返回给父进程的值
+- RETURN VALUE - 返回值
+- ERRORS - 可能出现的错误类型
+- ENVIRONMENT - 环境变量
+- FILES - 相关配置文件
+- VERSIONS - 版本
+- CONFORMING TO - 符合的规范
+- NOTES - 使用注意事项
+- BUGS - 已经发现的bug
+- EXAMPLE - 一些例子
+- AUTHORS - 作者
+- SEE ALSO - 功能或操作对象相近的其它命令
 
 
 man 中的一些快捷操作:
@@ -916,30 +964,28 @@ N       |	反向查询
 
 与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
 
-# 25. ntsysv
+# 26. ntsysv
+
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 26. wget
+# 27. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
-
 
 
 参考: [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
 
-# 27. md5 sha
 
-SHA
+# 28. SHA
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
 - SHA家族的五个算法，分别是SHA-1、SHA-224、SHA-256、SHA-384，和SHA-512，由美国国家安全局（NSA）所设计，并由美国国家标准与技术研究院（NIST）发布，是美国的政府标准。后四者有时并称为SHA-2。SHA-1在许多安全协定中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5（更早之前被广为使用的杂凑函数）的后继者。
 
 - 生成 hash 校验: `sha1sum filename`
-
-  直接生成 hash 校验后的结果
   ```bash
+  #  直接生成 hash 校验后的结果
   Tim@computer:~/Downloads$ sha1sum feeds-master.zip 
   751420b576570fcbfb24e80e47e18168342541e0  feeds-master.zip
   ```
@@ -952,7 +998,8 @@ SHA
   feeds-master.zip: OK
   ```
 
-md5
+# 29. md5
+
 - md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
 
 
@@ -965,7 +1012,10 @@ md5
   feeds-master.zip: OK
   ```
 
-# 28. ldconfig
+
+
+# 30. ldconfig
+
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序连接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
@@ -975,7 +1025,7 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
 
 
 
-# 29. chkconfig
+# 31. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
@@ -983,31 +1033,35 @@ chkconfig 命令用来更新（启动或停止）和查询系统服务的运行�
 
 
 
-# 30. 包管理
+# 32. 包管理
+
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
-Debian/Ubuntu采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
+Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
 
-CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
+CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
 
-## 30.1. 软件仓库
-- 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
+## 32.1. 软件仓库
 
 - Windows
   > 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
 
-- Linux或Unix
+- Linux 或 Unix
    - 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
    - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
+- 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
-## 30.2. apt命令
+
+
+## 32.2. apt命令
+
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
 - apt-get install # ------(package 安装包)
 - apt-get install # -----(package --reinstall 重新安装包)
-- apt-get -f install # -----(强制安装, "-f = --fix-missing"当是修复安装吧...)
+- apt-get -f install # -----(强制安装, "-f = --fix-missing")
 - apt-get remove #-----(package 删除包)
 - apt-get remove --purge # ------(package 删除包，包括删除配置文件等)
 - apt-get autoremove --purge # ----(package 删除包及其依赖的软件包+配置文件等
@@ -1035,7 +1089,8 @@ CentOS/Red Hat/Fedora采用 `rpm` 进行软件包的管理，使用 `yum` 进行
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 30.3. dpkg 命令
+## 32.3. dpkg 命令
+
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -1057,9 +1112,10 @@ CentOS7 安装高版本 gcc/g++
 
 
 
-# 31. 防火墙
+# 33. 防火墙
 
-## 31.1. ubuntu下默认的防火墙
+## 33.1. ubuntu下默认的防火墙
+
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
 - `sudo ufw disable` 关闭防火墙
@@ -1071,9 +1127,8 @@ CentOS7 安装高版本 gcc/g++
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 31.2. CentOS下默认的防火墙
-- 参考
-  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+## 33.2. CentOS下默认的防火墙
+
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```
@@ -1104,15 +1159,18 @@ CentOS7下默认的防火墙为 `firewalld`
 
 
 
-# 32. SELinux
+
+# 34. SELinux
+
 SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 33. 共性问题
+# 35. 共性问题
 
-## 33.1. Linux与Windows相差8小时处理
+## 35.1. Linux与Windows相差8小时处理
+
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
 重启完成将硬件时间UTC改为CST，双系统时间保持一致。
@@ -1127,6 +1185,8 @@ $sudo ntpdate time.windows.com
 
 
 
-# 34. 参考
+# 36. 参考
+
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
+  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
