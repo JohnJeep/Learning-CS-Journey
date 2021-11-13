@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-10-15 14:50:08
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-12 13:54:18
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: Vim编辑器使用
 --> 
 
@@ -10,32 +10,33 @@
 
 - [1. Philosophy](#1-philosophy)
 - [2. Normal Mode](#2-normal-mode)
-	- [2.1. Cursor move(光标移动)](#21-cursor-move光标移动)
-	- [2.2. Yank(复制)](#22-yank复制)
-	- [2.3. Put(粘贴)](#23-put粘贴)
-	- [2.4. Delete(删除)](#24-delete删除)
-	- [2.5. Undo(撤销)](#25-undo撤销)
-	- [2.6. Find(查找)](#26-find查找)
-	- [2.7. Mark(标记)](#27-mark标记)
-	- [2.8. Making corrections and moving text(修正和移动文本)](#28-making-corrections-and-moving-text修正和移动文本)
+  - [2.1. Cursor move(光标移动)](#21-cursor-move光标移动)
+  - [2.2. Yank(复制)](#22-yank复制)
+  - [2.3. Put(粘贴)](#23-put粘贴)
+  - [2.4. Delete(删除)](#24-delete删除)
+  - [2.5. Undo(撤销)](#25-undo撤销)
+  - [2.6. Find(查找)](#26-find查找)
+  - [2.7. Mark(标记)](#27-mark标记)
+  - [2.8. Making corrections and moving text(修正和移动文本)](#28-making-corrections-and-moving-text修正和移动文本)
 - [3. Visual Mode](#3-visual-mode)
 - [4. Visual Line Mode](#4-visual-line-mode)
 - [5. Visual Block Mode](#5-visual-block-mode)
 - [6. Replace Mode](#6-replace-mode)
 - [7. Insert Mode](#7-insert-mode)
 - [8. Command Line Mode](#8-command-line-mode)
-	- [8.1. File](#81-file)
-	- [8.2. Command](#82-command)
-	- [8.3. Replace(替换)](#83-replace替换)
-	- [8.4. Window(窗口)](#84-window窗口)
-	- [8.5. Shell](#85-shell)
-	- [8.6. Help(帮助)](#86-help帮助)
-	- [8.7. Comment(注释)](#87-comment注释)
+  - [8.1. File](#81-file)
+  - [8.2. Command](#82-command)
+  - [8.3. Replace(替换)](#83-replace替换)
+  - [8.4. Window(窗口)](#84-window窗口)
+  - [8.5. Shell](#85-shell)
+  - [8.6. Help(帮助)](#86-help帮助)
+  - [8.7. Comment(注释)](#87-comment注释)
 - [9. Registers](#9-registers)
 - [10. Vim Configer](#10-vim-configer)
 - [11. Recover Swap File](#11-recover-swap-file)
 - [12. Vim Sheet](#12-vim-sheet)
-- [13. Reference](#13-reference)
+- [13. Vscodevim tricks](#13-vscodevim-tricks)
+- [14. Reference](#14-reference)
 
 <!-- /TOC -->
 
@@ -452,7 +453,24 @@ Vim 命令手抄
 <img src="./pictures/../../pictures/vim-cmd.png">
 
 
-# 13. Reference
+
+
+# 13. Vscodevim tricks
+
+vscode 中安装 vim 模拟插件。记录一些实用的技巧。
+
+注释
+- `gc` 触发行注释。例如：`gcc` 触发当前行注释；`gc2j` 触发当前行和下两行注释。（一般结合点号 `.` 操作会很香）
+- `gC` 触发块注释。例如：`gCi)` 从 `(` 开始注释到 `)` 结尾处。
+- `gd` 跳转到定义。
+- `gh` 等同于鼠标悬停显示 types and error messages。
+- `gb` 光标高亮显示找到的相同单词，每按一次 `gb` 就高亮显示一次。
+
+
+
+
+
+# 14. Reference
 
 - [官方vim在线帮助手册](https://vimhelp.org/): 非常重要，值得阅读。
 - [MIT2020年missing-semester lectures vim section](https://missing.csail.mit.edu/2020/editors/)
