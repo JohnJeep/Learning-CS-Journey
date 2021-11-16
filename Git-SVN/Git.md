@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2021-11-02 22:17:02
+ * @LastEditTime: 2021-11-17 00:40:48
  * @LastEditors: Windows10
  * @Description: git基础命令学习
 --> 
@@ -39,10 +39,11 @@
       - [1.16.4.3. 远程仓库与本地的关联](#11643-远程仓库与本地的关联)
       - [1.16.4.4. git远程仓库更换名称，本地如何修改？](#11644-git远程仓库更换名称本地如何修改)
   - [1.17. Git中文乱码](#117-git中文乱码)
-  - [1.18. Git代理配置](#118-git代理配置)
-  - [1.19. Git update](#119-git-update)
-  - [1.20. 提交代码总结](#120-提交代码总结)
-  - [1.21. Github 开源项目搜索技巧](#121-github-开源项目搜索技巧)
+  - [1.18. LF or CRLF](#118-lf-or-crlf)
+  - [1.19. Git代理配置](#119-git代理配置)
+  - [1.20. Git update](#120-git-update)
+  - [1.21. 提交代码总结](#121-提交代码总结)
+  - [1.22. Github 开源项目搜索技巧](#122-github-开源项目搜索技巧)
 - [2. Git高级板块](#2-git高级板块)
   - [2.1. Git协议](#21-git协议)
     - [2.1.1. SSH(Secure Shell)协议](#211-sshsecure-shell协议)
@@ -54,6 +55,7 @@
 - [3. 学习参考](#3-学习参考)
 
 <!-- /TOC -->
+
 # 1. Git 基础板块
 
 ## 1.1. Git init
@@ -528,9 +530,53 @@ Git 与 GitHub 使用，有四个区，需要理解。
 
 
 ## 1.17. Git中文乱码
+
+
 - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
 
-## 1.18. Git代理配置 
+
+## 1.18. LF or CRLF
+
+Git 多平台换行符问题(LF or CRLF)。文本文件所使用的换行符，在不同的系统平台上是不一样的。UNIX/Linux 使用的是 0x0A（LF），早期的 Mac OS 使用的是 0x0D（CR），后来的 OS X 在更换内核后与 UNIX 保持一致了。但 DOS/Windows 一直使用 0x0D0A（CRLF） 作为换行符。
+
+跨平台协作开发是常有的，不统一的换行符确实对跨平台的文件交换带来了麻烦。最大的问题是，在不同平台上，换行符发生改变时，Git 会认为整个文件被修改，这就造成我们没法 diff，不能正确反映本次的修改。还好 Git 在设计时就考虑了这一点，其提供了一个 autocrlf 的配置项，用于在提交和检出时自动转换换行符，该配置有三个可选项：
+
+```
+# 提交时转换为LF，检出时转换为CRLF
+git config --global core.autocrlf true
+
+# 提交时转换为LF，检出时不转换
+git config --global core.autocrlf input
+
+# 提交检出均不转换
+git config --global core.autocrlf false
+
+
+```
+
+如果把 autocrlf 设置为 false 时，那另一个配置项 safecrlf 最好设置为 ture。该选项用于检查文件是否包含混合换行符，其有三个可选项：
+```
+# 拒绝提交包含混合换行符的文件
+git config --global core.safecrlf true
+
+# 允许提交包含混合换行符的文件
+git config --global core.safecrlf false
+
+# 提交包含混合换行符的文件时给出警告
+git config --global core.safecrlf warn
+```
+
+Windows 上 Git bash 客户端自带了 dos2unix 转换工具，将换行符统一转换为 Unix 下的 LF。只需执行下面的命令即可：
+```
+find . -type f -exec dos2unix {} +
+```
+
+参考
+- [Git 多平台换行符问题(LF or CRLF)](http://kuanghy.github.io/2017/03/19/git-lf-or-crlf)
+
+
+
+## 1.19. Git代理配置 
 
 
 - 只对github进行代理，不影响国内的仓库
@@ -560,11 +606,11 @@ Git 与 GitHub 使用，有四个区，需要理解。
   - [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
 
 
-## 1.19. Git update
+## 1.20. Git update
 - git windows 更新 `git update-git-for-windows`
 
 
-## 1.20. 提交代码总结
+## 1.21. 提交代码总结
 
 第一次提交：
 - `git init`  初始化
@@ -595,7 +641,7 @@ Git 与 GitHub 使用，有四个区，需要理解。
 - `git help <verb>` 查看帮助，verb为Git的关键字
 - `git add -p(patch)` 依次存储每一个文件的改动，包括文件中做的哪些些改动
 
-## 1.21. Github 开源项目搜索技巧
+## 1.22. Github 开源项目搜索技巧
 
 | 搜索名字   | in:name xxx           |
 | ---------- | --------------------- |

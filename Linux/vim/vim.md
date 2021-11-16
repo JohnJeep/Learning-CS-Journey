@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-11-12 13:54:18
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2021-11-17 00:33:42
+ * @LastEditors: Windows10
  * @Description: Vim编辑器使用
 --> 
 
@@ -32,7 +32,7 @@
   - [8.6. Help(帮助)](#86-help帮助)
   - [8.7. Comment(注释)](#87-comment注释)
 - [9. Registers](#9-registers)
-- [10. Vim Configer](#10-vim-configer)
+- [10. Vim Config](#10-vim-config)
 - [11. Recover Swap File](#11-recover-swap-file)
 - [12. Vim Sheet](#12-vim-sheet)
 - [13. Vscodevim tricks](#13-vscodevim-tricks)
@@ -134,6 +134,7 @@ Yanking 是 Vim 中拷贝命令的名字。由于"c"己经被用于表示 change
 ## 2.3. Put(粘贴)
 
 - `p(小写)` 将缓冲区内容粘贴光到标所在行的下面一行。
+  
   > 目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴
 - `P(大写)` 将缓冲区内(buffer)容粘贴到光标所在行的上面一行
 - `J`	将光标所在行与下一行的数据结合成同一行
@@ -270,6 +271,7 @@ Vim's operator commands
 - `y` 复制所选中的字符
 - `p` 粘贴所选中的字符
 - 如何一次性改变多行的内容(Multi cursor)？
+  
   > 光标定位到要操作的地方，按下 `Ctrl+v` 组合键进入 `VISUAL BLOCK` 模式，通过h（左），j（下），k（上），l（右）选取行和列，按下 `Shift+i` 组合键后，进入 `Insert Mode` 下的 `Multi cursor` 操作，输入要插入的内容，此时你发现在 `Insert Mode` 下只有一行改变了，而不是多行同时改变了，此时需要你连续按两次 `Esc` 键，你会看到多行改变后的内容，并回到 `Normal Mode` 。 
 
 
@@ -354,6 +356,7 @@ Command Line Mode 下一些常见的命令操作。
 - `:s/old/new/g` 用new 替换行中所有出现的old
 - `:n1,n2 s/old/new/g` 用new 替换从第n1行到第n2行中出现的old
 - `:% s/old/new/g` 用 new 替换整篇中出现的old; (g:global, s: substitute)
+  
   > 判断每个替换的字符是不是确定被替换，可在最后添加控制标志位 `c` 来操作。例如：`:%s/content/copy/gc`
 
 
@@ -422,18 +425,18 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 	```
 
 
-# 10. Vim Configer
+# 10. Vim Config
 
 - 系统级配置文件目录：`/etc/vim/vimrc`
 - 用户级配置文件目录：`~/.vim/vimrc`
 - 设置Tab的大小 
-  ```sh
-  set tabstop=4      # 表示一个 tab 显示出来是多少个空格的长度，默认 8。
-  set softtabstop=4  # 表示在编辑模式的时候按退格键的时候退回缩进的长度。
-  set shiftwidth=4   # 表示每一级缩进的长度，一般设置成跟softtabstop一样。
-  set expandtab      # 当设置成expandtab时，缩进用空格来表示
-  # set noexpandtab  # noexpandtab是用制表符表示一个缩进
-  set autoindent     # 按换行键，让代码自动缩进一个Tab，设置自动缩进
+  ```
+  set tabstop=4      " 表示一个 tab 显示出来是多少个空格的长度，默认 8
+  set softtabstop=4  " 表示在编辑模式的时候按退格键的时候退回缩进的长度
+  set shiftwidth=4   " 表示每一级缩进的长度，一般设置成跟softtabstop一样
+  set expandtab      " 当设置成expandtab时，缩进用空格来表示
+  # set noexpandtab  " noexpandtab是用制表符表示一个缩进
+  set autoindent     " 按换行键，让代码自动缩进一个Tab，设置自动缩进
   ```
 
 
