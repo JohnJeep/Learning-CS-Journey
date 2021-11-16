@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-11 21:26:35
+ * @LastEditTime: 2021-11-14 17:11:22
  * @LastEditors: Windows10
  * @Description: Linux 基础用法笔记
 --> 
@@ -11,71 +11,92 @@
 - [2. 硬件基础知识](#2-硬件基础知识)
   - [2.1. MBR](#21-mbr)
   - [2.2. GPT](#22-gpt)
-  - [2.3. BIOS 与 UEFI](#23-bios-与-uefi)
+  - [2.3. BIOS与UEFI](#23-bios与uefi)
   - [2.4. 分区](#24-分区)
-- [3. 文件I/O](#3-文件io)
-  - [3.1. 常用命令](#31-常用命令)
-  - [3.2. 查看文件内容](#32-查看文件内容)
-  - [3.3. 磁盘](#33-磁盘)
-  - [3.4. 文件权限与链接](#34-文件权限与链接)
-  - [3.5. 默认文件权限 umask](#35-默认文件权限-umask)
-  - [3.6. 文件隐藏属性](#36-文件隐藏属性)
-  - [3.7. 用户与用户组](#37-用户与用户组)
-  - [3.8. 用户权限修改](#38-用户权限修改)
-  - [3.9. 文件种类与扩展名](#39-文件种类与扩展名)
-  - [3.10. 文件目录](#310-文件目录)
-  - [3.11. link(链接)](#311-link链接)
-    - [3.11.1. hard links](#3111-hard-links)
-    - [3.11.2. symbolic  links](#3112-symbolic--links)
-  - [3.12. 绝对路径与相对路径](#312-绝对路径与相对路径)
-- [4. tar](#4-tar)
-  - [4.1. 压缩文件类型](#41-压缩文件类型)
-  - [4.2. tar文件打包](#42-tar文件打包)
-  - [4.3. 打包文件或目录](#43-打包文件或目录)
-  - [4.4. 解包文件或目录](#44-解包文件或目录)
-  - [4.5. 解压缩文件](#45-解压缩文件)
-  - [4.6. 打包压缩](#46-打包压缩)
-  - [4.7. zcat zless](#47-zcat-zless)
-  - [4.8. zip](#48-zip)
-- [5. pipe](#5-pipe)
-- [6. tee](#6-tee)
-- [7. wc](#7-wc)
-- [8. top](#8-top)
-- [9. ps](#9-ps)
-- [10. pgrep](#10-pgrep)
-- [11. killall 与 pkill](#11-killall-与-pkill)
-- [12. pstree](#12-pstree)
-- [13. strace](#13-strace)
-- [14. pstack](#14-pstack)
-- [15. find](#15-find)
-- [16. grep](#16-grep)
-- [17. PID](#17-pid)
-- [18. netstat](#18-netstat)
-- [19. lsof](#19-lsof)
-- [20. netcat](#20-netcat)
-- [21. socat](#21-socat)
-- [22. traceroute](#22-traceroute)
-- [23. dmesg](#23-dmesg)
-- [24. vmstat](#24-vmstat)
-- [25. man](#25-man)
-- [26. ntsysv](#26-ntsysv)
-- [27. wget](#27-wget)
-- [28. SHA](#28-sha)
-- [29. md5](#29-md5)
-- [30. ldconfig](#30-ldconfig)
-- [31. ldd](#31-ldd)
-- [32. chkconfig](#32-chkconfig)
-- [33. 包管理](#33-包管理)
-  - [33.1. 软件仓库](#331-软件仓库)
-  - [33.2. apt命令](#332-apt命令)
-  - [33.3. dpkg 命令](#333-dpkg-命令)
-- [34. 防火墙](#34-防火墙)
-  - [34.1. ubuntu下默认的防火墙](#341-ubuntu下默认的防火墙)
-  - [34.2. CentOS下默认的防火墙](#342-centos下默认的防火墙)
-- [35. SELinux](#35-selinux)
-- [36. 共性问题](#36-共性问题)
-  - [36.1. Linux与Windows相差8小时处理](#361-linux与windows相差8小时处理)
-- [37. 参考](#37-参考)
+- [3. 基础命令](#3-基础命令)
+  - [3.1. touch](#31-touch)
+  - [3.2. rm](#32-rm)
+  - [3.3. mkdir](#33-mkdir)
+  - [3.4. mv](#34-mv)
+  - [3.5. cp](#35-cp)
+  - [3.6. ls](#36-ls)
+  - [3.7. disk](#37-disk)
+  - [3.8. fdisk](#38-fdisk)
+  - [3.9. df](#39-df)
+  - [3.10. umount](#310-umount)
+  - [3.11. which](#311-which)
+  - [3.12. whereis](#312-whereis)
+  - [3.13. hostname](#313-hostname)
+- [4. 系统相关](#4-系统相关)
+- [5. 文件查看命令](#5-文件查看命令)
+  - [5.1. tac](#51-tac)
+  - [5.2. nl](#52-nl)
+  - [5.3. more](#53-more)
+  - [5.4. less](#54-less)
+  - [5.5. head 和 tail](#55-head-和-tail)
+- [6. 文件 I/O](#6-文件-io)
+  - [6.1. 文件权限](#61-文件权限)
+  - [6.2. umask](#62-umask)
+  - [6.3. chattr](#63-chattr)
+  - [6.4. 用户与用户组](#64-用户与用户组)
+  - [6.5. 用户权限修改](#65-用户权限修改)
+  - [6.6. 文件种类与扩展名](#66-文件种类与扩展名)
+  - [6.7. Linux系统目录](#67-linux系统目录)
+  - [6.8. 绝对路径与相对路径](#68-绝对路径与相对路径)
+- [7. tar](#7-tar)
+  - [7.1. 压缩文件类型](#71-压缩文件类型)
+  - [7.2. tar文件打包](#72-tar文件打包)
+  - [7.3. 打包文件或目录](#73-打包文件或目录)
+  - [7.4. 解包文件或目录](#74-解包文件或目录)
+  - [7.5. 解压缩文件](#75-解压缩文件)
+  - [7.6. 打包压缩](#76-打包压缩)
+  - [7.7. zcat zless](#77-zcat-zless)
+  - [7.8. zip](#78-zip)
+- [8. link](#8-link)
+  - [8.1. hard links](#81-hard-links)
+  - [8.2. symbolic links](#82-symbolic-links)
+- [9. pipe](#9-pipe)
+- [10. tee](#10-tee)
+- [11. wc](#11-wc)
+- [12. top](#12-top)
+- [13. ps](#13-ps)
+- [14. pgrep](#14-pgrep)
+- [15. killall 与 pkill](#15-killall-与-pkill)
+- [16. nohup](#16-nohup)
+- [17. pstree](#17-pstree)
+- [18. strace](#18-strace)
+- [19. pstack](#19-pstack)
+- [20. find](#20-find)
+- [21. grep](#21-grep)
+- [22. PID](#22-pid)
+- [23. netstat](#23-netstat)
+- [24. ss](#24-ss)
+- [25. lsof](#25-lsof)
+- [26. netcat](#26-netcat)
+- [27. socat](#27-socat)
+- [28. traceroute](#28-traceroute)
+- [29. dmesg](#29-dmesg)
+- [30. vmstat](#30-vmstat)
+- [31. man](#31-man)
+- [32. ntsysv](#32-ntsysv)
+- [33. wget](#33-wget)
+- [34. SHA](#34-sha)
+- [35. md5](#35-md5)
+- [36. ldconfig](#36-ldconfig)
+- [37. ldd](#37-ldd)
+- [38. chkconfig](#38-chkconfig)
+- [39. 包管理](#39-包管理)
+  - [39.1. 软件仓库](#391-软件仓库)
+  - [39.2. apt](#392-apt)
+  - [39.3. dpkg](#393-dpkg)
+  - [39.4. gcc8/g++8 以上安装](#394-gcc8g8-以上安装)
+- [40. 防火墙](#40-防火墙)
+  - [40.1. ubuntu 下默认的防火墙](#401-ubuntu-下默认的防火墙)
+  - [40.2. CentOS 下默认的防火墙](#402-centos-下默认的防火墙)
+- [41. SELinux](#41-selinux)
+- [42. 共性问题](#42-共性问题)
+  - [42.1. Linux与Windows相差8小时处理](#421-linux与windows相差8小时处理)
+- [43. 参考](#43-参考)
 
 <!-- /TOC -->
 
@@ -134,7 +155,7 @@
 
 
 
-## 2.3. BIOS 与 UEFI
+## 2.3. BIOS与UEFI
 
 - BIOS：是一个写入到主板上的一个软件程序（仅有16位），采用汇编语言编写的。 
 - Boot loader的主要任务
@@ -161,68 +182,259 @@ Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及�
 
 操作系统开机的流程：BIOS--->MBR--->引导启动程序--->内核文件
 
-swap分区：磁盘模拟内存的交换分区，当有数据被存放在物理内存里面，但这些数据又不是常被CPU使用时，这些不常被使用的数据将会被扔到硬盘的交换分区当中去，而速度较快的物理内存将被释放出来给真正需要的程序使用。交换分区不会使用目录树的挂载，所有交换分区就不需要指定挂载点。
+swap 分区：磁盘模拟内存的交换分区，当有数据被存放在物理内存里面，但这些数据又不是常被CPU使用时，这些不常被使用的数据将会被扔到硬盘的交换分区当中去，而速度较快的物理内存将被释放出来给真正需要的程序使用。交换分区不会使用目录树的挂载，所有交换分区就不需要指定挂载点。
+
+ 
+
+# 3. 基础命令
+
+## 3.1. touch 
+
+```sh
+touch fileName: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
+```
+
+## 3.2. rm
+
+```sh
+rm fileName(remove): 删除一个文本
+rm -rf: 删除一个目录下的所有文件；以下为两个常用的参数
+
+参数
+  -i(interactive)：让系统在执行前确认。
+  -r(recursive)：递归
+```
+
+## 3.3. mkdir
+
+```sh
+mkdir(make directory): 新建一个目录。
+
+创建多层的目录加参数 -p(--parents)
+
+一次性创建很多个文件夹
+    [root@CentOS7 ~]# mkdir test/bb{1..10}
+    [root@CentOS7 ~]# ls test/
+    bb1  bb10  bb2  bb3  bb4  bb5  bb6  bb7  bb8  bb9
+
+rmdir: 移除一个目录
+```
+
+## 3.4. mv 
+
+```sh
+mv 命令用来将文件或目录改名或将文件由一个目录移入另一个目录中。
+mv source dest 将文件源文件或目录 (source) 移到 目标文件或目录处 (dest)，并重名为 dest。
+
+移动文件： mv a.txt /home/Desptop/ 将当前目录下的 a.txt 文件移动到 /home/Desktop/ 路径下
+移动目录： mv /usr/lib/* /home 将 /usr/lib/ 路径下的所有文件都移动到 /home/ 路径下。
+
+参数选项：
+  -v(verbose)： 显示 move 命令执行的过程。
+```
+
+## 3.5. cp 
+
+```sh
+cp src dest  将文件src拷贝到当前目录下为dest文件
+
+注意：拷贝目录时，要加参数 -r(recursive)
+拷贝操作会复制执行者的属性和权限。
+```
 
 
 
-# 3. 文件I/O
+## 3.6. ls
 
-## 3.1. 常用命令
+```sh
+ls 命令列出文件夹中的内容
 
-- `touch fileName`: 文件不存在新建一个文本；文件存在时，修改文件创建的时间。
-- `rm fileName(remove)`: 删除一个文本
-- `mkdir(make directory) `: 新建一个目录，创建多层的目录加参数 `-p` (--parents)
-- `rmdir `: 移除一个目录
-- `rm -rf `: 删除一个目录下的所有文件；以下为两个常用的参数
-  - `-i(interactive)`：让系统在执行前确认。
-  - `-r(recursive)`：表示递归
-- `mv source dest`: 将文件源文件或目录 (source) 移到 目标文件或目录处 (dest)，并重名为 `dest`。`mv` 用来将文件或目录改名或将文件由一个目录移入另一个目录中。
-  - 移动文件： `mv a.txt /home/Desptop/` 将当前目录下的 `a.txt` 文件移动到 `/home/Desktop/` 路径下
-  - 移动目录： `mv /usr/lib/* /home` 将 `/usr/lib/` 路径下的所有文件都移动到 `/home/` 路径下。
-  - 参数选项：`-v(verbose)` 显示 move 命令执行的过程。
-- `cp src dest`: 将文件src拷贝到当前目录下为dest文件；
-  - 注意：拷贝目录时，要加 `-r` 参数(recursive)
-  - 拷贝操作会复制执行者的属性和权限。
-- `ls` 
-  - `ls -al`: 查看所有隐藏的文件  
-  - `ls -l | grep "*-" | wc -l` 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
-- `uname -a`: 查看Linux版本
-- `lscpu`: 查看系统CPU情况
+参数
+  -a  显示所有的文件，包含隐藏的
+  -l  详细的输出文件夹中内容
+  -h  以人类可读的形式输出文件的大小
+  --full-time  以完整的时间格式输出
+  -t  根据最后修改的时间排序，最新的在第一个
+  -F  在不同的文件结尾输出不同的特殊符号
+  -d  显示文件夹本生信息，不输出其中的内容
+  -r(reverse)  逆序排序
+  -S  默认按照从小到大对文件夹大小排序
+  -i  显示文件的 inode 信息
+  
+
+例子：
+    ls -al: 查看所有隐藏的文件  
+    ls -l | grep "*-" | wc -l 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
+```
+
+## 3.7. disk
+
+```shell
+du(disk usage): 显示指定的目录或文件所占用的磁盘空间大小。
+
+参数
+  -h(human)：以人类容易看懂的方式显示
+  -M(megabytes): 以1MB为单位
+  -s(summarize): 仅显示总计
+
+示例：
+du -sh 路径名 ：显示指定路径下文件的大小
+
+统计 `~/` 路径下每个文件的大小
+[root@localhost ~]# du -sh ~/*
+4.0K    /root/anaconda-ks.cfg
+0       /root/Desktop
+0       /root/Documents
+0       /root/Downloads
+0       /root/Music
+0       /root/Pictures
+0       /root/Public
+2.2M    /root/redis-6.0.16.tar.gz
+0       /root/Templates
+0       /root/Videos
+```
+
+## 3.8. fdisk
+
+```sh
+fdisk 操作磁盘分区表
+
+参数：
+  -l 查看硬盘的情况
+```
+
+## 3.9. df
+
+```
+df(disk free): 显示Linux 系统上文件系统的磁盘使用情况 
+
+-h(human)：以人类容易看懂的方式显示
+-i(inodes): 列出 inode 信息，不列出已使用的 block
+-H: 很像 -h, 但是用 1000 为单位而不是用 1024
+```
+
+mount
+
+```
+mount 挂载命令
+
+语法形式
+  mount 设备名字 挂在目录  
+  mount –t type dev dir
+
+参数：
+  –t type ：是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
+  dev：挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
+  dir：挂载点，即挂载到的文件目录路径
+
+示例：
+  mount -t iso9660 /dev/cdrom /media/drom
+
+```
+
+## 3.10. umount
+
+```sh
+umout 设备装载常用命令
+
+示例：
+  umount dir device […]
+```
+
+
+
+## 3.11. which
+
+```sh
+在 PATH 变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。
+
+示例：`which gcc`
+```
+
+## 3.12. whereis
+
+```sh
+whereis: 查找系统中包含可以找到的所有文件
+
+参数 -b : 只能用于搜索程序名和二进制文件
+示例：whereis gcc
+```
+
+## 3.13. hostname
+
+```
+hostname 是 Linux 的主机名。而 Linux 的 hostname 位于 /etc/hostname 下，修改此路径下的文件是永久有效的。
+
+若直接在终端使用命令 `hostname xxx` 修改，修改后仅仅是本次有效，重启后就失效了。 
+```
+
+# 4. 系统相关
+
+- uname -a:  查看 Linux 版本
+- `lscpu`: 查看系统 CPU 情况
 - `locale -a`： 列出系统支持的所有语言环境
-- `nslookup 域名` 查看域名对应的IP地址
-- `which`
-  - 在 `PATH` 变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。
-  - 示例：`which gcc`
-- `whereis`: 查找系统中包含可以找到的所有文件
-  - 只能用于搜索程序名和二进制文件（参数-b）
-  - 示例：`whereis gcc`
 - `eject`: 将光盘驱动器中的光盘轻轻弹出和收回
-- 修改主机名
-  - 修改 `/etc/hostname` 这个文件，重启后永久有效。
-  - 直接在终端使用命令 `hostname xxx` 修改，修改后仅仅是本次有效，重启后就失效了。 
+- `nslookup 域名` 查看域名对应的IP地址
 
 
-## 3.2. 查看文件内容
 
-- `cat(concatenate)`：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
-  > `cat < hello.txt > hello2.txt` 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 `cp` 指令的一个副本。  
-- `tac`：从最后一行开始显示文件内容。
-- `nl` ：查看文件时可以显示行号。
-- `more`：(`-n`：可以显示行号)一页一页的显示文件内容，只能往后翻。
-- `less`：(`-n`：可以显示行号)一页一页的显示文件内容，既可以往后翻又可以往前翻。一般用的最多。
-  - 空格键：向下翻一页。一般使用上下箭头进行翻页。
-  - /字符串：向下查找字符串。
-  - ?字符串：向上查找字符串。
-  - n：重复前一个查找。
-  - N：反向重复前一个查找。
-  - g：进到这个数据的第一行。
-  - G：进到这个数据的最后一行。
-  - q：退出less程序。
-- `od(Octal Dump)`：默认以二进制的方式读取文件内容。
-  - 将指定文件内容以八进制、十进制、十六进制、浮点格式或 ASCII 编码字符方式显示，通常用于显示或查看文件中不能直接显示在终端的字符。
-  - 格式：`od -t TYPE` 文件
-  - 参数
-    ```
+# 5. 文件查看命令
+
+cat
+
+```sh
+cat(concatenate)：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
+
+示例：
+  cat < hello.txt > hello2.txt   # 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 cp 指令的一个副本。  
+```
+
+## 5.1. tac
+
+```sh
+tac：从最后一行开始显示文件内容。
+```
+
+## 5.2. nl 
+
+```sh
+nl ：查看文件时可以显示行号。
+```
+
+
+
+## 5.3. more
+
+```
+more：(-n：可以显示行号)一页一页的显示文件内容，只能往后翻。
+```
+
+
+
+## 5.4. less
+
+```sh
+less：(-n：可以显示行号)一页一页的显示文件内容，既可以往后翻又可以往前翻，一般用的最多。
+
+参数：
+    空格键：向下翻一页。一般使用上下箭头进行翻页。
+    /字符串：向下查找字符串。
+    ?字符串：向上查找字符串。
+    n：重复前一个查找。
+    N：反向重复前一个查找。
+    g：进到这个数据的第一行。
+    G：进到这个数据的最后一行。
+    q：退出less程序。
+```
+
+od 
+
+```sh
+od(Octal Dump)：默认以二进制的方式读取文件内容。将指定文件内容以八进制、十进制、十六进制、浮点格式或 ASCII 编码字符方式显示，通常用于显示或查看文件中不能直接显示在终端的字符。
+
+格式：`od -t TYPE` 文件
+
+参数
     -A RADIX   --address-radix=RADIX   选择以何种基数表示地址偏移
     -j BYTES   --skip-bytes=BYTES      跳过指定数目的字节
     -N BYTES   --read-bytes=BYTES      输出指定字节数
@@ -239,62 +451,28 @@ swap分区：磁盘模拟内存的交换分区，当有数据被存放在物理�
       x[SIZE]：利用十六进制(hexadecimal)来输出数据。每个整数占用 SIZE bytes。
       
       SIZE 可以为数字，也可以为大写字母。如果 TYPE 是 [doux] 中的一个，那么 SIZE 可以为 C  = sizeof(char)，S = sizeof(short)，I = sizeof(int)，L = sizeof(long)。如果 TYPE 是 f，那么 SIZE 可以为 F = sizeof(float)，D = sizeof(double) ，L = sizeof(long double)
-    ```
-  - 示例
-    - `od -t x testfile`，以十六进制输出testfile，默认以四字节为一组（一列）显示。
-    - 利用 od 命令来查看字符的ASCII表：`echo abc | od -t dCc`
-- head、tail：取出文件前几行或最后几行的数据。
-  > 示例：在屏幕上列出 `/etc/man_db.conf` 文件中的第11行到22行之间的内容，并且显示行号。 `cat -n /etc/man_db.conf | head -n 20 | tail -n 10`
-
-
-## 3.3. 磁盘
-
-`du(disk usage)`: 显示指定的目录或文件所占用的磁盘空间大小。
-- `-h(human)`：以人类容易看懂的方式显示
-- `-M(megabytes)`: 以1MB为单位
-- `-s(summarize)`: 仅显示总计
-- 示例：`du -h`
-- du -sh 路径名 ：显示指定路径下文件的大小
-```
-// 统计 `~/` 路径下每个文件的大小
-
-[root@localhost ~]# du -sh ~/*
-4.0K    /root/anaconda-ks.cfg
-0       /root/Desktop
-0       /root/Documents
-0       /root/Downloads
-0       /root/Music
-0       /root/Pictures
-0       /root/Public
-2.2M    /root/redis-6.0.16.tar.gz
-0       /root/Templates
-0       /root/Videos
+      
+示例：
+  od -t x testfile  # 以十六进制输出 testfile，默认以四字节为一组（一列）显示。
+  echo abc | od -t dCc   # 查看字符的 ASCII 表
 ```
 
-`df(disk free)`: 显示Linux 系统上文件系统的磁盘使用情况 
-- `-h(human)`：以人类容易看懂的方式显示
-- `-i(inodes)`: 列出 inode 信息，不列出已使用的 block
-- `-H`: 很像 -h, 但是用 1000 为单位而不是用 1024
 
 
-`fdisk -l` 查看硬盘的情况
+## 5.5. head 和 tail
 
-mout 挂载命令
-> `mount 设备名字 挂在目录`
-- `mount` 设备装载常用命令：`mount –t type dev dir`
-- `–t type` 是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
-- `dev` 是挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
-- `dir`表示挂载点，即挂载到的文件目录路径
-- 例如：`mount -t iso9660 /dev/cdrom /media/drom`
+```sh
+head、tail：取出文件前几行或最后几行的数据。
 
+示例：
+  在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。 cat -n /etc/man_db.conf | head -n 20 | tail -n 10
+```
 
-`umout` 设备装载常用命令
-- 例如：`umount dir device […]`
+# 6. 文件 I/O
 
+## 6.1. 文件权限
 
-## 3.4. 文件权限与链接
-
-> CentOS使用的是 xfs 作为默认的文件系统。
+CentOS使用的是 xfs 作为默认的文件系统。
 
 文件权限分为
   - 可读（Read），可以读取文件的内容。
@@ -313,7 +491,7 @@ mout 挂载命令
   > 通常一个用户给其它的用户开放目录，至少要具备 `rx` 权限，其它的用户才能访问当前用户的目录。
 
 
-## 3.5. 默认文件权限 umask
+## 6.2. umask
 
 - umask: 指定目前用户在建立文件或目录时的默认权限值。
 - 查看当前系统的umask值：`0002` ;第一个数值为特殊权限值，后面三个分别对应为 `rwx` 的值。
@@ -329,46 +507,46 @@ mout 挂载命令
   ```
 
 
-## 3.6. 文件隐藏属性
+## 6.3. chattr
 
-- 修改文件的隐藏属性：`chattr [+-=] [ASacdistu]` 该命令一般用于对数据的安全性比较高的地方
-  ```
-  选项与参数
-  
-  + ： 增加某一个特殊参数， 其他原本存在参数则不动。
-  - ： 移除某一个特殊参数， 其他原本存在参数则不动。
-  = ： 设置一定， 且仅有后面接的参数
-  A ： 当设置了 A 这个属性时， 若你有存取此文件（ 或目录） 时， 他的存取时间 atime 将不会被修改，可避免 I/O 较慢的机器过度的存取磁盘。（目前建议使用文件系统挂载参数处理这个项目）
-  S ： 一般文件是非同步写入磁盘的， 如果加上 S 这个属性时，当你进行任何文件的修改， 该更动会“同步”写入磁盘中。
-  a ： 当设置 a 之后， 这个文件将只能增加数据，而不能删除也不能修改数据， 只有root 才能设置这属性
-  c ： 这个属性设置之后， 将会自动的将此文件“压缩”， 在读取的时候将会自动解压缩，但是在储存的时候， 将会先进行压缩后再储存（ 看来对于大文件似乎蛮有用的！）
-  d ： 当 dump 程序被执行的时候， 设置 d 属性将可使该文件（ 或目录） 不会被 dump 备份
-  i ： 这个 i 可就很厉害了！ 他可以让一个文件“不能被删除、 改名、设置链接也无法写入或新增数据！”对于系统安全性有相当大的助益！ 只有 root 能设置此属性
-  s ： 当文件设置了 s 属性时， 如果这个文件被删除， 他将会被完全的移除出这个硬盘空间，所以如果误删了， 完全无法救回来了！
-  u ： 与 s 相反的， 当使用 u 来设置文件时， 如果该文件被删除了， 则数据内容其实还存在磁盘中，可以使用来救援该文件！
-  
-  注意1： 属性设置常见的是 a 与 i 的设置值， 而且很多设置值必须要身为 root 才能设置
-  注意2： xfs 文件系统仅支持 AadiS 而已
-  
-  范例： 请尝试到/tmp下面创建文件， 并加入 i 的参数， 尝试删除看看。
-    [root@study ~]# cd /tmp
-    [root@study tmp]# touch attrtest &lt;==创建一个空文件
-    [root@study tmp]# chattr +i attrtest &lt;==给予 i 的属性
-    [root@study tmp]# rm attrtest &lt;==尝试删除看看
-    rm: remove regular empty file `attrtest'? y
-    rm: cannot remove `attrtest': Operation not permitted
-    // 看到了吗？连 root 也没有办法将这个文件删除呢！ 赶紧解除设置！
-  
-  范例： 请将该文件的 i 属性取消！
-  [root@study tmp]# chattr -i attrtest
-  
-  ```
+修改文件的隐藏属性：`chattr [+-=] [ASacdistu]` 该命令一般用于对数据的安全性比较高的地方
+```
+选项与参数
 
-- 查看文件或目录的隐藏属性：`lsattr [-adR] 文件或目录`
++ ： 增加某一个特殊参数， 其他原本存在参数则不动。
+- ： 移除某一个特殊参数， 其他原本存在参数则不动。
+= ： 设置一定， 且仅有后面接的参数
+A ： 当设置了 A 这个属性时， 若你有存取此文件（ 或目录） 时， 他的存取时间 atime 将不会被修改，可避免 I/O 较慢的机器过度的存取磁盘。（目前建议使用文件系统挂载参数处理这个项目）
+S ： 一般文件是非同步写入磁盘的， 如果加上 S 这个属性时，当你进行任何文件的修改， 该更动会“同步”写入磁盘中。
+a ： 当设置 a 之后， 这个文件将只能增加数据，而不能删除也不能修改数据， 只有root 才能设置这属性
+c ： 这个属性设置之后， 将会自动的将此文件“压缩”， 在读取的时候将会自动解压缩，但是在储存的时候， 将会先进行压缩后再储存（ 看来对于大文件似乎蛮有用的！）
+d ： 当 dump 程序被执行的时候， 设置 d 属性将可使该文件（ 或目录） 不会被 dump 备份
+i ： 这个 i 可就很厉害了！ 他可以让一个文件“不能被删除、 改名、设置链接也无法写入或新增数据！”对于系统安全性有相当大的助益！ 只有 root 能设置此属性
+s ： 当文件设置了 s 属性时， 如果这个文件被删除， 他将会被完全的移除出这个硬盘空间，所以如果误删了， 完全无法救回来了！
+u ： 与 s 相反的， 当使用 u 来设置文件时， 如果该文件被删除了， 则数据内容其实还存在磁盘中，可以使用来救援该文件！
+
+注意1： 属性设置常见的是 a 与 i 的设置值， 而且很多设置值必须要身为 root 才能设置
+注意2： xfs 文件系统仅支持 AadiS 而已
+
+范例： 请尝试到/tmp下面创建文件， 并加入 i 的参数， 尝试删除看看。
+  [root@study ~]# cd /tmp
+  [root@study tmp]# touch attrtest &lt;==创建一个空文件
+  [root@study tmp]# chattr +i attrtest &lt;==给予 i 的属性
+  [root@study tmp]# rm attrtest &lt;==尝试删除看看
+  rm: remove regular empty file `attrtest'? y
+  rm: cannot remove `attrtest': Operation not permitted
+  // 看到了吗？连 root 也没有办法将这个文件删除呢！ 赶紧解除设置！
+
+范例： 请将该文件的 i 属性取消！
+[root@study tmp]# chattr -i attrtest
+
+```
+
+查看文件或目录的隐藏属性：`lsattr [-adR] 文件或目录`
 
 
 
-## 3.7. 用户与用户组
+## 6.4. 用户与用户组
 
 说明 | 用户(owner) | 用户组(group) | 其它用户(other)
 --- | --- | --- |---
@@ -386,7 +564,7 @@ mout 挂载命令
   - 第7栏是文件名，对于符号链接
 
 
-## 3.8. 用户权限修改
+## 6.5. 用户权限修改
 
 - `chown`: 修改文件的拥有者（用户）
 - `chgrp`: 修改文件的用户组
@@ -438,7 +616,7 @@ mout 挂载命令
 
 
 
-## 3.9. 文件种类与扩展名
+## 6.6. 文件种类与扩展名
 
 类型符号 | 文件类型                      | 分类
 ---    |---                           | ---
@@ -453,9 +631,9 @@ s      | 套接文件(socket)               | null
 Linux下文件的最大长度：单一文件或目录的最大允许文件名为 255bytes，以一个ASCII英文占用一个字节来说，则可达255个字符长度，每个汉字占用 2个字节，则最大的文件名大约在 128 个汉字之间。
 
 
-## 3.10. 文件目录
+## 6.7. Linux系统目录
 
-> FHS(Filesystem Hierarchy Standard)：文件系统分层标准
+FHS(Filesystem Hierarchy Standard)：文件系统分层标准
 
 - boot：开机启动配置文件。Linux kernel常用的文件名为：vmlinuz，如果使用的是grub2这个开机管理程序， 则还会存在/boot/grub2/这个目录。
 - dev：存储外部设备文件。比要重要的文件有/dev/null, /dev/zero, /dev/tty, /dev/loop, /dev/sd等等。
@@ -494,7 +672,7 @@ Linux下文件的最大长度：单一文件或目录的最大允许文件名为
 - /var/run/：某些程序或者是服务启动后，会将他们的PID放置在这个目录下喔！ 与 /run 相同，这个目录链接到 /run去了！
 - /var/spool/：这个目录通常放置一些伫列数据，所谓的“伫列”就是排队等待其他程序使用的数据啦！ 这些数据被使用后通常都会被删除。
 
-```
+```sh
 一些链接文件之间的关系
 
 /bin --> /usr/bin
@@ -506,61 +684,33 @@ Linux下文件的最大长度：单一文件或目录的最大允许文件名为
 ```
 
 
-
-## 3.11. link(链接)
-
-Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
-
-
-### 3.11.1. hard links
-
-硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
-
-硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。要创建硬链接，原始文件也必须事先存在，只不过这次使用ln命令时不再需要加入额外的参数了。
-
-> 建立硬链接: `ln 原文件 新文件` 
-
-
-
-### 3.11.2. symbolic  links
-
-符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件。这两个通过符号链接在一起的文件，彼此的内容并不相同。
-
-要为一个文件创建符号链接，原始文件必须事先存在。然后可以使用 `ln` 命令以及 `-s`选项来创建符号链接。
-
-> 建立软连接: `ln -s source  destination` 
-
-
-
-
-## 3.12. 绝对路径与相对路径
+## 6.8. 绝对路径与相对路径
 
 绝对路径：一定由跟目录(`/`)写起。例如：`/usr/share/doc`  在shell脚本中一般使用绝对路径，防止因为不同的工作环境导致一些问题的发生。
 
 相对路径：不是由根目录(`/`)写起。例如：`../man`  相对路径只是相对于当前的工作路径。
 
+# 7. tar
+
+tar 命令用于的文件的打包和解压。
 
 
-# 4. tar
-
-tar 用于的文件的打包和解压。
-
-
-## 4.1. 压缩文件类型
+## 7.1. 压缩文件类型
 
 - `gzip`: 压缩文件后缀(*.gz)
 - `bzip2`: 压缩文件后缀(*.bz2)
 - `xz`: 压缩文件后缀(*.xz)
-<br>
+
 <img src="./pictures/compress.png">
 
 
-## 4.2. tar文件打包    
+## 7.2. tar文件打包    
 
 参数
 - `-c(Create)`: 打包文件
 - `-t(lisT)`: 察看打包文件的内容含有哪些文件名
 - `-x(eXtract)`: 解压打包文件 
+  
   > 注意：`-c, -t, -x` 不可同时出现在一串命令行中。
 - `-v(Verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
 - `-f(Filename)`:  后面要立刻接要被处理的文件名！
@@ -570,23 +720,24 @@ tar 用于的文件的打包和解压。
 - `-z`：通过 gzip 的支持进行压缩/解压，此时文件名最好为  `*.tar.gz`
 - `-j`：通过 bzip2 的支持进行压缩/解压，此时文件名最好为 `*.tar.bz2`
 - `-J` ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 `*.tar.xz`
+  
   > 注意：`-z, -j, -J` 不可以同时出现在一串命令行中
 
 
-## 4.3. 打包文件或目录
+## 7.3. 打包文件或目录
 
 - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar：`tar -cvf A.tar anaconda-ks.cfg `
 - 打包多个文件或目录，中间需要用空格分开：`tar -cvf B.tar anaconda-ks.cfg /tmp/`
 
 
-## 4.4. 解包文件或目录
+## 7.4. 解包文件或目录
 
 -  格式：`tar -xvf 解压的文件  -C 文件解压后的路径`
 -  注意：若后面不跟 `-C 文件解压后的路径` ，则会默认解包到当前路径下
 -  `tar -xvf test.tar -C /tmp` ：将test.tar打包的文件解包到 /tmp 路径下
 
 
-## 4.5. 解压缩文件
+## 7.5. 解压缩文件
 
 - 解多个文件
   > `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
@@ -597,7 +748,7 @@ tar 用于的文件的打包和解压。
   - `tar -zxvf etc.tar.gz etc/gdb`   将 etc.tar.gz压缩包中gdb文件夹解压 到当前目录下。
 
 
-## 4.6. 打包压缩
+## 7.6. 打包压缩
 
 - 打包压缩所有文件
   
@@ -614,7 +765,7 @@ tar 用于的文件的打包和解压。
     2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
 
 
-## 4.7. zcat zless 
+## 7.7. zcat zless 
 
 zcat、zless 命令直接查看压缩文件中的内容。
 
@@ -627,7 +778,7 @@ hello word
 ```
 
 
-## 4.8. zip
+## 7.8. zip
 
 > zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
@@ -641,8 +792,30 @@ hello word
 
 > 注意：直接使用unzip指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。
 
+# 8. link
 
-# 5. pipe
+Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
+
+
+## 8.1. hard links
+
+硬链接: 指向磁盘中文件的节点(inode),只有文件才能创建硬链接，目录不能创建。
+
+硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。要创建硬链接，原始文件也必须事先存在，只不过这次使用ln命令时不再需要加入额外的参数了。
+
+> 建立硬链接: `ln 原文件 新文件` 
+
+
+
+## 8.2. symbolic links
+
+符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件。这两个通过符号链接在一起的文件，彼此的内容并不相同。
+
+要为一个文件创建符号链接，原始文件必须事先存在。然后可以使用 `ln` 命令以及 `-s`选项来创建符号链接。
+
+> 建立软连接: `ln -s source  destination` 
+
+# 9. pipe
 
 pipe中文翻译过来是管道的意思。用 `|` 表示。
 
@@ -656,7 +829,7 @@ pipe中文翻译过来是管道的意思。用 `|` 表示。
 
 
 
-# 6. tee
+# 10. tee
 
 man手册英文原意：`tee - read from standard input and write to standard output and files`
 
@@ -665,7 +838,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 
 
-# 7. wc
+# 11. wc
 
 作用：print newline, word, and byte counts for each file. (用来计算一个文件或者指定的多个文件中的行数，单词数和字符数)
 
@@ -675,7 +848,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 - `-w`:  打印 word counts
 
 
-# 8. top
+# 12. top
 
 - 动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
 - 使用：`top -bn 1 -i -c` 
@@ -690,7 +863,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
   - `%st` 被虚拟机偷走的cpu 
 
 
-# 9. ps
+# 13. ps
 
 ps 是 `process status` 的缩写。
 
@@ -757,7 +930,7 @@ Thu Jun 10 08:33:04 2021       33:48
 ```
 
 
-# 10. pgrep
+# 14. pgrep
 
 根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
 
@@ -772,7 +945,7 @@ Thu Jun 10 08:33:04 2021       33:48
   ```
 
 
-# 11. killall 与 pkill
+# 15. killall 与 pkill
 
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
 
@@ -782,14 +955,25 @@ killall bash
 pkill bash
 ```
 
+# 16. nohup
 
-# 12. pstree 
+```
+nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
+
+示例：
+  nohup ping www.baidu.com    让执行 ping 命令的进程在后台运行。
+
+```
+
+
+
+# 17. pstree 
 
 - 查找各个进程之间的相关性。
 - Linux系统中内核调用的第一个进程为 `systemd`，该进程的PID为 `1`
 
 
-# 13. strace
+# 18. strace
 
 strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
 
@@ -797,158 +981,180 @@ strace指令跟踪程序使用的底层系统调用，可输出系统调用被�
 - 追踪进程的系统调用、信号传递、状态变化。
 
 
-# 14. pstack
+# 19. pstack
 pstack工具跟踪指定进程的栈信息。
 
 
-# 15. find
+# 20. find
 find：按照文件属性查找 
 
-- 选项参数
-  - `-name`: 例子：find /usr/src -name filename.txt
-  - `-type`: 例子：find /usr/src -type filename.txt
-    
-    > 类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
-  - `-size`: 默认单位为512byte，一个扇区的大小
-    - 例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
-    - 例子：find /usr/src -size +10k -size -20k
-  - `-maxdepth`: 例子： find /usr -maxdepth 2 -type d | wc -l  统计/usr 目录下深度为2的所有目录文件
-  - `-exec`: 例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
-  - `-print`: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有“./”字符串；
-  - `print0`: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；  
-  - `xargs`
-    -  以空格或`\0` 作为分隔符拆分解析的命令。每次从缓冲区读取的数据有限，而exec则是一次性将查到的内容读到缓冲区内。
-    - 例子：find ./ -name "*.sh" -print | xargs ls -l  结合管道一起使用，用法与exec一样。 
-  - `-atime(access time)`: 访问时间， `+7` 七天以前，`-7` 最近七天以内访问过的
-  - `-amin`: 访问时间（按照分钟）
-  - `-mtime`: 上次修改的时间（按照天数）
-  - `-mmin(modified minute) `: 修改时间（按照分钟）
-  - `ctime(change time)`: 最近文件的状态被改变的时间
-  - `cmin(change minute)`: 最近文件的状态被改变的时间（按照分钟）
+```sh
+选项参数
+-name
+  例子：find /usr/src -name filename.txt
+-type：类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
+  例子：find /usr/src -type filename.txt
+-size: 默认单位为512byte，一个扇区的大小
+  例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
+  例子：find /usr/src -size +10k -size -20k
+-maxdepth: 
+  例子： find /usr -maxdepth 2 -type d | wc -l  统计/usr 目录下深度为2的所有目录文件
+-exec: 
+  例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
+-print: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有 ./ 字符串；
+- print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；  
+- xargs
+  以空格或 \0 作为分隔符拆分解析的命令。每次从缓冲区读取的数据有限，而 exec则是一次性将查到的内容读到缓冲区内。
+  例子：find ./ -name "*.sh" -print | xargs ls -l  结合管道一起使用，用法与 exec 一样。 
+-atime(access time): 访问时间， +7 七天以前，-7 最近七天以内访问过的
+-amin: 访问时间（按照分钟）
+-mtime: 上次修改的时间（按照天数）
+-mmin(modified minute): 修改时间（按照分钟）
+-ctime(change time): 最近文件的状态被改变的时间
+-cmin(change minute): 最近文件的状态被改变的时间（按照分钟）
+```
 
 
-# 16. grep
+# 21. grep
 
 `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
 
-三种形式的grep命令
-- gerp:标准格式
-- egrep:扩展grep命令，其实和grep -E等价，支持基本和扩展的正则表达式。
-- fgrep: 快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
+三种形式的 grep 命令
 
+- gerp 是标准格式
+- egrep 是扩展grep命令，其实和grep -E等价，支持基本和扩展的正则表达式。
+- fgrep 是快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
+
+```sh
 选项参数
-- `-n`：列出所有的匹配行，显示行号
-- `-r`: 递归搜索
-- `-R`：  
-- `-i`: 搜索时，忽略大小写
-- `-c`: 只输出匹配行的数量
-- `-l`: 只列出符合匹配的文件名，不列出具体的匹配行
-- `-h`: 查询多文件时不显示文件名
-- `-s`: 不显示不存在、没有匹配文本的错误信息
-- `-v`: 显示不包含匹配文本的所有行
-- `-w`: 匹配整个单词
-- `-x`: 匹配整行
-- `-q`: 禁止输出任何结果，已退出状态表示搜索是否成功
-- `-b`: 打印匹配行距文件头部的偏移量，以字节为单位
-- `-o`: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
-  
+-n：列出所有的匹配行，显示行号
+-r: 递归搜索
+-R：  
+-i: 搜索时，忽略大小写
+-c: 只输出匹配行的数量
+-l: 只列出符合匹配的文件名，不列出具体的匹配行
+-h: 查询多文件时不显示文件名
+-s: 不显示不存在、没有匹配文本的错误信息
+-v: 显示不包含匹配文本的所有行
+-w: 匹配整个单词
+-x: 匹配整行
+-q: 禁止输出任何结果，已退出状态表示搜索是否成功
+-b: 打印匹配行距文件头部的偏移量，以字节为单位
+-o: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
 
 示例：
-```
-grep -r  "task_struct {" /usr/src/  -n       搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
+  grep -r  "task_struct {" /usr/src/  -n       # 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
 ```
 
 
-# 17. PID
+# 22. PID
 
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
+# 23. netstat
+
+```sh
+netstat 是一个查看系统中端口使用情况的一个命令。侦听端口：应用程序或进程侦听的网络端口，充当通信端点。注意：同一个 IP 地址上不能用两个不同的服务去侦听同一端口
+
+语法格式
+  netstat 检查端口
+
+参数项
+    -t  显示 TCP 端口。
+    -u  显示 UDP 端口。
+    -n  显示数字地址而不是主机名。
+    -l  仅显示侦听端口。
+    -p  显示进程的 PID 和名称
+
+示例：
+  netstat -tunlp    # 列出正在侦听的所有TCP或UDP端口
+  netstat -apn | grep 端口号  # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
+```
+
+# 24. ss 
+
+```sh
+ss 检查端口： 
+
+示例：
+  ss -tunlp
+```
 
 
-# 18. netstat
 
-netstat 是一个查看系统中端口使用情况的一个命令。
+# 25. lsof 
 
-- 侦听端口：应用程序或进程侦听的网络端口，充当通信端点
-- 同一个 IP 地址上不能用两个不同的服务去侦听同一端口
-- `netstat` 检查端口
-  - ` -t `  显示 TCP 端口。
-  - ` -u `  显示 UDP 端口。
-  - ` -n `  显示数字地址而不是主机名。
-  - ` -l `  仅显示侦听端口。
-  - ` -p `  显示进程的 `PID和名称`
-    - ` netstat -tunlp ` 列出正在侦听的所有TCP或UDP端口
-    - Proto - 套接字使用的协议。
-    - Local Address - 进程侦听的 IP 地址和端口号。
-    - PID/Program name  - PID 和进程名称
+```sh
+lsof 列出整个 Linux 系统打开的所有文件描述符。
+
+参数
+  -p：指定进程ID（ PID）。
+  -d：允许指定要显示的文件描述符编号。
   
-- 查看指定端口号的所有进程在TCP、UDP传输中的所有状态：`netstat -apn | grep 端口号`
-- `ss` 检查端口： `ss -tunlp`
+示例：
+  lsof -nP -iTCP -sTCP:LISTEN 获取所有侦听 TCP 端口的列表 
+```
 
 
-# 19. lsof
-
-`lsof` 列出整个 Linux 系统打开的所有文件描述符。
-
-- `lsof -nP -iTCP -sTCP:LISTEN ` 获取所有侦听 TCP 端口的列表 
-- 参数
-  - `-p`： 指定进程ID（ PID）。
-  - `-d`：允许指定要显示的文件描述符编号。 
-
-
-# 20. netcat
+# 26. netcat
 
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
 
-# 21. socat
+# 27. socat
 
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站：http://www.dest-unreach.org/socat/ 
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
 
-# 22. traceroute
+# 28. traceroute
 
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
 
-# 23. dmesg 
+# 29. dmesg 
 
 dmesg是分析内核产生的一些信息。
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
 
-# 24. vmstat
+# 30. vmstat
 
 可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
 
 
-# 25. man
+# 31. man
 
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
+```sh
+语法格式：man -n 命令参数
 
-`man -n 命令参数`：n为数字
-- 1：普通应用程序或shell命令
-- 2：系统调用
-- 3：库函数
-- 4：设备文件
-- 5：文件格式、或相关协议
-- 6：游戏设备
-- 7：其它设备
-- 8：root管理命令
-- 9：非标准的内核程序
-  <img src="./pictures/man代号.png">
-  ```
-  man 2 socket
-  ```
+其中 n 为数字，不同的数字表示如下：
+    1：普通应用程序或shell命令
+    2：系统调用
+    3：库函数
+    4：设备文件
+    5：文件格式、或相关协议
+    6：游戏设备
+    7：其它设备
+    8：root管理命令
+    9：非标准的内核程序
+    
+示例：
+  查找 socket 文档： man 2 socket
+```
 
-`man -k keyword` 按照关键字搜索与之匹配的相似命令。
-  ```bash
+<img src="./pictures/man代号.png">
+
+
+  ```sh
+  man -k keyword    # 按照关键字搜索与之匹配的相似命令。
+  
   john@ubuntu:~$ man -k what
   git-blame (1)        - Show what revision and author last modified each line of a file
   git-receive-pack (1) - Receive what is pushed into the repository
@@ -960,28 +1166,30 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
   whatis (1)           - display one-line manual page descriptions
   ```
 
-
 man手册中的一些关键字
-- NAME - 命令名
-- SYNOPSIS - 使用方法大纲
-- CONFIGURATION - 配置
-- DESCRIPTION - 功能说明
-- OPTIONS - 可选参数说明
-- EXIT STATUS - 退出状态, 这是一个返回给父进程的值
-- RETURN VALUE - 返回值
-- ERRORS - 可能出现的错误类型
-- ENVIRONMENT - 环境变量
-- FILES - 相关配置文件
-- VERSIONS - 版本
-- CONFORMING TO - 符合的规范
-- NOTES - 使用注意事项
-- BUGS - 已经发现的bug
-- EXAMPLE - 一些例子
-- AUTHORS - 作者
-- SEE ALSO - 功能或操作对象相近的其它命令
+
+```
+NAME - 命令名
+SYNOPSIS - 使用方法大纲
+CONFIGURATION - 配置
+DESCRIPTION - 功能说明
+OPTIONS - 可选参数说明
+EXIT STATUS - 退出状态, 这是一个返回给父进程的值
+RETURN VALUE - 返回值
+ERRORS - 可能出现的错误类型
+ENVIRONMENT - 环境变量
+FILES - 相关配置文件
+VERSIONS - 版本
+CONFORMING TO - 符合的规范
+NOTES - 使用注意事项
+BUGS - 已经发现的bug
+EXAMPLE - 一些例子
+AUTHORS - 作者
+SEE ALSO - 功能或操作对象相近的其它命令
+```
 
 
-man 中的一些快捷操作:
+man 中的快捷操作:
 
 名称    | 用法
 ---     |---
@@ -993,12 +1201,12 @@ N       |	反向查询
 
 与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
 
-# 26. ntsysv
+# 32. ntsysv
 
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 27. wget
+# 33. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
@@ -1007,7 +1215,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
 
-# 28. SHA
+# 34. SHA
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
 - SHA家族的五个算法，分别是SHA-1、SHA-224、SHA-256、SHA-384，和SHA-512，由美国国家安全局（NSA）所设计，并由美国国家标准与技术研究院（NIST）发布，是美国的政府标准。后四者有时并称为SHA-2。SHA-1在许多安全协定中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5（更早之前被广为使用的杂凑函数）的后继者。
@@ -1027,7 +1235,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   feeds-master.zip: OK
   ```
 
-# 29. md5
+# 35. md5
 
 - md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
 
@@ -1042,22 +1250,18 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   ```
 
 
-# 30. ldconfig
+# 36. ldconfig
 
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
 
-参考
-- [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
-
-
-# 31. ldd
+# 37. ldd
 
 作用：判断某个可执行的二进制文件含有什么动态库。
 
-```
+```sh
 [root@zk_190 etc]# ldd -v /usr/bin/cat
         linux-vdso.so.1 =>  (0x00007ffe11572000)
         libc.so.6 => /lib64/libc.so.6 (0x00007f8996748000)
@@ -1075,20 +1279,14 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
                 ld-linux-x86-64.so.2 (GLIBC_PRIVATE) => /lib64/ld-linux-x86-64.so.2
         /lib64/ld-linux-x86-64.so.2 (0x00007faf69eef000)
 
-      // 参数 -v 表示该函数来自于哪一个软件
+      # 参数 -v 表示该函数来自于哪一个软件
 ```
 
-
-
-# 32. chkconfig
+# 38. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
-
-
-
-
-# 33. 包管理
+# 39. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
@@ -1096,22 +1294,22 @@ Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线
 
 CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
-
-## 33.1. 软件仓库
-
-- Windows
-  
-  > 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
-  
-- Linux 或 Unix
-   - 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
-   - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
-
-- 清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
+清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
 
 
 
-## 33.2. apt命令
+
+## 39.1. 软件仓库
+
+Windows
+
+- 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
+
+Linux 或 Unix
+- 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
+- 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
+
+## 39.2. apt
 
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
@@ -1145,7 +1343,7 @@ CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进�
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 33.3. dpkg 命令
+## 39.3. dpkg 
 
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
@@ -1161,16 +1359,20 @@ CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进�
 
 
 -----------------------------------------------------------------
+
+## 39.4. gcc8/g++8 以上安装
+
 CentOS7 安装高版本 gcc/g++
+
 - 安装软件仓库包 scl: `yum install centos-release-scl`
 - 安装 gcc/g++，数字 8 对应的是 gcc/g++8: `yum install devtoolset-8-gcc devtoolset-8-gcc-c++`
 - shell 终端临时设置默认版本，重启后失效: `scl enable devtoolset-8 -- bash`；长期有效设置：`vim /etc/profile` 文件中的最后一行加入: `source /opt/rh/devtoolset-8/enable`
 
 
 
-# 34. 防火墙
+# 40. 防火墙
 
-## 34.1. ubuntu下默认的防火墙
+## 40.1. ubuntu 下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -1183,14 +1385,15 @@ CentOS7 安装高版本 gcc/g++
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 34.2. CentOS下默认的防火墙
+## 40.2. CentOS 下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
-```
+```sh
+firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
+
 参数解释
-1、firwall-cmd：是 Linux 提供的操作 firewall 的一个工具；
-2、–-permanent：表示设置为持久；
-3、–-add-port：标识添加的端口
+  –-permanent：表示设置为持久；
+  –-add-port：标识添加的端口
 ```
 
 - 启动： systemctl start firewalld
@@ -1213,20 +1416,16 @@ CentOS7下默认的防火墙为 `firewalld`
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
-参考
-- [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+# 41. SELinux
+
+SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
+
+SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 35. SELinux
+# 42. 共性问题
 
-SELinux是Security Enhanced Linux的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
-
-SELinux是通过 MAC(Mandatory Access Control: 强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
-
-
-# 36. 共性问题
-
-## 36.1. Linux与Windows相差8小时处理
+## 42.1. Linux与Windows相差8小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -1243,8 +1442,10 @@ $sudo ntpdate time.windows.com
 
 
 
-# 37. 参考
+# 43. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
-  - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+- [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+- [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+- [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
