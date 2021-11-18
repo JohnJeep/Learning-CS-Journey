@@ -84,8 +84,10 @@ Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般�
 - `Ctrl +  q`: 恢复当前terminal的stdin（Resume）
 - ` stop + job号`: 将前台的进程挂起
 - ` fg `: 将后台中的命令调至前台继续运行
+  
   > `fg %job number`: 将放在后台的任务通过指定其 `job number`，让它在前台工作。`%job number`是通过jobs命令查到的后台正在执行的命令的序号(不是pid，数字默认从 1 开始)
 - `bg`: 进程转到后台
+  
   > `bg %number` 直接让在后台暂停（stopping）的任务变为运行（running）状态。
 - `jobs`：查看放在后台的所有任务。
   - `+` : 代表最近被放到后台的任务号码。
@@ -198,7 +200,7 @@ Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般�
 ## 4.2. 变量
 
 > 变量名前面加上 `$` 表示显示当前变量的值，还可以让变量作为命令行的参数。没有美元符， shell会将变量名解释成普通的文本字符串。
-  
+
 ### 4.2.1. 环境变量
 
 - 本地变量: `VARNAME=value`。shell中默认的变量类型为字符串类型，定义时不需要指定类型。
@@ -291,6 +293,7 @@ echo The resulting value is $value2
 
 输入重定向。Linux会用重定向指定的文件来替换标准输入文件描述符。它会读取文件并提取数据，就如同它是键盘上键入的。
 - 输入重定向将文件的内容重定向到命令，使用小于符号 `<`。
+  
   > 形式：`command < inputfile`  ，小于号说明数据正在从输入文件流向命令。
 - 内联输入重定向符号是远小于号（ <<）。
 
@@ -652,6 +655,27 @@ sed俗称做流编辑器，以行单位进行字符处理。
     - FS：输入文件的列分隔符，默认是空格和TAB
     - ORS：输出字段的行分隔符，默认是换行符
     - RS：输入文件的行分隔符，默认是换行符
+
+# 15 expect
+
+**Expect** 是[Unix](https://zh.wikipedia.org/wiki/Unix)系统中用来进行自动化控制和测试的软件工具，由[Don Libes](https://zh.wikipedia.org/w/index.php?title=Don_Libes&action=edit&redlink=1)制作，作为[Tcl](https://zh.wikipedia.org/wiki/Tcl)脚本语言的一个扩展，应用在交互式[软件](https://zh.wikipedia.org/wiki/软件)中如[telnet](https://zh.wikipedia.org/wiki/Telnet)，[ftp](https://zh.wikipedia.org/wiki/文件传输协议)，[Passwd](https://zh.wikipedia.org/wiki/Passwd)，[fsck](https://zh.wikipedia.org/wiki/Fsck)，[rlogin](https://zh.wikipedia.org/w/index.php?title=Rlogin&action=edit&redlink=1)，[tip](https://zh.wikipedia.org/w/index.php?title=Tip&action=edit&redlink=1)，[ssh](https://zh.wikipedia.org/wiki/Secure_Shell)等等。该工具利用Unix伪终端包装其子进程，允许任意程序通过终端接入进行自动化控制；也可利用[Tk](https://zh.wikipedia.org/wiki/Tk)工具，将交互程序包装在[X11](https://zh.wikipedia.org/wiki/X11)的[图形用户界面](https://zh.wikipedia.org/wiki/图形用户界面)中。
+
+expect 参数项：
+
+```
+spawn               交互程序开始后面跟命令或者指定程序
+expect              获取匹配信息匹配成功则执行expect后面的程序动作
+send exp_send       用于发送指定的字符串信息
+exp_continue        在expect中多次匹配就需要用到
+send_user           用来打印输出 相当于shell中的echo
+exit                退出expect脚本
+eof                 expect执行结束 退出
+set                 定义变量
+puts                输出变量
+set timeout         设置超时时间
+```
+
+
 
 # 15. Reference
 
