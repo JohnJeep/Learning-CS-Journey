@@ -203,6 +203,8 @@ Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般�
 
 ### 4.2.1. 环境变量
 
+Linux 的环境变量使用 `PATH` 表示，多个环境变量参数之间使用 `:` 分割开，而 Windows 下使用 `;` 分割开。打印 Linux 系统的环境变量 `echo $PATH`
+
 - 本地变量: `VARNAME=value`。shell中默认的变量类型为字符串类型，定义时不需要指定类型。
 - 环境变量: 将本地变量提升为环境变量，`export VARNAME=value`
 - 删除已定义的环境变量或本地变量：`unset VARNAME`
