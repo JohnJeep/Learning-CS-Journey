@@ -1,4 +1,5 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditTime: 2021-11-14 17:11:22
@@ -145,34 +146,36 @@
 
 ## 2.2. GPT
 
-> GPT: GUID Partition Table，源自EFI标准的一种较新的磁盘分区表结构的标准，支持64位的寻址。
-- LBA(Logical Block Address): 逻辑区块位址
-  - LBA0(MBR兼容区块)：储存了第一阶段的启动引导程序。
-  - LBA1(GPT表头记录)：记录了分区表本身的位置与大小， 同时记录了备份用的 GPT 分区（在最后 34 个 LBA 区块）放置的位置，同时放置了分区表的检验机制码（ CRC32），操作系统可以根据这个检验码来判断 GPT 是否正确。 
-  - LBA2-33（实际记录分区的信息地方）：从 LBA2 区块开始，每个 LBA 都可以记录 4 组分区记录，所以在默认的情况下，总共可以有 4*32 = 128 组分区记录。 因为每个 LBA 有 512Bytes， 因此每组记录用到 128Bytes 的空间， 除了每组记录所需要的识别码与相关的记录之外， GPT 在每组记录中分别提供了 64bits 来记载开始/结束的扇区号码。
+GPT: GUID Partition Table，源自EFI标准的一种较新的磁盘分区表结构的标准，支持64位的寻址。
 
-> GPT 分区已经没有所谓的主、 扩展、 逻辑分区的概念，既然每组纪录都可以独立存在，当然每个都可以视为是主分区， 每一个分区都可以拿来格式化使用。
+LBA(Logical Block Address): 逻辑区块位址
+- LBA0(MBR兼容区块)：储存了第一阶段的启动引导程序。
+- LBA1(GPT表头记录)：记录了分区表本身的位置与大小， 同时记录了备份用的 GPT 分区（在最后 34 个 LBA 区块）放置的位置，同时放置了分区表的检验机制码（ CRC32），操作系统可以根据这个检验码来判断 GPT 是否正确。 
+- LBA2-33（实际记录分区的信息地方）：从 LBA2 区块开始，每个 LBA 都可以记录 4 组分区记录，所以在默认的情况下，总共可以有 4*32 = 128 组分区记录。 因为每个 LBA 有 512Bytes， 因此每组记录用到 128Bytes 的空间， 除了每组记录所需要的识别码与相关的记录之外， GPT 在每组记录中分别提供了 64bits 来记载开始/结束的扇区号码。
+
+GPT 分区已经没有所谓的主、 扩展、 逻辑分区的概念，既然每组纪录都可以独立存在，当然每个都可以视为是主分区， 每一个分区都可以拿来格式化使用。
 
 
 
 ## 2.3. BIOS与UEFI
 
-- BIOS：是一个写入到主板上的一个软件程序（仅有16位），采用汇编语言编写的。 
-- Boot loader的主要任务
-  - 提供加载项：用户可以选择不同的启动选项，这也是多重引导的重要功能。
-  - 加载内核文件：直接指向可使用的程序区段，来启动操作系统。
-  - 转交其它启动引导程序：将启动管理功能转交给其它引导程序负责。
-> 每个分区都有自己的启动扇区(boot sector)。启动引导程序只会认识自己的系统分区内的可开机核心文件， 以及其它启动引导程序而已；
+BIOS：是一个写入到主板上的一个软件程序（仅有16位），采用汇编语言编写的。 
 
-> 如果要安装多重开机，为什么最好先安装Windows再安装Linux呢？
->
+Boot loader的主要任务
+- 提供加载项：用户可以选择不同的启动选项，这也是多重引导的重要功能。
+- 加载内核文件：直接指向可使用的程序区段，来启动操作系统。
+- 转交其它启动引导程序：将启动管理功能转交给其它引导程序负责。
+
+  > 每个分区都有自己的启动扇区(boot sector)。启动引导程序只会认识自己的系统分区内的可开机核心文件， 以及其它启动引导程序而已；
+
+如果要安装多重开机，为什么最好先安装Windows再安装Linux呢？
 > 因为 Linux在安装的时候，你可以选择将启动引导程序安装在 MBR 或其它分区的启动扇区， 而且Linux的启动引导程序可以手动设置选项，所以你可以在Linux的启动引导程序里面加入Windows启动的选项；
-Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及自己所在分区的启动扇区，你没有选择的机会， 而且它没有让我们自己选择选项的功能。因此，如果先安装Linux再安装Windows的话，那么 MBR 的启动引导程序就只会有Windows的选项， 而不会有Linux的选项（ 因为原本在MBR内的Linux的启动引导程序就会被覆盖掉） 。
+>Windows在安装的时候， 它的安装程序会主动的覆盖掉 MBR 以及自己所在分区的启动扇区，你没有选择的机会， 而且它没有让我们自己选择选项的功能。因此，如果先安装Linux再安装Windows的话，那么 MBR 的启动引导程序就只会有Windows的选项， 而不会有Linux的选项（ 因为原本在MBR内的Linux的启动引导程序就会被覆盖掉） 。
 
-- UEFI(Unified Extensible Firmware Interface): 统一可扩展固件接口，采用C语言编写的。其中UEFI可以直接获取GPT的分区表。
+UEFI(Unified Extensible Firmware Interface): 统一可扩展固件接口，采用C语言编写的。其中UEFI可以直接获取GPT的分区表。
 
-> 为什么在安装系统时，需要将UEFI的secure boot关闭？
-> 
+为什么在安装系统时，需要将 UEFI 的 secure boot 关闭？ 
+
 > 因为使用secure boot会使将要启动的操作系统，必须要被UEFI验证，否则就无法启动。
 
 
@@ -265,7 +268,28 @@ ls 命令列出文件夹中的内容
 例子：
     ls -al: 查看所有隐藏的文件  
     ls -l | grep "*-" | wc -l 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
+    ls | wc -l 统计当前目录下总共有多少行
 ```
+
+## stat
+
+```sh
+stat 查看文件的详细信息，比 ls 查看的更多
+
+例子：
+[root@CentOS7 ~]# stat t.txt
+  File: ‘t.txt’
+  Size: 149             Blocks: 8          IO Block: 4096   regular file
+Device: fd00h/64768d    Inode: 34955932    Links: 1
+Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+Context: unconfined_u:object_r:admin_home_t:s0
+Access: 2021-11-20 21:20:51.966004651 +0800
+Modify: 2021-11-20 21:20:44.858014426 +0800
+Change: 2021-11-20 21:20:44.858014426 +0800
+ Birth: -
+```
+
+
 
 ## 3.7. disk
 
@@ -380,11 +404,14 @@ hostname 是 Linux 的主机名。而 Linux 的 hostname 位于 /etc/hostname �
 
 # 5. 文件查看命令
 
-cat
+## cat
 
 ```sh
 cat(concatenate)：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
 
+参数项
+  - n 显示行号
+  
 示例：
   cat < hello.txt > hello2.txt   # 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 cp 指令的一个副本。  
 ```
@@ -467,6 +494,19 @@ head、tail：取出文件前几行或最后几行的数据。
 示例：
   在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。 cat -n /etc/man_db.conf | head -n 20 | tail -n 10
 ```
+
+## uniq 
+
+```sh
+uniq 输出或忽略文件的重复行，常与 sort 排序命令结合使用
+
+参数项
+  -c, --count    每行前面显示重复出现的次数
+  -d, --repeated 只显示重复的行
+  -u, --unique   只显示出现过一次的行
+```
+
+
 
 # 6. 文件 I/O
 
@@ -840,12 +880,19 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 # 11. wc
 
-作用：print newline, word, and byte counts for each file. (用来计算一个文件或者指定的多个文件中的行数，单词数和字符数)
+作用：print newline, word, and byte counts for each file. (用来统计一个文件或者指定的多个文件中的行数，单词数和字符数)
 
+```sh
+格式
+  wc [OPTION]... [FILE]...
+  
 选项参数
-- `-c`: 打印字节数
-- `-l`: 打印列数
-- `-w`:  打印 word counts
+  -c --bytes 打印字节数
+  -l --lines 打印行数
+  -w --words 打印单词数
+  -m --chars 打印字符数
+  -L --max-line-length 打印最长行的长度
+```
 
 
 # 12. top
@@ -930,21 +977,6 @@ Thu Jun 10 08:33:04 2021       33:48
 ```
 
 
-# 14. pgrep
-
-根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
-
-- `pgrep -l program_name)`  只显示某个进程的PID
-- `pidof program_name`：找出某个正在执行的进程的PID
-  ```sh
-  pgrep bash
-  3528
-  
-  pidof bash 
-  3528
-  ```
-
-
 # 15. killall 与 pkill
 
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
@@ -989,6 +1021,10 @@ pstack工具跟踪指定进程的栈信息。
 find：按照文件属性查找 
 
 ```sh
+格式
+  find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]
+  find /opt -name "*"
+
 选项参数
 -name
   例子：find /usr/src -name filename.txt
@@ -998,22 +1034,88 @@ find：按照文件属性查找
   例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
   例子：find /usr/src -size +10k -size -20k
 -maxdepth: 
-  例子： find /usr -maxdepth 2 -type d | wc -l  统计/usr 目录下深度为2的所有目录文件
+  例子： find /usr -maxdepth 2 -type d | wc -l  统计 /usr 目录下深度为2的所有目录文件
+        find /usr -maxdepth 2 ! -type d 查找 /usr 路径下深度为 2 除开类型为目录的所有文件
 -exec: 
   例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
 -print: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有 ./ 字符串；
 - print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；  
-- xargs
-  以空格或 \0 作为分隔符拆分解析的命令。每次从缓冲区读取的数据有限，而 exec则是一次性将查到的内容读到缓冲区内。
-  例子：find ./ -name "*.sh" -print | xargs ls -l  结合管道一起使用，用法与 exec 一样。 
--atime(access time): 访问时间， +7 七天以前，-7 最近七天以内访问过的
+-atime(access time): 访问时间， +7 超过七天被访问的文件；-7 七天以内访问过的文件  7 恰好在七天前被访问的文件（那个时间点）
+  find . atime -7 
 -amin: 访问时间（按照分钟）
 -mtime: 上次修改的时间（按照天数）
 -mmin(modified minute): 修改时间（按照分钟）
 -ctime(change time): 最近文件的状态被改变的时间
 -cmin(change minute): 最近文件的状态被改变的时间（按照分钟）
+-prune: 忽略指定的文件查找
+   find . -path "./test" -prune -o -name "*.txt" -print  忽略 test 文件夹去查找当前路径下以 txt 结尾的所有文件
+-ok 执行的命令：输出的结果确定是否要执行指定的命令
+  [root@CentOS7 ~]# find .  -path "./LY" -prune -o -name "*.gz" -ok ls -l {} \;
+  < ls ... ./redis-6.0.16.tar.gz > ? y
+  -rw-r--r--. 1 root root 2288647 Nov  1 20:26 ./redis-6.0.16.tar.gz
+ < ls ... ./LY.tar.gz > ? y
+-rw-r--r--. 1 root root 506827845 Nov 11 20:23 ./LY.tar.gz
+
 ```
 
+## xargs
+
+xargs 又称管道命令。是给命令传递参数的一个过滤器，也是组合多个命令的一个工具，它把一个数据流分割成一些足够小的快，方便过滤器和命令进行处理。
+
+```sh
+参数项
+  -d 指定一个特定的分隔符显示，默认分隔符为空格
+  -i 使用 {} 替代传递的参数
+  -n 限制单个命令行的参数个数
+  -t 显示详情
+  -p 交互模式
+  -0 --null，使用 null 分割，而不是空白，禁用引号和反斜杠处理
+
+例子：
+  多行输入变单行
+    [root@CentOS7 ~]# cat a.txt
+    123
+
+    456
+
+    789
+    [root@CentOS7 ~]# xargs < a.txt
+    123 456 789
+  -n 参数的使用
+    [root@CentOS7 ~]# cat a.txt
+    123 111 222 333
+
+    456 444 555 666
+
+    789 777 888 999
+    [root@CentOS7 ~]# xargs -n 2 < a.txt
+    123 111
+    222 333
+    456 444
+    555 666
+    789 777
+    888 999
+  -d 参数使用
+    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK"
+    helo,AI,DB,CJ,KK
+    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK" | xargs -d ","
+    helo AI DB CJ KK
+    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK" | xargs -d "," -n 2
+    helo AI
+    DB CJ
+    KK
+    
+ -i参数使用；将当前目录下深度为 1 的所有 .txt 文件移动到当前已存在的 temp 目录下；xargs -i 作为参数传递
+    [root@CentOS7 ~]# find . -maxdepth 1 -name "*.txt" | xargs -i mv {} ./temp
+    [root@CentOS7 ~]# ls temp/
+    a.txt  b.txt
+    
+  -I参数使用；将当前目录下所有为 .txt 的文件移出到上一级已存在的 txt 目录下
+    [root@CentOS7 temp]# find . -name "*.txt" | xargs -I aa mv aa ../txt
+    [root@CentOS7 ~]# ls txt/
+    a.txt  b.txt
+
+```
 
 # 21. grep
 
@@ -1046,6 +1148,20 @@ find：按照文件属性查找
   grep -r  "task_struct {" /usr/src/  -n       # 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
 ```
 
+# 14. pgrep
+
+```sh
+根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
+
+pgrep -l program_name  只显示某个进程的PID
+pidof program_name  找出某个正在执行的进程的PID
+
+pgrep bash
+3528
+
+pidof bash 
+3528
+```
 
 # 22. PID
 
