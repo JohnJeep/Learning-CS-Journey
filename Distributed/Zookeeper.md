@@ -15,6 +15,8 @@ Zookeeper=文件系统+监控通知机制
 
 ZooKeeper 适用于存储和协同相关的关键数据，不适合用于大数据量存储。如果要存 KV 或者大量的业务数据，还是要用数据库或者其他 NoSql 来做。
 
+# 缺点
+
 为什么 ZooKeeper 不适合大数据量存储呢？主要有以下两个原因：
 
 1. 设计方面：ZooKeeper 需要把所有的数据（它的 data tree）加载到内存中。这就决定了ZooKeeper 存储的数据量受内存的限制。这一点 ZooKeeper 和 Redis 比较像。一般的数据库系统例如 MySQL（使用 InnoDB 存储引擎的话）可以存储大于内存的数据，这是因为 InnoDB 是基于 B-Tree 的存储引擎。B-tree 存储引擎和 LSM 存储引擎都可以存储大于内存的数据量。
@@ -83,6 +85,7 @@ ZooKeeper 对外提供一个用来访问 data tree的简化文件系统 API：
 
 - **create :** 在树中的某个位置创建一个节点
 - **delete :** 删除一个节点存在：测试节点是否存在于某个位置
+- **deleteall**：删除所有节点
 - **get data :** 从节点读取数据
 - **set data：** 将数据写入节点
 - **get children :** 检索节点的子节点列表
@@ -126,13 +129,82 @@ ZooKeeper 对外提供一个用来访问 data tree的简化文件系统 API：
 
 
 
+# 监听（Watch）
+
+监听原理
+
+1） 首先要有一个main()线程
+2） 在main线程中创建Zookeeper客户端， 这时就会创建两个线程， 一个负责网络连接通信（connet） ， 一个负责监听（listener） 。
+3） 通过connect线程将注册的监听事件发送给Zookeeper。
+4） 在Zookeeper的注册监听器列表中将注册的监听事件添加到列表中。
+5） Zookeeper监听到有数据或路径变化， 就会将这个消息发送给listener线程。
+6） listener线程内部调用了process()方法。  
+
+![image-20211121214454971](D:\GitCode\Learning-CS-Journey\Distributed\figures\image-20211121214454971.png)
+
+常见监听点
+
+1. 监听节点上值得变化情况
+
+```sh
+// 一台机器上改变节点
+[zk: 192.168.0.191(CONNECTED) 10] set /Yongheng/Dan "Yao"
+
+// 另一台机器上监听
+[zk: localhost:2181(CONNECTED) 9] get -w /Yongheng/Dan
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeDataChanged path:/Yongheng/Dan
+```
+
+2. 监听节点的子节点变化情况（增加、删除节点）
+
+```sh
+// 192.168.0.191 机器上增加节点
+[zk: 192.168.0.191(CONNECTED) 12] create /Yongheng/Qi "GuiFu"
+Created /Yongheng/Qi
+
+// localhost 机器上监听变化
+[zk: localhost:2181(CONNECTED) 1] ls -w /Yongheng
+[Dan, Lin, Xue, Yao]
+[zk: localhost:2181(CONNECTED) 2]
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/Yongheng
+```
+
+<font color=red>注意：</font> 无论是节点中的数据还是节点的变化，注册一次，只能监听一次。想再次监听，需要再次注册。  
 
 
 
 
 
+
+
+# 面试
+
+## 选举机制
+
+半数机制，超过半数的投票通过，即通过。
+（1）第一次启动选举规则：投票过半数时， 服务器 id 大的胜出
+（2）第二次启动选举规则：
+  - EPOCH 大的直接胜出
+  - EPOCH 相同，事务 id 大的胜出
+  - 事务 id 相同，服务器 id 大的胜出  
+
+
+## 生产集群安装多少 zk 合适？
+安装奇数台。
+生产经验：
+⚫ 10 台服务器： 3 台 zk；
+⚫ 20 台服务器： 5 台 zk；
+⚫ 100 台服务器： 11 台 zk；
+⚫ 200 台服务器： 11 台 zk
+服务器台数多：好处，提高可靠性；坏处：提高通信延时  
 
 # 参考
+
+
 
 [Zookeeper 入门介绍](https://xie.infoq.cn/article/edd698410f30cf4b8113e228d)
 
