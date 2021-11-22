@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-11-11 21:10:19
+ * @LastEditTime: 2021-11-23 00:05:31
  * @LastEditors: Windows10
  * @Description: shall 学习笔记
 -->
@@ -51,7 +51,8 @@
 - [12. tee](#12-tee)
 - [13. sed](#13-sed)
 - [14. awk](#14-awk)
-- [15. Reference](#15-reference)
+- [15. expect](#15-expect)
+- [16. Reference](#16-reference)
 
 <!-- /TOC -->
 
@@ -104,7 +105,7 @@ Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般�
 ## 2.2. 大小写
 
 - `esc + u:`  将当前光标之后以空格隔开的单词或者字符转换为大写，包括当前光标(upper)
-- `esc + l:`  将当前光标之后以空格隔开的单词或者字符转换为大小，包括当前光标(lower)
+- `esc + l:`  将当前光标之后以空格隔开的单词或者字符转换为小写，包括当前光标(lower)
 - `esc + c:`  将当前光标之后以空格隔开的单词首字母转换为大写
 
 
@@ -658,7 +659,7 @@ sed俗称做流编辑器，以行单位进行字符处理。
     - ORS：输出字段的行分隔符，默认是换行符
     - RS：输入文件的行分隔符，默认是换行符
 
-# 15 expect
+# 15. expect
 
 **Expect** 是[Unix](https://zh.wikipedia.org/wiki/Unix)系统中用来进行自动化控制和测试的软件工具，由[Don Libes](https://zh.wikipedia.org/w/index.php?title=Don_Libes&action=edit&redlink=1)制作，作为[Tcl](https://zh.wikipedia.org/wiki/Tcl)脚本语言的一个扩展，应用在交互式[软件](https://zh.wikipedia.org/wiki/软件)中如[telnet](https://zh.wikipedia.org/wiki/Telnet)，[ftp](https://zh.wikipedia.org/wiki/文件传输协议)，[Passwd](https://zh.wikipedia.org/wiki/Passwd)，[fsck](https://zh.wikipedia.org/wiki/Fsck)，[rlogin](https://zh.wikipedia.org/w/index.php?title=Rlogin&action=edit&redlink=1)，[tip](https://zh.wikipedia.org/w/index.php?title=Tip&action=edit&redlink=1)，[ssh](https://zh.wikipedia.org/wiki/Secure_Shell)等等。该工具利用Unix伪终端包装其子进程，允许任意程序通过终端接入进行自动化控制；也可利用[Tk](https://zh.wikipedia.org/wiki/Tk)工具，将交互程序包装在[X11](https://zh.wikipedia.org/wiki/X11)的[图形用户界面](https://zh.wikipedia.org/wiki/图形用户界面)中。
 
@@ -679,7 +680,7 @@ set timeout         设置超时时间
 
 
 
-# 15. Reference
+# 16. Reference
 
 - [十分钟学会 tmux](https://www.cnblogs.com/kaiye/p/6275207.html)
 - [Bash快捷键大全](https://linux.cn/article-5660-1.html)
