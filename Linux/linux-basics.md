@@ -2,10 +2,11 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-23 18:30:49
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2021-11-26 01:11:22
+ * @LastEditors: Windows10
  * @Description: Linux 基础用法笔记
 --> 
+
 <!-- TOC -->
 
 - [1. Linux Basic](#1-linux-basic)
@@ -14,7 +15,7 @@
   - [2.2. GPT](#22-gpt)
   - [2.3. BIOS与UEFI](#23-bios与uefi)
   - [2.4. 分区](#24-分区)
-- [3. 基础命令](#3-基础命令)
+- [3. 基础命令令](#3-基础命令令)
   - [3.1. touch](#31-touch)
   - [3.2. rm](#32-rm)
   - [3.3. mkdir](#33-mkdir)
@@ -70,48 +71,52 @@
 - [17. strace](#17-strace)
 - [18. pstack](#18-pstack)
 - [19. find](#19-find)
-  - [19.1. xargs](#191-xargs)
-- [20. grep](#20-grep)
-- [21. pgrep](#21-pgrep)
-- [22. PID](#22-pid)
-- [23. netstat](#23-netstat)
-- [24. ss](#24-ss)
-- [25. lsof](#25-lsof)
-- [26. netcat](#26-netcat)
-- [27. socat](#27-socat)
-- [28. traceroute](#28-traceroute)
-- [29. dmesg](#29-dmesg)
-- [30. vmstat](#30-vmstat)
-- [31. man](#31-man)
-- [32. ntsysv](#32-ntsysv)
-- [33. wget](#33-wget)
-- [34. SHA](#34-sha)
-- [35. md5](#35-md5)
-- [36. ldconfig](#36-ldconfig)
-- [37. ldd](#37-ldd)
-- [38. chkconfig](#38-chkconfig)
-- [39. scp](#39-scp)
-- [40. rsync](#40-rsync)
-- [41. 包管理](#41-包管理)
-  - [41.1. 软件仓库](#411-软件仓库)
-  - [41.2. apt](#412-apt)
-  - [41.3. dpkg](#413-dpkg)
-  - [41.4. gcc8/g++8 以上安装](#414-gcc8g8-以上安装)
-- [42. 防火墙](#42-防火墙)
-  - [42.1. ubuntu 下默认的防火墙](#421-ubuntu-下默认的防火墙)
-  - [42.2. CentOS 下默认的防火墙](#422-centos-下默认的防火墙)
-- [43. SELinux](#43-selinux)
-- [44. 共性问题](#44-共性问题)
-  - [44.1. Linux与Windows相差8小时处理](#441-linux与windows相差8小时处理)
-- [45. 参考](#45-参考)
+- [20. xargs](#20-xargs)
+- [21. grep](#21-grep)
+- [22. pgrep](#22-pgrep)
+- [23. PID](#23-pid)
+- [24. netstat](#24-netstat)
+- [25. ss](#25-ss)
+- [26. lsof](#26-lsof)
+- [27. netcat](#27-netcat)
+- [28. socat](#28-socat)
+- [29. traceroute](#29-traceroute)
+- [30. dmesg](#30-dmesg)
+- [31. vmstat](#31-vmstat)
+- [32. man](#32-man)
+- [33. ntsysv](#33-ntsysv)
+- [34. wget](#34-wget)
+- [35. SHA](#35-sha)
+- [36. md5](#36-md5)
+- [37. ldconfig](#37-ldconfig)
+- [38. ldd](#38-ldd)
+- [39. chkconfig](#39-chkconfig)
+- [40. scp](#40-scp)
+- [41. rsync](#41-rsync)
+- [42. 包管理](#42-包管理)
+  - [42.1. 软件仓库](#421-软件仓库)
+  - [42.2. RPM](#422-rpm)
+  - [42.3. Yun](#423-yun)
+  - [42.4. apt](#424-apt)
+  - [42.5. dpkg](#425-dpkg)
+- [43. 防火墙](#43-防火墙)
+  - [43.1. ubuntu 下默认的防火墙](#431-ubuntu-下默认的防火墙)
+  - [43.2. CentOS 下默认的防火墙](#432-centos-下默认的防火墙)
+- [44. SELinux](#44-selinux)
+- [45. 共性问题](#45-共性问题)
+  - [45.1. Linux与Windows相差8小时处理](#451-linux与windows相差8小时处理)
+- [46. 参考](#46-参考)
 
 <!-- /TOC -->
+
 
 # 1. Linux Basic
 
 介绍 Linux 系统的基础使用，包括计算机的硬件知识、Linux常见基础命令的用法。
 
+----------------------------
 
+每次查了就忘了，花费很多时间，找的东西良莠不齐，因此记下查的知识点。
 
 # 2. 硬件基础知识
 
@@ -120,34 +125,35 @@
 
 ## 2.1. MBR
 
-> MBR(Master Boot Record): 主引导记录
-- 引导启动程序记录区与分区表通常放在磁盘的第一个扇区，这个扇区通常大小为 512 bytes。
-  - 446字节的**MBR**安装启动引导程序，64 字节的**分区表**记录整块硬盘分区的状态。
-  - 由于分区表所在区块仅有64 Bytes容量， 因此最多仅能有四组记录区，每组记录区记录了该区段的启始与结束的柱面号码。 
-  > 引导启动程序的作用：加载内核文件。
-  ```
-  1. 其实所谓的“分区”只是针对那个64 Bytes的分区表进行设置而已！
-  2. 硬盘默认的分区表仅能写入四组分区信息
-  3. 这四组分区信息我们称为主要（ Primary） 或延伸（ Extended） 分区
-  4. 分区的最小单位“通常”为柱面（ cylinder）
-  5. 当系统要写入磁盘时， 一定会参考磁盘分区表， 才能针对某个分区进行数据的处理 
-  ```
-  
-- 扩展分区
-  - 扩展分区并不是只占一个区块，而是会分布在每个分区的最前面几个扇区来记载分区信息的！
-  - 扩展分区的目的是使用额外的扇区来记录分区信息， 扩展分区本身并不能被拿来格式化。 然后我们可以通过扩展分区所指向的那个区块继续作分区的记录。
+MBR(Master Boot Record): 主引导记录
 
-- MBR 主要分区(Primary)、 扩展分区(Extend)与逻辑分区(logical) 三者的区别
-  - 主要分区与扩展分区最多可以有四个（ 硬盘的限制）
-  - 扩展分区最多只能有一个（ 操作系统的限制）
-  - 逻辑分区是由扩展分区持续切割出来的分区；
-  - 能够被格式化后作为数据存取的分区是：主要分区与逻辑分区，扩展分区无法格式化；
-  - 逻辑分区的数量依操作系统而不同，在Linux系统中 SATA 硬盘已经可以突破63个以上的分区限制；
+引导启动程序记录区与分区表通常放在磁盘的第一个扇区，这个扇区通常大小为 512 bytes。
+- 446字节的**MBR**安装启动引导程序，64 字节的**分区表**记录整块硬盘分区的状态。
+- 由于分区表所在区块仅有64 Bytes容量， 因此最多仅能有四组记录区，每组记录区记录了该区段的启始与结束的柱面号码。 
+> 引导启动程序的作用：加载内核文件。
+```
+1. 其实所谓的“分区”只是针对那个64 Bytes的分区表进行设置而已！
+2. 硬盘默认的分区表仅能写入四组分区信息
+3. 这四组分区信息我们称为主要（ Primary） 或延伸（ Extended） 分区
+4. 分区的最小单位“通常”为柱面（ cylinder）
+5. 当系统要写入磁盘时， 一定会参考磁盘分区表， 才能针对某个分区进行数据的处理 
+```
 
-- MBR分区的缺点
-  - 操作系统无法抓取到 2T 以上的磁盘容量！
-  - MBR 仅有一个区块，若被破坏后，经常无法或很难救援。
-  - MBR 内存放的启动引导程序最大为 446Bytes， 无法容纳较多的程序码。
+扩展分区
+- 扩展分区并不是只占一个区块，而是会分布在每个分区的最前面几个扇区来记载分区信息的！
+- 扩展分区的目的是使用额外的扇区来记录分区信息， 扩展分区本身并不能被拿来格式化。 然后我们可以通过扩展分区所指向的那个区块继续作分区的记录。
+
+MBR 主要分区(Primary)、 扩展分区(Extend)与逻辑分区(logical) 三者的区别
+- 主要分区与扩展分区最多可以有四个（ 硬盘的限制）
+- 扩展分区最多只能有一个（ 操作系统的限制）
+- 逻辑分区是由扩展分区持续切割出来的分区；
+- 能够被格式化后作为数据存取的分区是：主要分区与逻辑分区，扩展分区无法格式化；
+- 逻辑分区的数量依操作系统而不同，在Linux系统中 SATA 硬盘已经可以突破63个以上的分区限制；
+
+MBR分区的缺点
+- 操作系统无法抓取到 2T 以上的磁盘容量！
+- MBR 仅有一个区块，若被破坏后，经常无法或很难救援。
+- MBR 内存放的启动引导程序最大为 446Bytes， 无法容纳较多的程序码。
 
 
 ## 2.2. GPT
@@ -193,9 +199,7 @@ UEFI(Unified Extensible Firmware Interface): 统一可扩展固件接口，采�
 
 swap 分区：磁盘模拟内存的交换分区，当有数据被存放在物理内存里面，但这些数据又不是常被CPU使用时，这些不常被使用的数据将会被扔到硬盘的交换分区当中去，而速度较快的物理内存将被释放出来给真正需要的程序使用。交换分区不会使用目录树的挂载，所有交换分区就不需要指定挂载点。
 
- 
-
-# 3. 基础命令
+# 3. 基础命令令
 
 ## 3.1. touch 
 
@@ -338,9 +342,10 @@ fdisk 操作磁盘分区表
 ```
 df(disk free): 显示Linux 系统上文件系统的磁盘使用情况 
 
--h(human)：以人类容易看懂的方式显示
--i(inodes): 列出 inode 信息，不列出已使用的 block
--H: 很像 -h, 但是用 1000 为单位而不是用 1024
+参数项：
+  -h(human)：以人类容易看懂的方式显示
+  -i(inodes): 列出 inode 信息，不列出已使用的 block
+  -H: 很像 -h, 但是用 1000 为单位而不是用 1024
 ```
 
 mount
@@ -405,8 +410,6 @@ hostname 是 Linux 的主机名。而 Linux 的 hostname 位于 /etc/hostname �
 - `locale -a`： 列出系统支持的所有语言环境
 - `eject`: 将光盘驱动器中的光盘轻轻弹出和收回
 - `nslookup 域名` 查看域名对应的IP地址
-
-
 
 # 5. 文件查看命令
 
@@ -483,7 +486,9 @@ od(Octal Dump)：默认以二进制的方式读取文件内容。将指定文件
       u[SIZE]：利用无符号的十进制(decimal)来输出数据。每个整数占用 SIZE bytes。
       x[SIZE]：利用十六进制(hexadecimal)来输出数据。每个整数占用 SIZE bytes。
       
-      SIZE 可以为数字，也可以为大写字母。如果 TYPE 是 [doux] 中的一个，那么 SIZE 可以为 C  = sizeof(char)，S = sizeof(short)，I = sizeof(int)，L = sizeof(long)。如果 TYPE 是 f，那么 SIZE 可以为 F = sizeof(float)，D = sizeof(double) ，L = sizeof(long double)
+      SIZE 可以为数字，也可以为大写字母。如果 TYPE 是 [doux] 中的一个，那么 SIZE 可以为
+      	C  = sizeof(char)，S = sizeof(short)，I = sizeof(int)，L = sizeof(long)。
+      	如果 TYPE 是 f，那么 SIZE 可以为 F = sizeof(float)，D = sizeof(double) ，L = sizeof(long double)
       
 示例：
   od -t x testfile  # 以十六进制输出 testfile，默认以四字节为一组（一列）显示。
@@ -752,22 +757,25 @@ tar 命令用于的文件的打包和解压。
 
 ## 7.2. tar文件打包    
 
-参数
-- `-c(Create)`: 打包文件
-- `-t(lisT)`: 察看打包文件的内容含有哪些文件名
-- `-x(eXtract)`: 解压打包文件 
-  
-  > 注意：`-c, -t, -x` 不可同时出现在一串命令行中。
-- `-v(Verbose)`: 在压缩/解压缩的过程中，将正在处理的文件名显示出来
-- `-f(Filename)`:  后面要立刻接要被处理的文件名！
-- `-C(direCtory: 目录)`: 将文件解压在特定的目录
-- `-p(小写)`:  保存原本文件的权限与属性，不包含根目录(/)。
-- `-P(大写)`：保留绝对路径，即允许备份的数据中中包含根目录。解压后的数据直接从根目录(/)开始。
-- `-z`：通过 gzip 的支持进行压缩/解压，此时文件名最好为  `*.tar.gz`
-- `-j`：通过 bzip2 的支持进行压缩/解压，此时文件名最好为 `*.tar.bz2`
-- `-J` ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 `*.tar.xz`
-  
-  > 注意：`-z, -j, -J` 不可以同时出现在一串命令行中
+
+
+```sh
+参数项：
+
+-c(Create): 打包文件
+-t(lisT): 察看打包文件的内容含有哪些文件名
+-x(eXtract): 解压打包文件 
+  注意：-c, -t, -x 不可同时出现在一串命令行中。
+-v(Verbose): 在压缩/解压缩的过程中，将正在处理的文件名显示出来
+-f(Filename):  后面要立刻接要被处理的文件名！
+-C(direCtory: 目录): 将文件解压在特定的目录
+-p(小写):  保存原本文件的权限与属性，不包含根目录 /。
+-P(大写)：保留绝对路径，即允许备份的数据中中包含根目录。解压后的数据直接从根目录 / 开始。
+-z：通过 gzip 的支持进行压缩/解压，此时文件名最好为  *.tar.gz
+-j：通过 bzip2 的支持进行压缩/解压，此时文件名最好为 *.tar.bz2
+-J ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 *.tar.xz
+  注意：-z, -j, -J 不可以同时出现在一串命令行中
+```
 
 
 ## 7.3. 打包文件或目录
@@ -786,9 +794,10 @@ tar 命令用于的文件的打包和解压。
 ## 7.5. 解压缩文件
 
 - 解多个文件
-  > `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
+  - `tar -zxvf etc.tar.gz -C ~/Exercise_Linux/tmp`       将etc.tar.gz文件解压到~/Exercise_Linux/tmp目录下，不加 `-C ~/Exercise_Linux/tmp ` 则只是解压到当前目录下。
   
-  > 注意：指定解压的目录必须要首先存在，否则会出错，tar命令不会自动创建不存在的文件夹。
+  - 注意：指定解压的目录必须要首先存在，否则会出错，tar命令不会自动创建不存在的文件夹。
+
 
 - 解压单一文件
   - `tar -zxvf etc.tar.gz etc/gdb`   将 etc.tar.gz压缩包中gdb文件夹解压 到当前目录下。
@@ -826,7 +835,7 @@ hello word
 
 ## 7.8. zip
 
-> zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
+zip是压缩指令,unzip是解压指令。zip指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
 - zip -r yasuo.zip demo.txt mydir  // 将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
 - zip -r  mydir.zip  mydir         // 压缩当前目录下的子目录mydir
@@ -1064,7 +1073,7 @@ find：按照文件属性查找
 
 ```
 
-## 19.1. xargs
+# 20. xargs
 
 xargs 又称管道命令。是给命令传递参数的一个过滤器，也是组合多个命令的一个工具，它把一个数据流分割成一些足够小的快，方便过滤器和命令进行处理。
 
@@ -1123,7 +1132,7 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 
 ```
 
-# 20. grep
+# 21. grep
 
 `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
 
@@ -1154,7 +1163,7 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
   grep -r  "task_struct {" /usr/src/  -n       # 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
 ```
 
-# 21. pgrep
+# 22. pgrep
 
 ```sh
 根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
@@ -1169,13 +1178,13 @@ pidof bash
 3528
 ```
 
-# 22. PID
+# 23. PID
 
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
-# 23. netstat
+# 24. netstat
 
 ```sh
 netstat 是一个查看系统中端口使用情况的一个命令。侦听端口：应用程序或进程侦听的网络端口，充当通信端点。注意：同一个 IP 地址上不能用两个不同的服务去侦听同一端口
@@ -1195,7 +1204,7 @@ netstat 是一个查看系统中端口使用情况的一个命令。侦听端口
   netstat -apn | grep 端口号  # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
 ```
 
-# 24. ss 
+# 25. ss 
 
 ```sh
 ss 检查端口： 
@@ -1206,7 +1215,7 @@ ss 检查端口：
 
 
 
-# 25. lsof 
+# 26. lsof 
 
 ```sh
 lsof 列出整个 Linux 系统打开的所有文件描述符。
@@ -1220,36 +1229,36 @@ lsof 列出整个 Linux 系统打开的所有文件描述符。
 ```
 
 
-# 26. netcat
+# 27. netcat
 
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
 
-# 27. socat
+# 28. socat
 
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站：http://www.dest-unreach.org/socat/ 
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
 
-# 28. traceroute
+# 29. traceroute
 
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
 
-# 29. dmesg 
+# 30. dmesg 
 
 dmesg是分析内核产生的一些信息。
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
 
-# 30. vmstat
+# 31. vmstat
 
 可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
 
 
-# 31. man
+# 32. man
 
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
@@ -1323,12 +1332,12 @@ N       |	反向查询
 
 与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
 
-# 32. ntsysv
+# 33. ntsysv
 
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 33. wget
+# 34. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
@@ -1337,7 +1346,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
 
-# 34. SHA
+# 35. SHA
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
 - SHA家族的五个算法，分别是SHA-1、SHA-224、SHA-256、SHA-384，和SHA-512，由美国国家安全局（NSA）所设计，并由美国国家标准与技术研究院（NIST）发布，是美国的政府标准。后四者有时并称为SHA-2。SHA-1在许多安全协定中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5（更早之前被广为使用的杂凑函数）的后继者。
@@ -1357,29 +1366,28 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   feeds-master.zip: OK
   ```
 
-# 35. md5
+# 36. md5
 
-- md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
+md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
+
+MD5 校验的用法与 SHA 校验的用法一样。下面是 MD5 校验的用法
+```
+Tim@computer:~/Downloads$ md5sum feeds-master.zip > md.txt
+Tim@computer:~/Downloads$ cat md.txt 
+f273a8295e2c28e598764ed04898a742  feeds-master.zip
+Tim@computer:~/Downloads$ md5sum -c md.txt 
+feeds-master.zip: OK
+```
 
 
-- MD5 校验的用法与 SHA 校验的用法一样。下面是 MD5 校验的用法
-  ```
-  Tim@computer:~/Downloads$ md5sum feeds-master.zip > md.txt
-  Tim@computer:~/Downloads$ cat md.txt 
-  f273a8295e2c28e598764ed04898a742  feeds-master.zip
-  Tim@computer:~/Downloads$ md5sum -c md.txt 
-  feeds-master.zip: OK
-  ```
-
-
-# 36. ldconfig
+# 37. ldconfig
 
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
 
-# 37. ldd
+# 38. ldd
 
 作用：判断某个可执行的二进制文件含有什么动态库。
 
@@ -1404,11 +1412,11 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
       # 参数 -v 表示该函数来自于哪一个软件
 ```
 
-# 38. chkconfig
+# 39. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
-# 39. scp 
+# 40. scp 
 
 SCP(secure copy) 是基于ssh协议的安全拷贝，用于将文件/目录安全地从本地主机传输到远程主机。
 
@@ -1441,7 +1449,7 @@ test40.txt                                                                      
 -rw-r--r--   1 root    root          12 7月   6 09:41 test40.txt
 ```
 
-# 40. rsync
+# 41. rsync
 
 Rsync (remote synchronize)也可以实现同步本地主机和远程主机的文件/目录，和SCP不同之处在于，首次复制时，Rsync会复制整个目录，在后面的复制中，不会复制相同的内容，只对差异文件做更新，scp是把所有文件都复制过去。Rsync广泛用于备份和镜像。
 
@@ -1464,7 +1472,7 @@ apt-get install rsync  # Ubuntu
 | -l      | 拷贝符号连接                                                 |
 | —delete | 删除目标目录中多余的文件，也就是保持两个目录相同，使得目标目录成为源目录的镜像副本 |
 
-- **复制文件/目录到远程主机。**如果复制的目标目录不存在，会自动创建，语法格式和SCP一样：
+- 复制文件/目录到远程主机。如果复制的目标目录不存在，会自动创建，语法格式和SCP一样：
 
 ```sh
 rsync source_file_name/ user@destination_host:destination_folder # 复制文件
@@ -1503,7 +1511,7 @@ root@192.168.20.30's password:
 
 
 
-# 41. 包管理
+# 42. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
@@ -1516,17 +1524,62 @@ CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进�
 
 
 
-## 41.1. 软件仓库
+## 42.1. 软件仓库
 
 Windows
 
 - 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
 
 Linux 或 Unix
+
 - 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
 - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
-## 41.2. apt
+
+
+## 42.2. RPM
+
+安装软件需要手动解决依赖关系。
+
+仓库源位置：`/etc/yum.repos.d/`，查看中重点关注是基础的 `CentOS-Base.repo`
+
+```sh
+rpm -ql  列出软件中安装的软件包
+
+```
+
+Epel 镜像 
+
+EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
+
+
+
+- 官方主页：https://fedoraproject.org/wiki/EPEL
+- [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
+
+
+
+
+## 42.3. Yun
+
+安装软件时会自动解决依赖关系。
+
+Yum 配置文件： `/etc/yum.conf`  为所有仓库提供公共配置
+
+```sh
+参数项
+repolist
+
+grouplist   可用组
+
+```
+
+
+
+
+
+
+## 42.4. apt
 
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
@@ -1560,7 +1613,7 @@ Linux 或 Unix
     - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
 
-## 41.3. dpkg 
+## 42.5. dpkg 
 
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
@@ -1577,19 +1630,13 @@ Linux 或 Unix
 
 -----------------------------------------------------------------
 
-## 41.4. gcc8/g++8 以上安装
-
-CentOS7 安装高版本 gcc/g++
-
-- 安装软件仓库包 scl: `yum install centos-release-scl`
-- 安装 gcc/g++，数字 8 对应的是 gcc/g++8: `yum install devtoolset-8-gcc devtoolset-8-gcc-c++`
-- shell 终端临时设置默认版本，重启后失效: `scl enable devtoolset-8 -- bash`；长期有效设置：`vim /etc/profile` 文件中的最后一行加入: `source /opt/rh/devtoolset-8/enable`
+- 
 
 
 
-# 42. 防火墙
+# 43. 防火墙
 
-## 42.1. ubuntu 下默认的防火墙
+## 43.1. ubuntu 下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -1602,7 +1649,7 @@ CentOS7 安装高版本 gcc/g++
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 42.2. CentOS 下默认的防火墙
+## 43.2. CentOS 下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```sh
@@ -1633,16 +1680,16 @@ firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
-# 43. SELinux
+# 44. SELinux
 
 SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 44. 共性问题
+# 45. 共性问题
 
-## 44.1. Linux与Windows相差8小时处理
+## 45.1. Linux与Windows相差8小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -1659,7 +1706,7 @@ $sudo ntpdate time.windows.com
 
 
 
-# 45. 参考
+# 46. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
