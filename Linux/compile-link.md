@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2021-09-07 15:32:39
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-26 01:10:11
+ * @LastEditors: Windows10
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
@@ -10,18 +10,19 @@
 
 - [1. 缩写](#1-缩写)
 - [2. 程序处理过程](#2-程序处理过程)
-	- [2.1. 程序运行的过程](#21-程序运行的过程)
-	- [2.2. 编译](#22-编译)
-	- [2.3. 内存四区](#23-内存四区)
-	- [2.4. gcc 常用参数](#24-gcc-常用参数)
-	- [2.5. 静态库](#25-静态库)
-	- [2.6. 动态库](#26-动态库)
-		- [2.6.1. Linux平台](#261-linux平台)
-		- [2.6.2. Windows平台](#262-windows平台)
+  - [2.1. 程序运行的过程](#21-程序运行的过程)
+  - [2.2. 编译](#22-编译)
+  - [2.3. 内存四区](#23-内存四区)
+  - [2.4. gcc](#24-gcc)
+  - [2.5. 静态库](#25-静态库)
+  - [2.6. 动态库](#26-动态库)
+    - [2.6.1. Linux平台](#261-linux平台)
+    - [2.6.2. Windows平台](#262-windows平台)
 - [3. ELF relocatable](#3-elf-relocatable)
-- [4. 工具](#4-工具)
-- [5. 构建](#5-构建)
-- [6. 参考](#6-参考)
+- [4. 编译三部曲](#4-编译三部曲)
+- [5. 工具](#5-工具)
+- [6. 构建](#6-构建)
+- [7. 参考](#7-参考)
 
 <!-- /TOC -->
 
@@ -266,15 +267,52 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
 
 <img src="./pictures/ELF-relocatable.png">
 
+# 4. 编译三部曲
 
-# 4. 工具
+第一步：执行脚本 configure 文件
+
+```
+./configure --prefix=指定软件路径
+
+对 C/C++ 代码进行编译时，需要指定编译配置文件 Makefile，需要通过 configure 脚本生成
+```
+
+第二部：执行 make 命令
+
+```
+执行 make 命令进行 编译。
+```
+
+第三步：执行 make install
+
+```
+安装软件到第一步 ./configure 后面指定的路径下。
+```
+
+
+
+```sh
+CentOS7 安装高版本 gcc8/g++8
+
+  1、安装软件仓库包 scl: yum install centos-release-scl
+  2、安装 gcc/g++，数字 8 对应的是 gcc/g++8: yum install devtoolset-8-gcc devtoolset-8-gcc-c++
+  3、shell 终端临时设置默认版本，重启后失效: scl enable devtoolset-8 -- bash；
+     长期有效设置：vim /etc/profile 文件中的最后一行加入: source /opt/rh/devtoolset-8/enable
+```
+
+
+
+[离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
+
+
+# 5. 工具
 
 - readelf
   
   读取 ELF(Executable and Linking Format) 文件中信息
   
 - size
-   
+  
    查看object文件或者链接库文件中的object文件的各个段(section)的大小及其总的大小。
    
 - nm
@@ -359,7 +397,7 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
   ```
 
 
-# 5. 构建
+# 6. 构建
 
 两种编译构建方式。
 
@@ -369,7 +407,7 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
-# 6. 参考
+# 7. 参考
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
 - [内存管理(详细版)](https://www.cnblogs.com/yif1991/p/5049638.html)：详细的解释了内存四区的相关内容。
