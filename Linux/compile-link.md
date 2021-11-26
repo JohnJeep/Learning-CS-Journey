@@ -155,6 +155,8 @@ Linux 下内存分配管理如下图所示
 
 ## 2.4. gcc 
 
+GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。但其很快扩展，变得可处理C++，后来又扩展为能够支持更多编程语言，如Fortran、Pascal、Objective -C、Java、Ada、Go以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
+
 ```sh
 常用参数项
 -g(gdb)                生成调试信息
@@ -269,12 +271,18 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
 
 # 4. 编译三部曲
 
-第一步：执行脚本 configure 文件
+第一步：执行脚本 configure 文件，设置指定的参数
 
-```
+```sh
 ./configure --prefix=指定软件路径
+例如：../configure --prefix=/usr/local/gcc-4.9.4 -enable-checking=release -enable-languages=c,c++ -disable-multilib
 
-对 C/C++ 代码进行编译时，需要指定编译配置文件 Makefile，需要通过 configure 脚本生成
+参数项
+  --prefix：指定安装路径。
+  --enable-threads=posix：启用POSIX标准的线程支持。要让程序能在符合POSIX规范的linux发布版上正确运行，就应该启用该选项。这里取决于目标操作系统的类型，其它可用值有：aix、dec、solaris、win32等。
+  --disable-checking：不对编译时生成的代码进行一致性检查（检查的话一般设置为：--enable-checking=release）。建议机器硬件配置较低以及不愿等待太久编译时间的童鞋，可以设置为disable，但是这会增加产生未预期的错误的风险。
+  --disable-multilib：如果你的操作系统是32位，默认就已经设置为disable，这意味着gcc仅能生成32位的可执行程序。如果你的操作系统是64位，默认设置为enable，这意味着用gcc编译其它源文件时可以通过-m32选项来决定是否生成32位机器代码。由于我们这里是64位系统上，所以要禁止生成32位代码。
+  --enable-languages=c,c++：支持的高级语言类型和运行时库，可以设置的所有语言还包括ada、Fortran、java、objc、obj-c++、GO等语言。这里只开启了c和c++，因为支持的语言越多，就需要安装越多的相应静态与动态库，等待的时间也越久。
 ```
 
 第二部：执行 make 命令
@@ -302,7 +310,29 @@ CentOS7 安装高版本 gcc8/g++8
 
 
 
-[离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
+```sh
+拓展知识点
+  GCC4.8 支持 C++11
+  GCC 4.8.1 will be C++11 feature-complete [2013-04-01]
+Support for C++11 ref-qualifiers was added to the GCC 4.8 branch, making G++ the first C++ compiler to implement all the major language features of the C++11 standard. This functionality will be available in GCC 4.8.1.
+
+
+GCC5.3 支持 C++14
+  GCC 5 C++14 language feature-complete [2014-12-23]
+  Support for all C++14 language features has been added to the development sources for GCC, and will be available when GCC 5 is released next year. Contributed by Jason Merrill, Braden Obrzut, Adam Butcher, Edward Smith-Rowland, and Jakub Jelinek.
+  
+  
+查看libstdc++.so的版本
+  strings /usr/lib/libstdc++.so.6 | grep GLIBCXX  
+ 
+```
+
+
+
+- [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
+- [Linux 源码编译安装](https://www.linuxidc.com/Linux/2015-01/112595.htm)
+- [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
+- [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
 
 
 # 5. 工具
