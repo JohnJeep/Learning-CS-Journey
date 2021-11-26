@@ -1505,9 +1505,17 @@ root@192.168.20.30's password:
 -rw-r--r-- 1 root root 12 7月   8 11:11 test40.txt
 ```
 
+- 排除多个文件或目录
+
+  ```sh
+  rsync -avP --exclude={del_file1, del_file2, ...} source_dir dest_dir
+  
+  rsync -avp --exclude={log,*.so} * root@192.168.153.222:/home/zhoushuhui/IOV/Server
+  ```
+
 参考
 
-[使用SCP或Rsync实现Linux主机之间文件、目录的复制 | HiYong (hiyongz.github.io)](https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/)
+- [使用SCP或Rsync实现Linux主机之间文件、目录的复制 | HiYong (hiyongz.github.io)](https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/)
 
 
 
