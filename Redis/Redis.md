@@ -1,55 +1,52 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2021-11-23 00:05:20
+ * @LastEditTime: 2021-11-28 23:13:48
  * @LastEditors: Windows10
  * @Description: redis学习
 -->
 
 <!-- TOC -->
 
-- [# 1. 目标](#-1-目标)
-- [2. 概念](#2-概念)
-- [3. 配置](#3-配置)
-- [4. 启动](#4-启动)
-- [5. 通用命令](#5-通用命令)
-- [6. KEYS](#6-keys)
-  - [6.1. EXISTS](#61-exists)
-  - [6.2. DEL](#62-del)
-  - [6.3. DUMP](#63-dump)
-  - [6.4. MOVE](#64-move)
-  - [6.5. TYPE](#65-type)
-  - [6.6. RENAME](#66-rename)
-  - [6.7. 生存时间](#67-生存时间)
-- [7. 基本数据类型](#7-基本数据类型)
-  - [7.1. string(字符串)](#71-string字符串)
-  - [7.2. hash(哈希)](#72-hash哈希)
-  - [7.3. list(列表)](#73-list列表)
-  - [7.4. set(集合)](#74-set集合)
-  - [7.5. zset(sorted set 有序集合)](#75-zsetsorted-set-有序集合)
-- [8. 持久化](#8-持久化)
-- [9. 事务](#9-事务)
-- [10. pub/sub(订阅与发布模式)](#10-pubsub订阅与发布模式)
-- [11. Master/Slave(主从复制)](#11-masterslave主从复制)
-- [12. redis连接](#12-redis连接)
-- [13. redis服务器](#13-redis服务器)
-- [14. HyperLogLog](#14-hyperloglog)
-- [15. 参考](#15-参考)
+- [1. 概念](#1-概念)
+- [2. 配置](#2-配置)
+- [3. 启动](#3-启动)
+- [4. 通用命令](#4-通用命令)
+- [5. KEYS](#5-keys)
+  - [5.1. EXISTS](#51-exists)
+  - [5.2. DEL](#52-del)
+  - [5.3. DUMP](#53-dump)
+  - [5.4. MOVE](#54-move)
+  - [5.5. TYPE](#55-type)
+  - [5.6. RENAME](#56-rename)
+  - [5.7. 生存时间](#57-生存时间)
+- [6. 基本数据类型](#6-基本数据类型)
+  - [6.1. string(字符串)](#61-string字符串)
+  - [6.2. hash(哈希)](#62-hash哈希)
+  - [6.3. list(列表)](#63-list列表)
+  - [6.4. set(集合)](#64-set集合)
+  - [6.5. zset(sorted set 有序集合)](#65-zsetsorted-set-有序集合)
+- [7. 持久化](#7-持久化)
+  - [7.1. RDB](#71-rdb)
+  - [7.2. AOF](#72-aof)
+- [8. 事务](#8-事务)
+- [9. pub/sub](#9-pubsub)
+- [10. Master/Slave replication](#10-masterslave-replication)
+- [11. redis连接](#11-redis连接)
+- [12. redis服务器](#12-redis服务器)
+- [13. HyperLogLog](#13-hyperloglog)
+- [14. 集群(cluster)](#14-集群cluster)
+- [15. 应用问题](#15-应用问题)
+  - [15.1. 缓存穿透](#151-缓存穿透)
+  - [15.2. 缓存击穿](#152-缓存击穿)
+  - [15.3. 缓存雪崩](#153-缓存雪崩)
+  - [15.4. 分布式锁](#154-分布式锁)
+- [16. 参考](#16-参考)
 
 <!-- /TOC -->
 
 
-# 1. 目标
-=======================================
-
-主从同步机制
-
-持久化原理
-
-Cluster架构体系
-
-
-# 2. 概念
+# 1. 概念
 
 NoSQL 数据库
 - NoSQL = Not Only SQL(不仅仅是 SQL) ，泛指 non-relational(非关系型数据库)。今天随着互联网 web2.0 网站的兴起，比如谷歌或 Facebook 每天为他们的用户收集万亿比特的数据， 这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展，就是一个数据量超大。传统的 SQL 语句库不再适应这些应用了。 NoSQL 数据库是为了解决大规模数据集合多重数据种类带来的挑战，特别是超大规模数据的存储。
@@ -66,7 +63,7 @@ Redis 的主要优点
 - Redis 支持数据的备份，即 master-slave 模式的数据备份。
 
 
-# 3. 配置
+# 2. 配置
 
 Redis/src/ 目录相关文件功能描述
 
@@ -86,7 +83,7 @@ protected-mode=yes 时起作用。
 
 
 
-# 4. 启动
+# 3. 启动
 
 Redis 客户端与服务器的启动。
 
@@ -128,7 +125,7 @@ PONG
 ```
 
 
-# 5. 通用命令
+# 4. 通用命令
 
 - `info`: 查看 Redis 的所有统计信息。
 - `select index`: 切换数据库。
@@ -141,7 +138,7 @@ PONG
 
 
 
-# 6. KEYS 
+# 5. KEYS 
 
 Redis 键命(key) 令用于管理 redis 的键。
 
@@ -154,7 +151,7 @@ Redis 键命(key) 令用于管理 redis 的键。
   - `\*` : 匹配字符x,用于转义符号；若要匹配 ？，则使用 `\?`
 
 
-## 6.1. EXISTS
+## 5.1. EXISTS
 
 `exists key`：判断一个按键是否存在，如果按键存在，则返回整数类型1，否则返回0
 
@@ -166,7 +163,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 ```
 
 
-## 6.2. DEL
+## 5.2. DEL
 
 `del key1, key2 ...`: 删除一个或多个按键，返回值是删除的键的个数。
 
@@ -176,7 +173,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 ```
 
 
-## 6.3. DUMP
+## 5.3. DUMP
 
 - `dump key`：序列化给定的key ，如果 key 不存在，那么返回 nil； 否则，返回序列化之后的值。
 - 序列化生成的值有以下几个特点：
@@ -195,13 +192,13 @@ Redis 键命(key) 令用于管理 redis 的键。
   ```
 
 
-## 6.4. MOVE
+## 5.4. MOVE
 
 - `move key db`：将当前数据库的键值 key 移动到给定的数据库 db 当中，移动成功返回 1，失败则返回 0。
 - 如果当前数据库(源数据库)和给定数据库(目标数据库)有相同名字的给定 key ，或者 key 不存在于当前数据库，那么 MOVE 没有任何效果。
 
 
-## 6.5. TYPE
+## 5.5. TYPE
 `type key1, key2, ...`: 获取按键的数据类型。数据类型可以是 string、hash、list、set、zset。
 
 ```sh
@@ -217,7 +214,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 9) "key1"
 ```
 
-## 6.6. RENAME
+## 5.6. RENAME
 
 - `rename key key1`：将键值key修改为key1
 - `renamenx key key1`：仅当键值key1不存在当前数据库中时，才可以将key修改为key1
@@ -242,9 +239,9 @@ OK
 ```
 
 
-## 6.7. 生存时间
+## 5.7. 生存时间
 
-- redis在实际使用过程中一般用作缓存，然而缓存的数据一般都需要设置生存时间，也就是到期后销毁数据。
+- redis 在实际使用过程中一般用作缓存，然而缓存的数据一般都需要设置生存时间，也就是到期后销毁数据。
 - `expire key seconds`：键值对的生存时间为 seconds，时间到后，销毁键值对中的数据
 - `TTL key`：以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。
   - TTL返回值：
@@ -297,9 +294,9 @@ OK
 
 
 
-# 7. 基本数据类型
+# 6. 基本数据类型
 
-## 7.1. string(字符串)
+## 6.1. string(字符串)
 
 string类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value` ，一个键最大能存储 512MB。
 
@@ -372,7 +369,7 @@ string类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value
   ```
 
 
-## 7.2. hash(哈希)
+## 6.2. hash(哈希)
 
 Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个键值对集合，hash特别适合用于存储对象。
 <img src="./figures/redis-hash结构.png">
@@ -424,13 +421,13 @@ Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个�
   2) "password"
   3) "name"
   4) "age"
-
+  
   127.0.0.1:6379> hexists user age
   (integer) 1
   127.0.0.1:6379> hexists user sex
   (integer) 0
   127.0.0.1:6379>
-
+  
   127.0.0.1:6379> hlen user
   (integer) 4
   127.0.0.1:6379> hvals user
@@ -438,12 +435,12 @@ Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个�
   2) "123"
   3) "ZS"
   4) "23"
-
+  
   127.0.0.1:6379> hsetnx user name jock
   (integer) 0
   127.0.0.1:6379> hsetnx user sex woman
   (integer) 1
-
+  
   127.0.0.1:6379> hscan user 2
   1) "0"
   2)  1) "username"
@@ -459,7 +456,7 @@ Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个�
   ```
 
 
-## 7.3. list(列表)
+## 6.3. list(列表)
 
 Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。列表最多可存储 $2^{32} - 1$ 元素 (4294967295, 每个列表可存储40多亿)。
 
@@ -583,7 +580,7 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
   ```
 
 
-## 7.4. set(集合)
+## 6.4. set(集合)
 
 Redis Set 是 string 类型的无序集合。集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。 在 Redis 可以添加，删除和测试成员存在的时间复杂度为 O（1）。集合中最大的成员数为 $2^{32} - 1$ (4294967295, 每个集合可存储40多亿个成员)。
 
@@ -665,7 +662,7 @@ Redis 非常人性化的为集合提供了 求交集、并集、差集等操作,
 - 3.好友推荐的时候,根据 tag 求交集,大于某个 临界值 就可以推荐
 
 
-## 7.5. zset(sorted set 有序集合)
+## 6.5. zset(sorted set 有序集合)
 
 Redis 有序集合和集合一样也是 string 类型元素的集合，且不允许重复的成员。redis 通过 `score` 来为集合中的成员进行从小到大的排序。有序集合的成员(member) 是唯一的,但分数 (score) 却可以重复。
 
@@ -708,14 +705,91 @@ Redis 有序集合和集合一样也是 string 类型元素的集合，且不允
 - 1.带有权重的元素,LOL游戏大区最强王者
 - 2 排行榜
 
+# 7. 持久化
 
-# 8. 持久化
+Redis 的持久化策略分为两种，一种为 RDB，另一中为 AOF。
 
-AOF(Append Only File)。
+## 7.1. RDB
 
-RDB（Redis DataBase） 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，则会将内存中的数据写入到磁盘中。即在指定目录下生成一个 dump.rdb 文件。 Redis 重启会通过加载 dump.rdb 文件来恢复数据。
+RDB（Redis Data Base） 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，将内存中的数据写入到磁盘中。即在指定目录下生成一个 dump.rdb 文件， Redis 重启通过加载 dump.rdb 文件来恢复数据。
 
-# 9. 事务
+Redis 单独创建（fork）一个子进程来进行持久化，将数据写到一个临时文件中，待持久化过程结束后，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程不进行任何 I/O 操作，确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那么 RDB 方式要比 AOF 方式更加高效。
+
+优点：
+
+- 适合大规模的数据恢复；
+- 对数据的完整性和一致性要求不高。
+
+缺点：
+
+- 在一定时间间隔内做一次备份，若Redis 意外挂掉，最后一次持久化后的数据可能丢失。
+- Fork 时，内存中的数据被克隆了一份，会花费 2 倍的内存空间。
+
+生成 dump.rdb  文件可通过 save 或 bgsave 命令操作。
+
+- save：只管保存，其他不管，操作时全部阻塞。
+- bgsave：在后台异步执行快照操作，同时还可以响应客户端的请求。
+- lastsave：获取最后一次成功执行快照的时间。 
+
+```
+save 秒 写操作次数
+
+默认配置
+save 60 10000     1分钟内改了 1万次
+save 300 10       5分钟内改了 1次
+save 900 1        15分钟内改了 1次
+```
+
+动态停止 RDB 保存的规则：配置文件中设置为空，`redis-cli config set save ""`
+
+rdbcompression：对于存储到磁盘中的快照，可以设置是否进行压缩存储．如果是的话，redis 会采用 LZF 算法进行压缩；如果你不想消耗 CPU 来进行压缩的话，可以关闭此功能。
+
+## 7.2. AOF
+
+AOF(Append Only File) 以日志的形式来记录每个写操作，将 Redis 执行过的所有写指令记录下来（读操作不记录），只追加文件但不可以改文件，Redis 启动时，会读取文件来重新构建数据。换言之，redis 重启后就根据日志文件中的内容将写指令从前到后执行一次，来完成数据的恢复工作。
+
+Rewrite
+
+AOF 采用文件追加方式，使文件会越来越大，为避免出现此种情况，新增了重写机制，当 AOF 文件的大小超过所设定的阈值时，Redis 就会启动 AOF 文件的内容压缩，只保留可以恢复数搌的最小指令集，可以使用命令 `bgrewriteaof`
+
+重写原理：AOF 文件持续增长而过大时，会fork出一条新进程来将文件重写（也是先写临时文件最后再rename），遍历新进程的内存中数据，每条记录有一条 Set 语句。重写 aof 文件的操作，并没有读取旧的 aof 文件，而是将整个内存中的数据库内容用命令的方式重写到了一个新的 aof 文件中，这点和快照有点类似。
+
+触发机制：Redis 会记录上次重写的 AOF 大小，默认配置：AOF 文件大小是上次 rewrite 后大小的一倍，且文件大于 64M 时触发。
+
+优势
+
+- 每秒同步。命令：`appendfsync always`，同步持久化，每次发生数据变更就会被立即记录到磁盘，性能较差，但数据完整性较好。
+- 每次修改就同步。命令：`appendfsync everysec`，异步操作，每秒记录，若果一秒内宕机，有数据丢失。
+- 不同步。命令：`appendfsync no`
+
+缺点
+
+- 对相同数据集的数据而言，aof 文件要远大于 rdb 文件，恢复速度慢与 rdb。
+- aof 运行效率要慢与 rdb，每秒同步策略效率较好，不同步效率和 rdb 相同。
+
+小建议
+
+- 如果只希望服务器在运行的时候存在，可以不使用任何的持久化。 
+
+Redis 能否开启两种持久化？
+
+```
+能，Redis 重启时会优先载入 AOF 文件来恢复原始的数据，通常情况下 AOF 文件保存的数据集要比 RDB 文件保存的数据集完整。RDB 的数据不实时，若同时使用两者时，服务器重启也只会找 AOF 文件。那要不要只使用 AOF呢？作者建议不要，因为 RDB 更适合用于备份数据库（AOF 在不断变化不好备份）。
+```
+
+关于性能的建议：
+
+```
+1、 因为 RDB 文件只用作后备用途，建议只在 slave上 持久化 RDB 文件，而且只要15分钟备份一次就够了，只保留 save 900 1 这条规则。
+
+2、如果 Enalbe AOF，好处是在最恶劣情况下也只会丢失不超过两秒数据，启动脚本较简单，只需要加载自己的 AOF 文件就可以了；代价是带来了持续的 I/O，二是AOF rewrite 是将 rewrite 过程中产生的新数据写到新文件，这个过程造成的阻塞几乎是不可避免的。只要硬盘许可，应该尽量减少 AOF rewrite 的频率，AOF 重写的大小默认值 64M 太小了，可以设到 5G 以上：默认超过原大小 100％ 大小时重写可以改到适当的数值。
+
+3、如果不 Enable AOF，仅靠 Master-Slave Replication 实现高可用性也可以。能省掉一大笔 I/O 也减少了 rewrite 时带来的系统波动。代价是如果 Master/slave 同时挂掉，会丢失十几分钟的数据，启动脚本也要比较两个 Master/slave 中载入较新的那个的 RDB 文件。
+```
+
+ 
+
+# 8. 事务
 
 Redis 事务可以一次性执行多个命令，本质是一组命令的集合。事务具有的特性
 - 事务是一个单独的隔离操作：事务中的所有命令都会被序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。
@@ -756,7 +830,7 @@ QUEUED
 
 
 
-# 10. pub/sub(订阅与发布模式)
+# 9. pub/sub
 
 Redis 发布订阅(pub/sub)是一种进程间的消息通信模式：发送者(publish)发送消息，订阅者(subscribe)接收消息。 Redis 客户端可以订阅任意数量的频道。
 
@@ -780,14 +854,45 @@ Redis 发布订阅命令
 
 
 
-# 11. Master/Slave(主从复制)
+# 10. Master/Slave replication
+
+Master/Slave replication(主从复制) master 以 write 为主，slave 以 read 为主。
+
+原理
+
+```
+Slave 启动成功后连接 master时，会发送一个 sync 命令，master 接受到命令后，启动后台的存盘进程，同时收集所有接受到的哦用于修改数据集命令，后台进程执行完毕后，master 将传送整个数据文件到 slave，完成一次完全同步。
+```
+
+全量复制：slave 服务在接受到数据库文件的数据后，将其存盘并加载到内存中。
+
+增量复制：master 继续将新收集到的所有修改命令依次传递给 slave，完成同步，但是只要是重新连接 master，一次完全同步将被自动执行。
+
+作用
+
+- 读写分离
+- 容灾恢复
+
+```
+pidfile 
+port
+logfile
+dbdumpfile
+```
+
+```sh
+命令
+  slaveof IP port     从机连接主机：slaveof 192.168.58.39 6379 
+  info replication
+
+```
+
+哨兵模式（sentinel）
+
+master 挂掉后，有哨兵进程在运行，在 slave 中自动投票选出一台机器作为 master，其余的为仍为 slave；若之前挂掉的 master 机器重新连接，此时这台机器不能再为 master 了，通过哨兵自动转化为 slave。
 
 
-
-
-
-
-# 12. redis连接
+# 11. redis连接
 
 Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数据库默认编号是0
 
@@ -799,74 +904,89 @@ Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数
 - `swapdb index1 index2`：交换同一Redis服务器上两个数据库的数据，执行成功返回OK 。
 
 
-# 13. redis服务器
+# 12. redis服务器
 
 - `dbsize`：返回当前数据库中所有key的数目
-- `flushdb`：删除当前数据库中的所有key
-- `flushall`：清空所有数据库中的所有key
-- `bgsave`：在后台异步保存当前数据库的数据到磁盘，会立即返回 OK 状态码。edis forks, 父进程继续提供服务以供客户端调用，子进程将DB数据保存到磁盘然后退出。如果操作成功，可以通过客户端命令 `lastsave` 来检查操作结果。
-- `client list`：列出所有已连接客户端信息和统计数据。
-  - `id`: 唯一的64位的客户端ID(Redis 2.8.12加入)。
-  - `addr`: 客户端的地址和端口
-  - `fd`: 套接字所使用的文件描述符
-    - r: 客户端套接字（在事件 loop 中）是可读的（readable）
-    - w: 客户端套接字（在事件 loop 中）是可写的（writeable） 
-  - `age`: 以秒计算的已连接时长
-  - `idle`: 以秒计算的空闲时长
-  - `flags`: 客户端 flag。
-  - `db`: 该客户端正在使用的数据库 ID
-  - `sub`: 已订阅频道的数量
-  - `psub`: 已订阅模式的数量
-  - `multi`: 在事务中被执行的命令数量
-  - `qbuf`: 查询缓冲区的长度（字节为单位， 0 表示没有分配查询缓冲区）
-  - `qbuf-free`: 查询缓冲区剩余空间的长度（字节为单位， 0 表示没有剩余空间）
-  - `obl`: 输出缓冲区的长度（字节为单位， 0 表示没有分配输出缓冲区）
-  - `oll`: 输出列表包含的对象数量（当输出缓冲区没有剩余空间时，命令回复会以字符串对象的形式被入队到这个队列里）
-  - `omem`: 输出缓冲区和输出列表占用的内存总量
-  - `events`: 文件描述符事件
-  - `cmd`: 最近一次执行的命令
 
-  > 客户端 flag 可以由以下部分组成：
-  ```
-  O: 客户端是 MONITOR 模式下的附属节点（slave）
-  S: 客户端是一般模式下（normal）的附属节点
-  M: 客户端是主节点（master）
-  x: 客户端正在执行事务
-  b: 客户端正在等待阻塞事件
-  i: 客户端正在等待 VM I/O 操作（已废弃）
-  d: 一个受监视（watched）的键已被修改， EXEC 命令将失败
-  c: 在将回复完整地写出之后，关闭链接
-  u: 客户端未被阻塞（unblocked）
-  U: 通过Unix套接字连接的客户端
-  r: 客户端是只读模式的集群节点
-  A: 尽可能快地关闭连接
-  N: 未设置任何 flag
+- `flushdb`：删除当前数据库中的所有key
+
+- `flushall`：清空所有数据库中的所有key
+
+- `bgsave`：在后台异步保存当前数据库的数据到磁盘，会立即返回 OK 状态码。edis forks, 父进程继续提供服务以供客户端调用，子进程将DB数据保存到磁盘然后退出。如果操作成功，可以通过客户端命令 `lastsave` 来检查操作结果。
+
+- `client list`：列出所有已连接客户端信息和统计数据。
+  
+  ```sh
+  id: 唯一的64位的客户端ID(Redis 2.8.12加入)。
+  addr: 客户端的地址和端口
+  fd: 套接字所使用的文件描述符
+    r: 客户端套接字（在事件 loop 中）是可读的（readable）
+    w: 客户端套接字（在事件 loop 中）是可写的（writeable） 
+  age: 以秒计算的已连接时长
+  idle: 以秒计算的空闲时长
+  flags: 客户端 flag。
+      O: 客户端是 MONITOR 模式下的附属节点（slave）
+      S: 客户端是一般模式下（normal）的附属节点
+      M: 客户端是主节点（master）
+      x: 客户端正在执行事务
+      b: 客户端正在等待阻塞事件
+      i: 客户端正在等待 VM I/O 操作（已废弃）
+      d: 一个受监视（watched）的键已被修改， EXEC 命令将失败
+      c: 在将回复完整地写出之后，关闭链接
+      u: 客户端未被阻塞（unblocked）
+      U: 通过Unix套接字连接的客户端
+      r: 客户端是只读模式的集群节点
+      A: 尽可能快地关闭连接
+      N: 未设置任何 flag
+      
+  db: 该客户端正在使用的数据库 ID
+  sub: 已订阅频道的数量
+  psub: 已订阅模式的数量
+  multi: 在事务中被执行的命令数量
+  qbuf: 查询缓冲区的长度（字节为单位， 0 表示没有分配查询缓冲区）
+  qbuf-free: 查询缓冲区剩余空间的长度（字节为单位， 0 表示没有剩余空间）
+  obl: 输出缓冲区的长度（字节为单位， 0 表示没有分配输出缓冲区）
+  oll: 输出列表包含的对象数量（当输出缓冲区没有剩余空间时，命令回复会以字符串对象的形式被入队到这个队列里）
+  omem: 输出缓冲区和输出列表占用的内存总量
+  events: 文件描述符事件
+  cmd: 最近一次执行的命令
   ```
 
 - `client id`：返回当前连接的ID；Redis 5 新增的命令。
+
 - `client setname connection-name`：为当前连接分配一个名字connection-name，这个名字会显示在CLIENT LIST命令的结果中，用于识别当前正在与服务器进行连接的客户端。
+
 - `client getname`：返回当前连接由 CLIENT SETNAME设置的名字。如果没有用CLIENT SETNAME设置名字，将返回一个空的值。
+
 - `client kill addr:port`：关闭指定地址和端口号的客户端
+
 - `client pause timeout`：将所有客户端的访问暂停给定的毫秒数
-  
+
   > 可以在MULTI/EXEC中一起使用CLIENT PAUSE 和INFO replication以在阻塞的同时获取当前master的偏移量。用这种方法，可以让slaves处理至给定的复制偏移节点。
+
 - `info [section]`：返回关于Redis服务器的各种信息和统计数值。通过给定可选的参数 section ，可以让命令只返回某一部分的信息:
-  - server: Redis服务器的一般信息
-  - clients: 客户端的连接部分
-  - memory: 内存消耗相关信息
-  - persistence: RDB和AOF相关信息
-  - stats: 一般统计
-  - replication: 主/从复制信息
-  - cpu: 统计CPU的消耗
-  - commandstats: Redis命令统计
-  - cluster: Redis集群信息
-  - keyspace: 数据库的相关统计
+
+  ```sh
+  server: Redis服务器的一般信息
+  clients: 客户端的连接部分
+  memory: 内存消耗相关信息
+  persistence: RDB和AOF相关信息
+  stats: 一般统计
+  replication: 主/从复制信息
+  cpu: 统计CPU的消耗
+  commandstats: Redis命令统计
+  cluster: Redis集群信息
+  keyspace: 数据库的相关统计
+  ```
 
 - `save`：执行一个同步操作，以RDB文件的方式保存所有数据的快照 很少在生产环境直接使用SAVE 命令，因为它会阻塞所有的客户端的请求，可以使用BGSAVE 命令代替。
+
 - `lastsave`：获得租后一次磁盘同步的时间。执行成功时返回UNIX时间戳。客户端执行 BGSAVE 命令时，可以通过每N秒发送一个 LASTSAVE 命令来查看BGSAVE 命令执行的结果，由 LASTSAVE 返回结果的变化可以判断执行结果。
+
 - `shutsown [nosave] [save]`：关闭服务器
+
 - 恢复数据：只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 `CONFIG` 命令。
-  ```
+  ```sh
   127.0.0.1:6379> save
   OK
   127.0.0.1:6379> config get dir
@@ -876,12 +996,11 @@ Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数
   Background saving started
   ```
 
-- `command`：以数组的形式返回有关所有Redis命令的详细信息。
-- `command count`：返回Redis服务器命令的总数。
+- `command`：以数组的形式返回有关所有 Redis命令 的详细信息。
 
+- `command count`：返回 Redis 服务器命令的总数。
 
-
-# 14. HyperLogLog
+# 13. HyperLogLog
 
 Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
 
@@ -911,13 +1030,38 @@ OK
 (integer) 8
 ```
 
+# 14. 集群(cluster)
 
-# 15. 参考
+
+
+# 15. 应用问题
+
+## 15.1. 缓存穿透
+
+
+
+
+
+## 15.2. 缓存击穿
+
+
+
+
+
+## 15.3. 缓存雪崩
+
+
+
+
+
+## 15.4. 分布式锁
+
+
+
+# 16. 参考
 
 - [redis.io](https://redis.io/) : Redis官方网站
 - [redis.cn-commands](http://redis.cn/commands.html)：redis中文版相关命令用法
 - [Redis学习教程](https://piaosanlang.gitbooks.io/redis/content/index.html)：比较全面的介绍了有关redis的使用。
-- [W3Cschool Redis教程](https://www.w3cschool.cn/redis/redis-intro.html)
-- [CSN: Redis教程](https://blog.csdn.net/hellozpc/article/details/81267030)
 - [Redis 开机自启动](https://www.jianshu.com/p/a73e0565e2a1)
 
