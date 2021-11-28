@@ -1,7 +1,8 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2021-11-26 01:10:11
+ * @LastEditTime: 2021-11-28 23:09:37
  * @LastEditors: Windows10
  * @Description: 预处理、编译、汇编、链接过程
 -->
@@ -10,23 +11,24 @@
 
 - [1. 缩写](#1-缩写)
 - [2. 程序处理过程](#2-程序处理过程)
-  - [2.1. 程序运行的过程](#21-程序运行的过程)
-  - [2.2. 编译](#22-编译)
-  - [2.3. 内存四区](#23-内存四区)
-  - [2.4. gcc](#24-gcc)
-  - [2.5. 静态库](#25-静态库)
-  - [2.6. 动态库](#26-动态库)
-    - [2.6.1. Linux平台](#261-linux平台)
-    - [2.6.2. Windows平台](#262-windows平台)
-- [3. ELF relocatable](#3-elf-relocatable)
-- [4. 编译三部曲](#4-编译三部曲)
-- [5. 工具](#5-工具)
-- [6. 构建](#6-构建)
-- [7. 参考](#7-参考)
+- [3. 内存四区](#3-内存四区)
+- [4. 函数库](#4-函数库)
+- [5. 静态库](#5-静态库)
+- [6. 动态库](#6-动态库)
+  - [6.1. Linux平台](#61-linux平台)
+  - [6.2. Windows平台](#62-windows平台)
+- [7. ELF relocatable](#7-elf-relocatable)
+- [8. gcc](#8-gcc)
+- [9. 编译三部曲](#9-编译三部曲)
+- [10. 工具](#10-工具)
+- [11. 构建](#11-构建)
+- [12. 参考](#12-参考)
 
 <!-- /TOC -->
 
 # 1. 缩写
+
+- EXE(Executable)：可执行文件
 - PE(Portable Executable)：可移植可执行。
 - ELF(Executable Linkable Format)：可执行可链接格式。
 - DLL(Dynamic ALinking Library): windows下的以 `.dll` 方式命名，Linux下的以 `.so` 方式命名。
@@ -34,57 +36,69 @@
 - BSS(Block Started by Symbol): 未初始化的全局变量和局部静态变量的区域。
 
 
+
 # 2. 程序处理过程 
 
-## 2.1. 程序运行的过程
-- 预处理(Preprocessing): 处理C、C++源代码 `#include` 文件生成预处理文件 `.i` 或者 `.ii` 文件
+程序处理的流程：源代码→预处理→编译→汇编→目标文件→链接→可执行文件
 
-- 编译(Compile): 将预处理文件编译成汇编代码 `.s` 文件
+预处理(Preprocessing)
 
-- 汇编(Assemble): 汇编代码生成目标文件(`.o` 或者 `.obj`)
+- 处理C、C++源代码 `#include` 文件生成预处理文件 `.i` 或者 `.ii` 文件
 
-- 链接(Linking): 将库文件(`.lib` 或 `.a`)和二进制文件(`.o` 或 `obi`)通过链接器(ld: linker directive)生成可执行文件(`.out`  output file)
-  > linking:：将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可以被加载到内存并执行。链接可以执行于编译时、加载时、运行时。
-  - 静态连接(static linking): 将外部函数库拷贝到可执行文件
-  - 动态链接(dynamic linking)：外部函数库不进入安装包，只在运行时动态引用
-  > 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
+编译(Compile)
 
--  链接器必须完成的两个任务
-   -  符号解析(symbol resolution  )：将每个符号引用正好和一个符号定义关联起来。
-   -  重定位：链接器通过把每个符号定义于一个内存位置关联起来，从而重定位这些细节，然后修改所有对这些符号的引用，使它们指向这个内存位置。
+- 将预处理文件编译成汇编代码 `.s` 文件
+
+汇编(Assemble)
+
+- 汇编代码生成目标文件(`.o` 或者 `.obj`)
+
+目标文件(Object file)
+
+- 编译器编译源码后生成的文件叫做目标文件。
+
+链接(Linking)
+
+- 将库文件(`.lib` 或 `.a`)和二进制文件(`.o` 或 `obi`)通过链接器(ld: linker directive)生成可执行文件(`.out`  output file)。通俗的讲：将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可以被加载到内存并执行。链接可以执行于编译时、加载时、运行时。
+- Windows中启动程序由 CRT、DLL 提供，Linux中由 glibc(libs-start.c) 提供。
+- 静态连接(static linking): 将外部函数库拷贝到可执行文件
+- 动态链接(dynamic linking)：外部函数库不进入安装包，只在运行时动态引用
+- 链接器必须完成的两个任务
+  - 符号解析(symbol resolution)：将每个符号引用正好和一个符号定义关联起来。
+  - 重定位：链接器通过把每个符号定义于一个内存位置关联起来，从而重定位这些细节，然后修改所有对这些符号的引用，使它们指向这个内存位置。
+
+
+例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
 
 <div align="center">
 	<img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png">
 </div>
 
+可执行文件
 
-## 2.2. 编译
 
-编译过程
-- 源代码→预处理→编译→汇编→目标文件→链接→可执行文件
-- 预处理
-- 编译
-- 汇编
-- 目标文件
-- 链接
-  - Windows中启动程序由CRT、DLL提供，Linux中由glibc(libs-start.c)提供。
-- 可执行文件
-  - 加载器
-    - 运行程序时，加载器首先加载程序到内存中，<font color=red> 被加载程序称为进程 </font>，并由操作系统加载。
-    - 主要作用：
-      - 验证
-      - 从硬盘复制可执行文件到主存中
-      - 配置栈
-      - 配置寄存器
-      - 跳转到程序入口点(_start)
-    - 加载器加载可执行文件时，操作系统使用的步骤
-      1. 加载器请求操作系统创建一个新进程
-      2. 操作系统为新进程建立页表
-      3. 用无效入口标记页表
-      4. 开始执行程序，生成即时页面错误异常
-      <img src="./pictures/加载过程.png">
 
-## 2.3. 内存四区
+- 加载器
+  - 运行程序时，加载器首先加载程序到内存中，<font color=red> 被加载程序称为进程 </font>，并由操作系统加载。
+  - 主要作用：
+    - 验证
+    - 从硬盘复制可执行文件到主存中
+    - 配置栈
+    - 配置寄存器
+    - 跳转到程序入口点(_start)
+  - 加载器加载可执行文件时，操作系统使用的步骤
+    1. 加载器请求操作系统创建一个新进程
+    2. 操作系统为新进程建立页表
+    3. 用无效入口标记页表
+    4. 开始执行程序，生成即时页面错误异常
+
+<div align="center">
+	<img width="80%" height="40%" src="./pictures/加载过程.png">
+</div>
+
+
+
+# 3. 内存四区
 
 首先了解基本的几个概念。
 - 全局变量（外部变量）：出现在代码块 `{}` 之外的变量就是全局变量。
@@ -153,32 +167,14 @@ Linux 下内存分配管理如下图所示
 
 
 
-## 2.4. gcc 
+# 4. 函数库
 
-GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。但其很快扩展，变得可处理C++，后来又扩展为能够支持更多编程语言，如Fortran、Pascal、Objective -C、Java、Ada、Go以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
+函数库是可以被调用来执行的一段功能函数。函数库分为静态库和动态库。
 
-```sh
-常用参数项
--g(gdb)                生成调试信息
--Wall                  编译时生成调试信息
--E(prEprocessed)       源文件文件 .c 生成 预处理文件 .i
--S(aSsembler)          预处理文件 .i 生成汇编文件 .s
--c(compile小写)         汇编文件 .s 生成可执行文件 .o 
--o(output 小写)         生成可执行的二进制文件(类似于Windows中的.exe文件)
--L(link)                链接库路径
--O(Optimizations 大写)  优化代码
-
--I(dIr)                 指定include头文件
-  gcc test.c -I ./include -o test.out  使用 -I 链接指定目录下(./include)的头文件进行编译生成可执行文件。
-
--D(Defn macro)           指定相关的宏文件(控制日志log输出)
-  gcc test.c -I ./include -o test.out -D DEBUG  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
-```
+Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/usr/lib64` 里面。
 
 
-
-
-## 2.5. 静态库
+# 5. 静态库
 
 所有编译器都提供一种机制，将所有相关的目标模块打包成一个单独的文件，成为静态库(static library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
@@ -201,13 +197,15 @@ GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。�
 - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
 
 
-## 2.6. 动态库
+# 6. 动态库
 
 动态库也叫共享库(share library)，它是一个目标模块，在运行或加载时，能加载到任意的内存地址，并链接一个内存中的程序，这个过程就叫动态链接(dynamic linking)，它是由一个叫动态链接器(dynamic linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下以 `.dll` 后缀。
 
 > 只有在程序执行的过程中才会加载动态链接库。
 
-### 2.6.1. Linux平台
+
+
+## 6.1. Linux平台
 
 - 命名规则
   - Linux中以 `.so` 结尾。形如：`lib + 库的名字 + .so`
@@ -259,19 +257,47 @@ GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。�
 - 加载的速度相对静态库比较慢。 
 
 
-### 2.6.2. Windows平台
+## 6.2. Windows平台
 
 C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h .lib .dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
 还有一点是 dll 是在调试的时候使用的，lib 是编译的时候使用的，两者是不同时期使用的工具。
 
 
-# 3. ELF relocatable
+# 7. ELF relocatable
 
 <img src="./pictures/ELF-relocatable.png">
 
-# 4. 编译三部曲
 
-第一步：执行脚本 configure 文件，设置指定的参数
+查看符号表内容
+```
+readlf -s main.o
+```
+
+# 8. gcc 
+
+GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。但其很快扩展，变得可处理C++，后来又扩展为能够支持更多编程语言，如Fortran、Pascal、Objective -C、Java、Ada、Go以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
+
+```sh
+常用参数项
+-g(gdb)                生成调试信息
+-Wall                  编译时生成调试信息
+-E(prEprocessed)       源文件文件 .c 生成 预处理文件 .i
+-S(aSsembler)          预处理文件 .i 生成汇编文件 .s
+-c(compile小写)         汇编文件 .s 生成可执行文件 .o 
+-o(output 小写)         生成可执行的二进制文件(类似于Windows中的.exe文件)
+-L(link)                链接库路径
+-O(Optimizations 大写)  优化代码
+
+-I(dIr)                 指定include头文件
+  gcc test.c -I ./include -o test.out  使用 -I 链接指定目录下(./include)的头文件进行编译生成可执行文件。
+
+-D(Defn macro)           指定相关的宏文件(控制日志log输出)
+  gcc test.c -I ./include -o test.out -D DEBUG  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
+```
+
+# 9. 编译三部曲
+
+第一步：执行脚本 configure 文件，设置指定的参数，建立 Makefile 文件。
 
 ```sh
 ./configure --prefix=指定软件路径
@@ -335,7 +361,7 @@ GCC5.3 支持 C++14
 - [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
 
 
-# 5. 工具
+# 10. 工具
 
 - readelf
   
@@ -427,7 +453,7 @@ GCC5.3 支持 C++14
   ```
 
 
-# 6. 构建
+# 11. 构建
 
 两种编译构建方式。
 
@@ -437,7 +463,7 @@ GCC5.3 支持 C++14
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
-# 7. 参考
+# 12. 参考
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
 - [内存管理(详细版)](https://www.cnblogs.com/yif1991/p/5049638.html)：详细的解释了内存四区的相关内容。
