@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2021-11-17 00:40:48
+ * @LastEditTime: 2021-11-28 23:12:44
  * @LastEditors: Windows10
  * @Description: git基础命令学习
 --> 
@@ -329,6 +329,7 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
 
 - 分支合并步骤
   - 从远程仓库拉取数据 `git fetch origin master` 
+    
     > 将远程仓库分支的数据拉取到本地临时分支 `git fetch origin master:temp`
   - 查看远程仓库的版本 `git remote -v`
   - 比较本地仓库与远程仓库的区别 `git diff master origin/master`
@@ -571,7 +572,23 @@ Windows 上 Git bash 客户端自带了 dos2unix 转换工具，将换行符统�
 find . -type f -exec dos2unix {} +
 ```
 
+Linux 与 Windows 换行符 转换
+
+```
+Linux 下使用 cat -A file 来查看文件采用的是哪种换行符。Windows 下编辑的文件放到 Linux 下打开，发现每行结尾是 ^M$，表示 CRLF；而 Linux 下的文件每行结尾是 $，表示 LF。
+
+使用 dos2unix 和 unix2dos 命令进行 Linux 与 windows 不同平台下的换行符格式转换。
+dos2unix [-kn] file [newfile]
+unix2dos [-kn] file [newfile]
+参数项
+  -n: 保留原本的旧文件，将转换后的内容输出到新文件
+  -k: 保留文件中原本的 mtime 时间格式
+```
+
+
+
 参考
+
 - [Git 多平台换行符问题(LF or CRLF)](http://kuanghy.github.io/2017/03/19/git-lf-or-crlf)
 
 
