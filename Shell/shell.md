@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-11-23 00:05:31
+ * @LastEditTime: 2021-11-28 23:12:15
  * @LastEditors: Windows10
  * @Description: shall 学习笔记
 -->
@@ -68,13 +68,13 @@ Shell 命令分为三大类：
 - 外部命令
 - 用户定义函数（function）、别名（alias）
 
-> 查找某个命令属于哪类：`type -a <命令名称>`
+查找某个命令属于哪类：`type -a <命令名称>`
 
 
 
 # 2. Bash 终端快捷键
 
-Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
+Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
 
 ## 2.1. 终端控制
 
@@ -189,13 +189,21 @@ Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般�
 ## 4.1. 引号
 
 单引号与双引号的区别
-- 被双引号括住的内容表示单一字符串，它防止通配符扩展，但允许变量扩展。
-- 被单引号括住的内容只能表示字符串。
+- 双引号内的特殊字符可以保持原有的特性，比如 `$`。
+
+  ```sh
+  var="lang is $LANG"，使用 echo $var 得到 lang is en_US.UTF-8
+  ```
+
+- 单引号内的特殊字符只能表示一般字符（纯文本），而不会有特殊字符。
   ```bash
-  var=200      # =号两边不能有空格
-  echo $var    # 200
-  echo '$var'  # $var
-  echo "$var"  # 200，打印变量var的内容
+  var="lang is $LANG"，使用 echo $var 得到 lang is $LANG
+  
+  其它示例：
+    var=200      # =号两边不能有空格
+    echo $var    # 200
+    echo '$var'  # $var
+    echo "$var"  # 200，打印变量var的内容
   ```
 
 ## 4.2. 变量
@@ -242,17 +250,27 @@ echo The resulting value is $value2
 
 ## 4.3. 命令替换
 
-> shell脚本中最有用的特性之一就是可以从 shell 命令输出中提取信息，并将其赋给变量。把输出赋给变量之后，就可以随意在脚本中使用了。
+shell脚本中最有用的特性之一就是可以从 shell 命令输出中提取信息，并将其赋给变量。把输出赋给变量之后，就可以随意在脚本中使用了。
 
 有两种方法可以将命令输出赋给变量：
-- 反引号字符 ` ` `
-- `$()` 格式：`$(commmand)` 执行括号里面的命令功能。例如：`$(data)`
-```
-[root@KF-CFT-mongdb3 ~]# test=$(date)
-[root@KF-CFT-mongdb3 ~]# echo $test
-2021年 11月 08日 星期一 10:52:12 CST
-```
-> shell会运行命令替换符号中的命令，并将其输出赋给变量testing。注意，赋值等号和命令替换字符之间没有空格。
+1. 反引号字符 ` ` `
+
+   ```sh
+   [root@CentOS7 ~]# var=`ls`
+   [root@CentOS7 ~]# echo $var
+   anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
+   ```
+
+   
+
+2. `$()` 格式：`$(commmand)` 执行括号里面的命令功能。例如：`$(data)`
+    ```sh
+    [root@KF-CFT-mongdb3 ~]# test=$(date)
+    [root@KF-CFT-mongdb3 ~]# echo $test   
+    2021年 11月 08日 星期一 10:52:12 CST
+    
+    shell 会运行命令替换符号中的命令，并将其输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
+    ```
 
 
 ## 4.4. 命令行参数
@@ -294,11 +312,10 @@ echo The resulting value is $value2
   - 用法：`命令 >> 文件名`。例如：`pwd >> text.tct` 将用`pwd`生成的数据放到 `test.txt` 文件中，`不会覆盖原`来的文件，新加的文件保留到文本后面。
 
 
-输入重定向。Linux会用重定向指定的文件来替换标准输入文件描述符。它会读取文件并提取数据，就如同它是键盘上键入的。
-- 输入重定向将文件的内容重定向到命令，使用小于符号 `<`。
+输入重定向。
+- 输入重定向将文件的内容重定向到命令，使用小于符号 `<` 表示，简单的来讲，就是将原本需要由键盘输入的数据，改为由文件内容来替换。形式：`command < inputfile`  ，小于号说明数据正在从输入文件流向命令。
   
-  > 形式：`command < inputfile`  ，小于号说明数据正在从输入文件流向命令。
-- 内联输入重定向符号是远小于号（ <<）。
+- <<  将文件中的内容追加到输入中。
 
 
 临时重定向：想在脚本中生成错误信息时，使用输出重定向符来将输出信息重定向到 `STDERR` 文件描述符，这种方法会重定向每条设定的语句。`echo "This is an error message" >&2`
@@ -308,9 +325,9 @@ echo The resulting value is $value2
 
 
 三个标准文件描述符 
-- `STDIN`: 标准输入 0
-- `STDOUT`: 标准输出 1
-- `STDERR`: 标准错误 2
+- `STDIN`: 标准输入 ，代码为 0，使用 > 或 >> 
+- `STDOUT`: 标准输出 ，代码为 1，使用 < 或 <<
+- `STDERR`: 标准错误，代码为 2，使用 2> 或 2>>
 
 
 
