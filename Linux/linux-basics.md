@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-26 01:11:22
+ * @LastEditTime: 2021-11-28 23:12:02
  * @LastEditors: Windows10
  * @Description: Linux 基础用法笔记
 --> 
@@ -104,7 +104,7 @@
   - [43.2. CentOS 下默认的防火墙](#432-centos-下默认的防火墙)
 - [44. SELinux](#44-selinux)
 - [45. 共性问题](#45-共性问题)
-  - [45.1. Linux与Windows相差8小时处理](#451-linux与windows相差8小时处理)
+  - [45.1. Linux 与 Windows相差 8 小时处理](#451-linux-与-windows相差-8-小时处理)
 - [46. 参考](#46-参考)
 
 <!-- /TOC -->
@@ -872,17 +872,15 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 
 # 9. pipe
 
-pipe中文翻译过来是管道的意思。用 `|` 表示。
+pipe 中文翻译过来是管道的意思，用 `|` 表示。
 
-> 定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入，常用 `|` 表示。管道常与grep命令组合使用：`grep 命令1|命令2|命令3|·····|命令n`
+定义：将一个命令的输出传送给另一个命令，作为另一个命令的输入，常用 `|` 表示。管道常与grep命令组合使用：`grep 命令1|命令2|命令3|·····|命令n`
 
-- &和&&  |和||四者区别
-  - `& `: 表示将当前任务放在后台执行，如要在后台运行redis-server,则有  redis-server &
-  - `&&`: 表示前一条命令执行成功时，才执行后一条命令 ，如 echo 'hello‘ && echo 'world'    
-  - `| `: 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'hello' | wc -l
-  - `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
-
-
+& 和 &&  | 和 || 四者区别
+- `& `: 表示将当前任务放在后台执行，如要在后台运行 redis-server，则有  redis-server &
+- `&&`: 表示前一条命令执行成功时，才执行后一条命令，如 echo 'hello‘ && echo 'world'    
+- `| `: 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'hello' | wc -l
+- `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
 
 # 10. tee
 
@@ -890,8 +888,6 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 - 功能：从标准输入读数据，写到标准输出和文件中。
 - 用法：`echo hello | tee file` 将 hello 字符写到file文件中并显示在标准输出上。
-
-
 
 # 11. wc
 
@@ -912,76 +908,99 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 
 # 12. top
 
-- 动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
-- 使用：`top -bn 1 -i -c` 
-- 参数 
-  - `%us` 表示用户空间程序的cpu使用率（没有通过nice调度）
-  - `%sy` 表示系统空间的cpu使用率，主要是内核程序。
-  - `%ni` 表示用户空间且通过nice调度过的程序的cpu使用率。
-  - `%id` 空闲cpu
-  - `%wa` cpu运行时在等待io的时间
-  - `%hi` cpu处理硬中断的数量
-  - `%si` cpu处理软中断的数量
-  - `%st` 被虚拟机偷走的cpu 
+动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
+
+```sh
+参数项：
+    %us 用户空间程序的 cpu 使用率（没有通过 nice 调度）
+    %sy 系统空间的 cpu 使用率，主要是内核程序。
+    %ni 用户空间且通过 nice 调度过的程序的 cpu 使用率。
+    %id 空闲cpu
+    %wa cpu运行时在等待io的时间
+    %hi cpu处理硬中断的数量
+    %si cpu处理软中断的数量
+    %st 被虚拟机偷走的cpu 
+    
+例子：
+	top -bn 1 -i -c
+```
 
 
 # 13. ps
 
-ps 是 `process status` 的缩写。
+ps 是 process status 的缩写。
+
+```sh
+
+[root@CentOS7 INSTALL]# ps aux
+USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root          1  0.0  0.3 128324  6960 ?        Ss   13:58   0:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+root          2  0.0  0.0      0     0 ?        S    13:58   0:00 [kthreadd]
+root          4  0.0  0.0      0     0 ?        S<   13:58   0:00 [kworker/0:0H]
+root          5  0.0  0.0      0     0 ?        S    13:58   0:00 [kworker/u256:0]
+root          6  0.0  0.0      0     0 ?        S    13:58   0:00 [ksoftirqd/0]
+root          7  0.0  0.0      0     0 ?        S    13:58   0:01 [migration/0]
+root          8  0.0  0.0      0     0 ?        S    13:58   0:00 [rcu_bh]
+root          9  0.0  0.0      0     0 ?        S    13:58   0:25 [rcu_sched]
+
+```
 
 显示格式参数
-- `USER `：用户名
-- `%CPU `：该进程用掉的CPU百分比
-- `%MEM `：进程占用内存的百分比
-- `VSZ  `：该进程使用的虚拟內存量（KB）
-- `RSS  `：该进程占用的固定內存量（KB）（驻留中页的数量）
-- `TTY  `：表示该进程在那个终端上运行，若与终端无关，则显示? 若为pts/n，则表示由网络连接进入主机的进程，tty1-tty6 表示是本机上面的登录进程。
-- `STAT `：该进程目前的状态
-- `START`：该进程被触发启动的时间
-- `TIME `：该进程实际使用CPU运行的时间
-- `CMD(command)`：执行此进程触发的命令是什么
-- `UID  `：用户ID、但输出的是用户名
-- `PID  `：进程的ID
-- `PPID `：父进程ID
-- `C    `：CPU使用率，单位为百分比
-- `STIME`：进程启动到现在的时间
-- `PRI(priority)`：进程被CPU执行的优先级，数值越小，代表该进程被CPU执行的越快。这个值由内核动态调整，用户无法直接调整PRI的值。
-- `NI(nice)`：调整进程的优先级。
-  - nice值的可调整的范围在 -20~19 之间。
-  - root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
-  - 一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
-  - PRI与NI之间的关系：`PRI(new) = PRI(old) + nice`
-  - nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
-  - 如何调整nice值？
-    - 进程刚开始时就给指定一个特定的nice值。`nice -n -5 vim &` 启动vim时，给定一个nice值，并将vim放在后台执行。
-    - 调整已存在的进程的nice值，需要用 `renice` 命令：`renice 4 2366` 将PID=2366进程的nice值调整为4
-- `ADDR`：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 `-` 表示
-- `SZ`：表示此进程用掉多少内存
-- `WCHAN`：表示目前进程是否在运行，如果为 `-`，则表示正在运行。
+
+```sh
+USER：用户名
+%CPU：该进程用掉的CPU百分比
+%MEM：进程占用内存的百分比
+VSZ：该进程使用的虚拟內存量（KB）
+RSS：该进程占用的固定內存量（KB）（驻留中页的数量）
+TTY：表示该进程在那个终端上运行，若与终端无关，则显示? 若为pts/n，则表示由网络连接进入主机的进程，tty1-tty6 表示是本机上面的登录进程。
+STAT：进程当前的状态
+    D(uninterruptible sleep) 无法中断的休眠状态（通常 IO 相关的进程）；
+    R(running)               正在运行可中在队列中可过行的；
+    S(大写：sleep)            处于休眠状态；
+    T(stop)                  停止状态（stopped by job control signal）；
+    W                        进入内存交换 （从内核2.6开始无效）；
+    X(dead)                  死掉的进程 （基本很少看见）；
+    Z(zombie)                僵尸状态，进程已被终止，但无法被删除；
+    <                        高优先级进程
+    N                        低优先级的进程
+    L                        有些页被锁进内存；
+    s                        该进程含有子进程；
+    l                        多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）；
+    +                        位于前台的进程组；
+    
+START：该进程被触发启动的时间
+TIME：该进程实际使用CPU运行的时间
+CMD(command)：执行此进程触发的命令是什么
+UID：用户ID、但输出的是用户名
+PID：进程的ID
+PPID：父进程ID
+C：CPU使用率，单位为百分比
+STIME：进程启动到现在的时间
+PRI(priority)：进程被CPU执行的优先级，数值越小，代表该进程被CPU执行的越快。这个值由内核动态调整，用户无法直接调整PRI的值。
+NI(nice)：调整进程的优先级。
+    nice值的可调整的范围在 -20~19 之间。
+    root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
+    一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
+    PRI与NI之间的关系：PRI(new) = PRI(old) + nice
+    nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
+    如何调整nice值？
+      1. 进程刚开始时就给指定一个特定的nice值。nice -n -5 vim & 启动vim时，给定一个nice值，并将vim放在后台执行。
+      2. 调整已存在的进程的nice值，需要用 renice 命令：renice 4 2366 将PID=2366 进程的nice值调整为4
+
+ADDR：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 - 表示
+SZ：此进程用掉多少内存
+WCHAN：目前进程是否在运行，如果为 -，则表示正在运行。
+
+```
 
 
-STAT状态位常见的状态字符
-- `D(uninterruptible sleep)` 无法中断的休眠状态（通常 IO 相关的进程）；
-- `R(running)` 正在运行可中在队列中可过行的；
-- `S(大写：sleep)` 处于休眠状态；
-- `T(stop)` 停止或被追踪状态；
-- `W` 进入内存交换 （从内核2.6开始无效）；
-- `X(dead)` 死掉的进程 （基本很少看见）；
-- `Z(zombie)` 僵尸状态，进程已被终止，但无法被删除；
-- `<` 优先级高的进程
-- `N` 优先级较低的进程
-- `L` 有些页被锁进内存；
-- `s` 进程的领导者（在它之下有子进程）；
-- `l` 多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）；
-- `+` 位于后台的进程组；
-
-
-参数命令组合
+常见参数命令组合
 - `ps –ef|grep 程序名称`：查看一个程序是否运行 
 - `ps -Lf 端口号|wc -l `：查看线程个数  
-- `ps -l`：查看当前用户的bash进程
-- `ps aux`：查看系统运行的所有进程，默认按照PID的顺序排序。
-- `ps axjf`：查看系统运行的所有进程，并带有PPID项
+- `ps -l`：查看当前用户的 bash 进程
+- `ps aux`：查看系统运行的所有进程，默认按照 PID 的顺序排序。
+- `ps axjf`：查看系统运行的所有进程，并带有 PPID 项
 
 
 ```sh
@@ -1004,15 +1023,12 @@ pkill bash
 
 # 15. nohup
 
-```
+```sh
 nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
 
 示例：
   nohup ping www.baidu.com    让执行 ping 命令的进程在后台运行。
-
 ```
-
-
 
 # 16. pstree 
 
@@ -1146,7 +1162,6 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 选项参数
 -n：列出所有的匹配行，显示行号
 -r: 递归搜索
--R：  
 -i: 搜索时，忽略大小写
 -c: 只输出匹配行的数量
 -l: 只列出符合匹配的文件名，不列出具体的匹配行
@@ -1161,12 +1176,13 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 
 示例：
   grep -r  "task_struct {" /usr/src/  -n       # 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
+  grep '[^0-6]'  helo.txt
 ```
 
 # 22. pgrep
 
 ```sh
-根据进程的名称查找并返回进程的 ID 号到标准输出。预支相似的命令 `pidof` 功能一样。
+根据进程的名称查找并返回进程的 ID 号到标准输出。与 pidof 功能一样。
 
 pgrep -l program_name  只显示某个进程的PID
 pidof program_name  找出某个正在执行的进程的PID
@@ -1206,6 +1222,8 @@ netstat 是一个查看系统中端口使用情况的一个命令。侦听端口
 
 # 25. ss 
 
+ss 是用于调查套接字的另一个实用程序。
+
 ```sh
 ss 检查端口： 
 
@@ -1218,7 +1236,7 @@ ss 检查端口：
 # 26. lsof 
 
 ```sh
-lsof 列出整个 Linux 系统打开的所有文件描述符。
+lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 
 参数
   -p：指定进程ID（ PID）。
@@ -1329,8 +1347,16 @@ man 中的快捷操作:
 n       |	继续下一个搜寻
 N       |	反向查询 
 
-
 与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点，如此组织犹如一张网，和网页类似。
+
+自定义软件安装路径配置 man page。
+
+```sh
+自定义的软件没有安装在 /usr/local/ 路径时，需手动配置 man page，否则使用 man  去查找软件相关的手册时，会找不到。例如：你安装的软件放置到
+/usr/local/software/， 那么 man page 搜寻的设置中， 可能就得要在 /etc/man_db.conf 内的 40~50 行左右处， 写入 MANPATH_MAP /usr/local/software/bin /usr/local/software/man，这样才可以使用 man 来查询该软件的在线文件。 
+```
+
+
 
 # 33. ntsysv
 
@@ -1697,7 +1723,7 @@ SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来
 
 # 45. 共性问题
 
-## 45.1. Linux与Windows相差8小时处理
+## 45.1. Linux 与 Windows相差 8 小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
