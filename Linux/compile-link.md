@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2021-11-28 23:09:37
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-11-29 18:17:53
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
@@ -20,9 +20,16 @@
 - [7. ELF relocatable](#7-elf-relocatable)
 - [8. gcc](#8-gcc)
 - [9. 编译三部曲](#9-编译三部曲)
-- [10. 工具](#10-工具)
-- [11. 构建](#11-构建)
-- [12. 参考](#12-参考)
+- [10. 包管理](#10-包管理)
+  - [10.1. 软件仓库](#101-软件仓库)
+  - [10.2. RPM](#102-rpm)
+  - [10.3. Epel](#103-epel)
+  - [10.4. Yun](#104-yun)
+  - [10.5. apt](#105-apt)
+  - [10.6. dpkg](#106-dpkg)
+- [11. 工具](#11-工具)
+- [12. 构建](#12-构建)
+- [13. 参考](#13-参考)
 
 <!-- /TOC -->
 
@@ -295,6 +302,12 @@ GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。�
   gcc test.c -I ./include -o test.out -D DEBUG  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
 ```
 
+- [GCC 包下载：fedoraproject.org](https://archives.fedoraproject.org/pub/)
+- [gun.org](http://ftp.gnu.org/gnu/)
+- [清华大学 GNU 源镜像](https://mirrors.tuna.tsinghua.edu.cn/gnu/)
+
+
+
 # 9. 编译三部曲
 
 第一步：执行脚本 configure 文件，设置指定的参数，建立 Makefile 文件。
@@ -353,15 +366,135 @@ GCC5.3 支持 C++14
  
 ```
 
-
-
 - [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
-- [Linux 源码编译安装](https://www.linuxidc.com/Linux/2015-01/112595.htm)
 - [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
 - [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
 
+# 10. 包管理
 
-# 10. 工具
+[RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
+
+Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
+
+CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
+
+
+
+
+## 10.1. 软件仓库
+
+Windows
+
+- 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
+
+Linux 或 Unix
+
+- 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
+- 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
+
+
+
+## 10.2. RPM
+
+**rpm包**：把二进制程序文件、配置文件以和帮助文档等程序资源打包在一起形成的文件。安装软件需要手动解决依赖关系。
+
+仓库源位置：`/etc/yum.repos.d/`，查看中重点关注是基础的 `CentOS-Base.repo`
+
+```sh
+rpm -ql  列出软件中安装的软件包
+
+```
+
+## 10.3. Epel 
+
+EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
+
+
+
+- 官方主页：https://fedoraproject.org/wiki/EPEL
+- [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
+
+
+
+
+## 10.4. Yun
+
+**yum源（rpm软件仓库）**：集中存储rpm包的服务器，通常以http、nfs、ftp、file等协议提供rpm包下载安装服务。互联网中的yum源一般分为发行方和第三方提供。CentOS默认使用发行方yum源。安装软件时会自动解决依赖关系。
+
+**yum配置文件**：CentOS中用于定义yum源位置和使用协议的配置文件，存放在 `/etc/yum.repo.d`目录下的 `*.repo` 文件，为所有仓库提供公共配置。
+
+CentOS8默认开启的yum配置文件有：CentOS-AppStream.repo、CentOS-Base.repo、CentOS-Extras.repo；
+
+CentOS7及以下版本默认开启的yum配置文件有：CentOS-Base.repo、CentOS-Extras.repo、CentOS-Updates.repo。
+
+- **dnf/yum命令**：CentOS中用于从yum源下载rpm包、自动处理包依赖关系，并且能够一次安装所有所依赖rpm包的命令工具。CentOS8建议使用dnf工具，CentOS7及以下只能使用yum工具。两个工具的用法、参数一致。
+- **reposync**：用于同步互联网yum源的rpm包到本地磁盘中的命令工具。通过yum源下载yum-utils安装。
+- **createrepo**：用于扫描本地磁盘中的rpm包并生成元数据文件，建立本地yum源的命令工具。建成本地yum源后，服务器可以通过file协议使用本地yum源。
+- **modifyrepo：**用于导入yum源模块文件的命令工具。
+
+```sh
+参数项
+repolist
+
+grouplist   可用组
+
+```
+
+
+
+
+## 10.5. apt
+
+- apt-cache search # ------(package 搜索包)
+- apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
+- apt-get install # ------(package 安装包)
+- apt-get install # -----(package --reinstall 重新安装包)
+- apt-get -f install # -----(强制安装, "-f = --fix-missing")
+- apt-get remove #-----(package 删除包)
+- apt-get remove --purge # ------(package 删除包，包括删除配置文件等)
+- apt-get autoremove --purge # ----(package 删除包及其依赖的软件包+配置文件等
+- `apt-get update`  更新源(软件列表)
+- `apt-get upgrade` 更新已安装的包
+- `apt-get clean && apt-get autoclean`  清理下载文件的缓存和只清理过时的包
+- apt-get dist-upgrade # ---------升级系统
+- apt-get dselect-upgrade #------使用 dselect 升级
+- apt-cache depends #-------(package 了解使用依赖)
+- apt-cache rdepends # ------(package 了解某个具体的依赖,当是查看该包被哪些包依赖吧...)
+- apt-get build-dep # ------(package 安装相关的编译环境)
+- apt-get source #------(package 下载该包的源代码)
+- apt-get check #-------检查是否有损坏的依赖
+- `dpkg -S filename` -----查找filename属于哪个软件包
+- apt-file search filename -----查找filename属于哪个软件包
+- apt-file list packagename -----列出软件包的内容
+- apt-file update --更新apt-file的数据库
+- 找到安装的软件
+  - dpkg -S softwarename 显示包含此软件包的所有位置
+  - dpkg -L softwarename 显示安装路径
+  - dpkg -l softwarename 查看软件版本
+  - 用 find 或 whereis 命令查找文件位置
+- 卸载软件
+  -  apt-get remove softname1 softname2 …;              移除式卸载
+  -  apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
+
+
+## 10.6. dpkg 
+
+- dpkg --info "软件包名" --列出软件包解包后的包名称.
+- dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
+- dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
+- dpkg -s 查询已安装的包的详细信息.
+- dpkg -L 查询系统中已安装的软件包所安装的位置. (类似于rpm -ql)
+- dpkg -S 查询系统中某个文件属于哪个软件包. (类似于rpm -qf)
+- dpkg -I 查询deb包的详细信息,在一个软件包下载到本地之后看看用不用安装(看一下呗).
+- dpkg -i 手动安装软件包(这个命令并不能解决软件包之前的依赖性问题),如果在安装某一个软件包的时候遇到了软件依- 赖的问题,可以用apt-get -f install在解决信赖性这个问题.
+- dpkg -r 卸载软件包.不是完全的卸载,它的配置文件还存在.
+- dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
+- dpkg -reconfigure 重新配置
+
+
+
+
+# 11. 工具
 
 - readelf
   
@@ -453,7 +586,7 @@ GCC5.3 支持 C++14
   ```
 
 
-# 11. 构建
+# 12. 构建
 
 两种编译构建方式。
 
@@ -463,7 +596,7 @@ GCC5.3 支持 C++14
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
-# 12. 参考
+# 13. 参考
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
 - [内存管理(详细版)](https://www.cnblogs.com/yif1991/p/5049638.html)：详细的解释了内存四区的相关内容。
