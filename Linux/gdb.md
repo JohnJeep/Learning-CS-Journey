@@ -1,14 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2021-08-24 21:25:10
+ * @LastEditTime: 2021-11-30 01:15:40
  * @LastEditors: Windows10
  * @Description: GDB、Makefile使用剖析
 --> 
 
 <!-- TOC -->
 
-- [1. 启动GDB打普通断点](#1-启动gdb打普通断点)
+- [1. 启动 GDB 打普通断点](#1-启动-gdb-打普通断点)
 - [2. 调试程序](#2-调试程序)
 - [3. TUI模式](#3-tui模式)
 - [4. 调试多进程](#4-调试多进程)
@@ -16,30 +16,48 @@
 - [6. 查看内存](#6-查看内存)
 - [7. Hardware watchpoint(硬件断点)](#7-hardware-watchpoint硬件断点)
 - [8. 调试正在运行的程序](#8-调试正在运行的程序)
-- [9. 底层原理](#9-底层原理)
-- [10. 参考](#10-参考)
+- [9. 设置动态库](#9-设置动态库)
+- [10. GDB 反方向调试](#10-gdb-反方向调试)
+- [11. 底层原理](#11-底层原理)
+- [12. 参考](#12-参考)
 
 <!-- /TOC -->
 
-# 1. 启动GDB打普通断点
+# 1. 启动 GDB 打普通断点
 
-> 在进行GDB调试之前需要先打断点。GDB中的断点分为：普通断点、观察断点、捕捉断点，一般使用 `break` 打的断点称为普通断点，使用 `watch` 打的断点称为硬件断点，使用 `catch` 打的断点称为捕捉断点。
+在进行GDB调试之前需要先打断点。GDB中的断点分为：普通断点、观察断点、捕捉断点，一般使用 `break` 打的断点称为普通断点，使用 `watch` 打的断点称为硬件断点，使用 `catch` 打的断点称为捕捉断点。
+
+启动 GDB
+
+```sh
+start 程序只运行一次就停止了
+run(r) 启动后运行到断点处
+
+1. 使用 gdb 调试程序之前，必须使用 -g 或 –ggdb 编译选项编译源文件：gcc xxx.c -g -o xxx.out 
+2. 直接启动可执行文件，其中 a.out 是带有调试信息的可执行文件
+   gdb a.out   
+3. 启动调试程序名后带参数的程序：
+  pdb --args a.out  ini/hello.ini
+  
+  另外一种运行方式：先启动可执行文件，后面不带参数，然后再 GDB 里面设置参数项
+    gdb b.out
+    set args  ini/hello.ini
+```
 
 
-- `gcc xxx.c -g -o xxx.out` 使用 gdb 调试程序之前,必须使用 `-g` 或 `–ggdb`编译选项编译源文件。
-- `gdb a.out` 启动GDB，其中 `a.out` 是带有调试信息的可执行文件
-- `list(l)`  默认查看`10行` 程序代码
+- `list(l)`  默认查看`10 行` 程序代码
+
 - `enter键` 执行上一次输入过的命令
+
 - `l xxx.c: zz(或行号)` 查看 `xxx.c` 文件中的 `zz` 函数
+
 - `break(b) main(或行号)`   在main函数处设置断点。  `break 20`   在 `20行` 处设置断点。
-- `b 22 if i==10`  设置条件断点。在22行处，当 `i==10` 时设置一个断点。
+
+- `b 22 if i==10`  设置条件断点。在22行处，当 `i==10` 时设置一个断点。可以直接在某个文件的某个函数打断点，然后运行查看，多文件可以设置断点。
+  
   > 注意: 有循环体的时候，断点应设置在循环体的内部。在循环体(for、while等语句)的时候程序不会停。
+  
 - `info(i) break`  查看设置的断点信息内容
-- 启动GDB
-  - `start` 程序只运行一次就停止了
-  - `run(r)`
-
-
 
 # 2. 调试程序
   - `next(n)    ` 单步执行程序，但不进入子函数内部
@@ -123,7 +141,7 @@ set scheduler-locking 命令的语法格式如下：
 # 6. 查看内存
 
 - `back trace(bt)` 打印当前函数调用栈的所有信息
-- `examine(x)` 查看内存地址中的值
+- `examine(x)` 查看内存地址中的值。比如，使用 `bt` 查看不了堆栈信息时，可用该命令指定多少地址以什么样的格式显示堆栈中的数据。
   - `n` 是一个正整数，表示显示内存的长度，也就是说从当前地址向后显示几个地址的内容。 
   - `f` 按浮点数格式显示变量。  
   - `u` 从当前地址往后请求的字节数，如果不指定的话，GDB默认是4个bytes。b表示单字节，h表示双字节，w表示四字节，g表示八字节。
@@ -184,6 +202,8 @@ GDB 可以对正在执行的程序进行调度，它允许开发人员中断程�
 
 2、 attach 可执行程序的进程 PID: `gdb attach pid`
 
+> 另一种方式：gdb -p pid或程序名
+
 3、 当attach进程时，会停止进程的运行，这时使进程继续运行需要使用 continue/c 命令。
 
 4、 当程序停止时，用其它的命令查看其它信息
@@ -194,9 +214,27 @@ GDB 可以对正在执行的程序进行调度，它允许开发人员中断程�
   - `info proc` 显示进程信息
   - `info reg` 显示寄存器信息
 
+# 9. 设置动态库
+
+```
+set solib-search-path  动态库路径
+```
+
+# 10. GDB 反方向调试
+
+GDB7.0 以上的平台开始支持反向调试反向调试需要开启记录，调试结束关闭记录，只有在开启记录之后才能完全正常的进行反向调试。
+
+```sh
+(gdb) record        开启记录
+(gdb) record stop   关闭记录
+(gdb) reverse-next  向上走一步
+
+set exec-direction [forward | reverse]   设置程序运行方向，能够像正常调试方式一样反向调试
+```
 
 
-# 9. 底层原理
+
+# 11. 底层原理
 
 ptrace 系统函数是 Linux 内核提供的一个用于进程跟踪的系统调用，通过它，一个进程(gdb)可以读写另外一个进程(test)的指令空间、数据空间、堆栈和寄存器的值。而且gdb进程接管了test进程的所有信号，也就是说系统向test进程发送的所有信号，都被gdb进程接收到，这样一来，test进程的执行就被gdb控制了，从而达到调试的目的。
 
@@ -209,8 +247,10 @@ gdb底层的调试机制是怎样的？
 
 
 
-# 10. 参考
+# 12. 参考
 
+- [GDB 官方英文文档](https://www.gnu.org/software/gdb/)
+- [CS-MCU GDB tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/)
 - [用图文带你彻底弄懂GDB调试原理](https://mp.weixin.qq.com/s?__biz=MzA3MzAwODYyNQ==&mid=2247483895&idx=1&sn=ba35d1823c259a959b72a310e0a92068&scene=21#wechat_redirect)
 - [100个gdb小技巧](https://wizardforcel.gitbooks.io/100-gdb-tips/content/set-watchpoint.html)
 - [线程的查看以及利用gdb调试多线程](https://blog.csdn.net/zhangye3017/article/details/80382496)

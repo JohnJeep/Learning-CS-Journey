@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-29 18:18:07
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2021-11-29 23:33:17
+ * @LastEditors: Windows10
  * @Description: Linux 基础用法笔记
 --> 
 
@@ -15,7 +15,7 @@
   - [2.2. GPT](#22-gpt)
   - [2.3. BIOS与UEFI](#23-bios与uefi)
   - [2.4. 分区](#24-分区)
-- [3. 基础命令令](#3-基础命令令)
+- [3. 基础命令](#3-基础命令)
   - [3.1. touch](#31-touch)
   - [3.2. rm](#32-rm)
   - [3.3. mkdir](#33-mkdir)
@@ -193,7 +193,7 @@ UEFI(Unified Extensible Firmware Interface): 统一可扩展固件接口，采�
 
 swap 分区：磁盘模拟内存的交换分区，当有数据被存放在物理内存里面，但这些数据又不是常被CPU使用时，这些不常被使用的数据将会被扔到硬盘的交换分区当中去，而速度较快的物理内存将被释放出来给真正需要的程序使用。交换分区不会使用目录树的挂载，所有交换分区就不需要指定挂载点。
 
-# 3. 基础命令令
+# 3. 基础命令
 
 ## 3.1. touch 
 
@@ -1469,6 +1469,8 @@ test40.txt                                                                      
 -rw-r--r--   1 root    root          12 7月   6 09:41 test40.txt
 ```
 
+
+
 # 41. rsync
 
 Rsync (remote synchronize)也可以实现同步本地主机和远程主机的文件/目录，和SCP不同之处在于，首次复制时，Rsync会复制整个目录，在后面的复制中，不会复制相同的内容，只对差异文件做更新，scp是把所有文件都复制过去。Rsync广泛用于备份和镜像。
@@ -1534,7 +1536,6 @@ root@192.168.20.30's password:
   ```
 
 参考
-
 - [使用SCP或Rsync实现Linux主机之间文件、目录的复制 | HiYong (hiyongz.github.io)](https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/)
 
 
@@ -1560,7 +1561,7 @@ CentOS7下默认的防火墙为 `firewalld`
 ```sh
 firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 
-参数解释
+参数项：
   –-permanent：表示设置为持久；
   –-add-port：标识添加的端口
 ```
@@ -1615,6 +1616,5 @@ $sudo ntpdate time.windows.com
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
-- [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 - [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
