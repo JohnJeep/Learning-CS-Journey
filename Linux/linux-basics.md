@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-28 23:12:02
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-11-29 18:18:07
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux 基础用法笔记
 --> 
 
@@ -93,19 +93,13 @@
 - [39. chkconfig](#39-chkconfig)
 - [40. scp](#40-scp)
 - [41. rsync](#41-rsync)
-- [42. 包管理](#42-包管理)
-  - [42.1. 软件仓库](#421-软件仓库)
-  - [42.2. RPM](#422-rpm)
-  - [42.3. Yun](#423-yun)
-  - [42.4. apt](#424-apt)
-  - [42.5. dpkg](#425-dpkg)
-- [43. 防火墙](#43-防火墙)
-  - [43.1. ubuntu 下默认的防火墙](#431-ubuntu-下默认的防火墙)
-  - [43.2. CentOS 下默认的防火墙](#432-centos-下默认的防火墙)
-- [44. SELinux](#44-selinux)
-- [45. 共性问题](#45-共性问题)
-  - [45.1. Linux 与 Windows相差 8 小时处理](#451-linux-与-windows相差-8-小时处理)
-- [46. 参考](#46-参考)
+- [42. 防火墙](#42-防火墙)
+  - [42.1. ubuntu 下默认的防火墙](#421-ubuntu-下默认的防火墙)
+  - [42.2. CentOS 下默认的防火墙](#422-centos-下默认的防火墙)
+- [43. SELinux](#43-selinux)
+- [44. 共性问题](#44-共性问题)
+  - [44.1. Linux 与 Windows相差 8 小时处理](#441-linux-与-windows相差-8-小时处理)
+- [45. 参考](#45-参考)
 
 <!-- /TOC -->
 
@@ -1545,132 +1539,9 @@ root@192.168.20.30's password:
 
 
 
-# 42. 包管理
+# 42. 防火墙
 
-[RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
-
-Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线软件的升级。
-
-CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
-
-清华大学镜像网站：https://mirrors.tuna.tsinghua.edu.cn/cygwin/
-
-
-
-
-## 42.1. 软件仓库
-
-Windows
-
-- 常有文件程序自解压、选定安装组件和安装路径（个别不让选择路径）、添加注册表项等等，完成以后双击启动运行，卸载时找安装路径下的uninstall或者控制面板里卸载
-
-Linux 或 Unix
-
-- 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
-- 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
-
-
-
-## 42.2. RPM
-
-安装软件需要手动解决依赖关系。
-
-仓库源位置：`/etc/yum.repos.d/`，查看中重点关注是基础的 `CentOS-Base.repo`
-
-```sh
-rpm -ql  列出软件中安装的软件包
-
-```
-
-Epel 镜像 
-
-EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
-
-
-
-- 官方主页：https://fedoraproject.org/wiki/EPEL
-- [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
-
-
-
-
-## 42.3. Yun
-
-安装软件时会自动解决依赖关系。
-
-Yum 配置文件： `/etc/yum.conf`  为所有仓库提供公共配置
-
-```sh
-参数项
-repolist
-
-grouplist   可用组
-
-```
-
-
-
-
-
-
-## 42.4. apt
-
-- apt-cache search # ------(package 搜索包)
-- apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
-- apt-get install # ------(package 安装包)
-- apt-get install # -----(package --reinstall 重新安装包)
-- apt-get -f install # -----(强制安装, "-f = --fix-missing")
-- apt-get remove #-----(package 删除包)
-- apt-get remove --purge # ------(package 删除包，包括删除配置文件等)
-- apt-get autoremove --purge # ----(package 删除包及其依赖的软件包+配置文件等
-- `apt-get update`  更新源(软件列表)
-- `apt-get upgrade` 更新已安装的包
-- `apt-get clean && apt-get autoclean`  清理下载文件的缓存和只清理过时的包
-- apt-get dist-upgrade # ---------升级系统
-- apt-get dselect-upgrade #------使用 dselect 升级
-- apt-cache depends #-------(package 了解使用依赖)
-- apt-cache rdepends # ------(package 了解某个具体的依赖,当是查看该包被哪些包依赖吧...)
-- apt-get build-dep # ------(package 安装相关的编译环境)
-- apt-get source #------(package 下载该包的源代码)
-- apt-get check #-------检查是否有损坏的依赖
-- `dpkg -S filename` -----查找filename属于哪个软件包
-- apt-file search filename -----查找filename属于哪个软件包
-- apt-file list packagename -----列出软件包的内容
-- apt-file update --更新apt-file的数据库
-- 找到安装的软件
-  - dpkg -S softwarename 显示包含此软件包的所有位置
-  - dpkg -L softwarename 显示安装路径
-  - dpkg -l softwarename 查看软件版本
-  - 用 find 或 whereis 命令查找文件位置
--  卸载软件
-    -  apt-get remove softname1 softname2 …;              移除式卸载
-    - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
-
-
-## 42.5. dpkg 
-
-- dpkg --info "软件包名" --列出软件包解包后的包名称.
-- dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
-- dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
-- dpkg -s 查询已安装的包的详细信息.
-- dpkg -L 查询系统中已安装的软件包所安装的位置. (类似于rpm -ql)
-- dpkg -S 查询系统中某个文件属于哪个软件包. (类似于rpm -qf)
-- dpkg -I 查询deb包的详细信息,在一个软件包下载到本地之后看看用不用安装(看一下呗).
-- dpkg -i 手动安装软件包(这个命令并不能解决软件包之前的依赖性问题),如果在安装某一个软件包的时候遇到了软件依- 赖的问题,可以用apt-get -f install在解决信赖性这个问题.
-- dpkg -r 卸载软件包.不是完全的卸载,它的配置文件还存在.
-- dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
-- dpkg -reconfigure 重新配置
-
-
------------------------------------------------------------------
-
-- 
-
-
-
-# 43. 防火墙
-
-## 43.1. ubuntu 下默认的防火墙
+## 42.1. ubuntu 下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -1683,7 +1554,7 @@ grouplist   可用组
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 43.2. CentOS 下默认的防火墙
+## 42.2. CentOS 下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```sh
@@ -1714,16 +1585,16 @@ firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
-# 44. SELinux
+# 43. SELinux
 
 SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 45. 共性问题
+# 44. 共性问题
 
-## 45.1. Linux 与 Windows相差 8 小时处理
+## 44.1. Linux 与 Windows相差 8 小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -1740,7 +1611,7 @@ $sudo ntpdate time.windows.com
 
 
 
-# 46. 参考
+# 45. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
