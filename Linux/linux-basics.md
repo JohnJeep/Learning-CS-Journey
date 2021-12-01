@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-11-29 23:33:17
+ * @LastEditTime: 2021-12-01 23:36:03
  * @LastEditors: Windows10
  * @Description: Linux 基础用法笔记
 --> 
@@ -99,7 +99,8 @@
 - [43. SELinux](#43-selinux)
 - [44. 共性问题](#44-共性问题)
   - [44.1. Linux 与 Windows相差 8 小时处理](#441-linux-与-windows相差-8-小时处理)
-- [45. 参考](#45-参考)
+- [45. SSH](#45-ssh)
+- [46. 参考](#46-参考)
 
 <!-- /TOC -->
 
@@ -1609,10 +1610,12 @@ $sudo ntpdate time.windows.com
 ```
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
+# 45. SSH
+
+[What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。
 
 
-
-# 45. 参考
+# 46. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
