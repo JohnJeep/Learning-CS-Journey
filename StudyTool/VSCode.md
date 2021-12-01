@@ -1,17 +1,12 @@
 <!--
  * @Author: JohnJeep
-
  * @Date: 2019-09-11 13:46:17
-
- * @LastEditTime: 2021-11-13 14:27:42
-
- * @LastEditors: DESKTOP-0S33AUT
-
+ * @LastEditTime: 2021-12-01 23:35:34
+ * @LastEditors: Windows10
  * @Description: VSCode常用快捷键说明
-
  * -->
 
-  # 1. VSCode 快捷键
+# 1. VSCode 快捷键捷键
 
 1. `Ctrl + P` 快速打开文件
 2. `Ctrl+Shift+P` 或 `F1` 显示命令面板
@@ -33,8 +28,11 @@
 18. `Ctrl+K+J`  展开所有代码
 19. `Ctrl+Shift+[`  折叠光标所处代码块内的代码
 20. `Ctrl+Shift+]`  展开光标所处代码块内的代码
+20. `Ctrl Shift o` 当前文件中搜索 symbols（匹配到相关的）
+20. `Ctrl T` 当前 workspace 中搜索 symbols
 
 > 搜索 `process explorer` 查看进程资源管理
+
 
 # 2. Config
 
@@ -50,5 +48,11 @@ ${fileDirname} - 文件所在的文件夹路径
 ```
 
 
+常用配置文件说明
+- `tasks.json` (compiler build settings)
+- `launch.json` (debugger settings)
+- `c_cpp_properties.json` (compiler path and IntelliSense settings)
 
- **[c_cpp_properties.json 官方文档](https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference)** 
+
+
+**[c_cpp_properties.json 官方文档](https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference)** 
