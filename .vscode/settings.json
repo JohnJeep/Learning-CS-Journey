@@ -70,5 +70,6 @@
     "jupyter.jupyterServerType": "local",
 "C_Cpp.errorSquiggles": "Disabled",
 "editor.lineNumbers": "relative",
-"workbench.tree.indent": 4
+"workbench.tree.indent": 4,
+"cmake.configureOnOpen": false
 }
