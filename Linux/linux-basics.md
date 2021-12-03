@@ -1614,8 +1614,104 @@ $sudo ntpdate time.windows.com
 
 [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。
 
+# 46. ulimit 系统参数修改
 
-# 46. 参考
+查看系统参数
+
+```sh
+
+[root@KF-CFT-AP2 ~]# ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 62795
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 62795
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+```
+
+系统参数修改临时有效
+
+```sh
+直接在 shell 中修改参数值，比如
+1. 修改 core 文件大小
+	[root@KF-CFT-AP2 ~]# ulimit -c unlimited
+2. 修改文件打开的个数 open files
+	[root@KF-CFT-AP2 ~]# ulimit -n 2000
+
+其它的参数同理修改
+```
+
+系统参数修永久有效
+
+```sh
+修改 /etc/security/limits.conf 文件，直接在文件后面追加自己要添加的内容，完成后，登出当前用户，然后再登录，查看改变的值。
+
+[root@KF-CFT-AP2 limits.d]# vim /etc/security/limits.conf
+#        - core - limits the core file size (KB)
+#        - data - max data size (KB)
+#        - fsize - maximum filesize (KB)
+#        - memlock - max locked-in-memory address space (KB)
+#        - nofile - max number of open files
+#        - rss - max resident set size (KB)
+#        - stack - max stack size (KB)
+#        - cpu - max CPU time (MIN)
+#        - nproc - max number of processes
+#        - as - address space limit (KB)
+#        - maxlogins - max number of logins for this user
+#        - maxsyslogins - max number of logins on the system
+#        - priority - the priority to run user process with
+#        - locks - max number of file locks the user can hold
+#        - sigpending - max number of pending signals
+#        - msgqueue - max memory used by POSIX message queues (bytes)
+#        - nice - max nice priority allowed to raise to values: [-20, 19]
+#        - rtprio - max realtime priority
+#
+#<domain>      <type>  <item>         <value>
+#
+
+#*               soft    core            0
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#@student        -       maxlogins       4
+
+# End of file
+
+# 修改打开文件数
+* hard nofile 3000
+* soft nofile 3000
+```
+
+注意：有时修改了 `/etc/security/limits.conf` 文件并没有达到自己所预期的内容，感觉是没有生效。可能的原因：
+
+1. 加载了系统中 `/etc/profile` 文件中对系统参数的修改。优先级第二高
+2. 加载了系统中 `/etc/security/limits.d/` 目录下文件的修改，比如：`90-nproc.conf` 或者 `20-nproc.conf`文件。优先级第三高
+
+
+
+参考：
+
+[linux limits.conf 生效,linux修改limits.conf不生效](https://blog.csdn.net/weixin_35075144/article/details/117593351)
+
+[/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
+
+
+
+
+
+# 47. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
