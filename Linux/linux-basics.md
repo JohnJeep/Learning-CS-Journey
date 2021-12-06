@@ -1082,6 +1082,10 @@ find：按照文件属性查找
  < ls ... ./LY.tar.gz > ? y
 -rw-r--r--. 1 root root 506827845 Nov 11 20:23 ./LY.tar.gz
 
+-iname
+例子：
+  find . -iname '*.log' | xargs grep 'open files'  查找当前路径下所有 .log 文件中包含的 open files 字段
+
 ```
 
 # 20. xargs
@@ -1610,25 +1614,42 @@ $sudo ntpdate time.windows.com
 ```
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-# 45. SSH
 
-[What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 46. ulimit 系统参数修改
+
+为什么要修改系统的参数？
+
+
+
+
 
 查看系统参数
 
 ```sh
 
 [root@KF-CFT-AP2 ~]# ulimit -a
-core file size          (blocks, -c) 0
+core file size          (blocks, -c) 0          # 设定core文件的最大值，单位为 block。
 data seg size           (kbytes, -d) unlimited
 scheduling priority             (-e) 0
 file size               (blocks, -f) unlimited
 pending signals                 (-i) 62795
 max locked memory       (kbytes, -l) 64
 max memory size         (kbytes, -m) unlimited
-open files                      (-n) 1024
+open files                      (-n) 1024      # 一个进程可以打开文件描述符的数量的最大值
 pipe size            (512 bytes, -p) 8
 POSIX message queues     (bytes, -q) 819200
 real-time priority              (-r) 0
@@ -1638,6 +1659,29 @@ max user processes              (-u) 62795
 virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
 ```
+
+
+
+## **root用户修改后其他用户不生效**
+
+在root用户修改为65536后，用其他用户登录服务器检测`ulimit -n` 还是1024。那么就是该用户未生效。
+
+修改 `/etc/ssh/sshd_config` 中配置，将 UsePAM 项值设置为 yes，表示使用 PAM 模块来加载。 
+
+```
+# UsePAM no
+UsePAM yes
+```
+
+修改完后，重启服务
+
+```sh
+service sshd restart
+```
+
+
+
+
 
 系统参数修改临时有效
 
@@ -1694,10 +1738,23 @@ file locks                      (-x) unlimited
 * soft nofile 3000
 ```
 
+*：表示所有的用户。
+
+
+
+
+
 注意：有时修改了 `/etc/security/limits.conf` 文件并没有达到自己所预期的内容，感觉是没有生效。可能的原因：
 
 1. 加载了系统中 `/etc/profile` 文件中对系统参数的修改。优先级第二高
 2. 加载了系统中 `/etc/security/limits.d/` 目录下文件的修改，比如：`90-nproc.conf` 或者 `20-nproc.conf`文件。优先级第三高
+
+hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系统当前限制。当你设置 hard limit 后，soft limit 的值就只能小于 hard limit 。普通用户可以降低 hard limit 的值，但是不能提高它，只有 root 用户才能提高 hard limit。
+
+
+
+
+
 
 
 
@@ -1707,9 +1764,11 @@ file locks                      (-x) unlimited
 
 [/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
 
+[Linux-PAM 官方文档](http://www.linux-pam.org/)
 
+[Linux下PAM模块学习总结](https://www.cnblogs.com/kevingrace/p/8671964.html)
 
-
+[Linux下设置最大文件打开数nofile及nr_open、file-max](https://www.cnblogs.com/zengkefu/p/5635153.html)
 
 # 47. 参考
 
