@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-11-28 23:12:15
+ * @LastEditTime: 2021-12-07 01:18:23
  * @LastEditors: Windows10
  * @Description: shall 学习笔记
 -->
@@ -582,8 +582,8 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 # 11. 正则表达式
 
 两种流行的正则表达式引擎
-  - POSIX基础正则表达式（ basic regular expression， BRE）引擎。例子：sed编辑器。
-  - POSIX扩展正则表达式（ extended regular expression， ERE）引擎。例子：gawk工具。
+ - POSIX基础正则表达式（ basic regular expression， BRE）引擎。例子：sed编辑器。
+ - POSIX扩展正则表达式（ extended regular expression， ERE）引擎。例子：gawk工具。
 
 <img src="./figures/regExp.png">
 
@@ -592,7 +592,9 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 
 - `.`: 匹配任意一个字符
 - `[]`: 匹配括号中的任意一个字符
-- `-`: 在[] 括号内表示字符范围。eg: `[0-9]`
+- `-(横线)`: 在[] 括号内表示字符范围。eg: `[0-9]`
+- `%` 匹配零个或多个字符
+- `_(下划线)` 匹配单个字符。
 - `^`: 位于[] 括号的开头，匹配除括号中的字符之外的任意一个字符。eg: `[^abf]` 匹配除abf字符以外的所有字符。
 - `\s`: 匹配任意空白字符。
 - `\S`: 匹配任意非空白字符。
