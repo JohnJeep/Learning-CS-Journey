@@ -7,6 +7,7 @@
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
+
 <!-- TOC -->
 
 - [1. 缩写](#1-缩写)
@@ -360,6 +361,7 @@ glibc 是 gnu 发布的 libc 库，也即 c 运行库，又称 GNU C 库。glibc
 
 <img width="60%" hight="60%" src="./pictures/Linux_kernel_System_Call_Interface_and_glibc.svg">
 
+[官网解释 glibc](https://www.gnu.org/software/libc/libc.html)
 
 
 
@@ -382,6 +384,13 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Roland McGrath and Ulrich Drepper.
 ```
+
+参考
+- [glibc 官方源码地址](http://ftp.gnu.org/gnu/glibc/)
+- [glibc源码分析-1:构建过程](https://magus0219.me/zh-cn/glibc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-1-%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B/)
+
+
+
 
 ## 8.3. libstdc++
 
@@ -412,6 +421,9 @@ libc++使用内联 namespace 来帮助确保ABI不兼容类型不会被误认为
 ```sh
 ./configure --prefix=指定软件路径
 例如：../configure --prefix=/usr/local/gcc-4.9.4 -enable-checking=release -enable-languages=c,c++ -disable-multilib
+
+CentOS7 4.8.4 默认安装时的配置
+../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
 
 参数项
   --prefix：指定安装路径。
