@@ -1266,7 +1266,7 @@ Socat 的主要特点就是在两个数据流之间建立通道，且支持众�
 
 # 30. dmesg 
 
-dmesg是分析内核产生的一些信息。
+dmesg 是分析内核产生的一些信息。
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
@@ -1441,6 +1441,35 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
 # 39. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
+
+
+
+# LD_LIBRARY_PATH
+
+`LD_LIBRARY_PATH` 是 Linux 下用来处理环境变量的，告诉j加载器（loader）在什么路径下去查找非标准库中的共享库。
+
+Linux 运行的时候，是如何管理共享库(*.so)的？
+
+​	在 Linux 下面，共享库的寻找和加载是由 /lib/ld.so 实现的。 ld.so 在标准路经(/lib, /usr/lib) 中寻找应用程序用到的共享库。但是，如果需要用到的共享库在非标准路经，ld.so 怎么找到它呢？
+
+目前，Linux 通用的做法是将非标准路经加入 /etc/ld.so.conf，然后运行 ldconfig 生成 /etc/ld.so.cache。 ld.so 加载共享库的时候，会从 ld.so.cache 查找。传统上，Linux 的先辈 Unix 还有一个环境变量：LD_LIBRARY_PATH 来处理非标准路经的共享库。ld.so 加载共享库的时候，也会查找这个变量所设置的路经。
+
+LD_LIBRARY_PATH 的设置方法：用 `export` 命令来设置值
+
+```sh
+ // 将 /home/John/IOV/Libs 中的共享库路径添加到环境变量中
+ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/John/IOV/Libs
+```
+
+
+
+参考
+
+- [LD_LIBRARY_PATH](http://www.cppblog.com/toMyself/archive/2010/08/02/121971.html)
+- https://www.csdndocs.com/article/2589063
+- [linux 添加动态链接库路径](https://blog.csdn.net/liu0808/article/details/79012187)
+
+
 
 # 40. scp 
 
