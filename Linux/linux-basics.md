@@ -1783,14 +1783,57 @@ hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系�
 
 
 
+-------------------
+
+于nproc配置信息的扩展说明:
+
+对`max user processes`的配置, Linux系统默认先读取`/etc/security/limits.conf` 中的信息, 如果`/etc/security/limits.d/`目录下还有配置文件的话, 也会依次遍历读取, 最终, `/etc/security/limits.d/`中的配置会覆盖`/etc/security/limits.conf` 中的配置.
+
+另外, `max open files`和`max user processes`是不能配置`unlimited`的 —— 极不安全的设置, 此时系统会使用默认的配置值. 对`nproc`而言, 默认值的计算方法为:
+
+```sh
+# 查看系统的 max user processes
+[kf@ZHCS-AP1 ~]$ cat /proc/sys/kernel/threads-max
+128108
+
+# 计算公式为: 
+default_nproc = max_threads / 2;
+# 其中, max_threads = mempages / (8 * THREAD_SIZE / PAGE_SIZE);
+# mempages是机器的物理页面个数, THREAD_SIZE=8K, 所以, 计算公式为: 
+default_nproc = max_threads / 2 
+              = (mempages * PAGE_SIZE) / ( 2 * 8 *THREAD_SIZE ) 
+              = total_memory / 128K;
+              
+# 计算本机默认nproc配置: 
+cat /proc/meminfo | grep MemTotal
+MemTotal:       115571480 kB
+
+echo "115571480 / 128" | bc
+902902
+
+ulimit -u
+902682
+# 算出来default_nproc = 902902, 和实际的902682很接近, 
+# 因为物理页面会存储一些关键数据, 所以实际的比计算出来的要小一些.
+```
+
+------------------
+
+用户登录的时候执行sh脚本的顺序： 
+    /etc/profile.d/file 
+    /etc/profile 
+    /etc/bashrc 
+    /mingjie/.bashrc 
+    /mingjie/.bash_profile 
+
+    由于ulimit -n的脚本命令加载在第二部分，用户登录时由于权限原因在第二步还不能完成ulimit的修改，所以ulimit的值还是系统默认的1024。
+
 
 
 
 
 
 参考：
-
-[linux limits.conf 生效,linux修改limits.conf不生效](https://blog.csdn.net/weixin_35075144/article/details/117593351)
 
 [/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
 
@@ -1799,6 +1842,8 @@ hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系�
 [Linux下PAM模块学习总结](https://www.cnblogs.com/kevingrace/p/8671964.html)
 
 [Linux下设置最大文件打开数nofile及nr_open、file-max](https://www.cnblogs.com/zengkefu/p/5635153.html)
+
+[Linux - 修改系统的max open files、max user processes ](https://www.cnblogs.com/shoufeng/p/10620480.html)
 
 # 46. 参考
 
