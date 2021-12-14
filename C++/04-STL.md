@@ -195,21 +195,20 @@ GPL(General Public licence): 广泛开放授权。使用者可以自由阅读与
   - Algorithm 通过 Iterator 访问 Container 中的内容，Container 与 Algorithm 之间不能直接访问，需要借助 iterator，可以把 Iterator 看做是算法与容器之间沟通的桥梁；
   - Functor 协助 Algorithm 完成不同的策略变化；
   - Adaptor 修饰或套接 Functor；
-<img src="./figures/stl-component.png">
+  <img src="./figures/stl-component.png">
 
 
 
 - 使用六大部件的例子
   <img src="./figures/stl-component-example.png">
   
-
 - 常用的容器
   - Vector(向量)
   - Deque(双队列)
   - List(链表)
   - Map/Multimap(映射/多重映射)
   - Set/Multiset(集合/多重集合)
-<img src="./figures/container-library.png">
+  <img src="./figures/container-library.png">
 
 
 
@@ -241,6 +240,7 @@ STL源码中实现，没有构造和析构函数。
 
 
 - 动态数组实现机制：
+  
   > 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
 
 
@@ -288,7 +288,7 @@ STL源码中实现，没有构造和析构函数。
 - 随机访问快，支持随机迭代访问器。即支持 `[]` 操作符和 `at()`操作。
 - 节省空间。
 
-                      
+  ​                    
 #### 5.1.2.4. 缺点
 
 - 向容器中插入元素时，内部的元素必须能够执行 `拷贝（必须提供拷贝构造）` 操作。
@@ -555,7 +555,7 @@ mp[104] = "张飞";                                            // 法四
 <img src="./figures/unordered-containers.png">
 
 <img src="./figures/unordered-sets-multisets-internal-structure.png">
-  
+
 
 - `unordered_set` 模板类中的定义
   ```cpp
@@ -736,7 +736,7 @@ vector list map set容器如何选择？
   - `pop()` 出队列
   - `empty()` 对列为空
   - `front()` 队列头部元素
-  
+
 
 
 ### 5.5.3. priority_queue(优先级队列)
@@ -802,7 +802,7 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
   - `std::ceil()` -->向上取整数。`std::ceil(5.88)   = 6;`
 
 
-     
+​     
 
 # 7. Adaptor(适配器)
 
@@ -862,7 +862,6 @@ predicate: 判断这个条件是真还是假
   - 小于等于: less_equal<T>
   > 六种都属于二元运算。 
   
-
 - 逻辑运算 (Logical)
   - 逻辑 And: logical_and<T> 
   - 逻辑 Or: logical_or<T>
@@ -890,7 +889,7 @@ predicate: 判断这个条件是真还是假
     public:
       void operator() (Stu& T) {}
   }
-  ``` 
+  ```
 
 
 ## 8.5. 可调用对象包装器
@@ -964,7 +963,7 @@ std::bind()
 - 采用半开区间的优点？
   - 给遍历元素时，循环（loop）结束的时候，提供一个简单的判断依据。只要尚未达 `end()`，loop就继续执行。
   - 避免对空区间（empty ranges）采取特殊的处理。对于 `empty ranges` 而言，`begin()` 就等于 `end()`。
- 
+
 
 
 ## 9.4. iterator遵循的原则
@@ -1042,7 +1041,7 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 # 10. Allocator(分配器)
 什么是Allocator？
   > 负责内存空间的分配与管理。分配器是一个实现了动态空间配置、空间管理、空间释放的 `class template`。
-  
+
 分配器我们一般不直接使用它，它是给容器使用的。容器的内存分配是通过分配器来管理的。
 
 C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
@@ -1102,6 +1101,17 @@ trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征�
 
 
 
+# 12. String
+
+标准库接口
+
+
+
+
+
+
+
 # 12. Reference
+
 - [面试官：哈希表都不知道，你是怎么看懂HashMap的？ ](https://www.sohu.com/a/434917653_611601)
 - [c++ list, vector, map, set 区别与用法比较](https://cloud.tencent.com/developer/article/1052125)
