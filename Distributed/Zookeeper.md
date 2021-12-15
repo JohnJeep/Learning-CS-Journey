@@ -161,7 +161,7 @@ ZooKeeper 对外提供一个用来访问 data tree的简化文件系统 API：
 5） Zookeeper监听到有数据或路径变化， 就会将这个消息发送给listener线程。
 6） listener线程内部调用了process()方法。  
 
-![image-20211121214454971](D:\GitCode\Learning-CS-Journey\Distributed\figures\image-20211121214454971.png)
+![image-20211121214454971](figures/zk-client-server.png)
 
 常见监听点
 
