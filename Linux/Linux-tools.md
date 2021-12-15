@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-22 19:04:41
- * @LastEditTime: 2021-08-14 23:51:09
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-12-16 00:44:04
+ * @LastEditors: Please set LastEditors
  * @Description: 积累Linux下常用的开发工具
 -->
 
@@ -35,14 +35,3 @@
 - mtrace
 - AddressSanitizer(ASan) : 该工具为 gcc 自带，4.8以上版本都可以使用，支持Linux、OS、Android等多种平台，不止可以检测内存泄漏，它其实是一个内存错误检测具，可以检测的问题有：内存泄漏、堆栈和全局内存越界访问、free后继续使用、局部内存被外层使用、Initialization order bugs。
 - VLD (Visual Leak Detector) 是一款开源检测内存泄露软件，Windows 下 visual studio 中非常好用的内存泄漏检测工具。
-
-
-# 4. Linux 性能分析
-
-参考：[Linux Performance](http://www.brendangregg.com/linuxperf.html)
-
-<img src="./pictures/linux_observability_tools.png">
-
-- gprof: gprof是GNU工具之一，编译的时候，它在每个函数的出入口加入了profiling的代码，运行时统计程序在用户态的执行信息，可以得到每个函数的调用次数，执行时间，调用关系等信息，简单易懂。适合于查找用户级程序的性能瓶颈，然而对于很多耗时在内核态执行的程序，gprof不适合。
-- Oprofile: Oprofile也是一个开源的profiling工具，它使用硬件调试寄存器来统计信息，进行profiling的开销比较小，而且可以对内核进行profiling。它统计的信息非常多，可以得到cache的缺失率，memory的访存信息，分支预测错误率等等，这些信息gprof得不到，但是对于函数调用次数，它无能为力。
-- gperftools: Google出品，值得信赖，提供整个程序的热点分布图，找到性能瓶颈，然后可以针对性的进行性能优化。
