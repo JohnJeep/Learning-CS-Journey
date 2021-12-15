@@ -65,9 +65,9 @@
         "bitset": "cpp",
         "hash_map": "cpp",
         "hash_set": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "xstring": "cpp"
     },
-    "jupyter.jupyterServerType": "local",
 "C_Cpp.errorSquiggles": "Disabled",
 "editor.lineNumbers": "relative",
 "workbench.tree.indent": 4,
