@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2021-11-28 23:13:48
- * @LastEditors: Windows10
+ * @LastEditTime: 2021-12-17 14:09:59
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: redis学习
 -->
 
@@ -11,37 +11,38 @@
 - [1. 概念](#1-概念)
 - [2. 配置](#2-配置)
 - [3. 启动](#3-启动)
-- [4. 通用命令](#4-通用命令)
-- [5. KEYS](#5-keys)
-  - [5.1. EXISTS](#51-exists)
-  - [5.2. DEL](#52-del)
-  - [5.3. DUMP](#53-dump)
-  - [5.4. MOVE](#54-move)
-  - [5.5. TYPE](#55-type)
-  - [5.6. RENAME](#56-rename)
-  - [5.7. 生存时间](#57-生存时间)
-- [6. 基本数据类型](#6-基本数据类型)
-  - [6.1. string(字符串)](#61-string字符串)
-  - [6.2. hash(哈希)](#62-hash哈希)
-  - [6.3. list(列表)](#63-list列表)
-  - [6.4. set(集合)](#64-set集合)
-  - [6.5. zset(sorted set 有序集合)](#65-zsetsorted-set-有序集合)
-- [7. 持久化](#7-持久化)
-  - [7.1. RDB](#71-rdb)
-  - [7.2. AOF](#72-aof)
-- [8. 事务](#8-事务)
-- [9. pub/sub](#9-pubsub)
-- [10. Master/Slave replication](#10-masterslave-replication)
-- [11. redis连接](#11-redis连接)
-- [12. redis服务器](#12-redis服务器)
-- [13. HyperLogLog](#13-hyperloglog)
-- [14. 集群(cluster)](#14-集群cluster)
-- [15. 应用问题](#15-应用问题)
-  - [15.1. 缓存穿透](#151-缓存穿透)
-  - [15.2. 缓存击穿](#152-缓存击穿)
-  - [15.3. 缓存雪崩](#153-缓存雪崩)
-  - [15.4. 分布式锁](#154-分布式锁)
-- [16. 参考](#16-参考)
+- [4. 命令](#4-命令)
+  - [4.1. 通用命令](#41-通用命令)
+  - [4.2. KEYS](#42-keys)
+  - [4.3. EXISTS](#43-exists)
+  - [4.4. DEL](#44-del)
+  - [4.5. DUMP](#45-dump)
+  - [4.6. MOVE](#46-move)
+  - [4.7. TYPE](#47-type)
+  - [4.8. RENAME](#48-rename)
+  - [4.9. 生存时间](#49-生存时间)
+- [5. 基本数据类型](#5-基本数据类型)
+  - [5.1. string(字符串)](#51-string字符串)
+  - [5.2. hash(哈希)](#52-hash哈希)
+  - [5.3. list(列表)](#53-list列表)
+  - [5.4. set(集合)](#54-set集合)
+  - [5.5. zset(sorted set 有序集合)](#55-zsetsorted-set-有序集合)
+- [6. 持久化](#6-持久化)
+  - [6.1. RDB](#61-rdb)
+  - [6.2. AOF](#62-aof)
+- [7. 事务](#7-事务)
+- [8. pub/sub](#8-pubsub)
+- [9. Master/Slave replication](#9-masterslave-replication)
+- [10. Redis 连接](#10-redis-连接)
+- [11. Redis Server](#11-redis-server)
+- [12. HyperLogLog](#12-hyperloglog)
+- [13. 集群(cluster)](#13-集群cluster)
+- [14. 应用问题](#14-应用问题)
+  - [14.1. 缓存穿透](#141-缓存穿透)
+  - [14.2. 缓存击穿](#142-缓存击穿)
+  - [14.3. 缓存雪崩](#143-缓存雪崩)
+  - [14.4. 分布式锁](#144-分布式锁)
+- [15. 参考](#15-参考)
 
 <!-- /TOC -->
 
@@ -58,9 +59,19 @@ NoSQL 数据库
 - redis 是 Nosql 数据库中使用较为广泛的非关系型内存数据库，redis 内部是一个key-value 存储系统。它支持存储的 value 类型相对更多，包括 string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和 hash(哈希类型)。Redis 基于内存运行并支持持久化的 NoSQL 数据库，是当前最热门的NoSql数据库之一，也被人们称为数据结构存储服务器。
 
 Redis 的主要优点
-- Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用
-- Redis 不仅仅支持简单的 `key-value` 类型的数据，同时还提供 `list`，`set`，`zset`，`hash` 等数据结构的存储
+- Redis 支持数据的持久化，可以将内存（memory）中的数据保持在磁盘（disk）中，重启的时候可以再次加载进行使用。
+- Redis 不仅仅支持简单的 `key-value` 类型的数据，同时还提供 `list`，`set`，`zset`，`hash` 等数据结构的存储。
 - Redis 支持数据的备份，即 master-slave 模式的数据备份。
+
+Redis 应用场景
+
+- 用作缓存数据：将经常需要查询的数据存储在内存（memory） 而不是磁盘中，来提高效率。
+- 用作消息队列：相当于消息订阅系统，只能用于对数据一致性不高的业务中，对数据一致性要求较高时，建议用消息中间件，比如ActiveMQ、RocketMQ。
+- 计数器：比如统计点击率、点赞率，redis具有原子性，可以避免并发问题。
+- 电商网站信息：大型电商平台初始化页面数据的缓存。比如去哪儿网购买机票的时候首页的价格和你点进去的价格会有差异。
+- 热点数据：比如新闻网站实时热点、微博热搜等，需要频繁更新。总数据量比较大的时候直接从数据库查询会影响性能。
+
+
 
 
 # 2. 配置
@@ -124,8 +135,9 @@ redis 127.0.0.1:6379> PING   // 检测 redis 服务是否启动
 PONG
 ```
 
+# 4. 命令
 
-# 4. 通用命令
+## 4.1. 通用命令
 
 - `info`: 查看 Redis 的所有统计信息。
 - `select index`: 切换数据库。
@@ -138,9 +150,9 @@ PONG
 
 
 
-# 5. KEYS 
+## 4.2. KEYS 
 
-Redis 键命(key) 令用于管理 redis 的键。
+Redis 键（key）命令用于管理 redis 的键。
 
 - `key pattern`: 查找所有匹配给定模式的键。
 - 示例：`keys *` : 查询数据库中所有的键。
@@ -151,7 +163,7 @@ Redis 键命(key) 令用于管理 redis 的键。
   - `\*` : 匹配字符x,用于转义符号；若要匹配 ？，则使用 `\?`
 
 
-## 5.1. EXISTS
+## 4.3. EXISTS
 
 `exists key`：判断一个按键是否存在，如果按键存在，则返回整数类型1，否则返回0
 
@@ -163,7 +175,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 ```
 
 
-## 5.2. DEL
+## 4.4. DEL
 
 `del key1, key2 ...`: 删除一个或多个按键，返回值是删除的键的个数。
 
@@ -173,7 +185,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 ```
 
 
-## 5.3. DUMP
+## 4.5. DUMP
 
 - `dump key`：序列化给定的key ，如果 key 不存在，那么返回 nil； 否则，返回序列化之后的值。
 - 序列化生成的值有以下几个特点：
@@ -192,13 +204,13 @@ Redis 键命(key) 令用于管理 redis 的键。
   ```
 
 
-## 5.4. MOVE
+## 4.6. MOVE
 
 - `move key db`：将当前数据库的键值 key 移动到给定的数据库 db 当中，移动成功返回 1，失败则返回 0。
 - 如果当前数据库(源数据库)和给定数据库(目标数据库)有相同名字的给定 key ，或者 key 不存在于当前数据库，那么 MOVE 没有任何效果。
 
 
-## 5.5. TYPE
+## 4.7. TYPE
 `type key1, key2, ...`: 获取按键的数据类型。数据类型可以是 string、hash、list、set、zset。
 
 ```sh
@@ -214,7 +226,7 @@ Redis 键命(key) 令用于管理 redis 的键。
 9) "key1"
 ```
 
-## 5.6. RENAME
+## 4.8. RENAME
 
 - `rename key key1`：将键值key修改为key1
 - `renamenx key key1`：仅当键值key1不存在当前数据库中时，才可以将key修改为key1
@@ -239,7 +251,7 @@ OK
 ```
 
 
-## 5.7. 生存时间
+## 4.9. 生存时间
 
 - redis 在实际使用过程中一般用作缓存，然而缓存的数据一般都需要设置生存时间，也就是到期后销毁数据。
 - `expire key seconds`：键值对的生存时间为 seconds，时间到后，销毁键值对中的数据
@@ -294,9 +306,9 @@ OK
 
 
 
-# 6. 基本数据类型
+# 5. 基本数据类型
 
-## 6.1. string(字符串)
+## 5.1. string(字符串)
 
 string类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value` ，一个键最大能存储 512MB。
 
@@ -369,7 +381,7 @@ string类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value
   ```
 
 
-## 6.2. hash(哈希)
+## 5.2. hash(哈希)
 
 Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个键值对集合，hash特别适合用于存储对象。
 <img src="./figures/redis-hash结构.png">
@@ -456,7 +468,7 @@ Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个�
   ```
 
 
-## 6.3. list(列表)
+## 5.3. list(列表)
 
 Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。列表最多可存储 $2^{32} - 1$ 元素 (4294967295, 每个列表可存储40多亿)。
 
@@ -580,7 +592,7 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
   ```
 
 
-## 6.4. set(集合)
+## 5.4. set(集合)
 
 Redis Set 是 string 类型的无序集合。集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。 在 Redis 可以添加，删除和测试成员存在的时间复杂度为 O（1）。集合中最大的成员数为 $2^{32} - 1$ (4294967295, 每个集合可存储40多亿个成员)。
 
@@ -662,7 +674,7 @@ Redis 非常人性化的为集合提供了 求交集、并集、差集等操作,
 - 3.好友推荐的时候,根据 tag 求交集,大于某个 临界值 就可以推荐
 
 
-## 6.5. zset(sorted set 有序集合)
+## 5.5. zset(sorted set 有序集合)
 
 Redis 有序集合和集合一样也是 string 类型元素的集合，且不允许重复的成员。redis 通过 `score` 来为集合中的成员进行从小到大的排序。有序集合的成员(member) 是唯一的,但分数 (score) 却可以重复。
 
@@ -705,11 +717,11 @@ Redis 有序集合和集合一样也是 string 类型元素的集合，且不允
 - 1.带有权重的元素,LOL游戏大区最强王者
 - 2 排行榜
 
-# 7. 持久化
+# 6. 持久化
 
 Redis 的持久化策略分为两种，一种为 RDB，另一中为 AOF。
 
-## 7.1. RDB
+## 6.1. RDB
 
 RDB（Redis Data Base） 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，将内存中的数据写入到磁盘中。即在指定目录下生成一个 dump.rdb 文件， Redis 重启通过加载 dump.rdb 文件来恢复数据。
 
@@ -744,7 +756,7 @@ save 900 1        15分钟内改了 1次
 
 rdbcompression：对于存储到磁盘中的快照，可以设置是否进行压缩存储．如果是的话，redis 会采用 LZF 算法进行压缩；如果你不想消耗 CPU 来进行压缩的话，可以关闭此功能。
 
-## 7.2. AOF
+## 6.2. AOF
 
 AOF(Append Only File) 以日志的形式来记录每个写操作，将 Redis 执行过的所有写指令记录下来（读操作不记录），只追加文件但不可以改文件，Redis 启动时，会读取文件来重新构建数据。换言之，redis 重启后就根据日志文件中的内容将写指令从前到后执行一次，来完成数据的恢复工作。
 
@@ -789,7 +801,7 @@ Redis 能否开启两种持久化？
 
  
 
-# 8. 事务
+# 7. 事务
 
 Redis 事务可以一次性执行多个命令，本质是一组命令的集合。事务具有的特性
 - 事务是一个单独的隔离操作：事务中的所有命令都会被序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。
@@ -830,7 +842,7 @@ QUEUED
 
 
 
-# 9. pub/sub
+# 8. pub/sub
 
 Redis 发布订阅(pub/sub)是一种进程间的消息通信模式：发送者(publish)发送消息，订阅者(subscribe)接收消息。 Redis 客户端可以订阅任意数量的频道。
 
@@ -854,7 +866,7 @@ Redis 发布订阅命令
 
 
 
-# 10. Master/Slave replication
+# 9. Master/Slave replication
 
 Master/Slave replication(主从复制) master 以 write 为主，slave 以 read 为主。
 
@@ -892,7 +904,7 @@ dbdumpfile
 master 挂掉后，有哨兵进程在运行，在 slave 中自动投票选出一台机器作为 master，其余的为仍为 slave；若之前挂掉的 master 机器重新连接，此时这台机器不能再为 master 了，通过哨兵自动转化为 slave。
 
 
-# 11. redis连接
+# 10. Redis 连接
 
 Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数据库默认编号是0
 
@@ -904,7 +916,7 @@ Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数
 - `swapdb index1 index2`：交换同一Redis服务器上两个数据库的数据，执行成功返回OK 。
 
 
-# 12. redis服务器
+# 11. Redis Server
 
 - `dbsize`：返回当前数据库中所有key的数目
 
@@ -1000,7 +1012,7 @@ Redis中，一共有16个数据库，分别是0~15，一般情况下，进入数
 
 - `command count`：返回 Redis 服务器命令的总数。
 
-# 13. HyperLogLog
+# 12. HyperLogLog
 
 Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
 
@@ -1030,38 +1042,38 @@ OK
 (integer) 8
 ```
 
-# 14. 集群(cluster)
+# 13. 集群(cluster)
 
 
 
-# 15. 应用问题
+# 14. 应用问题
 
-## 15.1. 缓存穿透
-
-
-
-
-
-## 15.2. 缓存击穿
+## 14.1. 缓存穿透
 
 
 
 
 
-## 15.3. 缓存雪崩
+## 14.2. 缓存击穿
 
 
 
 
 
-## 15.4. 分布式锁
+## 14.3. 缓存雪崩
 
 
 
-# 16. 参考
 
-- [redis.io](https://redis.io/) : Redis官方网站
-- [redis.cn-commands](http://redis.cn/commands.html)：redis中文版相关命令用法
+
+## 14.4. 分布式锁
+
+
+
+# 15. 参考
+
+- [redis.io](https://redis.io/) : Redis 英文官方网站
+- [redis.cn-commands](http://redis.cn/commands.html)：redis 中文版相关命令用法
 - [Redis学习教程](https://piaosanlang.gitbooks.io/redis/content/index.html)：比较全面的介绍了有关redis的使用。
-- [Redis 开机自启动](https://www.jianshu.com/p/a73e0565e2a1)
+- [Redis 开机自启动脚本](https://www.jianshu.com/p/a73e0565e2a1)
 
