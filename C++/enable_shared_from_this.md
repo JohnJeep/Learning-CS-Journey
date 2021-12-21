@@ -17,20 +17,32 @@
 - [8. 参考](#8-参考)
 
 <!-- /TOC -->
-# 1. 什么是 `enable_shared_from_this`?
+# 1. 什么是 enable_shared_from_this?
 
-下面摘自 cpp reference 中概述
-- C++10开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： ` template< class T > class enable_shared_from_this;`
-- std::enable_shared_from_this 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
+C++11 开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： 
+
+```cpp
+template< class T > class enable_shared_from_this;
+```
+
+- `std::enable_shared_from_this` 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
+
 - 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
 
-# 2. 为什么要用 `enable_shared_from_this`？
+  ```cpp
+  
+  ```
+
+  
+
+# 2. 为什么要用 enable_shared_from_this？
 - 需要在类对象的内部中获得一个指向当前对象的 shared_ptr 对象。
 - 如果在一个程序中，对象内存的生命周期全部由智能指针来管理。在这种情况下，要在一个类的成员函数中，对外部返回this指针就成了一个很棘手的问题。
 
 
 # 3. 什么时候用？
 - 当一个类被 `share_ptr` 管理，且在类的成员函数里需要把当前类对象作为参数传给其他函数时，这时就需要传递一个指向自身的 `share_ptr`。
+- 在当前类的内部需要将当前类的对象传递给其它的类用。
 
 
 # 4. 如何安全地将 this 指针返回给调用者?
@@ -97,7 +109,7 @@
   - operator=：返回到 this 的引用，是一个受保护成员函数，成员属性为 `protected`。
   - shared_from_this：返回共享 `*this` 指针所有权的 shared_ptr，是一个 `public` 属性的成员函数。
   - weak_from_this(C++16)：返回共享 `*this` 所指针有权的 weak_ptr，是一个`public` 属性的成员函数。
- 
+
 # 6. 具体的代码示例
 
 ```cpp
