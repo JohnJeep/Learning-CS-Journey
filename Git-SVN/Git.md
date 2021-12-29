@@ -1,4 +1,5 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditTime: 2021-11-28 23:12:44
@@ -139,19 +140,26 @@ Git tag 有两种类型。
 - 指定commit提交的内容覆盖工作区 
   - `git checkout Develop -- readme.txt`  将对应分支中的文件(readme.txt)还原到当前分支(Develop)的工作区
 
-
 ## 1.7. Git rebase
 
-- `pick` 使用这个参数，commit信息什么都不用做。
-- `reword` 修改commit信息。
-- `edit`  修改commit提交的内容。但是使用这个命令的时候，rebase 操作会停在commit提交处，等待修改完毕，使用`git add .` 和 `git commit --amend` 修改提交，`git rebase --continue`继续 rebase 进程。
-- `squash` 将当前需要改变的commit信息与之前commit提交的信息进行合并，把融合的信息保存到融合后的提交中。
-- `fixup` 放弃融合后提交的提交信息。
-- `exec` 在新的一行使用shell来运行commit信息。
-- `drop` 删除commit 提交信息。
-
+Rebase 官方翻译为 “变基”，我觉得翻译为重新改变基准更为合适。`git rebase` 和 `git merge` 主要用于分支的合并，但使用 `git rebase` 会清除当前分支 commit 的版本历史信息，只保留最后一次的信息，commit 的信息是线性的，而 `merge` 是把不同分支的最终结果合并在一起。
 
 ## 1.8. Git commit
+
+```sh
+// 暂时不清楚是哪个？？？
+
+参数项
+  pick 使用这个参数，commit 信息什么都不用做。
+  reword 修改 commit 信息。
+  --edit  修改 commit 提交的内容。但是使用这个命令的时候，rebase 操作会停在 commit 提交处，等待修改完毕，使用 git add . 和  git commit --amend 修改提交，git rebase --continue 继续 rebase 进程。
+  --squash 将当前需要改变的commit信息与之前commit提交的信息进行合并，把融合的信息保存到融合后的提交中。
+  --fixup 放弃融合后提交的提交信息。
+  exec 在新的一行使用shell来运行commit信息。
+  drop 删除commit 提交信息。
+```
+
+
 
 - 修改最近一次的注释
   - `git commit --amend` 修改最后一次提交的注释 
@@ -226,8 +234,9 @@ Git tag 有两种类型。
 
 ## 1.11. Git blame
 
-
 ## 1.12. Git bisect
+
+找到某个 bug 是哪次 commit 的。
 
 
 ## 1.13. Git branch
