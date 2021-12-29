@@ -747,7 +747,7 @@ Redis 的持久化策略分为两种，一种为 RDB，另一中为 AOF。
 
 ## 7.1. RDB
 
-RDB（Redis Data Base） 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，将内存中的数据写入到磁盘中。即在指定目录下生成一个 dump.rdb 文件， Redis 重启通过加载 dump.rdb 文件来恢复数据。
+RDB（Redis DataBase） 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，将内存中的数据写入到磁盘中。即在指定目录下生成一个 dump.rdb 文件， Redis 重启通过加载 dump.rdb 文件来恢复数据。
 
 Redis 单独创建（fork）一个子进程来进行持久化，将数据写到一个临时文件中，待持久化过程结束后，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程不进行任何 I/O 操作，确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那么 RDB 方式要比 AOF 方式更加高效。
 
@@ -1115,6 +1115,11 @@ Redis 使用中会遇见很多的问题，下面一幅图，列出了 Redis 中�
 
 - [redis.io](https://redis.io/) : Redis 英文官方网站
 - [redis.cn-commands](http://redis.cn/commands.html)：redis 中文版相关命令用法
+- [Redis 命令参考](http://redisdoc.com/)
 - [Redis学习教程](https://piaosanlang.gitbooks.io/redis/content/index.html)：比较全面的介绍了有关redis的使用。
 - [Redis 开机自启动脚本](https://www.jianshu.com/p/a73e0565e2a1)
+- 工具手册：《Redis 使用手册》
+- 原理书：《Redis 设计与实现》
+- 实战书：《Redis 开发与运维》
+- [Redis Github  官方源码](https://github.com/redis/redis)
 
