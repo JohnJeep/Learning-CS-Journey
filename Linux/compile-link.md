@@ -505,14 +505,38 @@ Linux 或 Unix
 
 ## 10.2. RPM
 
+rpm（RPM Package Manager）叫RPM包管理器。
+
 **rpm包**：把二进制程序文件、配置文件以和帮助文档等程序资源打包在一起形成的文件。安装软件需要手动解决依赖关系。
 
 仓库源位置：`/etc/yum.repos.d/`，查看中重点关注是基础的 `CentOS-Base.repo`
 
+RPM 包安装包的格式，下面以 `autoconf-2.63-5.1.el6.noarch.rpm` 安装包为例子。
+
+![](pictures/rpm-packets.png)
+
 ```sh
+# 参数项
+-q|--query  
+-V|--verify
+-i|--install
+-U|--upgrade
+-e|--erase
+
+
+# 常见命令
 rpm -ql  列出软件中安装的软件包
+rpm -e xxx 卸载 xxx 包
+rpm -qa xxx 查询安装包
+rpm -ivh --force --nodeps *rpm  一次性安装多个软件包
 
 ```
+
+
+
+
+
+
 
 ## 10.3. Epel 
 
