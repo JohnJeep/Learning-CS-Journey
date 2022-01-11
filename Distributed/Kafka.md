@@ -52,7 +52,7 @@ Kafka 有点像消息系统，允许发布和订阅消息流。从这点来看�
 
 Kafka 是一个分布式的基于发布-订阅模式的消息队列（Message Queue），主要应用于大数据实时处理领域。
 
-## 3.1. 诞生的目的的
+## 3.1. 诞生的目的
 
 开始是 Linkedin 内部建立的一个基础设施系统，虽然有很多数据库和系统可以用来存储数据，但是他们发现在他们当前的架构中缺少一种东西来帮助处理连续不断的数据流（handle the continuous flow of data）。在开发 Kafka 之前，他们实验了各种现成的解决方案，从消息系统（messaging systems ）到日志聚合系统（log aggregation），再到 ETL 工具，但这些都无法满足他们的需求。 
 
@@ -71,6 +71,24 @@ Kafka 常常会被拿来与现有的技术作比较：企业级消息系统（en
 ## 3.3. 它与现有的系统比较有什么区别？  
 
 Kafka 和 ETL 工具或其他数据集等这些工具都擅长移动数据，但它们最大的不同在于 Kafka 颠覆了传统的思维 。 Kafka 并非只是把数据从一个系统拆解出来再塞进另一个系统，它其实是一个面向实时数据流的平台（a platform oriented around real-time streams of events）。也就是说，它不仅可以将现有的应用程序和数据系统连接起来，它还能用于加强这些触发相同数据流的应用。  
+
+# 发展历程
+
+1. 0.7版本：只有基础消息队列功能，无副本；
+
+2. 0.8版本：增加了副本机制，新的producer API；至此kafka成为一个真正意义上的分布式高可靠消息队列解决方案；
+
+3. 0.9版本：增加权限和认证，新的consumer API，Kafka Connect功能；
+
+4. 0.10版本：引入Kafka Streams功能，bug修复；
+
+5. 0.11版本：增加producer API幂等，事物API，消息格式重构；
+
+6. 1.0和2.0版本：Kafka Streams改进；
+
+   ![](figures/kafka-streams.png)
+
+
 
 
 
