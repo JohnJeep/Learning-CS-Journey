@@ -1,31 +1,52 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2021-11-30 01:15:40
- * @LastEditors: Windows10
+ * @LastEditTime: 2022-01-13 00:23:45
+ * @LastEditors: Please set LastEditors
  * @Description: GDB、Makefile使用剖析
 --> 
 
 <!-- TOC -->
 
-- [1. 启动 GDB 打普通断点](#1-启动-gdb-打普通断点)
-- [2. 调试程序](#2-调试程序)
-- [3. TUI模式](#3-tui模式)
-- [4. 调试多进程](#4-调试多进程)
-- [5. 调试多线程](#5-调试多线程)
-- [6. 查看内存](#6-查看内存)
-- [7. Hardware watchpoint(硬件断点)](#7-hardware-watchpoint硬件断点)
-- [8. 调试正在运行的程序](#8-调试正在运行的程序)
-- [9. 设置动态库](#9-设置动态库)
-- [10. GDB 反方向调试](#10-gdb-反方向调试)
-- [11. 底层原理](#11-底层原理)
-- [12. 参考](#12-参考)
+- [1. Invoking gdb](#1-invoking-gdb)
+- [2. logging](#2-logging)
+- [3. 常用命令](#3-常用命令)
+  - [3.1. list](#31-list)
+  - [3.2. break](#32-break)
+  - [3.3. delete](#33-delete)
+  - [3.4. next](#34-next)
+  - [3.5. step](#35-step)
+  - [3.6. finish](#36-finish)
+  - [3.7. shell](#37-shell)
+  - [3.8. dir](#38-dir)
+  - [3.9. args](#39-args)
+  - [3.10. info](#310-info)
+  - [3.11. show](#311-show)
+  - [3.12. help](#312-help)
+  - [3.13. Others](#313-others)
+- [4. TUI](#4-tui)
+- [5. layout](#5-layout)
+- [6. 调试多进程](#6-调试多进程)
+- [7. 指定源码](#7-指定源码)
+- [8. 调试多线程](#8-调试多线程)
+- [9. 查看内存](#9-查看内存)
+  - [9.1. backtrace](#91-backtrace)
+  - [9.2. examine](#92-examine)
+- [10. Watchpoints  (观察断点)](#10-watchpoints--观察断点)
+- [11. Catchpoints （捕获断点）](#11-catchpoints-捕获断点)
+- [12. 调试正在运行的程序](#12-调试正在运行的程序)
+- [13. 设置动态库](#13-设置动态库)
+- [14. Reverse](#14-reverse)
+- [15. edit](#15-edit)
+- [16. 底层原理](#16-底层原理)
+- [17. 参考](#17-参考)
 
 <!-- /TOC -->
 
-# 1. 启动 GDB 
+# 1. Invoking gdb  
 
-启动 GDB
+GDB 是一个非常重要的调试工具，要用 GDB，首先要学会启动 GDB。
 
 ```sh
 (gdb)  start 程序只运行一次就停止了
@@ -41,9 +62,35 @@
     set args  ini/hello.ini
 ```
 
-# 2. 常用命令
+# 2. logging
 
-## list
+将 GDB的命令保存到文件中，可用 GDB 的 logging 命令。
+
+```
+// Enable or disable logging.
+set logging enabled [on|off]
+
+// Change the name of the current logfile. The default logfile is gdb.txt.
+set logging file file
+
+// By default, gdb will append to the logfile. Set overwrite if you want set logging enabled on to overwrite the logfile instead.
+set logging overwrite [on|off]
+
+// By default, gdb output will go to both the terminal and the logfile. Setredirect if you want output to go only to the log file.
+set logging redirect [on|off]
+
+// By default, gdb debug output will go to both the terminal and the logfile. Setdebugredirect if you want debug output to go only to the log file.
+set logging debugredirect [on|off]
+
+// Show the current values of the logging settings
+show logging
+```
+
+ 
+
+# 3. 常用命令
+
+## 3.1. list
 
 `list` 查看源码中指定的行和函数，默认查看`10 行` 程序代码。命令后面可跟参数，指定查看的范围。
 
@@ -53,9 +100,7 @@ l xxx.c:func 查看 xxx.c 文件中的 func 函数
 l xxx.c:100 从第 100 行开始查看 xxx.c 文件中内容
 ```
 
-- `enter` 键执行上一次输入过的命令
-
-## break
+## 3.2. break
 
 break 命令用来设置断点，缩写为 `b` 。
 
@@ -71,52 +116,68 @@ b 22 if i==10   在22行处，当 i==10 时设置一个断点。可以直接在�
 
 ```
 
-> 注意: 有循环体的时候，断点应设置在循环体的内部。在循环体(for、while等语句)的时候程序不会停。
+注意: 有循环体的时候，断点应设置在循环体的内部。在循环体(for、while等语句)的时候程序不会停。
 
-- `next(n)    ` 单步执行程序，但不进入子函数内部
+## 3.3. delete
+
+删除指点的断点，参数必须是断点编号，若不指定编号，删除所有的断点。简写为 `del`。
+
+```
+// 删除当前编号为 N 的断点，N为数字
+(gdb) del N
+```
+
+其它相关的命令
+
+```
+(gdb)disable 断点号n：暂停第n个断点
+(gdb)enable 断点号n：开启第n个断点
+```
+
+
+
+## 3.4. next
+
+单步执行程序，但不进入子函数内部，简写为 `n`。
+
+## 3.5. step
+
+单步调试如果有函数调用，则进入函数，简写为 `s`；与命令 n 不同，n 是不进入调用的函数的。
+
+## 3.6. finish
+
+从函数体内部跳出去。如果该函数体内部打的有断点，首先需要把断点删除，然后再跳出函数体。
+
 - `u` 跳出单次循环，然后跳到循环后面的语句。
-- `step(s)    ` 单步执行程序，进入子函数内部
-- `finish` 从函数体内部跳出去。如果该函数体内部打的有断点，首先需要把断点删除，然后再跳出函数体。
 - `continue(c)` 继续执行程序
 - `print(p) 变量名` 查看指定变量值
 - `ptype 变量名` 查看变量的类型
 - `display 变量名` 在循环的时候实时追踪变量的值。 `display i` 追踪变量 `i` 的值
 - `undisplay 变量名的编号`  不追踪某个变量的值。首先查看不需要追踪变量的编号 `i(info) display` ，然后使用 `undisplay 变量名的编号` 去掉不用追踪的变量。
-- `del(d) 断点编号N` 删除当前编号为 N 的断点
 - `set var=value` 设置变量的值
 - `quit(q)` 退出gdb
 - `ni` 单步执行汇编指令，不进入子函数内部
 - `si` 单步执行汇编指令，进入子函数内部
 
+
+
 ```
-(gdb) bt：查看函数堆栈
 
-(gdb) finish：退出函数
-
-(gdb) shell 命令行：执行shell命令行
-
-(gdb) show paths:查看程序运行路径
-
-(gdb) cd 相当于shell的cd
-
-(gdb)pwd 显示当前所在目录
-
-(gdb)info program 来查看程序的是否在运行，进程号，被暂停的原因。
 
 (gdb)clear 行号n：清除第n行的断点
 
-(gdb)delete 断点号n：删除第n个断点
-
-(gdb)disable 断点号n：暂停第n个断点
-
-(gdb)enable 断点号n：开启第n个断点
-
-(gdb)step：单步调试如果有函数调用，则进入函数；与命令 n 不同，n 是不进入调用的函数的
 ```
 
+## 3.7. shell
 
+gdb 中执行 shell 命令。在命令前添加 shell 关键字即可。
 
-## dir
+```
+(gdb) shell pwd
+/home/John/SrcCompile/Src
+```
+
+## 3.8. dir
 
 使用`directory`（或`dir`)命令设置源文件的查找目录。如果希望在gdb启动时，加载code的位置，避免每次在gdb中再次输入命令，可以使用gdb的`-d` 参数
 
@@ -125,9 +186,19 @@ b 22 if i==10   在22行处，当 i==10 时设置一个断点。可以直接在�
 gdb -q a.out -d /search/code/some
 ```
 
+与目录相关的命令。
+
+```
+// gdb 中切换到 xxx 目录
+(gdb) cd xxx
+
+// 显示当前所在目录
+(gdb)pwd 
+```
 
 
-## args
+
+## 3.9. args
 
 `args` 命令用来设置被调试程序的参数。有三种方式来指定。
 
@@ -159,7 +230,7 @@ gdb b.out
 (gdb) run  ini/hello.ini
 ```
 
-## info
+## 3.10. info
 
 显示正在调试程序的通用命令。info 是通用命令，简写为 `i` 后面还要跟具体要显示的子命令（subcommands），这些子命令可以是 `args`，`registers` 等等，描述当前程序的命令。
 
@@ -182,9 +253,15 @@ Local exec file:
 
 //  查看设置的断点信息内容
 info break
+
+// 查看程序的是否在运行，进程号，被暂停的原因。
+(gdb)info program 
+
+// 打印出当前函数中所有局部变量及其值
+info locals
 ```
 
-## show
+## 3.11. show
 
 显示 GDB 本身内部的信息，像 `version`，`environment`，`user` 等等。语法同 `info` 命令一样。
 
@@ -202,11 +279,14 @@ and "show warranty" for details.
 This GDB was configured as "x86_64-redhat-linux-gnu".
 For bug reporting instructions, please see:
 <http://www.gnu.org/software/gdb/bugs/>.
+
+// 查看程序运行路径
+(gdb) show paths  
 ```
 
 官方参考：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
 
-## help
+## 3.12. help
 
 help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、最好的资料，需要仔细研磨，但是常常被大多数人给遗忘了，去网上搜索各种各样的资料。
 
@@ -262,7 +342,13 @@ Command name abbreviations are allowed if unambiguous.
 
    官网地址：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
 
-# 3. TUI 
+## 3.13. Others
+
+GDB 中特殊的命令。
+
+- `enter` 键执行上一次输入过的命令
+
+# 4. TUI 
 TUI（Text User Interface）进行交互式的源码调试。
 
 ```
@@ -271,33 +357,26 @@ gdb program -tui
 
 终端执行上面这条命令后，利用图形的方式调试 `program` 可执行程序。
 
-- TUI模式下，总共有4种窗口
-  - 命令窗口
-  - 源码窗口：可以使用 `PageUp`，`PageDown` 和4个方向键来查看源码。
-  - 汇编窗口
-  - 寄存器窗口
+TUI模式下，总共有4种窗口
+- 命令窗口
+- 源码窗口：可以使用 `PageUp`，`PageDown` 和4个方向键来查看源码。
+- 汇编窗口
+- 寄存器窗口
+
+进入窗口的快捷键
+
 - `ctrl + x + a` 进入调试图形界面，再按同样的快捷键，退出调试图形化窗口。
 - `ctrl + x + 1` 进入汇编调试图形界面，再按一次退出汇编调试图形界面。
 - `ctrl + x + 2` 显示其中2个窗口，数字 `2` 表示除了显示命令窗口外还可以同时再显示2个窗口。连续按下 `Ctrl+x+2` 就会出现这三个窗口的两两组合。
 - TUI模式下有时显示会出现混叠现象，此时按下 `Ctrl+l`（是小写的L）进行刷新。
-- 断点显示的几种状态
-  - `B` 表示断点处代码已经运行至少一次
-  - `b` 表示断点处代码还没有运行到
-  - `+` 表示该断点处于enable状态
-  - `-` 表示该断点处于disable状态
 
-# shell
+在交互式的窗口上面，断点显示的几种状态：
+- `B` 表示断点处代码已经运行至少一次
+- `b` 表示断点处代码还没有运行到
+- `+` 表示该断点处于enable状态
+- `-` 表示该断点处于disable状态
 
-gdb 中执行 shell 命令。在命令前添加 shell 关键字即可。
-
-```
-(gdb) shell pwd
-/home/John/SrcCompile/Src
-```
-
-
-
-# layout
+# 5. layout
 
 layout：用于分割窗口，可以一边查看代码，一边测试。主要有以下几种用法：
 
@@ -316,7 +395,7 @@ layout：用于分割窗口，可以一边查看代码，一边测试。主要�
 
 
 
-# 4. 调试多进程
+# 6. 调试多进程
 
 gdb 追踪多个分支（父子进程）
 - `set follow-fork-mode child`  追踪子进程
@@ -324,7 +403,7 @@ gdb 追踪多个分支（父子进程）
 
 
 
-# 指定源码
+# 7. 指定源码
 
 编译好的程序文件，放到了另外一台机器上进行调试，或者你的源码文件全都移动到了另外一个目录，怎么办呢？当然你还可以使用前面的方法添加源码搜索路径，也可以使用`set substitute-path from to`将原来的路径替换为新的路径。
 
@@ -388,7 +467,7 @@ Source directories searched: $cdir:$cwd
 原文链接：https://blog.csdn.net/albertsh/article/details/107437084
 
 
-# 5. 调试多线程
+# 8. 调试多线程
 
 GDB 多线程调试的术语
 - all-stop mode      全停模式
@@ -426,22 +505,52 @@ set scheduler-locking 命令的语法格式如下：
 - [GDB scheduler-locking 命令详解](https://www.cnblogs.com/pugang/p/7698772.html)
 
 
-# 6. 查看内存
+# 9. 查看内存
 
-- `back trace(bt)` 打印当前函数调用栈的所有信息
-- `examine(x)` 查看内存地址中的值。比如，使用 `bt` 查看不了堆栈信息时，可用该命令指定多少地址以什么样的格式显示堆栈中的数据。
-  - `n` 是一个正整数，表示显示内存的长度，也就是说从当前地址向后显示几个地址的内容。 
-  - `f` 按浮点数格式显示变量。  
-  - `u` 从当前地址往后请求的字节数，如果不指定的话，GDB默认是4个bytes。b表示单字节，h表示双字节，w表示四字节，g表示八字节。
+## 9.1. backtrace
+
+查看函数调用堆栈信息，简写为 `bt`。
+
+```
+(gdb) bt
+```
+
+## 9.2. examine 
+
+`examine` 查看内存地址中的值，简写 `x`。作用：在堆栈中从指定的哪个地址开始，以什么样的格式显示多长的数据。
+
+```
+// 格式
+x/nfu addr
+x addr 
+```
+
+参数 n，f，u，都是可选项。
+- `n` 是一个十进制的整数，默认值为 `1`， 表示显示多大的内存，有后面的单位 `u` 来定。也就是说从当前地址向后显示多少地址的内容。 
+- `f(format)` 显示的格式，默认是以 16 进制显示。  这些格式可以是：‘x’, ‘d’, ‘u’, ‘o’, ‘t’,‘a’, ‘c’, ‘f’, ‘s’  。
+- `u` 表示单位大小 unit。从当前地址往后请求的字节数，如果不指定的话，GDB 默认是4个bytes。b 表示bytes，h表示Halfwords (two bytes)，w表示Words (four bytes)，g表示Giant words (eight bytes)。
+- `addr` 表示显示的开始地址。
+
+```
+// 从 0x54320 地址开始显示 3 个 十进制无符号半字（Halfwords）大小的内容
+(gdb) x/3uh 0x54320
+
+(gdb) x/5i $pc-6
+0x804837f <main+11>: mov %esp,%ebp
+0x8048381 <main+13>: push %ecx
+0x8048382 <main+14>: sub $0x4,%esp
+=> 0x8048385 <main+17>: movl $0x8048460,(%esp)
+0x804838c <main+24>: call 0x80482d4 <puts@plt>
+```
 
 
 
 
-# 7. Hardware watchpoint(硬件断点)
+# 10. Watchpoints  (观察断点)
 
 普通断点：需要程序运行到哪行，你就在哪行设置断点，然后等程序运行到断点处可以单步执行，查看内存变量，遇到多个位置修改同一个变量时，并且要查看是谁改变了变量的时候，就要设置多个断点来进行查看。
 
-硬件断点也叫观察断点。观察断点就是为了要监控某个变量或者表达式的值，通过值的变化情况来判断程序的执行过程是否存在异常或者Bug。只有某个变量或者表达式的值发生了改变，程序才会停止执行。相比普通断点，观察断点不需要我们预测变量（表达式）值发生改变的具体位置。
+硬件断点（Hardware watchpoint）也叫观察断点（Watchpoints）。观察断点就是为了要监控某个变量或者表达式的值，通过值的变化情况来判断程序的执行过程是否存在异常或者Bug。只有某个变量或者表达式的值发生了改变，程序才会停止执行。相比普通断点，观察断点不需要我们预测变量（表达式）值发生改变的具体位置。
 
 用法 
 ```
@@ -480,9 +589,9 @@ int main()
 
 ```
 
+# 11. Catchpoints （捕获断点）
 
-
-# 8. 调试正在运行的程序
+# 12. 调试正在运行的程序
 
 GDB 可以对正在执行的程序进行调度，它允许开发人员中断程序并查看其状态，之后还能让这个程序正常地继续执行。
 
@@ -490,7 +599,7 @@ GDB 可以对正在执行的程序进行调度，它允许开发人员中断程�
 
 2、 attach 可执行程序的进程 PID: `gdb attach pid`
 
-> 另一种方式：gdb -p pid或程序名
+> 另一种方式：gdb -p pid或程序名。-p表示 program
 
 3、 当attach进程时，会停止进程的运行，这时使进程继续运行需要使用 continue/c 命令。
 
@@ -502,13 +611,13 @@ GDB 可以对正在执行的程序进行调度，它允许开发人员中断程�
   - `info proc` 显示进程信息
   - `info reg` 显示寄存器信息
 
-# 9. 设置动态库
+# 13. 设置动态库
 
 ```
 set solib-search-path  动态库路径
 ```
 
-# 10. GDB 反方向调试
+# 14. Reverse
 
 GDB7.0 以上的平台开始支持反向调试需要开启记录，调试结束关闭记录，只有在开启记录之后才能完全正常的进行反向调试。
 
@@ -522,13 +631,13 @@ set exec-direction [forward | reverse]   设置程序运行方向，能够像正
 
 
 
-# edit
+# 15. edit
 
 gdb 调试模式下对源码进行编辑，使用 `edit` 命令。
 
 
 
-# 11. 底层原理
+# 16. 底层原理
 
 ptrace 系统函数是 Linux 内核提供的一个用于进程跟踪的系统调用，通过它，一个进程(gdb)可以读写另外一个进程(test)的指令空间、数据空间、堆栈和寄存器的值。而且gdb进程接管了test进程的所有信号，也就是说系统向test进程发送的所有信号，都被gdb进程接收到，这样一来，test进程的执行就被gdb控制了，从而达到调试的目的。
 
@@ -541,7 +650,7 @@ gdb底层的调试机制是怎样的？
 
 
 
-# 12. 参考
+# 17. 参考
 
 - [GDB 官方英文文档](https://www.gnu.org/software/gdb/)
 - [CS-MCU GDB tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/)
