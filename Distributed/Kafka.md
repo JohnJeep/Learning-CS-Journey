@@ -52,7 +52,7 @@ Kafka 有点像消息系统，允许发布和订阅消息流。从这点来看�
 
 Kafka 是一个分布式的基于发布-订阅模式的消息队列（Message Queue），主要应用于大数据实时处理领域。
 
-## 3.1. 诞生的目的
+# 3.1. 诞生的目的
 
 开始是 Linkedin 内部建立的一个基础设施系统，虽然有很多数据库和系统可以用来存储数据，但是他们发现在他们当前的架构中缺少一种东西来帮助处理连续不断的数据流（handle the continuous flow of data）。在开发 Kafka 之前，他们实验了各种现成的解决方案，从消息系统（messaging systems ）到日志聚合系统（log aggregation），再到 ETL 工具，但这些都无法满足他们的需求。 
 
@@ -110,15 +110,16 @@ Kafka 和 ETL 工具或其他数据集等这些工具都擅长移动数据，但
 
 
 
+## 关键术语
+
+- Topic（主题）：将数据分类，主题中有分区有副本。kafka 中的数据主要存储在 topic 中。
+
+- Partition（分区）：提高 topic 的负载均衡，同时也提高了并发能力。
+- broker（消息中心）：负责接收和处理消息的服务器。
+- Follower：相当于备份的作用。
 
 
-Topic（主题）：将数据分类，主题中有分区有副本。kafka 中的数据主要存储在 topic 中。
-
-Partition（分区）：提高 topic 的负载均衡，同时也提高了并发能力。
-
-Follower：相当于备份的作用。
-
-注意：同一个分区（partition）中的数据（topic）只能被同一个组中的一个消费者（consumer）消费。
+注意：同一个分区（partition）中的数据（topic）只能被同一个消费组中的一个消费者（consumer）消费。
 
 Zookeeper 作用
 
@@ -171,6 +172,8 @@ HW 解决的是消费一致性和存储一致性问题。
 - Kafka 官网：https://kafka.apache.org/
 - 《Kafka: The Definitive Guide: Real-Time Data and Stream Processing at Scale》
 - 《Kafka 权威指南》
+- [The Apache Kafka C/C++ client library API](https://docs.confluent.io/platform/current/clients/librdkafka/html/index.html)
+- [51CTO 天山老妖S-kafka系列](https://blog.51cto.com/u_9291927/category33.html)
 
 
 
