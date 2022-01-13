@@ -198,9 +198,48 @@ WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/Yongheng
 
 
 
+# Ensemble 
 
+Zookeeper 中的集群不叫 cluster，而是叫 ensemble。
 
+Zookeeper 使用的是一致性协议（consensus protocol），所以推荐每个 ensemble 里应该包含奇数（odd）个节点（比如 3 个、 5 个等），因为只有当 ensemble 里的大多数节点处于可用状态， Zookeeper 才能处理外部的请求。也就是说，如果有一个包含 3 个节点的 ensemble，那么它允许一个节点失效。如果 ensemble 包含 5 个节点，那么它允许 2 个节点失效。  
 
+## 集群中节点个数的选择
+
+假设有一个包含 5 个节点的集群（ensemble），为了将修改的配置（包括交换节点）文件写入到集群，你需要重启每一个节点。如果你的集群无法容忍多个节点失效，那么在进行集群维护时就会存在风险。不过，也不建议一个集群包含超过 7 个节点，因为 Zookeeper 使用了一致性协议，节点过多会降低整个集群的性能。  
+
+## 集群配置
+
+为了将 zookeeper 的服务器配置成集群（ensemble），需要一个公共的配置，列出所有的服务器。每台服务器在数据目录（data directory）中创建一个 myid 文件，用 于指明自己的 ID。  如果集群里服务器的 hostnames  是 `zoo!.example.com, zoo2.example.com, zoo3 .example.com` ，那么配置文件可能是下面这样的：  
+
+```
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+initLimit=20
+syncLimit=5
+server.1=zoo1.example.com:2888:3888
+server.2=zoo2.example.com:2888:3888
+server.3=zoo3.example.com:2888:3888
+```
+
+- clientPort：客户端端口号
+- initLimit：表示 followers  连接到 leader 之间建立初始化连接的时间上限。
+- syncLimit：表示允许从节点（followers）与主节点（leader）处于不同步状态的时间上限。  
+  
+  > initLimit 和 syncLimit 单位时间是 tickTime。比如：initLimit 的值为20，表示的时间为：20*2000ms=40s
+
+配置里还列出了集群中所有服务器的地址，服务器地址遵循的格式 `server.X=hostname:peerPort:leaderPort`各个参数说明如下：  
+
+- X：服务的 ID 号，必须是一个整数（integer），不需要从 0 开始或不要求是连续的。
+- hostname：服务器的主机名（hostname）或 IP 地址。
+- peerPort：集群中的服务器彼此之间通信的端口号。
+- leaderPort：leader 选择执行的 TCP 端口号。
+
+客户端只需要通过 clientPort 就能连接到集群，而集群节点间的通信则需要同时用到这 3 个
+端口（ peerPort 、 leaderPort 、 clientPort ）。  
+
+除了公共的配置文件外，每个服务器都必须在 `data Dir` 目录中创建一个叫作 `myid` 的文件，文件里要包含服务器 ID ， 这个 ID 要与配置文件里配置的 ID 保持一致。完成这些步骤后，就可以启动服务器，让它们彼此间进行通信了。  
 
 # 12. 面试
 
