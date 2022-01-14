@@ -202,16 +202,22 @@ Delete 为 Vim 的删除命令，等价于 copy 操作，delete 拷贝当前的�
 > Mark 是自己定义标记的字母，可以设置的任意按键。
 
 
-## 2.8. Making corrections and moving text(修正和移动文本)
+## 2.8. Making corrections and moving text
 
-介绍几种修正和移动文本的方法，包括 3 中基本修改文本的方法：operator-motion(操作符-动作), Visual Mode(可视模式) and text objects(文本对象)。
+介绍几种修正和移动文本（Making corrections and moving text）的方法，包括 3 中基本修改文本的方法：
+
+1. operator-motion(操作符-动作)
+2. Visual Mode(可视模式) 
+3. text objects(文本对象)
 
 **operator-motion(操作符-动作)**
 
-- Vim 的强大很大程度上源自操作符与动作命令相结合，`Operator + Motion = Action`。
-- `d4w` 就是操作符-动作的模式，`d` 是删除操作符，`4w` 是一个执行命令。
+Vim 的强大很大程度上源自操作符与动作命令相结合，`Operator + Motion = Action`。
 
-Vim's operator commands
+- `d4w` 就是操作符-动作的模式，`d` 是删除操作符，`4w` 是一个执行命令，表示删除 4 个单词。
+- `d5k`：向上删除 5 行，并包括当前行。
+
+常见 VIM 操作符命令（Vim's operator commands）
 
 | 命令 | 用途                               |
 | ---- | ---------------------------------- |
@@ -233,9 +239,12 @@ Vim's operator commands
 **text-objects(文本对象)**
 
 - 使用 operator text objects 来修改文本。
-- 例如 `daw`
+- 例如 `da)`表示：Normal 模式下，将光标放在 `(` 处，按下 `da)` 组合键后，一对圆括号中的内容就删除了。
 
-> a 表示 around; i 表示 in。
+> a 表示 around; 
+> i 表示 in。
+
+文本对象包括分隔符文本对象和范围文本对象，下面图片中分别列出了通用的文本对象。
 
 <img src="../pictures/vim-text-objects.png">
 
