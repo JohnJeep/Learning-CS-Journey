@@ -1187,7 +1187,55 @@ trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征�
 
 
 
+const char* 与 string 之间的转换。
 
+`char*` 是 C 语言形式的字符串，`string` 类是 C++ 的字符串，C++为了要兼容 C 语言的字符串，两者之间需要进行转换。
+
+1、`string` 转 `const char*`。直接调用 string 类的 `c_str()` 接口。
+
+```cpp
+string str = “abc”;
+const char* c_str = str.c_str();
+```
+
+2、`const char*` 转 `string`。直接赋值即可。
+
+```cpp
+const char* c_str = “abc”;
+string str(c_str);
+```
+
+3、`string` 转 `char*`
+
+```cpp
+char* c = “abc”;
+string s(c);
+const int len = s.length();
+c = new char[len+1];
+strcpy(c,s.c_str());
+```
+
+4、char* 转 string
+
+```
+char* c = “abc”;
+string s(c);
+```
+
+5、 `const char*` 转 `char*`
+
+```cpp
+const char* cpc = “abc”;
+char* pc = new char[strlen(cpc)+1];
+strcpy(pc,cpc);
+```
+
+6、`char*` 转 `const char*`，直接赋值即可
+
+```cpp
+char* pc = “abc”;
+const char* cpc = pc;
+```
 
 
 

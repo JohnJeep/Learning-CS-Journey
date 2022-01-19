@@ -1159,10 +1159,17 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 - fgrep 是快速grep命令，其实和grep -F等价，不支持正则表达式，按照字符串表面意思进行匹配。
 
 ```sh
-选项参数
--n：列出所有的匹配行，显示行号
+用法
+  grep [OPTIONS] PATTERN [FILE...]
+  grep [OPTIONS] [-e PATTERN | -f FILE] [FILE...]
+
+OPTIONS: 
 -r: 递归搜索
+  例子： 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
+  grep -r  "task_struct {" /usr/src/  -n 
+  
 -i: 搜索时，忽略大小写
+-n：列出所有的匹配行，显示行号
 -c: 只输出匹配行的数量
 -l: 只列出符合匹配的文件名，不列出具体的匹配行
 -h: 查询多文件时不显示文件名
@@ -1173,9 +1180,11 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 -q: 禁止输出任何结果，已退出状态表示搜索是否成功
 -b: 打印匹配行距文件头部的偏移量，以字节为单位
 -o: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
+-a, --text: 将处理的二进制文件当作文本文件，等同于 --binary-files=text 操作
+  例子： 搜索压缩文件中的 open files 关键字
+  [root@centos7 log]# zcat Server_log/20220118.tar.gz  | grep -a "open files"
 
-示例：
-  grep -r  "task_struct {" /usr/src/  -n       # 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
+结合正则表达式  
   grep '[^0-6]'  helo.txt
 ```
 
