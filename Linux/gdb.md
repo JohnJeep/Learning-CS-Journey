@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2022-01-21 23:57:45
+ * @LastEditTime: 2022-01-23 20:26:16
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: GDB 用法笔记
 --> 
@@ -78,7 +78,7 @@ GDB 全称“GNU symbolic debugger”，从名称上不难看出，它诞生于 
 3. 当程序被停住时，可以检查此时你的程序中所发生的事。
 4. 在程序执行过程中修改程序中的变量或条件，将一个bug产生的影响修正从而测试其他bug。
 
-**简单的讲，GDB 就是一个程序，只不过这个程序通过一些手段可以去调试其它的程序。** GDB 可以调试服务端和客户端。调试客户端叫 gdb，调试服务端叫 gdbserver。
+**简单的讲，GDB 就是一个程序，只不过这个程序通过一些手段可以去调试其它的程序。** 
 
 
 
@@ -125,10 +125,6 @@ yum install gdb
   This is free software: you are free to change and redistribute it.
   There is NO WARRANTY, to the extent permitted by law.
 ```
-
-
-
-
 
 # 3. Invoking GDB
 
@@ -270,9 +266,8 @@ GDB 程序中执行 `run` 命令，GDB 会创建一个子进程，让创建的�
 `set args` 命令用来设置被调试程序的参数。有三种方式来指定。
 
 ```
-// 语法
-(gdb) set args 参数:指定运行时的参数
-(gdb) show args：查看设置好的参数
+// 指定运行时的参数
+(gdb) set args 参数
 ```
 
 第一种：
@@ -297,11 +292,52 @@ gdb b.out
 (gdb) run  ini/hello.ini
 ```
 
+显示被调试程序设置的参数。
+
+```
+(gdb) show args
+Argument list to give program being debugged when it is started is "ini/hello.ini".
+(gdb)
+```
+
 ### 6.1.2. environment
 
 调试程序的环境变量。你要调试程序的环境通常继承自 GDB 程序。你也可以用 `set environmen `和 `unset environmen` 命令来改变你要调试程序的环境。
 
+- path directory  
 
+  将目录名 `directory` 添加到 PATH 环境变量（可执行文件的搜索路径）的前面，环境变量将值传递给你要调试的程序，而 gdb 程序使用的 PATH 值不会更改。你也可以同时指定多个目录名（directory  ），用空格或操作系统依赖的分隔符（‘:’ on Unix, ‘;’on MS-DOS and MS-Windows  ）分割开。 
+
+- show paths  
+
+  显示可执行文件的搜索路径列表。
+
+  ```
+  (gdb) show paths
+  Executable and object file path: /usr/local/git/bin:/usr/local/gcc-4.9.4/bin:/usr/jdk1.8.0_102/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/puppetlabs/bin:/home/John/bin
+  (gdb)
+  ```
+
+- show environment [varname]  
+
+  打印你给调试程序设置的环境变量值`varname` 。若没有给设定的值 `varname`，将会打印你的调试程序中所有的环境变量和名字。`environment` 可简写为 `env`。
+
+  ```
+  (gdb) show env
+  ```
+
+- set environment varname [=value]  
+
+  设置环境变量的名字等于某个值 `value`。这个值会改变你要调试程序的环境变量，但不会改变 GDB 程序自身的环境变量。若 `value` 值被忽略，则变量名将被设置为 `null`。
+
+  ```
+  // 告诉被调试的程序，当运行 run 命令时，环境变量 kk 的值为 foo
+  (gdb) set env kk=foo
+  ```
+
+- unset environment varname  
+
+  从被调试程序的环境变量表中移除环境变量 `varname`。
 
 ### 6.1.3. working directory
 
@@ -315,7 +351,7 @@ gdb b.out
 
 - show cwd   
 
-  显示子进程的工作路径。若没有指定子进程的工作路径，子进程默认继承自 GDB 程序的工作路径。
+  current working directory，简写为 cwd。`show cwd` 命令表示显示子进程（inferior）的工作路径。若没有指定子进程的工作路径，子进程默认继承自 GDB 程序的工作路径。
 
   ```
   (gdb) set cwd ~
@@ -743,7 +779,7 @@ gdb program -tui
 
 终端下执行上面这条命令后，利用图形的方式调试可执行程序 `program` 。
 
-<img src="gdb/gdb-tui.png" style="zoom:67%;" />
+<img src="pictures/gdb-tui.png" style="zoom:67%;" />
 
 第二种：先进入 GDB 程序，然后再 GDB中执行　`layout xxx` 命令。
 
