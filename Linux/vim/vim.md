@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditTime: 2021-11-28 23:13:07
- * @LastEditors: Windows10
+ * @LastEditTime: 2022-01-24 14:27:54
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: Vim编辑器使用
 --> 
 
@@ -17,7 +17,12 @@
   - [2.5. Undo(撤销)](#25-undo撤销)
   - [2.6. Find(查找)](#26-find查找)
   - [2.7. Mark(标记)](#27-mark标记)
-  - [2.8. Making corrections and moving text(修正和移动文本)](#28-making-corrections-and-moving-text修正和移动文本)
+  - [2.8. Making corrections and moving text](#28-making-corrections-and-moving-text)
+  - [2.9. Fold](#29-fold)
+    - [2.9.1. Manual Fold](#291-manual-fold)
+    - [2.9.2. Indent Fold](#292-indent-fold)
+    - [2.9.3. Syntax Fold](#293-syntax-fold)
+    - [2.9.4. Marker Fold](#294-marker-fold)
 - [3. Visual Mode](#3-visual-mode)
 - [4. Visual Line Mode](#4-visual-line-mode)
 - [5. Visual Block Mode](#5-visual-block-mode)
@@ -248,20 +253,71 @@ Vim 的强大很大程度上源自操作符与动作命令相结合，`Operator 
 
 <img src="../pictures/vim-text-objects.png">
 
-## fold
+## 2.9. Fold
 
- vim 中代码折叠。
+ vim 中代码折叠。按照折叠所依据的规则，可以分为Manual（手工折叠）、Indent（缩进折叠）、Marker（标记折叠）和Syntax（语法折叠）等。
 
-- `zo` 打开一个折叠。
-- `zc` 关闭一个折叠。
-- `za` 当关闭时打开，当打开时关闭。
-- `zo`、`zc`、`za` 对应 `zO`、`zC` 和 `zA`；以递归形式改变折叠状态。
-- `zR` 打开全部折叠。
-- `zM` 关闭全部折叠。
+查看折叠的帮助信息
 
+```
+:help folding     查看折叠的帮助信息
+:help fold-marker 查看标记折叠帮助信息
+:help fold-syntax 查看语法折叠帮助信息
+:help fold-indent 查看缩进折叠帮助信息
+:help fold-manual 查看手动折叠帮助信息
+```
 
+折叠快捷键
 
+```
+za 打开/关闭当前的折叠
+zo 打开一个折叠
+zc 关闭一个折叠
+zo、zc、za 对应 zO、zC 和 zA：以递归形式改变折叠状态。
 
+zR 打开所有的折叠及其嵌套的折叠
+zr 打开所有的折叠
+zM 关闭所有的折叠及其嵌套的折叠
+zm 关闭所有的折叠
+zd 删除当前折叠
+zE 删除所有折叠
+zj 移动至下一个折叠
+zk 移动至上一个折叠
+zn 禁用折叠
+zN 启动折叠
+```
+
+### 2.9.1. Manual Fold
+
+启用手工折叠。
+
+```
+:set foldmethod=manual
+```
+
+### 2.9.2. Indent Fold
+
+启用缩进折叠，所有文本将按照（选项*shiftwidth* 定义的）缩进层次自动折叠。
+
+```
+:set foldmethod=indent
+```
+
+### 2.9.3. Syntax Fold
+
+启用语法折叠。所有文本将按照语法结构自动折叠。
+
+```
+:set foldmethod=syntax
+```
+
+### 2.9.4. Marker Fold
+
+启用标记折叠，所有文本将按照特定标记（默认为{{{和}}}）自动折叠。
+
+```
+:set foldmethod=marker
+```
 
 # 3. Visual Mode
 
