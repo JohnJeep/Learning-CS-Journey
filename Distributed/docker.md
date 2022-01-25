@@ -38,7 +38,8 @@
 - [10. Docker 容器数据卷](#10-docker-容器数据卷)
 - [11. Dockerfile](#11-dockerfile)
 - [12. Docker network](#12-docker-network)
-- [13. Compose](#13-compose)
+  - [12.1.](#121)
+- [13. Docker Compose](#13-docker-compose)
 - [14. 面试问题](#14-面试问题)
 - [15. Reference](#15-reference)
 
@@ -712,8 +713,6 @@ docker images
 	docker build [OPTIONS] PATH | URL | -
 ```
 
-
-
 # 9. Docker 下安装软件
 
 Docker下安装软件的步骤
@@ -733,9 +732,39 @@ Docker下安装软件的步骤
 
 # 12. Docker network
 
+## 12.1.  
+
+```
+[root@redis_181 ~]# docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 zk_network
+7de8536fcab27bd0318f783fbe4c2ce5f72123fbe646f559eaf80e742bde63c5
+[root@redis_181 ~]#
+
+[root@redis_181 ~]# docker network ls
+NETWORK ID     NAME         DRIVER    SCOPE
+2914ee1d3e2a   bridge       bridge    local
+9a2d889dab32   host         host      local
+c6cc0e89cb3c   none         null      local
+7de8536fcab2   zk_network   bridge    local
+
+```
 
 
-# 13. Compose
+
+
+
+# 13. Docker Compose
+
+
+
+配置 kafka
+
+```
+    KAFKA_ADVERTISED_HOST_NAME：广播主机名称，一般用IP指定
+    KAFKA_ZOOKEEPER_CONNECT：Zookeeper连接地址，格式：zoo1：port1,zoo2:port2:/path
+    KAFKA_LISTENERS：Kafka启动所使用的的协议及端口
+    KAFKA_ADVERTISED_LISTENERS：Kafka广播地址及端口，也就是告诉客户端，使用什么地址和端口能连接到Kafka，这个很重要，如果不指定，宿主机以外的客户端将无法连接到Kafka，比如我这里因为容器与宿主机做了端口映射，所以广播地址采用的是宿主机的地址及端口，告诉客户端只要连接到宿主机的指定端口就行了
+    KAFKA_BROKER_ID：指定BrokerId，如果不指定，将会自己生成
+```
 
 
 
