@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2021-12-07 01:17:41
- * @LastEditors: Windows10
+ * @LastEditTime: 2022-01-27 17:17:09
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux 基础用法笔记
 --> 
 
@@ -63,11 +63,11 @@
 - [9. pipe](#9-pipe)
 - [10. tee](#10-tee)
 - [11. wc](#11-wc)
-- [12. top](#12-top)
-- [13. ps](#13-ps)
-- [14. killall 与 pkill](#14-killall-与-pkill)
-- [15. nohup](#15-nohup)
-- [16. pstree](#16-pstree)
+- [12. ps](#12-ps)
+- [13. killall 与 pkill](#13-killall-与-pkill)
+- [14. nohup](#14-nohup)
+- [15. pstree](#15-pstree)
+- [16. ltrace](#16-ltrace)
 - [17. strace](#17-strace)
 - [18. pstack](#18-pstack)
 - [19. find](#19-find)
@@ -75,33 +75,29 @@
 - [21. grep](#21-grep)
 - [22. pgrep](#22-pgrep)
 - [23. PID](#23-pid)
-- [24. netstat](#24-netstat)
-- [25. ss](#25-ss)
-- [26. lsof](#26-lsof)
-- [27. netcat](#27-netcat)
-- [28. socat](#28-socat)
-- [29. traceroute](#29-traceroute)
-- [30. dmesg](#30-dmesg)
-- [31. vmstat](#31-vmstat)
-- [32. man](#32-man)
-- [33. ntsysv](#33-ntsysv)
-- [34. wget](#34-wget)
-- [35. SHA](#35-sha)
-- [36. md5](#36-md5)
-- [37. ldconfig](#37-ldconfig)
-- [38. ldd](#38-ldd)
-- [39. chkconfig](#39-chkconfig)
-- [40. scp](#40-scp)
-- [41. rsync](#41-rsync)
-- [42. 防火墙](#42-防火墙)
-  - [42.1. ubuntu 下默认的防火墙](#421-ubuntu-下默认的防火墙)
-  - [42.2. CentOS 下默认的防火墙](#422-centos-下默认的防火墙)
-- [43. SELinux](#43-selinux)
-- [44. 共性问题](#44-共性问题)
-  - [44.1. Linux 与 Windows相差 8 小时处理](#441-linux-与-windows相差-8-小时处理)
-- [45. ulimit 系统参数修改](#45-ulimit-系统参数修改)
-  - [45.1. **root用户修改后其他用户不生效**](#451-root用户修改后其他用户不生效)
-- [46. 参考](#46-参考)
+- [24. ss](#24-ss)
+- [25. lsof](#25-lsof)
+- [26. netcat](#26-netcat)
+- [27. socat](#27-socat)
+- [28. traceroute](#28-traceroute)
+- [29. man](#29-man)
+- [30. ntsysv](#30-ntsysv)
+- [31. wget](#31-wget)
+- [32. SHA](#32-sha)
+- [33. md5](#33-md5)
+- [34. ldconfig](#34-ldconfig)
+- [35. ldd](#35-ldd)
+- [36. chkconfig](#36-chkconfig)
+- [37. LD_LIBRARY_PATH](#37-ld_library_path)
+- [38. scp](#38-scp)
+- [39. rsync](#39-rsync)
+- [40. 防火墙](#40-防火墙)
+  - [40.1. ubuntu 下默认的防火墙](#401-ubuntu-下默认的防火墙)
+  - [40.2. CentOS 下默认的防火墙](#402-centos-下默认的防火墙)
+- [41. SELinux](#41-selinux)
+- [42. 共性问题](#42-共性问题)
+  - [42.1. Linux 与 Windows相差 8 小时处理](#421-linux-与-windows相差-8-小时处理)
+- [43. 参考](#43-参考)
 
 <!-- /TOC -->
 
@@ -929,27 +925,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
 ```
 
 
-# 12. top
-
-动态查看进程的变化，默认按照CPU使用率为排序的依据。可以在系统的后台执行，得到进程的全部信息。
-
-```sh
-参数项：
-    %us 用户空间程序的 cpu 使用率（没有通过 nice 调度）
-    %sy 系统空间的 cpu 使用率，主要是内核程序。
-    %ni 用户空间且通过 nice 调度过的程序的 cpu 使用率。
-    %id 空闲cpu
-    %wa cpu运行时在等待io的时间
-    %hi cpu处理硬中断的数量
-    %si cpu处理软中断的数量
-    %st 被虚拟机偷走的cpu 
-    
-例子：
-	top -bn 1 -i -c
-```
-
-
-# 13. ps
+# 12. ps
 
 ps 是 process status 的缩写。
 
@@ -1034,7 +1010,7 @@ Thu Jun 10 08:33:04 2021       33:48
 ```
 
 
-# 14. killall 与 pkill
+# 13. killall 与 pkill
 
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
 
@@ -1044,7 +1020,7 @@ killall bash
 pkill bash
 ```
 
-# 15. nohup
+# 14. nohup
 
 ```sh
 nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
@@ -1053,18 +1029,226 @@ nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
   nohup ping www.baidu.com    让执行 ping 命令的进程在后台运行。
 ```
 
-# 16. pstree 
+# 15. pstree 
 
-- 查找各个进程之间的相关性。
-- Linux系统中内核调用的第一个进程为 `systemd`，该进程的PID为 `1`
+pstree 命令是用于查看正在运行的进程之间的关系，用树形图显示，即哪个进程是父进程，哪个是子进程，可以清楚的看出来是谁创建了谁，同时还可以查看一个进程下有多少个子线程。
 
+注：Linux 系统中内核调用的第一个进程为 `systemd`，该进程的 PID 为 `1`。
+
+```
+几个重要的参数：
+-A 各进程树之间的连接以ASCII码字符来连接
+-U 各进程树之间的连接以utf8字符来连接，某些终端可能会有错误
+-p 同时列出每个进程的PID
+-u 同时列出每个进程的所属账号名称
+```
+
+```
+$ pstree
+init─┬─NetworkManager
+     ├─abrtd
+     ├─acpid
+     ├─atd
+     ├─automount───4*[{automount}]
+     ├─certmonger
+     ├─crond
+     ├─cupsd
+     ├─dbus-daemon
+     ├─hald───hald-runner─┬─hald-addon-acpi
+     │                    └─hald-addon-inpu
+     ├─irqbalance
+     ├─master─┬─bounce
+```
+
+```
+// 一个进程下有多个子线程，花括号{} 中的内容表示线程，圆括号() 中的内容表示线程ID或进程ID
+pstree -p 15821
+a.out(15821)─┬─{a.out}(15835)
+             ├─{a.out}(15836)
+             ├─{a.out}(15837)
+             ├─{a.out}(15838)
+             ├─{a.out}(15839)
+             ├─{a.out}(15840)
+             ├─{a.out}(15841)
+             ├─{a.out}(15843)
+             ├─{a.out}(15844)
+```
+
+# 16. ltrace
+
+跟踪进程调用库函数的信息，显示调用哪些库函数。
+
+```
+语法
+  ltrace [option ...] [command [arg ...]]
+
+选项参数
+-a 对齐具体某个列的返回值。
+-c 计算时间和调用，并在程序退出时打印摘要。
+-C 解码低级别名称（内核级）为用户级名称。
+-d 打印调试信息。
+-e 改变跟踪的事件。
+-f 跟踪子进程。
+-h 打印帮助信息。
+-i 打印指令指针，当库调用时。
+-l 只打印某个库中的调用。
+-L 不打印库调用。
+-n, --indent=NR 对每个调用级别嵌套以NR个空格进行缩进输出。
+-o, --output=file 把输出定向到文件。
+-p PID 附着在值为PID的进程号上进行ltrace。
+-r 打印相对时间戳。
+-s STRLEN 设置打印的字符串最大长度。
+-S 显示系统调用。
+-t, -tt, -ttt 打印绝对时间戳。
+-T 输出每个调用过程的时间开销。
+-u USERNAME 使用某个用户id或组ID来运行命令。
+-V, --version 打印版本信息，然后退出。
+
+示例
+  ltrace -p pid
+```
+
+示例1：执行程序不带任何参数
+
+```
+$ ltrace ./a.out
+(0, 0, 176780, -1, 0x7f080f441990)                                                            = 0x304c2221e0
+__libc_start_main(0x400898, 1, 0x7fff96a76768, 0x400920, 0x400990 <unfinished ...>
+_ZNSt8ios_base4InitC1Ev(0x600ee0, 65535, 0x7fff96a76778, 64, 0x304c7bbea0)                    = 0
+__cxa_atexit(0x400704, 0x600ee0, 0x600d98, 6, 0x305a3105e0)                                   = 0
+_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(0x600dc0, 0x4009ec, 0x7fff96a76778, 96, 0x304c7bbea0) = 0x600dc0
+_ZNSolsEPFRSoS_E(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30 <unfinished ...>
+_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30hello
+ <unfinished ...>
+<... _ZNSolsEPFRSoS_E resumed> )                                                              = 0x600dc0
+_ZNSt8ios_base4InitD1Ev(0x600ee0, 0, 160, 0x304c7bbf30, 4)                                    = 0x305a30f240
++++ exited (status 0) +++
+```
+
+示例2：输出调用时间开销
+
+```
+$ ltrace -T ./a.out
+(0, 0, 106015, -1, 0x7f3655ca9990)                                                            = 0x304c2221e0 <0.000129>
+__libc_start_main(0x400898, 1, 0x7fff2085dd98, 0x400920, 0x400990 <unfinished ...>
+_ZNSt8ios_base4InitC1Ev(0x600ee0, 65535, 0x7fff2085dda8, 64, 0x304c7bbea0)                    = 0 <0.000215>
+__cxa_atexit(0x400704, 0x600ee0, 0x600d98, 6, 0x305a3105e0)                                   = 0 <0.000110>
+_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(0x600dc0, 0x4009ec, 0x7fff2085dda8, 96, 0x304c7bbea0) = 0x600dc0 <0.000221>
+_ZNSolsEPFRSoS_E(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30 <unfinished ...>
+_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30hello
+ <unfinished ...>
+<... _ZNSolsEPFRSoS_E resumed> )                                                              = 0x600dc0 <0.000302>
+_ZNSt8ios_base4InitD1Ev(0x600ee0, 0, 160, 0x304c7bbf30, 4)                                    = 0x305a30f240 <0.000141>
++++ exited (status 0) +++
+```
+
+示例3：显示系统调用
+
+```
+$ ltrace -S ./a.out
+SYS_brk(NULL)                                                                                 = 0x23f8000
+SYS_mmap(0, 4096, 3, 34, 0xffffffff)                                                          = 0x7f16eaa25000
+SYS_access(0x304c01dac0, 4, 6, 4, 0x2f7362694c2f564f)                                         = -2
+SYS_open("tls/x86_64/libstdc++.so.6", 524288, 011410421010)                                   = -2
+SYS_open("tls/libstdc++.so.6", 524288, 011410421010)                                          = -2
+SYS_open("x86_64/libstdc++.so.6", 524288, 011410421010)                                       = -2
+SYS_open("libstdc++.so.6", 524288, 011410421010)                                              = -2   
+...........
+SYS_munmap(0x7f16eaa16000, 59833)                                                             = 0
+__libc_start_main(0x400898, 1, 0x7fff976dc088, 0x400920, 0x400990 <unfinished ...>
+_ZNSt8ios_base4InitC1Ev(0x600ee0, 65535, 0x7fff976dc098, 64, 0x304c7bbea0)                    = 0
+__cxa_atexit(0x400704, 0x600ee0, 0x600d98, 6, 0x305a3105e0)                                   = 0
+_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(0x600dc0, 0x4009ec, 0x7fff976dc098, 96, 0x304c7bbea0 <unfinished ...>
+SYS_fstat(1, 0x7fff976dbdb0, 0x7fff976dbdb0, 0x7fff976dbcd0, 0x304c7bca30)                    = 0
+SYS_mmap(0, 4096, 3, 34, 0xffffffff)                                                          = 0x7f16eaa24000
+<... _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc resumed> )                       = 0x600dc0
+_ZNSolsEPFRSoS_E(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30 <unfinished ...>
+_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_(0x600dc0, 0x400734, 0x305a2f75d8, 1024, 0x304c7bca30 <unfinished ...>
+SYS_write(1, "hello\n", 6hello
+)                                                                    = 6
+<... _ZNSolsEPFRSoS_E resumed> )                                                              = 0x600dc0
+_ZNSt8ios_base4InitD1Ev(0x600ee0, 0, 160, 0x304c7bbf30, 4)                                    = 0x305a30f240
+SYS_exit_group(0 <no return ...>
++++ exited (status 0) +++
+```
+
+参考：[ltrace命令详解 ](https://www.cnblogs.com/machangwei-8/p/10388938.html)
 
 # 17. strace
 
-strace指令跟踪程序使用的底层系统调用，可输出系统调用被执行的时间点以及各个调用耗时间时(strace  - trace system calls and signals)；
+**为什么要用 strace?**
 
-- 监控用户进程与内核进程的交互
-- 追踪进程的系统调用、信号传递、状态变化。
+看到一个进程调用了哪些API以及其调用顺序，例如我们要参考某个程序的实现，但我们又无法获得该程序的源代码时，使用系统调用跟踪命令不失为一个好办法。另外，在一些无法调试的环境上检查问题时，我们也可以用该命令来查看程序是否按预期执行。strace和dtruss都是同一类型的命令，strace是linux系统上的，而dtruss是mac系统上的。
+
+**strace 作用**
+
+strace 跟踪一个进程的系统调用或信号产生的信息。（strace  - trace system calls and signals）
+
+```
+参数项
+
+-c 统计每一系统调用的所执行的时间，次数和出错的次数等。 
+-d 输出strace关于标准错误的调试信息。 
+-f 跟踪由fork调用所产生的子进程。 
+-ff 如果提供-o filename，则所有进程的跟踪结果输出到相应的filename 
+-F 尝试跟踪vfork调用。在-f时，vfork不被跟踪。 
+-h 输出简要的帮助信息。 
+-i 输出系统调用的入口指针。 
+-q 禁止输出关于脱离的消息。 
+-r 打印出相对时间关于，每一个系统调用。 
+-t 在输出中的每一行前加上时间信息。 
+-tt 在输出中的每一行前加上时间信息，微秒级。 
+-ttt 微秒级输出，以秒了表示时间。 
+-T 显示每一调用所耗的时间。 
+-v 输出所有的系统调用。一些调用关于环境变量，状态，输入输出等调用由于使用频繁，默认不输出。 
+-V 输出strace的版本信息。 
+-x 以十六进制形式输出非标准字符串 
+-xx 所有字符串以十六进制形式输出。 
+-a column 设置返回值的输出位置。默认 为40。 
+
+-e expr  指定一个表达式，用来控制如何跟踪。格式如下: 
+	[qualifier=][!]value1[，value2]。。。 
+	qualifier只能是 trace，abbrev，verbose，raw，signal，read，write其中之一。
+	value是用来限定的符号或数字。默认的 qualifier是 trace。感叹号是否定符号。
+	例如: -eopen等价于 -e trace=open，表示只跟踪open调用。
+	而-etrace!=open表示跟踪除了open以外的其他调用。有两个特殊的符号 all 和 none。 
+ 
+-e trace=set 只跟踪指定的系统 调用。
+             例如:-e trace=open，close，rean，write表示只跟踪这四个系统调用。默认的为set=all。
+			 
+-e trace=file 只跟踪有关文件操作的系统调用。 
+
+-e trace=process 只跟踪有关进程控制的系统调用。 
+
+-e trace=network 跟踪与网络有关的所有系统调用。
+ 
+-e strace=signal 跟踪所有与系统信号有关的 系统调用 
+
+-e trace=ipc 跟踪所有与进程通讯有关的系统调用 
+
+-e abbrev=set 设定 strace输出的系统调用的结果集
+
+-e raw=set 将指定的系统调用的参数以十六进制显示。 
+
+-e signal=set 指定跟踪的系统信号。默认为all。
+              如 signal=!SIGIO(或者signal=!io)，表示不跟踪SIGIO信号。 
+
+-e read=set  输出从指定文件中读出 的数据。例如: 
+
+-e read=3，5 
+
+-e write=set 输出写入到指定文件中的数据。 
+
+-o filename 将strace的输出写入文件filename 
+
+-p pid 跟踪指定的进程pid。 
+
+-s strsize 指定输出的字符串的最大长度，默认为32。 
+
+-u username 以username 的UID和GID执行被跟踪的命令
+```
+
+
 
 
 # 18. pstack
@@ -1236,27 +1420,7 @@ pidof bash
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
-# 24. netstat
-
-```sh
-netstat 是一个查看系统中端口使用情况的一个命令。侦听端口：应用程序或进程侦听的网络端口，充当通信端点。注意：同一个 IP 地址上不能用两个不同的服务去侦听同一端口
-
-语法格式
-  netstat 检查端口
-
-参数项
-    -t  显示 TCP 端口。
-    -u  显示 UDP 端口。
-    -n  显示数字地址而不是主机名。
-    -l  仅显示侦听端口。
-    -p  显示进程的 PID 和名称
-
-示例：
-  netstat -tunlp    # 列出正在侦听的所有TCP或UDP端口
-  netstat -apn | grep 端口号  # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
-```
-
-# 25. ss 
+# 24. ss 
 
 ss 是用于调查套接字的另一个实用程序。
 
@@ -1269,7 +1433,7 @@ ss 检查端口：
 
 
 
-# 26. lsof 
+# 25. lsof 
 
 ```sh
 lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
@@ -1283,36 +1447,24 @@ lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 ```
 
 
-# 27. netcat
+# 26. netcat
 
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
 
-# 28. socat
+# 27. socat
 
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站：http://www.dest-unreach.org/socat/ 
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
 
-# 29. traceroute
+# 28. traceroute
 
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
 
-# 30. dmesg 
-
-dmesg 是分析内核产生的一些信息。
-
-系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
-
-
-# 31. vmstat
-
-可以检测系统资源（CPU、内存、磁盘、IO状态）的变化。
-
-
-# 32. man
+# 29. man
 
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
@@ -1394,12 +1546,12 @@ N       |	反向查询
 
 
 
-# 33. ntsysv
+# 30. ntsysv
 
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
-# 34. wget
+# 31. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
@@ -1408,7 +1560,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
 
 
-# 35. SHA
+# 32. SHA
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
 - SHA家族的五个算法，分别是SHA-1、SHA-224、SHA-256、SHA-384，和SHA-512，由美国国家安全局（NSA）所设计，并由美国国家标准与技术研究院（NIST）发布，是美国的政府标准。后四者有时并称为SHA-2。SHA-1在许多安全协定中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5（更早之前被广为使用的杂凑函数）的后继者。
@@ -1428,7 +1580,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   feeds-master.zip: OK
   ```
 
-# 36. md5
+# 33. md5
 
 md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
 
@@ -1442,14 +1594,14 @@ feeds-master.zip: OK
 ```
 
 
-# 37. ldconfig
+# 34. ldconfig
 
 ldconfig是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
 
-# 38. ldd
+# 35. ldd
 
 作用：判断某个可执行的二进制文件含有什么动态库。
 
@@ -1474,13 +1626,13 @@ ldconfig是一个动态链接库管理命令，其目的为了让动态链接库
       # 参数 -v 表示该函数来自于哪一个软件
 ```
 
-# 39. chkconfig
+# 36. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
 
 
-# LD_LIBRARY_PATH
+# 37. LD_LIBRARY_PATH
 
 `LD_LIBRARY_PATH` 是 Linux 下用来处理环境变量的，告诉j加载器（loader）在什么路径下去查找非标准库中的共享库。
 
@@ -1507,7 +1659,7 @@ LD_LIBRARY_PATH 的设置方法：用 `export` 命令来设置值
 
 
 
-# 40. scp 
+# 38. scp 
 
 SCP(secure copy) 是基于ssh协议的安全拷贝，用于将文件/目录安全地从本地主机传输到远程主机。
 
@@ -1542,7 +1694,7 @@ test40.txt                                                                      
 
 
 
-# 41. rsync
+# 39. rsync
 
 Rsync (remote synchronize) 实现同步本地主机和远程主机的文件/目录，和 SCP 不同之处在于，首次复制时，Rsync 会复制整个目录，在后面的复制中，不会复制相同的内容，只对差异文件做更新，scp 是把所有文件都复制过去。Rsync 广泛用于备份和镜像。
 
@@ -1611,9 +1763,9 @@ root@192.168.20.30's password:
 
 
 
-# 42. 防火墙
+# 40. 防火墙
 
-## 42.1. ubuntu 下默认的防火墙
+## 40.1. ubuntu 下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -1626,7 +1778,7 @@ root@192.168.20.30's password:
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 42.2. CentOS 下默认的防火墙
+## 40.2. CentOS 下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld` 
 ```sh
@@ -1657,16 +1809,16 @@ firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 - 移除 `8080` 端口 firewall-cmd --permanent --remove-port=8080/tcp
 
 
-# 43. SELinux
+# 41. SELinux
 
 SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
 
-# 44. 共性问题
+# 42. 共性问题
 
-## 44.1. Linux 与 Windows相差 8 小时处理
+## 42.1. Linux 与 Windows相差 8 小时处理
 
 新版本的Ubuntu使用systemd启动之后，时间也改成了由timedatectl来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -1680,208 +1832,7 @@ $sudo ntpdate time.windows.com
 ```
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 45. ulimit 系统参数修改
-
-为什么要修改系统的参数？
-
-
-
-
-
-查看系统参数
-
-```sh
-
-[root@KF-CFT-AP2 ~]# ulimit -a
-core file size          (blocks, -c) 0          # 设定core文件的最大值，单位为 block。
-data seg size           (kbytes, -d) unlimited
-scheduling priority             (-e) 0
-file size               (blocks, -f) unlimited
-pending signals                 (-i) 62795
-max locked memory       (kbytes, -l) 64
-max memory size         (kbytes, -m) unlimited
-open files                      (-n) 1024      # 一个进程可以打开文件描述符的数量的最大值
-pipe size            (512 bytes, -p) 8
-POSIX message queues     (bytes, -q) 819200
-real-time priority              (-r) 0
-stack size              (kbytes, -s) 10240
-cpu time               (seconds, -t) unlimited
-max user processes              (-u) 62795
-virtual memory          (kbytes, -v) unlimited
-file locks                      (-x) unlimited
-```
-
-
-
-## 45.1. **root用户修改后其他用户不生效**
-
-在root用户修改为65536后，用其他用户登录服务器检测`ulimit -n` 还是1024。那么就是该用户未生效。
-
-修改 `/etc/ssh/sshd_config` 中配置，将 UsePAM 项值设置为 yes，表示使用 PAM 模块来加载。 
-
-```
-# UsePAM no
-UsePAM yes
-```
-
-修改完后，重启服务
-
-```sh
-service sshd restart
-```
-
-
-
-
-
-系统参数修改临时有效
-
-```sh
-直接在 shell 中修改参数值，比如
-1. 修改 core 文件大小
-	[root@KF-CFT-AP2 ~]# ulimit -c unlimited
-2. 修改文件打开的个数 open files
-	[root@KF-CFT-AP2 ~]# ulimit -n 2000
-
-其它的参数同理修改
-```
-
-系统参数修永久有效
-
-```sh
-修改 /etc/security/limits.conf 文件，直接在文件后面追加自己要添加的内容，完成后，登出当前用户，然后再登录，查看改变的值。
-
-[root@KF-CFT-AP2 limits.d]# vim /etc/security/limits.conf
-#        - core - limits the core file size (KB)
-#        - data - max data size (KB)
-#        - fsize - maximum filesize (KB)
-#        - memlock - max locked-in-memory address space (KB)
-#        - nofile - max number of open files
-#        - rss - max resident set size (KB)
-#        - stack - max stack size (KB)
-#        - cpu - max CPU time (MIN)
-#        - nproc - max number of processes
-#        - as - address space limit (KB)
-#        - maxlogins - max number of logins for this user
-#        - maxsyslogins - max number of logins on the system
-#        - priority - the priority to run user process with
-#        - locks - max number of file locks the user can hold
-#        - sigpending - max number of pending signals
-#        - msgqueue - max memory used by POSIX message queues (bytes)
-#        - nice - max nice priority allowed to raise to values: [-20, 19]
-#        - rtprio - max realtime priority
-#
-#<domain>      <type>  <item>         <value>
-#
-
-#*               soft    core            0
-#*               hard    rss             10000
-#@student        hard    nproc           20
-#@faculty        soft    nproc           20
-#@faculty        hard    nproc           50
-#ftp             hard    nproc           0
-#@student        -       maxlogins       4
-
-# End of file
-
-# 修改打开文件数
-* hard nofile 3000
-* soft nofile 3000
-```
-
-*：表示所有的用户。
-
-
-
-
-
-注意：有时修改了 `/etc/security/limits.conf` 文件并没有达到自己所预期的内容，感觉是没有生效。可能的原因：
-
-1. 加载了系统中 `/etc/profile` 文件中对系统参数的修改。优先级第二高
-2. 加载了系统中 `/etc/security/limits.d/` 目录下文件的修改，比如：`90-nproc.conf` 或者 `20-nproc.conf`文件。优先级第三高
-
-hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系统当前限制。当你设置 hard limit 后，soft limit 的值就只能小于 hard limit 。普通用户可以降低 hard limit 的值，但是不能提高它，只有 root 用户才能提高 hard limit。
-
-
-
--------------------
-
-于nproc配置信息的扩展说明:
-
-对`max user processes`的配置, Linux系统默认先读取`/etc/security/limits.conf` 中的信息, 如果`/etc/security/limits.d/`目录下还有配置文件的话, 也会依次遍历读取, 最终, `/etc/security/limits.d/`中的配置会覆盖`/etc/security/limits.conf` 中的配置.
-
-另外, `max open files`和`max user processes`是不能配置`unlimited`的 —— 极不安全的设置, 此时系统会使用默认的配置值. 对`nproc`而言, 默认值的计算方法为:
-
-```sh
-# 查看系统的 max user processes
-[kf@ZHCS-AP1 ~]$ cat /proc/sys/kernel/threads-max
-128108
-
-# 计算公式为: 
-default_nproc = max_threads / 2;
-# 其中, max_threads = mempages / (8 * THREAD_SIZE / PAGE_SIZE);
-# mempages是机器的物理页面个数, THREAD_SIZE=8K, 所以, 计算公式为: 
-default_nproc = max_threads / 2 
-              = (mempages * PAGE_SIZE) / ( 2 * 8 *THREAD_SIZE ) 
-              = total_memory / 128K;
-              
-# 计算本机默认nproc配置: 
-cat /proc/meminfo | grep MemTotal
-MemTotal:       115571480 kB
-
-echo "115571480 / 128" | bc
-902902
-
-ulimit -u
-902682
-# 算出来default_nproc = 902902, 和实际的902682很接近, 
-# 因为物理页面会存储一些关键数据, 所以实际的比计算出来的要小一些.
-```
-
-------------------
-
-用户登录的时候执行sh脚本的顺序： 
-    /etc/profile.d/file 
-    /etc/profile 
-    /etc/bashrc 
-    /mingjie/.bashrc 
-    /mingjie/.bash_profile 
-
-    由于ulimit -n的脚本命令加载在第二部分，用户登录时由于权限原因在第二步还不能完成ulimit的修改，所以ulimit的值还是系统默认的1024。
-
-
-
-
-
-
-参考：
-
-[/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
-
-[Linux-PAM 官方文档](http://www.linux-pam.org/)
-
-[Linux下PAM模块学习总结](https://www.cnblogs.com/kevingrace/p/8671964.html)
-
-[Linux下设置最大文件打开数nofile及nr_open、file-max](https://www.cnblogs.com/zengkefu/p/5635153.html)
-
-[Linux - 修改系统的max open files、max user processes ](https://www.cnblogs.com/shoufeng/p/10620480.html)
-
-# 46. 参考
+# 43. 参考
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
