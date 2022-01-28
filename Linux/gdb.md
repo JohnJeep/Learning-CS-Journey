@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2022-01-23 20:26:16
+ * @LastEditTime: 2022-01-28 19:33:18
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: GDB 用法笔记
 --> 
@@ -50,7 +50,10 @@
 - [7. TUI](#7-tui)
   - [7.1. TUI 中的断点](#71-tui-中的断点)
   - [7.2. 快捷键](#72-快捷键)
-- [8. 改变源码路径](#8-改变源码路径)
+- [8. Examining Source Files](#8-examining-source-files)
+  - [8.1. 查看源码](#81-查看源码)
+  - [8.2. 编辑源码](#82-编辑源码)
+  - [8.3. 改变源码路径](#83-改变源码路径)
 - [9. 调试多进程](#9-调试多进程)
 - [10. 调试多线程](#10-调试多线程)
 - [11. 查看内存](#11-查看内存)
@@ -61,9 +64,8 @@
 - [14. 调试正在运行的程序](#14-调试正在运行的程序)
 - [15. 设置动态库](#15-设置动态库)
 - [16. Reverse](#16-reverse)
-- [17. edit](#17-edit)
-- [18. 底层原理](#18-底层原理)
-- [19. 参考](#19-参考)
+- [17. 底层原理](#17-底层原理)
+- [18. 参考](#18-参考)
 
 <!-- /TOC -->
 
@@ -457,13 +459,55 @@ Program stopped.
 
 ## 6.6. list
 
-`list` 查看源码中指定的行和函数，默认查看`10 行` 程序代码。命令后面可跟参数，指定查看的范围。
+`list` 查看源码中指定的行和函数，默认查看`10 行` 程序代码，缩写为 `l`。命令后面可跟参数，指定查看的范围。
 
 ```
-// 示例：
-l xxx.c:func 查看 xxx.c 文件中的 func 函数
-l xxx.c:100 从第 100 行开始查看 xxx.c 文件中内容
+list 从当前位置开始处，打印 10 行源码
+
+list linenum   以 linenum 行为中心行，开始打印源码
+  
+list function  以 function 函数处为中心行，开始打印源码
+
+list -  在上一次打印行的最后一行处，往前面开始打印源码，- 后面可跟行号或函数名
+
+list +  在上次打印行之后开始打印源码，- 后面可跟行号或函数名
+
+list num1,num2  指定位置，打印 num1 到 num2 之间的源码 
+  
 ```
+
+用 `set listsize` 命令改变默认打印源码的行数。
+
+```
+set listsize count      设置默认打印 count 行
+		set listsize 20     改为默认打印 20 行
+		
+set listsize unlimited  默认打印的行数没有限制
+```
+
+```
+show listsize   显示 list 命令默认打印的行数
+
+(gdb) show listsize
+Number of source lines gdb will list by default is 10.
+```
+
+指定行的具体位置去打印源码，源文件名与源码位置之间使用冒号（:）分隔
+
+```
+list -offset   参数 offset 为偏移量，表明是向前还是向后打印，从上一次打印的最后一行处开始算
+list +offset  
+
+list filename:function
+	list xxx.c:func 查看 xxx.c 文件中的 func 函数
+	
+filename:linenum	
+  list xxx.c:100 从第 100 行开始查看 xxx.c 文件中内容
+```
+
+
+
+
 
 ## 6.7. break
 
@@ -824,40 +868,62 @@ TUI 窗口绑定的快捷键。
 - Ctrl + x，再按2：双窗口模式，显示两个窗口
 - Ctrl + x，再按a：回到传统模式，即退出 layout，回到执行 layout 之前的调试窗口。
 
-# 8. 改变源码路径
 
-编译好的程序文件，放到了另外一台机器上进行调试，或者你的源码文件全都移动到了另外一个目录，怎么办呢？当然你还可以使用前面的方法添加源码搜索路径，也可以使用 `set substitute-path from to` 将原来的路径替换为新的路径。
 
-gdb在调试时默认会对两个路径进行搜索：
+# 8. Examining Source Files  
 
-1. 编译的时候的源文件路径
-2. 当前gdb的路径（即在gdb种执行pwd显示的路径，可以用cd改变）
+源文件检查包括查看源码、编辑源文件、搜索源文件、指定源码路径、源码和汇编代码、禁止读源码等内容。
+
+## 8.1. 查看源码
+
+源码的查看使用 `list` 命令，list 的用法请参考 “常用命令”中的 “list”用发。
+
+## 8.2. 编辑源码
+
+GDB 下对源码进行编辑，使用 `edit` 命令。有多种方式用 `edit` 打开源码文件，下面仅列出 2 种常用的方式。
 
 ```
-默认搜索路径 $cdir:$cwd
-cwd(current working directory): gdb 当前工作路径
-cdir: 源码被编译成目标文件的路径
+edit number   编辑当前文件，并跳转到 number 行
+edit file:number 编辑指定的 file 文件，并跳转到 number 行
+
+edit function 编辑当前文件，并跳转到 function 函数处的下一行
+edit file:function 编辑指定的 file 文件，并跳转到 function 函数处
 ```
 
-- 编译路径
-- 源码路径
-- 可执行文件路径
-- GDB 工作路径
+GDB 默认使用的编辑器是 `/bin/ex`，然而你也可以让 GDB 编辑时打开使用你自定义的编辑器，改变环境变量中的 `EDITOR` 即可。
 
-源码路径 在 gdb 启动后开始生效，默认值并不是空，而是 `$cdir:$cwd`，这又是什么鬼？其中的 `$cdir` 叫做编译目录，是代码在编译时记录到程序中的，`$cwd` 表示当前的调试目录，可以通过 cd 命令来修改，要注意这个 cd 修改的是 gdb 会话中的当前目录，不会影响启动 gdb 前文件系统中的目录位置。
+比如，配置 GDB 使用 vi 编辑器，在 shell 终端执行下面的命令即可。
 
-```sh
-// 终端下查看源码路径
-[John@KF-CFT-AP2 Src]$ readelf ~/IOV/Server/IOV-HttpClient -p .debug_str
+```
+EDITOR=/usr/bin/vi
+export EDITOR
+gdb ...
+```
 
-// 查看源码路径
-(gdb) show dir    
-Source directories searched: $cdir:$cwd
 
-// 设置源码的路径为 xxxx
-(gdb) dir   xxxx   
 
-// 查看源代码文件名和编译目录
+## 8.3. 改变源码路径
+
+为什么要改变源文件的路径？
+
+某些场景中代码编译与程序执行没有在相同的路径下运行，或者源文件被移动到了另外一个目录，甚至还有可能代码编译实在编译环境中操作，而程序运行则在开发环境下（另一台机器），此时你想要调试怎么办？这时就需要手动指定源路径表（source path）中的源码位置。
+
+手动去指定 source path 的核心：保证 Debug 信息中要有源码的路径，这样你在调试时，才能一边看源码，一边看程序执行的信息。
+
+ 源路径（source path）：一个搜索源文件的目录列表（list）。
+
+GDB 的 `source path` 默认包含两个特别的项 `$cwd`，`$cdir`， GDB 启动时会默认去搜索源路径 `$cdir:$cwd`
+
+- `cwd(current working directory)`：GDB 当前工作路径，和 `.` 是不一样的。`cwd` 在 GDB 运行过程中是会改变的，可以通过 cd 命令来修改，要注意这个 cd 修改的是 GDB session 中的当前目录，不会影响启动 GDB 程序时的目录位置。
+- `cdir(compilation directory)`：编译目录，是代码在编译时记录到 debug 信息中的目录。
+
+若 Debug 信息中记录了编译路径，但 `source path` 中搜索不到源文件，这时，GDB 将会结合编译路径和文件名再一次去 `source path` 中找源文件。
+
+有两种方式查看源代码文件名和编译目录。
+
+第一种：GDB 程序中查看源代码文件名和编译目录
+
+```
 (gdb) i source
 	Current source file is ../../Src/FrameWorkServer.cpp
   Compilation directory is /home/John/SrcCompile/Src/FrameWorkServer/Makefile/Debug
@@ -867,12 +933,115 @@ Source directories searched: $cdir:$cwd
   Compiled with DWARF 2 debugging format.
   Does not include preprocessor macro info.
 
+// 查看调试的程序中所有的源文件目录和编译目录
+(gdb) i sources
+```
+
+第二种：外部终端下查看源码路径
+
+```
+$ readelf a.out -p .debug_str
+```
+
+在开始操作之前，需要弄清楚 GDB 中几个重要的概念。
+
+- 编译路径（compilation directory）：编译源代码的路径。
+- 源码路径（source path）：源码存放的位置。
+- 可执行文件路径：编译完成的程序在哪个目录下运行。
+- 可执行文件记录的源文件路径（the executable records the source file）：编译后的可执行程序中记录的编译时路径。
+- GDB 当前工作路径（ current working directory）：在哪个目录下启动 GDB 程序。
+
+例子：编译路径为 `/project/build`，源码路径为 `/mnt/cross:$cdir:$cwd`，可执行文件记录的源文件路径为 `/usr/src/foo-1.0/lib/foo.c`，GDB 当前工作路径为 `/home/user`，GDB　将会从下面的位置中搜索源文件的路径：
+
+```
+/usr/src/foo-1.0/lib/foo.c             
+/mnt/cross/usr/src/foo-1.0/lib/foo.c   
+/project/build/usr/src/foo-1.0/lib/foo.c
+/home/user/usr/src/foo-1.0/lib/foo.c
+/mnt/cross/project/build/usr/src/foo-1.0/lib/foo.c
+/project/build/project/build/usr/src/foo-1.0/lib/foo.c
+/home/user/project/build/usr/src/foo-1.0/lib/foo.c
+/mnt/cross/foo.c
+/project/build/foo.c
+/home/user/foo.c
+```
+
+注意：可执行文件记录的源文件路径不能用来定位源文件（source files）。
+
+若退出 GDB 后，重新启动，GDB 会清除它缓存的有关源文件的位置以及每行在源文件中的位置信息。重新开始 GDB 时，`source path` 只包含 `$cdir` 和 `$cwd`，若想要在源路径列表中添加新的源文件路径，用 `directory ` 或 `set substitute-path` 命令。
+
+`set substitute-path` 命令可同时操作多个源文件，操作整个目录树，而 `directory` 命令每次只能改变一个源文件路径。比如之前源文件在 `/usr/src` 目录下，现在源文件被移到了 `/mnt/cross` 目录下。之前源文件中的 `foo-1.0` 目录中有多个文件，若用 `directory` 命令，需要对每个文件进行设置，太费时间了，而用 `set substitute-path` 命令，则需要替换目录名即可，不用对每个文件一一设置。
+
+`substitute-path` 命令语法
+
+```
 // 替换源码目录，将原来路径下的 src 替换为 xxx/xxxx/dest
 (gdb) set substitute-path src xxx/xxxx/dest
 
+// 例如：将 /usr/src 替换为 /mnt/cross
+(gdb) set substitute-path /usr/src /mnt/cross
+
+// 当有多条 set substitute-path 设置的规则时，按顺序依次添加规则，则源路径列表中按添加的顺序去设置
+// 将 /usr/src/include/defs.h 路径替换为 /mnt/include/defs.h
+// 将 /usr/src/lib/foo.c 路径替换为 /mnt/src/lib/foo.c
+(gdb) set substitute-path /usr/src/include /mnt/include
+(gdb) set substitute-path /usr/src /mnt/src
 ```
 
-原文链接：https://blog.csdn.net/albertsh/article/details/107437084
+```
+// 从路径列表中删除指令的路径 path
+// 若不指定 path 路径参数，则从 source path 中删除整个替换的规则
+unset substitute-path [path]
+```
+
+```
+// 打印源路径列表中的替换规则，如果有的话，它将重写该路径
+// 若不指定 path 路径参数，从源路径列表中打印已存在的替换规则
+show substitute-path [path]
+```
+
+`directory` 命令语法，其中 `directory` 缩写为 `dir`。
+
+```
+// 查看源路径列表中包含的目录
+(gdb) show dir    
+Source directories searched: $cdir:$cwd
+
+// dir 后面不跟路径，Linux 系统下则默认设置为 $cdir:$cwd 
+(gdb) dir
+
+// 设置源码的路径为 xxxx
+(gdb) dir   xxxx  
+
+// 指定多个路径，linux 下每个路径名之间用冒号（:）分隔开，window下用分号（;）分隔开
+(gdb) dir dirname1:dirname2:dirname3
+```
+
+若我每次启动 GDB 后都要去设置源码的路径，编写程序文件很少时没问题，但在大工程中用 Makefile 去编译的工程，编译在太机器上，程序运行在另外一台机器上，导致了编译路径、源码路径、可执行程序的路径都发生了变化，并且文件是非常多的。调试程序时，无论是用 `directory` 命令还是用 `substitute-path` 命令，都需要设置很多次，感觉很麻烦和费时，那有没有一种操作：将我要执行的命令放到一个文件中，然后 GDB 程序启动时去加载这个文件，然后再执行文件中的命令。
+
+很幸运的告诉你，有这么一种操作，那就是在 GDB 程序启动时后面跟 `-x` 参数和要执行的文件 `file`。
+
+man 手册中查看 GDB `-x` 参数说明。
+
+```
+man gdb
+       -x file
+               Execute GDB commands from file file.
+```
+
+示例：新建一个 `source-path-file` 文件，里面放入要执行的命令。
+
+```
+set substitute-path /usr/src/include /mnt/include
+set substitute-path /usr/src /mnt/src
+```
+
+外部 shell  终端 GDB 程序启动要调试的文件，后面跟 `source-path-file` 文件。执行后的结果与在 GDB 程序里面执行 `set substitute-path` 命令是等价的。
+
+```
+$ gdb a.out -x source-path-file
+```
+
 
 # 9. 调试多进程
 
@@ -890,6 +1059,7 @@ gdb 追踪多个分支（父子进程）
 # 10. 调试多线程
 
 GDB 多线程调试的术语
+
 - all-stop mode      全停模式
 
 - single-stepping    单步执行
@@ -1059,13 +1229,9 @@ set exec-direction [forward | reverse]   设置程序运行方向，能够像正
 
 
 
-# 17. edit
-
-gdb 调试模式下对源码进行编辑，使用 `edit` 命令。
 
 
-
-# 18. 底层原理
+# 17. 底层原理
 
 ptrace 系统函数是 Linux 内核提供的一个用于进程跟踪的系统调用，通过它，一个进程(gdb)可以读写另外一个进程(test)的指令空间、数据空间、堆栈和寄存器的值。而且gdb 进程接管了test 进程的所有信号，也就是说系统向 test 进程发送的所有信号，都被 gdb 进程接收到，这样一来，test 进程的执行就被 gdb 控制了，从而达到调试的目的。
 
@@ -1078,7 +1244,7 @@ gdb底层的调试机制是怎样的？
 
 
 
-# 19. 参考
+# 18. 参考
 
 - [GDB 官方英文文档](https://www.gnu.org/software/gdb/)：<font color=red>： 重点看 </font>
 - [CS-MCU GDB tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/)
