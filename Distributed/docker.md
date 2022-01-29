@@ -38,8 +38,9 @@
 - [10. Docker 容器数据卷](#10-docker-容器数据卷)
 - [11. Dockerfile](#11-dockerfile)
 - [12. Docker network](#12-docker-network)
-  - [12.1.](#121)
+  - [12.1. .](#121-)
 - [13. Docker Compose](#13-docker-compose)
+  - [13.1. 安装](#131-安装)
 - [14. 面试问题](#14-面试问题)
 - [15. Reference](#15-reference)
 
@@ -319,6 +320,9 @@ docker start <容器id或容器名>
 
 # 关闭容器
 docker stop <容器id或容器名>
+例子：
+  批量停止所有的容器
+  docker stop $(docker ps -a | awk '{print $1}'| tail -n +2)
 
 # 重启容器
 docker restart <容器ID或容器名>
@@ -732,7 +736,7 @@ Docker下安装软件的步骤
 
 # 12. Docker network
 
-## 12.1.  
+## 12.1. .  
 
 ```
 [root@redis_181 ~]# docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 zk_network
@@ -754,7 +758,18 @@ c6cc0e89cb3c   none         null      local
 
 # 13. Docker Compose
 
+## 13.1. 安装
 
+```
+1. 下载镜像
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+2. 添加可执行权限
+chmod +x /usr/local/bin/docker-compose
+
+3. 终端查看是否安装成功
+docker-compose --version
+```
 
 配置 kafka
 
