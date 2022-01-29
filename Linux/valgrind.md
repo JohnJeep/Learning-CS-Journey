@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-05 22:07:57
- * @LastEditTime: 2021-04-06 10:00:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-01-27 15:44:10
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: 一步一步地剖析Valgrind工具的使用
 -->
 <!-- TOC -->
@@ -14,12 +14,13 @@
 - [4. 参考](#4-参考)
 
 <!-- /TOC -->
+
 # 1. 简介
-Valgrind是Linux下进行内存泄露检测和性能分析的工具。
+Valgrind 是 Linux 下进行内存泄露检测和性能分析的工具。
 
 
 # 2. 用法
-- Valgrind包含下列工具：
+- Valgrind包含下列工具
   1. Memcheck：是一个内存错误检测器(detector)，检查程序中的内存问题，如泄漏、越界、非法指针等，让你的程序更正确。
   2. Cachegrind：是一Cache和分支预测分析器(branch-prediction profiler)，分析CPU的cache命中率、丢失率，用于进行代码优化，让你的程序运行的更快。
   3. Callgrind：是一个图形化调用生成Cache的分析器(profiler)，检测程序代码的运行时间和调用过程，以及分析程序性能。
@@ -47,7 +48,7 @@ Valgrind是Linux下进行内存泄露检测和性能分析的工具。
 
     > The stack trace tells you where the leaked memory was allocated. Memcheck cannot tell you why the memory leaked, unfortunately. 
 
-  - 这些问题往往是C/C++程序员最头疼的问题，Memcheck能在这里帮上大忙。例如：
+  - 这些问题往往是 C/C++ 程序员最头疼的问题，Memcheck 能在这里帮上大忙。例如：
     ```c
     #include <stdlib.h>  
     #include <malloc.h>  
@@ -79,20 +80,17 @@ Valgrind是Linux下进行内存泄露检测和性能分析的工具。
 
 
 # 3. Options
-- `--track-origins=yes` ：生成更多的信息，找到条件跳转或move 指令 问题的原始出处
-- `--num-callers` : 让stack trace 范围更大
+```
+- --track-origins=yes 生成更多的信息，找到条件跳转或move 指令 问题的原始出处
+- --num-callers  让stack trace 范围更大
+```
 
-
-- [自动生成Makefile](https://blog.csdn.net/initphp/article/details/43705765#%E5%85%B3%E4%BA%8EAutotools)
-
-
-- Clang-Tidy 和 CLazy 对你的代码进行静态检查
+Clang-Tidy 和 CLazy 对你的代码进行静态检查
 
 
 
 # 4. 参考 
-○ [valgrind官方文档说明](https://www.valgrind.org/downloads/current.html)
-
-○ [Stack overflow解释：How to install valgrind good?](https://stackoverflow.com/questions/24935217/how-to-install-valgrind-good/51671524)
-
-○ [valgrind的介绍、安装和使用](https://blog.csdn.net/justheretobe/article/details/52986461)
+- [valgrind官方文档说明](https://www.valgrind.org/downloads/current.html)
+- [Stack overflow解释：How to install valgrind good?](https://stackoverflow.com/questions/24935217/how-to-install-valgrind-good/51671524)
+- [valgrind的介绍、安装和使用](https://blog.csdn.net/justheretobe/article/details/52986461)
+- [自动生成Makefile](https://blog.csdn.net/initphp/article/details/43705765#%E5%85%B3%E4%BA%8EAutotools)
