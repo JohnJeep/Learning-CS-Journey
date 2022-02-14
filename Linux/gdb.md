@@ -110,8 +110,9 @@ yum install gdb
             [--exec-prefix=dir]
             [--srcdir=dirname]
             [--target=target]
-            --enable-tui=yes 配置 TUI模式
-            --with-ncurses 带 ncurses 库
+            --enable-tui=yes  配置 TUI模式
+            --with-ncurses    带 ncurses 库
+            --with-python=yes 带 python 脚本
             
 4. 编译，执行make
   [root@KF-CFT-AP2 gdb-10.2]# make
@@ -646,6 +647,43 @@ $3 = 30
 print(p) 变量名 
 ```
 
+查看和设置GDB中的显示项，查看用 `show` 命令，设置用 `set` 命令。
+
+```
+(gdb) set print object on   GDB会自动按照虚方法调用的规则显示输出
+(gdb) set print vtbl on     GDB将用比较规整的格式来显示虚函数表时，默认是关闭的
+(gdb) set print pretty on   每一行显示结构体
+
+
+查看虚函数显示格式
+(gdb) show print vtbl
+Printing of C++ virtual function tables is on.
+
+查看静态数据成员选项
+(gdb) show print static-members
+Printing of C++ static members is on.
+
+查看联合体数据的显示方式
+(gdb) show print union
+Printing of unions interior to structures is on.
+
+打开数组显示，打开后当数组显示时，每个元素占一行，如果不打开的话，每个元素则以逗号分隔。这个选项默认是关闭的。
+(gdb) set print array on
+
+显示数组显示方式
+(gdb) show print array
+Pretty formatting of arrays is off.
+
+打开地址输出，GDB会显出函数的参数地址，系统默认为打开的
+(gdb) set print address on
+
+显示地址输出方式
+(gdb) show print address
+Printing of addresses is on.
+```
+
+
+
 ## 6.16. ptype
 
 查看变量的类型
@@ -661,6 +699,12 @@ print(p) 变量名
 ## 6.18. undisplay
 
 `undisplay 变量名的编号`  不追踪某个变量的值。首先查看不需要追踪变量的编号 `i(info) display` ，然后使用 `undisplay 变量名的编号` 去掉不用追踪的变量。
+
+## whatis
+
+显示变量或函数类型
+
+
 
 ## 6.19. set
 
@@ -750,6 +794,10 @@ For bug reporting instructions, please see:
 ```
 
 官方参考：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
+
+## command
+
+
 
 ## 6.25. help
 
@@ -867,6 +915,8 @@ TUI 窗口绑定的快捷键。
 - Ctrl + x，再按1：单窗口模式，显示一个窗口
 - Ctrl + x，再按2：双窗口模式，显示两个窗口
 - Ctrl + x，再按a：回到传统模式，即退出 layout，回到执行 layout 之前的调试窗口。
+- Ctrl + p 查看上一个（prev）命令
+- Ctrl + N 查看下一个（next）命令
 
 
 
@@ -1223,13 +1273,10 @@ GDB7.0 以上的平台开始支持反向调试需要开启记录，调试结束�
 (gdb) record        开启记录
 (gdb) record stop   关闭记录
 (gdb) reverse-next  向上走一步
+(gdb) reverse-continue 向上继续调试
 
 set exec-direction [forward | reverse]   设置程序运行方向，能够像正常调试方式一样反向调试
 ```
-
-
-
-
 
 # 17. 底层原理
 
@@ -1250,6 +1297,7 @@ gdb底层的调试机制是怎样的？
 - [CS-MCU GDB tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/)
 - [用图文带你彻底弄懂GDB调试原理](https://mp.weixin.qq.com/s?__biz=MzA3MzAwODYyNQ==&mid=2247483895&idx=1&sn=ba35d1823c259a959b72a310e0a92068&scene=21#wechat_redirect)
 - [100个gdb小技巧](https://wizardforcel.gitbooks.io/100-gdb-tips/content/set-watchpoint.html)
+- [打印STL容器中的内容](https://wizardforcel.gitbooks.io/100-gdb-tips/content/print-STL-container.html)
 - [线程的查看以及利用gdb调试多线程](https://blog.csdn.net/zhangye3017/article/details/80382496)
 - [YouTube: MyGeekAdventures 临场演示如何使用GBD去调试代码](https://www.youtube.com/watch?v=xQ0ONbt-qPs&list=PL5Py8jKS3yHOco9op3r_6JN2IKmopTt7s) 
 - [ Linux Tools Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)
