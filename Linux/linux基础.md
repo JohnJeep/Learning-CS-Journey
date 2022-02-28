@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2022-01-27 17:17:09
+ * @LastEditTime: 2022-02-28 17:45:19
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux 基础用法笔记
 --> 
@@ -1435,16 +1435,43 @@ ss 检查端口：
 
 # 25. lsof 
 
-```sh
 lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 
+```
 参数
   -p：指定进程ID（ PID）。
   -d：允许指定要显示的文件描述符编号。
   
+   参看文件描述符为 1 的进程
+   [root@KF-CFT-AP2 ~]# lsof -d 1
+   COMMAND     PID      USER   FD   TYPE             DEVICE SIZE/OFF     NODE NAME
+   init          1      root    1u   CHR                1,3      0t0     3842 /dev/null
+   udevd       557      root    1u   CHR                1,3      0t0     3842 /dev/null
+
+  -i:端口号  查看指定端口占用情况
+ 	查看 47462 端口的占用情况
+  [root@KF]# lsof -i:47462
+  COMMAND     PID USER   FD   TYPE   DEVICE SIZE/OFF NODE NAME
+  L2BU-Boot 27283 root   19u  IPv4 82427778      0t0  TCP 172.26.153.222:47462->172.26.153.227:12243 (ESTABLISHED)
+ 
+  
 示例：
   lsof -nP -iTCP -sTCP:LISTEN 获取所有侦听 TCP 端口的列表 
 ```
+
+lsof 命令输出各列信息的意义如下：
+
+- `COMMAND`：进程的名称
+- `PID`：进程标识符
+- `USER`：进程所有者
+- `FD`：文件描述符类型
+- `TYPE`：文件类型
+- `DEVICE`：指定磁盘的名称
+- `SIZE/OFF`：文件的大小
+- `NODE`：文件在磁盘上的标识，索引节点
+- `NAME`：打开文件的确切名称
+
+> Tips：查看 xxx 端口的占用情况，有两种方式。第一采用 `lsof -i:xxx` 查看；第二：采用 `netstat -tunlp | grep xxx` 来查看。
 
 
 # 26. netcat
