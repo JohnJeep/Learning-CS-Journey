@@ -261,18 +261,23 @@ netstat 是一个查看系统中端口使用情况的一个命令，显示自从
   netstat 检查端口
 
 参数项
-  -a --all 显示监听和非监听的 sockets
-  -t --tcp  显示 TCP 端口。
-  -u --udp 显示 UDP 端口。
-  -n --numeric 显示数字地址而不是主机名（host）、port、user names。
-  -l --listening 仅显示侦听端口。
-  -p --program   显示进程的 PID 和名称
+  -a --all       显示监听和非监听的 sockets
+  -t --tcp       显示 TCP 端口。
+  -u --udp       显示 UDP 端口。
+  -n --numeric   显示数字地址而不是主机名（host）、port、user names。
+  -l --listening 仅显示侦听的 sockets。
+  -p --program   显示每个 sockets 所属程序的 PID 和 name。
 
 示例：
-  netstat -tunlp              # 列出正在侦听的所有TCP或UDP端口
-  netstat -apn | grep 端口号   # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
-  netstat -antp               # 列出所有TCP的连接
-  netstat -nltp               # 列出本地所有TCP侦听套接字
+  netstat -tunlp | grep 端口号   # 列出正在侦听的所有TCP或UDP端口，
+                                # 显示程序的PID和name，同时以数字形式显示IP，最常用
+[root@KF]# netstat -tunlp | grep 22
+tcp        0      0 0.0.0.0:22          0.0.0.0:*         LISTEN      1919/sshd
+tcp        0      0 :::22               :::*              LISTEN      1919/sshd
+                          
+  netstat -apn | grep 端口号     # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
+  netstat -antp                 # 列出所有TCP的连接
+  netstat -nltp                 # 列出本地所有TCP侦听套接字
 ```
 
 
