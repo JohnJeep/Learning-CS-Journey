@@ -224,11 +224,13 @@
 2. [Booksee](http://en.booksee.org/): 下载最新的电子图书。
 3. [Library Genesis2M](http://gen.lib.rus.ec/) : 适合下载较新的论文,只要是外文书籍和论文基本上都可以搜到并下载，最近几年的论文也可以下载`
 4. [sci-hub](https://mg.scihub.ltd/): Sci-Hub是一个在线数据库，其上提供7600万篇科学学术论文和文章. 
+    
     > 适合下载最新的论文,文献资源下载网站https://scihub.org/是哈萨克斯坦牛人(Alexandra Elbakyan)开发的可以下载任意谷歌上有电子版链接文献杂志的网站，只要输入你想要下载的文献链接就可以获取到该文献的真实地址并在线浏览，当然更重要的是可以下载。这个是俄罗斯的某黑客给弄的. 原理好像是类似于RVPN, 借用有权限的学校的IP给我们下载相关文献. 适用于所有杂志, 只有极少数的还是不能下载
 5. [google学术网](https://scholar.google.com/)
 6. [国内可以山寨访问Google](https://github.com/greatfire/wiki)
 7. [中国版sci-hub](http://www.sci-hub.ac.cn/): 国外文献免费下载，中国版SCI-HUB网址
 8.  [videolectures](http://videolectures.net/) : VideoLectures.net是世界上最大的英文学术网络视频，中文最大的是超星学术视频，需要校园网权限，可以观看最新学术演讲或PHD答辩视频。 
+    
     > 它的总部设在斯洛文尼亚的约瑟夫斯蒂芬研究所。网站最初是提供计算机科学的视频，后来拓宽到各类学科。自2006年以来，已有10763个人的14251视频讲座资源库。它提供众多免费教学视频，分类广阔，包括了各种自然科学（数学，物理，化学，生物、医学等）、社会科学（商学、哲学、体育等），高质量交流论坛为广大用户提供高质量学习内容。VideoLectures.NET 是一个自由和开放接入教育视频讲座库。包括高校的学术演讲或者PhD答辩。这些讲座是由学者在会议，暑期学校，讲习班和科学的许多领域的科学宣传活动。这些讲座都是很前沿的方向的很深入的学术讨论，对不是那个行业方向的人来说很难明白。网站是关于各个领域研究方向的报告视频及slides，其中不乏很多数据挖掘、机器学习方面的讲解视频，Slides(也就是ppt)可以下载
 9. [ScienceHUβ](https://scihub.org/): ScienceHUβ是一家全球性的科学技术出版商，可免费提供研究文章和最新研究信息，而对科学界没有任何障碍。
 
@@ -248,6 +250,12 @@
 - [FakeUpdate](http://fakeupdate.net/)  模拟多种系统的安装过程，让你上班愉快的摸鱼。
 - [zwcsm](https://www.zwcsm.com/)  帮你解决今天想要吃什么的难题。
 - [suulnnka.github.io](https://suulnnka.github.io/BullshitGenerator/index.html) 沙雕文章生成器，搅乱你的脑袋瓜子吧！
+
+## 电脑壁纸
+
+- [wallhere](https://wallhere.com/)
+- [极简壁纸](https://bz.zzzmh.cn/)
+- [资源帝](http://bizhi.ziyuandi.cn/)
 
 
 
