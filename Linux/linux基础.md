@@ -1,4 +1,4 @@
-<!--
+	<!--
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
@@ -1499,15 +1499,15 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 语法格式：man -n 命令参数
 
 其中 n 为数字，不同的数字表示如下：
-    1：普通应用程序或shell命令
-    2：系统调用
-    3：库函数
-    4：设备文件
-    5：文件格式、或相关协议
-    6：游戏设备
-    7：其它设备
-    8：root管理命令
-    9：非标准的内核程序
+    1：普通应用程序或shell命令（Executable programs or shell commands）
+    2：系统调用（System calls (functions provided by the kernel)）
+    3：库函数（Library calls (functions within program libraries)）
+    4：设备文件（Special files (usually found in /dev)）
+    5：文件格式、或相关协议（File formats and conventions, e.g. /etc/passwd）
+    6：游戏设备（Games）
+    7：其它设备（Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)）
+    8：root管理命令（System administration commands (usually only for root)）
+    9：非标准的内核程序（Kernel routines [Non standard]）
     
 示例：
   查找 socket 文档： man 2 socket
@@ -1530,30 +1530,31 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
   whatis (1)           - display one-line manual page descriptions
   ```
 
-man手册中的一些关键字
+man 手册中的一些关键字
 
-```
-NAME - 命令名
-SYNOPSIS - 使用方法大纲
-CONFIGURATION - 配置
-DESCRIPTION - 功能说明
-OPTIONS - 可选参数说明
-EXIT STATUS - 退出状态, 这是一个返回给父进程的值
-RETURN VALUE - 返回值
-ERRORS - 可能出现的错误类型
-ENVIRONMENT - 环境变量
-FILES - 相关配置文件
-VERSIONS - 版本
-CONFORMING TO - 符合的规范
-NOTES - 使用注意事项
-BUGS - 已经发现的bug
-EXAMPLE - 一些例子
-AUTHORS - 作者
-SEE ALSO - 功能或操作对象相近的其它命令
-```
+| 英文描述      | 中文描述                     |
+| ------------- | ---------------------------- |
+| NAME          | 命令名                       |
+| SYNOPSIS      | 使用方法大纲                 |
+| CONFIGURATION | 配置xxx                      |
+| DESCRIPTION   | 功能说明                     |
+| OPTIONS       | 可选参数说明                 |
+| EXAMPLE       | 实例                         |
+| EXIT STATUS   | 退出状态（返回给父进程的值） |
+| RETURN VALUE  | 返回值                       |
+| ERRORS        | 错误类型                     |
+| ENVIRONMENT   | 环境变量                     |
+| FILES         | 相关配置文件                 |
+| VERSIONS      | 版本                         |
+| CONFORMING TO | 符合的规范                   |
+| NOTES         | 注意事项                     |
+| BUGS          | 已经发现的 bug               |
+| AUTHORS       | 作者                         |
+| SEE ALSO      | 与之功能相近的其它命令       |
 
 
-man 中的快捷操作:
+
+man 中的快捷
 
 名称    | 用法
 ---     |---
