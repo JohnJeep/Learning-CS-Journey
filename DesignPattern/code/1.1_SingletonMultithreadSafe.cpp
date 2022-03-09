@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-02-21 11:07:51
- * @LastEditTime: 2021-02-21 11:23:11
+ * @LastEditTime: 2022-03-07 23:56:30
  * @LastEditors: Please set LastEditors
  * @Description: 单例模式在多线程中，线程安全的实现。
  *               使用的<mutex>类需要C++11之后才可以，Mingw编译器下需要高版本才支持，
@@ -34,7 +34,7 @@ private:
     }
 
     std::string m_value;
-    static Singleton *m_pinstance;
+    static Singleton *m_pInstance;
     static std::mutex m_mutex;
 
 public:
@@ -70,7 +70,7 @@ public:
 /**
  * Static methods should be defined outside the class.
  */
-Singleton *Singleton::m_pinstance{nullptr};
+Singleton *Singleton::m_pInstance{nullptr};
 std::mutex Singleton::m_mutex;
 
 /**
@@ -81,11 +81,10 @@ std::mutex Singleton::m_mutex;
 Singleton *Singleton::GetInstance(const std::string &value)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    if (m_pinstance == nullptr)
-    {
-        m_pinstance = new Singleton(value);
+    if (m_pInstance == nullptr) {
+        m_pInstance = new Singleton(value);
     }
-    return m_pinstance;
+    return m_pInstance;
 }
 
 void ThreadFoo()
