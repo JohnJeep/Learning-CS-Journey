@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2022-03-07 21:48:02
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2022-03-07 22:16:36
+ * @LastEditors: Please set LastEditors
  * @Description: 饿汉式单例模式，在类的全局区中一开始开辟空间为其创建对象
  *               在多个线程中，不存在资源竞争的问题。
  *             
@@ -20,8 +20,8 @@ public:
     static Singleton* freeInstance();                // 释放内存
 
 private:
-    static Singleton* m_Instance;                     // 静态指针 
-    Singleton();                                      // 构造函数私有化，禁止他人创建
+    static Singleton* m_Instance;                    // 静态指针 
+    Singleton();                                     // 构造函数私有化，禁止他人创建
     ~Singleton();
 };
 
@@ -51,7 +51,6 @@ Singleton* Singleton::freeInstance()
     }
     return m_Instance;
 }
-
 
 int main(int argc, char *argv[])
 {
