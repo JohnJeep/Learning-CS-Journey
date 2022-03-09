@@ -1,8 +1,14 @@
-fopen() 与 open() 区别
+<!--
 
+ * @Author: JohnJeep
+ * @Date: 2022-03-09 22:49:01
+ * @LastEditTime: 2022-03-09 23:40:52
+ * @LastEditors: Please set LastEditors
+ * @Description: fopen 函数与 open 函数的区别
+ * @FilePath: \Learning-CS-Journey\C\fopen() 与 open() 区别.md
+-->
 
-
-open() 函数
+## open() 函数
 
 open()是一个系统调用函数,用来打开或创建一个文件，通过不同的 flags 选项实现不同功能。
 
@@ -20,9 +26,68 @@ int open(const char *pathname, int flags, mode_t mode);
 
 
 
-fopen() 函数
+## fopen() 函数
 
-`fopen()` 是 C 语言中的库函数，在不同的操作系统中调用不同的内核 `API`， 返回的是一个指向 `FILE` 结构体的指针。其实底层源码中 `FILE` 结构体是 `_IO_FILE` 结构体的别名，源码为：`typedef struct _IO_FILE FILE;`
+`fopen()` 是 C 语言中的库函数，在不同的操作系统中调用不同的内核 `API`， 返回的是一个指向 `FILE` 结构体的指针。
+
+Linux 中实底层源码中的 `FILE` 结构体是 `_IO_FILE` 结构体的别名，其源码为：`typedef struct _IO_FILE FILE;`，最终调用的是 Linux 操作系统的 API 函数 `open`。其 `_IO_FILE` 结构体源码
+
+```cpp
+struct _IO_FILE {
+  int _flags;   /* High-order word is _IO_MAGIC; rest is flags. */
+#define _IO_file_flags _flags
+
+  /* The following pointers correspond to the C++ streambuf protocol. */
+  /* Note:  Tk uses the _IO_read_ptr and _IO_read_end fields directly. */
+  char* _IO_read_ptr; /* Current read pointer */
+  char* _IO_read_end; /* End of get area. */
+  char* _IO_read_base;  /* Start of putback+get area. */
+  char* _IO_write_base; /* Start of put area. */
+  char* _IO_write_ptr;  /* Current put pointer. */
+  char* _IO_write_end;  /* End of put area. */
+  char* _IO_buf_base; /* Start of reserve area. */
+  char* _IO_buf_end;  /* End of reserve area. */
+  /* The following fields are used to support backing up and undo. */
+  char *_IO_save_base; /* Pointer to start of non-current get area. */
+  char *_IO_backup_base;  /* Pointer to first valid character of backup area */
+  char *_IO_save_end; /* Pointer to end of non-current get area. */
+
+  struct _IO_marker *_markers;
+
+  struct _IO_FILE *_chain;
+
+  int _fileno;
+#if 0
+  int _blksize;
+#else
+  int _flags2;
+#endif
+  _IO_off_t _old_offset; /* This used to be _offset but it's too small.  */
+
+#define __HAVE_COLUMN /* temporary */
+  /* 1+column number of pbase(); 0 is unknown. */
+  unsigned short _cur_column;
+  signed char _vtable_offset;
+  char _shortbuf[1];
+
+  /*  char* _save_gptr;  char* _save_egptr; */
+
+  _IO_lock_t *_lock;
+#ifdef _IO_USE_OLD_IO_FILE
+};
+```
+
+而 windows 中实底层源码中的 `FILE` 结构体是 `_iobuf`，最终调用的是 Windows 操作系统的 API 函数 `CreateFile`。其 `_iobuf` 源码为
+
+```cpp
+typedef struct _iobuf
+{
+	void* _Placeholder;
+} FILE;
+```
+
+fopen 函数 API 接口使用说明
+
 
 ```cpp
 // 头文件
@@ -46,3 +111,42 @@ FILE *fopen(const char *path, const char *mode);
 - t(text)：文本文件
 - b(binary)：二进制文件
 - +：读和写
+
+示例
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main(void)
+{
+    FILE* fp = fopen("test.txt", "r");
+    if(!fp) {
+        perror("File opening failed");
+        return EXIT_FAILURE;
+    }
+ 
+    int c; // 注意：int，非char，要求处理EOF
+    while ((c = fgetc(fp)) != EOF) { // 标准C I/O读取文件循环
+       putchar(c);
+    }
+ 
+    if (ferror(fp)) {
+        puts("I/O error when reading");
+    }
+    else if (feof(fp)) {
+        puts("End of file reached successfully");
+    }
+    fclose(fp);
+}
+```
+
+
+
+## fopen() 与 open() 区别
+
+1. Windows 下 `CreateFile` 可以通过参数来制定，保证读写是否线程安全，而 `fopen` 则不可以。
+
+
+## Reference
+- [Windows API](https://zh.wikipedia.org/wiki/Windows_API)
