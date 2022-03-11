@@ -1184,7 +1184,7 @@ SYS_exit_group(0 <no return ...>
 
 strace 跟踪一个进程的系统调用或信号产生的信息。（strace  - trace system calls and signals）
 
-```
+```sh
 参数项
 
 -c 统计每一系统调用的所执行的时间，次数和出错的次数等。 
@@ -1266,38 +1266,56 @@ find：按照文件属性查找
 选项参数
 -name
   例子：find /usr/src -name filename.txt
+  
 -type：类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
   例子：find /usr/src -type filename.txt
+  
 -size: 默认单位为512byte，一个扇区的大小
   例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
   例子：find /usr/src -size +10k -size -20k
+  
 -maxdepth: 
   例子： find /usr -maxdepth 2 -type d | wc -l  统计 /usr 目录下深度为2的所有目录文件
         find /usr -maxdepth 2 ! -type d 查找 /usr 路径下深度为 2 除开类型为目录的所有文件
 -exec: 
   例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
+
 -print: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有 ./ 字符串；
-- print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；  
+
+- print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；
+
 -atime(access time): 访问时间， +7 超过七天被访问的文件；-7 七天以内访问过的文件  7 恰好在七天前被访问的文件（那个时间点）
   find . atime -7 
+  
 -amin: 访问时间（按照分钟）
+
 -mtime: 上次修改的时间（按照天数）
+
 -mmin(modified minute): 修改时间（按照分钟）
+
 -ctime(change time): 最近文件的状态被改变的时间
+
 -cmin(change minute): 最近文件的状态被改变的时间（按照分钟）
+
 -prune: 忽略指定的文件查找
    find . -path "./test" -prune -o -name "*.txt" -print  忽略 test 文件夹去查找当前路径下以 txt 结尾的所有文件
+   
 -ok 执行的命令：输出的结果确定是否要执行指定的命令
-  [root@CentOS7 ~]# find .  -path "./LY" -prune -o -name "*.gz" -ok ls -l {} \;
+  $ find .  -path "./LY" -prune -o -name "*.gz" -ok ls -l {} \;
   < ls ... ./redis-6.0.16.tar.gz > ? y
   -rw-r--r--. 1 root root 2288647 Nov  1 20:26 ./redis-6.0.16.tar.gz
  < ls ... ./LY.tar.gz > ? y
 -rw-r--r--. 1 root root 506827845 Nov 11 20:23 ./LY.tar.gz
 
 -iname
-例子：
-  find . -iname '*.log' | xargs grep 'open files'  查找当前路径下所有 .log 文件中包含的 open files 字段
-
+	例子：查找当前路径下所有 .log 文件中包含的 open files 字段
+  	find . -iname '*.log' | xargs grep 'open files'
+  		
+    从根目录开始查找所有扩展名为 .log 的文本文件，并找出包含 "flower" 的行：
+	$ find / -type f -name "*.log" | xargs grep "flower"
+	
+	从当前目录开始查找所有扩展名为 .ini 的文本文件，并找出包含 "dog" 的行：	
+	find . -name "*.ini" | xargs grep "dog"
 ```
 
 # 20. xargs
@@ -1315,48 +1333,51 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 
 例子：
   多行输入变单行
-    [root@CentOS7 ~]# cat a.txt
+    $ cat a.txt
     123
-
     456
-
     789
-    [root@CentOS7 ~]# xargs < a.txt
+    
+    $ xargs < a.txt
     123 456 789
+    
   -n 参数的使用
-    [root@CentOS7 ~]# cat a.txt
+    $ cat a.txt
     123 111 222 333
-
     456 444 555 666
-
     789 777 888 999
-    [root@CentOS7 ~]# xargs -n 2 < a.txt
+    
+    $ xargs -n 2 < a.txt
     123 111
     222 333
     456 444
     555 666
     789 777
     888 999
+    
   -d 参数使用
-    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK"
+    $  echo "helo,AI,DB,CJ,KK"
     helo,AI,DB,CJ,KK
-    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK" | xargs -d ","
+    
+    $  echo "helo,AI,DB,CJ,KK" | xargs -d ","
     helo AI DB CJ KK
-    [root@CentOS7 ~]#  echo "helo,AI,DB,CJ,KK" | xargs -d "," -n 2
+    
+    $  echo "helo,AI,DB,CJ,KK" | xargs -d "," -n 2
     helo AI
     DB CJ
     KK
     
- -i参数使用；将当前目录下深度为 1 的所有 .txt 文件移动到当前已存在的 temp 目录下；xargs -i 作为参数传递
-    [root@CentOS7 ~]# find . -maxdepth 1 -name "*.txt" | xargs -i mv {} ./temp
-    [root@CentOS7 ~]# ls temp/
+ -i参数使用
+ 	将当前目录下深度为 1 的所有 .txt 文件移动到当前已存在的 temp 目录下；xargs -i 作为参数传递
+    $ find . -maxdepth 1 -name "*.txt" | xargs -i mv {} ./temp
+    $ ls temp/
     a.txt  b.txt
     
-  -I参数使用；将当前目录下所有为 .txt 的文件移出到上一级已存在的 txt 目录下
+  -I参数使用
+  	将当前目录下所有为 .txt 的文件移出到上一级已存在的 txt 目录下
     [root@CentOS7 temp]# find . -name "*.txt" | xargs -I aa mv aa ../txt
-    [root@CentOS7 ~]# ls txt/
+    $ ls txt/
     a.txt  b.txt
-
 ```
 
 # 21. grep
@@ -1375,28 +1396,77 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
   grep [OPTIONS] [-e PATTERN | -f FILE] [FILE...]
 
 OPTIONS: 
--r: 递归搜索
-  例子： 搜索 /usr/src/ 目录下包含 task_struct { 的字符，并显示字符所在的行号
-  grep -r  "task_struct {" /usr/src/  -n 
-  
--i: 搜索时，忽略大小写
--n：列出所有的匹配行，显示行号
--c: 只输出匹配行的数量
--l: 只列出符合匹配的文件名，不列出具体的匹配行
--h: 查询多文件时不显示文件名
--s: 不显示不存在、没有匹配文本的错误信息
--v: 显示不包含匹配文本的所有行
--w: 匹配整个单词
--x: 匹配整行
--q: 禁止输出任何结果，已退出状态表示搜索是否成功
--b: 打印匹配行距文件头部的偏移量，以字节为单位
--o: 与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
--a, --text: 将处理的二进制文件当作文本文件，等同于 --binary-files=text 操作
-  例子： 搜索压缩文件中的 open files 关键字
-  [root@centos7 log]# zcat Server_log/20220118.tar.gz  | grep -a "open files"
+  通用程序信息（Generic Program Information）
+    --help 输出帮助信息后退出
+    
+    -V, --version 
+           输出 grep 版本号后退出
+    
+  模式语法（Pattern Syntax）
+    -E, --extended-regexp
+           匹配扩展正则表达式
+           
+    -F, --fixed-strings
+          匹配固定字符串而非正则表达式
+          
+ 	-G, --basic-regexp
+          匹配基本的正表达式，这个是默认选项
+          grep '[^0-6]'  helo.txt
+          
+    -P, --perl-regexp
+          匹配 perl 语法的正则表达式
+          
+  匹配控制（Matching Control）
+  	-i, --ignore-case
+  	      查找时忽略大小写：grep -i "book"
+          
+	--no-ignore-case
+	     匹配时不忽略大小写
+	     
+    -v, --invert-match
+         选择不包含所匹配文本的行
+ 	-w, --word-regexp
+          匹配整个单词
+          
+	-x, --line-regexp
+	      匹配整行
+	      
+ 通用输出控制
+   -c, --count
+         只输出匹配行的数量
+         
+   -l, --files-with-matches
+         只列出符合匹配的文件名，不列出具体的匹配行  
+         
+   -q, --quiet, --silent 
+         退出：不写任何的东西到标准输入中。如果找到任何匹配项，立即退出，状态为零，即使检测到错误也是如此。
+         
+  -s, --no-message 
+        不显示不存在、没有匹配文本的错误信息  
+        
+   -o, --only-matching     
+         与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
+         
+输出行前缀控制（Output Line Prefix Control）
+  -b, --byte-offset
+        打在每行输出之前打印输入文件中从 0 开始的字节偏移量。
+        
+  -h, --no-filename 
+      查询多文件时不显示文件名      
+      
+  -n, --line-number
+        列出所有的匹配行，显示行号
 
-结合正则表达式  
-  grep '[^0-6]'  helo.txt
+文件和路径选择（File and Directory Selection）
+	-a, --text
+	      将处理的二进制文件当作文本文件，等同于 --binary-files=text 操作
+          例子： 搜索压缩文件中的 open files 关键字
+          $ zcat Server_log/20220118.tar.gz  | grep -a "open files"
+
+	-r, --recursive 
+    递归搜索
+      例子： 搜索 /usr/src/ 路径下包含 task_struct { 的字符，并显示字符所在的行号
+      grep -r  "task_struct {" /usr/src/  -n 
 ```
 
 # 22. pgrep
