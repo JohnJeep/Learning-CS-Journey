@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2022-02-28 17:45:19
+ * @LastEditTime: 2022-03-18 18:01:22
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: Linux 基础用法笔记
 --> 
@@ -1256,40 +1256,50 @@ pstack 打印正在运行的进程的堆栈信息。
 
 
 # 19. find
-find：按照文件属性查找 
+find 命令：在指定的目录中共去查找文件。 
 
 ```sh
 格式
   find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]
-  find /opt -name "*"
 
 选项参数
--name
-  例子：find /usr/src -name filename.txt
+-name：按照名字匹配搜索，搜索的内容要用引号括起来，单引号或双引号都可以，从而避免它受 shell 终端扩展的影响。
+	例子：按照文件查找 /usr/src 路径下后缀名为 .txt 所有文件
+	find /usr/src -name "*.txt"
   
--type：类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
-  例子：find /usr/src -type filename.txt
+-type：按照文件类型查找。
+       类型包括：f(file), d(directory), l(link), c(char), d(device), s(socket), b(block)
+ 	例子：按照文件类型查找 /usr/src 路径下后缀名为 .txt 所有文件
+ 	find /usr/src -type "*.txt"
   
--size: 默认单位为512byte，一个扇区的大小
-  例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
-  例子：find /usr/src -size +10k -size -20k
+-size: 按照文件大小搜索，默认单位为512byte，一个扇区的大小
+	例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
+	例子：find /usr/src -size +10k -size -20k
   
 -maxdepth: 
-  例子： find /usr -maxdepth 2 -type d | wc -l  统计 /usr 目录下深度为2的所有目录文件
-        find /usr -maxdepth 2 ! -type d 查找 /usr 路径下深度为 2 除开类型为目录的所有文件
--exec: 
-  例子： find ./ -name "*.sh" -exec ls -l {} \;  列出当前目录下所有的 .sh 文件，并执行ls -l 命令
+	例子：统计 /usr 目录下深度为2的所有目录文件 
+	find /usr -maxdepth 2 -type d | wc -l  
+	
+	例子：查找 /usr 路径下深度为 2 除开类型为目录的所有文件
+	find /usr -maxdepth 2 ! -type d 
+	
+-exec
+	例子： 列出当前目录下所有的 .sh 文件，并执行ls -l 命令
+	find ./ -name "*.sh" -exec ls -l {} \;  
 
 -print: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有 ./ 字符串；
 
-- print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；
+-print0: 就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；
 
--atime(access time): 访问时间， +7 超过七天被访问的文件；-7 七天以内访问过的文件  7 恰好在七天前被访问的文件（那个时间点）
-  find . atime -7 
+-atime(access time): 访问时间， +7 超过七天被访问的文件；-7 七天以内访问过的文件; 7 恰好在七天前被访问的文件（那个时间点）
+	例子；查找当前路径下恰好在七天前被访问的文件
+	find . atime -7 
   
 -amin: 访问时间（按照分钟）
 
 -mtime: 上次修改的时间（按照天数）
+	查找当前路径下 7 天以前的 ErrorLog 文件
+	find . -name "ErrorLog*.log" -mtime +7
 
 -mmin(modified minute): 修改时间（按照分钟）
 
@@ -1301,11 +1311,7 @@ find：按照文件属性查找
    find . -path "./test" -prune -o -name "*.txt" -print  忽略 test 文件夹去查找当前路径下以 txt 结尾的所有文件
    
 -ok 执行的命令：输出的结果确定是否要执行指定的命令
-  $ find .  -path "./LY" -prune -o -name "*.gz" -ok ls -l {} \;
-  < ls ... ./redis-6.0.16.tar.gz > ? y
-  -rw-r--r--. 1 root root 2288647 Nov  1 20:26 ./redis-6.0.16.tar.gz
- < ls ... ./LY.tar.gz > ? y
--rw-r--r--. 1 root root 506827845 Nov 11 20:23 ./LY.tar.gz
+	find .  -path "./" -prune -o -name "*.gz" -ok ls -l {} \;
 
 -iname
 	例子：查找当前路径下所有 .log 文件中包含的 open files 字段
