@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2022-03-10 00:43:59
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-18 18:00:34
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: 设计模式学习
 -->
 
@@ -16,12 +16,13 @@
   - [4.1. **Singleton(单例模式)**](#41-singleton单例模式)
     - [4.1.1. 什么是单例模式？](#411-什么是单例模式)
     - [4.1.2. 实现的步骤](#412-实现的步骤)
-    - [4.1.3. 单例模式优点](#413-单例模式优点)
-    - [4.1.4. 单线程下实现单例模式](#414-单线程下实现单例模式)
-    - [4.1.5. 多线程下实现单例模式](#415-多线程下实现单例模式)
-      - [4.1.5.1. C++ 中如何解决多线程不安全问题？](#4151-c-中如何解决多线程不安全问题)
-      - [4.1.5.2. Java 中如何解决线程不安全的问题？](#4152-java-中如何解决线程不安全的问题)
-    - [4.1.6. 注意事项](#416-注意事项)
+    - [4.1.3. 单例模式优缺点](#413-单例模式优缺点)
+    - [4.1.4. 单例模式实现](#414-单例模式实现)
+      - [4.1.4.1. 饿汉式](#4141-饿汉式)
+      - [4.1.4.2. 懒汉式](#4142-懒汉式)
+      - [4.1.4.3. C++ 中如何解决多线程不安全问题？](#4143-c-中如何解决多线程不安全问题)
+      - [4.1.4.4. Java 中如何解决线程不安全的问题？](#4144-java-中如何解决线程不安全的问题)
+    - [4.1.5. 注意事项](#415-注意事项)
   - [4.2. **Factory Method(工厂模式)**](#42-factory-method工厂模式)
     - [4.2.1. 什么是 Factory Method？](#421-什么是-factory-method)
     - [4.2.2. 优点](#422-优点)
@@ -217,13 +218,60 @@
 </font>
 
 ### 4.1.2. 实现的步骤
-- 构造函数私有化，禁止他人创建。
-- 提供一个全局的静态方法。
-- 在类中定义一个静态指针，指向该类变量的静态变量指针。
+- 构造函数可见性设置为 `private`，禁止类创建额外的实例，只能创建一个实例。
+- 提供一个全局的静态（static）方法，作为外部类共享的唯一实例。
+- 在类中定义一个静态（static）指针，指向该类变量的静态变量指针。
 
 代码示例
 
 ```cpp
+class Singleton
+{
+public:
+    static Singleton* getInstance();                 // 提供一个全局的静态方法
+
+private:
+    static Singleton* m_Instance;                    // 静态指针 
+    Singleton();                                     // 构造函数私有化，禁止他人创建
+    ~Singleton();
+};
+
+// 类外部初始化静态变量
+Singleton* Singleton::m_Instance = nullptr   
+```
+
+注意代码中 `getInstance()` 方法的修饰符：`public` 和 `static`。`public` 修饰表示它是一个公共的方法，以便供外界其他对象使用；`static` 关键字表示它是一个静态方法，在类的外部可以直接通过类名（`Singleton::getInstance()`）来访问，而无须创建 `Singleton` 对象，事实上在类的外部也无法创建类的对象，因为构造函数是私有的。
+
+在类的外部我们无法直接创建新的 Singleton 对象，但可以通过类的成员方法 `Singleton::getInstance()` 来访问实例对象，第一次调用 `getInstance()` 方法时将创建唯一实例，再次调用时将返回第一次创建的实例，从而确保实例对象的唯一性。
+
+### 4.1.3. 单例模式优缺点
+
+优点
+
+- 在内存中只有一个对象，节省内存空间。
+- 避免频繁的创建销毁对象，可以提高性能。
+- 避免对共享资源的多重占用，简化访问。
+- 为整个系统提供一个全局访问点。
+
+缺点
+
+- 单例模式中没有抽象层，单例类的可扩展性差。
+- 单例类的职责过重，在一定程度上违背了“单一职责原则”。因为单例类既充当了工厂角色，提供了工厂方法，同时又充当了产品角色，包含一些业务方法，将产品的创建和产品的本身的功能融合到一起。
+
+### 4.1.4. 单例模式实现
+
+#### 4.1.4.1. 饿汉式
+
+饿汉式就是在类刚加载的时候就创建了类的实例，是一个全局对象，生命周期一直到程序退出，申请的内存空间才被释放。若对象创建的实例一直没有被使用，即程序中没有地方去调用，则存在申请的内存空间浪费的情况。这种以空间换时间的方式，虽然浪费了一些内存空间，但在多线程中保证了线程访问的安全，不会造成多线程之间资源竞争的问题。
+
+代码实现
+
+```cpp
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
 class Singleton
 {
 public:
@@ -236,23 +284,113 @@ private:
     ~Singleton();
 };
 
-// 类外部初始化静态变量
-Singleton* Singleton::m_Instance = nullptr   
+Singleton* Singleton::m_Instance = new Singleton;    // 静态全局变量创建对象
+
+Singleton::Singleton()
+{
+    cout << "执行构造函数" << endl;
+}
+
+Singleton::~Singleton()
+{
+    cout << "执行析构函数" << endl;
+}
+
+Singleton* Singleton::getInstance()
+{
+    return m_Instance;
+}
+
+Singleton* Singleton::freeInstance()
+{
+    if (m_Instance != nullptr) {
+        delete m_Instance;
+        m_Instance = nullptr;
+        cout << "释放对象内存" << endl;
+    }
+    return m_Instance;
+}
+
+int main(int argc, char *argv[])
+{
+    cout << "执行饿汉式的单例模式" << endl;
+
+    Singleton *s1 = Singleton::getInstance();
+    Singleton *s2 = Singleton::getInstance();
+    if (s1 == s2) {
+        cout << "是同一个对象" << endl;
+    }
+    else {
+        cout << "不是同一个对象" << endl;
+    }
+    
+    Singleton::freeInstance();
+
+    return 0;
+}
 ```
 
+执行结果：
 
+```
+执行构造函数
+执行饿汉式的单例模式
+是同一个对象
+执行析构函数
+释放对象内存
+```
 
-### 4.1.3. 单例模式优点
-- 在内存中只有一个对象，节省内存空间。
-- 避免频繁的创建销毁对象，可以提高性能。
-- 避免对共享资源的多重占用，简化访问。
-- 为整个系统提供一个全局访问点。
+执行 `main` 函数之前就创建了一个对象，一直到程序的生命周期结束，被创建对象的内存才会得到释放。
 
+使用场景
 
-### 4.1.4. 单线程下实现单例模式
-- 懒汉式：以时间换空间，等到真正使用的时候才去创建实例，不用时不去主动创建，在多线程访问时可能存在线程安全问题。
+- 适用于单例对象较少的情况。这样可以保证绝对线程安全、执行效率比较高。
+- 如果系统中有大批量的单例对象存在，系统初始化时就会导致大量的内存浪费。即无论对象用与不用都占着空间，浪费了内存。
 
-​	代码实现
+#### 4.1.4.2. 懒汉式
+
+懒汉式就是代码中需要调用类的实例时，比如，第一次在调用 `getInstace()`  的方法时，会去创建类的实例，给实例分配内存空间，而不是在类加载的时候就创建类的实例和分配空间，这种技术又称为**延迟加载(Lazy Load)**技术。
+
+普通懒汉式代码实现
+
+```cpp
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+class Singleton
+{
+public:
+    static Singleton* getInstance() {
+        if (m_Instance == nullptr) {
+        	m_Instance = new Singleton;     
+        }
+        return m_Instance;
+    }
+    
+    // 手动释放内存
+    static Singleton* freeInstance() {
+        if (m_Instance != nullptr) {
+            delete m_Instance;
+            m_Instance = nullptr;
+            cout << "Free instance memory." << endl;
+        }
+        return m_Instance;
+    }
+private:
+    Singleton() { cout << "Execute constructor." << endl; }
+    ~Singleton() { cout << "Execute destructor." << endl; }
+    static Singleton* m_Instance;           // 静态指针    
+};
+
+// 静态全局变量初始化
+Singleton* Singleton::m_Instance = nullptr; 
+```
+
+这种以时间换空间的方式，节约了效率，但同时也可能创建一些没有被调用的类实例，造成内存空间的浪费。最重要的问题：在多线程访问时单例模式可能存在线程安全的问题。
+
+多线程访问懒汉单例模式，代码实现
 
 ```cpp
 #include <unistd.h>
@@ -350,259 +488,189 @@ First
 First
 ```
 
+#### 4.1.4.3. C++ 中如何解决多线程不安全问题？
 
+- 第一种：牺牲内存空间，采用饿汉式单例模式。
 
-- 饿汉式：以空间换时间，类加载初始化的时候就主动创建实例，如果对象一直没有使用，则存在类对象浪费空间的情况。
+- 第二种：加锁。加锁后保证了多个线程访问时，同一时间内只有一个线程在创建对象，因此线程是安全的。
 
-  代码实现
+  加锁，实例是否创建只判断一次。
 
   ```cpp
   #include <iostream>
   #include <stdlib.h>
+  #include <pthread.h>
+  #include <mutex>
+  #include <unistd.h>
+  
+  using namespace std;
+  std::mutex m_mutex;
+  
+  class Singleton
+  {
+  public:
+      static Singleton* getInstance() {
+          m_mutex.lock();
+          if (m_Instance == nullptr) {
+              m_Instance = new Singleton;     
+          }
+          m_mutex.unlock();
+          return m_Instance;
+      }
+      
+      // 手动释放内存    
+      static Singleton* freeInstance() {
+          if (m_Instance != nullptr) {
+              delete m_Instance;
+              m_Instance = nullptr;
+              cout << "Free instance memory." << endl;
+          }
+          return m_Instance;
+      }
+  private:
+      Singleton() { cout << "Execute constructor." << endl; }
+      ~Singleton() { cout << "Execute destructor." << endl; }
+      static Singleton* m_Instance;           // 静态指针    
+  };
+  
+  // 静态全局变量初始化
+  Singleton* Singleton::m_Instance = nullptr; 
+  ```
+
+  上述代码虽然解决了线程安全问题，但是每次调用 **getInstance()** 时都需要进行线程锁定判断，在多线程高并发访问环境中，将会导致系统性能大大降低。如何既解决线程安全问题又不影响系统性能呢？我们继续对懒汉式单例进行改进。
+
+  ```cpp
+  #include <iostream>
+  #include <stdlib.h>
+  #include <pthread.h>
+  #include <mutex>
+  #include <unistd.h>
+  
+  using namespace std;
+  std::mutex m_mutex;
+  
+  class Singleton
+  {
+  public:
+  	// 第二种方法添加同步锁后保证了多个线程同时访问时安全的
+  	// 两次变量判断。双重检测机制，进入临界区以后，两个线程同时访问时，
+      // 需要保证一个时间内只有一个线程在创建对象
+      static Singleton* getInstance() {
+          if (m_Instance == nullptr) {
+              // 加同步锁，锁住整个类，防止 new Singleton 被执行多次
+              m_mutex.lock();
+              if (m_Instance == nullptr) {
+                  m_Instance = new Singleton;     
+              }
+              m_mutex.unlock();
+          }
+          return m_Instance;
+      }
+      
+      // 手动释放内存    
+      static Singleton* freeInstance() {
+          if (m_Instance != nullptr) {
+              delete m_Instance;
+              m_Instance = nullptr;
+              cout << "Free instance memory." << endl;
+          }
+          return m_Instance;
+      }
+  private:
+      Singleton() { cout << "Execute constructor." << endl; }
+      ~Singleton() { cout << "Execute destructor." << endl; }
+      static Singleton* m_Instance;           // 静态指针    
+  };
+  
+  // 静态全局变量初始化
+  Singleton* Singleton::m_Instance = nullptr; 
+  ```
+
+   假如在某一瞬间线程 A 和线程 B 都在调用 `getInstance()` 方法，此时实例对象为 `nullptr` 值，均能通过 `m_Instance == nullptr` 的判断。由于实现了加锁机制，线程 A 进入加锁定的代码中执行实例创建代码，线程 B 处于排队等待状态，必须等待线程 A 执行完毕后才可以进入加锁执行代码。但当 A 执行完毕时，线程 B 并不知道实例已经创建，将继续创建新的实例，导致产生多个单例对象，违背单例模式的设计思想，因此需要进行进一步改进，在加锁中再进行一次 `m_Instance == nullptr` 判断，这种方式称为**双重检查锁定(Double-Check Locking)**。
+
+  - 加锁的过程中，需要思考的问题？**类中资源的初始化可能有顺序问题，一些资源依赖于其他资源的初始化，可能会导致一些资源释放的问题。**
+
+- 静态局部变量。 C++11 以上，其设置为 `static`，再将该单例对象这样运行时确保只调用一次静态构造函数，实现的代码量不仅少。
+
+  ```cpp
+  #include <iostream>
+  #include <unistd.h>
   
   using namespace std;
   
   class Singleton
   {
   public:
-      static Singleton* getInstance();                 // 提供一个全局的静态方法
-      static Singleton* freeInstance();                // 释放内存
-  
+      static Singleton* getInstance() {
+          // 利用静态(static)局部实例，运行时确保只调用一次静态构造函数
+          static Singleton *instance = new Singleton;
+          return instance;
+      }  
+      
+      // 手动释放内存    
+      static Singleton* freeInstance() {
+          if (m_Instance != nullptr) {
+              delete m_Instance;
+              m_Instance = nullptr;
+              cout << "Free instance memory." << endl;
+          }
+          return m_Instance;
+      }
   private:
-      static Singleton* m_Instance;                    // 静态指针 
-      Singleton();                                     // 构造函数私有化，禁止他人创建
-      ~Singleton();
+      Singleton() { cout << "Execute constructor." << endl; }
+      ~Singleton() { cout << "Execute destructor." << endl; }
+      static Singleton* m_Instance;           // 静态指针    
   };
   
-  Singleton* Singleton::m_Instance = new Singleton;    // 静态全局变量创建对象
-  
-  Singleton::Singleton()
-  {
-      cout << "执行构造函数" << endl;
-  }
-  
-  Singleton::~Singleton()
-  {
-      cout << "执行析构函数" << endl;
-  }
-  
-  Singleton* Singleton::getInstance()
-  {
-      return m_Instance;
-  }
-  
-  Singleton* Singleton::freeInstance()
-  {
-      if (m_Instance != nullptr) {
-          delete m_Instance;
-          m_Instance = nullptr;
-          cout << "释放对象内存" << endl;
-      }
-      return m_Instance;
-  }
-  
-  int main(int argc, char *argv[])
-  {
-      cout << "执行饿汉式的单例模式" << endl;
-  
-      Singleton *s1 = Singleton::getInstance();
-      Singleton *s2 = Singleton::getInstance();
-      if (s1 == s2) {
-          cout << "是同一个对象" << endl;
-      }
-      else {
-          cout << "不是同一个对象" << endl;
-      }
-      
-      Singleton::freeInstance();
-  
-      return 0;
-  }
+  // 静态全局变量初始化
+  Singleton* Singleton::m_Instance = nullptr; 
   ```
 
-  执行结果：执行 `main` 函数之前就创建了一个对象，一直到程序的生命周期结束，被创建对象的内存才会得到释放。
+  
 
-  ```
-  执行构造函数
-  执行饿汉式的单例模式
-  是同一个对象
-  执行析构函数
-  释放对象内存
-  ```
-
-
-### 4.1.5. 多线程下实现单例模式
-多线程下，普通懒汉式的实现是**不安全**的，因此需要解决线程不安全问题。
-
-#### 4.1.5.1. C++ 中如何解决多线程不安全问题？
-
-C++ 通过三种方式实现来实现。
-
-- 第一种：牺牲内存空间，采用饿汉式单例模式。
-- 第二种：加锁。加锁后保证了多个线程访问时，同一时间内只有一个线程在创建对象，因此线程是安全的。
-- 第三种：利用内部静态变量。在创建对象时，将其设置为 static，运行时确保只调用一次静态构造函数。实现的代码量少。
+- 单例类中增加一个**静态(static)的内部类**。在新增的内部类中创建单例类的实例，再将创建的实例通过`getInstance()` 方法返回给外部接口使用。既可以实现延迟加载，又保证线程安全，不影响系统性能。
 
 ```cpp
 #include <iostream>
-#include <stdlib.h>
-#include <pthread.h>
-#include <mutex>
 #include <unistd.h>
 
 using namespace std;
-std::mutex m_mutex;
 
 class Singleton
 {
 public:
-    static Singleton* getInstance();        // 第一种方法
-    static Singleton* getInstanceLock();    // 第二种方法
-    static Singleton* getInstanceStatic();  // 第三种方法
-    static Singleton* freeInstance();
-
-    void show() 
-    {
-        cout << "Instance address: " << this << endl;
+    static Singleton* getInstance() {
+        return InnerSingleton::instance;
+    }  
+    
+    // 手动释放内存    
+    static Singleton* freeInstance() {
+        if (m_Instance != nullptr) {
+            delete m_Instance;
+            m_Instance = nullptr;
+            cout << "Free instance memory." << endl;
+        }
+        return m_Instance;
     }
-
 private:
-    Singleton();
-    ~Singleton();
+    static class InnerSingleton
+    {
+        static Singleton* instance = new Singleton;
+    }
+ 
+private:
+    Singleton() { cout << "Execute constructor." << endl; }
+    ~Singleton() { cout << "Execute destructor." << endl; }
     static Singleton* m_Instance;           // 静态指针    
 };
 
 // 静态全局变量初始化
 Singleton* Singleton::m_Instance = nullptr; 
-
-Singleton::Singleton()
-{
-    cout << "Execute constructor." << endl;
-}
-
-Singleton::~Singleton()
-{
-    cout << "Execute destructor." << endl;
-}
-
-Singleton* Singleton::freeInstance()
-{
-    if (m_Instance != nullptr) {
-        delete m_Instance;
-        m_Instance = nullptr;
-        cout << "Free instance memory." << endl;
-    }
-    return m_Instance;
-}
-
-// 第一种方法：懒汉式单例模式
-Singleton* Singleton::getInstance()
-{
-    if (m_Instance == nullptr) {
-        m_Instance = new Singleton;     // 只有在创建对象时，才分配内存
-    }
-
-    return m_Instance;
-}
-
-/**
- * @description: 第二种方法添加同步锁后保证了多个线程同时访问时安全的
- *               两次变量判断。双重检测机制，进入临界区以后，两个线程同时访问时，
- *               需要保证一个时间内只有一个线程在创建对象
- * @param {type} 
- * @return {type}: m_Instance
- */
-Singleton* Singleton::getInstanceLock()
-{
-    if (m_Instance == nullptr) {
-        // 加同步锁，锁住整个类，防止 new Singleton 被执行多次
-        m_mutex.lock();
-        if (m_Instance == nullptr) {
-            m_Instance = new Singleton;     
-        }
-        m_mutex.unlock();
-    }
-    return m_Instance;
-}
-
-// 第三种方法：利用静态构造函数
-Singleton* Singleton::getInstanceStatic()
-{
-    // 运行时确保只调用一次静态构造函数
-    static Singleton *instance = new Singleton;
-    return instance;
-}
-
-// 线程处理函数
-void *deal_thread(void * arg)
-{
-    pthread_t tid = pthread_self();
-    pthread_t pid = getpid();
-    cout << "tid = " << tid << "\t" << "pid = " << pid << endl;
-    pthread_detach(tid);   // 主线程与子线程分离，两者相互不干涉，子线程结束同时子线程的资源自动回收
-    
-    Singleton* singleton = Singleton::getInstance();
-    singleton->show();
-    
-    Singleton *tmp = Singleton::getInstanceLock();
-    Singleton::getInstanceStatic()->show();
-}
-
-int main(int argc, char *argv[])
-{
-    cout << "Execute lazy singleton..." << endl;
-
-    pthread_t tid;
-
-    for (int i = 0; i < 5; i++) {
-        int ret = pthread_create(&tid, NULL, deal_thread, (void*)i);
-        if (ret) {
-            perror("pthread create error.");
-        }
-        sleep(2);
-    }
-
-    Singleton::freeInstance();
-
-    return 0;
-}
 ```
 
-运行结果：每隔 2 秒创建一个子线程 
+#### 4.1.4.4. Java 中如何解决线程不安全的问题？
 
-```
-Execute lazy singleton...
-
-tid = 2 pid = 10364
-Execute constructor.
-Instance address: 0xee43b0
-Execute constructor.
-Instance address: 0xee4440
-
-tid = 3 pid = 10364
-Instance address: 0xee43b0
-Instance address: 0xee4440
-
-tid = 4 pid = 10364
-Instance address: 0xee43b0
-Instance address: 0xee4440
-
-tid = 5 pid = 10364
-Instance address: 0xee43b0
-Instance address: 0xee4440
-
-tid = 6 pid = 10364
-Instance address: 0xee43b0
-Instance address: 0xee4440
-
-Execute destructor.
-Free instance memory.
-```
-
-
-
-#### 4.1.5.2. Java 中如何解决线程不安全的问题？
-
-1. Java 中使用 `synchronized方法`。
+1. Java 中使用 `synchronized` 方法。
 ```Java
   // 线程安全的懒汉式单例
   public class Singleton2 {
@@ -740,7 +808,7 @@ Free instance memory.
 静态内部类 | 是 | 是 | 否
 枚举       | 是 | 否 | 是
 
-### 4.1.6. 注意事项
+### 4.1.5. 注意事项
 
 - 在使用单例模式时，我们必须使用单例类提供的公有工厂方法得到单例对象，而不应该使用反射来创建，否则将会实例化一个新对象。此外，在多线程环境下使用单例模式时，应特别注意线程安全问题。
 
