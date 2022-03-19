@@ -73,7 +73,7 @@ libc 是 Linux 下的 ANSI C 的函数库；glibc 是 Linux 下的 GUN C 函数�
 ## 2.2. glibc 版本查看
 
 ```c
-[root@CentOS7 ~]# ldd --version
+$ ldd --version
 ldd (GNU libc) 2.17
 Copyright (C) 2012 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
@@ -86,6 +86,14 @@ Written by Roland McGrath and Ulrich Drepper.
 
 libstdc++ 是 gcc 的标准 C++ 库。
 
+```sh
+64 位操作系统下查看 libstdc++.so 的版本
+$ strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX  
+```
+
+-  https://gcc.gnu.org/onlinedocs/libstdc++/ 
+-  https://gcc.gnu.org/onlinedocs/gcc-4.8.5/libstdc++/manual/ 
+
 # 4. libc++
 
 libc++ 是针对 clang 编译器重写的 C++ 标准库。
@@ -94,7 +102,9 @@ libc++ 是针对 clang 编译器重写的 C++ 标准库。
 
 # 5. Reference
 
-- [官网解释 glibc](https://www.gnu.org/software/libc/libc.html)
-- [glibc 官方源码地址](http://ftp.gnu.org/gnu/glibc/)
+- [官网： glibc 文档](https://www.gnu.org/software/libc/libc.html)
+- [glibc 官方 GUN 源码地址](http://ftp.gnu.org/gnu/glibc/)
+- [The GNU C Library Release Timeline](https://sourceware.org/glibc/wiki/Glibc%20Timeline)
 - [glibc源码分析-1:构建过程](https://magus0219.me/zh-cn/glibc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-1-%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B/)
+- [关于linux系统里glibc库的一些记述](http://fsemouse.com/wordpress/2021/01/19/关于linux系统里glibc库的一些记述/)
 
