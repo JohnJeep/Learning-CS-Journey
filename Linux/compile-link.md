@@ -283,7 +283,7 @@ readlf -s main.o
 
 # 8. GCC
 
-GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。但其很快扩展，变得可处理C++，后来又扩展为能够支持更多编程语言，如Fortran、Pascal、Objective -C、Java、Ada、Go以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
+GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言。但其很快扩展，变得可处理 C++，后来又扩展为能够支持更多编程语言，如 Fortran、Pascal、Objective -C、Java、Ada、Go 以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
 
 ```sh
 常用参数项
@@ -307,21 +307,7 @@ GCC 原名为GNU C语言编译器（GNU C Compiler），只能处理C语言。�
 - [gun.org](http://ftp.gnu.org/gnu/)
 - [清华大学 GNU 源镜像](https://mirrors.tuna.tsinghua.edu.cn/gnu/)
 
-
-
------------------------------------------
-
-高版本 GCC 编译器编译 C++11 之下的代码，可能出现的问题？
-
-许多c++ 11功能都需要C++标准库的新libc++实现。但是libc++与旧的libstdc++不兼容，但目前大多数软件通常都与旧的libstdc++链接。
-
-```
-libc++使用内联 namespace 来帮助确保ABI不兼容类型不会被误认为是彼此之间的错误。如果接口(interface)直接使用libc++ std::string，则期望libstdc++ std::string的库将不会链接到该接口(interface)，因为实际的符号是不同的:std::string与std::__1::string。
-```
-
-
-
-# 9. 编译三部曲
+## 9. 源码编译三部曲
 
 第一步：执行脚本 configure 文件，设置指定的参数，建立 Makefile 文件。
 
@@ -354,34 +340,42 @@ CentOS7 4.8.4 默认安装时的配置
 
 
 
-```sh
-CentOS7 安装高版本 gcc8/g++8
+## CentOS7 安装高版本 gcc8/g++8
 
-  1、安装软件仓库包 scl: yum install centos-release-scl
-  2、安装 gcc/g++，数字 8 对应的是 gcc/g++8: yum install devtoolset-8-gcc devtoolset-8-gcc-c++
-  3、shell 终端临时设置默认版本，重启后失效: scl enable devtoolset-8 -- bash；
-     长期有效设置：vim /etc/profile 文件中的最后一行加入: source /opt/rh/devtoolset-8/enable
+```sh
+1、安装软件仓库包 scl: yum install centos-release-scl
+2、安装 gcc/g++，数字 8 对应的是 gcc/g++8: yum install devtoolset-8-gcc devtoolset-8-gcc-c++
+3、shell 终端临时设置默认版本，重启后失效: scl enable devtoolset-8 -- bash；
+长期有效设置：vim /etc/profile 文件中的最后一行加入: source /opt/rh/devtoolset-8/enable
 ```
 
 
 
+高版本 GCC 编译器编译 C++11 之下的代码，可能出现的问题？
+
+许多 c++11 功能都需要 C++ 标准库的新 libc++ 实现。但是 libc++ 与旧的 libstdc++ 不兼容，但目前大多数软件通常都与旧的 libstdc++ 链接。
+
+```
+libc++ 使用内联 namespace 来帮助确保 ABI不兼容类型不会被误认为是彼此之间的错误。如果接口(interface) 直接使用 libc++ std::string，则期望 libstdc++ std::string 的库将不会链接到该接口(interface)，因为实际的符号是不同的 :std::string 与 std::__1::string。
+```
+
+## 拓展知识点
+
 ```sh
-拓展知识点
-  GCC4.8 支持 C++11
+GCC4.8.1 支持 C++11
   GCC 4.8.1 will be C++11 feature-complete [2013-04-01]
 Support for C++11 ref-qualifiers was added to the GCC 4.8 branch, making G++ the first C++ compiler to implement all the major language features of the C++11 standard. This functionality will be available in GCC 4.8.1.
+```
 
-
+```sh
 GCC5.3 支持 C++14
   GCC 5 C++14 language feature-complete [2014-12-23]
   Support for all C++14 language features has been added to the development sources for GCC, and will be available when GCC 5 is released next year. Contributed by Jason Merrill, Braden Obrzut, Adam Butcher, Edward Smith-Rowland, and Jakub Jelinek.
-  
-  
-查看libstdc++.so的版本
-  strings /usr/lib/libstdc++.so.6 | grep GLIBCXX  
- 
 ```
 
+
+
+- [GNU GCC 历史版本发布说明](https://gcc.gnu.org/news.html)
 - [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
 - [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
 - [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
@@ -436,14 +430,7 @@ rpm -ql  列出软件中安装的软件包
 rpm -e xxx 卸载 xxx 包
 rpm -qa xxx 查询安装包
 rpm -ivh --force --nodeps *rpm  一次性安装多个软件包
-
 ```
-
-
-
-
-
-
 
 ## 10.3. Epel 
 
