@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2022-03-18 18:00:34
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2022-03-21 01:05:10
+ * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
 -->
 
@@ -16,13 +16,13 @@
   - [4.1. **Singleton(单例模式)**](#41-singleton单例模式)
     - [4.1.1. 什么是单例模式？](#411-什么是单例模式)
     - [4.1.2. 实现的步骤](#412-实现的步骤)
-    - [4.1.3. 单例模式优缺点](#413-单例模式优缺点)
-    - [4.1.4. 单例模式实现](#414-单例模式实现)
-      - [4.1.4.1. 饿汉式](#4141-饿汉式)
-      - [4.1.4.2. 懒汉式](#4142-懒汉式)
-      - [4.1.4.3. C++ 中如何解决多线程不安全问题？](#4143-c-中如何解决多线程不安全问题)
-      - [4.1.4.4. Java 中如何解决线程不安全的问题？](#4144-java-中如何解决线程不安全的问题)
-    - [4.1.5. 注意事项](#415-注意事项)
+    - [4.1.3. 单例模式实现](#413-单例模式实现)
+      - [4.1.3.1. 饿汉式](#4131-饿汉式)
+      - [4.1.3.2. 懒汉式](#4132-懒汉式)
+      - [4.1.3.3. C++ 中多线程安全问题？](#4133-c-中多线程安全问题)
+    - [4.1.4. 单例模式内存释放](#414-单例模式内存释放)
+    - [4.1.5. 单例模式优缺点](#415-单例模式优缺点)
+    - [4.1.6. 参考](#416-参考)
   - [4.2. **Factory Method(工厂模式)**](#42-factory-method工厂模式)
     - [4.2.1. 什么是 Factory Method？](#421-什么是-factory-method)
     - [4.2.2. 优点](#422-优点)
@@ -244,25 +244,11 @@ Singleton* Singleton::m_Instance = nullptr
 
 在类的外部我们无法直接创建新的 Singleton 对象，但可以通过类的成员方法 `Singleton::getInstance()` 来访问实例对象，第一次调用 `getInstance()` 方法时将创建唯一实例，再次调用时将返回第一次创建的实例，从而确保实例对象的唯一性。
 
-### 4.1.3. 单例模式优缺点
+### 4.1.3. 单例模式实现
 
-优点
+#### 4.1.3.1. 饿汉式
 
-- 在内存中只有一个对象，节省内存空间。
-- 避免频繁的创建销毁对象，可以提高性能。
-- 避免对共享资源的多重占用，简化访问。
-- 为整个系统提供一个全局访问点。
-
-缺点
-
-- 单例模式中没有抽象层，单例类的可扩展性差。
-- 单例类的职责过重，在一定程度上违背了“单一职责原则”。因为单例类既充当了工厂角色，提供了工厂方法，同时又充当了产品角色，包含一些业务方法，将产品的创建和产品的本身的功能融合到一起。
-
-### 4.1.4. 单例模式实现
-
-#### 4.1.4.1. 饿汉式
-
-饿汉式就是在类刚加载的时候就创建了类的实例，是一个全局对象，生命周期一直到程序退出，申请的内存空间才被释放。若对象创建的实例一直没有被使用，即程序中没有地方去调用，则存在申请的内存空间浪费的情况。这种以空间换时间的方式，虽然浪费了一些内存空间，但在多线程中保证了线程访问的安全，不会造成多线程之间资源竞争的问题。
+饿汉式就是在类刚加载的时候就创建了类的实例，是一个全局对象，生命周期一直到程序退出，其申请的内存空间才被释放。若对象创建的实例一直没有被使用，即程序中没有地方去调用，则存在申请的内存空间浪费的情况。这种以空间换时间的方式，虽然浪费了一些内存空间，但在多线程中保证了线程访问的安全，不会造成多线程之间资源竞争的问题。
 
 代码实现
 
@@ -340,16 +326,16 @@ int main(int argc, char *argv[])
 释放对象内存
 ```
 
-执行 `main` 函数之前就创建了一个对象，一直到程序的生命周期结束，被创建对象的内存才会得到释放。
+执行 `main` 函数之前就创建了一个对象，一直到程序的生命周期结束，被创建对象的内存才会得到释放。若多线程访问时，在线程还没开始启动之前，类的实例就被创建完成了，因此就不会存在多线程安全的问题。
 
 使用场景
 
 - 适用于单例对象较少的情况。这样可以保证绝对线程安全、执行效率比较高。
-- 如果系统中有大批量的单例对象存在，系统初始化时就会导致大量的内存浪费。即无论对象用与不用都占着空间，浪费了内存。
+- 如果系统中有很多的地方使用了饿汉单例模式，系统初始化时就创建很多的单例对象，会导致大量的内存浪费。即无论对象用与不用都占着空间，浪费了内存空间。
 
-#### 4.1.4.2. 懒汉式
+#### 4.1.3.2. 懒汉式
 
-懒汉式就是代码中需要调用类的实例时，比如，第一次在调用 `getInstace()`  的方法时，会去创建类的实例，给实例分配内存空间，而不是在类加载的时候就创建类的实例和分配空间，这种技术又称为**延迟加载(Lazy Load)**技术。
+懒汉式就是代码中需要调用类的实例时，才会创建类的实例。比如，第一次在调用 `getInstace()`  的方法时，会去创建类的实例，给实例分配内存空间，而不是在类加载的时候就创建类的实例和分配空间，这种技术又称为 **延迟加载(Lazy Load)** 技术。
 
 普通懒汉式代码实现
 
@@ -388,9 +374,9 @@ private:
 Singleton* Singleton::m_Instance = nullptr; 
 ```
 
-这种以时间换空间的方式，节约了效率，但同时也可能创建一些没有被调用的类实例，造成内存空间的浪费。最重要的问题：在多线程访问时单例模式可能存在线程安全的问题。
+这种以时间换空间的方式，节约了效率，但最重要的问题是：在多线程访问时单例模式可能存在线程安全的问题。
 
-多线程访问懒汉单例模式，代码实现
+多线程访问懒汉单例模式，代码实现，支持 C++11 风格。
 
 ```cpp
 #include <unistd.h>
@@ -479,22 +465,30 @@ int main(int argc, char *argv[])
 实现结果：有时出现下面第一种情况，有时出现下面第二中情况。因此存在多个线程访问时，有资源竞争的问题。
 
 ```
-First
+// 第一种情况
 Second
+First
 ```
 
 ```
+// 第二种情况
 First
 First
 ```
 
-#### 4.1.4.3. C++ 中如何解决多线程不安全问题？
+针对上面的两种情况，我们知道第二种结果肯定是我们期望的，但为什么会产什么第一种结果呢？
 
-- 第一种：牺牲内存空间，采用饿汉式单例模式。
+因为： 假如在某一瞬间线程 A 和线程 B 都在调用 `getInstance()` 方法，此时实例对象为 `nullptr` 值，均能通过 `m_Instance == nullptr` 的判断。当线程 1   `new` 一个对象的过程还没有完成时，线程 2 也通过了判断，需要去 `new` 一个对象，现在程序中存在两个不同的对象，违背了单例模式的原则，因此是多线程不安全的。 至于哪个先被创建，则取决于线程抢占的时机。
 
-- 第二种：加锁。加锁后保证了多个线程访问时，同一时间内只有一个线程在创建对象，因此线程是安全的。
+现在我们思考下，要怎么去解决多线程访问不安全的问题？下面我们来一一探讨。
 
-  加锁，实例是否创建只判断一次。
+#### 4.1.3.3. C++ 中多线程安全问题？
+
+- 第一种：牺牲内存空间，采用饿汉式单例模式，用法见上面的饿汉式的实现过程。
+
+- 第二种：加锁。既然多个线程访问时，不能确定同一时间内有多少个线程同时访问，导致资源竞争（race condition）的问题。那么就给线程加把锁，让每个线程每次访问的时候，同一时间内只有一个线程在创建对象，其它的线程需要等锁的资源被释放后，才能工作。这样就保证了多个线程访问时，线程是安全的。
+
+  首先我们在实例是否被创建之前就去加锁。
 
   ```cpp
   #include <iostream>
@@ -537,60 +531,50 @@ First
   Singleton* Singleton::m_Instance = nullptr; 
   ```
 
-  上述代码虽然解决了线程安全问题，但是每次调用 **getInstance()** 时都需要进行线程锁定判断，在多线程高并发访问环境中，将会导致系统性能大大降低。如何既解决线程安全问题又不影响系统性能呢？我们继续对懒汉式单例进行改进。
+  上述代码虽然解决了线程安全问题，但是每次调用 `getInstance()` 时都需要进行锁的判断。假设当线程 1 在执行 `m_instance = new Singleton()` 的时候，线程 2 也在调用 `getInstance()`，线程 2 一定会被阻塞在加锁处，等待线程 1 执行结束后释放这个锁，最后再去执行线程 2。在多线程高并发访问环境中，频繁的进行加锁和解锁，将会导致系统性能大大降低，因为加锁和解锁都是一个耗时的过程。
+
+  那如何既解决线程安全问题又不影响系统性能呢？下面我们继续对懒汉式单例进行改进。
 
   ```cpp
-  #include <iostream>
-  #include <stdlib.h>
-  #include <pthread.h>
-  #include <mutex>
-  #include <unistd.h>
-  
-  using namespace std;
-  std::mutex m_mutex;
-  
-  class Singleton
-  {
-  public:
-  	// 第二种方法添加同步锁后保证了多个线程同时访问时安全的
-  	// 两次变量判断。双重检测机制，进入临界区以后，两个线程同时访问时，
-      // 需要保证一个时间内只有一个线程在创建对象
-      static Singleton* getInstance() {
+  static Singleton* getInstance() {
+      if (m_Instance == nullptr) {
+          m_mutex.lock();              // 加锁
           if (m_Instance == nullptr) {
-              // 加同步锁，锁住整个类，防止 new Singleton 被执行多次
-              m_mutex.lock();
-              if (m_Instance == nullptr) {
-                  m_Instance = new Singleton;     
-              }
-              m_mutex.unlock();
+              m_Instance = new Singleton;     
           }
-          return m_Instance;
+          m_mutex.unlock();
       }
-      
-      // 手动释放内存    
-      static Singleton* freeInstance() {
-          if (m_Instance != nullptr) {
-              delete m_Instance;
-              m_Instance = nullptr;
-              cout << "Free instance memory." << endl;
-          }
-          return m_Instance;
-      }
-  private:
-      Singleton() { cout << "Execute constructor." << endl; }
-      ~Singleton() { cout << "Execute destructor." << endl; }
-      static Singleton* m_Instance;           // 静态指针    
-  };
-  
-  // 静态全局变量初始化
-  Singleton* Singleton::m_Instance = nullptr; 
+      return m_Instance;
+  }
   ```
 
-   假如在某一瞬间线程 A 和线程 B 都在调用 `getInstance()` 方法，此时实例对象为 `nullptr` 值，均能通过 `m_Instance == nullptr` 的判断。由于实现了加锁机制，线程 A 进入加锁定的代码中执行实例创建代码，线程 B 处于排队等待状态，必须等待线程 A 执行完毕后才可以进入加锁执行代码。但当 A 执行完毕时，线程 B 并不知道实例已经创建，将继续创建新的实例，导致产生多个单例对象，违背单例模式的设计思想，因此需要进行进一步改进，在加锁中再进行一次 `m_Instance == nullptr` 判断，这种方式称为**双重检查锁定(Double-Check Locking)**。
+  加锁和解锁的步骤只有在第一次执行 `new Singleton()` 才是有必要的，只要 `m_instance` 实例被创建出来了，就没必要加锁解锁了，直接返回这个对象的指针。以后不管多少线程同时访问，使用 `if (m_instance == nullptr) `进行判断就行了（只是读操作，不需要加锁），没有线程安全问题，加了锁之后反而存在性能问题。因此我们在加锁之前再进行一次实例是否存在的判断。两次进行加锁判断的这种方式称为**双重检查锁定(Double Check Locking)**。
 
-  - 加锁的过程中，需要思考的问题？**类中资源的初始化可能有顺序问题，一些资源依赖于其他资源的初始化，可能会导致一些资源释放的问题。**
+  是不是觉得这样就完美啦？其实在一段时间内，大家都以为这是正确的、有效的做法。实际上却不是这样的。幸运的是，后来有大牛们发现了DCL中的问题，避免了这样错误的写法在更多的程序代码中出现。原因是内存读写的乱序执行造成的（编译器的问题）。
 
-- 静态局部变量。 C++11 以上，其设置为 `static`，再将该单例对象这样运行时确保只调用一次静态构造函数，实现的代码量不仅少。
+  那么到底错在哪里？
+
+  我们看 `m_instance = new Singleton()` 这句话，是创建对象的过程。其实这个过程可以分成三个步骤来执行：
+
+  1. 分配了一个 `Singleton` 类型对象所需要的内存。
+  2. 在分配的内存处构造 `Singleton` 类型的对象。
+  3. 把分配的内存的地址赋给指针 `m_instance`。
+
+  主观上，我们会觉得计算机在会按照1、2、3 的步骤来执行的，但是问题就出在这。实际上只能确定步骤 1 最先执行，而步骤 2、3 的执行顺序却是不一定的。假如某个线程 A 在调用执行`m_instance = new Singleton()` 的时候是按照 `1, 3, 2` 的顺序的，那那么当刚刚执行完步骤 3 的时候发生线程切换，计算机开始执行另外一个线程 B。因为第一次 check 没有上锁保护，那么在线程 B 中调用 `getInstance` 的时候，不会在第一次 check 上等待，而是执行后面的语句，而此时发现 `m_instance` 已经被赋值了，就会直接返回 `m_instance`，但是在线程 A 中步骤 2 还没有执行，对象没有被构造！也就是说在线程 B 中通过 `getInstance` 返回的对象还没有被构造就被拿去使用了！这样就会发生一些难以debug的灾难问题。
+
+  
+
+  - 加锁的过程中，需要思考的问题？
+
+    **类中资源的初始化可能有顺序问题，一些资源依赖于其他资源的初始化，可能会导致一些资源释放的问题。**
+
+    
+
+- 第三种：静态局部变量。
+
+  `java` 和 `c#` 发现这个问题后，就加了一个关键字 `volatile`，在声明 `m_instance`变量的时候，要加上`volatile`修饰，编译器看到之后，就知道这个地方不能够 reorder（一定要先分配内存，在执行构造器，都完成之后再赋值）。而对于 `c++` 标准却一直没有改正，所以 `VC++` 在 `2005` 版本也加入了这个关键字，但是这并不能够跨平台（只支持微软平台）。不过在新的 C++11 中，这个问题得到了解决。因为新的 C++11 规定了新的内存模型，保证了执行上述 3 个步骤的时候不会发生线程切换，相当这个初始化过程是“原子性”的的操作，DCL 又可以正确使用了。不过在 C++11 下却有更简洁的多线程 Singleton 写法了，比如用局部静态变量（local static variable）。
+
+   C++11 以上，其设置为 `static`，再将该单例对象这样运行时确保只调用一次静态构造函数，实现的代码量不仅少。
 
   ```cpp
   #include <iostream>
@@ -601,234 +585,53 @@ First
   class Singleton
   {
   public:
-      static Singleton* getInstance() {
-          // 利用静态(static)局部实例，运行时确保只调用一次静态构造函数
-          static Singleton *instance = new Singleton;
+      static Singleton& getInstance() {
+          static Singleton instance;
           return instance;
       }  
       
-      // 手动释放内存    
-      static Singleton* freeInstance() {
-          if (m_Instance != nullptr) {
-              delete m_Instance;
-              m_Instance = nullptr;
-              cout << "Free instance memory." << endl;
-          }
-          return m_Instance;
-      }
   private:
       Singleton() { cout << "Execute constructor." << endl; }
-      ~Singleton() { cout << "Execute destructor." << endl; }
-      static Singleton* m_Instance;           // 静态指针    
+      ~Singleton() { cout << "Execute destructor." << endl; } 
   };
-  
-  // 静态全局变量初始化
-  Singleton* Singleton::m_Instance = nullptr; 
   ```
-
   
-
-- 单例类中增加一个**静态(static)的内部类**。在新增的内部类中创建单例类的实例，再将创建的实例通过`getInstance()` 方法返回给外部接口使用。既可以实现延迟加载，又保证线程安全，不影响系统性能。
-
-```cpp
-#include <iostream>
-#include <unistd.h>
-
-using namespace std;
-
-class Singleton
-{
-public:
-    static Singleton* getInstance() {
-        return InnerSingleton::instance;
-    }  
-    
-    // 手动释放内存    
-    static Singleton* freeInstance() {
-        if (m_Instance != nullptr) {
-            delete m_Instance;
-            m_Instance = nullptr;
-            cout << "Free instance memory." << endl;
-        }
-        return m_Instance;
-    }
-private:
-    static class InnerSingleton
-    {
-        static Singleton* instance = new Singleton;
-    }
- 
-private:
-    Singleton() { cout << "Execute constructor." << endl; }
-    ~Singleton() { cout << "Execute destructor." << endl; }
-    static Singleton* m_Instance;           // 静态指针    
-};
-
-// 静态全局变量初始化
-Singleton* Singleton::m_Instance = nullptr; 
-```
-
-#### 4.1.4.4. Java 中如何解决线程不安全的问题？
-
-1. Java 中使用 `synchronized` 方法。
-```Java
-  // 线程安全的懒汉式单例
-  public class Singleton2 {
-      private static Singleton2 singleton2;
-      private Singleton2(){}
-      // 使用 synchronized 修饰，临界资源的同步互斥访问
-      public static synchronized Singleton2 getSingleton2(){
-          if (singleton2 == null) {
-              singleton2 = new Singleton2();
-          }
-          return singleton2;
-      }
-  }
-```
-
-  优缺点
-     1、运行效率低，因为同步块的作用域很大，锁的粒度有点粗。
-     2、保证了对临界资源的同步访问
-
-2. Java 中使用 `synchronized` 块。
-```Java
-  // 线程安全的懒汉式单例
-  public class Singleton2 {
-      private static Singleton2 singleton2;
-      private Singleton2(){}
-      public static Singleton2 getSingleton2(){
-          synchronized(Singleton2.class){  // 使用 synchronized 块，临界资源的同步互斥访问
-              if (singleton2 == null) { 
-                  singleton2 = new Singleton2();
-              }
-          }
-          return singleton2;
-      }
-  }
-```
-
-  优缺点：
-
-  - 效率仍然比较低，事实上，和使用synchronized方法的版本相比，基本没有任何效率上的提高。
-
-3. 使用 `内部类的懒汉式`。
-```Java
-  // 线程安全的懒汉式单例
-  public class Singleton5 {
-      // 私有内部类，按需加载，用时加载，也就是延迟加载
-      private static class Holder {
-          private static Singleton5 singleton5 = new Singleton5();
-      }
-      private Singleton5() {
+  原因在于在C++11之前的标准中并没有规定local static变量的内存模型，所以很多编译器在实现local static变量的时候仅仅是进行了一次check，但是在C++11却是线程安全的，这是因为新的C++标准规定了当一个线程正在初始化一个变量的时候，其他线程必须得等到该初始化完成以后才能访问它。
   
-      }
-      public static Singleton5 getSingleton5() {
-          return Holder.singleton5;
-      }
-```
+  不过有些编译器在C++11之前的版本就支持这种模型，例如g++，从g++4.0开始，meyers singleton就是线程安全的，不需要 C++11。其他的编译器就需要具体的去查相关的官方手册了。
 
-  优缺点：
-
-  - 效率比较高
-
-4. 使用 `双重检测加锁机制`。
-```Java
-  // 线程安全的懒汉式单例
-  public class Singleton3 {
-  
-      // 使用volatile关键字防止重排序，因为 new Instance()是一个非原子操作，
-      // 可能创建一个不完整的实例
-      private static volatile Singleton3 singleton3;
-  
-      private Singleton3() {
-      }
-  
-      public static Singleton3 getSingleton3() {
-          // Double-Check idiom
-          if (singleton3 == null) {
-              synchronized (Singleton3.class) {       // 1
-                  // 只需在第一次创建实例时才同步
-                  if (singleton3 == null) {       // 2
-                      singleton3 = new Singleton3();      // 3
-                  }
-              }
-          }
-          return singleton3;
-      }
-  }
-```
-
-优缺点：
-
--   保证了单例，提高了效率
-- 必须使用 `volatile` 关键字修饰单例引用。目的：解决指令重排序的问题。
-
-- 借助 ` ThreadLocal`。
-  ```Java
-  // 线程安全的懒汉式单例
-  public class Singleton4 {
-  
-    // ThreadLocal 线程局部变量
-    private static ThreadLocal<Singleton4> threadLocal = new ThreadLocal<Singleton4>();
-    private static Singleton4 singleton4 = null;
-  
-    private Singleton4(){}
-  
-    public static Singleton4 getSingleton4(){
-        if (threadLocal.get() == null) {        // 第一次检查：该线程是否第一次访问
-            createSingleton4();
-        }
-        return singleton4;
-    }
-  
-    public static void createSingleton4(){
-        synchronized (Singleton4.class) {
-            if (singleton4 == null) {          // 第二次检查：该单例是否被创建
-                singleton4 = new Singleton4();   // 只执行一次
-            }
-        }
-        threadLocal.set(singleton4);      // 将单例放入当前线程的局部变量中 
-    }
-  }
-  ```
-
-  优缺点：
-
-  - 作用：将临界资源线程局部化。
-
-  - 使用 `ThreadLocal` 的实现在效率上还不如双重检查锁定。
+### 4.1.4. 单例模式内存释放
 
 
-------------------------------
-几种方式实现单例模式的对比
 
-单例模式  | 是否线程安全 | 是否懒加载  | 是否防止反射构建
---- | --- | --- | ---
-双重锁检测 | 是 | 是 | 否
-静态内部类 | 是 | 是 | 否
-枚举       | 是 | 否 | 是
+### 4.1.5. 单例模式优缺点
 
-### 4.1.5. 注意事项
+优点
 
-- 在使用单例模式时，我们必须使用单例类提供的公有工厂方法得到单例对象，而不应该使用反射来创建，否则将会实例化一个新对象。此外，在多线程环境下使用单例模式时，应特别注意线程安全问题。
+- 在内存中只有一个对象，节省内存空间。
+- 避免频繁的创建销毁对象，可以提高性能。
+- 避免对共享资源的多重占用，简化访问。
+- 为整个系统提供一个全局访问点。
 
-- 想要实现高效率的多线程安全的单例模式
-  - 尽量减少同步块的作用域。
-  - 尽量使用细粒度的锁。
+缺点
 
-参考
+- 单例模式中没有抽象层，单例类的可扩展性差。
+- 单例类的职责过重，在一定程度上违背了“单一职责原则”。因为单例类既充当了工厂角色，提供了工厂方法，同时又充当了产品角色，包含一些业务方法，将产品的创建和产品的本身的功能融合到一起。
+
+### 4.1.6. 参考
+
 - [java单例模式](https://blog.csdn.net/czqqqqq/article/details/80451880)
 - [设计模式之单例模式](https://segmentfault.com/a/1190000015950693)：segmentfault 上面使用C++实现的单例模式。
-- https://blog.csdn.net/hj605635529/article/details/70172842
-- https://www.cnblogs.com/lfri/p/12743685.html
-- https://www.cnblogs.com/xiaolincoding/p/11437231.html
+- [C++中多线程与Singleton的那些事儿](https://www.cnblogs.com/liyuan989/p/4264889.html)：写的很详细。
+- [《C++ and the Perils of Double-Checked Locking》](http://www.aristeia.com/Papers/DDJ_Jul_Aug_2004_revised.pdf)
 
-
+ 
 
 ## 4.2. **Factory Method(工厂模式)**
 
 **简单工厂模式**
-> 简单工厂模式(Simple Factory Pattern)：专门定义一个类（工厂类）来负责创建其他类的实例。可以根据创建方法的参数来返回不同类的实例，被创建的实例通常都具有共同的父类。
+
+简单工厂模式(Simple Factory Pattern)：专门定义一个类（工厂类）来负责创建其他类的实例。可以根据创建方法的参数来返回不同类的实例，被创建的实例通常都具有共同的父类。
 
 - 举例：
   简单工厂模式像一个代工厂，一个工厂可以生产多种产品。举个例子，一个饮料加工厂同时帮百事可乐和可口可乐生产，加工厂根据输入参数``Type``来生产不同的产品。
@@ -843,17 +646,20 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 4.2.1. 什么是 Factory Method？
+
 工厂方法模式(Factory Method Pattern)又称为工厂模式，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，即通过不同的工厂子类来创建不同的产品对象。<font color=red>Factory Method 将类的实例化推迟到子类中。</font>
 
 举例子：工厂方法和简单工厂有一些区别，简单工厂是由一个代工厂生产不同的产品，而工厂方法是对工厂进行抽象化，不同产品都由专门的具体工厂来生产。可口可乐工厂专门生产可口可乐，百事可乐工厂专门生产百事可乐。
 
 
 ### 4.2.2. 优点
+
 * 用户只需要关心其所需产品对应的具体工厂是哪一个即可，不需要关心产品的创建细节，也不需要知道具体产品类的类名。
 * 当系统中加入新产品时，不需要修改抽象工厂和抽象产品提供的接口，也无须修改客户端和其他的具体工厂和具体产品，而只要添加一个具体工厂和与其对应的具体产品就可以了，符合了开闭原则。
 
 
 ### 4.2.3. 缺点
+
 * 当系统中加入新产品时，除了需要提供新的产品类之外，还要提供与其对应的具体工厂类。因此系统中类的个数将成对增加，增加了系统的复杂度。
 
 
@@ -870,15 +676,18 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 4.3.2. UML图
+
 <img src="./figures/Abstract_factory_UML.svg">
 
 
 
 ### 4.3.3. 优点
+
 * 具体产品在应用层代码隔离，不需要关心产品细节。只需要知道自己需要的产品是属于哪个工厂的即可。当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。这对一些需要根据当前环境来决定其行为的软件系统来说，是一种非常实用的设计模式。
   
 
 ### 4.3.4. 缺点
+
 * 规定了所有可能被创建的产品集合，产品族中扩展新的产品困难，需要修改抽象工厂的接口。
 
 ### 4.3.5. 工厂模式与抽象工厂模式的区别
@@ -898,20 +707,24 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 4.4.2. 适用性
+
 - 创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式。
 - 构造过程必须允许被构造的对象有不同的表示
 
 
 ### 4.4.3. UML图
+
 <img src="./figures/Builder_UML_class_diagram.svg">
 
 ### 4.4.4. 优点
+
 * 客户端不必知道产品内部组成的细节，将产品本身与产品的创建过程解耦，使得相同的创建过程可以创建不同的产品对象。
 * 每一个具体建造者都相对独立，而与其他的具体建造者无关，因此可以很方便地替换具体建造者或增加新的具体建造者， 用户使用不同的具体建造者即可得到不同的产品对象 。
 * 增加新的具体建造者无须修改原有类库的代码，指挥者类针对抽象建造者类编程，系统扩展方便，符合“开闭原则”。
 * 可以更加精细地控制产品的创建过程 。将复杂产品的创建步骤分解在不同的方法中，使得创建过程更加清晰，也更方便使用程序来控制创建过程。
 
 ### 4.4.5. 缺点
+
 * 建造者模式所创建的产品一般具有较多的共同点，其组成部分相似，如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制。
 * 如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大。
 
@@ -930,11 +743,13 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 4.5.2. 优点
+
 * 可以利用原型模式简化对象的创建过程，尤其是对一些创建过程繁琐，包含对象层级比较多的对象来说，使用原型模式可以节约系统资源，提高对象生成的效率。
 * 可以很方便得通过改变值来生成新的对象：有些对象之间的差别可能只在于某些值的不同；用原型模式可以快速复制出新的对象并手动修改值即可。
 
 
 ### 4.5.3. 缺点
+
 * 对象包含的所有对象都需要配备一个克隆的方法，这就使得在对象层级比较多的情况下，代码量会很大，也更加复杂。
 
 
@@ -964,6 +779,7 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 5.2.2. 优点
+
 * 降低系统的耦合度：代理模式能够协调调用者和被调用者，在一定程度上降低了系 统的耦合度。
 * 不同类型的代理可以对客户端对目标对象的访问进行不同的控制：
   * 远程代理,使得客户端可以访问在远程机器上的对象，远程机器 可能具有更好的计算性能与处理速度，可以快速响应并处理客户端请求。
@@ -972,6 +788,7 @@ Singleton* Singleton::m_Instance = nullptr;
 
 
 ### 5.2.3. 缺点
+
 * 由于在客户端和被代理对象之间增加了代理对象，因此可能会让客户端请求的速度变慢。
 
 
