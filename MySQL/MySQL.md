@@ -1,82 +1,66 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2021-01-18 09:56:00
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-21 11:31:43
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description:  MySQL基础知识学习，作为一个使用者的角度
 -->
 
 <!-- TOC -->
 
-- [1. 数据库（MySQL）](#1-数据库mysql)
-  - [1.1. 参考文章](#11-参考文章)
-  - [1.2. RDBMS（关系型数据库）](#12-rdbms关系型数据库)
-  - [1.3. 语句规范](#13-语句规范)
-  - [1.4. 安装操作](#14-安装操作)
-  - [1.5. 用户管理](#15-用户管理)
-  - [1.6. 密码与登录](#16-密码与登录)
-    - [1.6.1. 权限管理](#161-权限管理)
+- [1. MySQL 介绍](#1-mysql-介绍)
+  - [1.1. RDBMS（关系型数据库）](#11-rdbms关系型数据库)
+  - [1.2. 语句规范](#12-语句规范)
+  - [1.3. 安装操作](#13-安装操作)
+  - [1.4. 用户管理](#14-用户管理)
+  - [1.5. 密码与登录](#15-密码与登录)
+  - [1.6. 权限管理](#16-权限管理)
   - [1.7. MySQL配置文件](#17-mysql配置文件)
-  - [1.8. 存储架构](#18-存储架构)
-    - [1.8.1. MySQL分层结构](#181-mysql分层结构)
-    - [1.8.2. MySQL部件](#182-mysql部件)
-  - [1.9. 数值类型](#19-数值类型)
-  - [1.10. 日期和时间类型](#110-日期和时间类型)
-  - [1.11. 字符串](#111-字符串)
-  - [1.12. SHOW命令](#112-show命令)
-  - [1.13. 数据库操作](#113-数据库操作)
-  - [1.14. 数据表操作](#114-数据表操作)
-    - [1.14.1. 创建数据表(create)](#1141-创建数据表create)
-    - [1.14.2. 查看数据表(show)](#1142-查看数据表show)
-    - [1.14.3. 删除数据表(drop)](#1143-删除数据表drop)
-    - [1.14.4. 统计数据表](#1144-统计数据表)
-    - [1.14.5. 修改数表(alter)](#1145-修改数表alter)
-  - [1.15. 数据操作](#115-数据操作)
-    - [1.15.1. 插入数据(insert)](#1151-插入数据insert)
-    - [1.15.2. 更新表数据(update)](#1152-更新表数据update)
-    - [1.15.3. 删除表数据(delete)](#1153-删除表数据delete)
-    - [1.15.4. 查询(检索)表数据(select)](#1154-查询检索表数据select)
-      - [1.15.4.1. 子查询](#11541-子查询)
-      - [1.15.4.2. 连接](#11542-连接)
-  - [1.16. function](#116-function)
-  - [1.17. 视图(View)](#117-视图view)
-    - [1.17.1. 视图创建](#1171-视图创建)
-    - [1.17.2. 视图删除](#1172-视图删除)
-  - [1.18. 编码问题](#118-编码问题)
-  - [1.19. 引擎](#119-引擎)
-  - [1.20. table](#120-table)
-  - [1.21. index](#121-index)
-  - [1.22. lock](#122-lock)
-  - [1.23. transaction](#123-transaction)
-  - [1.24. 文件](#124-文件)
-  - [1.25. 数据的导入与导出](#125-数据的导入与导出)
-    - [1.25.1. 导入和导出txt文件](#1251-导入和导出txt文件)
+  - [1.8. MySQL分层结构](#18-mysql分层结构)
+  - [1.9. MySQL部件](#19-mysql部件)
+- [2. SQL 语句](#2-sql-语句)
+  - [2.1. 数值](#21-数值)
+  - [2.2. 日期和时间](#22-日期和时间)
+  - [2.3. 字符串](#23-字符串)
+  - [2.4. SHOW](#24-show)
+  - [2.5. 数据库操作](#25-数据库操作)
+  - [2.6. 数据表操作](#26-数据表操作)
+    - [2.6.1. 创建数据表(create)](#261-创建数据表create)
+    - [2.6.2. 查看数据表(show)](#262-查看数据表show)
+    - [2.6.3. 删除数据表(drop)](#263-删除数据表drop)
+    - [2.6.4. 统计数据表](#264-统计数据表)
+    - [2.6.5. 修改数表(alter)](#265-修改数表alter)
+  - [2.7. 数据操作](#27-数据操作)
+    - [2.7.1. 插入数据(insert)](#271-插入数据insert)
+    - [2.7.2. 更新表数据(update)](#272-更新表数据update)
+    - [2.7.3. 删除表数据(delete)](#273-删除表数据delete)
+    - [2.7.4. 查询(检索)表数据(select)](#274-查询检索表数据select)
+      - [2.7.4.1. 子查询](#2741-子查询)
+      - [2.7.4.2. 连接](#2742-连接)
+- [3. Function(函数)](#3-function函数)
+- [4. 视图(View)](#4-视图view)
+    - [4.1. 视图创建](#41-视图创建)
+    - [4.2. 视图删除](#42-视图删除)
+- [5. 编码问题](#5-编码问题)
+- [6. 存储架构](#6-存储架构)
+  - [6.1. 引擎](#61-引擎)
+  - [6.2. table](#62-table)
+  - [6.3. index](#63-index)
+- [7. lock](#7-lock)
+- [8. transaction](#8-transaction)
+- [9. 文件](#9-文件)
+- [10. 数据的导入与导出](#10-数据的导入与导出)
+  - [10.1. 基础导入与导出](#101-基础导入与导出)
+  - [10.2. txt文件导入和导出](#102-txt文件导入和导出)
+- [11. 参考](#11-参考)
 
 <!-- /TOC -->
 
-# 1. 数据库（MySQL）
-## 1.1. 参考文章
-- [MySQL安装教程参考文章](https://blog.csdn.net/u013235478/article/details/50623693)
-- [MySQL压缩包安装参考](https://www.cnblogs.com/laumians-notes/p/9069498.html)
-- [MySQL卸载参考](https://www.cnblogs.com/zimo-jing/p/7931866.html)
-- [MySQL 5.1安装和配置过程中遇到的问题](https://www.cnblogs.com/suiy-160428/p/5552463.html)
-- 学习网站
-  - [MySQL Tutorial 英文档](http://www.mysqltutorial.org/)
-  - [国外的Planet MySQL](https://planet.mysql.com/)
-  - [W3school SQL教程](https://www.w3school.com.cn/sql/sql_syntax.asp)
-- 博客
-  - [万乐荣MySQL讲解](http://www.notedeep.com/note/38/page/328)
-  - [何登成的技术博客](http://hedengcheng.com/)
-  - [orczhou博客](http://www.orczhou.com/)
-  - [追风刀·丁奇 - ITeye技术网站](https://dinglin.iteye.com/)
-  - [阿里云数据库高级专家彭立勋](http://www.penglixun.com/)
-  - [国外 Percona's MySQL & InnoDB performance and scalability blog](https://www.percona.com/blog/)
-  - [比较详细的MySQL学习笔记](https://shockerli.net/post/1000-line-mysql-note/)
+# 1. MySQL 介绍
 
 
-
-## 1.2. RDBMS（关系型数据库）
-> 一个关系型数据库由一个或数个表格组成
+## 1.1. RDBMS（关系型数据库）
+一个关系型数据库由一个或数个表格组成。
 
 - 冗余：存储两倍数据，冗余降低了性能，但提高了数据的安全性
 - 主键：主键是唯一的。一个数据表中只能包含一个主键。使用主键来查询数据
@@ -89,14 +73,14 @@
 - DCL(Data Control Language)语句：数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括grant、revoke 等。
 
 
-## 1.3. 语句规范
+## 1.2. 语句规范
 - 关键字与函数名称全部大写
 - 数据库名、表名称、字段名称全部小写
 - SQL语句默认是以 分号 结尾，SQL不区分大小写
 - 每个表保存一个实体信息
 
 
-## 1.4. 安装操作
+## 1.3. 安装操作
 - windows下以管理员身份运行cmd，进入到MySQL的bin目录，执行初始化命令：`mysqld --initialize --user=mysql --console`
 - 执行命令进行MySQL服务安装：`mysqld –install mysql`
 - Windows启动MySQL服务：`net start mysql`
@@ -108,26 +92,73 @@
 - 改变MySQL的分隔符(默认为 `;`)：`delimiter 任意的字符`
 
 
-## 1.5. 用户管理
-- 参考
-  - [MySQL在Linux下密码默认安全等级问题](https://blog.csdn.net/kuluzs/article/details/51924374)
-  - [MySQL修改密码（三种方法示例）](https://www.yiibai.com/mysql/changing-password.html)
-
-## 1.6. 密码与登录
-- 登录：`mysql -u root -p`
-- 改密码：MySQL提供了各种可用于更改用户密码的语句，包括UPDATE，SET PASSWORD 和 GRANT USAGE语句。
-  - 第一种： `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';`
-  - 第二种： `SET PASSWORD FOR 'root'@'localhost' = PASSWORD('新密码')`;
+## 1.4. 用户管理
 
 
-### 1.6.1. 权限管理
-- 刷新权限：`flush privileges`
-- 创建新用户：`create user '你的用户名'@'%' identified with mysql_native_password by '你的密码';`  
-- 创建用户后并刷新权限：`GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;`
-- 查看数据库中存在的用户：`SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;`
-- 查看数据的端口：`show global variables like 'port';`
-- 显示当前用户：`select user();`
-- 显示当前服务器版本：`select version();`
+## 1.5. 密码与登录
+- 登录 MySQL 客户端
+
+  ```sql
+  mysql -u root -p
+  ```
+
+- 改密码：MySQL提供了各种可用于更改用户密码的语句，包括 UPDATE，SET PASSWORD 和 GRANT USAGE语句。
+
+  第一种
+
+  ```sql
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
+  ```
+
+  第二种
+
+  ```sql
+  SET PASSWORD FOR 'root'@'localhost' = PASSWORD('新密码');
+  ```
+
+
+## 1.6. 权限管理
+- 刷新权限
+
+  ```sql
+  flush privileges;
+  ```
+
+- 创建新用户
+
+  ```sql
+  create user '你的用户名'@'%' identified with mysql_native_password by '你的密码';  
+  ```
+
+- 创建用户后并刷新权限
+
+  ```sql
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+  ```
+
+- 查看数据库中存在的用户
+
+  ```sql
+  SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+  ```
+
+- 查看数据的端口
+
+  ```sql
+  show global variables like 'port';
+  ```
+
+- 显示当前用户
+
+  ```sql
+  select user();
+  ```
+
+- 显示当前服务器版本
+
+  ```sql
+  select version();
+  ```
 
 
 ## 1.7. MySQL配置文件
@@ -143,19 +174,16 @@
   
 
 
-## 1.8. 存储架构
-- 和其它数据库相比，MySQL有点与众不同，它的架构可以在多种不同场景中应用并发挥良好作用。主要体现在存储引擎的架构上。
-- Pluggable Storage Engines. 插件式的存储引擎架构将查询处理和其它的系统任务以及数据的存储提取分离。这种架构可以根据业务的需求和实际需求选择合适的存储引擎。
 
 
-### 1.8.1. MySQL分层结构
+## 1.8. MySQL分层结构
 1. 连接层
 2. 服务层
 3. 引擎层
 4. 存储层
 
 
-### 1.8.2. MySQL部件
+## 1.9. MySQL部件
 - Connectors：指的是不同语言中与SQL的交互。
 - Management Serveices & Utilities： 系统管理和控制工具
 - Connection Pool：连接池
@@ -168,62 +196,53 @@
   - 解析器的主要功能：
     - 将SQL语句进行语义和语法的分析，分解成数据结构，然后按照不同的操作类型进行分类，然后做出针对性的转发到后续步骤，以后SQL语句的传递和处理就是基于这个结构的。
     - 如果在分解构成中遇到错误，那么就说明这个sql语句是不合理的 
-
 - Optimizer：查询优化器
 - Cache和Buffer：查询缓存
 - 存储引擎接口
 
+# 2. SQL 语句
 
+## 2.1. 数值
 
-
-
-
-
-## 1.9. 数值类型
-- TINYIN：1字节    范围：-128~127
-- SMALLINT: 2字节  范围：-32768~32767
-- MEDIUMINT: 3字节
-- BIGINT: 8字节
-- INT: 4字节
-  - int(M): M表示宽度， 常与 zerofill 连用
+- TINYIN：1 字节    范围：-128~127
+- SMALLINT: 2 字节  范围：-32768~32767
+- MEDIUMINT: 3 字节
+- BIGINT: 8 字节
+- INT: 4 字节
+  - int(M): M 表示宽度， 常与 zerofill 连用
   > 显示宽度，如果某个数不够定义字段时设置的位数，则前面以0补填，zerofill 属性修改。例如：int(5)   插入一个数'123'，补填后为'00123'
 - 浮点数
-  - FLOAT: 4字节
-  - DOUBLE: 8字节
- - 定点数：用 decimal 表示。
+  - FLOAT: 4 字节
+  - DOUBLE: 8 字节
+ - 定点数：用 `decimal` 表示。
 
-
-
-## 1.10. 日期和时间类型
-- DATE(3字节)；表示：日期值  YYYY-MM-DD
-- TIME(3字节)；表示：时间值或持续时间  HH:MM:SS
-- YEAR(1字节)；表示：年份值  YYYY
-- DATETIME: 8字节；表示：混合日期和时间值  YYYY-MM-DD HH:MM:SS；要记录年月日时分秒，并且记录的年份比较久远，那么最好使用 DATETIME。
-- TIMESTAMP：记录的日期需要让不同时区的用户使用，那么最好使用 TIMESTAMP，因为日期类型中只有它能够和实际时区相对应。
+## 2.2. 日期和时间
+- DATE(3字节)；表示：日期值  `YYYY-MM-DD`
+- TIME(3字节)；表示：时间值或持续时间  `HH:MM:SS`
+- YEAR(1字节)；表示：年份值  `YYYY`
+- DATETIME: 8字节；表示：混合日期和时间值  `YYYY-MM-DD HH:MM:SS`；要记录年月日时分秒，并且记录的年份比较久远，那么最好使用 `DATETIME`。
+- TIMESTAMP：记录的日期需要让不同时区的用户使用，那么最好使用 `TIMESTAMP`，因为日期类型中只有它能够和实际时区相对应。
+  
   > 需要经常插入或者更新日期为当前系统时间，则通常使用 TIMESTAMP 来表示。TIMESTAMP 值返回后显示为 “YYYY-MM-DD HH:MM:SS” 格式的字符串，显示宽度固定为 19 个字符。如果想要获得数字值，应在 TIMESTAMP 列添加+0。
 
 
 
-## 1.11. 字符串
+## 2.3. 字符串
 - CHAR: 固定长度的字符类型，范围：0-255
 - VARCHAR: 可变长度的字符类型，范围：0-65535
 - TINYBLOB: 0-255  不超过 255 个字符的二进制字符串
 - TEXT: 存储更大的文本文件， TEXT 只能保存字符数据。
 - BLOB: 也是存储更大的文本文件，BLOB 能用来保存二进制数据，比如照片等。
-  > BLOB 和 TEXT 值会引起一些性能问题，特别是在执行了大量的删除操作时。删除操作会在数据表中留下很大的“空洞”，以后填入这些“空洞”的记录在插入的性能上会有影响。为了提高性能，建议定期使用 OPTIMIZE TABLE 功能对这类表进行碎片整理，避免因为“空洞”导致性能问题。
+  
+  BLOB 和 TEXT 值会引起一些性能问题，特别是在执行了大量的删除操作时。删除操作会在数据表中留下很大的“空洞”，以后填入这些“空洞”的记录在插入的性能上会有影响。为了提高性能，建议定期使用 OPTIMIZE TABLE 功能对这类表进行碎片整理，避免因为“空洞”导致性能问题。
 
- 
+MySQL 5.0 以上的版本：1、一个汉字占多少长度与编码有关：2、UTF－8：一个汉字＝3个字节; 3、GBK：一个汉字＝2个字节
 
-
-> MySQL 5.0 以上的版本：1、一个汉字占多少长度与编码有关：2、UTF－8：一个汉字＝3个字节; 3、GBK：一个汉字＝2个字节
-
->  CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是其缺点是浪费
+CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是其缺点是浪费
 存储空间，程序需要对行尾空格进行处理，所以对于那些长度变化不大并且对查询速度有较
 高要求的数据可以考虑使用 CHAR 类型来存储。在 MySQL 中，不同的存储引擎对 CHAR 和 VARCHAR 的使用原则是不同的。
 
-
-
-## 1.12. SHOW命令
+## 2.4. SHOW
 - `USE 数据库名`: 选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库操作。
 - `SHOW DATABASES`:  列出 MySQL 数据库管理系统的所有数据库列表。
 - `SHOW TABLES`:  显示指定数据库的所有表。
@@ -232,25 +251,66 @@
 - `SHOW INDEX FROM 数据表`:  显示数据表的详细索引信息，包括 PRIMARY KEY（主键）
 
 
-## 1.13. 数据库操作
+## 2.5. 数据库操作
 - 三种方式查看当前数据库
-  - `select database();`
-  - `status;`
-  -  `select tables;`
+
+  ```sql
+  // 第1种
+  select database();
+  
+  // 第1种
+  status;
+  
+  // 第1种
+  select tables;
+  ```
+
 - 显示当前时间、用户名、数据库版本: `select now(), user(), version();`
-- 创建库:  `create database[ if not exists] 数据库名 数据库选项`
+
+- 创建库
+  
+  ```sql
+  create database[ if not exists] 数据库名 数据库选项;
+  ```
+  
   - 数据库选项：
     - CHARACTER SET charset_name
     - COLLATE collation_name
-- 查看已有库:  `show databases[ like 'pattern']`
-- 查看当前库信息:  `show create database 数据库名`
-- 修改库的选项信息:  `alter database 库名 选项信息`
-- 删除库(同时删除该数据库相关的目录及其目录内容): `drop database[ if exists] 数据库名`       
+  
+- 查看已有库
+
+  ```sql
+  show databases[ like 'pattern'];
+  ```
+
+- 查看当前库信息
+
+  ```sql
+  show create database 数据库名;
+  ```
+
+- 修改库的选项信息
+
+  ```sql
+  alter database 库名 选项信息;
+  ```
+
+- 删除该数据库相关的目录及其目录内容
+
+  ```sql
+  drop database[ if exists] 数据库名;
+  ```
 
 
-## 1.14. 数据表操作
-### 1.14.1. 创建数据表(create)
-- 创建数据表 `CREATE TABLE [temporary] [IF NOT EXISTS] table_name(column_name data_type, ...);`
+## 2.6. 数据表操作
+
+### 2.6.1. 创建数据表(create)
+- 创建数据表
+
+  ```sql
+  CREATE TABLE [temporary] [IF NOT EXISTS] table_name(column_name data_type, ...);
+  ```
+
   - table_name可以为`[库名].表名`
   - 每个字段必须有数据类型
     - 字段的定义：
@@ -260,91 +320,242 @@
   - `temporary`为临时表，会话结束时表自动消失  
 
 
-### 1.14.2. 查看数据表(show)
-- 查看数据表列表 `SHOW TABLES [FROM db_name]` 使用FROM db_name可以查看该数据库中所有的表
-- 查看数据表结构 
-  - `SHOW COLUMNS FROM tab_nmae`
-  - `DESC tab_name`
-  - `DESCRIBE tab_name`
-  - `EXPLAIN tab_name`
-- 查看表详细信息：`SHOW CREATE TABLE 表名`
-- 获取表信息：`SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']`
-- 查看记录（数据表内容） `SELECT expr, ... FROM tabl_name`
+### 2.6.2. 查看数据表(show)
+-  查看某个数据库中所有的表
+
+  ```sql
+  SHOW TABLES [FROM db_name]
+  ```
+
+- 查看数据表结构，有四种方式。 
+
+  ```sql
+  // 第1种
+  SHOW COLUMNS FROM tab_nmae
+  
+  // 第2种
+  DESC tab_name
+  
+  // 第3种
+  DESCRIBE tab_name
+  
+  // 第3种
+  EXPLAIN tab_name
+  ```
+
+- 查看表详细信息
+
+  ```sql
+  SHOW CREATE TABLE 表名
+  ```
+
+- 获取表信息
+
+  ```sql
+  SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']
+  ```
+
+- 查看记录（数据表内容）
+
+  ```sql
+  SELECT expr, ... FROM tabl_name
+  ```
 
 
-### 1.14.3. 删除数据表(drop)
-- 删除数据表：`DROP TABLE table_name;`
-- 清空数据表： `TRUNCATE [TABLE] tab_name`
-- 复制表结构: `CREATE TABLE 新表名称 LIKE 要复制的表名`
-- 复制表结构和数据: `CREATE TABLE 新表名称 [AS] SELECT * FROM 要复制的表名` 
-- 检查表是否有错误： `CHECK TABLE tbl_name [, tbl_name] ... [option] ...`
-- 优化表: `OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...`
-- 修复表:  `REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM]`
-- 分析表: `ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...`
+### 2.6.3. 删除数据表(drop)
+- 删除数据表
+
+  ```sql
+  DROP TABLE table_name;
+  ```
+
+- 清空数据表
+
+  ```sql
+  TRUNCATE [TABLE] tab_name;
+  ```
+
+- 复制表结构
+
+  ```sql
+  CREATE TABLE 新表名称 LIKE 要复制的表名;
+  ```
+
+- 复制表结构和数据
+
+  ```sql
+  CREATE TABLE 新表名称 [AS] SELECT * FROM 要复制的表名;
+  ```
+
+- 检查表是否有错误
+
+  ```sql
+  CHECK TABLE tbl_name [, tbl_name] ... [option] ...
+  ```
+
+- 优化表
+
+  ```sql
+  OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+  ```
+
+- 修复表
+
+  ```sql
+  REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM];
+  ```
+
+- 分析表
+
+  ```sql
+  ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+  ```
 
 
-### 1.14.4. 统计数据表
+### 2.6.4. 统计数据表
 - 查询数据采用SELECT命令
-  - 查询数据表中不重复的行：`SELECT DISTINCT col_name FROM tab_name`
-  - 从行 5 开始曲 4 行：`SELECT col_name FROM tab_name LIMIT 5, 4`
-- 统计某个数据库中有多少张表：`SELECT count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;`
+
+  ```sql
+  // 查询数据表中不重复的行
+  SELECT DISTINCT col_name FROM tab_name;
+  ```
+
+  ```sql
+  // 从行 5 开始取 4 行
+  SELECT col_name FROM tab_name LIMIT 5, 4;
+  ```
+
+- 统计某个数据库中有多少张表
+
+  ```sql
+  SELECT count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;
+  ```
 
 
-### 1.14.5. 修改数表(alter)
+### 2.6.5. 修改数表(alter)
 - 修改数据表
   - 对表进行重命名
     - `RENAME TABLE 原表名 TO 新表名`
     - `RENAME TABLE 原表名 TO 库名.表名`    （可将表移动到另一个数据库）
     - 尽量少去更改表和列的名称，在某些情况下可能导致一些视图不能使用
   - 修改表的字段结构：` ALTER TABLE 表名 操作名`
-    - 添加单列 `ALTER TABLE tab_name ADD [COLUMN] column_name column_definition[FIRST | AFTER col_name]`
+    - 添加单列 
+    
+      ```sql
+      ALTER TABLE tab_name ADD [COLUMN] column_name column_definition[FIRST | AFTER col_name];
+      ```
+    
     - 添加多列 `ALTER TABLE tab_name ADD [COLUMN] (col_name col_definition, ...)` 不能指定位置关系，只能在列的最下方
-    - 删除列 `ALTER TABLE tab_name DROP [COLUMN] col_name_1,DROP [COLUMN] col_name_2`
-      - 增加主键：`ALTER TABLE tab_name ADD [CONSRTAINT [symbol]] PRIMARY KEY [index_type](index_col_name)`
+    
+    - 删除列 
+      
+      ```sql
+      ALTER TABLE tab_name DROP [COLUMN] col_name_1,DROP [COLUMN] col_name_2;
+      ```
+      
+      - 增加主键
+      
+        ```sql
+        ALTER TABLE tab_name ADD [CONSRTAINT [symbol]] PRIMARY KEY [index_type](index_col_name);
+        ```
+      
       - 删除主键约束(删除主键前需删除其AUTO_INCREMENT属性): `ALTER TABLE tab_name DROP PRIMARY KEY`
+      
       - 创建唯一索引: `ALTER TABLE tab_name ADD UNIQUE [索引名] (字段名)`
+      
       - 删除唯一索引: `ALTER TABLE tab_name DROP {UNIQUE | KEY} index_name`
+      
       - 创建普通索引: `ALTER TABLE tab_name ADD INDEX [索引名] (字段名) ` 
+      
       - 删除索引: `ALTER TABLE tab_name DROP INDEX 索引名`
+      
       - 添加外键约束 `ALTER TABLE tab_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name] (index_col_name, ...) reference_definition`
+        
         > 例如：`ALTER TABLE county ADD FOREIGN KEY(pid) REFERENCES provinces(id);` pid为子键，id为父键
-      - 删除外键约束 `ALTER TABLE tab_name DROP FOREIGN KEY 约束名称`
-- 添加和删除默认约束 `ALTER TABLE tab_name ALTER [COLUMN] col_name {SET DEFAULT 设置的值 | DROP DEFAULT}`
-- 修改列属性和参数 `ALTER TABLE tab_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]`
-  - 改变列的位置和数据类型，数据类型的改变会导致数据的丢失。
+        
+      - 删除外键约束 
+      
+        ```sql
+        ALTER TABLE tab_name DROP FOREIGN KEY 约束名称;
+        ```
+  
+- 添加和删除默认约束 
+
+  ```sql
+  ALTER TABLE tab_name ALTER [COLUMN] col_name {SET DEFAULT 设置的值 | DROP DEFAULT};
+  ```
+
+- 修改列属性和参数 
+
+  ```sql
+  ALTER TABLE tab_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name];
+  ```
+
+  改变列的位置和数据类型，数据类型的改变会导致数据的丢失。
+
 - 对字段属性进行修改，不能修改字段名(所有原有属性也需写上)。  
-  - 对字段名修改: `ALTER TABLE tab_name CHANGE[ COLUMN] 原字段名 新字段名 新字段属性 新参数`
+
+  对字段名修改
+
+  ```sql
+  ALTER TABLE tab_name CHANGE[ COLUMN] 原字段名 新字段名 新字段属性 新参数;
+  ```
 
 
-## 1.15. 数据操作
-### 1.15.1. 插入数据(insert)
-- 单条插入数据：`INSERT INTO table_name ( field1, field2,...fieldN )
-                      VALUES
-                      ( value1, value2,...valueN );`
-  - 如果省略字段列表，要插入数据的值与字段顺序一致，不能任意调整位置
-  - 可同时插入多条数据记录：`INSERT INTO table_name ( field1, field2,...fieldN )
-                      VALUES
-                      ( value1, value2,...valueN ),
-                      ( value1, value2,...valueN ),
-                      ( value1, value2,...valueN ),`
-- 多条数据的插入，节省了网络开销、提高了插入效率
+## 2.7. 数据操作
+
+### 2.7.1. 插入数据(insert)
+- 单条插入数据
+
+  ```sql
+  INSERT INTO table_name ( field1, field2,...fieldN )
+      VALUES ( value1, value2,...valueN );
+  ```
+
+  如果省略字段列表，要插入数据的值与字段顺序一致，不能任意调整位置
+
+- 可同时插入多条数据记录
+
+     ```sql
+     INSERT INTO table_name ( field1, field2,...fieldN )
+         VALUES
+         ( value1, value2,...valueN ),
+         ( value1, value2,...valueN ),
+         ( value1, value2,...valueN );
+     ```
+
+     多条数据的插入，节省了网络开销、提高了插入效率
 
 
-### 1.15.2. 更新表数据(update)
-- 单表更新记录: `UPDATE tab_name SET 字段名=新值1 [, 字段名=新值N]... WHERE [where_condition]`  
+### 2.7.2. 更新表数据(update)
+- 单表更新记录
+  
+  ```sql
+   UPDATE tab_name SET 字段名=新值1 [, 字段名=新值N]... WHERE [where_condition];  
+  ```
+  
   - 若省略`WHERE`语句，表里面的内容都要更新
   - 组成
     - 列名和它们的新值
     - 要更新的表
     - 确定要更新行的过滤条件
-    
-- 清空某列的数据值：`update tab_name set 字段名=null where 执行的条件` 
+  
+- 清空某列的数据值
 
-- 多表更新: `update emp_1, emp_2 set emp_1.sal = emp_1.sal * emp_2.deptno, emp_2.deptname = emp_1.name where emp_1.deptno=emp_2.deptno`    更新表emp_1与表emp_2的deptno列相等的值，使表emp_1 sal列的值为emp_1.sal * emp_2.deptno, 表emp_2 列deptname的值为 emp_1.name
+  ```sql
+  update tab_name set 字段名=null where 执行的条件;
+  ```
+
+- 多表更新:。更新表 `emp_1`与表 `emp_2` 的 `deptno` 列相等的值，使表 `emp_1` 的 `sal` 列的值为 `emp_1.sal * emp_2.deptno`，表 `emp_2` 列 `deptname` 的值为 `emp_1.name`
+  
+  ```sql
+  update emp_1, emp_2 set emp_1.sal = emp_1.sal * emp_2.deptno, emp_2.deptname = emp_1.name where emp_1.deptno=emp_2.deptno;
+  ```
+  
   > 常用于根据一个表的字段来动态的更新另外一个表的字段属性
 
 
-### 1.15.3. 删除表数据(delete)
+### 2.7.3. 删除表数据(delete)
 - 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
   - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
 - 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
@@ -363,10 +574,14 @@
   - truncate 不激活trigger (触发器)，但是会重置Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从1开始记录，而不是接着原来的 ID数。而 delete 删除以后，identity 依旧是接着被删除的最近的那一条记录ID加1后进行记录。如果只需删除表中的部分记录，只能使用 DELETE语句配合 where条件
 
 
-### 1.15.4. 查询(检索)表数据(select)
+### 2.7.4. 查询(检索)表数据(select)
 - 查看表中所有数据: `SELECT * FROM tab_name WHERE [CONDITION]`
+
 - 去掉重复数据显示使用关键字 `distinct`
-  > `SELECT DISTINCT (co_name1, col_name2, ..., col_nameN) FROM tab_name WHERE [CONDITION]`
+  
+  ```sql
+  SELECT DISTINCT (co_name1, col_name2, ..., col_nameN) FROM tab_name WHERE [CONDITION]
+  ```
 
 
 - `where` 语句对数据表中的数据进行条件筛选，能与运算符组合后进行高级筛选行
@@ -418,18 +633,20 @@
 
 
 - where、group by、having、order by、limit这些关键字查询的使用顺序？
+  
   > 使用的顺序：where---group by---having---order by---limit
 
 
-#### 1.15.4.1. 子查询
+#### 2.7.4.1. 子查询
 - where型子查询: 内层查询的结果作为外层的条件
 - from型子查询：内层SQL查询的结果当成一张临时表，供外层的SQL再次查询。
 - exist型子查询：把外层SQL查询的结果拿到内层SQL中去测试，如果内层SQL成立，则该行取出。
 - <font color=red> NULL说用 </font>  
+  
   > null是一种类型，比较时只能用 `is null` 或 `is not null`;碰见运算符时，一律返回为null。使用null效率不高，影响索引的效果
 
 
-#### 1.15.4.2. 连接
+#### 2.7.4.2. 连接
 - 使用两表相乘生成第三个表的方法，再进行查询。这样做的方法效率很低，对内存的开销很大。
 - mysql中不支持外链接
 - 左连接: `A left join B on 条件`:
@@ -453,19 +670,20 @@
 
 
 
-## 1.16. function
+# 3. Function(函数)
 - `cancat()函数`: 拼接两个列:
 - `RTrim()函数`: 去掉值右边的所有空格
 - `LTrim()函数`: 去掉值左边的所有空格
 - `Upper()`: 将文本转换为大写
 
 
-## 1.17. 视图(View)
+# 4. 视图(View)
 - 什么是视图？
+  
   > 可以看成一张虚拟的表，是表通过某种运算得到的一个投影。
 
 
-### 1.17.1. 视图创建
+### 4.1. 视图创建
 - 创建视图` create view 视图名 as select语句`
 - 作用：
   - 简化查询：统计复杂的结果时，先用视图生成一个中间结果，再查询视图。
@@ -481,13 +699,11 @@
     - temptable：创建临时表
 
 
-### 1.17.2. 视图删除
+### 4.2. 视图删除
 - ` drop view view_name` 删除视图时，只能删除视图的定义，不会删除数据，删除一个或多个视图时，视图中间使用逗号分隔开
 
 
-
-
-## 1.18. 编码问题
+# 5. 编码问题
 - 字符集: `CHARSET = charset_name`
 -  查看数据库的编码方式：`show variables like '%char%';`
 
@@ -504,8 +720,13 @@
   - 正确选择返回内容的编码
   -  如果client、connection、result三者的编码都为GBK，则可以简写为：`set names gbk;`
 
+# 6. 存储架构
 
-## 1.19. 引擎
+- 和其它数据库相比，MySQL有点与众不同，它的架构可以在多种不同场景中应用并发挥良好作用。主要体现在存储引擎的架构上。
+- Pluggable Storage Engines. 插件式的存储引擎架构将查询处理和其它的系统任务以及数据的存储提取分离。这种架构可以根据业务的需求和实际需求选择合适的存储引擎。
+
+## 6.1. 引擎
+
 - 存储引擎: `ENGINE = engine_name`
   - 表在管理数据时采用的不同的数据结构，结构不同会导致处理方式、提供的特性操作等不同
 - 常见的引擎：InnoDB, MyISAM, Memory/Heap, BDB, Merge, Example, CSV, MaxDB, Archive
@@ -519,44 +740,46 @@
 - 修改表引擎方法: ` alter table table_name engine=InnoDB; `
 
 
-## 1.20. table
-- 在InnoDB引擎中，表都是根据主键顺序组织存放的，这种存储方式称为索引组织表(index organized table)。
+## 6.2. table
+- 在 InnoDB引 擎中，表都是根据主键顺序组织存放的，这种存储方式称为索引组织表(index organized table)。
 
 
-## 1.21. index
-- Innodb引擎支持下面的几种引擎？
+## 6.3. index
+- Innodb 引擎支持下面的几种引擎？
   - B+树：是关系型数据库职工查找最为常用和最有效的索引。
   - 全文索引
   - 哈希 
 
-
-
-## 1.22. lock
-- 什么是latch？
-  > latch一般叫为闩锁（轻量级的锁）。在innodb 引擎中，latch有分为mutex 和rwlock。目的是：用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。
-
-- 什么是lock？
-  > 锁是数据库系统中区别于文件系统的一个关键特性。
-
-- 为什么要有lock?
-  > 用于管理对共享资源的并发问题，提供数据的完整性和一致性。
-
+# 7. lock
+- 什么是 latch？
+  
+  latch一般叫为闩锁（轻量级的锁）。在innodb 引擎中，latch有分为mutex 和rwlock。目的是：用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。
+  
+- 什么是 lock？
+  
+  锁是数据库系统中区别于文件系统的一个关键特性。
+  
+- 为什么要有 lock?
+  
+  用于管理对共享资源的并发问题，提供数据的完整性和一致性。
+  
 - lock的对象是事务，用来锁定数据库中的对象，如tables，pages，rows，一般的lock的对象仅在事务commit和rollback后进行释放，lock是有死锁机制的。
 
 
-- 命令
-  - `show engine innodb status \G;`  查看当前数据库中锁的请求。
+- 查看当前数据库中锁的请求。
+  ```sql
+  show engine innodb status \G;  
+  ```
 
 
-## 1.23. transaction
-- 参考：
-  - [数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
-  
+# 8. transaction
 - 什么叫 transaction？
-  > 一个SQL语句或者一组复杂的SQL语句就是一个事务（transaction）。事务时访问并更新数据库中各数据项的一个程序执行单元。
+  
+  一个SQL语句或者一组复杂的SQL语句就是一个事务（transaction）。事务时访问并更新数据库中各数据项的一个程序执行单元。
   
 - 为什么要有 transaction？
-  > 事务会把数据库从一种一致状态转换为另一种一致状态，在数据库提交工作时，可以确保要么所有修改都已经保存了，要么所有修改都不保存。
+  
+  事务会把数据库从一种一致状态转换为另一种一致状态，在数据库提交工作时，可以确保要么所有修改都已经保存了，要么所有修改都不保存。
 
 
 - 事务的四大特性（ACID） 
@@ -566,8 +789,7 @@
   - 持久性（Durability）：事务一旦完成，无法撤销。一个事务一旦被提交了，对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。通过 `redo log(重做日志)` 和 `undo log` 操作来保证事务的一致性。
     - redo: 通常是物理日志，记录页的物理修改操作；redo是恢复提交事务修改的页操作。
     - undo：通常是逻辑日志，根据每行记录来进行记录；undo是回滚行记录到某个特定的版本。
-   
-
+  
 - 事务的操作
   - `start transaction`：显式开启事务  
   - `commit`：提交事务
@@ -578,15 +800,15 @@
   - `set transaction`：设置事务的隔离级别
 
 
-## 1.24. 文件
+# 9. 文件
 - 数据文件目录: `DATA DIRECTORY = '目录'`
 - 索引文件目录: `INDEX DIRECTORY = '目录'`
 - 表注释: `COMMENT = 'string'`
 - 分区选项: `PARTITION BY ...` (详细见手册)
 
+# 10. 数据的导入与导出
 
-## 1.25. 数据的导入与导出
-[Mysql备份还原数据库之mysqldump实例及参数详细说明](https://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html)
+## 10.1. 基础导入与导出
 
 - `mysqldump`导出固定条件的数据库
   - 导出整个数据库: `mysqldump -u 用户名 -p 数据库名 > 导出的文件名 `
@@ -611,18 +833,18 @@
 ```
 
 
-### 1.25.1. 导入和导出txt文件
-- 导入txt文件
-```
+## 10.2. txt文件导入和导出
+- 导入txt文件，设置导入的编码格式为 utf8，防止乱码，可选项目。
+```sql
 mysql> load data infile 'd.txt' into table table_name 
-    -> CHARACTER SET utf8,              // 设置导入的编码格式，防止乱码，可选
+    -> CHARACTER SET utf8,              
     -> fields terminated by','
     -> lines terminated by'\r\n'
 ```
 
 
 - 导出txt文件
-```
+```sql
  mysql> select * from table_name into outfile 'd.txt'
     -> fields terminated by','
     -> lines terminated by'\r\n'
@@ -630,11 +852,32 @@ mysql> load data infile 'd.txt' into table table_name
 
 
 - 只导入部分字段的数据
-```
- mysql> load data infile 'd.txt' into table tt
+```sql
+// name为字段名，可以为多个
+mysql> load data infile 'd.txt' into table tt
     -> lines terminated by'\r\n'
     -> (name);
-    // name为字段名，可以为多个
 ```
 
+# 11. 参考
 
+- [MySQL安装教程参考文章](https://blog.csdn.net/u013235478/article/details/50623693)
+- [MySQL压缩包安装参考](https://www.cnblogs.com/laumians-notes/p/9069498.html)
+- [MySQL卸载参考](https://www.cnblogs.com/zimo-jing/p/7931866.html)
+- [MySQL 5.1安装和配置过程中遇到的问题](https://www.cnblogs.com/suiy-160428/p/5552463.html)
+- 学习网站
+  - [MySQL Tutorial 英文档](http://www.mysqltutorial.org/)
+  - [国外的Planet MySQL](https://planet.mysql.com/)
+  - [W3school SQL教程](https://www.w3school.com.cn/sql/sql_syntax.asp)
+- 博客
+  - [万乐荣MySQL讲解](http://www.notedeep.com/note/38/page/328)
+  - [何登成的技术博客](http://hedengcheng.com/)
+  - [orczhou博客](http://www.orczhou.com/)
+  - [追风刀·丁奇 - ITeye技术网站](https://dinglin.iteye.com/)
+  - [阿里云数据库高级专家彭立勋](http://www.penglixun.com/)
+  - [国外 Percona's MySQL & InnoDB performance and scalability blog](https://www.percona.com/blog/)
+  - [比较详细的MySQL学习笔记](https://shockerli.net/post/1000-line-mysql-note/)
+- [MySQL在Linux下密码默认安全等级问题](https://blog.csdn.net/kuluzs/article/details/51924374)
+- [MySQL修改密码（三种方法示例）](https://www.yiibai.com/mysql/changing-password.html)
+- [数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
+- [Mysql备份还原数据库之mysqldump实例及参数详细说明](https://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html)
