@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:19:11
- * @LastEditTime: 2022-03-21 00:29:52
+ * @LastEditTime: 2022-03-22 00:33:23
  * @LastEditors: Please set LastEditors
  * @Description: 单例模式：此单例模式为懒汉式模式，即在 new 一个对象时，才分配内存
  *               在多个线程中，存在资源竞争的问题。
@@ -28,10 +28,11 @@ public:
 private:
     Singleton();
     ~Singleton();
-    Singleton(const Singleton &signal) = delete;
-    const Singleton &operator=(const Singleton &signal) = delete;
 
-    static Singleton* m_Instance;           // 静态指针    
+    Singleton(const Singleton &signal) = delete;                    // 禁止拷贝构造
+    const Singleton &operator=(const Singleton &signal) = delete;   // 禁止赋值操作
+
+    static Singleton* m_Instance;                                   // 静态指针    
 };
 
 // 类外部静态全局变量初始化

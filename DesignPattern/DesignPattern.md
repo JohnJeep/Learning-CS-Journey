@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2022-03-21 01:05:10
+ * @LastEditTime: 2022-03-22 01:12:46
  * @LastEditors: Please set LastEditors
  * @Description: 设计模式学习
 -->
@@ -601,6 +601,127 @@ First
   不过有些编译器在C++11之前的版本就支持这种模型，例如g++，从g++4.0开始，meyers singleton就是线程安全的，不需要 C++11。其他的编译器就需要具体的去查相关的官方手册了。
 
 ### 4.1.4. 单例模式内存释放
+
+大多数时候，使用上面第一种或第二种方法获取实例，不去手动释放内存，这种实现都不会出现问题，因为程序结束时，操作系统会负责自动回收资源，替代了人为的实现的过程。但有经验的读者可能会问，`m_Instance` 指向的空间什么时候释放呢？更严重的问题是，该实例的析构函数什么时候执行？如果在类的析构中执行一些必须的操作，比如关闭文件描述符，销毁锁的资源等。那么上面的代码无法实现这个要求，我们需要一种方法，正常的删除该实例。
+
+单例模式中释放用 new 申请的内存，有两种方式可以实现。
+
+第一种：在类中定义一个属性为 `public` 的内存销毁的方，使用 `delete` 关键字实现去释放内存。给外部类提供接口，去销毁对象。 
+
+```cpp
+static Singleton* freeInstance() {
+    if (m_Instance != nullptr) {
+        delete m_Instance;
+        m_Instance = nullptr;
+        cout << "Free instance memory." << endl;
+    }
+    return m_Instance;
+}
+```
+
+第一种方式可以实现内存的释放，但有时候忘记去写销毁内存的方法了，程序可能会出现问题。那么有没有一种方式：单例模式运行的生命周期结束时，自动去释放申请的内存，不用在类的外部额外的手动销毁，有一点类似于垃圾回收机制，这就是第二种方式。
+
+我们知道，程序在结束的时候，系统会自动析构所有的全局变量。事实上，系统也会析构所有的类的静态成员变量，就像这些静态成员也是全局变量一样。利用这个特征，我们可以在单例类中定义一个这样的静态成员变量，而它的唯一工作就是在析构函数中删除单例类的实例。
+
+```cpp
+class Singleton
+{
+public:
+    static Singleton* getInstace(const std::string& value);               // 懒汉式
+    Singleton(Singleton& other) = delete;                                 // 禁止拷贝操作
+    const Singleton& operator=(const Singleton&) = delete;                // 禁止赋值操作
+    
+    std::string getValue() {
+        return m_value;
+    }
+
+private:
+    // GC 类：程序结束时，进入析构函数销毁 Singleton 类的实例
+    class GC
+    {
+    public:
+        GC() {}
+        ~GC() {
+            if (m_Instance != nullptr) {
+                delete m_Instance;
+                m_Instance = nullptr;
+                cout << "Exec GC dector, delete m_Instance.\n";
+            }
+        }
+    };
+
+    static GC gc;                           // 定义静态成员变量，当程序结束时，会调用 GC 类的析构函数
+
+private:
+    Singleton(const std::string value);     // constructor
+    ~Singleton();                           // destructor
+
+    static Singleton* m_Instance;           // 静态成员指针
+    std::string m_value;
+};
+
+// 静态变量外部初始化
+Singleton::GC Singleton::gc; 
+Singleton* Singleton::m_Instance = nullptr;
+
+Singleton::Singleton(const std::string value)
+    : m_value(value)
+{
+    cout << "Exec Singleton ctor.\n";
+}
+
+Singleton::~Singleton()
+{
+    cout << "Exec Singleton dector.\n";
+}
+
+// 懒汉式单例，存在多个线程访问时资源竞争的问题
+Singleton* Singleton::getInstace(const std::string& value)
+{
+    if (m_Instance == nullptr) {
+        m_Instance = new Singleton(value);
+    }
+    return m_Instance;
+}
+
+
+// 第一个线程处理函数
+void ThreadFirst()
+{
+    std::this_thread::sleep_for(chrono::milliseconds(1000));
+    Singleton* singleton = Singleton::getInstace("First");
+    std::cout << singleton->getValue() << std::endl;
+}
+
+// 第二个线程处理函数
+void ThreadSecond()
+{
+    std::this_thread::sleep_for(chrono::milliseconds(1000));
+    Singleton* singleton = Singleton::getInstace("Second");
+    std::cout << singleton->getValue() << std::endl;
+}
+
+int main(int argc, char *argv[]) 
+{
+    std::thread t1(ThreadFirst);
+    std::thread t2(ThreadSecond);
+    t1.join();                          // 回收创建的线程，避免资源浪费
+    t2.join();
+
+    return 0;
+}
+```
+
+执行结果
+
+```
+Exec Singleton ctor.
+First
+Exec Singleton ctor.
+Second
+Exec Singleton dector.
+Exec GC dector, delete m_Instance.
+```
 
 
 

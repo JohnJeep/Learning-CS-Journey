@@ -1,7 +1,7 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-02-20 17:14:47
- * @LastEditTime: 2022-03-21 00:53:26
+ * @LastEditTime: 2022-03-22 01:07:27
  * @LastEditors: Please set LastEditors
  * @Description: 模拟懒汉模式资源竞争：线程安全与不安全问题
  */
@@ -23,35 +23,53 @@ public:
     static Singleton* getInstanceStatic(const std::string& value);        // 静态构造
     static Singleton* freeInstance();
 
-    // 禁止拷贝操作
-    Singleton(Singleton& other) = delete;
-
-    // 禁止赋值操作
-    void operator=(const Singleton&) = delete;
+    Singleton(Singleton& other) = delete;                                 // 禁止拷贝操作
+    const Singleton& operator=(const Singleton&) = delete;                // 禁止赋值操作
     
     std::string getValue() {
         return m_value;
     }
 
 private:
+    // GC 类：程序结束时，进入析构函数销毁 Singleton 类的实例
+    class GC
+    {
+    public:
+        GC() {}
+        ~GC() {
+            if (m_Instance != nullptr) {
+                delete m_Instance;
+                m_Instance = nullptr;
+                cout << "Exec GC dector, delete m_Instance.\n";
+            }
+        }
+    };
+
+    static GC gc;                           // 定义静态成员变量，当程序结束时，会调用 GC 类的析构函数
+
+private:
     Singleton(const std::string value);     // constructor
     ~Singleton();                           // destructor
+
     static Singleton* m_Instance;           // 静态成员指针
     static std::mutex m_mutex;
     std::string m_value;
 };
 
 // 静态变量外部初始化
+Singleton::GC Singleton::gc; 
 Singleton* Singleton::m_Instance = nullptr;
 std::mutex Singleton::m_mutex;
 
 Singleton::Singleton(const std::string value)
     : m_value(value)
 {
+    cout << "Exec Singleton ctor.\n";
 }
 
 Singleton::~Singleton()
 {
+    cout << "Exec Singleton dector.\n";
 }
 
 // 懒汉式单例，存在多个线程访问时资源竞争的问题
@@ -103,9 +121,9 @@ Singleton* Singleton::freeInstance()
 void ThreadFirst()
 {
     std::this_thread::sleep_for(chrono::milliseconds(1000));
-    // Singleton* singleton = Singleton::getInstace("First");
+    Singleton* singleton = Singleton::getInstace("First");
     // Singleton* singleton = Singleton::getInstanceLock("First");
-    Singleton* singleton = Singleton::getInstanceStatic("First");
+    // Singleton* singleton = Singleton::getInstanceStatic("First");
     std::cout << singleton->getValue() << std::endl;
 }
 
@@ -113,9 +131,9 @@ void ThreadFirst()
 void ThreadSecond()
 {
     std::this_thread::sleep_for(chrono::milliseconds(1000));
-    // Singleton* singleton = Singleton::getInstace("Second");
+    Singleton* singleton = Singleton::getInstace("Second");
     // Singleton* singleton = Singleton::getInstanceLock("Second");
-    Singleton* singleton = Singleton::getInstanceStatic("Second");
+    // Singleton* singleton = Singleton::getInstanceStatic("Second");
     std::cout << singleton->getValue() << std::endl;
 }
 
