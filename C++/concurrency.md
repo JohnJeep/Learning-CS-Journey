@@ -8,6 +8,8 @@
 # async
 async() 提供一个接口，让一段功能或一个可调用对象在后台运行，成为一个独立的线程。
 
+`async_wait()`
+
 
 # future
 Class future<> 允许你等待线程结束并获取其结果。
