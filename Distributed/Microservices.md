@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-11-17 00:36:00
- * @LastEditTime: 2021-12-09 22:02:55
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-30 17:59:50
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: 
 -->
 
@@ -30,4 +30,12 @@
 6. 分布式 唯一 ID 生成
 
  
+
+# 面对的挑战
+
+- 负载均衡
+- 熔断降级
+- 灰度发布
+- 故障切换
+- 分布式跟踪
 
