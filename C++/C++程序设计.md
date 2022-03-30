@@ -36,13 +36,35 @@ API 必须拥有良好的设计、文档、回归测试、并且保证发布之�
 ## 3. 软件设计考虑的原则
 
 - 可扩展性（scalability）：代码之间耦合低。
-
 - 可移植性（portability）：不同平台上运行。
-
 - 安全性：产品发布后，有没有做相关保护的措施。例如，当前发布的产品有问题，如何快速回滚到原来的版本，最大限度减少产品发布的风险。
-
 - 可维护性：方便组内其它的成员和后续维护代码的人员的快速理解和熟悉你的代码。
-
 - 可复用性
+
+---------
+
+- launch
+
+- wrapper
+
+- crontab 定时器
+
+- schedule
+
+- task
+
+- helper
+
+- register
+
+  - register_keybord_callback
+
+- callback
+
+- start
+
+- cancel
+
+- 
 
   
