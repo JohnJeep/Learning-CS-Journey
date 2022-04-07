@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package JJ;
+
+message Info {
+    string name = 1;
+    int32 grade = 2;
+    int32 score = 3; 
+}
+
+message Subject {
+  optional int32 id = 1;
+  optional string email = 2;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+  
+  PhoneType iPhone = 3; 
+}
