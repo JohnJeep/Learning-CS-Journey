@@ -29,11 +29,6 @@ template< class T > class enable_shared_from_this;
 
 - 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
 
-  ```cpp
-  
-  ```
-
-  
 
 # 2. 为什么要用 enable_shared_from_this？
 - 需要在类对象的内部中获得一个指向当前对象的 shared_ptr 对象。
