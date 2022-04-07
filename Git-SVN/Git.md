@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2022-03-20 01:09:24
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-04-07 18:09:45
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: git基础命令学习
 --> 
 
@@ -99,6 +99,7 @@
 ## 1.4. Git tag
 
 Git tag 有两种类型。
+
 - 轻量标签（lightweight）：很像一个不会改变的分支——它只是一个特定提交的引用。
   - 本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。 
   - `git tag 标签名`创建标签
@@ -126,13 +127,15 @@ Git tag 有两种类型。
 ## 1.6. Git checkout
 
 切换或者创建新分支
+
 - `git checkout  <new_branch_name>`   切换到 new_branch_name 分支下
 - `git branch Develop`  新建Develop分支
 - `git checkout -b <new_branch_name>`   创建 new_branch_new分支，并切换到当前分支
 > Git 2.23 版本之后，使用 `git switch` 替代原先的 `git chechout`。切换到已存在的分支: `git switch testing-branch`; 创建一个新分支并切换到当前分支: `git switch -c new-branch`; 返回到你 checkout 之前的分支: `git switch -`
 
 
-用暂存区或者指定commit提交内容覆盖工作区内容
+用暂存区或者指定 commit 提交内容覆盖工作区内容
+
 -  用暂存区内容覆盖工作区内容 
    - `git checkout readme.txt` 将暂存区中的`readme.txt`文件还原到工作区，如果要还原多个文件，使用**空格**分隔
    - 还原所有文件 `git checkout .`
