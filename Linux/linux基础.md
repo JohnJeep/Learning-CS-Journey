@@ -1351,6 +1351,12 @@ find 命令：在指定的目录中共去查找文件。
 -mtime: 上次修改的时间（按照天数）
 	查找当前路径下 7 天以前的 ErrorLog 文件
 	find . -name "ErrorLog*.log" -mtime +7
+	
+	删除当前路径下超过 10 天被修改的文件
+	find . -name "DataDeal*.log" -mtime +10 | xargs rm -rf
+	
+	另外一种写法
+	find . -name "IOV-GBDataDeal*.log" -mtime +10 -exec rm -rf {} \;
 
 -mmin(modified minute): 修改时间（按照分钟）
 
