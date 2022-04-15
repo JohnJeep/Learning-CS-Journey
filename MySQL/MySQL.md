@@ -428,7 +428,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 - 统计某个数据库中有多少张表
 
   ```sql
-  SELECT count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;
+  select count(*) TABLES, table_schema FROM information_schema.TABLES where table_schema = '数据库名' GROUP BY table_schema;
   ```
 
 
@@ -669,12 +669,61 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 
 
-
 # 3. Function(函数)
-- `cancat()函数`: 拼接两个列:
-- `RTrim()函数`: 去掉值右边的所有空格
-- `LTrim()函数`: 去掉值左边的所有空格
-- `Upper()`: 将文本转换为大写
+
+## count
+
+`count()` 是一个聚合函数，函数的参数不仅可以是字段名，也可以是其他任意表达式，该函数作用是**统计符合查询条件的记录中，函数指定的参数不为 NULL 的记录有多少个**。
+
+- `count(column_name)` 函数：统计 `table_name` 表中 `column_name`  列字段不为 `NULL` 的行数。
+
+  ```sql
+  select count(column_name) FROM table_name
+  ```
+
+  `column_name` 列明为主键时，
+
+  
+
+- `count(*)` 返回表中所有列对应的行数，不会忽略 NULL 值。
+
+  ```sql
+  select count(*) FROM table_name
+  ```
+
+
+
+`count(1)`
+
+
+
+小林coding： https://www.cnblogs.com/xiaolincoding/p/15769721.html
+
+
+
+## cancat
+
+`cancat()函数`: 拼接两个列:
+
+## Rtrim
+
+`RTrim()函数`: 去掉值右边的所有空格
+
+## LTrim
+
+`LTrim()函数`: 去掉值左边的所有空格
+
+## Upper
+
+`Upper()`: 将文本转换为大写
+
+
+
+
+
+
+
+
 
 
 # 4. 视图(View)
@@ -839,15 +888,15 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 mysql> load data infile 'd.txt' into table table_name 
     -> CHARACTER SET utf8,              
     -> fields terminated by','
-    -> lines terminated by'\r\n'
+    -> lines terminated by'\r\n';
 ```
 
 
 - 导出txt文件
 ```sql
- mysql> select * from table_name into outfile 'd.txt'
+mysql> select * from table_name into outfile 'd.txt'
     -> fields terminated by','
-    -> lines terminated by'\r\n'
+    -> lines terminated by'\r\n';
 ```
 
 
@@ -861,6 +910,7 @@ mysql> load data infile 'd.txt' into table tt
 
 # 11. 参考
 
+- [MySQL 5.7 reference manual](https://dev.mysql.com/doc/refman/5.7/en/)
 - [MySQL安装教程参考文章](https://blog.csdn.net/u013235478/article/details/50623693)
 - [MySQL压缩包安装参考](https://www.cnblogs.com/laumians-notes/p/9069498.html)
 - [MySQL卸载参考](https://www.cnblogs.com/zimo-jing/p/7931866.html)
@@ -876,8 +926,20 @@ mysql> load data infile 'd.txt' into table tt
   - [追风刀·丁奇 - ITeye技术网站](https://dinglin.iteye.com/)
   - [阿里云数据库高级专家彭立勋](http://www.penglixun.com/)
   - [国外 Percona's MySQL & InnoDB performance and scalability blog](https://www.percona.com/blog/)
-  - [比较详细的MySQL学习笔记](https://shockerli.net/post/1000-line-mysql-note/)
+  - [格物：MySQL学习笔记](https://shockerli.net/post/1000-line-mysql-note/)
 - [MySQL在Linux下密码默认安全等级问题](https://blog.csdn.net/kuluzs/article/details/51924374)
 - [MySQL修改密码（三种方法示例）](https://www.yiibai.com/mysql/changing-password.html)
 - [数据库事务的四大特性以及事务的隔离级别](https://blog.csdn.net/FX677588/article/details/76747864)
 - [Mysql备份还原数据库之mysqldump实例及参数详细说明](https://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html)
+
+- 社区版下载网站：https://dev.mysql.com/downloads/
+
+- 版本发行说明手册，其中有各版本新增内容：
+
+  https://dev.mysql.com/doc/relnotes/mysql/5.7/en/
+
+  https://dev.mysql.com/doc/relnotes/mysql/8.0/en/
+
+- 查看与提交bug网站：https://bugs.mysql.com/
+
+- MySQL团队博客：https://mysqlserverteam.com/

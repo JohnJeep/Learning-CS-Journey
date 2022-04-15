@@ -1532,6 +1532,18 @@ OPTIONS:
       grep -r  "task_struct {" /usr/src/  -n 
 ```
 
+
+
+查询生产环境下以压缩归档的日志，在不用解压文件的前提下直接进行查询日志，其中压缩的文件格式为 `.gz`
+
+```
+[root@John]# zgrep -ia "ReportDBTable" ./Server_log/20220411.tar.gz
+[20220411_204121_750][I]received update config[t_config.ReportDBTable]: old(), new(1)[TID:4661]
+[20220411_204214_321][I]Get ReportDBTable value: 1[TID:3143]
+```
+
+
+
 # 22. pgrep
 
 根据进程的名称查找并返回进程的 ID 号到标准输出。与 pidof 功能一样。
