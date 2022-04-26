@@ -1,4 +1,3 @@
-
 <!-- TOC -->
 
 - [1. 为什么会出现 Docker？](#1-为什么会出现-docker)
@@ -10,39 +9,49 @@
   - [5.2. Windows 下安装 Docker](#52-windows-下安装-docker)
 - [6. Windows系统上为什么能运行 Docker？](#6-windows系统上为什么能运行-docker)
 - [7. Docker 组件](#7-docker-组件)
-  - [7.1. Docker 原理](#71-docker-原理)
-- [8. Docker 命令](#8-docker-命令)
-  - [8.1. 帮助启动命令](#81-帮助启动命令)
-  - [8.2. 容器命令](#82-容器命令)
-    - [8.2.1. docker run](#821-docker-run)
-    - [8.2.2. exit](#822-exit)
-    - [8.2.3. docker ps](#823-docker-ps)
-    - [8.2.4. docker logs](#824-docker-logs)
-    - [8.2.5. docker top](#825-docker-top)
-    - [8.2.6. docker inspect](#826-docker-inspect)
-    - [8.2.7. docker exec](#827-docker-exec)
-    - [8.2.8. docker attach](#828-docker-attach)
-    - [8.2.9. docker cp](#829-docker-cp)
-    - [8.2.10. docker export](#8210-docker-export)
-    - [8.2.11. docker import](#8211-docker-import)
-  - [8.3. 镜像命令](#83-镜像命令)
-    - [8.3.1. docker  images](#831-docker--images)
-    - [8.3.2. docker  search](#832-docker--search)
-    - [8.3.3. docker pull](#833-docker-pull)
-    - [8.3.4. docker rmi](#834-docker-rmi)
-    - [8.3.5. docker system df](#835-docker-system-df)
-    - [8.3.6. docker save](#836-docker-save)
-    - [8.3.7. docker load](#837-docker-load)
-    - [8.3.8. docker build](#838-docker-build)
-- [9. Docker 下安装软件](#9-docker-下安装软件)
-- [10. Docker 容器数据卷](#10-docker-容器数据卷)
-- [11. Dockerfile](#11-dockerfile)
-- [12. Docker network](#12-docker-network)
-  - [12.1. .](#121-)
-- [13. Docker Compose](#13-docker-compose)
-  - [13.1. 安装](#131-安装)
-- [14. 面试问题](#14-面试问题)
-- [15. Reference](#15-reference)
+  - [7.1. Docker 镜像加载原理](#71-docker-镜像加载原理)
+  - [7.2. Docker 镜像分层](#72-docker-镜像分层)
+  - [7.3. Docker 原理](#73-docker-原理)
+- [8. Docker 架构](#8-docker-架构)
+  - [8.1. Docker 运行流程](#81-docker-运行流程)
+- [9. Docker 命令](#9-docker-命令)
+  - [9.1. 帮助启动命令](#91-帮助启动命令)
+  - [9.2. 容器命令](#92-容器命令)
+    - [9.2.1. docker run](#921-docker-run)
+    - [9.2.2. docker ps](#922-docker-ps)
+    - [9.2.3. exit](#923-exit)
+    - [9.2.4. docker start](#924-docker-start)
+    - [9.2.5. docker stop](#925-docker-stop)
+    - [9.2.6. docker restart](#926-docker-restart)
+    - [9.2.7. docker kill](#927-docker-kill)
+    - [9.2.8. docker rm](#928-docker-rm)
+    - [9.2.9. docker top](#929-docker-top)
+    - [9.2.10. docker inspect](#9210-docker-inspect)
+    - [9.2.11. docker exec](#9211-docker-exec)
+    - [9.2.12. docker attach](#9212-docker-attach)
+    - [9.2.13. docker cp](#9213-docker-cp)
+    - [9.2.14. docker logs](#9214-docker-logs)
+    - [9.2.15.](#9215)
+    - [9.2.16. docker export](#9216-docker-export)
+    - [9.2.17. docker import](#9217-docker-import)
+  - [9.3. 镜像命令](#93-镜像命令)
+    - [9.3.1. docker  images](#931-docker--images)
+    - [9.3.2. docker  search](#932-docker--search)
+    - [9.3.3. docker pull](#933-docker-pull)
+    - [9.3.4. docker rmi](#934-docker-rmi)
+    - [9.3.5. docker system df](#935-docker-system-df)
+    - [9.3.6. docker save](#936-docker-save)
+    - [9.3.7. docker load](#937-docker-load)
+    - [9.3.8. docker build](#938-docker-build)
+- [10. Docker 下安装软件](#10-docker-下安装软件)
+- [11. Docker 容器数据卷](#11-docker-容器数据卷)
+- [12. Dockerfile](#12-dockerfile)
+  - [12.1. docker commit](#121-docker-commit)
+- [13. Docker network](#13-docker-network)
+- [14. Docker Compose](#14-docker-compose)
+  - [14.1. 安装](#141-安装)
+- [15. 面试问题](#15-面试问题)
+- [16. Reference](#16-reference)
 
 <!-- /TOC -->
 
@@ -55,6 +64,10 @@
 Docker 是基于 Go 语言实现的云开源项目。主要目标是“build, ship and run any app, anywhere”，通过对应用组件的封装、分发、部署、运行等生命周期的管理，使用户的 APP 及运行环境能做到“一次镜像，处处运行”。
 
 Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成镜像，通过镜像成为运行在 Docker 容器上面的示例。Docker 能运行在任何的操作系统上，实现了跨平台、跨服务器。只需要一次配置好环境，换到别的机器上就可以一键部署了，大大简化了操作。
+
+从面向对象的角度看 docker：Docker 利用容器，独立运行一个或一组应用，这些程序或服务都在容器里面，容器就类似于一个虚拟化的运行环境，**容器是镜像创建的运行实例**。
+
+从镜像的角度看 docker：可以把容器看做是一个简易版的 Linux 环境，包括 root 用户权限、进程空间、用户空间、网络空间等，还有一些应用程序。
 
 参考：https://docs.microsoft.com/zh-cn/dotnet/architecture/microservices/container-docker-introduction/docker-defined
 
@@ -70,7 +83,7 @@ Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成
 
   由于 Docker 不需要 Hyperversion（虚拟机）实现硬件资源虚拟化，运行在 Docker 容器上的程序直接使用的是实际物理机器的硬件资源，因此 CPU、内存利用率在 Docker 上有跟明显的优势。
 
-  ![](figures/vm-docker.png)
+  ![](figures/vm-container.jpg)
 
 - Docker 利用的是宿主机的内核，不需要加载操作系统的内核。
 
@@ -81,6 +94,8 @@ Docker 优点
 - 轻便：Docker 是基于容器的虚拟化，仅包含业务运行所需要的环境。
 - 高效：不需要操作系统的虚拟化开销。
 - 灵活性更高：支持多网络配置、分层存储和包管理。
+
+参考：[Docker Containers and Kubernetes: An Architectural Perspective](https://dzone.com/articles/docker-containers-and-kubernetes-an-architectural)
 
 # 5. Docker 安装
 
@@ -126,13 +141,13 @@ Docker在早期是只专注于Linux虚拟化实现的一种容器技术，因为
 Docker在Windows系统上安装时，Docker会创建一个基于Linux的虚拟机，叫做MobyLinuxVM虚拟机，这个虚拟机是基于Alpine Linux的。Docker应用程序会连接到此虚拟机，你便可以开始创建具有必要操作组件的容器了。为了与本地网络和NAT（网络地址转换）进行通信，在Docker安装中会为虚拟机配置一个子网，以便你的容器在应用程序中使用。不过不必担心，MobyLinuxVM虚拟机是运行在Hyper-V，这是Windows是一项虚拟化技术，相比虚拟机之类的非常轻量级，容器可以共享主机内核，任务管理器里面可以看到对应进程。
 ```
 
-
-
 参考：[Docker在Windows的使用说明](http://www.520code.net/index.php/archives/39/)
 
 # 7. Docker 组件
 
 Docker 中有三个重要的组件：Image，Container，Repository。只有理解了这些概念后，学习 Docker 就很轻松了。
+
+![](figures/docker-container-component.jpg)
 
 - 镜像（Image）
   - Docker 镜像是一个特殊的文件系统，用来创建 Docker 容器，一个镜像可以创建很多个容器。比如 CentOS7 官方镜像。
@@ -149,10 +164,41 @@ Docker 中有三个重要的组件：Image，Container，Repository。只有理�
   - 集中存放镜像文件的地方，类似 Git 的远程仓库。
   - 仓库分为私有仓库和公开的仓库。私有仓库：比如公司内部搭建专门存放镜像文件的地方；公共仓库：任何人都能访问专门存放镜像文件的地方。全球最大的公开仓库是 Dockerhub(https://hub.docker.com)。在中国境内由于一些著名的原因，访问 Dockerhub 仓库比较慢，可以配置国内的镜像仓库，比如阿里云、网易等等。
 
+## 7.1. Docker 镜像加载原理
 
-## 7.1. Docker 原理
+Docker 镜像实际上由一层一层的文件系统组成的，这种文件系统叫 UnionFS（联合文件系统）。Docker 镜像底层是引导文件系统 `bootfs`，这一层与典型的 Linux/Unix 系统是一样的，包含 boot 加载器和内核。当 boot 加载完成之后，整个内核就存在与内存中了，此时的内存权已由 bootfs 转移给内核，然后系统会卸载 bootfs。
+
+> bootfs 全名叫 boot file system，主要包含 BootLoader 和 kernel，BootLoader 主要是引导加载 kernel，Linux 刚启动时会加载 bootfs 文件系统。
+
+> rootfs（root file system）在 bootfs 文件系统之上，包含的是 Linux 系统中的 `/dev`、`/proc`、`/bin`、`/etc` 等标准目录和文件。rootfs 就是各种不同的操作系统的发行版，比如 Ubuntu、Redhat等。
+
+对于一个精简的 OS，rootfs 可以很小，只需要包括最基本的命令、工具和程序库就可以了，因为底层直接用 Host 的kernel，自己只需要提供 rootfs 就行了。可见对于不同的 Linux 发行版，bootfs 基本是一致的，rootfs 会有差别，因此不同的发行版可以公用 bootfs。
+
+## 7.2. Docker 镜像分层
+
+Docker 镜像层是 **只读** 的，容器层是 **可写** 的。当容器启动时，一个新的、具有写权限的层被加载到容器的顶部，这一层通常成为“容器层”，容器层之下的都叫“镜像层”。所有对容器的添加、删除、修改等操作都只会发生在容器层中。
+
+镜像层
+
+![images-layers](figures/images-layers.jpg)
+
+容器层
+
+![](figures/container-layers.jpg)
+
+Docker 镜像分层的优点：资源共享、方便复制迁移。比如：有多个镜像都是从相同的基类镜像（base）构建而来，那么 docker Host 只需在磁盘上保存一份 base 镜像，同时内存中也只需要加载一份 base 镜像，就可以为所有的容器服务了。
+
+![](figures/container-base-images.png)
+
+参考：[docker docs 官方文档讲解](https://docs.docker.com/storage/storagedriver/)
+
+## 7.3. Docker 原理
 
 ![](figures/docker-view.png)
+
+# 8. Docker 架构
+
+![](figures/docker-architecture.jpg)
 
 Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）运行在主机（host）上，然后通过 Socket 连接从客户端访问，守护进程从客户端接受命令并管理运行在主机上的容器。
 
@@ -160,7 +206,7 @@ Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）
 
 
 
-Docker 运行流程
+## 8.1. Docker 运行流程
 
 1. 用户是使用 Docker Client 与 Docker Daemon建立通信，并发送请求给 Docker daemon。
 2. Docker Daemon 作为 Docker 架构中的主体部分，苜先提供 Docker Server 的功能使其可以接受 Docker Client的请求。
@@ -172,11 +218,14 @@ Docker 运行流程
 
 
 
-# 8. Docker 命令
+参考：
 
-运行 Docker 的格式:
+- [Docker 总体架构](https://docker.renkeju.com/docker/docker.html)
+- [Docker and Kubernetes Security: Principles & Practices](https://www.linkedin.com/pulse/docker-kubernetes-security-principles-practices-dr-rabi-prasad-padhy) 深入讲解了 Docker 的底层原理。
 
-`docker [OPTIONS] COMMAND`
+# 9. Docker 命令
+
+运行 Docker 的格式：`docker [OPTIONS] COMMAND`
 
 说明：
 
@@ -186,7 +235,7 @@ Docker 运行流程
 
 Docker 官方命令参考：https://docs.docker.com/reference/
 
-## 8.1. 帮助启动命令
+## 9.1. 帮助启动命令
 
 ```
 # 查看Docker版本信息
@@ -221,16 +270,21 @@ $ sudo rm -rf /var/lib/docker
 $ sudo rm -rf /var/lib/containerd
 ```
 
-## 8.2. 容器命令
+## 9.2. 容器命令
 
-### 8.2.1. docker run
+### 9.2.1. docker run
 
-在一个新的容器中运行一条命令。
+在一个新的容器中运行一条命令。在指定的镜像中创建一个具有写权限的容器层（container layer），然后运行指定的命令。
+
+用法
 
 ```
-用法
-	docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
 
+Docker run中的可选项
+
+```
 OPTIONS:
   -i, --interactive   交互式运行容器
   -t, --tty           给容器重新分配一个伪终端（pseudo-TTY）
@@ -240,11 +294,13 @@ OPTIONS:
   --name=“容器名字”   给容器分配一个名字，不指定名字时，docker 会随机分配一个
 ```
 
-运行 `Docker run` 命令都干了什么？
+要启动 docker，运行 `Docker run` 命令即可，我们思考下，执行 `docker run` 命令 docker 引擎都干了什么。底层是怎样实现的？
 
 ![](figures/docker-run.png)
 
 示例1
+
+`docker run -it 36c607e7b14d /bin/bash`  命令表示：交互式启动一个镜像 ID 为 `36c607e7b14d` 的 zookeeper 容器，并在容器中执行  `/bin/bash` 命令。
 
 ```
 [root@redis_181 ~]# docker images
@@ -256,16 +312,16 @@ hello-world          latest    feb5d9fea6a5   3 months ago   13.3kB
 root@c9fa3e7753a5:/apache-zookeeper-3.7.0-bin#
 ```
 
-`docker run -it 36c607e7b14d /bin/bash`  命令表示：交互式启动一个镜像 ID 为 36c607e7b14d 的 zookeeper 容器，并在容器中执行 /bin/bash 命令。
+示例2
 
-示例2：交互式的方式启动一个容器，并给容器起一个新名字，同时分配一个伪终端。在标准输入中用 bash 命令启动伪终端。
+交互式的方式启动一个容器，并给容器起一个新名字，同时分配一个伪终端。在标准输入中用 bash 命令启动伪终端。
 
 ```
 [root@redis_181 ~]# docker run -it --name=kafka wurstmeister/kafka /bin/bash
 bash-5.1#
 ```
 
-
+示例3
 
 后台运行 Docker 容器
 
@@ -276,16 +332,7 @@ bash-5.1#
 77e61214ea8c95c007dc02928d01179ba964e63a9c1861a870fedb6f4938dd56
 ```
 
-
-
-### 8.2.2. exit
-
-从容器中退出。退出容器有两种方式：
-
-1. 容器中执行 `exit` 命令后，直接退出，同时容器也停止了。
-2. 按 `Ctrl + p + q` 组合命令后，退出容器，当容器不停止，后台还在运行。
-
-### 8.2.3. docker ps
+### 9.2.2. docker ps
 
 列出本地主机中当前正在运行的容器信息
 
@@ -312,61 +359,65 @@ ab67455c4ee2   wurstmeister/kafka   "/bin/bash"   2 minutes ago   Up 2 minutes  
 docker ps -a
 ```
 
+### 9.2.3. exit
 
+从容器中退出。退出容器有两种方式：
+
+1. 容器中执行 `exit` 命令后，直接退出，同时容器也停止了。
+2. 按 `Ctrl + p + q` 组合命令后，退出容器，当容器不停止，后台还在运行。
+
+### 9.2.4. docker start
+
+启动容器
 
 ```
-# 启动容器
 docker start <容器id或容器名>
+```
 
-# 关闭容器
+### 9.2.5. docker stop
+
+关闭容器
+
+```
 docker stop <容器id或容器名>
+
 例子：
   批量停止所有的容器
   docker stop $(docker ps -a | awk '{print $1}'| tail -n +2)
+```
 
-# 重启容器
+### 9.2.6. docker restart
+
+重启容器
+
+```
 docker restart <容器ID或容器名>
+```
 
-# 强制停止容器
+### 9.2.7. docker kill
+
+强制停止容器
+
+```
 docker kill <容器ID或容器名>
+```
 
-# 删除一停止的容器
+### 9.2.8. docker rm
+
+删除以停止的容器
+
+```
 docker rm <容器ID或容器名>
-
-# 导出一个已经创建的容器到一个文件
-docker export [容器ID]
-
-# 将制作好的容器快照导入指定路径下
-docker import [路径]
 ```
 
-
-
-### 8.2.4. docker logs
-
-查看容器内部日志
-
-```
-用法
-	docker logs [OPTIONS] CONTAINER
-
-OPTIONS:
-      --details        Show extra details provided to logs
-  -f, --follow         Follow log output
-      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
-  -n, --tail string    Number of lines to show from the end of the logs (default "all")
-  -t, --timestamps     Show timestamps
-      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
-```
-
-### 8.2.5. docker top
+### 9.2.9. docker top
 
 显示一个容器内部运行的进程。
+用法：`docker top CONTAINER [ps OPTIONS]`
+
+示例
 
 ```
-用法
-	docker top CONTAINER [ps OPTIONS]
-
 [root@redis_181 ~]# docker ps
   CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS      NAMES
   77e61214ea8c   redis:6.0.8   "docker-entrypoint.s…"   15 seconds ago   Up 13 seconds   6379/tcp   focused_almeida
@@ -376,7 +427,7 @@ OPTIONS:
   polkitd             9516        9497    0      08:17     ?       00:00:00            redis-server *:6379
 ```
 
-### 8.2.6. docker inspect
+### 9.2.10. docker inspect
 
 查看容器的内部细节信息。
 
@@ -395,7 +446,7 @@ OPTIONS:
 
 
 
-### 8.2.7. docker exec
+### 9.2.11. docker exec
 
 重新进入原先已退出的容器内部。
 
@@ -406,16 +457,21 @@ OPTIONS:
 [OPTIONS]:
   -d, --detach 在容器中后台执行命令； 
   -i, --interactive=true | false ：打开标准输入接受用户输入命令
-
-示例
-	docker exec -it <容器ID> /bin/bash
-	
-	# 使用 /bin/bash 命令前台交互的重新进入到容器内部 
-	[root@redis_181 ~]# docker exec -it 77e61214ea8c /bin/bash
-	root@77e61214ea8c:/data#
 ```
 
-### 8.2.8. docker attach
+示例
+
+```
+docker exec -it <容器ID> /bin/bash
+
+# 使用 /bin/bash 命令前台交互的重新进入到容器内部 
+[root@redis_181 ~]# docker exec -it 77e61214ea8c /bin/bash
+root@77e61214ea8c:/data#
+```
+
+
+
+### 9.2.12. docker attach
 
 重新进入原先已退出的容器内部，并将本地标准输入、输出和错误流附加到正在运行的容器。
 
@@ -432,9 +488,63 @@ OPTIONS:
 注意：`docker exec` 与 `docker attach` 的区别
 
 - `docker attach`  直接进入容器命令行的终端，不会启动新的进程，用 `exit` 命令退出容器时，会导致容器停止。
+
+  外部终端查看 docker 容器的 ID
+
+  ```
+  [root@CentOS7 ~]# docker ps
+  CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
+  86fcdb251eb9   ubuntu    "/bin/bash"   6 minutes ago   Up 6 minutes             romantic_murdock
+  ```
+
+  指定容器 ID，进入 docker 容器内部
+
+  ```
+  [root@CentOS7 ~]# docker attach 86fcdb251eb9
+  root@86fcdb251eb9:/#
+  root@86fcdb251eb9:/# ls
+  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+  ```
+
+  执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器没有跑起来，已经停止运行了。
+
+  ```
+  root@86fcdb251eb9:/# exit
+  exit
+  [root@CentOS7 ~]# docker ps
+  CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+  ```
+
 - 执行 `docker exec` 是在容器内部打开新的终端，并且可以启动新的进程，用 `exit` 命令退出容器时，不会导致容器停止。
 
-### 8.2.9. docker cp
+  外部终端查看 docker 容器的 ID
+
+  ```
+  [root@CentOS7 ~]# docker ps
+  CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES
+  178c5e88904a   ubuntu    "/bin/bash"   20 seconds ago   Up 19 seconds             eager_ellisS
+  ```
+
+  指定容器 ID 和命令，比如指定 ID 为 `178c5e88904a` 的容器，以交互式的方式重新打开一个伪终端后进入容器内部。
+
+  ```
+  [root@CentOS7 ~]# docker exec -it 178c5e88904a  /bin/bash
+  root@178c5e88904a:/#
+  ```
+
+  执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器还在后台运行，并没有停止。
+
+  ```
+  root@178c5e88904a:/# exit
+  exit
+  [root@CentOS7 ~]# docker ps
+  CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
+  178c5e88904a   ubuntu    "/bin/bash"   3 minutes ago   Up 3 minutes             eager_ellis
+  ```
+
+
+
+### 9.2.13. docker cp
 
 在容器和本地文件系统（本地主机）之间拷贝文件或文件夹。
 
@@ -448,7 +558,26 @@ OPTIONS:
   -L, --follow-link   Always follow symbol link in SRC_PATH
 ```
 
-### 8.2.10. docker export
+### 9.2.14. docker logs
+
+查看容器内部日志
+
+```
+用法
+	docker logs [OPTIONS] CONTAINER
+
+OPTIONS:
+      --details        Show extra details provided to logs
+  -f, --follow         Follow log output
+      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+  -n, --tail string    Number of lines to show from the end of the logs (default "all")
+  -t, --timestamps     Show timestamps
+      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+```
+
+### 9.2.15.  
+
+### 9.2.16. docker export
 
 导出一个容器文件系统作为一个 tar 包。
 
@@ -458,8 +587,11 @@ OPTIONS:
 	
 Options:
   -o, --output string   Write to a file, instead of STDOUT
-  
+```
+
 示例
+
+```
 [root@redis_181 ~]# docker ps -a
 CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                    PORTS      NAMES
 302e76d7a7af   redis:6.0.8          "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes             6379/tcp   elated_feistel
@@ -473,9 +605,11 @@ bdbd7d438f8f   hello-world          "/hello"                 2 days ago       Ex
                     hw.tar  
 ```
 
-### 8.2.11. docker import
 
-从 tar 包中的内容创建一个新的文件系统，再导入为 Docker镜像。
+
+### 9.2.17. docker import
+
+从 tar 包中的内容创建一个新的文件系统，再导入为 Docker 镜像。
 
 ```
 用法
@@ -485,9 +619,12 @@ OPTIONS:
   -c, --change list       Apply Dockerfile instruction to the created image
   -m, --message string    Set commit message for imported image
       --platform string   Set platform if server is multi-platform capable
+```
 
 示例
-  # cat 文件名.tar | docker import - 镜像用户/镜像名:镜像版本号
+
+```
+# cat 文件名.tar | docker import - 镜像用户/镜像名:镜像版本号
     [root@redis_181 ~]# cat hello.tar | docker import - john/hello:5.0
     sha256:ed584048180e082610c982dc8f56ccf9618872f80d5848d0e8c840dfd46c13bc
     [root@redis_181 ~]# docker images
@@ -504,11 +641,9 @@ OPTIONS:
 
 
 
-容器生命周期
+## 9.3. 镜像命令
 
-## 8.3. 镜像命令
-
-### 8.3.1. docker  images
+### 9.3.1. docker  images
 
 列出本地主机上已下载的所有 Docker 镜像
 
@@ -519,7 +654,11 @@ OPTIONS:
 OPTIONS:
   -a, --all   显示所有的镜像，包括默认隐藏的中间镜像（历史镜像）
   -q, --quiet 只显示镜像 ID
+```
 
+示例
+
+```
 [root@redis_181 ~]# docker images
 REPOSITORY           TAG       IMAGE ID       CREATED        SIZE
 wurstmeister/kafka   latest    2dd91ce2efe1   2 weeks ago    508MB
@@ -539,7 +678,7 @@ SIZE：镜像大小
 
 同一个仓库源可以有多个 TAG 版本，说明仓库源有不同的版本，用 `REPOSITORY:TAG` 来表示不同的镜像。比如 `redis:6.0.8` 表示从仓库源获取的是 redis 版本为6.0.8 ，在这个 Docker engine 中还可以拉取 redis 版本为 5.0 的仓库源，用 `redis:5.0` 表示，二者可以同时共存。若在拉取镜像时不指定镜像的标签版本，Docker 将默认使用 TAG 为 latest 的版本（最新版本）。
 
-### 8.3.2. docker  search
+### 9.3.2. docker  search
 
 从仓库源中搜索某个镜像
 
@@ -586,15 +725,13 @@ xetamus/redis-resource           forked redis-resource                          
 flant/redis-sentinel-proxy       Redis sentinel proxy by enriclluelles writte…   0                    [OK]
 ```
 
-```
-NAME：镜像名称
-DESCRIPTION：镜像说明
-STARS：点赞数量
-OFFICIAL：是否是官方的
-AUTOMATED：是否是自动构建的
-```
+- NAME：镜像名称
+- DESCRIPTION：镜像说明
+- STARS：点赞数量
+- OFFICIAL：是否是官方的
+- AUTOMATED：是否是自动构建的
 
-### 8.3.3. docker pull
+### 9.3.3. docker pull
 
 从仓库源中拉取指定的镜像或仓库
 
@@ -607,17 +744,21 @@ OPTIONS:
       --disable-content-trust   Skip image verification (default true)
       --platform string         Set platform if server is multi-platform capable
   -q, --quiet                   Suppress verbose output
-
-示例
-# 拉取时不指定版本，Docker 引擎默认从仓库源拉取最新的版本
-[root@redis_181 ~]# docker pull redis
-
-# 拉取时指定版本 TAG
-[root@redis_181 ~]# docker pull redis:6.0.8
-
 ```
 
-### 8.3.4. docker rmi
+示例
+
+```
+从 docker 仓库中拉取 redis 镜像，拉取时不指定版本，Docker 引擎默认从仓库源拉取最新的版本
+[root@redis_181 ~]# docker pull redis
+
+拉取时指定版本 TAG
+[root@redis_181 ~]# docker pull redis:6.0.8
+```
+
+
+
+### 9.3.4. docker rmi
 
 删除指定的镜像（rmi: Remove one or more images）
 
@@ -628,26 +769,38 @@ OPTIONS:
 OPTIONS:
   -f, --force      Force removal of the image
       --no-prune   Do not delete untagged parents
-      
-示例
-	# 删除单个镜像
-  [root@redis_181 ~]# docker rmi -f hello-world
-  Untagged: hello-world:latest
-  Untagged: hello-world@sha256:975f4b14f326b05db86e16de00144f9c12257553bba9484fed41f9b6f2257800
-  Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
- 
- # 删除多个镜像
- [root@redis_181 ~]# docker rmi -f redis:6.0.8 rdis:5.0
- 
- # 用参数续传来删除，将查找到的 Ubuntu 镜像 ID 传入要删除的表达式后面
-  [root@redis_181 ~]# docker rmi -f $(docker images -q ubuntu)
-  Untagged: ubuntu:latest
-  Untagged: ubuntu@sha256:b5a61709a9a44284d88fb12e5c48db0409cfad5b69d4ff8224077c57302df9cf
-  Deleted: sha256:d13c942271d66cb0954c3ba93e143cd253421fe0772b8bed32c4c0077a546d4d
-  Deleted: sha256:0eba131dffd015134cb310c284b776c1e44d330146cd2f0e30c4e464d0b76d24
 ```
 
-### 8.3.5. docker system df 
+示例：
+
+1. 删除单个镜像
+
+```
+[root@redis_181 ~]# docker rmi -f hello-world
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:975f4b14f326b05db86e16de00144f9c12257553bba9484fed41f9b6f2257800
+Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
+```
+
+2. 删除多个镜像
+
+```
+[root@redis_181 ~]# docker rmi -f redis:6.0.8 rdis:5.0
+```
+
+3. 用参数续传来删除，将查找到的 Ubuntu 镜像 ID 传入要删除的表达式后面
+
+```
+[root@redis_181 ~]# docker rmi -f $(docker images -q ubuntu)
+Untagged: ubuntu:latest
+Untagged: ubuntu@sha256:b5a61709a9a44284d88fb12e5c48db0409cfad5b69d4ff8224077c57302df9cf
+Deleted: sha256:d13c942271d66cb0954c3ba93e143cd253421fe0772b8bed32c4c0077a546d4d
+Deleted: sha256:0eba131dffd015134cb310c284b776c1e44d330146cd2f0e30c4e464d0b76d24
+```
+
+
+
+### 9.3.5. docker system df 
 
 查看镜像、容器、数据卷所占用的空间大小
 
@@ -663,17 +816,15 @@ Build Cache     0         0         0B        0B
 
 显示结果说明
 
-```
-TYPE：类型
-TOTAL：总数
-ACTIVE：激活状态
-SIZE：大小
-RECLAIMABLE：可回收
-```
+- TYPE：类型
+- TOTAL：总数
+- ACTIVE：激活状态
+- SIZE：大小
+- RECLAIMABLE：可回收
 
-### 8.3.6. docker save
+### 9.3.6. docker save
 
-保存一个或多个镜像到 tar 包中，默认是通过标准输出流。 
+保存一个或多个镜像到 `tar` 包中，默认是通过标准输出流。 
 
 ```
 用法
@@ -683,9 +834,9 @@ OPTIONS:
   -o, --output string   Write to a file, instead of STDOUT
 ```
 
-### 8.3.7. docker load
+### 9.3.7. docker load
 
-从一个 tar 包或标准输入中导入 Docker 镜像。
+从一个 `tar` 包或标准输入中导入 Docker 镜像。
 
 ```
 用法
@@ -694,8 +845,11 @@ OPTIONS:
 OPTIONS:
   -i, --input string   Read from tar archive file, instead of STDIN
   -q, --quiet          Suppress the load output
+```
 
 示例
+
+```
 docker image ls
 
 # 两种方式都是等效的
@@ -708,16 +862,13 @@ docker images
 
 
 
-### 8.3.8. docker build
+### 9.3.8. docker build
 
 从一个 Dockerfile 中构建一个 Docker 镜像。
 
-```
-用法
-	docker build [OPTIONS] PATH | URL | -
-```
+ 用法 ：`docker build [OPTIONS] PATH | URL | -`
 
-# 9. Docker 下安装软件
+# 10. Docker 下安装软件
 
 Docker下安装软件的步骤
 
@@ -730,13 +881,33 @@ Docker下安装软件的步骤
 
 
 
-# 10. Docker 容器数据卷
+# 11. Docker 容器数据卷
 
-# 11. Dockerfile
+# 12. Dockerfile
 
-# 12. Docker network
+## 12.1. docker commit
 
-## 12.1. .  
+基于原有镜像的改变，创建一个新的镜像（image）。
+
+用法
+
+```
+docker commit -m "提交的描述信息" -a="作者" 容器ID 目标镜像名:[标签名]
+
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+Create a new image from a container's changes
+
+Options:
+  -a, --author string    Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  -c, --change list      Apply Dockerfile instruction to the created image
+  -m, --message string   Commit message
+  -p, --pause            Pause container during commit (default true)
+```
+
+
+
+# 13. Docker network
 
 ```
 [root@redis_181 ~]# docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 zk_network
@@ -756,9 +927,9 @@ c6cc0e89cb3c   none         null      local
 
 
 
-# 13. Docker Compose
+# 14. Docker Compose
 
-## 13.1. 安装
+## 14.1. 安装
 
 ```
 1. 下载镜像
@@ -783,13 +954,13 @@ docker-compose --version
 
 
 
-# 14. 面试问题
+# 15. 面试问题
 
 1. Docker 的虚悬镜像是什么
 
    仓库命、标签命都是 <none> 的镜像，俗称为虚悬镜像（dangling image）。
 
-# 15. Reference
+# 16. Reference
 
 - Docker 官网：https://docs.docker.com/
 - Dockerhub，安装 Docker 镜像文件的仓库：https://hub.docker.com/
