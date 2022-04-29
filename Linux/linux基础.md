@@ -281,11 +281,22 @@ ls 命令列出文件夹中的内容
   -i  显示文件的 inode 信息
 ```
 
+例子1：
+
 ```
-例子：
-    ls -al: 查看所有隐藏的文件  
-    ls -l | grep "*-" | wc -l 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
-    ls | wc -l 统计当前目录下总共有多少行
+ls -al: 查看所有隐藏的文件  
+ls -l | grep "*-" | wc -l 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
+ls | wc -l 统计当前目录下总共有多少行
+```
+
+例2：查看当前路径下的链接文件
+
+```
+[root@centos]# ls -lF | grep ^l
+lrwxrwxrwx 1 root root       18 7月   7 2021 libcrypto.so -> libcrypto.so.1.0.0*
+lrwxrwxrwx 1 root root       12 7月   7 2021 libcurl.so -> libcurl.so.4*
+lrwxrwxrwx 1 root root       20 7月   7 2021 libmysqlclient.so -> libmysqlclient.so.20*
+lrwxrwxrwx 1 root root       12 6月   3 2021 libpcre.so -> libpcre.so.1
 ```
 
 
