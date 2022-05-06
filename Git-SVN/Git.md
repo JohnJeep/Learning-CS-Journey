@@ -2,59 +2,59 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2022-04-07 18:09:45
+ * @LastEditTime: 2022-04-28 13:49:26
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: git基础命令学习
 --> 
 
 <!-- TOC -->
 
-- [1. Git 基础板块](#1-git-基础板块)
-  - [1.1. Git init](#11-git-init)
-  - [1.2. Git add](#12-git-add)
-  - [1.3. Git log](#13-git-log)
-  - [1.4. Git tag](#14-git-tag)
-  - [1.5. Git alias](#15-git-alias)
-  - [1.6. Git checkout](#16-git-checkout)
-  - [1.7. Git commit](#17-git-commit)
-  - [1.8. Git diff](#18-git-diff)
-  - [1.9. Git stash](#19-git-stash)
-  - [1.10. Git blame](#110-git-blame)
-  - [1.11. Git bisect](#111-git-bisect)
-  - [1.12. Git branch](#112-git-branch)
-    - [1.12.1. Branch Command](#1121-branch-command)
-    - [1.12.2. Branches Principle](#1122-branches-principle)
-    - [1.12.3. Branches conflict](#1123-branches-conflict)
-  - [1.13. Git rebase](#113-git-rebase)
-  - [1.14. Git revert](#114-git-revert)
-  - [1.15. Git Reset](#115-git-reset)
-  - [1.16. Removing or restore files](#116-removing-or-restore-files)
-    - [1.16.1. 删除指定文件](#1161-删除指定文件)
-    - [1.16.2. 恢复删除的文件](#1162-恢复删除的文件)
-  - [1.17. Git 四区](#117-git-四区)
-    - [1.17.1. Workspace](#1171-workspace)
-    - [1.17.2. Index](#1172-index)
-    - [1.17.3. Local repository](#1173-local-repository)
-    - [1.17.4. Remote repository](#1174-remote-repository)
-      - [1.17.4.1. Git remote](#11741-git-remote)
-      - [1.17.4.2. Git pull Git fetch](#11742-git-pull-git-fetch)
-      - [1.17.4.3. 远程仓库与本地的关联](#11743-远程仓库与本地的关联)
-      - [1.17.4.4. git远程仓库更换名称，本地如何修改？](#11744-git远程仓库更换名称本地如何修改)
-  - [1.18. Git中文乱码](#118-git中文乱码)
-  - [1.19. LF or CRLF](#119-lf-or-crlf)
-  - [1.20. Git代理配置](#120-git代理配置)
-  - [1.21. Git update](#121-git-update)
-  - [1.22. 提交代码总结](#122-提交代码总结)
-  - [1.23. Github 开源项目搜索技巧](#123-github-开源项目搜索技巧)
-- [2. Git高级板块](#2-git高级板块)
-  - [2.1. Git协议](#21-git协议)
-    - [2.1.1. SSH(Secure Shell)协议](#211-sshsecure-shell协议)
-  - [2.2. Git Internals](#22-git-internals)
-    - [2.2.1. Git文件状态](#221-git文件状态)
-    - [2.2.2. Git目录组成](#222-git目录组成)
-    - [2.2.3. Git objects](#223-git-objects)
-    - [2.2.4. Git Reference](#224-git-reference)
-- [3. 学习参考](#3-学习参考)
+- [1. Git 基础板块](#1-git-%E5%9F%BA%E7%A1%80%E6%9D%BF%E5%9D%97)
+    - [1.1. Git init](#11-git-init)
+    - [1.2. Git add](#12-git-add)
+    - [1.3. Git log](#13-git-log)
+    - [1.4. Git tag](#14-git-tag)
+    - [1.5. Git alias](#15-git-alias)
+    - [1.6. Git checkout](#16-git-checkout)
+    - [1.7. Git commit](#17-git-commit)
+    - [1.8. Git diff](#18-git-diff)
+    - [1.9. Git stash](#19-git-stash)
+    - [1.10. Git blame](#110-git-blame)
+    - [1.11. Git bisect](#111-git-bisect)
+    - [1.12. Git branch](#112-git-branch)
+        - [1.12.1. Branch Command](#1121-branch-command)
+        - [1.12.2. Branches Principle](#1122-branches-principle)
+        - [1.12.3. Branches conflict](#1123-branches-conflict)
+    - [1.13. Git rebase](#113-git-rebase)
+    - [1.14. Git revert](#114-git-revert)
+    - [1.15. Git Reset](#115-git-reset)
+    - [1.16. Removing or restore files](#116-removing-or-restore-files)
+        - [1.16.1. 删除指定文件](#1161-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6)
+        - [1.16.2. 恢复删除的文件](#1162-%E6%81%A2%E5%A4%8D%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6)
+    - [1.17. Git 四区](#117-git-%E5%9B%9B%E5%8C%BA)
+        - [1.17.1. Workspace](#1171-workspace)
+        - [1.17.2. Index](#1172-index)
+        - [1.17.3. Local repository](#1173-local-repository)
+        - [1.17.4. Remote repository](#1174-remote-repository)
+            - [1.17.4.1. Git remote](#11741-git-remote)
+            - [1.17.4.2. Git pull Git fetch](#11742-git-pull-git-fetch)
+            - [1.17.4.3. 远程仓库与本地的关联](#11743-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8E%E6%9C%AC%E5%9C%B0%E7%9A%84%E5%85%B3%E8%81%94)
+            - [1.17.4.4. git远程仓库更换名称，本地如何修改？](#11744-git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%9B%B4%E6%8D%A2%E5%90%8D%E7%A7%B0%E6%9C%AC%E5%9C%B0%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9)
+    - [1.18. Git中文乱码](#118-git%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81)
+    - [1.19. LF or CRLF](#119-lf-or-crlf)
+    - [1.20. Git代理配置](#120-git%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE)
+    - [1.21. Git update](#121-git-update)
+    - [1.22. 提交代码总结](#122-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E6%80%BB%E7%BB%93)
+    - [1.23. Github 开源项目搜索技巧](#123-github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7)
+- [2. Git高级板块](#2-git%E9%AB%98%E7%BA%A7%E6%9D%BF%E5%9D%97)
+    - [2.1. Git协议](#21-git%E5%8D%8F%E8%AE%AE)
+        - [2.1.1. SSHSecure Shell协议](#211-sshsecure-shell%E5%8D%8F%E8%AE%AE)
+    - [2.2. Git Internals](#22-git-internals)
+        - [2.2.1. Git文件状态](#221-git%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81)
+        - [2.2.2. Git目录组成](#222-git%E7%9B%AE%E5%BD%95%E7%BB%84%E6%88%90)
+        - [2.2.3. Git objects](#223-git-objects)
+        - [2.2.4. Git Reference](#224-git-reference)
+- [3. 学习参考](#3-%E5%AD%A6%E4%B9%A0%E5%8F%82%E8%80%83)
 
 <!-- /TOC -->
 
@@ -267,6 +267,7 @@ Git tag 有两种类型。
 
 - 远程仓库分支
   - `git branch --remote` 查看远程仓库分支
+  - `git push <remote> --delete <branch>` 删除远程仓库分支，remote 可为远程仓库地址或者是仓库的别名，branch 为待删除分支的名字。
 
 
 - 常用分支命名：
