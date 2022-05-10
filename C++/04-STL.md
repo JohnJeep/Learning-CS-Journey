@@ -1,8 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
- * @LastEditTime: 2021-12-21 22:48:53
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-08 16:03:04
  * @Description: 剖析C++标准库
 -->
 
@@ -817,6 +816,8 @@ priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 
 从实现的角度来看，STL算法是一种 `function template`。**而所有的 Algorithms 内部最本质的操作无非就是比大小。**
 
+标准库中大约封装了有 80 多种算法。
+
 STL算法的核心思想
 - STL通过类模板技术，实现了数据类型与容器模型的分离。
 - 通过函数对象实现了自定义数据类型与底层算法的分离。
@@ -836,33 +837,38 @@ heap(堆)的STL库中函数
 
 ## 5.2. API 接口
 
-- `for_each()` 遍历容器中的所有元素。
-- `transform()` 将容器中的数据进行某种转换的运算。
+- `std::for_each()` 遍历容器中的所有元素。
+- `std::transform()` 将容器中的数据进行某种转换的运算。
   > 两个算法的区别
-  > - `for_each()` 使用的函数对象可以没有 `返回值`，参数一般传 `reference`，因此速度较快，不是很灵活。
-  > - `transform()` 使用的函数对象必须要有 `返回值`，参数一般传 `value`，因此速度较慢，但是很灵活。
-- `adjacent()` 查找一对相邻位置重复的元素，找到则返回指向这对元素的第一个元素的迭代器值。
-- `distance()` 返回两个迭代器之间的距离，两个迭代器必须指向同一个容器。
-- `binary_search()` 采用二分法在有序序列中查找 value，找到则返回 true。在无序的序列中不能使用。
-- `count()` 计数容器中指定元素的个数。
-- `count_if()` 使用 `谓词` 计数容器中指定条件元素的个数。
-- `find()` 
-- `find_if()` 
-- `merge()`  合并两个有序的序列，并存放到另一个序列中。
-- `sort()` 默认按照升序的方式重新排列指定范围内元素的元素。
-- `random_shuffle()` 对指定范围内的元素随机进行排序。
-- `reverse()` 对指定范围内的元素进行倒叙排序。
-- `copy()` 将一个容器中的元素值拷贝到另一个容器中
-- `replace()` 将指定范围内的 `oldValue` 替换为 `newValue`
-- `replace_if()` 将指定范围内的 `oldValue` 替换为 `newValue`，需要指定 `函数对象`（是自定义的函数对象或STL预定义的函数对象）。
-- `swap()`  交换两个容器
-- `accumulate()` 累加遍历容器中指定范围内的元素，并在结果上加一个指定的值。
-- `stable_partition()`
-- `upper_bound()` 
-- `lower_bound()` 
+  > - `std::for_each()` 使用的函数对象可以没有 `返回值`，参数一般传 `reference`，因此速度较快，不是很灵活。
+  > - `std::transform()` 使用的函数对象必须要有 `返回值`，参数一般传 `value`，因此速度较慢，但是很灵活。
+- `std::adjacent()` 查找一对相邻位置重复的元素，找到则返回指向这对元素的第一个元素的迭代器值。
+- `std::distance()` 返回两个迭代器之间的距离，两个迭代器必须指向同一个容器。
+- `std::binary_search()` 采用二分法在有序序列中查找 value，找到则返回 true。在无序的序列中不能使用。
+- `std::count()` 计数容器中指定元素的个数。
+- `std::count_if()` 使用 `谓词` 计数容器中指定条件元素的个数。
+- `std::find()` 
+- `std::find_if()` 
+- `std::merge()`  合并两个有序的序列，并存放到另一个序列中。
+- `std::sort()` 默认按照升序的方式重新排列指定范围内元素的元素。
+- `std::random_shuffle()` 对指定范围内的元素随机进行排序。
+- `std::reverse()` 对指定范围内的元素进行倒叙排序。
+- `std::copy()` 将一个容器中的元素值拷贝到另一个容器中
+- `std::replace()` 将指定范围内的 `oldValue` 替换为 `newValue`
+- `std::replace_if()` 将指定范围内的 `oldValue` 替换为 `newValue`，需要指定 `函数对象`（是自定义的函数对象或STL预定义的函数对象）。
+- `std::swap()`  交换两个容器
+- `std::accumulate()` 累加遍历容器中指定范围内的元素，并在结果上加一个指定的值。
+- `std::stable_partition()`
+- `std::upper_bound()` 
+- `std::lower_bound()` 
 - `std::floor()` 和 `std::ceil()`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
   - `std::floor()` -->向下取整数。`5.88   std::floor(5.88) = 5;`
   - `std::ceil()` -->向上取整数。`std::ceil(5.88)   = 6;`
+- `std::rotate()`
+- `std::max()`
+- `std::min()`
+- `std::sample`
+
 
 
 
