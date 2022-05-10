@@ -31,9 +31,8 @@
     - [9.2.12. docker attach](#9212-docker-attach)
     - [9.2.13. docker cp](#9213-docker-cp)
     - [9.2.14. docker logs](#9214-docker-logs)
-    - [9.2.15.](#9215)
-    - [9.2.16. docker export](#9216-docker-export)
-    - [9.2.17. docker import](#9217-docker-import)
+    - [9.2.15. docker export](#9215-docker-export)
+    - [9.2.16. docker import](#9216-docker-import)
   - [9.3. 镜像命令](#93-镜像命令)
     - [9.3.1. docker  images](#931-docker--images)
     - [9.3.2. docker  search](#932-docker--search)
@@ -575,9 +574,7 @@ OPTIONS:
       --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
 ```
 
-### 9.2.15.  
-
-### 9.2.16. docker export
+### 9.2.15. docker export
 
 导出一个容器文件系统作为一个 tar 包。
 
@@ -607,7 +604,7 @@ bdbd7d438f8f   hello-world          "/hello"                 2 days ago       Ex
 
 
 
-### 9.2.17. docker import
+### 9.2.16. docker import
 
 从 tar 包中的内容创建一个新的文件系统，再导入为 Docker 镜像。
 
