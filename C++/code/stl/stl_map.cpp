@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-07-19 11:47:03
- * @LastEditTime: 2021-03-03 22:29:31
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-08 15:04:24
+ * @LastEditors: JohnJeep
  * @Description: STL标准库中map与multimap用法
  */ 
 #include <iostream>
@@ -145,10 +145,33 @@ void test02()
     }
 }
 
+void test03() 
+{
+
+    std::map<int, std::string> stu{{007, "wang"}, {4327, "zhangsan"}};    // 采用初始值列初始化
+
+    // 插入元素
+    stu.emplace(10, "lisi");
+    stu.emplace(20, "wuyu");
+    stu.emplace(30, "meimei");
+    
+    // [id, name] 只支持C++17及以上
+    // for (const auto& [id, name] : stu) {   
+    //     cout << "id: " << id << ", name: " << name << endl;
+    // }
+
+    for (const auto& item : stu) {
+        cout << "id: " << item.first << ", name: " << item.second << endl;
+    }
+    cout << "map size: " << stu.size() << endl;
+}
+
+
 int main(int argc, char *argv[])
 {
-    test01();
-    test02();
-    
+    // test01();
+    // test02();
+    test03();
+
     return 0;
 }

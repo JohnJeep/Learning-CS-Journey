@@ -1,8 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-01-04 10:57:29
- * @LastEditTime: 2022-01-27 15:41:49
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2022-05-08 16:02:44
  * @Description: 命名规范笔记
 --> 
 
@@ -285,4 +284,5 @@
 消灭重复！消灭重复！消灭重复！
 
 ## 1.10. 参考
-- [Google的C++编程规范总结](https://blog.csdn.net/orange_littlegirl/article/details/94153948)
+- [CSDN：Google的C++编程规范总结](https://blog.csdn.net/orange_littlegirl/article/details/94153948)
+- [Google Style Guides](https://google.github.io/styleguide/)：Google 所有编程语言编程规范文档。
