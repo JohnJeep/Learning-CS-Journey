@@ -2,5 +2,6 @@
 "C_Cpp.errorSquiggles": "Disabled",
 "editor.lineNumbers": "relative",
 "workbench.tree.indent": 4,
-"cmake.configureOnOpen": false
+"cmake.configureOnOpen": false,
+"files.encoding": "utf8"
 }
