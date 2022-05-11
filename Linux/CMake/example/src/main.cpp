@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 11:12:00
- * @LastEditTime: 2021-05-16 13:28:45
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-12 01:55:07
+ * @LastEditors: JohnJeep johnjeep1985@gmail.com
  * @Description: In User Settings Edit
  */
 #include <iostream>
-#include "Integer.h"
+#include "integer.h"
 using namespace std;
 
 void TestInteger()
