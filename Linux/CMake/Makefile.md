@@ -2,25 +2,25 @@
 
  * @Author: JohnJeep
  * @Date: 2021-04-07 23:25:09
- * @LastEditTime: 2021-11-28 23:07:52
- * @LastEditors: Windows10
+ * @LastEditTime: 2022-05-12 09:02:36
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: In User Settings Edit
 -->
 
 <!-- TOC -->
 
-- [1. 概念](#1-概念)
+- [1. Makefile](#1-makefile)
   - [1.1. 什么是 Makefile?](#11-什么是-makefile)
   - [1.2. 什么是 Make 和 configure ？](#12-什么是-make-和-configure-)
   - [1.3. 检测程序会检测哪些内容？](#13-检测程序会检测哪些内容)
-- [2. 源码下载](#2-源码下载)
-- [3. 操作步骤](#3-操作步骤)
-- [4. 三个基本要素](#4-三个基本要素)
-- [5. 参考](#5-参考)
+  - [1.4. 源码下载](#14-源码下载)
+  - [1.5. 操作步骤](#15-操作步骤)
+  - [1.6. 三个基本要素](#16-三个基本要素)
 
 <!-- /TOC -->
 
-# 1. 概念
+
+# 1. Makefile
 
 ## 1.1. 什么是 Makefile?
 
@@ -41,19 +41,19 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 通常软
 - 内核的头文件（header include）是否存在，驱动程序必须要的检测
 
 
-# 2. 源码下载
+## 1.4. 源码下载
 
 同一个软件在不同的平台上执行，需要重新编译，这就是为什么在下载类 Linux 的软件程序时，会提供源码下载。
 
 
 
-# 3. 操作步骤
+## 1.5. 操作步骤
 
 - 直接使用 `make` 指令，会生成 Makefile 文件中定义的最终目标文件。
 - 使用 `make 自定义变量名`，会执行自定义变量名下面定义的规则指令。
 
 
-# 4. 三个基本要素
+## 1.6. 三个基本要素
 - 目标
 - 依赖
 - 命令
@@ -96,13 +96,3 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 通常软
   %.o: %c
       gcc -c $< -o $@
   ```
-
-# 5. 参考
-- [CMake 入门实战](https://www.hahack.com/codes/cmake/)
-- [CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)
-- [在 linux 下使用 CMake 构建应用程序](https://www.ibm.com/developerworks/cn/linux/l-cn-cmake/index.html)
-- [CMake官网](http://www.cmake.org/)
-- [cmake常用命令](https://cmake.org/cmake/help/v2.8.8/cmake.html#section_Commands)
-- [Cmake大型项目设置指南](https://oldpan.me/archives/cmake-meta-project-use)
-- [CLoin与CMake详细教程](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html)
-- [VSCode运行多文件C++教程：使用CMake](https://blog.csdn.net/frostime/article/details/86756983)

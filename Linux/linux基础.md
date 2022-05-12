@@ -654,11 +654,24 @@ u ： 与 s 相反的， 当使用 u 来设置文件时， 如果该文件被删
 
   ```
   基本语法：
-    chown [-R] 账号名称 文件或目录
-    chown [-R] 账号名称:用户组名称 文件或目录
+    chown [-R] 用户名 文件或目录
+    chown [-R] 用户名:用户组名称 文件或目录
   
   参数：
-    -R : 进行递归( recursive )的持续更改，即连同子目录下的所有文件、目录都更新成为这个用户组。常常用在更改某一目录的情况。
+    -R : 进行递归( recursive )的持续更改，即连同子目录下的所有文件、目录都更新成为这个用户组。
+         常常用在更改某一目录的情况。
+  ```
+
+  实例：
+
+  ```
+  [root@DEV ~]# ll test.txt
+  -rw------- 1 root root 0 May 10 23:42 test.txt
+  
+  [root@DEV ~]# chown zhoush test.txt
+  
+  [root@DEV ~]# ll test.txt
+  -rw------- 1 zhoush root 0 May 10 23:42 test.txt
   ```
 
   
@@ -672,13 +685,72 @@ u ： 与 s 相反的， 当使用 u 来设置文件时， 如果该文件被删
     chgrp [-R] 用户组名称 dirname/filename ...
   
   参数：
-    -R : 进行递归( recursive )的持续更改，即连同子目录下的所有文件、目录都更新成为这个用户组。常常用在更改某一目录的情况。
+    -R : 进行递归( recursive )的持续更改，即连同子目录下的所有文件、目录都更新成为这个用户组。
+         常常用在更改某一目录的情况。
   ```
+
+  ```
+  [root@DEV ~]# ll test.txt
+  -rw------- 1 zhoush root 0 May 10 23:42 test.txt
+  
+  [root@DEV ~]# chgrp zhoush test.txt
+  
+  [root@DEV ~]# ll test.txt
+  -rw------- 1 zhoush zhoush 0 May 10 23:42 test.txt
+  ```
+
+  
 
 - chmod
 
   `chmod` 命令是修改文件的模式权限，SUID、SGID、SBIT等特性
 > sudo: do as su(super user)
+
+
+
+`useradd`  增加一个新用户或者更新默认新用户信息
+
+`usermod` 更改用户帐户属性，例如将其添加到一个已有的组中。
+
+在 Linux 用户系统中存在两类组。第一类是**主要用户组**，第二类是**附加用户组**。所有的用户帐户及相关信息都存储在 `/etc/passwd` 文件中，`/etc/shadow` 和 `/etc/group` 文件存储了用户信息。
+
+将一个新用户添加到主要用户组：
+
+```
+# useradd -g developers zsh
+# id zsh
+```
+
+将一个新用户添加到附加用户组：
+
+```
+# useradd -G developers cnzhx
+```
+
+将已存在的用户添加到主要用户组中：
+
+```
+# usermod -g developers zsh
+# id zsh
+```
+
+将一个已存在用户添加到附加用户组：
+
+```
+# usermod -G developers cnzhx
+```
+
+如果要将一个用户从某个组中删除:
+
+```
+gpasswd -d user group
+```
+
+但是这个时候需要保证 group 不是 user 的主组。
+
+​	
+
+参考：https://cnzhx.net/blog/linux-add-user-to-group/
 
 ## 6.6. 特殊权限
 
