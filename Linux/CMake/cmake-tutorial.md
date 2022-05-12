@@ -2,9 +2,33 @@
 
  * @Author: JohnJeep
  * @Date: 2022-05-11 21:46:10
- * @LastEditTime: 2022-05-12 01:14:01
+ * @LastEditTime: 2022-05-12 09:01:58
 -->
+<!-- TOC -->
 
+- [1. CMake 教程](#1-cmake-教程)
+- [2. 语法特性](#2-语法特性)
+  - [2.1. 变量](#21-变量)
+  - [2.2. CMake 命令](#22-cmake-命令)
+      - [2.2.1. cmake_minimum_required](#221-cmake_minimum_required)
+      - [2.2.2. project](#222-project)
+      - [2.2.3. set](#223-set)
+      - [2.2.4. add_definitions](#224-add_definitions)
+      - [2.2.5. add_compile_options](#225-add_compile_options)
+      - [2.2.6. add_library](#226-add_library)
+      - [2.2.7. add_executable](#227-add_executable)
+      - [2.2.8. add_subdirectory](#228-add_subdirectory)
+      - [2.2.9. include_directories](#229-include_directories)
+      - [2.2.10. file](#2210-file)
+      - [2.2.11. aux_source_directory](#2211-aux_source_directory)
+      - [2.2.12. link_directories](#2212-link_directories)
+      - [2.2.13. target_link_libraries](#2213-target_link_libraries)
+      - [2.2.14. if/elseif](#2214-ifelseif)
+      - [2.2.15. install](#2215-install)
+- [3. 构建方式](#3-构建方式)
+- [4. Reference](#4-reference)
+
+<!-- /TOC -->
 
 # 1. CMake 教程
 
@@ -237,6 +261,38 @@ elseif(UNIX)
 endif()
 ```
 
+#### 2.2.15. install
+
+```cmake
+# 安装COPYRIGHT 和 README 文件到 /usr/local/share/doc/cmake 路径下
+install(files COPYRIGHT destination share/doc/cmake)
+
+# 安装脚本文件到 /usr/local/bin 下面
+install(program run_shell.sh destation bin)
+
+# 安装二进制文件到 /usr/local/bin 路径下
+install(targets hello destation lib)
+
+
+```
+
+安装的时候可以指定绝对路径，也可以指定相对路径。其中，使用相对路径时，
+
+`cmake_install_prefix` 默认安装路径在 `/usr/local`，自己指定文件安装路径：`cmake_install_prefix=/usr`
+
+
+
+```cmake
+# 安装文件到某个目录下
+install(directory doc/ destation share/doc/cmake)
+```
+
+安装的文件后面是否带有 `/`，安装时有很大的区别：
+
+- `doc/` 文件后带有 `/` 表示将 `doc` 路径下的所有文件安装到 `/usr/local/share/doc/cmake` 路径下。
+- `doc` 文件后不带 `/` 表示将 `doc` 整个文件安装到 `/usr/local/share/doc/cmake` 路径下。
+
+
 # 3. 构建方式
 
 - 内部构建，不推荐使用
@@ -274,6 +330,11 @@ endif()
 
 # 4. Reference
 
+- [CMake 官网](http://www.cmake.org/)
+- [Cmake Reference Documentation](https://cmake.org/documentation/)
 - [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 - [CMake Commands](https://cmake.org/cmake/help/latest/manual/cmake-commands.7.html)
-
+- [CMake 入门实战](https://www.hahack.com/codes/cmake/)
+- [Cmake 大型项目设置指南](https://oldpan.me/archives/cmake-meta-project-use)
+- [CSDN：CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)
+- [CLoin 与 CMake详细教程](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html)
