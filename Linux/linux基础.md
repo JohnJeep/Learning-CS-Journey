@@ -2081,7 +2081,7 @@ SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源�
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
-# 42. 共性问题
+# 42. QAQ
 
 ## 42.1. Linux 与 Windows相差 8 小时
 
@@ -2097,7 +2097,50 @@ $sudo ntpdate time.windows.com
 ```
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-# 43. 参考
+## 编码转换
+
+`enca` 是 Linux 下的文件编码转换工具。
+
+```
+安装：apt install enca
+查看版本：enca --versioN
+```
+
+查看某个文件编码
+
+```
+enca -L zh_CN file_name
+```
+
+将某个文件转化为 `utf-8`
+
+```
+enca -L zh_CN -x utf-8 file_name
+```
+
+转化某个文件但如果不想覆盖原文件可以这样
+
+```
+enca -L zh_CN -x UTF-8 < file1 > file2 
+```
+
+查看当前目录下的文件编码
+
+```
+enca -L zh_CN `ls`
+```
+
+将当前目录下所有的文件转换为 UTF-8
+
+```
+enca -L zh_CN -x utf-8 *
+```
+
+源码地址：https://dl.cihar.com/enca/
+
+
+
+# 43. Reference
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)

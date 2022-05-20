@@ -502,7 +502,9 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 # 10. Vim Config
 
 - 系统级配置文件目录：`/etc/vim/vimrc`
+
 - 用户级配置文件目录：`~/.vim/vimrc`
+
 - 设置Tab的大小 
   ```
   set tabstop=4      " 表示一个 tab 显示出来是多少个空格的长度，默认 8
@@ -512,6 +514,14 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
   # set noexpandtab  " noexpandtab是用制表符表示一个缩进
   set autoindent     " 按换行键，让代码自动缩进一个Tab，设置自动缩进
   ```
+  
+- 设置文件编码
+
+  ```
+  set fileencoding=utf-8
+  ```
+
+  
 
 
 # 11. Recover Swap File
