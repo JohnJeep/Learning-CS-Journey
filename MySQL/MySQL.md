@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2022-03-21 11:31:43
+ * @LastEditTime: 2022-05-20 23:12:55
  * @LastEditors: DESKTOP-0S33AUT
  * @Description:  MySQL基础知识学习，作为一个使用者的角度
 -->
@@ -38,6 +38,11 @@
       - [2.7.4.1. 子查询](#2741-子查询)
       - [2.7.4.2. 连接](#2742-连接)
 - [3. Function(函数)](#3-function函数)
+  - [3.1. count](#31-count)
+  - [3.2. cancat](#32-cancat)
+  - [3.3. Rtrim](#33-rtrim)
+  - [3.4. LTrim](#34-ltrim)
+  - [3.5. Upper](#35-upper)
 - [4. 视图(View)](#4-视图view)
     - [4.1. 视图创建](#41-视图创建)
     - [4.2. 视图删除](#42-视图删除)
@@ -273,7 +278,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
   create database[ if not exists] 数据库名 数据库选项;
   ```
   
-  - 数据库选项：
+  数据库选项：
     - CHARACTER SET charset_name
     - COLLATE collation_name
   
@@ -671,7 +676,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 # 3. Function(函数)
 
-## count
+## 3.1. count
 
 `count()` 是一个聚合函数，函数的参数不仅可以是字段名，也可以是其他任意表达式，该函数作用是**统计符合查询条件的记录中，函数指定的参数不为 NULL 的记录有多少个**。
 
@@ -701,19 +706,19 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 
 
-## cancat
+## 3.2. cancat
 
 `cancat()函数`: 拼接两个列:
 
-## Rtrim
+## 3.3. Rtrim
 
 `RTrim()函数`: 去掉值右边的所有空格
 
-## LTrim
+## 3.4. LTrim
 
 `LTrim()函数`: 去掉值左边的所有空格
 
-## Upper
+## 3.5. Upper
 
 `Upper()`: 将文本转换为大写
 
