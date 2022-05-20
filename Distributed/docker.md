@@ -124,11 +124,21 @@ CentOS Linux release 7.9.2009 (Core)
 Linux redis_181 3.10.0-1160.49.1.el7.x86_64 #1 SMP Tue Nov 30 15:51:32 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
+参考
+
+- [Control Docker with systemd](https://docs.docker.com/config/daemon/systemd/)
+- [nstall Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
+- [cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
+
+
 
 
 ## 5.2. Windows 下安装 Docker
 
 Docker 官网介绍 Windows下安装 Docker有两种方式，一种是在 Windows 子系统（WSL）中安装 Docker，另一种在带有 Windows 虚拟化技术的 Windows 容器中安装。
+
+
+
 
 # 6. Windows系统上为什么能运行 Docker？
 

@@ -214,6 +214,8 @@ I'm you
 - 《Kafka 权威指南》
 - [The Apache Kafka C/C++ client library API](https://docs.confluent.io/platform/current/clients/librdkafka/html/index.html)
 - [51CTO 天山老妖S-kafka系列](https://blog.51cto.com/u_9291927/category33.html)
+- [kafka详细教程](https://blog.csdn.net/hellozpc/article/details/105680217)
+- [Kafka 入门知识](https://cloud.tencent.com/developer/article/1547380)]
 
 
 
