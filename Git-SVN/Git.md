@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2022-05-10 00:43:37
+ * @LastEditTime: 2022-05-13 14:16:35
  * @LastEditors: DESKTOP-0S33AUT
  * @Description: git基础命令学习
 --> 
@@ -21,11 +21,11 @@
   - [1.9. Git stash](#19-git-stash)
   - [1.10. Git blame](#110-git-blame)
   - [1.11. Git bisect](#111-git-bisect)
-  - [1.12. Git branch](#112-git-branch)
-    - [1.12.1. Branch Command](#1121-branch-command)
-    - [1.12.2. Branches Principle](#1122-branches-principle)
-    - [1.12.3. Branches conflict](#1123-branches-conflict)
-  - [1.13. Git rebase](#113-git-rebase)
+  - [1.12. Git rebase](#112-git-rebase)
+  - [1.13. Git branch](#113-git-branch)
+    - [1.13.1. Branch Command](#1131-branch-command)
+    - [1.13.2. Branches Principle](#1132-branches-principle)
+    - [1.13.3. Branches conflict](#1133-branches-conflict)
   - [1.14. Git revert](#114-git-revert)
   - [1.15. Git Reset](#115-git-reset)
   - [1.16. Removing or restore files](#116-removing-or-restore-files)
@@ -250,52 +250,66 @@ Git tag 有两种类型。
 
 找到某个 bug 是哪次 commit 的。
 
+## 1.12. Git rebase
 
-## 1.12. Git branch
-
-### 1.12.1. Branch Command
-
-- 本地仓库分支
-  - `git branch` 查看本地仓库分支
-  - `git branch -v` 查看每个分支最后一次提交的内容
-  - `git branch -r` 查看远程仓库的所有分支
-  - `git reflog show --date=iso master`  查看指定分支的历次更改记录
-  - `git branch --merge` 查看哪些分支已经合并到当前分支
-  - `git branch --no-merged` 查看所有包含未合并工作的分支
-  - `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去
-  - `git merge`合并分支：在分支`a`下写代码，与分支`master`上的代码合并
-    - 第一步，切换到分支`master`下`git chechout master`
-    - 第二步，与分支`a`合并`git merge a`
-  - `git branch -d a` 删除指定分支 a 
-  - `git branch -D a` 强制把未合并的分支删除
-  - `git log --oneline --decorate --graph --all` 查看提交历史、各个分支的指向以及项目的分支分叉情况
-  - `git stash save` 切换分支之前保存要修改的文件，不想提交之前的工作
-  - `git stash list` 查看存储在栈上的文件
-  - `git stash apply` 将最近存储的文件重新使用
-  - `git stash apply stash_name`使用之前某次存储的文件
-
-- 远程仓库分支
-  - `git branch --remote` 查看远程仓库分支
-  
-  - `git push <remote> --delete <branch>` 删除远程仓库分支，remote 可为远程仓库地址或者是仓库的别名，branch 为待删除分支的名字。
-  
-    ```
-    git push origin --delete feature_0426
-    ```
+Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**更为合适。`git rebase` 和 `git merge` 都可以用于分支的合并，但使用 `git rebase` 合并的分支，提交（commit）信息是线性的，因为它会清除当前分支提交（commit）的版本历史信息，只选择保留最后一次的提交信息；而 `merge` 是把不同分支的最终结果合并在一起。
 
 
-- 常用分支命名：
+
+总结下，`git rebase` 有两个功能
+
+1. 压缩提交的记录。
+2. 分支合并时，让合并的分支更简洁，只选择保留最后一次的提交信息，线性显示提交的记录，观察起来更优美。
+
+
+
+## 1.13. Git branch
+
+
+
+### 1.13.1. Branch Command
+
+本地仓库分支
+- `git branch` 查看本地仓库分支
+- `git branch -v` 查看每个分支最后一次提交的内容
+- `git branch -r` 查看远程仓库的所有分支
+- `git reflog show --date=iso master`  查看指定分支的历次更改记录
+- `git branch --merge` 查看哪些分支已经合并到当前分支
+- `git branch --no-merged` 查看所有包含未合并工作的分支
+- `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去
+- `git merge`合并分支：在分支`a`下写代码，与分支`master`上的代码合并
+  - 第一步，切换到分支`master`下`git chechout master`
+  - 第二步，与分支`a`合并`git merge a`
+- `git branch -d a` 删除指定分支 a 。删除分支时，不要在当前分支删除当前分支，一定要切换的到另一个分支去删除。
+- `git branch -D a` 强制把未合并的分支删除
+- `git log --oneline --decorate --graph --all` 查看提交历史、各个分支的指向以及项目的分支分叉情况
+- `git stash save` 切换分支之前保存要修改的文件，不想提交之前的工作
+- `git stash list` 查看存储在栈上的文件
+- `git stash apply` 将最近存储的文件重新使用
+- `git stash apply stash_name`使用之前某次存储的文件
+
+远程仓库分支
+- `git branch --remote` 查看远程仓库分支
+
+- `git push <remote> --delete <branch>` 删除远程仓库分支，remote 可为远程仓库地址或者是仓库的别名，branch 为待删除分支的名字。
+
+  ```
+  git push origin --delete feature_0426
+  ```
+
+常用分支命名：
 <font color="red"> 
-  - develop 
-  - topic 
-  - proposed 
-  - hotfix(紧急分支) 
-  - iss534  
-  - experiment 
+
+- develop 
+- topic 
+- proposed 
+- hotfix(紧急分支) 
+- iss534  
+- experiment 
 </font>
 
 
-### 1.12.2. Branches Principle
+### 1.13.2. Branches Principle
 <font color="red">Git 中的分支只是指向提交对象之一的轻量级可移动指针。</font>
 
 Git 是怎么创建新分支的呢？ 很简单，它只是为你创建了一个可以移动的新的指针。 比如，创建一个 testing 分支， 你需要使用 git branch 命令：
@@ -337,22 +351,28 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
 合并完分支后，甚至可以删除`testing`分支。删除`testing`分支就是把`testing`指针给删掉，删掉后，我们就剩下了一条`master`分支：
 
 
-### 1.12.3. Branches conflict
+### 1.13.3. Branches conflict
 
-- 为什么会产冲突？
-  - 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
-  - 两个分支中修改了同一个文件的名称 
+为什么会产冲突？
+- 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
+- 两个分支中修改了同一个文件的名称 
 
--  采用`Git rebase(变基)`与`git merge`进行解决
-  - 什么时候用`rebase`？
-    - 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
-    - 合并多次提交纪录: 例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
-    - 合并分支
-    - <font color="red"> 注意: </font> 已经推送到github远程仓库的文件（多人开发的重要分支）不要，使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
+采用 `Git rebase`与 `git merge` 进行解决
+- 什么时候用`rebase`？
 
-  - 什么时候用`merge`?
-    - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用`--no-ff`  参数，用普通模式合并，在master主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而`fast forward`合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
-    - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
+  - 合并多次提交纪录
+
+    例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
+
+    > 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
+
+  - 合并分支
+
+    <font color="red"> 注意: </font> 已经推送到github远程仓库的文件（多人开发的重要分支）不要使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
+
+- 什么时候用 `merge`?
+  - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用 `--no-ff`  参数，用普通模式合并，在 master 主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而 `fast forward` 合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
+  - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
 
 - 分支合并步骤
   - 从远程仓库拉取数据 `git fetch origin master` 
@@ -371,44 +391,35 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
   - [Git分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
 
 
-## 1.13. Git rebase
-
-Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**更为合适。`git rebase` 和 `git merge` 都可以用于分支的合并，但使用 `git rebase` 合并的分支，提交（commit）信息是线性的，因为它会清除当前分支提交（commit）的版本历史信息，只选择保留最后一次的提交信息；而 `merge` 是把不同分支的最终结果合并在一起。
-
-
-
-总结下，`git rebase` 有两个功能
-
-1. 压缩提交的记录。
-2. 分支合并时，让合并的分支更简洁，只选择保留最后一次的提交信息，线性显示提交的记录，观察起来更优美。
-
-
 ## 1.14. Git revert
 
 
 
 ## 1.15. Git Reset
 
-1. `git reset`命令是Git提供的后悔药之一，它可以帮我们把内容恢复到指定的`commit`提交版本。
+`git reset` 命令是Git提供的后悔药之一，它可以帮我们把内容恢复到指定的`commit`提交版本。
 
-2. `reset`翻译成中文有**重置**的意思，恰如起名，`git reset`命令可以重置当前分支所指向提交的位置，很多教程说此命令的作用是删除分支或者提交，其实这是完全错误的，`commit`提交依然存在，只是当前分支所指向的`commit`提交进行了重置，分支所指向的新`commit`提交之后的提交就像消失了一样（`git log`无法查询到）
+`reset`翻译成中文有**重置**的意思，恰如起名，`git reset` 命令可以重置当前分支所指向提交的位置，很多教程说此命令的作用是删除分支或者提交，其实这是完全错误的，`commit `提交依然存在，只是当前分支所指向的`commit`提交进行了重置，分支所指向的新 `commit` 提交之后的提交就像消失了一样（`git log`无法查询到）
 
-3. 命令后面紧跟参数
-   - `git reset`后面紧跟的参数是指定`commit`提交的标识 `git reset 5609309 --hard`
-   - 标识可以是`sha-1`值或者`HEAD`、`HEAD^`或者分支名称等形式
-     - `git reset HEAD^ --hard`
-     - `HEAD`表示执行当前分支
-   - 最后的参数`--hard`
-   - `^`当前分支所指向提交的前一个提交，`^^`表示当前分支所指向提交的前一个分支的前一个分支，以此类推；`^^`过多自然不太方便，可以使用`HEAD~2`表示
-   - 使用分支名称作为参数`git reset master^ --hard`
+命令后面紧跟参数
+- `git reset`后面紧跟的参数是指定`commit`提交的标识 `git reset 5609309 --hard`
+- 标识可以是`sha-1`值或者`HEAD`、`HEAD^`或者分支名称等形式
+  - `git reset HEAD^ --hard`
+  - `HEAD`表示执行当前分支
+- 最后的参数`--hard`
+- `^`当前分支所指向提交的前一个提交，`^^`表示当前分支所指向提交的前一个分支的前一个分支，以此类推；`^^`过多自然不太方便，可以使用`HEAD~2`表示
+- 使用分支名称作为参数`git reset master^ --hard`
 
-4. `mixed`、`soft` 和 `hard` 区别
-    - `--mixed`：默认值，当重置分支所指向 `commit` 提交位置时，暂存区中的内容会被新指向的 `commit` 提交内容所替换，工作区内容不变，即它回退到某个版本，只保留源码，回退 commit 和 index 信息。
-    - `--soft`：暂存区和工作区的内容都保持原样，不会被替换，只回退了 commit 的信息。
-    - `--hard`：暂存区和工作区的内容都会被新指向的`commit`提交内容所替换，彻底回退到某个版本，本地的源码也会变为上一个版本的内容；`git reset --hard`只影响被跟踪的文件，如果工作区有新增的文件，并不会被影响。
 
-5. 最后说明
-   - 假如`commit`已经被`push`到远程仓库上，那么其他开发人员可能会基于对应的`commit`提交进行开发产生新的`commit`，如果此时进行`reset`操作，会造成其他开发人员的提交历史丢失，这可能会产生严重后果。
+
+`mixed`、`soft` 和 `hard` 区别
+
+- `--mixed`：默认值，当重置分支所指向 `commit` 提交位置时，暂存区中的内容会被新指向的 `commit` 提交内容所替换，工作区内容不变，即它回退到某个版本，只保留源码，回退 commit 和 index 信息。
+- `--soft`：暂存区和工作区的内容都保持原样，不会被替换，只回退了 commit 的信息。
+- `--hard`：暂存区和工作区的内容都会被新指向的`commit`提交内容所替换，彻底回退到某个版本，本地的源码也会变为上一个版本的内容；`git reset --hard`只影响被跟踪的文件，如果工作区有新增的文件，并不会被影响。
+
+最后说明
+- 假如`commit`已经被`push`到远程仓库上，那么其他开发人员可能会基于对应的`commit`提交进行开发产生新的`commit`，如果此时进行`reset`操作，会造成其他开发人员的提交历史丢失，这可能会产生严重后果。
 
 
 
@@ -464,7 +475,7 @@ Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**�
 <img width="80%" hight="80%" src="./figure/四区过程.png"/>
 
 Git 与 GitHub 使用，有四个区，需要理解。
-- Workspace: 名为工作区，也可以称为 Working Directory (工作目录)，是你电脑存放代码的地方。
+- Workspace：名为工作区，也可以称为 Working Directory (工作目录)，是你电脑存放代码的地方。
 - Index: 名为暂存区，是 `.git` 目录下的一个 `index` 文件，它是 **指向** 文件的一个索引。
 - local repository: 名为本地版本库，是 `Git` 用来保存本地项目的元数据和对象数据库的地方。
 - Remote repository: 名为远程仓库，是远程服务器托管代码的地方。
@@ -527,10 +538,24 @@ Git 与 GitHub 使用，有四个区，需要理解。
 #### 1.17.4.1. Git remote
 
 - `git remote -v` 显示远程仓库的别名和对应的 URL。
+
 - `git remote show remote_name` 查看某个远程仓库。
+
 - `git remote rename old_name new_name` 重命名原仓库名字。
+
 - `git remote rm remote_name` 移除一个远程仓库。
+
 - `git remote add <alias_name> <url>` 本地仓库与仓库地址为 URL，别名为 `alias_name` 的远程仓库进行关联。
+
+- 有些分支在远程其实早就被删除了，但是在你本地依然可以看见这些被删除的分支，可用下面的命令删除远程服务器上不再存在的远程分支引用。
+
+  ```
+  git remote prune origin
+  
+  git remote update --prune
+  ```
+
+  
 
 
 #### 1.17.4.2. Git pull Git fetch
@@ -580,8 +605,6 @@ git config --global user.name=xxxxx
 git config --global user.email=xxxx@gmail.com
 ```
 
-
-
 存储用户名
 
 ```
@@ -592,53 +615,53 @@ git config --local credential.helper store
 
 ## 1.19. Git代理配置 
 
+只对github进行代理，不影响国内的仓库
+```
+git config --global http.https//github.com.proxy http://127.0.0.1:8001
+git config --global https.https//github.com.proxy https://127.0.0.1:8001
+```
 
-- 只对github进行代理，不影响国内的仓库
-  ```
-  git config --global http.https//github.com.proxy http://127.0.0.1:8001
-  git config --global https.https//github.com.proxy https://127.0.0.1:8001
-  ```
+设置全局代理，国内的仓库速度也会收到一定的影响。
+```
+git config --global http.proxy http://127.0.0.1:1080
+git config --global https.proxy https://127.0.0.1:1080
 
-- 设置全局代理，国内的仓库速度也会收到一定的影响。
-  ```
-  git config --global http.proxy http://127.0.0.1:1080
-  git config --global https.proxy https://127.0.0.1:1080
-  
-  // 取消全局代理
-  git config --global --unset http.proxy
-  git config --global --unset https.proxy
-  ```
+// 取消全局代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
 
-- Windows下修改Host文件
-  ```
-  192.30.253.112 github.com
-  192.30.253.113 github.com
-  151.101.185.194 github.global.ssl.fastly.net
-  ```
+Windows下修改Host文件
+```
+192.30.253.112 github.com
+192.30.253.113 github.com
+151.101.185.194 github.global.ssl.fastly.net
+```
+
 
 - 参考 
   - [Git 代理配置方案](https://wiki.imalan.cn/archives/Git%20%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/)
 
 
 ## 1.20. Git update
-- git windows 更新 `git update-git-for-windows`
+git windows 更新 `git update-git-for-windows`
 
 
 ## 1.21. 提交代码总结
 
 ## 1.22. 第一次提交
 
-- `git init`  初始化
-- `git add README.md`   提交到暂存库
-- `git commit -m "first commit"`   为提交的文件添加注释说明
-- `git remote add origin git@github.com:michaelliao/learngit.git`  本地Git库与远程的仓库关联
-- `git push -u origin master`      本地库的所有内容推送到远程库上
+1. `git init`  初始化
+2. `git add README.md`   提交到暂存库
+3. `git commit -m "first commit"`   为提交的文件添加注释说明
+4. `git remote add origin git@github.com:michaelliao/learngit.git`  本地Git库与远程的仓库关联
+5. `git push -u origin master`      本地库的所有内容推送到远程库上
 
 ## 1.23. 不是第一次提交
 
-- `git add README.md`              提交到暂存库
-- `git commit -m "first commit"`   为提交的文件添加注释说明
-- `git push origin master`         本地库的所有内容推送到远程库上
+1. `git add README.md`              提交到暂存库
+2. `git commit -m "first commit"`   为提交的文件添加注释说明
+3. `git push origin master`         本地库的所有内容推送到远程库上
 
 ## 1.24. Git 常用命令令
 
@@ -672,6 +695,8 @@ git config --local credential.helper store
   <img src="./figure/修改远程仓库名.png">
 
 ## 2.2. Git中文乱码
+
+参考
 
 
 - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
@@ -750,37 +775,36 @@ unix2dos [-kn] file [newfile]
 
 ## 3.1. Git协议
 
-- 四种协议传输资料
-  - 本地(Local)协议
-  - Git协议
-  - HTTP协议
-  - SSH(Secure Shell)协议
+Git 支持四种协议传输
+- 本地(Local)协议
+- Git协议
+- HTTP协议
+- SSH(Secure Shell)协议
 
 
 ### 3.1.1. SSH(Secure Shell)协议
 
-- SSH 协议支持口令与密钥两种安全验证模式，但无论那种模式，最终都需要使用密钥来加密数据以确保安全，而 SSH 密钥通常使用的算法为 RSA 和 DSA。
+SSH 协议支持口令与密钥两种安全验证模式，但无论那种模式，最终都需要使用密钥来加密数据以确保安全，而 SSH 密钥通常使用的算法为 RSA 和 DSA。
 
-- 命令　
-  - SSH1：只支持RSAS算法
-  - SSH2：支持RSA和DSA算法  
-  - `ssh -T git@github.com`查看SSHkey
-  - `sssh-keygen -t rsa` 使用RSA算法创建密钥
-  - `id_rsa` 密钥 和 `id_rsa.pub` 公钥
+命令　
+- SSH1：只支持RSAS算法
+- SSH2：支持RSA和DSA算法  
+- `ssh -T git@github.com` 查看SSHkey
+- `sssh-keygen -t rsa` 使用RSA算法创建密钥
+- `id_rsa` 密钥 和 `id_rsa.pub` 公钥
 
-
-- 为什么要用SSH？
-  - 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
-  - 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
-  - GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
-  - Git支持多种协议，包括`https`，但通过`ssh`支持的原生git协议速度最快。
+为什么要用SSH？
+- 是保证本机(当前电脑)与GitHub服务器连接的有效凭证
+- 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
+- GitHub允许你添加多个Key，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+- Git支持多种协议，包括`https`，但通过`ssh`支持的原生git协议速度最快。
 
 
 ## 3.2. Git Internals
 
-- Git 不是存储每个文件与初始版本的差异，而是把数据看作是对小型文件系统的一组快照 (snapshots)。每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。  
+Git 不是存储每个文件与初始版本的差异，而是把数据看作是对小型文件系统的一组快照 (snapshots)。每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。  
 
-- Git保证了数据的完整性。所有数据在存储前都计算校验和(SHA-1 散列)，然后以校验和来引用。Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。
+Git保证了数据的完整性。所有数据在存储前都计算校验和(SHA-1 散列)，然后以校验和来引用。Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。
 
 ### 3.2.1. Git文件状态
 
@@ -807,8 +831,8 @@ unix2dos [-kn] file [newfile]
 Git 是一个内容寻址文件系统，听起来很酷。但这是什么意思呢？ 这意味着，Git 的核心部分是一个简单的键值对数据库（key-value data store）。 你可以向 Git 仓库中插入任意类型的内容，它会返回一个唯一的键，通过该键可以在任意时刻再次取回该内容。
 
 可以通过底层命令 `git hash-object` 来演示上述效果: 可将任意数据保存于 `.git/objects` 目录（即 对象数据库），并返回指向该数据对象的唯一的键。即计算对象 ID 并可选择性的从文件创建一个 blob(Compute object ID and optionally creates a blob from a file)。 
-- `-w`: 选项表示该命令不要只返回键，还要将该对象写入数据库中。
-- `--stdin`: 从标准输入读 object，而不是从文件中读。若不指定此选项，则须在命令尾部给出待存储文件的路径。
+- `-w`：选项表示该命令不要只返回键，还要将该对象写入数据库中。
+- `--stdin`：从标准输入读 object，而不是从文件中读。若不指定此选项，则须在命令尾部给出待存储文件的路径。
 
 ```bash
 $ echo "hello" | git hash-object   --stdin -w
@@ -881,10 +905,10 @@ Git 仓库中有五个对象：三个 blob 对象（保存着文件快照）、�
 
 
 ### 3.2.4. Git Reference
-- Git 中用 `reference 或简写refs` 这个名字指针来替代原始提交文件的 SHA-1 值。
+- Git 中用 `reference 或简写refs` 这个指针来替代原始提交文件的 `SHA-1` 值。
 
 
-- HEAD reference: 是一个符号引用（symbolic reference），并不完全是指向目前所在的分支, 而是指向正在操作的 commit提交。
+- HEAD reference: 是一个符号引用（symbolic reference），并不完全是指向目前所在的分支, 而是指向正在操作的 `commit` 提交。
   > 符号引用：表示它是一个指向其他引用的指针。 
   - `cat .git/HEAD` 或者`git symbolic-ref HEAD`  查看HEAD文件中的内容
   - `git show HEAD` 查看HEAD信息
