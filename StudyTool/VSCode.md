@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-11 13:46:17
- * @LastEditTime: 2021-12-18 01:25:37
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-22 11:24:40
+ * @LastEditors: DESKTOP-0S33AUT
  * @Description: VSCode 使用说明
  * -->
 
@@ -95,10 +95,36 @@ ${fileDirname} - 文件所在的文件夹路径
 
 
 
-用户环境设置
+## 用户环境设置
 
-- `editor.lineNumbers` 控制整个行号显示与否及如何显示
-- `"editor.rulers": [120]` 设置垂直标尺为 120 个字符
+VScode 用户环境修改支持两种方式：
+  - Json 文件中修改。环境设置都放在 `setting.son` 文件中，Windows 下存放的路径为 `C:\Users\user_name\AppData\Roaming\Code\User`，其中 user_name 为当前用户的名字，要根据具体的用户去找到对应的路径。
+  - 直接通过界面 UI 的方式去修改，是图形化的操作，比较简单，通过快捷键 `Ctrl ,` 打开配置修改的 UI 界面，然后再去修改具体的配置。
+
+
+下面是自己一些常用的设置，是通过 Json 格式修改的。
+
+```json
+"editor.rulers": [120],                  // 设置垂直标尺为 120 个字符
+"editor.lineNumbers": "relative",        // 控制整个行号显示与否及如何显示；relative 表示相对显示行号，
+"files.eol": "\n",                       // 文件的换行符
+"C_Cpp.clang_format_style": "Webkit",    // C++ 代码风格
+
+"terminal.integrated.defaultProfile.windows": "Ubuntu-20.04 (WSL)",  // 默认打开终端
+
+// 新增外部终端配置；新增一个Git 终端
+"terminal.integrated.profiles.windows": {
+    "Git-bash": {
+        "path": "C:/Data/Git/bin/bash.exe"
+    },
+},
+
+// Vim 按键绑定配置
+"vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+},
+```
 
 
 # 3. 命令行面板（Panel）
