@@ -79,13 +79,13 @@ Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成
 # 4. 为什么 Docker 比虚拟机快？
 
 - Docker 有比虚拟机更少的抽象层。
-
+  
   由于 Docker 不需要 Hyperversion（虚拟机）实现硬件资源虚拟化，运行在 Docker 容器上的程序直接使用的是实际物理机器的硬件资源，因此 CPU、内存利用率在 Docker 上有跟明显的优势。
-
+  
   ![](figures/vm-container.jpg)
 
 - Docker 利用的是宿主机的内核，不需要加载操作系统的内核。
-
+  
   当新建一个容器时，Docker 不需要和虚拟机一样加载一个操作系统的内核，而是利用的是宿主机的内核，避免了操作系统的加载、寻址、系统内核返回等比较费时、费资源的过程。当新建一个虚拟机时，虚拟机软件需要先加载操作系统，然后再返回，这个过程是非常耗时的，分钟级别的，而 Docker 则是直接省略了这一过程，新建一个 Docker 容器只需要几秒钟，非常的快。 
 
 Docker 优点
@@ -98,11 +98,7 @@ Docker 优点
 
 # 5. Docker 安装
 
-平台支持（Supported platforms）
-
-Docker 引擎（Docker Engine ）支持 Linux 、macOS、Win10（通过 Docker 桌面版）等不同的平台安装，还支持[静态二进制文件](https://docs.docker.com/engine/install/binaries/)的安装。
-
-
+平台支持（Supported platforms）：Docker 引擎（Docker Engine ）支持 Linux 、macOS、Win10（通过 Docker 桌面版）等不同的平台安装，还支持[静态二进制文件](https://docs.docker.com/engine/install/binaries/)的安装。
 
 ## 5.1. CenOS7 下安装 Docker
 
@@ -120,25 +116,19 @@ Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Lin
 CentOS Linux release 7.9.2009 (Core)
 
 // 查看内核版本、硬件架构、主机名称、操作系统类型等信息
-[root@redis_181 ~]# uname -a	
+[root@redis_181 ~]# uname -a    
 Linux redis_181 3.10.0-1160.49.1.el7.x86_64 #1 SMP Tue Nov 30 15:51:32 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 参考
 
 - [Control Docker with systemd](https://docs.docker.com/config/daemon/systemd/)
-- [nstall Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
+- [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
 - [cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
-
-
-
 
 ## 5.2. Windows 下安装 Docker
 
 Docker 官网介绍 Windows下安装 Docker有两种方式，一种是在 Windows 子系统（WSL）中安装 Docker，另一种在带有 Windows 虚拟化技术的 Windows 容器中安装。
-
-
-
 
 # 6. Windows系统上为什么能运行 Docker？
 
@@ -159,17 +149,20 @@ Docker 中有三个重要的组件：Image，Container，Repository。只有理�
 ![](figures/docker-container-component.jpg)
 
 - 镜像（Image）
+  
   - Docker 镜像是一个特殊的文件系统，用来创建 Docker 容器，一个镜像可以创建很多个容器。比如 CentOS7 官方镜像。
   - Docker 中除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。
   - 镜像不包含任何的动态数据，镜像中的内容在构建之后不会再被改变。
 
 - 容器（Container）
+  
   - Docker 利用容器，独立运行一个或一组应用，而应用程序或服务都运行在容器里面。
   - 容器就类似于一个虚拟化的运行环境，容器是镜像创建运行时的实例，就像是面向对象程序设计中的**类** 和 **实例** 一样，镜像相当于**类**，容器相当于**类的实例**。
   - 容器为镜像提供了一个标准的、容器之间相互隔离的运行环境，容器可以被创建、启动、停止、删除、暂停等。
   - 创建的容器有两部分组成：一个是最小最核心的赖以生存的 Linux 内核文件，另一个是具体的应用程序。
 
 - 仓库（Repository）
+  
   - 集中存放镜像文件的地方，类似 Git 的远程仓库。
   - 仓库分为私有仓库和公开的仓库。私有仓库：比如公司内部搭建专门存放镜像文件的地方；公共仓库：任何人都能访问专门存放镜像文件的地方。全球最大的公开仓库是 Dockerhub(https://hub.docker.com)。在中国境内由于一些著名的原因，访问 Dockerhub 仓库比较慢，可以配置国内的镜像仓库，比如阿里云、网易等等。
 
@@ -213,8 +206,6 @@ Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）
 
 ![](figures/docker-c_s.png)
 
-
-
 ## 8.1. Docker 运行流程
 
 1. 用户是使用 Docker Client 与 Docker Daemon建立通信，并发送请求给 Docker daemon。
@@ -224,8 +215,6 @@ Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）
 5. 当需要为 Docker 创建网络环境时，通过网络管理驱动 Network driver 创建并配置 Docker 容器网络环境。
 6. 当需要限制 Docker 容器运行资源或执行用户指令等操作时，则通过 exec driver 来完成。
 7. libcantainer 是一项独立的容器管鋰包，network driver 以及 exec driver 都是通过 libcontainer 来实现具体对容器操作。
-
-
 
 参考：
 
@@ -347,8 +336,8 @@ bash-5.1#
 
 ```
 用法
-	docker ps [OPTIONS]
-	
+    docker ps [OPTIONS]
+
 OPTIONS:
   -a, --all             Show all containers (default shows just running)
   -f, --filter filter   Filter output based on conditions provided
@@ -442,7 +431,7 @@ docker rm <容器ID或容器名>
 
 ```
 用法
-	docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+    docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 
 OPTIONS:
   -f, --format string   Format the output using the given Go template
@@ -450,10 +439,8 @@ OPTIONS:
       --type string     Return JSON for specified type
 
 示例
-	docker inspect 容器ID
+    docker inspect 容器ID
 ```
-
-
 
 ### 9.2.11. docker exec
 
@@ -461,8 +448,8 @@ OPTIONS:
 
 ```
 用法
-	docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
-	
+    docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
 [OPTIONS]:
   -d, --detach 在容器中后台执行命令； 
   -i, --interactive=true | false ：打开标准输入接受用户输入命令
@@ -478,15 +465,13 @@ docker exec -it <容器ID> /bin/bash
 root@77e61214ea8c:/data#
 ```
 
-
-
 ### 9.2.12. docker attach
 
 重新进入原先已退出的容器内部，并将本地标准输入、输出和错误流附加到正在运行的容器。
 
 ```
 用法
-	docker attach [OPTIONS] CONTAINER
+    docker attach [OPTIONS] CONTAINER
 
 OPTIONS:
   --detach-keys string   Override the key sequence for detaching a container
@@ -497,26 +482,26 @@ OPTIONS:
 注意：`docker exec` 与 `docker attach` 的区别
 
 - `docker attach`  直接进入容器命令行的终端，不会启动新的进程，用 `exit` 命令退出容器时，会导致容器停止。
-
+  
   外部终端查看 docker 容器的 ID
-
+  
   ```
   [root@CentOS7 ~]# docker ps
   CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
   86fcdb251eb9   ubuntu    "/bin/bash"   6 minutes ago   Up 6 minutes             romantic_murdock
   ```
-
+  
   指定容器 ID，进入 docker 容器内部
-
+  
   ```
   [root@CentOS7 ~]# docker attach 86fcdb251eb9
   root@86fcdb251eb9:/#
   root@86fcdb251eb9:/# ls
   bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
   ```
-
+  
   执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器没有跑起来，已经停止运行了。
-
+  
   ```
   root@86fcdb251eb9:/# exit
   exit
@@ -525,24 +510,24 @@ OPTIONS:
   ```
 
 - 执行 `docker exec` 是在容器内部打开新的终端，并且可以启动新的进程，用 `exit` 命令退出容器时，不会导致容器停止。
-
+  
   外部终端查看 docker 容器的 ID
-
+  
   ```
   [root@CentOS7 ~]# docker ps
   CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES
   178c5e88904a   ubuntu    "/bin/bash"   20 seconds ago   Up 19 seconds             eager_ellisS
   ```
-
+  
   指定容器 ID 和命令，比如指定 ID 为 `178c5e88904a` 的容器，以交互式的方式重新打开一个伪终端后进入容器内部。
-
+  
   ```
   [root@CentOS7 ~]# docker exec -it 178c5e88904a  /bin/bash
   root@178c5e88904a:/#
   ```
-
+  
   执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器还在后台运行，并没有停止。
-
+  
   ```
   root@178c5e88904a:/# exit
   exit
@@ -551,16 +536,14 @@ OPTIONS:
   178c5e88904a   ubuntu    "/bin/bash"   3 minutes ago   Up 3 minutes             eager_ellis
   ```
 
-
-
 ### 9.2.13. docker cp
 
 在容器和本地文件系统（本地主机）之间拷贝文件或文件夹。
 
 ```
 用法
-	docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
-	docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
+    docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
+    docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
 
 OPTIONS:
   -a, --archive       Archive mode (copy all uid/gid information)
@@ -573,7 +556,7 @@ OPTIONS:
 
 ```
 用法
-	docker logs [OPTIONS] CONTAINER
+    docker logs [OPTIONS] CONTAINER
 
 OPTIONS:
       --details        Show extra details provided to logs
@@ -590,8 +573,8 @@ OPTIONS:
 
 ```
 用法
-	docker export [OPTIONS] CONTAINER
-	
+    docker export [OPTIONS] CONTAINER
+
 Options:
   -o, --output string   Write to a file, instead of STDOUT
 ```
@@ -611,8 +594,6 @@ bdbd7d438f8f   hello-world          "/hello"                 2 days ago       Ex
 [root@redis_181 ~]# docker export -o="hw.tar" bdbd7d438f8f
                     hw.tar  
 ```
-
-
 
 ### 9.2.16. docker import
 
@@ -638,15 +619,13 @@ OPTIONS:
     REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
     john/hello           5.0       ed584048180e   12 seconds ago   13.3kB
     wurstmeister/kafka   latest    2dd91ce2efe1   2 weeks ago      508MB
-  
+
   # 从远程位置导入
    docker import https://example.com/exampleimage.tgz
-   
+
  # 从本地文件中导入
    docker import /path/to/exampleimage.tgz
 ```
-
-
 
 ## 9.3. 镜像命令
 
@@ -656,7 +635,7 @@ OPTIONS:
 
 ```
 用法
-	docker images [OPTIONS] [REPOSITORY[:TAG]]
+    docker images [OPTIONS] [REPOSITORY[:TAG]]
 
 OPTIONS:
   -a, --all   显示所有的镜像，包括默认隐藏的中间镜像（历史镜像）
@@ -691,7 +670,7 @@ SIZE：镜像大小
 
 ```
 用法
-	docker search [OPTIONS] TERM
+    docker search [OPTIONS] TERM
 
 OPTIONS：
   -f, --filter filter   Filter output based on conditions provided
@@ -744,7 +723,7 @@ flant/redis-sentinel-proxy       Redis sentinel proxy by enriclluelles writte…
 
 ```
 用法
-	docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+    docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 
 OPTIONS:
   -a, --all-tags                Download all tagged images in the repository
@@ -763,15 +742,13 @@ OPTIONS:
 [root@redis_181 ~]# docker pull redis:6.0.8
 ```
 
-
-
 ### 9.3.4. docker rmi
 
 删除指定的镜像（rmi: Remove one or more images）
 
 ```
 用法
-	docker rmi [OPTIONS] IMAGE [IMAGE...]
+    docker rmi [OPTIONS] IMAGE [IMAGE...]
 
 OPTIONS:
   -f, --force      Force removal of the image
@@ -805,9 +782,7 @@ Deleted: sha256:d13c942271d66cb0954c3ba93e143cd253421fe0772b8bed32c4c0077a546d4d
 Deleted: sha256:0eba131dffd015134cb310c284b776c1e44d330146cd2f0e30c4e464d0b76d24
 ```
 
-
-
-### 9.3.5. docker system df 
+### 9.3.5. docker system df
 
 查看镜像、容器、数据卷所占用的空间大小
 
@@ -818,7 +793,6 @@ Images          3         3         785.9MB   0B (0%)
 Containers      5         0         344B      344B (100%)
 Local Volumes   5         5         2B        0B (0%)
 Build Cache     0         0         0B        0B
-
 ```
 
 显示结果说明
@@ -836,7 +810,7 @@ Build Cache     0         0         0B        0B
 ```
 用法
   docker save [OPTIONS] IMAGE [IMAGE...]
-  
+
 OPTIONS:
   -o, --output string   Write to a file, instead of STDOUT
 ```
@@ -848,7 +822,7 @@ OPTIONS:
 ```
 用法
   docker load [OPTIONS]
-  
+
 OPTIONS:
   -i, --input string   Read from tar archive file, instead of STDIN
   -q, --quiet          Suppress the load output
@@ -867,8 +841,6 @@ docker load < busybox.tar.gz
 docker images
 ```
 
-
-
 ### 9.3.8. docker build
 
 从一个 Dockerfile 中构建一个 Docker 镜像。
@@ -885,8 +857,6 @@ Docker下安装软件的步骤
 4. 启动镜像：注意端口映射。
 5. 停止容器
 6. 移除容器
-
-
 
 # 11. Docker 容器数据卷
 
@@ -912,8 +882,6 @@ Options:
   -p, --pause            Pause container during commit (default true)
 ```
 
-
-
 # 13. Docker network
 
 ```
@@ -927,12 +895,7 @@ NETWORK ID     NAME         DRIVER    SCOPE
 9a2d889dab32   host         host      local
 c6cc0e89cb3c   none         null      local
 7de8536fcab2   zk_network   bridge    local
-
 ```
-
-
-
-
 
 # 14. Docker Compose
 
@@ -959,12 +922,10 @@ docker-compose --version
     KAFKA_BROKER_ID：指定BrokerId，如果不指定，将会自己生成
 ```
 
-
-
 # 15. 面试问题
 
 1. Docker 的虚悬镜像是什么
-
+   
    仓库命、标签命都是 <none> 的镜像，俗称为虚悬镜像（dangling image）。
 
 # 16. Reference

@@ -30,7 +30,7 @@ Core dump 中文翻译为“核心转储”，它是进程运行时在突然崩�
 
 `/proc/sys/kernel/core_uses_pid `可以控制产生的 core 文件的文件名中是否添加 pid 作为扩展 ，如果添加则文件内容为 1 ，否则为 0
 
-`proc/sys/kernel/core_pattern` 可以设置格式化的 core 文件保存位置或文件名 ，比如原来文件内容是 core-%e
+`/proc/sys/kernel/core_pattern` 可以设置格式化的 core 文件保存位置或文件名 ，比如原来文件内容是 core-%e
 
 可以这样修改 :
 
@@ -52,18 +52,11 @@ echo "/corefile/core-%e-%p-%t" > core_pattern
 %e - insert coredumping executable name into filename 添加命令名
 ```
 
-# ④修改core文件保存路径
+## 修改core文件保存路径
 
-●默认生成的core文件保存在可执行文件所在的目录下，文件名为core。
-
-●通过修改/proc/sys/kernel/core_uses_pid文件使生成的core文件加上pid号，echo 1>/proc/sys/kernel/core_uses_pid。
-
-● 还可以通过修改/proc/sys/kernel/core_pattern控制生成的core文件保存的位置以及文件名。
-
-echo "/home/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
-
-
-
+- 默认生成的 core 文件保存在可执行文件所在的目录下，文件名为 core。
+- 通过修改`/proc/sys/kernel/core_uses_pid`文件使生成的core文件加上pid号，`echo 1>/proc/sys/kernel/core_uses_pid`。
+- 还可以通过修改`/proc/sys/kernel/core_pattern`控制生成的 core 文件保存的位置以及文件名。 
 
 # 3. GDB定位 Core 文件
 
@@ -75,8 +68,6 @@ echo "/home/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
 4. 定位异常变量。指令不会有问题，是指令操作的变量不符合预期。
 
 善于利用**汇编指令**以及 **打印指令（x、print、display**可以更有效的定位Core。
-
-
 
 利用 GDB 调试生成的 core 文件。
 
