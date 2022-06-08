@@ -7,7 +7,6 @@
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
-
 <!-- TOC -->
 
 - [1. 缩写](#1-缩写)
@@ -43,9 +42,7 @@
 - SLL(Static ALinking Library): windows下的以 `.lib` 方式命名，Linux的以 `.a` 方式命名。
 - BSS(Block Started by Symbol): 未初始化的全局变量和局部静态变量的区域。
 
-
-
-# 2. 程序处理过程 
+# 2. 程序处理过程
 
 程序处理的流程：源代码→预处理→编译→汇编→目标文件→链接→可执行文件
 
@@ -75,16 +72,13 @@
   - 符号解析(symbol resolution)：将每个符号引用正好和一个符号定义关联起来。
   - 重定位：链接器通过把每个符号定义于一个内存位置关联起来，从而重定位这些细节，然后修改所有对这些符号的引用，使它们指向这个内存位置。
 
-
 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
 
 <div align="center">
-	<img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png">
+    <img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png">
 </div>
 
 可执行文件
-
-
 
 - 加载器
   - 运行程序时，加载器首先加载程序到内存中，<font color=red> 被加载程序称为进程 </font>，并由操作系统加载。
@@ -101,14 +95,13 @@
     4. 开始执行程序，生成即时页面错误异常
 
 <div align="center">
-	<img width="80%" height="40%" src="./pictures/加载过程.png">
+    <img width="80%" height="40%" src="./pictures/加载过程.png">
 </div>
-
-
 
 # 3. 内存四区
 
 首先了解基本的几个概念。
+
 - 全局变量（外部变量）：出现在代码块 `{}` 之外的变量就是全局变量。
 - 局部变量（自动变量）：一般情况下，代码块 `{}` 内部定义的变量就是自动变量，也可使用 `auto` 显示定义。
 - static 变量：是指内存位置在程序执行期间一直不改变的变量，用关键字 `static` 修饰。代码块内部的静态变量只能被这个代码块内部访问，代码块外部的静态变量只能被定义这个变量的文件访问。
@@ -116,18 +109,21 @@
 源代码编译后在内存中被分成五个主要部分：代码区、数据区、BSS、栈、堆。
 
 - 代码区(code segment/text segment)
+  
   - 用来存放程序执行代码的一块内存区域，里面装的是 CPU 执行的机器指令。
   - 程序加载到内存的时候由操作系统分配，程序结束时由操作系统释放。这部分区域的大小在程序运行前就已经确定，这块内存在程序运行期间是不变的，通常属于只能读，不能写，因为防止程序被指令意外的修改。
   - 代码区是共享的，共享的目的是为了频繁执行的程序，在内存中仅有一份代码的拷贝。
   - 函数也是代码的一部分，故函数都被放在代码区，包括main函数。 
 
 - 数据段(data segment)
+  
   - 用来存放程序中已初始化的 global 变量和static 变量的一块内存区域。
   - 分配优先于main函数，生存期与程序共存亡。
   - 程序一开始就分配了，直到结束才释放。
   - 可读可写。
 
 - 栈(stack)
+  
   - 栈(stack)是一种先进后出的内存结构，存储局部变量、函数形参和返回地址。
   - 栈是从高地址向低地址方向增长。
   - 在C语言中，函数参数的入栈顺序是从右到左。
@@ -138,6 +134,7 @@
   - 栈分配与释放消耗CPU资源，只能存储少量的数据。
 
 - 堆(heap)
+  
   - 堆区由操作系统分配给每个进程，动态内存从堆中获取，调用 malloc()、calloc()、realloc()函数分配动态内存。
   - 堆区分配的内存仅能通过指针访问。 
   - 调用 free()函数将内存还给堆。
@@ -145,18 +142,20 @@
   - `malloc` 和 `free` 函数底层函数是采用全局指针实现的。
 
 - BSS段
+  
   - BSS(Block Started by Symbol): 以符号开始的块，用来存放程序中未初始化的全局变量和局部静态变量的一块区域。
   - 包括所有未初始化的全局变量、用static关键字声明且未初始化的静态全局变量
   - 运行所需空间记录在目标文件中，不在目标文件中占用实际空间
   - 程序启动过程中需要初始化的任意变量都可以存放在BSS段中。
 
-
 什么时候用堆和栈？
+
 - 如果明确知道数据占用多少内存，那么数据量较小时用栈，较大时用堆 
 - 如果不知道数据量大小(可能需要占用较大内存)，最好用堆(因为这样保险些)
 - 如果需要动态创建数组，则用堆
 
 Linux 下内存分配管理如下图所示
+
 <div align="center">
   <img width="90%" height="90%" src="./pictures/虚拟地址空间.png">
 </div>
@@ -164,6 +163,7 @@ Linux 下内存分配管理如下图所示
 --------------------------
 
 常见的内存错误
+
 - 内存分配未成功，却使用了它。编程新手常犯这种错误，因为他们没有意识到内存分配会不成功。常用解决办法是，在使用内存之前检查指针是否为NULL。
 - 内存分配虽然成功，但是尚未初始化就引用它。犯这种错误主要有两个起因：一是没有初始化的观念；二是误以为内存的缺省初值全为零，导致引用初值错误（例如数组）。 内存的缺省初值究竟是什么并没有统一的标准，尽管有些时候为零值，我们宁可信其无不可信其有。所以无论用何种方式创建数组，都别忘了赋初值，即便是赋零值也不可省略，不要嫌麻烦。
 - 内存分配成功并且已经初始化，但操作越过了内存的边界。
@@ -173,37 +173,34 @@ Linux 下内存分配管理如下图所示
   - 函数的return语句写错了，注意不要返回指向“栈内存”的“指针”或者“引用”，因为该内存在函数体结束时被自动销毁。
   - 使用free或delete释放了内存后，没有将指针设置为NULL。导致产生“野指针”。
 
-
-
 # 4. 函数库
 
 函数库是可以被调用来执行的一段功能函数。函数库分为静态库和动态库。
 
 Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/usr/lib64` 里面。
 
-
 # 5. 静态库
 
 所有编译器都提供一种机制，将所有相关的目标模块打包成一个单独的文件，成为静态库(static library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
-
 命名规则
+
 - Linux中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
 - `libtest.a` 静态库为 test
 
-
 制作步骤
+
 - 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
 - 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。基本格式为  `ar rcs 静态库的名字(libtest.a) 所有的.o文件 `
   - `ar rcs libstatic_1.a *.o` 
 - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
-<div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
-
+  
+  <div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
 
 优缺点
+
 - 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
 - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
-
 
 # 6. 动态库
 
@@ -211,7 +208,11 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 
 > 只有在程序执行的过程中才会加载动态链接库。
 
+思考？
 
+- 既然动态库是在运行时加载，那为什么在编译时还需要指明？
+  
+  因为在编译的时候，编译器需要知道每一个动态库中提供了哪些符号。
 
 ## 6.1. Linux平台
 
@@ -222,11 +223,9 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
   - 生成与位置无关的 `.o` 文件。使用的命令 `gcc -fPIC -c *.c -I ./include`  将当前目录下所有的 `.c` 文件都生成 `.o` 文件，其中包括的头文件在 `./include` 路径下。
   - 将 `.o` 文件打包。 `gcc -shared -o libmytest.so *o -I ./include`  将当前目录下所有的 `.o` 文件打包为共享库 `libmytest.so`
 
-
 - 共享库的调用
   - `gcc main.c ./lib/libmytest.so -o main.out -I ./include`  源文件 ` main.c` 与`./lib/libmytest.so` 目录下的动态库文件链接生成可执行的 `main.out` 文件
   - `gcc main.c -L ./lib -l mytest -o main.out -I ./include`    这种方式实现，需要在系统中配置动态链接库的环境变量。
-
 
 - `ldd` 查看可执行文件 (.out) 在动态执行过程中所依赖的所有动态库。
   
@@ -242,41 +241,42 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
           libpthread.so.0 => /lib64/libpthread.so.0 (0x00007faf6f3c2000)
   ```
 
-
 程序加载动态库是从系统的环境变量中去查找的。
 
 ① 开发过程中临时使用的一种方法，不是永久生效。每次关闭终端，都会将配置的环境变量清除。
+
 - 系统提供的动态链接库环境变量 `LD_LIBRARY_PATH`
 - 将自己制作的动态链接库路径导入到 `LD_LIBRARY_PATH` 路径中。`export  LD_LIBRARY_PATH = 制作的动态链接库路径`
 
 ② 直接在 `.bashrc`文件中去配置 `export  LD_LIBRARY_PATH = 制作的动态链接库路径`。每次打开终端都会去读取配置的文件。
 
 ③ 比较常用的方法 
+
 - 查找动态连接器的配置文件。查找 `/etc` 目录下的 `ld.so.conf`文件
 - 将自己制作的动态链接库路径写到配置文件中。要使用绝对路径，完整的动态库位置。
 - 更新配置文件。`sudo ldconfig -v`
 
 优点
+
 - 执行程序的体积较小。
 - 在程序的接口没有发生改变之前，不需要重新编译程序。 
 
 缺点 
+
 - 发布程序的时候，需要将动态库发布给用户。
 - 加载的速度相对静态库比较慢。 
-
 
 ## 6.2. Windows平台
 
 C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h .lib .dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
 还有一点是 dll 是在调试的时候使用的，lib 是编译的时候使用的，两者是不同时期使用的工具。
 
-
 # 7. ELF relocatable
 
 <img src="./pictures/ELF-relocatable.png">
 
-
 查看符号表内容
+
 ```
 readlf -s main.o
 ```
@@ -300,7 +300,14 @@ GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言�
   gcc test.c -I ./include -o test.out  使用 -I 链接指定目录下(./include)的头文件进行编译生成可执行文件。
 
 -D(Defn macro)           指定相关的宏文件(控制日志log输出)
-  gcc test.c -I ./include -o test.out -D DEBUG  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
+  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
+  gcc test.c -I ./include -o test.out -D DEBUG  
+
+-fPIC(position independent code)
+  生成与位置无关的代码
+ 
+
+
 ```
 
 - [GCC 包下载：fedoraproject.org](https://archives.fedoraproject.org/pub/)
@@ -338,8 +345,6 @@ CentOS7 4.8.4 默认安装时的配置
 安装软件到第一步 ./configure 后面指定的路径下。
 ```
 
-
-
 ## CentOS7 安装高版本 gcc8/g++8
 
 ```sh
@@ -348,8 +353,6 @@ CentOS7 4.8.4 默认安装时的配置
 3、shell 终端临时设置默认版本，重启后失效: scl enable devtoolset-8 -- bash；
 长期有效设置：vim /etc/profile 文件中的最后一行加入: source /opt/rh/devtoolset-8/enable
 ```
-
-
 
 高版本 GCC 编译器编译 C++11 之下的代码，可能出现的问题？
 
@@ -373,8 +376,6 @@ GCC5.3 支持 C++14
   Support for all C++14 language features has been added to the development sources for GCC, and will be available when GCC 5 is released next year. Contributed by Jason Merrill, Braden Obrzut, Adam Butcher, Edward Smith-Rowland, and Jakub Jelinek.
 ```
 
-
-
 - [GNU GCC 历史版本发布说明](https://gcc.gnu.org/news.html)
 - [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
 - [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
@@ -388,9 +389,6 @@ Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线
 
 CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
-
-
-
 ## 10.1. 软件仓库
 
 Windows
@@ -401,8 +399,6 @@ Linux 或 Unix
 
 - 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
 - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
-
-
 
 ## 10.2. RPM
 
@@ -432,17 +428,12 @@ rpm -qa xxx 查询安装包
 rpm -ivh --force --nodeps *rpm  一次性安装多个软件包
 ```
 
-## 10.3. Epel 
+## 10.3. Epel
 
 EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
 
-
-
 - 官方主页：https://fedoraproject.org/wiki/EPEL
 - [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
-
-
-
 
 ## 10.4. Yun
 
@@ -464,11 +455,7 @@ CentOS7及以下版本默认开启的yum配置文件有：CentOS-Base.repo、Cen
 repolist
 
 grouplist   可用组
-
 ```
-
-
-
 
 ## 10.5. apt
 
@@ -500,11 +487,10 @@ grouplist   可用组
   - dpkg -l softwarename 查看软件版本
   - 用 find 或 whereis 命令查找文件位置
 - 卸载软件
-  -  apt-get remove softname1 softname2 …;              移除式卸载
-  -  apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
+  - apt-get remove softname1 softname2 …;              移除式卸载
+  - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
-
-## 10.6. dpkg 
+## 10.6. dpkg
 
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
@@ -518,115 +504,145 @@ grouplist   可用组
 - dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
 - dpkg -reconfigure 重新配置
 
-
-
-
 # 11. 工具
 
-- readelf
-  
-  读取 ELF(Executable and Linking Format) 文件中信息
-  
-- size
-  
-   查看object文件或者链接库文件中的object文件的各个段(section)的大小及其总的大小。
-   
-- nm
-  
-  查看静态库或可执行文件里面的内容(list symbols from object files：列出一个函数库文件中的符号表)
+## readelf
 
-  例如：`nm main.out`， `nm mylib.a` 
-  
-- objdump
-  
-  是Linux下的反汇编目标文件或者可执行文件的命令，它以一种可阅读的格式让你更多地了解二进制文件可能带有的附加信息。
-  
-  ```sh
-  常用符号表字段
-  
-  .text：   已编译程序的机器代码。
-  
-  .rodata： 只读数据，比如printf语句中的格式串和开关(switch)语句的跳转表。
-  
-  .data：   已初始化的全局C变量。局部C变量在运行时被保存在栈中，既不出现在.data中，也不出现在.bss节中。
-  
-  .bss：    未初始化的全局C变量。在目标文件中这个节不占据实际的空间，它仅仅是一个占位符。目标文件格式区分初始化和未初始化变量是为了空间效率在：在目标文件中，未初始化变量不需要占据任何实际的磁盘空间。
-  
-  .symtab： 一个符号表(symbol table)，它存放在程序中被定义和引用的函数和全局变量的信息。一些程序员错误地认为必须通过-g选项来编译一个程序，得到符号表信息。实际上，每个可重定位目标文件在 `.symtab` 中都有一张符号表。然而，和编译器中的符号表不同，.symtab符号表不包含局部变量的表目。
-  
-  .rel.text：当链接噐把这个目标文件和其他文件结合时，`.text` 中的许多位置都需要修改。一般而言，任何调用外部函数或者引用全局变量的指令都需要修改。另一方面调用本地函数的指令则不需要修改。注意，可执行目标文件中并不需要重定位信息，因此通常省略，除非使用者显式地指示链接器包含这些信息。
-  
-  .rel.data：被模块定义或引用的任何全局变量的信息。一般而言，任何已初始化全局变量的初始值是全局变量或者外部定义函数的地址都需要被修改。
-  
-  .debug：  一个调试符号表，其有些表目是程序中定义的局部变量和类型定义，有些表目是程序中定义和引用的全局变量，有些是原始的C源文件。只有以-g选项调用编译驱动程序时，才会得到这张表。
-  
-  .line：  原始C源程序中的行号和 `.text` 中机器指令之间的映射。只有以 `-g` 选项调用编译驱动程序时，才会得到这张表。
-  
-  .strtab：一个字符串表，其内容包括 `.symtab` 和 `.debug` 中的符号表，以及节头部中的节名字。字符串表就是以 `null` 结尾的字符串序列。
-  ```
-  
-  
-  
-  ```sh
-  参数选项
-  
-  -a  --archive-headers       显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 
-  -b bfdname --target=bfdname 指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： 
-  
-  objdump -b oasys -m vax -h fu.o 
-  显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 
-  
-  -C  --demangle              将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 
-  -g --debugging              显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 
-  
-  -e  --debugging-tags        类似 -g 选项，但是生成的信息是和ctags工具相兼容的格式。 
-  -d --disassemble            从 objfile 中反汇编那些特定指令机器码的 section。 
-  -D  --disassemble-all       与 -d 类似，但反汇编所有section. 
-  --prefix-addresses          反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 
-  
-  -EB 
-  -EL 
-  --endian={big|little}       指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. 
-  
-  -f --file-headers           显示 objfile 中每个文件的整体头部摘要信息。 
-  -h --section-headers --headers 显示目标文件各个section的头部摘要信息。 
-  -H --help 简短的帮助信息。 
-  -j name  --section=name      仅仅显示指定名称为name的section的信息 
-  -l --line-numbers            用文件名和行号标注相应的目标代码，仅仅和 -d、 -D 或者 -r 一起使用使用 -ld 和使用 -d 的区别不是很大，在源码级调试的时候有用，要求编译时使用了 -g 之类的调试编译选项。 
-  
-  -m machine --architecture=machine 指定反汇编目标文件时使用的架构，当待反汇编文件本身没描述架构信息的时候(比如 S-records)，这个选项很有用。可以用 -i 选项列出这里能够指定的架构. 
-  
-  -r --reloc                  显示文件的重定位入口。如果和-d或者-D一起使用，重定位部分以反汇编后的格式显示出来。 
-  -R  --dynamic-reloc         显示文件的动态重定位入口，仅仅对于动态目标文件意义，比如某些共享库。 
-  -s  --full-contents         显示指定 section 的完整内容。默认所有的非空section都会被显示。 
-  -S --source                 尽可能反汇编出源代码，尤其当编译的时候指定了 -g 这种调试参数时，效果比较明显。隐含了 -d 参数。
-  --show-raw-insn             反汇编的时候，显示每条汇编指令对应的机器码，如不指定 --prefix-addresses，这将是缺省选项。 
-  --no-show-raw-insn          反汇编时，不显示汇编指令的机器码，如不指定 --prefix-addresses，这将是缺省选项。 
-  --start-address=address     从指定地址开始显示数据，该选项影响 -d、 -r 和 -s 选项的输出。 
-  --stop-address=address      显示数据直到指定地址为止，该项影响-d、-r和-s选项的输出。 
-  -t --syms                   显示文件的符号表入口。类似于 nm -s 提供的信息 
-  -T --dynamic-syms           显示文件的动态符号表入口，仅仅对动态目标文件意义，比如某些共享库。它显示的信息类似于 nm -D|--dynamic 显示的信息。 
-  -V --version                版本信息 
-  --all-headers -x            显示所可用的头信息，包括符号表、重定位入口。 -x 等价于 -a -f -h -r -t 同时指定。 
-  -z --disassemble-zeroes     一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 
-  @file                       可以将选项集中到一个文件中，然后使用这个 @file 选项载入。
-  ```
+读取 ELF(Executable and Linking Format) 文件中信息
 
+```bash
+参数项
+-l
+  readelf -l libxxx.so
+
+# 
+-S 
+  查看符号表内容
+  readelf -S xxx.out/xxx.so/xxx.a
+
+-r
+  查看重定位信息
+    
+```
+
+## size
+
+ 查看object文件或者链接库文件中的object文件的各个段(section)的大小及其总的大小。
+
+## nm
+
+查看静态库或可执行文件里面的内容（list symbols from object files：列出一个函数库文件中的符号表）。
+
+例如：`nm main.out`， `nm mylib.a` 
+
+## pmap
+
+打印一个进程的内存映射（report memory map of a process）。
+
+示例：
+
+```
+pmap 进程PID
+```
+
+## patchelf
+
+patchelf 是一个简单的实用程序，用于修改已存在的 ELF 可执行表（executables）和库（libraries）。它会改变 可执行表的动态加载器（loader），同时也会改变可执行表和库的路径（PATH）。
+
+```bash
+--print-needed
+  查看一个可执行程序或动态库，依赖于其它哪些模块。
+  anna$:/usr/lib$ patchelf --print-needed libmpathcmd.so.0
+  libc.so.6
+
+
+```
+
+## objdump
+
+是 Linux 下的反汇编目标文件或者可执行文件的命令，它以一种可阅读的格式让你更多地了解二进制文件可能带有的附加信息。
+
+```bash
+常用符号表字段
+
+.text：   已编译程序的机器代码。
+
+.rodata： 只读数据，比如printf语句中的格式串和开关(switch)语句的跳转表。
+
+.data：   已初始化的全局C变量。局部C变量在运行时被保存在栈中，既不出现在.data中，也不出现在.bss节中。
+
+.bss：    未初始化的全局C变量。在目标文件中这个节不占据实际的空间，它仅仅是一个占位符。目标文件格式区分初始化和未初始化变量是为了空间效率在：在目标文件中，未初始化变量不需要占据任何实际的磁盘空间。
+
+.symtab： 一个符号表(symbol table)，它存放在程序中被定义和引用的函数和全局变量的信息。一些程序员错误地认为必须通过-g选项来编译一个程序，得到符号表信息。实际上，每个可重定位目标文件在 `.symtab` 中都有一张符号表。然而，和编译器中的符号表不同，.symtab符号表不包含局部变量的表目。
+
+.rel.text：当链接噐把这个目标文件和其他文件结合时，`.text` 中的许多位置都需要修改。一般而言，任何调用外部函数或者引用全局变量的指令都需要修改。另一方面调用本地函数的指令则不需要修改。注意，可执行目标文件中并不需要重定位信息，因此通常省略，除非使用者显式地指示链接器包含这些信息。
+
+.rel.data：被模块定义或引用的任何全局变量的信息。一般而言，任何已初始化全局变量的初始值是全局变量或者外部定义函数的地址都需要被修改。
+
+.debug：  一个调试符号表，其有些表目是程序中定义的局部变量和类型定义，有些表目是程序中定义和引用的全局变量，有些是原始的C源文件。只有以-g选项调用编译驱动程序时，才会得到这张表。
+
+.line：  原始C源程序中的行号和 `.text` 中机器指令之间的映射。只有以 `-g` 选项调用编译驱动程序时，才会得到这张表。
+
+.strtab：一个字符串表，其内容包括 `.symtab` 和 `.debug` 中的符号表，以及节头部中的节名字。字符串表就是以 `null` 结尾的字符串序列。
+```
+
+```bash
+参数选项
+
+-a  --archive-headers       显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 
+-b bfdname --target=bfdname 指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： 
+
+objdump -b oasys -m vax -h fu.o 
+显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 
+
+-C  --demangle              将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 
+-g --debugging              显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 
+
+-e  --debugging-tags        类似 -g 选项，但是生成的信息是和ctags工具相兼容的格式。 
+-d --disassemble            从 objfile 中反汇编那些特定指令机器码的 section。 
+-D  --disassemble-all       与 -d 类似，但反汇编所有section. 
+--prefix-addresses          反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 
+
+-EB 
+-EL 
+--endian={big|little}       指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. 
+
+-f --file-headers           显示 objfile 中每个文件的整体头部摘要信息。 
+-h --section-headers --headers 显示目标文件各个section的头部摘要信息。 
+-H --help 简短的帮助信息。 
+-j name  --section=name      仅仅显示指定名称为name的section的信息 
+-l --line-numbers            用文件名和行号标注相应的目标代码，仅仅和 -d、 -D 或者 -r 一起使用使用 -ld 和使用 -d 的区别不是很大，在源码级调试的时候有用，要求编译时使用了 -g 之类的调试编译选项。 
+
+-m machine --architecture=machine 指定反汇编目标文件时使用的架构，当待反汇编文件本身没描述架构信息的时候(比如 S-records)，这个选项很有用。可以用 -i 选项列出这里能够指定的架构. 
+
+-r --reloc                  显示文件的重定位入口。如果和-d或者-D一起使用，重定位部分以反汇编后的格式显示出来。 
+-R  --dynamic-reloc         显示文件的动态重定位入口，仅仅对于动态目标文件意义，比如某些共享库。 
+-s  --full-contents         显示指定 section 的完整内容。默认所有的非空section都会被显示。 
+-S --source                 尽可能反汇编出源代码，尤其当编译的时候指定了 -g 这种调试参数时，效果比较明显。隐含了 -d 参数。
+--show-raw-insn             反汇编的时候，显示每条汇编指令对应的机器码，如不指定 --prefix-addresses，这将是缺省选项。 
+--no-show-raw-insn          反汇编时，不显示汇编指令的机器码，如不指定 --prefix-addresses，这将是缺省选项。 
+--start-address=address     从指定地址开始显示数据，该选项影响 -d、 -r 和 -s 选项的输出。 
+--stop-address=address      显示数据直到指定地址为止，该项影响-d、-r和-s选项的输出。 
+-t --syms                   显示文件的符号表入口。类似于 nm -s 提供的信息 
+-T --dynamic-syms           显示文件的动态符号表入口，仅仅对动态目标文件意义，比如某些共享库。它显示的信息类似于 nm -D|--dynamic 显示的信息。 
+-V --version                版本信息 
+--all-headers -x            显示所可用的头信息，包括符号表、重定位入口。 -x 等价于 -a -f -h -r -t 同时指定。 
+-z --disassemble-zeroes     一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 
+@file                       可以将选项集中到一个文件中，然后使用这个 @file 选项载入。
+```
 
 # 12. 构建
 
 两种编译构建方式。
 
 - 原生(native)编译构建，即编译构建命令所运行(host)的系统环境和编译构建输出目标(target)的系统环境一致；
+
 - 交叉(cross)编译构建，上述target和host不一致，即在A系统环境构建出在B系统上运行的目标，这在嵌入式开发中尤为多见。
   
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
-
 # 13. 参考
+
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
 - [内存管理(详细版)](https://www.cnblogs.com/yif1991/p/5049638.html)：详细的解释了内存四区的相关内容。
-
-
-
