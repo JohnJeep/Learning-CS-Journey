@@ -21,10 +21,7 @@ open()是一个系统调用函数,用来打开或创建一个文件，通过不�
 // 函数原型
 int open(const char *pathname, int flags);
 int open(const char *pathname, int flags, mode_t mode);
-
 ```
-
-
 
 ## fopen() 函数
 
@@ -82,12 +79,11 @@ struct _IO_FILE {
 ```cpp
 typedef struct _iobuf
 {
-	void* _Placeholder;
+    void* _Placeholder;
 } FILE;
 ```
 
 fopen 函数 API 接口使用说明
-
 
 ```cpp
 // 头文件
@@ -117,7 +113,7 @@ FILE *fopen(const char *path, const char *mode);
 ```c
 #include <stdio.h>
 #include <stdlib.h>
- 
+
 int main(void)
 {
     FILE* fp = fopen("test.txt", "r");
@@ -125,12 +121,12 @@ int main(void)
         perror("File opening failed");
         return EXIT_FAILURE;
     }
- 
+
     int c; // 注意：int，非char，要求处理EOF
     while ((c = fgetc(fp)) != EOF) { // 标准C I/O读取文件循环
        putchar(c);
     }
- 
+
     if (ferror(fp)) {
         puts("I/O error when reading");
     }
@@ -141,8 +137,6 @@ int main(void)
 }
 ```
 
-
-
 ## fopen() 与 open() 区别
 
 1. Windows 下 `CreateFile` 可以通过参数来制定，保证读写是否线程安全，而 `fopen` 则不可以。
@@ -150,8 +144,8 @@ int main(void)
 
 不同的进程同时访问一个文件，给文件加锁是有效的；而一个进程中的多个线程或协程同时对同一个文件进行加锁会互相覆盖掉，是无效的。
 
-
-
-
 ## Reference
+
 - [Windows API](https://zh.wikipedia.org/wiki/Windows_API)
+- [关于C++：为什么std::fstreams这么慢？ | 码农家园](https://www.codenong.com/26095160/)
+- [C/C++读写文件的几种方法fstream fopen、fwrite()、fread()操作](https://www.cnblogs.com/ZY-Dream/p/11181924.html)
