@@ -1,0 +1,11 @@
+{
+    "ip":"192.168.237.131",
+    "port":3306,
+    "userName":"root",
+    "password":"root",
+    "dbName":"testdb",
+    "minSize":100,
+    "maxSize":1024,
+    "maxIdleTime":5000,
+    "timeout":1000
+}
