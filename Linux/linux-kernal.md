@@ -1,35 +1,11 @@
 <!--
  * @Author: JohnJeep
- * @Date: 2020-08-19 19:37:29
- * @LastEditTime: 2021-12-07 01:17:50
- * @LastEditors: Windows10
- * @Description: Linux kernel 学习
+ * @Date: Wednesday, August 19th 2020, 18:58:33 PM
+ * @LastEditors: JohnJeep
+ * @LastEditTime: Saturday, July 9th 2022, 14:06:44 PM
+ * @Description: Linux kernal 学习
+ * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
-
-<!-- TOC -->
-
-- [1. 理解内核的秘籍](#1-%E7%90%86%E8%A7%A3%E5%86%85%E6%A0%B8%E7%9A%84%E7%A7%98%E7%B1%8D)
-- [2. 如何学习内核](#2-%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E5%86%85%E6%A0%B8)
-  - [2.1. 核心的东西：最基础、最原始的概念。](#21-%E6%A0%B8%E5%BF%83%E7%9A%84%E4%B8%9C%E8%A5%BF%E6%9C%80%E5%9F%BA%E7%A1%80%E6%9C%80%E5%8E%9F%E5%A7%8B%E7%9A%84%E6%A6%82%E5%BF%B5)
-- [3. Linux 内核体系结构](#3-linux-%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84)
-  - [3.1. 内核模式与体系结构](#31-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%BC%8F%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84)
-  - [3.2. struct](#32-struct)
-  - [3.3. 内核中断](#33-%E5%86%85%E6%A0%B8%E4%B8%AD%E6%96%AD)
-  - [3.4. 内核进程](#34-%E5%86%85%E6%A0%B8%E8%BF%9B%E7%A8%8B)
-- [4. Linux 内核源码结构](#4-linux-%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84)
-  - [4.1. Linux 内核源码宏观结构](#41-linux-%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%AE%8F%E8%A7%82%E7%BB%93%E6%9E%84)
-  - [4.2. Linux 内核源码各级源码分类](#42-linux-%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%90%84%E7%BA%A7%E6%BA%90%E7%A0%81%E5%88%86%E7%B1%BB)
-  - [4.3. Linux 内核源码解析第一刀](#43-linux-%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E7%AC%AC%E4%B8%80%E5%88%80)
-- [5. Linux 内核引导程序](#5-linux-%E5%86%85%E6%A0%B8%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F)
-  - [5.1. Linux 内核启动程序分析](#51-linux-%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90)
-  - [5.2. Linux 内核初始化程序分析](#52-linux-%E5%86%85%E6%A0%B8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90)
-  - [5.3. Linux 第一个进程分析](#53-linux-%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%88%86%E6%9E%90)
-- [6. 网络](#6-%E7%BD%91%E7%BB%9C)
-  - [6.1. Netfilter](#61-netfilter)
-  - [6.2. Iptables](#62-iptables)
-- [7. Reference](#7-reference)
-
-<!-- /TOC -->
 
 # 1. 理解内核的秘籍
 
