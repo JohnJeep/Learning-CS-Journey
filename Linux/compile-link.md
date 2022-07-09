@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
- * @LastEditTime: 2022-03-09 23:37:41
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:50:12
+ * @LastEditors: JohnJeep johnjeep1985@gmail.com
  * @Description: 预处理、编译、汇编、链接过程
 -->
 
@@ -19,7 +19,9 @@
   - [6.2. Windows平台](#62-windows平台)
 - [7. ELF relocatable](#7-elf-relocatable)
 - [8. GCC](#8-gcc)
-- [9. 编译三部曲](#9-编译三部曲)
+  - [9. 源码编译三部曲](#9-源码编译三部曲)
+  - [CentOS7 安装高版本 gcc8/g++8](#centos7-安装高版本-gcc8g8)
+  - [拓展知识点](#拓展知识点)
 - [10. 包管理](#10-包管理)
   - [10.1. 软件仓库](#101-软件仓库)
   - [10.2. RPM](#102-rpm)
@@ -28,6 +30,12 @@
   - [10.5. apt](#105-apt)
   - [10.6. dpkg](#106-dpkg)
 - [11. 工具](#11-工具)
+  - [readelf](#readelf)
+  - [size](#size)
+  - [nm](#nm)
+  - [pmap](#pmap)
+  - [patchelf](#patchelf)
+  - [objdump](#objdump)
 - [12. 构建](#12-构建)
 - [13. 参考](#13-参考)
 
@@ -303,9 +311,9 @@ GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言�
   链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
   gcc test.c -I ./include -o test.out -D DEBUG  
 
--fPIC(position independent code)
-  生成与位置无关的代码
+-fPIC(position independent code)  生成与位置无关的代码
  
+--Woverride-virtual   编译时检查虚函数
 
 
 ```
