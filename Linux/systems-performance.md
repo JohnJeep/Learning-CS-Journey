@@ -31,7 +31,6 @@
 
 <!-- /TOC -->
 
-
 # 1. 性能优化
 
 ## 1.1. 怎样做性能优化？
@@ -39,8 +38,6 @@
 在做性能优化之前，需要了解性能**优化指标**。从应用负载的视角来看，有两个核心指标：**吞吐量和延时**，这两个指标直接影响了产品终端的用户体验。从系统资源的角度看，有**资源利用率、饱和度**等指标。
 
 性能问题的本质，就是系统资源已经达到瓶颈，但请求的处理却还不够快，无法支撑更多的请求。而性能分析，就是找出应用或系统的瓶颈，并设法去避免或者缓解它们，从而更高效地利用系统资源处理更多的请求。
-
-
 
 从运行时性能的开销和编译时性能的开销角度思考
 
@@ -68,6 +65,7 @@
 **1 分钟之内在命令行模式下用已有的 Linux 标准工具进行性能优化检测。**
 
 在 1 分钟之内只需要通过运行下面的 10 个命令就可以对系统资源使用和运行进程有一个很高程度的了解，寻找错误信息和饱和度指标，显示为请求队列的长度，或者等待时长、显示资源利用率。
+
 > 饱和度是指一个资源已经超过了它自己的负荷能力。
 
 ```
@@ -107,15 +105,13 @@ oprofile 是一个开源的 profiling 分析工具，它使用硬件调试寄存
 
 Google 开发的一款性能分析工具，提供整个程序的热点分布图，找到性能瓶颈，然后可以针对性的进行性能优化。
 
-
-
 #### 1.2.1.4. mpstat
 
 mpstat 是多核 CPU 性能分析工具，用来实时查看每个 CPU 的性能指标，以及所有 CPU 的平均指标。
 
 ```sh
 参数项
-	-P: 输出哪个处理器的数据，后面跟 CPU 的数字号码或者是 ON 或 ALL；ON 表示输出统计每个在运行的处理器；ALL 表示输出统计所有的处理器
+    -P: 输出哪个处理器的数据，后面跟 CPU 的数字号码或者是 ON 或 ALL；ON 表示输出统计每个在运行的处理器；ALL 表示输出统计所有的处理器
 
 // 监控所有 CPU，每隔5秒输出一组数据
 [root@CentOS7 ~]# mpstat -P ALL 5
@@ -132,11 +128,11 @@ pidstat 是进程性能分析工具，监视当前被 Linux 内核管理的单�
 
 ```sh
 参数项
-	-u 输出 CPU 的利用率，utilization 缩写为 u
-	-t 显示所选线程的统计信息，很常用，thread 缩写为 t
-	-r 显示缺页错误（page faults）和内存利用信息
-	-w 任务活动切换的信息，只有在 Linux kernels 大于等于 2.6.23 才有效
-	
+    -u 输出 CPU 的利用率，utilization 缩写为 u
+    -t 显示所选线程的统计信息，很常用，thread 缩写为 t
+    -r 显示缺页错误（page faults）和内存利用信息
+    -w 任务活动切换的信息，只有在 Linux kernels 大于等于 2.6.23 才有效
+
 // 每隔 5 秒输出一组数据
 [root@CentOS7 ~]# pidstat -u 5 1
 Linux 3.10.0-1160.49.1.el7.x86_64 (CentOS7)     12/15/2021      _x86_64_        (2 CPU)
@@ -177,7 +173,6 @@ avg-cpu:  %user   %nice %system %iowait  %steal   %idle
 Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
 sdb               0.00     0.00    0.00    3.00     0.00    24.00     8.00     0.01    4.00   4.00   1.20
 dm-0              0.00     0.00    0.00    3.00     0.00    24.00     8.00     0.01    4.00   4.00   1.20
-
 ```
 
 输出结果各个字段说明
@@ -192,15 +187,57 @@ dm-0              0.00     0.00    0.00    3.00     0.00    24.00     8.00     0
 
 5. svctm：发送给设备 I/O 请求的平均服务时间(ms)，如果 svctm 与 await 很接近，表示几乎没有 I/O 等待，磁盘性能很好，否则磁盘队列等待时间较长，磁盘响应较差；
 
-   
-
 #### 1.2.1.7. vmstat
 
-统计  processes、 memory、paging、 block IO、 traps、CPU等信息。
+vmstat是 Virtual Meomory Statistics（虚拟内存统计）的缩写，可对操作系统的processes、 memory、paging、 block IO、 traps、CPU等活动进行监控。他是对系统的整体情况进行统计，不足之处是无法对某个进程进行深入分析。vmstat 工具提供了一种低开销的系统性能观察方式。因为 vmstat 本身就是低开销工具，在非常高负荷的服务器上，你需要查看并监控系统的健康情况,在控制窗口还是能够使用vmstat 输出结果。
 
+##### 虚拟内存原理
+
+在系统中运行的每个进程都需要使用到内存，但不是每个进程都需要每时每刻使用系统分配的内存空间。当系统运行所需内存超过实际的物理内存，内核会释放某些进程所占用但未使用的部分或所有物理内存，将这部分资料存储在磁盘上直到进程下一次调用，并将释放出的内存提供给有需要的进程使用。
+
+在Linux内存管理中，主要是通过“调页Paging”和“交换Swapping”来完成上述的内存调度。调页算法是将内存中最近不常使用的页面换到磁盘上，把活动页面保留在内存中供进程使用。交换技术是将整个进程，而不是部分页面，全部交换到磁盘上。
+
+分页(Page)写入磁盘的过程被称作Page-Out，分页(Page)从磁盘重新回到内存的过程被称作Page-In。当内核需要一个分页时，但发现此分页不在物理内存中(因为已经被Page-Out了)，此时就发生了分页错误（Page Fault）。
+
+当系统内核发现可运行内存变少时，就会通过Page-Out来释放一部分物理内存。尽管Page-Out不是经常发生，但是如果Page-out频繁不断的发生，直到当内核管理分页的时间超过运行程式的时间时，系统效能会急剧下降。这时的系统已经运行非常慢或进入暂停状态，这种状态亦被称作thrashing(颠簸)。
+
+##### 命令格式
+
+```shell
+vmstat [-a] [-n] [-S unit] [delay [ count]]
+vmstat [-s] [-n] [-S unit]
+vmstat [-m] [-n] [delay [ count]]
+vmstat [-d] [-n] [delay [ count]]
+vmstat [-p disk partition] [-n] [delay [ count]]
+vmstat [-f]
+vmstat [-V]
 ```
 
-// 示例：每隔 1 秒打印一条统计信息
+##### 命令参数
+
+```shell
+-m：显示slabinfo
+  
+-n：只在开始时显示一次各字段名称。
+  
+-s：显示内存相关统计信息及多种系统活动数量。
+  
+delay：刷新时间间隔。如果不指定，只显示一条结果。
+  
+count：刷新次数。如果不指定刷新次数，但指定了刷新时间间隔，这时刷新次数为无穷。
+  
+-d：显示磁盘相关统计信息。
+  
+-p：显示指定磁盘分区统计信息
+  
+-S：使用指定单位显示。参数有 k 、K 、m 、M ，分别代表1000、1024、1000000、1048576字节（byte）。默认单位为K（1024 bytes）
+  
+-V：显示vmstat版本信息。
+```
+
+示例：每隔 1 秒打印一条统计信息
+
+```
 $ vmstat 1
 procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
@@ -208,49 +245,54 @@ procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
  0  0   8320 3822176 427996 2263184    0    0     0     0 5889 20478  2  1 97  0  0
  1  0   8320 3822176 427996 2263184    0    0     0     0 6126 20785  3  1 97  0  0
  3  0   8320 3822176 427996 2263184    0    0     0    48 6459 21076  2  1 96  0  0
-
 ```
 
 虚拟内存模式（VM mode）下，显示结果中各个字段的含义
 
 - procs
+  
   - r：CPU 上的等待运行时（run time）的进程数。这个指标提供了判断 CPU 饱和度的数据，因为它不包含 I/O 等待的进程。
   - b：不可中断睡眠状态（uninterruptible sleep）的进程数；
-  
+
 - Memory
+  
   - swpd 表示使用到的虚拟内存数量
   - free：空闲内存，单位是 k。如果这个数比较大，就说明你还有充足的空闲内存。“free -m” 和下面第 7 个命令，可以更详细的分析空闲内存的状态。
-  
-- swap
 
+- swap
+  
   - si：从磁盘交换进来和交换出去的内存数。
   - so：从磁盘交换出去的内存数。
 
 - IO： 
-
+  
   - bo： 每秒钟发送到块设备的块数目，单位：blocks/s。
   - bi  每秒钟从块设备收到的块数目，单位：blocks/s。
 
 - system 
-
+  
   - in：每秒钟的系统中断数，包括时钟中断（clock）。
   - cs：每秒钟上下文切换的数。
 
 - cpu
-
+  
   下面这些是占总 CPU 时间的百分比。
-
+  
   - us：运行非内核代码花费的时间，用户空间的时间，包括 nice time。（user time）
-
+  
   - sy：运行内核代码花费的时间。（system time）
-
+  
   - id：空闲 CPU 花费的时间。在 Linux 内核版本 2.5.41 之前，还包括 IO-wait 时间。（idle）
-
+  
   - wa：等待 IO 花费的时间。（waitting）
-
+  
   - st：从虚拟机器偷走的时间，在 Linux 内核 2.6.11之前，为unknown。（stolen）
-
+    
     有虚拟机的情景下才有意义，因为虚拟机下 CPU 也是共享物理 CPU 的，所以这段时间表明虚拟机等待 hypervisor 调度 CPU 的时间，也意味着这段时间 hypervisor 将 CPU 调度给别的 CPU 执行，这个时段的 CPU 资源被“stolen”了。
+  
+  
+  
+  参考： https://www.apim.cn/html/5375
 
 #### 1.2.1.8. netstat
 
@@ -274,13 +316,11 @@ netstat 是一个查看系统中端口使用情况的一个命令，显示自从
 [root@KF]# netstat -tunlp | grep 22
 tcp        0      0 0.0.0.0:22          0.0.0.0:*         LISTEN      1919/sshd
 tcp        0      0 :::22               :::*              LISTEN      1919/sshd
-                          
+
   netstat -apn | grep 端口号     # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
   netstat -antp                 # 列出所有TCP的连接
   netstat -nltp                 # 列出本地所有TCP侦听套接字
 ```
-
-
 
 #### 1.2.1.9. stress
 
@@ -288,22 +328,20 @@ stress 是linux 下的压力测试小工具，可以用来模拟 CPU、IO、内�
 
 ```sh
 参数项
-	-t: 等同于 --timeout N，在 N 秒后超时
-	-c: 等同于 --cpu N，产生 N 个 CPU 工作
-	-i: 等同于 --io N，产生 N 个 IO 工作
-	
+    -t: 等同于 --timeout N，在 N 秒后超时
+    -c: 等同于 --cpu N，产生 N 个 CPU 工作
+    -i: 等同于 --io N，产生 N 个 IO 工作
+
 // 模拟 CPU1 使用率为 100% 的情况
 [root@CentOS7 ~]# stress --cpu 1 --timeout 600
 stress: info: [6790] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
 ```
 
-
-
-#### 1.2.1.10. uptimee
+#### 1.2.1.10. uptime
 
 `uptime` 命令显示当前系统运行了多长时间，当前有多少个用户登录，系统在过去 1分钟、5分钟、15分钟的负载均衡信息，是一种快速展示系统平均负载的手段。
 
-```
+```shell
 $ uptime
  10:32:25 up 21 days, 22:36,  5 users,  load average: 0.00, 0.00, 0.00
 ```
@@ -314,7 +352,7 @@ dmesg 工具被用来检查和控制内核的环形缓冲区（ring buffer），
 
 系统在启动的时候，内核会去检测系统的硬件，你的某些硬件到底有没有被识别，就与这个时候的侦测有关。 但是这些侦测的过程要不是没有显示在屏幕上，就是很飞快的在屏幕上一闪而逝。能不能把内核检测的信息识别出来看看？ 可以使用 dmesg 。所有内核检测的信息，不管是启动时候还是系统运行过程中，反正只要是内核产生的信息，都会被记录到内存中的某个保护区段。 dmesg 这个指令就能够将该区段的信息读出来。
 
-```
+```shell
 // 打印启动消息日志中的最后 10 信息
 $ dmesg | tail
 [1880957.563150] perl invoked oom-killer: gfp_mask=0x280da, order=0, oom_score_adj=0
@@ -324,13 +362,11 @@ $ dmesg | tail
 [2320864.954447] TCP: Possible SYN flooding on port 7001. Dropping request.  Check SNMP counters.
 ```
 
-
-
 #### 1.2.1.12. sar
 
-sar 工具用来检测网络接口的吞吐：rxkB/s 和 txkB/s，作为收发数据负载的度量，也是检测是否达到收发极限。
+sar 工具用来检测网络接口的吞吐：`rxkB/s` 和 `txkB/s`，作为收发数据负载的度量，也是检测是否达到收发极限。
 
-```
+```shell
 参数项
   -n 主要用来分析网络活动，虽然网络中它还给细分了 NFS、IP、ICMP、SOCK 等各种层次各种协议的数据信息。
 
@@ -360,12 +396,14 @@ Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_     
 显示结果解释
 
 - TCP
+  
   - active/s：本地发起的 TCP 连接，比如通过 connect()，TCP 的状态从CLOSED -> SYN-SENT
   - passive/s：由远程发起的 TCP 连接，比如通过 accept()，TCP 的状态从LISTEN -> SYN-RCVD
   - retrans/s(tcpRetransSegs)：每秒钟 TCP 重传数目，通常在网络质量差，或者服务器过载后丢包的情况下，根据 TCP 的确认重传机制会发生重传操作
   - isegerr/s(tcpInErrs)：每秒钟接收到出错的数据包(比如 checksum 失败)
 
 - UDP
+  
   - noport/s(udpNoPorts)：每秒钟接收到的但是却没有应用程序在指定目的端口的数据报个
   - idgmerr/s(udpInErrors)：除了上面原因之外的本机接收到但却无法派发的数据报个数
 
@@ -383,14 +421,12 @@ Top 是 linux 下动态监控各个进程资源占用状况的工具，默认按
     %hi cpu处理硬中断的数量
     %si cpu处理软中断的数量
     %st 被虚拟机偷走的cpu 
-    
+
 例子：
-	top -bn 1 -i -c
+    top -bn 1 -i -c
 ```
 
 利用一张图来解释各个参数的用法。
-
-
 
 <img src="pictures/top.png" style="zoom:60%;" />
 
@@ -407,8 +443,6 @@ Buffers 与 Cached 对比说明
 
 - Buffers 是针对 raw disk 的块缓存，主要是以 raw block 的方式缓存文件系统的元数据(比如超级块信息等)，这个值一般比较小(20M左右)；
 - Cached 是针对于某些具体的文件进行读缓存，以增加文件的访问效率而使用的，可以说是用于文件系统中文件缓存使用。
-
-
 
 #### 1.2.1.14. htop
 
@@ -435,25 +469,15 @@ Buffers 与 Cached 对比说明
 -h 帮助信息
 ```
 
-
-
 #### 1.2.1.16. iotop
 
 `iotop` 是 Linux 系统默认自带的一个用来监控磁盘 I/O 使用情况的工具。
-
-
-
-
 
 ### 1.2.2. 代码编写
 
 优化编写的代码。
 
-
-
 ## 1.3. 优化到多少？
-
-
 
 ## 1.4. 其它
 
@@ -463,15 +487,13 @@ Buffers 与 Cached 对比说明
 
 判断是运行时变量还是编译时变量？
 
-​	使用 static_assert()
+​    使用 static_assert()
 
 应用：
 
-​	替换宏（为什么要替换宏？）
+​    替换宏（为什么要替换宏？）
 
-​	宏运行在什么时候？（编译？运行？）
-
-
+​    宏运行在什么时候？（编译？运行？）
 
 # 2. CPU Performance
 
@@ -493,17 +515,9 @@ CPU 使用率指单位时间内 CPU 繁忙情况的统计，跟平均负载并�
 
 # 3. Memory Performance
 
-
-
 # 4. I/O Performance
 
-
-
 # 5. Network Performance
-
-
-
-
 
 # 6. 参考
 
@@ -514,6 +528,3 @@ CPU 使用率指单位时间内 CPU 繁忙情况的统计，跟平均负载并�
 - [CodeSheep 列出常用监控工具](https://mp.weixin.qq.com/s?__biz=MzU4ODI1MjA3NQ==&mid=2247495793&idx=1&sn=a46b6570280594552e5d711942f72eb0&chksm=fddd26b5caaaafa303b282a258b712a461f7a453af9d9c6737515f8edc8cf74d5c57a6a2e94d&scene=126&&sessionid=1643247338#rd)
 
 - [如何查看 Linux 服务器性能参数指标？](https://mp.weixin.qq.com/s/8PShiKil_rOiIZbH4C95HA)
-
-  
-
