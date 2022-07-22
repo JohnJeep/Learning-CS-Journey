@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditTime: 2022-05-22 13:10:57
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2022-07-22 18:28:26
+ * @LastEditors: JohnJeep JohnJeep1985@gail.com
  * @Description: git基础命令学习
 -->
 
@@ -974,3 +974,4 @@ HEAD reference：是一个符号引用（symbolic reference），并不完全是
 - [Git from the Bottom Up](https://jwiegley.github.io/git-from-the-bottom-up/): 不仅解释了Git的数据模型，还解释了其实现的细节。
 - [Git PAT 使用](https://blog.csdn.net/yjw123456/article/details/119696726): Github 支持 personal access token 的用法。
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)： Vincent Driessen 介绍 git 工作流。
+- [阿里约束 git commit 提交规范](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247498589&idx=1&sn=c0419f08bd455de9147e47387778943e&chksm=e92ac652de5d4f44040790d2b0f0fe206cc5017c6fb60a767f08fd5bdf082e5ede0dc66e4673&cur_album_id=1419161363276169216&scene=189)
