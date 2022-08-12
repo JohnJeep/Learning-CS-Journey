@@ -904,6 +904,7 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
   ```bash
   tar -cvf A.tar anaconda-ks.cfg 
   ```
+
 - 打包多个文件或目录，中间需要用空格分开
   
   ```bash
@@ -1151,6 +1152,8 @@ killall bash
 
 pkill bash
 ```
+
+参考：[Linux批量kill进程 - abce - 博客园](https://www.cnblogs.com/abclife/p/7380397.html)
 
 # 14. nohup
 
