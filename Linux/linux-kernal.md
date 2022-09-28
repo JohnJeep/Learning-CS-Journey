@@ -140,21 +140,13 @@ Netfilter 是 Linux 内核内部的**包过滤和处理框架**。
 # 7. Reference
 
 - [维基百科中文解释Linux内核](https://zh.wikipedia.org/wiki/Linux%E5%86%85%E6%A0%B8)
-
 - [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/): 官方 Linux kernel 英文 API 手册。
-
 - [Linux source code Bootlin](https://elixir.bootlin.com/linux/latest/source): 在线查看Linux kernel 源码。
-
 - [在线man-pages手册](https://man7.org/linux/man-pages/index.html) 由 man-pages 的维护者 Michael Kerrisk 维护的在线 man-pages 手册。其中除了 man-pages 手册外，还有许多丰富的内容，像 `The Linux Programming Interface` 等，值得日常重点查阅。
-
 - [Kernel coverage at LWN.net](https://lwn.net/Kernel/)：分享 Linux 内核开发的一些文章，很最权威，内容很优质。
-
 - [Github linux_kernel_wiki](https://github.com/0voice/linux_kernel_wiki)：Github 上零声学院开源的 Linux 内核学习的方法，很全面，值得重点看。
-
 - [技术大牛--布伦丹·格雷格的网站](http://www.brendangregg.com/index.html)
-
 - [Linux操作系统内核学习](https://ty-chen.github.io/categories/)：作者自己搭建的一个博客，里面记录了自己学习 Linux 内核方面的一些知识点。
-
 - [Linux内核中双向链表的经典实现](https://www.cnblogs.com/skywang12345/p/3562146.html#a1)
-
 - [What every programmer should know about memory](https://lwn.net/Articles/250967/)：博客写了关于 Memory、CPU caches、Virtual memory、NUMA systems、cache optimization、multi-threaded optimizations、Memory performance tools 等各个方面的知识，质量很高，需要细细的琢磨。
+- [Linux0号进程，1号进程，2号进程](https://cloud.tencent.com/developer/article/1603977)
