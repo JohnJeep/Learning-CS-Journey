@@ -5,6 +5,7 @@
 using namespace Json;
 ConnectionPool* ConnectionPool::getConnectPool()
 {
+    // 对于静态局部变量的初始化，编译器自动进行lock和unlock
     static ConnectionPool pool;
     return &pool;
 }
@@ -30,18 +31,26 @@ bool ConnectionPool::parseJsonFile()
     return false;
 }
 
+/**
+ * @brief 生产连接 
+ * 
+ */
 void ConnectionPool::produceConnection()
 {
     while (true) {
         unique_lock<mutex> locker(m_mutexQ);
         while (m_connectionQ.size() >= m_minSize) {
-            m_cond.wait(locker);
+            m_cond.wait(locker);   // 生产线程进入等待状态，释放锁，保证消费线程正常运行
         }
         addConnection();
-        m_cond.notify_all();
+        m_cond.notify_all();  // 通知消费者线程去消费连接
     }
 }
 
+/**
+ * @brief 消费连接 
+ * 
+ */
 void ConnectionPool::recycleConnection()
 {
     while (true) {
@@ -52,6 +61,7 @@ void ConnectionPool::recycleConnection()
             if (conn->getAliveTime() >= m_maxIdleTime) {
                 m_connectionQ.pop();
                 delete conn;
+                conn = nullptr;
             } else {
                 break;
             }
@@ -59,6 +69,10 @@ void ConnectionPool::recycleConnection()
     }
 }
 
+/**
+ * @brief 创建连接 
+ * 
+ */
 void ConnectionPool::addConnection()
 {
     MysqlConn* conn = new MysqlConn;
@@ -80,11 +94,11 @@ shared_ptr<MysqlConn> ConnectionPool::getConnection()
     }
     shared_ptr<MysqlConn> connptr(m_connectionQ.front(), [this](MysqlConn* conn) {
         lock_guard<mutex> locker(m_mutexQ);
-        conn->refreshAliveTime();
+        conn->refreshAliveTime();  //在归还回空闲连接队列之前要记录一下连接开始空闲的时刻
         m_connectionQ.push(conn);
     });
     m_connectionQ.pop();
-    m_cond.notify_all();
+    m_cond.notify_all();  // 消费者取出一个连接之后，通知生产者，生产者检查队列，如果为空则生产
     return connptr;
 }
 
@@ -94,6 +108,7 @@ ConnectionPool::~ConnectionPool()
         MysqlConn* conn = m_connectionQ.front();
         m_connectionQ.pop();
         delete conn;
+        conn = nullptr;
     }
 }
 
