@@ -27,10 +27,10 @@ public:
     bool commit();
     // 事务回滚 
     bool rollback();
-    // 刷新起始的空闲时间点
-    void refreshAliveTime();
-    // 计算连接存活的总时长
-    long long getAliveTime();
+  
+    void refreshAliveTime();   // 连接创建时的空闲时间点
+    long long getAliveTime();  // 计算连接存活的总时间
+
 private:
     void freeResult();
     MYSQL* m_conn = nullptr;
