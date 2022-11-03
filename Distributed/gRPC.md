@@ -29,14 +29,21 @@ RPC Architecture
 
 
 
+## grc特点
 
+1. 语言中立，支持多种语言；
+2. 基于 IDL 文件定义服务，通过 proto3 工具生成指定语言的数据结构、服务端接口以及客户端 Stub；
+3. 通信协议基于标准的 HTTP/2 设计，支持双向流、消息头压缩、单 TCP 的多路复用、服务端推送等特性，这些特性使得 gRPC 在移动端设备上更加省电和节省网络流量；
+4. 序列化支持 PB（Protocol Buffer）和 JSON，PB 是一种语言无关的高性能序列化框架，基于 HTTP/2 + PB, 保障了 RPC 调用的高性能。
+
+在一次RPC调用中，负责为客户端代理的节点（gRPC中称之为Stub）会将请求和参数传到服务端，并由Service进行实际的处理，然后将结果返回给Stub，最终返回到客户端中。
 
 ## gRPC 四种通信模式
 
-1. Unary
-2. server-side streaming
-3. client-side-streaming
-4. Bidirectional Streaming 
+1. Unary（一元RPC）
+2. server-side streaming（服务端流式RPC）
+3. client-side-streaming（客户端流式RPC）
+4. Bidirectional Streaming （ 双向流式RPC）
 
 
 
@@ -82,7 +89,6 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 ## Reference
 
 - [What is gRPC? Protocol Buffers, Streaming, and Architecture Explained](https://www.freecodecamp.org/news/what-is-grpc-protocol-buffers-stream-architecture/)
-
 - [Introduction to gRPC Part1](https://www.polarsparc.com/xhtml/gRPC-1.html)
 - [Introduction to gRPC Part2](https://www.polarsparc.com/xhtml/gRPC-2.html)
 - [Introduction to gRPC Part3](https://www.polarsparc.com/xhtml/gRPC-3.html)
@@ -90,6 +96,7 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 - [gRPC 代码使用的 C/C++ 技巧](https://panzhongxian.cn/cn/2021/09/grpc-cpp-tricks/)
 - gRPC 博客归档：https://panzhongxian.cn/tags/grpc/
 - C++ gRPC 异步 API 实例与优势：https://juejin.cn/post/6998554231837818917
+- grpc学习：https://qiankunli.github.io/2020/02/28/grpc.html
 
 可选
 
