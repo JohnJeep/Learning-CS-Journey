@@ -678,3 +678,4 @@ Windows下修改Host文件
 - [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html): 采用画图的方式来理解Git.
 - [Learn Git Branching](https://learngitbranching.js.org/)：通过玩游戏的方式来学习Git。
 - [Version Control (Git)](https://missing.csail.mit.edu/2020/version-control/): MIT 2020 年开设的一门 missing-semester 课程，这是 Version Control (Git) 章节。
+- [Git头指针分离状态](https://blog.csdn.net/qq_32907195/article/details/109217034)

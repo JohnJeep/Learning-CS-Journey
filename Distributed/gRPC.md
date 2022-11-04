@@ -29,7 +29,7 @@ RPC Architecture
 
 
 
-## grc特点
+## RPC 特点
 
 1. 语言中立，支持多种语言；
 2. 基于 IDL 文件定义服务，通过 proto3 工具生成指定语言的数据结构、服务端接口以及客户端 Stub；
@@ -38,12 +38,102 @@ RPC Architecture
 
 在一次RPC调用中，负责为客户端代理的节点（gRPC中称之为Stub）会将请求和参数传到服务端，并由Service进行实际的处理，然后将结果返回给Stub，最终返回到客户端中。
 
+
+## 如何学习 gRPC?
+
+总结一下，学习 RPC 时，我们先要了解其基本原理以及关键的网络通信部分，不要一味依赖现成的框架；之后我们再学习 RPC 的重点和难点，了解 RPC 框架中的治理功能以及集群管理功能等；这个时候你已经很厉害了，但这还不是终点，我们要对 RPC 活学活用，学会提升 RPC 的性能以及它在分布式环境下如何定位问题等等。
+
+
+
+## proto 文件
+
+`hello.proto`
+
+```protobuf
+// proto buffer 语法版本
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+// 包名：用来防止协议消息类型之间发生命名的冲突；C++叫命名空间，Java中叫包名
+package helloworld;
+
+// 定义gRPC服务的接口
+service Greeter {
+  // 远程调用方法；HelloRequest为函数参数，HelloReply为函数返回值
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// 定义请求的消息格式和类型 
+message HelloRequest {
+  string name = 1;  // 唯一字段编号，用于二进制消息格式中识别该字段
+}
+
+// 定义响应的消息格式和类型 
+message HelloReply {
+  string message = 1;
+}
+
+```
+
+
+
+## gRPC 服务端
+
+
+
+## gRPC 客户端
+
+
+
+## gRPC 处理流程
+
+当调用 gRPC 服务时，客户端的 gRPC 库会使用 protocol buffers，将 RPC 的请求**编排（masrshal）**为 protocol buffers 格式，然后通过 HTTP/2 进行发送。在服务端，请求会被**解排（unmasrshal）**。而响应也遵循类似的执行流，从服务端发送到客户端。
+
+- 编排：将参数和远程函数打包的过程。
+- 解排：解包消息到对应的方法调用的过程。
+
+
+
+
+
+
+
+## gRPC 强大的功能
+
+- 治理功能。比如连接管理、健康检测、负载均衡、优雅启停机、异常重试、业务分组以及熔断限流。
+
+- 集群管理功能。
+
 ## gRPC 四种通信模式
 
 1. Unary（一元RPC）
+
+   一元RPC模式也称为简单RPC模式。在该模式中，客户端发送单个请求到服务端，服务端响应单个响应。
+
+   ![Unary Architecture](https://www.polarsparc.com/xhtml/images/grpc-02.png)
+
 2. server-side streaming（服务端流式RPC）
+
+   客户端向服务端发送单个请求，服务端收到客户端的请求后，会处理多个响应，这种多个响应所组成的序列也被称为”流“。
+
+   ![Server Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-06.png)
+
 3. client-side-streaming（客户端流式RPC）
+
+   在客户端流 RPC 模式中，客户端会发送多个请求给服务器端，而不再是单个请求  。服务器
+   端会发送一个响应给客户端 。 但是，服务器端不一定要等到从客户端接收到所有消息后
+   才发送响应。基于这样的逻辑 ，我们可以在接收到流中的一条消息或几条消息之后就发送
+   响应，也可以在读取完流中的所有消息之后再发送响应.  
+
+   ![Client Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-08.png)
+
 4. Bidirectional Streaming （ 双向流式RPC）
+
+   ![Bidirectional Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-09.png)
 
 
 
