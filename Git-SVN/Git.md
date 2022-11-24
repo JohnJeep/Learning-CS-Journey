@@ -186,26 +186,36 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
 ## 1.8. Git diff
 
 - `git diff` 比较工作区和暂存区之间的差异
+
 - `git diff HEAD` 比较工作区与最新本地仓库之间的差异
+
 - `git diff --cached`比较暂存区与最新本地仓库的差异dd
+
 - `git diff master origin/master `  查看本地仓库中分支为 `master` 的文件与Github远程仓库中别名为`origin`下 `master` 分支文件的差异。
+
+- `git diff --stat <local branch> <remote branch>` 比较本地分支与远程指定分支之间的差异。
+
+  例如，比较本地分支 `feat_grpc` 与远程分支 `dev` 之间的差异： `git diff --stat feat_grpc  remotes/origin/dev`
 
 
 ## 1.9. Git stash
 
-- Git还提供了一个 `stash` 功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：`git stash`,去解决 Bug 问题。
-- `git stash list` 命令查看存储的工作现场 
-- Git 把 `stash` 内容存在某个地方了，但是需要恢复一下，有两个办法
-  - 一是用 `git stash apply` 恢复，但是恢复后，stash内容并不删除，你需要用 `git stash drop` 来删除
-  - 另一种方式是用 `git stash pop`，恢复的同时把 `stash` 内容也删了。
-
+- Git 提供了一个 `stash` 功能，把当前工作现场”储藏”起来，等以后恢复现场后继续工作：`git stash`，去解决 Bug 问题。
+- `git stash list` ：查看所有已存储的工作现场 。
+- Git 把 `stash` 内容存在某个地方了，需要恢复存储的内容，有两个办法
+  1. 用 `git stash apply` 恢复，但是恢复后，stash内容并不删除，你需要用 `git stash drop` 来删除
+  2. 用 `git stash pop`，恢复的同时把 `stash` 内容也删了。
 
 ## 1.10. Git blame
+
+
 
 
 ## 1.11. Git bisect
 
 找到某个 bug 是哪次 commit 的。
+
+
 
 
 ## 1.12. Git rebase
@@ -220,6 +230,8 @@ Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**�
 
 
 ## 1.13. Git revert
+
+
 
 ## 1.14. Git Reset
 
@@ -318,15 +330,16 @@ Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**�
 
 ## 2.1. Local repo branch 
 
-本地仓库分支
+本地仓库分支常用命令。
 
-- `git branch` 查看本地仓库分支
-- `git branch -v` 查看每个分支最后一次提交的内容
-- `git branch -r` 查看远程仓库的所有分支
-- `git reflog show --date=iso master`  查看指定分支的历次更改记录
-- `git branch --merge` 查看哪些分支已经合并到当前分支
-- `git branch --no-merged` 查看所有包含未合并工作的分支
-- `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去
+- `git branch` 只查看本地仓库分支。
+- `git branch -r` 只查看远程仓库的所有分支。
+- `git branch -a` 查看远程和本地的已有的所有分支。
+- `git branch -v` 查看每个分支最后一次提交的内容。
+- `git reflog show --date=iso master`  查看指定分支的历次更改记录。
+- `git branch --merge` 查看哪些分支已经合并到当前分支。
+- `git branch --no-merged` 查看所有包含未合并工作的分支。
+- `git branch branch_name` 创建一个分支，且不会自动切换到新分支中去。
 - `git merge`合并分支：在分支`a`下写代码，与分支`master`上的代码合并
   - 第一步，切换到分支`master`下`git chechout master`
   - 第二步，与分支`a`合并`git merge a`
@@ -341,7 +354,7 @@ Rebase 官方翻译为 “变基”，我觉得翻译为**重新改变基准**�
 
 ## 2.2. Remote repo branch
 
-远程仓库分支
+远程仓库分支常用命令。
 
 - `git branch --remote` 查看远程仓库分支
 
