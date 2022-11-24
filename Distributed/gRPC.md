@@ -53,6 +53,7 @@ RPC Architecture
 // proto buffer 语法版本
 syntax = "proto3";
 
+// 只对Java语言有效
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
@@ -139,7 +140,7 @@ message HelloReply {
 
 ## 异步API
 
-C++ gRPC 异步的操作使用 CompletionQueue 来实现的。任何异步操作的完成都是完成队列中的一个事件。
+C++ gRPC 异步的操作使用 **CompletionQueue** 来实现的。任何异步操作的完成都是完成队列中的一个事件。
 
 
 
@@ -163,7 +164,7 @@ C++ gRPC 异步的操作使用 CompletionQueue 来实现的。任何异步操作
 
 目录提供了 gRPC 的核心开发 API，并将【核心组件】转成【函数调用】
 
-比如 channel.h 是中的 `grpc_channel` 结构和 `grpc_channel_create_internal()` 函数的声明，在对应的 channel.cc 中有实现。****
+比如 channel.h 是中的 `grpc_channel` 结构和 `grpc_channel_create_internal()` 函数的声明，在对应的 channel.cc 中有实现。
 
 #### src/core
 
