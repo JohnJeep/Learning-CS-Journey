@@ -928,7 +928,33 @@ docker-compose --version
    
    仓库命、标签命都是 <none> 的镜像，俗称为虚悬镜像（dangling image）。
 
-# 16. Reference
+
+
+# 16. FAQ
+
+## Docker下/var/lib/docker/overlay2空间清理办法
+
+参考：https://blog.csdn.net/longailk/article/details/122728982
+
+- docker的overlay2中存的都是什么？
+  存的是我们的镜像文件和容器内的文件
+
+- 如何清理/var/lib/docker/overlay2？
+  - 删除不用的镜像
+
+  - 检查是否有容器内的服务会往容器内的本地写文件
+
+  - 检查各容器的磁盘占用，如果有发现磁盘占用过高的情况则对应处理【原则上如果容器内服务有写文件行为，则写文件的目录应当挂载到宿主机上，而不是直接往容器的本地写
+
+  - 需要应急处理的话可以先进入容器内直接删除容器内可以删除的文件
+
+
+
+
+
+
+
+# 17. Reference
 
 - Docker 官网：https://docs.docker.com/
 - Dockerhub，安装 Docker 镜像文件的仓库：https://hub.docker.com/
