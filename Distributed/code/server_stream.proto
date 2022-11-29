@@ -1,0 +1,21 @@
+// protocol buffer 协议版本
+syntax = "proto3";
+
+// 包名
+package serverstream;
+
+// 服务端流式rpc
+service StreamServer {
+    rpc ListValue(SimpleRequest) returns(stream StreamResponse) {}
+}
+
+// 请求消息
+message SimpleRequest {
+    string data = 1;
+    string num_greating = 2;
+}
+
+// 响应消息
+message StreamResponse {
+    string message = 1;
+}

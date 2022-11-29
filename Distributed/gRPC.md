@@ -80,6 +80,14 @@ message HelloReply {
 
 ```
 
+生成 `pb.cc`、`pb.h` 、`grpc.cc`、`grpc.pb.h` 文件。
+
+```
+protoc --grpc_out=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin`  ./server_stream.proto
+
+protoc --cpp_out=. ./server_stream.proto 
+```
+
 
 
 ## gRPC 服务端
@@ -111,28 +119,33 @@ message HelloReply {
 
 ## gRPC 四种通信模式
 
+gRPC 有 4  种请求和响应模式。
+
 1. Unary（一元RPC）
 
-   一元RPC模式也称为简单RPC模式。在该模式中，客户端发送单个请求到服务端，服务端响应单个响应。
+   一元RPC模式也称为简单RPC模式。客户端发送单个请求到服务端，等待服务端的响应。
 
    ![Unary Architecture](https://www.polarsparc.com/xhtml/images/grpc-02.png)
 
 2. server-side streaming（服务端流式RPC）
 
-   客户端向服务端发送单个请求，服务端收到客户端的请求后，会处理多个响应，这种多个响应所组成的序列也被称为”流“。
+   当数据量大或者需要不断传输数据时候，我们应该使用流式RPC，它允许我们边处理边传输数据。
+
+   服务端流式RPC：客户端向服务端发送单个请求，服务端收到客户端的请求后，处理多个响应，这种多个响应所组成的序列被称为”流（stream）“。客户端读来自服务端返回的 stream，直到没有消息为止。
 
    ![Server Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-06.png)
 
+   
+
 3. client-side-streaming（客户端流式RPC）
 
-   在客户端流 RPC 模式中，客户端会发送多个请求给服务器端，而不再是单个请求  。服务器
-   端会发送一个响应给客户端 。 但是，服务器端不一定要等到从客户端接收到所有消息后
-   才发送响应。基于这样的逻辑 ，我们可以在接收到流中的一条消息或几条消息之后就发送
-   响应，也可以在读取完流中的所有消息之后再发送响应.  
+   在客户端流 RPC 模式中，客户端发送（write）多个请求给服务器端，而不再是单个请求，一旦客户端完成了发送消息，它等服务端去读（read）完一个序列的消息，由服务端返回一个响应 （response）。
 
    ![Client Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-08.png)
 
 4. Bidirectional Streaming （ 双向流式RPC）
+
+   双方使用读写流（a read-write stream）去发送一个消息序列，两个流独立操作，双方可以同时发送和同时接收。
 
    ![Bidirectional Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-09.png)
 
@@ -179,6 +192,8 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 
 ## Reference
 
+- [gRPC 英文官方文档](https://grpc.io/)
+- [gRPC 中文文档](http://doc.oschina.net/grpc?t=61534)：与英文版本不同步，不是最新版本。
 - [What is gRPC? Protocol Buffers, Streaming, and Architecture Explained](https://www.freecodecamp.org/news/what-is-grpc-protocol-buffers-stream-architecture/)
 - [Introduction to gRPC Part1](https://www.polarsparc.com/xhtml/gRPC-1.html)
 - [Introduction to gRPC Part2](https://www.polarsparc.com/xhtml/gRPC-2.html)
@@ -187,7 +202,9 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 - [gRPC 代码使用的 C/C++ 技巧](https://panzhongxian.cn/cn/2021/09/grpc-cpp-tricks/)
 - gRPC 博客归档：https://panzhongxian.cn/tags/grpc/
 - C++ gRPC 异步 API 实例与优势：https://juejin.cn/post/6998554231837818917
-- grpc学习：https://qiankunli.github.io/2020/02/28/grpc.html
+- **grpc学习**：https://qiankunli.github.io/2020/02/28/grpc.html
+- gRPC博客学习归档：https://www.cnblogs.com/FireworksEasyCool/category/1693727.html
+- [grpc使用记录(三)简单异步服务实例](https://www.cnblogs.com/oloroso/p/11345266.html)：C++ 实现
 
 可选
 
