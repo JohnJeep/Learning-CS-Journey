@@ -25,6 +25,8 @@ CURL_GLOBAL_NOTHING   //没有额外的初始化。
 
 # The Easy interface
 
+同步接口。
+
 ```c
 curl_easy_init()
 curl_easy_cleanup()
@@ -82,6 +84,8 @@ option 运作起来.
 ## 
 
 ## Multi interface
+
+异步接口。
 
 接口使用的步骤
 
@@ -214,14 +218,14 @@ option 运作起来.
 
 # Refernce
 
-Everything curl: https://everything.curl.dev/
+- Everything curl: https://everything.curl.dev/
 
-官方 curl docs: https://curl.se/docs/
+- 官方 curl docs: https://curl.se/docs/
 
-[libcurl programming tutorial]([libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html))
-
-[curl_easy_setopt的基本选项解析[libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html)](https://blog.csdn.net/whui19890911/article/details/79247062)
-
-[curl学习篇3：curl API简介](https://blog.csdn.net/weixin_42645653/article/details/120200661)
+- [libcurl programming tutorial]([libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html))
+- [libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html)
+- [curl_easy_setopt的基本选项解析 ](https://blog.csdn.net/whui19890911/article/details/79247062)
+- [curl学习篇3：curl API简介](https://blog.csdn.net/weixin_42645653/article/details/120200661)
+- https://cloud.tencent.com/developer/article/1580392
 
 
