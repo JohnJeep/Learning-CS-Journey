@@ -10,6 +10,14 @@
 
 
 
+## 服务治理
+
+每个服务启动的时候，会将自身的服务和IP注册到注册中心，其他服务调用的时候，只需要向注册中心申请地址即可。
+
+
+
+
+
 ## RPC(remote produce call)
 
 RPC Architecture
