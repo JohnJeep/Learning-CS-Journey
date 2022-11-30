@@ -218,3 +218,11 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 
 - 微服务治理框架(C++版)详细设计：https://github.com/grpc-nebula/grpc-nebula-c/tree/master/docs
 - gRPC Load Balancing：https://grpc.io/blog/grpc-load-balancing/
+
+
+
+
+
+## github
+
+**Github awesome-grpc:** https://github.com/grpc-ecosystem/awesome-grpc
