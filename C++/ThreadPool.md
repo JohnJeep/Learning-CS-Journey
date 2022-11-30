@@ -70,3 +70,4 @@
 # 参考
 
 - [基于C++11实现线程池的工作原理](https://www.cnblogs.com/ailumiyana/p/10016965.html)
+- [C++ 动态伸缩线程池](https://www.cnblogs.com/oloroso/p/15716114.html)
