@@ -45,6 +45,14 @@ RPC Architecture
 
 
 
+1. 掌握grpc基础理论
+2. 会用grpc API 去做一些简单的 server、client
+3. 掌握grpc功能
+4. 阅读源码
+5. 深刻理解grpc功能，成为一个高手
+
+
+
 ## proto 文件
 
 `hello.proto`
@@ -190,7 +198,7 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 
 
 
-## Reference
+## References
 
 - [gRPC 英文官方文档](https://grpc.io/)
 - [gRPC 中文文档](http://doc.oschina.net/grpc?t=61534)：与英文版本不同步，不是最新版本。
@@ -205,8 +213,22 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 - **grpc学习**：https://qiankunli.github.io/2020/02/28/grpc.html
 - gRPC博客学习归档：https://www.cnblogs.com/FireworksEasyCool/category/1693727.html
 - [grpc使用记录(三)简单异步服务实例](https://www.cnblogs.com/oloroso/p/11345266.html)：C++ 实现
+- [聊一下 gRPC 的 C++ 异步编程](https://www.luozhiyun.com/archives/671)
+- [C++ gRPC 异步 API 实例与优势](https://blog.miigon.net/posts/cn-so-difference-between-sync-and-async-grpc/)
+- [Lessons learnt from writing asynchronous streaming gRPC services in C++](https://www.gresearch.co.uk/blog/article/lessons-learnt-from-writing-asynchronous-streaming-grpc-services-in-c/) grpc 异步服务端流模式例子。
 
 可选
 
 - 微服务治理框架(C++版)详细设计：https://github.com/grpc-nebula/grpc-nebula-c/tree/master/docs
 - gRPC Load Balancing：https://grpc.io/blog/grpc-load-balancing/
+
+gRPC Issues
+
+- C++ Asynchronous Streaming RPC example #10013: https://github.com/grpc/grpc/issues/10013
+- C++ Async bidi streaming sample #8934: https://github.com/grpc/grpc/pull/8934
+- Provide a simple event-processing loop for C++ async API #7352: https://github.com/grpc/grpc/issues/7352
+
+其它应对方案
+
+- Tradias/[asio-grpc: https://github.com/Tradias/asio-grpc
+- agrpc: https://github.com/npuichigo/agrpc
