@@ -6,6 +6,25 @@
  * @Description: API gateway 用法
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
+
+# API 网关教程
+
+
+
+## 什么是API网关
+
+
+
+## 原理
+
+
+
+## 怎么使用
+
+
+
+
+
 # Reference
 
 Google Cloud：https://cloud.google.com/api-gateway/docs/about-api-gateway?hl=zh-cn
