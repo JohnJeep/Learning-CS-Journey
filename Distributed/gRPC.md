@@ -10,6 +10,14 @@
 
 
 
+## 服务治理
+
+每个服务启动的时候，会将自身的服务和IP注册到注册中心，其他服务调用的时候，只需要向注册中心申请地址即可。
+
+
+
+
+
 ## RPC(remote produce call)
 
 RPC Architecture
@@ -216,6 +224,7 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 - [聊一下 gRPC 的 C++ 异步编程](https://www.luozhiyun.com/archives/671)
 - [C++ gRPC 异步 API 实例与优势](https://blog.miigon.net/posts/cn-so-difference-between-sync-and-async-grpc/)
 - [Lessons learnt from writing asynchronous streaming gRPC services in C++](https://www.gresearch.co.uk/blog/article/lessons-learnt-from-writing-asynchronous-streaming-grpc-services-in-c/) grpc 异步服务端流模式例子。
+- **Github awesome-grpc:** https://github.com/grpc-ecosystem/awesome-grpc
 
 可选
 
@@ -232,3 +241,4 @@ gRPC Issues
 
 - Tradias/[asio-grpc: https://github.com/Tradias/asio-grpc
 - agrpc: https://github.com/npuichigo/agrpc
+
