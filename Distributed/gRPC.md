@@ -112,6 +112,14 @@ protoc --cpp_out=. ./server_stream.proto
 
 ## gRPC 客户端
 
+### 异步客户端
+
+- gRPC的异步依托于CompletionQueue完成队列（消息队列）来实现。
+- 在异步客户端中，通过gRPC stub的异步方法调用，获取ClientAsyncResponseReader的实例。
+- 在异步客户端中，ClientAsyncResponseReader的Finish方法向CompletionQueue注册了响应消息处理器和响应消息体的存储容器。
+- 当服务器响应消息到来时，响应消息体被填充到注册的容器中，而响应消息处理器则被push到CompletionQueue中。
+- 从CompletionQueue中获取到响应消息处理器，对响应消息进行处理。
+
 
 
 ## gRPC 处理流程
@@ -120,8 +128,6 @@ protoc --cpp_out=. ./server_stream.proto
 
 - 编排：将参数和远程函数打包的过程。
 - 解排：解包消息到对应的方法调用的过程。
-
-
 
 
 
@@ -223,7 +229,7 @@ core 提供了低层次的库，提供给高层次库封装用的。 顶层的 A
 - [grpc使用记录(三)简单异步服务实例](https://www.cnblogs.com/oloroso/p/11345266.html)：C++ 实现
 - [聊一下 gRPC 的 C++ 异步编程](https://www.luozhiyun.com/archives/671)
 - [C++ gRPC 异步 API 实例与优势](https://blog.miigon.net/posts/cn-so-difference-between-sync-and-async-grpc/)
-- [Lessons learnt from writing asynchronous streaming gRPC services in C++](https://www.gresearch.co.uk/blog/article/lessons-learnt-from-writing-asynchronous-streaming-grpc-services-in-c/) grpc 异步服务端流模式例子。
+- [Lessons learnt from writing asynchronous streaming gRPC services in C++](https://www.gresearch.co.uk/blog/article/lessons-learnt-from-writing-asynchronous-streaming-grpc-services-in-c/) ：grpc 异步服务端流模式例子。
 - **Github awesome-grpc:** https://github.com/grpc-ecosystem/awesome-grpc
 
 可选
