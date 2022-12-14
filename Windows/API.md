@@ -1,3 +1,12 @@
+## Win32 API 后缀
+
+- `A` 表示使用ANSI编码作为标准输入与输出流的文本编码
+- `W` 表示使用Unicode作为编码
+- `Ex` 表示拓展, 标注了Ex的winapi函数会比没有标Ex的函数多一些参数什么的, 可以说拓展了一些功能
+- `ExA` 与 ExW 就是 A,W与Ex的结合了
+
+
+
 ## _beginthreadex
 
 函数原型
