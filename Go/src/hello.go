@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"time"
-	// "net/url"
 )
 
 func main() {
@@ -11,5 +10,4 @@ func main() {
 	fmt.Println("Ni hao!")
 	fmt.Println("time: ", time.Now())
 	fmt.Println("Unix time: ", time.UnixDate)
-
 }
