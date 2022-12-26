@@ -244,35 +244,34 @@ Linux 的环境变量使用 `PATH` 表示，多个环境变量参数之间使用
   
   ```sh
   #!/bin/bash
+  value1=10
+  value2= $value1
+  echo The resulting value is $value2
   ```
 
-value1=10
-value2=$value1
-echo The resulting value is $value2
-
-```
 ## 4.3. 命令替换
 
 shell脚本中最有用的特性之一就是可以从 shell 命令输出中提取信息，并将其赋给变量。把输出赋给变量之后，就可以随意在脚本中使用了。
 
 有两种方法可以将命令输出赋给变量：
-1. 反引号字符 ` ` `
 
-   ```sh
-   [root@CentOS7 ~]# var=`ls`
-   [root@CentOS7 ~]# echo $var
-   anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
+1. 反引号字符 ` `` `
+
+```shell
+[root@CentOS7 ~]# var=`ls`
+[root@CentOS7 ~]# echo $var
+anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
 ```
 
 2. `$()` 格式：`$(commmand)` 执行括号里面的命令功能。例如：`$(data)`
    
-   ```sh
+   ```shel
    [root@KF-CFT-mongdb3 ~]# test=$(date)
    [root@KF-CFT-mongdb3 ~]# echo $test   
    2021年 11月 08日 星期一 10:52:12 CST
+   ```
    
    shell 会运行命令替换符号中的命令，并将其输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
-   ```
 
 ## 4.4. 命令行参数
 
