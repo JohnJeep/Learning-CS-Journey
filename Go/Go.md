@@ -31,7 +31,19 @@ GO代码必须在工作空间内。工作空间是一个目录，其中包含三
 
 ![](./figure/企业开发项目结构.png)
 
+## 设置代理
+
+七牛云
+
+```
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOSUMDB=goproxy.cn/sumdb/sum.golang.org
+```
+
+
+
 # 3. Golang特点
+
 ## 拥有特性
 1. 自动立即回收。
 2. 更丰富的内置类型。
