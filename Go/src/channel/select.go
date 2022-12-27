@@ -4,10 +4,33 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
+	intChan := make(chan int, 10)
+	stringChan := make(chan string, 5)
 
-	fmt.Println()
+	for i := 0; i < cap(stringChan); i++ {
+		stringChan <- "Hello " + fmt.Sprintf("%d", i) // write
+	}
 
+	for i := 0; i < cap(intChan); i++ {
+		intChan <- i // write
+	}
+
+	for {
+		select {
+		case valInt := <-intChan:
+			fmt.Printf("从int channel read data: %d\n", valInt)
+		case valStr := <-stringChan:
+			fmt.Printf("从string channel read data: %s\n", valStr)
+			time.Sleep(time.Second)
+		default:
+			fmt.Printf("没有来自管道中的数据可读\n")
+			return // 退出循环，不然一值在死循环中
+		}
+	}
 }

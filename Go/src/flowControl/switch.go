@@ -24,5 +24,4 @@ func main() {
 	default:
 		fmt.Println("不及格, score:", score)
 	}
-
 }
