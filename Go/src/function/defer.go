@@ -14,7 +14,8 @@ func TestNoDefer() {
 	fmt.Println("3333333333333")
 }
 
-// defer 先进后出的顺序
+// 带有 defer 关键字的语句，语句执行开始时，会把数据压入 defer 栈中
+// 整个函数执行完成后，再从 defer 栈中取出之前压入的数据，按 先进后出的顺序执行
 func TestUseDefer() {
 	fmt.Println("Start carry defer ...")
 	defer fmt.Println("1111111111111")
@@ -36,6 +37,7 @@ func AnonymousDefer() {
 	fmt.Printf("匿名函数外部, id = %d, name = %s\n", id, name)
 }
 
+// 带参数的匿名函数结合 defer
 func AnonymousDeferWithParam() {
 	id := 007
 	name := "spader"
