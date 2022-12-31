@@ -410,7 +410,7 @@ const (
 )
 ```
 
-#### iota
+### iota
 
 常量声明可以使用 `iota` 常量生成器初始化， 它用于生成一组以相似规则初始化的常量， 但是不用每行都写一遍初始化表达式。 在一个`const`声明语句中， 在第一个声明的常量所在的行，iota将会被置为0， 然后在每一个有常量声明的行加一。  
 
@@ -459,10 +459,10 @@ func PrintConstIotaMulti() {
 
 ### String
 
-标准库中有四个包对字符串处理尤为重要： `bytes`、 `strings`、 `strconv`和`unicode`包。
+标准库中有四个包对字符串处理尤为重要： `bytes`、 `strings`、`strconv` 和 `unicode` 包。
 
--  strings包提供了许多如字符串的查询、 替换、 比较、 截断、 拆分和合并等功能。
-- `bytes` 包也提供了很多类似功能的函数， 但是针对和字符串有着相同结构的`[]byte`类型。 因为字符串是只读的， 因此逐步构建字符串会导致很多分配和复制。 在这种情况下， 使用 `bytes.Buffer` 类型将会更有效。
+-  `strings` 包提供了许多如字符串的查询、 替换、 比较、 截断、 拆分和合并等功能。
+- `bytes` 包也提供了很多类似功能的函数， 但是针对和字符串有着相同结构的 `[]byte`类型。 因为字符串是只读的， 因此逐步构建字符串会导致很多分配和复制。 在这种情况下， 使用 `bytes.Buffer` 类型将会更有效。
 - `strconv` 包提供了布尔型、 整型数、 浮点数和对应字符串的相互转换， 还提供了双引号转义相关的转换。
 - `path` 和 `path/filepath`包提供了关于文件路径名更一般的函数操作。  
 
@@ -475,9 +475,160 @@ func Fields(s string) []string
 func HasPrefix(s, prefix string) bool
 func Index(s, sep string) int
 func Join(a []string, sep string) string
+
+//  所有函数
+func Clone(s string) string
+func Compare(a, b string) int
+func Contains(s, substr string) bool
+func ContainsAny(s, chars string) bool
+func ContainsRune(s string, r rune) bool
+func Count(s, substr string) int
+func Cut(s, sep string) (before, after string, found bool)
+func EqualFold(s, t string) bool
+func Fields(s string) []string
+func FieldsFunc(s string, f func(rune) bool) []string
+func HasPrefix(s, prefix string) bool
+func HasSuffix(s, suffix string) bool
+func Index(s, substr string) int
+func IndexAny(s, chars string) int
+func IndexByte(s string, c byte) int
+func IndexFunc(s string, f func(rune) bool) int
+func IndexRune(s string, r rune) int
+func Join(elems []string, sep string) string
+func LastIndex(s, substr string) int
+func LastIndexAny(s, chars string) int
+func LastIndexByte(s string, c byte) int
+func LastIndexFunc(s string, f func(rune) bool) int
+func Map(mapping func(rune) rune, s string) string
+func Repeat(s string, count int) string
+func Replace(s, old, new string, n int) string
+func ReplaceAll(s, old, new string) string
+func Split(s, sep string) []string
+func SplitAfter(s, sep string) []string
+func SplitAfterN(s, sep string, n int) []string
+func SplitN(s, sep string, n int) []string
+func Title(s string) stringDEPRECATED
+func ToLower(s string) string
+func ToLowerSpecial(c unicode.SpecialCase, s string) string
+func ToTitle(s string) string
+func ToTitleSpecial(c unicode.SpecialCase, s string) string
+func ToUpper(s string) string
+func ToUpperSpecial(c unicode.SpecialCase, s string) string
+func ToValidUTF8(s, replacement string) string
+func Trim(s, cutset string) string
+func TrimFunc(s string, f func(rune) bool) string
+func TrimLeft(s, cutset string) string
+func TrimLeftFunc(s string, f func(rune) bool) string
+func TrimPrefix(s, prefix string) string
+func TrimRight(s, cutset string) string
+func TrimRightFunc(s string, f func(rune) bool) string
+func TrimSpace(s string) string
+func TrimSuffix(s, suffix string) string
 ```
 
-bytes 包中常用 API：  
+字符串常用函数
+
+1. 统计字符串的长度，按照 字节。
+
+   ```go
+   len(str)
+   ```
+
+2. 遍历字符串，同时处理含有中文。
+
+   ```go
+   str := "中国"
+   r := []rune(str)
+   ```
+
+3. 字符串转整型
+
+   ```go
+   func Atoi(s string) (int, error){}
+   ```
+
+4. 整型转字符串
+
+   ```go
+   func Itoa(i int) string {}
+   ```
+
+5. 字符串转 []byte
+
+   ```go
+   var bytes = []byte("hello")
+   ```
+
+6. []byte 转 字符串
+
+   ```go
+   str := string([]byte{97, 98, 99})
+   ```
+
+7. 判断字符串s是否包含子串substr。
+
+   ```go
+   func Contains(s, substr string) bool
+   ```
+
+8. 统计一个字符串中有几个指定的字串。
+
+   ```go
+   func Count(s, sep string) int
+   ```
+
+9. 判断两个`utf-8` 编码字符串（将unicode大写、小写、标题三种格式字符视为相同）是否相同。
+
+   ```
+   func EqualFold(s, t string) bool
+   ```
+
+   注意：用 `==` 比较两个字符串是否相等，是区分大小写的。
+
+10. 将指定的字串替换为另一个字符串，返回一个替换后的新字符串，old string 没有发生被改变。传递的是值拷贝。
+
+    ```go
+    func Replace(s, old, new string, n int) string
+    ```
+
+    n 为指定替换的个数。若 n < 0，替换所有的老串。
+
+11. 将一个字符串，按照指定的分隔符分拆分为多个字串。
+
+    ```go
+    func Split(s, sep string) []string
+    ```
+
+12. 将字符串左右两边的空格去掉
+
+    ```go
+    func TrimSpace(s string) string
+    
+    // fmt.Println(strings.TrimSpace(" \t\n Hello, Gophers \n\t\r\n"))
+    ```
+
+13. 将字符串左右两边指定的字符串去掉
+
+    ```go
+    func Trim(s, cutset string) string
+    
+    // fmt.Print(strings.Trim("¡¡¡Hello, Gophers!!!", "!¡"))
+    // 输出：Hello, Gophers
+    ```
+
+14. 将字符串左边指定的字符串去掉
+
+    ```go
+    func TrimLeft(s string, cutset string) string
+    ```
+
+15. 将字符串右边指定的字符串去掉
+
+    ```go
+    func TrimRight(s string, cutset string) string
+    ```
+
+`bytes` 包中常用 API：  
 
 ```go
 func Contains(b, subslice []byte) bool
