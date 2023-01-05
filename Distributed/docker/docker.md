@@ -7,6 +7,7 @@
 - [5. Docker 安装](#5-docker-安装)
   - [5.1. CenOS7 下安装 Docker](#51-cenos7-下安装-docker)
   - [5.2. Windows 下安装 Docker](#52-windows-下安装-docker)
+    - [5.2.1. WSL 中安装](#521-wsl-中安装)
 - [6. Windows系统上为什么能运行 Docker？](#6-windows系统上为什么能运行-docker)
 - [7. Docker 组件](#7-docker-组件)
   - [7.1. Docker 镜像加载原理](#71-docker-镜像加载原理)
@@ -44,6 +45,7 @@
     - [9.3.8. docker build](#938-docker-build)
 - [10. Docker 下安装软件](#10-docker-下安装软件)
 - [11. Docker 容器数据卷](#11-docker-容器数据卷)
+  - [11.1. Volume 是什么？](#111-volume-是什么)
 - [12. Dockerfile](#12-dockerfile)
   - [12.1. docker commit](#121-docker-commit)
 - [13. Docker network](#13-docker-network)
@@ -74,7 +76,7 @@ Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成
 
 1. 传统虚拟机不仅在操作系统上模拟一套虚拟的硬件，还需要模拟出一个完成的操作系统，然后再模拟出的操作系统上运行所需的进程（即软件）。
 2. Docker 容器它没有自己的内核，也没有进行硬件的虚拟化，Docker 容器内的应用进程直接运行在宿主机（安装 Docker 软件的操作系统）的内核上，因此 Docker 容器要比传统虚拟机更轻便，占用系统资源少。每个容器之间相互隔离，容器与容器之间的进程彼此个不影响，并且每个容器都有自己的文件系统。
-3. Docker 是内核级虚拟化，不想传统的虚拟化技术需要额外的 Hypersion 支持，因此一台物理机器上可以运行多个容器的示例，大大提升了物理机器的 CPU 和 内存的利用率，节省了很多钱。
+3. Docker 是内核级虚拟化，不像传统的虚拟化技术需要额外的 Hypersion 支持，因此一台物理机器上可以运行多个容器的示例，大大提升了物理机器的 CPU 和 内存的利用率，节省了很多钱。
 
 # 4. 为什么 Docker 比虚拟机快？
 
@@ -82,7 +84,7 @@ Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成
   
   由于 Docker 不需要 Hyperversion（虚拟机）实现硬件资源虚拟化，运行在 Docker 容器上的程序直接使用的是实际物理机器的硬件资源，因此 CPU、内存利用率在 Docker 上有跟明显的优势。
   
-  ![](figures/vm-container.jpg)
+  ![](../figures/vm-container.jpg)
 
 - Docker 利用的是宿主机的内核，不需要加载操作系统的内核。
   
@@ -102,7 +104,7 @@ Docker 优点
 
 ## 5.1. CenOS7 下安装 Docker
 
-Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Linux 内核环境。Docker 实际上是在已运行的 Linux 下制造了一个隔离的文件环境，因此它执行的效率几乎等同于所部署的 Linux 主机。Docker 必须部署在带有 Linux 内核的系统上。
+Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Linux 内核环境。Docker 实际上是在已运行的 Linux 下制造了一个隔离的文件环境，因此它执行的效率几乎等同于所部署的 Linux 主机。Docker 必须部署在带有Linux 内核的系统上。
 
 安装前提条件
 
@@ -122,23 +124,54 @@ Linux redis_181 3.10.0-1160.49.1.el7.x86_64 #1 SMP Tue Nov 30 15:51:32 UTC 2021 
 
 参考
 
-- [Control Docker with systemd](https://docs.docker.com/config/daemon/systemd/)
-- [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
-- [cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
+- Control Docker with systemd: https://docs.docker.com/config/daemon/systemd/
+- Install Docker Engine from binaries: https://docs.docker.com/engine/install/binaries/
+- cgroupfs-mount: https://github.com/tianon/cgroupfs-mount
 
 ## 5.2. Windows 下安装 Docker
 
 Docker 官网介绍 Windows下安装 Docker有两种方式，一种是在 Windows 子系统（WSL）中安装 Docker，另一种在带有 Windows 虚拟化技术的 Windows 容器中安装。
 
+### 5.2.1. WSL 中安装
+
+WSL 已安装好后，在WSL2 里面的终端按照下面的步骤执行：
+
+1. 配置 docker 源
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt update
+```
+
+2. 安装 docker-ce
+
+   ```
+   sudo apt install -y docker-ce
+   ```
+
+3. 启动 docker
+
+   ```
+   sudo service docker start
+   ```
+
+参考：https://docs.docker.com/engine/install/ubuntu/
+
+
+
 # 6. Windows系统上为什么能运行 Docker？
 
-Docker在早期是只专注于Linux虚拟化实现的一种容器技术，因为Linux得天独厚的Namespace 和 CGroup 等系统内隔离机制特性，使得在Linux更易实现，在经过容器技术的疯狂发展推崇之后，微软看到了这一红利，在于2014年宣布与Docker公司合作，将容器技术迁移到Windows上，这一动作让Windows改变了过去，只能通过VM等大型虚拟机软件通过装Linux来装Docker的现状，现在也可以很轻量级的将Docker融入系统中使用了。由于Windows系统和Linux在实现上还是有些差别，尽管我们在Docker上的操作大致相同，仍然需要注意一些事项。
+Docker在早期是只专注于Linux虚拟化实现的一种容器技术，因为Linux得天独厚的 Namespace 和 CGroup 等系统内隔离机制特性，使得在 Linux更易实现，在经过容器技术的疯狂发展推崇之后，微软看到了这一红利，在于2014 年宣布与 Docker 公司合作，将容器技术迁移到 Windows 上，这一动作让 Windows 改变了过去，只能通过VM等大型虚拟机软件通过装Linux来装Docker的现状，现在也可以很轻量级的将Docker融入系统中使用了。由于Windows系统和Linux在实现上还是有些差别，尽管我们在Docker上的操作大致相同，仍然需要注意一些事项。
 
-没有安装 WSL 的Windows，运行 Docker 原理
+没有安装 WSL 的Windows，运行 Docker 原理：
 
-```
-Docker在Windows系统上安装时，Docker会创建一个基于Linux的虚拟机，叫做MobyLinuxVM虚拟机，这个虚拟机是基于Alpine Linux的。Docker应用程序会连接到此虚拟机，你便可以开始创建具有必要操作组件的容器了。为了与本地网络和NAT（网络地址转换）进行通信，在Docker安装中会为虚拟机配置一个子网，以便你的容器在应用程序中使用。不过不必担心，MobyLinuxVM虚拟机是运行在Hyper-V，这是Windows是一项虚拟化技术，相比虚拟机之类的非常轻量级，容器可以共享主机内核，任务管理器里面可以看到对应进程。
-```
+> Docker 在 Windows 系统上安装时，Docker 会创建一个基于Linux的虚拟机，叫做 MobyLinuxVM 虚拟机，这个虚拟机是基于Alpine Linux的。Docker应用程序会连接到此虚拟机，你便可以开始创建具有必要操作组件的容器了。为了与本地网络和NAT（网络地址转换）进行通信，在Docker安装中会为虚拟机配置一个子网，以便你的容器在应用程序中使用。不过不必担心，MobyLinuxVM虚拟机是运行在Hyper-V，这是Windows是一项虚拟化技术，相比虚拟机之类的非常轻量级，容器可以共享主机内核，任务管理器里面可以看到对应进程。
 
 参考：[Docker在Windows的使用说明](http://www.520code.net/index.php/archives/39/)
 
@@ -146,7 +179,7 @@ Docker在Windows系统上安装时，Docker会创建一个基于Linux的虚拟�
 
 Docker 中有三个重要的组件：Image，Container，Repository。只有理解了这些概念后，学习 Docker 就很轻松了。
 
-![](figures/docker-container-component.jpg)
+![](../figures/docker-container-component.jpg)
 
 - 镜像（Image）
   
@@ -182,29 +215,29 @@ Docker 镜像层是 **只读** 的，容器层是 **可写** 的。当容器启�
 
 镜像层
 
-![images-layers](figures/images-layers.jpg)
+![images-layers](../figures/images-layers.jpg)
 
 容器层
 
-![](figures/container-layers.jpg)
+![](../figures/container-layers.jpg)
 
 Docker 镜像分层的优点：资源共享、方便复制迁移。比如：有多个镜像都是从相同的基类镜像（base）构建而来，那么 docker Host 只需在磁盘上保存一份 base 镜像，同时内存中也只需要加载一份 base 镜像，就可以为所有的容器服务了。
 
-![](figures/container-base-images.png)
+![](../figures/container-base-images.png)
 
 参考：[docker docs 官方文档讲解](https://docs.docker.com/storage/storagedriver/)
 
 ## 7.3. Docker 原理
 
-![](figures/docker-view.png)
+![](../figures/docker-view.png)
 
 # 8. Docker 架构
 
-![](figures/docker-architecture.jpg)
+![](../figures/docker-architecture.jpg)
 
 Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）运行在主机（host）上，然后通过 Socket 连接从客户端访问，守护进程从客户端接受命令并管理运行在主机上的容器。
 
-![](figures/docker-c_s.png)
+![](../figures/docker-c_s.png)
 
 ## 8.1. Docker 运行流程
 
@@ -240,7 +273,7 @@ Docker 官方命令参考：https://docs.docker.com/reference/
 docker version
 
 # 启动服务
-systemctl stop docker
+systemctl start docker
 
 # 停止服务
 systemctl stop docker
@@ -294,7 +327,7 @@ OPTIONS:
 
 要启动 docker，运行 `Docker run` 命令即可，我们思考下，执行 `docker run` 命令 docker 引擎都干了什么。底层是怎样实现的？
 
-![](figures/docker-run.png)
+![](../figures/docker-run.png)
 
 示例1
 
@@ -860,7 +893,15 @@ Docker下安装软件的步骤
 
 # 11. Docker 容器数据卷
 
+## 11.1. Volume 是什么？
+
+卷就是目录或文件，存在于一个或多个容器中，由 docker 挂载到容器，但不属于联合文件系统，因此能绕过联合文件系统（Union File System）提供一些用于持续存储或共享数据的特性。
+
+卷的设计目的：就是数据的持久化，完全独立于容器的生存周期，因此 docker 不会在容器删除时删除其挂载的数据卷。
+
 # 12. Dockerfile
+
+
 
 ## 12.1. docker commit
 
@@ -915,11 +956,11 @@ docker-compose --version
 配置 kafka
 
 ```
-    KAFKA_ADVERTISED_HOST_NAME：广播主机名称，一般用IP指定
-    KAFKA_ZOOKEEPER_CONNECT：Zookeeper连接地址，格式：zoo1：port1,zoo2:port2:/path
-    KAFKA_LISTENERS：Kafka启动所使用的的协议及端口
-    KAFKA_ADVERTISED_LISTENERS：Kafka广播地址及端口，也就是告诉客户端，使用什么地址和端口能连接到Kafka，这个很重要，如果不指定，宿主机以外的客户端将无法连接到Kafka，比如我这里因为容器与宿主机做了端口映射，所以广播地址采用的是宿主机的地址及端口，告诉客户端只要连接到宿主机的指定端口就行了
-    KAFKA_BROKER_ID：指定BrokerId，如果不指定，将会自己生成
+KAFKA_ADVERTISED_HOST_NAME：广播主机名称，一般用IP指定
+KAFKA_ZOOKEEPER_CONNECT：Zookeeper连接地址，格式：zoo1：port1,zoo2:port2:/path
+KAFKA_LISTENERS：Kafka启动所使用的的协议及端口
+KAFKA_ADVERTISED_LISTENERS：Kafka广播地址及端口，也就是告诉客户端，使用什么地址和端口能连接到Kafka，这个很重要，如果不指定，宿主机以外的客户端将无法连接到Kafka，比如我这里因为容器与宿主机做了端口映射，所以广播地址采用的是宿主机的地址及端口，告诉客户端只要连接到宿主机的指定端口就行了
+KAFKA_BROKER_ID：指定BrokerId，如果不指定，将会自己生成
 ```
 
 # 15. 面试问题
@@ -935,5 +976,6 @@ docker-compose --version
 - [Docker搭建Zookeeper&Kafka集群](https://www.cnblogs.com/Jacian/p/11421114.html)
 - [THE CONTAINER NETWORKING LANDSCAPE: CNI FROM COREOS AND CNM FROM DOCKER](https://thenewstack.io/container-networking-landscape-cni-coreos-cnm-docker) 一篇英文文章，讲解 docker 和 container ecosystem。
 - [Github 英文讲解 CNI - the Container Network Interface](https://github.com/containernetworking/cni)
+- Docker 社区版源码：https://github.com/moby/moby
 
 学习三部曲：理论、实操、总结
