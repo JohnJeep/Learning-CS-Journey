@@ -554,7 +554,7 @@ OPTIONS:
   
   指定容器 ID 和命令，比如指定 ID 为 `178c5e88904a` 的容器，以交互式的方式重新打开一个伪终端后进入容器内部。
   
-  ```
+  ```bash
   [root@CentOS7 ~]# docker exec -it 178c5e88904a  /bin/bash
   root@178c5e88904a:/#
   ```
@@ -884,7 +884,7 @@ docker images
 
 Docker下安装软件的步骤
 
-1. 搜索镜像
+1. 搜索镜像。去docker 官网去搜索镜像。
 2. 拉取镜像
 3. 查看镜像
 4. 启动镜像：注意端口映射。
@@ -899,7 +899,41 @@ Docker下安装软件的步骤
 
 卷的设计目的：就是数据的持久化，完全独立于容器的生存周期，因此 docker 不会在容器删除时删除其挂载的数据卷。
 
+命令用法
+
+```shell
+docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录    镜像名
+
+// 实例
+docker run -it --privileged=true -v /home/docker_data:/data  --name redis-7 redis /bin/bash
+
+
+// 默认情况下，容器内的目录具有读写权限：rW
+// 限制容器内的权限，具有只读属性 ro
+docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:ro    镜像名
+
+```
+
+## Volume 能干吗？
+
+将运行的环境打包镜像，run 后形成容器实例运行。若 Docker 容器产生的数据不进行备份，那么当容器的实例删除后，容器内的数据也就没有了，为了能保存数据在 docker 中，因此使用卷（volume）。
+
+数据卷的特点
+
+- 可在容器之间共享或重用数据。
+- 卷中的更改可以直接实时生效。
+- 数据卷的生命周期一直持续到没有容器使用它为止。
+- 数据卷中的更改不会包含在镜像的更新中。
+
+
+
+
+
 # 12. Dockerfile
+
+## Dockerfile 是什么？
+
+Dockerfile 是用来构建 Docker 镜像的文本文件，是一条条构建镜像所需的指令和参数构成的脚本。
 
 
 
@@ -909,7 +943,7 @@ Docker下安装软件的步骤
 
 用法
 
-```
+```bash
 docker commit -m "提交的描述信息" -a="作者" 容器ID 目标镜像名:[标签名]
 
 Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
