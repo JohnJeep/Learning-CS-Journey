@@ -1204,6 +1204,20 @@ char* pc = “abc”;
 const char* cpc = pc;
 ```
 
+## 底层实现
+
+Scott Meyers 在《Effective STL》第 15 条中提到 std::string 底层实现有多种方式，归纳起来有 3 类。
+
+- eager copy（无特殊处理）。采用类似 `std::vector` 的数据结构，现在很少采用这种形式。
+- Copy-on-Write（COW，写时复制）。
+- Short String Optimize（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
+
+C++ GCC std::string 在C++11 之前与之后实现是完全不同的。c++11之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为**C++11标准规定：不允许[]导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了**。**
+
+重要区别：COW 的 basic_string有一个 RefCnt 变量，用于引用计数。而 C++11 basic_string完全没有。
+
+
+
 # 12. Reference
 
 - [面试官：哈希表都不知道，你是怎么看懂HashMap的？ ](https://www.sohu.com/a/434917653_611601)
