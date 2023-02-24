@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2021-12-07 01:18:23
- * @LastEditors: Windows10
+ * @LastEditTime: 2023-02-24 16:52:36
+ * @LastEditors: JohnJeep JohnJeep1985@gail.com
  * @Description: shall 学习笔记
 -->
 
@@ -197,7 +197,7 @@ Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般
 - 单引号内的特殊字符只能表示一般字符（纯文本），而不会有特殊字符。
   
   ```bash
-  var="lang is $LANG"，使用 echo $var 得到 lang is $LANG
+  var='lang is $LANG'，使用 echo $var 得到 lang is $LANG
   
   其它示例：
     var=200      # =号两边不能有空格
