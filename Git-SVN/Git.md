@@ -191,6 +191,8 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
 
 - `git diff --stat <local branch> <remote branch>` 比较本地分支与远程指定分支之间的差异。
 
+  如果不是查看每个文件的详细差别，而是统计一下有哪些文件被改动，有多少行被改动，就可以使用 `--stat` 参数。
+  
   例如，比较本地分支 `feat_grpc` 与远程分支 `dev` 之间的差异： `git diff --stat feat_grpc  remotes/origin/dev`
 
 
