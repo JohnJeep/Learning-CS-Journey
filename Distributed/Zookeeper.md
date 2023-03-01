@@ -264,7 +264,5 @@ server.3=zoo3.example.com:2888:3888
 
 # 13. 参考
 
-
-
 [Zookeeper 入门介绍](https://xie.infoq.cn/article/edd698410f30cf4b8113e228d)
 
