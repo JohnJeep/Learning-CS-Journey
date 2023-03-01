@@ -22,7 +22,7 @@
 
 RPC Architecture
 
-![](figures/remote-call-procedure-working.png)
+![](../figures/remote-call-procedure-working.png)
 
 ## gRPC 概念
 
