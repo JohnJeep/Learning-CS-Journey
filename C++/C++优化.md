@@ -1,3 +1,11 @@
+# 开销来自哪里
+
+- 函数之间的调用。用模板和内联函数去解决。
+
+
+
+
+
 # Reference
 
 - [Software optimization resources](https://www.agner.org/optimize/)
