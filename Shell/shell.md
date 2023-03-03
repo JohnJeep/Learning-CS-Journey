@@ -26,7 +26,8 @@
     - [4.2.2. 用户变量](#422-用户变量)
   - [4.3. 命令替换](#43-命令替换)
   - [4.4. 命令行参数](#44-命令行参数)
-  - [4.5. 执行数学运算](#45-执行数学运算)
+  - [4.5. basename](#45-basename)
+  - [4.6. 执行数学运算](#46-执行数学运算)
 - [5. 重定向](#5-重定向)
 - [6. 结构化命令](#6-结构化命令)
   - [6.1. if 语句](#61-if-语句)
@@ -88,11 +89,11 @@ Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般
 
 - ` fg `: 将后台中的命令调至前台继续运行
   
-  > `fg %job number`: 将放在后台的任务通过指定其 `job number`，让它在前台工作。`%job number`是通过jobs命令查到的后台正在执行的命令的序号(不是pid，数字默认从 1 开始)
+  `fg %job number`: 将放在后台的任务通过指定其 `job number`，让它在前台工作。`%job number`是通过jobs命令查到的后台正在执行的命令的序号(不是pid，数字默认从 1 开始)
 
 - `bg`: 进程转到后台
   
-  > `bg %number` 直接让在后台暂停（stopping）的任务变为运行（running）状态。
+  `bg %number` 直接让在后台暂停（stopping）的任务变为运行（running）状态。
 
 - `jobs`：查看放在后台的所有任务。
   
@@ -106,9 +107,9 @@ Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般
 
 - nohup
   
-  - 在用户注销或脱机后，任务还能继续在后天执行，与系统使用的terminal 无关。
-  - 一般的任务管理的后台与所使用的terminal有关，terminal终止后，后台任务也就终止了。
-  - 想要后台的任务在你注销用户后还能继续执行，可以使用 `nohup 结合 &` 搭配使用。
+  - 在用户注销或脱机后，任务还能继续在后天执行，与系统使用的 terminal 无关。
+  - 一般的任务管理的后台与所使用的 terminal 有关，terminal 终止后，后台任务也就终止了。
+  - 想要后台的任务在你注销用户后还能继续执行，可以使用 `nohup` 结合 `&`  搭配使用。
 
 ## 2.2. 大小写
 
@@ -160,55 +161,122 @@ Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般
 ## 2.8. 其它命令
 
 - `cd - ` 在两个相邻的目录之间进行切换。
-- `;` 在一条行中执行多条命令，采用 ; 实现
 - `&&` 仅在上一个命令成功的情况下，才能执行后面的多个命令
 - `lsblk` 以树状的格式列出块设备
 
 # 3. Shell 启动
 
-当你登录Linux系统时，bash shell 会作为登录 shell 启动。登录 shell 会从 5 个不同的启动文件里读取命令：
+当你登录 Linux 系统时，bash shell 会作为登录 shell 启动。登录 shell 会从 5 个不同的启动文件里读取命令：
 
-- /etc/profile
-- $HOME/.bash_profile
-- $HOME/.bashrc
-- $HOME/.bash_login
-- $HOME/.profile
+- `/etc/profile`
+- `$HOME/.bash_profile`
+- `$HOME/.bashrc`
+- `$HOME/.bash_login`
+- `$HOME/.profile`
 
-> `/etc/profile` 文件是系统上默认的bash shell的主启动文件。系统上的每个用户登录时都会执行这个启动文件。
+> `/etc/profile` 文件是系统上默认的 bash shell 的主启动文件，系统上的每个用户登录时都会执行这个启动文件。
 
 # 4. 基本命令
 
-- 解释采用哪种shell运行脚本: `!#/bin/sh`
+- 解释采用哪种 shell 运行脚本: `!#/bin/sh`
+
 - 多条语句之间使用 `;` 分割开
-- 输入的命令采用 `()` 括起来，shell会fork一个新的字shell进程执行括号里面的内容。
-- 确定哪些命令是否属于shell内建命令：`type command`
+
+- 输入的命令采用 `()` 括起来，shell 会 fork 一个新的子 shell 进程执行括号里面的内容。
+
+- 确定哪些命令是否属于 shell 内建命令：`type command`
+
+  ```shell
+  [root@DEV-ALWLPT-AP03 log]# type pwd
+  pwd is a shell builtin
+  ```
+
 - 数据类型：只有字符串类型。
 
 ## 4.1. 引号
 
-单引号与双引号的区别
+双引号优点
+
+- 双引号里可以有变量。
+  
+  ```shell
+  # 统计字符串的长度
+  string="abcd"
+echo ${#string} # 输出 4
+  ```
+  
+- 双引号里可以出现转义字符。
 
 - 双引号内的特殊字符可以保持原有的特性，比如 `$`。
   
   ```sh
-  var="lang is $LANG"，使用 echo $var 得到 lang is en_US.UTF-8
+  # 使用 echo $var 得到 lang is en_US.UTF-8
+  var="lang is $LANG"
   ```
+```
 
-- 单引号内的特殊字符只能表示一般字符（纯文本），而不会有特殊字符。
+单引号的限制
+
+- 单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；
   
+- 单引号字串中不能出现单引号（对单引号使用转义符后也不行）。
+
   ```bash
-  var='lang is $LANG'，使用 echo $var 得到 lang is $LANG
+  # 使用 echo $var 得到 lang is $LANG
+  var='lang is $LANG'
   
   其它示例：
     var=200      # =号两边不能有空格
     echo $var    # 200
     echo '$var'  # $var
     echo "$var"  # 200，打印变量var的内容
-  ```
+```
 
 ## 4.2. 变量
 
-> 变量名前面加上 `$` 表示显示当前变量的值，还可以让变量作为命令行的参数。没有美元符， shell会将变量名解释成普通的文本字符串。
+定义变量时，变量名称不加美元符号($)。
+
+```shell
+path="/etc/"  # 定义一个变量path
+```
+
+变量名前面加上 `$` 表示显示当前变量的值。
+
+```bash
+echo $path    # 调用变量
+echo ${path} # 变量名外面的花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界
+```
+
+```shell
+[root@DEV-ALWLPT-AP03 log]# path="/etc/"
+[root@DEV-ALWLPT-AP03 log]# echo $path
+/etc/
+[root@DEV-ALWLPT-AP03 log]# echo ${path}
+/etc/
+```
+
+没有 `$`， shell 会将变量名解释成普通的文本字符串。
+
+```shell
+[root@DEV-ALWLPT-AP03 log]# echo date
+date
+```
+
+变量可作为命令行的参数。
+
+```shell
+[root@DEV-ALWLPT-AP03 log]# path="/home"
+[root@DEV-ALWLPT-AP03 log]# ls $path
+data  emqx  emqx4  failed  go  
+```
+
+注意点：
+
+- 变量名和等号之间不能有空格。
+- 变量首个字符必须为字母(a-z，A-Z)。
+- 变量中间不能有空格，可以使用下划线(_)。
+- 变量不能使用标点符号。
+- 变量不能使用 bash 里的关键字，可用 help 命令查看保留关键字。
 
 ### 4.2.1. 环境变量
 
@@ -251,9 +319,9 @@ Linux 的环境变量使用 `PATH` 表示，多个环境变量参数之间使用
 
 ## 4.3. 命令替换
 
-shell脚本中最有用的特性之一就是可以从 shell 命令输出中提取信息，并将其赋给变量。把输出赋给变量之后，就可以随意在脚本中使用了。
+shell 脚本中最有用的特性之一就是可以从 shell 命令输出中提取信息，并将其赋给变量。把输出赋给变量之后，就可以随意在脚本中使用了。
 
-有两种方法可以将命令输出赋给变量：
+有两种方法可以将命令输出赋给变量
 
 1. 反引号字符 ` `` `
 
@@ -271,28 +339,90 @@ anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
    2021年 11月 08日 星期一 10:52:12 CST
    ```
    
-   shell 会运行命令替换符号中的命令，并将其输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
+   shell 先运行括号中的命令，然后将输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
 
 ## 4.4. 命令行参数
 
-- `$0`: 获取 shell 在命令行启动的脚本名，会包含完整的脚本路径。去掉脚本的路径利用 `basenmae` 关键字实现。
+- `$0`: 获取 shell 在命令行启动的脚本名，会包含完整的脚本路径。
+
+  去掉脚本的路径利用 `basename` 关键字实现。
+
+  ```shell
+  # shell 文件 test.sh
+  #! /bin/bash
+  echo helloword
+  echo $0
+  echo $(basename $0) # 去掉路径名
+  echo $(basename -s .sh $0) # 去掉路径名和后缀
+  
+  [root@DEV-ALWLPT-AP03 log]# ./test.sh
+  helloword
+  ./test.sh
+  test.sh
+  test
+  ```
+
 - `$1`: 第一个参数 
+
 - `$2`: 第二个参数 
+
 - `$#`: 统计命令行参数的个数。
+
 - `$*`: 将 shell 的所有参数当成单个参数。
+
 - `$@`: 单独处理输入的每个参数。
+
 - `$?`: 显示上一次命令的退出状态码。
   - 成功结束的命令退出状态码是 `0`。
   - 如果一个命令结束时有错误，退出状态就是一个正值；
   - 无效命令会返回一个退出状态码 `127`。
+  
 - `$$`: 显示脚本运行的当前进程 ID 号。
+
 - `shift`: 允许你在不知道参数总数的情况下处理各种脚本参数，该命令会将下一个参数移动到 `$1`。默认情况下它会将每个参数变量向左移动一个位置，后面也可以指定移动多个参数的位置。如果某个参数被移出，它的值就被丢弃了，无法再恢复。
 
-## 4.5. 执行数学运算
+## 4.5. basename 
+
+basename 是一个命令行中实用的小工具，可从给定的文件名中删除目录和后缀，并打印出来。
+
+在 Centos7 系统中，已经默认安装了 `basename` 命令了，该命令包含在 `coreutils` 安装包里。
+
+```bash
+[root@DEV-ALWLPT-AP03 log]# rpm -qf /usr/bin/basename
+coreutils-8.22-24.el7_9.2.x86_64
+```
+
+basename 命令默认删除所有结尾的 `/` 字符：
+
+```bash
+[root@DEV-ALWLPT-AP03 log]# basename /usr/local
+local
+```
+
+默认情况下，每条输出行以换行符(\n)结尾。要以 `NUL` 结尾，请使用-z（--zero）选项。
+
+```bash
+[root@DEV-ALWLPT-AP03 log]# basename -z /usr/local
+local[root@DEV-ALWLPT-AP03 log]#
+```
+
+删除文件名的扩展名
+
+```shell
+# 第一种
+[root@DEV-ALWLPT-AP03 log]# basename -s .log IOT-Alert20230303_122511_663.log
+IOT-Alert20230303_122511_663
+
+# 第二种
+[root@DEV-ALWLPT-AP03 log]# basename IOT-Alert20230303_122511_663.log .log
+IOT-Alert20230303_122511_663
+```
+
+## 4.6. 执行数学运算
 
 算术代换: 用于基本的算术计算。
 
-- `echo $[11+12]` 两个数相加
+- `echo $[11+12]` 两个数相加。
 - `echo $[2#10+16#12]` 二进制的 10 加上十六进制的 12，结果按照十进制显示
 
 # 5. 重定向
@@ -323,13 +453,13 @@ anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
 
 # 6. 结构化命令
 
-许多程序要求对shell脚本中的命令施加一些逻辑流程控制。有一类命令会根据条件使脚本跳过某些命令。这样的命令通常称为结构化命令（ structured command）。
+许多程序要求对 shell 脚本中的命令施加一些逻辑流程控制。有一类命令会根据条件使脚本跳过某些命令。这样的命令通常称为结构化命令（ structured command）。
 
 ## 6.1. if 语句
 
-如果你在用其他编程语言的if-then语句，这种形式可能会让你有点困惑。在其他编程语言中， if语句之后的对象是一个等式，这个等式的求值结果为TRUE或FALSE。但bash shell的if语句并不是这么做的。
+如果你在用其他编程语言的 `if-then` 语句，这种形式可能会让你有点困惑。在其他编程语言中，if 语句之后的对象是一个等式，这个等式的求值结果为 TRUE 或 FALSE。但 bash shell 的 if 语句并不是这么做的。
 
-bash shell 的 if 语句会运行 if 后面的那个命令。如果该命令的退出状态码是 0（该命令成功运行），位于 then 部分的命令就会被执行。如果该命令的退出状态码是其他值，部分的命令就不会被执行，bash shell 会继续执行脚本中的下一个命令或者执行 `else` 部分的内容。fi 语句用来表示if-then 语句到此结束。
+bash shell 的 if 语句会运行 if 后面的那个命令。如果该命令的退出状态码是 0（该命令成功运行），位于 then 部分的命令就会被执行。如果该命令的退出状态码是其他值，部分的命令就不会被执行，bash shell 会继续执行脚本中的下一个命令或者执行 `else` 部分的内容。fi 语句用来表示 `if-then` 语句到此结束。
 
 if 语句格式
 
@@ -427,7 +557,7 @@ fi
 
 ## 6.3. for 语句
 
-利用ls命令判断当前目录下文件的的类型
+利用 `ls` 命令判断当前目录下文件的的类型
 
 ```bash
 #! /bin/bash
@@ -568,26 +698,38 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 
 两种流行的正则表达式引擎
 
-- POSIX基础正则表达式（ basic regular expression， BRE）引擎。例子：sed编辑器。
-- POSIX扩展正则表达式（ extended regular expression， ERE）引擎。例子：gawk工具。
+- POSIX 基础正则表达式（ basic regular expression， BRE）引擎。例子：sed 编辑器。
+- POSIX 扩展正则表达式（ extended regular expression， ERE）引擎。例子：gawk 工具。
 
 <img src="./figures/regExp.png">
 
 ## 11.1. 字符串限定符
 
-- `.`: 匹配任意一个字符
-- `[]`: 匹配括号中的任意一个字符
-- `-(横线)`: 在[] 括号内表示字符范围。eg: `[0-9]`
-- `%` 匹配零个或多个字符
+- `.`: 匹配任意一个字符。
+
+- `[]`: 匹配括号中的任意一个字符。
+
+- `-(横线)`: 在 [] 括号内表示字符范围。eg: `[0-9]`。
+
 - `_(下划线)` 匹配单个字符。
-- `^`: 位于[] 括号的开头，匹配除括号中的字符之外的任意一个字符。eg: `[^abf]` 匹配除abf字符以外的所有字符。
+
+- `^`: 位于[] 括号的开头，匹配除括号中的字符之外的任意一个字符。
+
+  示例: `[^abf]` 匹配除 abf 字符以外的所有字符。
+
 - `\s`: 匹配任意空白字符。
+
 - `\S`: 匹配任意非空白字符。
+
 - `\d`: 匹配任意数字。
+
 - `\D`: 匹配非任意数字。
+
 - `w`: 匹配任意单字字符（字母、数字、下划线）。
+
 - `W`: 匹配任意非单字字符。
-- `[[:xxx:]]`: grep工具转给你预定义的一些字符类。
+
+- `[[:xxx:]]`: grep 工具转给你预定义的一些字符类。
 
 ## 11.2. 数量限定符
 
@@ -611,8 +753,24 @@ shell函数体中没有函数参数和返回值，函数参数在运行时传递
 ## 11.4. 其他特殊字符
 
 - `\`: 转义字符，可以将普通字符转义为特殊字符，也可以将特殊字符转义为普通字符。
+
 - `()`: 将正则表达式的一部分使用括号括起来，组成一个单元，对整个单元使用数量限定符。
+
 - `|`: 连接两个子表达式。
+
+- `%`: 匹配指定删除内容
+
+  Shell 中使用百分号，将变量的内容从指定截取内容的后面删除（包括指定截取的内容），并从尾部开始删除。
+
+  一个 `%` 号表示从尾部开始匹配删除，找到最近的内容停止；两个 `%%` 表示从尾部开始匹配删除，遇到最远的指定内容就停止匹配。
+
+  ```shell
+  [root@DEV-ALWLPT-AP03 log]# filename=aaabbccddaabbccdd
+  [root@DEV-ALWLPT-AP03 log]# echo "${filename%bb*}"
+  aaabbccddaa
+  [root@DEV-ALWLPT-AP03 log]# echo "${filename%%bb*}"
+  aaa
+  ```
 
 # 12. tee
 
