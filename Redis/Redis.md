@@ -92,7 +92,7 @@ NoSQL 数据库
 什么是 redis？
 
 - Redis 全名叫 Remote Dictionary Server，即远程字典服务，是一个开源的用 C 语言编写、遵守 BSD 协议、基于内存运行并支持持久化的日志型、key-Value 的数据库、并提供多种语言的API。为了保证效率，Redis 将数据缓存在内存（memory）中，周期性的将数据写入磁盘。
-- redis 是 Nosql 数据库中使用较为广泛的非关系型内存数据库，redis 内部是一个key-value 存储系统。它支持存储的 value 类型相对更多，包括 string（字符串）、list（链表）、se（集合）、zset（sorted set –有序集合）、 hash（哈希类型）、位图，hyperloglogs等数据类型。Redis 基于内存运行并支持持久化的 NoSQL 数据库，是当前最热门的NoSql数据库之一，也被人们称为数据结构存储服务器。
+- redis 是 Nosql 数据库中使用较为广泛的非关系型内存数据库，redis 内部是一个key-value 存储系统。它支持存储的 value 类型相对更多，包括 string（字符串）、list（链表）、set（集合）、zset（sorted set –有序集合）、 hash（哈希类型）、位图，hyperloglogs 等数据类型。Redis 基于内存运行并支持持久化的 NoSQL 数据库，是当前最热门的 NoSql 数据库之一，也被人们称为数据结构存储服务器。
 
 Redis 的主要优点
 
@@ -103,26 +103,26 @@ Redis 的主要优点
 Redis 应用场景
 
 - 用作缓存数据：将经常需要查询的数据存储在内存（memory） 而不是磁盘中，来提高效率。
-- 用作消息队列：相当于消息订阅系统，只能用于对数据一致性不高的业务中，对数据一致性要求较高时，建议用消息中间件，比如ActiveMQ、RocketMQ。
+- 用作消息队列：相当于消息订阅系统，只能用于对数据一致性不高的业务中，对数据一致性要求较高时，建议用消息中间件，比如 ActiveMQ、RocketMQ。
 - 计数器：比如统计点击率、点赞率，可以快速实现计数和查询的功能。redis 具有原子性，可以避免并发问题。
 - 电商网站信息：大型电商平台初始化页面数据的缓存。比如去哪儿网购买机票的时候首页的价格和你点进去的价格会有差异。
 - 热点数据：比如新闻网站实时热点、微博热搜等，需要频繁更新。总数据量比较大的时候直接从数据库查询会影响性能。
 
 # 3. 配置
 
-Redis/src/ 目录相关文件功能描述
+`Redis/src/` 目录相关文件功能描述
 
-- redis-server  : redis 服务器
-- redis-cli  : redis 命令行客户端
-- redis-benchmark : redis 性能测试工具
-- redis-check-aof : aof 文件修复工具
-- redis-check-rdb : 文件检查工具 
+- `redis-server`: redis 服务器
+- `redis-cli`: redis 命令行客户端
+- `redis-benchmark`: redis 性能测试工具
+- `redis-check-aof`: aof 文件修复工具
+- `redis-check-rdb`: 文件检查工具 
 
-/usr/lib/systemd/system/ 目录下存放的都是开机自启动服务。
+`/usr/lib/systemd/system/` 目录下存放的都是开机自启动服务。
 
-- loglevel: 日志级别。开发阶段可以设置成 debug，生产阶段通常设置为 notice 或者 warning。
-- logfile: 日志文件保存路径，默认下没有配置。
-- requirepass： 配置 Redis 的访问密码。默认不配置密码，即访问不需要密码验证。 此配置项需要在
+- `loglevel`: 日志级别。开发阶段可以设置成 debug，生产阶段通常设置为 notice 或者 warning。
+- `logfile`: 日志文件保存路径，默认下没有配置。
+- `requirepass`： 配置 Redis 的访问密码。默认不配置密码，即访问不需要密码验证。 此配置项需要在
   `protected-mode=yes` 时起作用。 
 
 # 4. 启动
@@ -130,7 +130,7 @@ Redis/src/ 目录相关文件功能描述
 Redis 客户端与服务器的启动。
 
 - `redis-cli`：启动 Redis 客户端
-- `redis-cli -h host -p port -a password`：远程机器上启动Redis 客户端
+- `redis-cli -h host -p port -a password`：远程机器上启动 Redis 客户端
 - `redis-server`：启动 Redis 服务器
 
 可执行程序后面不跟参数，后台直接启动 server
@@ -201,7 +201,7 @@ Redis 键（key）命令用于管理 redis 的键。
 - `？`: 匹配一个字符 
 - `*`: 匹配任意个字符（包括0个字符）
 - `[]`: 匹配括号间的任一字符
-- `\*` : 匹配字符x,用于转义符号；若要匹配 ？，则使用 `\?`
+- `\*` : 匹配字符x，用于转义符号；若要匹配 ？，则使用 `\?`
 
 ```bash
 127.0.0.1:6379> keys *
@@ -273,8 +273,8 @@ string
 
 ## 5.8. RENAME
 
-- `rename key key1`：将键值key修改为key1
-- `renamenx key key1`：仅当键值key1不存在当前数据库中时，才可以将key修改为key1
+- `rename key key1`：将键值 key 修改为 key1
+- `renamenx key key1`：仅当键值 key1 不存在当前数据库中时，才可以将 key 修改为 key1
 - `randomkey`：从当前数据库中随机返回一个 key 。
   
   ```sh
@@ -299,7 +299,7 @@ redis 在实际使用过程中一般用作缓存，然而缓存的数据一般�
 - `expire key seconds`：键值对的生存时间为 seconds，时间到后，销毁键值对中的数据
 - `TTL key`：以秒为单位，返回给定 key 的剩余生存时间（TTL, time to live）。
   - TTL返回值：
-    - 大于0的数字：剩余生存时间，单位为秒
+    - 大于 0 的数字：剩余生存时间，单位为秒
     - -1 ： 没有生存时间，永久存储
     - -2 ： 数据已经被删除
 - `pttl key`：以毫秒为单位返回 key 的剩余的过期时间。
@@ -349,7 +349,7 @@ OK
 
 ## 6.1. string(字符串)
 
-string类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value` ，一个键最大能存储 512MB。
+string 类型是 Redis 最基本的数据类型，一个 `key`对应一个 `value` ，一个键最大能存储 512MB。
 
 基础命令
 
@@ -925,11 +925,11 @@ QUEUED
 
 # 9. pub/sub
 
-list作为消息队列应用场景受到限制很重要的原因在于没有广播，所以Redis 2.0中引入了一个新的数据结构pubsub。pubsub虽然不能算作是list的替代品，但它确实能解决一些list不能解决的问题。
+list 作为消息队列应用场景受到限制很重要的原因在于没有广播，所以 Redis 2.0 中引入了一个新的数据结构pubsub。pubsub 虽然不能算作是 list 的替代品，但它确实能解决一些 list 不能解决的问题。
 
-pubsub引入一个概念叫channel，生产者通过publish接口投递消息时会指定channel，消费者通过subscribe接口订阅它关心的channel，调用subscribe后这条连接会进入一个特殊的状态，通常不能在发送其他请求，当有消息投递到这个channel时Redis服务端会立刻通过该连接将消息推送到消费者。这里一个channel可以被多个应用订阅，消息会同时投递到每个订阅者，做到了消息的广播。
+pubsub 引入一个概念叫 channel，生产者通过 publish 接口投递消息时会指定 channel，消费者通过 subscribe 接口订阅它关心的 channel，调用 subscribe 后这条连接会进入一个特殊的状态，通常不能在发送其他请求，当有消息投递到这个 channe l时 Redis 服务端会立刻通过该连接将消息推送到消费者。这里一个 channel 可以被多个应用订阅，消息会同时投递到每个订阅者，做到了消息的广播。
 
-另一方面，消费者可以会订阅一批channel，例如一个用户订阅了浙江的新闻的推送，但浙江新闻还会进行细分，例如“浙江杭州xx”、“浙江温州xx”，这里订阅者不需要获取浙江的所有子类在挨个订阅，只需要调用psubscribe“浙江*”就能订阅所有以浙江开头的新闻推送了，这里psubscribe传入一个通配符表达的channel，Redis服务端按照规则推送所有匹配channel的消息给对应的客户端。
+另一方面，消费者可以会订阅一批 channel，例如一个用户订阅了浙江的新闻的推送，但浙江新闻还会进行细分，例如“浙江杭州xx”、“浙江温州xx”，这里订阅者不需要获取浙江的所有子类在挨个订阅，只需要调用 psubscribe “浙江*”就能订阅所有以浙江开头的新闻推送了，这里 psubscribe 传入一个通配符表达的 channel，Redis 服务端按照规则推送所有匹配channel的消息给对应的客户端。
 
 Redis 发布订阅(pub/sub)是一种进程间的消息通信模式：发送者(publish)发送消息，订阅者(subscribe)接收消息。 Redis 客户端可以订阅任意数量的频道。
 
@@ -952,9 +952,9 @@ Redis 发布订阅命令
 
 ## 9.1. pubsub的不足之处处
 
-pubsub的消息数据是瞬时的，它在Redis服务端不做保存，publish发送到Redis的消息会立刻推送到所有当时subscribe连接的客户端，如果当时客户端因为网络问题断连，那么就会错过这条消息，当客户端重连后，它没法重新获取之前那条消息，甚至无法判断是否有消息丢失。
+pubsub 的消息数据是瞬时的，它在 Redis 服务端不做保存，publish 发送到 Redis 的消息会立刻推送到所有当时subscribe 连接的客户端，如果当时客户端因为网络问题断连，那么就会错过这条消息，当客户端重连后，它没法重新获取之前那条消息，甚至无法判断是否有消息丢失。
 
-pubsub中消费者获取消息是一个推送模型，这意味着Redis会按消息生产的速度给所有的消费者推送消息，不管消费者处理能力如何，如果消费者应用处理能力不足，消息就会在Redis的client buf中堆积，当堆积数据超过一个阈值后会断开这条连接，这意味着这些消息全部丢失了，在也找不回来了。如果同时有多个消费者的client buf堆积数据但又还没达到断开连接的阈值，那么Redis服务端的内存会膨胀，进程可能因为oom而被杀掉，这导致了整个服务中断。
+pubsub 中消费者获取消息是一个推送模型，这意味着 Redis 会按消息生产的速度给所有的消费者推送消息，不管消费者处理能力如何，如果消费者应用处理能力不足，消息就会在 Redis 的 client buf 中堆积，当堆积数据超过一个阈值后会断开这条连接，这意味着这些消息全部丢失了，在也找不回来了。如果同时有多个消费者的 client buf堆积数据但又还没达到断开连接的阈值，那么 Redis 服务端的内存会膨胀，进程可能因为 oom 而被杀掉，这导致了整个服务中断。
 
 ## 9.2. 优缺点
 
@@ -962,13 +962,13 @@ pubsub中消费者获取消息是一个推送模型，这意味着Redis会按消
 
 - 消息具备广播能力
 
-- psubscribe能按字符串通配符匹配，给予了业务逻辑的灵活性
+- psubscribe 能按字符串通配符匹配，给予了业务逻辑的灵活性
 
-- 能订阅特定key或特定命令的系统消息
+- 能订阅特定 key 或特定命令的系统消息
 
 不足
 
-- Redis异常、客户端断连都会导致消息丢失
+- Redis 异常、客户端断连都会导致消息丢失
 
 - 消息缺乏堆积能力，不能削峰填谷。推送的方式缺乏背压机制，没有考虑消费者处理能力，推送的消息超过消费者处理能力后可能导致消息丢失或服务异常
 
@@ -985,7 +985,7 @@ Redis 用作消息队列的原因：高吞吐量、低延时、需要一个消�
 
 # 10. stream
 
-消息丢失、消息服务不稳定的问题严重限制了pubsub的应用场景，所以Redis需要重新设计一套机制，来解决这些问题，这就有了后来的stream结构。
+消息丢失、消息服务不稳定的问题严重限制了 pubsub 的应用场景，所以 Redis 需要重新设计一套机制，来解决这些问题，这就有了后来的 stream 结构。
 
 ## 10.1. 特性
 
@@ -1025,15 +1025,15 @@ stream的模型做到了消息的高效分发，而且保证了消息至少被�
 
 # 11. tair
 
-Redis stream的不足也是内存型数据库特性带来的，它拥有高吞吐、低延时，但大容量下成本会比较高，而应用的场景也不完全是绝对的大容量低吞吐或小容量高吞吐，有时应用的场景会介于二者之间，需要平衡容量和吞吐的关系，所以需要一个产品它的存储成本低于Redis stream，但它的性能又高于磁盘型消息队列。
+Redis stream 的不足也是内存型数据库特性带来的，它拥有高吞吐、低延时，但大容量下成本会比较高，而应用的场景也不完全是绝对的大容量低吞吐或小容量高吞吐，有时应用的场景会介于二者之间，需要平衡容量和吞吐的关系，所以需要一个产品它的存储成本低于 Redis stream，但它的性能又高于磁盘型消息队列。
 
-另一方面Redis stream在Redis故障场景下不能保证消息的不丢失，这导致业务需要自己实现一些复杂的机制来回补这段数据，同时也限制了它应用在一些对一致性要求较高的场景。为了让业务逻辑更简单，stream应用范围更广，需要保证故障场景下的消息持久化。
+另一方面R edis stream 在 Redis 故障场景下不能保证消息的不丢失，这导致业务需要自己实现一些复杂的机制来回补这段数据，同时也限制了它应用在一些对一致性要求较高的场景。为了让业务逻辑更简单，stream 应用范围更广，需要保证故障场景下的消息持久化。
 
-兼顾成本、性能、持久化，这就有了Tair持久内存版。
+兼顾成本、性能、持久化，这就有了 Tair 持久内存版。
 
 ## 11.1. Tair持久内存版特性
 
-Tair持久内存版引入了Intel傲腾持久内存（下面称作AEP），它的性能略低于内存，但相同容量下成本低于内存。Tair持久内存版将主要数据存储在AEP上，使得相同容量下，成本更低，这使同样单价下stream能堆积更多的消息。
+Tai 持久内存版引入了 Intel 傲腾持久内存（下面称作AEP），它的性能略低于内存，但相同容量下成本低于内存。Tair 持久内存版将主要数据存储在 AEP上，使得相同容量下，成本更低，这使同样单价下 stream 能堆积更多的消息。
 
 参考：[阿里开发：Redis消息队列发展历程](https://mp.weixin.qq.com/s/gCUT5TcCQRAxYkTJfTRjJw)
 
@@ -1243,13 +1243,14 @@ Redis 使用中会遇见很多的问题，下面一幅图，列出了 Redis 中�
 
 # 22. 参考
 
-- [redis.io](https://redis.io/) : Redis 英文官方网站
-- [redis.cn-commands](http://redis.cn/commands.html)：redis 中文版相关命令用法
-- [Redis 命令参考](http://redisdoc.com/)
-- [Redis学习教程](https://piaosanlang.gitbooks.io/redis/content/index.html)：比较全面的介绍了有关redis的使用。
-- [Redis 开机自启动脚本](https://www.jianshu.com/p/a73e0565e2a1)
+-  Redis 英文官方网站: https://redis.io/
+- redis 中文版相关命令用法: http://redis.cn/commands.html
+- Redis 命令参考: http://redisdoc.com/
+- Redis学习教程: https://piaosanlang.gitbooks.io/redis/content/index.html
+- Redis 开机自启动脚本: https://www.jianshu.com/p/a73e0565e2a1
 - 工具手册：《Redis 使用手册》
 - 原理书：《Redis 设计与实现》
 - 实战书：《Redis 开发与运维》
-- [Redis Github  官方源码](https://github.com/redis/redis)
-- [Redis LPUSH 命令详解教程-嗨客网](https://haicoder.net/redis/redis-lpush.html)
+- Redis Github  官方源码: https://github.com/redis/redis
+- Redis LPUSH 命令详解教程-嗨客网: https://haicoder.net/redis/redis-lpush.html
+
