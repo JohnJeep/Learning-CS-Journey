@@ -13,8 +13,9 @@
 - [4. Container(容器)](#4-container容器)
   - [4.1. Sequence containers(有序容器)](#41-sequence-containers有序容器)
     - [4.1.1. Array(数组)](#411-array数组)
-      - [4.1.1.1. 缺点](#4111-缺点)
-      - [4.1.1.2. 源码分析](#4112-源码分析)
+      - [4.1.1.1. 优点](#4111-优点)
+      - [4.1.1.2. 缺点](#4112-缺点)
+      - [4.1.1.3. 源码分析](#4113-源码分析)
     - [4.1.2. vector(单端的动态数组)](#412-vector单端的动态数组)
       - [4.1.2.1. API接口](#4121-api接口)
       - [4.1.2.2. 优点](#4122-优点)
@@ -47,18 +48,18 @@
     - [4.2.4. map](#424-map)
       - [4.2.4.1. map与multimap内部结构图](#4241-map与multimap内部结构图)
       - [4.2.4.2. map insert](#4242-map-insert)
-      - [4.2.4.3. at() && []](#4243-at--)
+      - [4.2.4.3. at() \&\& \[\]](#4243-at--)
       - [4.2.4.4. 优点](#4244-优点)
       - [4.2.4.5. 缺点](#4245-缺点)
     - [4.2.5. mutimap](#425-mutimap)
     - [4.2.6. map 与 multimap 对比](#426-map-与-multimap-对比)
     - [4.2.7. 与其它容器对比](#427-与其它容器对比)
   - [4.3. Unordered associative containers(无序关联容器)](#43-unordered-associative-containers无序关联容器)
-    - [4.3.1. unordered_set](#431-unordered_set)
-    - [4.3.2. unordered_multiset](#432-unordered_multiset)
-    - [4.3.3. unordered_map](#433-unordered_map)
+    - [4.3.1. unordered\_set](#431-unordered_set)
+    - [4.3.2. unordered\_multiset](#432-unordered_multiset)
+    - [4.3.3. unordered\_map](#433-unordered_map)
     - [4.3.4. API 接口](#434-api-接口)
-    - [4.3.5. unordered_multimap](#435-unordered_multimap)
+    - [4.3.5. unordered\_multimap](#435-unordered_multimap)
     - [4.3.6. hashtable](#436-hashtable)
       - [4.3.6.1. 什么是hashtable？](#4361-什么是hashtable)
       - [4.3.6.2. 为什么要用 hashtable?](#4362-为什么要用-hashtable)
@@ -79,7 +80,7 @@
     - [4.5.2. queue](#452-queue)
       - [4.5.2.1. 内部结构图](#4521-内部结构图)
       - [4.5.2.2. API 接口](#4522-api-接口)
-    - [4.5.3. priority_queue(优先级队列)](#453-priority_queue优先级队列)
+    - [4.5.3. priority\_queue(优先级队列)](#453-priority_queue优先级队列)
       - [4.5.3.1. 什么是优先级队列](#4531-什么是优先级队列)
       - [4.5.3.2. 标准库接口](#4532-标准库接口)
 - [5. Algorithm](#5-algorithm)
@@ -112,13 +113,15 @@
   - [8.7. 迭代器失效的原因？](#87-迭代器失效的原因)
 - [9. Allocator(分配器)](#9-allocator分配器)
 - [10. Traits(萃取机)](#10-traits萃取机)
-  - [10.1. iterator_traits](#101-iterator_traits)
+  - [10.1. iterator\_traits](#101-iterator_traits)
   - [10.2. type traits](#102-type-traits)
   - [10.3. char traits](#103-char-traits)
   - [10.4. allocator traits](#104-allocator-traits)
   - [10.5. pointer traits](#105-pointer-traits)
   - [10.6. array traits](#106-array-traits)
 - [11. String](#11-string)
+  - [11.1. string 与 char\* 转换](#111-string-与-char-转换)
+  - [11.2. 底层实现](#112-底层实现)
 - [12. Reference](#12-reference)
 
 <!-- /TOC -->
@@ -232,13 +235,22 @@ Array 是 C++11 标准之后新增的一个容器，表示固定数量的元素(
 
 <img src="./figures/container-arrays.png">
 
-注意点：STL源码中实现，没有构造和析构函数。
+Array会把元素复制到其内部的 static C-style array中。这些元素总是拥有一个明确次序。因此 array 是一种有序(ordered)集合。Array允许随机访问，也就是你可以在常量时间内直接访问任何元素，前提是你知道元素位置。Array的迭代器属于随机访问（random-access)迭代器，所以你可以对它运用任何 STL 算法。
 
-#### 4.1.1.1. 缺点
+如果你需要一个有固定元素量的序列，`classarray<>` 将带来最效能，因为内存被分配下stack中（如果可能的话），绝不会被重分配(reallocation)，而且你拥有随机访问能力。
+
+**注意点：**STL 源码中实现，没有构造和析构函数。
+
+#### 4.1.1.1. 优点
+
+支持 `[]` 和 `at()` 操作。`at()` 函数带范围检查，超出范围，就会抛出 `range-error`异常；而 `[]` 操作是不做范围检查的。 
+
+#### 4.1.1.2. 缺点
 
 - 不能扩容。
+- Array 不允许你指定分配器(Allocator)。
 
-#### 4.1.1.2. 源码分析
+#### 4.1.1.3. 源码分析
 
 <img src="./figures/array.png">
 
@@ -323,7 +335,7 @@ GNU 4.9版源码UML图
 
 ### 4.1.3. deque(双端数组)
 
-deque是在功能上合并了vector和list。与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
+deque 是在功能上合并了 vector 和 list。与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
 
 deque 的内部结构图如下
 
@@ -343,17 +355,17 @@ deque 的内部结构图如下
 #### 4.1.3.2. 优点
 
 - 支持随机访问，即支持 `[]`操作符和 `at()`。
-- 在内部方便的进行插入和删除操作
-- 可在两端进行push、pop
+- 在内部方便的进行插入和删除操作。
+- 可在两端进行 push、pop。
 
 #### 4.1.3.3. 缺点
 
 - 每次扩容的大小为一个 buffer。
-- 占用内存多。
+- 占用内存多，采用多个内存区块来存储元素。
 
 ### 4.1.4. list(双向链表)
 
-list是一个双向链表的容器，可以高效的进行 `插入` 和 `删除` 元素。每一个结点都包括一个信息快Info、一个前驱指针Pre、一个后驱指针Post。可以不分配固定的内存大小，方便的进行添加和删除操作，使用的是非连续的内存空间进行存储。
+list是一个双向链表的容器，可以高效的进行 **插入** 和 **删除** 元素。每一个结点都包括一个信息快 Info、一个前驱指针 Pre、一个后驱指针 Post。可以不分配固定的内存大小，方便的进行添加和删除操作，使用的是非连续的内存空间进行存储。
 
 #### 4.1.4.1. list insert
 
@@ -686,26 +698,31 @@ Hashtable 其实是综合了数组和链表的优点，当 Hashtable 对数值�
 
 ## 4.4. Containers Difference(容器之间的差异性)
 
-和其他所有关联式容器一样，`map/multimap` 底层是以平衡二叉树完成的。C++ standard 并未明定这一点，但是从map和multimap各项操作的复杂度自然可以得出这一结念。通常set、multiset、map和multimp都使用相同的内部结构，因此，你可以把set和multiset视为特殊的map和multimp，只不过set元素的 `value和key是同一对象`。因此，map和multimap拥有set和multiset的所有能力和所有操作。当然，某些细微差异还是有的：首先，它们的元素是key/value pair，其次，map可作为关联式数组(associative array)来使用。
+和其他所有关联式容器一样，`map/multimap` 底层是以平衡二叉树完成的。C++ standard 并未明定这一点，但是从 `map` 和 `multimap` 各项操作的复杂度自然可以得出这一结念。
 
-vector list map set容器如何选择？
+通常 `set`、`multiset`、`map` 和 `multimp` 都使用相同的内部结构，因此，你可以把 `set` 和 `multiset` 视为特殊的 `map` 和 `multimp`，只不过 `set` 元素的 **value 和 key 是同一对象**。因此，`map` 和 `multimap` 拥有 `set` 和 `multiset` 的所有能力和所有操作。当然，某些细微差异还是有的：首先，它们的元素是 key/value pair，其次，`map` 可作为关联式数组(associative array)来使用。
 
-- list和vector最主要的区别在于vector是使用连续内存存储的，他支持 `[]` 运算符，而list是底层用链表数据结构实现的，不支持 `[]` 。
-- Vector对元素随机访问的速度很快，但是在头部插入元素速度很慢，在尾部插入速度很快。
-- List对于随机访问速度慢得多，因为需要遍历整个链表才能做到，但是对元素的插入就快的多了，不需要拷贝和移动数据，只需要改变指针的指向就可以了。另外对于新添加的元素，Vector有一套算法，而List可以任意加入。
-- Map、Set属于关联性容器，底层是采用红黑树实现的，它的插入、删除效率比其他序列容器高，因为它不需要做内存拷贝和内存移动，而是改变指向节点的指针。
-- Set和Vector的区别在于Set容器不包含重复的数据。Set和Map的区别在于Set只含有Key，而Map有一个Key和Key所对应的Value两个元素。
-- Map 和 Hash_Map 的区别是 Hash_Map 使用了 Hash 算法来加快查找过程，但是需要更多的内存来存放这些 Hash 桶元素，因此可以算得上是采用空间来换取时间策略。
+容器如何选择？
+
+- Array 和 vector 的区别在于容器的长度是否固定。若要随机访问，且容器的长度固定，则用 `array`，反之用 `vector`。
+- `List` 和 `vector` 最主要的区别在于 `vector` 是使用连续内存存储的，它支持 `[]` 运算符，而 `list` 底层用链表数据结构实现的，不支持 `[]` 。
+- `Vector` 内部结构简单，对元素随机访问的速度很快，但是在头部插入元素速度很慢，在尾部插入速度很快。所以数据的访问十分灵活方便，数据的处理也很快。
+- `List` 对于随机访问速度慢得多，因为需要遍历整个链表才能做到，但是对元素的插入就快的多了，不需要拷贝和移动数据，只需要改变指针的指向就可以了。
+- `Map`、`Set` 属于关联性容器，底层是采用红黑树实现的，它的插入、删除效率比其他序列容器高，因为它不需要做内存拷贝和内存移动，而是改变指向节点的指针。
+- `Set` 和 `Vector` 的区别在于 `Set` 容器不包含重复的数据。Set 和 Map 的区别在于 Set 只含有 Key，而 Map有一个 Key 和 Key 所对应的 Value 两个元素。
+- `Map` 和 `HashMap` 的区别是 `HashMap` 使用了 Hash 算法来加快查找过程，但是需要更多的内存来存放这些 Hash 桶元素，因此可以算得上是采用空间来换取时间策略。
 
 简单选择容器的准则
 
-1. 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector 
-2. 如果你需要大量的插入和删除，而不关心随即存取，则应使用list 
-3. 如果你需要随即存取，而且关心两端数据的插入和删除，则应使用deque
+1. 若需要高效的随机存取，而不在乎插入和删除的效率，使用 `vector`。 
+2. 经常需要元素大量的插入、删除和移动，而不关心随机存取，则应使用 `list`。
+3. 若需要随机存取，而且经常在两端对数据进行插入和删除，则应使用 `deque`；若希望元素从容器中被移除时，容器能自动缩减内部的内存用量，那么也用 `deque`。
+4. 若需要字典结构或者处理 key/value 这样的键值对时，应采用 `unordered map(multimap)`；若元素的顺序很重要，则用 `map(multimap)`。
+5. 经常根据某个准则去查找元素，则应根据该准则进行 hash 的 `unordered_set` 或 `unordered_multiset`；若元素的顺序很重要，则用 `set` 或 `multiset`。
 
 ## 4.5. Container adaptors(容器适配器)
 
-容器适配器为有序的容器提供了不同的接口。queue和stack底层完全借助 deque实现的。
+容器适配器为有序的容器提供了不同的接口。queue 和 stack 底层完全借助 deque 实现的。
 
 ### 4.5.1. stack
 
@@ -1067,7 +1084,7 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 
 - 何为迭代器失效？
   
-  - STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
+  STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
 
 - 对于序列式容器，比如vector，删除当前的iterator会使后面所有元素的iterator都失效。因为序列式容器中内存是连续分配的（分配一个数组作为内存），删除一个元素导致后面所有的元素会向前移动一个位置。删除了一个元素，该元素后面的所有元素都要挪位置，所以，删除一个数据后，其他数据的地址发生了变化，之前获取的迭代器根据原有的信息就访问不到正确的数据。
 
@@ -1156,6 +1173,9 @@ trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征�
 
 String 类是 C++ 标准库接对 char* 字符串一系列操作的封装，位于头文件 `#include <string>` 中。
 
+
+## 11.1. string 与 char* 转换
+
 1、const char* 与 string 之间的转换。
 
 `char*` 是 C 语言形式的字符串，`string` 类是 C++ 的字符串，C++ 为了要兼容 C 语言的字符串，两者之间需要进行转换。`string` 转 `const char*`，直接调用 string 类的 `c_str()` 接口。
@@ -1204,17 +1224,17 @@ char* pc = “abc”;
 const char* cpc = pc;
 ```
 
-## 底层实现
+## 11.2. 底层实现
 
-Scott Meyers 在《Effective STL》第 15 条中提到 std::string 底层实现有多种方式，归纳起来有 3 类。
+Scott Meyers 在《Effective STL》第 15 条中提到 `std::string` 底层实现有多种方式，归纳起来有 3 类。
 
 - eager copy（无特殊处理）。采用类似 `std::vector` 的数据结构，现在很少采用这种形式。
 - Copy-on-Write（COW，写时复制）。
 - Short String Optimize（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
 
-C++ GCC std::string 在C++11 之前与之后实现是完全不同的。c++11之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为**C++11标准规定：不允许[]导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了**。**
+C++ GCC `std::string` 在C++11 之前与之后实现是完全不同的。c++11 之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为 **C++11 标准规定：不允许 [] 导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了。
 
-重要区别：COW 的 basic_string有一个 RefCnt 变量，用于引用计数。而 C++11 basic_string完全没有。
+重要区别：COW 的 `basic_string` 有一个 `RefCnt` 变量，用于引用计数；而 C++11 `basic_string`  完全没有。
 
 
 
