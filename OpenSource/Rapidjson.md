@@ -30,13 +30,13 @@
 
 ## 2.1. 是什么
 
-rapidjson是腾讯的开源Json解析框架，用C++代码实现，用于解析和生成JSON由于全部代码仅用头文件实现，因此很容易集成在项目中。根据其作者Milo Yipz所做的比较，可以看出rapidjson的性能非常可观。通过使用DOM（Document Object Model）可以很方便的将Json转化成DOM，然后查询修改，再转化为一个Json。通过rapidjson库，可以方便我们进行参数的传递，解析的工作。Json非常便捷的支持键值对、数组、以及深入的嵌套，在编写程序时，可以帮助我们聚焦于业务，而对于参数的传递，则可以较少的投入精力。
+rapidjson 是腾讯的开源 Json解析框架，用 C++ 代码实现，用于解析和生成 JSON 由于全部代码仅用头文件实现，因此很容易集成在项目中。根据其作者 Milo Yipz 所做的比较，可以看出 rapidjson 的性能非常可观。通过使用 DOM（Document Object Model）可以很方便的将 Json 转化成 DOM，然后查询修改，再转化为一个 Json。通过 rapidjson 库，可以方便我们进行参数的传递，解析的工作。Json 非常便捷的支持键值对、数组、以及深入的嵌套，在编写程序时，可以帮助我们聚焦于业务，而对于参数的传递，则可以较少的投入精力。
 
 ## 2.2. 特征
 
 优点
 
-- RapidJSON库仅由头文件组成，只需把头文件复制至你的项目中。
+- RapidJSON 库仅由头文件组成，只需把头文件复制至你的项目中。
 
 - 独立、最小依赖。不需依赖 STL、Boost 库等。
 
@@ -50,13 +50,11 @@ rapidjson是腾讯的开源Json解析框架，用C++代码实现，用于解析�
 
 - RapidJSON 解析和生成速度快。使用模版及内联函数去降低函数调用开销。内部经优化的 Grisu2 及浮点数解析实现。
 
-- RapidJSON 是一个C++的 JSON 解析器及生成器，它的灵感来自RapidXml
+- RapidJSON 是一个C++ 的 JSON 解析器及生成器，它的灵感来自 RapidXml
 
-- RapidJSON独立。它不依赖于BOOST等外部库。它甚至不依赖于STL
+- RapidJSON 对 Unicode 友好。它支持 UTF-8、UTF-16、UTF-32 (大端序／小端序)，并内部支持这些编码的检测、校验及转码。
 
-- RapidJSON 对Unicode 友好。它支持UTF-8、UTF-16、UTF-32 (大端序／小端序)，并内部支持这些编码的检测、校验及转码。
-
-  例如，RapidJSON可以在分析一个UTF-8文件至DOM时，把当中的JSON字符串转码至UTF-16。它也支持代理对（surrogate pair）及”\u0000”（空字符），这些特征使得我们，可以很好的把rapidjson集成到项目代码之中，提高开发的效率。
+  例如，RapidJSON 可以在分析一个 UTF-8 文件至 DOM 时，把当中的 JSON 字符串转码至 UTF-16。它也支持代理对（surrogate pair）及 ”\u0000”（空字符），这些特征使得我们，可以很好的把 rapidjson 集成到项目代码之中，提高开发的效率。
 
 缺点
 
@@ -91,36 +89,36 @@ static constexpr auto json = "{\"Info\":[{\"lots\":10,\"order_algorithm\":\"01\"
 代码解析实现
 
 ```cpp
-    rapidjson::Document doc;
-    doc.Parse(json);
+rapidjson::Document doc;
+doc.Parse(json);
 
-    // 2. Modify it by DOM.
-    rapidjson::Value& s = doc["MsgSendFlag"];
-    s.SetInt(s.GetInt() + 1);
+// 2. Modify it by DOM.
+rapidjson::Value& s = doc["MsgSendFlag"];
+s.SetInt(s.GetInt() + 1);
 
-    rapidjson::Value& infoArray = doc["Info"];
-    if (infoArray.IsArray()) {
-        for (int i = 0; i < infoArray.Size(); i++) {
-            const rapidjson::Value& object = infoArray[i];
-            int lots = object["lots"].GetInt();
-            std::string order_algorithm = object["order_algorithm"].GetString();
-            std::cout << "int lots = " << lots << std::endl;
-            std::cout << "string order_algorithm = " << order_algorithm << std::endl;
-            const rapidjson::Value& info_object = object["list_instrument_id"];
-            if (info_object.IsArray()) {
-                for (int j = 0; j < info_object.Size(); j++) {
-                    std::string instrument = info_object[j].GetString();
-                    std::cout << "instrument[" << j << "] = " << instrument << std::endl;
-                }
+rapidjson::Value& infoArray = doc["Info"];
+if (infoArray.IsArray()) {
+    for (int i = 0; i < infoArray.Size(); i++) {
+        const rapidjson::Value& object = infoArray[i];
+        int lots = object["lots"].GetInt();
+        std::string order_algorithm = object["order_algorithm"].GetString();
+        std::cout << "int lots = " << lots << std::endl;
+        std::cout << "string order_algorithm = " << order_algorithm << std::endl;
+        const rapidjson::Value& info_object = object["list_instrument_id"];
+        if (info_object.IsArray()) {
+            for (int j = 0; j < info_object.Size(); j++) {
+                std::string instrument = info_object[j].GetString();
+                std::cout << "instrument[" << j << "] = " << instrument << std::endl;
             }
         }
     }
+}
 
-    // 3. Stringify the DOM
-    rapidjson::StringBuffer buffer;
-    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-    doc.Accept(writer);
-    std::cout << buffer.GetString() << std::endl;
+// 3. Stringify the DOM
+rapidjson::StringBuffer buffer;
+rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+doc.Accept(writer);
+std::cout << buffer.GetString() << std::endl;
 ```
 
 ### 2.3.2. 创建
@@ -128,47 +126,47 @@ static constexpr auto json = "{\"Info\":[{\"lots\":10,\"order_algorithm\":\"01\"
 组建一个json字符串
 
 ```cpp
-    std::cout << json << std::endl;
+std::cout << json << std::endl;
 
-    std::cout << "|==================|" << std::endl;
-    std::cout << "||rapidjson output||" << std::endl;
-    std::cout << "|==================|" << std::endl;
+std::cout << "|==================|" << std::endl;
+std::cout << "||rapidjson output||" << std::endl;
+std::cout << "|==================|" << std::endl;
 
-    rapidjson::Document doc; // doc 对象默认类型为 null
-    doc.SetObject(); // 改变类型
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+rapidjson::Document doc; // doc 对象默认类型为 null
+doc.SetObject(); // 改变类型
+rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
 
-    doc.AddMember("MsgSendFlag", 1, allocator);
-    doc.AddMember("MsgErrorReason", "IDorpassworderror", allocator);
-    doc.AddMember("MsgRef", 1, allocator);
+doc.AddMember("MsgSendFlag", 1, allocator);
+doc.AddMember("MsgErrorReason", "IDorpassworderror", allocator);
+doc.AddMember("MsgRef", 1, allocator);
 
-    rapidjson::Value info_array(rapidjson::kArrayType);
+rapidjson::Value info_array(rapidjson::kArrayType);
 
-    for (int i = 0; i < 2; i++) {
-        rapidjson::Value info_object(rapidjson::kObjectType); // 调用构造函数，参数类型为：json vale type
-        info_object.SetObject();
-        info_object.AddMember("lots", 10 + i, allocator);
-        info_object.AddMember("order_algorithm", "01", allocator);
+for (int i = 0; i < 2; i++) {
+    rapidjson::Value info_object(rapidjson::kObjectType); // 调用构造函数，参数类型为：json vale type
+    info_object.SetObject();
+    info_object.AddMember("lots", 10 + i, allocator);
+    info_object.AddMember("order_algorithm", "01", allocator);
 
-        rapidjson::Value instrument_array(rapidjson::kArrayType);
-        for (int j = 0; j < 2; j++) {
-            rapidjson::Value instrument_object(rapidjson::kObjectType);
-            instrument_object.SetObject();
-            instrument_object.SetString("cu1701");
-            instrument_array.PushBack(instrument_object, allocator);
-        }
-
-        info_object.AddMember("list_instrument_id", instrument_array, allocator);
-        info_array.PushBack(info_object, allocator);
+    rapidjson::Value instrument_array(rapidjson::kArrayType);
+    for (int j = 0; j < 2; j++) {
+        rapidjson::Value instrument_object(rapidjson::kObjectType);
+        instrument_object.SetObject();
+        instrument_object.SetString("cu1701");
+        instrument_array.PushBack(instrument_object, allocator);
     }
 
-    doc.AddMember("Info", info_array, allocator);
+    info_object.AddMember("list_instrument_id", instrument_array, allocator);
+    info_array.PushBack(info_object, allocator);
+}
 
-    // 3. Stringify the DOM
-    rapidjson::StringBuffer buffer; // 输出流，它分配一个内存缓冲区，供写入整个 JSON
-    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-    doc.Accept(writer);
-    std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的内容
+doc.AddMember("Info", info_array, allocator);
+
+// 3. Stringify the DOM
+rapidjson::StringBuffer buffer; // 输出流，它分配一个内存缓冲区，供写入整个 JSON
+rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+doc.Accept(writer);
+std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的内容
 ```
 
 ## 2.4. 注意事项
@@ -197,18 +195,18 @@ static constexpr auto json = "{\"Info\":[{\"lots\":10,\"order_algorithm\":\"01\"
 - 部分 C++11 支持
 
   - 右值引用（rvalue reference）
-  - `noexcept` 修饰符
-  - 范围 for 循环
+  - 支持 `noexcept` 修饰符
+  - 支持简洁的范围 for 循环
   
-- Value 赋值使用move语义，而不是copy语义。也就是说，拷贝构造和拷贝赋值函数都是用move语义实现的。
+- Value 赋值使用move语义，而不是 copy 语义。也就是说，拷贝构造和拷贝赋值函数都是用 move 语义实现的。
 
-- 当string的生命周期不足时，Value应该使用Copy-string存储策略，否则value无法长期存储字符串。
+- 当 string 的生命周期不足时，Value 应该使用 Copy-string 存储策略，否则 value 无法长期存储字符串。
 
-- StringBuffer是一个简单的输出流，当该缓冲区满溢时会自动增加容量（默认为256个字符）。
+- StringBuffer 是一个简单的输出流，当该缓冲区满溢时会自动增加容量（默认为 256 个字符）。
 
-- FileReadStream / FileWriteStream，和IStreamWrapper / OStreamWrapper，它们都是字节流，不处理编码。若输入流或输出流数据是非UTF-8编码时，输入流数据需要用EncodedInputStream或AutoUTFInputStream包装，而输出流数据需要用EncodedOutputStream 或AutoUTFOutputStream包装。
+- FileReadStream / FileWriteStream，和IStreamWrapper / OStreamWrapper，它们都是字节流，不处理编码。若输入流或输出流数据是非 UTF-8 编码时，输入流数据需要用 EncodedInputStream 或AutoUTFInputStream 包装，而输出流数据需要用 EncodedOutputStream 或 AutoUTFOutputStream 包装。
 
-- **不建议**使用wistream和wostream。
+- **不建议**使用 wistream 和 wostream。
 
 ## 2.5. 查询 Value
 
