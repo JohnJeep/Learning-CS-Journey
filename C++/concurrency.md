@@ -81,5 +81,15 @@ Waiting and Polling (等待和轮训)
 - `Class future<>` 允许你等待线程结束并获取其结果。
 - `std::shared_future<>`允许你在多个地点等待和处理线程结束。
 
+##  Condition Variable
 
+条件变量接口 API
 
+- `wait(ul)`: 使用 `unique_lock` 锁来等待通知
+- `wait(ul, pred)`: 使用 `unique_lock`锁来等待通知，直到 pred 在一次苏醒之后结果为 true。
+- `wait_for(ul, duration)`: 使用 `unique_lock`锁来等待通知，等带期限是一个时间段 duration。
+- `wait_for(ul, duration, pred)`: 使用 `unique_lock`锁来等待通知，等带期限是一个时间段 duration 或直到 pred 在一次苏醒之后结果为 true。
+- `wait_until(ul, timepoint)`: 使用 `unique_lock`锁来等待通知，直到某个时间点 time point。
+- `wait_until(ul, timepoint, pred)`: 使用 `unique_lock`锁来等待通知，直到某个时间点 time point 或直到 pred 在一次苏醒之后结果为 true。
+- `notify_one()`: 唤醒一个等待者（线程）。
+- `notify_all()`: 唤醒所有的等待者（线程）。
