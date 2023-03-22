@@ -85,47 +85,50 @@
     - [4.5.3. priority\_queue(优先级队列)](#453-priority_queue优先级队列)
       - [4.5.3.1. 什么是优先级队列](#4531-什么是优先级队列)
       - [4.5.3.2. 标准库接口](#4532-标准库接口)
-- [5. Algorithm](#5-algorithm)
-  - [5.1. Heap(堆)](#51-heap堆)
+- [5. String](#5-string)
+  - [5.1. string 与 char\* 转换](#51-string-与-char-转换)
   - [5.2. API 接口](#52-api-接口)
-- [6. Adaptor(适配器)](#6-adaptor适配器)
-  - [6.1. 什么是适配器？](#61-什么是适配器)
+  - [5.3. 底层实现](#53-底层实现)
+    - [5.3.1. 数据类型( Type Definitions and Static Values)](#531-数据类型-type-definitions-and-static-values)
+- [6. Functor(仿函数)](#6-functor仿函数)
+  - [6.1. 什么是仿函数？](#61-什么是仿函数)
   - [6.2. 分类](#62-分类)
-    - [6.2.1. 函数适配器](#621-函数适配器)
-    - [6.2.2. bind adaptor(绑定适配器)](#622-bind-adaptor绑定适配器)
-    - [6.2.3. composite adaptor(组合适配器)](#623-composite-adaptor组合适配器)
-    - [6.2.4. pointer adaptor(指针适配器)](#624-pointer-adaptor指针适配器)
-    - [6.2.5. member function adaptor(成员函数适配器)](#625-member-function-adaptor成员函数适配器)
-- [7. Functor(仿函数)](#7-functor仿函数)
-  - [7.1. 什么是仿函数？](#71-什么是仿函数)
-  - [7.2. 分类](#72-分类)
-  - [7.3. 可调用对象](#73-可调用对象)
-  - [7.4. 函数对象调用](#74-函数对象调用)
-  - [7.5. 可调用对象包装器](#75-可调用对象包装器)
-  - [7.6. 可调用对象绑定器](#76-可调用对象绑定器)
-  - [7.7. Predefined Function Objects (预定义函数对象)](#77-predefined-function-objects-预定义函数对象)
-  - [7.8. 其它](#78-其它)
-- [8. Iterator(迭代器)](#8-iterator迭代器)
-  - [8.1. 什么是迭代器？](#81-什么是迭代器)
-  - [8.2. 基本操作](#82-基本操作)
-  - [8.3. half-open range(前闭后开区间)](#83-half-open-range前闭后开区间)
-  - [8.4. iterator遵循的原则](#84-iterator遵循的原则)
-  - [8.5. Iterator 分类](#85-iterator-分类)
-  - [8.6. 源码分析](#86-源码分析)
-  - [8.7. 迭代器失效的原因？](#87-迭代器失效的原因)
-- [9. Allocator(分配器)](#9-allocator分配器)
-- [10. Traits(萃取机)](#10-traits萃取机)
-  - [10.1. iterator\_traits](#101-iterator_traits)
-  - [10.2. type traits](#102-type-traits)
-  - [10.3. char traits](#103-char-traits)
-  - [10.4. allocator traits](#104-allocator-traits)
-  - [10.5. pointer traits](#105-pointer-traits)
-  - [10.6. array traits](#106-array-traits)
-- [11. String](#11-string)
-  - [11.1. string 与 char\* 转换](#111-string-与-char-转换)
-  - [11.2. API 接口](#112-api-接口)
-  - [11.3. 底层实现](#113-底层实现)
-    - [11.3.1. 数据类型( Type Definitions and Static Values)](#1131-数据类型-type-definitions-and-static-values)
+  - [6.3. 可调用对象](#63-可调用对象)
+  - [6.4. 函数对象调用](#64-函数对象调用)
+  - [6.5. 可调用对象包装器](#65-可调用对象包装器)
+  - [6.6. 可调用对象绑定器](#66-可调用对象绑定器)
+  - [6.7. Predefined Function Objects (预定义函数对象)](#67-predefined-function-objects-预定义函数对象)
+  - [6.8. 其它](#68-其它)
+- [7. Algorithm](#7-algorithm)
+  - [7.1. Heap(堆)](#71-heap堆)
+  - [7.2. API 接口](#72-api-接口)
+- [8. Adaptor(适配器)](#8-adaptor适配器)
+  - [8.1. 什么是适配器](#81-什么是适配器)
+  - [8.2. 分类](#82-分类)
+    - [8.2.1. function adaptor(函数适配器)](#821-function-adaptor函数适配器)
+    - [8.2.2. bind adaptor(绑定适配器)](#822-bind-adaptor绑定适配器)
+    - [8.2.3. composite adaptor(组合适配器)](#823-composite-adaptor组合适配器)
+    - [8.2.4. pointer adaptor(指针适配器)](#824-pointer-adaptor指针适配器)
+    - [8.2.5. member function adaptor(成员函数适配器)](#825-member-function-adaptor成员函数适配器)
+- [9. Traits(萃取机)](#9-traits萃取机)
+  - [9.1. iterator\_traits](#91-iterator_traits)
+  - [9.2. type traits](#92-type-traits)
+  - [9.3. char traits](#93-char-traits)
+  - [9.4. allocator traits](#94-allocator-traits)
+  - [9.5. pointer traits](#95-pointer-traits)
+  - [9.6. array traits](#96-array-traits)
+- [10. Iterators(迭代器)](#10-iterators迭代器)
+  - [10.1. 什么是迭代器](#101-什么是迭代器)
+  - [10.2. 迭代器设计思维](#102-迭代器设计思维)
+  - [10.3. 基本操作](#103-基本操作)
+  - [10.4. 迭代运算](#104-迭代运算)
+  - [10.5. iterator遵循的原则](#105-iterator遵循的原则)
+  - [10.6. Iterator 分类](#106-iterator-分类)
+  - [10.7. 迭代器失效](#107-迭代器失效)
+- [11. Allocators(分配器)](#11-allocators分配器)
+  - [11.1. 什么是分配器](#111-什么是分配器)
+  - [11.2. 默认分配器](#112-默认分配器)
+  - [11.3. Allocator 标准接口](#113-allocator-标准接口)
 - [12. Reference](#12-reference)
 
 <!-- /TOC -->
@@ -808,7 +811,253 @@ priority_queue<int> g_priq;                            // 默认为最大值优�
 priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
 ```
 
-# 5. Algorithm
+# 5. String
+
+String 类是 C++ 标准库接对 `char*` 字符串一系列操作的封装，位于头文件 `#include <string>` 中。
+
+
+## 5.1. string 与 char* 转换
+
+1、const char* 与 string 之间的转换。
+
+`char*` 是 C 语言形式的字符串，`string` 类是 C++ 的字符串，C++ 为了要兼容 C 语言的字符串，两者之间需要进行转换。`string` 转 `const char*`，直接调用 string 类的 `c_str()` 接口。
+
+```cpp
+string str = “abc”;
+const char* c_str = str.c_str();
+```
+
+2、`const char*` 转 `string`，直接赋值即可。
+
+```cpp
+const char* c_str = “abc”;
+string str(c_str);
+```
+
+3、`string` 转 `char*`
+
+```cpp
+char* c = “abc”;
+string s(c);
+const int len = s.length();
+c = new char[len+1];
+strcpy(c,s.c_str());
+```
+
+4、char* 转 string，直接赋值即可。
+
+```cpp
+char* c = “abc”;
+string s(c);
+```
+
+5、 `const char*` 转 `char*`
+
+```cpp
+const char* cpc = “abc”;
+char* pc = new char[strlen(cpc)+1];
+strcpy(pc,cpc);
+```
+
+6、`char*` 转 `const char*`，直接赋值即可
+
+```cpp
+char* pc = “abc”;
+const char* cpc = pc;
+```
+
+## 5.2. API 接口
+
+string 是一个随机存储容器。
+
+- `constructors`: 构造函数。Create or copy a string
+- `destructor`: 析构函数。Destroys a string
+- `=` : 对 string 赋一个新值，新值可以是 string，C-string 形式的字符或单一字符。
+-  `assign()`: 给 string 赋单个或多个值。
+- `swap()`: 交换两个 string 内容。
+- `+=`, `append()`, `push_back()`: 追加字符。
+- `insert()`：插入字符。
+- `erase()`, `pop_back()`: 删除字符。`pop_back()` 自 C++ 开始。
+- `clear()`: 移除所有字符。
+- `resize()`: 改变字符数量，在尾部删除或添加字符。
+- `replace()`: 替换字符
+- `data()`, `c_str()`: 将 string 字符串中内容作为字符数组（C-string形式）返回 。C++11 之前，`data()` 不是一个有效的 C-string，返回的结果中不包含 `\0`，C++11 之后，两者的方式是相同的。
+- `size()`, `length()`: 返回 string 中当前的字符数量。
+- `empty()`: 检查 string 中的字符数量是否为 0。检查 string 是否为空时，C++ STL 中建议用 `empty()` 替代 `size()`、`length()`，因为 `empty()` 比较快。
+- `max_size()`: 返回一个 string 中包含的最大字符数量。若操作 string 时，它的长度 `length` 大于 `max_szie`，后，STL 会抛出 `length_error`异常。
+-  `capacity`() : 未重新分配 string 内部内存之前，返回 string 包含的最大字符数量。
+  - 重新分配后，所有字符串字符指向的 reference、pointer、Iterator 均无效了。
+  - 重新分配是很耗费时间的。
+- `reverse():` 避免重新分配，保留一定容量，确保该容量用尽之前，reference 一直有效。
+- `getline()`: 逐行读取所有字符，包括开头的空白字符，直到遇到指定的分行符或 `end of file` 结束，默认情况下分行符为 换行符。
+
+## 5.3. 底层实现
+
+Scott Meyers 在《Effective STL》第 15 条中提到 `std::string` 底层实现有多种方式，归纳起来有 3 类。
+
+- eager copy（无特殊处理）。采用类似 `std::vector` 的数据结构，现在很少采用这种形式。
+- Copy-on-Write（COW，写时复制）。
+- Short String Optimize（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
+
+C++ GCC `std::string` 在 C++11 之前与之后实现是完全不同的。c++11 之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为 **C++11 标准规定：不允许 [] 导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了。
+
+**重要区别**：COW 的 `basic_string` 有一个 `RefCnt` 变量，用于引用计数；而自 C++11开始，采用引用计数（reference counted）实现的 `basic_string`  不在被允许。因为让 string 的内部缓冲区共享被共享（ share internal buffers），在多线程环境中是行不通的。
+
+### 5.3.1. 数据类型( Type Definitions and Static Values)
+
+1. `string::traits_type`
+2. `string::value_type`
+3. `string::size_type`
+4. `string::difference_type`
+5. `string::reference`
+6. `string::const_reference`
+7. `string::pointer`
+8. `string::const_pointer`
+9. `string::iterator`
+10. `string::const_iterator`
+11. `string::reverse_iterator`
+12. `string::const_reverse_iterator`
+13. `static const size_type string::npos`
+14. `string::allocator_type`
+
+
+# 6. Functor(仿函数)
+
+## 6.1. 什么是仿函数？
+
+仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
+
+<img src="./figures/functors.png">
+
+## 6.2. 分类
+
+按操作数个数划分
+
+- 一元运算 (unary_function)
+- 二元运算 (binary_function)
+
+按功能划分
+
+- 算术运算 (Arithmetic)
+  
+  - 加：plus<T>
+  
+  - 减: minus<T>
+  
+  - 乘: multiplies<T>
+  
+  - 除: divides<T>
+  
+  - 取模: modulus<T>  
+  
+  - 否定: negate<T> 
+    
+    > negate 属于一元运算，其余的都属于二元运算。
+
+- 关系运算 (Ratioanl)
+  
+  - 等于: equal_to<T> 
+  
+  - 不等于: not_equal_to<T>
+  
+  - 大于: greater<T>
+  
+  - 大于等于: greater_equal<T>
+  
+  - 小于: less<T>
+  
+  - 小于等于: less_equal<T>
+    
+    > 六种都属于二元运算。 
+
+- 逻辑运算 (Logical)
+  
+  - 逻辑 And: logical_and<T> 
+  
+  - 逻辑 Or: logical_or<T>
+  
+  - 逻辑 Not: logical_not<T>
+    
+    > And, Or 属于二元运算，Not 属于一元运算。 
+
+## 6.3. 可调用对象
+
+哪些可以是可调用对象？
+
+- 函数指针 (function pointer)
+- 带有成员函数 `operator()` 创建的 object。
+- 带有转换函数，可将自己转换为函数指针的 类 所创建的 object。
+- lambda 表达式。
+
+## 6.4. 函数对象调用
+
+- 函数对象可以做函数参数。 
+
+- 函数对象可以做返回值。 
+
+- 函数对象的调用与 `回调函数` 的调用类似。 
+  
+  ```cpp
+  class Stu
+  {
+    private:
+    public:
+      void operator() (Stu& T) {}
+  }
+  ```
+
+## 6.5. 可调用对象包装器
+
+包含头文件：`#include <functional>`
+
+语法
+`std::function<返回值类型(参数列表)> obj_name = 可调用对象`
+
+包装器可包装哪些东西？
+
+- 包装类的普通成员函数
+- 包装类的静态函数
+- 包装仿函数
+- 包装转化为函数指针的函数对象
+
+类的成员函数不能直接使用可调用对象包装器，还需要结合绑定器一起使用。
+
+## 6.6. 可调用对象绑定器
+
+std::bind()
+
+绑定器作用
+
+- 将可调用对象与其参数一起绑定成为仿函数。
+- 将多元可调用转化为一元可调用对象
+
+两种方式
+
+- 绑定非类的成员变量。
+- 绑定类的成员变量或成员函数。
+
+## 6.7. Predefined Function Objects (预定义函数对象)
+
+标准STL模板库中提前预定义了很多的函数对象。任何应用程序想要使用 STL 内建的仿函数，都必须包含标准库预定义函数对象的头文件 `<functional>`。
+
+仿函数的主要作用就是为了搭配 STL 算法，在算法中进行使用。
+
+## 6.8. 其它
+
+- 证同函数(identity_function): 任何数值通过此函数后，不会有任何改变。标准库 `stl_function.h` 中用 `identity` 来指定 RB-tree 所需的 KeyOfValue。
+
+- 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的 KeyOfValue。
+  
+  - select1st: 接受一个pair，传回它的第一个元素。
+  - select2nd: 接受一个pair，传回它的第二个元素。
+
+- 投射函数
+  
+  - project1st: 传回第一参数，忽略第二参数。
+  - project2nd: 传回第二参数，忽略第1参数。
+
+
+# 7. Algorithm
 
 从实现的角度来看，STL算法是一种 `function template`。**而所有的 Algorithms 内部最本质的操作无非就是比大小。**
 
@@ -820,16 +1069,16 @@ STL算法的核心思想
 - 通过函数对象实现了自定义数据类型与底层算法的分离。
 - 通过迭代器的方式统一的去遍历容器，向容器中读数据和写数据。
 
-## 5.1. Heap(堆)
+## 7.1. Heap(堆)
 
-heap(堆)的STL库中函数
+heap（堆）的 STL 库中函数
 
 - `make_heap(first, last, comp);` 建立一个空堆；
 - `push_heap(first, last, comp);` 向堆中插入一个新元素；
 - `top_heap(first, last, comp); ` 获取当前堆顶元素的值；
 - `sort_heap(first, last, comp);` 对当前堆进行排序；
 
-## 5.2. API 接口
+## 7.2. API 接口
 
 - `std::for_each()` 遍历容器中的所有元素。
 
@@ -891,170 +1140,107 @@ heap(堆)的STL库中函数
 
 - `std::sample`
 
-# 6. Adaptor(适配器)
+# 8. Adaptor(适配器)
 
-## 6.1. 什么是适配器？
+## 8.1. 什么是适配器
 
 适配器是一种用来修饰容器(containers)或仿函数(functor)或迭代器(iterators)接口的东西。改变 `functor` 接口者，称为 `function adaptor`；改变 `container` 接口者，称为 `container adaptor`；改变 `iterator` 接口者，称为 `iterator adaptor`。
 
-## 6.2. 分类
+## 8.2. 分类
 
-### 6.2.1. 函数适配器
+### 8.2.1. function adaptor(函数适配器)
 
-### 6.2.2. bind adaptor(绑定适配器)
 
-### 6.2.3. composite adaptor(组合适配器)
 
-### 6.2.4. pointer adaptor(指针适配器)
+### 8.2.2. bind adaptor(绑定适配器)
 
-### 6.2.5. member function adaptor(成员函数适配器)
+
+
+### 8.2.3. composite adaptor(组合适配器)
+
+
+
+### 8.2.4. pointer adaptor(指针适配器)
+
+
+
+### 8.2.5. member function adaptor(成员函数适配器)
 
 predicate: 判断这个条件是真还是假
 
-# 7. Functor(仿函数)
 
-## 7.1. 什么是仿函数？
 
-仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了 `operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
 
-<img src="./figures/functors.png">
 
-## 7.2. 分类
+# 9. Traits(萃取机)
 
-按操作数个数划分
+trait 中文译为：特点、特征、特性。
 
-- 一元运算 (unary_function)
-- 二元运算 (binary_function)
+`Traits` 有很多的类型。
 
-按功能划分
+## 9.1. iterator_traits
 
-- 算术运算 (Arithmetic)
-  
-  - 加：plus<T>
-  
-  - 减: minus<T>
-  
-  - 乘: multiplies<T>
-  
-  - 除: divides<T>
-  
-  - 取模: modulus<T>  
-  
-  - 否定: negate<T> 
-    
-    > negate 属于一元运算，其余的都属于二元运算。
+ `iterator_traits` 即为迭代器的特征。这个有点不好理解，可以把它理解成一个 `萃取机`，用来区分传入迭代器中的类型是 **class iterators** 还是 **non class iterators，即 native pointer**。可以利用**类模板中的 partial specialization**可以得到目标。
 
-- 关系运算 (Ratioanl)
-  
-  - 等于: equal_to<T> 
-  
-  - 不等于: not_equal_to<T>
-  
-  - 大于: greater<T>
-  
-  - 大于等于: greater_equal<T>
-  
-  - 小于: less<T>
-  
-  - 小于等于: less_equal<T>
-    
-    > 六种都属于二元运算。 
+<img src="./figures/iterator-traits.png">
 
-- 逻辑运算 (Logical)
-  
-  - 逻辑 And: logical_and<T> 
-  
-  - 逻辑 Or: logical_or<T>
-  
-  - 逻辑 Not: logical_not<T>
-    
-    > And, Or 属于二元运算，Not 属于一元运算。 
+根据经验，最常用到的迭代器相应型别有五种：`value type`，`difference type`，`pointer`，`reference`，`iterator_category`。如果你希望你所开发的容器能与 STL 水乳交融，一定要为你的容器中的迭代器定义这五种相应类型。“特性萃取机” traits 会很忠实地将原汁原味榨取出来：
 
-## 7.3. 可调用对象
+<img src="./figures/traits.png">
 
-哪些可以是可调用对象？
+其中，`iterator_traits` 位于 `../C++/bits/stl_iterators.h>` 头文件里。
 
-- 函数指针 (function pointer)
-- 带有成员函数 `operator()` 创建的 object。
-- 带有转换函数，可将自己转换为函数指针的 类 所创建的 object。
-- lambda 表达式。
+```cpp
+public:
+  typedef _Iterator					                iterator_type;
 
-## 7.4. 函数对象调用
+  typedef typename __traits_type::iterator_category iterator_category;
+  typedef typename __traits_type::value_type  	    value_type;
+  typedef typename __traits_type::difference_type 	difference_type;
+  typedef typename __traits_type::reference 	    reference;
+  typedef typename __traits_type::pointer   	    pointer;
+```
 
-- 函数对象可以做函数参数。 
+- value_type: 迭代器所指对象的类型。
+- difference_type: 两个迭代器之间的距离。也可以用来表示一个容器的最大容量，因为对于连续空间的容器而言，最大容量就是头尾之间的距离。
+- reference: 迭代器所指向的内容是否允许改变。
+- pointer: 迭代器指向的内容为指针。
+- iterator_category: 迭代器的类别。查看 *迭代器章节的分类部分*。
 
-- 函数对象可以做返回值。 
+## 9.2. type traits
 
-- 函数对象的调用与 `回调函数` 的调用类似。 
-  
-  ```cpp
-  class Stu
-  {
-    private:
-    public:
-      void operator() (Stu& T) {}
-  }
-  ```
+位于 `../C++/type_traits.h>` 头文件中。
 
-## 7.5. 可调用对象包装器
+## 9.3. char traits
 
-包含头文件：`#include <functional>`
+位于 `../C++/bits/char_traits.h>` 头文件中。
 
-语法
-`std::function<返回值类型(参数列表)> obj_name = 可调用对象`
+## 9.4. allocator traits
 
-包装器可包装哪些东西？
+位于 `../C++/bits/alloc_traits.h>` 头文件中。
 
-- 包装类的普通成员函数
-- 包装类的静态函数
-- 包装仿函数
-- 包装转化为函数指针的函数对象
+## 9.5. pointer traits
 
-类的成员函数不能直接使用可调用对象包装器，还需要结合绑定器一起使用。
+位于 `../C++/bits/ptr_traits.h>` 头文件中。
 
-## 7.6. 可调用对象绑定器
+## 9.6. array traits
 
-std::bind()
+位于 `../C++/array>` 头文件中。
 
-绑定器作用
 
-- 将可调用对象与其参数一起绑定成为仿函数。
-- 将多元可调用转化为一元可调用对象
+# 10. Iterators(迭代器)
 
-两种方式
+## 10.1. 什么是迭代器
 
-- 绑定非类的成员变量。
-- 绑定类的成员变量或成员函数。
+表示元素在容器中的位置，这种对象的概念就称为迭代器。（STL标准库中的解释：we need a concept of an object that represents positions of elements in a container. This concept exists. Objects that fulfill this concept are called iterators.）
 
-## 7.7. Predefined Function Objects (预定义函数对象)
+迭代器就是一种泛化的指针，是一个可遍历 STL 容器中全部或部分元素的对象。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
 
-标准STL模板库中提前预定义了很多的函数对象。任何应用程序想要使用 STL 内建的仿函数，都必须包含标准库预定义函数对象的头文件 `<functional>`。
+## 10.2. 迭代器设计思维
 
-仿函数的主要作用就是为了搭配 STL 算法，在算法中进行使用。
+不论是泛型思维或 STL 的实际运用，迭代器（iterators）都扮演着重要的角色。STL 的中心思想在于：将数据容器（containers）和算法（algorithms）分开，彼此独立设计，最后再以一帖胶着剂将它们撮合在一起。容器和算法的泛型化，从技术角度来看并不困难，C++ 的 class templates 和 function templates 可分别达成目标。如何设计出两者之间的良好胶着剂，才是大难题。
 
-## 7.8. 其它
-
-- 证同函数(identity_function): 任何数值通过此函数后，不会有任何改变。标准库 `stl_function.h` 中用 `identity` 来指定 RB-tree 所需的 KeyOfValue。
-
-- 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的 KeyOfValue。
-  
-  - select1st: 接受一个pair，传回它的第一个元素。
-  - select2nd: 接受一个pair，传回它的第二个元素。
-
-- 投射函数
-  
-  - project1st: 传回第一参数，忽略第二参数。
-  - project2nd: 传回第二参数，忽略第1参数。
-
-# 8. Iterator(迭代器)
-
-## 8.1. 什么是迭代器？
-
-表示元素在容器中的位置，这种对象的概念就称为迭代器。(STL标准库中的解释：we need a concept of an object that represents positions of elements in a container. This concept exists.Objects that fulfill this concept are called iterators.  
-
-迭代器就是一种泛化的指针，是一个可遍历STL容器中全部或部分元素的对象。从实现的角度看，迭代器是一种将 `operator*`, `operator->`, `operator++`, `operator--` 等指针操作给予重载的 `class template`。
-
-## 8.2. 基本操作
+## 10.3. 基本操作
 
 - `operator *`: 返回当前位置上元素的值。
 - `operator ++ 或 operator --`: 让迭代器指向下一个或上一个元素。
@@ -1063,7 +1249,9 @@ std::bind()
 
 不同的迭代器也许是 `smart pointers`，具有遍历复杂数据结构的能力，其内部运作机制取决于所遍历的数据结构。每一种容器都必须提供自己的迭代器。事实上每一种容器的确都将其迭代器以嵌套方式定义与 class 内部，因此各种迭代器的接口（interface）虽然相同，但类型（type）却是各不相同。
 
-## 8.3. half-open range(前闭后开区间)
+## 10.4. 迭代运算
+
+迭代器的区间是一个前闭后开区间（half-open range）。
 
 - begin: 返回一个迭代器，指向容器中第一个元素的位置。
 - end: 返回一个迭代器，指向容器的终点，终点位于最后一个元素的下一个位置。
@@ -1075,37 +1263,36 @@ std::bind()
 - 给遍历元素时，循环（loop）结束的时候，提供一个简单的判断依据。只要尚未达 `end()`，loop就继续执行。
 - 避免对空区间（empty ranges）采取特殊的处理。对于 `empty ranges` 而言，`begin()` 就等于 `end()`。
 
-## 8.4. iterator遵循的原则
+## 10.5. iterator遵循的原则
 
-iterator 是算法 (Algorithms) 与容器 (containers) 之间的桥梁。
+iterator 是算法（Algorithms）与容器 （containers）之间的桥梁。
 
 <img src="./figures/iterator-types.png">
 
-## 8.5. Iterator 分类
+## 10.6. Iterator 分类
+
+根据移动特性和施行特性，迭代器分为五类：
+
+- input iterator: 这种迭代器所指的对象，不允许外界去改变，属于只读的。
+- output iterator: 属于只能写的迭代器。
+- forward iterator: 允许”写入型“算法（例如：`replace()`）在此迭代器所形成的区间上进行读写操作。l
+- bidirectional iterator: 双向移动迭代器。
+- random access iterator: 随机访问迭代器，涵盖所有指针运算的能力。
 
 <img src="./figures/iterator-category.png">
 
-istream_iterator 的 iterator_category
-<img src="./figures/istream-iterator.png">
-
-ostream_iterator 的 iterator_category
-<img src="./figures/ostream-iterator.png">
-
-父类中没有data 和 function，子类继承于父类的 typedef。
-
-**Iterator分类对算法的影响**
-
-<img src="./figures/iterator-category-copy.png">
-
-<img src="./figures/iterator-category-destory.png">
-
-<img src="./figures/iterator-category-destory-2.png">
-
-## 8.6. 源码分析
-
-位于标准库的 `stl_iterator_base_types.h` 文件中。
+源码位于标准库的 `stl_iterator_base_types.h` 文件中。
 
 ```cpp
+// stl_iterator_base_types.h
+/**
+   *  @defgroup iterator_tags Iterator Tags
+   *  These are empty types, used to distinguish different iterators.  The
+   *  distinction is not made by what they contain, but simply by what they
+   *  are.  Different underlying algorithms can then be used based on the
+   *  different operations supported by different iterator types.
+  */
+
 ///  Marking input iterators.
 struct input_iterator_tag { };
 
@@ -1124,11 +1311,29 @@ struct bidirectional_iterator_tag : public forward_iterator_tag { };
 struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 ```
 
-## 8.7. 迭代器失效的原因？
+`istream_iterator` 的 iterator_category
+<img src="./figures/istream-iterator.png">
 
-- 何为迭代器失效？
+`ostream_iterator` 的 iterator_category
+<img src="./figures/ostream-iterator.png">
+
+父类中没有data 和 function，子类继承于父类的 typedef。
+
+**Iterator分类对算法的影响**
+
+<img src="./figures/iterator-category-copy.png">
+
+<img src="./figures/iterator-category-destory.png">
+
+<img src="./figures/iterator-category-destory-2.png">
+
+
+
+## 10.7. 迭代器失效
+
+- 为什么迭代器会失效？
   
-  STL容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
+  STL 容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指向原空间的迭代器失效。 
 
 - 对于序列式容器，比如vector，删除当前的iterator会使后面所有元素的iterator都失效。因为序列式容器中内存是连续分配的（分配一个数组作为内存），删除一个元素导致后面所有的元素会向前移动一个位置。删除了一个元素，该元素后面的所有元素都要挪位置，所以，删除一个数据后，其他数据的地址发生了变化，之前获取的迭代器根据原有的信息就访问不到正确的数据。
 
@@ -1150,15 +1355,19 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 - [聊聊map和vector的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
 - [C++ STL 迭代器失效问题](https://www.cnblogs.com/qiaoconglovelife/p/5370396.html)
 
-# 9. Allocator(分配器)
+# 11. Allocators(分配器)
+
+## 11.1. 什么是分配器
 
 分配器（Allocator）负责内存空间的分配与管理。分配器是一个实现了动态空间配置、空间管理、空间释放的 `class template`。分配器我们一般不直接使用它，它是给容器使用的。容器的内存分配是通过分配器来管理的。
 
-C++标准库在许多地方使用特殊的对象(objects)处理内存的分配(allocation)和归还(deallocation)，像这样的对象(objects)就称为分配器`allocators`。
+C++ 标准库在许多地方使用特殊的对象（objects）处理内存的分配（allocation）和归还（deallocation），像这样的对象（objects）就称为分配器`allocators`。
 
-**Allocator代表的是一种特殊内存模型(memorymodel)，并提供一种抽象的概念，将对内存的索求(need to use memory)转变为对内存的直接调用(raw call for memory)。** 如果在相同的时间使用不同的分配器(allocato)对象，允许你在程序中使用不同的内存模型(memory models)。
+**Allocator 代表的是一种特殊内存模型（memorymodel），并提供一种抽象的概念，将需要使用的内存（need to use memory）转变为对内存的直接调用（raw call for memory）。** 如果在相同的时间使用不同的分配器（allocato）对象，允许你在程序中使用不同的内存模型（memory models）。
 
-最初，allocator只是作为STL的一部分而引人的，用来处理像PC上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存(shared memory）、垃圾回收（garbagecollection）、面向对象数据库(object-oriented database)等解决方案能保特一致接。
+最初，allocator 只是作为 STL 的一部分而引人的，用来处理像 PC 上不同类型的指针（例如near、far、huge指针）这一类乱七八艚的问题；现在则是作为“运用某种内存模型”技术方案的基础，使得像共享内存（shared memory）、垃圾回收（garbagecollection）、面向对象数据库（object-oriented database）等解决方案能保特一致接。
+
+## 11.2. 默认分配器
 
 C++标准定了一个 default allocator 如下：
 
@@ -1169,164 +1378,45 @@ namespace std {
 }
 ```
 
-这个default allocator可在 "allocator得以被当作实参使用”的任何地方允许当默认值，它会执行内存分配和回收的一般用法。也是说，它会调用new和delete操作符。但C++并没有对“在什么时候以什么方式调用这些操作符"给予明确规定。因此，default allocator甚至可能在内部对分配内存采用缓存(cache)的手法。
+这个默认分配器（default allocator）可在 **allocator 得以被当作实参**使用的任何地方允许当默认值，它会执行内存分配和回收。也是说，它会调用 new 和 delete 操作符。但 C++ 并没有对**在什么时候以什么方式调用这些操作符**给予明确规定。因此，default allocator 甚至可能在内部对分配内存采用缓存（cache）的手法。
 
-绝人多数程序都使用 default allocator，但有时其它程序库也可能提供些 allocator 满足特定需求。这种情况下只需简单地将它们当做实参即可。只有少数情况下才需要自行写一个 allocator，现实中最常使用的还是default allocator。
+绝人多数程序都使用 default allocator，但有时其它程序库也可能提供些 allocator 满足特定需求。这种情况下只需简单地将它们当做实参即可。只有少数情况下才需要自行写一个 allocator，现实中最常使用的还是 default allocator。
 
-allocator底层的操作都是采用 `malloc()` 和 `free()`来分配和释放内存。
+allocator 底层的操作都是采用 `malloc()` 和 `free()`来分配和释放内存。`malloc` 分配内存时，会有额外的外开销（overhead），使程序变慢。若要提高内存分配的效率，需要减少 `cookie（用以记录内存的大小）` 的开销
 
-malloc分配内存时，会有额外的外开销(overhead)，使程序变慢。使内存分配的效率高，需要减少cookie的开销。
+## 11.3. Allocator 标准接口
 
-`operator new()`
-
-`malloc() `
-
-# 10. Traits(萃取机)
-
-## 10.1. iterator_traits
-
-trait 中文译为：特点、特征。 iterator_traits即为迭代器的特征。这个有点不好理解，可以把它理解成一个 `萃取机`，用来区分传入迭代器中的类型是 `class iterators` 还是 `non class iterators，即native pointer`。可以利用 `类模板中的partial specialization` 可以得到目标。
-
-<img src="./figures/iterator-traits.png">
-
-位于 `../C++/bits/stl_iterators.h>` 头文件中。
-
-<img src="./figures/traits.png">
-
-## 10.2. type traits
-
-位于 `../C++/type_traits.h>` 头文件中。
-
-## 10.3. char traits
-
-位于 `../C++/bits/char_traits.h>` 头文件中。
-
-## 10.4. allocator traits
-
-位于 `../C++/bits/alloc_traits.h>` 头文件中。
-
-## 10.5. pointer traits
-
-位于 `../C++/bits/ptr_traits.h>` 头文件中。
-
-## 10.6. array traits
-
-位于 `../C++/array>` 头文件中。
-
-# 11. String
-
-String 类是 C++ 标准库接对 `char*` 字符串一系列操作的封装，位于头文件 `#include <string>` 中。
-
-
-## 11.1. string 与 char* 转换
-
-1、const char* 与 string 之间的转换。
-
-`char*` 是 C 语言形式的字符串，`string` 类是 C++ 的字符串，C++ 为了要兼容 C 语言的字符串，两者之间需要进行转换。`string` 转 `const char*`，直接调用 string 类的 `c_str()` 接口。
-
-```cpp
-string str = “abc”;
-const char* c_str = str.c_str();
-```
-
-2、`const char*` 转 `string`，直接赋值即可。
-
-```cpp
-const char* c_str = “abc”;
-string str(c_str);
-```
-
-3、`string` 转 `char*`
-
-```cpp
-char* c = “abc”;
-string s(c);
-const int len = s.length();
-c = new char[len+1];
-strcpy(c,s.c_str());
-```
-
-4、char* 转 string，直接赋值即可。
-
-```cpp
-char* c = “abc”;
-string s(c);
-```
-
-5、 `const char*` 转 `char*`
-
-```cpp
-const char* cpc = “abc”;
-char* pc = new char[strlen(cpc)+1];
-strcpy(pc,cpc);
-```
-
-6、`char*` 转 `const char*`，直接赋值即可
-
-```cpp
-char* pc = “abc”;
-const char* cpc = pc;
-```
-
-## 11.2. API 接口
-
-string 是一个随机存储容器。
-
-- constructors: 构造函数。Create or copy a string
-- destructor: 析构函数。Destroys a string
-- `=` : 对 string 赋一个新值，新值可以是 string，C-string 形式的字符或单一字符。
--  assign(): 给 string 赋单个或多个值。
-- swap(): 交换两个 string 内容。
-- +=, append(), push_back(): 追加字符。
-- insert()：插入字符。
-- erase(), pop_back(): 删除字符。`pop_back()` 自 C++ 开始。
-- clear(): 移除所有字符。
-- resize(): 改变字符数量，在尾部删除或添加字符。
-- replace(): 替换字符
-- data(), c_str(): 将 string 字符串中内容作为字符数组（C-string形式）返回 。C++11 之前，`data()` 不是一个有效的 C-string，返回的结果中不包含 `\0`，C++11 之后，两者的方式是相同的。
-- size(), length(): 返回 string 中当前的字符数量。
-- empty(): 检查 string 中的字符数量是否为 0。检查 string 是否为空时，C++ STL 中建议用 `empty()` 替代 `size()`、`length()`，因为 `empty()` 比较快。
-- max_size(): 返回一个 string 中包含的最大字符数量。若操作 string 时，它的长度 `length` 大于 `max_szie`，后，STL 会抛出 `length_error`异常。
--  capacity() : 未重新分配 string 内部内存之前，返回 string 包含的最大字符数量。
-  - 重新分配后，所有字符串字符指向的 reference、pointer、Iterator 均无效了。
-  - 重新分配是很耗费时间的。
-- reverse(): 避免重新分配，保留一定容量，确保该容量用尽之前，reference 一直有效。
-- getline(): 逐行读取所有字符，包括开头的空白字符，直到遇到指定的分行符或 `end of file` 结束，默认情况下分行符为 换行符。
-
-
-
-
-
-## 11.3. 底层实现
-
-Scott Meyers 在《Effective STL》第 15 条中提到 `std::string` 底层实现有多种方式，归纳起来有 3 类。
-
-- eager copy（无特殊处理）。采用类似 `std::vector` 的数据结构，现在很少采用这种形式。
-- Copy-on-Write（COW，写时复制）。
-- Short String Optimize（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
-
-C++ GCC `std::string` 在 C++11 之前与之后实现是完全不同的。c++11 之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为 **C++11 标准规定：不允许 [] 导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了。
-
-**重要区别**：COW 的 `basic_string` 有一个 `RefCnt` 变量，用于引用计数；而自 C++11开始，采用引用计数（reference counted）实现的 `basic_string`  不在被允许。因为让 string 的内部缓冲区共享被共享（ share internal buffers），在多线程环境中是行不通的。
-
-### 11.3.1. 数据类型( Type Definitions and Static Values)
-
-1. `string::traits_type`
-2. `string::value_type`
-3. `string::size_type`
-4. `string::difference_type`
-5. `string::reference`
-6. `string::const_reference`
-7. `string::pointer`
-8. `string::const_pointer`
-9. `string::iterator`
-10. `string::const_iterator`
-11. `string::reverse_iterator`
-12. `string::const_reverse_iterator`
-13. `static const size_type string::npos`
-14. `string::allocator_type`
-
-
+1. `allocator::value_type` 
+   - The type of the elements. 
+   - It is usually equivalent to T for an `allocator<T>`，传递一个模板参数类型。
+2. `allocator::size_type`
+3. `allocator::difference_type`
+   - 有符号整数值的类型，它可以表示分配模型中任意两个指针之间的差异。
+4. `allocator::pointer`
+5. `allocator::const_pointer`
+6. `allocator::void_pointer`
+7. `allocator::const_void_pointer`
+8. `allocator::reference`
+9. `allocator::const_reference`
+10. `allocator::rebind`
+11. `allocator::propagate_on_container_copy_assignment`
+12. `allocator::propagate_on_container_move_assignment`
+13. `allocator::propagate_on_container_swap`
+14. `allocator::allocator ()`
+15. `allocator::allocator (const allocator& a)`
+16. `allocator::allocator (allocator&& a)`
+17. `allocator::˜allocator ()`
+18. `pointer allocator::address (reference value)` 
+19. `const_pointer allocator::address (const_reference value)`
+20. `size_type allocator::max_size ()`
+21. `pointer allocator::allocate (size_type num)` 
+22. `pointer allocator::allocate (size_type num, allocator::const_pointer hint)`
+23. `void allocator::deallocate (pointer p, size_type num)`
+24. `void allocator::construct (U* p, Args&&... args)`
+25. `void allocator::destroy (U* p)`
+26. `bool operator == (const allocator& a1, const allocator& a2)`
+27. `bool operator != (const allocator& a1, const allocator& a2)`
+28. `allocator select_on_container_copy_construction ()`
 
 
 
