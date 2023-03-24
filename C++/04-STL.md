@@ -267,32 +267,43 @@ vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，�
 
 动态数组实现机制：
 
-> 先为数组开辟较小的空间，然后往数组里面添加数据，当数据的数目超过数组的容量时，再重新分配一块更大的空间（STL中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
+> 先为数组开辟较小的空间，然后往数组里面添加数据，当数组中元素的数量超过数组的容量时，重新分配一块更大的空间（STL 中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
+
+
+
+发生内存的重分配（realloc）操作通常有 4 个步骤
+
+1. 分配一个新的内存块，它是容器当前容量的一些倍数，常常为 2 倍。
+2. 将容器旧内存中的所有元素复制到新内存中。
+3. 销毁旧内存中的对象（object）。
+4. 销毁（Deallocate）旧内存。
 
 <font color=red> 注意：</font>
 
 - 使用动态数组时，尽量减少改变数组容量大小的次数，可以减少时间性能的消耗。 一般每次扩容为原来的  2 倍。
-- 当vector 扩容时，会调用 `move constructor` 和 `move destructor`，并且移动构造和移动析构函数在执行期间是不会抛出异常的，用 `noexcept` 关键字修饰。因为它不能确保异常发生后，移动构造和移动析构函数还能满足标准库的要求，所以是禁止抛异常的。
-- <font color=red> 成长型的容器（需要发生 memory reallocation）在标准库中只有两种：`vector` 和 `deque`。</font>
+- 当 vector 扩容时，会调用 `move constructor` 和 `move destructor`，并且移动构造和移动析构函数在执行期间不会抛出异常，是用 `noexcept` 关键字修饰。因为它不能确保异常发生后，移动构造和移动析构函数还能满足标准库的要求，所以是禁止抛异常的。
+- <font color=red> 标准库中成长型的容器（需要发生 memory reallocation）有：`vector` 、`deque`、`string`。</font>
 
 内部结构图
 
 <img src="./figures/container-vectors.png">
 
+
+
 #### 4.1.2.1. API接口
 
 - `size()`: 返回容器中元素的个数
-- `get(r)`: 获取秩（索引）为r的元素
-- `put(r, e)`: 用e替换秩为r元素的数值
-- `insert(r, e)`: 向秩为r的元素处插入数值e，后面元素依次后移
-- `remove(r)`: 初除秩为 `r` 的元素，返回全元素中原存放的对象
+- `get(r)`: 获取索引为 r 的元素
+- `put(r, e)`: 用 e 替换索引为 r 元素的数值
+- `insert(r, e)`: 向索引为 r 的元素处插入数值 e，后面元素依次后移
+- `remove(r)`: 移除索引为 r 的元素，返回全元素中原存放的对象
 - `disordered()`: 判断所有元素是否已按升序序排列
 - `sort()`: 调整各元素癿位置，使按照升序序排列
 - `deduplicate()`: 删除重复元素   ---向量
 - `uniquify()`: 删除重复元素 ---有序向量
 - `traverse()`: 遍历向量幵统一处理所有元素，处理斱法由函数对象指定
 - `empty()`: 判断容器是否为空
-- `at(index)`: 返回索引为index的元素
+- `at(index)`: 返回索引为 index 的元素
 - `erase(p)`: 删除指针p指向位置的数据，返回下指向下一个数据位置的指针（迭代器）
 - `erase(beg, end)`:删除区间`[beg, end)`的数据
 - `pop_back()`: 删除最后一个元素
@@ -301,9 +312,15 @@ vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，�
 - `front()`: 获取首部元素
 - `begin(), end()`: 返回容器首尾元素的迭代器
 - `clear()`: 移除容器中所有的元素
-- `swap()`: 交换两个容器的内容，交换两个 vector 的内容后，两者的容量也交换了，这是一个间接缩短vector的小窍门。
-- `shrink_to_fit()`: 缩短vector的大小到合适的空间，为实现特定的优化保留了回旋的余地。
-- `resize()`: 重新设置vector的容量
+- `swap()`: 交换两个容器的内容，交换两个 vector 的内容后，两者的容量也交换了，**这是一个间接缩短 vector的小窍门。**
+- `shrink_to_fit()`: 缩短 vector 的大小到合适的空间，为实现特定的优化保留了回旋的余地。
+- `resize(size_t n)`: 强制容器将其容纳的元素数更改为 n。
+  - 若 n 小于当前容器的 size，原容器里超过 n 后面的值被销毁。
+  - 若 n 大于当前容器的 size，容器里超过 size 后面的内容，编译器将默认构造函数中的数据写入到容器里面。
+  - 若 n 大于当前容器的 capacity ，向容器中增加元素之前会发生 `reallocation`。
+- `reserve(size_t n)`: 强制将容器的容量重新设置为 n。
+  - 若 n 大于当前容器的 capacity，发生 `reallocation`。
+  - 若 n 小于当前容器的 capacity，`vector` 忽略调用，什么也不会做；string 会将其容量减少到 `size ()`和 n 的最大值，但 string 的大小（size）肯定保持不变。
 
 #### 4.1.2.2. 优点
 
@@ -897,11 +914,35 @@ Scott Meyers 在《Effective STL》第 15 条中提到 `std::string` 底层实�
 
 - eager copy（无特殊处理）。采用类似 `std::vector` 的数据结构，现在很少采用这种形式。
 - Copy-on-Write（COW，写时复制）。
-- Short String Optimize（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
+- Small String Optimization（SSO，短字符串优化）。利用 string 对象的本身空间来存储短字符串。
 
 C++ GCC `std::string` 在 C++11 之前与之后实现是完全不同的。c++11 之前实现的是 **COW** string。C++11之后实现的就是**实时拷贝**，因为 **C++11 标准规定：不允许 [] 导致之前的迭代器失效**，这就使得 COW 的string 不再符合C++规范了。
 
 **重要区别**：COW 的 `basic_string` 有一个 `RefCnt` 变量，用于引用计数；而自 C++11开始，采用引用计数（reference counted）实现的 `basic_string`  不在被允许。因为让 string 的内部缓冲区共享被共享（ share internal buffers），在多线程环境中是行不通的。
+
+
+
+### 空 string 大小
+
+源码
+
+```cpp
+// C++11 及其以上
+
+static const size_type	npos = static_cast<size_type>(-1);
+size_type		_M_string_length;
+
+enum { _S_local_capacity = 15 / sizeof(_CharT) };
+
+union
+{
+    _CharT           _M_local_buf[_S_local_capacity + 1];
+    size_type        _M_allocated_capacity;
+};
+
+```
+
+`size_type` 由机器决定。
 
 ### 5.3.1. 数据类型( Type Definitions and Static Values)
 
