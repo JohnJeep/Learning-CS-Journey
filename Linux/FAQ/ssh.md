@@ -275,10 +275,11 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的
 
 
 
-参考
+# Reference
 
 - [sshd_config(5) — Linux manual page](https://man7.org/linux/man-pages/man5/sshd_config.5.html)
 - [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。
 - [SSH远程登录配置文件sshd_config详解](https://blog.csdn.net/field_yang/article/details/51568861)
 - [CentOS6.9下升级默认的OpenSSH操作记录（升级到OpenSSH_7.6p1）](https://cloud.tencent.com/developer/article/1193007)
+- SSH 教程: https://wangdoc.com/ssh/key
 
