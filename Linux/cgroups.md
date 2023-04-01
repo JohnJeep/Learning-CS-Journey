@@ -64,4 +64,3 @@ drwxr-xr-x.  5 root root   0 May 26 21:00 systemd
 
 - [Control groups, part 6: A look under the hood [LWN.net]](https://lwn.net/Articles/606925/)：Linux 周刊（LWN.net）分享的文章，非常不错。
 - [Linux资源管理之cgroups简介](https://tech.meituan.com/2015/03/31/cgroups.html)：美团技术团队分享的 cgroups 用法。
-- 
