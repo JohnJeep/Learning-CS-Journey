@@ -1052,7 +1052,10 @@ union
 包含头文件：`#include <functional>`
 
 语法
-`std::function<返回值类型(参数列表)> obj_name = 可调用对象`
+
+```cpp
+std::function<返回值类型(参数列表)> obj_name = 可调用对象
+```
 
 包装器可包装哪些东西？
 
