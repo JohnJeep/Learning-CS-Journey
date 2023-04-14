@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+ zk1:
+  image: zookeeper # 镜像名称
+  restart: always # 当发生错误时自动重启
+  hostname: zk1
+  container_name: zk1
+  privileged: true
+  ports: # 端口
+   - 2181:2181
+  volumes: # 挂载数据卷
+   - /opt/zk-cluster/zk1/data:/data
+   - /opt/zk-cluster/zk1/datalog:/datalog
+  environment:
+   ZOO_MY_ID: 1 # 节点ID
+   # ZOO_PORT: 2181 # zookeeper端口号
+   ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181 # zookeeper节点列表
+  networks:
+   default:
+    ipv4_address: 172.18.0.4
+ 
+ zk2:
+  image: zookeeper
+  restart: always
+  hostname: zk2
+  container_name: zk2
+  privileged: true
+  ports:
+   - 2182:2181
+  volumes:
+   - /opt/zk-cluster/zk2/data:/data
+   - /opt/zk-cluster/zk2/datalog:/datalog
+  environment:
+   ZOO_MY_ID: 2
+   # ZOO_PORT: 2181
+   ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
+  networks:
+   default:
+    ipv4_address: 172.18.0.2
+ 
+ zk3:
+  image: zookeeper
+  restart: always
+  hostname: zk3
+  container_name: zk3
+  privileged: true
+  ports:
+   - 2183:2181
+  volumes:
+   - /opt/zk-cluster/zk3/data:/data
+   - /opt/zk-cluster/zk3/datalog:/datalog
+  environment:
+   ZOO_MY_ID: 3
+   # ZOO_PORT: 2181
+   ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
+  networks:
+   default:
+    ipv4_address: 172.18.0.3
+ 
+networks:
+ default:
+  external:
+   name: zk_network
