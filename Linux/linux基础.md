@@ -53,15 +53,17 @@
     - [6.5.3. chmod](#653-chmod)
     - [6.5.4. usermod](#654-usermod)
   - [6.6. 特殊权限](#66-特殊权限)
+  - [6.7. 文件类型](#67-文件类型)
+  - [6.8. Linux 系统目录](#68-linux-系统目录)
   - [6.9. 绝对路径与相对路径](#69-绝对路径与相对路径)
 - [7. tar](#7-tar)
-  - [7.2. tar文件打包](#72-tar文件打包)
-  - [7.3. 打包文件或目录](#73-打包文件或目录)
-  - [7.5. 解压文件](#75-解压文件)
-  - [7.6. 打包并压缩](#76-打包并压缩)
-  - [解压缩包](#解压缩包)
-  - [7.7. zcat zless](#77-zcat-zless)
-  - [7.8. zip](#78-zip)
+  - [7.1. tar文件打包](#71-tar文件打包)
+  - [7.2. 打包文件或目录](#72-打包文件或目录)
+  - [7.3. 解压文件](#73-解压文件)
+  - [7.4. 打包并压缩](#74-打包并压缩)
+  - [7.5. 解压缩包](#75-解压缩包)
+  - [7.6. zcat zless](#76-zcat-zless)
+  - [7.7. zip](#77-zip)
 - [8. link](#8-link)
   - [8.1. hard links](#81-hard-links)
   - [8.2. symbolic links](#82-symbolic-links)
@@ -80,6 +82,7 @@
 - [21. grep](#21-grep)
 - [22. pgrep](#22-pgrep)
 - [23. PID](#23-pid)
+  - [23.1. dd](#231-dd)
 - [24. ss](#24-ss)
 - [25. lsof](#25-lsof)
 - [26. netcat](#26-netcat)
@@ -93,7 +96,7 @@
 - [34. ldconfig](#34-ldconfig)
 - [35. ldd](#35-ldd)
 - [36. chkconfig](#36-chkconfig)
-- [37. LD_LIBRARY_PATH](#37-ld_library_path)
+- [37. LD\_LIBRARY\_PATH](#37-ld_library_path)
 - [38. scp](#38-scp)
 - [39. rsync](#39-rsync)
 - [40. 防火墙](#40-防火墙)
@@ -102,7 +105,7 @@
 - [41. SELinux](#41-selinux)
 - [42. QAQ](#42-qaq)
   - [42.1. Linux 与 Windows相差 8 小时](#421-linux-与-windows相差-8-小时)
-  - [42.2. 编码转换](#422-编码转换)
+  - [42.2. enca](#422-enca)
 - [43. Reference](#43-reference)
 
 <!-- /TOC -->
@@ -755,6 +758,7 @@ SUID(Set UID)，简写：s，数字：4
   
   ```
   例如：
+  ```
 1. steve 对于 /usr/bin/passwd 这个程序来说是具有 x 权限的， 表示 steve 能执行passwd；
 2. passwd 的拥有者是 root 这个帐号；
 3. steve 执行 passwd 的过程中， 会“暂时”获得 root 的权限；
@@ -874,7 +878,7 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
 
 <img src="./pictures/compress.png">
 
-## 7.2. tar文件打包
+## 7.1. tar文件打包
 
 ```bash
 参数项：
@@ -894,7 +898,7 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
   注意：-z, -j, -J 不可以同时出现在一串命令行中
 ```
 
-## 7.3. 打包文件或目录
+## 7.2. 打包文件或目录
 
 - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar
   
@@ -908,7 +912,7 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
   tar -cvf B.tar anaconda-ks.cfg /tmp/
   ```
 
-## 7.5. 解压文件
+## 7.3. 解压文件
 
 只对文件或目录进行打包，没有进行压缩，其通用格式为
 
@@ -924,7 +928,7 @@ tar -xvf 解压的文件 -C 文件解压后的路径
 tar -xvf test.tar -C /tmp
 ```
 
-## 7.6. 打包并压缩
+## 7.4. 打包并压缩
 
 - 打包压缩所有文件
   
@@ -941,7 +945,7 @@ tar -xvf test.tar -C /tmp
   1.  一定要注意排除目录的最后不要带 `/`，否则 `exclude` 目录将不起作用
   2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径 
 
-## 解压缩包
+## 7.5. 解压缩包
 
 对打包并压缩后的文件进行解压。例如：将 `hello.tar.gz` 压缩文件解压到`~/Exercise_Linux/tmp`目录下。
 
@@ -955,7 +959,7 @@ tar -zxvf hello.tar.gz -C ~/Exercise_Linux/tmp
 
 - 不加 `-C ~/Exercise_Linux/tmp`，表示只是解压到当前目录下。
 
-## 7.7. zcat zless
+## 7.6. zcat zless
 
 zcat、zless 命令直接查看压缩文件中的内容。
 
@@ -967,7 +971,7 @@ $ zless test.gz
 hello word
 ```
 
-## 7.8. zip
+## 7.7. zip
 
 zip 是压缩指令，unzip 是解压指令。zip 指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
@@ -1655,6 +1659,19 @@ pidof bash
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
+## 23.1. dd
+
+`dd` 命令根据指定的操作（OPERAND）去转换（convert）和拷贝（copy）一个文件，同时还能打印拷贝的速度。
+
+用法
+
+```bash
+dd [OPERAND]...
+dd OPTION
+```
+
+
+
 # 24. ss
 
 ss 是用于调查套接字的另一个实用程序。
@@ -2086,7 +2103,7 @@ $sudo ntpdate time.windows.com
 
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-## 42.2. 编码转换
+## 42.2. enca
 
 `enca` 是 Linux 下的文件编码转换工具。
 
