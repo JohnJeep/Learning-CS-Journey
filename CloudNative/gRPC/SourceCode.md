@@ -34,7 +34,24 @@ grpc核心库采用reactor设计模式，如grpc_closure就是为了方便异步
 
 closure就是闭包的英文名称。简单的理解，闭包函数将创建闭包时的上下文中的变量与自己绑定在一起，将变量的生存期和作用域延长到闭包函数结束。
 
+## 2.6. 源码
 
+### 2.6.1. 结构
+
+#### 2.6.1.1. src/core/lib/surface/
+
+`grpc_init()` 声明在 include/grpc/grpc.h 文件中，而其定义则是在 src/core/lib/surface/init.cc 文件中。
+
+目录提供了 gRPC 的核心开发 API，并将【核心组件】转成【函数调用】
+
+比如 channel.h 是中的 `grpc_channel` 结构和 `grpc_channel_create_internal()` 函数的声明，在对应的 channel.cc 中有实现。
+
+#### 2.6.1.2. src/core
+
+core 提供了低层次的库，提供给高层次库封装用的。 顶层的 API 在 grpc.h 中声明 安全相关的 在 grpc_security.h 中
+
+- include/grpc/grpc.h 是给 C 语言使用的 API
+- include/grpcpp/grpcpp.h 是给 C++ 语言使用的 API
 
 # 3. 参考
 

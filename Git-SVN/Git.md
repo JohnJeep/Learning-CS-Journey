@@ -444,22 +444,42 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
 
 采用 `Git rebase`与 `git merge` 进行解决
 
-- 什么时候用`rebase`？
-  
-  - 合并多次提交纪录
-    
-    例如：合并前4次提交的记录`git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
-    
-    > 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
-  
-  - 合并分支
-    
-    <font color="red"> 注意: </font> 已经推送到github远程仓库的文件（多人开发的重要分支）不要使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
+### Git rebase
 
-- 什么时候用 `merge`?
+- 合并多次提交纪录
   
-  - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。使用 `--no-ff`  参数，用普通模式合并，在 master 主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而 `fast forward` 合并，则没有合并操作的记录，会丢掉分支信息。`git merge --no-ff -m "merge with   no-ff" dev` 
-  - 将两个分支进行合并提交。将一个分支的变更集成到另一个分支的变更。 
+  例如：合并前 4 次提交的记录`git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
+  
+  > 本质是先取消自己的提交，临时保存，然后把当前分支更新到最新的origin分支，最后应用自己的提交。
+
+
+<font color="red"> 注意: </font> 已经推送到 github 远程仓库的文件（多人开发的重要分支）不要使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
+
+###  Git merge
+
+- 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将 Master 分支指向 Develop 分支。使用 `--no-ff`  参数，用普通模式合并，在 master 主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而 `fast forward` 合并，则没有合并操作的记录，会丢掉分支信息。
+
+  ```shell
+  git merge --no-ff -m "merge with no-ff" dev 
+  ```
+
+- 两个分支合并时，将一个分支的变更集成到另一个分支上。其中分支合并的语法如下
+
+  ```shell
+  git merge 要合并进来的分支名 --strategy=合并策略
+  
+  # 简写
+  git merge 要合并进来的分支名 --s=合并策略
+  ```
+
+   合并策略可以省略。Git  merge 有很多的合并策略。其中常见的是 `Fast-forward`、`Recursive` 、`Ours`、`Theirs`、`Octopus`。 Git 默认会帮你自动挑选合适的合并策略，如果你需要强制指定，使用 `git merge -s <策略名字>` 即可。
+
+  - fast-forward
+  - recursive：默认的合并策略，如果你不指定策略参数，那么将使用这个合并策略。这将直接使用递归三路合并算法进行合并。
+  - ours
+  - octopus
+  - subtree
+  - resolve
 
 - 分支合并步骤
   
@@ -474,6 +494,10 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
   - 合并冲突，将远程仓库与本地仓库合并 `git merge origin master`
 
 > Git **合并分支**很快！就改改指针，工作区内容不变！
+
+
+
+
 
 参考
 
