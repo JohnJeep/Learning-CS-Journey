@@ -123,6 +123,12 @@ gRPC 有 4  种请求和响应模式。
 
    ![Unary Architecture](https://www.polarsparc.com/xhtml/images/grpc-02.png)
 
+   缺点：
+
+   - 数据包过大造成的瞬时压力
+
+   - 接收数据包时，需要所有数据包都接受成功且正确后，才能够回调响应，进行业务处理（无法客户端边发送，服务端边处理）
+
 2. server-side streaming（服务端流式RPC）
 
    当数据量大或者需要不断传输数据时候，我们应该使用流式RPC，它允许我们边处理边传输数据。
@@ -144,10 +150,18 @@ gRPC 有 4  种请求和响应模式。
    双向流式RPC 模式：client 发送一定消息序列的请求（request）给 server，而 server 给 client 回的响应也是一定消息序列的响应。双方使用读写流（a read-write stream）去发送一个消息序列，**两个流独立操作**，双方可以同时发送和同时接收。
 
    ![Bidirectional Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-09.png)
-   
+
    注意点：
-   
+
    - 避免 **race condition** 或 **deadlocks**。
+
+
+
+### 流的结束
+
+- Client 发送流：通过 `Writer->WritesDone()` 结束流
+- Server 发送流：通过结束 rpc 调用并返回状态码`status code`的方式来结束流
+- 读取流：通过 `Reader->Read()` 返回的 bool 型状态，来判断流是否结束
 
 
 
@@ -228,6 +242,25 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 - 绑定一个 `CompletionQueue` 到一个 RPC 调用
 - 利用唯一的 `void*` Tag 进行读写
 - 调用 `CompletionQueue::Next()` 等待操作完成，完成后通过唯一的 Tag 来判断对应什么请求/返回进行后续操作
+
+
+
+tag：根据`CompletionQueue`返回的 tag 知道是哪个对象产生了事件。
+
+#### 实现 C++ gRPC 异步双向流需要注意以下几个方面：
+
+1. 使用异步 API：使用 C++ gRPC 提供的异步 API，如 `AsyncReaderWriter`，而不是同步 API。异步 API 能够在单线程内处理多个客户端请求，提高程序的并发性能。
+2. 线程安全：C++ gRPC 是线程安全的，但需要保证在使用 gRPC API 时，线程安全性不受影响。需要注意避免多个线程同时访问同一资源导致的竞态条件问题。
+3. 序列化和反序列化：需要将请求和响应数据序列化和反序列化。C++ gRPC 默认使用 Protocol Buffers 作为序列化格式，需要定义好请求和响应消息的格式。
+4. 错误处理：在处理异步双向流时，需要注意错误处理。例如，当客户端断开连接时，需要正确处理该事件，避免导致程序异常退出。
+5. 流控制：需要合理地使用流控制机制，避免客户端和服务端之间的数据流量过大导致程序崩溃或者性能下降。
+6. 代码清晰度：异步编程需要编写更复杂的代码，需要保证代码结构清晰易读，便于维护和修改。
+
+
+
+
+
+
 
 ## 2.8. gRPC 处理流程
 
