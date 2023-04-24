@@ -1,5 +1,3 @@
-// 暴露在外部的头文件，Widget 类中并不清楚 Impl 类的实现，只知道接口
-
 #ifndef _PIMPL_WIDGET_H
 #define _PIMPL_WIDGET_H 
 #include <memory>
@@ -9,7 +7,7 @@
 class Widget
 {
 public:
-    Widget(/* args */);
+    Widget();
     ~Widget();
 
 private:
@@ -23,10 +21,10 @@ private:
 class Widget
 {
 public:
-    Widget(/* args */);
-    ~Widget();
+    Widget();
+    ~Widget();   // only declare destructor
 
-    // 支持 move operation
+    // 支持 move operation，拷贝构造和assign操作声明
     Widget(Widget&& rhs);
     Widget& operator=(Widget&& rhs);
 
@@ -35,8 +33,8 @@ public:
     Widget& operator=(const Widget& rhs); // copy operator=
 
 private:
-    struct Impl;                     // declare implementation struct
-    std::unique_ptr<Impl> pImpl;     // declare pointer
+    struct Impl;                     // declare struct Impl
+    std::unique_ptr<Impl> pImpl;     // declare pointer pImpl，建议用 std::unique_ptr 而不是 std::shared_ptr
 };
 
 #endif

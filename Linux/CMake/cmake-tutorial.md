@@ -339,3 +339,5 @@ install(directory doc/ destation share/doc/cmake)
 - [CSDN：CMake教程](https://blog.csdn.net/fan_hai_ping/article/details/42524205)
 - [CLoin 与 CMake详细教程](https://www.jetbrains.com/help/clion/quick-tutorial-on-configuring-clion-on-windows.html)
 - [CMake 添加编译选项](https://www.cnblogs.com/standardzero/p/10798603.html)
+- Learn Makefiles With the tastiest examples: https://makefiletutorial.com/
+

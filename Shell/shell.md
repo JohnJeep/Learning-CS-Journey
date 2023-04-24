@@ -856,7 +856,7 @@ set timeout         设置超时时间
 
 # 16. Reference
 
-- [十分钟学会 tmux](https://www.cnblogs.com/kaiye/p/6275207.html)
-- [Bash快捷键大全](https://linux.cn/article-5660-1.html)
-- [Terminator The robot future of terminals](https://gnometerminator.blogspot.com/p/introduction.html)
-- [如何在Qt中使用正则表达式](https://blog.csdn.net/Hyc_cheng/article/details/112132963#t5)
+- Bash快捷键大全: https://linux.cn/article-5660-1.html
+- Terminator The robot future of terminals: https://gnometerminator.blogspot.com/p/introduction.html
+- 如何在Qt中使用正则表达式: https://blog.csdn.net/Hyc_cheng/article/details/112132963#t5
+- 十分钟学会 tmux: https://www.cnblogs.com/kaiye/p/6275207.html
