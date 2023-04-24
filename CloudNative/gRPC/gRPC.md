@@ -2,7 +2,7 @@
  * @Author: johnjeep
  * @Date: 2022-11-02 21:34:24
  * @LastEditors: johnjeep
- * @LastEditTime: 2023-04-20 16:16:48
+ * @LastEditTime: 2023-04-25 01:06:43
  * @Description: gRPC 用法
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -17,19 +17,24 @@
     - [2.2.1. Channel](#221-channel)
     - [2.2.2. Stub](#222-stub)
     - [2.2.3. Metadata](#223-metadata)
-  - [2.3. gRPC 特点](#23-grpc-特点)
-  - [2.4. Service definition](#24-service-definition)
-  - [2.5. proto 文件](#25-proto-文件)
-  - [2.6. gRPC 服务端](#26-grpc-服务端)
-  - [2.7. gRPC 客户端](#27-grpc-客户端)
-    - [2.7.1. 同步（Synchronous）](#271-同步synchronous)
-    - [2.7.2. 异步（Asynchronous）](#272-异步asynchronous)
-  - [2.8. gRPC 处理流程](#28-grpc-处理流程)
-  - [2.9. gRPC基于HTTP/2的优缺点](#29-grpc基于http2的优缺点)
-  - [2.10. gRPC 强大的功能](#210-grpc-强大的功能)
-    - [2.10.1. 服务治理](#2101-服务治理)
-- [3. Performance](#3-performance)
-- [4. References](#4-references)
+  - [1.2. gRPC 特点](#12-grpc-特点)
+  - [1.3. Service definition](#13-service-definition)
+    - [1.3.1. 流的结束](#131-流的结束)
+  - [1.2. proto 文件](#12-proto-文件)
+  - [1.3. gRPC 服务端](#13-grpc-服务端)
+  - [1.4. gRPC 客户端](#14-grpc-客户端)
+    - [1.4.1. 同步（Synchronous）](#141-同步synchronous)
+  - [1.2. 同步RPC缺点](#12-同步rpc缺点)
+    - [1.2.1. 异步（Asynchronous）](#121-异步asynchronous)
+      - [1.2.1.1. 实现 C++ gRPC 异步双向流注意事项](#1211-实现-c-grpc-异步双向流注意事项)
+      - [1.2.1.2. API接口](#1212-api接口)
+      - [1.2.1.3. 多线程](#1213-多线程)
+  - [1.2. gRPC 处理流程](#12-grpc-处理流程)
+  - [1.3. gRPC基于HTTP/2的优缺点](#13-grpc基于http2的优缺点)
+  - [1.4. gRPC 强大的功能](#14-grpc-强大的功能)
+    - [1.4.1. 服务治理](#141-服务治理)
+- [2. Performance](#2-performance)
+- [3. References](#3-references)
 
 <!-- /TOC -->
 
@@ -102,7 +107,7 @@ User-defined metadata is not used by gRPC, which allows the client to provide in
 
 
 
-## 2.3. gRPC 特点
+## 1.2. gRPC 特点
 
 1. 语言中立，支持多种语言；
 2. 基于 IDL 文件定义服务，通过 proto3 工具生成指定语言的数据结构、服务端接口以及客户端 Stub；
@@ -113,7 +118,7 @@ User-defined metadata is not used by gRPC, which allows the client to provide in
 
 
 
-## 2.4. Service definition
+## 1.3. Service definition
 
 gRPC 有 4  种请求和响应模式。
 
@@ -157,7 +162,7 @@ gRPC 有 4  种请求和响应模式。
 
 
 
-### 流的结束
+### 1.3.1. 流的结束
 
 - Client 发送流：通过 `Writer->WritesDone()` 结束流
 - Server 发送流：通过结束 rpc 调用并返回状态码`status code`的方式来结束流
@@ -165,7 +170,7 @@ gRPC 有 4  种请求和响应模式。
 
 
 
-## 2.5. proto 文件
+## 1.2. proto 文件
 
 gRPC 默认采用 protocol buffers 数据传输格式。protocol buffers 是google开发的一种能够将结构数据序列化的数据描述语言。
 
@@ -214,23 +219,35 @@ protoc --cpp_out=. ./server_stream.proto
 
 
 
-## 2.6. gRPC 服务端
+## 1.3. gRPC 服务端
 
 
 
-## 2.7. gRPC 客户端
+## 1.4. gRPC 客户端
 
 gRPC 支持两种类型的 client stub。
 
-### 2.7.1. 同步（Synchronous）
+### 1.4.1. 同步（Synchronous）
 
-client 等（wait）server 返回的响应。
+同步rpc调用调用完后，client 不立即=返回，而是等（wait）server 返回的响应。
 
-### 2.7.2. 异步（Asynchronous）
+
+
+## 1.2. 同步RPC缺点
+
+1. 线程利用率低：线程资源是系统中非常重要的资源，在一个进程中线程总数是有限制的，提升线程使用率就能够有效提升系统的吞吐量，在同步 RPC 调用中，如果服务端没有返回响应，客户端业务线程就会一直阻塞，无法处理其它业务消息。
+2. 纠结的超时时间：RPC 调用的超时时间配置是个比较棘手的问题。如果配置的过大，一旦服务端返回响应慢，就容易把客户端挂死。如果配置的过小，则超时失败率会增加。即便参考测试环境的平均和最大时延来设置，由于生产环境数据、硬件等与测试环境的差异，也很难一次设置的比较合理。另外，考虑到客户端流量的变化、服务端依赖的数据库、缓存、第三方系统等的性能波动，这都会导致服务调用时延发生变化，因此，依靠超时时间来保障系统的可靠性，难度很大。
+3. 雪崩效应：在一个同步调用链中，只要下游某个服务返回响应慢，会导致故障沿着调用链向上游蔓延，最终把整个系统都拖垮，引起雪崩
+
+
+
+### 1.2.1. 异步（Asynchronous）
 
 概念：client 采用非阻塞式（non-blocking）的去调用 server 端返回的响应。异步API 会阻塞线程，直到一个接收或发送一个消息（message）。
 
 C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**CompletionQueue** 是一个 `event queue`。任何异步操作的完成都是完成队列中的一个事件。
+
+异步调用是从 CompletionQueue 中取得响应返回的结果。
 
 - 在异步客户端中，通过`gRPC` `stub` 的异步方法调用，获取`ClientAsyncResponseReader`的实例。
 - 在异步客户端中，`ClientAsyncResponseReader` 的Finish方法向 `CompletionQueue`注册了响应消息处理器和响应消息体的存储容器。
@@ -241,13 +258,9 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 
 - 绑定一个 `CompletionQueue` 到一个 RPC 调用
 - 利用唯一的 `void*` Tag 进行读写
-- 调用 `CompletionQueue::Next()` 等待操作完成，完成后通过唯一的 Tag 来判断对应什么请求/返回进行后续操作
+- 调用 `CompletionQueue::Next()` 等待操作完成，完成后通过唯一的 Tag 来判断对应什么请求/返回进行后续操作。tag：根据`CompletionQueue`返回的 tag 知道是哪个对象产生了事件。
 
-
-
-tag：根据`CompletionQueue`返回的 tag 知道是哪个对象产生了事件。
-
-#### 实现 C++ gRPC 异步双向流需要注意以下几个方面：
+#### 1.2.1.1. 实现 C++ gRPC 异步双向流注意事项
 
 1. 使用异步 API：使用 C++ gRPC 提供的异步 API，如 `AsyncReaderWriter`，而不是同步 API。异步 API 能够在单线程内处理多个客户端请求，提高程序的并发性能。
 2. 线程安全：C++ gRPC 是线程安全的，但需要保证在使用 gRPC API 时，线程安全性不受影响。需要注意避免多个线程同时访问同一资源导致的竞态条件问题。
@@ -258,18 +271,33 @@ tag：根据`CompletionQueue`返回的 tag 知道是哪个对象产生了事件�
 
 
 
+#### 1.2.1.2. API接口
+
+- `StartCall`：开始异步RPC调用。
+- `Finish`：等待服务器的响应。
+- `Next`：一旦服务器的响应到达，调用`cq.Next`方法来获取响应，并检查状态是否OK。
+- `PrepareAsyncYourMethod`：准备一个异步的RPC调用。
+
+
+
+#### 1.2.1.3. 多线程
+
+对于如何在多线程中使用异步 RPC API 完成队列，官方的的文档说明是：Right now, the best performance trade-off is having numcpu's threads and one completion queue per thread.
+
+当前，最好的权衡性能的方法是使用创建 cpu 个数的线程数，并在每个线程中都使用一个完成队列。
 
 
 
 
-## 2.8. gRPC 处理流程
+
+## 1.2. gRPC 处理流程
 
 当调用 gRPC 服务时，客户端的 gRPC 库会使用 protocol buffers，将 RPC 的请求**编排（masrshal）**为 protocol buffers 格式，然后通过 HTTP/2 进行发送。在服务端，请求会被**解排（unmasrshal）**。而响应也遵循类似的执行流，从服务端发送到客户端。
 
 - 编排：将参数和远程函数打包的过程。
 - 解排：解包消息到对应的方法调用的过程。
 
-## 2.9. gRPC基于HTTP/2的优缺点
+## 1.3. gRPC基于HTTP/2的优缺点
 
 **优点**
 
@@ -293,24 +321,24 @@ tag：根据`CompletionQueue`返回的 tag 知道是哪个对象产生了事件�
 
 
 
-## 2.10. gRPC 强大的功能
+## 1.4. gRPC 强大的功能
 
 - 治理功能。比如连接管理、健康检测、负载均衡、优雅启停机、异常重试、业务分组以及熔断限流。
 - 集群管理功能。
 
-### 2.10.1. 服务治理
+### 1.4.1. 服务治理
 
 每个服务启动的时候，会将自身的服务和IP注册到注册中心，其他服务调用的时候，只需要向注册中心申请地址即可。
 
 
 
-# 3. Performance
+# 2. Performance
 
 
 
 
 
-# 4. References
+# 3. References
 
 - [gRPC 英文官方文档](https://grpc.io/)
 - [gRPC 中文文档](http://doc.oschina.net/grpc?t=61534)：与英文版本不同步，不是最新版本。
