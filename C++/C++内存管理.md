@@ -11,6 +11,19 @@
 Doug Lea自1986年开始研究malloc算法，他的作品被称为 DL Malloc，目前linux中的glibc的malloc算法就是直接来自Doug Lea，其它平台的malloc的实现或多或少受到DL的影响。
 
 
+
+# 内存管理层级
+
+1. OS（操作系统），Windows 系统的的 `HeapAlloc` 和 `VirtualAlloc`；
+2. GUNC++/CRT 编译器的 `malloc()`
+3. C++ 标准库的 `Allocator`
+4. C++ 应用程序层面的内存 API 函数。
+
+
+
+
+
+
 # 内存库作品
 
 - tcmalloc：稳定，占用内存更低。
