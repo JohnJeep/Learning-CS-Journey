@@ -1,4 +1,5 @@
 <!--
+
  * @Author: johnjeep
  * @Date: 2022-11-02 21:34:24
  * @LastEditors: johnjeep
@@ -144,11 +145,15 @@ gRPC 有 4  种请求和响应模式。
 
    
 
+   
+
 3. client-side-streaming（客户端流式RPC）
 
    在客户端流 RPC 模式中，客户端发送（write）多个请求给服务器端，而不再是单个请求，一旦客户端完成了发送消息，它等服务端去读（read）完一个序列的消息，由服务端返回一个响应 （response）。
 
    ![Client Streaming Architecture](https://www.polarsparc.com/xhtml/images/grpc-08.png)
+
+   
 
 4. Bidirectional Streaming （ 双向流式RPC）
 
@@ -159,6 +164,11 @@ gRPC 有 4  种请求和响应模式。
    注意点：
 
    - 避免 **race condition** 或 **deadlocks**。
+   
+
+在 gRPC 双向流中，每个传输的消息都有一个头部和一个消息体。其中，消息头部包括了消息的元数据，如消息类型、编解码信息、消息 ID 等；消息体则包含了具体的消息内容。这些信息都是通过 Protocol Buffers 进行编解码的。
+
+
 
 
 
@@ -212,9 +222,11 @@ message HelloReply {
 生成 `pb.cc`、`pb.h` 、`grpc.cc`、`grpc.pb.h` 文件。
 
 ```shell
-protoc --grpc_out=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin`         ./server_stream.proto
+// 指定路径下生成 cpp 文件到指定的路径
+protoc --proto_path=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` --cpp_out=/workspaces/xiot-platform/xiot-platform/iot/server/IOT-ProductServer/proto ./industrial_gateway.proto ./google/protobuf/struct.proto ./google/api/field_behavior.proto
 
-protoc --cpp_out=. ./server_stream.proto 
+// 指定路径下生成 grpc 文件到指定的路径
+ protoc --proto_path=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` --grpc_out=/workspaces/xiot-platform/xiot-platform/iot/server/IOT-ProductServer/proto ./industrial_gateway.proto ./google/protobuf/struct.proto ./google/api/field_behavior.proto 
 ```
 
 
@@ -245,6 +257,8 @@ gRPC 支持两种类型的 client stub。
 
 概念：client 采用非阻塞式（non-blocking）的去调用 server 端返回的响应。异步API 会阻塞线程，直到一个接收或发送一个消息（message）。
 
+**异步通信要考虑并行和并发。**
+
 C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**CompletionQueue** 是一个 `event queue`。任何异步操作的完成都是完成队列中的一个事件。
 
 异步调用是从 CompletionQueue 中取得响应返回的结果。
@@ -274,9 +288,54 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 #### 1.2.1.2. API接口
 
 - `StartCall`：开始异步RPC调用。
+
 - `Finish`：等待服务器的响应。
+
+- `ShutDown()` 作用
+
+  ```
+  在gRPC中，ShutDown()是一个方法，用于安全地停止gRPC服务器或客户端的所有RPC处理。它可以使gRPC平滑地退出，并等待任何未完成的RPC处理完成后关闭gRPC，同时确保不会丢失任何信息。
+  
+  具体来说，对于服务器：
+  
+  当服务器调用Shutdown()方法时，它将不再处理新的RPC请求，并且直到所有未完成的RPC请求都被处理完毕后才关闭服务器端口, 这样做的好处是，可以确保所有客户端完成所有最终的数据交换。
+  
+  应用程序可以调用Shutdown方法以便更改服务配置，例如重新加载证书、更改端口等。
+  
+  也可以设置超时选项，如果所有RPC请求在超时之前没能完成，那么服务器会强制经由Shutdown清理所有未完成的请求，如果不指定超时选项，服务器将一直等待正在处理的请求，即使超过了Graceful Shutdown Deadlin，然后关闭端口。
+  
+  对于客户端：
+  
+  当客户端调用Shutdown()方法时，它将使所有未完成的RPC请求立即终止，并且将不会处理新的RPC请求。
+  
+  客户端在调用Shutdown()方法后仍可创建新的Channels和Stubs实例，但这些实例将在未来的任何RPC处理期间忽略它们。
+  
+  综上，gRPC中的ShutDown()方法对于确保RPC请求恰当、安全地完成很重要。在服务器和客户端中，ShutDown()方法被用于清理并停止所有正在运行的RPC处理。如果不通过Shutdown()来关闭gRPC，同时存在未完成的RPC请求时，会存在内存泄漏和丢失信息的风险。
+  ```
+
 - `Next`：一旦服务器的响应到达，调用`cq.Next`方法来获取响应，并检查状态是否OK。
+
 - `PrepareAsyncYourMethod`：准备一个异步的RPC调用。
+
+- grpc::WriteOptions 
+
+  ```
+  grpc::WriteOptions 是构建 gRPC 的时候使用的选项之一，它用于控制服务器在响应请求时的行为。
+  
+  grpc::WriteOptions 主要有以下作用：
+  
+  用于控制服务器的流控制：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的流量，例如限制数据的大小、速度等。
+  
+  用于控制服务器的压缩：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的压缩方式，例如使用 Gzip 压缩或其它压缩方式。
+  
+  用于控制服务器的 Acknowledgement：当客户端发送数据给服务器时，服务器可以使用 WriteOptions 来控制何时发送 Acknowledgement，以及 Acknowledgement 的格式等。
+  ```
+
+  
+
+```
+为了防止阻塞，Read，Write和Finish都将从CompletionQueue上的一个Event标记返回，以表明每个操作何时完成。在一个while循环中持续等待，直到一些事件被触发。如果事件是状态事件，那么while循环将退出，否则事件将处理并继续循环等待下一个事件。
+```
 
 
 
@@ -286,7 +345,7 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 
 当前，最好的权衡性能的方法是使用创建 cpu 个数的线程数，并在每个线程中都使用一个完成队列。
 
-
+在高并发和效率方面，使用CompletionQueue可充分利用现代多核处理器。此外，gRPC库本身已经进行了优化以提高性能。最后，您还可以使用**流量控制**来限制客户端和服务器之间的通信速度。
 
 
 
@@ -329,6 +388,24 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 ### 1.4.1. 服务治理
 
 每个服务启动的时候，会将自身的服务和IP注册到注册中心，其他服务调用的时候，只需要向注册中心申请地址即可。
+
+### 保活机制
+
+### 负载均衡
+
+### channel 复用
+
+### 流量控制
+
+
+
+
+
+
+
+
+
+
 
 
 
