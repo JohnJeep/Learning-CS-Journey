@@ -3,7 +3,7 @@
  * @Author: johnjeep
  * @Date: 2022-11-02 21:34:24
  * @LastEditors: johnjeep
- * @LastEditTime: 2023-04-25 01:06:43
+ * @LastEditTime: 2023-05-06 01:30:46
  * @Description: gRPC 用法
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -20,6 +20,8 @@
     - [2.2.3. Metadata](#223-metadata)
   - [1.2. gRPC 特点](#12-grpc-特点)
   - [1.3. Service definition](#13-service-definition)
+    - [Request](#request)
+    - [Response](#response)
     - [1.3.1. 流的结束](#131-流的结束)
   - [1.2. proto 文件](#12-proto-文件)
   - [1.3. gRPC 服务端](#13-grpc-服务端)
@@ -34,6 +36,10 @@
   - [1.3. gRPC基于HTTP/2的优缺点](#13-grpc基于http2的优缺点)
   - [1.4. gRPC 强大的功能](#14-grpc-强大的功能)
     - [1.4.1. 服务治理](#141-服务治理)
+    - [保活机制](#保活机制)
+    - [负载均衡](#负载均衡)
+    - [channel 复用](#channel-复用)
+    - [flow control（流量控制）](#flow-control流量控制)
 - [2. Performance](#2-performance)
 - [3. References](#3-references)
 
@@ -122,6 +128,34 @@ User-defined metadata is not used by gRPC, which allows the client to provide in
 ## 1.3. Service definition
 
 gRPC 有 4  种请求和响应模式。
+
+gRPC 是 Google 基于 HTTP/2 以及 protobuf 的，要了解 gRPC 协议，只需要知道 gRPC 是如何在 HTTP/2 上面传输就可以了。
+
+gRPC 通常有四种模式，unary，client streaming，server streaming 以及 bidirectional streaming，对于底层 HTTP/2 来说，它们都是 stream，并且仍然是一套 request + response 模型。
+
+### Request
+
+gRPC 的 request 通常包含 Request-Headers, 0 或者多个 Length-Prefixed-Message 以及 EOS。
+
+Request-Headers 直接使用的 HTTP/2 headers，在 HEADERS 和 CONTINUATION frame 里面派发。定义的 header 主要有 Call-Definition 以及 Custom-Metadata。Call-Definition 里面包括 Method（其实就是用的 HTTP/2 的 POST），Content-Type 等。而 Custom-Metadata 则是应用层自定义的任意 key-value，key 不建议使用 `grpc-`开头，因为这是为 gRPC 后续自己保留的。
+
+Length-Prefixed-Message 主要在 DATA frame 里面派发，它有一个 Compressed flag 用来表示改 message 是否压缩，如果为 1，表示该 message 采用了压缩，而压缩算法定义在 header 里面的 Message-Encoding 里面。然后后面跟着四字节的 message length 以及实际的 message。
+
+EOS（end-of-stream） 会在最后的 DATA frame 里面带上了 `END_STREAM`这个 flag。用来表示 stream 不会在发送任何数据，可以关闭了。
+
+### Response
+
+Response 主要包含 Response-Headers，0 或者多个 Length-Prefixed-Message 以及 Trailers。如果遇到了错误，也可以直接返回 Trailers-Only。
+
+Response-Headers 主要包括 HTTP-Status，Content-Type 以及 Custom-Metadata 等。Trailers-Only 也有 HTTP-Status ，Content-Type 和 Trailers。Trailers 包括了 Status 以及 0 或者多个 Custom-Metadata。
+
+HTTP-Status 就是我们通常的 HTTP 200，301，400 这些，很通用就不再解释。Status 也就是 gRPC 的 status， 而 Status-Message 则是 gRPC 的 message。Status-Message 采用了 Percent-Encoded 的编码方式，具体参考 [这里 ](https://tools.ietf.org/html/rfc3986#section-2.1)。
+
+如果在最后收到的 HEADERS frame 里面，带上了 Trailers，并且有 `END_STREAM`这个 flag，那么就意味着 response 的 EOS。
+
+
+
+
 
 1. Unary（一元 RPC）
 
@@ -395,7 +429,16 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 
 ### channel 复用
 
-### 流量控制
+### flow control（流量控制）
+
+HTTP/2 也支持流控，如果 sender 端发送数据太快，receiver 端可能因为太忙，或者压力太大，或者只想给特定的 stream 分配资源，receiver 端就可能不想处理这些数据。譬如，如果 client 给 server 请求了一个视频，但这时候用户暂停观看了，client 就可能告诉 server 别在发送数据了。
+
+虽然 TCP 也有 flow control，但它仅仅只对一个连接有效果。HTTP/2 在一条连接上面会有多个 streams，有时候，我们仅仅只想对一些 stream 进行控制，所以 HTTP/2 单独提供了流控机制。Flow control 有如下特性：
+
+- Flow control 是单向的。Receiver 可以选择给 stream 或者整个连接设置 window size。
+- Flow control 是基于信任的。Receiver 只是会给 sender 建议它的初始连接和 stream 的 flow control window size。
+- Flow control 不可能被禁止掉。当 HTTP/2 连接建立起来之后，client 和 server 会交换 SETTINGS frames，用来设置 flow control window size。
+- Flow control 是 hop-by-hop，并不是 end-to-end 的，也就是我们可以用一个中间人来进行 flow control。
 
 
 
