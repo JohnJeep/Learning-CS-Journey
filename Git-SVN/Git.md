@@ -180,8 +180,13 @@ Git tag 有两种类型。
 
 Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-convertion.md) 文档。
 
-
 ## 1.8. Git diff
+
+执行 `Git diff` 命令后，显示的结果分析：
+
+> 执行命令之后，绿色部分代表增加的内容，红色部分代表删除的内容，
+>
+> ---代表源文件，即修改前的文件；+++代表目标文件，即修改后的文件;
 
 - `git diff` 比较工作区和暂存区之间的差异
 
