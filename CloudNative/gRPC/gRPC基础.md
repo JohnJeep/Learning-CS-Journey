@@ -425,6 +425,8 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 
 ### 保活机制
 
+## 熔断机制/限流机制
+
 ### 负载均衡
 
 ### channel 复用
@@ -460,7 +462,8 @@ HTTP/2 也支持流控，如果 sender 端发送数据太快，receiver 端可�
 
 # 3. References
 
-- [gRPC 英文官方文档](https://grpc.io/)
+- gRPC 英文官方文档：https://grpc.io/
+- Github仓库解释gRPC设计的原理：https://github.com/grpc/proposal
 - [gRPC 中文文档](http://doc.oschina.net/grpc?t=61534)：与英文版本不同步，不是最新版本。
 - [What is gRPC? Protocol Buffers, Streaming, and Architecture Explained](https://www.freecodecamp.org/news/what-is-grpc-protocol-buffers-stream-architecture/)
 - [Introduction to gRPC Part1](https://www.polarsparc.com/xhtml/gRPC-1.html)

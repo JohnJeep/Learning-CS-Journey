@@ -78,6 +78,24 @@ gRPC GoAway 机制是一种可靠的方法，用于管理长连接和复杂的�
 
 
 
-# 3. 参考
+# gRPC epoll architecture
 
-[CSDN：gRPC 源码分析](https://blog.csdn.net/happyanger6/category_9292845.html)
+
+
+- https://github.com/grpc/grpc/blob/master/doc/core/epoll-polling-engine.md
+- https://yiakwy.github.io/blog/2017/10/01/gRPC-C-CORE
+
+
+
+# Visualizing gRPC Language Stacks
+
+https://grpc.io/blog/grpc-stacks/
+
+gRPC: Under the Hood: https://www.oreilly.com/library/view/grpc-up-and/9781492058328/ch04.html
+
+
+
+# 3. References
+
+- CSDN：gRPC 源码分析: https://blog.csdn.net/happyanger6/category_9292845.html
+- RPC原理以及GRPC详解: https://www.cnblogs.com/awesomeHai/p/liuhai.html
