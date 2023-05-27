@@ -1,11 +1,10 @@
 <!--
-
  * @Author: JohnJeep
- * @Date: 2022-03-09 22:49:01
- * @LastEditTime: 2022-03-09 23:40:52
- * @LastEditors: Please set LastEditors
- * @Description: fopen 函数与 open 函数的区别
- * @FilePath: \Learning-CS-Journey\C\fopen() 与 open() 区别.md
+ * @Date: 2022-03-09 17:36:33
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-05-27 17:04:47
+ * @Description:  fopen 函数与 open 函数的区别
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
 ## open() 函数
@@ -140,9 +139,10 @@ int main(void)
 ## fopen() 与 open() 区别
 
 1. Windows 下 `CreateFile` 可以通过参数来制定，保证读写是否线程安全，而 `fopen` 则不可以。
-2. fopen 工作在用户空间，open 是 Linux 的系统调用，所以工作在内核空间。
+2. `fopen` 工作在用户空间，`open` 是 Linux 的系统调用，所以工作在内核空间。
 
 不同的进程同时访问一个文件，给文件加锁是有效的；而一个进程中的多个线程或协程同时对同一个文件进行加锁会互相覆盖掉，是无效的。
+
 
 ## Reference
 
