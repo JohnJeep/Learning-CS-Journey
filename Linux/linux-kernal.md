@@ -2,10 +2,34 @@
  * @Author: JohnJeep
  * @Date: Wednesday, August 19th 2020, 18:58:33 PM
  * @LastEditors: JohnJeep
- * @LastEditTime: Saturday, July 9th 2022, 14:06:44 PM
+ * @LastEditTime: 2023-05-27 15:40:16
  * @Description: Linux kernal 学习
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
+
+<!-- TOC -->
+
+- [1. 理解内核的秘籍](#1-理解内核的秘籍)
+- [2. 如何学习内核](#2-如何学习内核)
+  - [2.1. 核心的东西：最基础、最原始的概念。](#21-核心的东西最基础最原始的概念)
+- [2. Linux 内核体系结构](#2-linux-内核体系结构)
+  - [2.1. 内核模式与体系结构](#21-内核模式与体系结构)
+  - [2.2. struct](#22-struct)
+  - [2.3. 内核中断](#23-内核中断)
+  - [2.4. 内核进程](#24-内核进程)
+- [2. Linux 内核源码结构](#2-linux-内核源码结构)
+  - [2.1. Linux 内核源码宏观结构](#21-linux-内核源码宏观结构)
+  - [2.2. Linux 内核源码各级源码分类](#22-linux-内核源码各级源码分类)
+  - [2.3. Linux 内核源码解析第一刀](#23-linux-内核源码解析第一刀)
+- [2. Linux 内核引导程序](#2-linux-内核引导程序)
+  - [2.1. Linux 内核启动程序分析](#21-linux-内核启动程序分析)
+  - [2.2. Linux 内核初始化程序分析](#22-linux-内核初始化程序分析)
+  - [2.3. Linux 第一个进程分析](#23-linux-第一个进程分析)
+- [2. The Linux Storage Stack Diagram](#2-the-linux-storage-stack-diagram)
+- [3. Reference](#3-reference)
+
+<!-- /TOC -->
+
 
 # 1. 理解内核的秘籍
 
@@ -41,7 +65,7 @@ dmesg
 
 menuconfig
 
-# 3. Linux 内核体系结构
+# 2. Linux 内核体系结构
 
 - Linux是一个单内核，运行在单独的内核空间上。具有模块化设计、抢占式内核、支持内核线程、动态装载内核模块的能力，让所有事情都运行在内核态，直接调用函数，无须消息传递。
 
@@ -67,7 +91,7 @@ Linux 内核架构
 
 
 
-## 3.1. 内核模式与体系结构
+## 2.1. 内核模式与体系结构
 
 操作系统的工作方式
 
@@ -91,65 +115,56 @@ Linux 内核架构
   1. 内核驱动的种类变多了，但内核驱动的管理模式并没有发生巨大的改变，比如：一段时间的三个跳段：零散型、分层型、设备树（Android操作系统）。
   2. 进程的调度算法发生了改变，但进程的管理方式没有发生巨大的改变。
 
-## 3.2. struct
+## 2.2. struct
 
 内核中常见的 struct 结构体
 
 - task_struct
 - mm_task
 
-## 3.3. 内核中断
+## 2.3. 内核中断
 
-## 3.4. 内核进程
+## 2.4. 内核进程
 
-[task_struct(进程描述符)](https://blog.csdn.net/lf_2016/article/details/54347820)
+task_struct(进程描述符：https://blog.csdn.net/lf_2016/article/details/54347820
 
 每一个进程都有一个 task_struct。
 
-# 4. Linux 内核源码结构
-
-## 4.1. Linux 内核源码宏观结构
-
-## 4.2. Linux 内核源码各级源码分类
-
-## 4.3. Linux 内核源码解析第一刀
-
-# 5. Linux 内核引导程序
-
-## 5.1. Linux 内核启动程序分析
-
-## 5.2. Linux 内核初始化程序分析
-
-## 5.3. Linux 第一个进程分析
-
-# 6. 网络
-
-- [Github Linux 4.4.0内核源码分析——TCP实现](https://github.com/fzyz999/Analysis_TCP_in_Linux)  真的是宝贝啊！！！！
-- [个人博客：ARTHURCHIAO'S BLOG ](https://arthurchiao.art/articles-zh/) 主要是 Linux 和 Linux 网络相关的文章，也是宝贝啊！！！
-- [Linux 网络栈监控和调优：接收数据（2016）](https://arthurchiao.art/blog/tuning-stack-rx-zh/)
-- [ Linux 网络栈监控和调优：发送数据（2017）](https://arthurchiao.art/blog/tuning-stack-tx-zh/)
-- [[译] NAT - 网络地址转换（2016）](https://arthurchiao.art/blog/nat-zh/)
-- [Github Linus 介绍 Scaling in the Linux Networking Stack](https://github.com/torvalds/linux/blob/master/Documentation/networking/scaling.rst)
-- [Introduction to Linux interfaces for virtual networking](https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking#)  介绍虚拟网络：Bridge、VLAN等
-- [Linux 基金开源协会讲解 napi ](https://wiki.linuxfoundation.org/networking/napi)
-
-## 6.1. Netfilter
-
-Netfilter 是 Linux 内核内部的**包过滤和处理框架**。
-
-<img src="../Linux/pictures/Netfilter-packet-flow.svg">
+# 2. Linux 内核源码结构
 
 
 
-[官方 netfilter 文档](https://www.netfilter.org/)
-
-## 6.2. Iptables
-
-[Iptables Tutorial 1.2.2](https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html)
+## 2.1. Linux 内核源码宏观结构
 
 
 
-# The Linux Storage Stack Diagram
+## 2.2. Linux 内核源码各级源码分类
+
+
+
+## 2.3. Linux 内核源码解析第一刀
+
+
+
+# 2. Linux 内核引导程序
+
+
+
+## 2.1. Linux 内核启动程序分析
+
+
+
+## 2.2. Linux 内核初始化程序分析
+
+
+
+## 2.3. Linux 第一个进程分析
+
+
+
+
+
+# 2. The Linux Storage Stack Diagram
 
 <img src="pictures/The_Linux_Storage_Stack_Diagram.svg">
 
@@ -159,7 +174,7 @@ Netfilter 是 Linux 内核内部的**包过滤和处理框架**。
 
 
 
-# 7. Reference
+# 3. Reference
 
 - 英文WIKI: https://en.wikipedia.org/wiki/Linux_kernel
 
@@ -189,6 +204,6 @@ Netfilter 是 Linux 内核内部的**包过滤和处理框架**。
 
 - What every programmer should know about memory: https://lwn.net/Articles/250967
 
-  博客写了关于 Memory、CPU caches、Virtual memory、NUMA systems、cache optimization、multi-threaded optimizations、Memory performance tools 等各个方面的知识，质量很高，需要细细的琢磨。
+  <font color=red>博客写了关于 Memory、CPU caches、Virtual memory、NUMA systems、cache optimization、multi-threaded optimizations、Memory performance tools 等各个方面的知识，质量很高，需要细细的琢磨。</font>
 
 - Linux0号进程，1号进程，2号进程: https://cloud.tencent.com/developer/article/1603977
