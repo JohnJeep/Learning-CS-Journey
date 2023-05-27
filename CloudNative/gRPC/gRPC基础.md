@@ -2,8 +2,8 @@
 
  * @Author: johnjeep
  * @Date: 2022-11-02 21:34:24
- * @LastEditors: johnjeep
- * @LastEditTime: 2023-05-06 01:30:46
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-05-27 15:36:13
  * @Description: gRPC 用法
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -33,10 +33,11 @@
       - [1.2.1.2. API接口](#1212-api接口)
       - [1.2.1.3. 多线程](#1213-多线程)
   - [1.2. gRPC 处理流程](#12-grpc-处理流程)
-  - [1.3. gRPC基于HTTP/2的优缺点](#13-grpc基于http2的优缺点)
+  - [](#)
   - [1.4. gRPC 强大的功能](#14-grpc-强大的功能)
     - [1.4.1. 服务治理](#141-服务治理)
     - [保活机制](#保活机制)
+  - [熔断机制/限流机制](#熔断机制限流机制)
     - [负载均衡](#负载均衡)
     - [channel 复用](#channel-复用)
     - [flow control（流量控制）](#flow-control流量控制)
@@ -92,25 +93,34 @@ RPC 标准最早是由Bruce Jay Nelson 写的论文 [Implementing Remote Procedu
 
 ### 2.2.1. Channel
 
-- channel 是一个连接。在指定的 host 和 IP 上与 gRPC server 建立的连接。只在当创建一个客户端的 stub时候会被用到。
-- Clients 可以指定 channel 的参数，去修改gRPC 的默认行为，例如：开启或关闭消息压缩的开关。
-- 一个 channel 是具有状态的，包括 `idle` 和 `connected`。
+在 gRPC 中，Channel 是客户端与服务端之间通信的通道。当客户端需要与服务端进行通信时，它需要创建一个 Channel 对象，通过这个对象来发送请求和接收响应。
+
+Channel 是一个连接池，它会缓存与服务端的连接以提高请求的效率。当客户端发送一个请求时，它会从连接池中获取一个可用的连接，如果连接池中没有可用连接，则会创建一个新的连接。
+
+除了发送请求和接收响应外，Channel 还可以提供一些其他的功能，例如**拦截器、事件监听、性能指标**等等。
+
+- 拦截器可以用来拦截请求和响应，并对其进行处理，例如添加认证信息、日志记录等等。
+- 事件监听器可以监听 Channel 中发生的事件，例如连接建立、连接断开、请求发送等等。
+- 性能指标可以用来监控 Channel 中请求的成功率、延迟等指标，帮助开发者进行性能优化。
+
+
+
+> - Clients 可以指定 channel 的参数，去修改gRPC 的默认行为，例如：开启或关闭消息压缩的开关。
+> - 一个 channel 是具有状态的，包括 `idle` 和 `connected`。
+
+
 
 ### 2.2.2. Stub 
 
-- 客户端（client）有一个称为 stub 的本地对象（ local object ）（对于某些语言，用的术语是 client） ，它实现了与服务端（service）相同的方法。然后，客户端（client）可以在本地对象上调用这些方法，这些方法将调用的参数包装为合适的协议缓冲消息类型，将请求发送到服务器，并返回服务器的协议缓冲区的响应（protocol buffer responses）。
+在 gRPC 中，Stub 是客户端使用的一个代理类，它实现了客户端与服务端之间通信的逻辑。通过 Stub 对象，客户端可以调用远程服务提供的 RPC 方法，并将请求发送到服务端进行处理，同时接收服务端返回的响应结果。
 
-- *On the client side, the client has a local object known as stub (for some languages, the preferred term is client) that implements the same methods as the service. The client can then just call those methods on the local object, and the methods wrap the parameters for the call in the appropriate protocol buffer message type, send the requests to the server, and return the server’s protocol buffer responses.*
+在 gRPC 中，每个服务都有一个对应的 Stub 类，该类包含了该服务定义的所有 RPC 方法，客户端可以通过该 Stub 对象来调用这些方法。在 gRPC 中，Stub 类是由 Protocol Buffers 编译器自动生成的，根据服务定义的 `.proto` 文件，编译器会生成一个对应的 Stub 类，并将其与客户端代码一起编译。
+
+> 官方解释：*On the client side, the client has a local object known as stub (for some languages, the preferred term is client) that implements the same methods as the service. The client can then just call those methods on the local object, and the methods wrap the parameters for the call in the appropriate protocol buffer message type, send the requests to the server, and return the server’s protocol buffer responses.*
 
 ### 2.2.3. Metadata
 
-元数据一般是键值对的形式，表示特定的RPC调用信息。key 一般是 strings，value一般也是string，有时可能是二进制数据。元数据对gRPC本身是不透明的 - 它允许客户端提供与服务器调用相关的信息，反之亦然。
 
-Metadata is information about a particular RPC call (such as [authentication details](https://grpc.io/docs/guides/auth/)) in the form of a list of key-value pairs, where the keys are strings and the values are typically strings, but can be binary data.
-
-Keys are case insensitive and consist of ASCII letters, digits, and special characters `-`, `_`, `.` and must not start with `grpc-` (which is reserved for gRPC itself). Binary-valued keys end in `-bin` while ASCII-valued keys do not.
-
-User-defined metadata is not used by gRPC, which allows the client to provide information associated with the call to the server and vice versa.
 
 
 
@@ -327,7 +337,6 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 
 - `ShutDown()` 作用
 
-  ```
   在gRPC中，ShutDown()是一个方法，用于安全地停止gRPC服务器或客户端的所有RPC处理。它可以使gRPC平滑地退出，并等待任何未完成的RPC处理完成后关闭gRPC，同时确保不会丢失任何信息。
   
   具体来说，对于服务器：
@@ -345,26 +354,20 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
   客户端在调用Shutdown()方法后仍可创建新的Channels和Stubs实例，但这些实例将在未来的任何RPC处理期间忽略它们。
   
   综上，gRPC中的ShutDown()方法对于确保RPC请求恰当、安全地完成很重要。在服务器和客户端中，ShutDown()方法被用于清理并停止所有正在运行的RPC处理。如果不通过Shutdown()来关闭gRPC，同时存在未完成的RPC请求时，会存在内存泄漏和丢失信息的风险。
-  ```
-
+  
 - `Next`：一旦服务器的响应到达，调用`cq.Next`方法来获取响应，并检查状态是否OK。
 
 - `PrepareAsyncYourMethod`：准备一个异步的RPC调用。
 
-- grpc::WriteOptions 
+- `grpc::WriteOptions` 
 
-  ```
-  grpc::WriteOptions 是构建 gRPC 的时候使用的选项之一，它用于控制服务器在响应请求时的行为。
+  - grpc::WriteOptions 是构建 gRPC 的时候使用的选项之一，它用于控制服务器在响应请求时的行为。在 gRPC C++ 中，可以使用 `grpc::WriteOptions` 类来设置写入选项。其中，`writeOptions.set_last_message(true)` 方法用于设置当前消息是否为 Bidirectional Stream 中的最后一个消息。当设置为 true 时，表示当前消息为最后一个消息，否则表示当前消息为中间消息。
   
-  grpc::WriteOptions 主要有以下作用：
+  - `grpc::WriteOptions` 主要有以下作用：
+    - 用于控制服务器的流控制：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的流量，例如限制数据的大小、速度等。
+    - 用于控制服务器的压缩：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的压缩方式，例如使用 Gzip 压缩或其它压缩方式。
+    - 用于控制服务器的 Acknowledgement：当客户端发送数据给服务器时，服务器可以使用 WriteOptions 来控制何时发送 Acknowledgement，以及 Acknowledgement 的格式等。
   
-  用于控制服务器的流控制：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的流量，例如限制数据的大小、速度等。
-  
-  用于控制服务器的压缩：当客户端向服务器发送数据时，服务器可以使用 WriteOptions 来控制数据的压缩方式，例如使用 Gzip 压缩或其它压缩方式。
-  
-  用于控制服务器的 Acknowledgement：当客户端发送数据给服务器时，服务器可以使用 WriteOptions 来控制何时发送 Acknowledgement，以及 Acknowledgement 的格式等。
-  ```
-
   
 
 ```
@@ -390,29 +393,7 @@ C++ gRPC 异步的操作是采用 **CompletionQueue** 来实现的。**Completio
 - 编排：将参数和远程函数打包的过程。
 - 解排：解包消息到对应的方法调用的过程。
 
-## 1.3. gRPC基于HTTP/2的优缺点
-
-**优点**
-
-- HTTP/2是一个经过实践检验的公开的标准
-- 天然支持手机、物联网、浏览器
-- 多语言实现容易，每种流行的编程语言都有自己的HTTP/2 Client
-- HTTP/2支持Stream和流控
-- 基于HTTP/2 在Gateway/Proxy很容易支持
-- HTTP/2 安全性有保证
-- HTTP/2 鉴权成熟
-
-**缺点**
-
-- RPC 的元数据的传输不够高效
-- HTTP/2 里一次 gRPC 调用需要解码两次,一次是HEADERS frame，一次是DATA frame
-- HTTP/2 标准本身是只有一个TCP连接，但是实际在 gRPC 里是会有多个TCP连接，使用时需要注意。
-
-
-
-
-
-
+## 
 
 ## 1.4. gRPC 强大的功能
 
