@@ -1,3 +1,13 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-04-08 09:27:21
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-05-27 15:38:07
+ * @Description: Protobuf 知识
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+-->
+
+
 ## 概念
 
 
@@ -55,6 +65,23 @@ protobuf 中定义服务
 以上是日常涉及的常见功能，如果还想详细了解可阅读 [Protobuf Version 3.0.0](https://github.com/protocolbuffers/protobuf/releases?after=v3.2.1)
 
 
+
+## Protobuf 适用场景
+
+思考方向：使用这个协议会产生什么影响。
+
+1. 网络带宽
+2. 吞吐量
+3. 响应速度
+4. 传输效率
+5. 存储成本
+
+
+
+### 处理大数据包局限
+
+1. 内存占用：在反序列化大型 Protobuf 数据包时，需要将整个数据包加载到内存中。这可能导致内存占用较高，因此在处理非常大的数据包时，可能需要考虑分块处理或其他优化策略。
+2. 消息大小限制：Protobuf 有一个默认的消息大小限制（默认为 64MB），超过该限制的数据包将无法正常处理。可以通过调整配置或使用流式处理来解决此问题，但需要注意潜在的影响。
 
 
 
