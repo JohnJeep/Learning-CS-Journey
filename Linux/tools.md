@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-22 19:04:41
- * @LastEditTime: 2022-01-27 15:42:34
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2023-05-27 15:41:12
+ * @LastEditors: JohnJeep
  * @Description: 积累Linux下常用的开发工具
 -->
 
@@ -31,8 +31,13 @@
 
 # 3. 内存泄漏检测工具
 
-- valgrind
+- valgrind 
+
+  [valgrind.md](valgrind.md) 
+
 - mtrace
+
 - AddressSanitizer(ASan) : 该工具为 gcc 自带，4.8以上版本都可以使用，支持Linux、OS、Android等多种平台，不止可以检测内存泄漏，它其实是一个内存错误检测具，可以检测的问题有：内存泄漏、堆栈和全局内存越界访问、free后继续使用、局部内存被外层使用、Initialization order bugs。
+
 - VLD (Visual Leak Detector) 是一款开源检测内存泄露软件，Windows 下 visual studio 中非常好用的内存泄漏检测工具。
 
