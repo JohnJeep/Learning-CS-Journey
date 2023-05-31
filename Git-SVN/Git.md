@@ -1,8 +1,8 @@
 <!--
  * @Author: johnjeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditors: johnjeep
- * @LastEditTime: 2022-12-27 22:37:56
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-05-31 19:11:18
  * @Description: git基础命令学习 
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -33,6 +33,8 @@
   - [2.2. Remote repo branch](#22-remote-repo-branch)
   - [2.3. Branches Principle](#23-branches-principle)
   - [2.4. Branches conflict](#24-branches-conflict)
+    - [2.4.1. Git rebase](#241-git-rebase)
+    - [2.4.2. Git merge](#242-git-merge)
 - [3. Git 四区](#3-git-四区)
   - [3.1. Workspace](#31-workspace)
   - [3.2. Index](#32-index)
@@ -228,7 +230,45 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
 
 ## 1.10. Git blame
 
+在 Git 中，`blame` 是一个命令，用于查看文件的每一行是由哪个提交引入的。它可以帮助你确定代码中每个行的作者和最后修改的时间。
 
+`git blame` 的基本用法如下：
+
+```
+git blame <file>
+```
+
+这会显示文件的每一行，以及每一行最后一次修改的提交信息，包括提交的哈希值、作者的姓名、修改的日期和时间。
+
+你也可以通过指定一个特定的提交范围来限制 `blame` 的输出。以下是几个示例：
+
+1. 指定一个文件的某个版本：
+
+   ```
+   git blame <commit> -- <file>
+   ```
+
+   这会显示指定提交中文件的每一行。
+
+2. 指定某个提交之前的所有提交：
+
+   ```
+   git blame <commit>^ -- <file>
+   ```
+
+   这会显示指定提交之前的所有提交中文件的每一行。
+
+3. 指定一个提交范围：
+
+   ```
+   git blame <start-commit>..<end-commit> -- <file>
+   ```
+
+   这会显示指定提交范围内文件的每一行。
+
+`git blame` 还支持其他一些选项，例如 `-L` 选项用于指定只显示文件中的特定行号范围，以及 `-w` 选项用于忽略空白字符的变化。
+
+这些只是 `git blame` 的基本用法和一些常见选项，还有其他更高级的用法，你可以查看 Git 的官方文档或运行 `git blame --help` 来获取更多详细信息。
 
 
 ## 1.11. Git bisect
@@ -449,7 +489,7 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
 
 采用 `Git rebase`与 `git merge` 进行解决
 
-### Git rebase
+### 2.4.1. Git rebase
 
 - 合并多次提交纪录
   
@@ -460,7 +500,7 @@ Git创建一个分支很快，因为除了增加一个 `testing` 指针，改变
 
 <font color="red"> 注意: </font> 已经推送到 github 远程仓库的文件（多人开发的重要分支）不要使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
 
-###  Git merge
+###  2.4.2. Git merge
 
 - 默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将 Master 分支指向 Develop 分支。使用 `--no-ff`  参数，用普通模式合并，在 master 主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而 `fast forward` 合并，则没有合并操作的记录，会丢掉分支信息。
 
@@ -640,32 +680,46 @@ Git清空版本库
 
 # 4. Git config
 
-配置项目或仓库级别用户名和密码，该配置位于 `.git` 路径下的 `config` 文件中。
+- 配置项目或某个仓库的用户名和密码，该配置位于 `.git` 路径下的 `config` 文件中。
 
-```bash
-git config user.name=xxxxx
-git config user.email=xxxx@gmail.com
-```
+  ```bash
+  git config --local user.name=xxxxx
+  git config --local user.email=xxxx@gmail.com
+  ```
 
-配置系统用户级别的用户名和密码，该配置位于用户家目录下的 `.gitconfig` 文件中。
+- 配置系统用户级别的用户名和密码，该配置位于用户家目录下的 `.gitconfig` 文件中。
 
-```bash
-git config --global user.name=xxxxx
-git config --global user.email=xxxx@gmail.com
-```
+  ```bash
+  git config --global user.name=xxxxx
+  git config --global user.email=xxxx@gmail.com
+  ```
 
-配置当前操作系统下，所有用户使用 git 的用户名和密码，一般不建议这么做，不太安全。
+- 配置当前操作系统下，所有用户使用 git 的用户名和密码，一般不建议这么做，不太安全。
 
-```bash
-git config --system user.name=xxxxx
-git config --system user.email=xxxx@gmail.com
-```
+  ```bash
+  git config --system user.name=xxxxx
+  git config --system user.email=xxxx@gmail.com
+  ```
 
-存储用户名
+- 设置了一个本地的凭证助手（credential helper）来处理凭证信息，以便在使用 Git 进行远程操作时，不需要每次都输入用户名和密码。
 
-```bash
-git config --local credential.helper store
-```
+  ```bash
+  git config --local credential.helper store
+  ```
+
+  当你运行这个命令时，Git 会将凭证信息存储在本地存储中，通常是在你的用户目录下的一个隐藏文件中（`.git-credentials`）。存储的凭证信息包括远程仓库的 URL、用户名和密码。
+
+  设置了 `credential.helper` 为 `store` 后，Git 会将凭证信息明文存储在本地文件中。这样，在后续的操作中，Git 将会自动从本地文件中读取凭证信息，而无需再次输入用户名和密码。这在简化日常的 Git 操作过程中非常有用，特别是当你需要频繁地与远程仓库进行交互时。
+
+  需要注意的是，存储凭证信息明文可能存在安全风险，因为其他人可以访问到这些凭证信息。因此，建议在安全的环境下使用 `store` 凭证助手，或者考虑使用其他更安全的凭证助手，如 `cache` 或 `osxkeychain`，它们可以更加安全地存储凭证信息。
+
+  如果你希望移除 `store` 凭证助手的配置，可以使用以下命令：
+
+  ```bash
+  git config --local --unset credential.helper
+  ```
+
+  这会从 Git 配置中移除 `credential.helper` 的设置，并停止使用凭证助手来存储和管理凭证信息。
 
 # 5. Git 代理配置
 
@@ -735,8 +789,9 @@ Windows下修改Host文件
 
 # 8. Reference
 - [git-scm.com](https://git-scm.com/docs): Git官方参考手册。
+- [GitHub Training Kit](https://training.github.com/): 来自 Github 官方专业服务团队的开源课程软件，非常好！！！
 - [**git-recipes**](https://github.com/geeeeeeeeek/git-recipes)：github上开源的git中文食谱，收集了许多国外优秀的文章，质量很高。
-- [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html): 采用画图的方式来理解Git.
+- [图解Git](http://marklodato.github.io/visual-git-guide/index-zh-cn.html): 采用画图的方式来理解Git。
 - [Learn Git Branching](https://learngitbranching.js.org/)：通过玩游戏的方式来学习Git。
 - [Version Control (Git)](https://missing.csail.mit.edu/2020/version-control/): MIT 2020 年开设的一门 missing-semester 课程，这是 Version Control (Git) 章节。
 - [Git头指针分离状态](https://blog.csdn.net/qq_32907195/article/details/109217034)
