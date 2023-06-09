@@ -2,7 +2,7 @@
  * @Author: johnjeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-31 19:11:18
+ * @LastEditTime: 2023-06-09 18:54:19
  * @Description: git基础命令学习 
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -720,10 +720,13 @@ Git清空版本库
   ```
 
   这会从 Git 配置中移除 `credential.helper` 的设置，并停止使用凭证助手来存储和管理凭证信息。
+  
+  参考文献：
+  - [官网 Git 工具 - 凭证存储](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8)
 
 # 5. Git 代理配置
 
-只对github进行代理，不影响国内的仓库
+只对 github 进行代理，不影响国内的仓库
 
 ```bash
 git config --global http.https//github.com.proxy http://127.0.0.1:8001
