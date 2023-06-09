@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-31 19:10:35
+ * @LastEditTime: 2023-06-09 18:55:01
  * @Description: Go 语言学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -72,7 +72,6 @@
   - [7.4. 包之间调用](#74-包之间调用)
   - [7.5. 打包](#75-打包)
   - [7.6. 导入包](#76-导入包)
-  - [7.7. 文献](#77-文献)
 - [8. Testing(测试)](#8-testing测试)
   - [8.1. 测试函数](#81-测试函数)
   - [8.2. 基准测试](#82-基准测试)
@@ -155,12 +154,6 @@ Go 代码必须在工作空间内。工作空间是一个目录，其中包含�
 
 
 自动生成 `pkg`、`bin` 目录文件，需用 `go install` 命令即可，还需在 go 的环境变量中配置 `GOBIN` 路径。
-
-参考文献
-
-- <font color=red>Gihub golang-standards: https://github.com/golang-standards/project-layout </font>
-- golang 编程规范 - 项目目录结构：https://makeoptim.com/golang/standards/project-layout/
-- Go工程化(二) 项目目录结构Go工程化(二) 项目目录结构：https://lailin.xyz/post/go-training-week4-project-layout.html
 
 
 
@@ -1407,18 +1400,6 @@ import _ "fmt"
 
 
 
-## 7.7. 文献
-
-- Package names: https://go.dev/blog/package-names
-
-- Style guideline for Go packages: https://rakyll.org/style-packages/
-
-- <font color=red>Github paper-code: https://github.com/danceyoung/paper-code/tree/master </font>
-
-  对一些好的技术文章结合自己的实践经验进行翻译、举例说明等或自己的经验分享。主要包括架构设计、模式设计、模型设计、重构及源码解析等。
-
-
-
 # 8. Testing(测试)
 
 Go 语言的工具和标准库中集成了轻量级的测试功能，避免了强大但复杂的测试框架。测试库提供了一些基本构件，必要时可以用来构建复杂的测试构件。
@@ -1686,27 +1667,38 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - Go 官方 Github 源码：https://github.com/golang/go
 - Github 英文 Go 开发者成长路线图：https://github.com/Alikhll/golang-developer-roadmap
 
-------------------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+工程目录
+- <font color=red>Gihub golang-standards: https://github.com/golang-standards/project-layout </font>
+- golang 编程规范 - 项目目录结构：https://makeoptim.com/golang/standards/project-layout/
+- Go工程化(二) 项目目录结构Go工程化(二) 项目目录结构：https://lailin.xyz/post/go-training-week4-project-layout.html
+
+------------------------------------------------------------------------
+
+包
+- Package names: https://go.dev/blog/package-names
+- Style guideline for Go packages: https://rakyll.org/style-packages/
+- <font color=red>Github paper-code: https://github.com/danceyoung/paper-code/tree/master </font>
+  对一些好的技术文章结合自己的实践经验进行翻译、举例说明等或自己的经验分享。主要包括架构设计、模式设计、模型设计、重构及源码解析等。
+
+------------------------------------------------------------------------
 
 - Go 教程：https://www.topgoer.com/ 非常详细，值得学习。
-
 - Go语言圣经中文教程：https://books.studygolang.com/gopl-zh/
-
 - Golang 标准库中文文档：https://studygolang.com/pkgdoc
-
 - Go 中文文档教程：https://tour.go-zh.org/list
 
+------------------------------------
+
+笔记经验分享
+
 - [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO语言题解LeetCode，比较全面，使用GO语言时值得参考。
-
 - [Halfrost-Field 冰霜之地](https://github.com/halfrost/Halfrost-Field)：Github上的一位作者记录了学习GO语言的一些方法和经验。
-
 - [Go 语言问题集(Go Questions)](https://www.bookstack.cn/read/qcrao-Go-Questions/README.md)：作者学习Go语言的笔记
-
 - [Go 语言设计与实现 ](https://draveness.me/golang/)：这位作者是个大牛，开源作品很多，该项目讲解了Go语言的一些基础知识，值得学习
-
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go
 
-  
 
 
 
