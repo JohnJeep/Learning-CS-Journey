@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-06-09 18:56:37
+ * @LastEditTime: 2023-06-13 18:18:00
  * @Description: Linux 基础用法
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -82,31 +82,31 @@
 - [21. grep](#21-grep)
 - [22. pgrep](#22-pgrep)
 - [23. PID](#23-pid)
-  - [23.1. dd](#231-dd)
-- [24. ss](#24-ss)
-- [25. lsof](#25-lsof)
-- [26. netcat](#26-netcat)
-- [27. socat](#27-socat)
-- [28. traceroute](#28-traceroute)
-- [29. man](#29-man)
-- [30. ntsysv](#30-ntsysv)
-- [31. wget](#31-wget)
-- [32. SHA](#32-sha)
-- [33. md5](#33-md5)
-- [34. ldconfig](#34-ldconfig)
-- [35. ldd](#35-ldd)
-- [36. chkconfig](#36-chkconfig)
-- [37. LD\_LIBRARY\_PATH](#37-ld_library_path)
-- [38. scp](#38-scp)
-- [39. rsync](#39-rsync)
-- [40. 防火墙](#40-防火墙)
-  - [40.1. ubuntu 下默认的防火墙](#401-ubuntu-下默认的防火墙)
-  - [40.2. CentOS下默认的防火墙](#402-centos下默认的防火墙)
-- [41. SELinux](#41-selinux)
-- [42. QAQ](#42-qaq)
-  - [42.1. Linux 与 Windows相差 8 小时](#421-linux-与-windows相差-8-小时)
-  - [42.2. enca](#422-enca)
-- [43. Reference](#43-reference)
+- [24. dd](#24-dd)
+- [25. ss](#25-ss)
+- [26. lsof](#26-lsof)
+- [27. netcat](#27-netcat)
+- [28. socat](#28-socat)
+- [29. traceroute](#29-traceroute)
+- [30. man](#30-man)
+- [31. ntsysv](#31-ntsysv)
+- [32. wget](#32-wget)
+- [33. SHA](#33-sha)
+- [34. md5](#34-md5)
+- [35. ldconfig](#35-ldconfig)
+- [36. ldd](#36-ldd)
+- [37. chkconfig](#37-chkconfig)
+- [38. LD\_LIBRARY\_PATH](#38-ld_library_path)
+- [39. scp](#39-scp)
+- [40. rsync](#40-rsync)
+- [41. 防火墙](#41-防火墙)
+  - [41.1. ubuntu 下默认的防火墙](#411-ubuntu-下默认的防火墙)
+  - [41.2. CentOS下默认的防火墙](#412-centos下默认的防火墙)
+- [42. SELinux](#42-selinux)
+- [43. QAQ](#43-qaq)
+  - [43.1. Linux 与 Windows相差 8 小时](#431-linux-与-windows相差-8-小时)
+  - [43.2. enca](#432-enca)
+- [44. Reference](#44-reference)
 
 <!-- /TOC -->
 
@@ -1664,7 +1664,7 @@ pidof bash
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
-## 23.1. dd
+# 24. dd
 
 `dd` 命令根据指定的操作（OPERAND）去转换（convert）和拷贝（copy）一个文件，同时还能打印拷贝的速度。
 
@@ -1677,7 +1677,7 @@ dd OPTION
 
 
 
-# 24. ss
+# 25. ss
 
 ss 是用于调查套接字的另一个实用程序。
 
@@ -1688,7 +1688,7 @@ ss 检查端口：
   ss -tunlp
 ```
 
-# 25. lsof
+# 26. lsof
 
 lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 
@@ -1728,21 +1728,21 @@ lsof 命令输出各列信息的意义如下：
 
 > Tips：查看 xxx 端口的占用情况，有两种方式。第一采用 `lsof -i:xxx` 查看；第二：采用 `netstat -tunlp | grep xxx` 来查看。
 
-# 26. netcat
+# 27. netcat
 
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
-# 27. socat
+# 28. socat
 
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站： http://www.dest-unreach.org/socat/ 
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
-# 28. traceroute
+# 29. traceroute
 
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
-# 29. man
+# 30. man
 
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
@@ -1816,17 +1816,17 @@ whatis (1)           - display one-line manual page descriptions
 - 自定义软件安装路径配置 man page。
   自定义的软件没有安装在 /`usr/local/` 路径时，需手动配置 man page，否则使用 man 去查找软件相关的手册时，会找不到。例如：你安装的软件放置到`/usr/local/software/`， 那么 man page 搜寻的设置中， 可能就得要在 `/etc/man_db.conf `内的 40~50 行左右处， 写入 `MANPATH_MAP /usr/local/software/bin /usr/local/software/man`，这样才可以使用 man 来查询该软件的在线文件。
 
-# 30. ntsysv
+# 31. ntsysv
 
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
-# 31. wget
+# 32. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
 参考: [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
-# 32. SHA
+# 33. SHA
 
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
@@ -1850,7 +1850,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   feeds-master.zip: OK
   ```
 
-# 33. md5
+# 34. md5
 
 md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
 
@@ -1864,13 +1864,13 @@ Tim@computer:~/Downloads$ md5sum -c md.txt
 feeds-master.zip: OK
 ```
 
-# 34. ldconfig
+# 35. ldconfig
 
 ldconfig 是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
-# 35. ldd
+# 36. ldd
 
 作用：判断某个可执行的二进制文件含有什么动态库。
 
@@ -1895,11 +1895,11 @@ ldconfig 是一个动态链接库管理命令，其目的为了让动态链接�
       # 参数 -v 表示该函数来自于哪一个软件
 ```
 
-# 36. chkconfig
+# 37. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记 chkconfig 不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
-# 37. LD_LIBRARY_PATH
+# 38. LD_LIBRARY_PATH
 
 `LD_LIBRARY_PATH` 是 Linux 下用来处理环境变量的，告诉加载器（loader）在什么路径下去查找非标准库中的共享库。
 
@@ -1922,7 +1922,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/John/IOV/Libs
 - https://www.csdndocs.com/article/2589063
 - [linux 添加动态链接库路径](https://blog.csdn.net/liu0808/article/details/79012187)
 
-# 38. scp
+# 39. scp
 
 SCP(secure copy) 是基于ssh协议的安全拷贝，用于将文件/目录安全地从本地主机传输到远程主机。
 
@@ -1962,7 +1962,7 @@ test40.txt                                                                      
 -rw-r--r--   1 root    root          12 7月   6 09:41 test40.txt
 ```
 
-# 39. rsync
+# 40. rsync
 
 Rsync (remote synchronize) 实现同步本地主机和远程主机的文件/目录，和 SCP 不同之处在于，首次复制时，Rsync 会复制整个目录，在后面的复制中，不会复制相同的内容，只对差异文件做更新，scp 是把所有文件都复制过去。Rsync 广泛用于备份和镜像。
 
@@ -2041,9 +2041,9 @@ rsync -avp --exclude={log,*.so} * root@192.168.153.222:/home/zhoushuhui/IOV/Serv
 
 
 
-# 40. 防火墙
+# 41. 防火墙
 
-## 40.1. ubuntu 下默认的防火墙
+## 41.1. ubuntu 下默认的防火墙
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -2056,7 +2056,7 @@ rsync -avp --exclude={log,*.so} * root@192.168.153.222:/home/zhoushuhui/IOV/Serv
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
 
-## 40.2. CentOS下默认的防火墙
+## 41.2. CentOS下默认的防火墙
 
 CentOS7下默认的防火墙为 `firewalld`
 
@@ -2089,15 +2089,15 @@ firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 
 
 
-# 41. SELinux
+# 42. SELinux
 
 SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
-# 42. QAQ
+# 43. QAQ
 
-## 42.1. Linux 与 Windows相差 8 小时
+## 43.1. Linux 与 Windows相差 8 小时
 
 新版本的 Ubuntu 使用 `systemd` 启动之后，时间也改成了由 `timedatectl` 来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -2113,7 +2113,7 @@ $sudo ntpdate time.windows.com
 
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-## 42.2. enca
+## 43.2. enca
 
 `enca` 是 Linux 下的文件编码转换工具。
 
@@ -2154,7 +2154,7 @@ enca -L zh_CN -x utf-8 *
 
 源码地址： https://dl.cihar.com/enca/
 
-# 43. Reference
+# 44. Reference
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
