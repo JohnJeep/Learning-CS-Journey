@@ -1,27 +1,31 @@
 <!--
  * @Author: johnjeep
  * @Date: 2022-12-27 20:41:57
- * @LastEditors: johnjeep
- * @LastEditTime: 2022-12-27 20:47:01
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-06-16 17:25:56
  * @Description: 
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 <!-- TOC -->
 
-- [GO Standard library](#go-standard-library)
-  - [Reference](#reference)
+- [1. GO Standard library](#1-go-standard-library)
+  - [1.1. IO](#11-io)
+    - [1.1.1. MultiWriter](#111-multiwriter)
+  - [1.2. log](#12-log)
+  - [1.3. strconv](#13-strconv)
+  - [1.4. Reference](#14-reference)
 
 <!-- /TOC -->
 
-# GO Standard library
+# 1. GO Standard library
 
 Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含I/O操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
 
 
 
-## IO
+## 1.1. IO
 
-### MultiWriter 
+### 1.1.1. MultiWriter 
 
 ```go
 func MultiWriter(writers ...Writer) Writer
@@ -31,7 +35,7 @@ MultiWriter 函数是一个变参函数，可以接受任意个实现了 io.Writ
 
 
 
-## log
+## 1.2. log
 
 log包实现了简单的日志服务。本包定义了Logger类型，该类型提供了一些格式化输出的方法。本包也提供了一个预定义的“标准”Logger，可以通过辅助函数Print[f|ln]、Fatal[f|ln]和Panic[f|ln]访问，比手工创建一个Logger对象更容易使用。Logger会打印每条日志信息的日期、时间，默认输出到标准错误。Fatal系列函数会在写入日志信息后调用os.Exit(1)。Panic 系列函数会在写入日志信息后 panic。
 
@@ -78,7 +82,7 @@ prefix: 每行日志开头的前缀
 flag: 定义日志包含了哪些属性（时间、文件等）
 ```
 
-## strconv 
+## 1.3. strconv 
 
 ```
 import "strconv"
@@ -88,7 +92,7 @@ strconv包实现了基本数据类型和其字符串表示的相互转换。
 
 
 
-## Reference
+## 1.4. Reference
 
 [Go Standard library](https://pkg.go.dev/std)
 
