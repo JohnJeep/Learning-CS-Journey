@@ -722,6 +722,7 @@ Git清空版本库
   这会从 Git 配置中移除 `credential.helper` 的设置，并停止使用凭证助手来存储和管理凭证信息。
   
   参考文献：
+  
   - [官网 Git 工具 - 凭证存储](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8)
 
 # 5. Git 代理配置
@@ -798,3 +799,4 @@ Windows下修改Host文件
 - [Learn Git Branching](https://learngitbranching.js.org/)：通过玩游戏的方式来学习Git。
 - [Version Control (Git)](https://missing.csail.mit.edu/2020/version-control/): MIT 2020 年开设的一门 missing-semester 课程，这是 Version Control (Git) 章节。
 - [Git头指针分离状态](https://blog.csdn.net/qq_32907195/article/details/109217034)
+- GitHub 实用小技巧总结: https://github.com/Snailclimb/JavaGuide/blob/main/docs/tools/git/github-tips.md
