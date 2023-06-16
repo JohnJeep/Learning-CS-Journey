@@ -10,7 +10,7 @@
 
 ## 安装
 
-[Microsoft 官方 docs](https://docs.microsoft.com/zh-cn/windows/wsl/)
+Microsoft 官方 docs: https://docs.microsoft.com/zh-cn/windows/wsl/
 
 
 

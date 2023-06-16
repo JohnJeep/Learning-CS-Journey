@@ -2159,4 +2159,6 @@ enca -L zh_CN -x utf-8 *
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
 - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
-- [linux ldconfig命令,环境变量文件配置详解](https://blog.csdn.net/winycg/article/details/80572735)
+- linux ldconfig命令,环境变量文件配置详解: https://blog.csdn.net/winycg/article/details/80572735
+- Linux 基础用法总结: https://mp.weixin.qq.com/s/ioLF8ocrWuASlZRCUqo7KA 自己酌情裁剪，吸收写的好的地方。
+
