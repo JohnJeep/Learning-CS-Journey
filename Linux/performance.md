@@ -36,7 +36,7 @@
 
 <!-- /TOC -->
 
-# 1. 性能优化
+# 1. Performance optimization(性能优化)
 
 ## 1.1. 怎样做性能优化？
 
