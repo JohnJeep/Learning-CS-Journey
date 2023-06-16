@@ -3,33 +3,34 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-06-09 18:55:01
+ * @LastEditTime: 2023-06-16 17:24:40
  * @Description: Go 语言学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 
 <!-- TOC -->
 
-- [1. 学习方法](#1-学习方法)
-- [2. 基本概念](#2-基本概念)
+- [1. How to learn go(学习方法)](#1-how-to-learn-go学习方法)
+- [2. Concept(基本概念)](#2-concept基本概念)
 - [3. Golang特点](#3-golang特点)
   - [3.1. 拥有特性](#31-拥有特性)
   - [3.2. 不支持的特性](#32-不支持的特性)
+  - [3.3. 应用方向](#33-应用方向)
 - [4. Go 基础](#4-go-基础)
-  - [4.1. 代理](#41-代理)
+  - [4.1. Agent(代理)](#41-agent代理)
   - [4.2. 项目目录结构](#42-项目目录结构)
-  - [4.3. 编译](#43-编译)
-  - [4.4. 内置类型](#44-内置类型)
+  - [4.3. Compile(编译)](#43-compile编译)
+  - [4.4. built-in type(内置类型)](#44-built-in-type内置类型)
     - [4.4.1. 值类型](#441-值类型)
     - [4.4.2. 引用类型](#442-引用类型)
-  - [4.5. 内置函数](#45-内置函数)
+  - [4.5. built-in function(内置函数)](#45-built-in-function内置函数)
     - [4.5.1. append](#451-append)
     - [4.5.2. copy](#452-copy)
     - [4.5.3. make](#453-make)
     - [4.5.4. new](#454-new)
   - [4.6. 内置接口](#46-内置接口)
     - [4.6.1. Error()](#461-error)
-  - [4.7. 声明](#47-声明)
+  - [4.7. declare(声明)](#47-declare声明)
     - [4.7.1. 变量声明](#471-变量声明)
     - [4.7.2. 类型声明](#472-类型声明)
   - [4.8. Unicode](#48-unicode)
@@ -44,15 +45,20 @@
     - [4.10.4. Struct](#4104-struct)
 - [5. 语言特性](#5-语言特性)
   - [5.1. Function(函数)](#51-function函数)
-    - [5.1.1. Panic(异常)](#511-panic异常)
-    - [5.1.2. defer(延迟调用)](#512-defer延迟调用)
-    - [5.1.3. Recover](#513-recover)
+    - [5.1.1. 函数声明](#511-函数声明)
+    - [5.1.2. 多返回值](#512-多返回值)
+    - [5.1.3. 错误](#513-错误)
+    - [5.1.4. 匿名函数](#514-匿名函数)
+    - [5.1.5. 可变参数](#515-可变参数)
+    - [5.1.6. Panic(异常)](#516-panic异常)
+    - [5.1.7. defer(延迟调用)](#517-defer延迟调用)
+    - [5.1.8. Recover](#518-recover)
   - [5.2. 面向对象](#52-面向对象)
     - [5.2.1. Method(方法)](#521-method方法)
     - [5.2.2. Encapsulation(封装)](#522-encapsulation封装)
-    - [5.2.3. 继承](#523-继承)
-    - [5.2.4. 多态](#524-多态)
-    - [5.2.5. Interface 接口](#525-interface-接口)
+    - [5.2.3. Inheritance(继承)](#523-inheritance继承)
+    - [5.2.4. polymorphism(多态)](#524-polymorphism多态)
+    - [5.2.5. Interfaces(接口)](#525-interfaces接口)
     - [5.2.6. 类型断言](#526-类型断言)
 - [6. Concurrency(并发)](#6-concurrency并发)
   - [6.1. Goroutine](#61-goroutine)
@@ -75,20 +81,23 @@
 - [8. Testing(测试)](#8-testing测试)
   - [8.1. 测试函数](#81-测试函数)
   - [8.2. 基准测试](#82-基准测试)
-  - [8.3. Coverage 测试覆盖率](#83-coverage-测试覆盖率)
+  - [8.3. Coverage(测试覆盖率)](#83-coverage测试覆盖率)
 - [9. Reflection(反射)](#9-reflection反射)
   - [9.1. 概念](#91-概念)
   - [9.2. 重要API函数](#92-重要api函数)
   - [9.3. 注意事项](#93-注意事项)
-- [10. Reference](#10-reference)
+- [10. Garbage Collector(垃圾回收)](#10-garbage-collector垃圾回收)
+- [11. Reference](#11-reference)
 
 <!-- /TOC -->
 
-# 1. 学习方法
+# 1. How to learn go(学习方法)
+
 - 先知道怎么做，再知道为什么？
 - 对知识有一个整体的框架，然后再学习具体的内容。
 
-# 2. 基本概念
+# 2. Concept(基本概念)
+
 GO 语言的吉祥物：樱花鼠。
 
 学习一门新的语言，需要掌握语言的变量、常量、表达式、控制流和函数等基本语法，这些都是每门语言通用的特性。
@@ -99,6 +108,7 @@ GO 语言的吉祥物：樱花鼠。
 # 3. Golang特点
 
 ## 3.1. 拥有特性
+
 1. 自动立即回收。
 2. 更丰富的内置类型。
 3. 函数多返回值。
@@ -113,6 +123,7 @@ GO 语言的吉祥物：樱花鼠。
 12. 静态编译，编译好后，扔服务器直接运行。
 
 ## 3.2. 不支持的特性
+
 1. 没有隐式的数值转换。
 2. 没有构造函数和析构函数。
 3. 没有运算符重载。
@@ -126,9 +137,17 @@ GO 语言的吉祥物：樱花鼠。
 
 Go语言有足够的类型系统以避免动态语言中那些粗心的类型错误。
 
+## 3.3. 应用方向
+
+- 服务器编程：处理日志、数据打包、虚拟机处理、文件系统、分布式系统、数据库代理等；
+- 网络编程： Web 应用、API 应用、下载应用等；
+- 内存数据库和云平台领域，目前国外很多云平台都是采用 Go 开发。
+
+
+
 # 4. Go 基础
 
-## 4.1. 代理
+## 4.1. Agent(代理)
 
 设置代理
 
@@ -151,17 +170,12 @@ Go 代码必须在工作空间内。工作空间是一个目录，其中包含�
 - `pkg`： 存放编译后生成的库文件，如 go module。
 - `bin`：存放编译后生成的二进制文件（目标文件）。
 
-
-
 自动生成 `pkg`、`bin` 目录文件，需用 `go install` 命令即可，还需在 go 的环境变量中配置 `GOBIN` 路径。
 
 
+## 4.3. Compile(编译)
 
-
-
-## 4.3. 编译
-
-Go是一门编译型语言，Go语言的工具链将源代码及其依赖转换成计算机的机器指令。Go语言提供的工具都通过一个单独的命令`go`调用，`go`命令有一系列子命令。最简单的一个子命令就是 run。这个命令编译一个或多个以 `.go`结尾的源文件，链接库文件，并运行最终生成的可执行文件。
+Go 是一门编译型语言，Go语言的工具链将源代码及其依赖转换成计算机的机器指令。Go语言提供的工具都通过一个单独的命令`go`调用，`go`命令有一系列子命令。最简单的一个子命令就是 run。这个命令编译一个或多个以 `.go`结尾的源文件，链接库文件，并运行最终生成的可执行文件。
 
 ```go
 go run xxx.go
@@ -184,7 +198,7 @@ Go build 编译参数
 go build -ldflags "-s -w" -o main-ldflags main.go 
 ```
 
-## 4.4. 内置类型
+## 4.4. built-in type(内置类型)
 
 ### 4.4.1. 值类型
 
@@ -207,24 +221,24 @@ chan      -- 管道
 interface --接口
 ```
 
-## 4.5. 内置函数
+## 4.5. built-in function(内置函数)
 
 Go 语言拥有一些不需要进行导入操作就可以使用的内置函数。
 
 ```go
 append          -- 用来追加元素到数组、slice中,返回修改后的数组、slice
 close           -- 主要用来关闭channel
-delete            -- 从map中删除key对应的value
-panic            -- 停止常规的goroutine  （panic和recover：用来做错误处理）
+delete          -- 从map中删除key对应的value
+panic           -- 停止常规的goroutine  （panic和recover：用来做错误处理）
 recover         -- 允许程序定义goroutine的panic动作
 real            -- 返回complex的实部   （complex、real imag：用于创建和操作复数）
 imag            -- 返回complex的虚部
-make            -- 用来分配内存，返回Type本身(只能应用于slice, map, channel)
-new                -- 用来分配内存，主要用来分配值类型，比如int、struct。返回指向Type的指针
-cap                -- capacity是容量的意思，用于返回某个类型的最大容量（只能用于切片和 map）
+make            -- 用来分配内存，返回Type本身（只能应用于slice, map, channel）
+new             -- 用来分配内存，主要用来分配值类型，比如int、struct。返回指向Type的指针
+cap             -- capacity是容量的意思，用于返回某个类型的最大容量（只能用于切片和 map）
 copy            -- 用于复制和连接slice，返回复制的数目
-len                -- 来求长度，比如string、array、slice、map、channel ，返回长度
-print、println     -- 底层打印函数，在部署环境中建议使用 fmt 包
+len             -- 来求长度，比如string、array、slice、map、channel ，返回长度
+print、println  -- 底层打印函数，在部署环境中建议使用 fmt 包
 ```
 
 官方英文文档：https://pkg.go.dev/builtin@go1.19.4
@@ -288,7 +302,7 @@ make([]T, len, cap)
 
 ### 4.5.4. new
 
-`new` 是 Go 语言内置的一个函数，用于内存的分配。
+`new` 是 Go 语言内置的一个函数，用于内存的分配。`new` 函数用于分配内存，并返回一个指向新分配的零值对象的指针。
 
 用法
 
@@ -306,7 +320,7 @@ a := new(int)
 **new 与 make 的区别**
 
 1. 二者都是用来做内存分配的。
-2. `make` 只用于 `slice`、`map` 以及 `channel` 的初始化，返回的还是这三个引用类型本身；
+2. `make` 只用于 `slice`、`map` 以及 `channel` 的初始化，返回的还是这三个引用类型本身。
 3. `new` 用于类型的内存分配，并且内存对应的值为类型零值，返回的是指向类型的指针。
 
 
@@ -324,7 +338,7 @@ type error interface {
 
 
 
-## 4.7. 声明
+## 4.7. declare(声明)
 
 Go 语言有四种主要声明方式：
 
@@ -677,37 +691,97 @@ func Join(s [][]byte, sep []byte) []byte
 
 ### 4.10.1. Array
 
-数组是一个由固定长度的特定类型元素组成的序列， 一个数组可以由零个或多个元素组成。因为数组的长度是固定的， 因此在Go语言中很少直接使用数组。 和数组对应的类型是Slice（ 切片） ， 它是可以增长和收缩动态序列， slice功能也更灵活， 但是要理解slice工作原	理的话需要先理解数组。  
+数组是一个由固定长度的特定类型元素组成的序列， 一个数组可以由零个或多个元素组成。因为数组的长度是固定的， 因此在Go语言中很少直接使用数组。 和数组对应的类型是Slice（ 切片） ， 它是可以增长和收缩动态序列， slice功能也更灵活， 但是要理解slice工作原	理的话需要先理解数组。
+
+- **Declaring an array set to its zero value**
+
+  ```go
+  // Declare an integer array of five elements.
+  var array [5]int
+  ```
+
+-  **Declaring an array using an array literal**
+
+  ```go
+  // Declare an integer array of five elements.
+  // Initialize each element with a specific value.
+  array := [5]int{10, 20, 30, 40, 50}
+  ```
+
+- **Declaring an array with Go calculating size**
+
+  ```go
+  // Declare an integer array.
+  // Initialize each element with a specific value.
+  // Capacity is determined based on the number of values initialized.
+  array := [...]int{10, 20, 30, 40, 50}
+  ```
 
 ### 4.10.2. Slice
 
-Slice(切片)是一个可变的数组，一个slice类型一般写作[]T， 其中T代表slice中元素的类型。slice的语法和数组很像， 只是没有固定长度而已。  切片是数组的一个引用，因此切片是引用类型。但自身是结构体，值拷贝传递。
+Slice（切片）切片是围绕动态数组的概念构建的，动态数组可以根据需要增长（grow）和收缩（shrink）。一个 `slice` 类型一般写作 `[]T`， 其中 `T` 代表 `slice` 中元素的类型。slice的语法和数组很像， 只是没有固定长度而已。  切片是数组的一个引用，因此切片是引用类型。但自身是结构体，值拷贝传递。
 
-一个slice是一个轻量级的数据结构，提供了访问数组子序列（或者全部）元素的功能，而且slice的底层确实引用一个数组对象。一个slice由三个部分构成：指针、长度和容量。指针指向第一个slice元素对应的底层数组元素的地址，要注意的是slice的第一个元素并不一定就是数组的第一个元素。长度对应slice中元素的数目；长度不能超过容量，容量一般是从slice的开始位置到底层数据的结尾位置。内置的len和cap函数分别返回slice的长度和容量。
+切片的定义
 
-- 切片遍历方式和数组一样，可以用len()求长度。表示可用元素数量，读写操作不能超过该限制。
--  cap可以求出slice最大扩张容量，不能超出数组限制。0 <= len(slice) <= len(array)，其中array是slice引用的数组。
-- 切片的定义：var 变量名 []类型，比如 var str []string  var arr []int。
-- 如果 slice == nil，那么 len、cap 结果都等于 0。
+```go
+var 变量名 []类型
 
-注意：
+// 比如: 
+var str []string  
+var arr []int
 
-- slice之间不能比较， 因此我们不能使用==操作符来判断两个slice是否含有全部相等元素。 不过标准库提供了高度优化的bytes.Equal函数来判断两个字节型slice是否相等（ []byte） ， 但是对于其他类型的slice， 我们必须自己展开每个元素进行比较  
+// Create a slice of strings. Use build-in function make()
+// Contains a length and capacity of 5 elements.
+slice := make([]string, 5)
+
+// Create a slice of integers.
+// Contains a length of 3 and has a capacity of 5 elements.
+slice := make([]int, 3, 5)
+
+// Create a slice of integers.
+// Make the length larger than the capacity.
+slice := make([]int, 5, 3)
+Compiler Error:
+len larger than cap in make([]int)
+
+// Create a slice of strings.
+// Contains a length and capacity of 5 elements.
+slice := []string{"Red", "Blue", "Green", "Yellow", "Pink"}
+
+// Create a slice of integers.
+// Contains a length and capacity of 3 elements.
+slice := []int{10, 20, 30}
+
+// Create a nil slice of integers.
+var slice []int
+```
+
+一个slice是一个轻量级的数据结构，提供了访问数组子序列（或者全部）元素的功能，而且 `slice` 的底层确实引用一个数组对象。一个 slice 由三个部分构成：指针（addr pointer）、长度（length）和容量（capacity）。
+
+- 指针指向第一个slice元素对应的底层数组元素的地址，要注意的是slice的第一个元素并不一定就是数组的第一个元素。长度对应slice中元素的数目；
+- 长度不能超过容量。切片遍历方式和数组一样，可以用 `len()` 求长度。表示可用元素数量，读写操作不能超过该限制。
+- 容量一般是从 slice 的开始位置到底层数据的结尾位置。内置的 `len()` 和 `cap()` 函数分别返回 slice 的长度和容量。
+  - `cap()` 可以求出 `slice` 最大扩张容量，不能超出数组限制。`0 <= len(slice) <= len(array)`，其中array是 slice 引用的数组。
+  - 如果 `slice == nil`，那么 len、cap 结果都等于 0。
+
+<font color=red>注意：</font>
+
+- slice 之间不能比较， 因此我们不能使用==操作符来判断两个 slice 是否含有全部相等元素。 不过标准库提供了高度优化的 `bytes.Equal` 函数来判断两个字节型 slice 是否相等（ []byte） ， 但是对于其他类型的 slice， 我们必须自己展开每个元素进行比较  
 - 判断一个 slice 值是否为空，使用 `len(0) == 0` 来判断，不应该使用 `s = nil` 去判断。
 
 
 
 ### 4.10.3. Map
 
-在Go语言中， 一个 map 就是一个哈希表的引用， map 类型可以写为 `map[K]V`， 其中 K 和 V 分别对应 key 和value。 map 中所有的 key 都有相同的类型， 所有的 value 也有着相同的类型， 但是 key 和 value 之间可以是不同的数据类型。 其中K对应的 key 必须是支持 `==` 比较运算符的数据类型， 所以 map 可以通过测试 key 是否相等来判断是否已经存在。对于 V 对应的value 数据类型则没有任何的限制。
+在Go语言中， 一个 map 就是一个哈希表的引用， map 类型可以写为 `map[K]V`， 其中 K 和 V 分别对应 key 和value。 map 中所有的 key 都有相同的类型， 所有的 value 也有着相同的类型， 但是 key 和 value 之间可以是不同的数据类型。 其中 K 对应的 key 必须是支持 `==` 比较运算符的数据类型， 所以 map 可以通过测试 key 是否相等来判断是否已经存在。对于 V 对应的 value 数据类型则没有任何的限制。
 
-内置的 `make` 函数可以创建一个 map：
+用内置的 `make` 函数创建一个 map
 
 ```go
 m := make(map[string]int)
 ```
 
-map 字面值创建map，并为map赋初值。
+用 map literal 方式去创建 map 是很常用的方式。下面的代码中，创建一个 map 并同时给 map 赋初值。注：赋的初值可以为空值，形如：`m := map[string]int {}`。
 
 ```go
 m := map[string]int {
@@ -716,10 +790,28 @@ m := map[string]int {
 } 
 ```
 
+ Declaring a map that stores slices of strings
+
+```go
+// Create a map using a slice of strings as the value.
+dict := map[int][]string{}
+```
+
 注意：
 
-- map 中的key：**切片、函数不能作为key。** 
+- map 中的 key：**切片、函数不能作为key。** 
+
+  ```go
+  // Create a map using a slice of strings as the key.
+  dict := map[[]string]int{}
+  
+  // 编译器报错
+  Compiler Exception:
+  invalid map key type []string
+  ```
+
 - map 中没有 `cap()`函数，只有 `len()` 函数。
+
 - map 是无序的，无法决定返回值的顺序，每次打印的返回值的结果可能不一样。
 
 
@@ -785,6 +877,8 @@ type Stu struct {
 
 ## 5.1. Function(函数)
 
+### 5.1.1. 函数声明
+
 函数声明包括函数名、 形式参数列表、 返回值列表（ 可省略） 以及函数体  
 
 ```go
@@ -795,7 +889,21 @@ func name(parameter-list) (result-list) {
 
 当调用一个函数的时候， 函数的每个调用参数将会被赋值给函数内部的参数变量， 所以**函数参数变量接收的是一个复制的副本， 并不是原始调用的变量。** 因为函数参数传递的机制导致传递大的数组类型将是低效的， 并且对数组参数的任何的修改都是发生在复制的数组上， 并不能直接修改调用时原始的数组变量。  
 
-### 5.1.1. Panic(异常)
+### 5.1.2. 多返回值
+
+
+
+### 5.1.3. 错误
+
+
+
+### 5.1.4. 匿名函数
+
+
+
+### 5.1.5. 可变参数
+
+### 5.1.6. Panic(异常)
 
 Golang 的类型系统会在编译时捕获很多错误， 但有些错误只能在运行时检查， 如数组访问越界、空指针引用等。 这些运行时错误会引起 `painc` 异常。
 
@@ -818,7 +926,7 @@ Go 语言中也支持自定义错误，使用内置的 `errors.New()` 和 内置
 - `errors.New("错误说明")`：返回一个 error 类型的值，表示一个错误。内置的 error 是接口类型。可能是 nil 或者 non-nil。 nil 表示函数运行成功， non-nil 表示失败。
 -  `panic()` 函数：接收一个 `error` 类型的的变量，输出错误信息，并退出程序。因为 `panic(v interface{})` 函数的参数类型为空接口（`interface{}`），任何一个变量都可以赋值给空接口。
 
-### 5.1.2. defer(延迟调用)
+### 5.1.7. defer(延迟调用)
 
 `defer` 是 Go 中的一个关键字，用于延迟调用。
 
@@ -846,7 +954,7 @@ Go 语言中也支持自定义错误，使用内置的 `errors.New()` 和 内置
 
 - 只能放在函数或方法的内部。
 
-### 5.1.3. Recover
+### 5.1.8. Recover
 
 `recover` 是 Go 语言内置的一个函数。如果在 `defer` 函数中调用了内置函数 `recover`， 并且定义该 `defer` 语句的函数发生了`panic` 异常， recover 会使程序从 panic中恢复， 并返回 panic value。 导致 panic 异常的函数不会继续运行， 但能正常返回。 在未发生panic时调用recover， recover会返回nil。  
 
@@ -872,7 +980,7 @@ Golang 中仍然有面向对象编程的继承、封装、多态的特性，只�
 
 ### 5.2.1. Method(方法)
 
-在函数声明时，在函数名字之前放了一个变量，就是一个方法。这个变量叫接收者，可以是普通类型或者是结构体。
+函数声明时，在函数名字之前放了一个变量，就是一个方法。这个变量叫接收者，可以是普通类型或者是结构体。
 
 ```go
 // 函数
@@ -887,7 +995,7 @@ func (recevier type) methodName(参数列表)(返回值列表){
 }
 ```
 
-Go语言的面向对象机制与一般语言不同。它没有类层次结构，甚至可以说没有类；仅仅通过组合（而不是继承）简单的对象来构建复杂的对象。
+Go 语言的面向对象机制与一般语言不同。它没有类层次结构，甚至可以说没有类；仅仅通过组合（而不是继承）简单的对象来构建复杂的对象。
 
 注意
 
@@ -895,7 +1003,7 @@ Go语言的面向对象机制与一般语言不同。它没有类层次结构，
 
 - 一般方法中的类型与结构体绑定，采用**传指针**的方式，这样做的效率高。
 
-- 方法的访问范围的控制规则和函数一样，方法名首字母大写，可在本包和其它包访问，二方法名小写，只能在本包中访问。
+- 方法的访问范围的控制规则和函数一样：若方法名首字母大写，可在本包和其它包访问；若方法名小写，只能在本包中访问。
 
 - 自定义实现了 `String()` 方法，用 `fmt.Printf()` 函数调用时，优先执行自己定义实现的  `String()` 方法，而不是去执行 Go 中自带的  `String()` 方法。
 
@@ -923,7 +1031,7 @@ Go语言的面向对象机制与一般语言不同。它没有类层次结构，
 
 说明：Golang 中没有特别强调封装，对面向对象的特性做了简化。
 
-### 5.2.3. 继承
+### 5.2.3. Inheritance(继承)
 
 为什么需要继承？
 
@@ -1037,16 +1145,16 @@ type Books struct {
 
 - 如果一个 struct 中嵌套了多个匿名结构体，那么该结构体直接可以访问匿名结构体中的字段和方法，从而实现了**多重继承**。在 Golang 开发中，为了代码的简洁性，尽量不使用多重继承。
 
-### 5.2.4. 多态
+### 5.2.4. polymorphism(多态)
 
 接口体现多态的两种方式
 
 1. 多态参数
 2. 多态数组
 
-### 5.2.5. Interface 接口
+### 5.2.5. Interfaces(接口)
 
-在Go语言中接口（interface）是一种抽象的**类型**。interface 是一组 method 的集合，是 d`uck-type programming` 的一种体现。接口做的事情就像是定义一个协议（规则），不关心属性，只关心方法。
+Go 语言的接口（interface）是一种抽象的**类型**。interface 是一组方法（method ）的集合，是 `duck-type programming` 的一种体现。接口做的事情就像是定义一个协议（规则），不关心属性，只关心方法。
 
 **为什么要有接口？**
 
@@ -1078,7 +1186,7 @@ type usb interface {
 
 - 接口里的方法都没有方法体，即接口中的方法是没有实现的。接口体现了程序设计的多态和高内聚低耦合的思想。
 
-- Golang 中的接口不需要显示的实现，即不需要指定结构体或者变量具体实现了哪些接口。只需要将 接口中的所有方法都实现就可以了。
+- Golang 中的接口不需要显示的实现，即不需要指定结构体或者变量具体实现了哪些接口。只需要将接口中的所有方法都实现就可以了。
 
 - Golang 的接口里面不能有任何的变量。
 
@@ -1316,7 +1424,9 @@ Go 以**包**的形式来管理文件和项目目录结构的。所有的go代�
 
 ## 7.1. init 函数
 
-每个包可以包含任意多个 `init` 函数，这些函数都会在程序执行开始的时候被调用。所有被编译器发现的 `init` 函数都会安排在 main 函数之前执行。 `init` 函数用在设置包、初始化变量或者其他要在程序运行前优先完成的引导工作。  
+每个包可以包含任意多个 `init` 函数，这些函数都会在程序执行开始的时候被调用。所有被编译器发现的 `init` 函数都会安排在 `main` 函数之前执行。
+
+ `init` 函数用在设置包、初始化变量或者其他要在程序运行前优先完成的引导工作。  
 
 ## 7.2. 包的作用
 
@@ -1552,7 +1662,7 @@ func Benchmark1000(b *testing.B) { benchmark(b, 1000) }
 
 通过函数参数来指定输入的大小， 但是参数变量对于每个具体的基准测试都是固定的。 要避免直接修改 `b.N` 来控制输入的大小。 除非你将它作为一个固定大小的迭代计算输入， 否则基准测试的结果将毫无意义。  
 
-## 8.3. Coverage 测试覆盖率
+## 8.3. Coverage(测试覆盖率)
 
 执行 go 的测试程序时，用 `coverage` 来统计测试用例的覆盖率。
 
@@ -1660,7 +1770,19 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 
 - https://halfrost.com/go_reflection/
 
-# 10. Reference
+
+
+# 10. Garbage Collector(垃圾回收)
+
+在Go语言中，内存的分配和释放是由垃圾回收器（Garbage Collector）自动处理的，而不需要显式地进行手动内存管理。
+
+垃圾回收器会自动跟踪对象的引用和使用情况，在对象不再被引用时自动回收其所占用的内存。
+
+开发者可以专注于业务逻辑而无需手动管理内存。通过使用 `new` 函数创建对象后，当对象不再被引用时，垃圾回收器会自动将其标记为不可达，并在适当的时候回收其占用的内存。
+
+
+
+# 11. Reference
 
 - Go 官方英文文档：https://go.dev/
 - Go 官方英文标准库：https://pkg.go.dev/std
@@ -1682,6 +1804,12 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - <font color=red>Github paper-code: https://github.com/danceyoung/paper-code/tree/master </font>
   对一些好的技术文章结合自己的实践经验进行翻译、举例说明等或自己的经验分享。主要包括架构设计、模式设计、模型设计、重构及源码解析等。
 
+------------------------------------------------------------------
+
+垃圾回收
+
+- Go 官网 A Guide to the Go Garbage Collector: https://tip.golang.org/doc/gc-guide
+
 ------------------------------------------------------------------------
 
 - Go 教程：https://www.topgoer.com/ 非常详细，值得学习。
@@ -1693,10 +1821,11 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 
 笔记经验分享
 
-- [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO语言题解LeetCode，比较全面，使用GO语言时值得参考。
+- [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO 语言题解 LeetCode，比较全面，使用GO语言时值得参考。
 - [Halfrost-Field 冰霜之地](https://github.com/halfrost/Halfrost-Field)：Github上的一位作者记录了学习GO语言的一些方法和经验。
 - [Go 语言问题集(Go Questions)](https://www.bookstack.cn/read/qcrao-Go-Questions/README.md)：作者学习Go语言的笔记
-- [Go 语言设计与实现 ](https://draveness.me/golang/)：这位作者是个大牛，开源作品很多，该项目讲解了Go语言的一些基础知识，值得学习
+- Go 语言设计与实现: https://draveness.me/golang/ 
+  这位作者是个大牛，开源作品很多，该项目系统的讲解了 Go 语言的知识，非常值得学习。
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go
 
 
