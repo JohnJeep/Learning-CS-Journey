@@ -1,4 +1,5 @@
 <!--
+
  * @Author: johnjeep
  * @Date: 2022-12-27 20:41:57
  * @LastEditors: JohnJeep
@@ -23,9 +24,21 @@ Go语言的标准库（通常被称为语言自带的电池），提供了清晰
 
 
 
-## 1.1. IO
+学习标准库达到三个层面：
 
-### 1.1.1. MultiWriter 
+1. 会使用标准库提供的 API 接口。用这些接口熟练的去写业务代码。
+2. 熟悉标准库的源码，理解库作者设计的思路和优秀的编码习惯。
+3. 在第二步的基础上，自己去扩充标准库，自己尝试去写、封装一些库，然后开源，让更多的人了解到，去使用自己写的库，在别人用的过程中加深理解。
+
+优质的内容
+
+1. 源码结构清晰，架构、布局合理。
+2. 完整的文档。
+3. 社区广泛。
+
+# 2. IO
+
+## 2.1. MultiWriter 
 
 ```go
 func MultiWriter(writers ...Writer) Writer
@@ -35,7 +48,7 @@ MultiWriter 函数是一个变参函数，可以接受任意个实现了 io.Writ
 
 
 
-## 1.2. log
+# 3. log
 
 log包实现了简单的日志服务。本包定义了Logger类型，该类型提供了一些格式化输出的方法。本包也提供了一个预定义的“标准”Logger，可以通过辅助函数Print[f|ln]、Fatal[f|ln]和Panic[f|ln]访问，比手工创建一个Logger对象更容易使用。Logger会打印每条日志信息的日期、时间，默认输出到标准错误。Fatal系列函数会在写入日志信息后调用os.Exit(1)。Panic 系列函数会在写入日志信息后 panic。
 
@@ -82,7 +95,7 @@ prefix: 每行日志开头的前缀
 flag: 定义日志包含了哪些属性（时间、文件等）
 ```
 
-## 1.3. strconv 
+# 4. strconv 
 
 ```
 import "strconv"
@@ -92,7 +105,37 @@ strconv包实现了基本数据类型和其字符串表示的相互转换。
 
 
 
-## 1.4. Reference
 
-[Go Standard library](https://pkg.go.dev/std)
+
+# 5. encoding
+
+## 5.1. json
+
+Go 标准库中的`encoding/json`包提供了对JSON（JavaScript Object Notation）数据的编码和解码功能。它允许将Go语言中的数据结构转换为JSON格式的字符串，并且可以将JSON格式的字符串解析为Go语言的数据结构。
+
+`encoding/json`包的主要作用如下：
+
+1. JSON序列化：`encoding/json`包可以将Go语言的数据结构（如结构体 struct、切片 slice、映射 map等）转换为JSON格式的字符串。这个过程被称为JSON序列化或编码。序列化过程将数据转换为可传输或存储的字符串形式，以便在网络传输或数据持久化时使用。
+2. JSON反序列化：`encoding/json`包可以将JSON格式的字符串解析为Go语言的数据结构。这个过程被称为JSON反序列化或解码。反序列化过程将字符串解析为对应的数据结构，以便在程序中进行进一步的处理和使用。
+3. 自定义JSON标签：`encoding/json`包通过使用结构体字段上的标签（tag）来控制JSON编码和解码的行为。可以使用`json:"fieldname"`标签来指定字段在JSON中的名称，也可以使用其他标签选项来自定义编码和解码的行为。
+4. 错误处理：`encoding/json`包提供了处理JSON解析过程中可能发生的错误的机制。例如，如果JSON格式与Go数据结构不匹配，或者JSON中的值无法正确解析为Go类型，`encoding/json`包会返回相应的错误信息。
+5. 编码器和解码器：`encoding/json`包提供了`Encoder`和`Decoder`类型，它们封装了JSON编码和解码的功能。这些类型提供了更高级别的API，可以方便地进行JSON数据的流式编码和解码。
+
+
+
+### 5.1.1. Marshal
+
+Go语言中，Marshal（编组）是指将数据结构或对象转换为字节流或字符串的过程。Marshal操作通常用于将Go语言中的数据结构序列化为可传输或持久化的格式，例如JSON、XML、Protobuf等。
+
+在Go语言中，Marshal操作可以通过标准库中的 `encoding/json`、`encoding/xml `等包实现。这些包提供了Marshal 函数，可以将 Go 语言中的数据结构转换为对应格式的字符串或字节流。net
+
+## 5.2. http
+
+一文说透 Go 语言 HTTP 标准库：https://www.luozhiyun.com/archives/561
+
+
+
+# 6. Reference
+
+Go Standard library: https://pkg.go.dev/std
 

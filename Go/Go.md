@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-06-16 17:24:40
+ * @LastEditTime: 2023-06-30 18:11:43
  * @Description: Go 语言学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -12,7 +12,9 @@
 
 - [1. How to learn go(学习方法)](#1-how-to-learn-go学习方法)
 - [2. Concept(基本概念)](#2-concept基本概念)
-- [3. Golang特点](#3-golang特点)
+  - [2.1. 吉祥物](#21-吉祥物)
+  - [2.2. Go  mod](#22-go--mod)
+- [3. Golang 特点](#3-golang-特点)
   - [3.1. 拥有特性](#31-拥有特性)
   - [3.2. 不支持的特性](#32-不支持的特性)
   - [3.3. 应用方向](#33-应用方向)
@@ -38,6 +40,7 @@
     - [4.9.1. Constant(常量)](#491-constant常量)
     - [4.9.2. iota](#492-iota)
     - [4.9.3. String](#493-string)
+    - [4.9.4. any](#494-any)
   - [4.10. Composite Types(复合类型)](#410-composite-types复合类型)
     - [4.10.1. Array](#4101-array)
     - [4.10.2. Slice](#4102-slice)
@@ -53,13 +56,15 @@
     - [5.1.6. Panic(异常)](#516-panic异常)
     - [5.1.7. defer(延迟调用)](#517-defer延迟调用)
     - [5.1.8. Recover](#518-recover)
-  - [5.2. 面向对象](#52-面向对象)
+  - [5.2. Object Oriented Programming(面向对象)](#52-object-oriented-programming面向对象)
     - [5.2.1. Method(方法)](#521-method方法)
     - [5.2.2. Encapsulation(封装)](#522-encapsulation封装)
     - [5.2.3. Inheritance(继承)](#523-inheritance继承)
     - [5.2.4. polymorphism(多态)](#524-polymorphism多态)
     - [5.2.5. Interfaces(接口)](#525-interfaces接口)
-    - [5.2.6. 类型断言](#526-类型断言)
+    - [5.2.6. Type Assertions(类型断言)](#526-type-assertions类型断言)
+    - [5.2.7. constructor(构造函数)](#527-constructor构造函数)
+  - [5.3. 泛型](#53-泛型)
 - [6. Concurrency(并发)](#6-concurrency并发)
   - [6.1. Goroutine](#61-goroutine)
     - [6.1.1. 概念](#611-概念)
@@ -95,17 +100,44 @@
 
 - 先知道怎么做，再知道为什么？
 - 对知识有一个整体的框架，然后再学习具体的内容。
+- 学习一门新的语言，需要掌握语言的变量、常量、表达式、控制流和函数等基本语法，这些都是每门语言通用的特性。
+
+GO程序员的五个进化阶段:
+
+- **第一个阶段(菜逼)**: 刚刚学习了这门语言。 已经通过一些教程或者培训班了解基本的语法，可以写短的代码片段。
+- **第二个阶段 (探索者)**: 可以写一个完整的程序，但不懂一些更高级的语言特征，比如“channels”。还没有使用GO写一个大项目。
+- **第三个阶段(大手)**: 你能熟练的使用Go, 能够用GO去解决，生产环境中一个具体和完整的问题。已经形成了一套自己的惯用法和常用代码库。在你的编码方案中Go是一个非常好用的工具。
+- **第四阶段 (大神)**: 绝逼清楚Go语言的设计选择和背后的动机。能理解的简洁和可组合性哲学。
+- **布道师**: 积极地与他人分享关于Go语言知识和你对Go语言的理解。在各种合适的场所发出自己的声音, 参与邮件列表、建立QQ群、做专题报告。成为一个布道者不见得是一个完全独立的阶段，这个角色可以在上述的任何一个阶段中。
+
+如何快速高效率地学习Go语言：https://studygolang.com/articles/27295
 
 # 2. Concept(基本概念)
 
+## 2.1. 吉祥物
+
 GO 语言的吉祥物：樱花鼠。
 
-学习一门新的语言，需要掌握语言的变量、常量、表达式、控制流和函数等基本语法，这些都是每门语言通用的特性。
+
+
+## 2.2. Go  mod
+
+Go mod（又称为Go Modules）是Go语言**1.11**及以上版本引入的一种依赖管理工具。它旨在改善Go语言项目的依赖管理和版本控制。
+
+在早期，Go语言使用`GOPATH`作为项目的工作空间，并使用第三方工具（如`dep`、`glide`等）来管理依赖关系。然而，这种方式在多项目开发和版本管理方面存在一些问题。
+
+Go mod的出现解决了这些问题。它允许在项目的源码目录内直接管理依赖关系，而无需依赖于`GOPATH`。通过使用Go mod，开发人员可以轻松地添加、更新和删除项目所需的依赖项。
+
+Go mod使用一个名为`go.mod`的文件来记录项目的依赖关系和版本信息。该文件会明确列出项目所依赖的模块及其版本约束。当构建项目时，Go mod会自动下载所需的依赖项，并确保其符合指定的版本约束。
+
+Go mod还支持语义版本控制，使开发人员能够定义依赖项的最小和最大版本要求。这有助于确保项目在不引入不兼容的更改的情况下，持续使用稳定的依赖项版本。
+
+总之，Go mod是Go语言中的一种依赖管理工具，它简化了项目的依赖管理和版本控制，提供了更灵活和可靠的方式来管理和使用第三方库。
 
 
 
 
-# 3. Golang特点
+# 3. Golang 特点
 
 ## 3.1. 拥有特性
 
@@ -175,7 +207,7 @@ Go 代码必须在工作空间内。工作空间是一个目录，其中包含�
 
 ## 4.3. Compile(编译)
 
-Go 是一门编译型语言，Go语言的工具链将源代码及其依赖转换成计算机的机器指令。Go语言提供的工具都通过一个单独的命令`go`调用，`go`命令有一系列子命令。最简单的一个子命令就是 run。这个命令编译一个或多个以 `.go`结尾的源文件，链接库文件，并运行最终生成的可执行文件。
+Go 是一门编译型语言，Go 语言的工具链将源代码及其依赖转换成计算机的机器指令。Go 语言提供的工具都通过一个单独的命令 `go`调用，`go`命令有一系列子命令。最简单的一个子命令就是 run。这个命令编译一个或多个以 `.go`结尾的源文件，链接库文件，并运行最终生成的可执行文件。
 
 ```go
 go run xxx.go
@@ -190,13 +222,70 @@ Go build 编译参数
 -s 去掉符号信息
 -a 强制编译所有依赖包
 -race 协程竞争关系
-```
 
-示例
-
-```go
+// 示例
 go build -ldflags "-s -w" -o main-ldflags main.go 
 ```
+
+查看 Go 工具链支持哪些命令，命令行终端输入 `go help` 即可。
+
+```go
+$ go help
+Go is a tool for managing Go source code.
+
+Usage:
+
+        go <command> [arguments]
+
+The commands are:
+
+        bug         start a bug report
+        build       compile packages and dependencies
+        clean       remove object files and cached files
+        doc         show documentation for package or symbol
+        env         print Go environment information
+        fix         update packages to use new APIs
+        fmt         gofmt (reformat) package sources
+        generate    generate Go files by processing source
+        get         add dependencies to current module and install them
+        install     compile and install packages and dependencies
+        list        list packages or modules
+        mod         module maintenance
+        work        workspace maintenance
+        run         compile and run Go program
+        test        test packages
+        tool        run specified go tool
+        version     print Go version
+        vet         report likely mistakes in packages
+
+Use "go help <command>" for more information about a command.
+
+Additional help topics:
+
+        buildconstraint build constraints
+        buildmode       build modes
+        c               calling between Go and C
+        cache           build and test caching
+        environment     environment variables
+        filetype        file types
+        go.mod          the go.mod file
+        gopath          GOPATH environment variable
+        gopath-get      legacy GOPATH go get
+        goproxy         module proxy protocol
+        importpath      import path syntax
+        modules         modules, module versions, and more
+        module-get      module-aware go get
+        module-auth     module authentication using go.sum
+        packages        package lists and patterns
+        private         configuration for downloading non-public code
+        testflag        testing flags
+        testfunc        testing functions
+        vcs             controlling version control with GOVCS
+
+Use "go help <topic>" for more information about that topic.
+```
+
+
 
 ## 4.4. built-in type(内置类型)
 
@@ -329,7 +418,7 @@ a := new(int)
 
 ### 4.6.1. Error()
 
-```
+```go
 //只要实现了Error()函数，返回值为String的都实现了err接口
 type error interface { 
 	Error()    String
@@ -342,7 +431,7 @@ type error interface {
 
 Go 语言有四种主要声明方式：
 
-```
+```go
 var（声明变量）
 const（声明常量）
 type（声明类型） 
@@ -685,6 +774,16 @@ func Index(s, sep []byte) int
 func Join(s [][]byte, sep []byte) []byte
 ```
 
+### 4.9.4. any
+
+`any` 是 Go built-in package 中的一种类型，表示的是空接口（`interface{}`）的别名。**空接口**表示可以接受任何类型的值。
+
+原型
+
+```go
+type any = interface{}
+```
+
 
 
 ## 4.10. Composite Types(复合类型)
@@ -964,7 +1063,7 @@ Golang 对错误处理的方式，引入了 `Panic`、`defer`、`recover` 机制
 
 使用的方式：Go 抛出一个 `Panic` 异常，在 `defer` 中用内置函数 `recover`() 去捕获异常，然后再正常处理。
 
-## 5.2. 面向对象
+## 5.2. Object Oriented Programming(面向对象)
 
 Golang 中没有类（class），只有结构体 struct。Golang 是基于 struct 来实现面向对象的。
 
@@ -1239,12 +1338,49 @@ type usb interface {
 
 
 
+### 5.2.6. Type Assertions(类型断言)
 
-### 5.2.6. 类型断言
+类型断言（Type Assertion）是在编程语言中用于判断和转换值类型的操作。在 Go 语言中，类型断言被用于从接口类型中提取出具体的值，并判断其是否为特定的类型。 语法上它看起来像 `x.(T)` 被称为断言类型， 这里 `x` 表示一个接口的类型，`T` 表示一个类型。
 
-类型断言是一个使用在接口值上的操作。 语法上它看起来像 `x.(T)` 被称为断言类型， 这里 `x` 表示一个接口的类型，`T` 表示一个类型。 一个类型断言检查它操作对象的动态类型是否和断言的类型匹配。  
+在 Go 中，类型断言有两种形式：
 
-接口是一般的类型，不知道具体类型，要将接口转化为具体的类型，就需要使用断言。
+1. 单个值的类型断言：
+
+   ```go
+   value, ok := x.(T)
+   ```
+
+   这种形式的类型断言用于从接口值 `x` 中提取出具体的值，并将其转换为类型 `T`。如果 `x` 的类型可以转换为 `T`，则断言成功，`value` 将接收转换后的值，`ok` 的值为 `true`。如果断言失败，即 `x` 的类型不能转换为 `T`，则 `value` 将得到 `T` 类型的零值，`ok` 的值为 `false`。
+
+2. 类型检查的类型断言：
+
+   ```go
+   _, ok := x.(T)
+   ```
+
+   这种形式的类型断言只关注接口值 `x` 的类型是否可以转换为类型 `T`。如果可以转换，`ok` 的值为 `true`，否则为 `false`。这种形式的类型断言通常用于**判断某个接口值是否满足特定的接口类型**。
+
+需要注意的是，类型断言只能应用于接口类型的值。它将接口值分为两个部分：底层的具体值和该值的类型信息。类型断言可以提取底层的具体值，并检查该值是否与目标类型兼容。
+
+以下是一个示例，展示了在 Go 中的类型断言的用法：
+
+```go
+// interface{} 为空接口
+var x interface{} = "Hello"
+
+value, ok := x.(string)
+if ok {
+    fmt.Println("Value:", value)
+} else {
+    fmt.Println("Type assertion failed")
+}
+```
+
+在上述示例中，我们将字符串 `"Hello"` 赋值给接口变量 `x`。然后，使用类型断言判断 `x` 的底层类型是否为 `string` 类型。由于 `x` 的底层类型是 `string`，类型断言成功，`value` 变量接收到转换后的字符串值，并打印输出。
+
+类型断言在 Go 中常用于处理接口类型的值，可以根据具体的类型执行特定的操作或获取特定的属性。然而，应谨慎使用类型断言，确保断言的正确性，以避免运行时的类型错误。
+
+另一个示例来辅助说明。
 
 ```go
 package main
@@ -1266,6 +1402,61 @@ func main() {
 	fmt.Println(p2)
 }
 ```
+
+注意：
+
+- 类型断言是一个作用在接口值上的操作。  
+- 接口是一般的类型，不知道具体类型，要将接口转化为具体的类型，就需要使用断言。
+- 使用空接口和类型断言可能会导致运行时的类型错误，因为类型断言是在**运行时**进行的。因此，在使用空接口和类型断言时，需要确保值的实际类型与预期类型匹配，或者通过适当的错误处理来处理类型不匹配的情况。
+
+### 5.2.7. constructor(构造函数)
+
+在许多编程语言中，构造函数（constructor）是一种用于创建和初始化对象的特殊方法。它的主要目的是在对象创建时执行必要的初始化操作，并确保对象的有效状态。
+
+然而，在 Go 语言中，并没有像其他语言中的构造函数那样的特殊语法或关键字。相反，Go 推崇简洁性和灵活性，通过**普通的函数和结构体组合来实现对象的创建和初始化。**
+
+尽管如此，为什么还要模拟构造函数呢？以下是一些可能的原因：
+
+1. 初始化对象：通过模拟构造函数，可以将对象的创建和初始化过程封装在一个函数中，使代码更加清晰和可读。它可以在一个地方集中处理对象的初始化逻辑，减少重复代码。
+2. 隐藏内部实现：模拟构造函数可以帮助隐藏对象的内部实现细节，将对象的创建过程与外部调用代码分离。这样，外部代码只需要关注如何使用对象，而无需了解其创建和初始化的具体细节。
+3. 提供参数化初始化：构造函数的模拟可以接收参数，并根据不同的参数值创建不同的对象实例。这样可以在创建对象时根据需要进行个性化的初始化。
+4. 简化对象的创建：通过构造函数的模拟，可以简化对象的创建过程，尤其是在需要进行多个初始化步骤或依赖注入时。它可以封装复杂的初始化逻辑，使代码更易于维护和扩展。
+
+需要注意的是，尽管模拟构造函数在某些情况下可以提供便利和代码组织上的好处，但在 Go 语言中，并没有像其他语言那样的语言级别的构造函数概念。因此，它仍然只是一种模拟，并没有与语言本身的特性和语法相对应。
+
+## 5.3. 泛型
+
+函数的泛型参数是一种在函数定义中使用的通用类型参数，可以用于表示多种不同的类型。在Go语言中，从 **Go 1.18** 版本开始引入了**泛型特性**，允许开发者定义具有泛型参数的函数、方法和数据结构。
+
+泛型参数使用方括号（**[]**）包围，并在函数名后面紧跟泛型参数列表。泛型参数可以是任何合法的标识符，用于表示类型的占位符。通过将泛型参数放在函数签名中，可以在函数体内使用它们作为类型的抽象。
+
+泛型参数的主要作用是增加代码的复用性和灵活性，使函数能够适用于多种类型，而不仅仅局限于特定的类型。通过使用泛型参数，可以编写更通用、更灵活的函数，减少代码的重复编写。
+
+以下是一个示例函数，展示了如何在Go语言中定义带有泛型参数的函数：
+
+```go
+codefunc PrintSlice[T any](slice []T) {
+    for _, element := range slice {
+        fmt.Println(element)
+    }
+}
+```
+
+在上面的示例中，`PrintSlice`函数定义了一个泛型参数`T`，它接受一个切片`slice`作为参数。在函数体内，可以使用`T`来表示切片中的元素类型，实现对切片元素的打印。
+
+通过在函数调用时指定具体的类型，可以使用`PrintSlice`函数打印不同类型的切片。例如：
+
+```go
+codeintSlice := []int{1, 2, 3}
+PrintSlice(intSlice)
+
+stringSlice := []string{"Hello", "World"}
+PrintSlice(stringSlice)
+```
+
+在上述示例中，`PrintSlice`函数被分别调用了两次，一次传入`int`类型的切片，一次传入`string`类型的切片。由于函数使用了泛型参数`T`，它能够适用于不同类型的切片。
+
+需要注意的是，泛型参数只在函数内部有效，它们的作用范围仅限于函数体内。在函数外部是无法直接使用泛型参数的，因为泛型参数在编译时会被具体的类型替换。
 
 # 6. Concurrency(并发)
 
