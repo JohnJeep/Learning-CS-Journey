@@ -96,7 +96,7 @@ Kafka 和 ETL 工具或其他数据集等这些工具都擅长移动数据，但
 
 6. 1.0和2.0版本：Kafka Streams改进；
 
-   ![](figures/kafka-streams.png)
+   ![](../figures/kafka-streams.png)
 
 
 
