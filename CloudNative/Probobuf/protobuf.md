@@ -85,11 +85,13 @@ protobuf 中定义服务
 
 
 
-# 参考
+# References
 
 - Google 官网教程：https://developers.google.com/protocol-buffers
 - Github 地址：https://github.com/protocolbuffers/protobuf
 - Protocol Buffers V3中文语法指南：https://www.liwenzhou.com/posts/Go/Protobuf3-language-guide-zh/
+- Github Google APIs: https://github.com/googleapis/googleapis/tree/master
+- Google APIs: https://google.aip.dev/general
 
 
 
