@@ -33,7 +33,6 @@
 - register file： a small storage device that consists of a collection of word-size registers, each with its own unique name. 
 <p><img src="./figures/计算机系统硬件架构.png"> </p>
 
-
 1. buses(总线)
    - 总线是贯穿整个系统的一组电子导管，携带字节信息并负责在各个部件间传递。 
    - 被设计用来传输固定大小的字节块(fixed-size chunks of bytes)，也就是字(word)。
@@ -61,20 +60,23 @@
 
 ### 1.1.2. 一个 `hello` 可执行程序的底层调用过程
 1. 初始时，shell程序执行它的指令，等待我们输人一个命令。在键盘上输人字符串 `./hello` 后，shell程序将字符逐一读入register，再把它存放到memory中。
-   <p><img src="./figures/hello可执行读取.png"> </p>
-
+   
+<p><img src="./figures/hello可执行读取.png"> </p>
+   
 2. 当在键盘上敲 `enter` 键时，shell程序就知道我们已经结束了命令的输人。然后shell执行一系列指令来加载可执行的 `hello` 文件，这些指令将 `hello` 目标文件中的代码和数据从磁盘(disk)复制到主存(main memory)。数据包括最终会被输出的 `hello,world \n` 字符串。利用直接存储器存取(direct memory access : DMA)技术，数据可以不通过处理器(processor)而直接从磁盘(disk)到达主存(main memory)。
-   <p><img src="./figures/hello可执行加载.png"> </p>
-
+   
+<p><img src="./figures/hello可执行加载.png"> </p>
+   
 3. 一旦目标文件hello中的代码和数据被加载到主存(main memory)，处理器就开始执行hello程序的main程序中的机器语言指令。这些指令将 `hello,world \n` 字符串中的 `bytes` 从主存复制到寄存器文件(register file)，再从寄存器文件中复制到显示设备，最终显示在屏幕上。
+   
    <p><img src="./figures/hello可执行显示.png"> </p>
 
 
 ### 1.1.3. cache(缓存)
 <p><img src="./figures/内存分层结构.png"> </p>
 <p><img src="./figures/cache-memories.png"> </p>
-
 - context switching: 操作系统通过处理器在进程间切换，来实现在同一时间上执行多个程序。
+  
   > The operating system performs this interleaving with a mechanism known as context switching. 
 - context: 操作系统会跟踪进程运行时所需的所有状态信息，叫做上下文。包括的信息有以下部分：
   - the current values of the PC
@@ -92,3 +94,5 @@
 - [15-213: Intro to Computer Systems, Spring 2016-video](https://www.youtube.com/watch?v=hs3wRnQUh0o&list=PLbY-cFJNzq7z_tQGq-rxtq_n2QQDf5vnM&index=3):  YouTube上一个UP主上传的课程视频。
 - [2015 CMU 15-213 CSAPP 深入理解计算机系统 课程视频](https://www.bilibili.com/video/BV1iW411d7hd): B站对该课程的翻译。
 - [深入理解计算机系统（英文版·第3版）](https://book.douban.com/subject/27000879/): 豆瓣网对该书籍的评价。
+- CSAPP 重点解读：https://fengmuzi2003.gitbook.io/csapp3e/
+
