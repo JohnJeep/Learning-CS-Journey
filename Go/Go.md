@@ -970,7 +970,7 @@ type Stu struct {
   ```
 - `struct` 的每个字段上，可以写一个 `tag`，该 `tag` 可以通过**反射机制**获取。常见的场景就是序列化和反序列化。
 
-> `for range` 循环用于迭代数组、切片、映射和通道，但并不适用于结构体类型。
+> `for range` 循环用于迭代array、slice、map和channel，但不适用于结构体类型。
 
 # 5. 语言特性
 
