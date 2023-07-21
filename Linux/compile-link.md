@@ -1,4 +1,5 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
@@ -200,6 +201,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 
 - 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
 - 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。基本格式为  `ar rcs 静态库的名字(libtest.a) 所有的.o文件 `
+  
   - `ar rcs libstatic_1.a *.o` 
 - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
   
@@ -388,6 +390,7 @@ GCC5.3 支持 C++14
 - [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
 - [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
 - [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
+- [**CentOS下离线安装gcc环境，图文详细，方法全面**](https://blog.51cto.com/u_14089205/2485301?u_atoken=0475e265-abfb-432c-bfb1-c97021d375cd&u_asession=01ogsxgS7WqDDhfHxJBA3tySuJoQLPU7Mo1t0qQM8oX1gIjn9NkTPKsfuM9wUeCkZyX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K9T6Skf8G7F5_odZ0I0AeJU88K6FZziwTt7TNrPVU-d_2BkFo3NEHBv0PZUm6pbxQU&u_asig=05NjW6cy-7_DOVLCJ5yY0xUjyZdNii222gZ8CBYNC2-kxLwqNZcRznzNJlTGFikFQNdDeTXXaCH9gxxB_bXfuDd8FLqKsnQLHkUQ1ZHfh3CQ-AEuPGBzKGc0px5fa5PyZE0WZX_farO5ZSDrFzcwrvDd4ss8s7GG-KUqB6plMu8BP9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzUGHsagEujBC_AvKS2HjtZaUdPfTTV87rFMrUrrgd0Lqa8KPmxEvUknfKsop6MC1kO3h9VXwMyh6PgyDIVSG1W9Vksf1-kHx6lS1DDW9Qv6U4c0g9zEGGygqGkD8zIaRcgyMCcOAeA64HiKzlA8DugWt59etCjmgwcMzWzJCS1N4mWspDxyAEEo4kbsryBKb9Q&u_aref=3kSTCuGS3qx%2FcOMR4cQo%2FTU%2B7iE%3D)
 
 # 包管理
 
