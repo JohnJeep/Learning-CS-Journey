@@ -1,8 +1,8 @@
 <!--
  * @Author: johnjeep
  * @Date: 2019-04-04 23:28:59
- * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-10 14:39:40
+ * @LastEditors: johnjeep
+ * @LastEditTime: 2023-07-16 10:45:08
  * @Description: git 基础命令学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
@@ -167,7 +167,9 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
 执行 `Git diff` 命令后，显示的结果分析：
 > 执行命令之后，绿色部分代表增加的内容，红色部分代表删除的内容，
 >
-> --- 代表源文件，即修改前的文件；+++ 代表目标文件，即修改后的文件;
+> ---代表源文件，即修改前的文件；+++代表目标文件，即修改后的文件;
+>
+> 小技巧：比较两个分支中的文件有哪些差异时，先将原来的文件放在前面，改动后的文件放在后面。这样放的好处是：对显示的结果好分析，更符合常人的逻辑思考结果。比如，改动后的文件相对未改动之前的文件，有添加的行，显示结果就为 ++++，若有删除除的行，显示的结果就显示 ———，非常的直观。
 
 - `git diff` 比较工作区和暂存区之间的差异
 - `git diff HEAD` 比较工作区与最新本地仓库之间的差异
@@ -330,6 +332,7 @@ git push origin master --force
   - 第二步，与分支 `a` 合并 `git merge a`
 - `git branch -d a` 删除指定分支 a 。删除分支时，不要在当前分支删除当前分支，一定要切换的到另一个分支去删除。
 - `git branch -D a` 强制把未合并的分支删除
+- `git branch | grep "feature-" | xargs git branch -d`  批量删除多个本地的分支
 - `git log --oneline --decorate --graph --all` 查看提交历史、各个分支的指向以及项目的分支分叉情况
 - `git stash save` 切换分支之前保存要修改的文件，不想提交之前的工作
 - `git stash list` 查看存储在栈上的文件
