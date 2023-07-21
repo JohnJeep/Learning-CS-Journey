@@ -119,6 +119,19 @@
   ```sql
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('新密码');
   ```
+  
+  8.0 以上版本修改密码使用:
+  
+  ```
+  ALTER user 'root'@'localhost' IDENTIFIED BY '你的密码';
+  ```
+  
+  如：
+  
+  ```
+  mysql> ALTER user 'root'@'localhost' IDENTIFIED BY '123456';
+  mysql> FLUSH PRIVILEGES;
+  ```
 
 ## 1.6. 权限管理
 
@@ -255,12 +268,23 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 ## 2.4. SHOW
 
-- `USE 数据库名`: 选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库操作。
-- `SHOW DATABASES`:  列出 MySQL 数据库管理系统的所有数据库列表。
-- `SHOW TABLES`:  显示指定数据库的所有表。
-- `SHOW GRANTS`： 显示授予用户（所有用户或特定用户）的安全权限。
-- `SHOW COLUMNS FROM 数据表`:  显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息，即查看表的结构。
-- `SHOW INDEX FROM 数据表`:  显示数据表的详细索引信息，包括 PRIMARY KEY（主键）
+在 MySQL 中，`SHOW` 命令是用于查看数据库对象和系统信息的命令，并不是针对用户级别的。`SHOW` 命令用于查看数据库服务器的各种信息，例如数据库列表、表信息、列信息、用户权限、服务器状态等。
+
+以下是一些常用的 `SHOW` 命令及其用途：
+
+1. `SHOW DATABASES;`：显示 MySQL 数据库管理系统的所有数据库列表。
+2. `SHOW TABLES;`：显示当前数据库中所有表的列表。
+3. `SHOW COLUMNS FROM table_name;`：显示指定表的所有列信息。包括数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息，即查看表的结构。
+4. `SHOW INDEX FROM 数据表`:  显示数据表的详细索引信息，包括 `PRIMARY KEY`（主键）
+5. `SHOW GRANTS FOR user_name@host_name;`：显示指定用户的权限信息。
+6. `SHOW STATUS;`：显示当前服务器状态信息。
+7. `SHOW VARIABLES;`：显示 MySQL 服务器的各种配置变量。
+
+## USE
+
+`USE 数据库名`: 选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库操作。
+
+
 
 ## 2.5. 数据库操作
 
@@ -574,6 +598,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 ### 2.7.3. 删除表数据(delete)
 
 - 删除单表数据(对行操作): `DELETE FROM tab_name WHERE 删除条件 `    
+  
   - 多行(删除age=-127和age=127的两行)：`delete from info where age in (-128, 127);`
 - 删除多表数据(对行操作): `DELETE FROM tab1_name, tab2_name, ... tabn_name WHERE 删除条件 `
 - 删除原来的表并重新创建一个表，而不是逐行删除表中的数据: `TRUNCATE`
