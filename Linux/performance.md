@@ -606,7 +606,7 @@ CPU 使用率指单位时间内 CPU 繁忙情况的统计，跟平均负载并�
 
 # 5. Network Performance
 
-# 6. 参考
+# 6. References
 
 - [Linux Performance](http://www.brendangregg.com/linuxperf.html)
 
@@ -618,3 +618,4 @@ CPU 使用率指单位时间内 CPU 繁忙情况的统计，跟平均负载并�
 
 
 - [面试官：如何优化你的程序](https://mp.weixin.qq.com/s/S46POYxx4QQQuubpGwMaxg)
+- [简书：Linux 问题故障定位的小技巧](https://www.jianshu.com/p/0bbac570fa4c)
