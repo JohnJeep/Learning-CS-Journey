@@ -1,4 +1,11 @@
-// 继承是通过 匿名字段来实现的
+/*
+ * @Author: JohnJeep
+ * @Date: 2023-01-06 17:48:37
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-07-11 14:27:31
+ * @Description: 继承是通过 匿名字段来实现的
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ */
 
 package main
 
