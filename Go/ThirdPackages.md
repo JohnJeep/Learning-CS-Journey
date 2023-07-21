@@ -1,28 +1,30 @@
 # 1. 框架
 
+
 ## 1.1. Kratos
 
-### 1.1.1. 简介
 
+### 1.1.1. 简介
 Kratos 一套轻量级 Go 微服务框架，包含大量微服务相关框架及工具。
+
 
 ### 1.1.2. 用法
 
-### 1.1.3. References
 
+### 1.1.3. References
 - 官网: https://go-kratos.dev/
 - Github: https://github.com/go-kratos/kratos
 
+
 ## 1.2. Go zero
 
-### 1.2.1. 简介
 
+### 1.2.1. 简介
 zerolog 是一个高性能、零内存分配的 Go 日志库，结构化日志记录，即日志输出打印的格式为 JSON。
 
+
 ### 1.2.2. 用法
-
 在大型工程中使用zerolog库进行日志记录可以按照以下步骤进行：
-
 1. 引入zerolog库：在代码中导入zerolog库，使用类似于`import "github.com/rs/zerolog/log"`的语句将zerolog库引入到你的工程中。
 2. 配置zerolog：根据你的需求对zerolog进行配置，例如设置日志级别、输出目标（如文件、标准输出等）、格式化选项等。你可以使用zerolog库提供的方法来进行配置，比如`zerolog.Level`、`zerolog.Output`等。
 3. 创建Logger实例：使用zerolog提供的方法创建一个Logger实例，通常可以使用`zerolog.New()`来创建一个默认配置的Logger。你也可以根据需要进行自定义配置，比如设置输出格式、添加字段等。
@@ -64,8 +66,8 @@ func main() {
 }
 ```
 
-### 1.2.3. FAQ
 
+### 1.2.3. FAQ
 在 ZeroLog 日志库中，`Err()` 和 `Error()` 方法用于记录错误信息，但它们在使用方式和输出内容上有所区别。
 
 1. `Err()` 方法：
@@ -113,30 +115,31 @@ func main() {
 - `Err()` 方法将错误作为事件字段记录，并可以与其他日志信息一起输出。
 - `Error()` 方法将错误信息作为独立的日志消息输出，不会与其他日志内容混合在一起。
 
-### 1.2.4. References
 
+### 1.2.4. References
 - Go packages: https://pkg.go.dev/github.com/rs/zerolog
 - Github: https://github.com/rs/zerolog
 - Better Stack 教程：https://betterstack.com/community/guides/logging/zerolog/ 
-
 
 
 文档页面排版很好看，图标配色好看，很值得自己学习！！！
 
 https://learning-cloud-native-go.github.io/
 
+
 # 2. 工程
+
 
 ## 2.1. wire
 
-### 2.1.1. 简介
 
+### 2.1.1. 简介
 [wire](https://github.com/google/wire) 是 google 开源用 Go 语言写的用于编译时依赖注入的（dependency injection）代码生成工具。它能够根据你的代码，生成相应的依赖注入 go 代码。
 
 注：依赖注入的工具还有用反射实现的。
 
-### 2.1.2. 用法
 
+### 2.1.2. 用法
 Wire通过读取Go代码中的注释和类型信息，生成依赖注入相关的代码。这些生成的代码包括初始化函数、依赖注入容器和相应的依赖关系。生成的代码可以帮助开发人员更容易地管理和解决复杂的依赖关系。
 
 - `wire.NewSet()`: 将多个 provides 放到一个 set 集合中。
@@ -145,7 +148,6 @@ Wire通过读取Go代码中的注释和类型信息，生成依赖注入相关�
 
 
 ### 2.1.3. Reference
-
 - Go packages: https://pkg.go.dev/github.com/google/wire 
 - Github: https://github.com/google/wire
 - Compile-time Dependency Injection With Go Cloud's Wire: https://go.dev/blog/wire
@@ -154,14 +156,13 @@ Wire通过读取Go代码中的注释和类型信息，生成依赖注入相关�
 
 
 
-
-
 # 3. 工具
+
 
 ## 3.1. Cobra
 
-### 3.1.1. 简介
 
+### 3.1.1. 简介
 Go Cobra 是一个开源的用 Go 语言实现的命令行工具（库），被广泛用于构建命令行工具和 CLI 应用程序。它提供了一组简单且一致的API，可以帮助开发者轻松构建具有命令、子命令、标志、参数和帮助文档的命令行工具。
 
 Cobra提供了以下主要功能和特点：
@@ -178,8 +179,8 @@ Cobra提供了以下主要功能和特点：
 >
 > **Commands** represent actions, **Args** are things and **Flags** are modifiers for those actions.
 
-### 3.1.2. 用法
 
+### 3.1.2. 用法
 官方推荐命令格式
 
 ```
@@ -195,18 +196,15 @@ command: server
 ```
 
 
-
 ### 3.1.3. References
-
 - Go 官网包：https://pkg.go.dev/github.com/spf13/cobra
 - 官网：https://cobra.dev/
 
-## 3.2. viper
 
+## 3.2. viper
 Viper 是适用于 Go 应用程序的完整配置解决方案。它被设计用于在应用程序中工作，并且可以处理所有类型的配置需求和格式。
 
 它支持以下特性：
-
 - 设置默认值
 - 从`JSON`、`TOML`、`YAML`、`HCL`、`envfile`和`Java properties`格式的配置文件读取配置信息
 - 实时监控和重新读取配置文件（可选）
@@ -217,9 +215,7 @@ Viper 是适用于 Go 应用程序的完整配置解决方案。它被设计用�
 - 显式配置值
 
 
-
 ### 3.2.1. 为什么选择Viper?
-
 在构建现代应用程序时，你无需担心配置文件格式；你想要专注于构建出色的软件。Viper的出现就是为了在这方面帮助你的。
 
 Viper能够为你执行下列操作：
@@ -241,18 +237,19 @@ Viper会按照下面的优先级。每个项目的优先级都高于它下面的
 
 **重要：** 目前 Viper 配置的键（Key）是大小写不敏感的。目前正在讨论是否将这一选项设为可选。
 
+
 ### 3.2.2. References
 
 - Github：https://github.com/spf13/viper
 - Go语言配置管理神器——Viper中文教程：https://www.liwenzhou.com/posts/Go/viper/
 
 
-
 ## 3.3. Go-toml
 
-### 3.3.1. 简介
 
+### 3.3.1. 简介
 Go-toml 是一个操作 TOML 格式的 Go library。
+
 
 ### 3.3.2. References
 
@@ -261,31 +258,28 @@ Github: https://github.com/pelletier/go-toml
 Go packages: https://pkg.go.dev/github.com/pelletier/go-toml
 
 
-
 ## 3.4. GORM
 
-### 3.4.1. 简介
 
+### 3.4.1. 简介
 GORM是Golang目前比较热门的数据库ORM操作库，对开发者也比较友好，使用非常方便简单，使用上主要就是把struct类型和数据库表记录进行映射，操作数据库的时候不需要直接手写Sql代码，这里主要介绍**MySQL**数据库。
 
-### 3.4.2. References
 
+### 3.4.2. References
 - 官网: https://gorm.io/
 - Github: https://github.com/go-gorm/gorm
 - Go packages: https://pkg.go.dev/gorm.io/gorm
 
+
 ## 3.5. sarama
 
 
-
 ### 3.5.1. References
-
 - Github: https://github.com/Shopify/sarama
 
 
 
 ## 3.6. Kafka-go
-
 和sarama一样，segmentio/kafka-go也是一个纯go实现的kafka client，并且在很多公司的生产环境经历过考验，segmentio/kafka-go提供低级conn api和高级api(reader和writer)，以writer为例，相对低级api，它是并发safe的，还提供连接保持和重试，无需开发者自己实现，另外writer还支持sync和async写、带context.Context的超时写等。
 
 不过Writer的sync模式写十分慢，1秒钟才几十条，但async模式就飞快了！
@@ -295,74 +289,62 @@ GORM是Golang目前比较热门的数据库ORM操作库，对开发者也比较�
 
 
 ### 3.6.1. 对比
-
 Sarama和segmentio/kafka-go是Go语言中两个常用的Kafka客户端库，它们各有优点和缺点。以下是它们的详细比较：
 
 Sarama: 优点：
-
 1. 社区支持：Sarama是Go语言中最受欢迎的Kafka客户端库之一，因此具有一个活跃的社区，提供了广泛的文档、教程和示例代码。
 2. 功能丰富：Sarama提供了全面的Kafka功能支持，包括生产者和消费者API、事务支持、元数据管理等。它具有灵活的配置选项，使你能够自定义与Kafka集群的交互。
 3. 成熟稳定：Sarama已经存在一段时间，并且在许多生产环境中得到广泛使用，因此它被认为是一个成熟且稳定的选择。
 
-缺点：
 
+缺点：
 1. 性能：尽管Sarama提供了高性能的Kafka客户端，但一些基准测试显示，与segmentio/kafka-go相比，它的性能可能稍逊一筹。
 2. 依赖性：Sarama的依赖库比较多，这可能增加了项目的复杂性和构建过程的复杂性。
 3. 自定义功能限制：尽管Sarama提供了广泛的功能，但在某些特定需求下，可能需要自定义实现，这可能会受到Sarama的架构限制。
 
-segmentio/kafka-go: 优点：
 
+segmentio/kafka-go: 优点：
 1. 简单易用：segmentio/kafka-go是一个轻量级的Kafka客户端库，它具有简单、易于使用的API。它专注于提供基本的生产者和消费者功能，适用于一些简单的Kafka应用程序。
 2. 性能：segmentio/kafka-go在性能方面表现出色，一些基准测试显示它比Sarama具有更高的吞吐量和更低的延迟。
 3. 低依赖性：segmentio/kafka-go的依赖库相对较少，这有助于减少项目的复杂性和构建过程的复杂性。
 
-缺点：
 
+缺点：
 1. 功能限制：相对于Sarama，segmentio/kafka-go的功能较为有限。它提供了基本的生产者和消费者功能，但在某些高级特性（如事务支持、元数据管理等）方面可能不如Sarama全面。
 2. 社区支持：尽管segmentio/kafka-go在一些项目中得到广泛使用，但相比Sarama，它的社区规模较小，可能在文档、教程和示例方面略显不足。
 
 综上所述，如果你需要一个成熟、功能丰富的Kafka客户端库，并且对社区支持和文档重视，那么Sarama可能是一个更好的选择。但如果你希望一个简单、高性能的Kafka客户端库，并且对于基本的生产者和消费者功能满足需求，那么segmentio/kafka-go可能更适合你的项目。最终的选择应该根据你的具体需求和偏好来决定。
 
 
-
 ### 3.6.2. Reference
-
 - Github: https://github.com/segmentio/kafka-go
 - Go packages: https://pkg.go.dev/github.com/segmentio/kafka-go
 - Go社区主流Kafka客户端简要对比: https://tonybai.com/2022/03/28/the-comparison-of-the-go-community-leading-kakfa-clients/
 
 
-
-
-
-
-
 ## 3.7. errgroup
-
 用于处理 goroutine 中的错误。
 
-### 3.7.1. 用法
 
+### 3.7.1. 用法
 Group 的核心能力就在于能够并发执行多个子任务，从调用者的角度，我们只需要传入要执行的函数，签名为：`func() error`即可，非常通用。如果任务执行成功，就返回 nil，否则就返回 error，并且会 cancel 那个新的 Context。
 
 
-
 ### 3.7.2. References
-
 - Go packages: https://pkg.go.dev/golang.org/x/sync/errgroup
-
 
 
 ## 3.8. fiber
 
-### 3.8.1. 简介
 
+### 3.8.1. 简介
 **Fiber**，一个受[Express](https://github.com/expressjs/express)启发的Golang **Web框架**，建立在[Fasthttp](https://github.com/valyala/fasthttp) 的基础之上。旨在**简化**、**零内存分配**和**高性能**，以及**快速**开发。Go 速度快，占用的内存少，而且性能高，这意味着它也使得 Fiber 框架更快。
+
 
 ### 3.8.2. 用法
 
-#### 3.8.2.1. 🧬 内置中间件
 
+#### 3.8.2.1. 🧬 内置中间件
 以下为`fiber`框架的内置中间件：
 
 | 中间件                                                       | 描述                                                     |
@@ -385,7 +367,6 @@ Group 的核心能力就在于能够并发执行多个子任务，从调用者�
 
 
 #### 3.8.2.2. 🧬 外部中间件
-
 有`fiber`团队维护的外部中间件
 
 | 中间件                                            | 描述                                      |
@@ -406,27 +387,24 @@ https://www.bookstack.cn/read/recommend/0002-gofiber.md
 
 
 ### 3.8.3. References
-
 - 官网: https://docs.gofiber.io/
 - Go packages: https://pkg.go.dev/github.com/gofiber/fiber/v2
 - Github: https://github.com/gofiber/fiber
 
+
 ## 3.9. Gin
 
-### 3.9.1. 简介
 
+### 3.9.1. 简介
 流行的web框架。
 
 基于官方 net/http 内建标准库封装的。 
 
+
 ### 3.9.2. 用法
-
 - 路由(Route)：URL 到函数的映射。
-
 - URL
-
   - 静态匹配，路径固定。
-
     ```go
     r.GET("index", func(ctx *gin.Context) {
       ctx.JSON(200, gin.H{
@@ -434,81 +412,129 @@ https://www.bookstack.cn/read/recommend/0002-gofiber.md
       })
     })
     ```
-
   - 动态匹配，路径参数。比如：`/user/find/:id`
-
     ```go
     r.POST("/user/find/:id", func(ctx *gin.Context) {
       param := ctx.Param("id")
       ctx.JSON(200, param)
     })
     ```
-
   - 模糊匹配，使用通配符 `*`。
-
     ```go
     r.PUT("/about/*path", func(ctx *gin.Context) {
     	param := ctx.Param("path")
     	ctx.JSON(200, param)
     })
     ```
-
 - API 
-
   - 路由分组：Group()
-
   - 参数查询
-
     - `Query()` 查询普通的参数
-
     - `GetQuery()` 判断指定的参数是否存在
-
     - `DefaultQuery()` 指定的参数不存在，给定个默认值
-
     - `BindQuery()` 
-
     - `ShouldBindQuery()`  相比 `BindQuery()`  报错后不影响。
-
       > map 类型请求参数不支持。
 
 
-
 ### 3.9.3. Reference
-
 - Github: https://github.com/gin-gonic/gin
 - 官网: https://gin-gonic.com/
 - Go packages: https://pkg.go.dev/github.com/gin-gonic/gin
 - 官方 example: https://github.com/gin-gonic/examples
+- gin框架源码解析：https://www.liwenzhou.com/posts/Go/gin-sourcecode/
 
 
 
 ## 3.10. go-migrate
-
 用 Go 语言编写的数据库迁移命令行工具。
 
-### 3.10.1. 为什么要使用数据库迁移工具
 
+### 3.10.1. 为什么要使用数据库迁移工具
 让代码与数据的改变都进行版本控制。
 
 
-
 ### 3.10.2. Reference
-
 - Github: https://github.com/golang-migrate/migrate
-
 
 
 ## 3.11. Watermill
 
-### 3.11.1. 简介
 
+### 3.11.1. 简介
 [watermill](https://watermill.io/)是 Go 语言的一个异步消息解决方案，它支持消息重传、保存消息，后启动的订阅者也能收到前面发布的消息。`watermill`内置了多种**订阅-发布**实现，包括`Kafka/RabbitMQ`，甚至还支持`HTTP/MySQL binlog`。当然也可以编写自己的订阅-发布实现。此外，它还提供了监控、限流等中间件。
 
 
-
 ### 3.11.2. References
-
 - 官网：https://watermill.io/
 - Github: https://github.com/ThreeDotsLabs/watermill/
 - Go packages: https://pkg.go.dev/github.com/ThreeDotsLabs/watermill@v1.2.0/pubsub/gochannel
 
+
+## 3.12. Gotest
+
+
+### 3.12.1. 简介
+gotests 是一款开源的表格驱动测试函数的工具，不需要从0开始写表格驱动测试函数，工具自动生成表格驱动测试函数的框架，在每个对应的测试函数中填入相应的测试案例即可。
+
+
+### 3.12.2. 用法
+**Minimum Go version:** Go 1.6
+
+Use [`go get`](https://golang.org/cmd/go/#hdr-Download_and_install_packages_and_dependencies) to install and update:
+
+```sh
+// 终端执行
+go get -u github.com/cweill/gotests/...
+```
+
+From the commandline, `gotests` can generate Go tests for specific source files or an entire directory. By default, it prints its output to `stdout`.
+
+```sh
+$ gotests [options] PATH ...
+```
+
+Available options:
+
+```sh
+  -all                  generate tests for all functions and methods
+
+  -excl                 regexp. generate tests for functions and methods that don't
+                         match. Takes precedence over -only, -exported, and -all
+
+  -exported             generate tests for exported functions and methods. Takes
+                         precedence over -only and -all
+
+  -i                    print test inputs in error messages
+
+  -only                 regexp. generate tests for functions and methods that match only.
+                         Takes precedence over -all
+
+  -nosubtests           disable subtest generation when >= Go 1.7
+
+  -parallel             enable parallel subtest generation when >= Go 1.7.
+
+  -w                    write output to (test) files instead of stdout
+
+  -template_dir         Path to a directory containing custom test code templates. Takes
+                         precedence over -template. This can also be set via environment
+                         variable GOTESTS_TEMPLATE_DIR
+
+  -template             Specify custom test code templates, e.g. testify. This can also
+                         be set via environment variable GOTESTS_TEMPLATE
+
+  -template_params_file read external parameters to template by json with file
+
+  -template_params      read external parameters to template by json with stdin
+```
+
+
+终端用 gotests 命令执行代码文件 `xxx.go`，生成对应的测试文件 `xxx_test.go`，录下如果事先存在这个文件就不再生成。
+
+```go
+gotests -all -w xxx.go
+```
+
+
+### 3.12.3. References
+- Github: https://github.com/cweill/gotests
