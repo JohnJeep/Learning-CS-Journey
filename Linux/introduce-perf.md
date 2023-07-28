@@ -2,20 +2,18 @@
  * @Author: JohnJeep
  * @Date: 2022-07-13 22:59:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2022-07-13 23:52:37
+ * @LastEditTime: 2023-07-25 15:31:37
  * @Description: Linux perf 工具用法
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
 
 
 # perf
-
-perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL（Performance Counters for Linux），是 Linux 下的一个性能分析的工具（Performance analysis tools for Linux），从 2009 年发行的 Linux 内核 2.6.31 版本开始支持。
+perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL(Performance Counters for Linux)，是 Linux 下的一个性能分析的工具(Performance analysis tools for Linux)，从 2009 年发行的 Linux 内核 2.6.31 版本开始支持。
 
 
 
 ## Subcommands
-
 perf  使用时支持多个子命令。
 
 - `stat`: measure total event count for single program or for system for some time
@@ -27,15 +25,15 @@ perf  使用时支持多个子命令。
 - `list`: list available events
 - trace
 
-## 可选项参数
 
+## 可选项参数
 - `-e`
 - `-a`
 - `-p`
 - `-t`
 
-# Reference
 
+# References
 - brendangregg 博客 perf Examples: https://www.brendangregg.com/perf.html
 - Github 源码: https://github.com/brendangregg/perf-tools
 - Wikipedia 英文解释 perf (Linux)：https://en.wikipedia.org/wiki/Perf_(Linux)
