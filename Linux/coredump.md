@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-18 22:30:09
- * @LastEditTime: 2022-01-27 15:42:15
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2023-07-25 15:45:14
+ * @LastEditors: JohnJeep
  * @Description: Core dump 使用 
 -->
 
@@ -52,7 +52,7 @@ echo "/corefile/core-%e-%p-%t" > core_pattern
 %e - insert coredumping executable name into filename 添加命令名
 ```
 
-## 修改core文件保存路径
+## 2.3. 修改core文件保存路径
 
 - 默认生成的 core 文件保存在可执行文件所在的目录下，文件名为 core。
 - 通过修改`/proc/sys/kernel/core_uses_pid`文件使生成的core文件加上pid号，`echo 1>/proc/sys/kernel/core_uses_pid`。
@@ -76,8 +76,7 @@ echo "/corefile/core-%e-%p-%t" > core_pattern
 gdb hello-word.out core.12259
 ```
 
-# 4. 参考
-
+# 4. References
 - https://zhuanlan.zhihu.com/p/98700797
 - https://blog.csdn.net/sunxiaopengsun/article/details/72974548
 - https://blog.csdn.net/p942005405/article/details/102059719
