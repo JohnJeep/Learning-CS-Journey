@@ -216,7 +216,7 @@ option 运作起来.
 -Y/–speed-limit    停止传输速度的限制，速度时间
 ```
 
-# Refernce
+# References
 
 - Everything curl: https://everything.curl.dev/
 
