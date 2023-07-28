@@ -7,7 +7,7 @@
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. VSCode 快捷键
+# 1. VS Code Shortcuts(快捷键)
 
 
 ## 1.1. Folder
@@ -56,7 +56,7 @@
 - `Shift + Alt + 0` 切换布局的方向（水平与垂直方向之间切换）
 
 
-# 2. Configure
+# 2. Configures(配置)
 VS Code 是以工作区（workspace）来管理工程的，每个工作区下有个隐藏的 `.vscode` 目录，这个文件夹中包含以下几种文件
 
 - `settings.json`：当前工程环境的配置，设置的配置仅仅只对当前的工程有效，对其它的工程或对当前的用户是不生效的。
@@ -156,7 +156,7 @@ ${fileDirname} - 文件所在的文件夹路径
 ```
 
 
-# 3. Panel
+# 3. Panel(面板)
 使用 `Ctrl Shift P` 或 `F1` 打开命令行的面板（panel），命令面板是根据输入框里的第一个字符来决定提供什么功能的，不同的字符执行的功能不一样。
 
 - `>`：提供所有的命令。
@@ -169,14 +169,14 @@ ${fileDirname} - 文件所在的文件夹路径
 - `process explorer`： 查看进程资源管理。
 
 
-# 4. workspace
+# 4. workspace(工作空间)
 VS Code 则选择了一种相对轻量，而且大家都易于理解的方式，那就是所有的操作都基于文件和文件夹。当你打开一个文件夹，VS Code 的核心功能就会对这个文件夹进行分析，并提供对应的功能。
 
 注意工作台最下方的状态栏，当 VS Code 没有打开任何文件夹的时候，它的颜色是紫色的。而如果在工作台中打开了某个文件夹，状态栏的颜色就会变成蓝色。
 
 
 
-# 5. Debugging
+# 5. Debugging(调试)
 VS Code 是把调试功能的最终实现交给插件来完成的。VS Code 提供了一套通用的图形界面和交互方式，比如怎么创建断点、如何添加条件断点、如何查看当前调试状态下参数的值，等等。无论你使用哪个编程语言或者调试器，这一套交互流程都是相似的。
 
 VS Code 为插件作者提供了一套统一的接口，叫做 Debug Adapter Protocol（DAP）。当用户在界面上完成一系列调试相关的操作时，VS Code 则通过 `DAP` 唤起调试插件，由插件完成最终的操作。
@@ -199,10 +199,86 @@ VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electr
 
 上图中，绿色的就是插件进程 Extension Host 了。VS Code 创建 Extension Host 进程的方式，就是创建一个新的 Electron 进程，并且以 Node.js 的形式运行。也就是说，这个进程就是一个完整的 Node.js 进程，Node.js 版本就是你使用的 Electron 中的 Node.js 。
 
+# Plugins(插件)
 
-# 6. Reference
+## Go
+
+### Built-in Go snippets
+
+查看 VS Code 中所有 Go 内建的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert Snippet`，就可以看到所有内置的代码片段了。
+
+| Abbreviation | Description                                                  |
+| ------------ | ------------------------------------------------------------ |
+| im           | Snippet for import statement                                 |
+| ims          | Snippet for a import block                                   |
+| co           | Snippet for a constant                                       |
+| cos          | Snippet for a constant block                                 |
+| tyi          | Snippet for a type interface                                 |
+| tys          | Snippet for a struct declaration                             |
+| pkgm         | Snippet for main package & function                          |
+| func         | Snippet for function declaration                             |
+| meth         | Snippet for method declaration                               |
+| var          | Snippet for a single variable                                |
+| vars         | Snippet for a multiple variable                              |
+| finit        | Snippet for init function                                    |
+| fmain        | Snippet for main function                                    |
+|              |                                                              |
+| ch           | Snippet for a channel                                        |
+| map          | Snippet for a map                                            |
+| make         | Snippet for make statement                                   |
+| in           | Snippet for empty interface                                  |
+| new          | Snippet for new statement                                    |
+| pn           | Snippet for panic                                            |
+|              |                                                              |
+| switch       | Snippet for switch statement                                 |
+| sel          | Snippet for select statement                                 |
+| cs           | Snippet for case clause                                      |
+| for          | Snippet for a for loop                                       |
+| forr         | Snippet for a for range loop                                 |
+|              |                                                              |
+| if           | Snippet for if statement                                     |
+| el           | Snippet for else branch                                      |
+| ie           | Snippet for if else                                          |
+| iferr        | Snippet for if err != nil                                    |
+|              |                                                              |
+| fp           | Snippet for fmt.Println()                                    |
+| ff           | Snippet for fmt.Printf()                                     |
+| lp           | Snippet for log.Println()                                    |
+| lf           | Snippet for log.Printf()                                     |
+| lv           | Snippet for log.Printf() with variable content               |
+|              |                                                              |
+| tl           | Snippet for t.Log()                                          |
+| tlf          | Snippet for t.Logf()                                         |
+| tlv          | Snippet for t.Logf() with variable content                   |
+|              |                                                              |
+| wr           | Snippet for http Response                                    |
+| hf           | Snippet for http.HandleFunc()                                |
+| hand         | Snippet for http handler declaration                         |
+| rd           | Snippet for http.Redirect()                                  |
+| herr         | Snippet for http.Error()                                     |
+| las          | Snippet for http.ListenAndServe                              |
+| sv           | Snippet for http.Serve                                       |
+|              |                                                              |
+| go           | Snippet for anonymous goroutine declaration                  |
+| gf           | Snippet for goroutine declaration                            |
+| df           | Snippet for defer statement                                  |
+|              |                                                              |
+| tf           | Snippet for Test function                                    |
+| bf           | Snippet for Benchmark function                               |
+| ef           | Snippet for Example function                                 |
+| tdt          | Snippet for table driven test                                |
+|              |                                                              |
+| helloweb     | Snippet for sample hello world webapp                        |
+| sort         | Snippet for a custom sort.Sort interface implementation, for a given slice type |
+
+
+
+
+# 6. References
 - [微软官方 Visual Studio Code 文档](https://code.visualstudio.com)
 - [c_cpp_properties.json 官方文档](https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference)
 -  [微软官方 variable-reference](https://code.visualstudio.com/docs/editor/variables-reference)
+-  VS Code and Go: a superhero's guide: https://bitfieldconsulting.com/golang/vs-code-go
+-  Microsoft vscode go snippets configure: https://github.com/microsoft/vscode-go/blob/master/snippets/go.json
 
 
