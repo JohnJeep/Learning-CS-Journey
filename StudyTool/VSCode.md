@@ -55,6 +55,13 @@
 - `Ctrl 数字` 在不同的编辑组之间进行切换
 - `Shift + Alt + 0` 切换布局的方向（水平与垂直方向之间切换）
 
+## Call Hierarchy
+
+VS Code 中有一个 `show call hierarchy` 的功能，显示代码之间的调用关系图。选定一个函数时，按下默认的快捷键  `Shift + Alt+H`，会显示选定的函数被谁调用或者选定的函数调用了哪些函数。`show call hierarchy`  提供了两个选项来决定如何显示代码之间的调用关系：
+
+- `Show Outgoing Calls`：如果你选择一个函数，并使用 "Show Outgoing Calls" 功能，它会展示出该函数调用的其他函数或方法。
+- `Show Incoming Calls"`：如果你选择一个函数，并使用 "Show Incoming Calls" 功能，它会展示哪些函数或方法调用了当前选定的函数。
+
 
 # 2. Configures(配置)
 VS Code 是以工作区（workspace）来管理工程的，每个工作区下有个隐藏的 `.vscode` 目录，这个文件夹中包含以下几种文件
@@ -280,5 +287,6 @@ VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electr
 -  [微软官方 variable-reference](https://code.visualstudio.com/docs/editor/variables-reference)
 -  VS Code and Go: a superhero's guide: https://bitfieldconsulting.com/golang/vs-code-go
 -  Microsoft vscode go snippets configure: https://github.com/microsoft/vscode-go/blob/master/snippets/go.json
+-  **Microsoft C++ Team Blog**: https://devblogs.microsoft.com/cppblog/
 
 
