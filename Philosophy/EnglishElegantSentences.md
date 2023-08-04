@@ -1,11 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2021-12-01 20:08:02
- * @LastEditors: Windows10
+ * @LastEditTime: 2023-08-04 14:59:30
+ * @LastEditors: JohnJeep
  * @file: ElegantSentences.md
  * @Description: 积累优雅的英文句子。
 --> 
+# 英文美句
 
 Books are the ever-burning lamps Of accumulated  wisdom. <br> 书籍是积累智慧的长明灯。 
 

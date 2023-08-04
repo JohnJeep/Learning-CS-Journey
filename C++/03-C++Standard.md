@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:21:43
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-24 11:40:11
+ * @LastEditTime: 2023-08-04 15:42:55
  * @Description: C++ 语言不同标准新特性学习
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved.
 -->
@@ -932,7 +932,8 @@ C++14 引入了一些新特性，以下是其中一些：
 
     template<typename T>
     void foo(T t) {
-        if constexpr (bool b
+        if constexpr (bool b)
+    }
     ```
 
 
@@ -953,4 +954,6 @@ C++14 引入了一些新特性，以下是其中一些：
 
 
 # 5. References
+- C++ standard: https://isocpp.org/std/the-standard <br>
+  标准委员会官方站点，近期的会议、行程、活动、计划等等都会发布在这里。这里也会推荐一些比较好的文章、教程、书籍等等内容，供C++程序员阅读。
 - modern C++ 讲解：http://www.modernescpp.com/index.php

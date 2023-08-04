@@ -1,11 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-07 15:20:08
- * @LastEditTime: 2021-06-27 23:50:42
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-08-04 15:03:50
+ * @LastEditors: JohnJeep
  * @Description: 网络术语缩写
 -->
-## 常用术语缩写
+# 常用网络术语缩写
 - URL: 统一资源定位符 (Uniform Resource Locator)
 - DNS: 域名系统 (Domain Name System)
 - ADSL: 非对称数字用户线路 (Asymmetric Digital Subscriber Line) 。它是一种

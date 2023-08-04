@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-27 21:05:38
- * @LastEditTime: 2021-04-07 14:05:18
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-08-04 15:08:43
+ * @LastEditors: JohnJeep
  * @Description: 读网络是怎样连接的笔记
 --> 
 <!-- TOC -->
@@ -13,6 +13,7 @@
 - [4. 通过接入网进入互联网内部](#4-通过接入网进入互联网内部)
 - [5. 服务器端的局域网](#5-服务器端的局域网)
 - [6. 请求到达Web服务器，响应返回浏览器](#6-请求到达web服务器响应返回浏览器)
+- [References](#references)
 
 <!-- /TOC -->
 
@@ -250,3 +251,7 @@ PPPoE 头部，然后用隧道机制将包发送给网络运营商的路由器�
   - (1)根据收到的包的发送方 IP 地址、发送方端口号、接收方 IP 地址、接收方端口号找到相对应的套接字
   - (2)将数据块拼合起来并保存在接收缓冲区中；
   - (3)向客户端返回 ACK
+
+
+# References
+- 豆瓣 网络是怎样连接的：https://book.douban.com/subject/26941639/

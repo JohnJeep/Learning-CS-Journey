@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-01-04 10:57:29
- * @LastEditTime: 2022-05-08 16:02:44
+ * @LastEditTime: 2023-08-04 15:31:46
  * @Description: 命名规范笔记
 --> 
 
@@ -26,7 +26,8 @@
   - [1.7. 注释规约](#17-注释规约)
   - [1.8. 单元测试](#18-单元测试)
   - [1.9. Code Review](#19-code-review)
-  - [1.10. 参考](#110-参考)
+  - [1.10. 代码写的优美的特征](#110-代码写的优美的特征)
+  - [1.11. References](#111-references)
 
 <!-- /TOC -->
 
@@ -298,13 +299,14 @@
 
 - **消灭重复！消灭重复！消灭重复！**
 
-## 1.10. 代码写的优美的特征
 
+## 1.10. 代码写的优美的特征
 1. 命名规范，风格统一。**给变量取名称时，为什么人家（Google的工程师）就能想到那么多、那么优雅、恰到好处的名字？**
 2. 行间距恰到好处。
 3. 整体布局合理，让人一看感觉就很舒适。看代码就像看诗歌一样，甚至比诗歌还要优美。
 4. 合理的注释。
 
-## 1.11. 参考
+
+## 1.11. References
 - [CSDN：Google的C++编程规范总结](https://blog.csdn.net/orange_littlegirl/article/details/94153948)
 - [Google Style Guides](https://google.github.io/styleguide/)：Google 所有编程语言编程规范文档。

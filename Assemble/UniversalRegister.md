@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-18 21:33:28
- * @LastEditTime: 2020-09-27 08:50:12
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-08-04 16:07:21
+ * @LastEditors: JohnJeep
  * @Description: 常用的通用寄存器
 -->
+
 <!-- TOC -->
 
 - [1. instruction(指令)](#1-instruction指令)
@@ -15,7 +16,7 @@
   - [3.3. Pushing and Popping Stack Data](#33-pushing-and-popping-stack-data)
   - [3.4. Arithmetic and Logical Operations(算术与逻辑运算)](#34-arithmetic-and-logical-operations算术与逻辑运算)
     - [3.4.1. lea(load effective address)：加载有效地址](#341-leaload-effective-address加载有效地址)
-    - [3.4.2. unary && binary](#342-unary--binary)
+    - [3.4.2. unary \&\& binary](#342-unary--binary)
     - [3.4.3. shifts](#343-shifts)
   - [3.5. Control Instruction(控制指令)](#35-control-instruction控制指令)
   - [3.6. Jump Instruction(跳转指令)](#36-jump-instruction跳转指令)
@@ -105,7 +106,7 @@ Inter 8086架构有16个处理器，可供程序员使用的有14个16位的寄�
     - $r_b$: base register(64-bit基址寄存器)
     - $r_i$: index register(64-bit变址寄存器)
     - s: scale factor(比例因子，s必须是1、2、4或8)
-  <img src="./figures/操作数格式.png">
+  <img src="./figures/operand.png">
 
 
 
@@ -135,21 +136,21 @@ GNU汇编器默认采用 AT&T 样式的语法，其中的源和目的操作数�
     - movw: move word(移动字)
     - movl: move double word(32 bit 数据被看成是long word，因此用后缀“l” 表示双字)
     - movq: move quad word(移动四字)
-     <img src="./figures/mov指令.png">
+     <img src="./figures/mov.png">
     > 常规的 `movq` 指令只能以表示为32位补码数字的立即数作为源操作数，然后把这个值符号扩展得到64位的值，放到目的(destination)位置。`movabsq` 指令能够以任意6位立即数值作为源操作数(source operand)，并且只能以寄存器(register)作为目的(destination)。
 
   - 上面几个指令实现的例子
-    <img src="./figures/mov指令移动例子.png">
+    <img src="./figures/mov-example.png">
 
   <font color=red>注意：</font>
   大多数情况中，mov指令只会更新 destination operand 指定的寄存器字节和内存位置；但是当mov指令的destination 为寄存器时，它会把该寄存器的高位 4字节设置为0，原因是：任意的生成32 bit 值的指令都会将该register的高位设置为0。
 
 
 - 两类数据移动指令：将较小的 source 拷贝到 destination中。MOVZ中的指令把destination中剩余的字节补充为 0，MOVS类中的指令通过符号扩充来填充，把source operand 的最高位进行拷贝。
-<img src="./figures/MOVZ类.png">
-<img src="./figures/MOVs类.png">
+<img src="./figures/movz.png">
+<img src="./figures/movs.png">
 
-  <font color=red>注意：</font>
+<font color=red>注意：</font>
   `cltq` 指令：它没有操作数，总是以 `%eax` 为source；`%rax` 为destination，作为符号扩展的结果。
 
 
@@ -173,7 +174,7 @@ stack的栈顶元素的地址是栈中元素地址最小的，因此栈具有向
 
 ## 3.4. Arithmetic and Logical Operations(算术与逻辑运算)
 下面表中有四组操作(operations)：加载有效地址(load effective address)、一元操作(unary)、二元操作(binary)、移位(shifts)。其中一元操作只有一个操作数，二元操作有两个操作数(operand)
-<img src="./figures/算术和逻辑操作.png">
+<img src="./figures/arithmetic.png">
 
 
 ### 3.4.1. lea(load effective address)：加载有效地址
@@ -224,7 +225,6 @@ subq %rdx,%rax            // 结果为：0xFD
 > 一个字节的移位量使得移位量的编码范围可以达到 $2^8-1=255$ 。x86-64中，移位操作对 w 位长的数据值进行操作，移位量是由 `%cl` 寄存器的低 `m` 位决定的，这里 $2^m = w$，高位会被忽珞。所以，当寄存器 `%cl` 的十六进制值为0xFF时，指令 salb 会移7位，salw会移15位，sall会移31位，而会移63位。
 
 
-
 ## 3.5. Control Instruction(控制指令)
 - single-bit condition code registers(单个位的条件码寄存器)
   - CF(carry flag 进位标志): Set on high-order bit carry or borrow; cleared otherwise
@@ -232,8 +232,6 @@ subq %rdx,%rax            // 结果为：0xFD
   - ZF(zero flags 零标志): Set if result is zero; cleared otherwise
   - SF(sign flag 符号标志): Set equal to high-order bit of result (0 if positive 1 if negative)
   - OF(overflow flag 溢出标志): Set if result is too large a positive number or too small a negative number (excluding sign bit) to fit in destination operand; cleared otherwise
-
-
 
 
 ## 3.6. Jump Instruction(跳转指令)
