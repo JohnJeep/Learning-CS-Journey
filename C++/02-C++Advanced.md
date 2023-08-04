@@ -1,10 +1,10 @@
 <!--
 
- * @Author: johnjeep
+ * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
  * @LastEditTime: 2023-05-27 17:52:02
- * @Description: C++ 提高部分
+ * @Description: C++ 高级
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 

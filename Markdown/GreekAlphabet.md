@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-11 22:14:21
- * @LastEditTime: 2021-01-11 22:16:32
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-08-04 14:52:34
+ * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
 # 希腊字母表
@@ -109,5 +109,6 @@ $\Omega$  \Omega
 
 ![希腊字母](./figures/希腊字母表.png)
 
-[维基百科希腊字母表](https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D)
+# References
+- [维基百科希腊字母表](https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D)
 
