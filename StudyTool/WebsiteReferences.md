@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2023-07-10 14:00:14
+ * @LastEditTime: 2023-08-04 14:42:29
  * @LastEditors: JohnJeep
  * @Description: 积累一些学习的网站。
 -->
@@ -10,6 +10,7 @@
 <!-- TOC -->
 
 - [1. 博客和知识社区](#1-博客和知识社区)
+  - [个人搭建博客](#个人搭建博客)
 - [2. 编程和刷题网站](#2-编程和刷题网站)
 - [3. 公开课和在线视频学习](#3-公开课和在线视频学习)
 - [4. 字幕下载](#4-字幕下载)
@@ -47,6 +48,18 @@
 - [segmentfault](https://segmentfault.com/): 国内 IT 技术问答网站
 - [InfoQ](https://www.infoq.cn):(Information Queue) 国内的一个在线新闻 / 社区网站，旨在通过促进软件开发领域知识与创新的传播，为软件开发者提供帮助。平常用的很少。
 - [老 D 博客](https://laod.cn/hosts/2018-google-hosts.html)：报道当今比较潮流、新的技术。
+
+
+## 个人搭建博客
+推荐一些优秀大佬自己搭建的博客网站
+- FreeMind: https://freemind.pluskid.org/
+- 小林Coding: https://xiaolincoding.com/
+- 李文周的博客：https://www.liwenzhou.com/
+- 码神之路：https://www.mszlu.com/
+- 王超的个人博客：https://writings.sh/
+- 腾讯罗志云：https://www.luozhiyun.com/
+- 腾讯大佬个人博客：https://www.hitzhangjie.pro/blog/
+- 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go/
 
 
 # 2. 编程和刷题网站
@@ -233,7 +246,7 @@
 9. [ScienceHUβ](https://scihub.org/): ScienceHUβ是一家全球性的科学技术出版商，可免费提供研究文章和最新研究信息，而对科学界没有任何障碍。
 
 
-[参考网址](http://blog.sciencenet.cn/blog-752541-821254.html)
+[参考 sciencenet.cn](http://blog.sciencenet.cn/blog-752541-821254.html)
 
 
 # 16. 二次元
@@ -264,11 +277,23 @@
    3. [中文文案排版细则](https://dawner.top/posts/chinese-copywriting-rules/)
    4. [中文技术文档写作风格指南](https://github.com/yikeke/zh-style-guide/)
 2. vscode 自动排版加空格插件：vscode-pangu
-3. markdown 发布到公众号，墨滴：https://mdnice.com/
-4. 知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
-5. 在线阅读网站，基于 vuepress，采用主题 [vuepress-theme-hope](https://github.com/vuepress-theme-hope/vuepress-theme-hope)
-6. 表情素材 Emoji Cheat Sheet: https://www.webfx.com/tools/emoji-cheat-sheet/
-7. Log 小图标生成来自 Shield: https://shields.io/
+3. markdown 发布到公众号之前，采用的排版工具
+   1. 墨滴：https://mdnice.com
+   2. markdown.com.cn: https://markdown.com.cn/editor/  提供模板选择和 CSS 样式微调，一键把外链转成备注信息。
+4. 博客网站搭建
+   1. 在线阅读网站，基于 vuepress，采用主题 [vuepress-theme-hope](https://github.com/vuepress-theme-hope/vuepress-theme-hope)
+   2. hexo: https://hexo.io/zh-cn <br>
+      框架直接生成整个静态网站，然后直接部署在 Github Pages 上，不用自己购买服务器，省却了一大笔的开下，相当方便。
+5. 表情素材：https://www.webfx.com/tools/emoji-cheat-sheet
+6. Log 小图标生成: https://shields.io
+7. 代码片段转化为图片：https://carbon.now.sh
+8. 配色方案：https://coolors.co
+9.  配图
+    1. 封面配图: https://unsplash.com 
+    2. 360 壁纸： https://bizhi.360.cn/
+    3. 花瓣网： https://huaban.com/discovery
+    4.  知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
+
 
 
 # 20. 参考
