@@ -218,23 +218,31 @@ procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
 
 
 ## 1.8. netstat
-netstat 是一个查看系统中端口使用情况的一个命令，显示自从系统启动以来，各个协议的总体数据信息。侦听端口：应用程序或进程侦听的网络端口，充当通信端点。注意：同一个 IP 地址上不能用两个不同的服务去侦听同一端口
+`netstat` 是一个查看系统中端口使用情况的命令，显示自从系统启动以来，各个协议的总体数据信息。
+
+- 侦听端口：应用程序或进程侦听的网络端口，充当通信端点。
+- 注意：同一个 IP 地址上不能用两个不同的服务去侦听同一端口
+
+下面是 `netstat` 命令的用法解释：
 
 ```sh
 语法格式
   netstat 检查端口
 
 参数项
-  -a --all       显示监听和非监听的 sockets
-  -t --tcp       显示 TCP 端口。
-  -u --udp       显示 UDP 端口。
-  -n --numeric   显示数字地址而不是主机名（host）、port、user names。
-  -l --listening 仅显示侦听的 sockets。
-  -p --program   显示每个 sockets 所属程序的 PID 和 name。
+  -a --all       显示所有的连接，包括监听状态和非监听状态的连接（sockets）。
+  -t --tcp       显示 TCP 连接信息。该选项将显示所有的 TCP 连接，包括建立连接和监听状态。
+  -u --udp       显示所有的 UDP 连接信息。
+  -n --numeric   显示数字形式的 IP 地址和端口号，而不尝试进行主机名和服务名的反解析。
+  -l --listening 仅显示处于监听状态的套接字（sockets）。
+  -p --program   显示每个连接（sockets）的进程的 PID 和名称（name）。
+```
 
-示例：
-  netstat -tunlp | grep 端口号   # 列出正在侦听的所有TCP或UDP端口，
-                                # 显示程序的PID和name，同时以数字形式显示IP，最常用
+示例
+
+```sh
+netstat -tunlp | grep 端口号   # 列出正在侦听的所有TCP或UDP端口，
+                              # 显示程序的PID和name，同时以数字形式显示IP，最常用
 [root@KF]# netstat -tunlp | grep 22
 tcp        0      0 0.0.0.0:22          0.0.0.0:*         LISTEN      1919/sshd
 tcp        0      0 :::22               :::*              LISTEN      1919/sshd
@@ -242,10 +250,21 @@ tcp        0      0 :::22               :::*              LISTEN      1919/sshd
   netstat -apn | grep 端口号     # 查看指定端口号的所有进程在TCP、UDP传输中的所有状态
   netstat -antp                 # 列出所有TCP的连接
   netstat -nltp                 # 列出本地所有TCP侦听套接字
+  netstat -nat
 ```
 
+Tips:
+
+Linux中查看内核中设置的 `TIME_WAIT` 时间：
+
+```sh
+sysctl net.ipv4.tcp_fin_timeout
+```
+
+在大多数 Linux 发行版中，TIME_WAIT 时间的默认值通常为 60 秒。 
 
 ## 1.9. stress
+
 stress 是linux 下的压力测试小工具，可以用来模拟 CPU、IO、内存、磁盘等资源耗尽的问题，但这也仅仅只是用来模拟进行简单的资源耗尽问题，用它模拟产生的结果和业务真实场景差别还是很大的，真实业务场景下不建议使用。
 
 ```sh
