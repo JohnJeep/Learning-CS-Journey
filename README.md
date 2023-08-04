@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2023-07-10 15:03:50
+ * @LastEditTime: 2023-08-04 16:21:20
  * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
@@ -49,22 +49,25 @@ C 语言是自己接触的第一门语言，基本的语法在大学时就已经
 
 
 # 3. C++
-C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的的强化，但是现代的 C++ 已经与 C 相差很大了，几乎是另一种语言。学习 C++ 需要花费的很长时间，它的知识点不仅广泛还很细粒、灵活性很高。自己在学习时，学习知识点时，学习的快，忘记的也快，因此，自己就把学习过程中的一些理解、笔记和体会记录下来。
+C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的的强化，但是现代的 C++ 已经与 C 相差很大了，几乎是另一种语言。学习 C++ 需要花费的很长时间，    
+它的知识点不仅广泛还很细粒、灵活性很高。自己在学习时，学习知识点时，学习的快，忘记的也快，因此，自己就把学习过程中的一些理解、笔记和体会记录下来。
 
 
-## 3.1. [C++ 基础](C++/01-C++基础.md)
+## 3.1. [C++ 基础](C++/01-C++Novice.md)
 这部分主要是 C++ 的基础知识点，常用的语法，该板块涉及的内容比较多。
+
 <img src="./C++/figures/toc-1.png">
+
 <img src="./C++/figures/toc-2.png">
 
 
-## 3.2. [C++ 高级](C++/02-C++高级.md)
+## 3.2. [C++ 高级](C++/02-C++Advanced.md)
 C++ 的核心思想是面向对象，这个板块包含了 C++ 面向对象的内容：封装、继承、多态；泛型编程、输入输出流、元编程等。
 
 <img src="./C++/figures/toc-3.png">
 
 
-## 3.3. [C++ 新特性](C++/03-C++新特性.md)
+## 3.3. [C++ 新特性](C++/03-C++Standard.md)
 主要介绍 C++11、C++14、C++17、C++20 的新特性，
 
 <img src="./C++/figures/toc-c11.png">
@@ -82,13 +85,12 @@ C++ 的核心思想是面向对象，这个板块包含了 C++ 面向对象的�
 C++ 不同 Java、Python、GO 等，C++ 没有垃圾回收机制，内存的分配和释放都需自己手动管理，因此真真理解 C++ 编译器中的内存管理机制是非常重要的。这部分的内容，目前只写了部分，后面的内容，以后在完善。
 
 1. [C++ 中 enable_shared_from_this 用法](C++/enable_shared_from_this.md)
-2. [Core dump 调试用法](./C++/Core-dump.md)
-3. [Valgrind 内存泄漏检查的利器](C++/Valgrind.md)
-4. [C++ 编程规范](./C++/编程规范.md)
+2. [Core dump 调试用法](Linux/coredump.md)
+3. [Valgrind 内存泄漏检查的利器](Linux/valgrind.md)
+4. [C++ 编程规范](C++/C++StyleGuide.md)
 5. [C++ 中的并发处理](C++/concurrency.md)
 6. [多线程时线程池的使用](C++/ThreadPool.md)
-7. [非常值得学习的 C/C++ 服务端开源库](C++/OpenSourceProject.md)
-
+7. [非常值得学习的 C/C++ 服务端开源库](OpenSource/OpenSourceProject.md)
 
 # 4. 内功修炼
 [计算机底层知识的加深理解](OS/ComputerSystemAProgramm'sPerspective.md)
@@ -149,14 +151,14 @@ Currency(并发)
 
 
 # 6. 计算机网络
-[计算机网络基础知识](Network / 网络基础. md)
+[计算机网络基础知识](Network/NetworkPrimer.md)
 
 <img src="./Network/figure/toc-net-1.png">
 <img src="./Network/figure/toc-net-2.png">
 
-----------------------------------------------------------
-- [计算机网络常用网络术语缩写](Network/网络术语缩写.md)
-- [HTTP 基础](Network/HTTP基础.md)
+---
+- [计算机网络常用网络术语缩写](Network/AbbrNetworkTerms.md)
+- [HTTP 基础](Network/HTTP.md)
 - [Wireshark 网络抓包工具使用分析](Network/Wireshark.md)
 
 
@@ -209,10 +211,10 @@ Currency(并发)
 
 
 # 10. Git-SVN
-[从最简单的 Git 使用，到 Git 内部原理，一步步带你窥探其的奥秘](Git-SVN/Git.md)
+[从最简单的 Git 使用，到 Git 内部原理，一步步带你窥探其的奥秘](Git-SVN/Git.md)<br>
 <img src="Git-SVN/figure/toc-git.png">
 
-[SVN 工具](Git-SVN/SVN.md)
+[SVN 工具](Git-SVN/SVN.md)<br>
 <img src="Git-SVN/figure/toc-svn.png">
 
 
@@ -222,7 +224,7 @@ Currency(并发)
 
 
 # 12. Linux
-- [Linux 基础知识点](Linux/linux-basics.md)
+- [Linux 基础知识点](Linux/linux-primer.md)
 
 <img src="Linux/pictures/toc-linux-basics-1.png">
 <img src="Linux/pictures/toc-linux-basics-2.png">
@@ -239,12 +241,12 @@ Currency(并发)
 
 
 # 13. Shell
-[Shell 基础语法分析](Shell/shell.md)
+[Shell 基础语法分析](Shell/shell.md)<br>
 <img src="Shell/figures/toc-shell.png">
 
 
 # 14. Redis
-[Redis 基础用法](Redis/Redis.md)
+[Redis 基础用法](Redis/Redis.md)<br>
 <img src="Redis/figures/toc-redis.png">
 
 
@@ -262,7 +264,7 @@ Currency(并发)
 
 
 # 17. Qt
-- [Qt 常见基础组件用法](Qt/Qt.md)
+- [Qt 常见基础组件用法](Qt/Qt.md)   
 <img src="Qt/figures/toc-qt.png">
 
 
@@ -271,18 +273,18 @@ Currency(并发)
 
 
 # 19. Markdown
-- [Markdown 基础语法讲解](Markdown/MarkdownLatex.ipynb)
-- [LaTeX 数学公式编写的利器](Markdown/LaTex语法.md)
-- [希腊字母表](Markdown/希腊字母表.md)
-- [编写 Markdown 文档的 typora 软件常用使用说明](Markdown/Typora使用手册.md)
+- [编写 Markdown 文档的 typora 软件常用使用说明](Markdown/TyporaMarkdown.md)
+- [LaTeX 数学公式编写的利器](Markdown/LaTex.md)
+- [希腊字母表](Markdown/GreekAlphabet.md)
+- [Jupyter 基础语法讲解](Markdown/MarkdownLatex.ipynb)
 
 
 # 20. 工具
 - [draw.io 绘图工具常用快捷键](StudyTool/draw.io.md)
 - [Jetbrains 系列软件使用技巧](StudyTool/JetbrainsPlugins.md)
-- [VSCode 常用快捷键](StudyTool/VSCode-ShortCuts.md)
-- [掌握这些 windows10 系统快捷键，大幅度提高日常工作效率](StudyTool/Windows10-Shortcuts.md)
-- [积累了许多常用的习学习网站](StudyTool/learning-website.md)
+- [VSCode 常用快捷键](StudyTool/VSCode.md)
+- [掌握这些 windows10 系统快捷键，大幅度提高日常工作效率](StudyTool/Windows10.md)
+- [积累了许多常用的习学习网站](StudyTool/WebsiteReferences.md)
 - [IPAD 比较好的收费的软件](StudyTool/iPad-tools.md)
 
 
