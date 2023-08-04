@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-11 14:05:00
+ * @LastEditTime: 2023-08-04 10:35:59
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -93,7 +93,7 @@
   - [9.2. 重要 API 函数](#92-重要-api-函数)
   - [9.3. 注意事项](#93-注意事项)
 - [10. Garbage Collector(垃圾回收)](#10-garbage-collector垃圾回收)
-- [11. Reference](#11-reference)
+- [11. References](#11-references)
 
 <!-- /TOC -->
 
@@ -1929,7 +1929,7 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 开发者可以专注于业务逻辑而无需手动管理内存。通过使用 `new` 函数创建对象后，当对象不再被引用时，垃圾回收器会自动将其标记为不可达，并在适当的时候回收其占用的内存。
 
 
-# 11. Reference
+# 11. References
 - Go 官方英文文档：https://go.dev/
 - Go 官方英文标准库：https://pkg.go.dev/std
 - Go 官方 Github 源码：https://github.com/golang/go
@@ -1974,6 +1974,8 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go
 - 嗨客网：https://haicoder.net/golang/golang-lib.html
 - learnku 社区网站：https://learnku.com/go
+- 腾讯大佬个人博客：https://www.hitzhangjie.pro/blog/
+- **印度小哥 mohitkhare 博客**：https://www.mohitkhare.com/blog/go-dependency-injection/
 
 
 
