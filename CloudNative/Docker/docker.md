@@ -823,13 +823,21 @@ Deleted: sha256:0eba131dffd015134cb310c284b776c1e44d330146cd2f0e30c4e464d0b76d24
 
 查看镜像、容器、数据卷所占用的空间大小
 
-```
+```shell
 [root@redis_181 ~]# docker system df
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
 Images          3         3         785.9MB   0B (0%)
 Containers      5         0         344B      344B (100%)
 Local Volumes   5         5         2B        0B (0%)
 Build Cache     0         0         0B        0B
+
+可选项
+	# 清理磁盘，删除关闭的容器、无用的数据卷和网络，以及无tag的镜像
+	docker system prune
+	
+	# 清理掉所有的 Docker 镜像，包括你暂时关闭的容器，以及暂时没有使用的 docker 镜像
+	docker system prune -a
+
 ```
 
 显示结果说明

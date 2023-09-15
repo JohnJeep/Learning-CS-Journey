@@ -120,7 +120,7 @@ Kafka 和 ETL 工具或其他数据集等这些工具都擅长移动数据，但
 
 
 
-## 7.1. 关键术语
+## 7.1. Terminology
 
 - Topic（主题）：将数据分类，主题中有分区有副本。kafka 中的数据主要存储在 topic 中。
 
@@ -208,7 +208,7 @@ I'm you
 
 
 
-# 12. 参考
+# 12. References
 
 - Kafka 官网：https://kafka.apache.org/
 - 《Kafka: The Definitive Guide: Real-Time Data and Stream Processing at Scale》
@@ -216,7 +216,7 @@ I'm you
 - [The Apache Kafka C/C++ client library API](https://docs.confluent.io/platform/current/clients/librdkafka/html/index.html)
 - [51CTO 天山老妖S-kafka系列](https://blog.51cto.com/u_9291927/category33.html)
 - [kafka详细教程](https://blog.csdn.net/hellozpc/article/details/105680217)
-- [Kafka 入门知识](https://cloud.tencent.com/developer/article/1547380)]
+- [Kafka 入门知识](https://cloud.tencent.com/developer/article/1547380)
 
 
 
