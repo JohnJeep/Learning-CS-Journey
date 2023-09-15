@@ -392,7 +392,7 @@ func copy(dst, src []Type) int
 
 
 ### 4.6.3. make
-`make` 也是用于内存分配的，区别于 `new`，它只用于 `slice`、`map` 以及 `chan` 的内存创建，而且它返回的类型就是这三个类型本身，而不是他们的指针类型，因为这三种类型就是 ** 引用类型 **，所以就没有必要返回他们的指针了。
+`make` 也是用于内存分配的，区别于 `new`，它只用于 `slice`、`map` 以及 `chan` 的内存创建，而且它返回的类型就是这三个类型本身，而不是他们的指针类型，因为这三种类型就是 **引用类型 **，所以就没有必要返回他们的指针了。
 
 用法
 
@@ -404,7 +404,7 @@ b = make(map[string]int, 10)
 b := make(map[string]int, 10)
 ```
 
-用内置的 `make` 函数创建一个指定元素类型、 长度和容量的 `slice`。 容 ** 量部分可以省略， 在这种情况下， 容量将等于长度。**
+用内置的 `make` 函数创建一个指定元素类型、 长度和容量的 `slice`。  **容量部分可以省略， 在这种情况下， 容量将等于长度。**
 
 ```go
 make([]T, len)
@@ -789,7 +789,7 @@ func Join(s [][]byte, sep []byte) []byte
 
 ### 4.10.4. any
 
-`any` 是 Go built-in package 中的一种类型，表示的是空接口（`interface{}`）的别名。** 空接口 ** 表示可以接受任何类型的值。
+`any` 是 Go built-in package 中的一种类型，表示的是空接口（`interface{}`）的别名。**空接口 ** 表示可以接受任何类型的值。
 
 原型
 
@@ -864,7 +864,7 @@ var slice []int
 
 一个 slice 是一个轻量级的数据结构，提供了访问数组子序列（或者全部）元素的功能，而且 `slice` 的底层确实引用一个数组对象。一个 slice 由三个部分构成：指针（addr pointer）、长度（length）和容量（capacity）。
 
-- 指针指向第一个 slice 元素对应的底层数组元素的地址，要注意的是 slice 的第一个元素并不一定就是数组的第一个元素。长度对应 slice 中元素的数目；
+- 指针指向第一个 slice 元素对应的底层数组元素的地址，要注意的是 slice 的第一个元素并不一定就是数组的第一个元素。长度对应 slice 中元素的数目。
 - 长度不能超过容量。切片遍历方式和数组一样，可以用 `len()` 求长度。表示可用元素数量，读写操作不能超过该限制。
 - 容量一般是从 slice 的开始位置到底层数据的结尾位置。内置的 `len()` 和 `cap()` 函数分别返回 slice 的长度和容量。
   - `cap()` 可以求出 `slice` 最大扩张容量，不能超出数组限制。`0 <= len(slice) <= len(array)`，其中 array 是 slice 引用的数组。
@@ -872,7 +872,7 @@ var slice []int
 
 <font color=red> 注意：</font>
 
-- slice 之间不能比较， 因此我们不能使用 == 操作符来判断两个 slice 是否含有全部相等元素。 不过标准库提供了高度优化的 `bytes.Equal` 函数来判断两个字节型 slice 是否相等（ []byte） ， 但是对于其他类型的 slice， 我们必须自己展开每个元素进行比较
+- slice 之间不能比较， 因此我们不能使用 `==` 操作符来判断两个 slice 是否含有全部相等元素。 不过标准库提供了高度优化的 `bytes.Equal` 函数来判断两个字节型 slice 是否相等 ，但是对于其他类型的 slice， 我们必须自己展开每个元素进行比较
 - 判断一个 slice 值是否为空，使用 `len(0) == 0` 来判断，不应该使用 `s = nil` 去判断。
 
 
@@ -943,6 +943,31 @@ type Stu struct {
 创建一个结构体后，若没有给结构体赋初值，编译器会默认给结构中的字段一个零值。布尔类型是 false，整型是 0，字符串是 `""`，指 针、slice、map 的零值都是 `nil`，即还没有分配空间；数组的默认值和它的元素类型有关。
 
 如果结构体没有任何成员的话就是空结构体， 写作 `struct{}`， 它的大小为 0， 不包含任何信息。
+
+#### 匿名结构体
+
+定义：没有名字的结构体，通常只用于在代码中仅使用一次的结构类型。
+
+```go
+func showMyCar() {
+    newCar := struct {
+        make    string
+        model   string
+        mileage int
+    }{
+        make:    "Ford",
+        model:   "Taurus",
+        mileage: 200000,
+    }
+    fmt.Printlb(newCar.mode)
+}
+```
+
+使用的好处：如果一个结构体初始化后只被使用一次，那么使用匿名结构体就会很方便，不用在程序的 package 中定义太多的结构体类型，比如在解析接口的响应到结构体后，就可以使用匿名结构体
+
+
+
+
 
 **注意**
 
@@ -1935,6 +1960,7 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - Go 官方 Github 源码：https://github.com/golang/go
 - Go 官方 Wiki：https://github.com/golang/go/wiki
 - Github 英文 Go 开发者成长路线图：https://github.com/Alikhll/golang-developer-roadmap
+- Go Slice Tricks Cheat Sheet: https://ueokande.github.io/go-slice-tricks/
 
 ------------------------------------------------------------------------
 
@@ -1967,15 +1993,27 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 
 社区及经验分享
 - [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO 语言题解 LeetCode，比较全面，使用 GO 语言时值得参考。
+
 - [Halfrost-Field 冰霜之地](https://github.com/halfrost/Halfrost-Field)：Github 上的一位作者记录了学习 GO 语言的一些方法和经验。
+
 - [Go 语言问题集 (Go Questions)](https://www.bookstack.cn/read/qcrao-Go-Questions/README.md)：作者学习 Go 语言的笔记
+
 - Go 语言设计与实现：https://draveness.me/golang/
   这位作者是个大牛，开源作品很多，该项目系统的讲解了 Go 语言的知识，非常值得学习。
+  
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go
+
 - 嗨客网：https://haicoder.net/golang/golang-lib.html
+
 - learnku 社区网站：https://learnku.com/go
+
 - 腾讯大佬个人博客：https://www.hitzhangjie.pro/blog/
+
 - **印度小哥 mohitkhare 博客**：https://www.mohitkhare.com/blog/go-dependency-injection/
+
+- Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
+
+  介绍了 Go 中一些常踩的坑和性能优化技巧。
 
 
 
