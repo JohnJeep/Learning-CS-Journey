@@ -434,6 +434,7 @@ https://www.bookstack.cn/read/recommend/0002-gofiber.md
     - `DefaultQuery()` 指定的参数不存在，给定个默认值
     - `BindQuery()` 
     - `ShouldBindQuery()`  相比 `BindQuery()`  报错后不影响。
+      
       > map 类型请求参数不支持。
 
 
@@ -464,11 +465,21 @@ https://www.bookstack.cn/read/recommend/0002-gofiber.md
 ### 3.11.1. 简介
 [watermill](https://watermill.io/)是 Go 语言的一个异步消息解决方案，它支持消息重传、保存消息，后启动的订阅者也能收到前面发布的消息。`watermill`内置了多种**订阅-发布**实现，包括`Kafka/RabbitMQ`，甚至还支持`HTTP/MySQL binlog`。当然也可以编写自己的订阅-发布实现。此外，它还提供了监控、限流等中间件。
 
+### 难题
+
+发布/订阅模式一些常见的问题
+
+- 将消息发送到订阅者管道之后就不管了，这样如果订阅者处理压力较大，会在管道中堆积太多消息，一旦订阅者异常退出，这些消息将会全部丢失！
+- 若没有消息保存，如果订阅者后启动，之前发布的消息，这个订阅者是无法收到的。
+
+
+
 
 ### 3.11.2. References
 - 官网：https://watermill.io/
 - Github: https://github.com/ThreeDotsLabs/watermill/
 - Go packages: https://pkg.go.dev/github.com/ThreeDotsLabs/watermill@v1.2.0/pubsub/gochannel
+- Go 每日一库之 watermill: https://cloud.tencent.com/developer/article/1693800
 
 
 ## 3.12. Gotest
