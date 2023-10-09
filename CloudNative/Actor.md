@@ -1,6 +1,12 @@
 # Actor Model
 
+Actor模型是一个概念模型，用于处理并发计算。Actor由3部分组成：状态（State）+行为（Behavior）+邮箱（Mailbox），State是指actor对象的变量信息，存在于actor之中，actor之间不共享内存数据，actor只会在接收到消息后，调用自己的方法改变自己的state，从而避免并发条件下的死锁等问题；Behavior是指actor的计算行为逻辑；邮箱建立actor之间的联系，一个actor发送消息后，接收消息的actor将消息放入邮箱中等待处理，邮箱内部通过队列实现，消息传递通过异步方式进行。
 
+
+
+### 介绍
+
+Proto.Actor-go 是一个用于构建分布式应用程序的框架，它基于 Go 语言开发，旨在简化并发和分布式系统的开发。这个框架使用 Actor 模型作为基础，允许开发者将应用程序拆分成独立的 Actor，并通过消息传递进行通信。
 
 ## 特点
 
@@ -75,7 +81,7 @@ https://proto.actor/docs/cluster/
 
 - clustering 的核心是 `cluster provider`
 
-- virtual actor model 借鉴了 `Microsoft Orleans` 的概念。`proto.Actor` 使用 `Grain` 为代码生成 `virtual actors`
+- virtual actor model 借鉴了 `Microsoft Orleans` 的概念。一个`Grain` 就是一个 `virtual actors`
 - Goissp
 - pub-sub
 
@@ -109,6 +115,7 @@ https://proto.actor/docs/cluster/
 
 - offical website: https://proto.actor/docs/
 - [Golang] protoactor-go 101: How actors communicate with each other: https://blog.oklahome.net/2018/09/protoactor-go-messaging-protocol.html
+- Microsoft Orleans: https://learn.microsoft.com/en-us/dotnet/orleans/overview
 - 知乎深入解析actor 模型（一)： actor 介绍及在游戏行业应用：https://zhuanlan.zhihu.com/p/427806717
 - 知乎深入解析actor 模型（二)： actor 在go 实践proto.Actor 源码解析：https://zhuanlan.zhihu.com/p/427817175
 
