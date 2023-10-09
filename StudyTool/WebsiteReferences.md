@@ -2,7 +2,7 @@
 
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2023-08-04 14:42:29
+ * @LastEditTime: 2023-09-20 15:18:52
  * @LastEditors: JohnJeep
  * @Description: 积累一些学习的网站。
 -->
@@ -10,7 +10,7 @@
 <!-- TOC -->
 
 - [1. 博客和知识社区](#1-博客和知识社区)
-  - [个人搭建博客](#个人搭建博客)
+  - [1.1. 个人搭建博客](#11-个人搭建博客)
 - [2. 编程和刷题网站](#2-编程和刷题网站)
 - [3. 公开课和在线视频学习](#3-公开课和在线视频学习)
 - [4. 字幕下载](#4-字幕下载)
@@ -22,18 +22,17 @@
 - [10. 考研](#10-考研)
 - [11. PPT](#11-ppt)
 - [12. 图片](#12-图片)
-- [13. 图标](#13-图标)
-- [14. 电子图书](#14-电子图书)
-  - [14.1. 文学](#141-文学)
-  - [14.2. 科技](#142-科技)
-  - [14.3. 漫画](#143-漫画)
-  - [14.4. 其它](#144-其它)
-- [15. 免费下载各种外文科技论文](#15-免费下载各种外文科技论文)
-- [16. 二次元](#16-二次元)
-- [17. 耍酷](#17-耍酷)
-- [18. 电脑壁纸](#18-电脑壁纸)
-- [19. 写作](#19-写作)
-- [20. 参考](#20-参考)
+- [13. 电子图书](#13-电子图书)
+  - [13.1. 文学](#131-文学)
+  - [13.2. 科技](#132-科技)
+  - [13.3. 漫画](#133-漫画)
+  - [13.4. 其它](#134-其它)
+- [14. 免费下载各种外文科技论文](#14-免费下载各种外文科技论文)
+- [15. 二次元](#15-二次元)
+- [16. 耍酷](#16-耍酷)
+- [17. 电脑壁纸](#17-电脑壁纸)
+- [18. 写作](#18-写作)
+- [19. 参考](#19-参考)
 
 <!-- /TOC -->
 
@@ -50,7 +49,7 @@
 - [老 D 博客](https://laod.cn/hosts/2018-google-hosts.html)：报道当今比较潮流、新的技术。
 
 
-## 个人搭建博客
+## 1.1. 个人搭建博客
 推荐一些优秀大佬自己搭建的博客网站
 - FreeMind: https://freemind.pluskid.org/
 - 小林Coding: https://xiaolincoding.com/
@@ -178,30 +177,27 @@
 
 
 # 12. 图片
-- [Stock Photos](https://stockphotos.io/): 是一个以 Creative Commons 授权为主的相册共享社群，也是摄影爱好者们的交流社区。内存约 2.5w 张各类优质图片，所有图片都是以 Pinterest 瀑布流的形式显示，亦可用于商业用途
-- [Gratisography](https://gratisography.com/): 它为用户提供免费高品质摄影图片，而且所有的图片都可以用于个人或者商业用途。每周更新图片你只需要点击即可下载
-- [Stockvault](https://www.stockvault.net/): 该网站的图片可以免费用于个人和非商业设计项目呢！
-- [视觉中国](https://www.vcg.com/)：视觉不仅是个图库网站，它还包含了音乐、视频等素材资源，用户可根据个人需求搜索图片资源。
-- [GIF 动画](https://ezgif.com/)：GIF 动画制作网站
-- [Pexels](https://www.pexels.com/)：免费高品质图片网
+- [unsplash](https://unsplash.com ): 推荐指数：⭐⭐⭐⭐⭐
+- [Pexels](https://www.pexels.com/)：免费高品质图片网。推荐指数：⭐⭐⭐⭐⭐
+- [阿里巴巴矢量图标素材库](https://www.iconfont.cn/): 首页的搜索框就可以输入你想要找的图标，也可以在图标库去寻找。选好你想要的图标之后还可以根据你的需要在线修改颜色，并提供 SVG/PNG/AI 图片格式的下载。推荐指数：⭐⭐⭐⭐
+- [icons8](https://icons8.com/): 国外的网站，提供各种格式，各种尺寸和配色。Icons8 除了将图示按照类别分类外，还利用不同平台的设计风格准则加以区隔，例如有 iOS10、Windows、Android、Google、Office。推荐指数：⭐⭐⭐⭐⭐
+- [360 壁纸]( https://bizhi.360.cn/) 推荐指数：⭐⭐⭐
+- [花瓣网]( https://huaban.com/discovery ) 推荐指数：⭐⭐⭐⭐
+- [Emoji Cheat Sheet](https://www.webfx.com/tools/emoji-cheat-sheet/): 各种表情包下载库。推荐指数：⭐⭐⭐⭐⭐
+- [emojiisland](https://emojiisland.com/) 下载 emoji 表情库。推荐指数：⭐⭐⭐⭐⭐
+- *[Gratisography](https://gratisography.com/): 它为用户提供免费高品质摄影图片，而且所有的图片都可以用于个人或者商业用途。网站图片质量感觉不是很高。*推荐指数：⭐
+- [stocksnap](https://stocksnap.io/): 该网站的图片可以免费用于个人和非商业设计项目呢！推荐指数：⭐⭐
+- *[视觉中国](https://www.vcg.com/)：视觉不仅是个图库网站，它还包含了音乐、视频等素材资源，用户可根据个人需求搜索图片资源。若不借助第三方工具，一般需要用户注册、购买后才能下载。*推荐指数：⭐
+- [GIF 动画](https://ezgif.com/)：GIF 动画制作网站。推荐指数：⭐⭐⭐
 - [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
-- [emojiisland](https://emojiisland.com/) 下载 emoji 表情库
-- [photomosh](https://photomosh.com/) 炫酷的图片制作
-- [Emoji Cheat Sheet](https://www.webfx.com/tools/emoji-cheat-sheet/): 各种表情包下载库。
-
-
-# 13. 图标
-- [阿里巴巴矢量图标素材库](https://www.iconfont.cn/): 首页的搜索框就可以输入你想要找的图标，也可以在图标库去寻找。选好你想要的图标之后还可以根据你的需要在线修改颜色，并提供 SVG/PNG/AI 图片格式的下载。
-- [icons8](https://icons8.com/): 网站也提供各种格式，各种尺寸和配色。Icons8 除了将图示按照类别分类外，还利用不同平台的设计风格准则加以区隔，例如有 iOS10、Windows、Android、Google、Office。
-- [Iconninja](http://www.iconninja.com/): 海量免费图标素材，支持关键词搜索，所有的素材图片均提供详细的如格式、宽度、高度、文件大小等信息，根据自己需要下载合适的尺寸。
-- [asyicon](https://www.easyicon.net/): 支持 PNG、ICO、ICNS 格式图标搜索、图标下载服务。
+- [photomosh](https://photomosh.com/) 炫酷的图片制作。推荐指数：⭐⭐
 
 
 
-# 14. 电子图书
+# 13. 电子图书
 
 
-## 14.1. 文学
+## 13.1. 文学
 - [我的小书屋](http://mebook.cc/)：这是一个个人开发者建的电子书资源网站
 - [书格](https://www.shuge.org/)：主要提供的是古籍图书
 - [读书小站](https://ibooks.org.cn/) 简洁清新的网站，下载各种文学类的电子书。
@@ -210,16 +206,16 @@
 - [书山有路](http://www.ssylu.com/)  收集各类文学书籍，提供 mobi,azw3,epub 等格式电子书下载。
 
 
-## 14.2. 科技
+## 13.2. 科技
 - [计算机书籍控](http://bestcbooks.com/)：这个网站有计算机专业的书籍，不是很新，有一部分的书籍。
 - [明明三省的网站](https://www.iizhi.cn/book/category/c)
 
 
-## 14.3. 漫画
+## 13.3. 漫画
 - [Vol.moe](http://vol.moe/)：要提供漫画类电子书资源的网站，无论从内容的质量还是数量上来讲，都是比较令人惊喜的
 
 
-## 14.4. 其它
+## 13.4. 其它
 - [Owllook](https://www.owllook.net/)：免费下载各类小说的搜索引擎， 页面清新简洁，无广告，直接输入书名即可搜索
 - [盘搜搜](http://www.pansoso.com/)：一个老牌网盘搜索工具，功能非常强大。非常简洁的界面。每天都有更新，不同达人分享自己的 “盘中资源”！盘搜不存储任何网盘内容，无论是工作还是学习都必备。
 - [中国国家图书馆](http://www.nlc.cn/): 一个国家总书库网站。教育资源怎么能少的了书籍资源？这个网站不仅是供国家机关使用，而且还是面对社会大众的，你可以在这里搜索书籍、论文、报刊、甚至古籍、音乐、影视！
@@ -232,7 +228,7 @@
 参考：[有哪些好的电子书下载网站及电子书阅读器推荐](https://www.zhihu.com/question/21202757/answer/646131444)
 
 
-# 15. 免费下载各种外文科技论文
+# 14. 免费下载各种外文科技论文
 1. [Z-Library](http://b-ok.org/)
 2. [Booksee](http://en.booksee.org/): 下载最新的电子图书。
 3. [Library Genesis2M](http://gen.lib.rus.ec/) : 适合下载较新的论文, 只要是外文书籍和论文基本上都可以搜到并下载，最近几年的论文也可以下载 `
@@ -249,14 +245,14 @@
 [参考 sciencenet.cn](http://blog.sciencenet.cn/blog-752541-821254.html)
 
 
-# 16. 二次元
+# 15. 二次元
 - [tunefind](https://www.tunefind.com/movie/zootopia-2016):  快速找到热门影视剧的 BGM！
 - [KonaChan 动漫 ACG 壁纸](https://konachan.net/): KonaChan 网站是一个致力于动漫、游戏壁纸图片搜索的站点，喜欢动漫的用户可以根据关键词来搜索自己想要的图片壁纸。想要找个性化的动漫壁纸，只有这种专业的动漫图片网站才有的。
 - [dova](https://dova-s.jp/) 免费的日文 BGM 下载。
 - [nico](https://www.nicovideo.jp/) 日文 BGM 下载。
 
 
-# 17. 耍酷
+# 16. 耍酷
 - [HackerTyper Neo](http://geektyper.com/#): 伪装成特工，让网吧里围观的小学生们膜拜你的神器！
 - [File Destructor 2.0](http://www.xnet.se/fd/): 此网站可以随意伪造任意文件格式，任意文件大小的文档, 如果你的死线就在明天而你到现在还什么都没做，那么你可以用它来拖延至少 1 天的时间。
 - [FakeUpdate](http://fakeupdate.net/)  模拟多种系统的安装过程，让你上班愉快的摸鱼。
@@ -264,13 +260,13 @@
 - [suulnnka.github.io](https://suulnnka.github.io/BullshitGenerator/index.html) 沙雕文章生成器，搅乱你的脑袋瓜子吧！
 
 
-# 18. 电脑壁纸
+# 17. 电脑壁纸
 - [wallhere](https://wallhere.com/)
 - [极简壁纸](https://bz.zzzmh.cn/)
 - [资源帝](http://bizhi.ziyuandi.cn/)
 
 
-# 19. 写作
+# 18. 写作
 1. 排版
    1. [Github 中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
    2. [写给大家看的中文排版指南](https://zhuanlan.zhihu.com/p/20506092)
@@ -289,13 +285,11 @@
 7. 代码片段转化为图片：https://carbon.now.sh
 8. 配色方案：https://coolors.co
 9.  配图
-    1. 封面配图: https://unsplash.com 
-    2. 360 壁纸： https://bizhi.360.cn/
-    3. 花瓣网： https://huaban.com/discovery
-    4.  知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
+    4. 知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
+    2. [图片](#12-图片)
 
 
 
-# 20. 参考
+# 19. 参考
 - [国外：These 62 Websites Will Make You Incredibly Smarter](https://medium.com/the-mission/these-62-websites-will-make-you-incredibly-smarter-7eb89f122c2e#.7jdomoyo7)
 

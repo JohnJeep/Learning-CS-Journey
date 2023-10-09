@@ -1276,4 +1276,5 @@ Redis 使用中会遇见很多的问题，下面一幅图，列出了 Redis 中�
 - 实战书：《Redis 开发与运维》
 - Redis Github  官方源码: https://github.com/redis/redis
 - Redis LPUSH 命令详解教程-嗨客网: https://haicoder.net/redis/redis-lpush.html
+- **数据库redis系列---- redis tutorial:** https://kingjcy.github.io/post/database/redis/redis/
 
