@@ -178,16 +178,31 @@ Go 语言有足够的类型系统以避免动态语言中那些粗心的类型�
 
 
 ## 4.1. Agent(代理)
-设置代理
+众所周知，国内网络访问国外资源经常会出现不稳定的情况。 Go 生态系统中有着许多中国 Gopher 们无法获取的模块，比如最著名的 `golang.org/x/...`。并且在中国大陆从 GitHub 获取模块的速度也有点慢。
+Linux 环境下，终端直接执行下面的命令进行国内镜像加速。
 
-七牛云
+```shell
+# 启用 Go Modules 功能
+go env -w GO111MODULE=on
 
-```
+# 设置七牛云镜像加速
 go env -w GOPROXY=https://goproxy.cn,direct
-go env -w GOSUMDB=goproxy.cn/sumdb/sum.golang.org
+
+# 设置国内的能访问到的 GOSUMDB 
+go env -w GOSUMDB=sum.golang.google.cn
 ```
+
+执行完后确认一下，看环境是否设置对
+
+```shell
+go env | grep GOPROXY
+GOPROXY="https://goproxy.cn"
+```
+
+
 
 ## 4.2. 项目目录结构
+
 在进行 `Go` 语言开发的时候，我们的代码总是会保存在 `$GOPATH/src` 目录下。在工程经过 `go build`、`go install` 或 `go get` 等指令后，会将下载的第三方包源代码文件放在 `$GOPATH/src` 目录下， 产生的二进制可执行文件放在 `$GOPATH/bin ` 目录下，生成的中间缓存文件会被保存在 `$GOPATH/pkg` 下。
 
 建立 Go 的工作空间（workspace，也就是 `GOPATH` 环境变量指向的目录）
@@ -364,7 +379,7 @@ print、println  -- 底层打印函数，在部署环境中建议使用 fmt 包
 func append(slice []Type, elems ...Type) []Type
 ```
 
-功能：在原 slice 的末尾添加元素，返回修改后的 slice
+功能：在原 slice 的末尾添加元素，返回修改后的 slice，返回值是一个新的slice
 
 ```go
 s1 := []int{2, 3, 5, 7}
@@ -755,14 +770,14 @@ func TrimSuffix(s, suffix string) string
 12. 将字符串左右两边的空格去掉
     ```go
     func TrimSpace(s string) string
-
+    
     // fmt.Println(strings.TrimSpace("\t\n Hello, Gophers \n\t\r\n"))
     ```
 
 13. 将字符串左右两边指定的字符串去掉
     ```go
     func Trim(s, cutset string) string
-
+    
     // fmt.Print(strings.Trim("¡¡¡Hello, Gophers!!!", "!¡"))
     // 输出：Hello, Gophers
     ```
@@ -862,7 +877,7 @@ slice := []int{10, 20, 30}
 var slice []int
 ```
 
-一个 slice 是一个轻量级的数据结构，提供了访问数组子序列（或者全部）元素的功能，而且 `slice` 的底层确实引用一个数组对象。一个 slice 由三个部分构成：指针（addr pointer）、长度（length）和容量（capacity）。
+一个 slice 是一个轻量级的数据结构，提供了访问数组子序列（或者全部）元素的功能，而且 `slice` 的底层确实引用一个数组对象。一个 slice 由三个部分构成：**指针（addr pointer）、长度（length）和容量（capacity）**。
 
 - 指针指向第一个 slice 元素对应的底层数组元素的地址，要注意的是 slice 的第一个元素并不一定就是数组的第一个元素。长度对应 slice 中元素的数目。
 - 长度不能超过容量。切片遍历方式和数组一样，可以用 `len()` 求长度。表示可用元素数量，读写操作不能超过该限制。
@@ -965,10 +980,6 @@ func showMyCar() {
 
 使用的好处：如果一个结构体初始化后只被使用一次，那么使用匿名结构体就会很方便，不用在程序的 package 中定义太多的结构体类型，比如在解析接口的响应到结构体后，就可以使用匿名结构体
 
-
-
-
-
 **注意**
 
 - 结构体数据拷贝默认是 **值拷贝** 的。
@@ -979,7 +990,7 @@ func showMyCar() {
   type A struct {
   	Num int
   }
-
+  
   type B type {
   	Num int
   }
@@ -990,13 +1001,13 @@ func showMyCar() {
   	ID   int
   	Name string
   }
-
+  
   type YuanDing Teacher // Golang 认为 YuanDing 是一种新的数据类型
   var t1 Teacher
   var y1 YuanDing
   // t1 = y1 // error：y1 与 t1 之间不能互转
   t1 = Teacher(y1) // 强转
-
+  
   fmt.Println("t1:", t1, "y1:", y1)
   ```
 - `struct` 的每个字段上，可以写一个 `tag`，该 `tag` 可以通过 **反射机制** 获取。常见的场景就是序列化和反序列化。
@@ -1143,7 +1154,7 @@ Go 语言的面向对象机制与一般语言不同。它没有类层次结构�
   	Name  string
   	Score int
   }
-
+  
   func (stu *Student) String() string {
   	str := fmt.Sprintf("Name=%s, Score=%d", stu.Name, stu.Score)
   	return str
@@ -1326,11 +1337,11 @@ type usb interface {
   type A interface {
       Test01()
   }
-
+  
   type B interface {
       Test02()
   }
-
+  
   // C 接口中继承了两个接口
   type C interface {
       Test03()
@@ -1344,15 +1355,15 @@ type usb interface {
   ```go
   type Stu struct {
   	Name string
-}
+  }
   
   // 空接口
   type T interface {}
-
+  
   // 调用
   var stu = Stu
   var t1 T = stu   // 赋结构体类型
-
+  
   f := 3.14
   var t2 interface{} = f // 赋基础类型
   ```
@@ -1665,7 +1676,7 @@ Go 以包的形式来管理文件和项目目录结构的。所有的 go 代码�
 - 访问其它的包函数或变量时，其语法格式是：
   ```go
   包名. 函数名
-
+  
   包名. 变量名
   ```
 - 在同一个包下不能有相同的两个函数名，否则会报重复定义。
@@ -1753,25 +1764,25 @@ go test 命令执行原理
   // 若运行正确，则无日志；若运行错误，则有日志
   // go test 后面没有参数指定包，那么将默认采用当前目录对应的包
   go test
-
+  
   // 无论运行是正确还是错误，都有日志输出
   // 参数 -v: 用于打印每个测试函数的名字和运行时间：
   go test -v
-
+  
   // 测试单个文件
   go test -v socket_test.go socket.go
-
+  
   // 测试单个方法
   go test -v -test.run TestAdd
-
+  
   // CPU 剖析数据标识了最耗 CPU 时间的函数。 在每个 CPU 上运行的线程在每隔几毫秒都会遇到
   // 操作系统的中断事件， 每次中断时都会记录一个剖析数据然后恢复正常的运行。
   go test -cpuprofile=cpu.out
-
+  
   // 堆剖析则标识了最耗内存的语句。剖析库会记录调用内部内存分配的操作，
   // 平均每 512KB 的内存申请会触发一个剖析数据。
   go test -memprofile=mem.out
-
+  
   // 阻塞剖析则记录阻塞 goroutine 最久的操作， 例如系统调用、 管道发送和接收，
   // 还有获取锁等。 每当 goroutine 被这些操作阻塞时， 剖析库都会记录相应的事件。
   go test -blockprofile=block.out
@@ -2020,7 +2031,6 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
 
   介绍了 Go 中一些常踩的坑和性能优化技巧。
-
 
 
 
