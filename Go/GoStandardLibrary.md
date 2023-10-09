@@ -46,6 +46,152 @@ func MultiWriter(writers ...Writer) Writer
 
 MultiWriter 函数是一个变参函数，可以接受任意个实现了 io.Writer 接口的值。这个函数会返回一个 io.Writer 值，这个值会把所有传入的 io.Writer 的值绑在一起。当对这个返回值进行写入时，会向所有绑在一起的 io.Writer 值做写入。
 
+## io.Writer
+
+`io.Writer` 是 Go 语言标准库中的接口，用于写入数据。它定义了一个用于写入字节的通用接口，可以在不同的数据源和目标上使用。以下是 `io.Writer` 的基本用法和示例：
+
+1. 导入标准库：
+
+```
+goCopy codeimport "io"
+```
+
+1. 使用 `io.Writer` 接口的类型进行写入。最常见的类型是 `os.File` 和 `bytes.Buffer`，但你也可以自定义实现 `io.Writer` 接口的类型。
+2. 使用 `Write` 方法来写入数据。`Write` 方法的签名如下：
+
+```
+func (w WriterType) Write(p []byte) (n int, err error)
+```
+
+其中 `WriterType` 是实现了 `io.Writer` 接口的类型，`p` 是要写入的字节切片，`n` 是写入的字节数，`err` 是可能发生的错误。
+
+以下是一些基本示例：
+
+### 示例 1: 写入到文件
+
+```go
+package main
+
+import (
+    "io"
+    "os"
+)
+
+func main() {
+    // 打开文件进行写入
+    file, err := os.Create("example.txt")
+    if err != nil {
+        panic(err)
+    }
+    defer file.Close()
+
+    // 创建一个 io.Writer
+    writer := io.Writer(file)
+
+    // 写入数据
+    data := []byte("Hello, World!\n")
+    n, err := writer.Write(data)
+    if err != nil {
+        panic(err)
+    }
+
+    // 打印写入的字节数
+    println(n) // 输出：13
+}
+```
+
+### 示例 2: 使用 bytes.Buffer
+
+```go
+package main
+
+import (
+    "bytes"
+    "io"
+    "os"
+)
+
+func main() {
+    // 创建一个 bytes.Buffer 作为 io.Writer
+    var buf bytes.Buffer
+
+    // 写入数据
+    data := []byte("Hello, World!\n")
+    n, err := buf.Write(data)
+    if err != nil {
+        panic(err)
+    }
+
+    // 打印写入的字节数
+    println(n) // 输出：13
+
+    // 将数据写入文件
+    file, err := os.Create("example.txt")
+    if err != nil {
+        panic(err)
+    }
+    defer file.Close()
+
+    _, err = io.Copy(file, &buf)
+    if err != nil {
+        panic(err)
+    }
+}
+```
+
+这些示例演示了如何使用 `io.Writer` 接口来写入数据到不同的目标中，包括文件和内存缓冲区。无论目标是什么，你都可以使用相同的 `Write` 方法来写入数据。在实际编程中，你可以根据需要选择合适的 `io.Writer` 实现。
+
+## io.ReadFull
+
+`io.ReadFull` 是 Go 语言标准库中的一个函数，它的作用是从输入流中读取指定数量的字节，直到读取到足够数量的字节或者发生错误为止。通常，它用于确保从输入流中读取到指定数量的字节，即使输入流中的数据不够也会一直尝试读取，直到达到指定数量或者发生错误。
+
+`io.ReadFull` 的函数签名如下：
+
+```
+func ReadFull(r Reader, buf []byte) (n int, err error)
+```
+
+其中：
+
+- `r` 是一个实现了 `io.Reader` 接口的对象，表示输入流。
+- `buf` 是一个字节数组，用来存储读取到的数据。
+- 返回值 `n` 表示实际读取到的字节数。
+- 返回值 `err` 表示读取过程中是否发生了错误，如果成功读取到了指定数量的字节，`err` 将为 `nil`，否则将包含一个描述错误的值。
+
+下面是一个示例，演示如何使用 `io.ReadFull` 从输入流中读取指定数量的字节：
+
+```go
+package main
+
+import (
+	"fmt"
+	"io"
+	"os"
+)
+
+func main() {
+	// 打开一个文件作为输入流
+	file, err := os.Open("example.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer file.Close()
+
+	// 读取 10 个字节的数据
+	data := make([]byte, 10)
+	n, err := io.ReadFull(file, data)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Printf("Read %d bytes: %s\n", n, data)
+}
+```
+
+在上述示例中，`io.ReadFull` 从文件中读取 10 个字节的数据，如果文件中的数据不足 10 个字节，它将返回一个错误。
+
 
 # 3. log
 log 包实现了简单的日志服务。本包定义了 Logger 类型，该类型提供了一些格式化输出的方法。本包也提供了一个预定义的 “标准”Logger，可以通过辅助函数 Print[f|ln]、Fatal[f|ln] 和 Panic[f|ln]访问，比手工创建一个 Logger 对象更容易使用。Logger 会打印每条日志信息的日期、时间，默认输出到标准错误。Fatal 系列函数会在写入日志信息后调用 os.Exit(1)。Panic 系列函数会在写入日志信息后 panic。
@@ -124,6 +270,15 @@ Go 语言中，Marshal（编组）是指将数据结构或对象转换为字节�
 
 
 
+# Context
+
+- Go标准库Context: https://www.liwenzhou.com/posts/Go/context/
+
+
+
 # 6. Reference
 - Go Standard library: https://pkg.go.dev/std
+- Go 语言中文网：https://studygolang.com/pkgdoc
+- Mastering GO 中文翻译：https://wskdsgcf.gitbook.io/mastering-go-zh-cn/
+- Go语言标准库 Example: https://books.studygolang.com/The-Golang-Standard-Library-by-Example/
 
