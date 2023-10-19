@@ -35,3 +35,10 @@ hostname=WSL2
 - `network` 组下面，`generateHosts` 表示是否自动生成 `hosts` 文件，`hostname` 表示 wsl 主机名。
 
 设置完参数后保存退出， window 终端执行 `wsl --shutwown` 关闭 wsl，然后用 `wsl` 命令启动系统，进入 wsl 系统后，发现 `hostname` 已被修改为 `WSL2`。
+
+## wsl 下安装zsh
+
+- 在WSL中安装zsh终端：https://www.cnblogs.com/hongdada/p/11087557.html
+- oh my zsh github themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+- agnoster 主题安装 powerline 字体: https://github.com/powerline/fonts
+
