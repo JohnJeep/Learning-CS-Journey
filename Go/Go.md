@@ -2029,8 +2029,28 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 - **印度小哥 mohitkhare 博客**：https://www.mohitkhare.com/blog/go-dependency-injection/
 
 - Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
-
   介绍了 Go 中一些常踩的坑和性能优化技巧。
+  
+- Go的50度灰：Golang新开发者要注意的陷阱和常见错误：https://colobu.com/2015/09/07/gotchas-and-common-mistakes-in-go-golang/
+  
+
+-----
+
+Github 优秀开源项目
+
+- golang-open-source-projects: https://github.com/hackstoic/golang-open-source-projects
+
+- awesome-go-cn: https://github.com/jobbole/awesome-go-cn
+
+- **go-awesome**: https://github.com/shockerli/go-awesome
+
+- **国外 awesome-go**: https://github.com/avelino/awesome-go
+
+- **Go 夜读：**
+
+  - **https://github.com/talkgo/read**  
+
+  - https://github.com/talkgo/night
 
 
 
