@@ -2161,4 +2161,5 @@ enca -L zh_CN -x utf-8 *
 - [CentOS 8发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
 - linux ldconfig命令,环境变量文件配置详解: https://blog.csdn.net/winycg/article/details/80572735
 - Linux 基础用法总结: https://mp.weixin.qq.com/s/ioLF8ocrWuASlZRCUqo7KA 自己酌情裁剪，吸收写的好的地方。
+- 修复 apt-key deprecated 警告：https://taoshu.in/unix/apt-key-deprecated.html
 
