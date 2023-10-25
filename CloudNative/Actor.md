@@ -4,6 +4,277 @@ Actor模型是一个概念模型，用于处理并发计算。Actor由3部分组
 
 
 
+**Actor**：Actor是ProtoActor的核心组件，它是一个可以处理消息的实体。每个Actor都有一个唯一的PID（Process ID）来标识。Actor通过消息进行通信，不共享状态，因此可以避免并发编程中的许多问题。
+
+ReceiveDefault 是 UserActor 接口中定义的一个方法。在 ProtoActor 的设计中，这个方法的主要作用是处理 Actor 接收到的未被明确处理的消息。
+
+在 Actor 模型中，Actor 通过消息进行通信。当 Actor 接收到一个消息时，它会在其 Receive 方法中查找对应的处理逻辑。如果 Receive 方法中没有找到对应的处理逻辑，那么这个消息就会被传递给 ReceiveDefault 方法。
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+
+	console "github.com/asynkron/goconsole"
+	"github.com/asynkron/protoactor-go/actor"
+)
+
+type (
+	hello      struct{ Who string }
+	helloActor struct{}
+)
+
+func (state *helloActor) Receive(context actor.Context) {
+	switch msg := context.Message().(type) {
+	case *actor.Started:
+		fmt.Println("Started, initialize actor here")
+	case *actor.Stopping:
+		fmt.Println("Stopping, actor is about shut down")
+	case *actor.Stopped:
+		fmt.Println("Stopped, actor and its children are stopped")
+	case *actor.Restarting:
+		fmt.Println("Restarting, actor is about restart")
+	case *hello:
+		fmt.Printf("Hello %v\n", msg.Who)
+	}
+}
+
+func main() {
+	system := actor.NewActorSystem()
+	props := actor.PropsFromProducer(func() actor.Actor { return &helloActor{} })
+	pid := system.Root.Spawn(props)
+	system.Root.Send(pid, &hello{Who: "Roger"})
+
+	// why wait?
+	// Stop is a system message and is not processed through the user message mailbox
+	// thus, it will be handled _before_ any user message
+	// we only do this to show the correct order of events in the console
+	time.Sleep(1 * time.Second)
+	system.Root.Stop(pid)
+
+	_, _ = console.ReadLine()
+}
+
+```
+
+**Router**：Router是用于管理一组Actor并将消息路由到这些Actor的组件。ProtoActor提供了几种路由策略，如RoundRobin（轮询）、Random（随机）等。
+
+```go
+package main
+
+import (
+	"log"
+
+	console "github.com/asynkron/goconsole"
+	"github.com/asynkron/protoactor-go/actor"
+	"github.com/asynkron/protoactor-go/router"
+)
+
+type workItem struct{ i int }
+
+const maxConcurrency = 5
+
+func doWork(ctx actor.Context) {
+	if msg, ok := ctx.Message().(*workItem); ok {
+		// this is guaranteed to only execute with a max concurrency level of `maxConcurrency`
+		log.Printf("%v got message %d", ctx.Self(), msg.i)
+	}
+}
+
+func main() {
+	system := actor.NewActorSystem()
+	pid := system.Root.Spawn(router.NewRoundRobinPool(maxConcurrency).Configure(actor.WithFunc(doWork)))
+	for i := 0; i < 1000; i++ {
+		system.Root.Send(pid, &workItem{i})
+	}
+	_, _ = console.ReadLine()
+}
+
+```
+
+**Remote**：Remote是ProtoActor的分布式组件，它允许Actor跨网络节点进行通信。你可以创建一个Remote Actor，然后在另一个节点上通过PID发送消息给它。
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"runtime"
+	"sync"
+	"time"
+
+	"remoterouting/messages"
+
+	console "github.com/asynkron/goconsole"
+	"github.com/asynkron/protoactor-go/actor"
+	"github.com/asynkron/protoactor-go/remote"
+	"github.com/asynkron/protoactor-go/router"
+)
+
+var (
+	system      = actor.NewActorSystem()
+	rootContext = system.Root
+)
+
+func main() {
+	cfg := remote.Configure("127.0.0.1", 8100)
+	r := remote.NewRemote(system, cfg)
+	r.Start()
+
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	runtime.GC()
+
+	p1 := actor.NewPID("127.0.0.1:8101", "remote")
+	p2 := actor.NewPID("127.0.0.1:8102", "remote")
+
+	remotePID := rootContext.Spawn(router.NewConsistentHashGroup(p1, p2))
+
+	messageCount := 1000000
+
+	var wgStop sync.WaitGroup
+
+	props := actor.
+		PropsFromProducer(newLocalActor(&wgStop, messageCount),
+			actor.WithMailbox(actor.Bounded(10000)))
+
+	pid := rootContext.Spawn(props)
+
+	log.Println("Starting to send")
+
+	t := time.Now()
+
+	for i := 0; i < messageCount; i++ {
+		message := &messages.Ping{User: fmt.Sprintf("User_%d", i)}
+		rootContext.RequestWithCustomSender(remotePID, message, pid)
+	}
+
+	wgStop.Wait()
+
+	rootContext.Stop(pid)
+
+	fmt.Printf("elapsed: %v\n", time.Since(t))
+
+	console.ReadLine()
+}
+
+```
+
+**Scheduler**：Scheduler是ProtoActor的定时任务组件，它可以让你在指定的时间后或者按照指定的间隔重复发送消息。
+
+```go
+package main
+
+import (
+	"log"
+	"math/rand"
+	"sync"
+	"time"
+
+	console "github.com/asynkron/goconsole"
+	"github.com/asynkron/protoactor-go/actor"
+	"github.com/asynkron/protoactor-go/scheduler"
+)
+
+var HelloMessages = []string{
+	"Hello",
+	"Bonjour",
+	"Hola",
+	"Zdravstvuyte",
+	"Nǐn hǎo",
+	"Salve",
+	"Konnichiwa",
+	"Olá",
+}
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(5)
+
+	rand.Seed(time.Now().UnixMicro())
+	system := actor.NewActorSystem()
+
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
+
+	count := 0
+	props := actor.PropsFromFunc(func(ctx actor.Context) {
+		switch t := ctx.Message().(type) {
+		case []string:
+			count++
+			log.Printf("\t%s, counter value: %d", t[rand.Intn(len(t))], count)
+			wg.Done()
+		case string:
+			log.Printf("\t%s\n", t)
+		}
+	})
+
+	pid := system.Root.Spawn(props)
+
+	s := scheduler.NewTimerScheduler(system.Root)
+	cancel := s.SendRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
+
+	wg.Wait()
+	cancel()
+
+	wg.Add(100) // add 100 to our waiting group
+	cancel = s.RequestRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
+
+	// the following timer will fire before the
+	// wait group is consumed and will stop the scheduler
+	time.Sleep(10 * time.Millisecond)
+	cancel()
+
+	s.SendOnce(1*time.Millisecond, pid, "Hello Once")
+
+	// this message will never show as we cancel it before it can be fired
+	cancel = s.RequestOnce(500*time.Millisecond, pid, "Hello Once Again")
+	time.Sleep(250 * time.Millisecond)
+	cancel()
+
+	_, _ = console.ReadLine()
+}
+
+```
+
+ **Plugin**：Plugin是ProtoActor的插件系统，你可以通过实现Plugin接口来创建自定义的插件。
+
+```go
+package plugin
+
+import (
+	"github.com/asynkron/protoactor-go/actor"
+)
+
+type plugin interface {
+	OnStart(actor.ReceiverContext)
+	OnOtherMessage(actor.ReceiverContext, *actor.MessageEnvelope)
+}
+
+func Use(plugin plugin) func(next actor.ReceiverFunc) actor.ReceiverFunc {
+	return func(next actor.ReceiverFunc) actor.ReceiverFunc {
+		fn := func(context actor.ReceiverContext, env *actor.MessageEnvelope) {
+			switch env.Message.(type) {
+			case *actor.Started:
+				plugin.OnStart(context)
+			default:
+				plugin.OnOtherMessage(context, env)
+			}
+
+			next(context, env)
+		}
+
+		return fn
+	}
+}
+
+```
+
+
+
+
+
 ## 带着问题思考
 
 1. Actors是如何发送和接收消息的？
@@ -121,6 +392,134 @@ https://proto.actor/docs/cluster/
 - Goissp
 - pub-sub
 
+Proto.Actor的集群（Cluster）是一种分布式Actor系统，它允许在多个节点上运行Actor，并通过网络进行通信。集群的主要目标是提供高可用性和容错性。
+
+以下是Proto.Actor集群的一些核心API：
+
+1. **Cluster.Start**：这个函数用于启动一个集群节点。它需要一个ClusterConfig对象，该对象包含了集群的配置信息，如节点的地址、端口、种子节点列表等。
+
+2. **Cluster.GetCluster**：这个函数返回一个Cluster对象，你可以通过这个对象进行集群的操作，如获取集群成员、注册或注销事件处理器等。
+
+3. **Cluster.SpawnNamed**：这个函数用于在集群中创建一个Actor。它需要一个Props对象和一个名字，返回创建的Actor的PID。
+
+4. **Cluster.PID**：这个函数用于获取集群中的一个Actor的PID。你可以通过这个PID向Actor发送消息。
+
+以下是一个简单的使用Proto.Actor集群的例子：
+
+```go
+package main
+
+import (
+	"log"
+	"time"
+
+	"github.com/asynkron/protoactor-go/actor"
+	"github.com/asynkron/protoactor-go/cluster"
+	"github.com/asynkron/protoactor-go/remote"
+)
+
+type HelloActor struct{}
+
+func (state *HelloActor) Receive(ctx actor.Context) {
+	switch msg := ctx.Message().(type) {
+	case *actor.Started:
+		log.Println("Started, initialize actor here")
+	case *actor.Stopping:
+		log.Println("Stopping, actor is about shut down")
+	case *actor.Stopped:
+		log.Println("Stopped, actor and its children are stopped")
+	case *actor.Restarting:
+		log.Println("Restarting, actor is about restart")
+	case string:
+		log.Printf("Hello %v\n", msg)
+	}
+}
+
+func main() {
+	system := actor.NewActorSystem()
+	remoteConfig := remote.Configure("localhost", 8080)
+	remote := remote.NewRemote(system, remoteConfig)
+	remote.Start()
+
+	clusterConfig := cluster.Configure("mycluster", remote, nil)
+	c := cluster.NewCluster(system, clusterConfig)
+	c.Start("node1", "localhost:8080")
+
+	props := actor.PropsFromProducer(func() actor.Actor { return &HelloActor{} })
+	pid, err := c.SpawnNamed(props, "hello")
+	if err != nil {
+		log.Fatalf("Failed to spawn named actor: %v", err)
+	}
+
+	c.PID("hello").Tell("Hello World")
+
+	time.Sleep(1 * time.Second)
+	c.Shutdown(true)
+}
+```
+
+在这个例子中，我们首先创建了一个Actor系统和一个远程配置，然后启动了一个远程节点。接着，我们创建了一个集群配置，并使用它启动了一个集群节点。然后，我们在集群中创建了一个名为"hello"的Actor，并向它发送了一个消息。最后，我们关闭了集群。
+
+
+
+#### grain
+
+在Proto.Actor中，Grain是一种特殊的Actor，它提供了一种更高级的抽象，使得开发者可以更加专注于业务逻辑，而不是并发和分布式计算的细节。
+
+Grain是一种虚拟Actor，它的生命周期由Proto.Actor框架自动管理。Grain可以在集群中的任何节点上运行，当它收到消息时，Proto.Actor框架会自动激活它；当它一段时间没有收到消息时，框架会自动将它停用，释放资源。
+
+Grain 的这种特性使得它非常适合用于构建大规模的分布式系统。开发者只需要关注业务逻辑，而无需关心Grain的位置、生命周期和并发问题。
+
+在`Proto.Actor`的集群中，Grain、Remote和Actor之间的关系如下：
+
+- **Grain**：Grain是一种特殊的Actor，它的生命周期由框架自动管理。Grain可以在集群中的任何节点上运行，它的状态可以持久化，也可以在内存中保存。
+
+- **Remote**：Remote是Proto.Actor的分布式组件，它允许Actor跨网络节点进行通信。Grain就是通过Remote在集群中的节点之间进行通信的。
+
+- **Actor**：Actor是Proto.Actor的核心组件，它是一个可以处理消息的实体。Grain实际上就是一种特殊的Actor，它提供了更高级的抽象，使得开发者可以更加专注于业务逻辑。
+
+在实际使用中，你可以根据需要选择使用Actor或Grain。如果你需要更高级的抽象和自动的生命周期管理，可以选择使用`Grain`；如果你需要更细粒度的控制，可以选择使用Actor。
+
+#### EventStream
+
+在Proto.Actor中，发布-订阅模式是通过EventStream组件实现的。EventStream是一个全局的消息通道，你可以在任何地方向它发布消息，也可以订阅它的消息。
+
+以下是使用EventStream进行发布-订阅的基本步骤：
+
+1. **订阅消息**：你可以通过EventStream.Subscribe函数订阅某种类型的消息。这个函数需要一个消息处理函数，当有消息发布时，这个函数会被调用。例如：
+
+```go
+system.EventStream.Subscribe(func(msg *MyMessage) {
+
+  *// 处理消息*
+
+})
+```
+
+2. **发布消息**：你可以通过EventStream.Publish函数发布消息。这个函数需要一个消息对象，这个消息会被发送给所有订阅了这种类型消息的处理函数。例如：
+
+```go
+system.EventStream.Publish(&MyMessage{Value: "Hello, World!"})
+```
+
+3. **取消订阅**：你可以通过EventStream.Unsubscribe函数取消订阅。这个函数需要一个之前通过Subscribe函数返回的订阅对象。例如：
+
+```
+subscription := system.EventStream.Subscribe(func(msg *MyMessage) {
+
+  // 处理消息
+
+})
+
+system.EventStream.Unsubscribe(subscription)
+```
+
+
+以上就是`Proto.Actor`中发布-订阅模式的基本使用方法。在实际使用中，你可能需要处理更复杂的场景，如在`Actor`之间进行发布-订阅、处理订阅失败等。
+
+#### Pub-Sub
+
+`Proto.Actor`的集群 `Pub-Sub`（发布-订阅）模式是通过`EventStream`组件实现的。`EventStream`是一个全局的消息通道，你可以在任何地方向它发布消息，也可以订阅它的消息。
 
 
 
@@ -128,6 +527,9 @@ https://proto.actor/docs/cluster/
 
 
 
+-------------
+
+Actor kind 是一种 actor 的类型，它定义了 actor 处理消息的方式。
 
 
 
