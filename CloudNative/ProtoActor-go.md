@@ -1,3 +1,81 @@
+## Actor
+
+### `context.go`
+
+```go
+// Context contains contextual information for actors
+type Context interface {
+	infoPart
+	basePart
+	messagePart
+	senderPart
+	receiverPart
+	spawnerPart
+	stopperPart
+	extensionPart
+}
+
+type ExtensionContext interface {
+	extensionPart
+}
+
+type SenderContext interface {
+	infoPart
+	senderPart
+	messagePart
+}
+
+type ReceiverContext interface {
+	infoPart
+	receiverPart
+	messagePart
+	extensionPart
+}
+
+type SpawnerContext interface {
+	infoPart
+	spawnerPart
+}
+```
+
+
+
+### `message.go`
+
+```go
+// Actor is the interface that defines the Receive method.
+//
+// Receive is sent messages to be processed from the mailbox associated with the instance of the actor
+type Actor interface {
+	Receive(c Context)
+}
+```
+
+Receive 方法是 Actor 接口的核心，它处理所有发送给 actor 的消息。
+
+Receive 方法是由 ProtoActor 框架自动调用的。当一个 Actor 收到消息时，框架会自动调用该 Actor 的 Receive 方法，并将消息作为参数传递。
+
+**在 ProtoActor 的内部，这是通过消息调度器（dispatcher）和邮箱（mailbox）来实现的。当一个消息被发送到 Actor 时，它首先被放入 Actor 的邮箱。然后，调度器会从邮箱中取出消息，并调用相应 Actor 的 Receive 方法。**
+
+因此，开发者不需要手动调用 Receive 方法，只需要实现它，定义 Actor 如何响应各种消息即可。
+
+
+
+### `dispatcher.go` 
+
+消息调度器
+
+```go
+type Dispatcher interface {
+	Schedule(fn func())
+	Throughput() int
+}
+```
+
+
+
+
+
 ## protoc-gen-gograinv2
 
 template.go 模板文件分析
