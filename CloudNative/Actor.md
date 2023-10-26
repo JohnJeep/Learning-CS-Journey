@@ -343,7 +343,50 @@ Proto.Actor-go 是一个用于构建分布式应用程序的框架，它基于 G
 
 
 
+
+
+
+
+
+
 ## Core Features(概念)
+
+### 1. **Spawn（生成）：**
+
+在Proto Actor中，`Spawn`是用于创建新的Actor实例的操作。当你想要创建一个新的Actor时，你会调用`Spawn`函数，并且提供一个`Props`对象作为参数，该对象描述了将要生成的Actor的行为。`Spawn`会返回一个`PID`（Process ID）——一个用于唯一标识Actor实例的标识符。
+
+```go
+pid, err := actor.Spawn(props) // 通过Props对象生成一个新的Actor实例，并返回其PID
+```
+
+### 2. **Props（属性）：**
+
+`Props`是一个用于配置Actor实例的对象。它定义了Actor的行为、状态和消息处理逻辑。当你调用`Spawn`函数时，你需要提供一个`Props`对象，以告诉Proto Actor系统你希望创建的Actor的特性。
+
+`Props`对象通常包含以下信息：
+
+- **Actor类型（Actor Type）：** 描述Actor的类型，指定Actor实例所属的类型。
+- **消息处理器（Message Handler）：** 定义了Actor如何处理接收到的消息。
+- **监督策略（Supervision Strategy）：** 定义了当Actor失败时，如何处理该Actor的策略。
+- **初始化参数（Initialization Parameters）：** 用于在Actor实例创建时传递给Actor构造函数的参数。
+
+在Proto Actor中，`Props`对象可以按需定制，以创建不同类型的Actor实例。以下是一个示例：
+
+```go
+props := actor.PropsFromFunc(func(ctx actor.Context) {
+    // 消息处理逻辑
+    switch msg := ctx.Message().(type) {
+    case string:
+        ctx.Respond("Received: " + msg)
+    }
+})
+
+pid, err := actor.Spawn(props)
+```
+
+在上述示例中，`PropsFromFunc`函数创建了一个`Props`对象，它指定了一个简单的消息处理器，该处理器能够处理接收到的字符串消息并回复。
+
+
 
 ### state
 
@@ -381,6 +424,10 @@ Actor的处理逻辑。定义在该时间点对消息作出反应时要采取的
 - Actor 可以运行在本地进程，也可以在不同机器的远程Actor上运行。
 - 消息是不可变的，因此是线程安全的。
 - 消息是异步的，
+
+
+
+
 
 ### Cluster(集群)
 
