@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2023-11-01 06:57:43
+ * @LastEditTime: 2023-11-01 07:00:47
  * @LastEditors: johnjeep
  * @file: ElegantSentences.md
  * @Description: 积累优雅的英文句子。
@@ -129,3 +129,4 @@ Everything that can be put into words can be put clearly. <br>凡是可书者，
 
 The horizon of life is broadened cheiefly by the enlargement of the heart. <br> 生活的地平线是随着心灵的开阔而变得宽广的。
 
+I am a slow walker, but I never walk back. <br> 我走的很慢，但是我从来不会后退。
