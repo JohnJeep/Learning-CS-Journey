@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19
- * @LastEditTime: 2023-08-04 14:59:30
- * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-11-01 06:57:43
+ * @LastEditors: johnjeep
  * @file: ElegantSentences.md
  * @Description: 积累优雅的英文句子。
 --> 
@@ -46,7 +46,7 @@ You need to recognize each step of progress you take towards achieving your goal
 
 Your joy for life, transmitted wherever you took your smile, and the sparkle in those unforgettable eyes.<br>你对生活的欣喜，通过你的微笑和你令人难忘的双眸中的闪光，传遍了你的所到之处。
 
-satisfy the demands of the marketplace. <br>满足市场需求
+satisfy the demands of the marketplace. <br>满足市场需求。
 
 It can be so much more than just memorization and retention.<br>学习知识不应该只是透过死记硬背的方式。
 
@@ -123,6 +123,9 @@ To improve is to change; to be perfect is to change often.<br>
 Life is 10% what happens to you and 90% how you react to it.<br>
 生活中10%是你将经历的事，而剩下的90%是你如何去应对的过程。
 
-Everything that can be thought at all can be thought clearly. <br>凡是可思者，皆可想清楚
+Everything that can be thought at all can be thought clearly. <br>凡是可思者，皆可想清楚。
 
-Everything that can be put into words can be put clearly. <br>凡是可书者，皆可写清楚
+Everything that can be put into words can be put clearly. <br>凡是可书者，皆可写清楚。
+
+The horizon of life is broadened cheiefly by the enlargement of the heart. <br> 生活的地平线是随着心灵的开阔而变得宽广的。
+
