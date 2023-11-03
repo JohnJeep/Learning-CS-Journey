@@ -72,6 +72,35 @@ type Dispatcher interface {
 }
 ```
 
+### `timer.go`
+
+TimerScheduler
+
+```go
+func (s *TimerScheduler) SendRepeatedly(initial, interval time.Duration, pid *actor.PID, message interface{}) CancelFunc {
+	return startTimer(initial, interval, func() {
+		s.ctx.Send(pid, message)
+	})
+}
+```
+
+上面的代码是一个TimerScheduler结构体中的方法`SendRepeatedly`的实现。这个方法的功能是创建一个定时器，定期地向指定的`PID`发送特定的消息。
+
+让我解释一下这个方法的参数和功能：
+
+- `initial`：表示定时器第一次触发的延迟时间。
+- `interval`：表示定时器之后每次触发的间隔时间。
+- `pid`：是一个指向特定Actor实例的`PID`（Process ID），消息将会发送给这个Actor。
+- `message`：是要发送的消息内容。
+
+这个方法的作用是在定时器到期时，使用`ctx.Send(pid, message)`向指定的Actor发送消息。定时器在创建后，会在经过`initial`时间段后触发第一次，之后每隔`interval`时间触发一次，每次触发都会向指定的Actor发送特定的消息。
+
+返回值是一个`CancelFunc`类型的函数，它可以用来取消定时器。通过调用这个函数，你可以停止后续的定时触发。
+
+这种定时器的功能通常用于在分布式系统中实现定期的任务调度、周期性的状态检查或者执行一些周期性的清理操作。它使得在Actor模型中实现定时任务变得非常方便和直观。
+
+
+
 
 
 
