@@ -60,6 +60,22 @@ drwxr-xr-x.  5 root root   0 May 26 21:00 systemd
 
 
 
+## 注意点
+
+- 全局的 `cgroup_mutex` 
+
+
+
+在线业务或离线业务，都会做内核隔离（sched-idle）
+
+开机时间
+
+资源占用
+
+沙箱 = 容器 + 虚机
+
+
+
 # Reference
 
 - [Control groups, part 6: A look under the hood [LWN.net]](https://lwn.net/Articles/606925/)：Linux 周刊（LWN.net）分享的文章，非常不错。
