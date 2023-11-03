@@ -143,7 +143,30 @@ task_struct 进程描述符：https://blog.csdn.net/lf_2016/article/details/5434
 来源：https://en.wikipedia.org/wiki/Linux_kernel#/media/File:The_Linux_Storage_Stack_Diagram.svg
 
 
+
+# 内核优化
+
+- 对 kernel 的调教。
+
+- kernel 与 框架的优化
+- 内存的管理 
+  - 内存碎片的优化
+
+Linux 内核社区
+
+- 理解内核补丁的生命周期。
+- 补丁的合并是严谨、严格的。
+- 遵循社区的规则和原则，对于新手建**议可以从一个小的补丁开始。**
+- 提交解决问题的标准。
+
+不要犹豫、不要害怕，一步一步的去解决问题。
+
+信任的建立。无论做什么，都需要一些信任的建立。信任的建立都是很难的，一但建立，与人之间的交流会简单很多。
+
+
+
 # 3. References
+
 - 英文WIKI: https://en.wikipedia.org/wiki/Linux_kernel
 - Wiki Linux kernel version history: https://en.wikipedia.org/wiki/Linux_kernel_version_history
 - 维基百科中文解释Linux内核: https://zh.wikipedia.org/wiki/Linux%E5%86%85%E6%A0%B8
