@@ -353,7 +353,7 @@ Proto.Actor-go 是一个用于构建分布式应用程序的框架，它基于 G
 
 ### 1. **Spawn（生成）：**
 
-在Proto Actor中，`Spawn`是用于创建新的Actor实例的操作。当你想要创建一个新的Actor时，你会调用`Spawn`函数，并且提供一个`Props`对象作为参数，该对象描述了将要生成的Actor的行为。`Spawn`会返回一个`PID`（Process ID）——一个用于唯一标识Actor实例的标识符。
+在Proto Actor中，**`Spawn`是用于创建新的Actor实例**的操作，并返回该 Actor 的 `PID`。当你想要创建一个新的Actor时，你会调用`Spawn`函数，并且提供一个`Props`对象作为参数，该对象描述了将要生成的Actor的行为。`Spawn`会返回一个`PID`（Process ID）——一个用于唯一标识Actor实例的标识符。
 
 ```go
 pid, err := actor.Spawn(props) // 通过Props对象生成一个新的Actor实例，并返回其PID
@@ -433,12 +433,6 @@ Actor的处理逻辑。定义在该时间点对消息作出反应时要采取的
 
 https://proto.actor/docs/cluster/
 
-- clustering 的核心是 `cluster provider`
-
-- virtual actor model 借鉴了 `Microsoft Orleans` 的概念。一个`Grain` 就是一个 `virtual actors`
-- Goissp
-- pub-sub
-
 Proto.Actor的集群（Cluster）是一种分布式Actor系统，它允许在多个节点上运行Actor，并通过网络进行通信。集群的主要目标是提供高可用性和容错性。
 
 以下是Proto.Actor集群的一些核心API：
@@ -513,7 +507,9 @@ func main() {
 
 在Proto.Actor中，Grain是一种特殊的Actor，它提供了一种更高级的抽象，使得开发者可以更加专注于业务逻辑，而不是并发和分布式计算的细节。
 
-Grain是一种虚拟Actor，它的生命周期由Proto.Actor框架自动管理。Grain可以在集群中的任何节点上运行，当它收到消息时，Proto.Actor框架会自动激活它；当它一段时间没有收到消息时，框架会自动将它停用，释放资源。
+virtual actor model 借鉴了 `Microsoft Orleans` 的概念。一个`Grain` 就是一个 `virtual actors`
+
+**Grain是一种虚拟Actor，它的生命周期由Proto.Actor框架自动管理。**Grain可以在集群中的任何节点上运行，当它收到消息时，Proto.Actor框架会自动激活它；当它一段时间没有收到消息时，框架会自动将它停用，释放资源。
 
 Grain 的这种特性使得它非常适合用于构建大规模的分布式系统。开发者只需要关注业务逻辑，而无需关心Grain的位置、生命周期和并发问题。
 
@@ -568,9 +564,31 @@ system.EventStream.Unsubscribe(subscription)
 
 `Proto.Actor`的集群 `Pub-Sub`（发布-订阅）模式是通过`EventStream`组件实现的。`EventStream`是一个全局的消息通道，你可以在任何地方向它发布消息，也可以订阅它的消息。
 
+#### cluster provider
 
+clustering 的核心是 `cluster provider`
 
+#### Gossip
 
+在分布式系统中，**gossip协议**是一种用于在网络中传播信息的分散式通信方法。它基于随机选择的节点之间的互相交流，以便将信息传播到整个网络。Gossip协议通常用于处理集群中的成员关系、状态同步、故障检测等问题。
+
+在Proto Actor的Golang实现中，gossip协议用于实现分布式系统中的Actor之间的通信和协作。Proto Actor提供了一种称为`gossip.Gossip`的模块，其中包含了一些用于在Actor之间传播信息的功能。
+
+在这个上下文中，"gossip" 是指在分布式系统中，Actor之间相互交换信息的一种机制。它允许不同的Actor之间共享状态信息，从而实现集群中的协作和协调。通过使用gossip协议，系统中的Actor可以更容易地了解其他Actor的状态，帮助实现一致性、容错性和可扩展性等特性。
+
+理解gossip的关键概念包括：
+
+1. **随机选择的节点交流信息**：Gossip协议中的节点（这里是指Actor）随机选择其他节点进行信息的交流。这种随机性确保了信息在整个网络中的分布。
+2. **信息的传播**：通过节点之间的交流，信息被传播到整个网络。这种方式使得系统中的所有节点逐渐了解到所有其他节点的状态。
+3. **自我修复性**：Gossip协议通常设计成具有自我修复性。如果某个节点长时间不可达，它的信息仍然可以通过其他节点传播，从而防止信息的丢失。
+
+在Proto Actor中，gossip机制帮助实现了集群中的Actor之间的信息传递和状态同步，使得系统更具弹性，能够应对网络分区、故障和动态的集群成员变化等情况。通过这种方式，Proto Actor系统可以更好地适应复杂的分布式环境。
+
+#### identity lookup
+
+在Proto Actor框架中，"identity lookup" 是指根据Actor的标识（identity）查找特定Actor实例的过程。在Proto Actor中，每个Actor都有一个唯一的标识符，通常是一个字符串。通过这个标识符，你可以在系统中查找并与特定的Actor进行交互。
+
+在Proto Actor的Golang实现中，有一个 `actor.PID` 结构表示一个Actor的标识符，其中 `PID` 是 "Process ID" 的缩写。`PID` 包含了用于定位Actor的信息，比如Actor的地址（Address）、ID等。你可以使用 `actor.PID` 来发送消息给特定的Actor实例。
 
 
 
