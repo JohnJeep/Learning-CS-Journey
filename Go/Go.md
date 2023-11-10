@@ -1766,7 +1766,7 @@ go test 命令执行原理
   go test
   
   // 无论运行是正确还是错误，都有日志输出
-  // 参数 -v: 用于打印每个测试函数的名字和运行时间：
+  // 参数 -v: 显示每个测试用例的结果和运行时间
   go test -v
   
   // 测试单个文件
@@ -1926,7 +1926,16 @@ go tool cover -html=c.out
 ```
 
 
+
+## 参考
+
+- 极客兔兔 Go Test 单元测试简明教程：https://geektutu.com/post/quick-go-test.html
+-  Go单测从零到溜系列0—单元测试基础：https://www.liwenzhou.com/posts/Go/unit-test-0/
+
+
+
 # 9. Reflection(反射)
+
 反射是一个强大的编程工具，是一种程序在运行期间审视自己的能力。
 
 
