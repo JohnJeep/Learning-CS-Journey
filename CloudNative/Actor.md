@@ -351,7 +351,7 @@ Proto.Actor-go 是一个用于构建分布式应用程序的框架，它基于 G
 
 ## Core Features(概念)
 
-### 1. **Spawn（生成）：**
+### 1. Spawn(生成)
 
 在Proto Actor中，**`Spawn`是用于创建新的Actor实例**的操作，并返回该 Actor 的 `PID`。当你想要创建一个新的Actor时，你会调用`Spawn`函数，并且提供一个`Props`对象作为参数，该对象描述了将要生成的Actor的行为。`Spawn`会返回一个`PID`（Process ID）——一个用于唯一标识Actor实例的标识符。
 
@@ -359,7 +359,7 @@ Proto.Actor-go 是一个用于构建分布式应用程序的框架，它基于 G
 pid, err := actor.Spawn(props) // 通过Props对象生成一个新的Actor实例，并返回其PID
 ```
 
-### 2. **Props（属性）：**
+### 2. Props(属性)
 
 `Props`是一个用于配置Actor实例的对象。它定义了Actor的行为、状态和消息处理逻辑。当你调用`Spawn`函数时，你需要提供一个`Props`对象，以告诉Proto Actor系统你希望创建的Actor的特性。
 
@@ -589,6 +589,12 @@ clustering 的核心是 `cluster provider`
 在Proto Actor框架中，"identity lookup" 是指根据Actor的标识（identity）查找特定Actor实例的过程。在Proto Actor中，每个Actor都有一个唯一的标识符，通常是一个字符串。通过这个标识符，你可以在系统中查找并与特定的Actor进行交互。
 
 在Proto Actor的Golang实现中，有一个 `actor.PID` 结构表示一个Actor的标识符，其中 `PID` 是 "Process ID" 的缩写。`PID` 包含了用于定位Actor的信息，比如Actor的地址（Address）、ID等。你可以使用 `actor.PID` 来发送消息给特定的Actor实例。
+
+
+
+#### autoMangment
+
+
 
 
 
