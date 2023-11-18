@@ -549,3 +549,24 @@ gotests -all -w xxx.go
 
 ### 3.12.3. References
 - Github: https://github.com/cweill/gotests
+
+
+
+## Gomock
+
+用法：
+
+
+
+### References
+
+- Gomock 实战指南：提升 Go 代码测试质量：https://www.lixueduan.com/posts/go/gomock/
+- Github gomock: https://github.com/golang/mock
+- CSDN gomock: https://blog.csdn.net/shanxiaoshuai/article/details/115492171
+
+
+
+
+
+
+
