@@ -1,0 +1,13 @@
+version: "2"
+sql:
+  - engine: "mysql"          # 数据库类型
+    # path:                    # 生成的go code路径
+    queries: "query.sql"     # sql 语句路径
+    schema: "schema.sql"     # 数据库表路径
+    gen:
+      go:
+        package: "db"
+        out: "db"
+        emit_interface: true  # 默认为false，设置该字段为true，会生成一个所有query的接口文档，生成的代码多出来一个 querier.go 的文件
+        emit_json_tags: false # 默认为false，设置该字段为true可以为生成的模型对象结构添加 JSON 标签
+        emit_prepared_queries: false # 默认为false，设置该字段为true，会为 SQL 生成对应的prepared statement
