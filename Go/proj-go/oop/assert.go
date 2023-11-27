@@ -1,12 +1,3 @@
-/*
- * @Author: JohnJeep
- * @Date: 2023-01-06 17:48:37
- * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-11 14:28:13
- * @Description: 类型断言用法
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
- */
-
 package main
 
 import "fmt"
