@@ -40,7 +40,11 @@ Stable Diffusion的代码和模型权重已公开发布，可以在大多数配�
 
 2023年5月，Stable Diffusion已经可以生成视频。
 
- 
+
+
+ 教程：https://stable-diffusion-art.com/qr-code/
+
+
 
 ## Novel AI
 
