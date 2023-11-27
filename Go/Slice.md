@@ -75,10 +75,6 @@ slice := make([]int, 3, 5)
 上面的实例，在创建 slice 时分别指定了长度和容量，而 slice 底层数组的长度是指定的 capacity
 
 ```go
-
-
-
-
 // Create a slice of integers.
 // Make the length larger than the capacity.
 slice := make([]int, 5, 3)
