@@ -1,11 +1,11 @@
 // 匿名函数与闭包用法
 // 匿名函数：没有名字的函数
 
-package fucntion
+package main
 
 import "fmt"
 
-func Anonymous() {
+func main() {
 	id := 0o07
 	name := "Mike"
 	// 定义匿名函数，用一个变量去接匿名函数的结果

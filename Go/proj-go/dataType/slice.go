@@ -22,8 +22,10 @@ func main() {
 	// var s []string // 声明一个 slice ，未初始化
 
 	// 声明数组
-	var month = [...]string{1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
-		7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
+	month := [...]string{
+		1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
+		7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December",
+	}
 
 	for i := 0; i < len(month); i++ {
 		fmt.Println(month[i]) // 第0个元素自动被设置为空字符串
@@ -31,7 +33,6 @@ func main() {
 
 	for index, v := range month {
 		fmt.Println(index, v)
-
 	}
 
 	Q2 := month[4:7]
@@ -51,4 +52,8 @@ func main() {
 	fmt.Println("reverse slice:", a)
 
 	TestAppend()
+
+	// 容器字面量初始化
+	s := []string{"one", "two", "there", "four"}
+	fmt.Println(s)
 }

@@ -4,7 +4,6 @@ package main
 
 import (
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 )
@@ -19,7 +18,7 @@ var (
 
 // 创建每个Logger类型的值并将其地址赋给每个变量
 func init() {
-	file, err := os.OpenFile("errors.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0644)
+	file, err := os.OpenFile("errors.log", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0o644)
 	if err != nil {
 		log.Fatalln("Failed to open errors log file:", err)
 	}
@@ -27,7 +26,7 @@ func init() {
 	// log.New() 创建并正确初始化一个 Logger 类型的值，返回新创建值的地址
 	// Discard 是一个 io.Writer，所有的 Write 调用都不会有动作，但是会成功返回
 	// 当某个等级的日志不重要时，使用 Discard 变量可以禁用这个等级的日志。
-	Trace = log.New(ioutil.Discard, "T: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Trace = log.New(io.Discard, "T: ", log.Ldate|log.Ltime|log.Lshortfile)
 	// Trace = log.New(os.Stdout, "T: ", log.Ldate|log.Ltime|log.Lshortfile)
 
 	// stdout 作为日志输出
