@@ -161,7 +161,7 @@ HEAD reference：是一个符号引用（symbolic reference），并不完全是
 
 
 
-# 3. 学习参考
+# 3. References
 
 - [Git for Computer Scientists](https://eagain.net/articles/git-for-computer-scientists/): 简短的解释Git的数据模型，有很多的图来阐述。
 - [How to explain git in simple words?](https://xosh.org/explain-git-in-simple-words/): 解释了Git底层实现的一些过程。

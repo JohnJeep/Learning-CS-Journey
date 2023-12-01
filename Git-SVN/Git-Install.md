@@ -81,6 +81,6 @@ Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Li
     git version 2.34.1
     ```
 
-# Reference
+# References
 
 [Git 官网镜像](https://mirrors.edge.kernel.org/pub/software/scm/git/)
