@@ -165,15 +165,11 @@
 - [中国研究生招生信息网](https://yz.chsi.com.cn/): 中国研究生招生信息网是隶属于教育部的以考研为主题的官方网站，是教育部唯一指定的研究生入学考试网上报名及调剂网站，主要提供研究生网上报名及调剂、专业目录查询、在线咨询、院校信息、报考指南和考试辅导等多方面的服务和信息指导。
 - [考研帮](http://www.kaoyan.com/): 中国最大的考研论坛。
 
-
 # 11. PPT
+
 - [PPTfans PPT 设计](http://www.pptfans.cn/): 是一个提供 PPT 文档制作的教学网站，提供专业 PPT 设计服务
-- [OfficePlus 微软 PPT 官方模板库](http://www.officeplus.cn/Template/Home.shtml): 微软旗下的官网, 该网站涵盖各类精品 PPT 模板、PPT 实用模块、Word 求职简历、Excel 图表、图片素材等资源 ，为全球 Office 用户提供丰富的高品质原创 PPT 资源。
 - [PoweredTemplate 商务 PPT 模板](https://poweredtemplate.com/): 提供 PPT 模版、网页模版、简报模版、商务图表模版、等丰富资源的站点，但是它的重点是在商务范畴
 - [PPT 模板下载_精美 PPT 模板下载](http://www.ypppt.com/): 优品 PPT，不仅包含一些高质量的模版，而且还有 PPT 图表，PPT 背景图等资源
-- [51PPT 模板网](http://www.51pptmoban.com/ppt/): 里面有教程，图片，图表，软件等很全面的资源
-- [演界网，](http://www.yanj.cn/): 中国首家演示设计交易平台
-- [PowerPoint Templates](https://www.presentationload.com/): 国外的 PPT 模版网站
 
 
 # 12. 图片
