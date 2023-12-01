@@ -2,8 +2,6 @@
 
 下面是 `Git-SVN` 通用的操作
 
-
-
 ```sh
 #Download an SVN project and its entire code history and initialize it as a git code base
 $ git svn clone -s [repository]
@@ -31,7 +29,7 @@ $ git checkout -b [local_branch] [remote_branch]
 
 
 
-# 参考
+# References
 
 [官方英文文档](https://git-scm.com/docs/git-svn)
 

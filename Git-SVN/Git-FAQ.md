@@ -85,6 +85,6 @@ unix2dos [-kn] file [newfile]
 ![Alt text](figure/github-search.png)
 
 
-## 1.5. 参考
+## 1.5. References
 - Github 仓库搜索高级技巧：https://github.com/search/advanced
 - [Git 多平台换行符问题 (LF or CRLF)](https://sampwood.github.io/2019/01/07/git%E5%A4%9A%E5%B9%B3%E5%8F%B0%E6%8D%A2%E8%A1%8C%E7%AC%A6%E9%97%AE%E9%A2%98-LF-CRLF/)
