@@ -1,12 +1,13 @@
 package main
 
 import (
-	"factory/mode"
 	"fmt"
+
+	"proj-go/factory/mode"
 )
 
 func main() {
-	var s = mode.SecondGrade("蔡徐坤", 11)
+	s := mode.SecondGrade("蔡徐坤", 11)
 
 	fmt.Println("student:", *s)
 	fmt.Println("student, name:", s.Name) // (*s).Name 等价于 s.Name 而访问 s.score 发生error
