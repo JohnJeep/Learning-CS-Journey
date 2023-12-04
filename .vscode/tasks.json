@@ -1,7 +1,7 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-        
+       /* 
 	    // Windows C++编译配置信息
         {
             "label": "Windows Compile C++",                                       // 任务名称，与launch.json的preLaunchTask相对应
@@ -106,11 +106,11 @@
                 }
             },
         },
-        
-        /*
+        */
+
         // linux C++ compile
         {
-            "label": "linux compile",
+            "label": "wsl compile C++",
             "command": "g++",
             "args": [
                 "-g",
@@ -138,6 +138,5 @@
                 "isDefault": true
             }
         } 
-        */           
 	]
 }
