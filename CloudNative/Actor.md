@@ -1,40 +1,49 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-09-15 11:03:37
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-12-15 17:27:42
+ * @Description: 分布式 Actor 学习
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+-->
+
 <!-- TOC -->
 
 - [1. Actor Model](#1-actor-model)
-  - [1.1. 带着问题思考](#11-带着问题思考)
-    - [1.1.1. Actors是如何发送和接收消息的？](#111-actors是如何发送和接收消息的)
-    - [1.1.2. 它们是如何并发地工作的？](#112-它们是如何并发地工作的)
-    - [1.1.3. 理解代码中的设计模式和结构](#113-理解代码中的设计模式和结构)
-  - [1.2. 模型介绍](#12-模型介绍)
-  - [1.3. Actor](#13-actor)
-    - [1.3.1. 特点](#131-特点)
-    - [1.3.2. 缺点](#132-缺点)
-    - [1.3.3. Spawn(生成)](#133-spawn生成)
-    - [1.3.4. Props(属性)](#134-props属性)
-    - [1.3.5. state](#135-state)
-    - [1.3.6. behavior](#136-behavior)
-    - [1.3.7. mailbox](#137-mailbox)
-    - [1.3.8. PID](#138-pid)
-    - [1.3.9. children](#139-children)
-    - [1.3.10. supervisor Strategy](#1310-supervisor-strategy)
-    - [1.3.11. messages](#1311-messages)
-    - [1.3.12. 用法](#1312-用法)
-    - [1.3.13. Router](#1313-router)
-    - [1.3.14. Persistence of actor's state](#1314-persistence-of-actors-state)
-  - [1.4. Remote](#14-remote)
-  - [1.5. Scheduler](#15-scheduler)
-  - [1.6. Cluster](#16-cluster)
-    - [1.6.1. grain](#161-grain)
-    - [1.6.2. EventStream](#162-eventstream)
-    - [1.6.3. Pub-Sub](#163-pub-sub)
-    - [1.6.4. cluster provider](#164-cluster-provider)
-      - [1.6.4.1. Kubernetes Provider](#1641-kubernetes-provider)
-      - [1.6.4.2. Consul Provider](#1642-consul-provider)
-      - [1.6.4.3. AWS ECS Provider](#1643-aws-ecs-provider)
-      - [1.6.4.4. Seed Provider - Experimental](#1644-seed-provider---experimental)
-    - [1.6.5. gossip](#165-gossip)
-    - [1.6.6. identity lookup](#166-identity-lookup)
-    - [1.6.7. autoMangment](#167-automangment)
+	- [1.1. 带着问题思考](#11-带着问题思考)
+		- [1.1.1. Actors是如何发送和接收消息的？](#111-actors是如何发送和接收消息的)
+		- [1.1.2. 它们是如何并发地工作的？](#112-它们是如何并发地工作的)
+		- [1.1.3. 理解代码中的设计模式和结构](#113-理解代码中的设计模式和结构)
+	- [1.2. 模型介绍](#12-模型介绍)
+	- [1.3. Actor](#13-actor)
+		- [1.3.1. 特点](#131-特点)
+		- [1.3.2. 缺点](#132-缺点)
+		- [1.3.3. Spawn(生成)](#133-spawn生成)
+		- [1.3.4. Props(属性)](#134-props属性)
+		- [1.3.5. state](#135-state)
+		- [1.3.6. behavior](#136-behavior)
+		- [1.3.7. mailbox](#137-mailbox)
+		- [1.3.8. PID](#138-pid)
+		- [1.3.9. children](#139-children)
+		- [1.3.10. supervisor Strategy](#1310-supervisor-strategy)
+		- [1.3.11. messages](#1311-messages)
+		- [1.3.12. 用法](#1312-用法)
+		- [1.3.13. Router](#1313-router)
+		- [1.3.14. Persistence of actor's state](#1314-persistence-of-actors-state)
+	- [1.4. Remote](#14-remote)
+	- [1.5. Scheduler](#15-scheduler)
+	- [1.6. Cluster](#16-cluster)
+		- [1.6.1. grain](#161-grain)
+		- [1.6.2. EventStream](#162-eventstream)
+		- [1.6.3. Pub-Sub](#163-pub-sub)
+		- [1.6.4. cluster provider](#164-cluster-provider)
+			- [1.6.4.1. Kubernetes Provider](#1641-kubernetes-provider)
+			- [1.6.4.2. Consul Provider](#1642-consul-provider)
+			- [1.6.4.3. AWS ECS Provider](#1643-aws-ecs-provider)
+			- [1.6.4.4. Seed Provider - Experimental](#1644-seed-provider---experimental)
+		- [1.6.5. gossip](#165-gossip)
+		- [1.6.6. identity lookup](#166-identity-lookup)
+		- [1.6.7. autoMangment](#167-automangment)
 - [2. References](#2-references)
 
 <!-- /TOC -->
@@ -478,16 +487,6 @@ func Use(plugin plugin) func(next actor.ReceiverFunc) actor.ReceiverFunc {
 
 
 
-
-
-
-
-- 
-
-
-
-
-
 ## 1.6. Cluster
 
 Proto.Actor的集群（Cluster）是一种分布式Actor系统，它允许在多个节点上运行Actor，并通过网络进行通信。集群的主要目标是提供高可用性和容错性。
@@ -625,9 +624,19 @@ system.EventStream.Unsubscribe(subscription)
 
 ### 1.6.4. cluster provider
 
-clustering 的核心是 `cluster provider`。
+cluster 的核心是 `cluster provider`。
 
-"provider" 指的是集群提供者（cluster provider）。集群提供者是一个模块或服务，负责为集群中的节点提供一致性的视图，使得节点能够了解集群中其他节点的状态、可用性以及成员身份等信息。
+集群提供者（cluster provider）：通常是指一种软件或服务，负责管理和提供集群的基础设施。一个集群是由多个计算机节点组成的集合，这些节点协同工作以完成共同的任务。Cluster Provider 为创建、监控和维护这个集群提供了支持，使得节点能够了解集群中其他节点的状态、可用性以及成员身份等信息。
+
+以下是一些 Cluster Provider 的功能和解释：
+
+1. **集群管理：** Cluster Provider 负责创建、配置和管理整个集群。它可能提供用户界面或命令行工具，用于定义集群的规模、节点配置和其他相关属性。
+2. **节点协调：** 集群中的节点需要协同工作以执行任务。Cluster Provider 负责确保节点之间的通信和协作，并在需要时自动进行节点的发现和注册。
+3. **资源分配和负载均衡：** Cluster Provider 可能会处理集群中资源的分配和负载均衡，以确保任务在集群中均匀分布，并最大程度地利用集群中的计算资源。
+4. **故障恢复：** 集群中的节点可能会因故障而失效，Cluster Provider 需要具备故障检测和自动恢复的机制，以保持集群的可靠性和稳定性。
+5. **扩展性：** Cluster Provider 应该支持集群的动态扩展，允许根据需求添加或移除节点，以适应工作负载的变化。
+6. **安全性：** 提供对集群中数据和通信的安全性管理，包括身份验证、授权和加密等方面的功能。
+7. **监控和日志：** 提供集群性能和健康状态的监控功能，同时记录有关集群操作和事件的日志信息，以便进行故障排除和性能分析。
 
 在这里，"cluster provider" 是负责维护和提供集群状态信息的组件。它允许应用程序中的节点通过与集群提供者进行交互，获取有关整个集群拓扑结构、节点状态的更新，并且使得集群中的节点能够协同工作。
 
@@ -681,7 +690,7 @@ clustering 的核心是 `cluster provider`。
 
 Actor kind 是一种 actor 的类型，它定义了 actor 处理消息的方式。
 
-
+> `Kind` 表示一个集群可以管理的 Actor 种类。
 
 重启期间事件的详细顺序如下所示：
 
@@ -695,30 +704,21 @@ Actor kind 是一种 actor 的类型，它定义了 actor 处理消息的方式�
 
 
 
-
-
-
-
 # 2. References
 
 - offical website: https://proto.actor/docs/
-
 - cluster: https://proto.actor/docs/cluster/
-
 - offical golang package API: https://pkg.go.dev/github.com/asynkron/protoactor-go
-
 - [Golang] protoactor-go 101:
 
   - How actors communicate with each other: https://blog.oklahome.net/2018/09/protoactor-go-messaging-protocol.html
 
   - How actor.Future works to synchronize concurrent task execution: https://blog.oklahome.net/2018/11/protoactor-go-how-future-works.html
   -  How proto.actor's clustering works to achieve higher availability: https://blog.oklahome.net/2021/05/protoactor-clustering.html
-
 - How virtual actor frameworks deal with cluster topology change: https://www.etteplan.com/stories/how-virtual-actor-frameworks-deal-cluster-topology-change
-
 - Microsoft Orleans: https://learn.microsoft.com/en-us/dotnet/orleans/overview
-
 - 知乎深入解析actor 模型（一)： actor 介绍及在游戏行业应用：https://zhuanlan.zhihu.com/p/427806717
-
 - 知乎深入解析actor 模型（二)： actor 在go 实践proto.Actor 源码解析：https://zhuanlan.zhihu.com/p/427817175
+- Chat Example Using Proto.Actor: https://aneshas.medium.com/chat-example-using-proto-actor-5b42864c2d70
+- 微软 Orleans 教程：https://orleans.azurewebsites.net/docs/index.html
 
