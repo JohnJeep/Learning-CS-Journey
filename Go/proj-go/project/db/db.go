@@ -2,6 +2,6 @@ package db
 
 import "fmt"
 
-func TestPrint() {
+func MyDB() {
 	fmt.Println("This is db package")
 }
