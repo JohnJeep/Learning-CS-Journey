@@ -1,3 +1,77 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-06-13 11:19:29
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2023-12-15 17:30:27
+ * @Description: Golang 第三方包用法学习
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. 框架](#1-框架)
+  - [1.1. Kratos](#11-kratos)
+    - [1.1.1. 简介](#111-简介)
+    - [1.1.2. 用法](#112-用法)
+    - [1.1.3. References](#113-references)
+  - [1.2. Go zero](#12-go-zero)
+    - [1.2.1. 简介](#121-简介)
+    - [1.2.2. 用法](#122-用法)
+    - [1.2.3. FAQ](#123-faq)
+    - [1.2.4. References](#124-references)
+- [2. 工程](#2-工程)
+  - [2.1. wire](#21-wire)
+    - [2.1.1. 简介](#211-简介)
+    - [2.1.2. 用法](#212-用法)
+    - [2.1.3. Reference](#213-reference)
+- [3. 工具](#3-工具)
+  - [3.1. Cobra](#31-cobra)
+    - [3.1.1. 简介](#311-简介)
+    - [3.1.2. 用法](#312-用法)
+    - [3.1.3. References](#313-references)
+  - [3.2. viper](#32-viper)
+    - [3.2.1. 为什么选择Viper?](#321-为什么选择viper)
+    - [3.2.2. References](#322-references)
+  - [3.3. Go-toml](#33-go-toml)
+    - [3.3.1. 简介](#331-简介)
+    - [3.3.2. References](#332-references)
+  - [3.4. GORM](#34-gorm)
+    - [3.4.1. 简介](#341-简介)
+    - [3.4.2. References](#342-references)
+  - [3.5. sarama](#35-sarama)
+    - [3.5.1. References](#351-references)
+  - [3.6. Kafka-go](#36-kafka-go)
+    - [3.6.1. 对比](#361-对比)
+    - [3.6.2. Reference](#362-reference)
+  - [3.7. errgroup](#37-errgroup)
+    - [3.7.1. 用法](#371-用法)
+    - [3.7.2. References](#372-references)
+  - [3.8. fiber](#38-fiber)
+    - [3.8.1. 简介](#381-简介)
+    - [3.8.2. 用法](#382-用法)
+      - [3.8.2.1. 🧬 内置中间件](#3821--内置中间件)
+      - [3.8.2.2. 🧬 外部中间件](#3822--外部中间件)
+    - [3.8.3. References](#383-references)
+  - [3.9. Gin](#39-gin)
+    - [3.9.1. 简介](#391-简介)
+    - [3.9.2. 用法](#392-用法)
+    - [3.9.3. Reference](#393-reference)
+  - [3.10. go-migrate](#310-go-migrate)
+    - [3.10.1. 为什么要使用数据库迁移工具](#3101-为什么要使用数据库迁移工具)
+    - [3.10.2. Reference](#3102-reference)
+  - [3.11. Watermill](#311-watermill)
+    - [3.11.1. 简介](#3111-简介)
+    - [难题](#难题)
+    - [3.11.2. References](#3112-references)
+  - [3.12. Gotest](#312-gotest)
+    - [3.12.1. 简介](#3121-简介)
+    - [3.12.2. 用法](#3122-用法)
+    - [3.12.3. References](#3123-references)
+  - [Gomock](#gomock)
+    - [goja](#goja)
+      - [API](#api)
+      - [](#)
+    - [References](#references)
+
+
 # 1. 框架
 
 
@@ -555,6 +629,115 @@ gotests -all -w xxx.go
 ## Gomock
 
 用法：
+
+
+
+### goja
+
+`goja` 是一个用于在Go语言中运行JavaScript代码的库。它提供了与JavaScript交互的功能，包括创建对象、调用函数、访问属性等。
+
+#### API
+
+- `goja.New()`
+
+  创建了一个新的JavaScript运行环境。
+
+  Goja 虚拟机实例本身并不是线程安全的。如果你需要在多个goroutine中使用Goja，你需要为每个goroutine创建一个新的Goja虚拟机实例。如果你尝试在多个goroutine中共享一个Goja虚拟机实例，你可能会遇到并发问题。
+
+  例如：
+
+  ```go
+  // vm 是一个goja的虚拟机对象
+  vm := goja.New()
+  ```
+
+- `vm.Get()`
+
+  获取一个Javascript变量值：
+
+  ```go
+  value, err := vm.Get("a"){
+    value, _ := value.ToInteger()
+  }
+  ```
+
+- `vm.Set()`
+
+  设置一个Javascript变量的值：
+
+  ```go
+  vm.Set("a", 88)
+  vm.Set("b", "hello")
+  ```
+
+  **陷阱函数**
+
+  "get" 陷阱函数会在尝试获取代理对象的属性时被调用。例如，如果你在 JavaScript 代码中写 `Things.property` 或 `Things['property']`，那么 "get" 陷阱函数就会被调用。
+
+  "set" 陷阱函数会在尝试设置代理对象的属性时被调用。例如，如果你在 JavaScript 代码中写 `Things.property = value`，那么 "set" 陷阱函数就会被调用
+
+
+
+- `SetFieldNameMapper()`
+
+  `SetFieldNameMapper`方法接受一个字段名映射器作为参数。在这里，`goja.TagFieldNameMapper("json", true)`是一个字段名映射器函数，它使用结构体字段的`json`标签作为字段名。第二个参数`true`表示忽略未标记为`json`的字段。
+
+  通过调用`SetFieldNameMapper`方法并传递这个字段名映射器函数作为参数，我们可以告诉goja虚拟机在处理结构体时使用这个映射器来将字段名与JSON字段进行映射。
+
+  这个功能在处理结构体与JSON之间的转换时非常有用。例如，当我们从JSON数据中解析出一个结构体对象时，可以使用这个字段名映射器来确保字段名的一致性。这行代码是在Go语言中使用goja库时的一部分。它的作用是设置一个字段名映射器，用于将结构体字段与JSON字段进行映射。
+
+- `NewObject()`
+
+  用于创建一个新的JavaScript对象。
+
+- `NewProxy()`
+
+  用于创建一个JavaScript代理对象。代理对象允许在JavaScript代码中拦截对对象属性的访问，并在Go代码中处理这些访问。
+
+  `NewProxy`函数接受两个参数：
+
+  1. 要代理的对象
+  2. 一个`ProxyTrapConfig`对象，其中包含了对属性访问进行拦截的回调函数。
+
+- `ToValue()`
+
+  Go语言的值转换为JavaScript的值。这个方法接受一个Go语言的值作为参数，并返回一个表示该值的JavaScript值。
+
+- `RunString()`
+
+  `vm.RunString()` 方法接受一个字符串参数，这个字符串是有效的 JavaScript 代码。这个方法会在当前的 `goja` 虚拟机环境（`vm`）中执行这段 JavaScript 代码，并返回执行结果。
+
+  返回的结果有两个：第一个是 JavaScript 代码执行后的结果，它的类型是 `goja.Value`；第二个是一个错误信息，如果在执行 JavaScript 代码过程中发生了错误，这个错误信息就会被返回。
+
+  例如：
+
+  ```go
+  vm := goja.New()
+  v, err := vm.RunString("2 + 2")
+  if err != nil {
+      log.Fatal(err)
+  } else {
+      fmt.Println(v.Export())  // 输出：4
+  }
+  ```
+
+  在这个例子中，`vm.RunString("2 + 2")` 会在 `goja` 虚拟机中执行 JavaScript 代码 `"2 + 2"`，并返回执行结果 `4`。
+
+- `export()`
+
+  `v.Export()` 是 Go 语言库 `goja` 中的一个方法。
+
+  `v.Export()` 方法用于将 JavaScript 的值转换为 Go 语言的值。这个方法没有参数，返回一个 `interface{}` 类型的值，这个值是 JavaScript 值在 Go 语言中的表示。
+
+  例如，如果 JavaScript 的值是一个数字，那么 `v.Export()` 方法会返回一个 `float64` 类型的值。如果 JavaScript 的值是一个字符串，那么 `v.Export()` 方法会返回一个 `string` 类型的值。
+
+  在你的代码中，`v.Export()` 方法用于获取 JavaScript 代码执行后的结果，并将其转换为 Go 语言的值。例如，如果 JavaScript 代码返回一个对象，那么 `v.Export()` 方法会返回一个 `map[string]interface{}` 类型的值，这个值表示 JavaScript 对象的属性和值。
+
+- `goja.Proxy`
+
+  `goja.Proxy`是一个自定义的类型，用于创建一个代理对象，代理对象通常用于封装对其他对象的访问。
+
+#### 
 
 
 
