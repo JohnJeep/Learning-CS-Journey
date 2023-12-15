@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-08-04 10:35:59
+ * @LastEditTime: 2023-12-15 17:29:39
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -13,7 +13,9 @@
 - [1. How to learn go(学习方法)](#1-how-to-learn-go学习方法)
 - [2. Concept(基本概念)](#2-concept基本概念)
   - [2.1. 吉祥物](#21-吉祥物)
-  - [2.2. Go  mod](#22-go--mod)
+  - [2.2. 命令](#22-命令)
+    - [2.2.1. go mod tidy](#221-go-mod-tidy)
+    - [2.2.2. go run](#222-go-run)
 - [3. Golang 特点](#3-golang-特点)
   - [3.1. 拥有特性](#31-拥有特性)
   - [3.2. 不支持的特性](#32-不支持的特性)
@@ -34,8 +36,8 @@
   - [4.7. 内置接口](#47-内置接口)
     - [4.7.1. Error()](#471-error)
   - [4.8. declare(声明)](#48-declare声明)
-    - [4.8.1. 变量声明](#481-变量声明)
-    - [4.8.2. 类型声明](#482-类型声明)
+    - [4.8.1. var](#481-var)
+    - [4.8.2. type](#482-type)
   - [4.9. Unicode](#49-unicode)
   - [4.10. Basic Data Types(基础数据类型)](#410-basic-data-types基础数据类型)
     - [4.10.1. Constant(常量)](#4101-constant常量)
@@ -47,6 +49,7 @@
     - [4.11.2. Slice](#4112-slice)
     - [4.11.3. Map](#4113-map)
     - [4.11.4. Struct](#4114-struct)
+      - [4.11.4.1. 匿名结构体](#41141-匿名结构体)
 - [5. 语言特性](#5-语言特性)
   - [5.1. Function(函数)](#51-function函数)
     - [5.1.1. 函数声明](#511-函数声明)
@@ -77,6 +80,7 @@
     - [6.2.3. 关闭 channel](#623-关闭-channel)
     - [6.2.4. 遍历 channel](#624-遍历-channel)
     - [6.2.5. 注意事项](#625-注意事项)
+    - [6.2.6. 应用场景](#626-应用场景)
 - [7. Package(包)](#7-package包)
   - [7.1. init 函数](#71-init-函数)
   - [7.2. 包的作用](#72-包的作用)
@@ -90,7 +94,7 @@
   - [8.3. Coverage(测试覆盖率)](#83-coverage测试覆盖率)
 - [9. Reflection(反射)](#9-reflection反射)
   - [9.1. 概念](#91-概念)
-  - [9.2. 重要 API 函数](#92-重要-api-函数)
+  - [9.2. 重要 API](#92-重要-api)
   - [9.3. 注意事项](#93-注意事项)
 - [10. Garbage Collector(垃圾回收)](#10-garbage-collector垃圾回收)
 - [11. References](#11-references)
@@ -212,6 +216,30 @@ Go mod 还支持语义版本控制，使开发人员能够定义依赖项的最�
 `go mod tidy`: 用来通过扫描当前项目中的所有代码来添加未被记录的依赖至go.mod文 件或从go.mod文件中删除不再被使用的依赖。
 
 `go get`: 用拉添加、升级、降级或者删除单个依赖。
+
+
+### 2.2.1. go mod tidy
+`go mod tidy` 是 Go 语言的一个命令，用于自动处理你的 Go 项目的依赖关系。具体来说，它会做以下两件事：
+
+1. 删除无用的模块：`go mod tidy` 会移除 go.mod 文件中所有未被项目中的任何代码直接或间接引用的模块。
+
+2. 添加缺失的模块：`go mod tidy` 会查找所有项目中直接或间接引用的模块，如果这些模块在 go.mod 文件中没有被列出，那么 `go mod tidy` 会将它们添加进去。
+
+这个命令通常在以下几种情况下使用：
+
+- 当你添加了一个新的依赖，但是忘记更新 `go.mod` 文件时。
+- 当你删除了一些代码，这些代码是项目中唯一引用某个依赖的地方，你想要移除这个不再使用的依赖时。
+- 当你的 `go.mod` 文件因为某些原因（比如合并冲突）变得不一致，你想要修复它时。
+
+使用这个命令的基本格式是在你的项目目录中运行 `go mod tidy`。
+
+### 2.2.2. go run 
+
+`go run`：这是 Go 语言的一个命令，用于编译并运行 Go 代码。它会先编译代码，然后立即运行编译后的程序。
+
+
+
+
 
 
 # 3. Golang 特点
@@ -484,7 +512,7 @@ func（声明函数）
 Go 的程序是保存在多个 `.go ` 文件中，文件的第一行就是 `package XXX` 声明，用来说明该文件属于哪个包（package）。`package` 声明下来就是 `import` 声明，再下来是类型，变量，常量，函数的声明。
 
 
-### 4.8.1. 变量声明
+### 4.8.1. var
 Go 变量声明以关键字 `var` 开头，变量类型放在变量的后面，行尾无需分号。
 
 其标准声明格式如下：
@@ -531,22 +559,49 @@ b := "boy" // b 为 string
 - **全部变量**：定义在函数的外部的变量。
 
 
-### 4.8.2. 类型声明
+### 4.8.2. type
 类型声明通用格式
 
 ```go
 type 类型名字 底层类型
 ```
 
-一个类型声明语句创建了一个新的类型名称， 和现有类型具有相同的底层结构。 新命名的类型提供了一个方法， 用来分隔不同概念的类型， 这样即使它们底层类型相同也是不兼容的。  type 声明的类型是原类型的一个别名。
+一个类型声明语句创建了一个新的类型名称， 和现有类型具有相同的底层结构。 新命名的类型提供了一个方法， 用来分隔不同概念的类型， 这样即使它们底层类型相同也是不兼容的。**type 声明的类型是原类型的一个别名。**
 
 ```go
 type Celsius float64 // 摄氏温度
 type Fahrenheit float64 // 华氏温度
 ```
 
+**在 Go 语言中，使用 `type` 关键字创建新的类型是一种常见的做法，这样做有几个好处：**
+
+1. **增强代码的可读性和可理解性**：新的类型名称可以更好地描述它的用途。在你的例子中，`ThingInnerServiceName` 比 `string` 更能表达它的含义。
+
+2. **类型安全**：新的类型不会与它的基础类型混淆。例如，你不能将一个 `ThingInnerServiceName` 类型的值赋给一个 `string` 类型的变量，除非你进行显式的类型转换。这可以防止一些类型错误。
+
+3. **可以添加方法**：你可以为新的类型添加方法。这是 Go 语言中的一种重要特性，可以让你创建更丰富的接口。
+
+例如：
+
+```go
+type ThingInnerServiceName string
+
+func (t ThingInnerServiceName) Print() {
+    fmt.Println("ThingInnerServiceName is: " + string(t))
+}
+
+func main() {
+    var name ThingInnerServiceName = "MyService"
+    name.Print()  // 输出：ThingInnerServiceName is: MyService
+}
+```
+
+在这个例子中，`ThingInnerServiceName` 类型有一个 `Print` 方法，可以打印出它的值。
+
+
 
 ## 4.9. Unicode
+
 在很久以前， 世界还是比较简单的， 起码计算机世界就只有一个 ASCII 字符集： 美国信息交换标准代码。 ASCII， 更准确地说是美国的 ASCII， 使用 7bit 来表示 128 个字符： 包含英文字母的大小写、 数字、 各种标点符号和设备控制符。 对于早期的计算机程序来说， 这些就足够了，但是这也导致了世界上很多其他地区的用户无法直接使用自己的符号系统。
 
 Go 语言中的 Unicode 编码为 `rune`，即 `int32` 类型。
@@ -966,7 +1021,7 @@ type Stu struct {
 
 如果结构体没有任何成员的话就是空结构体， 写作 `struct{}`， 它的大小为 0， 不包含任何信息。
 
-#### 匿名结构体
+#### 4.11.4.1. 匿名结构体
 
 定义：没有名字的结构体，通常只用于在代码中仅使用一次的结构类型。
 
@@ -1654,7 +1709,7 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
 
    一个协程出现了问题导致其它的协程不能工作，致使整个程序崩溃掉。这时我们就可以在出现问题的协程中使用 `recover` 来捕获异常（Panic），进行处理，即使这个协程发生问题，不会影响其它的协程，程序照样正常运行。
 
-### 应用场景
+### 6.2.6. 应用场景
 
 1. 消息收发
 2. 超时机制
@@ -2031,48 +2086,38 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 
 ------------------------------------
 
+log
+
+- [Go语言结构化日志：打破日志的边界，解放你的应用程序](https://devopsman.cn/archives/go-yu-yan-jie-gou-hua-ri-zhi--da-po-ri-zhi-de-bian-jie--jie-fang-ni-de-ying-yong-cheng-xu)
+- slog：Go官方版结构化日志包：https://tonybai.com/2022/10/30/first-exploration-of-slog/
+
+---
+
 社区及经验分享
+
 - [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO 语言题解 LeetCode，比较全面，使用 GO 语言时值得参考。
-
 - [Halfrost-Field 冰霜之地](https://github.com/halfrost/Halfrost-Field)：Github 上的一位作者记录了学习 GO 语言的一些方法和经验。
-
 - [Go 语言问题集 (Go Questions)](https://www.bookstack.cn/read/qcrao-Go-Questions/README.md)：作者学习 Go 语言的笔记
-
 - Go 语言设计与实现：https://draveness.me/golang/
   这位作者是个大牛，开源作品很多，该项目系统的讲解了 Go 语言的知识，非常值得学习。
-  
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go
-
 - 嗨客网：https://haicoder.net/golang/golang-lib.html
-
 - learnku 社区网站：https://learnku.com/go
-
 - 腾讯大佬个人博客：https://www.hitzhangjie.pro/blog/
-
 - **印度小哥 mohitkhare 博客**：https://www.mohitkhare.com/blog/go-dependency-injection/
-
 - Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
   介绍了 Go 中一些常踩的坑和性能优化技巧。
-  
 - Go的50度灰：Golang新开发者要注意的陷阱和常见错误：https://colobu.com/2015/09/07/gotchas-and-common-mistakes-in-go-golang/
-  
+
 
 -----
-
 Github 优秀开源项目
-
 - golang-open-source-projects: https://github.com/hackstoic/golang-open-source-projects
-
 - awesome-go-cn: https://github.com/jobbole/awesome-go-cn
-
 - **go-awesome**: https://github.com/shockerli/go-awesome
-
 - **国外 awesome-go**: https://github.com/avelino/awesome-go
-
 - **Go 夜读：**
-
   - **https://github.com/talkgo/read**  
-
   - https://github.com/talkgo/night
 
 
