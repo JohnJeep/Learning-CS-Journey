@@ -2,6 +2,7 @@
     "version": "0.2.0",
     "configurations": [
        
+        /*
         // C++ 单文件debug配置
         {
             "name": "(gdb) Launch",                                       // 配置名称，将会在启动配置的下拉菜单中显示 
@@ -51,11 +52,11 @@
             ],
             "preLaunchTask": "compile C" 
         },
-        
-        /* 
+        */
+
         // linux C++ debug
         {
-            "name": "C/C++",
+            "name": "wsl C++ Launch (GDB)",                                           // 配置名称，将会在启动配置的下拉菜单中显示
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -74,6 +75,5 @@
                 }
             ]
         }
-        */
     ]
 }
