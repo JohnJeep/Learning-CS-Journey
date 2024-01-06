@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2023-05-31 14:02:10
+ * @LastEditTime: 2024-01-06 17:35:56
  * @LastEditors: JohnJeep
  * @Description: GitHub 开源项目
 --> 
@@ -96,6 +96,8 @@
 - [libevent](https://github.com/libevent/libevent): Libevent 是一个用C语言编写的、轻量级的开源高性能事件通知库，主要有以下几个亮点：事件驱动，高性能，轻量级，专注于网络，不如 ACE 那么臃肿庞大；源代码相当精炼、易读；跨平台；支持多种 I/O 多路复用技术：epoll、poll、select 和 kqueue 等；支持 I/O，定时器和信号等事件；注册事件优先级等。
 - [workflow](https://github.com/sogou/workflow): 搜狗公司C++服务器引擎，支撑搜狗几乎所有后端C++在线服务，包括所有搜索服务，云输入法，在线广告等，每日处理超百亿请求。这是一个设计轻盈优雅的企业级程序引擎，可以满足大多数C++后端开发需求。
 - [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page): 是一个线性算术的C++模板库，功能强大、快速、优雅以及支持多平台。想找关于数学运算的三方库，首选Eigen就对了！直接使用 JupyterNoteBook，以 Python 的方式会更好。
+- 腾讯 Tars 框架: https://github.com/TarsCloud/TarsCpp
+- 腾讯Go 实现的grpc: https://github.com/trpc-group/trpc-go
 
 
 
