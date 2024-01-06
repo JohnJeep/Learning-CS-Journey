@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-12-15 17:29:39
+ * @LastEditTime: 2024-01-06 13:42:31
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -26,8 +26,8 @@
   - [4.3. Compile(编译)](#43-compile编译)
   - [4.4. key-words(关键字)](#44-key-words关键字)
   - [4.5. built-in type(内置类型)](#45-built-in-type内置类型)
-    - [4.5.1. 值类型](#451-值类型)
-    - [4.5.2. 引用类型](#452-引用类型)
+    - [4.5.1. Value types(值类型)](#451-value-types值类型)
+    - [4.5.2. Reference types(引用类型)](#452-reference-types引用类型)
   - [4.6. built-in function(内置函数)](#46-built-in-function内置函数)
     - [4.6.1. append](#461-append)
     - [4.6.2. copy](#462-copy)
@@ -73,7 +73,7 @@
   - [6.1. Goroutine](#61-goroutine)
     - [6.1.1. 概念](#611-概念)
     - [6.1.2. 特点](#612-特点)
-    - [6.1.3. MPG 模式](#613-mpg-模式)
+    - [6.1.3. goroutine scheduler](#613-goroutine-scheduler)
   - [6.2. Channel](#62-channel)
     - [6.2.1. 声明 channel](#621-声明-channel)
     - [6.2.2. 创建 channel](#622-创建-channel)
@@ -88,14 +88,11 @@
   - [7.4. 包之间调用](#74-包之间调用)
   - [7.5. 打包](#75-打包)
   - [7.6. 导入包](#76-导入包)
-- [8. Testing(测试)](#8-testing测试)
-  - [8.1. 测试函数](#81-测试函数)
-  - [8.2. 基准测试](#82-基准测试)
-  - [8.3. Coverage(测试覆盖率)](#83-coverage测试覆盖率)
-- [9. Reflection(反射)](#9-reflection反射)
-  - [9.1. 概念](#91-概念)
-  - [9.2. 重要 API](#92-重要-api)
-  - [9.3. 注意事项](#93-注意事项)
+- [8. Reflection(反射)](#8-reflection反射)
+  - [8.1. 概念](#81-概念)
+  - [8.2. 重要 API](#82-重要-api)
+  - [8.3. 注意事项](#83-注意事项)
+- [9. Problems](#9-problems)
 - [10. Garbage Collector(垃圾回收)](#10-garbage-collector垃圾回收)
 - [11. References](#11-references)
 
@@ -363,7 +360,7 @@ continue for          import  return       var
 ## 4.5. built-in type(内置类型)
 
 
-### 4.5.1. 值类型
+### 4.5.1. Value types(值类型)
 
 ```go
 bool
@@ -376,12 +373,13 @@ array    -- 固定长度的数组
 ```
 
 
-### 4.5.2. 引用类型
+### 4.5.2. Reference types(引用类型)
 ```go
-slice     -- 序列数组，也叫切片 (最常用)
-map       -- 映射
-chan      -- 管道
-interface -- 接口
+slice          -- 切片
+map            -- 映射
+chan           -- 管道
+interface      -- 接口
+function types --函数类型
 ```
 
 
@@ -544,7 +542,7 @@ var (
 )
 ```
 
-Go 语言在声明变量的时候，会自动对变量对应的内存区域进行初始化操作。每个变量会被初始化成其类型的默认值，例如： 整型和浮点型变量的默认值为 0；字符串变量的默认值为空字符串；布尔型变量默认为 `false`； 切片、函数、指针变量的默认为 `nil`。
+**Go 语言在声明变量的时候，会自动对变量对应的内存区域进行初始化操作。**每个变量会被初始化成其类型的默认值，例如： 整型和浮点型变量的默认值为 0；字符串变量的默认值为空字符串；布尔型变量默认为 `false`； 切片、函数、指针变量的默认为 `nil`。
 
 简短变量声明。用于声明和初始化局部变量。 它以 ` 名字:= 表达式 ` 形式声明变量， 变量的类型根据表达式来自动推导。
 
@@ -598,7 +596,13 @@ func main() {
 
 在这个例子中，`ThingInnerServiceName` 类型有一个 `Print` 方法，可以打印出它的值。
 
+注意：
 
+> Go 编译器不会对不同类型的值做隐式转换，需要做类型转换时，要显式指定。
+
+
+
+ 
 
 ## 4.9. Unicode
 
@@ -1383,9 +1387,41 @@ type usb interface {
 }
 ```
 
-注意：
+注意
 - 接口里的方法都没有方法体，即接口中的方法是没有实现的。接口体现了程序设计的多态和高内聚低耦合的思想。
+
+- Go 语言推荐尽量定义小的接口，并通过接口组合的方式构建程序。尽量让一个接口中的方法数量控制在 `1-3` 个内。
+
+  **将方法写的小优势**
+
+  - 接口越小，抽象度越高，被接纳程度越高。
+  - 易于实现和测试。
+  - 指责单一，易于复合使用。
+
+- 对于接口类型，优先以**单个单词**命令。对于拥有一个或多个方法的接口组合而成的接口，Go 语言的惯例是用 `方法名+er`这样的方式来命名。
+
+  ```go
+  type Writer interface {
+  	Write(p []byte) (n int, err error)
+  }
+  
+  type Reader interface {
+  	Read(p []byte) (n, int, err error)
+  }
+  
+  type Closer interface {
+  	Close() error
+  }
+  
+  type ReadWriteCloser interface {
+  	Reader
+  	Writer
+  	Closer
+  }
+  ```
+
 - Golang 中的接口不需要显示的实现，即不需要指定结构体或者变量具体实现了哪些接口。只需要将接口中的所有方法都实现就可以了。
+
 - Golang 的接口里面不能有任何的变量。
   ```go
   type Say interface {
@@ -1411,7 +1447,9 @@ type usb interface {
       B
   }
   ```
+  
 - **interface 类型默认是一个指针（引用类型）**，若没有初始化 interface 就是用，那么默认值为 `nil`。
+
 - **空接口中没有任何的方法，所有的类型都实现了空接口 **。即任何一个变量都可以赋值给空接口。（**很常用**）
   
   ```go
@@ -1430,6 +1468,7 @@ type usb interface {
   var t2 interface{} = f // 赋基础类型
   ```
   
+  尽量减少将空接口（`interface{}`）作为函数的参数类型，因为空接口类型编译时会逃过编译器的类型安全检查。需要编程者自己去检查传入参数的错误信息，并且直到运行时才能发现错误。
 
 空接口应用
 
@@ -1579,7 +1618,7 @@ Go 并发采用 `goroutines` 和 `channel` 去处理并发编程。
 
 如果你使用过操作系统或者其它语言提供的线程， 那么你可以简单地把 `goroutine` 类比作一个线程， 这样你就可以写出一些正确的程序了。
 
-当一个程序启动时， 其主函数即在一个单独的 `goroutine` 中运行， 我们叫它 `main goroutine`。 新的 `goroutine` 会用 go 语句来创建。 在语法上， go 语句是一个普通的函数或方法调用前加上 ** 关键字 go**。 Go 语句会使其语句中的函数在一个新创建的 `goroutine` 中运行， 而 go 语句本身会迅速地完成。
+当一个程序启动时， 其主函数即在一个单独的 `goroutine` 中运行， 我们叫它 `main goroutine`。 新的 `goroutine` 会用 go 语句来创建。 在语法上， go 语句是一个普通的函数或方法调用前加上关键字**go**。 Go 语句会使其语句中的函数在一个新创建的 `goroutine` 中运行， 而 go 语句本身会迅速地完成。
 
 ```go
 func gt() {
@@ -1593,23 +1632,25 @@ go gt() // 创建一个协程去调用函数 gt()
 
 **简而言之：协程就是一个轻量级的线程（编译器做了优化），一个 Go 主线程，可以起多个协程，很轻松的开启上万个协程。**
 
-**并发**：多线程在单核上运行。从微观上看，同一时间上只有一个任务在执行，这个时间点很短，短的肉眼无法分辨。
+**并发(comcurrency)**：多线程在单核上运行。从微观上看，同一时间上只有一个任务在执行，这个时间点很短，短的肉眼无法分辨。
 
-**并行**：多线程在多核上运行。从微观上看，同一时间点，有多个任务在同时执行。
+**并行(parallelism)**：多线程在多核上运行。从微观上看，同一时间点，有多个任务在同时执行。即不同的代码片段同时在不同的物理处 理器上执行。
+
+在很多情况下，并发的效果比并行好，因为操作系统和硬件的 总资源一般很少，但能支持系统同时做很多事情。
+
+如果希望让 goroutine 并行，必须使用多于一个逻辑处理器。当有多个逻辑处理器时，调度器 会将 goroutine 平等分配到每个逻辑处理器上。这会让 goroutine 在不同的线程上运行。不过要想真 的实现并行的效果，用户需要让自己的程序运行在有多个物理处理器的机器上。否则，哪怕 Go 语 言运行时使用多个线程，goroutine 依然会在同一个物理处理器上并发运行，达不到并行的效果。
 
 
 ### 6.1.2. 特点
-- 有独立的栈空间
+- 有独立的栈空间。Go 运行时默认为每个 goroutine 分配的栈空间为 2KB。
 - 共享程序堆空间
-- 调度由用户控制
+- 调度由用户控制。goroutine 调度的切换也并不用陷入（trap）操作系统内核完成，代价很低。
+
+### 6.1.3. goroutine scheduler
+
+goroutine 调度器：将 goroutine  按照一定的算法放到 CPU 上执行的程序就叫协程调度器。
 
 
-### 6.1.3. MPG 模式
-- M(Machine)：操作系统的主线程，也叫工作线程。
-- P(Processor)：协程执行需要的上下文。
-- G(Goroutine)：协程。
-
-参考：https://golang.design/under-the-hood/zh-cn/part2runtime/ch06sched/mpg/
 
 
 ## 6.2. Channel
@@ -1691,7 +1732,7 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
        default:
        ...
    }
-
+   
    // 示例
    intChan := make(chan int, 10) // 定义一个 int 类型的管道，其容量为 10，并创建
    stringChan := make(chan string, 10)
@@ -1704,6 +1745,8 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
        	fmt.Println("nothing...")
    }
    ```
+
+   使用 `select` 实现多路 channel 的并发控制。
 
 5. 协程（goroutine）中使用 `recover` ，解决协程中出现异常（`Panic`）导致程序崩溃的问题。
 
@@ -1799,211 +1842,16 @@ import _ "fmt"
 
 编译器会使用 Go 环境变量设置的路径，通过引入的相对路径来查找磁盘上的包。标准库中的包会在安装 Go 的位置找到。 Go 开发者创建的包会在 GOPATH 环境变量指定的目录里查找。GOPATH 指定的这些目录就是开发者的个人工作空间。
 
-
-# 8. Testing(测试)
-Go 语言的工具和标准库中集成了轻量级的测试功能，避免了强大但复杂的测试框架。测试库提供了一些基本构件，必要时可以用来构建复杂的测试构件。
-
-go test 命令是一个按照一定的约定和组织来测试代码的程序。 在包目录内， 所有以 `_test.go` 为后缀名的源文件在执行 `go build` 时不会被构建成包的一部分， 它们是 `go test` 测试的一部分。
-
-go test 命令执行原理
-
-> go test 命令会遍历所有的 *_test.go 文件中符合上述命名规则的函数， 生成一个临时的 main 包用于调用相应的测试函数， 接着构建并运行、 报告测试结果， 最后清理测试中生成的临时文件。
-
-
-## 8.1. 测试函数
-
-- 测试用例文件名必须以 `_test.go` 结尾，例如：`socket_test.go`
-- 在 `*_test.go` 文件中， 分为三种类型的函数： 测试函数、 基准测试 (benchmark) 函数、 示例函数。 一个测试函数是以 `Test` 为函数名前缀的函数， 用于测试程序的一些逻辑行为是否正确，go test 命令会调用这些测试函数并报告测试结果是 `PASS` 或 `FAIL`。 基准测试函数是以 `Benchmark` 为函数名前缀的函数， 它们用于衡量一些函数的性能； go test 命令会多次运行基准函数以计算一个平均的执行时间。
-- 每个测试用例中必须导入 `testing` 包。
-  ```go
-  import "testing"
-  ```
-- 测试用例中的函数名必须以 `Test` 开头，可选的后缀名必须以大写字母开头 。常见的命名原则：`Test + 被测试的函数名 `。测试用例函数 `TestSocket(t *testing.T)` 的形参必须是 `*testing.T`
-  ```go
-  func TestSocket(t *testing.T) { /* ..*/}
-  func TestSin(t *testing.T) { /* ... */ }
-  func TestCos(t *testing.T) { /* ... */ }
-  func TestLog(t *testing.T) { /* ... */ }
-  ```
-
-  其中 `t` 参数用于报告测试失败和附加的日志信息。
-- 一个测试用例文件中可以有多个测试用例函数，比如：`TestAdd()`、`TestSub()` 等。
-- 测试用例运行指令：
-  ```go
-  // 若运行正确，则无日志；若运行错误，则有日志
-  // go test 后面没有参数指定包，那么将默认采用当前目录对应的包
-  go test
-  
-  // 无论运行是正确还是错误，都有日志输出
-  // 参数 -v: 显示每个测试用例的结果和运行时间
-  go test -v
-  
-  // 测试单个文件
-  go test -v socket_test.go socket.go
-  
-  // 测试单个方法
-  go test -v -test.run TestAdd
-  
-  // CPU 剖析数据标识了最耗 CPU 时间的函数。 在每个 CPU 上运行的线程在每隔几毫秒都会遇到
-  // 操作系统的中断事件， 每次中断时都会记录一个剖析数据然后恢复正常的运行。
-  go test -cpuprofile=cpu.out
-  
-  // 堆剖析则标识了最耗内存的语句。剖析库会记录调用内部内存分配的操作，
-  // 平均每 512KB 的内存申请会触发一个剖析数据。
-  go test -memprofile=mem.out
-  
-  // 阻塞剖析则记录阻塞 goroutine 最久的操作， 例如系统调用、 管道发送和接收，
-  // 还有获取锁等。 每当 goroutine 被这些操作阻塞时， 剖析库都会记录相应的事件。
-  go test -blockprofile=block.out
-  ```
-
-  若同时开启 CPU 剖析、堆剖析、阻塞剖析时，要当心， 因为某一项分析操作可能会影响其他项的分析结果 。
-
-- 当出现错误时，用 `t.Fatalf` 来格式化输出错误信息，并退出程序。
-- `t.Logf` 可在测试用例中输出日志。
-- 测试用例函数，并没有放在 `main` 函数中，但用例程序也执行。因为在导入测试用例的包时，Golang 的测试框架中有 `main` 开始执行，然后再加载 测试用例程序 `xxx_test.go` 和 业务程序 `xxx.go`。
-- 测试用例程序执行完全后，显示的结果是 `PASS` 或者 `FAIL`。其中：`PASS` 表示测试用例运行成功；`FAIL` 表示测试用例执行失败。测试用例文件中的函数都执行成功，才显示 `PASS`；若发现有一个执行不成功，也会显示 `FAIL`。
-
-
-## 8.2. 基准测试
-基准测试是测量一个程序在固定工作负载下的性能。 在 Go 语言中， 基准测试函数和普通测试函数写法类似， 但是以 Benchmark 为前缀名， 并且带有一个 `*testing.B` 类型的参数； `*testing.B` 参数除了提供和 `*testing.T` 类似的方法， 还有额外一些和性能测量相关的方法。 **它还提供了一个整数 `N`， 用于指定操作执行的循环次数。**
-```go
-import "testing"
-
-// 循环中执行 N 次
-func BenchmarkSum(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Sum("A man, a plan, a canal: Panama")
-	}
-}
-```
-
-运行基准测试：
-
-基准测试与普通的测试不同，默认情况下不运行任何基准测试。要运行基准测试，使用 `-bench` 命令参数，该参数是一个正则表达式， 用于匹配要执行的基准测试函数的名字， 默认值是空的。 其中 `.` 模式将可以匹配所有
-基准测试函数 。
-```go
-// 匹配当前路径下所有的基准测试函数
-go test -bench=.
-
-goos: linux
-goarch: amd64
-pkg: test/product
-cpu: Intel(R) Core(TM) i5-10400H CPU @ 2.60GHz
-BenchmarkBuy-8
-...
-1000000000               0.0001251 ns/op
-PASS
-ok      test/product    0.007s
-
-// 只运行某个基准函数
-got test -v -bench="基准函数名"
-```
-
-基准测试结果中 `BenchmarkBuy-8`，基准测试函数的后缀部分 `8`，表示运行时对应的 `GOMAXPROCS` 值， 这对
-于一些与并发相关的基准测试是重要的信息。
-
-`-benchmem` 命令行参数：提供每次操作分配内存的次数，以及总共分配内存的字节数。
-```go
-go test -bench=. -benchmem
-
-goos: linux
-goarch: amd64
-pkg: test/word
-cpu: Intel(R) Core(TM) i5-10400H CPU @ 2.60GHz
-BenchmarkIsPalindrome02-8        4092888               281.4 ns/op           248 B/op          5 allocs/op
-BenchmarkIsPalindrome03-8        4306605               277.4 ns/op           248 B/op          5 allocs/op
-BenchmarkIsPalindrome04-8        7649563               147.7 ns/op           128 B/op          1 allocs/op
-PASS
-ok      test/word       4.225s
-```
-
-优化后的 `BenchmarkIsPalindrome04` 函数从从之前的 5 次内存分配变成了一次内存分配 `1 allocs/op`。
-
-注：
-- 单位为 `allocs/op` 的值表示每次操作从堆上分配内存的次数。
-- 单位为 `B/op` 的值表示每次操作分配的字节数。
-
-
-比较型的基准测试就是普通程序代码。 它们通常是单参数的函数， 由几个不同数量级的基准测试函数调用， 就像这样：
-```go
-func benchmark(b *testing.B, size int) { /* ... */ }
-func Benchmark10(b *testing.B) { benchmark(b, 10) }
-func Benchmark100(b *testing.B) { benchmark(b, 100) }
-func Benchmark1000(b *testing.B) { benchmark(b, 1000) }
-```
-
-通过函数参数来指定输入的大小， 但是参数变量对于每个具体的基准测试都是固定的。 要避免直接修改 `b.N` 来控制输入的大小。 除非你将它作为一个固定大小的迭代计算输入， 否则基准测试的结果将毫无意义。
-
-
-## 8.3. Coverage(测试覆盖率)
-执行 go 的测试程序时，用 `coverage` 来统计测试用例的覆盖率。
-```go
-go test -v -run=Coverage example/word
-```
-
- 执行 `example/word` 路径下所有 go 测试用例，并统计测试用例的覆盖率。
-
-查看 测试用例覆盖攻击的使用方法，可用 `go tool cover` 命令。
-
-```go
-Usage of 'go tool cover':
-Given a coverage profile produced by 'go test':
-        go test -coverprofile=c.out
-
-Open a web browser displaying annotated source code:
-        go tool cover -html=c.out
-
-Write out an HTML file instead of launching a web browser:
-        go tool cover -html=c.out -o coverage.html
-
-Display coverage percentages to stdout for each function:
-        go tool cover -func=c.out
-
-Finally, to generate modified source code with coverage annotations
-(what go test -cover does):
-        go tool cover -mode=set -var=CoverageVariableName program.go
-
-Flags:
-  -V    print version and exit
-  -func string
-        output coverage profile information for each function
-  -html string
-        generate HTML representation of coverage profile
-  -mode string
-        coverage mode: set, count, atomic
-  -o string
-        file for output; default: stdout
-  -var string
-        name of coverage variable to generate (default "GoCover")
-
-  Only one of -html, -func, or -mode may be set.
-```
-
-go tool 命令运行 Go 工具链的底层可执行程序。 这些底层可执行程序放在 ` $GOROOT/pkg/tool/${GOOS}_${GOARCH}` 目录。 因为有 go build 命令的原因， 我们很少直接调用这些底层工具。
-
-现在我们可以用 `-coverprofile` 标志参数重新运行测试：
-```go
-go test -run=Coverage -coverprofile=c.out  example/word
-```
-
- `-coverprofile` 在测试代码中插入生成钩子来统计覆盖率数据。 也就是说， 在运行每个测试前，它将待测代码拷贝一份并做修改， 在每个词法块都会设置一个布尔标志变量. 当被修改后的被测试代码运行退出时，将统计日志数据写入 `c.out` 文件， 并打印一部分执行的语句的一个总结。（ 如果你需要的是摘要， 使用 go test -cover 。）
-
-为了收集数据， 我们运行了测试覆盖率工具， 打印了测试日志， 使用下面的命令，生成一个 HTML 报告， 然后在浏览器中打开  。
-```go
-go tool cover -html=c.out
-```
-
-# 9. Reflection(反射)
+# 8. Reflection(反射)
 
 反射是一个强大的编程工具，是一种程序在运行期间审视自己的能力。
 
 
-## 9.1. 概念
+## 8.1. 概念
 Go 语言提供了一种机制， 能够在运行时更新变量和检查它们的值、 调用它们的方法和它们支持的内在操作， 而不需要在编译时就知道这些变量的具体类型， 这种机制被称为反射。
 
 
-## 9.2. 重要 API
+## 8.2. 重要 API
 - `reflect.TypeOf(变量名)`：获取变量的类型，返回 `reflect.Type` 类型。
 - `reflect.ValueOf(变量名)`：获取变量的值，返回 `reflect.Value` 类型，`reflect.Value` 是一个结构体类型。
   ```go
@@ -2022,7 +1870,7 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 例子：利用反射去获取结构体的字段、方法、标签。
 
 
-## 9.3. 注意事项
+## 8.3. 注意事项
 1. 基于反射的代码是比较脆弱的。 对于每一个会导致编译器报告类型错误的问题， 在反射中都有与之相对应的误用问题， 不同的是编译器会在构建时马上报告错误， 而反射则是在真正运行到的时候才会抛出 `panic` 异常， 可能是写完代码很久之后了， 而且程序也可能运行了很长的时间。
 2. 即使对应类型提供了相同文档， 但是反射的操作不能做静态类型检查， 而且大量反射的代码通常难以理解。
 3. 基于反射的代码通常比正常的代码运行速度慢一到两个数量级。
@@ -2030,6 +1878,22 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 
 参考
 - https://halfrost.com/go_reflection/
+
+
+
+# 9. Problems
+
+大规模软件开发存在的问题。
+
+1. 程序构建慢；
+2. 依赖复杂；
+3. 开发人员使用编程语言的不同子集。
+4. 代码理解性差；（可读性差、文档差）
+5. 功能重复实现；
+6. 升级更新消耗大；
+7. 实现自动化工具难度高；
+8. 版本问题；
+9. 跨语言问题；
 
 
 # 10. Garbage Collector(垃圾回收)
@@ -2108,7 +1972,6 @@ log
 - Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
   介绍了 Go 中一些常踩的坑和性能优化技巧。
 - Go的50度灰：Golang新开发者要注意的陷阱和常见错误：https://colobu.com/2015/09/07/gotchas-and-common-mistakes-in-go-golang/
-
 
 -----
 Github 优秀开源项目
