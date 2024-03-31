@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-06-13 18:18:00
+ * @LastEditTime: 2024-03-31 15:43:20
  * @Description: Linux 基础用法
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -106,7 +106,7 @@
 - [43. QAQ](#43-qaq)
   - [43.1. Linux 与 Windows相差 8 小时](#431-linux-与-windows相差-8-小时)
   - [43.2. enca](#432-enca)
-- [44. Reference](#44-reference)
+- [44. References](#44-references)
 
 <!-- /TOC -->
 
@@ -862,6 +862,9 @@ FHS(Filesystem Hierarchy Standard) ：文件系统分层标准
 /var/run --> /run
 ```
 
+![Alt text](pictures/linux-file-system.png)
+
+
 ## 6.9. 绝对路径与相对路径
 
 绝对路径：一定由跟目录(`/`)写起。例如：`/usr/share/doc`  在shell脚本中一般使用绝对路径，防止因为不同的工作环境导致一些问题的发生。
@@ -876,7 +879,8 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
 - `bzip2`: 压缩文件后缀(*.bz2)
 - `xz`: 压缩文件后缀(*.xz)
 
-<img src="./pictures/compress.png">
+![Alt text](pictures/compress.png)
+
 
 ## 7.1. tar文件打包
 
@@ -1763,8 +1767,8 @@ man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 示例：
   查找 socket 文档： man 2 socket
 ```
+![Alt text](pictures/man-description.png)
 
-<img src="./pictures/man代号.png">
 
 ```bash
 man -k keyword    # 按照关键字搜索与之匹配的相似命令。
@@ -2154,7 +2158,8 @@ enca -L zh_CN -x utf-8 *
 
 源码地址： https://dl.cihar.com/enca/
 
-# 44. Reference
+
+# 44. References
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
