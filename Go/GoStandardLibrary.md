@@ -12,13 +12,17 @@
 - [1. GO Standard library](#1-go-standard-library)
 - [2. IO](#2-io)
   - [2.1. MultiWriter](#21-multiwriter)
+  - [2.2. io.Writer](#22-iowriter)
+  - [2.3. io.ReadFull](#23-ioreadfull)
 - [3. log](#3-log)
 - [4. strconv](#4-strconv)
 - [5. encoding](#5-encoding)
   - [5.1. json](#51-json)
-    - [5.1.1. Marshal](#511-marshal)
-  - [5.2. http](#52-http)
-- [6. Reference](#6-reference)
+  - [5.2. Marshal](#52-marshal)
+  - [5.3. http](#53-http)
+- [6. Context](#6-context)
+- [7. sql](#7-sql)
+- [8. References](#8-references)
 
 <!-- /TOC -->
 
@@ -46,7 +50,7 @@ func MultiWriter(writers ...Writer) Writer
 
 MultiWriter 函数是一个变参函数，可以接受任意个实现了 io.Writer 接口的值。这个函数会返回一个 io.Writer 值，这个值会把所有传入的 io.Writer 的值绑在一起。当对这个返回值进行写入时，会向所有绑在一起的 io.Writer 值做写入。
 
-## io.Writer
+## 2.2. io.Writer
 
 `io.Writer` 是 Go 语言标准库中的接口，用于写入数据。它定义了一个用于写入字节的通用接口，可以在不同的数据源和目标上使用。以下是 `io.Writer` 的基本用法和示例：
 
@@ -67,7 +71,7 @@ func (w WriterType) Write(p []byte) (n int, err error)
 
 以下是一些基本示例：
 
-### 示例 1: 写入到文件
+**示例 1: 写入到文件**
 
 ```go
 package main
@@ -100,7 +104,7 @@ func main() {
 }
 ```
 
-### 示例 2: 使用 bytes.Buffer
+**示例 2: 使用 bytes.Buffer**
 
 ```go
 package main
@@ -141,7 +145,7 @@ func main() {
 
 这些示例演示了如何使用 `io.Writer` 接口来写入数据到不同的目标中，包括文件和内存缓冲区。无论目标是什么，你都可以使用相同的 `Write` 方法来写入数据。在实际编程中，你可以根据需要选择合适的 `io.Writer` 实现。
 
-## io.ReadFull
+## 2.3. io.ReadFull
 
 `io.ReadFull` 是 Go 语言标准库中的一个函数，它的作用是从输入流中读取指定数量的字节，直到读取到足够数量的字节或者发生错误为止。通常，它用于确保从输入流中读取到指定数量的字节，即使输入流中的数据不够也会一直尝试读取，直到达到指定数量或者发生错误。
 
@@ -259,24 +263,33 @@ Go 标准库中的 `encoding/json` 包提供了对 JSON（JavaScript Object Nota
 
 
 
-### 5.1.1. Marshal
+## 5.2. Marshal
 Go 语言中，Marshal（编组）是指将数据结构或对象转换为字节流或字符串的过程。Marshal 操作通常用于将 Go 语言中的数据结构序列化为可传输或持久化的格式，例如 JSON、XML、Protobuf 等。
 
 在 Go 语言中，Marshal 操作可以通过标准库中的 `encoding/json`、`encoding/xml ` 等包实现。这些包提供了 Marshal 函数，可以将 Go 语言中的数据结构转换为对应格式的字符串或字节流。net
 
 
-## 5.2. http
+
+
+## 5.3. http
 - 一文说透 Go 语言 HTTP 标准库：https://www.luozhiyun.com/archives/561
 
 
 
-# Context
+# 6. Context
 
 - Go标准库Context: https://www.liwenzhou.com/posts/Go/context/
 
+  
+
+# 7. sql
+
+- [在 Go 中如何使用 database/sql 来操作数据库](https://jianghushinian.cn/2023/06/05/how-to-use-database-sql-to-operate-database-in-go)
+- [Go packages database](https://pkg.go.dev/database/sql)
 
 
-# 6. Reference
+
+# 8. References
 - Go Standard library: https://pkg.go.dev/std
 - Go 语言中文网：https://studygolang.com/pkgdoc
 - Mastering GO 中文翻译：https://wskdsgcf.gitbook.io/mastering-go-zh-cn/
