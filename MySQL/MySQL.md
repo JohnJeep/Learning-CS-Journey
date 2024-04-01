@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2023-08-04 15:12:25
+ * @LastEditTime: 2024-01-06 17:33:53
  * @LastEditors: JohnJeep
  * @Description:  MySQL 基础知识学习，作为一个使用者的角度
 -->
@@ -151,7 +151,7 @@
 - 创建用户后并刷新权限
 
   ```sql
-  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+  GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' WITH GRANT OPTION;
   ```
 
 - 查看数据库中存在的用户
@@ -478,16 +478,12 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
     ```sh
     RENAME TABLE 原表名 TO 新表名
 
-  // 可将表移动到另一个数据库）
+    // 可将表移动到另一个数据库）
     RENAME TABLE 原表名 TO 库名. 表名
     ```
-
     尽量少去更改表和列的名称，在某些情况下可能导致一些视图不能使用
-
   - 修改表的字段结构：` ALTER TABLE 表名 操作名 `
-
     - 添加单列
-
       ```sql
       ALTER TABLE tab_name ADD [COLUMN] column_name column_definition[FIRST | AFTER col_name];
       ```
