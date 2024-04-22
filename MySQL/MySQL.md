@@ -6,62 +6,6 @@
  * @Description:  MySQL 基础知识学习，作为一个使用者的角度
 -->
 
-<!-- TOC -->
-
-- [1. MySQL 介绍](#1-mysql-介绍)
-  - [1.1. RDBMS（关系型数据库）](#11-rdbms关系型数据库)
-  - [1.2. 语句规范](#12-语句规范)
-  - [1.3. 安装操作](#13-安装操作)
-  - [1.4. 用户管理](#14-用户管理)
-  - [1.5. 密码与登录](#15-密码与登录)
-  - [1.6. 权限管理](#16-权限管理)
-  - [1.7. MySQL 配置文件](#17-mysql-配置文件)
-  - [1.8. MySQL 分层结构](#18-mysql-分层结构)
-  - [1.9. MySQL 部件](#19-mysql-部件)
-- [2. SQL 语句](#2-sql-语句)
-  - [2.1. 数值](#21-数值)
-  - [2.2. 日期和时间](#22-日期和时间)
-  - [2.3. 字符串](#23-字符串)
-  - [2.4. SHOW](#24-show)
-  - [2.5. USE](#25-use)
-  - [2.6. 数据库操作](#26-数据库操作)
-  - [2.7. 数据表操作](#27-数据表操作)
-    - [2.7.1. 创建数据表 (create)](#271-创建数据表-create)
-    - [2.7.2. 查看数据表 (show)](#272-查看数据表-show)
-    - [2.7.3. 删除数据表 (drop)](#273-删除数据表-drop)
-    - [2.7.4. 统计数据表](#274-统计数据表)
-    - [2.7.5. 修改数表 (alter)](#275-修改数表-alter)
-  - [2.8. 数据操作](#28-数据操作)
-    - [2.8.1. 插入数据 (insert)](#281-插入数据-insert)
-    - [2.8.2. 更新表数据 (update)](#282-更新表数据-update)
-    - [2.8.3. 删除表数据 (delete)](#283-删除表数据-delete)
-    - [2.8.4. 查询 (检索) 表数据(select)](#284-查询-检索-表数据select)
-      - [2.8.4.1. 子查询](#2841-子查询)
-      - [2.8.4.2. 连接](#2842-连接)
-- [3. Function(函数)](#3-function函数)
-  - [3.1. count](#31-count)
-  - [3.2. cancat](#32-cancat)
-  - [3.3. Rtrim](#33-rtrim)
-  - [3.4. LTrim](#34-ltrim)
-  - [3.5. Upper](#35-upper)
-- [4. 视图 (View)](#4-视图-view)
-    - [4.0.1. 视图创建](#401-视图创建)
-    - [4.0.2. 视图删除](#402-视图删除)
-- [5. 编码问题](#5-编码问题)
-- [6. 存储架构](#6-存储架构)
-  - [6.1. Engine](#61-engine)
-  - [6.2. table](#62-table)
-  - [6.3. index](#63-index)
-- [7. lock](#7-lock)
-- [8. transaction](#8-transaction)
-- [9. 文件](#9-文件)
-- [10. 数据的导入与导出](#10-数据的导入与导出)
-  - [10.1. 基础导入与导出](#101-基础导入与导出)
-  - [10.2. txt 文件导入和导出](#102-txt-文件导入和导出)
-- [11. References](#11-references)
-
-<!-- /TOC -->
-
 # 1. MySQL 介绍
 
 ## 1.1. RDBMS（关系型数据库）
@@ -123,59 +67,102 @@
 
   8.0 以上版本修改密码使用:
 
-  ```
+  ```sql
   ALTER user 'root'@'localhost' IDENTIFIED BY '你的密码';
-  ```
-
-  如：
-
-  ```
+  
+// 例子
   mysql> ALTER user 'root'@'localhost' IDENTIFIED BY '123456';
-  mysql> FLUSH PRIVILEGES;
+mysql> FLUSH PRIVILEGES;
   ```
+  
 
 ## 1.6. 权限管理
 
-- 刷新权限
+创建新用户
+
+```sql
+create user 'username'@'%' identified by '你的密码';
+```
+
+给指定的用户授予权限
+
+```sql
+GRANT ALL PRIVILEGES ON your_database.your_table TO 'username'@'host' identified by "password";
+
+权限类型
+- all privileges：所有权限。
+- select：读取权限。
+- delete：删除权限。
+- update：更新权限。
+- create：创建权限。
+- drop：删除数据库、数据表权限。
+
+// your_database 为 * 时，表示用户拥有所有库访问的权限
+// your_table 为 * 时，表示用户拥有某个库的所有表权限或者所有库的所有表权限
+
+// username@host表示授予的用户以及允许该用户登录的IP地址。其中Host有以下几种类型：
+- localhost：只允许该用户在本地登录，不能远程登录。
+- %：允许在除本机之外的任何一台机器远程登录。
+- 192.168.52.32：具体的IP表示只允许该用户从特定IP登录。
+```
+
+刷新权限
+
+```sql
+flush privileges;
+```
+查看用户拥有的权限
+
+```sql
+show grants for 'username';
+```
+
+取消用户权限
+
+```sql
+// 取消用户username对数据库your_database的所有权限
+REVOKE ALL PRIVILEGES ON your_database.* FROM 'username'@'localhost';
+```
+
+查看数据库中存在的用户
+
+```sql
+SELECT DISTINCT CONCAT('User:''',user,'''@''',host,''';') AS query FROM mysql.user;
+```
+
+查看数据的端口
+
+```sql
+show global variables like 'port';
+```
+
+显示当前用户
+
+```sql
+select user();
+```
+
+显示当前服务器版本
+
+```sql
+select version();
+```
+
+常用命令
+
+- 创建用户并授予指定数据库全部权限：适用于Web应用创建MySQL用户
 
   ```sql
-  flush privileges;
+  // 创建了用户zhangsan，并将数据库zhangsanDB的所有权限授予zhangsan。
+  create user zhangsan identified by 'zhangsan';
+  grant all privileges on zhangsanDb.* to zhangsan@'%' identified by 'zhangsan';
+  flush  privileges;
   ```
 
-- 创建新用户
+- 使zhangsan可以从本机登录，那么可以多赋予localhost权限：
 
   ```sql
-  create user '你的用户名'@'%' identified with mysql_native_password by '你的密码';
-  ```
-
-- 创建用户后并刷新权限
-
-  ```sql
-  GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' WITH GRANT OPTION;
-  ```
-
-- 查看数据库中存在的用户
-
-  ```sql
-  SELECT DISTINCT CONCAT('User:''',user,'''@''',host,''';') AS query FROM mysql.user;
-  ```
-
-- 查看数据的端口
-
-  ```sql
-  show global variables like 'port';
-  ```
-
-- 显示当前用户
-
-  ```sql
-  select user();
-  ```
-
-- 显示当前服务器版本
-
-  ```sql
-  select version();
+  grant all privileges on zhangsanDb.* to zhangsan@'localhost' identified by 'zhangsan';
   ```
 
 ## 1.7. MySQL 配置文件
@@ -679,6 +666,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 - from 型子查询：内层 SQL 查询的结果当成一张临时表，供外层的 SQL 再次查询。
 - exist 型子查询：把外层 SQL 查询的结果拿到内层 SQL 中去测试，如果内层 SQL 成立，则该行取出。
 - <font color=red> NULL 说用 </font>
+  
   > null 是一种类型，比较时只能用 `is null` 或 `is not null`; 碰见运算符时，一律返回为 null。使用 null 效率不高，影响索引的效果
 
 
@@ -895,10 +883,13 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 ## 10.1. 基础导入与导出
 `mysqldump` 导出固定条件的数据库
   - 导出整个数据库: `mysqldump -u 用户名 -p 数据库名 > 导出的文件名 `
+    
     > mysqldump -u wcnc -p smgp_apps_wcnc > wcnc.sql
   - 导出一个表: `mysqldump -u 用户名 -p 数据库名 表名 > 导出的文件名 `
+    
     > mysqldump -u wcnc -p smgp_apps_wcnc users> wcnc_users.sql
   - 导出一个数据库结构: `mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql`
+    
     > #-d 不导出数据只导出结构 --add-drop-table 在每个 create 语句之前增加一个 drop table
   - 批量导出多个数据库：`mysqldump  -u root -p --databases db_1 db_2`
 
