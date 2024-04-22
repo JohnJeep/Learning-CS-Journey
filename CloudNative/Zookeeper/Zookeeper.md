@@ -256,13 +256,15 @@ server.3=zoo3.example.com:2888:3888
 ## 12.2. 生产集群安装多少 zk 合适？
 安装奇数台。
 生产经验：
-⚫ 10 台服务器： 3 台 zk；
-⚫ 20 台服务器： 5 台 zk；
-⚫ 100 台服务器： 11 台 zk；
-⚫ 200 台服务器： 11 台 zk
+
+- 10 台服务器： 3 台 zk；
+- 20 台服务器： 5 台 zk；
+- 100 台服务器： 11 台 zk；
+-  200 台服务器： 11 台 zk
+
 服务器台数多：好处，提高可靠性；坏处：提高通信延时  
 
-# 13. 参考
+# 13. References
 
-[Zookeeper 入门介绍](https://xie.infoq.cn/article/edd698410f30cf4b8113e228d)
-
+- [Zookeeper 入门介绍](https://xie.infoq.cn/article/edd698410f30cf4b8113e228d)
+- [Centos7 离线安装 zookeeper 并设置服务开机自启 实践笔记](https://cloud.tencent.com/developer/article/1913682)
