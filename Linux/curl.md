@@ -1,8 +1,40 @@
-## API
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-05-10 09:36:06
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2024-03-31 16:27:25
+ * @Description: curl 用法
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. Curl](#1-curl)
+  - [1.1. API](#11-api)
+    - [`CURLcode curl_global_init(long flags);`](#curlcode-curl_global_initlong-flags)
+    - [1.1.2. `void curl_global_cleanup(void);`](#112-void-curl_global_cleanupvoid)
+    - [1.1.3. `char *curl_version( );`](#113-char-curl_version-)
+- [2. The Easy interface](#2-the-easy-interface)
+    - [2.0.1. `CURL *curl_easy_init( );`](#201-curl-curl_easy_init-)
+    - [2.0.2. `void curl_easy_cleanup(CURL *handle);`](#202-void-curl_easy_cleanupcurl-handle)
+    - [2.0.3. `CURLcode curl_easy_setopt(CURL *handle, CURLoption option, parameter);`](#203-curlcode-curl_easy_setoptcurl-handle-curloption-option-parameter)
+    - [2.0.4. `CURLcode curl_easy_perform(CURL *handle);`](#204-curlcode-curl_easy_performcurl-handle)
+  - [2.2. Multi interface](#22-multi-interface)
+  - [2.3. multi-socket interface](#23-multi-socket-interface)
+- [3. The primary structs](#3-the-primary-structs)
+  - [3.1. 命令参数](#31-命令参数)
+- [4. References](#4-references)
+
+
+# 1. Curl 
+
+linux curl 是一个利用 URL 规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称 url为下载工具。
+
+
+## 1.1. API
 
 `/usr/include/curl/curl.h` 中。
 
-### CURLcode curl_global_init(long flags);
+
+### `CURLcode curl_global_init(long flags);`
 
 描述：
 这个函数只能用一次。(其实在调用curl_global_cleanup 函数后仍然可再用)
@@ -15,15 +47,19 @@ CURL_GLOBAL_SSL  //初始化支持 安全套接字层。
 CURL_GLOBAL_WIN32 //初始化win32套接字库。
 CURL_GLOBAL_NOTHING   //没有额外的初始化。
 
-### void curl_global_cleanup(void);
+### 1.1.2. `void curl_global_cleanup(void);`
 
 描述：在结束libcurl使用的时候，用来对curl_global_init做的工作清理。类似于close的函数。
 
-### char *curl_version( );
+
+### 1.1.3. `char *curl_version( );`
 
 描述: 打印当前libcurl库的版本。
 
-# The Easy interface
+
+
+
+# 2. The Easy interface
 
 同步接口。
 
@@ -40,22 +76,21 @@ curl_easy_getinfo()
 Easy 接口使用的步骤：
 
 - Create easy handle for transfer
-
 - Set options for transfer
-
 - Perform transfer
-
 - Cleanup after transfer
 
 
 
-### CURL *curl_easy_init( );
+### 2.0.1. `CURL *curl_easy_init( );`
 
 描述:
 curl_easy_init用来初始化一个CURL的指针(有些像返回FILE类型的指针一样). 相应的在调用结束时要用curl_easy_cleanup函数清理.
 一般curl_easy_init意味着一个会话的开始. 它的返回值一般都用在easy系列的函数中.
 
-### void curl_easy_cleanup(CURL *handle);
+
+
+### 2.0.2. `void curl_easy_cleanup(CURL *handle);`
 
 描述:
 这个调用用来结束一个会话.与curl_easy_init配合着用. 
@@ -63,7 +98,8 @@ curl_easy_init用来初始化一个CURL的指针(有些像返回FILE类型的指
 参数:
 CURL类型的指针.
 
-### CURLcode curl_easy_setopt(CURL *handle, CURLoption option, parameter);
+
+### 2.0.3. `CURLcode curl_easy_setopt(CURL *handle, CURLoption option, parameter);`
 
 描述: 这个函数最重要了.几乎所有的curl 程序都要频繁的使用它.
 它告诉curl库，程序将有如何的行为。比如要查看一个网页的html代码等.
@@ -76,14 +112,16 @@ CURL类型的指针.
 
 CURLoption 这个参数的取值很多.具体的可以查看man手册.
 
-### CURLcode curl_easy_perform(CURL *handle);
+
+
+### 2.0.4. `CURLcode curl_easy_perform(CURL *handle);`
 
 描述:这个函数在初始化CURL类型的指针 以及curl_easy_setopt完成后调用. 就像字面的意思所说perform就像是个舞台.让我们设置的
 option 运作起来.
 
-## 
 
-## Multi interface
+
+## 2.2. Multi interface
 
 异步接口。
 
@@ -105,15 +143,13 @@ option 运作起来.
 
 
 
-## multi-socket interface
+## 2.3. multi-socket interface
 
-# The primary structs
-
-
+# 3. The primary structs
 
 
 
-## 命令
+## 3.1. 命令参数
 
 ```ini
 -a/–append    上传文件时，附加到目标文件
@@ -216,12 +252,11 @@ option 运作起来.
 -Y/–speed-limit    停止传输速度的限制，速度时间
 ```
 
-# References
 
+
+# 4. References
+- offical curl docs: https://curl.se/docs/
 - Everything curl: https://everything.curl.dev/
-
-- 官方 curl docs: https://curl.se/docs/
-
 - [libcurl programming tutorial]([libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html))
 - [libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html)
 - [curl_easy_setopt的基本选项解析 ](https://blog.csdn.net/whui19890911/article/details/79247062)
