@@ -1,4 +1,13 @@
-# 介绍
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-01-27 17:21:53
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2024-03-31 16:19:28
+ * @Description: linux curses 用法
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+-->
+
+# 1. 介绍
 
 [ncurses](https://link.zhihu.com/?target=http%3A//www.gnu.org/software/ncurses/ncurses.html)(new curses)是一套编程库，它提供了一系列的函数以便使用者调用它们去生成基于文本的用户界面。
 ncurses名字中的**n**意味着“new”，因为它是**curses**的自由软件版本。由于AT&T“臭名昭著”的版权政策，人们不得不在后来用ncurses去代替它。
@@ -11,27 +20,27 @@ ncurses是[GNU计划](https://link.zhihu.com/?target=https%3A//en.wikipedia.org/
 - lynx
 - screen
 
-# 安装
+# 2. 安装
 
-## Ubuntu 中安装 curses
+## 2.1. Ubuntu 中安装 curses
 
 ```
 sudo apt-get install libncurses5-dev
 ```
 
-## centos 中安装 curses
+## 2.2. centos 中安装 curses
 
 ```
 yum install ncurses-devel
 ```
 
-## 源码安装 ncurse 库
+## 2.3. 源码安装 ncurse 库
 
 下载地址：http://ftp.gnu.org/pub/gnu/ncurses/
 
 
 
-# 案例
+# 3. 案例
 
 示例：生成一个基于文本的图像化界面。
 
@@ -59,6 +68,6 @@ int main(int argc,char* argv[]){
 
 
 
-# References
+# 4. References
 
 - https://www.cnblogs.com/memoryXudy/p/10830548.html
