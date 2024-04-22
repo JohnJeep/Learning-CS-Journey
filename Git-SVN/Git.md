@@ -7,65 +7,19 @@
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
 
-<!-- TOC -->
-
-- [1. Git Command](#1-git-command)
-  - [1.1. Git init](#11-git-init)
-  - [1.2. Git add](#12-git-add)
-  - [1.3. Git log](#13-git-log)
-  - [1.4. Git tag](#14-git-tag)
-  - [1.5. Git alias](#15-git-alias)
-  - [1.6. Git checkout](#16-git-checkout)
-  - [1.7. Git commit](#17-git-commit)
-  - [1.8. Git diff](#18-git-diff)
-  - [1.9. Git stash](#19-git-stash)
-  - [1.10. Git blame](#110-git-blame)
-  - [1.11. Git bisect](#111-git-bisect)
-  - [1.12. Git rebase](#112-git-rebase)
-  - [1.13. Git revert](#113-git-revert)
-  - [1.14. Git Reset](#114-git-reset)
-  - [1.15. Remove or Restore](#115-remove-or-restore)
-    - [1.15.1. remove](#1151-remove)
-    - [1.15.2. restore](#1152-restore)
-  - [1.16. other command](#116-other-command)
-- [2. Git Branch](#2-git-branch)
-  - [2.1. Local repo branch](#21-local-repo-branch)
-  - [2.2. Remote repo branch](#22-remote-repo-branch)
-  - [2.3. Branches Principle](#23-branches-principle)
-  - [2.4. Branches conflict](#24-branches-conflict)
-    - [2.4.1. Git rebase](#241-git-rebase)
-    - [2.4.2. Git merge](#242-git-merge)
-- [3. Git Area](#3-git-area)
-  - [3.1. Workspace](#31-workspace)
-  - [3.2. Index](#32-index)
-  - [3.3. Local repository](#33-local-repository)
-  - [3.4. Remote repository](#34-remote-repository)
-    - [3.4.1. Git remote](#341-git-remote)
-    - [3.4.2. Git pull \&\& Git fetch](#342-git-pull--git-fetch)
-    - [3.4.3. Remote and local repository](#343-remote-and-local-repository)
-- [4. Git Config](#4-git-config)
-- [5. Git Proxy](#5-git-proxy)
-- [6. 提交代码总结](#6-提交代码总结)
-  - [6.1. 第一次提交](#61-第一次提交)
-  - [6.2. 不是第一次提交](#62-不是第一次提交)
-- [7. Git 常用命令](#7-git-常用命令)
-- [8. References](#8-references)
-
-<!-- /TOC -->
-
-# 1. Git Command
+# Git Command
 
 
-## 1.1. Git init
+## Git init
 - `git init` 初始化一个 Git 仓库
 
 
-## 1.2. Git add
+## Git add
 - `git add <file>` 添加文件到暂存区
 - `git add -p(patch)` 依次存储每一个文件的改动，包括文件中做的哪些些改动
 
 
-## 1.3. Git log
+## Git log
 - `git log` 查看历史记录。按提交时间列出所有的更新，最近的更新排在最上面。显示的有 HASH 散列码、提交日期、提交的注释等。
   - `HEAD` 表示当前版本，下标从零开始。
   - `HEAD^` 上一个版本就是，`HEAD^^` 上上一个版本就是, 当然往上 100 个版本写 100 个 ^ 比较容易数不过来，所以写成 `HEAD~100`
@@ -94,7 +48,7 @@
 - `git show` 显示最后一次文件改变的具体内容
 
 
-## 1.4. Git tag
+## Git tag
 Git tag 有两种类型。
 - 轻量标签（lightweight）：很像一个不会改变的分支——它只是一个特定提交的引用。
   - 本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。
@@ -116,11 +70,11 @@ Git tag 有两种类型。
   > 注意： 会导致仓库处于分离头指针 (detacthed HEAD) 状态. 在 “分离头指针” 状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。
 
 
-## 1.5. Git alias
+## Git alias
 - `git config --global alias.unstage 'reset HEAD --'`  给取消暂存取一个别名
 
 
-## 1.6. Git checkout
+## Git checkout
 切换或者创建新分支
 - `git checkout  <new_branch_name>`   切换到 new_branch_name 分支下
 - `git branch Develop`  新建 Develop 分支
@@ -139,7 +93,7 @@ Git tag 有两种类型。
   - `git checkout Develop -- readme.txt`  将对应分支中的文件 (readme.txt) 还原到当前分支 (Develop) 的工作区
 
 
-## 1.7. Git commit
+## Git commit
 ```sh
 参数项
   pick 使用这个参数，commit 信息什么都不用做。
@@ -167,7 +121,7 @@ Git tag 有两种类型。
 Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-convertion.md) 文档。
 
 
-## 1.8. Git diff
+## Git diff
 执行 `Git diff` 命令后，显示的结果分析：
 > 执行命令之后，绿色部分代表增加的内容，红色部分代表删除的内容，
 >
@@ -195,7 +149,7 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
     ```
 
 
-## 1.9. Git stash
+## Git stash
 - Git 提供了一个 `stash` 功能，把当前工作现场” 储藏” 起来，等以后恢复现场后继续工作：`git stash`，去解决 Bug 问题。
 - `git stash list` ：查看所有已存储的工作现场 。
 - Git 把 `stash` 内容存在某个地方了，需要恢复存储的内容，有两个办法
@@ -203,7 +157,7 @@ Git commit 提交规范：请参考 [Git-commit-convertion.md](./Git-commit-conv
   2. 用 `git stash pop`，恢复的同时把 `stash` 内容也删了。
 
 
-## 1.10. Git blame
+## Git blame
 在 Git 中，`blame` 是一个命令，用于查看文件的每一行是由哪个提交引入的。它可以帮助你确定代码中每个行的作者和最后修改的时间。
 
 `git blame` 的基本用法如下：
@@ -235,11 +189,11 @@ git blame <file>
 这些只是 `git blame` 的基本用法和一些常见选项，还有其他更高级的用法，你可以查看 Git 的官方文档或运行 `git blame --help` 来获取更多详细信息。
 
 
-## 1.11. Git bisect
+## Git bisect
 找到某个 bug 是哪次 commit 的。
 
 
-## 1.12. Git rebase
+## Git rebase
 Rebase 官方翻译为 “变基”，我觉得翻译为 **重新改变基准** 更为合适。`git rebase` 和 `git merge` 都可以用于分支的合并，但使用 `git rebase` 合并的分支，提交（commit）信息是线性的，因为它会清除当前分支提交（commit）的版本历史信息，只选择保留最后一次的提交信息；而 `merge` 是把不同分支的最终结果合并在一起。
 
 总结下，`git rebase` 有两个功能
@@ -247,10 +201,10 @@ Rebase 官方翻译为 “变基”，我觉得翻译为 **重新改变基准** 
 2. 分支合并时，让合并的分支更简洁，只选择保留最后一次的提交信息，线性显示提交的记录，观察起来更优美。
 
 
-## 1.13. Git revert
+## Git revert
 
 
-## 1.14. Git Reset
+## Git Reset
 `git reset` 命令是 Git 提供的后悔药之一，它可以帮我们把内容恢复到指定的 `commit` 提交版本。
 
 `reset` 翻译成中文有 **重置** 的意思，恰如起名，`git reset` 命令可以重置当前分支所指向提交的位置。使用 `git reset` 命令后 `commit ` 提交信息依然存在，只是当前分支所指向的 `commit` 提交进行了重置，分支所指向的新 `commit` 提交之后的提交就像消失了一样（`git log` 无法查询到）。
@@ -269,12 +223,12 @@ Rebase 官方翻译为 “变基”，我觉得翻译为 **重新改变基准** 
 <font color=red> 注意 </font>
 > 假如 `commit` 已经被 `push` 到远程仓库上，那么其他开发人员可能会基于对应的 `commit` 提交进行开发产生新的 `commit`，如果此时进行 `reset` 操作，会造成其他开发人员的提交历史丢失，这可能会产生严重后果。
 
-## 1.15. Remove or Restore
+## Remove or Restore
 
 文件的删除与重新存储文件。
 
 
-### 1.15.1. remove
+### remove
 - `rm` 删除命令，指令前面不加 `git`
   
   删除本地目录文件，不会删除提交到暂存区的文件。例如：`rm filename`
@@ -298,7 +252,7 @@ git push origin master --force
 ```
 
 
-### 1.15.2. restore
+### restore
 恢复工作区中被删除的文件
 - `rm` 指令只是将工作区中的文件删除，已提交到暂存区中的文件依然存在。此时想要恢复被 `rm` 指令删除的文件，只要将暂存区内容恢复到工作区即可。
 - `git checkout filename` ：恢复误删除的单个文件
@@ -313,16 +267,17 @@ git push origin master --force
 > 当然不是，如果你把 `.gti` 目录删除了，那肯定是无法再恢复。实质上，之所以能将删除的文件恢复，因为在 `.git` 目录中有备份，`Git` 会将 **暂存区** 或者 **历史提交** 中内容来恢复。
 
 
-## 1.16. other command
+## other command
 - `git gc`: 清理不必要的文件并优化本地存储库（Cleanup unnecessary files and optimize the local repository）。
 - `git count-objects -v`: 计算未打包的对象数量及其磁盘消耗（Count unpacked number of objects and their disk consumption）。
 - `git update`: windows 下更新 git，使用命令 `git update-git-for-windows`
 
 
-# 2. Git Branch
+# Git Branch
 
 
-## 2.1. Local repo branch
+## Local repo branch
+
 本地仓库分支常用命令
 
 - `git branch` 只查看本地仓库分支。
@@ -346,7 +301,7 @@ git push origin master --force
 - `git stash apply stash_name` 使用之前某次存储的文件
 
 
-## 2.2. Remote repo branch
+## Remote repo branch
 远程仓库分支常用命令
 
 - `git branch --remote` 查看远程仓库分支
@@ -378,7 +333,7 @@ experiment
 4. 将新本地分支和远程相连： `git branch --set-upsteam-to origin / 新分支名 `
 
 
-## 2.3. Branches Principle
+## Branches Principle
 <font color="red">Git 中的分支只是指向提交对象之一的轻量级可移动指针。</font>
 
 Git 是怎么创建新分支的呢？ 很简单，它只是为你创建了一个可以移动的新的指针。 比如，创建一个 testing 分支， 你需要使用 git branch 命令：
@@ -415,7 +370,7 @@ Git 创建一个分支很快，因为除了增加一个 `testing` 指针，改�
 合并完分支后，甚至可以删除 `testing` 分支。删除 `testing` 分支就是把 `testing` 指针给删掉，删掉后，我们就剩下了一条 `master` 分支：
 
 
-## 2.4. Branches conflict
+## Branches conflict
 为什么会产冲突？
 - 两个分支中修改了相同的文件。**注意：** 两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将这两部分合并。
 - 两个分支中修改了同一个文件的名称
@@ -423,7 +378,7 @@ Git 创建一个分支很快，因为除了增加一个 `testing` 指针，改�
 采用 `Git rebase` 与 `git merge` 进行解决
 
 
-### 2.4.1. Git rebase
+### Git rebase
 - 合并多次提交纪录
   例如：合并前 4 次提交的记录 `git rebase -i HEAD~4`，合并的 commit 不能是已经 push 到远程仓库的记录。
   
@@ -433,22 +388,22 @@ Git 创建一个分支很快，因为除了增加一个 `testing` 指针，改�
 已经推送到 github 远程仓库的文件（多人开发的重要分支）不要使用 `git rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
 
 
-###  2.4.2. Git merge
+### Git merge
+
 默认情况下，Git 执行 "快进式合并"（fast-farward merge），会直接将 Master 分支指向 Develop 分支。使用 `--no-ff`  参数，用普通模式合并，在 master 主分支上生成一个新的节点。可以在分支历史上看哪些曾经做过哪些的合并；而 `fast forward` 合并，则没有合并操作的记录，会丢掉分支信息。
 
-```shell
+```bash
 git merge --no-ff -m "merge with no-ff" dev
 ```
 
 两个分支合并时，将一个分支的变更集成到另一个分支上。其中分支合并的语法如下
-```shell
-git merge 要合并进来的分支名 --strategy = 合并策略
 
-# 简写
+```bash
+git merge 要合并进来的分支名 --strategy = 合并策略
 git merge 要合并进来的分支名 --s = 合并策略
 ```
 
- 合并策略可以省略。Git  merge 有很多的合并策略。其中常见的是 `Fast-forward`、`Recursive` 、`Ours`、`Theirs`、`Octopus`。 Git 默认会帮你自动挑选合适的合并策略，如果你需要强制指定，使用 `git merge -s <策略名字>` 即可。
+合并策略可以省略。Git  merge 有很多的合并策略。其中常见的是 `Fast-forward`、`Recursive` 、`Ours`、`Theirs`、`Octopus`。 Git 默认会帮你自动挑选合适的合并策略，如果你需要强制指定，使用 `git merge -s <策略名字>` 即可。
 
 ```shell
 fast-forward
@@ -471,10 +426,10 @@ resolve
 - 手动解决冲突，提交（commit）信息。
 - 合并冲突，将远程仓库与本地仓库合并 `git merge origin master`
 
-> Git **合并分支** 很快！就改改指针，工作区内容不变！
+> Git **合并分支** 很快！就改改指针，工作区内容不变。
 
 
-# 3. Git Area
+# Git Area
 <div align="center">
 <img  src="./figure/四区过程.png" style="zoom: 50%;" />
 </div>
@@ -486,7 +441,8 @@ Git 与 GitHub 使用，有**四个区**，需要理解。
 - `Remote repository`：名为远程仓库，是远程服务器存放代码的地方。
 
 
-## 3.1. Workspace
+## Workspace
+
 Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你电脑存放代码的地方。
 
 <div align="center">
@@ -497,7 +453,8 @@ Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你�
 工作区目录下的每一个文件只有两种状态：已跟踪（tracked：添加到暂存区）或未跟踪（untracked：没有添加都暂存区）。
 
 
-## 3.2. Index
+## Index
+
 在工作区路径下打开终端执行 `git init` 指令后，工作区内生成一个 `.git` 的文件，默认情况下，该文件的属性是隐藏的，不可见。**暂存区** 就是 `.git` 目录下有一个 `index` 文件，这个 `index` 中文翻译为 ` 暂存区 `，它是 **指向** 文件的一个索引。而真正的文件是存储在 `.git/objects` 目录中。
 
 当删除 **暂存区** 内容时，其实就是删除 `index` 文件中的内容，但 `.git/objects` 目录中的内容不会被删除。
@@ -507,10 +464,9 @@ Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你�
 </div>
 
 
-   
 1. Git 清空暂存区
 - 暂存区实质是 `.git` 目录下的 `index` 文件，只要将此文件删除，那么暂存区就被清空。可用这条命令来将暂存区中的内容清空 `rm .git /index` 。
-   
+  
   暂存区存在的必要性
    - 有些朋友感觉暂存区多余，其实并非如此，通过这个过渡性区域可以使提交更加条理，避免无用琐碎提交。
    - 暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支中的版本库中。
@@ -527,7 +483,8 @@ Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你�
    ```
 
 
-## 3.3. Local repository
+## Local repository
+
 Git 本地版本库是 `Git` 用来保存项目的元数据和对象数据库的地方。从其它计算机克隆仓库时，拷贝的就是这里的数据。
 
 工作目录下有一个默认隐藏的目录 `.git`，它并不属于工作目录，而是 Git 的本地版本库（Repository）。而版本库中内容很多，并且都很重要，有两个是我们实际操作中经常要遇到的，那就是暂存区（`index`）和分支（`branch`）。
@@ -544,23 +501,29 @@ Git 清空版本库
 - `git init`    重新初始化一个全新的版本库
 
 
-## 3.4. Remote repository
+## Remote repository
 
 
-### 3.4.1. Git remote
+### Git remote
+
 - `git remote -v` 显示远程仓库的别名和对应的 URL。
 - `git remote show remote_name` 查看某个远程仓库。
 - `git remote rename old_name new_name` 重命名原仓库名字。
 - `git remote rm remote_name` 移除一个远程仓库。
 - `git remote add <alias_name> <url>` 本地仓库与仓库地址为 URL，别名为 `alias_name` 的远程仓库进行关联。
 - 有些分支在远程其实早就被删除了，但是在你本地依然可以看见这些被删除的分支，可用下面的命令删除远程服务器上不再存在的远程分支引用。
-  ```bash
+
+  ```shell
+  #  删除本地仓库中已经不存在的远程分支引用
   git remote prune origin
+
+  # 更新远程分支信息并清理不存在的分支引用，保持本地仓库和远程仓库的同步。
   git remote update --prune
   ```
 
 
-### 3.4.2. Git pull && Git fetch
+### Git pull && Git fetch
+
 - `git pull`: 将远程仓库上当前分支的数据抓取到本地仓库，并自动合并远程分支与本地仓库的分支，`git pull` 相当于 `git fetch` 和 `git merge` 两步操作的叠加。
 - `git fetch`: 将远程仓库上当前分支的数据抓取到本地仓库，不修改本地仓库中的内容，需要自己手动进行合并。
 - `git fetch <远程仓库名> < 分支名 > : < 目标分支 >`
@@ -570,7 +533,8 @@ Git 清空版本库
   - `git push origin main : main` 将本地 main 分支中的数据推送到远程 origin 仓库的 main 分支上。若后面不指定 `: <远程分支名>`，git 会默认将当前本地的分支提交到远程仓库的默认分支中。
 
 
-### 3.4.3. Remote and local repository
+### Remote and local repository
+
 **远程仓库与本地的关联。**
 
 - `git remote add origin   git@github.com:michaelliao/learngit.git` 将本地仓库添加到远程 Git 仓库，默认别名为 `origin`
@@ -584,7 +548,7 @@ Git 清空版本库
   - git 不但会把本地的 `master` 分支内容推送的远程新的 `master` 分支，还会把本地的 `master` 分支和远程的 `master` 分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
 
-# 4. Git Config
+# Git Config
 - 配置项目或某个仓库的用户名和密码，该配置位于 `.git` 路径下的 `config` 文件中。
   ```bash
   git config --local user.name xxxxx
@@ -627,7 +591,7 @@ Git 清空版本库
   - [官网 Git 工具 - 凭证存储](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8)
 
 
-# 5. Git Proxy
+# Git Proxy
 只对 github 进行代理，不影响国内的仓库
 
 ```bash
@@ -654,10 +618,10 @@ Windows 下修改 Host 文件
 ```
 
 
-# 6. 提交代码总结
+# 提交代码总结
 
 
-## 6.1. 第一次提交
+## 第一次提交
 1. `git init`  初始化
 2. `git add README.md`   提交到暂存库
 3. `git commit -m "first commit"`   为提交的文件添加注释说明
@@ -665,13 +629,14 @@ Windows 下修改 Host 文件
 5. `git push -u origin master`      本地库的所有内容推送到远程库上
 
 
-## 6.2. 不是第一次提交
+## 不是第一次提交
+
 1. `git add README.md`  提交到暂存库
 2. `git commit -m "first commit"`   为提交的文件添加注释说明
 3. `git push origin master` 本地库的所有内容推送到远程库上
 
 
-# 7. Git 常用命令
+# Git 常用命令
 - `git init` 初始化一个 Git 仓库 。
 - `git add <file>` 添加文件到暂存区。
 - `git add -p(patch)` 依次存储每一个文件的改动，包括文件中做的哪些改动。
@@ -686,7 +651,7 @@ Windows 下修改 Host 文件
 - `git help <verb>` 查看帮助，verb 为 Git 的关键字。
 
 
-# 8. References
+# References
 **官方手册**
 
 - [git-scm.com](https://git-scm.com/docs): Git 官方参考手册。
@@ -708,7 +673,6 @@ Windows 下修改 Host 文件
 ---
 
 Git branch
-
 - 彻底搞懂 Git-Rebase: http://jartto.wang/2018/12/11/git-rebase/
 - [Git 冲突与解决方法](https://www.cnblogs.com/gavincoder/p/9071959.html)
 - [Git 分支合并冲突解决](https://www.cnblogs.com/shuimuzhushui/p/9022549.html)
