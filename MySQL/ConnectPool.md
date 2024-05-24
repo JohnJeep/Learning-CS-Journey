@@ -138,9 +138,10 @@
 
 # Reference
 
-- [C++实现MySQL数据库连接池](https://blog.csdn.net/qq_29108585/article/details/78178232)
-- [基于 C++11 的数据库连接池](https://subingwen.cn/cpp/dbconnectionPool)
-- [MySQL API 使用详解](https://subingwen.cn/mysql/mysql-api/)
-- 自己动手实现数据库连接池：https://blog.csdn.net/deginch/article/details/70059409
-- C/C++数据库连接池项目：https://blog.51cto.com/BugMaker/5588483
+1. [C++实现MySQL数据库连接池](https://blog.csdn.net/qq_29108585/article/details/78178232)
+2. [基于 C++11 的数据库连接池](https://subingwen.cn/cpp/dbconnectionPool)
+3. [MySQL API 使用详解](https://subingwen.cn/mysql/mysql-api/)
+4. 自己动手实现数据库连接池：https://blog.csdn.net/deginch/article/details/70059409
+5. C/C++数据库连接池项目：https://blog.51cto.com/BugMaker/5588483
+6. [MySQL Connection Handling and Scaling](https://dev.mysql.com/blog-archive/mysql-connection-handling-and-scaling/)
 
