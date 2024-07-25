@@ -187,6 +187,8 @@
 - [GIF 动画](https://ezgif.com/)：GIF 动画制作网站。推荐指数：⭐⭐⭐
 - [bigjpg](https://bigjpg.com/) 利用深度学习支持图片无损放大。
 - [photomosh](https://photomosh.com/) 炫酷的图片制作。推荐指数：⭐⭐
+- 可批量编辑图片 的所有工具：https://www.iloveimg.com/zh-cn
+- 知乎微信编辑器推荐：https://zhuanlan.zhihu.com/p/108676805
 
 
 
@@ -229,11 +231,13 @@
 2. [Booksee](http://en.booksee.org/): 下载最新的电子图书。
 3. [Library Genesis2M](http://gen.lib.rus.ec/) : 适合下载较新的论文, 只要是外文书籍和论文基本上都可以搜到并下载，最近几年的论文也可以下载 `
 4. [sci-hub](https://mg.scihub.ltd/): Sci-Hub 是一个在线数据库，其上提供 7600 万篇科学学术论文和文章.
+    
     > 适合下载最新的论文, 文献资源下载网站 https://scihub.org / 是哈萨克斯坦牛人 (Alexandra Elbakyan) 开发的可以下载任意谷歌上有电子版链接文献杂志的网站，只要输入你想要下载的文献链接就可以获取到该文献的真实地址并在线浏览，当然更重要的是可以下载。这个是俄罗斯的某黑客给弄的. 原理好像是类似于 RVPN, 借用有权限的学校的 IP 给我们下载相关文献. 适用于所有杂志, 只有极少数的还是不能下载
 5. [google 学术网](https://scholar.google.com/)
 6. [国内可以山寨访问 Google](https://github.com/greatfire/wiki)
 7. [中国版 sci-hub](http://www.sci-hub.ac.cn/): 国外文献免费下载，中国版 SCI-HUB 网址
 8.  [videolectures](http://videolectures.net/) : VideoLectures.net 是世界上最大的英文学术网络视频，中文最大的是超星学术视频，需要校园网权限，可以观看最新学术演讲或 PHD 答辩视频。
+    
     > 它的总部设在斯洛文尼亚的约瑟夫斯蒂芬研究所。网站最初是提供计算机科学的视频，后来拓宽到各类学科。自 2006 年以来，已有 10763 个人的 14251 视频讲座资源库。它提供众多免费教学视频，分类广阔，包括了各种自然科学（数学，物理，化学，生物、医学等）、社会科学（商学、哲学、体育等），高质量交流论坛为广大用户提供高质量学习内容。VideoLectures.NET 是一个自由和开放接入教育视频讲座库。包括高校的学术演讲或者 PhD 答辩。这些讲座是由学者在会议，暑期学校，讲习班和科学的许多领域的科学宣传活动。这些讲座都是很前沿的方向的很深入的学术讨论，对不是那个行业方向的人来说很难明白。网站是关于各个领域研究方向的报告视频及 slides，其中不乏很多数据挖掘、机器学习方面的讲解视频，Slides(也就是 ppt) 可以下载
 9. [ScienceHUβ](https://scihub.org/): ScienceHUβ是一家全球性的科学技术出版商，可免费提供研究文章和最新研究信息，而对科学界没有任何障碍。
 
@@ -262,7 +266,7 @@
 - [资源帝](http://bizhi.ziyuandi.cn/)
 
 
-# 18. 写作
+# l18. 写作
 1. 排版
    1. [Github 中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
    2. [写给大家看的中文排版指南](https://zhuanlan.zhihu.com/p/20506092)
@@ -272,6 +276,7 @@
 3. markdown 发布到公众号之前，采用的排版工具
    1. 墨滴：https://mdnice.com
    2. markdown.com.cn: https://markdown.com.cn/editor/  提供模板选择和 CSS 样式微调，一键把外链转成备注信息。
+   3. 一款高度简洁的微信 Markdown 编辑器：https://doocs.github.io/md/
 4. 博客网站搭建
    1. 在线阅读网站，基于 vuepress，采用主题 [vuepress-theme-hope](https://github.com/vuepress-theme-hope/vuepress-theme-hope)
    2. hexo: https://hexo.io/zh-cn <br>
@@ -281,8 +286,8 @@
 7. 代码片段转化为图片：https://carbon.now.sh
 8. 配色方案：https://coolors.co
 9.  配图
-    4. 知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
-    2. [图片](#12-图片)
+    	1. 知乎技术文章配图指南：https://zhuanlan.zhihu.com/p/96880688
+     	2. [图片](#12-图片)
 
 
 

@@ -135,7 +135,6 @@ c++ 是一种倾向于系统编程的通用编程语言，在 C 语言的基础�
   sizeof(nums) / sizeof(int) 
   ```
 
-  
 - 指针
   - 所有的指针都要初始化
   - `int *ptr`  整型指针，结果是一个值
@@ -189,8 +188,9 @@ C++的命名空间
   using uint64 = unsigned long long;
   ```
   
+
 C++编译器不支持使用 `typedef` 关键词为**模板类**设置别名，但是使用 `using` 的方式声明一个关键词却是允许的，只是这个是 C++11 标准才有的，如果在编译时不加上 `--std=c++11` 使用新的标准的话，编译器一样会报错。
-  
+
 - 优美的命名空间名积累
   - internal
   - metal
@@ -497,6 +497,7 @@ struct Widget
   - 当类的成员中有指针时，如果采用简单的浅拷贝，则两类中的两个指针将指向同一个地址，当对象快结束时，会调用两次析构函数，而导致指针悬挂现象，因此必须要用深拷贝。
 
   
+
 参考
   - [c++拷贝构造函数详解](https://www.cnblogs.com/alantu2018/p/8459250.html)
 
@@ -1039,7 +1040,7 @@ c2.func(c1);   // 采用友元的方式实现，通过对象参数访问私有�
 
 
 # 20. smart pointer(智能指针)
-C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `unique_ptr`。而所有的智能指针都被封装在标准库的 `<memory>` 头文件中，要使用智能指针必须引入 `#include <memory>` 头文件。
+自 C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `unique_ptr`。而所有的智能指针都被封装在标准库的 `<memory>` 头文件中，要使用智能指针必须引入 `#include <memory>` 头文件。
 
 
 ## 20.1. 为什么要使用智能指针？
@@ -1047,7 +1048,7 @@ C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `
   - 忘记释放内存，会造成内存泄漏
   - 有指针引用内存的情况下，释放了内存，产生引用非法内存的指针。
 - 需要更加安全的来管理动态内存。动态内存分配常用 `new` 和 `delete` 来分配内存。不使用 smart pointer 时，用动态内存分配时，可能会忘记 delete，导致内存泄漏；也可以使用异常捕获，但是会导致代码比较臃肿，不易阅读和维护。因此智能指针可以很好的解决这个问题。
-- 负责自动释放所指向对象的内存资源。智能指针就是一个类（class），当超出了类的作用域时，类会自动调用析构函数，释放资源。
+- 负责自动释放所指向对象的内存资源。智能指针就是一个类（class），当智能对象超出了类的作用域时，类会自动调用析构函数，释放资源。
 
 
 ## 20.2. 智能指针原理
@@ -1061,7 +1062,7 @@ C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `
 
 ## 20.4. auto_ptr
 - auto_ptr 智能指针采用所有权模式。
-- 已被C++11弃用，潜在内存崩溃问题。
+- 已被 C++11弃用，潜在内存崩溃问题。
 - 存在非法的申请内存时，在编译期时可能通过，但程序在运行时可能会出错。
 
 
@@ -1079,7 +1080,8 @@ C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `
 ### 20.5.3. 初始化
 unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数中初始化、移动构造函数中初始化 `std::move()`、采用 `reset()` 成员函数进行初始化。
 
-- unique_ptr 不允许执行 copy(拷贝) 和 assignment(赋值) 操作。但是可以用 `std::move()` 语义将对象的拥有权转移。
+- **unique_ptr 不允许执行 copy(拷贝) 和 assignment(赋值) 操作**。但是可以用 `std::move()` 语义将对象的拥有权转移。
+  
   ```cpp
   // initialize a unique_ptr with a new object
   std::unique_ptr<ClassA> up1(new ClassA);
@@ -1089,9 +1091,9 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
   
   // assign the unique_ptr, transfer ownership from up1 to up3
   std::unique_ptr<ClassA> up3(std::move(up1));    // OK
-  ```
-
-- 当程序试图将一个 unique_ptr 赋值给另一个时，如果源 unique_ptr 是个临时右值，编译器允许这么做；如果源 unique_ptr 将存在一段时间，编译器将禁止这么做。
+```
+  
+- 当程序试图将一个 `unique_ptr` 赋值给另一个时，如果源 `unique_ptr` 是个临时右值，编译器允许这么做；如果源 `unique_ptr` 将存在一段时间，编译器将禁止这么做。
   ```cpp
   unique_ptr<string> pu1(new string ("hello world")); 
   unique_ptr<string> pu2; 
@@ -1100,8 +1102,10 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
   pu3 = unique_ptr<string>(new string ("You"));   // 允许
   ```
 - 想要执行 ` pu2 = pu1;` 的操作，又要保证指针的安全。可以用C++有一个标准库函数 `std::move()`，让你能够将一个 `unique_ptr`赋给另一个。
+  
   > 尽管转移所有权后 还是有可能出现原有指针调用（调用就崩溃）的情况。但是这个语法能强调你是在 `转移所有权`，让你清晰的知道自己在做什么，从而`不乱调用原有指针`。
-- unique_ptr 可以转移对象的拥有权。使unique_ptr 不必一定拥有对象，它也可以是 empty；例如：当它被默认构造函数创建时。
+- `unique_ptr` 可以转移对象的拥有权。使`unique_ptr` 不必一定拥有对象，它也可以是 empty；例如：当它被默认构造函数创建时。
+  
   ```cpp
   std::unique_ptr<std::string> ip;
   ip = nullptr;
@@ -1121,20 +1125,20 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
 unique_ptr 也有自己的 删除器。
 
 ```cpp
-    // 但lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
-    using func = void(*)(Stu*);    // void 类型的函数指针
-    unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){    
-        delete p;
-    });
+// 但lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
+using func = void(*)(Stu*);    // void 类型的函数指针
+unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){    
+  delete p;
+});
 
 
-    // 有捕获参数时，unique_ptr 模板参数类型为 仿函数的返回类型
-    unique_ptr<Stu, std::function<void (Stu*)>> s2(new Stu(200), [&](Stu* p){    
-        delete p;
-    });
+// 有捕获参数时，unique_ptr 模板参数类型为 仿函数的返回类型
+unique_ptr<Stu, std::function<void (Stu*)>> s2(new Stu(200), [&](Stu* p){    
+  delete p;
+});
 
-    // 申请的内存为数组类型时，模板参数为数组类型
-    unique_ptr<Stu[]> ptr1(new Stu[3]);
+// 申请的内存为数组类型时，模板参数为数组类型
+unique_ptr<Stu[]> ptr1(new Stu[3]);
 ```
 
 独占的智能指针能管理数组类型的地址，能够自动释放。
@@ -1149,14 +1153,28 @@ C++11 中 shared_ptr 不支持下面的语法，自C++11之后的版本，开始
 shared_ptr<Stu[]> ptr1(new Stu[3]); 
 ```
 
-unique_ptr 智能指针创建对象时，在 C++11 版本没有提供 `std::make_unique` 这种方式去创建对象，只能用 `new` 关键字创建对象；而这一特点，在 C++14 版本中得到改善，两种方式都可以去创建对象。
+### 注意点
+
+`unique_ptr` 智能指针创建对象时，在 C++11 版本没有提供 `std::make_unique()` 的方式去创建对象，只能用 `new` 关键字创建对象。 
+
+```cpp
+std::unique<Employee> employee(new Employee);
+
+// 不需要显示去调用delete，智能智能自动去调用delete
+```
+
+`std::make_unique` 在 C++14 中引入，可用下面的方式去创建对象。
+
+```cpp
+auto employee = std:make_unique<Employee>();
+```
 
 若编译器版本只支持 C++11，可以自己封装一个 `std::make_unique` 函数去实现。
 
 ```cpp
 template<typename T, typename ...Args>
-std::unique_ptr<T> make_unique( Args&& ...args ) {
-  return std::unique_ptr<T>( new T( std::forward<Args>(args)... ) );
+std::unique_ptr<T> make_unique(Args&& ...args) {
+  return std::unique_ptr<T>(new T( std::forward<Args>(args)... ));
 }
 ```
 
