@@ -1,17 +1,17 @@
-<!--
-
- * @Author: johnjeep
+ <!-- 
+ * @Author: JohnJeep
  * @Date: 2022-11-02 21:34:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 15:36:13
+ * @LastEditTime: 2024-03-31 10:05:52
  * @Description: gRPC 用法
- * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
+ * Copyright (c) 2022 by johnjeep, All Rights Reserved.  
 -->
 
 <!-- TOC -->
 
 - [1. RPC(remote produce call)](#1-rpcremote-produce-call)
   - [1.1. 什么是 RPC](#11-什么是-rpc)
+  - [RPC 局限性](#rpc-局限性)
 - [2. gRPC](#2-grpc)
   - [2.1. 如何学习 gRPC?](#21-如何学习-grpc)
   - [2.2. 概念](#22-概念)
@@ -68,8 +68,16 @@ RPC 标准最早是由Bruce Jay Nelson 写的论文 [Implementing Remote Procedu
 - Client 端接收到消息，然后进行 Unpack 处理。
 
 
+RPC 实现例子：
+![Alt text](../figures/grpc-call.png)
 
-参考：https://www.selinux.tech/golang/grpc/what-grpc
+
+## RPC 局限性
+
+- 本地函数调用的结果是可预测的，而 RPC 需要经过网络传输，数据在中途可能因为各种原因丢失。
+- RPC 调用有可能超时，编写程序时需要考虑该情况。
+- 重试一个失败的 RPC 调用有可能造成数据重复，需要考虑幂等。
+- 由于传输数据时需要序列化和反序列化，RPC 在传输复杂对象时会不太方便。
 
 
 
@@ -84,6 +92,8 @@ RPC 标准最早是由Bruce Jay Nelson 写的论文 [Implementing Remote Procedu
 3. 掌握 grpc 功能
 4. 阅读源码
 5. 深刻理解 grpc 功能，成为一个高手
+
+
 
 ## 2.2. 概念
 
@@ -464,6 +474,9 @@ HTTP/2 也支持流控，如果 sender 端发送数据太快，receiver 端可�
 - [C++ gRPC 异步 API 实例与优势](https://blog.miigon.net/posts/cn-so-difference-between-sync-and-async-grpc/)
 - [Lessons learnt from writing asynchronous streaming gRPC services in C++](https://www.gresearch.co.uk/blog/article/lessons-learnt-from-writing-asynchronous-streaming-grpc-services-in-c/) ：grpc 异步服务端流模式例子。
 - **Github awesome-grpc:** https://github.com/grpc-ecosystem/awesome-grpc
+- https://www.selinux.tech/golang/grpc/what-grpc
+
+
 
 可选
 

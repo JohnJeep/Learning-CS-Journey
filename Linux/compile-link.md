@@ -3,46 +3,43 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2022-07-14 00:06:03
+ * @LastEditTime: 2024-03-31 16:24:11
  * @Description: 预处理、编译、汇编、链接过程
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
 
-<!-- TOC -->
-
-- [1. 缩写](#1-%E7%BC%A9%E5%86%99)
-- [2. 程序处理过程](#2-%E7%A8%8B%E5%BA%8F%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B)
-- [3. 内存四区](#3-%E5%86%85%E5%AD%98%E5%9B%9B%E5%8C%BA)
-- [4. 函数库](#4-%E5%87%BD%E6%95%B0%E5%BA%93)
-- [5. 静态库](#5-%E9%9D%99%E6%80%81%E5%BA%93)
-- [6. 动态库](#6-%E5%8A%A8%E6%80%81%E5%BA%93)
-    - [6.1. Linux平台](#61-linux%E5%B9%B3%E5%8F%B0)
-    - [6.2. Windows平台](#62-windows%E5%B9%B3%E5%8F%B0)
+- [1. 缩写](#1-缩写)
+- [2. 程序处理过程](#2-程序处理过程)
+- [3. 内存四区](#3-内存四区)
+- [4. 函数库](#4-函数库)
+- [5. 静态库](#5-静态库)
+- [6. 动态库](#6-动态库)
+  - [6.1. Linux平台](#61-linux平台)
+  - [6.2. Windows平台](#62-windows平台)
 - [7. ELF relocatable](#7-elf-relocatable)
 - [8. GCC](#8-gcc)
-    - [8.1. 源码编译三部曲](#81-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E4%B8%89%E9%83%A8%E6%9B%B2)
-    - [8.2. CentOS7 安装高版本 gcc8/g++8](#82-centos7-%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%AC-gcc8g8)
-    - [8.3. 拓展知识点](#83-%E6%8B%93%E5%B1%95%E7%9F%A5%E8%AF%86%E7%82%B9)
-- [9. 包管理](#9-%E5%8C%85%E7%AE%A1%E7%90%86)
-    - [9.1. 软件仓库](#91-%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93)
-    - [9.2. RPM](#92-rpm)
-    - [9.3. Epel](#93-epel)
-    - [9.4. Yun](#94-yun)
-    - [9.5. apt](#95-apt)
-    - [9.6. dpkg](#96-dpkg)
-- [10. 工具](#10-%E5%B7%A5%E5%85%B7)
-    - [10.1. readelf](#101-readelf)
-    - [10.2. size](#102-size)
-    - [10.3. nm](#103-nm)
-    - [10.4. pmap](#104-pmap)
-    - [10.5. patchelf](#105-patchelf)
-    - [10.6. objdump](#106-objdump)
-- [11. 构建](#11-%E6%9E%84%E5%BB%BA)
-- [12. 参考](#12-%E5%8F%82%E8%80%83)
+  - [8.1. 源码编译三部曲](#81-源码编译三部曲)
+  - [8.2. CentOS7 安装高版本 gcc8/g++8](#82-centos7-安装高版本-gcc8g8)
+  - [8.3. 拓展知识点](#83-拓展知识点)
+- [9. 包管理](#9-包管理)
+  - [9.1. 软件仓库](#91-软件仓库)
+  - [9.2. RPM](#92-rpm)
+  - [9.3. Epel](#93-epel)
+  - [9.4. Yun](#94-yun)
+  - [9.5. apt](#95-apt)
+  - [9.6. dpkg](#96-dpkg)
+- [10. 工具](#10-工具)
+  - [10.1. readelf](#101-readelf)
+  - [10.2. size](#102-size)
+  - [10.3. nm](#103-nm)
+  - [10.4. pmap](#104-pmap)
+  - [10.5. patchelf](#105-patchelf)
+  - [10.6. objdump](#106-objdump)
+- [11. Build](#11-build)
+- [12. References](#12-references)
 
-<!-- /TOC -->
 
-# 缩写
+# 1. 缩写
 
 - EXE(Executable)：可执行文件
 - PE(Portable Executable)：可移植可执行。
@@ -51,7 +48,7 @@
 - SLL(Static ALinking Library): windows下的以 `.lib` 方式命名，Linux的以 `.a` 方式命名。
 - BSS(Block Started by Symbol): 未初始化的全局变量和局部静态变量的区域。
 
-# 程序处理过程
+# 2. 程序处理过程
 
 程序处理的流程：源代码→预处理→编译→汇编→目标文件→链接→可执行文件
 
@@ -107,7 +104,7 @@
     <img width="80%" height="40%" src="./pictures/加载过程.png">
 </div>
 
-# 内存四区
+# 3. 内存四区
 
 首先了解基本的几个概念。
 
@@ -182,13 +179,13 @@ Linux 下内存分配管理如下图所示
   - 函数的return语句写错了，注意不要返回指向“栈内存”的“指针”或者“引用”，因为该内存在函数体结束时被自动销毁。
   - 使用free或delete释放了内存后，没有将指针设置为NULL。导致产生“野指针”。
 
-# 函数库
+# 4. 函数库
 
 函数库是可以被调用来执行的一段功能函数。函数库分为静态库和动态库。
 
 Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/usr/lib64` 里面。
 
-# 静态库
+# 5. 静态库
 
 所有编译器都提供一种机制，将所有相关的目标模块打包成一个单独的文件，成为静态库(static library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
@@ -212,7 +209,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 - 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
 - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
 
-# 动态库
+# 6. 动态库
 
 动态库也叫共享库(share library)，它是一个目标模块，在运行或加载时，能加载到任意的内存地址，并链接一个内存中的程序，这个过程就叫动态链接(dynamic linking)，它是由一个叫动态链接器(dynamic linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下以 `.dll` 后缀。
 
@@ -224,7 +221,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
   
   因为在编译的时候，编译器需要知道每一个动态库中提供了哪些符号。
 
-## Linux平台
+## 6.1. Linux平台
 
 - 命名规则
   - Linux中以 `.so` 结尾。形如：`lib + 库的名字 + .so`
@@ -276,12 +273,12 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 - 发布程序的时候，需要将动态库发布给用户。
 - 加载的速度相对静态库比较慢。 
 
-## Windows平台
+## 6.2. Windows平台
 
 C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h .lib .dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
 还有一点是 dll 是在调试的时候使用的，lib 是编译的时候使用的，两者是不同时期使用的工具。
 
-# ELF relocatable
+# 7. ELF relocatable
 
 <img src="./pictures/ELF-relocatable.png">
 
@@ -291,7 +288,7 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
 readlf -s main.o
 ```
 
-# GCC
+# 8. GCC
 
 GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言。但其很快扩展，变得可处理 C++，后来又扩展为能够支持更多编程语言，如 Fortran、Pascal、Objective -C、Java、Ada、Go 以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
 
@@ -324,7 +321,7 @@ GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言�
 - [gun.org](http://ftp.gnu.org/gnu/)
 - [清华大学 GNU 源镜像](https://mirrors.tuna.tsinghua.edu.cn/gnu/)
 
-## 源码编译三部曲
+## 8.1. 源码编译三部曲
 
 第一步：执行脚本 configure 文件，设置指定的参数，建立 Makefile 文件。
 
@@ -355,7 +352,7 @@ CentOS7 4.8.4 默认安装时的配置
 安装软件到第一步 ./configure 后面指定的路径下。
 ```
 
-## CentOS7 安装高版本 gcc8/g++8
+## 8.2. CentOS7 安装高版本 gcc8/g++8
 
 ```sh
 1、安装软件仓库包 scl: yum install centos-release-scl
@@ -372,7 +369,7 @@ CentOS7 4.8.4 默认安装时的配置
 libc++ 使用内联 namespace 来帮助确保 ABI不兼容类型不会被误认为是彼此之间的错误。如果接口(interface) 直接使用 libc++ std::string，则期望 libstdc++ std::string 的库将不会链接到该接口(interface)，因为实际的符号是不同的 :std::string 与 std::__1::string。
 ```
 
-## 拓展知识点
+## 8.3. 拓展知识点
 
 ```sh
 GCC4.8.1 支持 C++11
@@ -392,7 +389,7 @@ GCC5.3 支持 C++14
 - [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
 - [**CentOS下离线安装gcc环境，图文详细，方法全面**](https://blog.51cto.com/u_14089205/2485301?u_atoken=0475e265-abfb-432c-bfb1-c97021d375cd&u_asession=01ogsxgS7WqDDhfHxJBA3tySuJoQLPU7Mo1t0qQM8oX1gIjn9NkTPKsfuM9wUeCkZyX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K9T6Skf8G7F5_odZ0I0AeJU88K6FZziwTt7TNrPVU-d_2BkFo3NEHBv0PZUm6pbxQU&u_asig=05NjW6cy-7_DOVLCJ5yY0xUjyZdNii222gZ8CBYNC2-kxLwqNZcRznzNJlTGFikFQNdDeTXXaCH9gxxB_bXfuDd8FLqKsnQLHkUQ1ZHfh3CQ-AEuPGBzKGc0px5fa5PyZE0WZX_farO5ZSDrFzcwrvDd4ss8s7GG-KUqB6plMu8BP9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzUGHsagEujBC_AvKS2HjtZaUdPfTTV87rFMrUrrgd0Lqa8KPmxEvUknfKsop6MC1kO3h9VXwMyh6PgyDIVSG1W9Vksf1-kHx6lS1DDW9Qv6U4c0g9zEGGygqGkD8zIaRcgyMCcOAeA64HiKzlA8DugWt59etCjmgwcMzWzJCS1N4mWspDxyAEEo4kbsryBKb9Q&u_aref=3kSTCuGS3qx%2FcOMR4cQo%2FTU%2B7iE%3D)
 
-# 包管理
+# 9. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
@@ -400,7 +397,7 @@ Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线
 
 CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
-## 软件仓库
+## 9.1. 软件仓库
 
 Windows
 
@@ -411,7 +408,7 @@ Linux 或 Unix
 - 软件包组织方式上，是将可执行程序、程序库、手册页等多种类型文件打包压缩提供，内容上一般分为预先编译好的二进制包和程序源码包两种；
 - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
-## RPM
+## 9.2. RPM
 
 rpm（RPM Package Manager）叫RPM包管理器。
 
@@ -439,14 +436,14 @@ rpm -qa xxx 查询安装包
 rpm -ivh --force --nodeps *rpm  一次性安装多个软件包
 ```
 
-## Epel
+## 9.3. Epel
 
 EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
 
 - 官方主页：https://fedoraproject.org/wiki/EPEL
 - [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
 
-## Yun
+## 9.4. Yun
 
 **yum源（rpm软件仓库）**：集中存储rpm包的服务器，通常以http、nfs、ftp、file等协议提供rpm包下载安装服务。互联网中的yum源一般分为发行方和第三方提供。CentOS默认使用发行方yum源。安装软件时会自动解决依赖关系。
 
@@ -468,7 +465,7 @@ repolist
 grouplist   可用组
 ```
 
-## apt
+## 9.5. apt
 
 - apt-cache search # ------(package 搜索包)
 - apt-cache show #------(package 获取包的相关信息，如说明、大小、版本等)
@@ -501,7 +498,7 @@ grouplist   可用组
   - apt-get remove softname1 softname2 …;              移除式卸载
   - apt-get purge sofname1 softname2…;                       卸载软件同时清除配置文件
 
-## dpkg
+## 9.6. dpkg
 
 - dpkg --info "软件包名" --列出软件包解包后的包名称.
 - dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
@@ -515,9 +512,9 @@ grouplist   可用组
 - dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
 - dpkg -reconfigure 重新配置
 
-# 工具
+# 10. 工具
 
-## readelf
+## 10.1. readelf
 
 读取 ELF(Executable and Linking Format) 文件中信息
 
@@ -536,17 +533,17 @@ grouplist   可用组
     
 ```
 
-## size
+## 10.2. size
 
  查看object文件或者链接库文件中的object文件的各个段(section)的大小及其总的大小。
 
-## nm
+## 10.3. nm
 
 查看静态库或可执行文件里面的内容（list symbols from object files：列出一个函数库文件中的符号表）。
 
 例如：`nm main.out`， `nm mylib.a` 
 
-## pmap
+## 10.4. pmap
 
 打印一个进程的内存映射（report memory map of a process）。
 
@@ -556,7 +553,7 @@ grouplist   可用组
 pmap 进程PID
 ```
 
-## patchelf
+## 10.5. patchelf
 
 patchelf 是一个简单的实用程序，用于修改已存在的 ELF 可执行表（executables）和库（libraries）。它会改变 可执行表的动态加载器（loader），同时也会改变可执行表和库的路径（PATH）。
 
@@ -569,7 +566,8 @@ patchelf 是一个简单的实用程序，用于修改已存在的 ELF 可执行
 
 ```
 
-## objdump
+
+## 10.6. objdump
 
 是 Linux 下的反汇编目标文件或者可执行文件的命令，它以一种可阅读的格式让你更多地了解二进制文件可能带有的附加信息。
 
@@ -642,17 +640,17 @@ objdump -b oasys -m vax -h fu.o
 @file                       可以将选项集中到一个文件中，然后使用这个 @file 选项载入。
 ```
 
-# 构建
+
+# 11. Build
 
 两种编译构建方式。
 
 - 原生(native)编译构建，即编译构建命令所运行(host)的系统环境和编译构建输出目标(target)的系统环境一致；
-
 - 交叉(cross)编译构建，上述target和host不一致，即在A系统环境构建出在B系统上运行的目标，这在嵌入式开发中尤为多见。
-  
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
-# 参考
+
+# 12. References
 
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)

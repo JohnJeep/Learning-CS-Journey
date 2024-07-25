@@ -69,6 +69,7 @@ Data race (数据竞争): 两个线程并发操作同一块数据导致不可预
 Waiting and Polling (等待和轮训)
 
 
+![Alt text](figures/concurrent-parallel.gif)
 
 # 2. API 
 

@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
- * @LastEditors: johnjeep
- * @LastEditTime: 2023-07-16 12:58:43
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2024-03-31 15:41:21
  * @Description: VIM 编辑器使用
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -12,12 +12,12 @@
 - [1. Philosophy](#1-philosophy)
 - [2. Normal Mode](#2-normal-mode)
   - [2.1. Cursor move（光标移动）](#21-cursor-move光标移动)
-  - [2.2. Yank（复制）](#22-yank复制)
-  - [2.3. Put（粘贴）](#23-put粘贴)
-  - [2.4. Delete（删除）](#24-delete删除)
-  - [2.5. Undo（撤销）](#25-undo撤销)
-  - [2.6. Find（查找）](#26-find查找)
-  - [2.7. Mark（标记）](#27-mark标记)
+  - [2.2. Yank](#22-yank)
+  - [2.3. Put](#23-put)
+  - [2.4. Delete](#24-delete)
+  - [2.5. Undo](#25-undo)
+  - [2.6. Find](#26-find)
+  - [2.7. Mark](#27-mark)
   - [2.8. Making corrections and moving text](#28-making-corrections-and-moving-text)
   - [2.9. Fold](#29-fold)
     - [2.9.1. Manual Fold](#291-manual-fold)
@@ -39,6 +39,7 @@
   - [8.7. Comment（注释）](#87-comment注释)
 - [9. Registers](#9-registers)
 - [10. Vim Config](#10-vim-config)
+  - [10.1. Key Mapping](#101-key-mapping)
 - [11. Recover Swap File](#11-recover-swap-file)
 - [12. Vim Sheet](#12-vim-sheet)
 - [13. Vscodevim tricks](#13-vscodevim-tricks)
@@ -122,7 +123,7 @@ Vim 有实际行和**屏幕行**。以行号开头的行对应着一个**实际�
   > 如果光标不在数字上，那么 `Ctrl a` 命令将在当前行正向查找一个数字，如果找到了，它就径直跳到那里。
 
 
-## 2.2. Yank（复制）
+## 2.2. Yank
 Yanking 是 Vim 中拷贝命令的名字。由于"c"己经被用于表示 change 了，所以拷贝 (copy) 就不能再用"c"了。但"y"还是可用的。把这个命令称为 "yanking" 是为了更容易记住 "y" 这个键。
 
 要把文本从一个地方拷贝到另一个地方，你可以先删除它，然后用 "u" 命令恢复，再用 "p" 拷到另一个地方。可以使用更简单的方式进行拷贝，用 "y" 命令可以把文字拷贝到寄存器（register）中。然后用 "p" 命令粘贴到别处。
@@ -138,7 +139,7 @@ Yanking 是 Vim 中拷贝命令的名字。由于"c"己经被用于表示 change
   - 复制第 m 行到第 n 行之间的内容，在命令行模式中输入`m，ny` 例如：3，5y 复制第三行到第五行内容到缓存区。
 
 
-## 2.3. Put（粘贴）
+## 2.3. Put
 - `p（小写）` 将缓冲区内容粘贴光到标所在行的下面一行。
   > 目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴
 - `P（大写）` 将缓冲区内 (buffer) 容粘贴到光标所在行的上面一行
@@ -147,7 +148,7 @@ Yanking 是 Vim 中拷贝命令的名字。由于"c"己经被用于表示 change
 - `xp` 交换当前字符和其后一个字符
 
 
-## 2.4. Delete（删除）
+## 2.4. Delete
 Delete 为 Vim 的删除命令，等价于 copy 操作，delete 拷贝当前的文本到 register，然后从当前文档中移除当前的文本。
 
 - 字符操作 (word)
@@ -176,14 +177,14 @@ Delete 为 Vim 的删除命令，等价于 copy 操作，delete 拷贝当前的�
   - `J` 将光标所在行与下一行的数据结合成一行
 
 
-## 2.5. Undo（撤销）
+## 2.5. Undo
 - `u(undo 小写）` 撤销最近一次的操作，可以使用多次来恢复原有的操作
 - `U（大写）` 撤销对整行的操作
 - `Ctrl+R(Redo)` 可以恢复对撤消 `u（小写）` 命令的操作
 - `. （小数点）` 重复前一个动作的意思
 
 
-## 2.6. Find（查找）
+## 2.6. Find
 - `/word`	向光标之下寻找一个名称为 word 的字符串
 - `?word`	向光标之上寻找一个字符串名称为 word 的字符串
 - 在 `/` 或 `?` 之后，使用 `n` 向下查找，`N` 从当前字符向上查找。
@@ -196,13 +197,14 @@ Delete 为 Vim 的删除命令，等价于 copy 操作，delete 拷贝当前的�
 - `t(to)`: 跳至。`tw`：跳转到 w 字符处的前一个字符上。
 
 
-## 2.7. Mark（标记）
+## 2.7. Mark
 - `m{mark}` 设置标记
 - \`{mark} 返回标记
 > Mark 是自己定义标记的字母，可以设置的任意按键。
 
 
 ## 2.8. Making corrections and moving text
+
 介绍几种修正和移动文本（Making corrections and moving text）的方法，包括 3 中基本修改文本的方法：
 1. operator-motion（操作符-动作）
 2. Visual Mode（可视模式） 
@@ -276,6 +278,8 @@ zN 启动折叠
 
 
 ### 2.9.1. Manual Fold
+
+
 启用手工折叠
 ```sh
 :set foldmethod=manual
@@ -283,6 +287,7 @@ zN 启动折叠
 
 
 ### 2.9.2. Indent Fold
+
 启用缩进折叠，所有文本将按照（选项* shiftwidth* 定义的）缩进层次自动折叠。
 ```sh
 :set foldmethod=indent
@@ -290,6 +295,7 @@ zN 启动折叠
 
 
 ### 2.9.3. Syntax Fold
+
 启用语法折叠。所有文本将按照语法结构自动折叠。
 ```sh
 :set foldmethod=syntax
@@ -305,6 +311,7 @@ zN 启动折叠
 
 
 # 3. Visual Mode
+
 `Normal Mode` 下按 `V（小写）` 键进入到 `Visual Mode`，再根据需要进行复制、粘贴、删除、多光标等不同的操作。
 - `d` 删除 
 - `y` 复制
@@ -315,12 +322,14 @@ zN 启动折叠
 
 
 # 4. Visual Line Mode
+
 `Normal Mode` 下按 `Shift + v` 组合键或者 `V（大写）` 键进入到 `Visual Line Mode`，再根据需要对行 (Line) 进行复制、粘贴、删除、多光标等不同的操作。
 
 - `gv` 重选上次的高亮选区 。
 
 
 # 5. Visual Block Mode
+
 `Normal Mode` 下按 `Ctrl + v` 组合键进入到 `Visual Block Mode`，再根据需要进行复制、粘贴、删除、多光标等不同的操作。
 
 - `d` 删除所选中的字符
@@ -331,6 +340,7 @@ zN 启动折叠
 
 
 # 6. Replace Mode
+
 Normal Mode 下进行替换操作。
 - `R` 在命令行模式下，替换无限多个字符，执行后进入`insert Mode`。
 - `r（小写）` 替换一个字符，执行后还是在 `Normal Mode`。
@@ -347,6 +357,7 @@ Normal Mode 下进行替换操作。
 
 
 # 7. Insert Mode
+
 插入模式 (Insert Mode) 下，可以做文本操作，按「ESC」键或按 `Ctrl [` 键可回到  `normal` 模式。
 
 - `a(append)` 从当前光标所在的下一个字符处插入文本。
@@ -358,10 +369,12 @@ Normal Mode 下进行替换操作。
 
 
 # 8. Command Line Mode
+
 Normal Mode 模式下按下 `:` 键后进入 Command Line Mode 模式，进行对文件、窗口以及字符的替换等一系列的操作。
 
 
 ## 8.1. File
+
 Command Line Mode 下对文件进行操作。
 
 - `:w [file]`	将当前文件另存为另一个名为 file 的文件。
@@ -384,6 +397,7 @@ Vim 会记录跳转前后的位置，并提供了一些命令让我们能够沿�
 
 
 ## 8.2. Command
+
 Command Line Mode 下一些常见的命令操作。
 
 - `:normal` 执行任意的普通模式命令。
@@ -393,6 +407,7 @@ Command Line Mode 下也支持 `Tab` 键的自动补全。例如：输入`:col` 
 
 
 ## 8.3. Replace（替换）
+
 Command Line Mode 下对字符的替换。
 
 - `:s/old/new` 用 new 替换行中首次出现的 old
@@ -403,6 +418,7 @@ Command Line Mode 下对字符的替换。
 
 
 ## 8.4. Window（窗口）
+
 - `:open file`  在窗口中打开一个新的文件，会关闭之前的窗口。
 - `:new` 打开一个新窗口，光标停在顶层的窗口上，不会关闭之前的窗口。
 - `:close` 关闭窗口，最后一个窗口不能使用此命令，可以防止意外退出 vim。
@@ -416,6 +432,7 @@ Command Line Mode 下对字符的替换。
 
 
 ## 8.5. Shell
+
 使用 `!` 可以执行 shell 的操作，暂时离开 vim, 显示执行 shell 的内容。
 
 - `:shell` 启动一个交互的 shell 会话。
@@ -425,6 +442,7 @@ Command Line Mode 下对字符的替换。
 
 
 ## 8.6. Help（帮助）
+
 - `:help` or `F1` 显示整个帮助
 - `:help xxx` 显示 xxx 的帮助，比如 `:help i`, `:help CTRL-[`（即 Ctrl+[的帮助）。
 - `:help 'number'` Vim 选项的帮助用单引号括起
@@ -434,6 +452,7 @@ Command Line Mode 下对字符的替换。
 
 
 ## 8.7. Comment（注释）
+
 程序中以 `#` 开始的行表示为注释，所以要注释某些行，只需在行首加入 `#`。
 - `:3,5 s/^/#/g` 注释第 3-5 行
 - `:3,5 s/^#//g` 解除 3-5 行的注释
@@ -442,6 +461,7 @@ Command Line Mode 下对字符的替换。
 
 
 # 9. Registers
+
 Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪贴板那样，剪切、复制和粘
 贴文本；也可以记录一系列按键操作，把它们录制成宏。 可用 `Ctrl r {register} ` 命令来调用 Vim 的 register。
 
@@ -456,6 +476,7 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 
 
 # 10. Vim Config
+
 - 系统级配置文件目录：`/etc/vim/vimrc`
 - 用户级配置文件目录：`~/.vim/vimrc`
 - 设置 Tab 的大小 
@@ -475,11 +496,23 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
   ```sh
   set colorcolumn=num
   ```
-- 快捷键映射
-  - nnoremap(normal not recursively map)：表示普通模式下对按键进行非递归映射。
+
+  
+## 10.1. Key Mapping
+
+nnoremap(normal not recursively map)：表示普通模式下对按键进行非递归映射。
+
+```bash
+# 按下 <F2> 取消搜索高亮
+nnoremap <silent> <F2>      :nohlsearch<CR>
+inoremap <silent> <F2> <C-O>:nohlsearch<CR>
+```
+
+
 
 
 # 11. Recover Swap File
+
 - `O(open)` 只读打开，不改变文件内容
 - `E(edit)` 继续编辑文件，不恢复。swp 文件保存的内容
 - `R` 将恢复上次编辑以后未保存文件内容
@@ -488,12 +521,14 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 
 
 # 12. Vim Sheet
+
 Vim 命令手抄
 
-<img src="./pictures/../../pictures/vim-cmd.png">
+![Alt text](../pictures/vim-cmd.png)
 
 
 # 13. Vscodevim tricks
+
 vscode 中安装 vim 模拟插件。记录一些实用的技巧。
 
 注释
@@ -503,7 +538,9 @@ vscode 中安装 vim 模拟插件。记录一些实用的技巧。
 - `gh` 等同于鼠标悬停显示 types and error messages。
 - `gb` 光标高亮显示找到的相同单词，每按一次 `gb` 就高亮显示一次。
 
+
 # 14. References
+
 - [官方 vim 在线帮助手册](https://vimhelp.org/): 非常重要，值得阅读。
 - [英文版 Vim Cheat Sheet](https://vim.rtorr.com/)
 - [MIT 2020 年 missing-semester lectures vim section](https://missing.csail.mit.edu/2020/editors/)

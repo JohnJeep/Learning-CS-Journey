@@ -1000,7 +1000,7 @@ dict := map[int][]string{}
 
 - map 是无序的，无法决定返回值的顺序，每次打印的返回值的结果可能不一样。
 
-
+> 读>>写时，建议用 sync.Map。写>>读时，建议用 runtime.map。读=写时，建议用 courrentMap。
 
 ### 4.11.4. Struct
 
@@ -1490,8 +1490,16 @@ type usb interface {
   fmt.Println(studentInfo)
   ```
 
+Go 中的 interface 底层包含 2 中：eface、iface。
+
+interface 赋值的过程，即为 iface、eface 生成的过程。如果编译阶段编译器无法确定 interface 类型（比如 :iface 入参）会通过 conv 完成打包，有可能会导致逃逸。
+
+> 很多对 interface 类型的赋值(并非所有)，都会导致空间的分配和拷贝，这也是 Interface 函数为什么可能会导致逃逸的原因 go 这么做的主要原因：逃逸的分析位于编译阶段，对于不确定的类型在堆上分配最为合适。
+
+
 
 ### 5.2.6. Type Assertions(类型断言)
+
 类型断言（Type Assertion）是在编程语言中用于判断和转换值类型的操作。在 Go 语言中，类型断言被用于从接口类型中提取出具体的值，并判断其是否为特定的类型。 语法上它看起来像 `x.(T)` 被称为断言类型， 这里 `x` 表示类型为`interface{}`的变量，`T` 表示断言 `x` 可能是的类型。
 
 在 Go 中，类型断言有两种形式：
@@ -1685,6 +1693,8 @@ ch := make(chan int, cap)
 - channel 是有类型的，指定了管道的类型，管道中就只能存放该类型。
 - channel 的容量是在 make 时就指定了，不能自动增长，超过容量时，会报错。
 - 在没有使用协程的情形下，若管道中的数据已全部取出，再取就报 `deadlock` 错误。
+- **同步操作**：通道上的发送和接收操作是原子性的，保证了数据的一致性和可靠性。
+- **阻塞机制**：当通道为空时，接收操作会阻塞等待数据；当通道满时，发送操作会阻塞等待空间。
 
 
 ### 6.2.3. 关闭 channel
@@ -1758,8 +1768,75 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
 2. 超时机制
 3. 定时器
 
+## 竞争(data race)
+
+### 原子函数(atmoic)
+
+```go
+func incCountAtomic() {
+	defer wg111.Done()
+	for i := 0; i < 2; i++ {
+		atomic.AddInt32(&count, 1)
+		runtime.Gosched()
+	}
+}
+```
+
+常见的原子函数
+
+```bash
+LoadInt64
+StoreInt64
+LoadInt32
+StoreInt32
+LoadPointer
+StorePointer
+```
+
+注意：原子函数操作的数据类型都比较简单，不容易处理复杂的组合数据类型或者带有逻辑的大代码。
+
+### Mutex
+
+Go提供了另外一个sync包，用对代码段加锁解锁的办法来解决；这段代码叫做“临界区”。临界区在同一时刻只能有一个 goroutine 访问；这段代码就是同步执行的
+
+```go
+func incCountSync() {
+	defer wg111.Done()
+	for i := 0; i < 2; i++ {
+		mutex.Lock()
+		value := count
+		runtime.Gosched()
+		value++
+		count = value
+		mutex.Unlock()
+	}
+}
+```
+
+注意：**锁住的代码段开销尽量小，否则肯定影响性能。**
+
+### RWMutex
+
+读写锁：允许只读操作可以并发执行，写操作需要获得完全独享的访问权限。Golang 中读写锁的类型是 `sync.RWMutex`
+
+```go
+var mu sync.RWMutex
+var balance int
+func Balance() int {
+	mu.RLock()
+	defer mu.RUnlock()
+	return balance
+}
+```
+
+注意：
+
+> 仅在绝大部分goroutine都在获取读锁并且锁竞争比较激烈的时（即：goroutine一般都需要等待后才能获取锁），RWMutex才有优势。因为RWMutex需要更复杂的内部记录工作，所以在竞争不激烈的时候他比普通互斥锁还要慢。
+
+
 
 # 7. Package(包)
+
 利用 Go 自带的工具，使用单个命令完成编译、测试、基准测试、代码格式化、文档以及其他诸多任务。
 
 Go 以包的形式来管理文件和项目目录结构的。所有的 go 代码都被组织在包中。一个包其实就是包含很多 `.go` 文件的一个路径，这样就实现了代码的组织和互相隔离，阅读代码从一个包开始。要想写好 go 代码，要不断理解包和基于包多实践。
@@ -1916,7 +1993,7 @@ Go 语言提供了一种机制， 能够在运行时更新变量和检查它们�
 ------------------------------------------------------------------------
 
 工程目录
-- <font color=red>Gihub golang-standards: https://github.com/golang-standards/project-layout </font>
+- <font color=red>Gihub golang-standards: https://github.com/golang-standards/project-layout </font>
 - golang 编程规范 - 项目目录结构：https://makeoptim.com/golang/standards/project-layout/
 - Go 工程化 (二) 项目目录结构 Go 工程化 (二) 项目目录结构：https://lailin.xyz/post/go-training-week4-project-layout.html
 
@@ -1972,6 +2049,7 @@ log
 - Go 语言高性能编程：https://geektutu.com/post/high-performance-go.htm
   介绍了 Go 中一些常踩的坑和性能优化技巧。
 - Go的50度灰：Golang新开发者要注意的陷阱和常见错误：https://colobu.com/2015/09/07/gotchas-and-common-mistakes-in-go-golang/
+- Go总结（九）| goroutine+channel并发编程：https://chende.ren/2020/12/28140907-009-concurrency.html
 
 -----
 Github 优秀开源项目
@@ -1984,4 +2062,6 @@ Github 优秀开源项目
   - https://github.com/talkgo/night
 
 
+
+技术文章摘抄：https://learn.lianglianglee.com/
 

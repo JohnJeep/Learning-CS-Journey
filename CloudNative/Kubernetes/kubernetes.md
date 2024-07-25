@@ -26,7 +26,47 @@ Kubernets 管理 docker 流程
 
 
 
-### Headless Service
+## Stateful(有状态)
+
+- 用来控制有状态服务，StatefulSet 中的每个 Pod 的名字都是事先确定的，不能更改。
+- StatefulSet 中 Pod 的名字的作用：是关联与该Pod对应的状态。
+- StatefulSet 做的只是将确定的 Pod 与确定的存储关联起来保证状态的连续性。
+- 每个 Pod 挂载自己独立的存储，如果一个 Pod 出现故障，从其他节点启动一个同样名字的 Pod，要挂载上原来 Pod 的存储继续以它的状态提供服务。
+  	
+
+适用场景： 
+
+1. MySQL 、PostgreSQL数据库服务
+2. ZooKeeper、etcd 集群化管理服务
+3. 作为一种比普通容器更稳定可靠的模拟虚拟机的机制
+
+
+
+## Deployment
+
+部署是一个比 ReplicaSet 更广的 API 对象，可以是创建一个新的服务，更新一个新的服务，也可以是滚动升级一个服务。
+
+
+
+## Service
+
+- 每个Service对应一个集群内有效的虚拟 IP，集群内部通过虚拟IP访问服务。
+- Replica Set、Replica Controller和Deployment只是保证了支撑服务的微服务 Pod 的数量，但是没有解决如何访问这些服务的问题。
+
+## stateless(无状态)
+- 所控制的 Pod 的名字是随机设置的，一个 Pod 出故障了就被丢弃掉，在另一个地方重启一个新的 Pod，名字变了。名字和启动在哪儿都不重要，重要的只是 Pod 总数。
+- 一般不挂载存储或者挂载共享存储，保存的是所有 Pod 共享的状态。
+
+### DaemonSet
+
+### ReplicaSet
+
+### Replication Controller
+
+
+
+
+## Headless Service
 
 Kubernetes的Headless Service是一种特殊类型的服务，它允许直接访问Pod而不需要通过Service进行负载均衡。
 
@@ -41,6 +81,7 @@ Headless Service对于一些特定的使用场景非常有用，比如数据库�
 - 不需要负载均衡和 service IP。
 - 用于服务发现机制的项目或者中间件，如kafka和zookeeper之间进行leader选举，采用的是实例之间的实例IP通讯。因为ZK集群的Pod之间需要相互识别后，进行选举状态才会变为就绪，使用无头服务完美的解决这个问题。
 - 发现所有的 Pod，包括未就绪的Pod。
+
 
 
 
