@@ -1,0 +1,20 @@
+# path: /lib/systemd/system/redis.service or /etc/systemd/system/redis.service
+
+[Unit]
+Description=Redis persistent key-value database
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/redis/bin/redis-server /data/redis/etc/redis-6379.conf
+ExecReload=/usr/local/redis/bin/redis-server -s reload
+ExecStop=/usr/local/redis/bin/redis-server -s stop
+# ExecStop=/usr/local/redis/bin/redis-shutdown redis-6379
+PrivateTmp=true
+
+User=redis
+Group=redis
+
+[Install]
