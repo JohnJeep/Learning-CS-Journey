@@ -311,5 +311,7 @@ SHOW FIELD KEYS FROM measurement_name
 SHOW TAG KEYS FROM measurement_name
 ```
 
+# References
 
+- [InfluxDB（一）初探时序数据库](https://exceting.github.io/2019/06/21/InfluxDB%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E6%8E%A2%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/)
 
