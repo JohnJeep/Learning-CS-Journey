@@ -15,7 +15,7 @@ ping_command="ping -c 1 $target_host | grep 'time=' | sed \"s/^/$current_time /\
 
 
 # 检查当前时间是否在指定时间范围内
-if [[ "$current_time" > "2023-07-10 07:37" && "$current_time" < "2023-07-30 19:38" ]]; then
+if [[ "$current_time" > "2024-09-10 07:37" && "$current_time" < "2024-10-30 19:38" ]]; then
     echo "当前时间：$current_time"
     echo "正在 ping $target_host ..."
 
