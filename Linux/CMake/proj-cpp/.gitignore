@@ -1,0 +1,5 @@
+thirdPackages/googletest
+libs/*
+build
+include/gmock
+include/gtest
