@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-10-12 10:38:01
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-01-06 13:58:32
+ * @LastEditTime: 2024-12-02 16:39:19
  * @Description: Docker 安装教程
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
@@ -214,6 +214,15 @@ sudo systemctl status docker
 ```sh
 sudo docker run hello-world
 ```
+
+
+# Docker mirror
+- [yandex.ru](https://mirror.yandex.ru/): 俄罗斯Yandex镜像网站
+   ```sh
+   # 用法
+   docker pull cr.yandex/mirror/nginx
+   ```
+- [hub.atomgit.com](https://hub.atomgit.com/):可信镜像中心
 
 
 
