@@ -114,7 +114,7 @@ Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般
 - 多条语句之间使用 `;` 分割开
 - 输入的命令采用 `()` 括起来，shell 会 fork 一个新的子 shell 进程执行括号里面的内容。
 - 确定哪些命令是否属于 shell 内建命令：`type command`
-  ```sh
+  ```bash
   [root@DEV-ALWLPT-AP03 log]# type pwd
   pwd is a shell builtin
   ```
@@ -204,7 +204,9 @@ Linux 的环境变量使用 `PATH` 表示，多个环境变量参数之间使用
 
 显示环境变量可用三种命令查看：env、set、printenv
 - set 命令会显示出全局变量、局部变量以及用户定义变量，它还会按照字母顺序对结果进行排序。
-- env 和 printenv 命令不会对变量排序，也不会输出局部变量和用户定义变量。printenv 可以显示个别的环境变量
+  - `set -e` 命令：当脚本中某条命令报错以后立刻退出shell，不再执行后续代码。
+  - `set -u` 命令：当使用到未定义的变量以后打印报错信息，然后退出程序。
+- `env` 和 `printenv` 命令不会对变量排序，也不会输出局部变量和用户定义变量。printenv 可以显示个别的环境变量
   ```sh
   [root@KF-CFT-mongdb3 ~]# printenv HOME
   /root
@@ -348,7 +350,7 @@ IOT-Alert20230303_122511_663
 
 
 常见脚本重定向命令解释： `script.sh >/dev/null 2>&1`
-```sh
+```bash
 script.sh >/dev/null 2>&1 是一种重定向输出和错误的常见方法。下面是对该命令的解释：
 
 script.sh 是要执行的脚本或命令的名称。
@@ -717,10 +719,11 @@ sed俗称做流编辑器，以行单位进行字符处理。
 
 
 # 15. expect
+
 **Expect** 是[Unix](https://zh.wikipedia.org/wiki/Unix)系统中用来进行自动化控制和测试的软件工具，由[Don Libes](https://zh.wikipedia.org/w/index.php?title=Don_Libes&action=edit&redlink=1)制作，作为[Tcl](https://zh.wikipedia.org/wiki/Tcl)脚本语言的一个扩展，应用在交互式[软件](https://zh.wikipedia.org/wiki/软件)中如[telnet](https://zh.wikipedia.org/wiki/Telnet)，[ftp](https://zh.wikipedia.org/wiki/文件传输协议)，[Passwd](https://zh.wikipedia.org/wiki/Passwd)，[fsck](https://zh.wikipedia.org/wiki/Fsck)，[rlogin](https://zh.wikipedia.org/w/index.php?title=Rlogin&action=edit&redlink=1)，[tip](https://zh.wikipedia.org/w/index.php?title=Tip&action=edit&redlink=1)，[ssh](https://zh.wikipedia.org/wiki/Secure_Shell)等等。该工具利用Unix伪终端包装其子进程，允许任意程序通过终端接入进行自动化控制；也可利用[Tk](https://zh.wikipedia.org/wiki/Tk)工具，将交互程序包装在[X11](https://zh.wikipedia.org/wiki/X11)的[图形用户界面](https://zh.wikipedia.org/wiki/图形用户界面)中。
 
 expect 参数项：
-```sh
+```bash
 spawn               交互程序开始后面跟命令或者指定程序
 expect              获取匹配信息匹配成功则执行expect后面的程序动作
 send exp_send       用于发送指定的字符串信息
@@ -735,6 +738,7 @@ set timeout         设置超时时间
 
 
 # 16. References
+
 - Bash快捷键大全: https://linux.cn/article-5660-1.html
 - Terminator The robot future of terminals: https://gnometerminator.blogspot.com/p/introduction.html
 - 如何在Qt中使用正则表达式: https://blog.csdn.net/Hyc_cheng/article/details/112132963#t5
