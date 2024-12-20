@@ -1,4 +1,4 @@
-# linux 系统如何查看CPU信息、机器型号、内存信息等
+# linux system tricks and tips
 
 ## 系统
 
