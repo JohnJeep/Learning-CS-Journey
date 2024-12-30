@@ -19,7 +19,7 @@
 - [老 D 博客](https://laod.cn/hosts/2018-google-hosts.html)：报道当今比较潮流、新的技术。
 
 
-## 1.1. 个人搭建博客
+## 1.1. Awesome blogs
 推荐一些优秀大佬自己搭建的博客网站
 - FreeMind: https://freemind.pluskid.org/
 - 小林Coding: https://xiaolincoding.com/
@@ -29,6 +29,7 @@
 - 腾讯罗志云：https://www.luozhiyun.com/
 - 腾讯大佬个人博客：https://www.hitzhangjie.pro/blog/
 - 雨痕笔记，Go 语言大佬：https://www.yuque.com/qyuhen/go/
+- I code it：https://icodeit.org/archives/
 
 
 # 2. 编程和刷题网站
