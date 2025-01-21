@@ -146,4 +146,6 @@ grouplist   可用组
 3. CentOS旧版本软件包的镜像站点: https://vault.centos.org/
 4. 阿里云CentSO7镜像: https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/
 5. Docker repository: https://download.docker.com/linux/
-
+6. CentOS Vault Mirror: https://vault.centos.org/7.9.2009/
+7. Centos Linux 更换源，原官方源已经不再提供服务: https://www.cnblogs.com/007sx/p/18351813
+8. Devtoolset 安装与使用: https://weiyan.cc/yuque/%E5%BC%80%E5%8F%91%E8%BF%90%E7%BB%B4/%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%BC%96%E8%AF%91/2021-09-02-scl-devtoolset-note/
