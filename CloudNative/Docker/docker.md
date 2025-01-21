@@ -4,10 +4,6 @@
 - [2. Docker 是什么](#2-docker-是什么)
 - [3. Docker 与传统虚拟机有什么不同？](#3-docker-与传统虚拟机有什么不同)
 - [4. 为什么 Docker 比虚拟机快？](#4-为什么-docker-比虚拟机快)
-- [5. Docker 安装](#5-docker-安装)
-  - [5.1. CenOS7 下安装 Docker](#51-cenos7-下安装-docker)
-  - [5.2. Windows 下安装 Docker](#52-windows-下安装-docker)
-    - [5.2.1. WSL 中安装](#521-wsl-中安装)
 - [6. Windows系统上为什么能运行 Docker？](#6-windows系统上为什么能运行-docker)
 - [7. Docker 组件](#7-docker-组件)
   - [7.1. Docker 镜像加载原理](#71-docker-镜像加载原理)
@@ -69,7 +65,7 @@
   - [14.1. 安装](#141-安装)
 - [15. 面试问题](#15-面试问题)
 - [16. FAQ](#16-faq)
-  - [16.1. Docker下/var/lib/docker/overlay2空间清理办法](#161-docker下varlibdockeroverlay2空间清理办法)
+  - [16.1. Docker 空间占用清理](#161-docker-空间占用清理)
 - [17. References](#17-references)
 
 <!-- /TOC -->
@@ -743,6 +739,14 @@ Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
 2. 删除多个镜像
 ```sh
 [root@redis_181 ~]# docker rmi -f redis:6.0.8 rdis:5.0
+```
+
+```sh
+# 使用脚本：删除以myapp开头的所有镜像
+#!/bin/bash
+for image in $(docker images | grep '^myapp' | awk '{print $3}'); do
+    docker rmi -f $image
+done
 ```
 
 3. 用参数续传来删除，将查找到的 Ubuntu 镜像 ID 传入要删除的表达式后面
