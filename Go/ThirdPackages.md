@@ -745,7 +745,7 @@ gotests -all -w xxx.go
 
 ## 为什么选择sqlc
 
-在 Go 语言中编写数据库操作代码真的非常痛苦！`database/sql`标准库提供的都是比较底层的接口。我们需要编写大量重复的代码。大量的模板代码不仅写起来烦，而且还容易出错。有时候字段类型修改了一下，可能就需要改动很多地方；添加了一个新字段，之前使用 `select *` 查询语句的地方都要修改。如果有些地方有遗漏，可能就会造成运行时`panic`。即使使用 ORM 库，这些问题也不能完全解决！这时候，`sqlc`来了！`sqlc`可以根据我们编写的 SQL 语句生成类型安全的、地道的 Go 接口代码，我们要做的只是调用这些方法。
+在 Go 语言中编写数据库操作代码真的非常痛苦！`database/sql`标准库提供的都是比较底层的接口。我们需要编写大量重复的代码。大量的模板代码不仅写起来烦，而且还容易出错。有时候字段类型修改了一下，可能就需要改动很多地方；添加了一个新字段，之前使用 `select *` 查询语句的地方都要修改。如果有些地方有遗漏，可能就会造成运行时`panic`。即使使用 ORM 库，这些问题也不能完全解决！这时候，`sqlc`来了！`sqlc`可以根据我们编写的 SQL 语句生成类型安全的、地道的 Go 接口代码，我们要做的只是调用这些方法。
 
 ## 用法
 
@@ -780,5 +780,11 @@ packages：
 - Github sqlc: https://github.com/sqlc-dev/sqlc
 - Go 每日一库之 sqlc：https://cloud.tencent.com/developer/article/1693829
 
+# Go-sql-driver
 
+MySQL golang 数据库驱动。
 
+## References
+
+- Go library: https://github.com/go-sql-driver/mysql
+- [Go mysql驱动源码分析](https://blog.csdn.net/qq_39383767/article/details/144332375)
