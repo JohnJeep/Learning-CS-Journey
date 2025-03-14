@@ -1,8 +1,8 @@
-## EMQX 开放防火墙端口
+## EMQX Port
 
 EMQX 是一个高性能的 MQTT 消息中间件，通常用于物联网和实时消息应用。为了确保 EMQX 可以正常运行并允许客户端连接，你需要在防火墙上开放一些特定的端口。
 
-### 主要端口
+### Port
 
 1. **MQTT 协议端口**
    - **默认端口：`1883` (TCP)**：这是 MQTT 协议的默认端口，用于客户端与服务器之间的非加密通信。
@@ -64,10 +64,10 @@ firewall-cmd --list-ports
 
 对于 EMQX，你至少需要开放以下端口：
 
-- `1883`（非加密 MQTT）
-- `8883`（加密 MQTT）
-- `8083`（WebSocket MQTT）
-- `8084`（加密 WebSocket MQTT）
+- `1883`（TCP Port）
+- `8883`（SSL/TLS Port）
+- `8083`（WebSocket Port）
+- `8084`（Secure WebSocket Port）
 - `18083`（EMQX 管理控制台）
 - `4371` 和 `5371`（集群通信）
 
@@ -75,7 +75,7 @@ firewall-cmd --list-ports
 
 
 
-## EMQX 添加环境变量
+## EMQX env
 
 将 EMQX 添加到系统的环境变量中，可以让你在任何位置执行 EMQX 的命令，而不需要每次都进入其安装目录。以下是将 EMQX 添加到环境变量的步骤。
 
@@ -179,7 +179,7 @@ source /etc/profile
 
 
 
-## 客户端ID（ClientID）
+## ClientID
 
 ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是隔离的，故实际上 CoreID + ClientID 唯一标识了一个客户端连接。
 
@@ -191,7 +191,7 @@ ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是
 
 在 MQTT 协议中，`retain` 和 `retainHandling` 是两个不同的概念，分别与消息保留和消息传递策略有关。
 
-### 1. `retain` 参数：
+### 1. retain
 
 - **作用**：决定发布的消息是否被保留在 MQTT 服务器上。
 - **范围**：仅在发布消息时有效。
@@ -199,7 +199,7 @@ ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是
   - **`retain = true`**：消息被保留，新的订阅者会立即收到此消息。
   - **`retain = false`**：消息不被保留，新的订阅者不会收到过去发布的消息。
 
-### 2. `retainHandling` 参数：
+### 2. retainHandling 
 
 - **作用**：控制 MQTT 客户端在订阅时如何处理保留消息。
 - **范围**：仅在订阅消息时有效。
@@ -240,5 +240,9 @@ ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是
 
 # References
 
-- [centos7设置emqx开机自启动](http://iotts.com.cn/blog/2023/06/28/centos7%E8%AE%BE%E7%BD%AEemqx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/)
+- Eclipse Paho offical: https://eclipse.dev/paho/downloads
+- Eclipse Paho offical documentation: https://eclipse.dev/paho/documentation
+- MQTT 教程: https://www.emqx.com/zh/blog/category/mqtt-protocol
+- MQTT control packet: https://www.emqx.com/zh/blog/introduction-to-mqtt-control-packets
+- centos7设置emqx开机自启动: http://iotts.com.cn/blog/2023/06/28/centos7%E8%AE%BE%E7%BD%AEemqx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/
 - https://bifromq.io/zh-Hans/docs/2.0.0/best_practices/mqtt_parameters/
