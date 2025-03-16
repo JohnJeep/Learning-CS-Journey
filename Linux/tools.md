@@ -32,12 +32,26 @@
 # 3. 内存泄漏检测工具
 
 - valgrind 
-
   [valgrind.md](valgrind.md) 
-
 - mtrace
-
 - AddressSanitizer(ASan) : 该工具为 gcc 自带，4.8以上版本都可以使用，支持Linux、OS、Android等多种平台，不止可以检测内存泄漏，它其实是一个内存错误检测具，可以检测的问题有：内存泄漏、堆栈和全局内存越界访问、free后继续使用、局部内存被外层使用、Initialization order bugs。
-
 - VLD (Visual Leak Detector) 是一款开源检测内存泄露软件，Windows 下 visual studio 中非常好用的内存泄漏检测工具。
 
+
+# Magical Command
+- [ncdu](https://dev.yorhel.nl/ncdu): 具有文本模式用户界面的磁盘使用情况分析器。
+  安装 `sudo apt install ncdu`
+- [mv](https://midnight-commander.org/): 终端下面的 NotePad++
+  > Midnight Commander provides an internal text editor (mc -e,mcedit)
+  ```sh
+  apt-get install mc
+  ```
+- [icdiff](https://github.com/jeffkaufman/icdiff)：分屏显示 diff
+- [glances](https://nicolargo.github.io/glances)：更强大的 htop / top 代替者
+- [multitail](https://www.vanheusden.com/multitail)：多重 tail
+- [dstat](http://dag.wiee.rs/home-made/dstat)：vmstat 代替者
+- [ranger](https://github.com/ranger/ranger)：内容浏览/预览
+
+
+# References
+- https://skywind.me/blog/archives/3087
