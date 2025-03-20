@@ -553,4 +553,5 @@ vscode 中安装 vim 模拟插件。记录一些实用的技巧。
 - [vim-adventures](https://vim-adventures.com/) 通过玩游戏的方式来学习 Vim。
 - [Vim 快捷键大全](https://www.cnblogs.com/codehome/p/10214801.html)
 - [ctags 使用详解](https://blog.csdn.net/foreverling/article/details/80329586)
+- [VimScript 五分钟入门（翻译）](https://skywind.me/blog/archives/2193)
 
