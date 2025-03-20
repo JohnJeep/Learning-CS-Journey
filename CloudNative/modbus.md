@@ -1,3 +1,13 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-03-18 16:25:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-03-19 16:14:33
+ * @Description: Modbus 学习
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
+
 # References
 
 - [modbus tools](https://www.modbustools.com/modbus.html)

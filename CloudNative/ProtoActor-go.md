@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-11-27 11:11:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-03-19 16:16:26
+ * @Description: Actor 模型研究
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 ## Actor
 
 ### `context.go`
