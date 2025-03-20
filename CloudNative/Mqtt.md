@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-03-18 16:25:50
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-03-19 16:13:05
+ * @Description: MQTT 学习
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 ## EMQX Port
 
 EMQX 是一个高性能的 MQTT 消息中间件，通常用于物联网和实时消息应用。为了确保 EMQX 可以正常运行并允许客户端连接，你需要在防火墙上开放一些特定的端口。

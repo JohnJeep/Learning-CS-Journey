@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-12-18 16:25:50
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-03-19 16:17:25
+ * @Description: Ollama 学习
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # Ollama
 
 本地启动并运行大型语言模型。
