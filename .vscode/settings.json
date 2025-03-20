@@ -2,5 +2,12 @@
 "editor.lineNumbers": "relative",
 "workbench.tree.indent": 4,
 "cmake.configureOnOpen": false,
-"files.encoding": "utf8"
+"files.encoding": "utf8",
+"[markdown]": {
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    }
+}
 }
