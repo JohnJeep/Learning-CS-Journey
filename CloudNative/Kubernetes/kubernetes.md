@@ -23,9 +23,39 @@ Kubernets 管理 docker 流程
 ![](../figures/Kubernetes-Architecture.jpg)
 
 
+kubernets 集群架构组成
+
+Master node(主控节点)
+- API Server: 集群统一入口，以 Restful 方式交给 etcd 存储
+- Scheduler: 选择 node 节点应用部署
+- Controller: 处理集群中常规的后台任务
+- etcd: 存储系统，用于存储集群相关的数据
 
 
-## 3.1. Stateful(有状态)
+Work node(工作节点)
+- kubelet: master 派到 node 节点的代表，管理本机容器
+- kube-proxy: 提供网络代理，实现一些操作，比如负载均衡等
+- Pod
+    - 最小的部署单元
+    - 一组 container 的集合
+    - 一个容器中的 Pod 是共享网络的
+    - 短暂的生命周期，重启后资源被销毁
+
+
+
+
+
+## Pod
+
+## Controller
+
+- 确保预期的 Pod副本数量
+- 确保所有的 node 运行同一个 Pod
+- 可部署一次性任务和定时任务
+- 可部署 stateless, stateful
+
+
+### 3.1. Stateful(有状态)
 
 - 用来控制有状态服务，StatefulSet 中的每个 Pod 的名字都是事先确定的，不能更改。
 - StatefulSet 中 Pod 的名字的作用：是关联与该Pod对应的状态。
@@ -40,32 +70,20 @@ Kubernets 管理 docker 流程
 3. 作为一种比普通容器更稳定可靠的模拟虚拟机的机制
 
 
-
-## 3.2. Deployment
-
-部署是一个比 ReplicaSet 更广的 API 对象，可以是创建一个新的服务，更新一个新的服务，也可以是滚动升级一个服务。
-
+### 3.4. stateless(无状态)
+- 所控制的 Pod 的名字是随机设置的，一个 Pod 出故障了就被丢弃掉，在另一个地方重启一个新的 Pod，名字变了。名字和启动在哪儿都不重要，重要的只是 Pod 总数。
+- 一般不挂载存储或者挂载共享存储，保存的是所有 Pod 共享的状态。
 
 
 ## 3.3. Service
 
+> service：定义一组 Pod 访问的规则。
+
 - 每个 Service 对应一个集群内有效的虚拟 IP，集群内部通过虚拟IP访问服务。
 - Replica Set、Replica Controller 和 Deployment 只是保证了支撑服务的微服务 Pod 的数量，但是没有解决如何访问这些服务的问题。
 
-## 3.4. stateless(无状态)
-- 所控制的 Pod 的名字是随机设置的，一个 Pod 出故障了就被丢弃掉，在另一个地方重启一个新的 Pod，名字变了。名字和启动在哪儿都不重要，重要的只是 Pod 总数。
-- 一般不挂载存储或者挂载共享存储，保存的是所有 Pod 共享的状态。
 
-### 3.4.1. DaemonSet
-
-### 3.4.2. ReplicaSet
-
-### 3.4.3. Replication Controller
-
-
-
-
-## 3.5. Headless Service
+### 3.5. Headless Service
 
 Kubernetes 的 Headless Service 是一种特殊类型的服务，它允许直接访问 Pod 而不需要通过 Service 进行负载均衡。
 
@@ -84,6 +102,19 @@ Headless Service 对于一些特定的使用场景非常有用，比如数据库
 
 
 
+
+## 3.2. Deployment
+
+部署是一个比 ReplicaSet 更广的 API 对象，可以是创建一个新的服务，更新一个新的服务，也可以是滚动升级一个服务。
+
+
+### 3.4.1. DaemonSet
+
+### 3.4.2. ReplicaSet
+
+### 3.4.3. Replication Controller
+
+
 # 4. References
 
 - 官方英文文档: https://kubernetes.io
@@ -96,3 +127,6 @@ Headless Service 对于一些特定的使用场景非常有用，比如数据库
 - Kubernetes 的设计理念：https://jimmysong.io/kubernetes-handbook/concepts/concepts.html
 - Kubernetes 部署教程：https://zhuanlan.zhihu.com/p/641521752
 - Docker Containers and Kubernetes: An Architectural Perspective: https://dzone.com/articles/docker-containers-and-kubernetes-an-architectural
+
+
+curl -LO "https://mirrors.aliyun.com/kubernetes/kubectl/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
