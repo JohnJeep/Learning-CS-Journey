@@ -35,5 +35,18 @@
 
 
 
+# cmd
+
+查看电脑连接了哪些 WIFI
+
+```shell
+netsh wlan show profile
+```
+
+查看指定 WIFI 下的密码
+
+```shell
+netsh wlan show profile "ziroom608" key=clear
+```
 
 
