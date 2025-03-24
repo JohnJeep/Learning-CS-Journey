@@ -2,12 +2,14 @@
  * @Author: JohnJeep
  * @Date: 2024-01-06 17:19:15
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-01-06 17:30:46
+ * @LastEditTime: 2025-03-25 00:52:44
  * @Description:  Docker Compose 用法
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
 
-# 工程开发中常用缩写
+# 1. Introduce
+
+# 2. Abbreviation
 
 | 缩写     | 英文全称                    | 说明                 |
 | -------- | --------------------------- | -------------------- |
@@ -20,7 +22,29 @@
 
 
 
-## Docker Compose 指令
+# 2.1. Install
+
+```sh
+1. 下载镜像
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+2. 添加可执行权限
+chmod +x /usr/local/bin/docker-compose
+
+3. 终端查看是否安装成功
+docker-compose --version
+```
+
+配置 kafka
+```sh
+KAFKA_ADVERTISED_HOST_NAME：广播主机名称，一般用IP指定
+KAFKA_ZOOKEEPER_CONNECT：Zookeeper连接地址，格式：zoo1：port1,zoo2:port2:/path
+KAFKA_LISTENERS：Kafka启动所使用的的协议及端口
+KAFKA_ADVERTISED_LISTENERS：Kafka广播地址及端口，也就是告诉客户端，使用什么地址和端口能连接到Kafka，这个很重要，如果不指定，宿主机以外的客户端将无法连接到Kafka，比如我这里因为容器与宿主机做了端口映射，所以广播地址采用的是宿主机的地址及端口，告诉客户端只要连接到宿主机的指定端口就行了
+KAFKA_BROKER_ID：指定BrokerId，如果不指定，将会自己生成
+```
+
+# 2.2. Docker Compose command
 
 命令行终端输入 `docker compose --help` 查看 docker compose 的用法。
 
@@ -108,7 +132,7 @@ docker-compose exec  mysql  mysql -uroot -pMysql@root123
 
 
 
-# References
+# 3. References
 
 - Docker Compose offical doc: https://docs.docker.com/compose/
 - Compose 模板文件：https://yeasy.gitbook.io/docker_practice/compose/compose_file
