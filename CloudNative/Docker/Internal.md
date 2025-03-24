@@ -2,12 +2,13 @@
  * @Author: JohnJeep
  * @Date: 2023-03-30 15:33:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-01-06 14:00:29
+ * @LastEditTime: 2025-03-25 00:47:14
  * @Description:  Docker 内部原理探究
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 理解 Docker 内部原理
+
 1. **Docke 容器本质上是宿主机的进程。**
 2. namespace 实现了资源隔离。
 3. cgroups 实现了资源限制。
@@ -15,6 +16,7 @@
 
 
 ## 1.1. namespace资源隔离
+
 linux 内核提拱了 6 种 namespace 隔离的系统调用，如下图所示，但是真正的容器还需要处理许多其他工作。
 
 | namespace | 系统调用参数  | 隔离内容                   |
