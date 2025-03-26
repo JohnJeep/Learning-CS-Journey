@@ -1,5 +1,5 @@
 #!/bin/sh
-#
+# 开机自启动脚本，放在 /etc/init.d/nginx
 # nginx - this script starts and stops the nginx daemon
 #
 # chkconfig:   - 85 15
