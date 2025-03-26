@@ -1,4 +1,11 @@
-<!-- TOC -->
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-03-18 16:25:50
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-03-26 15:40:25
+ * @Description:  GNU tools chain
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
 - [1. binutils](#1-binutils)
   - [1.1. c++filt](#11-cfilt)
@@ -7,9 +14,10 @@
   - [2.2. glibc 版本查看](#22-glibc-版本查看)
 - [3. libstdc++](#3-libstdc)
 - [4. libc++](#4-libc)
-- [5. Reference](#5-reference)
+- [net-tools](#net-tools)
+- [apache2-tools](#apache2-tools)
+- [5. References](#5-references)
 
-<!-- /TOC -->
 
 # 1. binutils
 
@@ -49,9 +57,8 @@ Windows 环境下。
 
 c++filt 是 C++ 源码编译后生成二进制文件中符号表中的符号名还原工具。
 
-参考：
 
-- [Binutils - c++filt工具_qazw9600的博客-CSDN博客](https://blog.csdn.net/qazw9600/article/details/109729185)
+
 
 # 2. glibc
 
@@ -77,6 +84,8 @@ glibc 是 GNU 发布的 libc 库，也即 C 运行库，又称 GNU C 库。glibc
 
 <img width="60%" hight="60%" src="../Linux/pictures/Linux_kernel_System_Call_Interface_and_glibc.svg">
 
+
+
 ## 2.1. glibc 和 libc 的区别
 
 libc 是 Linux 下的 ANSI C 的函数库；glibc 是 Linux 下的 GUN C 函数库。
@@ -98,9 +107,11 @@ libc 是 Linux 下的 ANSI C 的函数库；glibc 是 Linux 下的 GUN C 函数�
   - 程序断言 (<assert.h>) 
 - GNU C 函数库是一种类似于第三方插件的东西，由于 Linux 是用Ｃ语言写的，所以 Linux 的一些操作是用Ｃ语言实现的，所以 GNU 组织开发了一个Ｃ语言的库，让我们更好的利用 C 语言开发基于 Linux 操作系统的程序。
 
-## 2.2. glibc 版本查看
 
-```c
+
+## 2.2. glibc version
+
+```shell
 $ ldd --version
 ldd (GNU libc) 2.17
 Copyright (C) 2012 Free Software Foundation, Inc.
@@ -113,7 +124,7 @@ Written by Roland McGrath and Ulrich Drepper.
 
 libstdc++ 是 GCC 的标准 C++ 库。
 
-```sh
+```shell
 64 位操作系统下查看 libstdc++.so 的版本
 $ strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX  
 ```
@@ -121,14 +132,58 @@ $ strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX
 - https://GCC.gnu.org/onlinedocs/libstdc++/ 
 - https://GCC.gnu.org/onlinedocs/GCC-4.8.5/libstdc++/manual/ 
 
+
+
 # 4. libc++
 
 libc++ 是针对 clang 编译器重写的 C++ 标准库。
 
-# 5. Reference
+
+# net-tools
+
+net-tools 包括下面的软件包
+- arp
+- hostname
+- ifconfig
+- netstat
+- rarp 
+- route
+- iptunnel
+- ipmaddr
+
+注：Debian 包管理系统中查看软件包中有哪些工具
+```shell
+dpkg -L net-tools | grep -E '/bin/|/sbin/' | xargs -I {} basename {}
+```
+
+
+# apache2-tools
+
+apache2-tools 包括下面的软件包
+- ab
+- checkgid
+- fcgistarter
+- htcacheclean
+- htdbm
+- htdigest
+- htpasswd
+- logresolve
+- rotatelogs
+- check_forensic
+- httxt2dbm
+- split-logfile
+
+注：Debian 包管理系统中查看软件包中有哪些工具
+```shell
+dpkg -L apache2-utils | grep -E '/bin/|/sbin/' | xargs -I {} basename {}
+```
+
+
+# 5. References
 
 - [官网： glibc 文档](https://www.gnu.org/software/libc/libc.html)
 - [glibc 官方 GUN 源码地址](http://ftp.gnu.org/gnu/glibc/)
 - [The GNU C Library Release Timeline](https://sourceware.org/glibc/wiki/Glibc%20Timeline)
 - [glibc源码分析-1:构建过程](https://magus0219.me/zh-cn/glibc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-1-%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B/)
 - [关于linux系统里glibc库的一些记述](http://fsemouse.com/wordpress/2021/01/19/关于linux系统里glibc库的一些记述/)
+- [Binutils - c++filt工具_qazw9600的博客-CSDN博客](https://blog.csdn.net/qazw9600/article/details/109729185)
