@@ -1,25 +1,40 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:42:59
- * @LastEditTime: 2025-03-26 15:42:18
+ * @LastEditTime: 2025-03-28 00:57:57
  * @LastEditors: JohnJeep
  * @Description: Nginx learning
  * -->
 
-- [1. Install](#1-install)
-  - [1.1. Source code install](#11-source-code-install)
-  - [1.2. Binary install](#12-binary-install)
-  - [1.3. Docker install](#13-docker-install)
-- [2. command](#2-command)
-- [3. Configure](#3-configure)
-- [4. Nginx Application](#4-nginx-application)
-- [5. References](#5-references)
+- [1. Introduce](#1-introduce)
+- [2. Install](#2-install)
+  - [2.1. Source code install](#21-source-code-install)
+  - [2.2. Binary install](#22-binary-install)
+  - [2.3. Docker install](#23-docker-install)
+- [3. command](#3-command)
+- [4. Configure](#4-configure)
+- [5. Nginx Application](#5-nginx-application)
+- [6. References](#6-references)
+
+# 1. Introduce
+
+nginx ("*engine x*") is an HTTP web server, reverse proxy, content cache, load balancer, TCP/UDP proxy server, and mail proxy server. Originally written by [Igor Sysoev](http://sysoev.ru/en/) and distributed under the [2-clause BSD License](https://nginx.org/LICENSE).
 
 
 
-# 1. Install
+Nginx 优点
 
-## 1.1. Source code install
+- 高并发、高性能
+- 可扩展性好
+- 高可靠性
+- 热部署
+- BSD许可证
+
+
+
+# 2. Install
+
+## 2.1. Source code install
 
 ```sh
 1. 准备编译环境，自动安装 Nginx 对应的依赖环境
@@ -189,7 +204,7 @@ WantedBy=multi-user.target
 ```
 
 
-## 1.2. Binary install
+## 2.2. Binary install
 
 Debian, Ubuntu 及发行版安装
 ```shell
@@ -198,7 +213,7 @@ sudo apt install neginx
 ```
 
 
-## 1.3. Docker install
+## 2.3. Docker install
 
 - 官网镜像：https://hub.docker.com/_/nginx/
 - 下载镜像：`docker pull nginx`
@@ -211,7 +226,7 @@ sudo apt install neginx
 - 重新启动服务：`docker restart my-nginx`
 
 
-# 2. command
+# 3. command
 
 ```sh
 # 停止nginx
@@ -226,7 +241,7 @@ nginx -s reopen
 # 查看版本
 nginx -v
 
-# 查看详细版本信息，包括编译参数
+# 查看详细版本信息，包括编译信息
 nginx -V
 
 # 检查对配置文件的修改是否正确
@@ -247,6 +262,9 @@ netstat -apn | grep nginx
 
 systemctl 来管理 nginx 进程
 ```sh
+# 重新加载系统服务
+systemctl daemon-reload
+
 # systemd 开机自启动
 systemctl enable nginx
 
@@ -269,9 +287,30 @@ systemctl stop nginx
 systemctl restart nginx
 ```
 
-# 3. Configure
+# 4. Configure
+
+Nginx 语法配置
+
+1. 配置文件由指令与指令块构成
+
+   指令块：upstream、http、server、location
+
+2. 每条指令以;分号结尾，指令与参数间以空格符号分隔
+
+3. 指令块以`{}`大括号将多条指令组织在一起
+
+4. `include`语句允许组合多个配置文件以提升可维护性
+
+5. 使用`#`符号添加注释，提高可读性
+
+6. 使用`$`符号使用变量
+
+7. 部分指令的参数支持正则表达式
+
+
 
 nginx 配置文件中的内置变量，也是全局变量
+
 | Variable          | 描述                                               |
 | ----------------- | -------------------------------------------------- |
 | $args             | 这个变量等于请求行中的参数，同$query_string        |
@@ -297,8 +336,43 @@ nginx 配置文件中的内置变量，也是全局变量
 | $document_uri     | 与$uri相同                                         |
 
 
+Nginx configure architecture
 
-# 4. Nginx Application
+![alt text](figures/configure.png)
+
+location
+
+- `alias`：用于将 URL 路径映射到文件系统的特定目录（`/www/image` 或 `/www/video`）。
+- 路径会直接替换 `location`（例如 `alias /www/image` 会直接指向 `/www/image`）。
+
+- `index`：指定默认访问的文件为 `index.html`。
+
+- `try_files`：确保请求的文件或目录存在，否则返回 404。
+
+  ```shell
+  # 挂载 /video 路径到 /www/video
+  location /video {
+    alias /www/video;
+    index index.html;
+    try_files $uri $uri/ =404;
+  }
+  ```
+
+- 如果用 `root`，路径会是 `root + location`（例如 `root /www; location /image` 会指向 `/www/image`）。
+
+  ```shell
+  # 根路径配置
+  location / {
+    root /www;
+    index index.html;
+  }
+  ```
+
+  
+
+
+
+# 5. Nginx Application
 
 - Web服务器
 - 反向代理
@@ -308,7 +382,7 @@ nginx 配置文件中的内置变量，也是全局变量
 
 
 
-# 5. References
+# 6. References
 
 - Nginx official document: https://nginx.org/en/docs
 - Nginx 极简教程: https://github.com/dunwu/nginx-tutorial
