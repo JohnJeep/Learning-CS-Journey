@@ -1,3 +1,10 @@
+---
+title: DataStructure
+data: 2025-03-30 00:04:11
+tags: ['DataStructure']
+category: DataStructure
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50

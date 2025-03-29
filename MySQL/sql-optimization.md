@@ -1,3 +1,10 @@
+---
+title: sql-optimization
+data: 2025-03-30 00:04:11
+tags: ['MySQL']
+category: MySQL
+---
+
 # 慢SQL
 
 慢 SQL 产生的表现：

@@ -1,3 +1,10 @@
+---
+title: JavaScript
+data: 2025-03-30 00:04:11
+tags: ['JavaScript']
+category: JavaScript
+---
+
 # JavaScript
 
 # References

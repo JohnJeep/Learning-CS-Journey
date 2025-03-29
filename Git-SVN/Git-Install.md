@@ -1,3 +1,10 @@
+---
+title: Git-Install
+data: 2025-03-30 00:04:10
+tags: ['Git-SVN']
+category: Git-SVN
+---
+
 # Git 安装
 
 Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Linux/Unix、macOS 等不同的操作系统上。下面讲解在不同平台上的安装。

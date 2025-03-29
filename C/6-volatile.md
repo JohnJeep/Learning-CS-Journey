@@ -1,3 +1,10 @@
+---
+title: 6-volatile
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-22 11:50:29

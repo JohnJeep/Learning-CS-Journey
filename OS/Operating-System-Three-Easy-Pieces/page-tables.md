@@ -1,3 +1,10 @@
+---
+title: page-tables
+data: 2025-03-30 00:04:11
+tags: ['Operating-System-Three-Easy-Pieces']
+category: Operating-System-Three-Easy-Pieces
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-25 19:37:43

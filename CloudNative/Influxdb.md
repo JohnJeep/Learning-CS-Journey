@@ -1,3 +1,10 @@
+---
+title: Influxdb
+data: 2025-03-30 00:04:10
+tags: ['CloudNative']
+category: CloudNative
+---
+
 # 1. InfluxDB 
 
 InfluxDB 是一个高性能的时序数据库，专门用于处理高写入负载的数据存储，尤其是时间序列数据，比如物联网传感器数据、性能监控数据和实时分析数据等。以下是InfluxDB的一些基本概念和操作介绍：

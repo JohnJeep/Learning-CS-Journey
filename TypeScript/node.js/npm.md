@@ -1,3 +1,10 @@
+---
+title: npm
+data: 2025-03-30 00:04:11
+tags: ['node.js']
+category: node.js
+---
+
 # introduce
 
 Node 是做事工具，npm 是安装工具

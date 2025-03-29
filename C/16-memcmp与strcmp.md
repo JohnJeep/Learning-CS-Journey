@@ -1,3 +1,10 @@
+---
+title: 16-memcmp与strcmp
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-12 09:47:29

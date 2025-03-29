@@ -1,3 +1,10 @@
+---
+title: ccat
+data: 2025-03-30 00:04:11
+tags: ['Shell']
+category: Shell
+---
+
 # 自带语法高亮的 cat – ccat
 
 让 cat 源代码时如果带上语法高亮，会不会让工作效率更高一些呢？

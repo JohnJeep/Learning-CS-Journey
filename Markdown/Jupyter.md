@@ -1,3 +1,10 @@
+---
+title: Jupyter
+data: 2025-03-30 00:04:10
+tags: ['Markdown']
+category: Markdown
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:57

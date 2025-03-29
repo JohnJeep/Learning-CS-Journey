@@ -1,3 +1,10 @@
+---
+title: C++Sheet
+data: 2025-03-30 00:04:11
+tags: ['FAQ']
+category: FAQ
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-03-30 22:59:03

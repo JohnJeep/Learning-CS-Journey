@@ -1,3 +1,10 @@
+---
+title: README
+data: 2025-03-30 00:04:11
+tags: ['project']
+category: project
+---
+
 不同目录下构建自己创建的不同 package
 
 1. 项目对应的目录下执行 `go mod init project_name`，创建一个 `go.mod` 文件，这种方式需要在

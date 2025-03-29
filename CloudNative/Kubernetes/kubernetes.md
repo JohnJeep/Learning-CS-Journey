@@ -1,3 +1,10 @@
+---
+title: kubernetes
+data: 2025-03-30 00:04:10
+tags: ['Kubernetes']
+category: Kubernetes
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-04-15 20:18:46

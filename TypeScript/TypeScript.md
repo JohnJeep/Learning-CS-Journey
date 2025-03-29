@@ -1,3 +1,10 @@
+---
+title: TypeScript
+data: 2025-03-30 00:04:11
+tags: ['TypeScript']
+category: TypeScript
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2025-03-15 13:18:26

@@ -1,3 +1,10 @@
+---
+title: MySQL-API
+data: 2025-03-30 00:04:11
+tags: ['MySQL']
+category: MySQL
+---
+
 # c++ connect API
 
 ```

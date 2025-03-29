@@ -1,3 +1,10 @@
+---
+title: 11-restrict
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-30 13:36:34

@@ -1,3 +1,10 @@
+---
+title: BrainMemory
+data: 2025-03-30 00:04:11
+tags: ['Philosophy']
+category: Philosophy
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:58

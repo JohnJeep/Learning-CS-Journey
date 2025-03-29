@@ -1,3 +1,10 @@
+---
+title: ComputerSystemAProgramm'sPerspective
+data: 2025-03-30 00:04:11
+tags: ['OS']
+category: OS
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34

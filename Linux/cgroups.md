@@ -1,3 +1,10 @@
+---
+title: cgroups
+data: 2025-03-30 00:04:10
+tags: ['Linux']
+category: Linux
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-07-04 17:54:26

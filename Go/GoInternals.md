@@ -1,3 +1,10 @@
+---
+title: GoInternals
+data: 2025-03-30 00:04:11
+tags: ['Go']
+category: Go
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2023-07-10 09:54:50

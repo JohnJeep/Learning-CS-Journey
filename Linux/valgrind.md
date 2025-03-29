@@ -1,3 +1,10 @@
+---
+title: valgrind
+data: 2025-03-30 00:04:10
+tags: ['Linux']
+category: Linux
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-05 22:07:57

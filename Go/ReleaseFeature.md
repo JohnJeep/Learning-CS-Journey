@@ -1,3 +1,10 @@
+---
+title: ReleaseFeature
+data: 2025-03-30 00:04:11
+tags: ['Go']
+category: Go
+---
+
 # Release Feature
 
 ## Go 1.20

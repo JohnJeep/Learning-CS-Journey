@@ -1,3 +1,10 @@
+---
+title: VisualStudio
+data: 2025-03-30 00:04:10
+tags: ['Windows']
+category: Windows
+---
+
 ## VisualStudio 版本对比
 
 因为微软的版本比较乱，所以要理清版本，首先需要区分 VS 和 VC 的含义：

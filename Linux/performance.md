@@ -1,3 +1,10 @@
+---
+title: performance
+data: 2025-03-30 00:04:10
+tags: ['Linux']
+category: Linux
+---
+
 <!-- TOC -->
 
 - [1. 性能优化](#1-性能优化)

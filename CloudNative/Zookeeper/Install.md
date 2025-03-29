@@ -1,3 +1,10 @@
+---
+title: Install
+data: 2025-03-30 00:04:10
+tags: ['Zookeeper']
+category: Zookeeper
+---
+
 # zookeeper的安装部署
 
 ## 安装

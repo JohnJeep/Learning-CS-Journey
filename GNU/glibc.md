@@ -1,3 +1,10 @@
+---
+title: glibc
+data: 2025-03-30 00:04:11
+tags: ['GNU']
+category: GNU
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-18 16:25:50

@@ -1,3 +1,10 @@
+---
+title: Keepalived
+data: 2025-03-30 00:04:11
+tags: ['Distributed']
+category: Distributed
+---
+
 # Keepalived 
 
 ## 安装

@@ -1,3 +1,10 @@
+---
+title: GPM
+data: 2025-03-30 00:04:11
+tags: ['Go']
+category: Go
+---
+
 # GPM Model
 
 在Golang（也称为Go）中，GPM代表着Go中的并发模型，它包括三个关键的组件：Goroutines（协程）、Scheduler（调度器）和系统线程（M：Machine）。GPM模型是Go语言实现并发的核心。下面是关于GPM模型的简要解释：

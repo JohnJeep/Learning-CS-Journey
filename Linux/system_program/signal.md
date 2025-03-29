@@ -1,3 +1,10 @@
+---
+title: signal
+data: 2025-03-30 00:04:10
+tags: ['system_program']
+category: system_program
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2023-07-25 14:51:53

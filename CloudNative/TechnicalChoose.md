@@ -1,3 +1,10 @@
+---
+title: TechnicalChoose
+data: 2025-03-30 00:04:10
+tags: ['CloudNative']
+category: CloudNative
+---
+
 # 技术选型
 
 ## Kafka && RocketMQ

@@ -1,3 +1,10 @@
+---
+title: LeetCode-Terminology
+data: 2025-03-30 00:04:10
+tags: ['LeetCode']
+category: LeetCode
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-03-20 00:06:33

@@ -1,3 +1,10 @@
+---
+title: RocketMQ
+data: 2025-03-30 00:04:10
+tags: ['RocketMQ']
+category: RocketMQ
+---
+
 Broker 每隔 30s 向 Name Server 发送心跳，Name Server 如果 120s 没有收到心跳，就会判断 Broker 宕机了。
 
 

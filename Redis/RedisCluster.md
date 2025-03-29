@@ -1,3 +1,10 @@
+---
+title: RedisCluster
+data: 2025-03-30 00:04:10
+tags: ['Redis']
+category: Redis
+---
+
 # 构建一个稳定、高性能Redis集群
 
 1️⃣数据怕丢失 -> 持久化（RDB/AOF）

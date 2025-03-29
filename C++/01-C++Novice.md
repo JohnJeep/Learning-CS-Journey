@@ -1,3 +1,10 @@
+---
+title: 01-C++Novice
+data: 2025-03-30 00:04:11
+tags: ['C++']
+category: C++
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26

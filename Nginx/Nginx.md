@@ -1,3 +1,10 @@
+---
+title: Nginx
+data: 2025-03-30 00:04:10
+tags: ['Nginx']
+category: Nginx
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:42:59

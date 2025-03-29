@@ -1,3 +1,10 @@
+---
+title: Redis
+data: 2025-03-30 00:04:10
+tags: ['Redis']
+category: Redis
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27

@@ -1,3 +1,10 @@
+---
+title: 22-枚举类型(Enumerations)
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:00:34

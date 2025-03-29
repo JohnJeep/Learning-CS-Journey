@@ -1,3 +1,10 @@
+---
+title: English
+data: 2025-03-30 00:04:11
+tags: ['Philosophy']
+category: Philosophy
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-03 22:07:49

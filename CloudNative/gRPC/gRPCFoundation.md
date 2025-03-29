@@ -1,3 +1,10 @@
+---
+title: gRPCFoundation
+data: 2025-03-30 00:04:10
+tags: ['gRPC']
+category: gRPC
+---
+
  <!-- 
  * @Author: JohnJeep
  * @Date: 2022-11-02 21:34:24

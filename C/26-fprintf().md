@@ -1,3 +1,10 @@
+---
+title: 26-fprintf()
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 - 函数原型：`int fprintf (FILE* stream, const char*format, [argument])`
   - stream: 指向FILE对象的指针
   - format: 这是 C 字符串，包含了要被写入到流 stream 中的文本。format 标签属性是`%[flags][width][.precision][length]specifier`

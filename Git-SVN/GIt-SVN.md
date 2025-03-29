@@ -1,3 +1,10 @@
+---
+title: GIt-SVN
+data: 2025-03-30 00:04:10
+tags: ['Git-SVN']
+category: Git-SVN
+---
+
 服务器使用的是 SVN，但是想本地使用 Git 的 local branch 或者离线编辑代码等，这时 `Git-SVN` 就是最好的。
 
 下面是 `Git-SVN` 通用的操作

@@ -1,3 +1,10 @@
+---
+title: Performance
+data: 2025-03-30 00:04:11
+tags: ['Go']
+category: Go
+---
+
 # GO 性能分析
 
 性能分析的主要工具为：profile、trace。

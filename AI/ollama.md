@@ -1,3 +1,10 @@
+---
+title: ollama
+data: 2025-03-30 00:04:10
+tags: ['AI']
+category: AI
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2024-12-18 16:25:50

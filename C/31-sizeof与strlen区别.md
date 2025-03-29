@@ -1,3 +1,10 @@
+---
+title: 31-sizeof与strlen区别
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-13 21:14:28

@@ -1,3 +1,10 @@
+---
+title: CPU
+data: 2025-03-30 00:04:11
+tags: ['CPU']
+category: CPU
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2023-05-27 11:08:34

@@ -1,3 +1,10 @@
+---
+title: fopen() 与 open() 区别
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-03-09 17:36:33

@@ -1,3 +1,10 @@
+---
+title: enable_shared_from_this
+data: 2025-03-30 00:04:11
+tags: ['C++']
+category: C++
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-28 21:24:43

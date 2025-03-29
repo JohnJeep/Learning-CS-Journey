@@ -1,3 +1,10 @@
+---
+title: EnglishElegantSentences
+data: 2025-03-30 00:04:11
+tags: ['Philosophy']
+category: Philosophy
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-30 22:33:19

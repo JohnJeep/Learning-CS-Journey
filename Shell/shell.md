@@ -1,3 +1,10 @@
+---
+title: shell
+data: 2025-03-30 00:04:11
+tags: ['Shell']
+category: Shell
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07

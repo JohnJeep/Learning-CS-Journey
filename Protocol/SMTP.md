@@ -1,3 +1,10 @@
+---
+title: SMTP
+data: 2025-03-30 00:04:10
+tags: ['Protocol']
+category: Protocol
+---
+
 # 1. 简介
 
 SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议，尽管邮件服务器可以用SMTP发送、接收邮件，但是邮件客户端只能用 SMTP 发送邮件，接收邮件一般用 IMAP 或者 POP3。邮件客户端使用 TCP 的 25 号端口与服务器通信。

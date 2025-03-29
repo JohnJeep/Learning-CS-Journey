@@ -1,3 +1,10 @@
+---
+title: Internals
+data: 2025-03-30 00:04:10
+tags: ['Kubernetes']
+category: Kubernetes
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2022-03-18 16:25:50

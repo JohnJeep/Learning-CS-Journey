@@ -1,3 +1,10 @@
+---
+title: 10-const
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2019-10-21 19:00:34

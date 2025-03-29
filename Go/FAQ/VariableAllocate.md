@@ -1,3 +1,10 @@
+---
+title: VariableAllocate
+data: 2025-03-30 00:04:11
+tags: ['FAQ']
+category: FAQ
+---
+
 ### How do I know whether a variable is allocated on the heap or the stack?
 
 一、C语言中返回函数中局部变量值和指针

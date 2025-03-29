@@ -1,3 +1,10 @@
+---
+title: 35-snprintf
+data: 2025-03-30 00:04:11
+tags: ['C']
+category: C
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-25 21:25:38

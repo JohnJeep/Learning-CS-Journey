@@ -1,3 +1,10 @@
+---
+title: package-manager
+data: 2025-03-30 00:04:10
+tags: ['Linux']
+category: Linux
+---
+
 # 1. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)

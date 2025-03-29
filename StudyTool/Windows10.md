@@ -1,3 +1,10 @@
+---
+title: Windows10
+data: 2025-03-30 00:04:10
+tags: ['StudyTool']
+category: StudyTool
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2020-06-01 21:30:44

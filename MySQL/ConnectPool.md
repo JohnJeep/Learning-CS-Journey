@@ -1,3 +1,10 @@
+---
+title: ConnectPool
+data: 2025-03-30 00:04:11
+tags: ['MySQL']
+category: MySQL
+---
+
 # 连接池
 
 ## 为什么要连接池？

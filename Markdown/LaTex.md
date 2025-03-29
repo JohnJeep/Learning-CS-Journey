@@ -1,3 +1,10 @@
+---
+title: LaTex
+data: 2025-03-30 00:04:10
+tags: ['Markdown']
+category: Markdown
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2019-03-13 09:55:36

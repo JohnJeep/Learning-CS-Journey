@@ -1,3 +1,10 @@
+---
+title: GoTest
+data: 2025-03-30 00:04:11
+tags: ['Go']
+category: Go
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2023-12-18 14:05:02

@@ -1,3 +1,10 @@
+---
+title: 02-C++Advanced
+data: 2025-03-30 00:04:11
+tags: ['C++']
+category: C++
+---
+
 <!--
 
  * @Author: JohnJeep

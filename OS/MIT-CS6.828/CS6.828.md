@@ -1,3 +1,10 @@
+---
+title: CS6.828
+data: 2025-03-30 00:04:11
+tags: ['MIT-CS6.828']
+category: MIT-CS6.828
+---
+
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-10 15:58:00

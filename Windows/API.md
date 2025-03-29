@@ -1,3 +1,10 @@
+---
+title: API
+data: 2025-03-30 00:04:10
+tags: ['Windows']
+category: Windows
+---
+
 ## Win32 API 后缀
 
 - `A` 表示使用ANSI编码作为标准输入与输出流的文本编码

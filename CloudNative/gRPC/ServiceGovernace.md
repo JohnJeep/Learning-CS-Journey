@@ -1,3 +1,10 @@
+---
+title: ServiceGovernace
+data: 2025-03-30 00:04:10
+tags: ['gRPC']
+category: gRPC
+---
+
 # 服务治理
 服务治理包含的功能：
 

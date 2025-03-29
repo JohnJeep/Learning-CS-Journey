@@ -1,3 +1,10 @@
+---
+title: ntp
+data: 2025-03-30 00:04:10
+tags: ['Linux']
+category: Linux
+---
+
 ### 简介
 
 `ntpd` 是传统的时间同步守护进程，用于让系统的时间与远程 NTP（Network Time Protocol）服务器持续保持同步。它适合长期在线的服务器，能逐步调整系统时钟，保持时间的精准性。以下是 `ntpd` 的使用方法，包括安装、配置和监控。
