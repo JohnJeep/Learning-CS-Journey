@@ -84,4 +84,4 @@ dkms.conf
 *.app
 
 TypeScript/out/*
-TypeScript/node.js/node_modules/*
+*/node_modules/*
