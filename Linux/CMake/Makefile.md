@@ -59,13 +59,13 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 通常软
 - 命令
 
 <div align="center"> 
-  <img width="80%" height="80%" src="../pictures/makefile三要素.png" />
+  <img width="80%" height="80%" src="../figures/makefile三要素.png" />
 </div>
 <div align="center">
-  <img width="80%" height="80%" src="../pictures/makefile工作原理-1.png" />
+  <img width="80%" height="80%" src="../figures/makefile工作原理-1.png" />
 </div>
 <div align="center"> 
-  <img width="80%" height="80%" src="../pictures/makefile工作原理-2.png" />
+  <img width="80%" height="80%" src="../figures/makefile工作原理-2.png" />
 </div>
 
 

@@ -118,7 +118,7 @@
     - SMTP 简单邮件传送协议。
     - SNMP 简单网络管理协议。
 
-  <img src="./figure/OSI七层模型.png"></p>
+  <img src="./figures/OSI七层模型.png">
 
 
 ## 1.3. Port
@@ -210,14 +210,12 @@ DNS是指：域名服务器(Domain Name Server)。在Internet上域名与IP地�
 - 从应用的角度上看，对 DNS的访问是通过一个地址解析器( resolution)来完成的。
 - DNS报文格式
   - 报文 (message) 由 `12字节长` 的首部和 `4个长度可变` 的字段组成。 
-  - DNS报文中最后的三个字段，`回答字段、授权字段和附加信息字段`，均采用一种称为资源记录 `RR( Resource Record)`的相同格式。
+  - DNS报文中最后的三个字段，`回答字段、授权字段和附加信息字段`，均采用一种称为资源记录 `RR( Resource Record)`的相同格式。<p>
+  <img src="./figures/DNS报文格式.png">
 
-  <img src="./figure/DNS报文格式.png"></p>
 
-
-- DNS报文首部中的标志字段
-
-  <img src="./figure/DNS报文首部中的标志字段.png"></p>
+- DNS报文首部中的标志字段<p>
+  <img src="./figures/DNS报文首部中的标志字段.png"></p>
 - QR 是 `1 bit` 字段： 0表示查询报文， 1表示响应报文。
   - opcode是一个`4 bit` 字段：通常值为0(标准查询)，其他值为1(反向查询)和2(服务器状态请求)。
   - AA 是 `1 bit` 标志，表示“授权回答 (authoritative answer)”。该名字服务器是授权于该域的。
@@ -229,7 +227,6 @@ DNS是指：域名服务器(Domain Name Server)。在Internet上域名与IP地�
 
 
 - 指针查询：给定一个IP地址，返回与该地址对应的域名。 
-
 - 资源记录(RR: resource record)
   - `A`: 记录了一个IP地址，存储32 bit的二进制数
   - `PTR`: 用于指针查询。
@@ -268,15 +265,10 @@ TCP 工作流程
   - 注意：不要将 `确认序号Ack` 与 `标志位中的ACK` 搞混了。 
 
 - TCP的首部(head)
-  - TCP数据在IP数据报中的封装
-
-    <img src="./figure/TCP数据在IP数据报中的封装.png"></p>
-
-  - TCP包的首部数据格式
-
-    <img src="./figure/TCP包首部.png">
-
-
+  - TCP数据在IP数据报中的封装<p>
+    <img src="./figures/TCP数据在IP数据报中的封装.png"></p>
+  - TCP包的首部数据格式<p>
+    <img src="./figures/TCP包首部.png">
   - TCP首部中的 `6个 bit标志位`
     - `URG(urgent)` 紧急指针(urgent pointer)，是一个正的偏移量。
     - `ACK(acknowledgement)` 确认序号。
@@ -284,10 +276,7 @@ TCP 工作流程
     - `RST(reset)` 重建连接。
     - `SYN(synchronous)` 同步序号用来发起一个连接。
     - `FIN(finish)` 发送方完成数据发送 
-
 - TCP流量控制：由连接的每一方通过窗口大小来确认。 窗口大小是一个 `16 bit` 的字节数。
-
-
 - 校验和：覆盖了整个TCP的报文段，包括TCP首部和TCP数据，是一个强制性的字段。一定是发送端进行校验和计算，接收端进行校验和 `验证`。
 
 
@@ -300,8 +289,8 @@ TCP 工作流程
 
 #### 3.1.1.1. ESTABLISHED
 
-需要三次握手，即连接必须是一方主动打开，另一方被动打开的。  
-<img src="./figure/TCP三次握手.jpeg"></p>
+需要三次握手，即连接必须是一方主动打开，另一方被动打开的。<p>
+<img src="./figures/TCP三次握手.jpeg">
 
 > `SYN_RECV` 状态：服务端被动打开后,接收到了客户端的SYN并且发送了ACK时的状态。再进一步接收到客户端的ACK就进入ESTABLISHED状态。
 
@@ -333,8 +322,7 @@ TCP 工作流程
 
 #### 3.1.1.2. CLOSE
 
-需要四次挥手。由于TCP的半关闭造成的。必须是一方主动释放，另一方被动释放。
-
+需要四次挥手。由于TCP的半关闭造成的。必须是一方主动释放，另一方被动释放。<p>
 ![alt text](figure/TCP四次挥手.jpeg)
 
 四次握手的简单过程描述：假设客户端准备中断连接，首先向服务器端发送一个FIN的请求关闭包(FIN=final)，然后由established状态过渡到FIN-WAIT1状态。服务器收到FIN包以后会发送一个ACK，然后自己由established状态进入CLOSE-WAIT状态。此时通信进入半双工状态，即留给服务器一个机会将剩余数据传递给客户端，传递完后服务器发送一个FIN+ACK的包，表示我已经发送完数据可以断开连接了，就这便进入LAST_ACK阶段。客户端收到以后，发送一个ACK表示收到并同意请求，接着由FIN-WAIT2进入TIME-WAIT阶段。服务器收到ACK，结束连接。客户端发送完ACK包之后，客户端还要等待2MSL(MSL=maxinum segment lifetime最长报文生存时间，2MSL就是两倍的MSL)才能真正的关闭连接。
@@ -391,13 +379,11 @@ TCP 工作流程
 TCP半关闭
   - 概念：客户端以结束向服务器端发送数据后，还能接收服务器端数据的能力。  
   - rsh工作原理
-  - 将标准输入(datafile)复制给TCP连接，将结果从TCP连接中复制给标准输出。
-
+  - 将标准输入(datafile)复制给TCP连接，将结果从TCP连接中复制给标准输出。<p>
 ![alt text](figure/rsh工作原理.png)
 
 
-TCP状态变迁
- 
+TCP状态变迁<p>
 ![alt text](figure/TCP正常连接建立和终止所对应的状态.png)
 
 `TIME_WAIT` 状态也称为 `2 MSL 等待状态`。
@@ -416,15 +402,12 @@ TCP状态变迁
 
 半打开(half-open)：一端正常关闭或异常终止连接而另一方却还不知道。
 
-同时打开：两个应用程序同时执行主动打开，每一方必须发送 `SYN`，这些 `SYN` 必须发送给对方。
+同时打开：两个应用程序同时执行主动打开，每一方必须发送 `SYN`，这些 `SYN` 必须发送给对方。<>
+<img src="./figures/同时打开变迁状态图.png">
 
-<img src="./figure/同时打开变迁状态图.png"></p>
 
-
-TCP选项 
- 
-![alt text](figure/TCP选项.png)
-
+TCP选项<p>
+![alt text](./figures/TCP选项.png)
 
 
 ### 3.1.2. TCP交互数据流
@@ -442,9 +425,8 @@ TCP选项
 
 滑动窗口机制
 
-TCP滑动窗口的可视化表示
-
-<img src="./figure/TCP滑动窗口的可视化表示.png"></p>
+TCP滑动窗口的可视化表示<p>
+<img src="./figures/TCP滑动窗口的可视化表示.png"></p>
 
 
 PUSH标志
@@ -541,13 +523,12 @@ PUSH标志
 - Fast Retransmit(快速重传)
   - 超时重传存在的问题：超时的周期相对较长。当一个报文段丢失时，这种长超时周期迫使发送方延迟重传丢失的 packet， 因而增加了端到端时延。可以在发送方通过冗余ACK (duplicate ACK) 来检测丢包的情况。
   - Duplicate ACK (重复 ACK): 是重新确认发送方已经收到较早确认报文段的 ACK。
-  - 发送方经常一个接一个地发送大量的报文段，如果一个报文段丢失，就很可能引起许多一个接一个冗余的ACK。如果 TCP 发送方接收到对相同数据的3个冗余ACK，它把这当作一种指示，说明跟在这个已被确认过 3 次的报文段之后的报文段已经丢失。一旦收到 3 个冗余 ACK, TCP就执行快速重传（fast retransmit） [RFC 5681]，即在该报文段的定时器过期之前重传丢失的报文段。
-
-  <img src="./figure/Fast-retransmit.png">
+  - 发送方经常一个接一个地发送大量的报文段，如果一个报文段丢失，就很可能引起许多一个接一个冗余的ACK。如果 TCP 发送方接收到对相同数据的3个冗余ACK，它把这当作一种指示，说明跟在这个已被确认过 3 次的报文段之后的报文段已经丢失。一旦收到 3 个冗余 ACK, TCP就执行快速重传（fast retransmit） [RFC 5681]，即在该报文段的定时器过期之前重传丢失的报文段。<p>
+  <img src="./figures/Fast-retransmit.png">
 
 
   - 采用快速重传的 TCP 中 ACK 接受事件的执行流程。
-    ```c++
+    ```cpp
     event: ACK received, with ACK field value of y
         if (y > SendBase) {
             SendBase=y
@@ -601,7 +582,7 @@ TCP 的拥塞控制是：每个 RTT 内 cwnd 线性（加性）增加 1 个 MSS�
 
   > 默认因特网版本的 IP 和 TCP 采用端到端拥塞控制方法。然而，最近 IP 和 TCP 也能够选择性网络辅助拥塞控制来实现。
 
-<img src="./figure/network-indicated-congestion.png">
+<img src="./figures/network-indicated-congestion.png">
 
 TCP必须使用端到端拥塞控制而不是使网络辅助的拥塞控制， 因为IP层不向端系统提供显式的网络拥塞反馈。
 
@@ -699,7 +680,7 @@ $$ average throughput of a connection = \frac{1.22 * MSS}{RTT \sqrt{L}}$$
 
 早期时，一个 TCP 发送方不会收到来自网络层的明确拥塞指示， 而是通过观察 packet 丢失来推断拥塞。 最近， 对于 IP 和 TCP 的扩展方案［RFC 3168］已经提出并已经实现和部署，该方案允许网络明确向 TCP 发送方和接收方发出拥塞信号。这种形式的网络辅助拥塞控制称为明确拥塞通告 (Explicit Congestion Notification, ECN)。
 
-<img src="./figure/Explicit-Congestion-Notification.png"> 
+<img src="./figures/Explicit-Congestion-Notification.png"> 
 
 在网络层， IP 数据报 (datagram) 首部的服务类型字段中的两个比特被用于 ECN。路由器所使用的一种 ECN 比特设置表示该路由器正在历经拥塞。该拥塞表示则由被标记的 IP 数据报所携带，送给目的主机，再由目的主机通知发送主机， RFC 3168没有提供路由器拥塞时的定义； 该判断是由路由器厂商所做的配置选择，并且由网络操作员决定。然而，RFC 3168 推荐仅当拥塞持续不断存在时才设置ECN比特。发送主机所使用的另一种 ECN 比特设置通知路由器发送方和接收方是 ECN 使能的，因此能够对于 ECN 指示的网络拥塞采取行动。
 
@@ -726,15 +707,13 @@ User Datagram Protocol (用户数据报协议) UDP 是一种简洁、轻量级�
   - Small packet header overhead. 每个TCP报文段都有 20  bytes 的头部开销，UDP 仅有8 bytes 的头部开销。
 
 
-UDP数据封装格式
-
-<img src="./figure/UDP数据报封装.png">
+UDP数据封装格式<p>
+<img src="./figures/UDP数据报封装.png">
 
 UDP首部: 长度为 `8 bytes`。
 - port: 通过端口号可以使目的主机 ( destination host) 将应用数据传递给运行在目的端系统中相应的进程（即执行分解功能） 。
-- length: 指定了 UDP 报文中的字节数量 (header + data)。因为从一个 UDP 字段到下一个 UDP 字段，数据字段的值可能不同，因此需要显示指定 length 字段。
-
-<img src="./figure/udp-segment-structure.png">
+- length: 指定了 UDP 报文中的字节数量 (header + data)。因为从一个 UDP 字段到下一个 UDP 字段，数据字段的值可能不同，因此需要显示指定 length 字段。<P>
+<img src="./figures/udp-segment-structure.png">
 
 
 校验和
@@ -742,9 +721,8 @@ UDP首部: 长度为 `8 bytes`。
 - IP的检验和只覆盖IP的首部。
 - UDP的检验和时可选的，而TCP的检验和是必须的。
 - UDP数据报和TCP段都包含一个 `12字节的伪首部`，是为了检验和而设置的。伪首部包含IP首部的一些字段，让UDP两次检查数据是否已经到达目的地。
-- 发送的数据报和收到的数据报具有相同的 `校验和`值。
-  
-<img src="./figure/UDP检验和计算.png">
+- 发送的数据报和收到的数据报具有相同的 `校验和`值。<P>
+<img src="./figures/UDP检验和计算.png">
 
 
 - UDP应用场景
@@ -851,14 +829,12 @@ routers 功能
 
 ## 4.6. Subnet mask(子网掩码)
 
-IPV4的子网掩码由 32  bit 组成，由一系列的1 和 0组成。1 表示该位用作网络前缀，0 表示该位用作Host identifier。 
-
-<img src="./figure/Subnetting_Concept-en.svg">
+IPV4的子网掩码由 32  bit 组成，由一系列的1 和 0组成。1 表示该位用作网络前缀，0 表示该位用作Host identifier。<p>
+<img src="./figures/Subnetting_Concept-en.svg">
 
 - Network prefix(网络地址)是IP地址与子网掩码做 `AND` 操作后的结果。 
-- Host identifier(主机地址)是 IP地址与子网掩码的补码 做 `AND` 操作后的结果。 
-
-<img src="./figure/子网.png">
+- Host identifier(主机地址)是 IP地址与子网掩码的补码 做 `AND` 操作后的结果。<p>
+<img src="./figures/子网.png">
 
 
 ## 4.7. default route(默认路由)
@@ -882,21 +858,17 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - IP数据报(IP datagram): IP传给网络接口层的数据单元。
 - `TTL` 字段的目的是防止数据报在选路时无休止地在网络中流动。每次经过一个路由器，其值减一。
 - IP提供不可靠、无连接的数据报传送服务。
-- IP首部为 `20个字节`，若有选项字节，其最大不超过 `40字节`
+- IP首部为 `20个字节`，若有选项字节，其最大不超过 `40字节` <p>
+<img src="./figures/IP数据报格式及首部中的各字段.png">
 
-<img src="./figure/IP数据报格式及首部中的各字段.png"></p>
+五类通用的互联网地址<p>
+<img src="./figures/五类互联网地址.png">
 
-五类通用的互联网地址
-
-<img src="./figure/五类互联网地址.png"></p>
-
-各类IP地址的范围
-
-<img src="./figure/各类IP地址的范围.png"></p>
+各类IP地址的范围<p>
+<img src="./figures/各类IP地址的范围.png">
 
 - 特殊的IP地址
   - 主机号和网络号全为 0，为 `DHCP`
-
 - IP在首部中存入一个长度为 `8 bit` 的数值，称作 `协议域`。 
   - 1: ICMP协议
   - 2: IGMP协议
@@ -937,7 +909,7 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - 发送端指明了一个数据报经过的 IP地址清单，但是数据报在清单上指明的任意两个地址之间可以通过其他路由器。
 - IP首部源站路由选项的通用格式
   
-<img src="./figure/IP首部源站路由选项的通用格式.png"></p>
+<img src="./figures/IP首部源站路由选项的通用格式.png">
   
 - 严格源站：路由的每一跳之间必须是直连。
 - 宽松源站
@@ -982,9 +954,8 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - 作用：获取下一跳(下一个路由)的MAC地址。 即为IP地址与其对应的硬件地址之间提供动态映射。
 - 物理地址大小为 `6 byte(即48  bit)` 
 
-ARP的 packet 格式
-
-<img src="./figure/ARP的packet格式.png"></p>
+ARP的 packet 格式<p>
+<img src="./figures/ARP的packet格式.png">
   
 - 2字节以太网帧类型，对ARP请求或应答来说，该字段的值为 `0x0806`
 - 操作字段的四种操作类型
@@ -1015,19 +986,17 @@ ARP的 packet 格式
 
 作用：测试网络，反映网络中包出现的错误信息。
 
-ICMP封装在IP数据报内部的结构
-  
-<img src="./figure/ICMP封装在IP数据报内部.png">
+ICMP封装在IP数据报内部的结构<p>
+<img src="./figures/ICMP封装在IP数据报内部.png">
   
 ICMP报文格式
-- 当发送差错一份ICMP报文时，差错报文包含税IP的头部和产生ICMP差错报文的IP数据报的前8个字节数据。这样，接收ICMP差错报文的模块就会把它与某个特定的协议(根据IP数据报首部中的协议字段来判断)和用户进程(根据包含在IP数据报前8个字节中的TCP或UDP报文首部中的TCP或UDP端口号来判断)联系起来。
 
-<img src="./figure/ICMP.png"><p>
+当发送差错一份ICMP报文时，差错报文包含税IP的头部和产生ICMP差错报文的IP数据报的前8个字节数据。这样，接收ICMP差错报文的模块就会把它与某个特定的协议(根据IP数据报首部中的协议字段来判断)和用户进程(根据包含在IP数据报前8个字节中的TCP或UDP报文首部中的TCP或UDP端口号来判断)联系起来。<p>
+<img src="./figures/ICMP.png">
 
 
-ICMP报文的类型
-
-<img src="./figure/ICMP报文数据类型.png"></p>
+ICMP报文的类型<p>
+<img src="./figures/ICMP报文数据类型.png">
   
 - ICMP不可达差错
   - 发生的情况：路由器收到一份需要分片的数据报，而IP首部又设置了不分片的标志位。
@@ -1042,16 +1011,14 @@ ICMP报文的类型
 
 - ICMP地址掩码请求与应答
   - 数据报格式
-  - ICMP地址掩码 `应答` 必须是收到请求接口的子网掩码。
-  
-  <img src="./figure/ICMP地址掩码请求和应答报文.png"></p>
+  - ICMP地址掩码 `应答` 必须是收到请求接口的子网掩码。<p>
+  <img src="./figures/ICMP地址掩码请求和应答报文.png">
 
 - ICMP时间戳请求与应答
   - 时间戳：记录穿过所有设备的时间。 
   - ICMP时间戳请求允许系统向另一个系统查询当前的时间。 
-  - 时间戳请求与应答数据报格式
-  
-  <img src="./figure/ICMP时间戳请求和应答报文.png"></p>
+  - 时间戳请求与应答数据报格式<p>
+  <img src="./figures/ICMP时间戳请求和应答报文.png">
 
 
 ## 4.12. ping
@@ -1060,9 +1027,8 @@ ICMP报文的类型
 - 概念：该程序发送一份回显请求报文给主机，并等待返回ICMP回显应答。
 - ping程序中ICMP请求和响应的数据报格式
   - unix中标识符为进程的ID。TTL计算方法：记下发送包当前的时间，将这个时间直接拷贝到 `选项数据`中，响应数据包时记下响应时间，用响应时间减去开始时间，即为TTL时间。
-  - Windows下不管开多少个窗口，ping的标识符都是 `相同的`，每增加一个ping，包的序列号增加 `1`。发包时间和回显时间是在windows操作系统内部计算的，不是他通过ping直接计算。
-  
-  <img src="./figure/ICMP回显请求和回显应答报文格式.png"></p>
+  - Windows下不管开多少个窗口，ping的标识符都是 `相同的`，每增加一个ping，包的序列号增加 `1`。发包时间和回显时间是在windows操作系统内部计算的，不是他通过ping直接计算。<P>
+  <img src="./figures/ICMP回显请求和回显应答报文格式.png">
 
 
 ## 4.13. Traceroute
@@ -1096,27 +1062,24 @@ ICMP报文的类型
 
 ## 5.1. 以太网帧格式
 
-以太网和IEEE 802封装格式
-
-<img src="./figure/数据帧封装格式.png"></p>
+以太网和IEEE 802封装格式<p>
+<img src="./figures/数据帧封装格式.png">
   
 - 帧(Frame): 通过以太网传输的比特流。
 - 长度必须在 46～1500字节之间。 
   
-网络数据包 
+
+网络数据包<p>
+<img src="./figures/网络数据包.png">
   
-<img src="./figure/网络数据包.png">
-  
-数据进入协议栈时的封装过程 
-  
-<img src="./figure/数据进入协议栈时的封装过程.png">
+数据进入协议栈时的封装过程<P>
+<img src="./figures/数据进入协议栈时的封装过程.png">
 
 
 ## 5.2. PPP(点对点协议)
 
-数据帧格式
-  
-<img src="./figure/PPP数据帧格式.png">
+数据帧格式<p>
+<img src="./figures/PPP数据帧格式.png">
   
 主要内容
 - 在串行链路上封装IP数据报
@@ -1145,9 +1108,8 @@ ICMP报文的类型
 
 让一个网络上的所以系统都知道当前主机所在的多播组。
 
-IGMP报文封装在IP数据报中
-  
-<img src="./figure/IGMP报文封装在IP数据报中.png">
+IGMP报文封装在IP数据报中<p>
+<img src="./figures/IGMP报文封装在IP数据报中.png">
   
 多播路由器使用 `IGMP报文` 来记录与该路由器相连网络中组成员的变化情况。
 

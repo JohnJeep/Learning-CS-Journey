@@ -26,6 +26,7 @@
   - [2.2. Linux 内核初始化程序分析](#22-linux-内核初始化程序分析)
   - [2.3. Linux 第一个进程分析](#23-linux-第一个进程分析)
 - [2. The Linux Storage Stack Diagram](#2-the-linux-storage-stack-diagram)
+- [内核优化](#内核优化)
 - [3. References](#3-references)
 
 <!-- /TOC -->
@@ -65,14 +66,14 @@ Linux 内核学习分为几个阶段
 - gcc 内建了一条用于优化的的指令：`likely()和 unlikely()`。编译器会根据这条指令对条件分支进行优化：判断该条件是经常出现还是很少出现。
 - 内核中的内存都不分页，若你每用掉一个byte时，物理内存就会减少一个byte。
 - 若果一个用户程序试图进行一次非法的内存访问，内核就会出现 `SIGSEGV` 信号，并结束整个进程。若内核自己非法访问了内存，则内核中会发生内存错误，导致oops。因此，在内核中，不应该去做访问非法的内存地址，引用空指针等，否则可能会死掉。   
-<img src="./pictures/内核源码结构.png">
+<img src="./figures/内核源码结构.png">
 
 
 Linux 内核架构  
-<img src="./pictures/linux内核架构.png">
+<img src="./figures/linux内核架构.png">
 
 **Linux Architecture and features**  
-<img src="pictures/Linux_kernel_map.svg">
+<img src="./figures/Linux_kernel_map.svg">
 
 
 ## 2.1. 内核模式与体系结构
@@ -138,7 +139,7 @@ task_struct 进程描述符：https://blog.csdn.net/lf_2016/article/details/5434
 
 
 # 2. The Linux Storage Stack Diagram
-<img src="pictures/The_Linux_Storage_Stack_Diagram.svg">
+<img src="./figures/The_Linux_Storage_Stack_Diagram.svg">
 
 来源：https://en.wikipedia.org/wiki/Linux_kernel#/media/File:The_Linux_Storage_Stack_Diagram.svg
 

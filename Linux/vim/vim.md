@@ -289,7 +289,7 @@ t: HTML tag
 
 
 文本对象包括分隔符文本对象和范围文本对象，下面图片中分别列出了通用的文本对象。
-<img src="../pictures/vim-text-objects.png">
+<img src="../figures/vim-text-objects.png">
 
 
 ## 2.9. Fold
@@ -571,7 +571,7 @@ inoremap <silent> <F2> <C-O>:nohlsearch<CR>
 
 Vim 命令手抄
 
-![Alt text](../pictures/vim-cmd.png)
+![Alt text](../figures/vim-cmd.png)
 
 
 # 13. Vscodevim tricks

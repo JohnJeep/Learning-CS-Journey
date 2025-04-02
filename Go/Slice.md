@@ -26,7 +26,8 @@
 
 方法已经介绍完了，下面开始进入正题：**Go 中 Slice 的用法。**
 
-![image-20231016072305108](figure/image-20231016072305108.png)
+![alt text](figures/how-to-learn-slice.png)
+
 
 ## Slice 是什么？
 

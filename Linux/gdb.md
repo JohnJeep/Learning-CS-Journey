@@ -39,12 +39,14 @@
   - [6.16. ptype](#616-ptype)
   - [6.17. display](#617-display)
   - [6.18. undisplay](#618-undisplay)
+  - [whatis](#whatis)
   - [6.19. set](#619-set)
   - [6.20. call](#620-call)
   - [6.21. clear](#621-clear)
   - [6.22. dir](#622-dir)
   - [6.23. info](#623-info)
   - [6.24. show](#624-show)
+  - [command](#command)
   - [6.25. help](#625-help)
   - [6.26. Others](#626-others)
 - [7. TUI](#7-tui)
@@ -1205,7 +1207,7 @@ x addr
 
 > 在使用 `watch var_name` 命名之前，需要使用 `file a.out`，加载 a.out 中的 `symbol table`，只有符号表加载成功后，才能打硬件断点。
 
-![](./pictures/watch-break.png)
+![](./figures/watch-break.png)
 
 ```c
 #include <stdio.h>
@@ -1287,7 +1289,7 @@ gdb底层的调试机制是怎样的？
 > 1. 调用系统函数ptrace；
 > 2. 通过execc来加载、执行可执行程序 test，那么test程序就在这个子进程中开始执行了。
 
-<img src="./pictures/gdb-ptrace.png">
+<img src="./figures/gdb-ptrace.png">
 
 
 

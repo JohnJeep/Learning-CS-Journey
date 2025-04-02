@@ -433,7 +433,7 @@ OK
 ## 7.2. hash(哈希)
 
 Redis hash是一个string类型的 `field` 和 `value` 的映射表，是一个键值对集合，hash特别适合用于存储对象。
-<img src="./figures/redis-hash结构.png">
+<img src="./figures/redis-hash.png">
 
 基础命令
 
