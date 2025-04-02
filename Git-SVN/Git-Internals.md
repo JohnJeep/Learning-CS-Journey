@@ -1,4 +1,13 @@
 
+- [1. Git协议](#1-git协议)
+  - [1.1. SSH(Secure Shell)协议](#11-sshsecure-shell协议)
+- [2. Git Internals](#2-git-internals)
+  - [2.1. Git 文件状态](#21-git-文件状态)
+  - [2.2. .Git 目录组成](#22-git-目录组成)
+  - [2.3. Git objects](#23-git-objects)
+    - [2.3.1. 文件模式](#231-文件模式)
+  - [2.4. Git HEAD](#24-git-head)
+- [3. References](#3-references)
 
 # 1. Git协议
 
@@ -126,7 +135,7 @@ Git 仓库中有五个对象（object）：三个 blob 对象（保存着文件�
 >  用 `git add` 和 `git commit` 命令时，Git 所做的工作实质就是将被改写的文件保存为数据对象，更新暂存区，记录树对象，最后创建一个指明了顶层树对象和父提交的提交对象。 
 
 
-### 文件模式
+### 2.3.1. 文件模式
 
 Git 有三种文件模式。
 - 100644，表明这是一个普通文件。
