@@ -74,7 +74,7 @@
 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
 
 <div align="center">
-    <img width="90%" height="90%" src="./pictures/gcc编译的四个阶段.png">
+    <img width="90%" height="90%" src="./figures/gcc编译的四个阶段.png">
 </div>
 
 可执行文件
@@ -94,7 +94,7 @@
     4. 开始执行程序，生成即时页面错误异常
 
 <div align="center">
-    <img width="80%" height="40%" src="./pictures/加载过程.png">
+    <img width="80%" height="40%" src="./figures/加载过程.png">
 </div>
 
 # 3. 内存四区
@@ -156,7 +156,7 @@
 Linux 下内存分配管理如下图所示
 
 <div align="center">
-  <img width="90%" height="90%" src="./pictures/虚拟地址空间.png">
+  <img width="90%" height="90%" src="./figures/虚拟地址空间.png">
 </div>
 
 --------------------------
@@ -195,7 +195,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
   - `ar rcs libstatic_1.a *.o` 
 - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
   
-  <div align="center"><img width="50%" height="50%" src="./pictures/静态库.png"></div>
+  <div align="center"><img width="50%" height="50%" src="./figures/静态库.png"></div>
 
 优缺点
 
@@ -273,7 +273,7 @@ C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定�
 
 # 7. ELF relocatable
 
-<img src="./pictures/ELF-relocatable.png">
+<img src="./figures/ELF-relocatable.png">
 
 查看符号表内容
 
