@@ -86,6 +86,7 @@ dkms.conf
 TypeScript/out/*
 */node_modules/*
 Blogs/source/_posts/*
+!Blogs/source/_posts/.gitkeep
 Blogs/db.json
 Blogs/package-lock.json
 */node_modules/*

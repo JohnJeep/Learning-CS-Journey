@@ -5,6 +5,15 @@ categories: blog
 data: 2025-03-29 21:35:31
 ---
 
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-03-28 10:19:40
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-03 10:33:35
+ * @Description: how to use hexo 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 
 # Install
 
@@ -13,7 +22,7 @@ data: 2025-03-29 21:35:31
 npm install -g hexo-cli
 
 # start 
-$ hexo init <folder>
+$ hexo init <folder>   # folder before not create
 $ cd <folder>
 $ npm install
 
