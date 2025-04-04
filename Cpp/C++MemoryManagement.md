@@ -1,13 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-02-08 21:59:39
- * @LastEditTime: 2021-08-15 00:22:24
- * @LastEditors: Windows10
+ * @LastEditTime: 2025-04-04 19:24:51
+ * @LastEditors: JohnJeep
  * @Description: 探究内存管理
 -->
 
-
 # History(历史)
+
 Doug Lea自1986年开始研究malloc算法，他的作品被称为 DL Malloc，目前linux中的glibc的malloc算法就是直接来自Doug Lea，其它平台的malloc的实现或多或少受到DL的影响。
 
 

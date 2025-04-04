@@ -1,20 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-05 22:07:57
- * @LastEditTime: 2023-07-25 15:33:53
+ * @LastEditTime: 2025-04-04 19:14:05
  * @LastEditors: JohnJeep
  * @Description: Valgrind工具使用
 -->
-
-<!-- TOC -->
-
-- [1. 简介](#1-简介)
-- [2. 用法](#2-用法)
-  - [2.1. Valgrind 工具详解](#21-valgrind-工具详解)
-- [3. Options](#3-options)
-- [4. References](#4-references)
-
-<!-- /TOC -->
 
 # 1. 简介
 

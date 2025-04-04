@@ -2,22 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2021-03-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-26 15:40:25
+ * @LastEditTime: 2025-04-04 19:19:26
  * @Description:  GNU tools chain
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. binutils](#1-binutils)
-  - [1.1. c++filt](#11-cfilt)
-- [2. glibc](#2-glibc)
-  - [2.1. glibc 和 libc 的区别](#21-glibc-和-libc-的区别)
-  - [2.2. glibc 版本查看](#22-glibc-版本查看)
-- [3. libstdc++](#3-libstdc)
-- [4. libc++](#4-libc)
-- [net-tools](#net-tools)
-- [apache2-tools](#apache2-tools)
-- [5. References](#5-references)
-
 
 # 1. binutils
 

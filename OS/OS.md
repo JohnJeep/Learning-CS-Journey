@@ -2,17 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2020-03-18 16:25:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-26 09:22:13
+ * @LastEditTime: 2025-04-04 20:06:56
  * @Description: operation system learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Architecture](#1-architecture)
-- [2. Instruction execution](#2-instruction-execution)
-- [3. Interrupt](#3-interrupt)
-- [4. Memory Hierarchy](#4-memory-hierarchy)
-  - [4.1. Cache](#41-cache)
-
 
 # 1. Architecture
 

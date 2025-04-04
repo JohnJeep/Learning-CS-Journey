@@ -2,50 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2022-11-02 21:34:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-03-31 10:05:52
+ * @LastEditTime: 2025-04-04 19:29:15
  * @Description: gRPC 用法
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.  
 -->
-
-<!-- TOC -->
-
-- [1. RPC(remote produce call)](#1-rpcremote-produce-call)
-  - [1.1. 什么是 RPC](#11-什么是-rpc)
-  - [RPC 局限性](#rpc-局限性)
-- [2. gRPC](#2-grpc)
-  - [2.1. 如何学习 gRPC?](#21-如何学习-grpc)
-  - [2.2. 概念](#22-概念)
-    - [2.2.1. Channel](#221-channel)
-    - [2.2.2. Stub](#222-stub)
-    - [2.2.3. Metadata](#223-metadata)
-  - [1.2. gRPC 特点](#12-grpc-特点)
-  - [1.3. Service definition](#13-service-definition)
-    - [Request](#request)
-    - [Response](#response)
-    - [1.3.1. 流的结束](#131-流的结束)
-  - [1.2. proto 文件](#12-proto-文件)
-  - [1.3. gRPC 服务端](#13-grpc-服务端)
-  - [1.4. gRPC 客户端](#14-grpc-客户端)
-    - [1.4.1. 同步（Synchronous）](#141-同步synchronous)
-  - [1.2. 同步RPC缺点](#12-同步rpc缺点)
-    - [1.2.1. 异步（Asynchronous）](#121-异步asynchronous)
-      - [1.2.1.1. 实现 C++ gRPC 异步双向流注意事项](#1211-实现-c-grpc-异步双向流注意事项)
-      - [1.2.1.2. API接口](#1212-api接口)
-      - [1.2.1.3. 多线程](#1213-多线程)
-  - [1.2. gRPC 处理流程](#12-grpc-处理流程)
-  - [](#)
-  - [1.4. gRPC 强大的功能](#14-grpc-强大的功能)
-    - [1.4.1. 服务治理](#141-服务治理)
-    - [保活机制](#保活机制)
-  - [熔断机制/限流机制](#熔断机制限流机制)
-    - [负载均衡](#负载均衡)
-    - [channel 复用](#channel-复用)
-    - [flow control（流量控制）](#flow-control流量控制)
-- [2. Performance](#2-performance)
-- [3. References](#3-references)
-
-<!-- /TOC -->
-
 
 # 1. RPC(remote produce call)
 

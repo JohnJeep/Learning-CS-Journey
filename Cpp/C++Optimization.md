@@ -1,3 +1,11 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-08-22 00:01:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:24:21
+ * @Description: cpp optimization
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 开销来自哪里
 
 - 函数之间的调用。用模板和内联函数去解决。
@@ -13,12 +21,7 @@
 - 选择恰当的优化设计策略。
 
 
-
-
-
-
-
-# Reference
+# References
 
 - [Software optimization resources](https://www.agner.org/optimize/)
 - 《Optimized C++》Kurt Guntheroth 大师编写的 C++ 优化书籍。

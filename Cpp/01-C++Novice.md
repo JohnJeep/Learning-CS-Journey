@@ -2,99 +2,13 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-08-04 15:58:43
+ * @LastEditTime: 2025-04-04 19:26:08
  * @Description: C++ 基础
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 
-<!-- TOC -->
-
-- [1. concept(概念)](#1-concept概念)
-- [2. c++ basics(C++基础)](#2-c-basicsc基础)
-- [3. namespace(命名空间)](#3-namespace命名空间)
-- [4. header file(头文件)](#4-header-file头文件)
-- [5. reference(引用)](#5-reference引用)
-  - [5.1. ordinary reference(普通引用)](#51-ordinary-reference普通引用)
-  - [5.2. lvalue reference(左值引用)](#52-lvalue-reference左值引用)
-  - [5.3. rvalue reference(右值引用)](#53-rvalue-reference右值引用)
-  - [5.4. const reference(常量引用)](#54-const-reference常量引用)
-- [6. function(函数)](#6-function函数)
-  - [6.1. inline(内联函数)](#61-inline内联函数)
-  - [6.2. function parameter(函数参数)](#62-function-parameter函数参数)
-  - [6.3. template function(模板函数)](#63-template-function模板函数)
-  - [6.4. conversion function(转换函数)](#64-conversion-function转换函数)
-  - [6.5. functor(仿函数)](#65-functor仿函数)
-- [7. Special member function (类中特别的成员函数)](#7-special-member-function-类中特别的成员函数)
-  - [7.1. constructor(构造函数)](#71-constructor构造函数)
-  - [7.2. copy constructor(拷贝构造)](#72-copy-constructor拷贝构造)
-  - [7.3. copy assignment operator(拷贝赋值)](#73-copy-assignment-operator拷贝赋值)
-  - [7.4. Move constructor(移动构造)](#74-move-constructor移动构造)
-  - [7.5. Move assignment operator(移动赋值操作)](#75-move-assignment-operator移动赋值操作)
-  - [7.6. destructor(析构函数)](#76-destructor析构函数)
-- [8. empty class](#8-empty-class)
-- [9. class object \&\& class pointer](#9-class-object--class-pointer)
-- [10. new \&\& delete](#10-new--delete)
-- [11. overload(重载)](#11-overload重载)
-- [12. override(重写)](#12-override重写)
-- [13. const](#13-const)
-- [14. static](#14-static)
-- [15. this](#15-this)
-- [16. mutable](#16-mutable)
-  - [16.1. mutable是什么？](#161-mutable是什么)
-  - [16.2. 为什么要用mutable？](#162-为什么要用mutable)
-  - [16.3. 使用 mutable 的注意事项](#163-使用-mutable-的注意事项)
-  - [16.4. 常函数](#164-常函数)
-- [17. pass by value \&\& pass by reference](#17-pass-by-value--pass-by-reference)
-- [18. friend(友元)](#18-friend友元)
-- [19. operator overloading(操作运算符重载)](#19-operator-overloading操作运算符重载)
-- [20. smart pointer(智能指针)](#20-smart-pointer智能指针)
-  - [20.1. 为什么要使用智能指针？](#201-为什么要使用智能指针)
-  - [20.2. 智能指针原理](#202-智能指针原理)
-  - [20.3. 使用智能指针的优点](#203-使用智能指针的优点)
-  - [20.4. auto\_ptr](#204-auto_ptr)
-  - [20.5. unique\_ptr](#205-unique_ptr)
-    - [20.5.1. 概述](#2051-概述)
-    - [20.5.2. 为什么要用 unique\_ptr](#2052-为什么要用-unique_ptr)
-    - [20.5.3. 初始化](#2053-初始化)
-    - [20.5.4. 成员函数](#2054-成员函数)
-    - [20.5.5. unique\_ptr 删除器](#2055-unique_ptr-删除器)
-  - [20.6. shared\_ptr](#206-shared_ptr)
-    - [20.6.1. 概述](#2061-概述)
-    - [20.6.2. 为什么要使用 shared\_ptr](#2062-为什么要使用-shared_ptr)
-    - [20.6.3. 成员函数](#2063-成员函数)
-    - [20.6.4. 底层原理](#2064-底层原理)
-    - [20.6.5. 初始化](#2065-初始化)
-    - [20.6.6. 用法](#2066-用法)
-    - [20.6.7. shared\_ptr 删除器](#2067-shared_ptr-删除器)
-    - [20.6.8. 注意点](#2068-注意点)
-  - [20.7. weak\_ptr](#207-weak_ptr)
-    - [20.7.1. 概述](#2071-概述)
-    - [20.7.2. 为什么要使用 weak\_ptr](#2072-为什么要使用-weak_ptr)
-    - [20.7.3. 初始化](#2073-初始化)
-    - [20.7.4. 底层原理](#2074-底层原理)
-    - [20.7.5. 成员函数](#2075-成员函数)
-    - [20.7.6. 注意点](#2076-注意点)
-- [21. typename](#21-typename)
-  - [21.1. 概念](#211-概念)
-  - [21.2. 为什么要用 typename ?](#212-为什么要用-typename-)
-  - [21.3. 注意点](#213-注意点)
-- [22. explicit conversions(显示类型转换)](#22-explicit-conversions显示类型转换)
-  - [22.1. static\_cast\<\>()](#221-static_cast)
-  - [22.2. reinterpret\_cast\<\>()](#222-reinterpret_cast)
-  - [22.3. dynamic\_cast\<\>()](#223-dynamic_cast)
-  - [22.4. const\_cast\<\>()](#224-const_cast)
-- [23. exception(异常处理)](#23-exception异常处理)
-  - [23.1. 异常变量的生命周期](#231-异常变量的生命周期)
-  - [23.2. 异常的层次结构](#232-异常的层次结构)
-  - [23.3. 异常的优缺点](#233-异常的优缺点)
-  - [23.4. 构造函数中的异常](#234-构造函数中的异常)
-- [24. Meaningful aphorisms (隽永警句)](#24-meaningful-aphorisms-隽永警句)
-- [25. References by website(学习参考)](#25-references-by-website学习参考)
-
-<!-- /TOC -->
-
-
 # 1. concept(概念)
+
 c++ 是一种倾向于系统编程的通用编程语言，在 C 语言的基础上发展起来的，支持的特性。
 - supports data abstraction
 - supports object-oriented programming

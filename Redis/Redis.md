@@ -1,69 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2022-07-04 17:43:30
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2025-04-04 20:02:42
+ * @LastEditors: JohnJeep
  * @Description: redis学习
 -->
-
-<!-- TOC -->
-
-- [1. 如何学 Redis](#1-如何学-redis)
-- [2. 概念](#2-概念)
-- [3. 历史](#3-历史)
-- [4. 配置](#4-配置)
-- [5. 启动](#5-启动)
-- [6. 命令](#6-命令)
-  - [6.1. General command](#61-general-command)
-  - [6.2. KEYS](#62-keys)
-  - [6.3. EXISTS](#63-exists)
-  - [6.4. DEL](#64-del)
-  - [6.5. DUMP](#65-dump)
-  - [6.6. MOVE](#66-move)
-  - [6.7. TYPE](#67-type)
-  - [6.8. RENAME](#68-rename)
-  - [6.9. TTL](#69-ttl)
-- [7. 基本数据类型](#7-基本数据类型)
-  - [7.1. string(字符串)](#71-string字符串)
-  - [7.2. hash(哈希)](#72-hash哈希)
-  - [7.3. list(列表)](#73-list列表)
-  - [7.4. set(集合)](#74-set集合)
-  - [7.5. zset(sorted set 有序集合)](#75-zsetsorted-set-有序集合)
-  - [7.6. rpoplpush](#76-rpoplpush)
-- [8. 持久化](#8-持久化)
-  - [8.1. RDB](#81-rdb)
-  - [8.2. AOF](#82-aof)
-- [9. 事务](#9-事务)
-- [10. pub/sub](#10-pubsub)
-  - [10.1. pubsub的不足之处处](#101-pubsub的不足之处处)
-  - [10.2. 优缺点](#102-优缺点)
-  - [10.3. 用途](#103-用途)
-  - [10.4. 消息队列出现解决的问题](#104-消息队列出现解决的问题)
-- [11. stream](#11-stream)
-  - [11.1. 特性](#111-特性)
-  - [11.2. 改进点](#112-改进点)
-  - [11.3. stream的不足](#113-stream的不足)
-- [12. tair](#12-tair)
-  - [12.1. Tair持久内存版特性](#121-tair持久内存版特性)
-- [13. Master/Slave replication](#13-masterslave-replication)
-- [14. Redis 连接](#14-redis-连接)
-- [15. Redis Server](#15-redis-server)
-- [16. HyperLogLog](#16-hyperloglog)
-- [17. 集群(cluster)](#17-集群cluster)
-- [18. 集群方案优化](#18-集群方案优化)
-- [19. 数据一致性](#19-数据一致性)
-- [20. 高并发访问](#20-高并发访问)
-- [21. 分布式锁](#21-分布式锁)
-- [22. 典型问题](#22-典型问题)
-  - [22.1. Redis 上踩过的坑](#221-redis-上踩过的坑)
-  - [22.2. 缓存基本原理](#222-缓存基本原理)
-  - [22.3. 缓存淘汰策略](#223-缓存淘汰策略)
-  - [22.4. 缓存穿透](#224-缓存穿透)
-  - [22.5. 缓存击穿](#225-缓存击穿)
-  - [22.6. 缓存雪崩](#226-缓存雪崩)
-- [23. Reference](#23-reference)
-
-<!-- /TOC -->
 
 # 1. 如何学 Redis
 

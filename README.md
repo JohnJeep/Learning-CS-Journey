@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2023-08-04 16:21:20
+ * @LastEditTime: 2025-04-04 19:53:54
  * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
@@ -13,39 +13,39 @@
 # 2. C 语言
 C 语言是自己接触的第一门语言，基本的语法在大学时就已经学过，这里不再讲基础的语法，仅仅只是记录自己在工作中对 C 语言知识点的补充，常用常更新。包括底层的一些知识点，字符编码、指针、函数指针、结构体、内存分配等常见的点。
 
-1. [字符编码](C/2-字符编码.md)
-2. [内存存放顺序](C/3-内存存放顺序.md)
-3. [断点调试](C/4-断点调试.md)
+1. [字符编码](C/2_character_encoding.md)
+2. [内存存放顺序](C/3_big_endian_little_endian.md)
+3. [断点调试](C/4-debug.md)
 4. [变量与数据类型](C/5-变量与数据类型.md)
-5. [Volatile 关键字用法解释](C/6-volatile.md)
-6. [为什么会出现段错误](C/7-segment-fault.md)
-7. [C 语言中常见的基础语法的补充](C/8-基础知识补充.md)
-8. [C 语言中精髓之一：指针函数和函数指针](C/9-指针函数和函数指针.md)
-9. [Const 关键字](C/10-const.md)
-10. [restrict 关键字](C/11-restrict.md)
-11. [exteren 关键字](C/12-extern.md)
-12. [最常见得 void 含义和用法](C/13-void.md)
+5. [Volatile 关键字用法解释](C/6_volatile.md)
+6. [为什么会出现段错误](C/7_segment_fault.md)
+7. [C 语言中常见的基础语法的补充](C/8-c_basic_knowledge.md)
+8. [C 语言中精髓之一：指针函数和函数指针](C/9_pointer_function_function_pointer.md)
+9. [Const 关键字](C/10_const.md)
+10. [restrict 关键字](C/11_restrict.md)
+11. [exteren 关键字](C/12_extern.md)
+12. [最常见得 void 含义和用法](C/13_void.md)
 13. [内存初始化函数 memset](C/14-memset.md)
-14. [memcpy 与 strcpy 函数的区别及用法](C/15-strncpy与memcpy.md)
-15. [memcmp 与 strcmp 函数的区别及用法](C/16-memcmp与strcmp.md)
-16. [typedef 用法剖析](C/17-typedef.md)
-17. [C 语言中精髓之一：结构体和字节对齐](C/18-struct和字节对齐.md)
-18. [word, half word, double word 用法及区别](C/20-字、半字、双字.md)
-19. [C 语言中精髓之一：指针](C/21-指针.md)
-20. [枚举类型](C/22-枚举类型(Enumerations).md)
-21. [C 语言中的状态机](C/23-状态机.md)
+14. [memcpy 与 strcpy 函数的区别及用法](C/15_strncpy_memcpy.md)
+15. [memcmp 与 strcmp 函数的区别及用法](C/16_memcmp_strcmp.md)
+16. [typedef 用法剖析](C/17_typedef.md)
+17. [C 语言中精髓之一：结构体和字节对齐](C/18_struct_bytealigned.md)
+18. [word, half word, double word 用法及区别](C/20_byte_halfword_word.md)
+19. [C 语言中精髓之一：指针](C/21_pointer.md)
+20. [枚举类型](C/22_enumerations.md)
+21. [C 语言中的状态机](C/23_state_machine.md)
 22. [C 语言中精髓之一：数组与指针的结合](C/24-数组与指针组合.md)
-23. 用到的比较生僻的库函数：[atoi()](C/25-atoi().md)、 [fprintf()](C/26-fprintf().md)、[snprintf()](C/35-snprintf.md)
-24. [常见的转义字符和 ASCII 码](C/29-转义字符与ASCII码.md)
-25. [C 语言中最重要的部分：内存分布](C/30-内存.md)
-26. [sizeof() 与 strlen() 的区别](C/31-sizeof与strlen区别.md)
-27. [程序入口函数 main() 分析](C/32_main().md)
-28. [提高效率之一的 do{...}(false) 用法](C/34-do-while(false).md)
-29. [容易的混淆的 * 和 ++ 的优先级使用](C/36-星号和++优先级.md)
-30. [C 语言中精髓之一：回调函数](C/37-回调函数.md)
-31. [static 关键字](C/38-static.md)
-32. [细谈 C 语言中的字符串](C/39-字符串.md)
-33. [编写 C 程序时需遵循的编码规范](C/C语言编程规范.md)
+23. 用到的比较生僻的库函数：[atoi()](C/25_atoi().md)、 [fprintf()](C/26_fprintf.md)、[snprintf()](C/35_snprintf.md)
+24. [常见的转义字符和 ASCII 码](C/29-escape_string_ASCII.md)
+25. [C 语言中最重要的部分：内存分布](C/30_memory.md)
+26. [sizeof() 与 strlen() 的区别](C/31_sizeof_strlen.md)
+27. [程序入口函数 main() 分析](C/32_main.md)
+28. [提高效率之一的 do{...}(false) 用法](C/34_do_while(false).md)
+29. [容易的混淆的 * 和 ++ 的优先级使用](C/36_*_++_operate.md)
+30. [C 语言中精髓之一：回调函数](C/37_callback_function.md)
+31. [static 关键字](C/38_static.md)
+32. [细谈 C 语言中的字符串](C/39_static.md)
+33. [编写 C 程序时需遵循的编码规范](C/0_c_code_of_conduct.md)
 
 
 # 3. C++

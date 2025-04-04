@@ -2,11 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2022-07-13 22:59:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-25 15:31:37
+ * @LastEditTime: 2025-04-04 19:15:40
  * @Description: Linux perf 工具用法
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
-
 
 # perf
 perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL(Performance Counters for Linux)，是 Linux 下的一个性能分析的工具(Performance analysis tools for Linux)，从 2009 年发行的 Linux 内核 2.6.31 版本开始支持。

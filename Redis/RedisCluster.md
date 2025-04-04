@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-09-05 23:51:27
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 20:02:55
+ * @Description: redis cluster learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # 构建一个稳定、高性能Redis集群
 
 1️⃣数据怕丢失 -> 持久化（RDB/AOF）

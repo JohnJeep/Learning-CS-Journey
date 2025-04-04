@@ -1,15 +1,11 @@
-
-<!-- TOC -->
-
-- [1. Git Commit 规范约定](#1-git-commit-规范约定)
-  - [1.1. 背景](#11-背景)
-  - [1.2. Commit message 结构](#12-commit-message-结构)
-  - [1.3. Commit 约定遵循准则](#13-commit-约定遵循准则)
-- [2. References](#2-references)
-
-<!-- /TOC -->
-
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-04-04 23:28:59
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:21:21
+ * @Description: Git commit Conventional
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 1. Git Commit 规范约定
 
 ## 1.1. 背景

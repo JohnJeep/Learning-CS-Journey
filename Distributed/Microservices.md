@@ -1,9 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-11-17 00:36:00
- * @LastEditTime: 2022-03-30 17:59:50
- * @LastEditors: DESKTOP-0S33AUT
- * @Description: 
+ * @LastEditTime: 2025-04-04 19:22:27
+ * @LastEditors: JohnJeep
+ * @Description:  microservice learning
 -->
 
 # 微服务
@@ -18,7 +18,6 @@
 
 3. 服务网关
 
-   
 
 ## 分布式
 

@@ -1,19 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-27 21:05:38
- * @LastEditTime: 2023-08-04 15:08:43
+ * @LastEditTime: 2025-04-04 20:01:37
  * @LastEditors: JohnJeep
  * @Description: 读网络是怎样连接的笔记
 --> 
-
-- [1. 浏览器生成消息的步骤](#1-浏览器生成消息的步骤)
-- [2. 协议栈（操作系统中的网络控制软件）工作流程](#2-协议栈操作系统中的网络控制软件工作流程)
-- [3. 交换机( switching hub)、路由器(router)、集线器(repeater hub)](#3-交换机-switching-hub路由器router集线器repeater-hub)
-- [4. 通过接入网进入互联网内部](#4-通过接入网进入互联网内部)
-- [5. 服务器端的局域网](#5-服务器端的局域网)
-- [6. 请求到达Web服务器，响应返回浏览器](#6-请求到达web服务器响应返回浏览器)
-- [7. References](#7-references)
-
 
 # 1. 浏览器生成消息的步骤
 

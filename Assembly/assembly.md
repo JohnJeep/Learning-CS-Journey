@@ -2,27 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2020-05-18 21:33:28
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-25 23:28:01
+ * @LastEditTime: 2025-04-04 20:00:50
  * @Description: Assembly learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [Assemble Tutorial](#assemble-tutorial)
-- [1. instruction](#1-instruction)
-- [2. Register](#2-register)
-- [3. Machine-Level Representation](#3-machine-level-representation)
-  - [3.1. Operand Specifiers(操作数指示符)](#31-operand-specifiers操作数指示符)
-  - [3.2. Data Movement Instructions](#32-data-movement-instructions)
-  - [3.3. Pushing and Popping Stack Data](#33-pushing-and-popping-stack-data)
-  - [3.4. Arithmetic and Logical Operations(算术与逻辑运算)](#34-arithmetic-and-logical-operations算术与逻辑运算)
-    - [3.4.1. lea(load effective address)：加载有效地址](#341-leaload-effective-address加载有效地址)
-    - [3.4.2. unary \&\& binary](#342-unary--binary)
-    - [3.4.3. shifts](#343-shifts)
-  - [3.5. Control Instruction](#35-control-instruction)
-  - [3.6. Jump Instruction](#36-jump-instruction)
-- [References](#references)
-
-<!-- /TOC -->
 
 # Assemble Tutorial
 

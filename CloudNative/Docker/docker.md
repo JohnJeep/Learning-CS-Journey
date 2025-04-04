@@ -1,75 +1,11 @@
-<!-- TOC -->
-
-- [1. 为什么会出现 Docker？](#1-为什么会出现-docker)
-- [2. Thinking](#2-thinking)
-- [3. Docker 是什么](#3-docker-是什么)
-- [4. Docker 与传统虚拟机有什么不同？](#4-docker-与传统虚拟机有什么不同)
-- [5. 为什么 Docker 比虚拟机快？](#5-为什么-docker-比虚拟机快)
-- [6. Windows系统上为什么能运行 Docker？](#6-windows系统上为什么能运行-docker)
-- [7. Docker Component](#7-docker-component)
-  - [7.1. Docker 镜像加载原理](#71-docker-镜像加载原理)
-  - [7.2. Docker image layer](#72-docker-image-layer)
-  - [7.3. Docker 原理](#73-docker-原理)
-- [8. Docker Architecture](#8-docker-architecture)
-  - [8.1. Docker 运行流程](#81-docker-运行流程)
-- [9. Docker Command](#9-docker-command)
-  - [9.1. help](#91-help)
-  - [9.2. Container Command](#92-container-command)
-    - [9.2.1. docker run](#921-docker-run)
-    - [9.2.2. docker ps](#922-docker-ps)
-    - [9.2.3. exit](#923-exit)
-    - [9.2.4. docker start](#924-docker-start)
-    - [9.2.5. docker stop](#925-docker-stop)
-    - [9.2.6. docker restart](#926-docker-restart)
-    - [9.2.7. docker kill](#927-docker-kill)
-    - [9.2.8. docker rm](#928-docker-rm)
-    - [9.2.9. docker top](#929-docker-top)
-    - [9.2.10. docker inspect](#9210-docker-inspect)
-    - [9.2.11. docker exec](#9211-docker-exec)
-    - [9.2.12. docker attach](#9212-docker-attach)
-    - [9.2.13. docker cp](#9213-docker-cp)
-    - [9.2.14. docker logs](#9214-docker-logs)
-    - [9.2.15. docker export](#9215-docker-export)
-    - [9.2.16. docker import](#9216-docker-import)
-  - [9.3. Image Command](#93-image-command)
-    - [9.3.1. docker  images](#931-docker--images)
-    - [9.3.2. docker  search](#932-docker--search)
-    - [9.3.3. docker pull](#933-docker-pull)
-    - [9.3.4. docker rmi](#934-docker-rmi)
-    - [9.3.5. docker system df](#935-docker-system-df)
-    - [9.3.6. docker save](#936-docker-save)
-    - [9.3.7. docker load](#937-docker-load)
-    - [9.3.8. docker build](#938-docker-build)
-- [10. Docker 下安装软件](#10-docker-下安装软件)
-- [11. Docker Volume](#11-docker-volume)
-  - [11.1. Volume 是什么？](#111-volume-是什么)
-  - [11.2. Volume 能干吗？](#112-volume-能干吗)
-- [12. Dockerfile](#12-dockerfile)
-    - [12.0.1. 构建的基本原则](#1201-构建的基本原则)
-    - [12.0.2. Buildkit](#1202-buildkit)
-    - [12.0.3. Buildx](#1203-buildx)
-  - [12.1. Dockerfile 是什么？](#121-dockerfile-是什么)
-  - [12.2. docker commit](#122-docker-commit)
-  - [12.3. Dockerfile builder](#123-dockerfile-builder)
-    - [12.3.1. RUN](#1231-run)
-    - [12.3.2. COPY](#1232-copy)
-    - [12.3.3. ENV](#1233-env)
-    - [12.3.4. EXPOSE](#1234-expose)
-    - [12.3.5. WORKDIR](#1235-workdir)
-    - [12.3.6. USER](#1236-user)
-  - [12.4. 问题](#124-问题)
-    - [12.4.1. 优化的基本原则](#1241-优化的基本原则)
-    - [12.4.2. 镜像构建很慢](#1242-镜像构建很慢)
-    - [12.4.3. 镜像瘦身](#1243-镜像瘦身)
-- [13. Docker network](#13-docker-network)
-  - [13.1. bridge](#131-bridge)
-  - [13.2. Host](#132-host)
-- [14. 面试问题](#14-面试问题)
-- [15. FAQ](#15-faq)
-  - [15.1. Docker 空间占用清理](#151-docker-空间占用清理)
-- [16. References](#16-references)
-
-<!-- /TOC -->
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-03-30 15:33:52
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:29:39
+ * @Description: Docker learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 为什么会出现 Docker？
 

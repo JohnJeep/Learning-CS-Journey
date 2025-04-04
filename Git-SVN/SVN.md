@@ -1,37 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-11-20 10:59:05
- * @LastEditTime: 2022-05-20 23:16:16
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2025-04-04 19:19:59
+ * @LastEditors: JohnJeep
  * @Description: SVN学习笔记
 -->
-
-- [1. 概念](#1-概念)
-- [2. 目录约定](#2-目录约定)
-- [3. 图标](#3-图标)
-- [4. svn冲突](#4-svn冲突)
-- [5. Git与SVN的区别](#5-git与svn的区别)
-- [6. subversion 常用流程](#6-subversion-常用流程)
-- [7. 常用命令](#7-常用命令)
-  - [7.1. add](#71-add)
-  - [7.2. checkout](#72-checkout)
-  - [7.3. commit](#73-commit)
-  - [7.4. lock/unlock](#74-lockunlock)
-  - [7.5. update](#75-update)
-  - [7.6. status](#76-status)
-  - [7.7. delete](#77-delete)
-  - [7.8. cat](#78-cat)
-  - [7.9. list](#79-list)
-  - [7.10. diff](#710-diff)
-  - [7.11. copy](#711-copy)
-  - [7.12. merge](#712-merge)
-  - [7.13. log](#713-log)
-  - [7.14. info](#714-info)
-  - [7.15. resolved](#715-resolved)
-  - [7.16. switch](#716-switch)
-  - [7.17. revert](#717-revert)
-- [8. 参考](#8-参考)
-
 
 # 1. 概念
 

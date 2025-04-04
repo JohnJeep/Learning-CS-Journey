@@ -2,51 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-09-15 11:03:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-12-15 17:27:42
+ * @LastEditTime: 2025-04-04 19:26:49
  * @Description: 分布式 Actor 学习
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
-
-<!-- TOC -->
-
-- [1. Actor Model](#1-actor-model)
-	- [1.1. 带着问题思考](#11-带着问题思考)
-		- [1.1.1. Actors是如何发送和接收消息的？](#111-actors是如何发送和接收消息的)
-		- [1.1.2. 它们是如何并发地工作的？](#112-它们是如何并发地工作的)
-		- [1.1.3. 理解代码中的设计模式和结构](#113-理解代码中的设计模式和结构)
-	- [1.2. 模型介绍](#12-模型介绍)
-	- [1.3. Actor](#13-actor)
-		- [1.3.1. 特点](#131-特点)
-		- [1.3.2. 缺点](#132-缺点)
-		- [1.3.3. Spawn(生成)](#133-spawn生成)
-		- [1.3.4. Props(属性)](#134-props属性)
-		- [1.3.5. state](#135-state)
-		- [1.3.6. behavior](#136-behavior)
-		- [1.3.7. mailbox](#137-mailbox)
-		- [1.3.8. PID](#138-pid)
-		- [1.3.9. children](#139-children)
-		- [1.3.10. supervisor Strategy](#1310-supervisor-strategy)
-		- [1.3.11. messages](#1311-messages)
-		- [1.3.12. 用法](#1312-用法)
-		- [1.3.13. Router](#1313-router)
-		- [1.3.14. Persistence of actor's state](#1314-persistence-of-actors-state)
-	- [1.4. Remote](#14-remote)
-	- [1.5. Scheduler](#15-scheduler)
-	- [1.6. Cluster](#16-cluster)
-		- [1.6.1. grain](#161-grain)
-		- [1.6.2. EventStream](#162-eventstream)
-		- [1.6.3. Pub-Sub](#163-pub-sub)
-		- [1.6.4. cluster provider](#164-cluster-provider)
-			- [1.6.4.1. Kubernetes Provider](#1641-kubernetes-provider)
-			- [1.6.4.2. Consul Provider](#1642-consul-provider)
-			- [1.6.4.3. AWS ECS Provider](#1643-aws-ecs-provider)
-			- [1.6.4.4. Seed Provider - Experimental](#1644-seed-provider---experimental)
-		- [1.6.5. gossip](#165-gossip)
-		- [1.6.6. identity lookup](#166-identity-lookup)
-		- [1.6.7. autoMangment](#167-automangment)
-- [2. References](#2-references)
-
-<!-- /TOC -->
 
 # 1. Actor Model
 

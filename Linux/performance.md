@@ -1,41 +1,11 @@
-<!-- TOC -->
-
-- [1. 性能优化](#1-性能优化)
-  - [1.1. 怎样做性能优化？](#11-怎样做性能优化)
-  - [1.2. 如何去分析](#12-如何去分析)
-    - [1.2.1. 工具](#121-工具)
-      - [1.2.1.1. gprof](#1211-gprof)
-      - [1.2.1.2. oprofile](#1212-oprofile)
-      - [1.2.1.3. gperftools](#1213-gperftools)
-      - [1.2.1.4. mpstat](#1214-mpstat)
-      - [1.2.1.5. pidstat](#1215-pidstat)
-      - [1.2.1.6. iostat](#1216-iostat)
-      - [1.2.1.7. vmstat](#1217-vmstat)
-        - [1.2.1.7.1. 虚拟内存原理](#12171-虚拟内存原理)
-        - [1.2.1.7.2. 命令格式](#12172-命令格式)
-        - [1.2.1.7.3. 命令参数](#12173-命令参数)
-      - [1.2.1.8. netstat](#1218-netstat)
-      - [1.2.1.9. stress](#1219-stress)
-      - [1.2.1.10. uptime](#12110-uptime)
-      - [1.2.1.11. dmesg](#12111-dmesg)
-      - [1.2.1.12. sar](#12112-sar)
-      - [1.2.1.13. top](#12113-top)
-      - [1.2.1.14. htop](#12114-htop)
-      - [1.2.1.15. iftop](#12115-iftop)
-      - [1.2.1.16. iotop](#12116-iotop)
-      - [1.2.1.17. vmtouch](#12117-vmtouch)
-      - [1.2.1.18. pmap](#12118-pmap)
-    - [1.2.2. 代码编写](#122-代码编写)
-  - [1.3. 优化到多少？](#13-优化到多少)
-  - [1.4. 其它](#14-其它)
-- [2. CPU Performance](#2-cpu-performance)
-- [3. Memory Performance](#3-memory-performance)
-- [4. I/O Performance](#4-io-performance)
-- [5. Network Performance](#5-network-performance)
-- [6. 参考](#6-参考)
-
-<!-- /TOC -->
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-01 00:40:42
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:13:40
+ * @Description: linux performance analysis
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 1. Performance optimization(性能优化)
 
 ## 1.1. 怎样做性能优化？
