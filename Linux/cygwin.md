@@ -1,11 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-24 10:10:40
- * @LastEditTime: 2021-04-01 14:56:24
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-04 19:13:08
+ * @LastEditors: JohnJeep
  * @Description: cygwin使用笔记
 --> 
+
 # 1. Cygwin
+
 ## 1.1. Command(命令)
 - 查看当前cygwin版本：`cygcheck -c cygwin`
 - 显示Windows下的进程 `ps -aW` 

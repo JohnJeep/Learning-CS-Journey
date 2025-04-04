@@ -1,3 +1,11 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-09-15 11:03:37
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:27:35
+ * @Description: zookeeper install
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # zookeeper的安装部署
 
 ## 安装

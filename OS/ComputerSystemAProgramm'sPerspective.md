@@ -1,20 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2025-03-26 09:26:27
+ * @LastEditTime: 2025-04-04 20:07:06
  * @LastEditors: JohnJeep
  * @Description: 深入理解计算机系统学习笔记
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Computer System: A Programmer's Perspective](#1-computer-system-a-programmers-perspective)
-  - [1.1. Program Structure \& Execution](#11-program-structure--execution)
-    - [1.1.1. 典型的计算机底层硬件组织架构](#111-典型的计算机底层硬件组织架构)
-    - [1.1.2. 一个 hello 可执行程序的底层调用过程](#112-一个-hello-可执行程序的底层调用过程)
-    - [1.1.3. cache(缓存)](#113-cache缓存)
-  - [1.2. References](#12-references)
-
-
 
 # 1. Computer System: A Programmer's Perspective
 

@@ -3,45 +3,10 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 17:52:02
+ * @LastEditTime: 2025-04-04 19:25:54
  * @Description: C++ 高级
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
-
-<!-- TOC -->
-
-- [1. Object Oriented Programming(面向对象编程)](#1-object-oriented-programming面向对象编程)
-  - [1.1. Encapsulation(封装)](#11-encapsulation封装)
-  - [1.2. Composition(复合)](#12-composition复合)
-  - [1.3. Delegation(委托)](#13-delegation委托)
-    - [1.2.1. copy on write](#121-copy-on-write)
-    - [1.2.2. pImpl Idiom](#122-pimpl-idiom)
-  - [1.3. Inheritance(继承)](#13-inheritance继承)
-    - [1.3.1. 父类与子类的关系](#131-父类与子类的关系)
-    - [1.3.2. 继承中的构造与析构调用原则](#132-继承中的构造与析构调用原则)
-    - [1.3.3. 继承中同名成员变量处理方法](#133-继承中同名成员变量处理方法)
-    - [1.3.4. Composite, Inheritance 和 Delegation 对比](#134-composite-inheritance-和-delegation-对比)
-    - [1.3.5. Inheritance and virtual function](#135-inheritance-and-virtual-function)
-  - [1.4. Polymorphism(多态)](#14-polymorphism多态)
-    - [1.4.1. 虚析构函数](#141-虚析构函数)
-    - [1.4.2. vptr虚指针)和vtbl(虚函数表)](#142-vptr虚指针和vtbl虚函数表)
-    - [1.4.3. 纯虚函数和抽象类](#143-纯虚函数和抽象类)
-  - [1.5. 耦合与解耦](#15-耦合与解耦)
-- [2. Generic Programming(泛型编程)](#2-generic-programming泛型编程)
-  - [2.1. Parameterized Type(参数化类型)](#21-parameterized-type参数化类型)
-  - [2.2. 模板编译](#22-模板编译)
-  - [2.3. Function Template(函数模板)](#23-function-template函数模板)
-  - [2.4. Class Template(类模板)](#24-class-template类模板)
-    - [2.4.1. Specialization(模板特化)](#241-specialization模板特化)
-    - [2.4.2. Class Partial Specialization(类模板偏特化)](#242-class-partial-specialization类模板偏特化)
-  - [2.5. Member Template(成员模板)](#25-member-template成员模板)
-  - [2.6. template template parameter](#26-template-template-parameter)
-- [3. IOStream(输入输出流)](#3-iostream输入输出流)
-- [4. std::move()](#4-stdmove)
-- [5. Meata Programming(元编程)](#5-meata-programming元编程)
-- [6. Resource acquisition is initialization(RAII)](#6-resource-acquisition-is-initializationraii)
-
-<!-- /TOC -->
 
 # 1. Object Oriented Programming(面向对象编程)
 

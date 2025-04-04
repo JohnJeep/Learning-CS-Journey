@@ -1,20 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:42:59
- * @LastEditTime: 2025-03-28 00:57:57
+ * @LastEditTime: 2025-04-04 20:07:50
  * @LastEditors: JohnJeep
  * @Description: Nginx learning
  * -->
-
-- [1. Introduce](#1-introduce)
-- [2. Install](#2-install)
-  - [2.1. Source code install](#21-source-code-install)
-  - [2.2. Binary install](#22-binary-install)
-  - [2.3. Docker install](#23-docker-install)
-- [3. command](#3-command)
-- [4. Configure](#4-configure)
-- [5. Nginx Application](#5-nginx-application)
-- [6. References](#6-references)
 
 # 1. Introduce
 

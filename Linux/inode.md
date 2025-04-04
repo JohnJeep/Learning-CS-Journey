@@ -1,23 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2020-08-24 23:07:06
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-04 19:15:49
+ * @LastEditors: JohnJeep
  * @Description: iNode的理解
 --> 
-
-<!-- TOC -->
-
-- [1. 查看iNode的命令](#1-查看inode的命令)
-- [2. 什么是iNode?](#2-什么是inode)
-- [3. iNode包含内容](#3-inode包含内容)
-- [4. 操作系统是如何打开文件的？](#4-操作系统是如何打开文件的)
-- [5. 目录文件](#5-目录文件)
-- [6. iNode的应用](#6-inode的应用)
-- [7. 硬链接与符号链接](#7-硬链接与符号链接)
-- [8. 参考](#8-参考)
-
-<!-- /TOC -->
 
 # 1. 查看iNode的命令
 - 查看每个硬盘分区的iNode总数和已经使用的数量 `df -i`

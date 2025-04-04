@@ -1,22 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-28 21:24:43
- * @LastEditTime: 2021-07-20 15:54:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-04 19:23:58
+ * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
-<!-- TOC -->
 
-- [1. 什么是 `enable_shared_from_this`?](#1-什么是-enable_shared_from_this)
-- [2. 为什么要用 `enable_shared_from_this`？](#2-为什么要用-enable_shared_from_this)
-- [3. 什么时候用？](#3-什么时候用)
-- [4. 如何安全地将 this 指针返回给调用者?](#4-如何安全地将-this-指针返回给调用者)
-- [5. 标准库中的源码](#5-标准库中的源码)
-- [6. 具体的代码示例](#6-具体的代码示例)
-- [7. 使用注意事项](#7-使用注意事项)
-- [8. 参考](#8-参考)
-
-<!-- /TOC -->
 # 1. 什么是 enable_shared_from_this?
 
 C++11 开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： 

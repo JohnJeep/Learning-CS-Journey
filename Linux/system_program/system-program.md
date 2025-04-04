@@ -1,62 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2023-07-25 15:44:11
+ * @LastEditTime: 2025-04-04 19:16:21
  * @LastEditors: JohnJeep
  * @Description: Linux 环境系统编程基础知识
 -->
-
-<!-- TOC -->
-
-- [1. System function](#1-system-function)
-  - [1.1. Core concept(概念)](#11-core-concept概念)
-  - [1.2. Carriage Return \&\& Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
-  - [1.3. File I/O(文件 I/O)](#13-file-io文件-io)
-    - [1.3.1. open()](#131-open)
-    - [1.3.2. read()/write()](#132-readwrite)
-    - [1.3.3. lseek()](#133-lseek)
-    - [1.3.4. fsync](#134-fsync)
-    - [1.3.5. stat()](#135-stat)
-    - [1.3.6. lstat()](#136-lstat)
-    - [1.3.7. access()](#137-access)
-    - [1.3.8. chmod()](#138-chmod)
-    - [1.3.9. truncate()](#139-truncate)
-    - [1.3.10. readlink()](#1310-readlink)
-    - [1.3.11. unlink()](#1311-unlink)
-    - [1.3.12. opendir()](#1312-opendir)
-    - [1.3.13. readdir()](#1313-readdir)
-    - [1.3.14. closedir()](#1314-closedir)
-    - [1.3.15. dup() \&\& dup2()](#1315-dup--dup2)
-    - [1.3.16. fcntl()](#1316-fcntl)
-  - [1.4. Environment variables(环境变量)](#14-environment-variables环境变量)
-- [2. Process(进程)](#2-process进程)
-  - [2.1. fork()](#21-fork)
-  - [2.2. exec() 家族](#22-exec-家族)
-  - [2.3. wait()](#23-wait)
-  - [2.4. IPC](#24-ipc)
-    - [2.4.1. Pipe(管道)](#241-pipe管道)
-      - [2.4.1.1. unamed pipe(匿名管道)](#2411-unamed-pipe匿名管道)
-      - [2.4.1.2. named pipe(有名管道)](#2412-named-pipe有名管道)
-    - [2.4.2. mmap](#242-mmap)
-    - [2.4.3. Signal(信号)](#243-signal信号)
-    - [2.4.4. Semaphore(信号量)](#244-semaphore信号量)
-    - [2.4.5. Message queues(消息队列)](#245-message-queues消息队列)
-    - [2.4.6. Socket(套接字)](#246-socket套接字)
-  - [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
-  - [2.6. Terminal(终端)](#26-terminal终端)
-  - [2.7. Process group(进程组)](#27-process-group进程组)
-  - [2.8. Daemon(守护进程)](#28-daemon守护进程)
-- [3. Thread(线程)](#3-thread线程)
-  - [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
-  - [3.2. Function(线程相关函数)](#32-function线程相关函数)
-  - [3.3. 线程属性设置](#33-线程属性设置)
-  - [3.4. 注意事项](#34-注意事项)
-  - [3.5. 线程同步](#35-线程同步)
-  - [3.6. 线程之间死锁的原因](#36-线程之间死锁的原因)
-  - [3.7. Mutex(线程互斥)](#37-mutex线程互斥)
-    - [3.7.1. References](#371-references)
-
-<!-- /TOC -->
 
 # 1. System function
 

@@ -1,13 +1,11 @@
-
-- [1. Git协议](#1-git协议)
-  - [1.1. SSH(Secure Shell)协议](#11-sshsecure-shell协议)
-- [2. Git Internals](#2-git-internals)
-  - [2.1. Git 文件状态](#21-git-文件状态)
-  - [2.2. .Git 目录组成](#22-git-目录组成)
-  - [2.3. Git objects](#23-git-objects)
-    - [2.3.1. 文件模式](#231-文件模式)
-  - [2.4. Git HEAD](#24-git-head)
-- [3. References](#3-references)
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-04-04 23:28:59
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:20:32
+ * @Description: Git internal learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. Git协议
 

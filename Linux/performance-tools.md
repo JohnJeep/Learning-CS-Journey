@@ -2,37 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-07-25 15:06:11
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-25 15:43:22
+ * @LastEditTime: 2025-04-04 19:15:01
  * @Description: Linux 系统优化工具使用
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
-
-<!-- TOC -->
-
-- [1. Linux 下常用性能分析工具](#1-linux-下常用性能分析工具)
-  - [1.1. gprof](#11-gprof)
-  - [1.2. oprofile](#12-oprofile)
-  - [1.3. gperftools](#13-gperftools)
-  - [1.4. mpstat](#14-mpstat)
-  - [1.5. pidstat](#15-pidstat)
-  - [1.6. iostat](#16-iostat)
-  - [1.7. vmstat](#17-vmstat)
-    - [1.7.1. 虚拟内存原理](#171-虚拟内存原理)
-    - [1.7.2. 格式](#172-格式)
-    - [1.7.3. 参数](#173-参数)
-  - [1.8. netstat](#18-netstat)
-  - [1.9. stress](#19-stress)
-  - [1.10. uptime](#110-uptime)
-  - [1.11. dmesg](#111-dmesg)
-  - [1.12. sar](#112-sar)
-  - [1.13. top](#113-top)
-  - [1.14. htop](#114-htop)
-  - [1.15. iftop](#115-iftop)
-  - [1.16. iotop](#116-iotop)
-  - [1.17. vmtouch](#117-vmtouch)
-  - [1.18. pmap](#118-pmap)
-
-<!-- /TOC -->
 
 # 1. Linux 下常用性能分析工具
 

@@ -1,3 +1,11 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-01 00:40:42
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:14:40
+ * @Description: package
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 1. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)

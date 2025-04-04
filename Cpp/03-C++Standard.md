@@ -2,49 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:21:43
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-08-04 15:42:55
+ * @LastEditTime: 2025-04-04 19:25:31
  * @Description: C++ 语言不同标准新特性学习
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved.
 -->
-
-<!-- TOC -->
-
-- [1. C++11 新特性](#1-c11-新特性)
-  - [1.1. Template of  Space](#11-template-of--space)
-  - [1.2. Initializer lists](#12-initializer-lists)
-  - [1.3. nullptr](#13-nullptr)
-  - [1.4. range based for statement](#14-range-based-for-statement)
-  - [1.5. Lambda](#15-lambda)
-  - [1.6. decltype](#16-decltype)
-  - [1.7. explicit](#17-explicit)
-  - [1.8. auto](#18-auto)
-  - [1.9. noexcept](#19-noexcept)
-  - [1.10. constexpr](#110-constexpr)
-  - [1.11. override](#111-override)
-  - [1.12. final](#112-final)
-  - [1.13. New Function Declaration Syntax](#113-new-function-declaration-syntax)
-  - [1.14. Scoped Enumerations](#114-scoped-enumerations)
-  - [1.15. New Template Features](#115-new-template-features)
-    - [1.15.1. **variadic templates**](#1151-variadic-templates)
-    - [1.15.2. Alias Templates (Template Typedef)](#1152-alias-templates-template-typedef)
-    - [1.15.3. Type Alias](#1153-type-alias)
-    - [1.15.4. Function template](#1154-function-template)
-  - [1.16. using](#116-using)
-  - [1.17. Move Semantics and Rvalue References](#117-move-semantics-and-rvalue-references)
-  - [1.18. =delete \&\& =default](#118-delete--default)
-  - [1.19. Chrono](#119-chrono)
-    - [1.19.1. duration](#1191-duration)
-    - [1.19.2. timepoint and clock](#1192-timepoint-and-clock)
-- [2. C++14 新特性](#2-c14-新特性)
-- [3. C++17 新特性](#3-c17-新特性)
-- [4. C++20 新特性](#4-c20-新特性)
-  - [4.1. Coroutines](#41-coroutines)
-  - [4.2. Concepts](#42-concepts)
-  - [4.3. Modules](#43-modules)
-  - [4.4. Ranges](#44-ranges)
-- [5. References](#5-references)
-
-<!-- /TOC -->
 
 C++ 新特性演化整体概览。
 

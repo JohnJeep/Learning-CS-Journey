@@ -3,28 +3,10 @@
  * @Author: johnjeep
  * @Date: 2022-12-27 20:41:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-21 17:27:43
+ * @LastEditTime: 2025-04-04 19:18:16
  * @Description: Go 标准库学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
-<!-- TOC -->
-
-- [1. GO Standard library](#1-go-standard-library)
-- [2. IO](#2-io)
-  - [2.1. MultiWriter](#21-multiwriter)
-  - [2.2. io.Writer](#22-iowriter)
-  - [2.3. io.ReadFull](#23-ioreadfull)
-- [3. log](#3-log)
-- [4. strconv](#4-strconv)
-- [5. encoding](#5-encoding)
-  - [5.1. json](#51-json)
-  - [5.2. Marshal](#52-marshal)
-  - [5.3. http](#53-http)
-- [6. Context](#6-context)
-- [7. sql](#7-sql)
-- [8. References](#8-references)
-
-<!-- /TOC -->
 
 # 1. GO Standard library
 Go 语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。

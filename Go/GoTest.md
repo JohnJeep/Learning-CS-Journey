@@ -2,18 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-12-18 14:05:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-01-06 17:44:45
+ * @LastEditTime: 2025-04-04 19:17:58
  * @Description: Go 测试用法
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Testing(测试)](#1-testing测试)
-  - [1.1. 测试函数](#11-测试函数)
-  - [1.2. 基准测试](#12-基准测试)
-  - [1.3. Coverage(测试覆盖率)](#13-coverage测试覆盖率)
-- [2. 为测试做设计](#2-为测试做设计)
-    - [2.0.1. 对代码阅读的思考](#201-对代码阅读的思考)
-- [3. References](#3-references)
 
 # 1. Testing(测试)
 

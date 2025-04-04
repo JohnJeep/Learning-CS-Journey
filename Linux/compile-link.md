@@ -3,34 +3,10 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-03-31 16:24:11
+ * @LastEditTime: 2025-04-04 19:12:38
  * @Description: 预处理、编译、汇编、链接过程
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
-
-- [1. 缩写](#1-缩写)
-- [2. 程序处理过程](#2-程序处理过程)
-- [3. 内存四区](#3-内存四区)
-- [4. 函数库](#4-函数库)
-- [5. 静态库](#5-静态库)
-- [6. 动态库](#6-动态库)
-  - [6.1. Linux平台](#61-linux平台)
-  - [6.2. Windows平台](#62-windows平台)
-- [7. ELF relocatable](#7-elf-relocatable)
-- [8. GCC](#8-gcc)
-  - [8.1. 源码编译三部曲](#81-源码编译三部曲)
-  - [8.2. CentOS7 安装高版本 gcc8/g++8](#82-centos7-安装高版本-gcc8g8)
-  - [8.3. 拓展知识点](#83-拓展知识点)
-- [9. 工具](#9-工具)
-  - [9.1. readelf](#91-readelf)
-  - [9.2. size](#92-size)
-  - [9.3. nm](#93-nm)
-  - [9.4. pmap](#94-pmap)
-  - [9.5. patchelf](#95-patchelf)
-  - [9.6. objdump](#96-objdump)
-- [10. Build](#10-build)
-- [11. References](#11-references)
-
 
 # 1. 缩写
 

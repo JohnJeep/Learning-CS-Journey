@@ -1,24 +1,11 @@
-<!-- TOC -->
-
-- [1. 概念](#1-概念)
-- [2. ZooKeeper 应用场景](#2-zookeeper-应用场景)
-- [3. 缺点](#3-缺点)
-- [4. 特点](#4-特点)
-- [5. 数据模型（Data Model）](#5-数据模型data-model)
-- [6. data tree 接口](#6-data-tree-接口)
-- [7. Znode 分类](#7-znode-分类)
-- [8. 事务 ID](#8-事务-id)
-- [9. Zookeeper 的角色](#9-zookeeper-的角色)
-- [10. 基本命令](#10-基本命令)
-- [11. 监听（Watch）](#11-监听watch)
-- [12. 面试](#12-面试)
-  - [12.1. 选举机制](#121-选举机制)
-  - [12.2. 生产集群安装多少 zk 合适？](#122-生产集群安装多少-zk-合适)
-- [13. 参考](#13-参考)
-
-<!-- /TOC -->
-
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-09-15 11:03:37
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:26:59
+ * @Description: zookeeper learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 1. 概念
 
 ZooKeeper 是一个分布式的，开放源码的分布式应用程序协同服务。ZooKeeper 的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。
