@@ -1,25 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-07-17 14:34:30
- * @LastEditTime: 2025-04-03 00:17:19
+ * @LastEditTime: 2025-04-04 20:00:23
  * @LastEditors: JohnJeep
  * @Description: 内存管理
 --> 
-<!-- TOC -->
-
-- [1. 概念](#1-概念)
-- [2. 分页，分段，逻辑地址，物理地址](#2-分页分段逻辑地址物理地址)
-  - [2.1. 物理地址(physical address)](#21-物理地址physical-address)
-  - [2.2. 逻辑地址(logical address)](#22-逻辑地址logical-address)
-  - [2.3. 相对地址](#23-相对地址)
-  - [2.4. Address(地址)](#24-address地址)
-  - [2.5. 帧(frame)](#25-帧frame)
-  - [2.6. 分页(paging)](#26-分页paging)
-  - [2.7. 分段(segmentation)](#27-分段segmentation)
-  - [2.8. 内存共享](#28-内存共享)
-  - [2.9. 页表(page table)](#29-页表page-table)
-- [2.10. References](#210-references)
-
 
 # 1. 概念
 
@@ -49,16 +34,16 @@
 
 内存层次排列
 <div algin="center">
-  <img width="%50" height="%50" src="./figures/内存层次排列.png">
+  <img width="%50" height="%50" src="./figures/cpu-dram.png">
 </div>
 <div algin="center">
-  <img width="%50" height="%50" src="./figures/内存排列.png">
+  <img width="%50" height="%50" src="./figures/cpu-control.png">
 </div>
 <div algin="center">
-  <img width="%50" height="%50" src="./figures/缓存模型.png">
+  <img width="%50" height="%50" src="./figures/cache-model.png">
 </div>
 <div algin="center">
-  <img width="%50" height="%50" src="./figures/数据获取.png">
+  <img width="%50" height="%50" src="./figures/cpu-cache.png">
 </div>
 <div algin="center">
   <img width="%50" height="%50" src="./figures/内存分类.png">
@@ -81,7 +66,7 @@
      - 进程团通过逻辑地址从任意段访问数据
      - 处理器将逻辑地址转换成线性地址，并使用线性地址访问内存
 <div algin="center">
-  <img width="634" height="%50" src="./figures/内存模型.png"/>
+  <img width="634" height="%50" src="./figures/memory-model.png"/>
 </div>
 
 
@@ -133,7 +118,7 @@
   - 所有进程共享一套内核数据：每个进程空间中，最初一部分的虚拟内存地址，都对应到物理内存中预留给内核的空间
   
 <div algin="center">
-  <img width="634" height="%50" src="./figures/虚拟内存系统.png"/>
+  <img width="634" height="%50" src="./figures/virtual-memory-system.png"/>
 </div>
 
 从内核中查看虚拟内存：
@@ -143,12 +128,12 @@
 
 虚拟地址组成：虚拟页号和页偏移字段 
 <div algin="center">
-  <img width="634" height="%50" src="./figures/虚拟地址组成.png"/>
+  <img width="634" height="%50" src="./figures/virtual_address.png"/>
 </div>
 
 虚拟地址转换成物理地址 
 <div algin="center">
-  <img width="634" height="%50" src="./figures/地址转换过程.png"/>
+  <img width="634" height="%50" src="./figures/address-translation.png"/>
 </div>
 
 ## 2.5. 帧(frame)
@@ -180,7 +165,7 @@
 ## 2.8. 内存共享
 
 <div algin="center">
-  <img width="634" height="%50" src="./figures/内存共享.png"/>
+  <img width="634" height="%50" src="./figures/physics-virtual-memory.png"/>
 </div>
 
 ## 2.9. 页表(page table)

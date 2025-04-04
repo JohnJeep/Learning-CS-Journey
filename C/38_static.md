@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-06 14:33:16
- * @LastEditTime: 2021-04-06 16:12:26
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-04 20:00:22
+ * @LastEditors: JohnJeep
  * @Description: static关键的用法
 -->
 
@@ -18,7 +18,7 @@
 
 - 办法就是：你需要将变量或函数用 `extern` 关键字进行声明，并且不用 `static` 关键字修饰。注意是声明，而不是定义。`extern int num;`和 `extern int add()`，这样操作过后，在`b.c`、`d.c`、`m.c`等多个文件中，你就能使用这个变量和函数了。
 
-> Tpis:看声明与定义的区别可以看我之前写的一篇文章。[extern的用法](./12-extern.md)
+> Tpis:看声明与定义的区别可以看我之前写的一篇文章。[extern的用法](./12_extern.md)
 
 
 static修饰的变量在函数体内定义时，表明它的申请的内存是驻留在全局区，直到程序运行结束。但是它作用域仍为局部作用域，只能在函数体内使用定义的该变量，不能在函数体外使用。因此可以得出一个结论：把局部变量改变为static变量后改变了它的生存期。把全局变量改变为static变量后是改变了它的作用域， 限制了它的使用范围，仅仅只在拥有该变量的文件中使用，不能在其它的文件中调用。

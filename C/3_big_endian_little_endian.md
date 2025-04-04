@@ -1,8 +1,8 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-06 09:49:29
- * @LastEditTime: 2021-04-02 11:25:59
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-04 20:00:19
+ * @LastEditors: JohnJeep
  * @Description: 内存存放顺序笔记
 --> 
 # 内存存放顺序
@@ -16,7 +16,7 @@
   - 先定义低地址，后定义高地址
   - 数组内存地址分配的公式：`base_address + index * data_size`
 
-<img src="./figures/内存地址分配顺序.png">
+<img src="./figures/Memory-assignment-sequence.png">
 
 
 ## 参考
