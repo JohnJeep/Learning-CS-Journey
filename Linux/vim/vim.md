@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:12:26
+ * @LastEditTime: 2025-04-04 20:19:40
  * @Description: How to use VIM
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -246,15 +246,15 @@ t: HTML tag
 
 
 文本对象包括分隔符文本对象和范围文本对象，下面图片中分别列出了通用的文本对象。
-<img src="../figures/vim-text-objects.png">
 
+![alt text](../figures/vim-text-objects.png)
 
 ## 2.9. Fold
 
 vim 中代码折叠。按照折叠所依据的规则，可以分为 Manual（手工折叠）、Indent（缩进折叠）、Marker（标记折叠）和 Syntax（语法折叠）等。
 
 查看折叠的帮助信息
-```sh
+```bash
 :help folding     查看折叠的帮助信息
 :help fold-marker 查看标记折叠帮助信息
 :help fold-syntax 查看语法折叠帮助信息
@@ -263,7 +263,7 @@ vim 中代码折叠。按照折叠所依据的规则，可以分为 Manual（手
 ```
 
 折叠快捷键
-```sh
+```bash
 za 打开/关闭当前的折叠
 zo 打开一个折叠
 zc 关闭一个折叠
@@ -285,15 +285,15 @@ zN 启动折叠
 ### 2.9.1. Manual Fold
 
 启用手工折叠
-```sh
+```bash
 :set foldmethod=manual
 ```
 
 
 ### 2.9.2. Indent Fold
 
-启用缩进折叠，所有文本将按照（选项* shiftwidth* 定义的）缩进层次自动折叠。
-```sh
+启用缩进折叠，所有文本将按照（选项 `shiftwidth` 定义的）缩进层次自动折叠。
+```bash
 :set foldmethod=indent
 ```
 
@@ -301,15 +301,15 @@ zN 启动折叠
 ### 2.9.3. Syntax Fold
 
 启用语法折叠。所有文本将按照语法结构自动折叠。
-```sh
+```bash
 :set foldmethod=syntax
 ```
 
 
 ### 2.9.4. Marker Fold
 
-启用标记折叠，所有文本将按照特定标记（默认为{{{和}}}）自动折叠。
-```sh
+启用标记折叠，所有文本将按照特定标记（默认为 `{{{`和 `}}}` ）自动折叠。
+```bash
 :set foldmethod=marker
 ```
 
@@ -475,7 +475,7 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 - **The expression register（表达式寄存器）** 在 **Insert Mode** 和 **Command Line Mode** 中均可以使用，只需要输入 `Ctrl r =` 键就可
   以访问这一寄存器。这个寄存器主要用于数值运算。
 - 在插入模式中使用
-	```sh
+	```bash
 	A 6 chairs, each costing $35, totals $
 	<C-r>=6*35<CR> 6 chairs, each costing $35, totals $210
 	```
@@ -486,7 +486,7 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
 - 系统级配置文件目录：`/etc/vim/vimrc`
 - 用户级配置文件目录：`~/.vim/vimrc`
 - 设置 Tab 的大小 
-  ```sh
+  ```bash
   set tabstop=4      " 表示一个 tab 显示出来是多少个空格的长度，默认 8
   set softtabstop=4  " 表示在编辑模式的时候按退格键的时候退回缩进的长度
   set shiftwidth=4   " 表示每一级缩进的长度，一般设置成跟 softtabstop 一样
@@ -495,11 +495,11 @@ Vim 的寄存器是一组用于保存文本的简单容器。它们既可像剪�
   set autoindent     " 按换行键，让代码自动缩进一个 Tab，设置自动缩进
   ```
 - 设置文件编码
-  ```sh
+  ```bash
   set fileencoding=utf-8
   ```
 - 高亮指定的列：num
-  ```sh
+  ```bash
   set colorcolumn=num
   ```
 
