@@ -1,18 +1,11 @@
-
-- [1. 理解面向对象和面向过程编程](#1-理解面向对象和面向过程编程)
-- [2. while语句](#2-while语句)
-- [3. 赋值语句 `=`](#3-赋值语句-)
-- [4. do ... while语句](#4-do--while语句)
-- [5. if...else语句](#5-ifelse语句)
-- [6. continue语句](#6-continue语句)
-- [7. 文件流](#7-文件流)
-- [8. 动态内存分配](#8-动态内存分配)
-- [9. 条件编译(precompilation)](#9-条件编译precompilation)
-- [10. 双引号与单引号区别](#10-双引号与单引号区别)
-- [11. 其它知识点](#11-其它知识点)
-- [12. References](#12-references)
-
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-08-29 21:45:27
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-04 19:45:30
+ * @Description: basic knowledgement
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 # 1. 理解面向对象和面向过程编程
 
 - 面向对象
@@ -22,7 +15,7 @@
   - 一种以过程为中心的编程思想，分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了
 
 
-# 2. while语句
+# 2. while
 
 ```C
 while ( expression )
@@ -39,7 +32,7 @@ while ( expression )
 - 可修改的左值(modifiable Lvalue)：用于标识可修改的对象。或者叫对象定位值(object locator value)
 
 
-# 4. do ... while语句
+# 4. do ... while
 
 ```C
 do {
@@ -51,7 +44,7 @@ do {
 - 一般而言， 当循环涉及初始化和更新变量时， 用for循环比较合适， 而在其他情况下用while循环更好
 
 
-# 5. if...else语句
+# 5. if...else
 
 ```C
 if ( expression )
@@ -64,7 +57,7 @@ else {
 - if和else之间只允许有一条语句（简单语句或复合语句）
 
 
-# 6. continue语句
+# 6. continue
 
 - 用作占位符：在使用while循环时，后边语句部分采用` ; `可以从continue代替
 - 让程序跳过循环体的余下部分
@@ -120,6 +113,7 @@ else {
   - C编译器允许字符串对字符变量赋值，只能得到错误
 
 # 11. 其它知识点 
+
 b = ++a 先对a加一后赋值为b
 
 b = a++ 先赋值后a加一
