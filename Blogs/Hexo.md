@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-03-28 10:19:40
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-03 17:48:02
+ * @LastEditTime: 2025-04-04 17:29:41
  * @Description: how to use hexo 
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -95,15 +95,26 @@ hexo clean && hexo g && hexo d
 Front-matter：确保每个 Markdown 文件都有正确的 Front-matter（标题、日期、分类等）
 
 示例：
-```bash
----
-title: 你的文章标题
-date: 2023-10-01  # 建议填写，否则 Hexo 可能不会正确排序
-tags: [tag1, tag2]
-categories: 分类
----
-```
 
+```bash
+# Page Front-matter
+---
+title: xxxx       # 页面标题，必填
+date: 2023-10-01  # 页面创建时间，必填
+type: 'xxx'       # tags，categories，link 三个页面需要配置，必填
+update: xxx       # 页面更新时间，可选
+---
+
+# Post Front-matter
+---
+title: Hello World        # 文章标题，必填
+date: 2025/04/02 22:11    # 创建时间，必填
+updated: 2025/04/02 22:11 # 更新时间，必填
+tags: [c,cpp]             # 文章标签，可选
+categories: cpp           # 文章分类，可选
+---
+
+```
 
 
 
@@ -111,8 +122,19 @@ categories: 分类
 
 - hexo official: https://hexo.io/zh-cn/docs/
 - Github hexo starter repo: https://github.com/hexojs/hexo-starter
-- Github Pages入门指南: https://sinoui.github.io/sinoui-guide/docs/github-pages-introduction
+- Github Pages: https://sinoui.github.io/sinoui-guide/docs/github-pages-introduction
 - butterfly theme official: https://butterfly.js.org/
-- 用『Hexo』搭建个人博客: https://liarrdev.github.io/post/Build-a-Blog-with-Hexo
 - Gtihub Hexo Filter MathJax: https://github.com/next-theme/hexo-filter-mathjax
+
+---
+Tools
+- shields: https://shields.io
+- unsplash: https://unsplash.com
+- fa address: https://fontawesome.com/search
+- 阿里巴巴矢量图标库: https://www.iconfont.cn
+
+---
+Blog
+- 用『Hexo』搭建个人博客: https://liarrdev.github.io/post/Build-a-Blog-with-Hexo
 - Hexo-Butterfly主题搭建记录: https://www.drflower.top/posts/5920b38e/
+- 关于我 Butterfly 主题的所有美化: https://blog.imzjw.cn/posts/b74f504f
