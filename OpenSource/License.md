@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-12-01 00:40:42
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:26:40
+ * @Description:  开源许可证
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # License 开源许可证
 
 ## MIT

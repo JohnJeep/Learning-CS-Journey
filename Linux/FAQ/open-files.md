@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-05-19 12:17:57
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:29:38
+ * @Description:  linux open-files
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # 1. 为什么要修改可打开的文件描述符的数量
 
 进程每打开一个文件（linux下一切皆文件，包括socket），都会消耗一定的内存资源。如果有不怀好心的人启动一个进程来无限的创建和打开新的文件，会让服务器崩溃。所以linux系统出于安全角度的考虑，在多个位置都限制了可打开的文件描述符的数量，包括系统级、用户级、进程级。这三个限制的含义和修改方式如下：

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-05-19 12:17:57
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:32:00
+ * @Description: linux 中常见问题排查
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # 1. linux 日志
 
 ## 1.1. 分类

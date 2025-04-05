@@ -1,6 +1,13 @@
-# SSH
+<!--
+ * @Author: JohnJeep
+ * @Date: 2021-05-19 12:17:57
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:31:51
+ * @Description: ssh learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-## SSH 配置
+# SSH 配置
 
 SSH 由客户端和服务端的软件组成，客户端可以使用的软件有 SecureCRT、putty、Xshell 等，服务器端运行的是一个 `sshd` 的服务，通过使用 SSH，可以把所有传输的数据进行加密，而且也能够防止 dns 和 IP 欺骗，SSH 传输的数据是经过压缩的，可以加快传输速度。
 
@@ -186,7 +193,8 @@ Subsystem sftp internal-sftp
 
 CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的是 OpenSSH_5.3p1。
 
-## SSH 免密钥登录
+
+# SSH 免密钥登录
 
 - 原理
 
@@ -275,7 +283,7 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的
 
 
 
-# Reference
+# References
 
 - [sshd_config(5) — Linux manual page](https://man7.org/linux/man-pages/man5/sshd_config.5.html)
 - [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。

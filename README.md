@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2025-04-04 19:53:54
+ * @LastEditTime: 2025-04-05 11:14:50
  * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
@@ -14,8 +14,8 @@
 C 语言是自己接触的第一门语言，基本的语法在大学时就已经学过，这里不再讲基础的语法，仅仅只是记录自己在工作中对 C 语言知识点的补充，常用常更新。包括底层的一些知识点，字符编码、指针、函数指针、结构体、内存分配等常见的点。
 
 1. [字符编码](C/2_character_encoding.md)
-2. [内存存放顺序](C/3_big_endian_little_endian.md)
-3. [断点调试](C/4-debug.md)
+2. [内存存放顺序](C/3_byte_order.md)
+3. [断点调试](C/4_debug.md)
 4. [变量与数据类型](C/5-变量与数据类型.md)
 5. [Volatile 关键字用法解释](C/6_volatile.md)
 6. [为什么会出现段错误](C/7_segment_fault.md)
@@ -35,7 +35,7 @@ C 语言是自己接触的第一门语言，基本的语法在大学时就已经
 20. [枚举类型](C/22_enumerations.md)
 21. [C 语言中的状态机](C/23_state_machine.md)
 22. [C 语言中精髓之一：数组与指针的结合](C/24-数组与指针组合.md)
-23. 用到的比较生僻的库函数：[atoi()](C/25_atoi().md)、 [fprintf()](C/26_fprintf.md)、[snprintf()](C/35_snprintf.md)
+23. 用到的比较生僻的库函数：[atoi()](C/25_atoi.md)、 [fprintf()](C/26_fprintf.md)、[snprintf()](C/35_snprintf.md)
 24. [常见的转义字符和 ASCII 码](C/29-escape_string_ASCII.md)
 25. [C 语言中最重要的部分：内存分布](C/30_memory.md)
 26. [sizeof() 与 strlen() 的区别](C/31_sizeof_strlen.md)
@@ -45,7 +45,7 @@ C 语言是自己接触的第一门语言，基本的语法在大学时就已经
 30. [C 语言中精髓之一：回调函数](C/37_callback_function.md)
 31. [static 关键字](C/38_static.md)
 32. [细谈 C 语言中的字符串](C/39_static.md)
-33. [编写 C 程序时需遵循的编码规范](C/0_c_code_of_conduct.md)
+33. [编写 C 程序时需遵循的编码规范](C/0_code_of_conduct.md)
 
 
 # 3. C++
@@ -56,32 +56,32 @@ C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的
 ## 3.1. [C++ 基础](C++/01-C++Novice.md)
 这部分主要是 C++ 的基础知识点，常用的语法，该板块涉及的内容比较多。
 
-<img src="./C++/figures/toc-1.png">
+<img src="./Cpp/figures/toc-1.png">
 
-<img src="./C++/figures/toc-2.png">
+<img src="./Cpp/figures/toc-2.png">
 
 
 ## 3.2. [C++ 高级](C++/02-C++Advanced.md)
 C++ 的核心思想是面向对象，这个板块包含了 C++ 面向对象的内容：封装、继承、多态；泛型编程、输入输出流、元编程等。
 
-<img src="./C++/figures/toc-3.png">
+<img src="./Cpp/figures/toc-3.png">
 
 
 ## 3.3. [C++ 新特性](C++/03-C++Standard.md)
 主要介绍 C++11、C++14、C++17、C++20 的新特性，
 
-<img src="./C++/figures/toc-c11.png">
+<img src="./Cpp/figures/toc-c11.png">
 
 
 ## 3.4. [C++STL](C++/04-STL.md)
 标准库是非常重要的，熟练地使用并知道其内部的原理对自己的编码是非常有帮助的。STL 是编写 C++ 的大牛们创造的一个非常优秀的作品，里面有很多的东西值得学习和探讨。
 
-<img src="./C++/figures/toc-stl-1.png">
-<img src="./C++/figures/toc-stl-2.png">
-<img src="./C++/figures/toc-stl-3.png">
+<img src="./Cpp/figures/toc-stl-1.png">
+<img src="./Cpp/figures/toc-stl-2.png">
+<img src="./Cpp/figures/toc-stl-3.png">
 
 
-## 3.5. [C++ 内存管理](./C++/05-内存管理.md)
+## 3.5. [C++ 内存管理](./Cpp/05-内存管理.md)
 C++ 不同 Java、Python、GO 等，C++ 没有垃圾回收机制，内存的分配和释放都需自己手动管理，因此真真理解 C++ 编译器中的内存管理机制是非常重要的。这部分的内容，目前只写了部分，后面的内容，以后在完善。
 
 1. [C++ 中 enable_shared_from_this 用法](C++/enable_shared_from_this.md)
@@ -153,8 +153,8 @@ Currency(并发)
 # 6. 计算机网络
 [计算机网络基础知识](Network/NetworkPrimer.md)
 
-<img src="./Network/figure/toc-net-1.png">
-<img src="./Network/figure/toc-net-2.png">
+<img src="./Network/figures/toc-net-1.png">
+<img src="./Network/figures/toc-net-2.png">
 
 ---
 - [计算机网络常用网络术语缩写](Network/AbbrNetworkTerms.md)
@@ -207,15 +207,15 @@ Currency(并发)
 # 9. 数据库
 [MySQL 数据库基础](MySQL/MySQL.md)
 
-<img src="MySQL/figure/toc-mysql.png">
+<img src="MySQL/figures/toc-mysql.png">
 
 
 # 10. Git-SVN
 [从最简单的 Git 使用，到 Git 内部原理，一步步带你窥探其的奥秘](Git-SVN/Git.md)<br>
-<img src="Git-SVN/figure/toc-git.png">
+<img src="Git-SVN/figures/toc-git.png">
 
 [SVN 工具](Git-SVN/SVN.md)<br>
-<img src="Git-SVN/figure/toc-svn.png">
+<img src="Git-SVN/figures/toc-svn.png">
 
 
 # 11. Go
@@ -226,13 +226,13 @@ Currency(并发)
 # 12. Linux
 - [Linux 基础知识点](Linux/linux-primer.md)
 
-<img src="Linux/pictures/toc-linux-basics-1.png">
-<img src="Linux/pictures/toc-linux-basics-2.png">
+<img src="Linux/figures/toc-linux-basics-1.png">
+<img src="Linux/figures/toc-linux-basics-2.png">
 
 -------------------------------------------------
 - [编译链接原理及过程分析](Linux/compile-link.md)
 - [GDB 调试常用命令及底层原理探讨](Linux/gdb.md)
-- [具有编辑器之神称为的 VIM 用法探讨](Linux/vim/vim.md)
+- [具有编辑器之神称为的 VIM 用法探讨](Linux/vim.md)
 - [CMAKE 原理及其语法探讨](Linux/CMake/cmake-tutorial.md)
 - [Makefile 原理和用法](Linux\CMake\Makefile.md)
 - [Linux 下索引节点 inode 分析](Linux/inode.md)
