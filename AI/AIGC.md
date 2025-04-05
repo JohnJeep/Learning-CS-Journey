@@ -1,18 +1,27 @@
-# AI Model
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-12-18 16:25:50
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:36:15
+ * @Description: AIGC
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-## ChatGPT
+# 1. AI Model
+
+## 1.1. ChatGPT
 
 ChatGPT官网： https://openai.com/
 
 CharGPT是 OpenAI公司开发的人工智能聊天程序，于 2022年11月推出。该程序使用基于GPT-3.5、GPT-4架构的大型语言模型並以强化学习训练。主要是以文字的方式与用户进行互动，可以用于自动生成文本、生成摘要、自问自答。基于输入的文本可以自动生成歌曲、诗歌，对软件开发者，可以进行辅助编程。同类的产品：谷歌的 Bard，百度的文心一言，阿里巴巴的通义千问，清华大学开放的 ChatGLM，科大讯飞的星火，复旦大学推出的 MOSS，美国 Anthropic 公司推出的 Claude
 
-## Midjourney
+## 1.2. Midjourney
 
 Midjourney官网： https://www.midjourney.com/
 
 Midjourney是一款2022年3月面世的AI绘画工具。只需要输入文字，通过AI模型就能生出对应的图片。最初是由美国一家工作室开发的，于2022年3月首次亮相，在8月迭代至V3版本并开始引发一定的关注，而2023年更新的V5版本让Midjourney及其作品成功“出圈”，代表作是“中国情侣”图片。
 
-## Stable Diffusion
+## 1.3. Stable Diffusion
 
 Stable Diffusion官网： https://stability.ai/
 
@@ -24,13 +33,13 @@ Stable Diffusion是2022年发布的深度学习文本到图像生成模型。它
 
  教程：https://stable-diffusion-art.com/qr-code/
 
-## Novel AI
+## 1.4. Novel AI
 
 Novel AI官网： https://novelai.net/
 
 NovelAI 是由美国特拉华州的 Anlatan 公司开发的云端软件即服务（SaaS）模式订阅制服务，其下有辅助故事写作以及文本到图像生成功能，于2021年6月15日推出测试版，2022年10月3日推出图像生成服务。Novel AI 用于故事写作和和绘画。它使用的GPT的模型进行故事写作。
 
-# Program
+# 2. Program
 
 Github Copilot
 
@@ -39,33 +48,34 @@ Github Copilot
 - 代码生成
 - 代码调试
 
-## AI 编辑器
+## 2.1. AI 编辑器
 
 - Cursor
 - Composer
 - Windsurf
 - Trae
 
-# LLM
+# 3. LLM
 
 LLM: large language model
 
 AGI: Artificial General Intelligence
 
-# NVIDIA
+# 4. NVIDIA
 
 开源框架
 - Blackwell
 
-# Protocol
+# 5. Protocol
 
 Model Context Protocol(MCP)
-  - introduction: https://modelcontextprotocol.io/introduction
-  - Github specification: https://github.com/modelcontextprotocol/specification
-  - Github: https://github.com/modelcontextprotocol
-  - Anthropic official: https://www.anthropic.com/news/model-context-protocol
+- introduction: https://modelcontextprotocol.io/introduction
+- Github specification: https://github.com/modelcontextprotocol/specification
+- Github: https://github.com/modelcontextprotocol
+- Anthropic official: https://www.anthropic.com/news/model-context-protocol
 
-# OpenSource Framework
+
+# 6. OpenSource Framework
 
 - https://github.com/ggerganov/whisper.cpp: whisper.cpp, Port of OpenAI's Whisper model in C/C++
 - https://github.com/ggml-org/llama.cpp: llama.cpp, LLM inference in C/C++
