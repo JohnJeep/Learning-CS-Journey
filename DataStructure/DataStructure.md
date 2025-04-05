@@ -1,12 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50
- * @LastEditTime: 2025-04-04 19:23:33
+ * @LastEditTime: 2025-04-05 12:17:00
  * @LastEditors: JohnJeep
  * @Description: 数据结构与算法学习笔记
 --> 
 
-# 1. 概念
+# 1. Introduction
 
 - 算法：处理问题的策略。
 - 数据结构：描述问题的数据模型。
@@ -50,12 +50,14 @@
 
 
 # 2. 代码的规范性
+
 - 正确性
 - 完整性
 - 鲁棒性：程序在执行的时候，可能会出现访问空指针的问题，会导致程序崩溃。
 
 
-# 3. 结构体定义（3种）
+# 3. definition struct
+
 - 法一：在定义结构体类型的同时说明结构体变量
   ```cpp
   struct 结构名
@@ -86,17 +88,18 @@
   - <font color=red> -> 成员选择指针 </font> `结构指针->结构成员`
 
 
-# 4. 链表
+# 4. linked list
 
 - 链表是一种动态的数据结构，每添加一个结点分配一次内存，占用的内存是连续的，没有闲置的内存
 - 数组的内存是一次性分配内存
 
 <p align="center">
-	<img src="./figures/链表.png">
+	<img src="./figures/linklist.png">
 </p>
 
 
-## 4.1. 线性表
+## 4.1.  linear linked list
+
 - 同一个线性表中所有的结点都必须是 **相同的数据类型**
 - 主要操作
   - 创建
@@ -122,13 +125,15 @@ data | next
 
 - 链表操作的精髓：先改变指针指向，再移动指针。
 
-## 4.2. 循环链表
+## 4.2. circular linked list
+
 - 建立循环链表时，必须使最后一个结点的指针指向表头结点
 - 判断是否到表尾时，判断该结点链域的值是否是表头结点，当链域值等于表头指针，说明已到达表尾
 
 
 
-# 5. 栈
+# 5. stack
+
 - 栈（stack）是一种特殊的线性表，所有的插入和删除都限制在表的同一端进行。进行插入、删除操作的一端为栈顶（top）,另一端为栈底，栈中没有元素时为空栈。
 - 特点：先入后出
 - 栈的主要操作
@@ -150,7 +155,8 @@ data | next
 - 链式栈：采用链表的方式实现栈操作，插入和删除只能在表头进行。
 
 
-# 6. 队列
+# 6. queue
+
 - 定义：只允许在一端（队尾）进行插入操作，在另一端（队头）进行删除操作的线性表
 - 特点： `先入先出` 方式管理的线性表，一般用于数据的缓存。
 - 分类
@@ -170,7 +176,7 @@ data | next
   - 队列中少用一个元素的空间，达到使队满和队空的条件不一样
 
 <p align="center">
-	<img src="./figures/队列.png">
+	<img src="./figures/queue.png">
 </p>
 
 
@@ -179,7 +185,8 @@ data | next
 
 
 
-# 7. 树
+# 7. Tree
+
 - 定义
   > 树是包含n（n≥0）个结点的有限集。在任意一棵非空树中，有且仅有一个称为根的结点；其余结点分为m（m≥0）个互不相交的子集，每个子集又是一棵树，称为根的子树
 - 特点
@@ -203,6 +210,7 @@ data | next
 
 
 ## 7.1. 树的存储
+
 - 利用数组的下标将离散的树结点的编号一一对应起来。
 - 存储原则
   - 存数值、存联系
@@ -221,16 +229,18 @@ data | next
   > 建立两张表，一张存储树结点的表，另一张存储结点与结点之间关系的表。
 
 
-## 7.2. 树的创建
+## 7.2. create tree 
+
 - 利用 `#号法` 进行树的创建。`#号法` 的先序遍历能确定一颗树。
-<p align="center"><img src="./figures/井号法创建树.png"></p>
-<p align="center"><img src="./figures/井号法创建树例子.png"></p>
+<p align="center"><img src="./figures/#-create-tree.png"></p>
+<p align="center"><img src="./figures/#-create-tree-example.png"></p>
 
 
-## 7.3. 二叉树（binary tree）
+## 7.3. binary tree
+
 - 定义：二叉树的定义是递归的，是n(n≥0)个结点的有限集。该集合为空或者由一个根加上两棵互不相交的、分别称为左子树和右子树的二叉树组成。
 - 二叉树的双亲表示法
-<p align="center"><img src="./figures/双亲结点.png"></p>
+<p align="center"><img src="./figures/parent-node.png"></p>
 
 - 二叉树的操作
   - 创建：建立一棵二叉树，初始化
@@ -269,6 +279,7 @@ data | next
 
 
 ## 7.4. 遍历二叉树（traverse binary tree）
+
 - 先序遍历（inorder tree walk）：（根-->左-->右）
     1. 访问根结点 
     2. 先序遍历左子树 
@@ -299,6 +310,8 @@ data | next
   - 通过 `中序遍历` 和 `后序遍历` 可以确定一棵树。
   - 通过 `先序遍历` 和 `后序遍历` 不能确定一棵树。
 
+
+
 ## 7.5. DFS与BFS
 
 - `DFS(Deep First Search)` 深度优先搜索
@@ -306,6 +319,7 @@ data | next
 
 
 ## 7.6. 二叉搜索树(binary search tree)
+
 - 什么是二叉搜索树？
   > 二叉搜索树是一种特殊的二叉树，实现更快速的查找。一棵树用链表数据结构表示，每个结点就是一个对象。
 - 性质
@@ -343,19 +357,20 @@ data | next
 
 ## 7.7. 平衡二叉树（AVL树）
 
-- 概念
-  > 平衡二叉树是一颗空树或者左右两个子树的高度差的绝对值不超过 1，并且左右两个子树都是一颗平衡二叉树。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道 AVL 树适合用于插入与删除次数比较少，但查找多的情况。
+平衡二叉树是一颗空树或者左右两个子树的高度差的绝对值不超过 1，并且左右两个子树都是一颗平衡二叉树。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道 AVL 树适合用于插入与删除次数比较少，但查找多的情况。
 
 
 
 ## 7.8. 红黑树（Red black tree）
 
 ### 7.8.1. 概念
-- 什么是红黑树？
-  > 红黑树是一颗二叉搜索树，它在每个结点上增加了一个存储位来表示结点的颜色，结点的颜色为红色或黑色。通过对任何一条从根结点到叶子结点路径上各个结点的颜色进行约束，确保红黑树上没有一条路径会比其它的路径长出 2 倍，使红黑树近似是平衡的。
+
+什么是红黑树？
+> 红黑树是一颗二叉搜索树，它在每个结点上增加了一个存储位来表示结点的颜色，结点的颜色为红色或黑色。通过对任何一条从根结点到叶子结点路径上各个结点的颜色进行约束，确保红黑树上没有一条路径会比其它的路径长出 2 倍，使红黑树近似是平衡的。
 
 
 ### 7.8.2. 红黑树特点
+
 1. 每个结点是红色或黑色。
 2. 根结点是黑色。
 3. 所有叶子都是黑色（叶子是指针为空的的结点）。
@@ -377,20 +392,22 @@ data | next
   - Linux中epoll机制的实现
 
 
-### 7.8.3. 旋转
+### 7.8.3. Rotate
+
 - 为什么红黑树要旋转？
   > 添加或删除红黑树中的结点之后，红黑树的结构发生了变化，可能不满足红黑树的5条性质，也就不再是一颗红黑树了，而是一颗普通的树。通过旋转，可以使这颗树重新成为红黑树。为了维护这些特性，必须要改变树中某些结点的颜色和指针结构。
 
 - 左旋：逆时针旋转红黑树的结点，使被旋转结点的右孩子成为被旋转结点的父结点，被旋转的结点成为新树的左孩子，被旋转结点的右孩子的左结点成为被旋转结点的右孩子。
 - 右旋：顺时针旋转红黑树的结点，使被旋转结点的左孩子成为被旋转结点的父结点，被旋转的结点成为新树的右孩子，被旋转结点的左孩子的右结点成为被旋转结点的左孩子。
-<p align="center"><img src="./figures/红黑树旋转.png"></p>
+<p align="center"><img src="./figures/redblack-tree-rotate.png"></p>
 
 - 变色：结点变化后的红黑树必须重新满足红黑树的性质，则需要把红色结点变为黑色，或者把黑色结点变为红色。
 
 > 红黑树旋转和变色的核心思想：将红色结点移动到根结点，再将根结点设置为黑色。
 
 
-### 7.8.4. 插入
+### 7.8.4. Insert
+
 - 为什么红黑树中新插入的结点必须是红色？
 > 一颗正常的红黑树中新插入的结点不是红色时，否则就违反了红黑树的性质 4：每个叶子结点到根结点的所有路径上不能有两个连续的红色结点。
 - 插入前需要找到结点插入的位置，如果插入结点小于当前遍历到的结点，则到当前结点的左子树中继续查找；如果插入结点大于当前结点，则到当前结点的右子树中继续查找。
@@ -403,22 +420,23 @@ data | next
       1. 将父结点和叔叔结点设置为黑色，     
       2. 如果此时祖父结点是根结点，则则直接将祖父结点设置为黑色。
       3. 如果此时祖父结点不是根结点，则将祖父结点（父结点的父结点）设置为红色，并将祖父结点更新为新的当前结点，然后再对祖父结点进行后续的操作。     
-          <p align="center"><img src="./figures/红黑树插入1.png"></p>
+          <p align="center"><img src="./figures/redblack-tree-insert-1.png"></p>
 
       - 若新的当前结点的父结点为红色，叔叔结点为黑色，且新的当前结点是其父结点的右孩子 
         1. 将父结点重新作为新的当前结点
         2. 以新的当前结点为支点进行左旋。此时新的当前结点满足左旋的特点，因此要用左旋来改变红黑树的结构。
         3. 如果原来的当前结点经过旋转后变为根结点，则直接将其设置为黑色。
         4. 如果原来的当前结点经过旋转后不是根结点，则需要将原来当前结点的父结点设置为新的当前结点。
-        <p align="center"><img src="./figures/红黑树插入2.png"></p>
+        <p align="center"><img src="./figures/redblack-tree-insert-2.png"></p>
 
       - 若新的当前结点的父结点为红色，叔叔结点为黑色，且新的当前结点是其父结点的左孩子
         - 将父结点设置为黑色，祖父结点设置为红色
         - 以祖父结点为支点进行右旋  
-        <p align="center"><img src="./figures/红黑树插入3.png"></p>
+        <p align="center"><img src="./figures/redblack-tree-insert-3.png"></p>
 
 
-### 7.8.5. 删除
+### 7.8.5. delete
+
 - 将红黑树当作一颗二叉查找树，待删除的结点按照儿子的个数，删除时分为3种情况。
   1. 被删除结点没有儿子，即为叶子结点。那么，直接将该结点删除就OK了 
   2. 若果被删除结点只有一个儿子，那么直接删除该结点，并用该结点的唯一子结点顶替它的位置。
@@ -438,31 +456,23 @@ data | next
   - case1：当前结点为新的根结点，删除没有影响，直接删除 
   - case2：当前结点为黑色，兄弟结点为红色，父结点和兄弟结点的儿子结点都为黑色 
     - 把父结点染成红色，兄弟结点染成黑色，然后再进行左旋操作
-    <p align="center"><img src="./figures/红黑树插入删除2.png"></p>
+    <p align="center"><img src="./figures/redblack-tree-del-2.png"></p>
   - case3：当前结点为黑色，兄弟结点、兄弟结点的儿子结点、父结点全都为黑色
     - 只需要简单的把兄弟结点颜色变为红色就可以了。
-    <p align="center"><img src="./figures/红黑树插入删除3.png"></p>  
+    <p align="center"><img src="./figures/redblack-tree-del-3.png"></p>  
   - case4：当前结点颜色是黑色，兄弟结点和它的儿子结点都为黑色，父结点为红色
     - 简单的将要删除结点的兄弟结点和父结点颜色进行交换就可以了。 
-    <p align="center"><img src="./figures/红黑树插入删除4.png"></p>  
+    <p align="center"><img src="./figures/redblack-tree-del-4.png"></p>  
   - case5：当前结点颜色是黑色且为父结点的左子结点，兄弟结点是黑色，兄弟的左子结点是红色，右子结点是黑色
     - 把兄弟结点染成红色，兄弟左子结点染黑色，再以兄弟结点为支点，进行右旋转操作。 
-    <p align="center"><img src="./figures/红黑树插入删除5.png"></p>  
+    <p align="center"><img src="./figures/redblack-tree-del-5.png"></p>  
   - case6：当前结点颜色是黑色且为父结点的左子结点，兄弟结点是黑色，兄弟结点的右子结点是红色，兄弟结点的左子结点颜色是任意色
     - 将兄弟结点染成当前结点的父结点颜色，兄弟结点右子结点染成黑色，再以当前结点的父结点为支点进行左旋转操作。 
-    <p align="center"><img src="./figures/红黑树插入删除6.png"></p>  
-
-### 7.8.6. 参考
-- [维基百科英文解释红黑树](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) 讲解最全面，重点掌握。
-- [维基百科中文解释红黑树](https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91)
-- [Github详解：教你透彻了解红黑树](https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md)
-- [A complete and working implementation in C](https://web.archive.org/web/20140328232325/http://en.literateprograms.org/Red-black_tree_(C))
-- [James Paton. "Red-Black Trees"](http://pages.cs.wisc.edu/~paton/readings/Red-Black-Trees/#intro)
-- [红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)
-
+    <p align="center"><img src="./figures/redblack-tree-del-6.png"></p>  
 
 
 ## 7.9. 字典数（trie树）
+
 - 是一种专门处理字符串匹配的数据结构，用来解决在一组字符串集合中快速查找某个字符串的问题
 - 特点
   - 根结点不包含字符，除根结点外的每一个子结点都包含一个字符。
@@ -492,35 +502,24 @@ data | next
   - 父结点的索引值等于当前结点的索引值的 `1/2 `
   - 左子结点的索引值等于当前结点的索引值的 `2倍`
   - 右子结点的索引值等于当前结点的索引值的 `2倍加1`
-   <p align="center"><img src="./figures/最大堆.png"></p>
+   <p align="center"><img src="./figures/max-heap.png"></p>
 
 - 结点的插入、删除操作
   - 添加新元素的时候，先存放到数组的尾部，然后在通过自下向上重新排序，使加添新元素后的二叉树，满足为堆数据结构的特性。
    - 删除元素时，一般默认删除第一个根结点，将数组的最后一个元素放到根结点的位置，之后通过自上而下重排序，使删除元素后的二叉树也满足堆数据结构的特性。
 
 
-- 参考
-  - [堆树（最大堆、最小堆）详解](https://blog.csdn.net/guoweimelon/article/details/50904346)
-  - [彻底弄懂最大堆的四种操作(图解+程序)（JAVA）](https://www.iteye.com/blog/128kj-1728555)
-  - [堆排序](https://www.cnblogs.com/dolphin0520/archive/2011/10/06/2199741.html)
-  - [算法】堆，最大堆（大顶堆）及最小堆（小顶堆）的实现](https://blog.csdn.net/cdnight/article/details/11650983?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
-
-
 
 ## 7.11. B树
 
-- 什么是B Tree？
-  > 在计算机科学中，B树（英语：B-tree）是一种自平衡的树，能够保持数据有序。这种数据结构能够让查找数据、顺序访问、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树（binary search tree）一个节点可以拥有2个以上的子节点。与自平衡二叉查找树不同，B树适用于读写相对大的数据块的存储系统，例如磁盘。B树减少定位记录时所经历的中间过程，从而加快存取速度。B树这种数据结构可以用来描述外部存储。这种数据结构常被应用在数据库和文件系统的实现上。
+什么是B Tree？
+> 在计算机科学中，B树（英语：B-tree）是一种自平衡的树，能够保持数据有序。这种数据结构能够让查找数据、顺序访问、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树（binary search tree）一个节点可以拥有2个以上的子节点。与自平衡二叉查找树不同，B树适用于读写相对大的数据块的存储系统，例如磁盘。B树减少定位记录时所经历的中间过程，从而加快存取速度。B树这种数据结构可以用来描述外部存储。这种数据结构常被应用在数据库和文件系统的实现上。
 
 
 
 - B tree 应用
   - 主要用于文件系统以及部分数据库索引（MongoDB） 而Mysql是用B+树的。
 
-
-- 参考
-  - [从B树、B+树、B*树谈到R 树](https://blog.csdn.net/v_july_v/article/details/6530142)
-  - [维基百科解释B树](https://zh.wikipedia.org/wiki/B%E6%A0%91)
 
 ## 7.12. B+树
 
@@ -549,14 +548,12 @@ data | next
 # 8. 算法
 
 排序算法时间复杂度、空间复杂度、稳定性比较。
-<p align="center"><img src="./figures/算法复杂度.png"></p>
+<p align="center"><img src="./figures/algorithm-complexity.png"></p>
 
 
 
 ## 8.1. 快速排序
-- 参考
-  - [维基百科解释快速排序](https://en.wikipedia.org/wiki/Quicksort)
-  - [快速排序及优化](https://www.cnblogs.com/ttltry-air/archive/2012/08/06/2625512.html)
+
 
 
 ## 8.2. 桶排序
@@ -579,11 +576,8 @@ data | next
   - 在最坏的情况下，时间复杂度为 $\Omicron(n*log_2 n)$
 
 
-- 参考
-  - [堆排序详解 ](https://www.cnblogs.com/skywang12345/p/3602162.html)
-  - 《数据结构与算法分析新视角》
-
 ## 8.4. 递归
+
 - 函数自己调用自己。
 - 缺点：
   - 需要消耗时间和空间：每一次函数调用，都需要在栈上分配空间来保存参数、返回地址和临时变量，而且往栈里面压入数据和弹出数据都需要时间的。 
@@ -592,12 +586,12 @@ data | next
 
 
 ## 8.5. 动态规划
+
 - 求一个问题的最优解，通常是最大值或最小值，而且问题可以分解为若干个子问题，并且子问题之间还有重叠的更小的子问题。 
 - 从上往下分析问题，从下往上求解问题。 
 
 
 ## 8.6. KMP(字符串查找)
-
 
 - [从头到尾彻底理解KMP（2014年8月22日版）](https://blog.csdn.net/v_JULY_v/article/details/7041827) 
 
@@ -613,7 +607,7 @@ data | next
 - 它可以在多种机器上编译和运行吗？或者说需要经过修改才能在不同的机器上运行吗？ 
 
 
-# 10. 参考资源
+# 10. References
 
 - [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) San Francisco大学计算机学院提供一个可视化的教学资源 
 - [visualgo](https://visualgo.net/en/sorting) 是一款可视化学习算法的工具，从简单的排序算法到复杂的图形数据结构和算法都有 
@@ -624,3 +618,28 @@ data | next
 - [DFS与BFS对比](https://www.cnblogs.com/wzl19981116/p/9397203.html)
 - [维基百科解释AVL树](https://zh.wikipedia.org/wiki/AVL%E6%A0%91)  
 - [排序算法时间复杂度、空间复杂度、稳定性比较](https://blog.csdn.net/yushiyi6453/article/details/76407640) 
+- [从B树、B+树、B*树谈到R 树](https://blog.csdn.net/v_july_v/article/details/6530142)
+- [维基百科解释B树](https://zh.wikipedia.org/wiki/B%E6%A0%91)
+- [堆树（最大堆、最小堆）详解](https://blog.csdn.net/guoweimelon/article/details/50904346)
+- [彻底弄懂最大堆的四种操作(图解+程序)（JAVA）](https://www.iteye.com/blog/128kj-1728555)
+- [堆排序](https://www.cnblogs.com/dolphin0520/archive/2011/10/06/2199741.html)
+- [算法】堆，最大堆（大顶堆）及最小堆（小顶堆）的实现](https://blog.csdn.net/cdnight/article/details/11650983?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
+
+---
+红黑树
+- [维基百科英文解释红黑树](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) 讲解最全面，重点掌握。
+- [维基百科中文解释红黑树](https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91)
+- [Github详解：教你透彻了解红黑树](https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md)
+- [A complete and working implementation in C](https://web.archive.org/web/20140328232325/http://en.literateprograms.org/Red-black_tree_(C))
+- [James Paton. "Red-Black Trees"](http://pages.cs.wisc.edu/~paton/readings/Red-Black-Trees/#intro)
+- [红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)
+  
+---
+quick sort
+- [维基百科解释快速排序](https://en.wikipedia.org/wiki/Quicksort)
+- [快速排序及优化](https://www.cnblogs.com/ttltry-air/archive/2012/08/06/2625512.html)
+
+---
+heap sort
+- [堆排序详解 ](https://www.cnblogs.com/skywang12345/p/3602162.html)
+- 《数据结构与算法分析新视角》
