@@ -1,10 +1,17 @@
-# JsonCppon
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-13 10:25:24
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:25:26
+ * @Description: jsoncpp learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-## 简介
+# 1. Introduction
 
 JsonCpp是一个序列化反序列JSON格式的开源C++库，被C++程序广泛使用（包括Chromium项目）。JsonCpp还有一个重要特性是其支持在JSON格式内注释，这对于使用JSON格式作为配置文件很有意义，可以给配置添加注释说明其用途。
 
-## 用法
+# 2. Usaging
 
 JsonCpp三个核心类 Reader、FastWriter、Value基本可以满足项目对JSON构造解析的要求。
 
@@ -23,7 +30,7 @@ JsonCpp三个核心类 Reader、FastWriter、Value基本可以满足项目对JSO
   - 第四， 删除，Object时删除某个key使用removeMember()接口，Array时删除某个元素使用removeIndex接口指定元素的下标。
 
 
-# Reference
+# 3. References
 
 - 官网：https://jsoncpp.sourceforge.net/old.html
 - 用法参考：https://www.cnblogs.com/ZY-Dream/p/10054074.html

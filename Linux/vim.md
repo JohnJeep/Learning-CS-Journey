@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 20:19:40
+ * @LastEditTime: 2025-04-05 11:09:00
  * @Description: How to use VIM
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -247,7 +247,7 @@ t: HTML tag
 
 文本对象包括分隔符文本对象和范围文本对象，下面图片中分别列出了通用的文本对象。
 
-![alt text](../figures/vim-text-objects.png)
+![alt text](./figures/vim-text-objects.png)
 
 ## 2.9. Fold
 
@@ -528,7 +528,7 @@ inoremap <silent> <F2> <C-O>:nohlsearch<CR>
 
 Vim 命令手抄
 
-![Alt text](../figures/vim-cmd.png)
+![Alt text](./figures/vim-cmd.png)
 
 
 # 13. Vscodevim tricks

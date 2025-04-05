@@ -1,6 +1,12 @@
-# jq
-
-## Introduction
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-01 00:40:42
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:21:42
+ * @Description: 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+# Introduction
 
 jq 是 stedolan 开发的一个轻量级的和灵活的命令行 JSON 处理器。
 
@@ -18,7 +24,7 @@ $ yum install jq
 
 
 
-## Reference
+# References
 
 - 官方文档：https://stedolan.github.io/jq/
 - 知乎介绍 jq 用法：https://zhuanlan.zhihu.com/p/606945462

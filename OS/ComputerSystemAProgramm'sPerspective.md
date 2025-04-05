@@ -1,13 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-10 20:56:34
- * @LastEditTime: 2025-04-04 20:07:06
+ * @LastEditTime: 2025-04-05 11:19:26
  * @LastEditors: JohnJeep
  * @Description: 深入理解计算机系统学习笔记
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. Computer System: A Programmer's Perspective
+# 1. Thinking
 
 
 <font color="red">
@@ -15,7 +15,7 @@
 </font>
 
 
-## 1.1. Program Structure & Execution
+# 2. Program Structure & Execution
 
 - Northbridge(北桥)：为了协调CPU、内存和高速的图形设备，人们设计了一个高速的北桥芯片，使它们之间高速的交换数据。
 - Southbridge(南桥)：为了解决北桥既要处理高速设备又要处理低速的设备，人们设计了专门处理低速设备的南桥芯片，磁盘、USB、键盘、鼠标等设备都连接在南桥上。
@@ -23,7 +23,7 @@
 - Relocation(重定位)：重新计算各个目标地址的的过程。
 
 
-### 1.1.1. 典型的计算机底层硬件组织架构
+## 2.1. 典型的计算机底层硬件组织架构
 - CPU: central processing unit
 - ALU: arithmetic/logic unit
 - PC: program counter
@@ -54,7 +54,7 @@
    - Jump: Extract a word from the instruction itself and copy that word into the program counter (PC), overwriting the previous value of the PC.
 
 
-### 1.1.2. 一个 hello 可执行程序的底层调用过程
+## 2.2. 一个 hello 可执行程序的底层调用过程
 
 1. 初始时，shell程序执行它的指令，等待我们输人一个命令。在键盘上输人字符串 `./hello` 后，shell程序将字符逐一读入register，再把它存放到memory中。
 
@@ -69,7 +69,7 @@
    <img src="./figures/hello可执行显示.png">
 
 
-### 1.1.3. cache(缓存)
+## 2.3. cache(缓存)
 
 <img src="./figures/内存分层结构.png">
 
@@ -86,7 +86,7 @@
 
 
 
-## 1.2. References
+# 3. References
 
 - [Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e)](https://csapp.cs.cmu.edu/): 官方英文书籍网站。
 - [Lab Assignments](http://csapp.cs.cmu.edu/3e/labs.html): 书籍中实验的部分。

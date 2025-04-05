@@ -1,38 +1,19 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-05-13 10:25:24
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:23:23
+ * @Description: rapidjson learning
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-<!-- TOC -->
+# 1. 基础用法
 
-- [1. rapidjson](#1-rapidjson)
-- [2. 基础用法](#2-基础用法)
-  - [2.1. 是什么](#21-是什么)
-  - [2.2. 特征](#22-特征)
-  - [2.3. 怎么用](#23-怎么用)
-    - [2.3.1. 解析](#231-解析)
-    - [2.3.2. 创建](#232-创建)
-  - [2.4. 注意事项](#24-注意事项)
-  - [2.5. 查询 Value](#25-查询-value)
-    - [2.5.1. 查询 Array](#251-查询-array)
-    - [2.5.2. 查询 Object](#252-查询-object)
-    - [2.5.3. 查询 String](#253-查询-string)
-- [3. 内部原理](#3-内部原理)
-  - [3.1. Reader](#31-reader)
-  - [3.2. Writer](#32-writer)
-  - [3.3. Document](#33-document)
-  - [3.4. Value](#34-value)
-  - [3.5. Allocator](#35-allocator)
-- [4. Reference](#4-reference)
-
-<!-- /TOC -->
-
-
-# 1. rapidjson 
-
-# 2. 基础用法
-
-## 2.1. 是什么
+## 1.1. 是什么
 
 rapidjson 是腾讯的开源 Json解析框架，用 C++ 代码实现，用于解析和生成 JSON 由于全部代码仅用头文件实现，因此很容易集成在项目中。根据其作者 Milo Yipz 所做的比较，可以看出 rapidjson 的性能非常可观。通过使用 DOM（Document Object Model）可以很方便的将 Json 转化成 DOM，然后查询修改，再转化为一个 Json。通过 rapidjson 库，可以方便我们进行参数的传递，解析的工作。Json 非常便捷的支持键值对、数组、以及深入的嵌套，在编写程序时，可以帮助我们聚焦于业务，而对于参数的传递，则可以较少的投入精力。
 
-## 2.2. 特征
+## 1.2. 特征
 
 优点
 
@@ -61,11 +42,11 @@ rapidjson 是腾讯的开源 Json解析框架，用 C++ 代码实现，用于解
 - RapidJSON 库较难使用，源码使用了大量的模板类和模板函数。
 - RapidJSON 库的 SAX 风格接口较难使用，因此使用 DOM 接口即可。
 
-## 2.3. 怎么用
+## 1.3. 怎么用
 
 Rapidjson [官网](https://rapidjson.org/zh-cn/md_doc_tutorial_8zh-cn.html) 非常详细的介绍了如何去使用，自己就不再把官方的文档般到这里来了。只总结一些使用的心得。
 
-### 2.3.1. 解析
+### 1.3.1. 解析
 
 json 字符串
 
@@ -121,7 +102,7 @@ doc.Accept(writer);
 std::cout << buffer.GetString() << std::endl;
 ```
 
-### 2.3.2. 创建
+### 1.3.2. 创建
 
 组建一个json字符串
 
@@ -169,7 +150,7 @@ doc.Accept(writer);
 std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的内容
 ```
 
-## 2.4. 注意事项
+## 1.4. 注意事项
 
 - RapidJSON 在类型转换时会检查数值的范围。
 
@@ -208,15 +189,15 @@ std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的�
 
 - **不建议**使用 wistream 和 wostream。
 
-## 2.5. 查询 Value
+## 1.5. 查询 Value
 
-### 2.5.1. 查询 Array
+### 1.5.1. 查询 Array
 
 缺省情况下，`SizeType` 是 `unsigned` 的 typedef。在多数系统中，Array 最多能存储 $2^{32}-1$ 个元素。
 
 用法与 `std::vector` 类似，同时也支持 C++11 的 for 循环迭代。
 
-### 2.5.2. 查询 Object
+### 1.5.2. 查询 Object
 
 - `FindMember()`:  检查成员是否存在并返回它的 `Value`。
 
@@ -242,7 +223,7 @@ std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的�
 
 rapidjson 为了最大化性能，大量使用了**浅拷贝**，使用之前一定要了解清楚。如果采用了浅拷贝，特别要注意局部对象的使用，以防止对象已被析构了，却还在被使用。
 
-### 2.5.3. 查询 String
+### 1.5.3. 查询 String
 
 RapidJSON 提供两个 String 的存储策略。
 
@@ -257,7 +238,7 @@ RapidJSON 提供两个 String 的存储策略。
   - `GetString()`
   -  `GetStringLength()`
 
-# 3. 内部原理
+# 2. 内部原理
 
 简称
 
@@ -274,7 +255,7 @@ RapidJSON 提供两个 String 的存储策略。
   - `writer.h`
   - `stringbuffer.h`
 
-## 3.1. Reader
+## 2.1. Reader
 
 `Reader`: （`GenericReader<...>` 的 typedef）是 JSON 的 SAX 风格**解析器**。
 
@@ -297,7 +278,7 @@ typedef GenericReader<UTF8<>, UTF8<> > Reader;
 
 
 
-## 3.2. Writer  
+## 2.2. Writer  
 
 `Writer`: （`GenericWriter<...>` 的 typedef）是 JSON 的 SAX 风格**生成器**。`Writer` 将数据生成 Json 格式数据。
 
@@ -383,7 +364,7 @@ public:
 
 2. 用 `Document` 类、分配器(Allocator)结合 `AddMember()` 函数。
 
-## 3.3. Document
+## 2.3. Document
 
 `Document`: 是模板类 `GenericDocument<UTF8<> >` 的别名，位于 `document.h` 文件中。
 
@@ -402,7 +383,7 @@ typedef GenericDocument<UTF8<> > Document;
 }
 ```
 
-## 3.4. Value
+## 2.4. Value
 
 `Value`: 是 DOM API 的核心，它是模板类 `GenericValue<UTF8<> >` 的别名，位于 `document.h` 中。
 
@@ -456,7 +437,7 @@ typedef GenericValue<UTF8<> > Value;
   };
   ```
 
-## 3.5. Allocator
+## 2.5. Allocator
 
 Allocator(分配器)，位于 `allocators.h` 文件中。
 
@@ -507,7 +488,7 @@ class MemoryPoolAllocator {
 }
 ```
 
-# 4. Reference
+# 3. Reference
 
 - 官方 Github: https://github.com/Tencent/rapidjson/
 - 英文文档: https://rapidjson.org/

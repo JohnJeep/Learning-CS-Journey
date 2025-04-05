@@ -1,18 +1,17 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-10 15:58:00
- * @LastEditTime: 2021-04-16 23:34:55
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-04-05 11:21:19
+ * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
-# MIT 6.828 & 6.S081
 
-课程
+# 课程
 
 - [MIT CS8.828, Operating System Engineering](https://pdos.csail.mit.edu/6.828/2018/schedule.html) 2018年秋季学科大纲。
 
 
-视频
+# 视频
 
 - YouTube：[6.828](https://www.youtube.com/playlist?list=PLfciLKR3SgqNJKKIKUliWoNBBH1VHL3AP)
 - B站：[6.828](https://www.bilibili.com/video/av15896196/)
@@ -22,7 +21,7 @@
 
 
 
-## Reference
+# References
 
 - [知乎：MIT6.828-神级OS课程-要是早遇到，我还会是这种 five 系列](https://zhuanlan.zhihu.com/p/74028717) 
 - [二十八画生征友：一起来通关6.S081/6.828吧](https://zhuanlan.zhihu.com/p/251366985)

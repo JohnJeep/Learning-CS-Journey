@@ -1,13 +1,13 @@
 <!--
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
- * @LastEditTime: 2021-05-19 12:20:24
- * @LastEditors: Please set LastEditors
- * @Description: Linux 常见服务器使用
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-05 11:29:16
+ * @Description: sftp learning 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-[sftp 使用](https://www.jb51.net/LINUXjishu/348693.html)
+# References
 
-
-https://www.myfreax.com/how-to-use-linux-sftp-command-to-transfer-files/
-
+- sftp 使用: https://www.jb51.net/LINUXjishu/348693.html
+- https://www.myfreax.com/how-to-use-linux-sftp-command-to-transfer-files
