@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2022-09-30 16:42:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-10 14:37:11
+ * @LastEditTime: 2025-04-06 13:40:31
  * @Description:
  * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
@@ -17,8 +17,7 @@
   git remote add origin new_address
   ```
 
-  <img src="./figure/修改远程仓库名.png">
-
+  ![alt text](figures/update-remote-repo-name.png)
 
 ## 1.2. Git 中文乱码
 - [解决 Git 在 windows 下中文乱码的问题](https://gist.github.com/nightire/5069597)
@@ -82,7 +81,7 @@ unix2dos [-kn] file [newfile]
 | 按语言      | language:xxx          |
 | 按作者名     | user:xxx              |
 
-![Alt text](figure/github-search.png)
+![Alt text](./figures/github-search.png)
 
 
 ## 1.5. References
