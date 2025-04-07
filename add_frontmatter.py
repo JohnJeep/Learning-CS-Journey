@@ -1,3 +1,11 @@
+'''
+Author: JohnJeep
+Date: 2025-04-01 00:40:42
+LastEditors: JohnJeep
+LastEditTime: 2025-04-05 13:04:38
+Description: front matter for markdown files
+Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+'''
 import os
 import shutil
 from datetime import datetime
@@ -10,13 +18,13 @@ def get_tags_from_path(file_path, base_path):
     # Add filename without extension as last tag
     filename = os.path.splitext(os.path.basename(file_path))[0]
     path_parts.append(filename)
-    # Convert to tags (lowercase first character)
-    tags = [part[0].lower() + part[1:] if part else part for part in path_parts if part]
+    # Convert all tags to lowercase
+    tags = [part.lower() for part in path_parts if part]
     return tags
 
 def process_md_files(base_path, output_base):
     # Excluded directories
-    excluded_dirs = {'Blogs', 'Embedded', 'Linux/vim/myvim'}
+    excluded_dirs = {'Blogs', 'Embedded', 'Linux/vim/myvim', 'Go/proj-go'}
     
     # Create output directory if it doesn't exist
     os.makedirs(output_base, exist_ok=True)
@@ -50,12 +58,13 @@ def process_md_files(base_path, output_base):
                 date = datetime.now().strftime("%Y/%m/%d %H:%M")
                 
                 # Create frontmatter with new format
+                tags_str = ''.join(f'   - {tag}\n' for tag in tags)
                 frontmatter = f"""---
 title: {title}
 date: {date}
-updated: 
-tags: {tags}
-categories: {category}
+updated: {date}
+tags: 
+{tags_str}categories: {category}
 ---
 
 """
