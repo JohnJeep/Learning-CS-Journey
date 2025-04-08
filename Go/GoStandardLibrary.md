@@ -8,7 +8,8 @@
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
 
-# 1. GO Standard library
+# 1. Introduction
+
 Go 语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
 
 学习标准库达到三个层面：
@@ -269,9 +270,28 @@ Go 语言中，Marshal（编组）是指将数据结构或对象转换为字节�
 - [在 Go 中如何使用 database/sql 来操作数据库](https://jianghushinian.cn/2023/06/05/how-to-use-database-sql-to-operate-database-in-go)
 - [Go packages database](https://pkg.go.dev/database/sql)
 
+# 8. strings
+
+在 Go 语言里，`strings.Builder` 是一个用于高效构建字符串的类型，它位于 `strings` 包中。由于 Go 语言的字符串是不可变的，若你频繁使用 `+` 运算符或者 `fmt.Sprintf` 来拼接字符串，会生成大量的临时字符串对象，这样不仅会消耗较多的内存，还会增加垃圾回收的负担，进而影响性能。而 `strings.Builder` 就可以很好地解决这个问题。
+
+## 8.1. 主要功能
+
+- **高效拼接字符串**：`strings.Builder` 内部使用字节切片来存储数据，它通过预先分配足够的内存，避免了频繁的内存分配和数据复制，从而显著提高了字符串拼接的效率。
+- **减少内存开销**：借助预先分配内存，减少了临时字符串对象的创建，降低了内存的使用量。
+
+## 8.2. 常用方法
+
+- **`Grow(n int)`**：为 `strings.Builder` 预先分配至少 `n` 字节的内存，以避免在拼接过程中频繁进行内存分配。
+- **`Write(p []byte)`**：把字节切片 `p` 追加到 `strings.Builder` 中。
+- **`WriteString(s string)`**：将字符串 `s` 追加到 `strings.Builder` 里。
+- **`String()`**：把 `strings.Builder` 中的内容转换为字符串。
 
 
-# 8. References
+
+
+
+# 9. References
+
 - Go Standard library: https://pkg.go.dev/std
 - Go 语言中文网：https://studygolang.com/pkgdoc
 - Mastering GO 中文翻译：https://wskdsgcf.gitbook.io/mastering-go-zh-cn/
