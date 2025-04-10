@@ -6,7 +6,8 @@
  * @Description: shall 学习笔记
 -->
 
-# 1. Shell
+# 1. Introduction
+
 一旦启动了终端仿真软件包或者登录 Linux 虚拟控制台，你就会看到 shell CLI 提示符。提示符就是进入shell世界的大门，是你输入 shell 命令的地方。默认 bash shell 提示符是美元符号（ $），这个符号表明 shell 在等待用户输入。  
 
 Shell 命令分为三大类：
@@ -17,11 +18,13 @@ Shell 命令分为三大类：
 查找某个命令属于哪类：`type -a <命令名称>`
 
 
-# 2. Bash 终端快捷键
+# 2. Bash Terminal Shortcuts
+
 Ctrl 开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的。
 
 
-## 2.1. 终端控制
+## 2.1. Terminal
+
 - `Ctrl + d` : 退出当前终端（end of file）
 - `Ctrl + c` : 强制终止当前命令，终止的是前台进程
 - `Ctrl + z` : 将当前任务暂停并挂在后台
