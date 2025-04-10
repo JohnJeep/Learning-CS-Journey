@@ -5,7 +5,16 @@ import (
 	"os"
 )
 
+func hostname() {
+	dir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println("get home dir failed:", err)
+	}
+	fmt.Println("home dir:", dir)
+}
+
 func main() {
+	hostname()
 	currDir, err := os.Getwd()
 	if err != nil {
 		fmt.Println("get current dir failed:", err)
