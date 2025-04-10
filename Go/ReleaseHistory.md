@@ -6,6 +6,9 @@
 
 2025年02月11日，1.24.0 版本发布。
 
+1. 语言特性
+   - map 底层实现使用 `swiss table` 替代原来的 `hashtable`。
+
 
 
 ## 1.23.0
@@ -312,6 +315,7 @@
   - 支持静态编译、垃圾回收、并发模型（Goroutine 和 Channel）。
   - 工具链包括 `go build`、`go run`、`go test`、`go fmt` 等。
   - 基于 `GOPATH` 的依赖管理模式。
+
 
 # References
 
