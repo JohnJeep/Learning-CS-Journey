@@ -21,10 +21,10 @@ menu:
   时间轴: /archives/ || fas fa-archive
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
-  清单||fa fa-heartbeat:
-    音乐: /music/ || fas fa-music
-    照片: /Gallery/ || fas fa-images
-  电影: /movies/ || fas fa-video
+  # 清单||fa fa-heartbeat:
+    # 音乐: /music/ || fas fa-music
+    # 照片: /Gallery/ || fas fa-images
+  # 电影: /movies/ || fas fa-video
   友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
 
@@ -132,7 +132,7 @@ post_meta:
     # Choose: date / relative
     date_format: date
     categories: true
-    tags: false
+    tags: true
     label: true
   post:
     # Choose: left / center
@@ -800,7 +800,7 @@ display_mode: light
 
 # Configuration for beautifying the content of the article
 beautify:
-  enable: true
+  enable: false
   # Specify the field to beautify (site or post)
   field: site
   # Specify the icon to be used as a prefix for the title, such as '\f0c1'
