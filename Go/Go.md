@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:18:48
+ * @LastEditTime: 2025-04-11 13:42:56
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -2031,3 +2031,4 @@ Github excellent open source project
 Tools
 - https://colobu.com/gotips/041.html 
 - 技术文章摘抄：https://learn.lianglianglee.com/
+- GO 命令教程: https://www.topgoer.cn/docs/go_command_tutorial/go_command_tutorial-1d9eko78f5vkq
