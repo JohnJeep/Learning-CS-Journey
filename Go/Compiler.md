@@ -2,19 +2,171 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:18:57
- * @Description: 
+ * @LastEditTime: 2025-04-11 13:49:01
+ * @Description: golang compiler learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-# Compile Analysis
 
-## 概述
+# 1. Introduction
 
 Golang 编译器底层源码分析。
 
-## 编译器原理
 
-Go编译器的基本工作流程和主要组件：
+# 2. 预编译指令
+
+在 Go 语言中，虽然没有像 C/C++ 那样的传统预处理器，但提供了一些特殊的注释指令（称为编译指示或编译器指令），用于控制编译、构建、代码生成等行为。以下是 Go 中常见的预编译指令和相关功能：
+
+### 1. 构建约束(Build Constraints)
+
+用于控制文件是否参与编译，通常基于操作系统、架构或自定义标签。
+
+#### 格式：
+
+- 新语法（Go 1.17+）
+
+  ```go
+  //go:build linux && amd64
+  ```
+
+- 旧语法（兼容性保留）
+
+  ```go
+  // +build linux,amd64
+  ```
+
+#### 示例：
+
+```go
+//go:build linux
+// +build linux
+
+package main
+```
+
+该文件仅在 Linux 系统下编译。
+
+------
+
+### 2. cgo
+
+用于在 Go 中调用 C 代码，设置 C 编译器和链接器参数。
+
+#### 常见指令：
+
+- **`#cgo CFLAGS`**：设置 C 编译器标志。
+- **`#cgo LDFLAGS`**：设置链接器标志。
+- **`#cgo pkg-config`**：通过 `pkg-config` 获取依赖参数。
+- **条件编译**：支持基于平台的条件参数。
+
+#### 示例：
+
+```go
+/*
+#cgo linux CFLAGS: -I/usr/local/include
+#cgo linux LDFLAGS: -L/usr/local/lib -lfoo
+#include <foo.h>
+*/
+import "C"
+```
+
+------
+
+### 3. go:generate
+
+通过 `go generate` 命令触发代码生成工具。
+
+#### 示例：
+
+```go
+//go:generate stringer -type=Color
+type Color int
+```
+
+运行 `go generate` 会生成 `Color` 类型的 String 方法。
+
+------
+
+### 4. **编译器指令**
+
+用于指导编译器优化或特殊行为，需紧邻函数声明。
+
+#### 常见指令：
+
+- **`//go:noinline`**：禁止内联函数。
+- **`//go:nosplit`**：跳过栈溢出检查。
+- **`//go:noescape`**：禁止参数逃逸到堆。
+- **`//go:linkname`**：链接到其他包的符号（需 `unsafe`）。
+- **`//go:uintptrescapes`**：处理 `uintptr` 逃逸问题。
+
+#### 示例：
+
+```go
+//go:noinline
+func MyFunction() {}
+```
+
+------
+
+### 5. go:embed
+
+自 Go 1.16 版本开始，支持文件嵌入指令， 用于将外部文件嵌入二进制中，需配合 `embed` 包。
+
+#### 示例：
+
+```go
+import _ "embed"
+
+//go:embed config.yaml
+var configData []byte
+```
+
+------
+
+### 6. **测试标签**
+
+结合 `go test -tags` 运行条件测试。
+
+#### 示例：
+
+```go
+// +build integration
+
+package main
+
+func TestIntegration(t *testing.T) {}
+```
+
+运行 `go test -tags=integration` 执行集成测试。
+
+------
+
+### 7. **汇编指令**
+
+在汇编文件中使用的特殊指令（如 `TEXT`, `DATA` 等），但属于底层实现细节，通常不直接使用。
+
+------
+
+### 总结表格
+
+| 指令类型   | 示例指令                 | 用途说明             |
+| :--------- | :----------------------- | :------------------- |
+| 构建约束   | `//go:build linux`       | 条件编译文件         |
+| Cgo 指令   | `#cgo LDFLAGS: -lfoo`    | 配置 C 编译/链接参数 |
+| 代码生成   | `//go:generate stringer` | 触发代码生成工具     |
+| 编译器优化 | `//go:noinline`          | 控制编译器内联行为   |
+| 文件嵌入   | `//go:embed file.txt`    | 嵌入外部文件到二进制 |
+| 测试标签   | `// +build integration`  | 区分测试类型         |
+
+------
+
+这些指令在 Go 开发中常用于跨平台支持、性能优化、C 交互和代码生成等场景。使用时需注意语法格式（如注释位置和空格），避免因格式错误导致指令失效。
+
+
+
+
+# 3. 编译器原理
+
+Go 编译器的基本工作流程和主要组件：
 
 1. **词法分析（Lexical Analysis）**：
    - 编译器首先会对源代码进行词法分析，将源代码分割成一系列标记（tokens）。这些标记包括关键字、标识符、常量和操作符等。
@@ -40,9 +192,9 @@ Go编译器的基本工作流程和主要组件：
 
 需要注意的是，Go编译器与C/C++等编译器不同，它在编译时进行了垃圾回收和自动内存管理的处理，因此Go程序不需要显式地释放内存。此外，Go编译器还包括一些与Go语言特性相关的特殊处理，如goroutine的支持和反射（reflection）等。
 
-## 自动内存管理
+# 4. 自动内存管理
 
-Go语言的自动内存管理是通过垃圾回收器（Garbage Collector，GC）来实现的。Go编译器和运行时系统共同协作，以管理程序中的内存分配和回收。下面是Go语言中的自动内存管理是如何工作的：
+Go 语言的自动内存管理是通过垃圾回收器（Garbage Collector，GC）来实现的。Go编译器和运行时系统共同协作，以管理程序中的内存分配和回收。下面是Go语言中的自动内存管理是如何工作的：
 
 1. **内存分配**：
    - 当你在Go程序中创建变量、切片、地图或其他数据结构时，Go运行时会负责在堆（heap）上为这些数据结构分配内存空间。
@@ -64,9 +216,9 @@ Go语言的自动内存管理是通过垃圾回收器（Garbage Collector，GC�
 
 
 
-## 逃逸分析
+# 5. Escape Analysis
 
- Go编译器中的逃逸分析是一项关键的静态分析技术，用于确定一个变量的生命周期是否超出了当前函数的作用域。逃逸分析的主要目的是优化内存分配，减少对堆内存的不必要分配，从而提高程序的性能和减少垃圾回收的压力。
+Go 编译器中的逃逸分析是一项关键的静态分析技术，用于确定一个变量的生命周期是否超出了当前函数的作用域。逃逸分析的主要目的是优化内存分配，减少对堆内存的不必要分配，从而提高程序的性能和减少垃圾回收的压力。
 
 **逃逸分析是在编译阶段完成的。**
 
@@ -100,9 +252,9 @@ Go语言的自动内存管理是通过垃圾回收器（Garbage Collector，GC�
 
 
 
-### 目录结构
+## 5.1. 目录结构
 
-Go编译器中逃逸分析源码的结构和关键文件的简要概述：
+Go 编译器中逃逸分析源码的结构和关键文件的简要概述：
 
 1. **目录结构**：
    - 逃逸分析的源代码位于`src/cmd/compile/internal/escape`目录下。
@@ -110,7 +262,7 @@ Go编译器中逃逸分析源码的结构和关键文件的简要概述：
    - `escape.go`：这是逃逸分析的主要实现文件，包含了逃逸分析器的核心逻辑。
    - `main.go`：包含逃逸分析的入口点，用于设置分析器的选项和运行分析。
    - `debug.go`：包含用于调试逃逸分析的代码。
-   - `inline.go`：包含与内联函数（inlining）有关的逃逸分析逻辑。
+   - `inline.go`：包含与内联函数（`inlining`）有关的逃逸分析逻辑。
    - `stmt.go`：包含用于处理不同类型语句的逃逸分析代码。
    - `type.go`：包含用于处理类型信息的逃逸分析代码。
    - `alloc.go`：包含用于分配对象的逃逸分析代码。
@@ -127,7 +279,7 @@ Go编译器中逃逸分析源码的结构和关键文件的简要概述：
 
 
 
-## References
+# 6. References
 
 - Github escape analysis: https://github.com/golang/go/tree/master/src/cmd/compile/internal/escape
 
