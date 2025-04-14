@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-11 13:42:56
+ * @LastEditTime: 2025-04-14 18:13:16
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -11,8 +11,9 @@
 # 1. How to learn go(学习方法)
 
 - 先知道怎么做，再知道为什么？
-- 对知识有一个整体的框架，然后再学习具体的内容。
+- 对知识有一个整体的框架概念，然后再学习具体的内容。
 - 学习一门新的语言，需要掌握语言的变量、常量、表达式、控制流和函数等基本语法，这些都是每门语言通用的特性。
+- 快速先学习一遍，然后再回过头来，去针对具体的用法或章节做补充、归纳。成为一个高手，必须在项目中去做具体的实战。
 
 GO 程序员的五个进化阶段:
 
@@ -271,6 +272,7 @@ go build -ldflags "-s -w" -o main-ldflags main.go
 ## 4.4. key-words(关键字)
 
 25 个关键字
+
 ```go
 break    default      func    interface    select
 case     defer        go      map          struct
@@ -278,7 +280,6 @@ chan     else         goto    package      switch
 const    fallthrough  if      range        type
 continue for          import  return       var
 ```
-
 
 ## 4.5. built-in type(内置类型)
 
@@ -407,8 +408,7 @@ a := new(int)
 2. `make` 只用于 `slice`、`map` 以及 `channel` 的初始化，返回的还是这三个引用类型本身。
 3. `new` 用于类型的内存分配，并且内存对应的值为类型零值，返回的是指向类型的指针。
 
-
-## 4.7. 内置接口
+## 4.7. built-in interface
 
 
 ### 4.7.1. Error()
@@ -535,8 +535,7 @@ Go 语言中的 Unicode 编码为 `rune`，即 `int32` 类型。
 
 `unicode` 包提供了 `IsDigit`、 `IsLetter`、 `IsUpper ` 和 `IsLower` 等类似功能， 它们用于给字符分类。 每个函数有一个单一的 `rune` 类型的参数， 然后返回一个布尔值  。
 
-
-## 4.10. Basic Data Types(基础数据类型)
+## 4.10. Basic Data Types
 
 数据类型的作用：告诉编译器变量以多大的内存去存储。
 
@@ -804,8 +803,7 @@ func Join(s [][]byte, sep []byte) []byte
 type any = interface{}
 ```
 
-
-## 4.11. Composite Types(复合类型)
+## 4.11. Composite Types
 
 
 ### 4.11.1. Array
@@ -818,6 +816,7 @@ type any = interface{}
   var array [5]int
   ```
 -  **Declaring an array using an array literal**
+   
     ```go
     // Declare an integer array of five elements.
     // Initialize each element with a specific value.
@@ -952,9 +951,9 @@ type Stu struct {
 
 创建一个结构体后，若没有给结构体赋初值，编译器会默认给结构中的字段一个零值。布尔类型是 false，整型是 0，字符串是 `""`，指 针、slice、map 的零值都是 `nil`，即还没有分配空间；数组的默认值和它的元素类型有关。
 
-如果结构体没有任何成员的话就是空结构体， 写作 `struct{}`， 它的大小为 0， 不包含任何信息。
+**如果结构体没有任何成员的话就是空结构体， 写作 `struct{}`， 它的大小为 0， 不包含任何信息。在 Go 语言中，空结构体不占用任何内存空间，常用于仅传递信号而不传递具体数据的场景。与 channel 结合十分巧妙，例如：ch := make(struct{}, 1)**
 
-#### 4.11.4.1. unname
+#### 4.11.4.1. unname struct
 
 定义：没有名字的结构体，通常只用于在代码中仅使用一次的结构类型。
 
@@ -1036,7 +1035,7 @@ func name(parameter-list) (result-list) {
 
 
 
-### 5.1.4. 匿名函数
+### 5.1.4. unname funcation 匿名函数
 
 
 
@@ -1556,15 +1555,16 @@ PrintSlice(stringSlice)
 - 一个泛型类型必须被实例化才能被用作值类型。
 
 
-# 6. Concurrency(并发)
+# 6. Concurrency
 
 Go 并发采用 `goroutines` 和 `channel` 去处理并发编程。
 
 
 ## 6.1. Goroutine
 
-
 ### 6.1.1. 概念
+
+**Goroutine** 是 Go 语言提供的**轻量级并发执行单元**，可以理解为 Go 自己实现的“协程”（Coroutine）。它由 Go 运行时（runtime）管理，而非操作系统直接调度，因此**开销极小**（初始仅 2KB 栈，可动态扩缩），能轻松支持百万级并发。
 
 在 Go 语言中， 每一个并发的执行单元叫作一个 `goroutine`，即协程。 设想这里的一个程序有两个函数，一个函数做计算， 另一个输出结果， 假设两个函数没有相互之间的调用关系。 一个线性的程序会先调用其中的一个函数， 然后再调用另一个。 如果程序中包含多个 `goroutine`， 对两个函数的调用则可能发生在同一时刻。
 
@@ -1588,22 +1588,69 @@ go gt() // 创建一个协程去调用函数 gt()
 
 **并行(parallelism)**：多线程在多核上运行。从微观上看，同一时间点，有多个任务在同时执行。即不同的代码片段同时在不同的物理处 理器上执行。
 
-在很多情况下，并发的效果比并行好，因为操作系统和硬件的 总资源一般很少，但能支持系统同时做很多事情。
+在很多情况下，并发的效果比并行好，因为操作系统和硬件的总资源一般很少，但能支持系统同时做很多事情。
 
-如果希望让 goroutine 并行，必须使用多于一个逻辑处理器。当有多个逻辑处理器时，调度器 会将 goroutine 平等分配到每个逻辑处理器上。这会让 goroutine 在不同的线程上运行。不过要想真 的实现并行的效果，用户需要让自己的程序运行在有多个物理处理器的机器上。否则，哪怕 Go 语 言运行时使用多个线程，goroutine 依然会在同一个物理处理器上并发运行，达不到并行的效果。
+如果希望让 goroutine 并行，必须使用多于一个逻辑处理器。当有多个逻辑处理器时，调度器会将 goroutine 平等分配到每个逻辑处理器上。这会让 goroutine 在不同的线程上运行。不过要想真 的实现并行的效果，用户需要让自己的程序运行在有多个物理处理器的机器上。否则，哪怕 Go 语 言运行时使用多个线程，goroutine 依然会在同一个物理处理器上并发运行，达不到并行的效果。
 
+**与线程（Thread）的对比**
 
-### 6.1.2. 特点
+| **特性**     | **Goroutine**           | **OS 线程**                            |
+| :----------- | :---------------------- | :------------------------------------- |
+| **创建成本** | 极低（微秒级，KB 内存） | 高（毫秒级，MB 级栈）                  |
+| **调度方式** | 用户态调度（Go 运行时） | 内核态调度（OS 抢占式）                |
+| **并发数量** | 轻松百万级              | 通常数千（受限于内存和上下文切换成本） |
+| **同步机制** | Channel、`sync` 包      | 锁、信号量等                           |
+
+### 6.1.2. 底层实现
+
+1. **动态栈管理**
+   - Goroutine 的栈初始仅 2KB，按需自动扩容/缩容（最大可达 GB 级），避免内存浪费。
+2. **协作式 + 抢占式调度**
+   - 多数情况下主动让出 CPU（如 Channel 操作、`runtime.Gosched()`）。
+   - 后台监控线程 `sysmon` 会强制抢占运行过久的 G（防止饿死其他 G）。
+3. **与 Channel 深度集成**
+   - Goroutine 间通过 Channel 通信，而非共享内存，降低竞态风险。
+
+### 6.1.3. 特点
 
 - 有独立的栈空间。Go 运行时默认为每个 goroutine 分配的栈空间为 2KB。
 - 共享程序堆空间
 - 调度由用户控制。goroutine 调度的切换也并不用陷入（trap）操作系统内核完成，代价很低。
 
+### 6.1.4. 应用场景
 
+- 高并发服务
 
-### 6.1.3. goroutine scheduler
+  ```go
+  // HTTP 服务器：每个请求一个 Goroutine
+  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+      go processRequest(r) // 并发处理
+  })
+  http.ListenAndServe(":8080", nil)
+  ```
 
-goroutine 调度器：将 goroutine  按照一定的算法放到 CPU 上执行的程序就叫协程调度器。
+- 并行计算
+
+  ```go
+  // 分治任务并行处理
+  results := make(chan int)
+  go calculateTaskA(results)
+  go calculateTaskB(results)
+  sum := <-results + <-results
+  ```
+
+- 异步IO
+
+### 6.1.5. 注意事项
+
+1. **避免泄露**
+   Goroutine 若因阻塞无法退出（如无接收的 Channel），会导致内存泄露，需用 `context` 或 `select` 控制生命周期。
+2. **数据竞争**
+   尽管推荐用 Channel，但若共享内存仍需加锁（`sync.Mutex`）：
+
+### 6.1.6. 调度器
+
+goroutine 调度器(scheduler)：将 goroutine  按照一定的算法放到 CPU 上执行的程序就叫**协程调度器**。
 
 
 
@@ -1612,8 +1659,7 @@ goroutine 调度器：将 goroutine  按照一定的算法放到 CPU 上执行�
 
 一个 `channel` 是一个通信机制，让一个 `goroutine` 通过  `channel` 给另一个 `goroutine` 发送信息。 每个 `channel` 都有一个特殊的类型， 也就是 `channels` 可发送数据的类型。
 
-
-### 6.2.1. 声明 channel
+### 6.2.1. declare channel
 
 ```go
 // 通用用法
@@ -1624,11 +1670,10 @@ var flow chan int
 ```
 
 注意点
-- channel 是引用类型
-- channel 必须初始化后才能写入数据，即必须使用 `make` 创建之后才能用。
+- **channel 是引用类型**
+- **channel 必须初始化后才能写入数据，即必须使用 `make` 创建之后才能用。**
 
-
-### 6.2.2. 创建 channel
+### 6.2.2. make channel
 
 ```go
 // 发送 int 类型数据；其中 cap 表示容量，可以省略
@@ -1645,10 +1690,15 @@ ch := make(chan int, cap)
 - **阻塞机制**：当通道为空时，接收操作会阻塞等待数据；当通道满时，发送操作会阻塞等待空间。
 
 
-### 6.2.3. 关闭 channel
+### 6.2.3. close channel
 
 使用内置的函数 `close()` 可以关闭 `channel`，当管道关闭后，就不能向管道中 **写（write）数据** 了，但是仍然可以从管道中 **读（read）数据**。
 
+**注意**
+
+1. 关闭通道的责任应属于发送方，避免在接收方或其他无关位置关闭。
+2. 重复关闭通道会引发 `panic`，可通过 `sync.Once` 或明确状态管理确保只关闭一次。
+3. **关闭 `nil` 通道会 panic**：确保通道未被置为 `nil` 后再关闭。
 
 ### 6.2.4. 遍历 channel
 
@@ -1658,8 +1708,40 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
 - 遍历时，若 channel 没有关闭，返回时则出现 `deadlock` 错误。
 - 遍历时，若 channel 已经关闭，则会正常遍历数据，遍历完后，退出循环。
 
+### 6.2.5. unbuffer channel
 
-### 6.2.5. 注意事项
+无缓冲通道：
+
+> An unbuffered channel is a channel with no capacity to hold any value before it’s
+> received.
+
+要求发送 goroutine 和接收 goroutine 同时准备好，才能完成发送和接收操作。如果两个goroutine
+没有同时准备好，channel 会导致先执行发送或接收操作的goroutine 阻塞等待。这种对 channel 进行发送和接收的交互行为本身就是**同步**的。其中任意一个操作都无法离开另一个操作单独存在。
+
+
+
+### 6.2.6. buffer channel
+
+有缓冲通道
+
+> A buffered channel is a channel with **capacity** to hold one or more values before they’re
+> received.
+
+特点
+
+- 不强制要求goroutine 之间必须同时完成发送和接收。
+
+- 发送和接收的 channel 阻塞的条件是不一样的。
+
+  只有当缓冲区(buffer)满时，发送操作才会阻塞；只有当缓冲区(buffer)为空时，接收操作才会阻塞。
+
+**注意：**
+
+- 无缓冲的 channel 是同步执行的，发送和接收的 goroutine 是在同一时间进行数据交换的；而有缓冲的 channel 既可以同一时间实行，也可以异步执行。
+- **无缓冲通道**：缓冲区容量为 0，意味着没有存储数据的空间，数据必须在发送和接收之间直接传递。
+- **有缓冲通道**：缓冲区容量大于 0，可在缓冲区中存储一定数量的数据，从而实现数据的异步传递。
+
+### 6.2.7. 注意事项
 
 1. 默认情况下，管道是双向的。
    ```go
@@ -1679,42 +1761,138 @@ channel 支持 `for ... range` 的方式进行遍历。不能用普通的 `for` 
    var c3 chan<- int
    ```
 
-4. 使用 `select ` 解决从管道中取（read）数据阻塞的问题。在实际的开发中，可能遇见比较复杂的需求，无法确定什么时候关闭 `channel`？若不关闭就会导致 `deadlock` 问题，这时 `select` 就派上用场了。
+### 6.2.8. select
 
-   语法格式：
+在 Go 语言里，`select` 语句和 `switch` 语句类似，但它专门用于处理通道操作。借助 `select` 语句，程序能在多个通道操作上等待，一旦其中某个操作准备就绪，就会执行对应的分支。
+
+语法格式：
+
+```go
+select {
+    case v1 := <- channel_1:
+    ...
+    case v2 := <- channel_2:
+    ....
+    case v3 := <- channel_3:
+    ...
+    default:   // 当所有通道阻塞时执行
+    ...
+}
+```
+
+示例
+
+```go
+intChan := make(chan int, 10) // 定义一个 int 类型的管道，其容量为 10，并创建
+stringChan := make(chan string, 10)
+select {
+    case v1 := <-intchan:
+   		fmt.Println(v1)
+    case v2 := <-stringchan:
+    	fmt.Println(v2)
+    default:
+    	fmt.Println("nothing...")
+}
+```
+
+**核心行为**
+
+- **阻塞等待**：当没有 `default` 分支且所有 `case` 的通道均未就绪时，`select` 会阻塞，直到某个 `case` 就绪。
+- **随机选择**：若多个 `case` 同时就绪，`select` **随机** 执行一个，确保公平性。
+- **非阻塞操作**：通过 `default` 分支可实现非阻塞的通道操作（如快速失败）。
+
+**应用场景**
+
+1. 多通道操作，多路复用。同时监听多个通道，优先处理最先就绪的。
+
    ```go
-   select {
-       case v1 := <- 管道 1:
-       ...
-       case v2 := <- 管道 2:
-       ....
-       case v3 := <- 管道 3:
-       ...
-       default:
-       ...
-   }
+   ch1 := make(chan string)
+   ch2 := make(chan string)
    
-   // 示例
-   intChan := make(chan int, 10) // 定义一个 int 类型的管道，其容量为 10，并创建
-   stringChan := make(chan string, 10)
+   go func() {
+       time.Sleep(1 * time.Second)
+       ch1 <- "one"
+   }()
+   go func() {
+       time.Sleep(2 * time.Second)
+       ch2 <- "two"
+   }()
+   
    select {
-       case v1 := <-intchan:
-      		fmt.Println(v1)
-       case v2 := <-stringchan:
-       	fmt.Println(v2)
-       default:
-       	fmt.Println("nothing...")
+   case msg := <-ch1:
+       fmt.Println(msg) // 输出 "one"（更快就绪）
+   case msg := <-ch2:
+       fmt.Println(msg)
    }
    ```
 
-   使用 `select` 实现多路 channel 的并发控制。
+2. 超时控制。使用 `time.After` 设置超时，避免永久阻塞。
 
-5. 协程（goroutine）中使用 `recover` ，解决协程中出现异常（`Panic`）导致程序崩溃的问题。
+   ```go
+   select {
+   case res := <-someChannel:
+       fmt.Println(res)
+   case <-time.After(3 * time.Second): // 3秒后触发
+       fmt.Println("Timeout!")
+   }
+   ```
+
+3. 非阻塞操作。通过 `default` 实现即时返回。
+
+   ```go
+   select {
+   case msg := <-ch:
+       fmt.Println(msg)
+   default: // 若 ch 无数据，立即执行
+       fmt.Println("No message")
+   }
+   ```
+
+4. 退出信号。监听退出通道，实现优雅终止。
+
+   ```go
+   done := make(chan struct{})
+   go func() {
+       for {
+           select {
+           case <-done:
+               fmt.Println("Exiting...")
+               return
+           case data := <-workChannel:
+               process(data)
+           }
+       }
+   }()
+   
+   // 触发退出
+   close(done)
+   ```
+
+**注意事项**
+
+- **空 `select{}`**：会导致死锁（无 `case` 可执行）。执行后出现：``fatal error: all goroutines are asleep - deadlock!`
+
+- **channel close 处理**：从已关闭通道读取会立即返回零值，需结合 `ok` 判断：
+
+  ```go
+  case v, ok := <-ch:
+      if !ok {
+          fmt.Println("Channel closed!")
+          return
+      }
+      fmt.Println("Received:", v)
+  ```
+
+- **`nil` 通道**：向 `nil` 通道发送或接收 会永久阻塞，但若 `case` 中通道为 `nil`，该**分支会被忽略**。
+
+### 6.2.9. recover
+
+1. 协程（goroutine）中使用 `recover` ，解决协程中出现异常（`Panic`）导致程序崩溃的问题。
 
    一个协程出现了问题导致其它的协程不能工作，致使整个程序崩溃掉。这时我们就可以在出现问题的协程中使用 `recover` 来捕获异常（Panic），进行处理，即使这个协程发生问题，不会影响其它的协程，程序照样正常运行。
 
 
-### 6.2.6. 应用场景
+### 6.2.10. 应用场景
 
 1. 消息收发
 2. 超时机制
@@ -1969,7 +2147,6 @@ Packages
 - <font color=red>Github paper-code: https://github.com/danceyoung/paper-code/tree/master </font>
   对一些好的技术文章结合自己的实践经验进行翻译、举例说明等或自己的经验分享。主要包括架构设计、模式设计、模型设计、重构及源码解析等。
 
-
 ------------------------------------------------------------------------
 Testing
 - 极客兔兔 Go Test 单元测试简明教程：https://geektutu.com/post/quick-go-test.html
@@ -1978,7 +2155,6 @@ Testing
 ------------------------------------------------------------------------
 Garbage
 - Go 官网 A Guide to the Go Garbage Collector: https://tip.golang.org/doc/gc-guide
-
 
 ------------------------------------------------------------------------
 Reflection
@@ -1997,7 +2173,6 @@ Tutorials
 log
 - [Go语言结构化日志：打破日志的边界，解放你的应用程序](https://devopsman.cn/archives/go-yu-yan-jie-gou-hua-ri-zhi--da-po-ri-zhi-de-bian-jie--jie-fang-ni-de-ying-yong-cheng-xu)
 - slog：Go官方版结构化日志包：https://tonybai.com/2022/10/30/first-exploration-of-slog/
-
 
 ------------------------------------------------------------------------
 Community skills sharing 
@@ -2026,9 +2201,8 @@ Github excellent open source project
   - **https://github.com/talkgo/read**  
   - https://github.com/talkgo/night
 
-
 ------------------------------------------------------------------------
 Tools
-- https://colobu.com/gotips/041.html 
+- https://colobu.com/gotips/041.html 
 - 技术文章摘抄：https://learn.lianglianglee.com/
 - GO 命令教程: https://www.topgoer.cn/docs/go_command_tutorial/go_command_tutorial-1d9eko78f5vkq
