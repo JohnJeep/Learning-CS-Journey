@@ -1,25 +1,75 @@
-# GPM Model
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-09 10:36:30
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-14 18:13:20
+ * @Description: golang Schedule
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+# 1. GPM Model
 
-在Golang（也称为Go）中，GPM代表着Go中的并发模型，它包括三个关键的组件：Goroutines（协程）、Scheduler（调度器）和系统线程（M：Machine）。GPM模型是Go语言实现并发的核心。下面是关于GPM模型的简要解释：
+Go语言的协程（goroutine）调度机制采用了高效的**M:N模型**，通过**G-M-P调度器**实现并发管理。
 
-1. G(Goroutine)
-   - Goroutine是Go语言中的轻量级线程，它由Go运行时（runtime）管理。与传统的线程相比，Goroutines的创建和销毁更加高效。
-   - Goroutines通过`go`关键字启动，可以在程序中创建数千甚至数百万个Goroutines而不会消耗太多内存。
-   - 每个Goroutine都运行一个函数，它们可以异步执行，互不干扰。
-   - 存储了 goroutine 执行的栈信息、goroutine 状态及goroutine的任务函数。
-   
-2. P(Processor)：协程执行需要的上下文。
-   
-   - P 的数量决定了系统内最大可并行的G数量。P 中拥有的是各种G对象队列、链表、一些缓存和状态。
-   
-   - Go运行时包含了一个调度器，它负责管理和调度Goroutines的执行。
-   - 调度器会在多个系统线程（M）之间分配Goroutines的执行。
-   - 调度器使用一种叫做"work-stealing"的技术，来确保各个系统线程都有足够的工作负载。
-   
-3. M(Machine)：操作系统的主线程，也叫工作线程。
-   - 系统线程是Go运行时的底层执行单元，它们由操作系统管理。
-   - 一个Go程序可以使用多个系统线程，每个线程都可以同时运行一个Goroutine。
-   - 系统线程会被调度器用来执行Goroutines。
+## 1.1. 核心组件
+
+Go调度器由三个核心组件构成：
+
+- **G (Goroutine)**：轻量级协程，包含栈、程序计数器等执行上下文。
+  - Goroutine是Go语言中的轻量级线程，它由Go运行时（runtime）管理。与传统的线程相比，Goroutines的创建和销毁更加高效。
+  - Goroutines通过`go`关键字启动，可以在程序中创建数千甚至数百万个Goroutines而不会消耗太多内存。
+  - 每个Goroutine都运行一个函数，它们可以异步执行，互不干扰。
+  - 存储了 goroutine 执行的栈信息、goroutine 状态及goroutine的任务函数。
+- **M (Machine)**：操作系统线程（OS Thread），负责实际执行 G 的代码。
+  - 系统线程是Go运行时的底层执行单元，它们由操作系统管理。
+  - 一个Go程序可以使用多个系统线程，每个线程都可以同时运行一个Goroutine。
+  - 系统线程会被调度器用来执行Goroutines。
+- **P (Processor)**：虚拟处理器，管理G的本地队列，充当M和G之间的调度上下文。
+  - P 的数量决定了系统内最大可并行的G数量。P 中拥有的是各种G对象队列、链表、一些缓存和状态。
+
+  - Go运行时包含了一个调度器，它负责管理和调度Goroutines的执行。
+  - 调度器会在多个系统线程（M）之间分配Goroutines的执行。
+  - 调度器使用一种叫做"work-stealing"的技术，来确保各个系统线程都有足够的工作负载。
+
+**默认配置**：P的数量等于CPU核心数（可通过`GOMAXPROCS`调整），每个P绑定一个M，实现多核并行。
+
+## 1.2. 调度流程
+
+**a. G的创建与分配**
+
+- 新G优先放入**当前P的本地队列**（容量256），若满则放入**全局队列**。
+- **工作窃取（Work Stealing）**：当P的本地队列为空时，从全局队列或其他P的队列窃取G，平衡负载。
+
+**b. M与P的绑定**
+
+- M需绑定一个P才能执行G。若M因系统调用阻塞（如文件I/O），会释放P，由其他M接管该P继续执行。
+- 阻塞结束后，M尝试获取P：成功则继续执行，否则将G放入全局队列，M休眠。
+
+**c. 抢占式调度**
+
+- **协作式切换**：G在函数调用、通道操作、`runtime.Gosched()`时主动让出CPU。
+- **强制抢占**：由`sysmon`监控线程检测运行超过10ms的G，标记为可抢占，在函数调用时触发调度。
+
+总结一下：Go的调度器主要结构是M、P、G，通过P来解耦M和G，每个P管理一组G的队列，M需要绑定P来执行G。调度策略包括工作窃取、抢占式调度、处理阻塞系统调用的分离机制等，从而高效地利用多核，减少阻塞，实现高并发。
+
+##  1.3. 关键机制
+
+**a. 系统调用处理**
+
+- **异步系统调用**（如网络I/O）：通过`epoll/kqueue`等实现非阻塞，G进入等待队列，M继续执行其他G。
+- **同步系统调用**（如文件I/O）：M阻塞，释放P，由其他M接管P执行新G。
+
+**b. 线程管理**
+
+- **线程池**：Go维护空闲M队列，避免频繁创建/销毁线程。当无可用M时创建新线程。
+- **自旋线程**：正在运行的M或寻找G的M会短暂自旋，减少调度延迟。
+
+**c. 调度策略优化**
+
+- **本地队列优先**：减少锁竞争，提升缓存局部性。
+- **全局队列兜底**：防止本地队列饥饿。
+- **小对象复用**：G对象池复用，减少内存分配开销。
+
+
 
 GPM模型的工作流程如下：
 
@@ -31,5 +81,10 @@ GPM模型的工作流程如下：
 
 总之，GPM模型是Go语言并发性能的核心之一，它使得Go程序能够高效地运行大量的并发任务而无需过多的线程管理开销。这种模型的好处包括更高的并发性能、更低的内存开销以及更简单的并发编程模型。
 
-## References
+
+
+# 2. References
+
 - https://golang.design/under-the-hood/zh-cn/part2runtime/ch06sched/mpg/
+- GPM 是什么: https://golang.design/go-questions/sched/gpm/
+- Golang调度器GPM原理与调度全分析: https://zhuanlan.zhihu.com/p/323271088
