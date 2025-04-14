@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50
- * @LastEditTime: 2025-04-05 12:17:00
+ * @LastEditTime: 2025-04-14 10:31:05
  * @LastEditors: JohnJeep
  * @Description: 数据结构与算法学习笔记
 --> 
@@ -91,11 +91,8 @@
 # 4. linked list
 
 - 链表是一种动态的数据结构，每添加一个结点分配一次内存，占用的内存是连续的，没有闲置的内存
-- 数组的内存是一次性分配内存
-
-<p align="center">
+- 数组的内存是一次性分配内存<p>
 	<img src="./figures/linklist.png">
-</p>
 
 
 ## 4.1.  linear linked list
@@ -232,15 +229,16 @@ data | next
 ## 7.2. create tree 
 
 - 利用 `#号法` 进行树的创建。`#号法` 的先序遍历能确定一颗树。
-<p align="center"><img src="./figures/#-create-tree.png"></p>
-<p align="center"><img src="./figures/#-create-tree-example.png"></p>
+<img src="./figures/create-tree.png"></p>
+<img src="./figures/create-tree-example.png"></p>
 
 
 ## 7.3. binary tree
 
 - 定义：二叉树的定义是递归的，是n(n≥0)个结点的有限集。该集合为空或者由一个根加上两棵互不相交的、分别称为左子树和右子树的二叉树组成。
 - 二叉树的双亲表示法
-<p align="center"><img src="./figures/parent-node.png"></p>
+
+  <img src="./figures/parent-node.png"></p>
 
 - 二叉树的操作
   - 创建：建立一棵二叉树，初始化
