@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-03-30 15:33:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:29:39
+ * @LastEditTime: 2025-04-15 14:59:26
  * @Description: Docker learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -1177,8 +1177,13 @@ Docker下/var/lib/docker/overlay2空间清理办法
 - [Docker Containers and Kubernetes: An Architectural Perspective](https://dzone.com/articles/docker-containers-and-kubernetes-an-architectural)
 - [Docker 总体架构](https://docker.renkeju.com/docker/docker.html)
 - [Docker and Kubernetes Security: Principles & Practices](https://www.linkedin.com/pulse/docker-kubernetes-security-principles-practices-dr-rabi-prasad-padhy) 深入讲解了 Docker 的底层原理。
+
+---
+Docker 镜像
+
 - Dockerfile 定制镜像：https://yeasy.gitbook.io/docker_practice/image/build
 - Dockers镜像瘦身：https://docs.erda.cloud/blog/post/2021/07/15/docker-compression/
+- docker镜像瘦身&优化: https://lailin.xyz/post/51252.html
 - 如何优化 docker 镜像体积：https://waynerv.com/posts/how-to-reduce-docker-image-size/
 - 构建 Go 应用 docker 镜像的十八种姿势：https://www.cnblogs.com/kevinwan/p/16033634.html
 - 容器技术原理(一)：从根本上认识容器镜像：https://waynerv.com/posts/container-fundamentals-learn-container-with-oci-spec

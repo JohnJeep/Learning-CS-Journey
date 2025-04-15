@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2022-04-15 20:18:46
- * @LastEditTime: 2025-03-24 01:24:08
+ * @LastEditTime: 2025-04-15 14:43:32
  * @LastEditors: JohnJeep
  * @Description: Kubernetes 学习
 -->
@@ -265,6 +265,8 @@ k8s 中有 3 层网络
 
 # 11. Addons(插件)
 
+
+
 # 12. References
 
 - 官方英文文档: https://kubernetes.io
@@ -277,4 +279,5 @@ k8s 中有 3 层网络
 - Kubernetes 的设计理念：https://jimmysong.io/kubernetes-handbook/concepts/concepts.html
 - Kubernetes 部署教程：https://zhuanlan.zhihu.com/p/641521752
 - Docker Containers and Kubernetes: An Architectural Perspective: https://dzone.com/articles/docker-containers-and-kubernetes-an-architectural
+- Kubernetes 简明教程: https://lailin.xyz/post/k8s-tutorials.html
 
