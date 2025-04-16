@@ -1,9 +1,9 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-16 17:18:59
- * @LastEditTime: 2021-04-08 15:02:00
- * @LastEditors: Please set LastEditors
- * @Description: 数据结构与算法刷题参考
+ * @LastEditTime: 2025-04-16 15:01:55
+ * @LastEditors: JohnJeep
+ * @Description: LeetCode
 -->
 
 - [Coding4Interviews](https://github.com/nlpjoe/Coding4Interviews) 仓库中有剑指offer和LeetCode的题解
@@ -20,3 +20,4 @@
 - <font color="red">[fucking-algorithm](https://github.com/labuladong/fucking-algorithm)  LeetCode算法刷题套路，共 60 多篇原创文章，涵盖了所有题型和技巧，而且一定要做到举一反三，通俗易懂。</font>
 - [leetcode_101](https://github.com/changgyhub/leetcode_101):LeetCode上101到题，和你一起你轻松刷题（C++）
 - <font color="red">[即时通讯网](http://www.52im.net/forum-105-1.html)：网站内容很丰富，很全面，各种资料都有，平时重点学习。</font>
+- LeetCode-Go: https://github.com/halfrost/LeetCode-Go
