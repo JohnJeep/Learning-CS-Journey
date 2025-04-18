@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-06-13 11:19:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:17:39
+ * @LastEditTime: 2025-04-18 15:27:07
  * @Description: Golang 第三方包用法学习
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
@@ -204,48 +204,6 @@ command: server
 - 官网：https://cobra.dev/
 
 
-# 5. viper
-Viper 是适用于 Go 应用程序的完整配置解决方案。它被设计用于在应用程序中工作，并且可以处理所有类型的配置需求和格式。
-
-它支持以下特性：
-- 设置默认值
-- 从`JSON`、`TOML`、`YAML`、`HCL`、`envfile`和`Java properties`格式的配置文件读取配置信息
-- 实时监控和重新读取配置文件（可选）
-- 从环境变量中读取
-- 从远程配置系统（etcd或Consul）读取并监控配置变化
-- 从命令行参数读取配置
-- 从buffer读取配置
-- 显式配置值
-
-
-## 5.1. 为什么选择Viper?
-在构建现代应用程序时，你无需担心配置文件格式；你想要专注于构建出色的软件。Viper的出现就是为了在这方面帮助你的。
-
-Viper能够为你执行下列操作：
-
-1. 查找、加载和反序列化`JSON`、`TOML`、`YAML`、`HCL`、`INI`、`envfile`和`Java properties`格式的配置文件。
-2. 提供一种机制为你的不同配置选项设置默认值。
-3. 提供一种机制来通过命令行参数覆盖指定选项的值。
-4. 提供别名系统，以便在不破坏现有代码的情况下轻松重命名参数。
-5. 当用户提供了与默认值相同的命令行或配置文件时，可以很容易地分辨出它们之间的区别。
-
-Viper会按照下面的优先级。每个项目的优先级都高于它下面的项目:
-
-- 显示调用`Set`设置值
-- 命令行参数（flag）
-- 环境变量
-- 配置文件
-- key/value存储
-- 默认值
-
-**重要：** 目前 Viper 配置的键（Key）是大小写不敏感的。目前正在讨论是否将这一选项设为可选。
-
-
-## 5.2. References
-
-- Github：https://github.com/spf13/viper
-- Go语言配置管理神器——Viper中文教程：https://www.liwenzhou.com/posts/Go/viper/
-
 
 # 6. Go-toml
 
@@ -393,61 +351,6 @@ https://www.bookstack.cn/read/recommend/0002-gofiber.md
 - 官网: https://docs.gofiber.io/
 - Go packages: https://pkg.go.dev/github.com/gofiber/fiber/v2
 - Github: https://github.com/gofiber/fiber
-
-
-# 13. Gin
-
-
-## 13.1. 简介
-流行的web框架。
-
-基于官方 net/http 内建标准库封装的。 
-
-
-## 13.2. 用法
-- 路由(Route)：URL 到函数的映射。
-- URL
-  - 静态匹配，路径固定。
-    ```go
-    r.GET("index", func(ctx *gin.Context) {
-      ctx.JSON(200, gin.H{
-        "key": "helloword", // 返回结果为json
-      })
-    })
-    ```
-  - 动态匹配，路径参数。比如：`/user/find/:id`
-    ```go
-    r.POST("/user/find/:id", func(ctx *gin.Context) {
-      param := ctx.Param("id")
-      ctx.JSON(200, param)
-    })
-    ```
-  - 模糊匹配，使用通配符 `*`。
-    ```go
-    r.PUT("/about/*path", func(ctx *gin.Context) {
-    	param := ctx.Param("path")
-    	ctx.JSON(200, param)
-    })
-    ```
-- API 
-  - 路由分组：Group()
-  - 参数查询
-    - `Query()` 查询普通的参数
-    - `GetQuery()` 判断指定的参数是否存在
-    - `DefaultQuery()` 指定的参数不存在，给定个默认值
-    - `BindQuery()` 
-    - `ShouldBindQuery()`  相比 `BindQuery()`  报错后不影响。
-      
-      > map 类型请求参数不支持。
-
-
-## 13.3. Reference
-- Github: https://github.com/gin-gonic/gin
-- 官网: https://gin-gonic.com/
-- Go packages: https://pkg.go.dev/github.com/gin-gonic/gin
-- 官方 example: https://github.com/gin-gonic/examples
-- gin框架源码解析：https://www.liwenzhou.com/posts/Go/gin-sourcecode/
-
 
 
 # 14. go-migrate
