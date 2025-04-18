@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2024-12-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-10 18:21:14
+ * @LastEditTime: 2025-04-18 17:29:06
  * @Description: Ollama 学习
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -40,6 +40,59 @@ Ollama 极大地简化了在 Docker 容器中部署和管理大型语言模型�
 - **ml**：机器学习后端相关代码，包含 GGML 和 Metal 等后端的实现。
 - **server**：服务器相关代码，包括缓存、命令处理等。
 - **runner**：运行器相关代码，如 Llama 运行器的缓存实现。
+
+
+## Snippets
+
+摘选出一些优秀的代码块来吸收。
+
+
+ctrl C 优雅退出
+
+```go
+// listen for a ctrl+c and stop any loaded llm
+signals := make(chan os.Signal, 1)
+signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
+go func() {
+   <-signals
+   srvr.Close()
+   schedDone()
+   sched.unloadAllRunners()
+   done()
+}()
+```
+
+server close
+
+```go
+ctx, done := context.WithCancel(context.Background())
+err = srvr.Serve(ln)
+// If server is closed from the signal handler, wait for the ctx to be done
+// otherwise error out quickly
+if !errors.Is(err, http.ErrServerClosed) {
+   return err
+}
+<-ctx.Done()
+```
+
+http handler error code
+```go
+func handleScheduleError(c *gin.Context, name string, err error) {
+	switch {
+	case errors.Is(err, errCapabilities), errors.Is(err, errRequired):
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	case errors.Is(err, context.Canceled):
+		c.JSON(499, gin.H{"error": "request canceled"})
+	case errors.Is(err, ErrMaxQueue):
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": err.Error()})
+	case errors.Is(err, os.ErrNotExist):
+		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("model %q not found, try pulling it first", name)})
+	default:
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+}
+```
+
 
 
 # References
