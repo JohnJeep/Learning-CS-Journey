@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 21:22:08
- * @LastEditTime: 2025-04-04 20:01:53
  * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-21 17:14:44
  * @Description: learn network protocol stack
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. Principles and Terminology
@@ -168,10 +169,9 @@ DNS是指：域名服务器(Domain Name Server)。在Internet上域名与IP地�
 ## 3.1. TCP(Transmission Control Protocol)
 
 <div style="color: red"> TCP 的特点：提供一种面向连接的、可靠的字节流传输。</div>
-
 TCP 工作流程
 > TCP将用户的数据打包成报文段 (segment)，发送报文后将启动一个定时器 (timer)，另一端对收到的数据进行确定，对失序的数据进行重新排序，丢弃数据，TCP提供端到端的流量控制 (flow control)，并计算和验证一个强制性的端到端校验和(checksum)。
-  
+
 ----
 
 - TCP包的长度最大可达 `60 bytes`，最小为 `20 bytes`。 
@@ -373,6 +373,7 @@ PUSH标志
   - 坚持定时器(Persistent Timer)：使窗口大小信息保持不断流动，即使另一端关闭了接收窗口。
   - 保活定时器(Keeplive Timer)：检测到一个空闲连接的另一端何时崩溃或重启。
   - 时间等待定时器(Timer Wait Timer) ：测量一个连接处于 `TIME_ WAIT` 状态的时间。
+    
     > Linux下查看2MSL的时间 `/proc/sys/net/ipv4/tcp_fin_timeout`
 
 
@@ -500,7 +501,7 @@ TCP 的拥塞控制是：每个 RTT 内 cwnd 线性（加性）增加 1 个 MSS�
 - 端到端拥寒控制 (End-to-end congestion control)。
   
 > 在端到端拥塞控制方法中， 网络层没有为传输层拥塞控制提供显式支持。即使网络中存在拥塞，端系统也必须通过对网络行为的观察 (如packet loss and delay) 来推断。TCP 采用端到端的方法解决拥塞控制，因为 IP 层不会向端系统提供有关网络拥塞的反馈信息。TCP segment 的丢失（通过超时或收到 3 次冗余确认 (timeout or the receipt of three duplicate acknowledgments) 而得知） 被认为是网络拥塞的一个迹象，TCP 会相应地减小其窗口长度。我们还将看到关于TCP拥塞控制的一些最新建议，即使用增加的往返时延值作为网络拥塞程度增加的指示 (uses increasing round-trip segment delay as an indicator of increased network congestion)。
-  
+
 - 网络辅助的拥塞控制 (Network-assisted congestion control)。
   > 在网络辅助的拥塞控制中，路由器向发送方提供关于网络中拥塞状态的显式反馈信息 (routers provide explicit feedback to the sender and/or receiver regarding the congestion state of the network)。这种反馈可以简单地用一个比特 ( bit) 来指示链路中的拥塞情况。
 
@@ -580,6 +581,7 @@ $$LastByteSent – LastByteAcked \leq mim \{ cwnd, rwnd \} $$
   - 早期版本：the Tahoe algorithm 
   - 较新版本：the Reno algorithm
   - 现代版本：the Vegas algorithm
+    
     > 实现原理：①在 packet 丢失发生之前，在来源端与目的地之间检测路由器中的拥塞； ②当检测出快要发生的 packet 丢失时，线性地降低发送速率。快要发生的 packet 丢失是通过观察 RTT 来预测的。packet 的 RTT 越长，路由器中的拥塞越严重。  
 
 
@@ -619,9 +621,9 @@ Congestion Notification Echo） 比特，通知发送主机中的 TCP 收到拥�
 ## 3.2. UDP(User Datagram Protocol)
 
 User Datagram Protocol (用户数据报协议) UDP 是一种简洁、轻量级的传输协议，提供最少的服务。UDP是无连接的 (connectionless)，在两个进程通信前没有握手过程。 UDP 协议提供一种不可靠数据传输服务，也就是说，当一个进程发送由一个报文 (message) 进 UDP 套接字时，UDP 协议并不保证该 message 会到达接收进程。不仅如此，到达接收进程的报文也可能是乱序到达的。
-  
+
 > UDP数据报：UDP传给IP的信息单元称作(UDP datagram)。
-  
+
 - UDP没有包括拥塞控制机制，所以 UDP 的发送端可以用它选定的任何速率向其下层（网络层） 注入数据。（然而，值得注意的是实际端到端吞吐量可能小于该速率，这可能是因为中间链路的带宽受限或因为拥塞而造成的。）
 
 - UDP 传输特点
@@ -719,6 +721,7 @@ routers 功能
 两种 control panel 的方法
 - 传统路由算法：在路由器上实现。
 - 软件定义网络 (Software-Defined Networking, SDN) ：在远程 server 上实现。
+  
   > 通过将这些控制平面功能作为一种单独服务，明确地分离数据平面和控制平面，控制平面功能通常置于一台远程“控制器” 中。 
 
 
@@ -833,8 +836,9 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - 发送端指明了一个数据报经过的 IP地址清单，但是数据报在清单上指明的任意两个地址之间可以通过其他路由器。
 - IP首部源站路由选项的通用格式
   
+
 <img src="./figures/IP首部源站路由选项的通用格式.png">
-  
+
 - 严格源站：路由的每一跳之间必须是直连。
 - 宽松源站
 
@@ -880,7 +884,7 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 
 ARP的 packet 格式<p>
 <img src="./figures/arp-packet.png">
-  
+
 - 2字节以太网帧类型，对ARP请求或应答来说，该字段的值为 `0x0806`
 - 操作字段的四种操作类型
   - ARP请求：值为1
@@ -912,7 +916,7 @@ ARP的 packet 格式<p>
 
 ICMP封装在IP数据报内部的结构<p>
 <img src="./figures/ICMP封装在IP数据报内部.png">
-  
+
 ICMP报文格式
 
 当发送差错一份ICMP报文时，差错报文包含税IP的头部和产生ICMP差错报文的IP数据报的前8个字节数据。这样，接收ICMP差错报文的模块就会把它与某个特定的协议(根据IP数据报首部中的协议字段来判断)和用户进程(根据包含在IP数据报前8个字节中的TCP或UDP报文首部中的TCP或UDP端口号来判断)联系起来。<p>
@@ -921,7 +925,7 @@ ICMP报文格式
 
 ICMP报文的类型<p>
 <img src="./figures/icmp-type-code.png">
-  
+
 - ICMP不可达差错
   - 发生的情况：路由器收到一份需要分片的数据报，而IP首部又设置了不分片的标志位。
 
@@ -963,6 +967,7 @@ ICMP报文的类型<p>
 - 记录路由选项一般是单向的，这样使得记录下来的IP地址翻了一倍。
 
   
+
 操作过程
 > 开始时发送一个TTL字段为 `1` 的UDP数据报，然后将TTL字段每次加 1，以确定路径中的每个路由器。每个路由器在丢弃 UDP数据报时都返回一个 ICMP超时报文 `2`，而最终目的主机则产生一个 `ICMP端口不可达` 的报文。
 
@@ -988,14 +993,14 @@ ICMP报文的类型<p>
 
 以太网和IEEE 802封装格式<p>
 <img src="./figures/数据帧封装格式.png">
-  
+
 - 帧(Frame): 通过以太网传输的比特流。
 - 长度必须在 46～1500字节之间。 
   
 
 网络数据包<p>
 <img src="./figures/net-packet.png">
-  
+
 数据进入协议栈时的封装过程<P>
 <img src="./figures/数据进入协议栈时的封装过程.png">
 
@@ -1004,7 +1009,7 @@ ICMP报文的类型<p>
 
 数据帧格式<p>
 <img src="./figures/ppp-frame.png">
-  
+
 主要内容
 - 在串行链路上封装IP数据报
 - 建立、配置及测试数据链路的链路控制协议(LCP： Link Control Protocol)。它允许通信双方进行协商，以确定不同的选项。
@@ -1034,292 +1039,12 @@ ICMP报文的类型<p>
 
 IGMP报文封装在IP数据报中<p>
 <img src="./figures/IGMP报文封装在IP数据报中.png">
-  
+
 多播路由器使用 `IGMP报文` 来记录与该路由器相连网络中组成员的变化情况。
 
 
 
-# 6. socket
-
-- NAT映射
-  - 作用对象
-    - 公网---私网
-    - 私网---公网
-
-- 打洞机制
-  - 作用对象
-    - 私网---私网
-
-- 大端法(Big-Endians)：高地址存低字节数据，低地址存储高字节数据
-- 小端法(Small-Endins)：高地址存高字节数据，低地址存储低字节数据
-
-
-- `inet_pton`和`inet_ntop`函数
-  - `inet_pton()` 将点分十进制字符串类型的IP地址转化为网络二进制字节序
-  - `inet_ntop()` 将网络二进制字节序转化为点分十进制字符串类型的IP地址
-  > 注意缩写：`p` presentation：表达式； `n` numeric：数值
-
-
-- `htons、ntohs、htonl和ntohl`函数
-  - 主机字节序(本地)与网络字节序之间相互转换的几组API函数，本地套接字一般按照 `小端法` 存储，网络字节序一般按照 `大端法` 存储。 
-  - 注意缩写：`h`：host，`n`：net，`l`：long，`s`：short
-    ```c
-    #include <netinet/in.h>
-    uint16_t htons(uint16_t host16 bitvalue);
-    uint32_t htonl(uint32_t host32 bitvalue);
-    uint16_t ntohs(uint16_t net16 bitvalue);
-    uint32_t ntohl(uint32_t net32 bitvalue);
-    ```
-
-## 6.1. Socket addr struct
- ```c
- struct in_addr {
-     in_addr_t  s_addr;           // 32- bit IPv4 address
-                                  // network byte ordered
- }
- struct sockaddr_in {
-     sa_family_t  sin_family;     // AF_INET
-     in_port_t    sin_port;       // 16- bit TCP or UDP port nummber, network byte ordered
-     struct in_addr    sin_addr;  // 32- bit IPv4 address, network byte ordered
-     char     sin_zero[8];        // unused
- }
-
- struct sockaddr {
-   sa_family_t  sa_family;        // address family: AF_XXX value
-   char        sa_data[14];       // protocol-specific address
- }
- ```
-
-- `struct sockaddr_in` 
-  - 是网络套接字地址结构，大小为 `16字节`，定义在<netinet/in>头文件中，可用 `man 7 ip` 命令查看位置。
-  - 一般我们在程序中是使用该结构体时，作为参数传递给套接字函数时需要强转为 `sockaddr` 类型，注意该结构体中 `port`和 `addr` 成员是网络序的(大端结构)。即定义时需要定义为 `struct sockaddr_in `;在调用时，需要强制转化为 `(struct sockaddr *)` 结构体类型
-- `struct sockaddr`
-  - 是套接字地址结构，当作为参数传递给套接字函数时，套接字地址结构总是以指针方式来使用，比如bind/accept/connect函数等。
-
-
-套接字(socket)
-- 网络中成对出现
-- 一个文件描述符指向两个内核缓冲区(一个读、一个写)
-- 包含一个IP地址和一个端口号，指定IP和端口号
-
-
-## 6.2. 网络套接字API
-
-- `socket()` 
-  - 作用：创建一个套接字
-  - 参数
-    - `domain`: 对于IPv4，`domain` 设置为 `AF_IENT`
-    - `type`: 对于TCP，面向数据流的传输协议，应设置为 `SOCK_STREAM`；对于UDP，面向报文传输的协议，应设置为 `SOCK_DGRAM`
-    - `protocol`: 根据情况而定，一般设置为 `0`
-  - 返回值
-    - 成功: 返回指向新创建socket的文件描述符
-    - 失败：返回 `-1`
-
-- `bind()` 服务器调用 `bind` 绑定固定的网络地址和端口号 
-- `listen()` 服务器允许客户端同一时间可以建立多少连接，即最多允许有多少个客户端处于连接等待状态。
-- `accept()` 服务器端的套接字上接受一个连接请求。
-  - 返回值
-    - 成功：返回一个全新的socket文件描述符，用于和客户端通信。
-    - 失败：返回 `-1`
-- `connect()` 客户端调用 `connect` 与服务器建立连接
-
-
-- `read()`
-  - 返回值大于 `0` 时，返回实际读到的字节数。
-  - 返回值等你 `0` 时，`read()` 函数数据才读完。
-  - 返回值等于 `-1` 时，出现异常
-    - `errno == EINTR` 时，read函数被信号中断，则需要重启或退出(quit)。
-    - `errno == EAGAIN` 时，以非阻塞(EWOULDBLOCK)的方式去读，但是读到的没有数据。 
-    - 出现其它的值时，则执行 `perror()` 函数显示错误提示。
-
-
-- `readline()` 读取一行的内容，遇到 `\n` 则结束
-
-> 注意点：在使用套接字函数时，需要对函数做错误检查，保证代码的鲁棒性，可以把错误检查的代码封装在一起。
-
-- `shutdown(int sockfd, int how)` 在应用程序中执行一个半关闭的状态 
-  - 参数 how 
-    - `SHUT_RD` 关闭sockfd套接字上的读共能 
-    - `SHUT_WR` 关闭sockfd套接字上的写共能 
-    - `SHUT_RDWR` 关闭sockfd套接字上的读写共能，相当于两次调用 `shutdown()`, 第一次以 `SHUT_RD`调用，第二次以 `SHUT_WR` 调用。
-  - 注意点
-    - `shutdown`函数不考虑文件描述符的引用计数，直接关闭文件描述符。而 `close()`函数每次关闭一次，文件描述符的个数就减一，直到计数为 0 时，所有的进程都调用了 `close()`，套接字才全被释放。
-    - 在多进程的通信中，若一个进程调用了 `shutdown(sfd, SHUT_RDWR)`，则其它的进程不能进行通信；若一个进程调用了 `close(sfd)`，将不会影响其它进程的通信。
-
-
-
-### 6.2.1. 短连接的操作步骤
-
-建立连接——数据传输——关闭连接...建立连接——数据传输——关闭连接
-
-1. client 向 server 发起连接请求
-2. server 接到请求，双方建立连接
-3. client 向 server 发送消息
-4. server 回应 client
-5. 一次读写完成，此时双方任何一个都可以发起 close 操作
-
-
-### 6.2.2. 优点
-短连接对于服务器来说管理较为简单，存在的连接都是有用的连接，不需要额外的控制手段。
-
-
-### 6.2.3. 缺点
-但如果客户请求频繁，将在TCP的建立和关闭操作上浪费时间和带宽。
-
-## 6.3. 长连接
-
-### 6.3.1. 长连接的操作步骤是：
-
-建立连接——数据传输...（保持连接）...数据传输——关闭连接
-
-1. client 向 server 发起连接
-2. server 接到请求，双方建立连接
-3. client 向 server 发送消息
-4. server 回应 client
-5. 一次读写完成，连接不关闭
-6. 后续读写操作...
-7. 长时间操作之后client发起关闭请求
-
-
-
-### 6.3.2. 优点
-
-长连接可以省去较多的TCP建立和关闭的操作，减少浪费，节约时间。
-
-对于频繁请求资源的客户来说，较适用长连接。
-
-
-
-### 6.3.3. 缺点
-
-client与server之间的连接如果一直不关闭的话，会存在一个问题，随着客户端连接越来越多，server早晚有扛不住的时候，这时候server端需要采取一些策略，如关闭一些长时间没有读写事件发生的连接，这样可以避免一些恶意连接导致server端服务受损；如果条件再允许就可以以客户端机器为颗粒度，限制每个客户端的最大长连接数，这样可以完全避免某个蛋疼的客户端连累后端服务。
-
-
-
-## 6.4. 什么时候用长连接，短连接
-
-长连接多用于操作频繁，点对点的通讯，而且连接数不能太多情况，。每个TCP连接都需要三步握手，这需要时间，如果每个操作都是先连接，再操作的话那么处理速度会降低很多，所以每个操作完后都不断开，下次处理时直接发送数据包就OK了，不用建立TCP连接。例如：数据库的连接用长连接，如果用短连接频繁的通信会造成socket错误，而且频繁的socket 创建也是对资源的浪费。
-
-
-而像WEB网站的http服务一般都用短链接，因为长连接对于服务端来说会耗费一定的资源，而像WEB网站这么频繁的成千上万甚至上亿客户端的连接用短连接会更省一些资源，如果用长连接，而且同时有成千上万的用户，如果每个用户都占用一个连接的话，那可想而知吧。所以并发量大，但每个用户无需频繁操作情况下需用短连好
-
-
-## 6.5. 心跳
-
-跳机制的原理很简单：客户端每隔N秒向服务端发送一个心跳消息，服务端收到心跳消息后，回复同样的心跳消息给客户端。如果服务端或客户端在M秒（M>N）内都没有收到包括心跳消息在内的任何消息，即心跳超时，我们就认为目标TCP连接已经断开了。
-
-
-## 6.6. 轮询
-
-短轮询：浏览器发起一个“询问”请求，服务器无论有无新数据，都立即响应（有就返回新数据，没有就返回一个表示’空’的自定义数据格式），一个HTTP连接结束。 
-
-
-长轮询：长轮询的经典实现 —— Comet：基于 HTTP 长连接的“服务器推”技术。
-- 浏览器发起一个“询问”请求，当没有新数据时，服务器端并不立即响应，而是等待数据，当有新数据产生时，才向浏览器响应，一个HTTP连接结束。
-- 补充： 当服务端没有数据更新的时候，连接会保持一段时间周期知道数据或者状态改变或者过期，依次减少无效的客户端和服务端的交互。
-- 补充： 当服务端数据变更频繁的话，这种机制和定时轮询毫无区别。
-
-
-
-# 7. high currency
-
-## 7.1. 多进程并发服务器
-
-实现的思想：用父子进程(fork)和信号捕捉(signal()或sigaction)去实现。父进程关闭客户端的文件描述符，并进行信号的捕捉，回收子进程，来处理僵尸进程；子进程关闭服务端的文件描述符，进行信号的注册。
-
-
-
-## 7.2. 多线程并发服务器
-
-- 实现的思想：设置线程的属性和线程的分离 `pthread_detach`
-- 无路是采用多进程并发服务器还是多线程并发服务器，对服务器的产生的开销都比较大，一般只用一些比较小的场合，像大型的网络一般不适用，需要用到多路IO转接模型来实现。
-
-
-## 7.3. 多路 IO 复用
-
-UDP 和 TCP 最基本的责任是: 将两个端系统间 IP 的传递服务扩展为运行在端系统上的两个进程之间的传递服务。将主机间传递扩展到进程间传递被称为传输层的多路复用 (transport-layer multiplexing) 与多路分解 (demultiplexing) 
-
-- 多路IO转接模型原理：不再由应用程序(服务器)直接监听客户端，而是通过内核替代应用程序进行监听文件。
-- 查看一个进程可以打开sock文件描述符的上限值 `cat /proc/sys/fs/file-max`
-- 端口复用函数
-  - `setsockopt()` :一般插入在 `socket()` 函数与 `bind()` 函数之间。
-
-
-### 7.3.1. select
-
-- 监听所有文件描述符中最大的文件描述符
-- 数据请求事件
-  - read
-  - write
-  - error
-- 返回值：返回监听的文件描述符总数。
-- 缺点
-  - Linux中select监听文件描述符的的最大值为 1024 
-  - 需要自定一个数据结构(数组)去遍历哪些文件描述符满足条件。
-  - 每次进行操作的时候，需要将监听的集合和满足条件监听的集合进行保存，因为每次的操作会修改原有集合的值。
-- 四个辅助函数
-  - `void FD_ZERO(fd_set *set)` 将set清0
-  - `void FD_CLR(int fd, fd_set *set)` 将fd从set中清除出去
-  - `void FD_SET(int fd, fd_set *set)` 将fd设置到set集合中去
-  - `int FD_ISSET(int fd, fd_set *set)` 判断fd是否在set集合中 
-
-
-### 7.3.2. poll
-
-函数原型：`int poll(struct pollfd *fds, nfds_t nfds, int timeout);` 
-
-参数
-- `fds` 数组的首地址  
-- `nfds` 数组中元素的个数
-- `timeout` 超时时间(单位为ms级别)
-  - `-1` 阻塞等待
-  - `0`  立即返回，不阻塞等待
-  - `>0` 等待指定的时间长度
-
-优点
-- 监听文件描述符的返回值可以超过 1024
-- 实现了监听集合与返回集合的分离
-- 仅在数组中搜索，范围变小了，但是效率还是比较低
-
-
-### 7.3.3. epoll
-
-函数
-- `epoll_create(int size);`   创建一个epoll，返回值指向Linux内核中的平衡二叉树(红黑树)的树根。
-- `epoll_ctl(int epfd, in op, in fd, struct epoll_event *event);` 控制某个epoll监听的文件描符上的事件：注册、删除、修改。
-  - `op`: EPOLL_CTL_ADD/ EPOLL_CTL_MOD/ EPOLL_CTL_DEL
-  - `event`: EPOLL_IN/ EPOLL_OUT / EPOLL_ERR
-- `epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout);` 等待所有监控文件描述符上事件的产生，即监听epoll红黑树上事件的发生。
-  - `struct epoll_event *event` event为传出参数，是一个数组。
-  - `int maxevents` 数组的最大值  
-
-三种触发模式
-- `epoll ET` 边沿触发
-  - 只有client发送数据时，才会触发。
-  - 调用：`event = EPOLLIN | EPOLLET`
-  - client将大量的数据存到epoll的缓冲区中时，server只从epoll中读取一部分的数据，这部分的数据概括了缓冲区中所有数据的信息，缓冲区中剩余的数据根据需求来进行取舍。
-
-- `epoll LT` 水平触发  
-  - 系统不做任何的声明，一般默认是水平触发。
-  - 一次性对 `read()` 函数进行操作，只有 `read()` 函数执行完后，才会进行水平触发。
-
-- 非阻塞IO方式
-  - 优点：减少 `epoll_wait` 函数调用的次数，提高效率。
-  - `open()` 函数，在socket套接字中不适用。
-  - 结合 `fcntl()` 函数和 `readn()` 函数一起使用。 `readn()` 一次性读取 `n` 个字节后才返回。
-  - 如何使用？
-    - 使用边沿触发方式 
-    - 执行过程中使用 `while(read())`
-    - 调用 `fcntl(0_NOBLOCK)`
-
-epoll应用场景：不仅可以用于socket套接字 ，还可以用于管道和文件中。
-
-epoll反应堆模型
-- 核心思想：调用了 `libevent` 库
-- 使用 `libevent` 库优点：库的底层大量采用了回调的思想，即函数指针的使用，同时也是跨平台的。
-
-
-# 8. References
+# 6. References
 
 - [原书作者网站：Computer Networking: a Top Down Approach](http://gaia.cs.umass.edu/kurose_ross/index.php)
 - [TCP/IP协议.卷一](https://www.kancloud.cn/lifei6671/tcp-ip/139758)
@@ -1331,9 +1056,3 @@ epoll反应堆模型
 - [理解TCP/IP三次握手与四次挥手的正确姿势](https://www.cnblogs.com/lms0755/p/9053119.html)
 - [简述TCP的三次握手过程](https://blog.csdn.net/sssnmnmjmf/article/details/68486261)
 - [TCP/IP三次握手详解](https://blog.csdn.net/metasearch/article/details/2147213)
-- [深入理解基本套接字编程](https://www.cnblogs.com/luoxn28/p/5819798.html)
-- https://cloud.tencent.com/developer/article/1470024: 长连接和短连接详细解析，值得阅读。
-- https://www.cnblogs.com/georgexu/p/10909814.html
-- https://www.cnblogs.com/biGpython/archive/2011/11/17/2252401.html
-- https://www.cnblogs.com/miaozhihang/p/9518584.html
-
