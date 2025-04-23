@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-14 18:13:16
+ * @LastEditTime: 2025-04-23 15:05:41
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -1389,7 +1389,7 @@ type usb interface {
   
 - **interface 类型默认是一个指针（引用类型）**，若没有初始化 interface 就是用，那么默认值为 `nil`。
 
-- **空接口中没有任何的方法，所有的类型都实现了空接口 **。即任何一个变量都可以赋值给空接口。（**很常用**）
+- **空接口中没有任何的方法，所有的类型都实现了空接口**。即任何一个变量都可以赋值给空接口。（**很常用**）
   
   ```go
   type Stu struct {
