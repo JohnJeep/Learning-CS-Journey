@@ -40,7 +40,8 @@ func (c *Camera) Stop() {
 type Computer struct {
 }
 
-// Working 方法接收接口类型的的变量
+// Usb interface 作为函数的参数
+// interface 也可以作为函数的返回值、也可作为 struct 的字段，实现依赖注入和松耦合
 func (c *Computer) Working(usb Usb) {
 	usb.Start()
 
@@ -48,7 +49,7 @@ func (c *Computer) Working(usb Usb) {
 	if p, ok := usb.(*Phone); ok {
 		p.Call() // 等价于 (*p).Call()
 	}
-	usb.Stop()
+	usb.Stop() // usb 是一个接口类型，运行时会根据传入的参数类型动态来调用相应的方法
 }
 
 func main() {
