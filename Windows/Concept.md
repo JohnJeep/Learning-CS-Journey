@@ -1,3 +1,13 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-09 10:34:40
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-24 16:58:03
+ * @Description: windows basic concept
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
+
 # Windows 编程基本概念
 
 - 宽字符：Unicode字符，双字节
@@ -17,7 +27,7 @@
 
 - Unicode：一个中文字符长度为1；多字节字符集：一个中文字符长度为2
 
-## 字符
+# 字符
 
 - L表示long
 - P表示pointer
@@ -68,7 +78,7 @@ std::wstring AsciiToUnicode( const std::string& in_str )
 }
 ```
 
-## Utf8和Unicode的互转
+# Utf8和Unicode的互转
 
 ```cpp
 //utf8转为unicode
@@ -102,7 +112,7 @@ std::string UnicodeToUTF8( const std::wstring& in_wStr )
 }
 ```
 
-## Ascii和Utf8的互转
+# Ascii和Utf8的互转
 
 ```cpp
  //ascii转为utf8
@@ -118,7 +128,7 @@ std::string UTF8ToAscii(const std::string& in_utf8Str)
 }
 ```
 
-## GB2312和Unicode的互转
+# GB2312和Unicode的互转
 
 ```cpp
  
@@ -160,7 +170,7 @@ std::string UnicodeToBIG5(const std::wstring& strUnicodeString)
 
 
 
-## References
+# References
 
 -  [Windows下的字符集转换](https://blog.csdn.net/r5014/article/details/112220672)
 -  https://blog.csdn.net/luoyeaijiao/article/details/7266490
