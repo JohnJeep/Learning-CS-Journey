@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-04-09 10:35:45
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-04-24 17:09:17
+ * @Description: document convention
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # 文档写作约定
 
 - 中文与英文字母之间必须间隔一个空格
@@ -11,6 +20,7 @@
 - [写给大家看的中文排版指南 - 知乎](https://zhuanlan.zhihu.com/p/20506092)
 - [中文文案排版细则 - Dawner](https://dawner.top/posts/chinese-copywriting-rules/)
 - [中文技术文档写作风格指南](https://github.com/yikeke/zh-style-guide/)
+
 
 提 issue/question 推荐阅读资料：
 
