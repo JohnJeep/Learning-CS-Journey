@@ -1,0 +1,24 @@
+# /lib/systemd/systemd/system/etcd.service
+
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+EnvironmentFile=/opt/etcd/cfg/etcd.conf
+ExecStart=/opt/etcd/bin/etcd \
+--cert-file=/opt/etcd/ssl/server.pem \
+--key-file=/opt/etcd/ssl/server-key.pem \
+--peer-cert-file=/opt/etcd/ssl/server.pem \
+--peer-key-file=/opt/etcd/ssl/server-key.pem \
+--trusted-ca-file=/opt/etcd/ssl/ca.pem \
+--peer-trusted-ca-file=/opt/etcd/ssl/ca.pem \
+--logger=zap
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
