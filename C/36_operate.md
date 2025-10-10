@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
 运行结果：
 
-<img src="./figures/++-*.png"><p>
+<img src="./figures/operate.png"><p>
 <img src="./figures/result.png">
 
 
