@@ -85,3 +85,5 @@ dkms.conf
 
 TypeScript/out/*
 */node_modules/*
+
+.obsidian/
