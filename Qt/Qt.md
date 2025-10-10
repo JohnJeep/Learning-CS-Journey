@@ -292,7 +292,7 @@ readyRead()来判断是否有数据传入，当客户端向服务端成功发送
 - [Qt拷贝文件、文件夹、创建文件夹、删除文件夹操作](https://blog.csdn.net/ljt350740378/article/details/71381705)
 - [QT创建TCP Socket通信](https://www.cnblogs.com/stones-dream/p/9700660.html)
 - https://cryfeifei.top/2020/05/30/qt-ji-chu-jiao-cheng/
--[QString, Std::string, char *相互转换](https://www.cnblogs.com/zxbilly/p/9195411.html)
-
-
-
+- [QString, Std::string, char* 相互转换](https://www.cnblogs.com/zxbilly/p/9195411.html)
+- [Qt编程指南](https://qtguide.ustclug.org/)
+- [爱编程的大丙](https://subingwen.cn/qt/)
+- [DevBeans](https://www.devbean.net/)
