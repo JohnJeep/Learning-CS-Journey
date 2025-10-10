@@ -41,7 +41,7 @@ C 语言是自己接触的第一门语言，基本的语法在大学时就已经
 26. [sizeof() 与 strlen() 的区别](C/31_sizeof_strlen.md)
 27. [程序入口函数 main() 分析](C/32_main.md)
 28. [提高效率之一的 do{...}(false) 用法](C/34_do_while(false).md)
-29. [容易的混淆的 * 和 ++ 的优先级使用](C/36_*_++_operate.md)
+29. [容易的混淆的 * 和 ++ 的优先级使用](C/36_operate.md)
 30. [C 语言中精髓之一：回调函数](C/37_callback_function.md)
 31. [static 关键字](C/38_static.md)
 32. [细谈 C 语言中的字符串](C/39_static.md)
