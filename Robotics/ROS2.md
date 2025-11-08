@@ -219,38 +219,7 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
 
 通过将不同的回调分配到不同的组，你可以实现复杂的并发控制，而无需在回调函数内部手动加锁。
 
-### DDS
 
-- [Github eProsima Fast DDS](https://github.com/eProsima/Fast-DDS)
-- [offical eProsima](https://www.eprosima.com/)
-- [FastDDS doc with eProsima ](https://fast-dds.docs.eprosima.com/en/latest/)
-- [Design ROS on DDS](https://design.ros2.org/articles/ros_on_dds.html)
-- [CSDN  ROS2 DDS中间件（图文并茂+超详细）](https://blog.csdn.net/weixin_39939185/article/details/145865272)
-- [性能优化](https://code-bai.com/2025/01/19/ros2-performance-optimization/)
-
-
-
-DDS 是 ROS2 的 底层通信机制。它是一种通信标准和一套API 定义。ROS2 默认采用的 DDS 实现为 eProsima FastDDS。
-
-DDS的全称是**Data Distribution Service**，也就是**数据分发服务**，2004年由**对象管理组织OMG**发布和维护，是一套专门为**实时系统**设计的**数据分发/订阅标准**，最早应用于美国海军， 解决舰船复杂网络环境中大量软件升级的兼容性问题，现在已经成为强制标准。
-
-DDS强调**以数据为中心**，可以提供丰富的**服务质量策略**(QoS)，以保障数据进行实时、高效、灵活地分发，可满足各种分布式实时通信应用需求
-
-
-
-QoS
-
-- reliability
-- history
-- depth
-
-可靠性(Reliability):RELIABLE确保所有数据被接收，适合关键传感器数据;BEST EFFORT追求速度，适合非关键的视频流
-
-历史记录(History):KEEP LAST(n)仅保留最新n条数据;KEEP ALL保留所有数据(需谨慎使用内存)
-
-生存时间(Liveliness):监控发布者状态，检测节点故障
-
-截止时间(Deadline):指定数据更新的最大间隔，确保实时性
 
 
 
@@ -353,7 +322,7 @@ QoS
 
 #### Gazebo
 
-用于仿真。
+是一个仿真工具。提供逼真的仿真环境。
 
 
 
@@ -365,6 +334,10 @@ QoS
 
 #### qrt
 
+qrt_reconfigure：动态调参。
+
+
+
 
 
 #### launch
@@ -375,20 +348,7 @@ ROS 系统中多 node 启动与 配置的一种脚本。
 
 
 
-#### URDF
 
-机器人建模方法，用来描述机器人外观、性能个方面的属性。
-
-机器人一般是由**硬件结构、驱动系统、传感器系统、控制系统**四大部分组成。
-
-- 硬件结构就是底盘、外壳、电机等实打实可以看到的设备；
-- 驱动系统就是可以驱使这些设备正常使用的装置，比如电机的驱动器，电源管理系统等；
-- 传感系统包括电机上的编码器、板载的IMU、安装的摄像头、雷达等等，便于机器人感知自己的状态和外部的环境；
-- 控制系统就是我们开发过程的主要载体了，一般是树莓派、电脑等计算平台，以及里边的操作系统和应用软件。
-
-机器人建模的过程，其实就是按照类似的思路，通过建模语言，把机器人每一个部分都描述清楚，再组合起来的过程。
-
-ROS中的建模方法叫做**URDF(Unified Robot Description Format)**，全称是**统一机器人描述格式**，不仅可以清晰描述机器人自身的模型，还可以描述机器人的外部环境。
 
 
 
@@ -472,44 +432,6 @@ rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 ### rmw
 
 ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
-
-
-
-### lifecycle
-
-- [offical lifecycle API](https://docs.ros.org/en/jazzy/p/lifecycle/)
-- [manage d-life cycle nodes in ROS 2](https://design.ros2.org/articles/node_lifecycle.html)
-
-问题：
-
-1. 节点管理问题：节点启动顺序或状态切换不稳定。
-
-
-
-
-
-Lifecycle Node 的核心状态机包含以下几个主要状态(primary states)：
-
-1. **`Unconfigured`**：
-   - **描述**：节点的“出生”状态。节点刚被启动，但尚未进行任何配置。它不能执行任何功能。
-   - **类比**：机器人刚通电，但所有软件都还没加载参数。
-2. **`Inactive`**：
-   - **描述**：节点已配置完成（例如，已从参数服务器读取了所有参数），但尚未被激活。此时，它**没有**创建任何 Publisher、Subscriber、Service 等通信对象，因此不消耗网络带宽和计算资源。
-   - **类比**：机器人的手臂驱动程序已经加载了配置（如长度、关节限制），但电机尚未上电，手臂不会运动。
-3. **`Active`**：
-   - **描述**：节点的“工作”状态。此时，节点已经创建了所有必要的 Publisher、Subscriber 等，开始执行其核心逻辑（如发布传感器数据、处理数据、响应服务请求）。
-   - **类比**：机器人手臂电机上电，控制器开始运行，可以接收指令并运动。
-4. **`Finalized`**：
-   - **描述**：节点的“死亡”状态。节点正在或已经清理了所有资源，即将关闭。这是一个不可逆的终点状态。
-   - **类比**：机器人关闭，所有程序退出。
-
-此外，还有一些**过渡状态**，如 `Configuring`, `Activating`, `Deactivating`, `CleaningUp`, `ErrorProcessing`。这些状态表示节点正在执行从一个主要状态切换到另一个主要状态所需的操作。
-
-
-
-
-
-
 
 
 
