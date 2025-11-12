@@ -20,7 +20,6 @@
 - 避免不必要计算和步骤。
 - 选择恰当的优化设计策略。
 
-
 # References
 
 - [Software optimization resources](https://www.agner.org/optimize/)

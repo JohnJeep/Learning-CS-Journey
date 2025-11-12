@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:26:08
+ * @LastEditTime: 2025-11-12 22:21:28
  * @Description: C++ 基础
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
@@ -156,28 +156,8 @@ C++编译器不支持使用 `typedef` 关键词为**模板类**设置别名，�
 
 <img src="./figures/reference-function.png">
 
-
-## 5.2. lvalue reference(左值引用)
-左值就是一个能够被修改的变量。
-
-- `引用` 作为 `左值`时，返回的是变量的本身，是变量而不是值（value）。变量只能是全局变量或静态变量，不能是局部变量，否则会出现 `Segmentation fault`。
-- 函数的返回值作为一个 `左值`时，应该返回的是一个引用`(reference)`。
-- 左值表达式表示的是一个对象的身份。
-- 变量表达式是一个左值，作用的时间比较长，右值的作用时间比较短暂。 
-
-
-## 5.3. rvalue reference(右值引用)
-何为右值引用？
-- 必须绑定到右值的引用，采用 `&&` 来获得右值引用，而不是 `&` 
-- 右值表达式表示的是对象的值。
-- 右值引用只能绑定到一个将要被销毁的对象，该对象没有其它的用户。
-
-`std::move()`
-- 显式的将左值转化为对应的右值引用类型。
-- 使用 `move()` 函数时告诉编译器，处理左值时像右值一样去处理它；对左值进行赋值或销毁外，不再使用它。
-
-
 ## 5.4. const reference(常量引用)
+
 让变量的引用拥有只读 (read-only) 的属性。
 
 ```cpp
@@ -199,8 +179,7 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 函数定义时，加 `inline` 关键字，例如 `inline void func(){}`。内联函数的关键字 `inline` 与函数体的实现在一起，不需额外的声明。 
 
 
-实现机制
-- C++编译器直接将函数体插入函数调用的地方。
+实现机制：C++编译器直接将函数体插入函数调用的地方。
 
 
 什么时候可以用 `inline`？
@@ -224,7 +203,8 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 ## 6.3. template function(模板函数)
 什么是模板函数？
-> 函数定义时不指定具体的数据类型，建立一个通用函数。函数调用时，根据实际的参数反推数据类型，即类型的参数化。
+
+函数定义时不指定具体的数据类型，建立一个通用函数。函数调用时，根据实际的参数反推数据类型，即类型的参数化。
 
 
 ## 6.4. conversion function(转换函数)
@@ -241,100 +221,378 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 <font color=red>思考：</font>为什么 C++ 中要把 class 设计成 pointer(智能指针)和 function(仿函数)？
 
+# 7. Special member function (特别成员函数)
 
-# 7. Special member function (类中特别的成员函数)
+## 7.1. Constructor(构造函数)
 
+### 为什么要用构造函数
 
-## 7.1. constructor(构造函数)
-
-为什么要用构造函数？
 - 被用来初始化类的对象。  
 - 类对象被创建时，编译器为对象(object)分配内存空间，并自动调用构造函数，完成成员的初始化 
 
+### 构造函数特征
 
-构造函数特征 
 - 构造函数的 `函数名称` 与 `类的名称` 一样。
 - **函数没有返回值**
 - 函数参数值
   - 创建的对象有默认值时，应传入创建对象的默认值。
   - 创建的对象没有默认值时，编译器传入的默认值为 `0`
 
+```cpp
+class Stu
+{
+public:
+    Stu() {}  // constructor
+    ~Stu() {}
+private:
+    string name;
+};
 
-构造函数注意点
-- 构造函数是一个 `成员函数`，函数内有一个 `this` 指针
-- 构造函数的访问属性可以放在 `private` 中。在单例模式（singleton）中就采用这种用法。
-- `构造函数` 与 `析构函数` 在类中声明了 ，必须要通过类的方法去实现，即声明了必须要用，否则编译时会报错。
-- 多线程编程中，构造函数不能保证线程的安全。
+```
 
+### 构造函数注意点
 
-类中默认的构造函数
-- 默认无参数构造：当类中没有定义构造函数时，C++编译器会默认提供一个无参数构造函数，构造函数的函数体为空。
+1. 构造函数是一个 `成员函数`，函数内有一个 `this` 指针。
+2. 构造函数的访问属性可以放在 `private` 中。在单例模式（singleton）中就采用这种用法。
+3. `构造函数` 与 `析构函数` 在类中声明了 ，必须要通过类的方法去实现，即声明了必须要用，否则编译时会报错。
+4. 多线程编程中，构造函数不能保证线程的安全。
+
+### 类中默认的构造函数
+
+- 默认无参数构造：当类中没有定义构造函数时，C++ 编译器会默认提供一个无参数构造函数，构造函数的函数体为空。
 - 默认拷贝构造：当类中没有定义拷贝构造函数时，C++编译器会默认提供一个拷贝构造函数（浅拷贝），简单的进行成员变量的值拷贝操作。
 
+### 构造函数分类
 
-构造函数分类
-- 无参构造：一般为栈内存空间，自动释放内存空间。调用时不用 `加括号`。
-- 带参数构造(重载了构造函数)
+1. 默认构造(Default Constructor)：不接受任何参数的构造函数。一般为**栈内存空间**，自动释放内存空间。调用时不用 `加括号`。
+
+2. 带参数构造(Parameterized Constructor)：重载了构造函数。
+
+     - 一般为堆内存空间，需要使用delete释放内存空间；使用 `new` 关键字创建空间
+     - 一般需要初始化构造的参数
+     - 有默认值参数的构造函数，需要在类的声明中指定默认参数值，一般只能指定一次，在构造函数实现时不需要再给出默认值，否则会报错。
+
+     ```cpp
+     class Stu
+     {
+     public:
+         Stu() {} // default constructor
+         Stu(string name) {this->name = name;} // parameterized constructor
+         Stu(const Stu& other) {this->name = other.name;} // copy constructor
+         Stu(Stu&& other) noexcept // move constructor
+         {
+             this->name = std::move(other.name);
+         }
+         ~Stu() {} // destructor
+         virtual int add(int x, int y) = 0; // pure virtual function
+         virtual void setName(string name) { this->name = name; }
+     
+     private:
+         string name;
+     };
+     
+     ```
+
+
+3. 拷贝构造(Copy Constructor)
+
+   用同类型的另一个对象来初始化新对象。
+
+   ```cpp
+   class MyClass {
+   public:
+       MyClass(const MyClass& other) {  // 拷贝构造函数
+           value = other.value;
+       }
+   private:
+       int value;
+   };
+   ```
+
+4. 移动构造函数 (Move Constructor) (C++11)
+
+   用于将资源从一个对象转移到另一个对象。
+
+   ```cpp
+   class MyClass {
+   public:
+       MyClass(MyClass&& other) noexcept {  // 移动构造函数
+           value = other.value;
+           other.value = 0;  // 置空原对象
+       }
+   private:
+       int value;
+   };
+   ```
+
+5. 委托构造函数 (Delegating Constructor) (C++11)
+
+   一个构造函数可以调用同一个类的另一个构造函数。
+
+   ```cpp
+   class MyClass {
+   public:
+       MyClass() : MyClass(0) {}  // 委托给下面的构造函数
+       
+       MyClass(int v) : value(v) {}
+   private:
+       int value;
+   };
+   ```
+
+6. 继承构造函数 (Inheriting Constructor) (C++11)
+
+   构造函数与父类的其它成员(成员变量和成员方法)不同，它不能被子类继承。因此，在创建子类对象时，为了初始化从父类中继承来的成员变量，编译器需要调用其父类的构造函数。如果子类的构造函数没有显示地调用父类的构造函数，则默认调用父类的无参构造函数。 
+
+1. 子类与父类均没有声明构造函数时，C++编译器会默认生成构造函数去调用。 
+
+   ```cpp
+   #include <iostream>
+   using namespace std;
+   
+   class Parent {
+   public:
+       // 没有声明任何构造函数
+       void show() { cout << "Parent class" << endl; }
+   };
+   
+   class Child : public Parent {
+   public:
+       // 没有声明任何构造函数
+       void display() { cout << "Child class" << endl; }
+   };
+   
+   int main() {
+       Child obj;  // 编译器自动生成默认构造函数
+       obj.show();    // 输出: Parent class
+       obj.display(); // 输出: Child class
+       return 0;
+   }
+   ```
+
+2. 子类继承父类的方法，默认会调用父类的无参数构造函数，再调用子类的无参或有参构造函数。
+
+   ```cpp
+   #include <iostream>
+   using namespace std;
+   
+   class Parent {
+   public:
+       Parent() {
+           cout << "Parent无参构造函数被调用" << endl;
+       }
+       
+       void show() { 
+           cout << "Parent方法" << endl; 
+       }
+   };
+   
+   class Child : public Parent {
+   public:
+       // 子类无参构造函数
+       Child() {
+           cout << "Child无参构造函数被调用" << endl;
+       }
+       
+       // 子类有参构造函数
+       Child(int x) {
+           cout << "Child有参构造函数被调用，参数: " << x << endl;
+       }
+       
+       void display() { 
+           cout << "Child方法" << endl; 
+       }
+   };
+   
+   int main() {
+       cout << "创建无参子类对象:" << endl;
+       Child obj1;  // 自动调用Parent() → Child()
+       
+       cout << "\n创建有参子类对象:" << endl;
+       Child obj2(10);  // 自动调用Parent() → Child(10)
+       
+       return 0;
+   }
+   ```
+
+3. 当父类为有参构造函数时
+
+   1. 父类的有参构造函数有默认的值时，子类中不需要显式地调用父类的构造，C++编译器会默认的调用父类的有参构造函数。
+
+   ```cpp
+   #include <iostream>
+   using namespace std;
+   
+   class Parent {
+   public:
+       // 有参构造函数，但有默认值
+       Parent(int x = 100, string str = "默认文本") {
+           cout << "Parent有参构造函数: x=" << x << ", str=" << str << endl;
+       }
+   };
+   
+   class Child : public Parent {
+   public:
+       // 不需要显式调用父类构造函数
+       Child() {
+           cout << "Child无参构造函数" << endl;
+       }
+       
+       Child(int y) {
+           cout << "Child有参构造函数: y=" << y << endl;
+       }
+   };
+   
+   int main() {
+       cout << "创建子类对象:" << endl;
+       Child obj1;      // 自动调用Parent(100, "默认文本")
+       Child obj2(50);  // 自动调用Parent(100, "默认文本")
+       return 0;
+   }
+   ```
+
+   2. 父类的有参构造函数没有默认的值时，子类中需要显式地调用父类的构造
+
+   ~~~cpp
+   ```cpp
+   #include <iostream>
+   using namespace std;
+   
+   class Parent {
+   public:
+       // 有参构造函数，没有默认值
+       Parent(int x, string str) {
+           cout << "Parent有参构造函数: x=" << x << ", str=" << str << endl;
+       }
+   };
+   
+   class Child : public Parent {
+   public:
+       // 必须显式调用父类构造函数
+       Child() : Parent(0, "默认") {
+           cout << "Child无参构造函数" << endl;
+       }
+       
+       Child(int y, string msg) : Parent(y * 2, msg + "_parent") {
+           cout << "Child有参构造函数: y=" << y << ", msg=" << msg << endl;
+       }
+   };
+   
+   int main() {
+       cout << "创建子类对象:" << endl;
+       Child obj1;              // 显式调用Parent(0, "默认")
+       Child obj2(25, "测试");  // 显式调用Parent(50, "测试_parent")
+       return 0;
+   }
+   ```
+   ~~~
+
+   3. 父类中既有无参默认构造又有带参默认构造函数时，子类继承父类时，需要子类显示的指定到底该调用哪一个构造函数。
+
+   ```cpp
+   #include <iostream>
+   using namespace std;
+   
+   class Parent {
+   public:
+       // 无参构造函数
+       Parent() {
+           cout << "Parent无参构造函数" << endl;
+       }
+       
+       // 有参构造函数
+       Parent(int x) {
+           cout << "Parent有参构造函数: x=" << x << endl;
+       }
+       
+       Parent(string str) {
+           cout << "Parent字符串构造函数: str=" << str << endl;
+       }
+   };
+   
+   class Child : public Parent {
+   public:
+       // 必须显式指定调用哪个父类构造函数
+       Child() : Parent() {  // 显式调用无参构造函数
+           cout << "Child无参构造函数" << endl;
+       }
+       
+       Child(int x) : Parent(x) {  // 显式调用有参构造函数
+           cout << "Child有参构造函数: x=" << x << endl;
+       }
+       
+       Child(string str) : Parent(str) {  // 显式调用字符串构造函数
+           cout << "Child字符串构造函数: str=" << str << endl;
+       }
+       
+       // 调用不同的父类构造函数
+       Child(int x, string str) : Parent(str) {
+           cout << "Child混合构造函数: x=" << x << ", str=" << str << endl;
+       }
+   };
+   
+   int main() {
+       cout << "测试不同情况:" << endl;
+       Child obj1;              // 调用Parent()
+       Child obj2(100);         // 调用Parent(100)
+       Child obj3("Hello");     // 调用Parent("Hello")
+       Child obj4(200, "World");// 调用Parent("World")
+       
+       return 0;
+   }
+   ```
+
+7. 显式构造函数 (Explicit Constructor)
+
+   防止隐式转换
+
+   ```cpp
+   class MyClass {
+   public:
+       explicit MyClass(int v) {  // 显式构造函数
+           value = v;
+       }
+   private:
+       int value;
+   };
+   
+   // MyClass obj = 5;  // 错误：不能隐式转换
+   MyClass obj(5);      // 正确：显式调用
+   ```
+
+8。 constexpr 构造函数 (C++11)
+
+在编译时求值的构造函数
+
+```cpp
+class MyClass {
+public:
+    constexpr MyClass(int v) : value(v) {}
+private:
+    int value;
+};
+
+constexpr MyClass obj(10);  // 编译时常量
+```
+
   
-  - 一般为堆内存空间，需要使用delete释放内存空间；使用 `new` 关键字创建空间
-  - 一般需要初始化构造的参数
-  - 有默认值参数的构造函数，需要在类的声明中指定默认参数值，一般只能指定一次，在构造函数实现时不需要再给出默认值，否则会报错。
-    
-    ```cpp
-    // 有参构造函数三种调用方法
-    Test t1(10);         // 括号法
-    Test t2 = t1;         // 等号法
-    Test t3 = Test(30);  // 直接调用构造函数
-    ```
 
-- 拷贝构造
-  ```cpp
-  // 声明一个类
-  class String()
-  {
-    private:
-      ...
-    public:
-      ...
-  }
-  // 实例化一个对象
-  String st_one;
+总结
+
+  1. **默认构造**：当没有声明任何构造函数时，编译器会自动生成
+  2. **继承调用顺序**：总是先调用父类构造函数，再调用子类构造函数
+  3. **有默认值的参数**：编译器可以自动调用，不需要显式指定
+  4. **无默认值的参数**：必须在子类构造函数初始化列表中显式调用
+  5. **多个构造函数**：必须显式指定要调用哪个父类构造函数
+
   
-  // 拷贝构造
-  String st_two = st_one;   // 方法一：等号(=)是拷贝一个对象不是赋值运算
-  String st_three(st_one)   // 方法二：初始化拷贝构造
-  ```
 
-- 构造函数在继承中的用法
-  > 构造函数与父类的其它成员(成员变量和成员方法)不同，它不能被子类继承。因此，在创建子类对象时，为了初始化从父类中继承来的成员变量，编译器需要调用其父类的构造函数。如果子类的构造函数没有显示地调用父类的构造函数，则默认调用父类的无参构造函数。 
-  
-  - 子类与父类均没有声明构造函数时，C++编译器会默认生成构造函数去调用。 
-  - 子类继承父类的方法，默认会调用父类的无参数构造函数，再调用子类的无参或有参构造函数。
-  - 当父类为有参构造函数时
-    - 父类的有参构造函数有默认的值时，子类中不需要显式地调用父类的构造，C++编译器会默认的调用父类的有参构造函数。
-    - 父类的有参构造函数没有默认的值时，子类中需要显式地调用父类的构造
-      ```cpp
-      class Parent
-      {
-       private:
-       public:
-         Parent(int a, int b){};
-      }
-      
-      class Child:public Parent
-      {
-      private:
-      public:
-        Child(int m, int n):Parent(a, b)     // 显示的调用父类的构造函数
-      }
-      ```
-    - 父类中既有无参默认构造又有带参默认构造函数时，子类继承父类时，需要子类显示的指定到底该调用哪一个构造函数。
-
-Initialization(初始化)
+### Initialization(初始化)
 
   类中成员的初始化
 
 ```cpp
+// 没有初始化
 struct Widget
 {
     int a;        // 没有初始化，获得一个任意的值
@@ -363,10 +621,12 @@ int main(int argc, char *argv[]) {
 ```
 
 ```cpp
+// 构造函数中初始化
 struct Widget
 {
     Widget()
     {
+        // 下面是 赋值操作 assignment operator
         a = 10;
         s = "hello";
         ptr = nullptr;
@@ -377,46 +637,90 @@ struct Widget
 };
 ```
 
-构造函数中初始化，都是属于赋值操作（assignment operator）,
 
 
-## 7.2. copy constructor(拷贝构造)
+## 7.2. Copy Constructor(拷贝构造)
+
 - 拷贝构造函数是由普通构造函数和赋值操作符共同实现的。
 - 拷贝构造函数必须以 `引用(reference)`的形式传递(参数为引用值)。
-- 拷贝构造函数使程序更有效率，因为它不用再构造一个对象的时候改变构造函数的参数列表
-- 当某对象是按值传递时（无论是类的对象作为函数参数，还是作为函数返回值），编译器都会先建立一个此对象的临时拷贝，而在建立该临时拷贝时就会调用类的拷贝构造函数。
+- 拷贝构造函数使程序更有效率，因为它不用再构造一个对象的时候，改变构造函数的参数列表
+- 当某对象是按值传递时（无论是类的对象作为函数参数，还是作为函数返回值），编译器都会先建立一个此对象的临时拷贝，而在建立临时拷贝时就会调用类的拷贝构造函数。
 
----
+### Shallow Copy(浅拷贝)
 
-- 浅拷贝（shallow copy）
-  
-  - 当类的对象发生复制过程的时候，类的对象自己有资源（堆或者是其它系统资源），但复制过程中并未复制资源，只是改变了指针的指向，这种称为浅拷贝。
-  - 只是将类的成员值进行拷贝，类指针没有进行拷贝，两个指针同时指向一块内存空间。
-    
-    ```cpp
-    // 没有做任何的说明，C++编译默认使用的是浅拷贝。
-    People obj_2 = obj_1;   将obj_1对象的内容拷贝到obj_2对象中，不是拷贝的指针。
-    ```
-  - 浅拷贝完成后，在释放资源的时候会产生资源归属不清的情况，导致一个指针指向已经被删除的内存空间，使程序运行出错。即销毁对象时，两个对象的析构函数将对同一个内存空间释放两次。
+定义：拷贝对象时，**只复制对象的成员变量本身**（包括指针变量的「地址值」），不复制指针指向的数据。
 
-- 深拷贝（deep copy）
-  
-  - 当类的对象发生复制过程的时候，类的对象自己有资源（堆或者是其它系统资源），但拷贝过程中复制了资源，这种将一个对象的资源完整的拷贝到另一个对象的过程，称为深拷贝。
-  - 不仅拷贝了类的 `成员变量值`，还拷贝了类的指针，两个指针指向两块不同的内存空间。
+- 浅拷贝只复制对象的成员变量的值，如果对象中有指针成员，那么复制的是指针的值（即地址），而不是指针所指向的数据。
+- 两个对象中的指针成员将指向同一块内存区域。这会导致一个问题：当其中一个对象修改了指针所指向的数据，另一个对象也会受到影响。更严重的是，当其中一个对象被销毁，它可能会释放这块内存，导致另一个对象的指针成为悬空指针（dangling pointer），再次使用该指针将导致未定义行为。
 
-- 什么时候用深拷贝和浅拷贝？
-  
-  - 类中没有自定义拷贝构造函数时，编译器会默认调用浅拷贝，完成成员的复制。
-  - 当类的成员中没有指针时，浅拷贝是可行的。
-  - 当类的成员中有指针时，如果采用简单的浅拷贝，则两类中的两个指针将指向同一个地址，当对象快结束时，会调用两次析构函数，而导致指针悬挂现象，因此必须要用深拷贝。
+```cpp
+class String {
+private:
+    char* str;
+public:
+    String(const char* s = "") {
+        str = new char[strlen(s) + 1];
+        strcpy(str, s);
+    }
 
-  
+    // 默认拷贝构造函数（浅拷贝）
+    String(const String& other)  {
+        str = other.str; // 危险：两个对象共享同一块内存，仅仅 copy 的是指针
+    }
 
-参考
-  - [c++拷贝构造函数详解](https://www.cnblogs.com/alantu2018/p/8459250.html)
+    ~String() {
+        delete[] str; // 如果两个对象共享同一块内存，会导致重复释放
+    }
+};
+```
 
+### Deep Copy(深拷贝)
 
-## 7.3. copy assignment operator(拷贝赋值)
+定义：拷贝对象时，**不仅复制对象的成员变量本身**，还会为指针成员**重新分配一块独立的堆内存**，并将原指针指向的数据完整复制到新内存。
+
+- 深拷贝不仅复制对象的成员变量，还会为指针成员分配新的内存空间，并将原指针所指向的数据复制到新的内存空间中。这样，两个对象的指针成员将指向不同的内存区域，互不影响。
+- 深拷贝通常需要自定义拷贝构造函数和赋值操作符(operator=)，以确保正确地分配和复制数据。
+
+```cpp
+class String {
+private:
+    char* str;
+public:
+    String(const char* s = "") {
+        str = new char[strlen(s) + 1];
+        strcpy(str, s);
+    }
+
+    // 自定义拷贝构造函数（深拷贝）
+    String(const String& other) {
+        str = new char[strlen(other.str) + 1];
+        strcpy(str, other.str);
+    }
+
+    // 赋值操作符也应该重载以实现深拷贝
+    String& operator=(const String& other) {
+        if (this != &other) { // 防止自赋值
+            delete[] str; // 释放原有内存
+            str = new char[strlen(other.str) + 1];
+            strcpy(str, other.str);
+        }
+        return *this;
+    }
+
+    ~String() {
+        delete[] str;
+    }
+};
+```
+
+### 什么时候用深拷贝和浅拷贝？
+
+1. 类中没有自定义拷贝构造函数时，**编译器会默认调用浅拷贝，完成成员的复制**。
+2. 当类的成员中没有指针时，浅拷贝是可行的。
+3. 当类的成员中有指针时，如果采用简单的浅拷贝，类中的两个指针将指向同一个地址，当对象快结束时，会调用两次析构函数，而导致指针悬挂现象，因此必须要用深拷贝。
+
+## 7.3. Copy Assignment Operator(拷贝赋值运算)
+
 ```cpp
 // 将对象s1拷贝赋值给对象s2，内部处理过程分3步：
 
@@ -449,21 +753,17 @@ MyString& MyString::operator=(const MyString& str)
 ```
 
 
-## 7.4. Move constructor(移动构造)
 
+## 7.6. Destructor(析构函数)
 
-## 7.5. Move assignment operator(移动赋值操作)
-
-
-## 7.6. destructor(析构函数)
 析构函数就是一个函数，只不过这个函数的函数名称与类名一样，在函数名之前还多了一个波浪号 `~`。例如：`string::~string()`，就是 `string` 类的析构函数。
 
 析构函数作用：类的对象离开作用域后释放对象使用的资源，在类死亡之前的前一刻调用，用于清除类中的资源（比如：释放内存）。
 
-析构函数注意点：
+析构函数注意点
 
 1. 一个类只能有一个析构函数，若有多个类则有多个析构函数。如果没有显式的定义析构函数，编译器会自动生成一个默认的析构函数。
-2. 析构函数不能 `重载`。每有一次构造函数的调用就会有一次析构函数的调用。
+2. 析构函数不能 `重载(overload)`。每有一次构造函数的调用就会有一次析构函数的调用。
 3. 只有当一切的构造动作都完成时，析构函数才有可能会被调用。因为在构造函数中可能会抛出异常从而导致程序结束。
 
 什么时候析构函数被调用？
@@ -472,12 +772,13 @@ MyString& MyString::operator=(const MyString& str)
 2. 手动去释放内存，用 `delete` 关键字时，先执行 delete，释放掉在堆上申请的内存后，再调用析构析构函数。
 
 
+
 # 8. empty class
+
 若 C++ 中一个 class 中什么也没有写，就是一个空的类（empty class），形如 `class Stu {};` 这样。程序编译时，C++ 编译器会给这个 `empty class` 提供默认构造函数（constructor）、析构函数（destructor）、拷贝构造函数（copy constructor）、拷贝赋值函数（copy assignment），并且这些函数的默认属性都是 `public` 且内联（ `inline`）。
 
-- 思考：为什么 C++ 中一个空类的大小为 `1byte` ？
-  
-  空类中没有函数和数据成员，但可以实例化类；一个类能被实例化，编译器就要给他分配空间，来指示类实例化的地址，通常编译器分配为 1 个字节（char类型），这样分配同时也保证了 空类占用的空间最小。
+思考：为什么 C++ 中一个空类的大小为 `1byte` ？
+> 空类中没有函数和数据成员，但可以实例化类；一个类能被实例化，编译器就要给他分配空间，来指示类实例化的地址，通常编译器分配为 1 个字节（char类型），这样分配同时也保证了 空类占用的空间最小。
 
 通常情况下，编译器生成一些函数
 
@@ -508,15 +809,18 @@ public:
 }
 ```
 
-- 类对象
-  - 格式：`Stu s1;`
-  - 定义之后就已经为 `s1` 这个对象在栈上分配了内存
-- 类指针
-  - 格式：`Stu *s2 = new Stu;`
-  - 定义 `*s2` 的时候没有分配内存，只有执行 `new` 后才会在堆上分配内存，是个永久的变量，需要用 `delete` 关键字手动去释放它。
+类对象
+- 格式：`Stu s1;`
+- 定义之后就已经为 `s1` 这个对象在栈上分配了内存
+
+类指针
+- 格式：`Stu *s2 = new Stu;`
+- 定义 `*s2` 的时候没有分配内存，只有执行 `new` 后才会在堆上分配内存，是个永久的变量，需要用 `delete` 关键字手动去释放它。
+
 
 
 # 10. new && delete
+
 windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则填充为最靠近 16 的倍数的大小。 
 
 `new` 动态分配内存 
@@ -579,44 +883,368 @@ windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则�
 - 标准库中使用 `placement arguments new` 的例子 <br>
   <img src="./figures/basic-string-new.png">
 
-
 # 11. overload(重载)
-函数重载是指函数名相同，参数表列个数或顺序、类型不同的函数。注意：不能靠函数返回类型来判断，因为函数的返回值不是判断函数重载的标准。
 
-函数重载的特点
+定义：函数重载是指在同一作用域内，函数名相同，参数表列个数或顺序、类型不同的函数。
 
-- 在同一个作用域中（C++中构造函数也可以重载）。
-- 函数名字相同。
-- 参数不同。
-- virtual 关键字可有可无。
-- 返回值可以不同。
-- 子类无法重载父类的函数。如果子类与父类的函数名称相同，则发生函数名称覆盖，不会发生函数重载。若想在子类和父类中分别调用具有相同名称的函数，则需要使用域分符号 `::`
-- 当子类中没有与父类相同参数的函数，只有名称相同的函数时，而子类去调用父类中重载的函数，则 C++ 编译器会将子类中有相同函数名称的函数去覆盖掉父类中相同名称的函数，从而将当前子类调用父类的函数当做子类中一个新的重载函数，但是编译器发现子类中并没有该函数的重载，因此会报错。
+注意：不能靠函数返回类型来判断，因为函数的返回值不是判断函数重载的标准。
+
+1. **函数重载的条件**：
+   - 函数名相同
+   - 参数列表不同（类型、个数、顺序）
+   - 在同一个作用域中
+2. **不能构成重载的情况**：
+   - 仅返回值类型不同
+   - 参数列表完全相同
+3. **继承中的注意事项**：
+   - **子类无法重载父类的函数，会发生名称隐藏。如果子类中定义了与父类同名的函数，会隐藏所有父类中同名的重载函数**。隐藏不是覆盖，只是子类中看不见，但在父类中还存在。
+   - 需要使用作用域解析符 `::` 来访问被隐藏（Name Hiding）的父类函数
+4. **virtual关键字**：
+   - virtual关键字不影响函数重载
+   - 虚函数也可以重载，重写虚函数时使用 override 关键字
 
 **函数重载底层实现原理**：编译器在编译时，根据函数的参数列表进行重命名。
 
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 示例1：参数类型不同的重载
+class Calculator {
+public:
+    // 整数相加
+    int add(int a, int b) {
+        cout << "调用 add(int, int): ";
+        return a + b;
+    }
+    
+    // 浮点数相加
+    double add(double a, double b) {
+        cout << "调用 add(double, double): ";
+        return a + b;
+    }
+    
+    // 三个整数相加
+    int add(int a, int b, int c) {
+        cout << "调用 add(int, int, int): ";
+        return a + b + c;
+    }
+    
+    // 字符串连接
+    string add(const string& a, const string& b) {
+        cout << "调用 add(string, string): ";
+        return a + b;
+    }
+};
+
+// 示例2：参数顺序不同的重载
+class Printer {
+public:
+    void print(int a, double b) {
+        cout << "整数: " << a << ", 浮点数: " << b << endl;
+    }
+    
+    void print(double a, int b) {
+        cout << "浮点数: " << a << ", 整数: " << b << endl;
+    }
+};
+
+// 示例3：构造函数重载
+class Person {
+private:
+    string name;
+    int age;
+    string occupation;
+    
+public:
+    // 默认构造函数
+    Person() {
+        name = "未知";
+        age = 0;
+        occupation = "无";
+        cout << "调用默认构造函数" << endl;
+    }
+    
+    // 带参数的构造函数
+    Person(string n, int a) {
+        name = n;
+        age = a;
+        occupation = "无";
+        cout << "调用 Person(string, int) 构造函数" << endl;
+    }
+    
+    // 三个参数的构造函数
+    Person(string n, int a, string o) {
+        name = n;
+        age = a;
+        occupation = o;
+        cout << "调用 Person(string, int, string) 构造函数" << endl;
+    }
+    
+    void display() {
+        cout << "姓名: " << name << ", 年龄: " << age << ", 职业: " << occupation << endl;
+    }
+};
+
+// 示例4：带有virtual关键字的函数重载
+class Base {
+public:
+    virtual void show(int x) {
+        cout << "Base::show(int): " << x << endl;
+    }
+    
+    virtual void show(double x) {
+        cout << "Base::show(double): " << x << endl;
+    }
+    
+    void display(string msg) {
+        cout << "Base::display(string): " << msg << endl;
+    }
+    
+    // 注意：仅返回值不同不能构成重载
+    // int display(string msg) { return 0; } // 错误！编译不通过
+};
+
+class Derived : public Base {
+public:
+    // 子类重写父类的虚函数
+    virtual void show(int x) override {
+        cout << "Derived::show(int): " << x << endl;
+    }
+    
+    // 注意：子类无法重载父类的函数，会发生名称隐藏
+    void display(int x) {
+        cout << "Derived::display(int): " << x << endl;
+    }
+    
+    // 如果想要在子类中访问父类的被覆盖函数，需要使用作用域解析符
+    void callBaseDisplay(string msg) {
+        Base::display(msg);  // 明确调用父类的display函数
+    }
+};
+
+// 示例5：返回值不同的情况（但参数必须不同）
+class Converter {
+public:
+    int toNumber(string str) {
+        cout << "调用 toNumber(string): ";
+        return stoi(str);
+    }
+    
+    double toNumber(double str) {  // 参数类型不同，可以重载
+        cout << "调用 toNumber(double): ";
+        return str;
+    }
+};
+
+int main() {
+    cout << "=== 函数重载示例演示 ===" << endl << endl;
+    
+    // 1. 参数类型不同的重载演示
+    cout << "1. 参数类型不同的重载:" << endl;
+    Calculator calc;
+    cout << calc.add(5, 3) << endl;
+    cout << calc.add(5.5, 3.3) << endl;
+    cout << calc.add(1, 2, 3) << endl;
+    cout << calc.add("Hello", " World") << endl;
+    cout << endl;
+    
+    // 2. 参数顺序不同的重载演示
+    cout << "2. 参数顺序不同的重载:" << endl;
+    Printer printer;
+    printer.print(10, 20.5);
+    printer.print(20.5, 10);
+    cout << endl;
+    
+    // 3. 构造函数重载演示
+    cout << "3. 构造函数重载:" << endl;
+    Person p1;                    // 调用默认构造函数
+    Person p2("张三", 25);        // 调用两个参数的构造函数
+    Person p3("李四", 30, "工程师"); // 调用三个参数的构造函数
+    
+    p1.display();
+    p2.display();
+    p3.display();
+    cout << endl;
+    
+    // 4. 继承中的函数重载演示
+    cout << "4. 继承中的函数重载:" << endl;
+    Base base;
+    Derived derived;
+    
+    cout << "Base对象调用:" << endl;
+    base.show(10);
+    base.show(10.5);
+    base.display("Hello Base");
+    
+    cout << "Derived对象调用:" << endl;
+    derived.show(20);           // 调用子类重写的函数
+    derived.show(20.5);         // 调用父类的函数（子类没有重写）
+    // derived.display("Hello"); // 错误！子类的display(int)覆盖了父类的display(string)
+    derived.display(100);       // 调用子类的display函数
+    derived.callBaseDisplay("Hello from Derived"); // 通过辅助函数调用父类函数
+    
+    cout << "通过Base指针调用:" << endl;
+    Base* ptr = &derived;
+    ptr->show(30);             // 多态：调用子类的函数
+    ptr->show(30.5);           // 调用父类的函数，父类有 double
+    ptr->display("Hello from Base pointer"); // 不是虚函数，则调用的是父类。非虚函数在编译时根据指针的静态类型（Base*）决定调用哪个函数。 
+    
+    // 5. 返回值不同的重载演示
+    cout << endl << "5. 返回值不同但参数不同的重载:" << endl;
+    Converter conv;
+    cout << conv.toNumber("123") << endl;
+    cout << conv.toNumber(45.67) << endl;
+    
+    return 0;
+}
+```
 
 # 12. override(重写)
-重写（也称为覆盖 override）是指派生类重新定义基类的虚函数。必须发生在子类与父类之间，并且父类与子类的函数具有完全相同的原型。使用 `virtual` 关键字声明后，能够产生多态，没有使用 `virtual` 关键字，只能叫重定义，不叫虚函数重写。
+
+重写（也称为覆盖 override）是指派生类重新定义基类的虚函数。
+
+**必须发生在子类与父类之间，并且父类与子类的函数具有完全相同的原型。**使用 `virtual` 关键字声明后，能够产生多态，没有使用 `virtual` 关键字，只能叫重定义，不叫虚函数重写。
 
 - 不在同一个作用域，分别位于派生类与基类。
 - 函数名字相同。
 - 参数相同。
-- 基类函数必须有 `virtual` 关键字，不能有 `static`。
+- 基类函数**必须有 `virtual` 关键字，不能有 `static`。**
 - 返回值相同，否则会报错。
 - 重写函数的访问修饰符可以不同。若基类中函数的修饰符是 `private`，派生类中重写的函数可以是 `public`，`protected`。
+
+`override` 关键字明确表示要重写基类的虚函数，提供编译时检查。
+
+`final` 关键字（C++11）防止进一步重写。
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 基类
+class Animal {
+private:
+    string name;
+
+public:
+    Animal(const string& n) : name(n) {}
+    
+    // 虚函数 - 将在派生类中被重写
+    virtual void makeSound() const {
+        cout << name << " makes a generic animal sound." << endl;
+    }
+    
+    // 私有虚函数 - 仍然可以在派生类中被重写
+    virtual void privateBehavior() const {
+        cout << name << " has private animal behavior." << endl;
+    }
+    
+    // 非虚函数 - 不能被重写，只能被重定义
+    void eat() const {
+        cout << name << " is eating." << endl;
+    }
+    
+    // 通过公有函数访问私有虚函数
+    void showPrivateBehavior() const {
+        privateBehavior();
+    }
+    
+    virtual ~Animal() = default;  // 虚析构函数
+};
+
+// 派生类 Dog
+class Dog : public Animal {
+public:
+    Dog(const string& n) : Animal(n) {}
+    
+    // 重写基类的虚函数 - 函数原型完全相同
+    void makeSound() const override {  // C++11 引入的 override 关键字
+        cout << "Woof! Woof!" << endl;
+    }
+    
+    // 重写基类的私有虚函数 - 访问修饰符可以不同
+    void privateBehavior() const override {
+        cout << "Dog is wagging its tail happily!" << endl;
+    }
+    
+    // 重定义基类的非虚函数 - 这不是重写
+    void eat() const {
+        cout << "Dog is eating dog food." << endl;
+    }
+};
+
+// 派生类 Cat
+class Cat : public Animal {
+public:
+    Cat(const string& n) : Animal(n) {}
+    
+    // 重写基类的虚函数
+    void makeSound() const override {
+        cout << "Meow! Meow!" << endl;
+    }
+    
+    // 重写基类的私有虚函数 - 使用 public 访问修饰符
+    void privateBehavior() const override {
+        cout << "Cat is purring softly." << endl;
+    }
+    
+    // 注意：这里没有重定义 eat() 函数
+};
+
+// 演示多态性的函数
+void demonstratePolymorphism(Animal* animal) {
+    animal->makeSound();           // 多态调用
+    animal->showPrivateBehavior(); // 间接调用私有虚函数
+    animal->eat();                 // 非虚函数调用 - 静态绑定
+    cout << "-------------------" << endl;
+}
+
+int main() {
+    // 创建对象
+    Animal genericAnimal("Generic Animal");
+    Dog dog("Buddy");
+    Cat cat("Whiskers");
+    
+    cout << "=== 直接调用 ===" << endl;
+    genericAnimal.makeSound();
+    dog.makeSound();
+    cat.makeSound();
+    cout << "-------------------" << endl;
+    
+    cout << "\n=== 多态演示 ===" << endl;
+    // 使用基类指针指向不同对象
+    Animal* animals[] = {&genericAnimal, &dog, &cat};
+    
+    for (Animal* animal : animals) {
+        demonstratePolymorphism(animal);
+    }
+    
+    cout << "\n=== 重定义演示 ===" << endl;
+    // 演示重定义（非虚函数）的行为
+    Animal* animalPtr = &dog;
+    animalPtr->eat();  // 调用基类的 eat() - 静态绑定
+    dog.eat();         // 调用派生类的 eat() - 重定义
+    
+    return 0;
+}
+```
+
+override 是 C++ 面向对象编程的核心特性，它使得程序能够根据对象的实际类型来调用相应的函数，实现了真正的多态行为。
 
 <p>
 <font color=red> 
     重载与重写的区别</br>
-1. 作用域不同：重载是在同一区域，子类无法重载父类，父类同名函数的将被覆盖，重写 是在父类与子类之间。</br>
-2. 重载是静态多态性，在编译期间确定执行的函数或运算符。</br>
-3. 重写是动态多态性，运行期间确定执行的函数，根据对象的实际类型调用相应的函数。</br>
+1. 作用域不同：overload 是在同一作用域，子类无法重载父类，父类同名函数的将被覆盖，override 是在父类与子类之间。</br>
+2. overload 是静态多态性，在编译期间确定执行的函数或运算符。</br>
+3. override 是动态多态性，运行期间确定执行的函数，根据对象的实际类型调用相应的函数。</br>
 </font>
 </p>
 
-
 # 13. const
+
 - C 语言中，`const` 是只读的变量，有自己的存储空间。
 - C++ 中，`const` 可能分配存储空间，也可能不分配存储空间。
   - 当 `const` 作为全局变量，并在其它的文件中到调用时，会分配存储空间。
@@ -894,8 +1522,31 @@ mutable const int test;         // 编译出错
 - 什么情况下不能使用 `引用传递（reference）`？
   - 当一个函数参数的变量为局部变量时，不能使用传引用。因为变量在函数结束时，变量就被销毁了，不存在，若再传递引用，调用者则不能得到值，会出错。
 
-
 # 18. friend(友元)
+
+友元函数是C++中的一种特殊函数，它可以访问类的私有（private）和保护（protected）成员，尽管它不是类的成员函数。友元函数在类中声明，但在类外定义。声明时需要在函数前加上关键字`friend`。
+
+### 主要特性：
+
+1. 友元函数不是类的成员函数，因此它没有`this`指针。
+2. 友元函数可以访问类的所有成员，包括私有和保护成员。
+3. 友元函数不能继承，即基类的友元函数不能访问派生类的私有和保护成员。
+4. 友元关系不具有传递性，即A是B的友元，B是C的友元，并不意味着A是C的友元。
+5. 友元函数可以是普通函数，也可以是其他类的成员函数。
+
+### 主要用法：
+
+1. 在类中声明友元函数，使用`friend`关键字。
+2. 在类外定义友元函数，不需要使用`friend`关键字，也不需要类名限定。
+
+### 使用场景：
+
+1. 当两个类需要共享数据，但又不想通过公有接口暴露所有数据时，可以使用友元函数。
+2. 重载运算符时，特别是当运算符的左操作数不是该类对象时，常常需要将运算符重载为友元函数。
+3. 某些全局函数需要访问类的私有成员时，可以将该全局函数声明为友元。
+
+----
+
 友元函数
 
 - 在一个类中使用 `friend` 关键字时，不是当前类的成员函数可以去访问当前类的私有成员或 protect成员 数据。
@@ -951,322 +1602,6 @@ c2.func(c1);   // 采用友元的方式实现，通过对象参数访问私有�
 - 根据业务，确定函数的返回值类型（是返回引用还是返回值？）以及函数体的实现。  
 
 `=` 赋值操作符重载。`=` 赋值操作只是将成员变量的值相应复制。若对象内包含指针，将造成不良后果：指针的值被丢弃了，但指针指向的内容并未释放。 
-
-
-# 20. smart pointer(智能指针)
-自 C++11 起 C++ 标准库提供了两种类型的智能指针：`shared_ptr` 和 `unique_ptr`。而所有的智能指针都被封装在标准库的 `<memory>` 头文件中，要使用智能指针必须引入 `#include <memory>` 头文件。
-
-
-## 20.1. 为什么要使用智能指针？
-- 动态分配内存时可能会出现一些问题
-  - 忘记释放内存，会造成内存泄漏
-  - 有指针引用内存的情况下，释放了内存，产生引用非法内存的指针。
-- 需要更加安全的来管理动态内存。动态内存分配常用 `new` 和 `delete` 来分配内存。不使用 smart pointer 时，用动态内存分配时，可能会忘记 delete，导致内存泄漏；也可以使用异常捕获，但是会导致代码比较臃肿，不易阅读和维护。因此智能指针可以很好的解决这个问题。
-- 负责自动释放所指向对象的内存资源。智能指针就是一个类（class），当智能对象超出了类的作用域时，类会自动调用析构函数，释放资源。
-
-
-## 20.2. 智能指针原理
-智能指针底层源码采用类模板（class template）来实现的，并不是一个简单的普通指针。可以用下面的模型来简单的表示
-<img src="./figures/smart-pointer.png">
-
-
-## 20.3. 使用智能指针的优点
-在函数结束时自动释放内存空间，不需要手动释放内存空间。
-
-
-## 20.4. auto_ptr
-- auto_ptr 智能指针采用所有权模式。
-- 已被 C++11弃用，潜在内存崩溃问题。
-- 存在非法的申请内存时，在编译期时可能通过，但程序在运行时可能会出错。
-
-
-## 20.5. unique_ptr
-
-
-### 20.5.1. 概述
-`unique_ptr` 实现的是一种独一无二拥有权 (exclusive ownership) 的概念。保证一个对象和其相应资源同一时间内只能被一个智能指针拥有(ownership)。当 unique_ptr 被销毁时，它所指向的对象也就自动销毁。
-
-
-### 20.5.2. 为什么要用 unique_ptr
-它对于避免资源泄露，例如以 `new` 创建对象后因为发生异常而忘记调用 `delete`特别有用。 
-
-
-### 20.5.3. 初始化
-unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数中初始化、移动构造函数中初始化 `std::move()`、采用 `reset()` 成员函数进行初始化。
-
-- **unique_ptr 不允许执行 copy(拷贝) 和 assignment(赋值) 操作**。但是可以用 `std::move()` 语义将对象的拥有权转移。
-  
-  ```cpp
-  // initialize a unique_ptr with a new object
-  std::unique_ptr<ClassA> up1(new ClassA);
-  
-  // copy the unique_ptr
-  std::unique_ptr<ClassA> up2(up1);  // ERROR
-  
-  // assign the unique_ptr, transfer ownership from up1 to up3
-  std::unique_ptr<ClassA> up3(std::move(up1));    // OK
-```
-  
-- 当程序试图将一个 `unique_ptr` 赋值给另一个时，如果源 `unique_ptr` 是个临时右值，编译器允许这么做；如果源 `unique_ptr` 将存在一段时间，编译器将禁止这么做。
-  ```cpp
-  unique_ptr<string> pu1(new string ("hello world")); 
-  unique_ptr<string> pu2; 
-  pu2 = pu1;                                      // 不允许拷贝构造
-  unique_ptr<string> pu3; 
-  pu3 = unique_ptr<string>(new string ("You"));   // 允许
-  ```
-- 想要执行 ` pu2 = pu1;` 的操作，又要保证指针的安全。可以用C++有一个标准库函数 `std::move()`，让你能够将一个 `unique_ptr`赋给另一个。
-  
-  > 尽管转移所有权后 还是有可能出现原有指针调用（调用就崩溃）的情况。但是这个语法能强调你是在 `转移所有权`，让你清晰的知道自己在做什么，从而`不乱调用原有指针`。
-- `unique_ptr` 可以转移对象的拥有权。使`unique_ptr` 不必一定拥有对象，它也可以是 empty；例如：当它被默认构造函数创建时。
-  
-  ```cpp
-  std::unique_ptr<std::string> ip;
-  ip = nullptr;
-  ip.reset();
-  ```
-
-
-### 20.5.4. 成员函数
-- `move()`: 转移对象的拥有权
-- `reset()`: 销毁内部对象并接受新对象的所有权并将该智能指针被置为空，等价于 up = nullptr
-- `release()`: 放弃内部对象的拥有权
-- `swap()`: 交换两个指针指向的对象(即交换所拥有的对象)。
-- `get()`: 获得内部对象的指针
-
-
-### 20.5.5. unique_ptr 删除器
-unique_ptr 也有自己的 删除器。
-
-```cpp
-// 但lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
-using func = void(*)(Stu*);    // void 类型的函数指针
-unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){    
-  delete p;
-});
-
-
-// 有捕获参数时，unique_ptr 模板参数类型为 仿函数的返回类型
-unique_ptr<Stu, std::function<void (Stu*)>> s2(new Stu(200), [&](Stu* p){    
-  delete p;
-});
-
-// 申请的内存为数组类型时，模板参数为数组类型
-unique_ptr<Stu[]> ptr1(new Stu[3]);
-```
-
-独占的智能指针能管理数组类型的地址，能够自动释放。
-
-```cpp
-unique_ptr<Stu[]> ptr1(new Stu[3]);
-```
-
-C++11 中 shared_ptr 不支持下面的语法，自C++11之后的版本，开始支持下面的语法。
-
-```cpp
-shared_ptr<Stu[]> ptr1(new Stu[3]); 
-```
-
-### 注意点
-
-`unique_ptr` 智能指针创建对象时，在 C++11 版本没有提供 `std::make_unique()` 的方式去创建对象，只能用 `new` 关键字创建对象。 
-
-```cpp
-std::unique<Employee> employee(new Employee);
-
-// 不需要显示去调用delete，智能智能自动去调用delete
-```
-
-`std::make_unique` 在 C++14 中引入，可用下面的方式去创建对象。
-
-```cpp
-auto employee = std:make_unique<Employee>();
-```
-
-若编译器版本只支持 C++11，可以自己封装一个 `std::make_unique` 函数去实现。
-
-```cpp
-template<typename T, typename ...Args>
-std::unique_ptr<T> make_unique(Args&& ...args) {
-  return std::unique_ptr<T>(new T( std::forward<Args>(args)... ));
-}
-```
-
-
-## 20.6. shared_ptr
-
-
-### 20.6.1. 概述
-`share_ptr` 实现的是一种共享所有权 (shared ownership)的概念。多个智能指针可以指向同一个对象，该对象和它的相关资源会在最后一个指针的指向 (`reference`) 被销毁时，得到释放。
-
-
-### 20.6.2. 为什么要使用 shared_ptr
-shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr 是独占的)，在使用引用计数的机制上提供了可以共享所有权的智能指针。  
-
-
-### 20.6.3. 成员函数
-- `use_count()` 返回引用计数的个数
-- `unique()` 返回指针对象的拥有者是否唯一(等价于 use_count=1)
-- `swap()` 交换两个 shared_ptr 对象(即交换所拥有的对象)
-- `reset()` 放弃内部对象的所有权或拥有对象的变更, 会引起原有对象的引用计数的减少。简单来说，主要有两个作用：1、让指针指向另一块内存；2、重置指针，即让引用计数变为 0。
-- `get()` 获得被 `shared_ptr` 包裹的内部对象, 即获得原始的指针，类似 `*p` 这样的。
-- `get_deleter()` 返回删除器 (deleter) 的地址。
-
-
-### 20.6.4. 底层原理
-采用 `引用计数` 的方法，记录当前内存资源被多少个智能指针引用，该引用计数的内存在堆上分配。当新增一个指针时，`引用计数` 加1，当释放时 `引用计数` 减一。只有引用计数为0时，智能指针才会自动释放引用的内存资源。
-
-
-### 20.6.5. 初始化
-`shared_ptr` 有四种初始化方式。
-
-- 通过构造函数初始化。
-- 通过移动构造函数或者拷贝构造函数初始化。
-- 通过 `reset()` 函数进行初始化。
-- 通过 `make_shared` 初始化。用 `shared_ptr` 进行初始化时不能将一个普通指针直接赋值给智能指针，因为一个是指针，一个是类。但可以通过 `make_shared` 函数或者通过构造函数传入普通指针，并可以通过 `get()` 函数获得普通指针。 
-  
-  ```cpp
-  shared_ptr<string> p = new string("hello");               // ERROR
-  shared_ptr<string> p(new string("hello"));                // OK
-  shared_ptr<string> p = make_shared<string>("hello"));     // OK
-  ```
-
-
-### 20.6.6. 用法
-直接使用智能指针对象。
-
-```cpp
-shared_ptr<Stu> st5 = make_shared<Stu>(9527);
-st6->setValue(777);
-st6->getValue();
-```
-
-获取智能指针对象的原始指针。
-
-```cpp
-shared_ptr<Stu> st1(new Stu(007));
-Stu* p = st1.get();
-p->setValue(100);
-p->getValue();
-```
-
-
-### 20.6.7. shared_ptr 删除器
-shared_ptr 默认的删除器函数不能自动析构申请的是数组类型对象的内存，因此需要手动实现一个删除器；当申请的内存不是数组类型时，不需要手动实现删除器。
-
-```cpp
-shared_ptr<Stu> st(new Stu(10), [](Stu* p){
-    delete p;
-});
-```
-
-其中对象中的第二个参数是匿名对象，这个匿名对象可以对象的外部实现后再传入进来，也可以在对象中使用 lambda 表达式，例如：`[](Stu* p){}`。
-
-```cpp
-// 定义一个自己的删除器：deleter,可以选择自己不手动实现
-shared_ptr<string> str(new string("Implement my deleter"),
-                       [](string* p) {
-                           cout << "deleter: " << *p << endl;
-                           delete p;
-                       });
-str = nullptr;
-
-// 必须要手动实现删除器
-// shared_ptr<Stu> St7(new Stu[5]);   // 执行 5 次 构造函数，析构函数执行一次，造成内存泄漏
-shared_ptr<Stu> St7(new Stu[5], [](Stu* t){  // 改进版
-    delete []t;
-});
-```
-
-在删除数组内存时，除了自己编写删除器，也可以使用 C++ 提供的 std::default_delete<T>() 函数作为删除器，这个函数内部的删除功能也是通过调用 delete 来实现的，要释放什么类型的内存就将模板类型 T 指定为什么类型即可。具体处理代码如下：
-
-```cpp
-shared_ptr<Stu> st8(new Stu(5), default_delete<Stu>());
-```
-
-自己封装一个 `make_shared_array` 方法来让 `shared_ptr` 支持数组。
-
-```cpp
-template<typename T>
-shared_ptr<T> make_shared_array(size_t len)
-{
-    return shared_ptr<T>(new T[len], default_delete<T[]>());
-}
-
-void test05()
-{
-    shared_ptr<Stu> t = make_shared_array<Stu>(4);
-    cout << t.use_count() << endl;
-}
-```
-
-完整的代码可在仓库中查看：[shared_ptr实现](./code/c11/shared_ptr.cpp)
-
-
-### 20.6.8. 注意点
-- `shared_ptr` 还有可能导致内存泄漏。两个对象相互使用一个 `shared_ptr` 成员变量指向对方，会造成循环引用，从而导致内存泄漏。
-- 不能使用一个原始地址值初始化多个 shared_ptr。
-- 函数不能返回管理了 this 指针的 shared_ptr 对象。
-- shared_ptr 只提供 `operator*` 和 `operator->`，没有提供 `operator[]` 和指针运算。
-
-
-## 20.7. weak_ptr
-
-
-### 20.7.1. 概述
-`weak_ptr` 是弱引用指针，是一种不控制对象生命周期的智能指针，指向一个 `shared_ptr` 管理的对象。`weak_ptr` 只提供一种访问手段，它不共享指针，不能操作资源。
-
-
-### 20.7.2. 为什么要使用 weak_ptr
-- 配合 `shared_ptr` 智能指针来进行工作，解决 `shared_ptr` 智能指针相互引用时死锁的问题。当两个 `shared_ptr`智能指针相互引用时，这两个指针的引用数永远不可能减到 0 ，导致资源永远不会释放。
-- 它是对 对象的一种弱引用，不会增加对象的 `引用计数`。
-- `weak_ptr ` 与 `shared_ptr`之间可以相互转化。`shared_ptr` 可以直接赋值给 `weak_ptr`；而 `weak_ptr `通过调用 `lock()` 函数来获得 `shared_ptr`。
-
-
-### 20.7.3. 初始化
-`weak_ptr` 提供三种初始化的方式：构造函数中初始化、拷贝构造函数初始化、通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象来初始化。
-
-```cpp
-shared_ptr<int> st(new int()); // Create a object
-
-weak_ptr<int> wt1;
-cout << "wt1.use_count = " << wt1.use_count() << endl;
-
-weak_ptr<int> wt2(st);
-cout << "wt2.use_count = " << wt2.use_count() << endl;
-
-weak_ptr<int> wt3(wt1);
-cout << "wt3.use_count = " << wt3.use_count() << endl;
-
-weak_ptr<int> wt4 = st; // 通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象
-cout << "wt4.use_count = " << wt4.use_count() << endl;
-```
-
-
-### 20.7.4. 底层原理
-`weak_ptr` 底层主要依赖于 `counter` 计数器类和 `shared_ptr` 赋值、构造等手段实现的。
-- `counter` 对象的目地就是用来申请一个块内存来存引用基数。
-- `share_ptr` 给出的函数接口为：构造，拷贝构造，赋值，解引用。
-
-
-### 20.7.5. 成员函数
-- `expired()` 检测所管理的对象是否已经释放, 如果已经释放, 返回 true; 否则返回 false。
-- `lock()` 获取所管理的对象的强引用 `shared_ptr`；如果 `expired` 为 true, 返回一个空的 `shared_ptr`; 否则返回一个 `shared_ptr`, 其内部对象指向与 `weak_ptr` 相同。
-- `reset()` 放弃被拥有物的拥有权，重新初始化为一个空的 `weak_ptr`。
-- `use_count()` 返回所监测的 `shared_ptr` 共享对象的引用计数。
-
-代码用例实现在工程库中：[Weak_ptr 智能指针用法](./code/c11/weak_ptr.cpp)
-
-
-### 20.7.6. 注意点
-- `weak_ptr` 没有重载 `*` 和`-> ` 但可以使用 `lock` 获得一个可用的 `shared_ptr` 对象。`weak_ptr` 在使用前需要检查合法性。
-- `weak_ptr` 支持 `拷贝或赋值`, 但不会影响对应的 `shared_ptr` 内部对象的计数。
-
-
-参考
-- 详解C++11智能指针: https://www.cnblogs.com/WindSun/p/11444429.html
-- C++智能指针详解: https://blog.csdn.net/flowing_wind/article/details/81301001
-- C++ 智能指针类: https://blog.csdn.net/heyabo/article/details/8791410
 
 
 # 21. typename
@@ -1439,13 +1774,13 @@ throw 需要处理的表达式;
 ## 23.4. 构造函数中的异常
 处理构造函数中初始值异常的唯一方法：将构造函数写成 `try函数语句块`
 
-
 # 24. Meaningful aphorisms (隽永警句)
+
 - 编程----写出大家风范。
-- 吾道一以惯之。--->出自孔子的《论语》
-- 胸中自有丘壑。--->出自叶圣陶的《苏州园林》
+- 吾道一以惯之。---> 出自孔子的《论语》
+- 胸中自有丘壑。---> 出自叶圣陶的《苏州园林》
 - 勿在浮沙筑高楼。
-- 山高月小，水落石出。--->出自宋代苏轼的《后赤壁赋》
+- 山高月小，水落石出。---> 出自宋代苏轼的《后赤壁赋》
 - 当你发现自己的才华撑不起野心时，就请安静下来学习吧！
 - Don't reinvent the wheel.
 
@@ -1454,36 +1789,38 @@ throw 需要处理的表达式;
 ---
 
 **StyleGuide(规范)**
+
 - 每个独立的类应单独放在一个文件里
 - 变量一般声明为 private，采用间接访问
 
 ---
 
-# 25. References by website(学习参考)
-- [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
-- [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
-- [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
-- [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines): Bjarne Stroustrup 与 Herb Sutter 联合编写的 C++ 教程。Github 地址：https://github.com/isocpp/CppCoreGuidelines
-- [open-std.org](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
-- [isocpp.org](https://isocpp.org/): 标准委员会官方站点，近期的会议、行程、活动、计划等等都会发布在这里。这里也会推荐一些比较好的文章、教程、书籍等等内容，供C++程序员阅读。
-- [C++ FAQ](https://www.stroustrup.com/C++11FAQ.html): 指出了C++编程中可能出现的一些问题，值得推荐阅读，中文网址 [C++11 FAQ](https://www.stroustrup.com/C++11FAQ.html)。
-- [cpprocks.com](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
-- [stroustrup.com](https://www.stroustrup.com/index.html): C++之父的主页，确定不来看看吗？好东西贼多。
-- http://scottmeyers.blogspot.com/：Scott Meyers 个人博客网址，长期更新，从 1999 年开始，每年都有文章更新，一直坚持到现在。
-- [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
-- [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软C++团队的博客，没事的话也可以看看。 
-- [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
-- [reddit cpp版块](https://www.reddit.com/r/cpp): reddit的cpp版块也不错，可以了解最新的C++消息，也可以提问题，也有人在这里写一些文章教程。
-- [herbsutter.com](https://herbsutter.com/): Herb Sutter的博客，Herb Sutter是C++核心人物之一，早期The Free Lunch Is Over这篇文章就出自他手，他还写过Exceptional系列C++图书.
-- [stepanovpapers.com](http://stepanovpapers.com/): 收录了泛型编程的祖师Alex Stepanov的论文网站，STL便是其杰作。可以说没人比他更懂泛型编程，而且这位大牛中的大牛竟然还仿照欧几里得的《几何原本》写了本《编程原本》，试图以公理化方法演绎编程。
-- [modernescpp.com](https://www.modernescpp.com/index.php): 一个开发者个人的网站，网站上的文章质量很高。值得一读。
-- [Preshing on Programming](https://preshing.com/): 自由开发者撰写的博客，内容质量很不错。
-- [arne-mertz.de](https://arne-mertz.de/): 同样是自由开发者撰写的博客，内容质量很不错。
-- [learncpp](https://www.learncpp.com/): 该网站主要是叫你如何使用C++，成为一个master。
-- [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
-- [C++ shell](http://cpp.sh/): 在线的C++编译器，在线编辑代码。
-- [herbsutter](https://herbsutter.com/): ISO C++标准委员会主席，C++/CLI首席架构师 的个人主页。
-- [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) 
-- [官方在线 The GNU C++ Library 文档](https://gcc.gnu.org/onlinedocs/libstdc++/)
-- [open source C++ libraries](https://en.cppreference.com/w/cpp/links/libs)：cppreference 官方列出的一些开源的 C++ 库。
-- https://www.fluentcpp.com：博客作者Jonathan Boccara 是C++软件工程负责人、博客作者和作家，专注于如何使代码具有表现力，顶级C++高手。
+# 25. References by websites
+1. [cppreference](https://en.cppreference.com/w/): 新版C++标准官方参考文档。
+2. [cplusplus](https://www.cplusplus.com/): 旧版的C++学习参考文档
+3. [GCC, the GNU Compiler Collection](http://gcc.gnu.org/): GCC编译器的官网
+4. [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines): Bjarne Stroustrup 与 Herb Sutter 联合编写的 C++ 教程。Github 地址：https://github.com/isocpp/CppCoreGuidelines
+5. [open-std.org](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/): C++标准委员会列出的C++中某项技术如何被采纳到标准中？
+6. [isocpp.org](https://isocpp.org/): 标准委员会官方站点，近期的会议、行程、活动、计划等等都会发布在这里。这里也会推荐一些比较好的文章、教程、书籍等等内容，供C++程序员阅读。
+7. [C++ FAQ](https://www.stroustrup.com/C++11FAQ.html): 指出了C++编程中可能出现的一些问题，值得推荐阅读，中文网址 [C++11 FAQ](https://www.stroustrup.com/C++11FAQ.html)。
+8. [cpprocks.com](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
+9. [stroustrup.com](https://www.stroustrup.com/index.html): C++之父的主页，确定不来看看吗？好东西贼多。
+10. http://scottmeyers.blogspot.com/：Scott Meyers 个人博客网址，长期更新，从 1999 年开始，每年都有文章更新，一直坚持到现在。
+11. [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
+12. [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软C++团队的博客，没事的话也可以看看。 
+13. [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
+14. [reddit cpp版块](https://www.reddit.com/r/cpp): reddit的cpp版块也不错，可以了解最新的C++消息，也可以提问题，也有人在这里写一些文章教程。
+15. [herbsutter.com](https://herbsutter.com/): Herb Sutter的博客，Herb Sutter是C++核心人物之一，早期The Free Lunch Is Over这篇文章就出自他手，他还写过Exceptional系列C++图书.
+16. [stepanovpapers.com](http://stepanovpapers.com/): 收录了泛型编程的祖师Alex Stepanov的论文网站，STL便是其杰作。可以说没人比他更懂泛型编程，而且这位大牛中的大牛竟然还仿照欧几里得的《几何原本》写了本《编程原本》，试图以公理化方法演绎编程。
+17. [modernescpp.com](https://www.modernescpp.com/index.php): 一个开发者个人的网站，网站上的文章质量很高。值得一读。
+18. [Preshing on Programming](https://preshing.com/): 自由开发者撰写的博客，内容质量很不错。
+19. [arne-mertz.de](https://arne-mertz.de/): 同样是自由开发者撰写的博客，内容质量很不错。
+20. [learncpp](https://www.learncpp.com/): 该网站主要是叫你如何使用C++，成为一个master。
+21. [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
+22. [C++ shell](http://cpp.sh/): 在线的C++编译器，在线编辑代码。
+23. [herbsutter](https://herbsutter.com/): ISO C++标准委员会主席，C++/CLI首席架构师 的个人主页。
+24. [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) 
+25. [官方在线 The GNU C++ Library 文档](https://gcc.gnu.org/onlinedocs/libstdc++/)
+26. [open source C++ libraries](https://en.cppreference.com/w/cpp/links/libs)：cppreference 官方列出的一些开源的 C++ 库。
+27. https://www.fluentcpp.com：博客作者Jonathan Boccara 是C++软件工程负责人、博客作者和作家，专注于如何使代码具有表现力，顶级C++高手。
+

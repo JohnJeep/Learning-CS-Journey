@@ -2,12 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-15 18:18:19
+ * @LastEditTime: 2025-11-12 22:22:45
  * @Description: cpp STL learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. Thinking(思考)
+# 1. Thinking
 
 ---------------------------
 
@@ -135,28 +135,81 @@ Array会把元素复制到其内部的 static C-style array中。这些元素总
 
 <img src="./figures/array.png">
 
-### 4.1.2. vector(单端的动态数组)
+### 4.1.2. vector(单端动态数组)
 
-vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector 之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说 vector 是一个能够存放任意类型的动态数组，能够增加和压缩数据。
+vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector 之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象。简单地说 vector 是一个能够存放任意类型的动态数组，能够增加和压缩数据。
 
-动态数组实现机制：
+**动态数组实现机制：**先为数组开辟较小的空间，然后往数组里面添加元素(element)，当数组中元素的数量超过数组的容量时，重新分配一块更大的空间，再把之前的数据复制到新的数组中，再把之前的内存释放。
 
-> 先为数组开辟较小的空间，然后往数组里面添加数据，当数组中元素的数量超过数组的容量时，重新分配一块更大的空间（STL 中 `vector` 每次扩容时，新的容量都是前一次的两倍），再把之前的数据复制到新的数组中，再把之前的内存释放。
+**内存自动扩容（重新分配内存 realloc）步骤：**
 
+1. 分配一个新的内存块，是当前容量的一些倍数。不同的编译器，扩容采用的策略是不一样的，GCC/Clang 常常为 2 倍，MSVC 通常是1.5倍。
+2. 将原内存中的元素拷贝到新内存中（如果元素是 class或  struct，则使用拷贝构造函数或移动构造函数，这取决于元素类型和vector的实现）。
+3. 释放（Deallocate）旧内存空间。
+4. 更新 vector 的内部指针，使其指向新内存，并更新容量和大小。
 
+在STL的具体实现中，扩容通常发生在`push_back`、`insert`、`emplace_back`等可能导致元素数量超过当前容量的操作中。
 
-发生内存的重分配（realloc）操作通常有 4 个步骤
+以GNU libstdc++的实现为例，扩容相关的函数主要是`_M_realloc_insert`，它会在需要扩容时被调用。这个函数会处理内存的重新分配和元素的移动。
 
-1. 分配一个新的内存块，它是容器当前容量的一些倍数，常常为 2 倍。
-2. 将容器旧内存中的所有元素复制到新内存中。
-3. 销毁旧内存中的对象（object）。
-4. 销毁（Deallocate）旧内存。
+```cpp
+// GCC libstdc++ 中的大致实现
+template<typename _Tp, typename _Alloc>
+void vector<_Tp, _Alloc>::_M_realloc_insert(iterator __position, const _Tp& __x) {
+    const size_type __len = _M_check_len(size_type(1), "vector::_M_realloc_insert");
+    pointer __new_start = _M_allocate(__len);          // 分配新内存
+    pointer __new_finish = __new_start;
+    // ... 拷贝原有元素和插入新元素 ...
+    _M_deallocate(_M_impl._M_start, _M_impl._M_end_of_storage - _M_impl._M_start);
+    // 更新指针
+    _M_impl._M_start = __new_start;
+    _M_impl._M_finish = __new_finish;
+    _M_impl._M_end_of_storage = __new_start + __len;
+}
+```
 
-<font color=red> 注意：</font>
+`_M_check_len()` - 计算新容量
 
-- 使用动态数组时，尽量减少改变数组容量大小的次数，可以减少时间性能的消耗。 一般每次扩容为原来的  2 倍。
+```cpp
+size_type
+    _M_check_len(size_type __n, const char* __s) const
+{
+    if (max_size() - size() < __n)
+        __throw_length_error(__N(__s));
+
+    const size_type __len = size() + (std::max)(size(), __n);
+    return (__len < size() || __len > max_size()) ? max_size() : __len;
+}
+```
+
+**为什么 GCC的libstdc++选择2倍扩容？**
+
+1. 分摊时间复杂度：使用2倍扩容（或其他大于1的倍数）可以使push_back操作的分摊时间复杂度为O(1)。因为每次扩容后，需要将原有元素复制到新空间，但每次扩容后可以允许接下来插入多个元素而不立即再次扩容。通过均摊分析，每个插入操作的分摊成本是常数。
+2. 内存分配策略：2倍扩容是一种折中策略。如果扩容因子太小（比如1.5倍），可能会导致频繁重新分配内存；如果太大（比如3倍），可能会浪费较多内存。2倍是一个在时间和空间上相对平衡的选择。
+3. 历史原因：早期的一些动态数组实现采用2倍扩容，这种策略被广泛接受并沿用。
+4. 与1.5倍扩容的对比：有些人认为1.5倍扩容可能更好，因为2倍扩容可能会导致之前分配的内存块无法被复用（因为要求的内存块大小是之前的2倍，而内存分配器可能更倾向于分配大小不同的块）。但是，2倍扩容在每次扩容后插入新元素的次数更多，因此可能减少重新分配的次数。
+
+在GCC的libstdc++中，具体的扩容倍数是由实现定义的。我们可以查看源码来确认。在libstdc++中，vector的扩容是通过_M_check_len函数计算新的容量，其实现大致如下：
+
+```cpp
+size_type _M_check_len(size_type __n, const char* __s) const {
+if (max_size() - size() < __n)
+__throw_length_error(__N(__s));
+```
+
+在push_back操作中，当需要扩容时，会调用_M_check_len(1, "vector::_M_realloc_insert")，其中__n为1（因为每次插入一个元素）。那么新容量的计算为：
+新容量 = size() + max(size(), 1)
+也就是说，如果当前size()为0，则新容量为1；如果当前size()为n，则新容量为n + n = 2n。所以确实是2倍扩容。
+
+但是，注意这里并不是严格的2倍，因为如果当前vector为空，第一次扩容是到1，然后第二次扩容是到2（1+max(1,1)=2），第三次是4（2+max(2,1)=4），以此类推。
+
+因此，GCC的vector是按照2倍扩容的。
+
+<font color=red> 注意</font>
+
+- 使用 vector 时，尽量减少改变 vector capacity 的次数，可以减少时间性能的消耗。
 - 当 vector 扩容时，会调用 `move constructor` 和 `move destructor`，并且移动构造和移动析构函数在执行期间不会抛出异常，是用 `noexcept` 关键字修饰。因为它不能确保异常发生后，移动构造和移动析构函数还能满足标准库的要求，所以是禁止抛异常的。
-- <font color=red> 标准库中成长型的容器（需要发生 memory reallocation）有：`vector` 、`deque`、`string`。</font>
+- <font color=red> 标准库中成长型的容器（需要发生 memory reallocation）有：`vector` 、`deque`、`string`。</font>
 
 内部结构图
 
@@ -164,54 +217,105 @@ vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，�
 
 
 
-#### 4.1.2.1. API接口
+#### 4.1.2.1. API
 
 - `size()`: 返回容器中元素的个数
+
 - `get(r)`: 获取索引为 r 的元素
+
 - `put(r, e)`: 用 e 替换索引为 r 元素的数值
-- `insert(r, e)`: 向索引为 r 的元素处插入数值 e，后面元素依次后移
+
+- `insert(r, e)`: 向索引为 r 的元素处插入数值 e，后面元素依次后移。**如果插入后元素数量超过当前容量，会进行扩容**
+
 - `remove(r)`: 移除索引为 r 的元素，返回全元素中原存放的对象
+
 - `disordered()`: 判断所有元素是否已按升序序排列
+
 - `sort()`: 调整各元素癿位置，使按照升序序排列
+
 - `deduplicate()`: 删除重复元素   ---向量
+
 - `uniquify()`: 删除重复元素 ---有序向量
+
 - `traverse()`: 遍历向量幵统一处理所有元素，处理斱法由函数对象指定
+
 - `empty()`: 判断容器是否为空
+
 - `at(index)`: 返回索引为 index 的元素
+
 - `erase(p)`: 删除指针p指向位置的数据，返回下指向下一个数据位置的指针（迭代器）
+
 - `erase(beg, end)`:删除区间`[beg, end)`的数据
+
 - `pop_back()`: 删除最后一个元素
-- `push_back()`: 在容器末尾插入一个元素
+
+- `push_back()`: 接受一个已构造的对象，并将其拷贝（或移动）到vector的末尾。，**当size >= capacity时会触发自动扩容**。push_back 内部就是调用的 emplace_back() + std::move()
+
+  ```cpp
+  void
+      push_back(value_type&& __x)
+  { emplace_back(std::move(__x)); }
+  ```
+
+- `emplace_back`：接受参数列表，在vector的末尾直接构造一个对象，避免不必要的拷贝或移动。
+
+  ```cpp
+  std::vector<std::unique_ptr<Resource>> resources;
+  // 潜在问题：如果emplace_back中途抛出异常，内存可能泄漏
+  resources.emplace_back(new Resource);  // new可能成功，但emplace_back可能失败
+  
+  // 更安全的方式：使用make_unique + push_back
+  resources.push_back(std::make_unique<Resource>());  // 异常安全
+  ```
+
+  > 一般使用 push_back 时，都会先构造一个对象，然后再进行拷贝或移动，操作的是已存在的对象。而 emplace_back 不需要先构建一个对象，直接在 vecto r内存中构造对象，避免了临时对象的拷贝。但要注意 emplace_back 使用时，异常安全和特殊容器（如`vector<bool>`），结合具体的场景使用。
+
 - `back()`: 获取尾部元素
+
 - `front()`: 获取首部元素
+
 - `begin(), end()`: 返回容器首尾元素的迭代器
+
 - `clear()`: 移除容器中所有的元素
+
 - `swap()`: 交换两个容器的内容，交换两个 vector 的内容后，两者的容量也交换了，**这是一个间接缩短 vector的小窍门。**
+
 - `shrink_to_fit()`: 缩短 vector 的大小到合适的空间，为实现特定的优化保留了回旋的余地。
-- `resize(size_t n)`: 强制容器将其容纳的元素数更改为 n。
-  - 若 n 小于当前容器的 size，原容器里超过 n 后面的值被销毁。
-  - 若 n 大于当前容器的 size，容器里超过 size 后面的内容，编译器将默认构造函数中的数据写入到容器里面。
-  - 若 n 大于当前容器的 capacity ，向容器中增加元素之前会发生 `reallocation`。
-- `reserve(size_t n)`: 强制将容器的容量重新设置为 n。
-  - 若 n 大于当前容器的 capacity，发生 `reallocation`。
-  - 若 n 小于当前容器的 capacity，`vector` 忽略调用，什么也不会做；string 会将其容量减少到 `size ()`和 n 的最大值，但 string 的大小（size）肯定保持不变。
+
+- `resize(size_t n)`: 强制容器将容器的 size 更改为 n。
+
+  - 若 n > capacity，向容器中增加元素之前会发生 `realloc`。capacity 值增加，size 值增加。
+  - 若 n <= size，`vector` 不会改变 capacity 的值，只会改变 vector 的大小 size，超过 n 后面的值被销毁。
+  - 若  size < n <= capacity，编译器将默认构造函数中的数据写入到容器里面。
+
+  > 频繁使用 resize 导致性能变差，它不会是 vector 的 capacity 自动缩小，想要减少内存，显式调用 `shrink_to_fit()` 或者使用 `swap()` 来实现。
+
+- `reserve(size_t n)`: 显式地将容器的 capacity 重新设置为 n。只影响容量(capacity)，不影响大小(size)
+
+  预选分配一块内存空间，减少 vector 频繁进行自动扩容的开销。
 
 #### 4.1.2.2. 优点
 
-- 不指定一块内存大小的数组的连续存储，即可以像数组一样操作，但可以对此数组进行动态操作，运行阶段执行。
-- 随机访问快，支持随机迭代访问器。即支持 `[]` 操作符和 `at()`操作。
-- 节省空间。
+1. 不指定一块内存大小的数组的连续存储，即可以像数组一样操作，但可以对此数组进行动态操作，运行阶段执行。
+2. 随机访问极快，支持随机迭代访问器，即支持 `[]` 操作符和 `at()`操作。
+3. 节省空间。
 
 #### 4.1.2.3. 缺点
 
-- 向容器中插入元素时，内部的元素必须能够执行 `拷贝（必须提供拷贝构造）` 操作。
-- 在内部进行插入删除操作效率低。
-- 只能在vector的最后进行push和pop，不能在vector的头进行push和pop。
-- 当动态添加的数据超过vector默认分配的大小时要进行整体的重新分配、拷贝与释放。
+1. 向容器中插入元素时，内部的元素必须能够执行 `拷贝（必须提供 copy constructor）` 操作。
+2. vector 的中间、头部进行  `insert/delete` 操作效率很慢。
+3. 只能在vector的尾部进行push和pop，不能在vector的头进行push和pop。
+4. 当动态添加的数据超过vector默认分配的大小时，要进行 vector 扩容。
 
 #### 4.1.2.4. 源码分析
 
 GNU 2.9版源码UML图
+
+vector 内部有三个指针管理：
+
+- start：指向第一个元素位置的指针。
+- finish：指向最后一个元素位置的指针。
+- end_of_storage：指向分配内存末尾的指针。
 
 <img src="./figures/vector-2.9.png">
 
@@ -233,7 +337,9 @@ GNU 4.9版源码UML图
 
 ### 4.1.3. deque(双端数组)
 
-deque 是在功能上合并了 vector 和 list。与 `vector` 容器类似，但是可以在 `Deque` 的两端进行操作。
+`std::deque` 的核心设计思想是**“分块的连续线性空间”**。它并不是像 `std::vector` 那样在逻辑和物理上都是完全连续的，也不是像 `std::list` 那样由离散的节点通过指针连接。它试图在 `vector`（高效的随机访问）和 `list`（高效的两端插入/删除）之间找到一个平衡点。
+
+
 
 deque 的内部结构图如下
 
@@ -241,25 +347,81 @@ deque 的内部结构图如下
 
 <img src="./figures/container-deques-internal-structure.png">
 
+**底层数据结构解释**
+
+一个典型的 `std::deque` 实现包含两个主要部分：
+
+1. Map
+   - 这是一个指针数组，通常本身是一个 `vector`。
+   - 数组中的每个指针（称为“节点”）都指向一块固定大小的、连续的内存块。这块内存块被称为“缓冲区”，是 `deque` 实际存储数据的地方。
+   - `Map` 的大小是可以动态增长的，以便在 `deque` 两端扩展时，可以容纳更多指向新缓冲区的指针。
+2. Buffer
+   - 这是实际存储元素的连续内存块。
+   - 缓冲区的大小通常是固定的，具体大小由实现定义（例如，在早期版本的 GNU libstdc++ 中，对于 `int` 类型的 `deque`，一个缓冲区可能被设计为可以存放 512 字节 / sizeof(int) 个元素）。
+
+此外，`deque` 对象本身还会维护几个关键的迭代器或指针，用于跟踪当前的使用状态：
+
+- `_M_start`（或 `begin`）：一个迭代器，指向第一个有效元素。
+- `_M_finish`（或 `end`）：一个迭代器，指向最后一个有效元素的下一个位置。
+
+而每个迭代器本身通常包含多个成员：
+
+- `cur`：指向当前缓冲区中的当前元素。
+- `first`：指向当前缓冲区的起始位置。
+- `last`：指向当前缓冲区的结束位置（最后一个元素的下一个位置）。
+- `node`：指向中控器 `Map` 中，管理当前缓冲区的那个指针。
+
 <img src="./figures/deque.png">
+
+ 若**`Map` 满了怎么办？**
+
+> 当在两端扩展时，如果 `Map` 没有空间来存放新的缓冲区指针，`deque` 会重新分配一个更大的 `Map`（通常是 `vector` 的扩容机制，比如 2 倍），并将原有的指针数据拷贝/移动到新的 `Map` 中央。这个过程比 `vector` 的重新分配要快，因为 `Map` 里只存指针，而 `vector` 需要拷贝所有实际对象。
 
 #### 4.1.3.1. API接口
 
-- `push_back()`: 在容器末尾插入一个元素
-- `push_front()` 容器头部插入一个元素
-- `pop_front()`: 容器头部删除一个元素
-- `pop_back()`: 删除最后一个元素
+1. `push_back(value)`: 在容器末尾插入一个元素。
+   1. 检查 `_M_finish` 迭代器所在的当前缓冲区是否还有剩余空间。
+   2. 如果有，直接在剩余空间构造元素，并移动 `_M_finish.cur`。
+   3. 如果没有，则**申请一块新的缓冲区**，将中控器 `Map` 中下一个可用的指针指向它，然后在新缓冲区的起始位置构造元素。同时可能需要调整 `_M_finish` 迭代器指向新的缓冲区。
+2. `push_front(value)` 容器头部插入一个元素。
+   1. 检查 `_M_start` 迭代器所在的当前缓冲区的前面是否还有剩余空间。
+   2. 如果有，在前面的空间构造元素，并移动 `_M_start.cur`。
+   3. 如果没有，则**申请一块新的缓冲区**，将中控器 `Map` 中前一个可用的指针指向它，然后在新缓冲区的末尾（`last - 1`）位置构造元素。同时调整 `_M_start` 迭代器指向新的缓冲区。
+3. `pop_front()`: 容器头部删除一个元素
+4. `pop_back()`: 删除最后一个元素
 
 #### 4.1.3.2. 优点
 
-- 支持随机访问，即支持 `[]`操作符和 `at()`。
-- 在内部方便的进行插入和删除操作。
-- 可在两端进行 push、pop。
+1. 随机访问较快，但有开销。可用`[]`操作符和 `at()`。
+
+   这是 `deque` 设计的精妙之处。虽然它在物理上不连续，但可以实现高效的常数时间随机访问。
+
+   **步骤：**
+
+   1. 假设要访问第 `i` 个元素。
+   2. 通过 `_M_start` 迭代器，可以知道第一个元素在它的当前缓冲区中的位置。
+   3. 计算 `i` 这个位置落在哪个缓冲区：`buffer_index = (i + start.buffer_offset) / buffer_size`
+   4. 计算在该缓冲区内的偏移：`offset = (i + start.buffer_offset) % buffer_size`
+   5. 通过中控器 `Map[buffer_index]` 找到对应的缓冲区，然后通过偏移 `offset` 直接访问该元素。
+
+   因为除法和取模运算，以及数组索引都是常数时间操作，所以随机访问是 **O(1)** 的，尽管常数因子比 `vector` 要大。
+
+2. 两端添加/删除元素 (`push_back`, `push_front`, `pop_back`, `pop_front`) 非常快。
 
 #### 4.1.3.3. 缺点
 
-- 每次扩容的大小为一个 buffer。
-- 占用内存多，采用多个内存区块来存储元素。
+1. 遍历 deque 比 vector 慢。
+2. 从中间 `insert/erase` 较慢。
+3. 每次扩容的大小为一个 buffer。
+4. 占用内存多，采用多个内存区块来存储元素。
+
+#### 4.1.3.4. 何时使用 `std::deque`？
+
+1. **需要频繁在序列两端进行插入和删除操作**：这是 `deque` 的典型使用场景，比如实现一个任务队列。
+2. **需要随机访问，但又无法承受 `vector` 在头部插入时的高成本**。
+3. **你不确定该用哪个时**：如果你需要一个默认的序列容器，`vector` 通常是首选。但如果你担心在头部插入元素会导致性能问题，`deque` 是一个很好的备选方案，因为它提供了几乎同样好的随机访问性能和优秀的两端操作性能。
+
+简单来说，`std::deque` 通过一种“用空间换时间”和“用复杂性换性能”的策略，巧妙地结合了数组和链表的优点，成为了一个非常实用的通用容器。
 
 ### 4.1.4. list(双向链表)
 
@@ -319,13 +481,13 @@ return __tmp;                           // 返回原值，执行的是拷贝构�
 
 **```_M_node = _M_node->_M_next;``` 这一行为++操作的具体实现过程：**
 
-> 移动结点。过程：将当前结点next域的值取出来赋给_M_node，而_M_node本身指向当前的结点，_M_node->_M_next 指到下一个结点的prev域。此时_M_node 与_M_node->_M_next指向的内容是一样的，所以把_M_node移动到 _M_node->_M_next 指向的位置，这一过程就是结点的++操作。
+移动结点。过程：将当前结点next域的值取出来赋给_M_node，而_M_node本身指向当前的结点，_M_node->_M_next 指到下一个结点的prev域。此时_M_node 与_M_node->_M_next指向的内容是一样的，所以把_M_node移动到 _M_node->_M_next 指向的位置，这一过程就是结点的++操作。
 
 <img src="./figures/node++.png">
 
 **思考：为什么前置++与后置++两者的返回值是不一样的？**
 
-> 为了与整数的 ++ 操作保持一致，操作运算符重载持有的操作应该向整数的操作看起，拥有类似的功，保证不能进行两次的 ++ 运算操作。
+为了与整数的 ++ 操作保持一致，操作运算符重载持有的操作应该向整数的操作看起，拥有类似的功，保证不能进行两次的 ++ 运算操作。
 
 <img src="./figures/self.png">
 
