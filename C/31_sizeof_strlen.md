@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-13 21:14:28
- * @LastEditTime: 2025-11-12 22:42:26
+ * @LastEditTime: 2025-11-13 20:04:17
  * @LastEditors: JohnJeep
  * @Description: sizeof与strlen区别
 -->
@@ -77,6 +77,8 @@ int main() {
     int arr[] = {1, 2, 3, 4, 5};
     std::cout << "sizeof(arr): " << sizeof(arr) << std::endl; // 20（假设int为4字节，5个元素）
     // strlen(arr); // 错误！strlen只能用于以空字符结尾的字符串，这里使用会导致未定义行为。
+    
+    std::cout << sizeof(arr) / sizeof(int) << std::endl; // 取数组的长度
 
     return 0;
 }
