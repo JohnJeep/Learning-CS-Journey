@@ -1,4 +1,4 @@
-# Terms
+# Protocol Terms
 
 - pattern
 - ethernet
@@ -46,3 +46,5 @@ Network Topology
     - session
 6. presentation
 7. Application
+
+<img src="../Network/figures/osi-model.png">
