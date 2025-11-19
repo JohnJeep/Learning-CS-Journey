@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-05-15 12:26:31
- * @LastEditTime: 2021-05-15 18:21:56
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-11-19 14:01:37
+ * @LastEditors: JohnJeep
  * @Description: 深入理解 lambda
  */
 #include <iostream>
@@ -11,7 +11,7 @@
 using namespace std;
 
 
-void test01_lambda_captures()
+void lambda_captures()
 {
     int x = 100;
     int y = 200;
@@ -27,7 +27,7 @@ void test01_lambda_captures()
     cout << "final y: " << y << endl;
 }
 
-void test02_lambda_capture_mutable()
+void lambda_capture_mutable()
 {
     cout << "Test lambda mutable" << endl;
     int id = 10;
@@ -44,8 +44,8 @@ void test02_lambda_capture_mutable()
 
 int main(int argc, char *argv[])
 {
-    test01_lambda_captures(); 
-    test02_lambda_capture_mutable();
+    lambda_captures(); 
+    lambda_capture_mutable();
 
     return 0;
 }
