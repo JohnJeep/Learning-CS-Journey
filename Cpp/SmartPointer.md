@@ -83,8 +83,7 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
 - `swap()`: 交换两个指针指向的对象(即交换所拥有的对象)。
 - `get()`: 获得内部对象的指针
 
-
-### 1.2.4. unique_ptr 删除器
+### 1.2.4. deleter
 
 unique_ptr 也有自己的 删除器。
 
@@ -146,8 +145,7 @@ std::unique_ptr<T> make_unique(Args&& ...args) {
 
 `share_ptr` 实现的是一种共享所有权 (shared ownership)的概念。多个智能指针可以指向同一个对象，该对象和它的相关资源会在最后一个指针的指向 (`reference`) 被销毁时，得到释放。
 
-
-### 1.3.1. 为什么要使用 shared_ptr
+### 1.3.1. 为什么要用 shared_ptr
 
 shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr 是独占的)，在使用引用计数的机制上提供了可以共享所有权的智能指针。  
 
@@ -164,27 +162,29 @@ shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr �
 
 ### 1.3.3. 底层原理
 
-采用 `引用计数` 的方法，记录当前内存资源被多少个智能指针引用，该引用计数的内存在堆上分配。当新增一个指针时，`引用计数` 加1，当释放时 `引用计数` 减一。只有引用计数为0时，智能指针才会自动释放引用的内存资源。
+采用 `引用计数` 的方法，记录当前内存资源被多少个智能指针引用，引用计数的内存在堆上分配。
 
+当新增一个指针时，`引用计数` 加1，当释放时 `引用计数` 减一。只有引用计数为0时，智能指针才会自动释放引用的内存资源。
+
+**调用 constructor，copy constructor，copy asignment 函数都会导致引用计数增加。**
 
 ### 1.3.4. 初始化
 
 `shared_ptr` 有四种初始化方式。
 
-- 通过构造函数初始化。
+1. 通过构造函数（constructor）初始化。
 
-- 通过移动构造函数或者拷贝构造函数初始化。
+2. 通过移动构造函数（move constructor）或者拷贝构造函数（copy constructor）初始化。
 
-- 通过 `reset()` 函数进行初始化。
+3. 通过 `reset()` 函数进行初始化。
 
-- 通过 `make_shared` 初始化。用 `shared_ptr` 进行初始化时不能将一个普通指针直接赋值给智能指针，因为一个是指针，一个是类。但可以通过 `make_shared` 函数或者通过构造函数传入普通指针，并可以通过 `get()` 函数获得普通指针。 
+4. 通过 `make_shared` 初始化。用 `shared_ptr` 进行初始化时，不能将一个普通指针直接赋值给智能指针，因为一个是指针，一个是类。但可以通过 `make_shared` 函数或者通过构造函数传入普通指针，并可以通过 `get()` 函数获得普通指针。 
 
   ```cpp
   shared_ptr<string> p = new string("hello");               // ERROR
   shared_ptr<string> p(new string("hello"));                // OK
   shared_ptr<string> p = make_shared<string>("hello"));     // OK
   ```
-
 
 ### 1.3.5. 用法
 
@@ -196,7 +196,7 @@ st6->setValue(777);
 st6->getValue();
 ```
 
-获取智能指针对象的原始指针。
+获取智能指针对象的原始指针，通过 `get()` 方法。
 
 ```cpp
 shared_ptr<Stu> st1(new Stu(007));
@@ -205,10 +205,9 @@ p->setValue(100);
 p->getValue();
 ```
 
+### 1.3.6. deleter
 
-### 1.3.6. shared_ptr 删除器
-
-shared_ptr 默认的删除器函数不能自动析构申请的是数组类型对象的内存，因此需要手动实现一个删除器；当申请的内存不是数组类型时，不需要手动实现删除器。
+shared_ptr 默认的删除器函数(deleter)不能自动析构申请的是数组类型对象的内存，因此需要手动实现一个删除器.当申请的内存不是数组类型时，不需要手动实现删除器。
 
 ```cpp
 shared_ptr<Stu> st(new Stu(10), [](Stu* p){
@@ -261,26 +260,38 @@ void test05()
 
 ### 1.3.7. 注意点
 
-- `shared_ptr` 还有可能导致内存泄漏。两个对象相互使用一个 `shared_ptr` 成员变量指向对方，会造成循环引用，从而导致内存泄漏。
-- 不能使用一个原始地址值初始化多个 shared_ptr。
-- 函数不能返回管理了 this 指针的 shared_ptr 对象。
-- shared_ptr 只提供 `operator*` 和 `operator->`，没有提供 `operator[]` 和指针运算。
+1. `shared_ptr` 可能导致内存泄漏。两个对象相互使用一个 `shared_ptr` 成员变量指向对方，会造成循环引用，从而导致内存泄漏。
+2. 不能使用一个原始地址值初始化多个 shared_ptr。
+3. 函数不能返回管理了 this 指针的 shared_ptr 对象。
+4. shared_ptr 只提供 `operator*` 和 `operator->`，没有提供 `operator[]` 和指针运算。
 
 ## 1.4. weak_ptr
 
 `weak_ptr` 是弱引用指针，是一种不控制对象生命周期的智能指针，指向一个 `shared_ptr` 管理的对象。`weak_ptr` 只提供一种访问手段，它不共享指针，不能操作资源。
 
-
-### 1.4.1. 为什么要使用 weak_ptr
+### 1.4.1. 为什么要用 weak_ptr
 
 1. 配合 `shared_ptr` 智能指针来进行工作，解决 `shared_ptr` 智能指针相互引用时死锁的问题。当两个 `shared_ptr`智能指针相互引用时，这两个指针的引用数永远不可能减到 0 ，导致资源永远不会释放。
-2. 它是对 对象的一种弱引用，不会增加对象的 `引用计数`。
+
+2. 它是对 对象的一种弱引用，不会增加对象的 **引用计数**。
+
 3. `weak_ptr ` 与 `shared_ptr`之间可以相互转化。`shared_ptr` 可以直接赋值给 `weak_ptr`；而 `weak_ptr `通过调用 `lock()` 函数来获得 `shared_ptr`。
 
+   ```cpp
+   std::shared_ptr<int> p1(new int(10));
+   std::weak_ptr<int> wp = p1; // shared_ptr直接赋值给weak_ptr
+   
+   // weak_ptr通过调用lock()获得 shared_ptr
+   std::shared_ptr<int> sp = wp.lock(); 
+   ```
 
 ### 1.4.2. 初始化
 
-`weak_ptr` 提供三种初始化的方式：构造函数中初始化、拷贝构造函数初始化、通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象来初始化。
+`weak_ptr` 提供三种初始化的方式
+
+1. 构造函数中初始化。
+2. 拷贝构造函数初始化。
+3. 通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象来初始化。
 
 ```cpp
 shared_ptr<int> st(new int()); // Create a object
@@ -294,7 +305,7 @@ cout << "wt2.use_count = " << wt2.use_count() << endl;
 weak_ptr<int> wt3(wt1);
 cout << "wt3.use_count = " << wt3.use_count() << endl;
 
-weak_ptr<int> wt4 = st; // 通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象
+weak_ptr<int> wt4 = st; // 通过隐式类型转换，shared_ptr对象直接赋值给 weak_ptr 对象
 cout << "wt4.use_count = " << wt4.use_count() << endl;
 ```
 
@@ -321,10 +332,3 @@ cout << "wt4.use_count = " << wt4.use_count() << endl;
 
 - `weak_ptr` 没有重载 `*` 和`-> ` 但可以使用 `lock` 获得一个可用的 `shared_ptr` 对象。`weak_ptr` 在使用前需要检查合法性。
 - `weak_ptr` 支持 `拷贝或赋值`, 但不会影响对应的 `shared_ptr` 内部对象的计数。
-
-
-参考
-
-- 详解C++11智能指针: https://www.cnblogs.com/WindSun/p/11444429.html
-- C++智能指针详解: https://blog.csdn.net/flowing_wind/article/details/81301001
-- C++ 智能指针类: https://blog.csdn.net/heyabo/article/details/8791410

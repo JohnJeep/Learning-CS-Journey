@@ -2015,21 +2015,22 @@ throw 需要处理的表达式;
 8. [cpprocks.com](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
 9. [stroustrup.com](https://www.stroustrup.com/index.html): C++之父的主页，确定不来看看吗？好东西贼多。
 10. http://scottmeyers.blogspot.com/：Scott Meyers 个人博客网址，长期更新，从 1999 年开始，每年都有文章更新，一直坚持到现在。
-11. [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
-12. [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软C++团队的博客，没事的话也可以看看。 
-13. [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
-14. [reddit cpp版块](https://www.reddit.com/r/cpp): reddit的cpp版块也不错，可以了解最新的C++消息，也可以提问题，也有人在这里写一些文章教程。
-15. [herbsutter.com](https://herbsutter.com/): Herb Sutter的博客，Herb Sutter是C++核心人物之一，早期The Free Lunch Is Over这篇文章就出自他手，他还写过Exceptional系列C++图书.
-16. [stepanovpapers.com](http://stepanovpapers.com/): 收录了泛型编程的祖师Alex Stepanov的论文网站，STL便是其杰作。可以说没人比他更懂泛型编程，而且这位大牛中的大牛竟然还仿照欧几里得的《几何原本》写了本《编程原本》，试图以公理化方法演绎编程。
-17. [modernescpp.com](https://www.modernescpp.com/index.php): 一个开发者个人的网站，网站上的文章质量很高。值得一读。
-18. [Preshing on Programming](https://preshing.com/): 自由开发者撰写的博客，内容质量很不错。
-19. [arne-mertz.de](https://arne-mertz.de/): 同样是自由开发者撰写的博客，内容质量很不错。
-20. [learncpp](https://www.learncpp.com/): 该网站主要是叫你如何使用C++，成为一个master。
-21. [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
-22. [C++ shell](http://cpp.sh/): 在线的C++编译器，在线编辑代码。
-23. [herbsutter](https://herbsutter.com/): ISO C++标准委员会主席，C++/CLI首席架构师 的个人主页。
-24. [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) 
-25. [官方在线 The GNU C++ Library 文档](https://gcc.gnu.org/onlinedocs/libstdc++/)
-26. [open source C++ libraries](https://en.cppreference.com/w/cpp/links/libs)：cppreference 官方列出的一些开源的 C++ 库。
-27. https://www.fluentcpp.com：博客作者Jonathan Boccara 是C++软件工程负责人、博客作者和作家，专注于如何使代码具有表现力，顶级C++高手。
+11. [**C++ Weekly With Jason Turner**](https://www.youtube.com/@cppweekly) 
+12. [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的C++参考技术文档，用于Visual Studio 中。
+13. [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软C++团队的博客，没事的话也可以看看。 
+14. [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
+15. [reddit cpp版块](https://www.reddit.com/r/cpp): reddit的cpp版块也不错，可以了解最新的C++消息，也可以提问题，也有人在这里写一些文章教程。
+16. [herbsutter.com](https://herbsutter.com/): Herb Sutter的博客，Herb Sutter是C++核心人物之一，早期The Free Lunch Is Over这篇文章就出自他手，他还写过Exceptional系列C++图书.
+17. [stepanovpapers.com](http://stepanovpapers.com/): 收录了泛型编程的祖师Alex Stepanov的论文网站，STL便是其杰作。可以说没人比他更懂泛型编程，而且这位大牛中的大牛竟然还仿照欧几里得的《几何原本》写了本《编程原本》，试图以公理化方法演绎编程。
+18. [modernescpp.com](https://www.modernescpp.com/index.php): 一个开发者个人的网站，网站上的文章质量很高。值得一读。
+19. [Preshing on Programming](https://preshing.com/): 自由开发者撰写的博客，内容质量很不错。
+20. [arne-mertz.de](https://arne-mertz.de/): 同样是自由开发者撰写的博客，内容质量很不错。
+21. [learncpp](https://www.learncpp.com/): 该网站主要是叫你如何使用C++，成为一个master。
+22. [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
+23. [C++ shell](http://cpp.sh/): 在线的C++编译器，在线编辑代码。
+24. [herbsutter](https://herbsutter.com/): ISO C++标准委员会主席，C++/CLI首席架构师 的个人主页。
+25. [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) 
+26. [官方在线 The GNU C++ Library 文档](https://gcc.gnu.org/onlinedocs/libstdc++/)
+27. [open source C++ libraries](https://en.cppreference.com/w/cpp/links/libs)：cppreference 官方列出的一些开源的 C++ 库。
+28. https://www.fluentcpp.com：博客作者Jonathan Boccara 是C++软件工程负责人、博客作者和作家，专注于如何使代码具有表现力，顶级C++高手。
 
