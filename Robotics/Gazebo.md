@@ -70,8 +70,6 @@ sudo apt remove gz-harmonic && sudo apt autoremove
 
 模型可以是一个机器人、一张桌子、一个盒子等。每个模型由一个或多个链接（link）组成，链接之间通过关节（joint）连接。每个链接可以具有多个碰撞（collision）和视觉（visual）属性，以及惯性（inertial）属性。
 
-
-
 - 单个模型（model）通常保存为.sdf文件，其中包含一个`<model>`标签（但也可以包含`<world>`，不过通常单个模型文件只包含`<model>`）。
 
 - 场景（world）文件通常保存为`.world`，其中包含一个`<world>`标签，里面可以有多个模型、光照等。

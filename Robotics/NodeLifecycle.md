@@ -99,7 +99,7 @@ ROS2 的 Node Lifecycle 是面向生产级机器人系统的一项重大改进�
 - [offical lifecycle API](https://docs.ros.org/en/jazzy/p/lifecycle/)
 - [managed-life cycle nodes in ROS 2](https://design.ros2.org/articles/node_lifecycle.html)
 
-问题：
+问题
 
 1. 节点管理问题：节点启动顺序或状态切换不稳定。
 

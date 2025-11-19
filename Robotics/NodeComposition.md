@@ -40,17 +40,16 @@
     *   **隔离性差**：如果一个节点出现严重错误（如段错误），会导致整个进程崩溃，所有组合在内的节点都会停止工作。
     *   **灵活性降低**：节点的启动和关闭是绑定在一起的。
 
----
-
 ### Node Composition 的三种实现方式
 
 ROS2 提供了三种主要的方法来实现节点组合：
 
 1.  **手动组合（Manual Composition）**
+    
     *   **描述**：程序员编写一个 C++ 主函数，在函数中显式地创建所有节点并执行它们。
     *   **适用场景**：适用于节点数量和结构固定的简单应用。
     *   **特点**：最直接，但灵活性最差。
-
+    
     ```cpp
     #include <rclcpp/rclcpp.hpp>
     #include <node1.hpp>
@@ -67,7 +66,7 @@ ROS2 提供了三种主要的方法来实现节点组合：
       return 0;
     }
     ```
-
+    
 2.  **使用 ComposableNode 容器**
     *   **描述**：这是最常用和推荐的方式。你将每个节点定义为一个 **`ComposableNode`** 类。然后，使用一个 **组件容器（Component Container）** 来加载这些节点。
     *   **实现**：在你的节点类中，使用 `rclcpp_components` 库的宏 `RCLCPP_COMPONENTS_REGISTER_NODE` 进行注册。
