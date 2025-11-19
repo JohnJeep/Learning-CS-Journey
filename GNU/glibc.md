@@ -70,7 +70,7 @@ glibc 是 GNU 发布的 libc 库，也即 C 运行库，又称 GNU C 库。glibc
 
 使用一张图表示
 
-<img width="60%" hight="60%" src="../Linux/pictures/Linux_kernel_System_Call_Interface_and_glibc.svg">
+<img width="60%" hight="60%" src="../Linux/figures/Linux_kernel_System_Call_Interface_and_glibc.svg">
 
 
 
