@@ -1,3 +1,11 @@
+/*
+ * @Author: JohnJeep
+ * @Date: 2025-11-12 22:55:03
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-19 10:21:24
+ * @Description: shared_ptr 引用计数的几种情况
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ */
 #include <iostream>
 #include <memory>
 
@@ -22,6 +30,13 @@ int main() {
 
     // 情况4：按值返回shared_ptr，在返回时引用计数增加（返回副本）
     // 但注意，如果使用移动语义（std::move）则不会增加，而是转移所有权。
+
+    // 情况5：weak_ptr 转换为 shared_ptr
+    std::weak_ptr<int> wp = p1;
+    std::shared_ptr<int> p4;
+    std::cout << "p4 引用计数: " << p4.use_count() << std::endl; // 输出 0
+    p4 = wp.lock();
+    std::cout << "p4 引用计数: " << p4.use_count() << std::endl; // 输出 4
 
     return 0;
 }

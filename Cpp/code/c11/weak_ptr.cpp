@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-13 11:12:26
- * @LastEditTime: 2021-05-27 23:56:09
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-11-19 09:55:11
+ * @LastEditors: JohnJeep
  * @Description: weak_ptr 例子
  */
 #include <cstdio>
@@ -18,13 +18,13 @@ class SmartPointerA
 private:
     /* data */
 public:
-    SmartPointerA(/* args */);
+    SmartPointerA();
     ~SmartPointerA();
     // shared_ptr<SmartPointerB> sp_b;  // 这样定义导致两个类中的指针对象相互引用，内存没有释放完
     weak_ptr<SmartPointerB> sp_b; // 解决两个类中的指针对象相互引用，内存没有释放完的问题
 };
 
-SmartPointerA::SmartPointerA(/* args */)
+SmartPointerA::SmartPointerA()
 {
     cout << "A excute construct function." << endl;
 }
@@ -39,7 +39,7 @@ class SmartPointerB
 private:
     /* data */
 public:
-    SmartPointerB(/* args */);
+    SmartPointerB();
     ~SmartPointerB();
     shared_ptr<SmartPointerA> sp_a;
     void pFun()
@@ -48,7 +48,7 @@ public:
     }
 };
 
-SmartPointerB::SmartPointerB(/* args */)
+SmartPointerB::SmartPointerB()
 {
     cout << "B excute construct function." << endl;
 }
@@ -63,7 +63,7 @@ class Book
 private:
     /* data */
 public:
-    Book(/* args */) 
+    Book() 
     {
         cout << "Book constructor..." << endl;
     }
@@ -73,7 +73,7 @@ public:
         cout << "Book deconstructor..." << endl;
     }
 
-    // 同一块内存会被析构两次，会产生野指针
+    // 同一块内存会被析构两次，会产生悬挂指针
     shared_ptr<Book> getSharedPt()
     {
         return shared_ptr<Book>(this);  
@@ -88,7 +88,7 @@ class Book2 : public enable_shared_from_this<Book2>
 private:
     /* data */
 public:
-    Book2(/* args */) 
+    Book2() 
     {
         cout << "Book constructor..." << endl;
     }
@@ -98,7 +98,6 @@ public:
         cout << "Book deconstructor..." << endl;
     }
 
-    // 同一块内存会被析构两次，会产生野指针
     shared_ptr<Book2> getSharedPt()
     {
         // 需要在类里面返回一个管理当前对象的智能指针的对象，不能直接构造一个 shared_ptr 指针的对象，
