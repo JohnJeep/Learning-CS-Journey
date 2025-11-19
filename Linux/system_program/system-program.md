@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2025-04-04 19:16:21
+ * @LastEditTime: 2025-11-18 10:51:58
  * @LastEditors: JohnJeep
  * @Description: Linux 环境系统编程基础知识
 -->
@@ -323,7 +323,7 @@ int main() {
   e(environment)	使用环境变量数组, 不使用进程原有的环境变量，设置新加载程序运行的环境变量
   ```
 
-  <img src="../figures/exec函数家族.png">
+  <img src="../figures/exec_family.png">
 - `execlp()`: 加载一个进程，通过环境变量加载。
 - `execl()`: 加载一个进程，通过路径 + 程序名称来加载。
 - `execle()`: 加载一个进程，通过路径 + 程序名称来加载，使用自定义环境变量 env。

@@ -66,7 +66,7 @@ top
 
 下图是常见的性能分析工具，来自性能领域的大师布伦丹·格雷格（Brendan Gregg）绘制，这个图是 Linux 性能分析最重要的参考资料之一，它告诉你，在 Linux 不同子系统出现性能问题后，应该用什么样的工具来观测和分析。
 
-<img src="pictures/linux_observability_tools.png" style="zoom: 33%;" >
+<img src="figures/linux_observability_tools.png" style="zoom: 33%;" >
 
 优化工具的使用具体请看：[Linux 下常用系统性能优化工具](./performance-tools.md)
 
@@ -92,7 +92,7 @@ top
 
 ​    宏运行在什么时候？（编译？运行？）
 
-# 2. CPU Performance
+# 2. CPU
 
 load average（平均负载）：单位时间内，系统处于可运行状态（runnable state）或不可中断状态（uninterruptable state）的平均进程数，与 CPU 使用率并没有直接关系。
 
@@ -110,11 +110,19 @@ CPU 使用率指单位时间内 CPU 繁忙情况的统计，跟平均负载并�
 - I/O 密集型进程，等待 I/O 也会导致平均负载升高，但 CPU 使用率不一定很高；
 - 大量等待 CPU 的进程调度也会导致平均负载升高，此时的 CPU 使用率也会比较高。
 
-# 3. Memory Performance
 
-# 4. I/O Performance
 
-# 5. Network Performance
+# 3. Memory
+
+
+
+# 4. I/O
+
+
+
+# 5. Network
+
+
 
 # 6. References
 

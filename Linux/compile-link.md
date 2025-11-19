@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:12:38
+ * @LastEditTime: 2025-11-18 10:54:26
  * @Description: 预处理、编译、汇编、链接过程
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
@@ -50,7 +50,7 @@
 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
 
 <div align="center">
-    <img width="90%" height="90%" src="./figures/gcc编译的四个阶段.png">
+    <img width="90%" height="90%" src="./figures/gcc_build_step.png">
 </div>
 
 可执行文件
@@ -132,7 +132,7 @@
 Linux 下内存分配管理如下图所示
 
 <div align="center">
-  <img width="90%" height="90%" src="./figures/虚拟地址空间.png">
+  <img width="90%" height="90%" src="./figures/virtual_address_space.png">
 </div>
 
 --------------------------
@@ -171,7 +171,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
   - `ar rcs libstatic_1.a *.o` 
 - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
   
-  <div align="center"><img width="50%" height="50%" src="./figures/静态库.png"></div>
+  <div align="center"><img width="50%" height="50%" src="./figures/static_library.png"></div>
 
 优缺点
 

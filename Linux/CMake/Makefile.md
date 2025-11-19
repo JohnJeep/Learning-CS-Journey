@@ -2,8 +2,8 @@
 
  * @Author: JohnJeep
  * @Date: 2021-04-07 23:25:09
- * @LastEditTime: 2022-05-12 09:02:36
- * @LastEditors: DESKTOP-0S33AUT
+ * @LastEditTime: 2025-11-18 10:54:22
+ * @LastEditors: JohnJeep
  * @Description: In User Settings Edit
 -->
 
@@ -59,7 +59,7 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 通常软
 - 命令
 
 <div align="center"> 
-  <img width="80%" height="80%" src="../figures/makefile三要素.png" />
+  <img width="80%" height="80%" src="../figures/makefile_three_elements.png" />
 </div>
 <div align="center">
   <img width="80%" height="80%" src="../figures/makefile工作原理-1.png" />

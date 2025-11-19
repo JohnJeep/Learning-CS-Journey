@@ -362,7 +362,7 @@ Temporary breakpoint 1 at 0x400877: file test.cpp, line 10.
 Starting program: /home/John/SrcCompile/a.out
 
 Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe4c8) at test.cpp:10
-10          int a = 10;xxxxxxxxxx (gdb)  start (gdb) startTemporary breakpoint 1 at 0x400877: file test.cpp, line 10.Starting program: /home/John/SrcCompile/a.outTemporary breakpoint 1, main (argc=1, argv=0x7fffffffe4c8) at test.cpp:1010          int a = 10;
+10          int a = 10;xxxxxxxxxx (gdb)  start (gdb) startTemporary breakpoint 1 at 0x400877: file test.cpp, line 10.Starting program: /home/John/SrcCompile/a.outTemporary breakpoint 1, main (argc=1, argv=0x7fffffffe4c8) at test.cpp:1010          int a = 10;
 ```
 
 ## 6.3. starti
@@ -809,7 +809,7 @@ gdb program -tui
 
 终端下执行上面这条命令后，利用图形的方式调试可执行程序 `program` 。
 
-<img src="pictures/gdb-tui.png" style="zoom:67%;" />
+<img src="figures/gdb-tui.png">
 
 第二种：先进入 GDB 程序，然后再 GDB中执行　`layout xxx` 命令。
 
