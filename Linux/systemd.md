@@ -1,13 +1,17 @@
 <!--
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2022-05-20 17:20:51
- * @LastEditTime: 2022-05-20 17:31:18
- * @LastEditors: DESKTOP-0S33AUT
- * @Description: In User Settings Edit
- * @FilePath: \Learning-CS-Journey\Linux\linux-service.md
+ * @LastEditTime: 2025-11-20 12:11:00
+ * @LastEditors: JohnJeep
+ * @Description: systemd usage
 -->
 
+- [systemd](#systemd)
+- [Unit](#unit)
+- [配置 Uinit 地址](#配置-uinit-地址)
+
 ## systemd
+
 Systemd（系统管理守护进程），最开始以GNU GPL协议授权开发，现在已转为使用GNU LGPL协议。字母d是daemon的缩写它取替并兼容传统的SysV init。事实上，CentOS和Debian，现在默认都是使用Systemd：
 
 - CentOS 7开始预设并使用Systemd
@@ -17,9 +21,6 @@ Systemd（系统管理守护进程），最开始以GNU GPL协议授权开发，
 
 - 按需启动进程，减少系统资源消耗
 - 并行启动进程，提高系统启动速度
-
-
-
 
 
 ## Unit

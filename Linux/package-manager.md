@@ -2,11 +2,24 @@
  * @Author: JohnJeep
  * @Date: 2025-04-01 00:40:42
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:14:40
- * @Description: package
+ * @LastEditTime: 2025-11-20 11:53:07
+ * @Description: package management
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-# 1. 包管理
+
+- [1. 包管理](#1-包管理)
+- [2. 软件仓库](#2-软件仓库)
+- [3. RPM](#3-rpm)
+- [4. Epel](#4-epel)
+- [5. Yum](#5-yum)
+- [6. apt](#6-apt)
+  - [6.1. apt-cache](#61-apt-cache)
+  - [6.2. apt-get](#62-apt-get)
+  - [6.3. apt-file](#63-apt-file)
+- [7. dpkg](#7-dpkg)
+- [8. packages repository](#8-packages-repository)
+
+## 1. 包管理
 
 [RedHat/CentOS8 【国内/本地/私有 Yum 源】制作和使用](https://www.jianshu.com/p/68db74388600)
 
@@ -14,7 +27,7 @@ Debian/Ubuntu 采用 `dpkg` 进行软件包的管理，使用 `apt` 进行在线
 
 CentOS/Red Hat/Fedora 采用 `rpm` 进行软件包的管理，使用 `yum` 进行在线软件的升级。
 
-## 1.1. 软件仓库
+## 2. 软件仓库
 
 Windows
 
@@ -26,7 +39,7 @@ Linux 或 Unix
 - 软件包管理方式上，不同开发者开发的软件，被打包集中统一存放在官方维护的软件仓库中，这个软件仓库就是一个软件源，和iOS/Android系统上的AppStore/应用市场等概念很像，Windows也开始使用“Windows Store”；除此外，第三方在遵守相关协议的前提下镜像（mirror）官方软件仓库成为镜像源，系统提供专门的软件包管理器用于从软件源下载、安装和卸载软件包。
 
 
-## 1.2. RPM
+## 3. RPM
 rpm（RPM Package Manager）叫RPM包管理器。
 
 **rpm包**：把二进制程序文件、配置文件以和帮助文档等程序资源打包在一起形成的文件。安装软件需要手动解决依赖关系。
@@ -53,14 +66,14 @@ rpm -qa xxx 查询安装包
 rpm -ivh --force --nodeps *rpm  一次性安装多个软件包
 ```
 
-## 1.3. Epel
+## 4. Epel
 
 EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。
 
 - 官方主页：https://fedoraproject.org/wiki/EPEL
 - [阿里云 epel 镜像配置](https://developer.aliyun.com/mirror/epel?spm=a2c6h.13651102.0.0.540e1b11JdpQPV)
 
-## 1.4. Yum
+## 5. Yum
 
 **yum源（rpm软件仓库）**：集中存储rpm包的服务器，通常以http、nfs、ftp、file等协议提供rpm包下载安装服务。互联网中的yum源一般分为发行方和第三方提供。CentOS默认使用发行方yum源。安装软件时会自动解决依赖关系。
 
@@ -82,9 +95,9 @@ repolist
 grouplist   可用组
 ```
 
-## 1.5. apt
+## 6. apt
 
-### 1.5.1. apt-cache
+### 6.1. apt-cache
 
 - `apt-cache search` 搜索包
 - `apt-cache show`  获取包的相关信息，如说明、大小、版本等
@@ -92,7 +105,7 @@ grouplist   可用组
 - `apt-cache rdepends` 了解某个具体的依赖,当是查看该包被哪些包依赖吧
 
 
-### 1.5.2. apt-get
+### 6.2. apt-get
 
 - `apt-get install`  安装xxxx包
 
@@ -122,13 +135,13 @@ grouplist   可用组
 - `apt-get purge sofname1 softname2`      卸载软件同时清除配置文件
 
 
-### 1.5.3. apt-file
+### 6.3. apt-file
 - `apt-file search filename` 查找filename属于哪个软件包
 - `apt-file list packagename` 列出软件包的内容
 - `apt-file update` 更新apt-file的数据库
 
 
-## 1.6. dpkg
+## 7. dpkg
 - `dpkg --info soft_name`  列出软件包解包后的包名称.
 - `dpkg -l`  列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 - dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
@@ -148,7 +161,7 @@ grouplist   可用组
   - 用 `find` 或 `whereis` 命令查找文件位置
 
 
-## 1.7. packages repository
+## 8. packages repository
 1. Ubuntu offical nginx: https://nginx.org/packages/ubuntu/pool/nginx/n/
 2. Packages for Linux and Unix: https://pkgs.org/
 3. CentOS旧版本软件包的镜像站点: https://vault.centos.org/

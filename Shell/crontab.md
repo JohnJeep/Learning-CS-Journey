@@ -2,19 +2,26 @@
  * @Author: JohnJeep
  * @Date: 2023-03-07 11:13:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-11-25 10:00:28
+ * @LastEditTime: 2025-11-20 12:43:13
  * @Description: Crontab 定时任务命令用法
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
-# crontab 用法
+crontab 使用
+
+- [1. 简介](#1-简介)
+- [2. 用法](#2-用法)
+  - [2.1. 示例](#21-示例)
+  - [2.2. 特殊符号](#22-特殊符号)
+- [3. 示例](#3-示例)
+- [4. References](#4-references)
 
 
-## 简介
+## 1. 简介
 crontab 命令主要用于设置命令行或者脚本周期性的执行。该命令从标准输入设备读取指令，并将其存放于文件中，以供之后读取和执行。本文主要讲述crontb命令的基本语法和配置方法。
 
 
-## 用法
+## 2. 用法
 `crontab` 是一个用于管理用户的 cron 任务的命令行工具。它允许你创建、编辑、查看和删除 cron 任务。以下是 `crontab` 命令的一些常用用法：
 
 命令格式
@@ -90,7 +97,7 @@ crontab [-u user] -e -l -r
 
 `command` 是要执行的命令或脚本的路径。
 
-### 示例
+### 2.1. 示例
 
 - `0 0 * * * command`: 每天午夜 0 点执行一次 `command`。
 - `*/5 * * * * command`: 每 5 分钟执行一次 `command`。
@@ -98,7 +105,7 @@ crontab [-u user] -e -l -r
 - `0 22 * * 1-5 command`: 每周一到周五的晚上 10 点执行一次 `command`。
 - `0 0 1 * * command`: 每月 1 号的午夜 0 点执行一次 `command`。
 
-### 特殊符号
+### 2.2. 特殊符号
 
 - `*`：代表任意值。例如在第1列表示每分钟执行，第2列表示每小时执行，第3列表示每天执行。
 - `*/n`：表示每隔 `n` 个单位时间。例如 `*/6` 表示每隔 6 小时。
@@ -107,7 +114,7 @@ crontab [-u user] -e -l -r
 - `@reboot`：系统启动后立即执行。
 
 
-## 示例
+## 3. 示例
 
 - 每天晚上10点运行`rumenz.sh`脚本
   ```shell
@@ -138,5 +145,5 @@ crontab [-u user] -e -l -r
   ```
 
 
-# References
+## 4. References
 - [微信公众号：Linux之crontab使用技巧](https://mp.weixin.qq.com/s?__biz=MzI4MDEwNzAzNg==&mid=2649459914&idx=2&sn=8f7e0735aceea33cf8117d312e1850d9&key=e459974591e3bac8f20384884c0fe290a53a9ac6358e9fc28da14268f503ad46863b05b9a889c0c144f38badd3be015a4f5decec10c4cb18ff4451985f916d5e88fda50d2ba31ac64cd477a6f254f42b136155835c7239e46eaf2bf956de1645793ed89f50ddd70f773eddb64cf2fc34ba664d2b066b9d3f9c0946570f7f74ce&ascene=0&uin=MTE2MDU5MjIzNA%3D%3D&devicetype=Windows+10+x64&version=6309001c&lang=zh_CN&countrycode=CN&exportkey=n_ChQIAhIQ5CCO7T21W4m%2FHwxeQZ3VihLgAQIE97dBBAEAAAAAAD2BFie%2FpmYAAAAOpnltbLcz9gKNyK89dVj0jSgivwYV2B3yIwV6skhUZ%2F21hP7%2FPBzb%2FRAB4wNgG%2BQrwySrMxiEetlGog7JYCky9UKJ55h9c%2B0b94pVa2DwKSj6ft6o842FlbRPuZyIUIG%2FS%2F%2BHE7urRVA3%2FWPK1tfwgpxbHYv2wLhgvcr8nFC5TKSRD3rUCdQUvWfVmstrpknhpfdDtkELXrwGtq0l0ZnigwAw9K0ADv%2FOz49edbeQxrAnjf8HZkSjavVSUycPc7leX%2FaRfZUN1ofW&acctmode=0&pass_ticket=K5XFCnpqUHgyghRamSLrpJZesihkkOehdPru%2FXgwII8ajjZ0zhjFFOeELdXcmvMPngHysHFBaWco1M9VK5rpcQ%3D%3D&wx_header=1&fontgear=2)

@@ -2,13 +2,17 @@
  * @Author: JohnJeep
  * @Date: 2023-07-25 14:51:53
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-25 15:33:23
+ * @LastEditTime: 2025-11-20 12:30:43
  * @Description: Linux 下常用信号解释
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
+- [1. Linux 下常用信号解释](#1-linux-下常用信号解释)
+- [2. SIGINT](#2-sigint)
+- [3. SIGTERM](#3-sigterm)
+- [4. SIGHUP](#4-sighup)
 
 
-# 1. Linux 下常用信号解释
+## 1. Linux 下常用信号解释
 
 Linux 终端下输入 `man 7 signal` 命令，可查看信号的使用手册。
 
@@ -72,7 +76,7 @@ DESCRIPTION
 
 ```
 
-## 1.1. SIGINT
+## 2. SIGINT
 SIGINT 是一个重要的操作系统信号，它表示"中断"信号（Interrupt Signal）。`SIGINT` 信号通常由终端用户通过在终端中按下 `Ctrl+C` 组合键来发送给正在运行的程序。
 
 `SIGINT` 信号的主要用途是 请求进程中断当前操作并终止执行。当用户想要停止一个正在运行的程序时，可以通过发送 `SIGINT` 信号来中断该程序的执行。
@@ -83,7 +87,7 @@ SIGINT 是一个重要的操作系统信号，它表示"中断"信号（Interrup
 2. **强制终止：** 如果程序没有捕捉 `SIGINT` 信号或捕捉信号后没有正常退出，操作系统可以采取进一步措施来强制终止程序的执行。这时，操作系统会发送 `SIGINT` 信号的衍生信号 `SIGKILL`（也称为"杀死信号"），该信号会立即终止进程而无需进一步处理。
 
 
-## 1.2. SIGTERM 
+## 3. SIGTERM 
 `SIGTERM` 是一个重要的操作系统信号，它表示"终止"或"终止信号"（Terminate Signal）。`SIGTERM` 信号用于请求进程正常终止，它向进程发送一个通知，告知进程需要关闭并退出。
 
 与 `SIGKILL` 信号不同，`SIGTERM` 信号是一种优雅的终止方式，它允许进程在终止之前进行清理和释放资源。进程可以通过捕捉 `SIGTERM` 信号并执行特定的终止处理程序来实现优雅的退出。
@@ -97,7 +101,7 @@ SIGINT 是一个重要的操作系统信号，它表示"中断"信号（Interrup
 值得注意的是，尽管 `SIGTERM` 信号请求进程优雅地终止，但并不能保证进程一定会退出。进程有权选择是否响应 `SIGTERM` 信号。如果进程在一定时间内（通常是几秒钟）没有响应 `SIGTERM`信号，操作系统可能会发送 `SIGKILL` 信号给进程，这是一种强制终止的方式，会导致进程立即终止且无法进行清理工作
 
 
-## 1.3. SIGHUP
+## 4. SIGHUP
 `SIGHUP` 是一个表示“挂起”或“终端挂起”的信号。它是 Unix 和类 Unix 系统中的一个操作系统信号。在类 Unix 系统中，进程（包括后台进程）可以接收不同类型的信号，以通知它们发生的某些事件或请求执行某些操作。
 
 `SIGHUP` 信号通常与终端相关联，当用户从终端注销（退出登录）时，操作系统会向终端关联的所有进程发送 `SIGHUP` 信号。这意味着进程应该在接收到 `SIGHUP` 信号时执行某种操作，通常是关闭或重新初始化。

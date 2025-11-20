@@ -1,6 +1,21 @@
-# 1. Linux 时钟
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-10-10 15:31:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 12:04:20
+ * @Description: Linux 时钟用法
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-## 1.1. date
+Linux 时钟
+- [1. date](#1-date)
+- [2. hwclock](#2-hwclock)
+- [3. ntpd](#3-ntpd)
+- [4. 公共时间服务器](#4-公共时间服务器)
+- [5. References](#5-references)
+
+
+## 1. date
 
 `date` 命令可以用来查看和手动设置日期、时间。命令格式如下：
 
@@ -25,7 +40,7 @@ Tue Feb 25 20:16:00 CST 2024
 
 **YYYY**：年份（四位数）
 
-## 1.2. hwclock
+## 2. hwclock
 
 Linux 系统的硬件时间。
 
@@ -44,13 +59,11 @@ hwclock -s, --hctosys   # he Hardware Clock to System Clock
 
 
 
-
-
-## 1.3. ntpd
+## 3. ntpd
 
 
 
-## 1.4. 公共时间服务器
+## 4. 公共时间服务器
 
 阿里云
 
@@ -75,7 +88,7 @@ ntpdate -u time.pool.aliyun.com
 
 
 
-# 2. References
+## 5. References
 
 - [ntp时间服务器 时间同步](https://www.cnblogs.com/centos2017/p/7896704.html)
 - [Linux系统时间同步方法小结](https://www.cnblogs.com/williamjie/p/10768657.html)

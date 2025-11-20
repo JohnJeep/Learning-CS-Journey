@@ -1,18 +1,32 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-02-08 21:59:39
- * @LastEditTime: 2025-04-04 19:24:51
+ * @LastEditTime: 2025-11-20 11:44:29
  * @LastEditors: JohnJeep
  * @Description: 探究内存管理
 -->
 
-# History(历史)
+- [1. History(历史)](#1-history历史)
+- [2. 内存管理层级](#2-内存管理层级)
+- [3. 内存库作品](#3-内存库作品)
+- [4. 优化内存布局](#4-优化内存布局)
+  - [4.1. 分析工具](#41-分析工具)
+    - [4.1.1. pahole](#411-pahole)
+    - [4.1.2. structpack](#412-structpack)
+    - [4.1.3. XLA](#413-xla)
+    - [4.1.4. MNN推理引擎](#414-mnn推理引擎)
+  - [4.2. 🛠️ 使用技巧](#42-️-使用技巧)
+- [5. Bibliography(书目)](#5-bibliography书目)
+- [6. Reference(参考)](#6-reference参考)
+
+
+# 1. History(历史)
 
 Doug Lea自1986年开始研究malloc算法，他的作品被称为 DL Malloc，目前linux中的glibc的malloc算法就是直接来自Doug Lea，其它平台的malloc的实现或多或少受到DL的影响。
 
 
 
-# 内存管理层级
+# 2. 内存管理层级
 
 1. OS（操作系统），Windows 系统的的 `HeapAlloc` 和 `VirtualAlloc`；
 2. GUNC++/CRT 编译器的 `malloc()`
@@ -23,18 +37,18 @@ Doug Lea自1986年开始研究malloc算法，他的作品被称为 DL Malloc，�
 
 
 
-# 内存库作品
+# 3. 内存库作品
 
 - tcmalloc：稳定，占用内存更低。
 - jemalloc性能更高，占用内存更高
 
 
 
-# 优化内存布局
+# 4. 优化内存布局
 
-## 分析工具
+## 4.1. 分析工具
 
-### pahole
+### 4.1.1. pahole
 
 Linux下最专业的内存布局分析工具。
 
@@ -61,7 +75,7 @@ Linux下最专业的内存布局分析工具。
 
 LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 
-### structpack
+### 4.1.2. structpack
 
 （开源内存布局优化神器）
 
@@ -70,7 +84,7 @@ LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 - 适合：嵌入式系统、高性能计算、游戏开发
 - GitHub地址：https://github.com/philippk/structpack
 
-### XLA
+### 4.1.3. XLA
 
 机器学习编译器
 
@@ -79,7 +93,7 @@ LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 - 优势：能将硬件缓存利用率提升30%以上
 - 适合：深度学习模型训练优化
 
-### MNN推理引擎
+### 4.1.4. MNN推理引擎
 
 推理引擎中的内存优化实践
 
@@ -87,7 +101,7 @@ LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 - 通过通道分组提高内存访问效率
 - 适合：深度学习推理场景
 
-## 🛠️ 使用技巧
+## 4.2. 🛠️ 使用技巧
 
 内存布局分析的步骤：
 
@@ -130,7 +144,7 @@ LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 
 
 
-# Bibliography(书目)
+# 5. Bibliography(书目)
 
 - STL源码剖析(侯捷)
 - Small Memory Software(James Noble & Charles Weir)
@@ -138,6 +152,6 @@ LWN.net: [Poke-a-hole and friends](https://lwn.net/Articles/335942/)
 
 
 
-# Reference(参考)
+# 6. Reference(参考)
 - [Doug Lea's Home Page](http://gee.cs.oswego.edu/): Malloc算法的发明者网站。
 - [Wikipedia Malloc](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation): 很权威的Wikipedia解释Malloc的用法。

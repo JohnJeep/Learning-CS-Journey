@@ -3,19 +3,36 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:25:54
+ * @LastEditTime: 2025-11-20 11:32:25
  * @Description: C++ 高级
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 
-# 1. Object Oriented Programming(面向对象编程)
+Object Oriented Programming(OOP)叫面向对象编程。 class without pointer members(类中的成员不带有指针)。 class with pointer members(类中的成员带有指针)。
 
-Object Oriented Programming(OOP)叫面向对象编程。
+- [1. Encapsulation(封装)](#1-encapsulation封装)
+- [2. Composition(复合)](#2-composition复合)
+- [3. Delegation(委托)](#3-delegation委托)
+  - [3.1. copy on write](#31-copy-on-write)
+  - [3.2. pImpl Idiom](#32-pimpl-idiom)
+- [4. Inheritance(继承)](#4-inheritance继承)
+  - [4.1. 父类与子类的关系](#41-父类与子类的关系)
+  - [4.2. 继承中的构造与析构调用原则](#42-继承中的构造与析构调用原则)
+  - [4.3. 继承中同名成员变量处理方法](#43-继承中同名成员变量处理方法)
+  - [4.4. Composite, Inheritance, Delegation 对比](#44-composite-inheritance-delegation-对比)
+  - [4.5. Inheritance and virtual function](#45-inheritance-and-virtual-function)
+- [5. Polymorphism(多态)](#5-polymorphism多态)
+  - [5.1. 虚函数](#51-虚函数)
+  - [5.2. 纯虚函数](#52-纯虚函数)
+  - [5.3. 虚析构函数](#53-虚析构函数)
+  - [5.4. vptr(虚指针)和vtbl(虚函数表)](#54-vptr虚指针和vtbl虚函数表)
+- [6. 耦合与解耦](#6-耦合与解耦)
+- [7. Aggregation: 聚合](#7-aggregation-聚合)
+- [8. Acquaintance: 相识](#8-acquaintance-相识)
+- [9. References](#9-references)
 
-- class without pointer members：类中的成员不带有指针。
-- class with pointer members：类中的成员带有指针。
 
-## 1.1. Encapsulation(封装)
+## 1. Encapsulation(封装)
 
 封装这个术语用来描述在过程接口后面隐藏实现细节的概念。
 
@@ -29,7 +46,7 @@ C++ 中对类的设计时，封装了属性和方法。若直接访问类的数�
 
 C++ 中类与类之间的关系主要归为三大类：复合、委托、继承。
 
-## 1.2. Composition(复合)
+## 2. Composition(复合)
 
 什么是复合？
 
@@ -62,7 +79,7 @@ class queue {
 
 > 类与类之间的生命周期两者是同步的。
 
-## 1.3. Delegation(委托)
+## 3. Delegation(委托)
 
 什么是delegation？
 
@@ -96,7 +113,7 @@ public:
 
 > 类与类之间的生命周期两者是不同步的。
 
-### 1.3.1. copy on write
+### 3.1. copy on write
 
 > MyString类对象的三个实例a，b, c 同时共享Stu类中的整数 `n`，指针 `rep` 指向数据 `hello`。如果实例 `a` 想要修改 `hello` 这个数据，则需要先拷贝一份，然后再修改拷贝的数据，这种实现的方法称为 `copy on write(写时复制)`
 
@@ -104,7 +121,7 @@ public:
   <img src="./figures/referenceCounting.png">
 </p>
 
-### 1.3.2. pImpl Idiom
+### 3.2. pImpl Idiom
 
 PImpl（Pointer to implementation，指向实现的指针，也叫`handle/body`或者叫防火墙编译）是一种常用来对**类的接口与实现**进行解耦的方法。《Effective Modern C++》第四章 Iterm 22 条的对 `Pimpl Idiom` 的用法做了非常详细的解释说明。
 
@@ -122,7 +139,7 @@ PImpl（Pointer to implementation，指向实现的指针，也叫`handle/body`�
 - For std::unique_ptr pImpl pointers, declare special member functions in the class header, but implement them in the implementation file. Do this even if the default function implementations are acceptable. 
 - The above advice applies to std::unique_ptr, but not to std::shared_ptr.
 
-## 1.4. Inheritance(继承)
+## 4. Inheritance(继承)
 
 什么是Inheritance？
 
@@ -182,7 +199,7 @@ public、protect、private 三个关键字的访问范围
 - 看子类如何从父类中继承？
 - 看父类的访问级别？ 
 
-### 1.4.1. 父类与子类的关系
+### 4.1. 父类与子类的关系
 
 - 子类是特殊的父类。
 
@@ -210,7 +227,7 @@ public、protect、private 三个关键字的访问范围
 
 - 子类对象可以 `当做父类对象使用`。
 
-### 1.4.2. 继承中的构造与析构调用原则
+### 4.2. 继承中的构造与析构调用原则
 
 <font color=red>
 内存角度探讨调用原则
@@ -221,7 +238,7 @@ public、protect、private 三个关键字的访问范围
 
 <img src="./figures/Inheritance.png">
 
-### 1.4.3. 继承中同名成员变量处理方法
+### 4.3. 继承中同名成员变量处理方法
 
 子类与父类中的成员变量和成员函数有相同的名称时，采用作用域的方式调用。
 
@@ -250,7 +267,7 @@ p1.Parent::shoe();
 c1.Child::shoe();
 ```
 
-### 1.4.4. Composite, Inheritance, Delegation 对比
+### 4.4. Composite, Inheritance, Delegation 对比
 
 - 继承
   
@@ -272,7 +289,7 @@ c1.Child::shoe();
     - 优点：便于运行时刻组合对象操作以及改变这些操作的组合方式。
     - 缺点： 动态的、高度参数化的软件比静态软件更难于理解。还有运行低效问题，不过从长远来看人的低效才是更主要的。只有当委托使设计比较简单而不是更复杂时，它才是好的选择。要给出一个能确切告诉你什么时候可以使用委托的规则是很困难的。因为委托可以得到的效率是与上下文有关的，并且还依赖于你的经验。
 
-### 1.4.5. Inheritance and virtual function
+### 4.5. Inheritance and virtual function
 
 在 C++ 中，在基类的成员函数声明前加上关键字 virtual 即可让该函数成为 虚函数，派生类中对此函数的不同实现都会继承这一修饰符，允许后续派生类覆盖，达到迟绑定的效果。
 
@@ -293,7 +310,7 @@ c1.Child::shoe();
 - virtual: 希望子类重写（override）父类，父类已有默认值。
 - pure-virtual: 子类（derived）中必须重写(override)父类，父类没有默认值。
 
-## 1.5. Polymorphism(多态)
+## 5. Polymorphism(多态)
 
 多态(polymorphism)指为不同数据类型的实体提供统一的接口。
 
@@ -319,7 +336,7 @@ c1.Child::shoe();
 - 通过虚函数表的虚指针 `vptr` 调用重写函数是在程序运行时进行的，需要通过寻址操作才能确定调用的是哪个函数。
 - 虚函数的效率比普通成员的效率要低。因为函数所有的调用都是动态绑定的，只有在运行的时候，才知道具体调用哪个。
 
-### 1.5.1. 虚函数
+### 5.1. 虚函数
 
 虚函数注意点
 
@@ -335,7 +352,7 @@ c1.Child::shoe();
 - C++ 中没有真正的类似Java中接口的方法，但可以使用虚继承来模拟接口的方法。
 - 虚继承中可以使用多继承的方式，来实现复杂的业务。
 
-### 1.5.2. 纯虚函数
+### 5.2. 纯虚函数
 
 ```cpp
 // 语法
@@ -357,7 +374,7 @@ virtual int func(int a) = 0;
 }
 ```
 
-### 1.5.3. 虚析构函数
+### 5.3. 虚析构函数
 
 为什么要虚析构函数？
 
@@ -370,7 +387,7 @@ virtual ~People()
 }
 ```
 
-### 1.5.4. vptr(虚指针)和vtbl(虚函数表)
+### 5.4. vptr(虚指针)和vtbl(虚函数表)
 
 **虚表指针（vptr）**：每个含有虚函数的类（或者从含有虚函数的类派生）的对象都会有一个虚表指针，该指针指向该类的虚函数表。存在于每个对象的内存布局中。
 
@@ -424,19 +441,19 @@ vtable 注意点
 
 
 
-## 1.6. 耦合与解耦
+## 6. 耦合与解耦
 
 - C++中采用抽象类，提前布局 `vptr` 指针，虚函数表，调用动态链编，实现与第三方产品的解耦合。
 - 动态库-----函数的首地址----调用函数指针----调用函数
 - 常常采用函数指针将任务的调用者与任务的实现者进行分开，两者互不依赖。  
 
-## 1.7. Aggregation: 聚合
+## 7. Aggregation: 聚合
 
 聚合意味着一个对象拥有另一个对象或对另一个对象负责。一般我们称一个对象包含另一个对象或者是另一个对象的一部分。聚合意味着聚合对象和其所有者具有相同的生命周期。
 
 C++中，聚合可以通过定义表示真正实例的成员变量来实现，但更通常的是将这些成员变量定义为实例指针或引用。
 
-## 1.8. Acquaintance: 相识
+## 8. Acquaintance: 相识
 
 相识意味着一个对象仅仅知道另一个对象。有时相识也被称为“关联”或“引用”关系。相识的对象可能请求彼此的操作，但是它们不为对方负责。相识是一种比聚合要弱的关系，它只标识了对象间较松散的耦合关系。
 
@@ -444,7 +461,7 @@ C++中，聚合可以通过定义表示真正实例的成员变量来实现，�
 
 聚合关系使用较少且比相识关系更持久；而相识关系则出现频率较高，但有时只存在于一个操作期间，相识也更具动态性，使得它在源代码中更难被辨别出来。
 
-## 1.9. References
+## 9. References
 
 - [Stack Overflow: Difference between private, public, and protected inheritance](https://stackoverflow.com/questions/860339/difference-between-private-public-and-protected-inheritance)
 - [Public, Protected and Private Inheritance in C++ Programming](https://www.programiz.com/cpp-programming/public-protected-private-inheritance)

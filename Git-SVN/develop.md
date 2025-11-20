@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-10-10 15:31:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 12:45:11
+ * @Description: Git develop flow
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 # 开发流程
 
 1. 克隆仓库，拉取最新代码

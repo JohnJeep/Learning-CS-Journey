@@ -1,8 +1,29 @@
-### 简介
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-10-10 15:31:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 11:54:38
+ * @Description: NTP 用法
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. 简介](#1-简介)
+- [2. 安装 `ntpd`](#2-安装-ntpd)
+- [3. 配置 `ntpd`](#3-配置-ntpd)
+- [4. 启动并启用 `ntpd`](#4-启动并启用-ntpd)
+- [5. 检查同步状态](#5-检查同步状态)
+- [6. 手动同步时间](#6-手动同步时间)
+- [7. 常见问题排查](#7-常见问题排查)
+- [8. 总结](#8-总结)
+- [9. 示例](#9-示例)
+- [10. 例子分析](#10-例子分析)
+
+
+### 1. 简介
 
 `ntpd` 是传统的时间同步守护进程，用于让系统的时间与远程 NTP（Network Time Protocol）服务器持续保持同步。它适合长期在线的服务器，能逐步调整系统时钟，保持时间的精准性。以下是 `ntpd` 的使用方法，包括安装、配置和监控。
 
-### 1. 安装 `ntpd`
+### 2. 安装 `ntpd`
 
 在大多数 Linux 发行版上，`ntpd` 都可以通过包管理器安装：
 
@@ -18,7 +39,7 @@ sudo yum install ntp
 sudo dnf install ntp
 ```
 
-### 2. 配置 `ntpd`
+### 3. 配置 `ntpd`
 
 `ntpd` 的配置文件通常位于 `/etc/ntp.conf`。打开文件，指定 NTP 服务器来同步时间。可以添加公共 NTP 服务器或局域网内的 NTP 服务器。例如，添加阿里云的 NTP 服务器：
 
@@ -41,7 +62,7 @@ server 2.pool.ntp.org iburst
 server 3.pool.ntp.org iburst
 ```
 
-### 3. 启动并启用 `ntpd`
+### 4. 启动并启用 `ntpd`
 
 完成配置后，启动 `ntpd` 服务，并将其设置为开机自启：
 
@@ -53,7 +74,7 @@ sudo systemctl start ntp
 sudo systemctl enable ntp
 ```
 
-### 4. 检查同步状态
+### 5. 检查同步状态
 
 - **查看 NTP 服务器的同步状态**：
 
@@ -71,7 +92,7 @@ sudo systemctl enable ntp
 
   此命令会告诉你系统时间是否与 NTP 服务器同步。
 
-### 5. 手动同步时间
+### 6. 手动同步时间
 
 如果系统时间偏差较大，可以在启动 `ntpd` 之前使用 `ntpd` 的一次性命令手动同步。注意在执行以下命令时必须停止 `ntpd` 服务：
 
@@ -84,18 +105,18 @@ sudo systemctl start ntp
 - `-g`：允许大幅度调整时间。
 - `-q`：表示一次性查询时间并退出。
 
-### 6. 常见问题排查
+### 7. 常见问题排查
 
 - **NTP 服务未同步**：检查防火墙设置是否允许 UDP 端口 123（NTP 使用的端口）。
 - **时间漂移过大**：可以使用 `ntpd -gq` 强制一次性同步。
 
-### 总结
+### 8. 总结
 
 `ntpd` 适合长期在线的服务器，尤其适用于需要长时间稳定时间同步的环境。
 
 
 
-## 示例
+### 9. 示例
 
 在 `ntpq -p` 命令的输出中，各字段提供了 NTP 服务器和同步状态的详细信息。以下是这些字段的含义：
 
@@ -120,7 +141,7 @@ sudo systemctl start ntp
 9. **offset**：偏移量（以毫秒为单位），表示客户端时间与该服务器时间的差异。偏移值越小，同步越精确。
 10. **jitter**：抖动，表示偏移量的变化情况，即最近几次轮询的偏移量波动程度，数值越小越好，说明时间源的稳定性越高。
 
-### 例子分析
+### 10. 例子分析
 
 ```shell
 remote           refid      st t when poll reach   delay   offset  jitter

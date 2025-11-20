@@ -1,4 +1,19 @@
-# Influxdb
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-10-10 15:31:52
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 12:43:49
+ * @Description: 常用代码片段 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+- [1. Influxdb](#1-influxdb)
+- [2. find](#2-find)
+- [3. mysql](#3-mysql)
+- [4. shell](#4-shell)
+- [5. docker](#5-docker)
+
+
+# 1. Influxdb
 
 ```sql
 // 启动
@@ -37,7 +52,7 @@ influx -import -path=/root/influxdb_dump_out -precision=ns
 
 
 
-# find
+# 2. find
 
 ```shell
 # 删除最近一小时外的日志
@@ -48,7 +63,7 @@ find ./*.log -type f -mtime +7 -exec rm -rf {} \;
 
 ```
 
-# mysql
+# 3. mysql
 
 ```shell
 // dump database
@@ -99,7 +114,7 @@ ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_
 
 
 
-# shell
+# 4. shell
 
 ```shell
 # 取当前系统中状态为“UP”的网络接口的IP地址
@@ -109,7 +124,7 @@ ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d '/'
 ps aux | grep xxx | grep -v grep | awk '{print "kill -9 " $2}' | sh
 ```
 
-# docker
+# 5. docker
 
 ```shell
 # 镜像导出

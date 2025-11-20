@@ -1,22 +1,35 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2025-04-04 19:15:49
+ * @LastEditTime: 2025-11-20 11:58:38
  * @LastEditors: JohnJeep
- * @Description: iNode的理解
+ * @Description: iNode 用法
 --> 
 
+- [1. 查看iNode的命令](#1-查看inode的命令)
+- [2. 什么是iNode](#2-什么是inode)
+- [3. iNode包含内容](#3-inode包含内容)
+- [4. 操作系统是如何打开文件的](#4-操作系统是如何打开文件的)
+- [5. 目录文件](#5-目录文件)
+- [6. iNode的应用](#6-inode的应用)
+- [7. 硬链接与符号链接](#7-硬链接与符号链接)
+- [8. References](#8-references)
+
+
 # 1. 查看iNode的命令
+
 - 查看每个硬盘分区的iNode总数和已经使用的数量 `df -i`
 - 查看当前路径下每个iNode的节点号  `ls  -li`
 - 查看某个文件的iNode信息  `stat test.txt`
 
 
-# 2. 什么是iNode?
+# 2. 什么是iNode
+
 概念：存储文件的元数据的区域叫iNode，也叫"索引节点"
 
 
 # 3. iNode包含内容
+
 - 文件的字节数
 - 文件的read、write、execute权限
 - 文件的ID（User ID、Group ID）
@@ -29,7 +42,8 @@
 - 创建时间
 
 
-# 4. 操作系统是如何打开文件的？
+# 4. 操作系统是如何打开文件的
+
 - 操作系统用iNode号码来识别不同的文件。分为三步：
   1.  系统找到这个文件名对应的iNode号
   2. 通过iNode号得到iNode中存储的信息
@@ -37,6 +51,7 @@
 
 
 # 5. 目录文件
+
 - Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。
 - 每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的iNode号。
 - 根目录`/`的iNode号是固定的
@@ -66,5 +81,5 @@
   - source和destination都必须指定完整的路径，才创建成功，否则创建的是个文本文件。source必须是已存在的文件，destination是没有创建的文件，需要自己指定。
 
 
-# 8. 参考
+# 8. References
 - [linux中inode包含什么内容？](https://mp.weixin.qq.com/s/u9t6QtYCRJAJVpEgxC8t0Q)

@@ -2,10 +2,31 @@
  * @Author: JohnJeep
  * @Date: Wednesday, August 19th 2020, 18:58:33 PM
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:15:18
+ * @LastEditTime: 2025-11-20 11:56:52
  * @Description: Linux kernal 学习
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
+
+- [1. 理解内核的秘籍](#1-理解内核的秘籍)
+- [2. 如何学习内核](#2-如何学习内核)
+  - [2.1. 核心的东西：最基础、最原始的概念。](#21-核心的东西最基础最原始的概念)
+- [3. Linux 内核体系结构](#3-linux-内核体系结构)
+  - [3.1. 内核模式与体系结构](#31-内核模式与体系结构)
+  - [3.2. struct](#32-struct)
+  - [3.3. 内核中断](#33-内核中断)
+  - [3.4. 内核进程](#34-内核进程)
+- [4. Linux 内核源码结构](#4-linux-内核源码结构)
+  - [4.1. Linux 内核源码宏观结构](#41-linux-内核源码宏观结构)
+  - [4.2. Linux 内核源码各级源码分类](#42-linux-内核源码各级源码分类)
+  - [4.3. Linux 内核源码解析第一刀](#43-linux-内核源码解析第一刀)
+- [5. Linux 内核引导程序](#5-linux-内核引导程序)
+  - [5.1. Linux 内核启动程序分析](#51-linux-内核启动程序分析)
+  - [5.2. Linux 内核初始化程序分析](#52-linux-内核初始化程序分析)
+  - [5.3. Linux 第一个进程分析](#53-linux-第一个进程分析)
+- [6. The Linux Storage Stack Diagram](#6-the-linux-storage-stack-diagram)
+- [7. 内核优化](#7-内核优化)
+- [8. References](#8-references)
+
 
 # 1. 理解内核的秘籍
 - 以一个设计者的角度来阅读内核
@@ -34,7 +55,7 @@ Linux 内核学习分为几个阶段
 ## 2.1. 核心的东西：最基础、最原始的概念。
 
 
-# 2. Linux 内核体系结构
+# 3. Linux 内核体系结构
 - Linux是一个单内核，运行在单独的内核空间上。具有模块化设计、抢占式内核、支持内核线程、动态装载内核模块的能力，让所有事情都运行在内核态，直接调用函数，无须消息传递。
 - 内核开发者通常把那些对时间要求比较高，而本身长度又比较短的函数定义成内联函数。若果一个函数较大，会被反复调用，且没有特别的时间上的限制，并赞成把它做成内联函数。
 - 在内核中，为了类型的的安全和易读性，优先使用内联函数而不是复杂的宏。
@@ -51,7 +72,7 @@ Linux 内核架构
 <img src="./figures/Linux_kernel_map.svg">
 
 
-## 2.1. 内核模式与体系结构
+## 3.1. 内核模式与体系结构
 操作系统的工作方式
 1. 操作系统从用户态态切换到内核态，即用户应用程序到内核程序。
 2. 实现操作系统的系统调用。
@@ -74,53 +95,53 @@ Linux 内核架构
   2. 进程的调度算法发生了改变，但进程的管理方式没有发生巨大的改变。
 
 
-## 2.2. struct
+## 3.2. struct
 内核中常见的 struct 结构体
 - task_struct
 - mm_task
 
 
-## 2.3. 内核中断
+## 3.3. 内核中断
 
 
-## 2.4. 内核进程
+## 3.4. 内核进程
 task_struct 进程描述符：https://blog.csdn.net/lf_2016/article/details/54347820
 
 每一个进程都有一个 task_struct。
 
 
-# 2. Linux 内核源码结构
+# 4. Linux 内核源码结构
 
 
-## 2.1. Linux 内核源码宏观结构
+## 4.1. Linux 内核源码宏观结构
 
 
-## 2.2. Linux 内核源码各级源码分类
+## 4.2. Linux 内核源码各级源码分类
 
 
-## 2.3. Linux 内核源码解析第一刀
+## 4.3. Linux 内核源码解析第一刀
 
 
-# 2. Linux 内核引导程序
+# 5. Linux 内核引导程序
 
 
-## 2.1. Linux 内核启动程序分析
+## 5.1. Linux 内核启动程序分析
 
 
-## 2.2. Linux 内核初始化程序分析
+## 5.2. Linux 内核初始化程序分析
 
 
-## 2.3. Linux 第一个进程分析
+## 5.3. Linux 第一个进程分析
 
 
-# 2. The Linux Storage Stack Diagram
+# 6. The Linux Storage Stack Diagram
 <img src="./figures/The_Linux_Storage_Stack_Diagram.svg">
 
 来源：https://en.wikipedia.org/wiki/Linux_kernel#/media/File:The_Linux_Storage_Stack_Diagram.svg
 
 
 
-# 内核优化
+# 7. 内核优化
 
 - 对 kernel 的调教。
 
@@ -141,7 +162,7 @@ Linux 内核社区
 
 
 
-# 3. References
+# 8. References
 
 - 英文WIKI: https://en.wikipedia.org/wiki/Linux_kernel
 - Wiki Linux kernel version history: https://en.wikipedia.org/wiki/Linux_kernel_version_history

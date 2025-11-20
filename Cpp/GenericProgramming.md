@@ -1,4 +1,25 @@
-# 2. Generic Programming(泛型编程)
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-12 11:26:18
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 11:46:29
+ * @Description: 泛型编程
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. Generic Programming(泛型编程)](#1-generic-programming泛型编程)
+- [2. Parameterized Type(参数化类型)](#2-parameterized-type参数化类型)
+- [3. 模板编译](#3-模板编译)
+- [4. Function Template(函数模板)](#4-function-template函数模板)
+- [5. Class Template(类模板)](#5-class-template类模板)
+  - [5.1. Specialization(模板特化)](#51-specialization模板特化)
+  - [5.2. Class Partial Specialization(类模板偏特化)](#52-class-partial-specialization类模板偏特化)
+- [6. Member Template(成员模板)](#6-member-template成员模板)
+- [7. template template parameter](#7-template-template-parameter)
+- [8. References](#8-references)
+
+
+## 1. Generic Programming(泛型编程)
 
 Generic Programming(泛型编程): 操作(operations)使用相同的接口，但是其类型(type)不相同，即使用模板(template)将泛型操作公式化。其中STL是泛型编程(GP)最成功的一个作品。
 
@@ -10,11 +31,11 @@ Generic Programming(泛型编程): 操作(operations)使用相同的接口，但
 
 > OOP是将类中的data与methods组合在一起的，而泛型编程(GP)则是将类中的data与methods分开来的。采用泛型编程可以实现容器(Containers)与算法(Algorithms)的各自分离与实现。
 
-## 2.1. Parameterized Type(参数化类型)
+## 2. Parameterized Type(参数化类型)
 
 参数化类型（parameterized type）也就是泛型编程（generic）和模板（templates）。
 
-## 2.2. 模板编译
+## 3. 模板编译
 
 当编译器遇到一个模板定义时，它并不生成代码。只有当我们实例化出模板的一个特定版本时，编译器才会生成代码。当我们使用（而不是定义）模板时，编译器才生成代码，这一特性影响了我们如何去组织代码以及错误何时被检测到。
 
@@ -22,7 +43,7 @@ Generic Programming(泛型编程): 操作(operations)使用相同的接口，但
 
 模板则不同：为了生成一个实例化版本，编译器需要掌握函数模板或类模板成员函数的定义。因此，与非模板代码不同，模板的头文件通常既包括声明也包括定义。
 
-## 2.3. Function Template(函数模板)
+## 4. Function Template(函数模板)
 
 模板函数语法
 
@@ -68,7 +89,7 @@ func(x, y);           // 调用时自动类型推导，不需要写出具体的�
 
 - 函数模板当函数参数与函数指针当函数参数的情况类似。 
 
-## 2.4. Class Template(类模板)
+## 5. Class Template(类模板)
 
 对类模板来说，我们通过提供一些额外信息来指定模板到底实例化成什么样的类，需要提供哪些信息由模板决定。在模板名字后面跟一对尖括号，尖括号内放上需要提供的信息。
 
@@ -121,7 +142,7 @@ private:
 
   - 一个类模板的每个实例都形成一个独立的类。 
 
-### 2.4.1. Specialization(模板特化)
+### 5.1. Specialization(模板特化)
 
 什么是模板特化？
 
@@ -129,7 +150,7 @@ private:
 
 <img src="../../GitCode/Learning-CS-Journey/Go/figure/specialization.png">
 
-### 2.4.2. Class Partial Specialization(类模板偏特化)
+### 5.2. Class Partial Specialization(类模板偏特化)
 
 类模板偏特化也叫类模板局部特化。只指定一个类模板中的部分参数，不全部在类模板调用时传入，对某个 template 参数进行特化工作。
 
@@ -159,7 +180,7 @@ template <typename T>
 下图中类模板传入的是一种通用的 T 类型，而另外一个相同的类模板，传入的参数 是 `T*` 类型，类模板的类型从 T 缩小为 `T*` 类型，这种的方式的类模板就是类模板范围的偏特化。
 <img src="../../GitCode/Learning-CS-Journey/Go/figure/partial-specialization2.png">
 
-## 2.5. Member Template(成员模板)
+## 6. Member Template(成员模板)
 
 为什么要使用 `member template`?
 
@@ -168,7 +189,8 @@ template <typename T>
   <img src="../../GitCode/Learning-CS-Journey/Go/figure/member-template.png">
   <img src="./figures/member-template-instance.png">
 
-## 2.6. template template parameter
+
+## 7. template template parameter
 
 什么是模板参数模板？
 
@@ -178,6 +200,6 @@ template <typename T>
 <img src="../../GitCode/Learning-CS-Journey/Go/figure/template-template-template2.png">
 <img src="./figures/template-template-template3.png">
 
-参考
 
+## 8. References
 - [【C++】template template argument 模板参数模板](https://www.cnblogs.com/visayafan/archive/2011/11/29/2268041.html) 

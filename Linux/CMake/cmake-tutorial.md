@@ -2,14 +2,36 @@
  * @Author: JohnJeep
  * @Date: 2022-05-11 21:46:10
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:17:07
+ * @LastEditTime: 2025-11-20 12:29:57
  * @Description: 
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. CMake 教程
+CMake 教程
 
-# 2. 语法特性
+- [1. 语法特性](#1-语法特性)
+  - [1.1. 变量](#11-变量)
+  - [1.2. CMake 命令](#12-cmake-命令)
+      - [1.2.0.1. cmake\_minimum\_required](#1201-cmake_minimum_required)
+      - [1.2.0.2. project](#1202-project)
+      - [1.2.0.3. set](#1203-set)
+      - [1.2.0.4. add\_definitions](#1204-add_definitions)
+      - [1.2.0.5. add\_compile\_options](#1205-add_compile_options)
+      - [1.2.0.6. add\_library](#1206-add_library)
+      - [1.2.0.7. add\_executable](#1207-add_executable)
+      - [1.2.0.8. add\_subdirectory](#1208-add_subdirectory)
+      - [1.2.0.9. include\_directories](#1209-include_directories)
+      - [1.2.0.10. file](#12010-file)
+      - [1.2.0.11. aux\_source\_directory](#12011-aux_source_directory)
+      - [1.2.0.12. link\_directories](#12012-link_directories)
+      - [1.2.0.13. target\_link\_libraries](#12013-target_link_libraries)
+      - [1.2.0.14. if/elseif](#12014-ifelseif)
+      - [1.2.0.15. install](#12015-install)
+- [2. 构建方式](#2-构建方式)
+- [3. References](#3-references)
+
+
+# 1. 语法特性
 
 - 基本语法格式：命令(参数1 参数2 ...)
   - 参数使用花括号括起来。
@@ -26,14 +48,14 @@ add_executable(test main.cpp test.cpp)
 ADD_EXECUTABLe(test main.cpp test.cpp)  # 与上一条的用法一样
 ```
 
-## 2.1. 变量
+## 1.1. 变量
 
 获取时使用 `${}` 的方式去取值，若在 `if` 语句中则需要直接使用变量名，不能使用 `${}` 的方式。
 ```cmake
 set(TEST test.cpp)
 ```
 
-## 2.2. CMake 命令
+## 1.2. CMake 命令
 
 CMake 命令官方总共分为 4 大类。
 
@@ -44,14 +66,14 @@ CMake 命令官方总共分为 4 大类。
 
 下面仅仅列出常见的一些命令。
 
-#### 2.2.1. cmake_minimum_required
+#### 1.2.0.1. cmake_minimum_required
 
 ```cmake
 # 设置最低CMake版本要求
 cmake_minimum_required(VERSION 3.12)
 ```
 
-#### 2.2.2. project
+#### 1.2.0.2. project
 
 设置工程的名字
 
@@ -70,7 +92,7 @@ project(TestProj)
 
  设置工程的名字，并存储在变量 `TestProj` 中，当被上一级的 `CMakeLists.txt` 调用时，工程的名字被存在变量 `CMAKE_PROJECT_NAME` 中。
 
-#### 2.2.3. set
+#### 1.2.0.3. set
 
 编译器相关设置
 
@@ -114,14 +136,14 @@ SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)   
 ```
 
-#### 2.2.4. add_definitions
+#### 1.2.0.4. add_definitions
 
 ```cmake
 # 设置字符集
 add_definitions(-DUNICODE -D_UTF-8) 
 ```
 
-#### 2.2.5. add_compile_options
+#### 1.2.0.5. add_compile_options
 
 添加编译参数
 
@@ -134,7 +156,7 @@ add_compile_options(-Wall std=c++11 -O3)
 
 
 
-#### 2.2.6. add_library
+#### 1.2.0.6. add_library
 
 生成库文件
 
@@ -145,7 +167,7 @@ add_compile_options(-Wall std=c++11 -O3)
 add_library(test SHARED ${SRC})
 ```
 
-#### 2.2.7. add_executable
+#### 1.2.0.7. add_executable
 
 生成可执行文件
 
@@ -154,7 +176,7 @@ add_library(test SHARED ${SRC})
 add_executable(main ${SOURCES})
 ```
 
-#### 2.2.8. add_subdirectory
+#### 1.2.0.8. add_subdirectory
 
 向工程中添加存放源文件的子目录，作为可选项，可指定二进制文件或二进制文件存放的位置。
 
@@ -167,7 +189,7 @@ add_executable(main ${SOURCES})
 
 
 
-#### 2.2.9. include_directories
+#### 1.2.0.9. include_directories
 
 ```cmake
 # 向工程中添加头文件路径，参数项可为一个或多个
@@ -178,7 +200,7 @@ include_directories(${TEST_PATH}/include)
 
 
 
-#### 2.2.10. file
+#### 1.2.0.10. file
 
 枚举头文件
 
@@ -187,7 +209,7 @@ include_directories(${TEST_PATH}/include)
 file(GLOB_RECURSE INCLUDES "Inc/*.h" "Inc/*.hpp")  
 ```
 
-#### 2.2.11. aux_source_directory
+#### 1.2.0.11. aux_source_directory
 
 搜索指定目录 `dir` 下所有的源文件，并将结果列表存储在变量 `variable` 中。
 
@@ -198,14 +220,14 @@ file(GLOB_RECURSE INCLUDES "Inc/*.h" "Inc/*.hpp")
 aux_source_directory(Src SOURCES) 
 ```
 
-#### 2.2.12. link_directories
+#### 1.2.0.12. link_directories
 
 ```cmake
 # 依赖的链接库路径
 link_directories(${TEST_PATH}/cmake/build)
 ```
 
-#### 2.2.13. target_link_libraries
+#### 1.2.0.13. target_link_libraries
 
 为目标文件链接所需要的共享库。
 
@@ -224,7 +246,7 @@ link_directories(${TEST_PATH}/cmake/build)
   - **A link flag**: 
   - **A generator expression**。
 
-#### 2.2.14. if/elseif
+#### 1.2.0.14. if/elseif
 
 ```cmake
 # 区分操作系统
@@ -238,7 +260,7 @@ elseif(UNIX)
 endif()
 ```
 
-#### 2.2.15. install
+#### 1.2.0.15. install
 
 ```cmake
 # 安装COPYRIGHT 和 README 文件到 /usr/local/share/doc/cmake 路径下
@@ -270,7 +292,7 @@ install(directory doc/ destation share/doc/cmake)
 - `doc` 文件后不带 `/` 表示将 `doc` 整个文件安装到 `/usr/local/share/doc/cmake` 路径下。
 
 
-# 3. 构建方式
+# 2. 构建方式
 
 - 内部构建，不推荐使用
 
@@ -305,7 +327,7 @@ install(directory doc/ destation share/doc/cmake)
 
   
 
-# 4. Reference
+# 3. References
 
 - [CMake 官网](http://www.cmake.org/)
 - [Cmake Reference Documentation](https://cmake.org/documentation/)

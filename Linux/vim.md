@@ -2,10 +2,50 @@
  * @Author: JohnJeep
  * @Date: 2020-05-11 22:06:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-05 11:09:00
+ * @LastEditTime: 2025-11-20 11:52:19
  * @Description: How to use VIM
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
+
+- [1. Philosophy](#1-philosophy)
+- [2. Normal Mode](#2-normal-mode)
+  - [2.1. Cursor](#21-cursor)
+  - [2.2. Yank](#22-yank)
+  - [2.3. Paste](#23-paste)
+  - [2.4. Delete](#24-delete)
+  - [2.5. Undo](#25-undo)
+  - [2.6. Find](#26-find)
+  - [2.7. Mark](#27-mark)
+  - [2.8. Motions](#28-motions)
+    - [2.8.1. operator-motion](#281-operator-motion)
+    - [2.8.2. text objects](#282-text-objects)
+  - [2.9. Fold](#29-fold)
+    - [2.9.1. Manual Fold](#291-manual-fold)
+    - [2.9.2. Indent Fold](#292-indent-fold)
+    - [2.9.3. Syntax Fold](#293-syntax-fold)
+    - [2.9.4. Marker Fold](#294-marker-fold)
+- [3. Visual Mode](#3-visual-mode)
+- [4. Visual Line Mode](#4-visual-line-mode)
+- [5. Visual Block Mode](#5-visual-block-mode)
+- [6. Replace Mode](#6-replace-mode)
+- [7. Insert Mode](#7-insert-mode)
+- [8. Command Line Mode](#8-command-line-mode)
+  - [8.1. File](#81-file)
+  - [8.2. Command](#82-command)
+  - [8.3. Replace](#83-replace)
+  - [8.4. Window](#84-window)
+  - [8.5. Shell](#85-shell)
+  - [8.6. Help](#86-help)
+  - [8.7. Comment](#87-comment)
+- [9. Registers](#9-registers)
+  - [9.1. The expression register](#91-the-expression-register)
+- [10. Vim Config](#10-vim-config)
+  - [10.1. Key Mapping](#101-key-mapping)
+- [11. Recover Swap File](#11-recover-swap-file)
+- [12. Vim Sheet](#12-vim-sheet)
+- [13. Vscodevim tricks](#13-vscodevim-tricks)
+- [14. References](#14-references)
+
 
 # 1. Philosophy
 

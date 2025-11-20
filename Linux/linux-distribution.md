@@ -1,14 +1,19 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2025-03-21 14:58:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-21 18:17:31
+ * @LastEditTime: 2025-11-20 11:57:34
  * @Description: linux distribution
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# Distribution
+- [1. Distribution](#1-distribution)
+- [2. Debian](#2-debian)
+- [3. Ubuntu](#3-ubuntu)
+- [4. Alpine](#4-alpine)
+- [5. References](#5-references)
+
+## 1. Distribution
 
 Terminology
 
@@ -17,7 +22,7 @@ Terminology
 
 
 
-## Debian
+## 2. Debian
 
 Debian is an operating system which is composed primarily of free and open-source software, most of which is under the GNU General Public License, and developed by a group of individuals known as the Debian project. Debian is one of the most popular Linux distributions for personal computers and network servers, and has been used as a base for several other Linux distributions.
 
@@ -50,7 +55,7 @@ Distribution Version
 
 
 
-## Ubuntu
+## 3. Ubuntu
 
 Distribution Version
 
@@ -64,7 +69,7 @@ Distribution Version
 | [24.10](https://en.wikipedia.org/wiki/Ubuntu_version_history#2410) | Oracular Oriole |  2024-10-10  |        2025-07        |                              |
 
 
-## Alpine
+## 4. Alpine
 
 |  版本号  | 发布日期[[12\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-12) | 支持结束日期[[13\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-13) | Linux内核版本 |
 | :------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-----------: |
@@ -92,7 +97,7 @@ Distribution Version
 
 
 
-# References
+## 5. References
 
 - Wikipedia Debian: https://en.wikipedia.org/wiki/Debian
 - Debian official: https://www.debian.org

@@ -1,11 +1,71 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2025-04-04 19:14:22
+ * @LastEditTime: 2025-11-20 11:59:30
  * @LastEditors: JohnJeep
- * @Description: GDB 用法笔记
+ * @Description: GDB Usage
 --> 
+
+- [1. 简介](#1-简介)
+- [2. 安装 GDB](#2-安装-gdb)
+  - [2.1. 在线安装](#21-在线安装)
+  - [2.2. 源码安装](#22-源码安装)
+- [3. Invoking GDB](#3-invoking-gdb)
+- [4. Shell Commands](#4-shell-commands)
+- [5. Logging Output](#5-logging-output)
+- [6. 常用命令](#6-常用命令)
+  - [6.1. run](#61-run)
+    - [6.1.1. arguments](#611-arguments)
+    - [6.1.2. environment](#612-environment)
+    - [6.1.3. working directory](#613-working-directory)
+    - [6.1.4. standard input and output](#614-standard-input-and-output)
+  - [6.2. start](#62-start)
+  - [6.3. starti](#63-starti)
+  - [6.4. continue](#64-continue)
+  - [6.5. quit](#65-quit)
+  - [6.6. list](#66-list)
+  - [6.7. break](#67-break)
+  - [6.8. delete](#68-delete)
+  - [6.9. next](#69-next)
+  - [6.10. next into](#610-next-into)
+  - [6.11. step](#611-step)
+  - [6.12. step into](#612-step-into)
+  - [6.13. finish](#613-finish)
+  - [6.14. until](#614-until)
+  - [6.15. print](#615-print)
+  - [6.16. ptype](#616-ptype)
+  - [6.17. display](#617-display)
+  - [6.18. undisplay](#618-undisplay)
+  - [6.19. whatis](#619-whatis)
+  - [6.20. set](#620-set)
+  - [6.21. call](#621-call)
+  - [6.22. clear](#622-clear)
+  - [6.23. dir](#623-dir)
+  - [6.24. info](#624-info)
+  - [6.25. show](#625-show)
+  - [6.26. command](#626-command)
+  - [6.27. help](#627-help)
+  - [6.28. Others](#628-others)
+- [7. TUI](#7-tui)
+  - [7.1. TUI 中的断点](#71-tui-中的断点)
+  - [7.2. 快捷键](#72-快捷键)
+- [8. Examining Source Files](#8-examining-source-files)
+  - [8.1. 查看源码](#81-查看源码)
+  - [8.2. 编辑源码](#82-编辑源码)
+  - [8.3. 改变源码路径](#83-改变源码路径)
+- [9. 调试多进程](#9-调试多进程)
+- [10. 调试多线程](#10-调试多线程)
+- [11. 查看内存](#11-查看内存)
+  - [11.1. backtrace](#111-backtrace)
+  - [11.2. examine](#112-examine)
+- [12. Watchpoints](#12-watchpoints)
+- [13. Catchpoints](#13-catchpoints)
+- [14. 调试正在运行的程序](#14-调试正在运行的程序)
+- [15. 设置动态库](#15-设置动态库)
+- [16. Reverse](#16-reverse)
+- [17. 底层原理](#17-底层原理)
+- [18. References](#18-references)
+
 
 # 1. 简介
 
@@ -638,13 +698,13 @@ Printing of addresses is on.
 
 `undisplay 变量名的编号`  不追踪某个变量的值。首先查看不需要追踪变量的编号 `i(info) display` ，然后使用 `undisplay 变量名的编号` 去掉不用追踪的变量。
 
-## whatis
+## 6.19. whatis
 
 显示变量或函数类型
 
 
 
-## 6.19. set
+## 6.20. set
 
 设置变量的值
 
@@ -654,11 +714,11 @@ set var=value
 
 
 
-## 6.20. call
+## 6.21. call
 
 调用和执行一个函数。
 
-## 6.21. clear
+## 6.22. clear
 
 清除断点。
 
@@ -668,7 +728,7 @@ set var=value
 
 
 
-## 6.22. dir
+## 6.23. dir
 
 使用`directory`（或`dir`)命令设置源文件的查找目录。如果希望在gdb启动时，加载code的位置，避免每次在gdb中再次输入命令，可以使用gdb的`-d` 参数
 
@@ -677,7 +737,7 @@ set var=value
 gdb -q a.out -d /search/code/some
 ```
 
-## 6.23. info
+## 6.24. info
 
 显示正在调试程序的通用命令。info 是通用命令，简写为 `i` 后面还要跟具体要显示的子命令（subcommands），这些子命令可以是 `args`，`registers` 等等，描述当前程序的命令。
 
@@ -708,7 +768,7 @@ info break
 info locals
 ```
 
-## 6.24. show
+## 6.25. show
 
 显示 GDB 本身内部的信息，像 `version`，`environment`，`user` 等等。语法同 `info` 命令一样。
 
@@ -733,11 +793,11 @@ For bug reporting instructions, please see:
 
 官方参考：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
 
-## command
+## 6.26. command
 
 
 
-## 6.25. help
+## 6.27. help
 
 help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、最好的资料，需要仔细研磨，但是常常被大多数人给遗忘了，去网上搜索各种各样的资料。
 
@@ -792,7 +852,7 @@ help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、�
 
    官网地址：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
 
-## 6.26. Others
+## 6.28. Others
 
 GDB 中特殊的命令。
 
@@ -1229,7 +1289,7 @@ gdb底层的调试机制是怎样的？
 
 
 
-# 18. 参考
+# 18. References
 
 - [GDB 官方英文文档](https://www.gnu.org/software/gdb/)：<font color=red>： 重点看 </font>
 - [CS-MCU GDB tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/)

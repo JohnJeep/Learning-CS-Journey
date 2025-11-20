@@ -2,10 +2,19 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:53
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:12:51
+ * @LastEditTime: 2025-11-20 12:03:41
  * @Description: Core dump 使用
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
+
+- [1. 什么是 Core dump?](#1-什么是-core-dump)
+- [2. core 产生原因](#2-core-产生原因)
+  - [2.1. Core dump 产生前提条件](#21-core-dump-产生前提条件)
+  - [2.2. Core dump 生成目录](#22-core-dump-生成目录)
+  - [2.3. 修改core文件保存路径](#23-修改core文件保存路径)
+- [3. GDB定位 Core 文件](#3-gdb定位-core-文件)
+- [4. References](#4-references)
+
 
 # 1. 什么是 Core dump?
 

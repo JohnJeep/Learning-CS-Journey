@@ -1,10 +1,58 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2025-11-18 10:51:58
+ * @LastEditTime: 2025-11-20 12:41:02
  * @LastEditors: JohnJeep
  * @Description: Linux 环境系统编程基础知识
 -->
+
+- [1. System function](#1-system-function)
+  - [1.1. Core concept(概念)](#11-core-concept概念)
+  - [1.2. Carriage Return \&\& Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
+  - [1.3. File I/O(文件 I/O)](#13-file-io文件-io)
+    - [1.3.1. open()](#131-open)
+    - [1.3.2. read()/write()](#132-readwrite)
+    - [1.3.3. lseek()](#133-lseek)
+    - [1.3.4. fsync](#134-fsync)
+    - [1.3.5. stat()](#135-stat)
+    - [1.3.6. lstat()](#136-lstat)
+    - [1.3.7. access()](#137-access)
+    - [1.3.8. chmod()](#138-chmod)
+    - [1.3.9. truncate()](#139-truncate)
+    - [1.3.10. readlink()](#1310-readlink)
+    - [1.3.11. unlink()](#1311-unlink)
+    - [1.3.12. opendir()](#1312-opendir)
+    - [1.3.13. readdir()](#1313-readdir)
+    - [1.3.14. closedir()](#1314-closedir)
+    - [1.3.15. dup() \&\& dup2()](#1315-dup--dup2)
+    - [1.3.16. fcntl()](#1316-fcntl)
+  - [1.4. Environment variables(环境变量)](#14-environment-variables环境变量)
+- [2. Process(进程)](#2-process进程)
+  - [2.1. fork()](#21-fork)
+  - [2.2. exec() family](#22-exec-family)
+  - [2.3. wait()](#23-wait)
+  - [2.4. IPC](#24-ipc)
+    - [2.4.1. Pipe(管道)](#241-pipe管道)
+      - [2.4.1.1. unamed pipe(匿名管道)](#2411-unamed-pipe匿名管道)
+      - [2.4.1.2. named pipe(有名管道)](#2412-named-pipe有名管道)
+    - [2.4.2. mmap](#242-mmap)
+    - [2.4.3. Signal(信号)](#243-signal信号)
+    - [2.4.4. Semaphore(信号量)](#244-semaphore信号量)
+    - [2.4.5. Message queues(消息队列)](#245-message-queues消息队列)
+    - [2.4.6. Socket(套接字)](#246-socket套接字)
+  - [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
+  - [2.6. Terminal(终端)](#26-terminal终端)
+  - [2.7. Process group(进程组)](#27-process-group进程组)
+  - [2.8. Daemon(守护进程)](#28-daemon守护进程)
+- [3. Thread(线程)](#3-thread线程)
+  - [3.1. Core concepts(基础概念)](#31-core-concepts基础概念)
+  - [3.2. Function(线程相关函数)](#32-function线程相关函数)
+  - [3.3. 线程属性设置](#33-线程属性设置)
+  - [3.4. 注意事项](#34-注意事项)
+  - [3.5. 线程同步](#35-线程同步)
+  - [3.6. 线程之间死锁的原因](#36-线程之间死锁的原因)
+  - [3.7. Mutex(线程互斥)](#37-mutex线程互斥)
+    - [3.7.1. References](#371-references)
 
 # 1. System function
 
@@ -312,7 +360,7 @@ int main() {
 - `getegid()` 获取当前进程有效用户组 ID 号
 
 
-## 2.2. exec() 家族
+## 2.2. exec() family
 
 - 执行 `exec()` 家族的函数后，将当前进程的内存空间数据替换为要执行函数的内存空间数据。
 - exec() 家族函数只有失败时才返回，返回值为 -1，程序执行成功时，含食宿不会返回。
@@ -389,26 +437,26 @@ int main() {
 ## 2.4. IPC
 IPC(Inter Process Communication) 叫进程间通信。
 
-- Linux 中七种文件类型
-  - 非伪文件：占用磁盘的存储空间
-    - `-` 普通文件
-    - `d(directory)` 目录
-    - `l(link)` 链接
+Linux 中七种文件类型
+- 非伪文件：占用磁盘的存储空间
+  - `-` 普通文件
+  - `d(directory)` 目录
+  - `l(link)` 链接
 
-  - 伪文件：不占用磁盘的存储空间
-    - `s(socket)` 套接字
-    - `b(block) ` 块设备
-    - `c(char)  ` 字符设备
-    - `p(pipe)  ` 管道
+- 伪文件：不占用磁盘的存储空间
+  - `s(socket)` 套接字
+  - `b(block) ` 块设备
+  - `c(char)  ` 字符设备
+  - `p(pipe)  ` 管道
 
 
-- 6 种方式
-  - Pipe(管道：最简单)
-  - Signal(信号：开销最小)
-  - Mmap(共享映射区：无血缘关系)
-  - Socket(本地套接字：最稳定)
-  - Message queue(消息队列)
-  - Semaphore(信号量)
+6 种方式
+- Pipe(管道：最简单)
+- Signal(信号：开销最小)
+- Mmap(共享映射区：无血缘关系)
+- Socket(本地套接字：最稳定)
+- Message queue(消息队列)
+- Semaphore(信号量)
 
 
 ### 2.4.1. Pipe(管道)

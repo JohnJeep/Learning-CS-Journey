@@ -2,10 +2,23 @@
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-15 18:14:46
+ * @LastEditTime: 2025-11-20 11:44:53
  * @Description: hashtable usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
+
+- [1. 什么是hashtable？](#1-什么是hashtable)
+- [2. 为什么要用 hashtable?](#2-为什么要用-hashtable)
+- [3. 什么是哈希冲突？](#3-什么是哈希冲突)
+- [4. 如何解决哈希冲突？](#4-如何解决哈希冲突)
+  - [4.1. 链地址法](#41-链地址法)
+  - [4.2. 开发定址法](#42-开发定址法)
+  - [4.3. 再哈希法](#43-再哈希法)
+  - [4.4. 建立公共溢出区](#44-建立公共溢出区)
+- [5. 优点](#5-优点)
+- [6. 缺点](#6-缺点)
+- [7. 复杂度](#7-复杂度)
+- [8. References](#8-references)
 
 # 1. 什么是hashtable？
 

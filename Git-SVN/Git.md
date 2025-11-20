@@ -2,13 +2,55 @@
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:20:16
- * @Description: Git 
+ * @LastEditTime: 2025-11-20 12:44:47
+ * @Description: Git Usage
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
 
-# 1. Git Command
+- [1. Git Command](#1-git-command)
+  - [1.1. Git init](#11-git-init)
+  - [1.2. Git add](#12-git-add)
+  - [1.3. Git log](#13-git-log)
+  - [1.4. Git tag](#14-git-tag)
+  - [1.5. Git alias](#15-git-alias)
+  - [1.6. Git checkout](#16-git-checkout)
+  - [1.7. Git commit](#17-git-commit)
+  - [1.8. Git diff](#18-git-diff)
+  - [1.9. Git stash](#19-git-stash)
+  - [1.10. Git blame](#110-git-blame)
+  - [1.11. Git bisect](#111-git-bisect)
+  - [1.12. Git rebase](#112-git-rebase)
+  - [1.13. Git revert](#113-git-revert)
+  - [1.14. Git Reset](#114-git-reset)
+  - [1.15. Remove or Restore](#115-remove-or-restore)
+    - [1.15.1. remove](#1151-remove)
+    - [1.15.2. restore](#1152-restore)
+  - [1.16. other command](#116-other-command)
+- [2. Git Branch](#2-git-branch)
+  - [2.1. Local repo branch](#21-local-repo-branch)
+  - [2.2. Remote repo branch](#22-remote-repo-branch)
+  - [2.3. Branches Principle](#23-branches-principle)
+  - [2.4. Branches conflict](#24-branches-conflict)
+    - [2.4.1. Git rebase](#241-git-rebase)
+    - [2.4.2. Git merge](#242-git-merge)
+- [3. Git Area](#3-git-area)
+  - [3.1. Workspace](#31-workspace)
+  - [3.2. Index](#32-index)
+  - [3.3. Local repository](#33-local-repository)
+  - [3.4. Remote repository](#34-remote-repository)
+    - [3.4.1. Git remote](#341-git-remote)
+    - [3.4.2. Git pull \&\& Git fetch](#342-git-pull--git-fetch)
+    - [3.4.3. Remote and local repository](#343-remote-and-local-repository)
+- [4. Git Config](#4-git-config)
+- [5. Git Proxy](#5-git-proxy)
+- [6. 提交代码总结](#6-提交代码总结)
+  - [6.1. 第一次提交](#61-第一次提交)
+  - [6.2. 不是第一次提交](#62-不是第一次提交)
+- [7. Git 常用命令](#7-git-常用命令)
+- [8. References](#8-references)
 
+
+# 1. Git Command
 
 ## 1.1. Git init
 - `git init` 初始化一个 Git 仓库

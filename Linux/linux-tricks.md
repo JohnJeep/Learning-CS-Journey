@@ -1,6 +1,27 @@
-# linux system tricks and tips
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-10-10 15:31:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2025-11-20 11:56:09
+ * @Description: Linux 使用技巧
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
 
-## 系统
+linux system tricks and tips
+- [1. 系统](#1-系统)
+- [2. 资源](#2-资源)
+- [3. 磁盘和分区](#3-磁盘和分区)
+- [4. 网络](#4-网络)
+- [5. 进程](#5-进程)
+- [6. 用户](#6-用户)
+- [7. 服务](#7-服务)
+- [8. 程序](#8-程序)
+- [9. 内存信息](#9-内存信息)
+- [10. 机器型号](#10-机器型号)
+- [11. 网卡信息](#11-网卡信息)
+
+
+## 1. 系统
 
 ```shell
 # uname -a        # 查看内核/操作系统/CPU信息
@@ -13,7 +34,7 @@
 # env          # 查看环境变量
 ```
 
-## 资源
+## 2. 资源
 
 ```shell
 # free -m        # 查看内存使用量和交换区使用量
@@ -25,7 +46,7 @@
 # cat /proc/loadavg   # 查看系统负载
 ```
 
-## 磁盘和分区
+## 3. 磁盘和分区
 
 ```shell
 # mount | column -t   # 查看挂接的分区状态
@@ -35,7 +56,7 @@
 # dmesg | grep IDE    # 查看启动时IDE设备检测状况
 ```
 
-## 网络
+## 4. 网络
 
 ```shell
 # ifconfig        # 查看所有网络接口的属性
@@ -46,14 +67,14 @@
 # netstat -s       # 查看网络统计信息
 ```
 
-## 进程
+## 5. 进程
 
 ```shell
 # ps -ef         # 查看所有进程
 # top          # 实时显示进程状态
 ```
 
-## 用户
+## 6. 用户
 
 ```shell
 # w           # 查看活动用户
@@ -64,14 +85,14 @@
 # crontab -l       # 查看当前用户的计划任务
 ```
 
-## 服务
+## 7. 服务
 
 ```shell
 # chkconfig --list    # 列出所有系统服务
 # chkconfig --list | grep on  # 列出所有启动的系统服务
 ```
 
-## 程序
+## 8. 程序
 
 ```shell
 # rpm -qa        # 查看所有安装的软件包
@@ -98,7 +119,7 @@
 (结果大于0, 说明支持64bit计算. lm指long mode, 支持lm则是64bit) 
 ```
 
-## 内存信息 
+## 9. 内存信息 
 
 ```shell
 # cat /proc/meminfo 
@@ -112,13 +133,13 @@ Red Hat Enterprise Linux AS release 4 (Nahant Update 5)
 (查看当前操作系统发行版信息) 
 ```
 
-## 机器型号
+## 10. 机器型号
 
 ```shell
 # dmidecode | grep "Product Name" 
 ```
 
-## 网卡信息 
+## 11. 网卡信息 
 
 ```shell
 # dmesg | grep -i eth

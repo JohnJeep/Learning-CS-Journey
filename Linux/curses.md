@@ -2,10 +2,19 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:53
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-03-31 16:19:28
- * @Description: linux curses 用法
+ * @LastEditTime: 2025-11-20 12:00:11
+ * @Description: linux curses usage
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
+
+- [1. 介绍](#1-介绍)
+- [2. 安装](#2-安装)
+  - [2.1. Ubuntu 中安装 curses](#21-ubuntu-中安装-curses)
+  - [2.2. centos 中安装 curses](#22-centos-中安装-curses)
+  - [2.3. 源码安装 ncurse 库](#23-源码安装-ncurse-库)
+- [3. 案例](#3-案例)
+- [4. References](#4-references)
+
 
 # 1. 介绍
 
