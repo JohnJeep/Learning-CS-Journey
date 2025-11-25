@@ -1,7 +1,7 @@
 <!--
 
  * @Author: JohnJeep
- * @Date: 2020-09-05 23:49:23
+ * @Date: 2023-09-05 23:49:23
  * @LastEditors: JohnJeep
  * @LastEditTime: 2025-04-23 15:05:41
  * @Description: Go 语言学习
@@ -281,6 +281,34 @@ const    fallthrough  if      range        type
 continue for          import  return       var
 ```
 
+#### Operator precedence(操作符优先级)
+
+Golang 中的操作符优先级与C++中的优先级不一样，要注意区分。
+
+比如
+
+```
+1<<31-1 // go 中当做 (1<<31)-1;  << 优先级高于 -
+1<<31-1 // C++ 中当做 1 << (31-1); - 优先级高于 <<
+```
+
+Go 语言规范（The Go Programming Language Specification）
+
+**官方链接：** https://go.dev/ref/spec#Operator_precedence
+
+在这个页面中，有专门的 "Operator precedence" 部分，明确列出了所有运算符的优先级顺序。
+
+```tex
+Precedence    Operator
+    5             *  /  %  <<  >>  &  &^
+    4             +  -  |  ^
+    3             ==  !=  <  <=  >  >=
+    2             &&
+    1             ||
+```
+
+
+
 ## 4.5. built-in type(内置类型)
 
 
@@ -539,8 +567,7 @@ Go 语言中的 Unicode 编码为 `rune`，即 `int32` 类型。
 
 数据类型的作用：告诉编译器变量以多大的内存去存储。
 
-
-### 4.10.1. Constant(常量)
+### 4.10.1. Constant
 
 常量表达式的值在编译期计算， 而不是在运行期。 每种常量的潜在类型都是基础类型：boolean、 string 或数字。
 一个常量的声明语句定义了常量的名字和变量的声明语法类似， 常量的值不可修改， 这样可以防止在运行期被意外或恶意的修改。
@@ -1013,7 +1040,7 @@ func showMyCar() {
 
 # 5. 语言特性
 
-## 5.1. Function(函数)
+## 5.1. Function
 
 ### 5.1.1. 函数声明
 
