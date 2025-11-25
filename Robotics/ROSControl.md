@@ -34,7 +34,7 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 1. Controllers(控制器)
 2. Controller Manager(控制器管理器)
 3. Resource Manager(资源管理器)
-4. Hardware Resources(硬件组件)
+4. Hardware Resources(硬件资源)
 
 ![](./Images/ros2_control_architecture.png)
 
