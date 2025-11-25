@@ -39,15 +39,16 @@ Docker 是在 Linux 容器技术的基础上发展起来的。将应用打包成
 
 # 5. 为什么 Docker 比虚拟机快？
 
-- Docker 有比虚拟机更少的抽象层。
-  由于 Docker 不需要 Hyperversion（虚拟机）实现硬件资源虚拟化，运行在 Docker 容器上的程序直接使用的是实际物理机器的硬件资源，因此 CPU、内存利用率在 Docker 上有跟明显的优势。
-  
-  ![](../figures/vm-container.jpg)
+Docker 有比虚拟机更少的抽象层。
+由于 Docker 不需要 Hyperversion（虚拟机）实现硬件资源虚拟化，运行在 Docker 容器上的程序直接使用的是实际物理机器的硬件资源，因此 CPU、内存利用率在 Docker 上有跟明显的优势。
 
-- Docker 利用的是宿主机的内核，不需要加载操作系统的内核。
-  当新建一个容器时，Docker 不需要和虚拟机一样加载一个操作系统的内核，而是利用的是宿主机的内核，避免了操作系统的加载、寻址、系统内核返回等比较费时、费资源的过程。当新建一个虚拟机时，虚拟机软件需要先加载操作系统，然后再返回，这个过程是非常耗时的，分钟级别的，而 Docker 则是直接省略了这一过程，新建一个 Docker 容器只需要几秒钟，非常的快。 
+![](../figures/vm-container.jpg)
 
-Docker 优点
+Docker 利用的是宿主机的内核，不需要加载操作系统的内核。
+当新建一个容器时，Docker 不需要和虚拟机一样加载一个操作系统的内核，而是利用的是宿主机的内核，避免了操作系统的加载、寻址、系统内核返回等比较费时、费资源的过程。当新建一个虚拟机时，虚拟机软件需要先加载操作系统，然后再返回，这个过程是非常耗时的，分钟级别的，而 Docker 则是直接省略了这一过程，新建一个 Docker 容器只需要几秒钟，非常的快。 
+
+**Docker 优点**
+
 - 轻便：Docker 是基于容器的虚拟化，仅包含业务运行所需要的环境。
 - 高效：不需要操作系统的虚拟化开销。
 - 灵活性更高：支持多网络配置、分层存储和包管理。
@@ -70,20 +71,20 @@ Docker 中有三个重要的组件：Image，Container，Repository。只有理�
 
 ![](../figures/docker-container-component.jpg)
 
-- 镜像（Image）
-  - Docker 镜像是一个特殊的文件系统，用来创建 Docker 容器，一个镜像可以创建很多个容器。比如 CentOS7 官方镜像。
-  - Docker 中除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。
-  - 镜像不包含任何的动态数据，镜像中的内容在构建之后不会再被改变。
+镜像（Image）
+- Docker 镜像是一个特殊的文件系统，用来创建 Docker 容器，一个镜像可以创建很多个容器。比如 CentOS7 官方镜像。
+- Docker 中除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。
+- 镜像不包含任何的动态数据，镜像中的内容在构建之后不会再被改变。
 
-- 容器（Container）
-  - Docker 利用容器，独立运行一个或一组应用，而应用程序或服务都运行在容器里面。
-  - 容器就类似于一个虚拟化的运行环境，容器是镜像创建运行时的实例，就像是面向对象程序设计中的**类** 和 **实例** 一样，镜像相当于**类**，容器相当于**类的实例**。
-  - 容器为镜像提供了一个标准的、容器之间相互隔离的运行环境，容器可以被创建、启动、停止、删除、暂停等。
-  - 创建的容器有两部分组成：一个是最小最核心的赖以生存的 Linux 内核文件，另一个是具体的应用程序。
+容器（Container）
+- Docker 利用容器，独立运行一个或一组应用，而应用程序或服务都运行在容器里面。
+- 容器就类似于一个虚拟化的运行环境，容器是镜像创建运行时的实例，就像是面向对象程序设计中的**类** 和 **实例** 一样，镜像相当于**类**，容器相当于**类的实例**。
+- 容器为镜像提供了一个标准的、容器之间相互隔离的运行环境，容器可以被创建、启动、停止、删除、暂停等。
+- 创建的容器有两部分组成：一个是最小最核心的赖以生存的 Linux 内核文件，另一个是具体的应用程序。
 
-- 仓库（Repository）
-  - 集中存放镜像文件的地方，类似 Git 的远程仓库。
-  - 仓库分为私有仓库和公开的仓库。私有仓库：比如公司内部搭建专门存放镜像文件的地方；公共仓库：任何人都能访问专门存放镜像文件的地方。全球最大的公开仓库是 Dockerhub(https://hub.docker.com)。在中国境内由于一些著名的原因，访问 Dockerhub 仓库比较慢，可以配置国内的镜像仓库，比如阿里云、网易等等。
+仓库（Repository）
+- 集中存放镜像文件的地方，类似 Git 的远程仓库。
+- 仓库分为私有仓库和公开的仓库。私有仓库：比如公司内部搭建专门存放镜像文件的地方；公共仓库：任何人都能访问专门存放镜像文件的地方。全球最大的公开仓库是 Dockerhub(https://hub.docker.com)。在中国境内由于一些著名的原因，访问 Dockerhub 仓库比较慢，可以配置国内的镜像仓库，比如阿里云、网易等等。
 
 
 
@@ -206,13 +207,13 @@ $ sudo rm -rf /var/lib/containerd
 
 用法
 
-```
+```bash
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
 Docker run中的可选项
 
-```
+```bash
 OPTIONS:
   -i, --interactive   交互式运行容器
   -t, --tty           给容器重新分配一个伪终端（pseudo-TTY）
@@ -230,7 +231,7 @@ OPTIONS:
 
 `docker run -it 36c607e7b14d /bin/bash`  命令表示：交互式启动一个镜像 ID 为 `36c607e7b14d` 的 zookeeper 容器，并在容器中执行  `/bin/bash` 命令。
 
-```
+```bash
 [root@redis_181 ~]# docker images
 REPOSITORY           TAG       IMAGE ID       CREATED        SIZE
 wurstmeister/kafka   latest    2dd91ce2efe1   2 weeks ago    508MB
@@ -244,7 +245,7 @@ root@c9fa3e7753a5:/apache-zookeeper-3.7.0-bin#
 
 交互式的方式启动一个容器，并给容器起一个新名字，同时分配一个伪终端。在标准输入中用 bash 命令启动伪终端。
 
-```
+```bash
 [root@redis_181 ~]# docker run -it --name=kafka wurstmeister/kafka /bin/bash
 bash-5.1#
 ```
@@ -255,7 +256,7 @@ bash-5.1#
 
 前提：要想 Docker 容器在后台运行，就必须有一个前台进程。若果容器运行的命令不是那些一直挂起的命令（比如：tail，top等），容器启动后就会自动退出。
 
-```
+```bash
 [root@redis_181 ~]# docker run -d redis:6.0.8
 77e61214ea8c95c007dc02928d01179ba964e63a9c1861a870fedb6f4938dd56
 ```
@@ -264,7 +265,7 @@ bash-5.1#
 
 列出本地主机中当前正在运行的容器信息
 
-```
+```bash
 用法
     docker ps [OPTIONS]
 
@@ -298,7 +299,7 @@ docker ps -a
 
 启动容器
 
-```
+```bash
 docker start <容器id或容器名>
 ```
 
@@ -306,7 +307,7 @@ docker start <容器id或容器名>
 
 关闭容器
 
-```
+```bash
 docker stop <容器id或容器名>
 
 例子：
@@ -318,16 +319,15 @@ docker stop <容器id或容器名>
 
 重启容器
 
-```
+```bash
 docker restart <容器ID或容器名>
 ```
-
 
 ### 9.2.7. docker kill
 
 强制停止容器
 
-```
+```bash
 docker kill <容器ID或容器名>
 ```
 
@@ -336,19 +336,16 @@ docker kill <容器ID或容器名>
 
 删除以停止的容器
 
-```
+```bash
 docker rm <容器ID或容器名>
 ```
-
 
 ### 9.2.9. docker top
 
 显示一个容器内部运行的进程。
 用法：`docker top CONTAINER [ps OPTIONS]`
 
-示例
-
-```
+```bash
 [root@redis_181 ~]# docker ps
   CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS      NAMES
   77e61214ea8c   redis:6.0.8   "docker-entrypoint.s…"   15 seconds ago   Up 13 seconds   6379/tcp   focused_almeida
@@ -362,7 +359,7 @@ docker rm <容器ID或容器名>
 
 查看容器的内部细节信息。
 
-```
+```bash
 用法
     docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 
@@ -379,7 +376,7 @@ OPTIONS:
 
 重新进入原先已退出的容器内部。
 
-```
+```bash
 用法
     docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 
@@ -390,7 +387,7 @@ OPTIONS:
 
 示例
 
-```
+```bash
 docker exec -it <容器ID> /bin/bash
 
 # 使用 /bin/bash 命令前台交互的重新进入到容器内部 
@@ -467,7 +464,7 @@ OPTIONS:
 
 在容器和本地文件系统（本地主机）之间拷贝文件或文件夹。
 
-```
+```bash
 用法
     docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
     docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
@@ -481,7 +478,7 @@ OPTIONS:
 
 查看容器内部日志
 
-```
+```bash
 用法
     docker logs [OPTIONS] CONTAINER
 
@@ -498,7 +495,7 @@ OPTIONS:
 
 导出一个容器文件系统作为一个 tar 包。
 
-```sh
+```bash
 用法
     docker export [OPTIONS] CONTAINER
 
@@ -527,7 +524,7 @@ bdbd7d438f8f   hello-world          "/hello"                 2 days ago       Ex
 从 tar 包中的内容创建一个新的文件系统，再导入为 Docker 镜像。
 
 ```sh
-用法
+Usage:
   docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
 
 OPTIONS:
@@ -539,18 +536,18 @@ OPTIONS:
 示例
 ```sh
 # cat 文件名.tar | docker import - 镜像用户/镜像名:镜像版本号
-    [root@redis_181 ~]# cat hello.tar | docker import - john/hello:5.0
-    sha256:ed584048180e082610c982dc8f56ccf9618872f80d5848d0e8c840dfd46c13bc
-    [root@redis_181 ~]# docker images
-    REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
-    john/hello           5.0       ed584048180e   12 seconds ago   13.3kB
-    wurstmeister/kafka   latest    2dd91ce2efe1   2 weeks ago      508MB
+[root@redis_181 ~]# cat hello.tar | docker import - john/hello:5.0
+sha256:ed584048180e082610c982dc8f56ccf9618872f80d5848d0e8c840dfd46c13bc
+[root@redis_181 ~]# docker images
+REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
+john/hello           5.0       ed584048180e   12 seconds ago   13.3kB
+wurstmeister/kafka   latest    2dd91ce2efe1   2 weeks ago      508MB
 
-  # 从远程位置导入
-   docker import https://example.com/exampleimage.tgz
+# 从远程位置导入
+docker import https://example.com/exampleimage.tgz
 
- # 从本地文件中导入
-   docker import /path/to/exampleimage.tgz
+# 从本地文件中导入
+docker import /path/to/exampleimage.tgz
 ```
 
 ## 9.3. Image Command
@@ -560,7 +557,7 @@ OPTIONS:
 列出本地主机上已下载的所有 Docker 镜像
 
 ```sh
-用法
+Usage:
     docker images [OPTIONS] [REPOSITORY[:TAG]]
 
 OPTIONS:
@@ -580,7 +577,7 @@ hello-world          latest    feb5d9fea6a5   3 months ago   13.3kB
 
 显示结果说明
 
-```
+```bash
 REPOSITORY：镜像的仓库源
 TAG：镜像的标签版本号
 IMAGE ID：镜像 ID
@@ -598,8 +595,8 @@ SIZE：镜像大小
 
 从仓库源中搜索某个镜像
 
-```sh
-用法
+```bash
+Usage:
     docker search [OPTIONS] TERM
 
 OPTIONS：
@@ -652,8 +649,8 @@ flant/redis-sentinel-proxy       Redis sentinel proxy by enriclluelles writte…
 
 从仓库源中拉取指定的镜像或仓库
 
-```sh
-用法
+```bash
+Usage:
     docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 
 OPTIONS:
@@ -676,8 +673,8 @@ OPTIONS:
 
 删除指定的镜像（rmi: Remove one or more images）
 
-```sh
-用法
+```bash
+Usage:
     docker rmi [OPTIONS] IMAGE [IMAGE...]
 
 OPTIONS:
@@ -687,7 +684,7 @@ OPTIONS:
 
 示例：
 1. 删除单个镜像
-```sh
+```bash
 [root@redis_181 ~]# docker rmi -f hello-world
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:975f4b14f326b05db86e16de00144f9c12257553bba9484fed41f9b6f2257800
@@ -747,8 +744,8 @@ Build Cache     0         0         0B        0B
 
 保存一个或多个镜像到 `tar` 包中，默认是通过标准输出流。 
 
-```sh
-用法
+```bash
+Usage:
   docker save [OPTIONS] IMAGE [IMAGE...]
 
 OPTIONS:
@@ -759,8 +756,8 @@ OPTIONS:
 
 从一个 `tar` 包或标准输入中导入 Docker 镜像。
 
-```sh
-用法
+```bash
+Usage:
   docker load [OPTIONS]
 
 OPTIONS:
@@ -783,8 +780,8 @@ docker images
 ### 9.3.8. docker build
 
 从一个 Dockerfile 中构建一个 Docker 镜像。
-```sh
-用法
+```bash
+Usage:
 docker build [OPTIONS] PATH | URL | -
 ```
 
@@ -807,9 +804,8 @@ Docker下安装软件的步骤
 
 卷的设计目的：就是数据的持久化，完全独立于容器的生存周期，因此 docker 不会在容器删除时删除其挂载的数据卷。
 
-命令用法
-
-```sh
+```bash
+// 命令用法
 docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录    镜像名
 
 // 实例
@@ -819,7 +815,6 @@ docker run -it --privileged=true -v /home/docker_data:/data  --name redis-7 redi
 // 默认情况下，容器内的目录具有读写权限：rW
 // 限制容器内的权限，具有只读属性 ro
 docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:ro    镜像名
-
 ```
 
 ## 11.2. Volume 能干吗？
@@ -999,9 +994,7 @@ RUN  # 用来执行命令的，运行一个 RUN 就表示构建一层镜像的�
 
 设置环境变量
 
-格式
-
-```
+```bash
 ENV <key> <value>
 ENV <key1>=<value1> <key2>=<value2>...
 ```
