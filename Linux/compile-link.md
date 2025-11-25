@@ -1,35 +1,36 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:03:56
+ * @LastEditTime: 2025-11-25 21:40:13
  * @Description: 预处理、编译、汇编、链接过程
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
 
 - [1. 缩写](#1-缩写)
-- [2. 程序处理过程](#2-程序处理过程)
+- [2. 编译链接](#2-编译链接)
+  - [2.1. 预处理(Preprocessing)](#21-预处理preprocessing)
+  - [2.2. 编译(Compilation)](#22-编译compilation)
+  - [2.3. 汇编(Assembly)](#23-汇编assembly)
+  - [2.4. 链接(Linking)](#24-链接linking)
+  - [2.5. 常见的工具链组合](#25-常见的工具链组合)
+  - [2.6. 可执行文件(Execute file)](#26-可执行文件execute-file)
 - [3. 内存四区](#3-内存四区)
 - [4. 函数库](#4-函数库)
-- [5. 静态库](#5-静态库)
-- [6. 动态库](#6-动态库)
-  - [6.1. Linux平台](#61-linux平台)
-  - [6.2. Windows平台](#62-windows平台)
-- [7. ELF relocatable](#7-elf-relocatable)
-- [8. GCC](#8-gcc)
-  - [8.1. 源码编译三部曲](#81-源码编译三部曲)
-  - [8.2. CentOS7 安装高版本 gcc8/g++8](#82-centos7-安装高版本-gcc8g8)
-  - [8.3. 拓展知识点](#83-拓展知识点)
-- [9. 工具](#9-工具)
-  - [9.1. readelf](#91-readelf)
-  - [9.2. size](#92-size)
-  - [9.3. nm](#93-nm)
-  - [9.4. pmap](#94-pmap)
-  - [9.5. patchelf](#95-patchelf)
-  - [9.6. objdump](#96-objdump)
-- [10. Build](#10-build)
-- [11. References](#11-references)
+  - [4.1. 静态库](#41-静态库)
+  - [4.2. 动态库](#42-动态库)
+    - [4.2.1. Linux平台](#421-linux平台)
+    - [4.2.2. Windows平台](#422-windows平台)
+- [5. ELF relocatable](#5-elf-relocatable)
+- [6. Tools](#6-tools)
+  - [6.1. readelf](#61-readelf)
+  - [6.2. size](#62-size)
+  - [6.3. nm](#63-nm)
+  - [6.4. pmap](#64-pmap)
+  - [6.5. patchelf](#65-patchelf)
+  - [6.6. objdump](#66-objdump)
+- [7. Build](#7-build)
+- [8. References](#8-references)
 
 # 1. 缩写
 
@@ -40,61 +41,131 @@
 - SLL(Static ALinking Library): windows下的以 `.lib` 方式命名，Linux的以 `.a` 方式命名。
 - BSS(Block Started by Symbol): 未初始化的全局变量和局部静态变量的区域。
 
-# 2. 程序处理过程
+# 2. 编译链接
 
 程序处理的流程：源代码→预处理→编译→汇编→目标文件→链接→可执行文件
 
-预处理(Preprocessing)
+## 2.1. 预处理(Preprocessing)
 
-- 处理C、C++源代码 `#include` 文件生成预处理文件 `.i` 或者 `.ii` 文件
+处理源代码中的预处理指令，例如`#include`、`#define`、`#ifdef`等。预处理器（cpp，C Preprocessor）会展开头文件，宏替换，条件编译等，生成一个纯C++代码文件（通常以`.i`或`.ii`为扩展名）。
 
-编译(Compile)
+```bash
+# 只进行预处理
+g++ -E main.cpp -o main.i
+```
 
-- 将预处理文件编译成汇编代码 `.s` 文件
+预处理阶段处理：
 
-汇编(Assemble)
+- `#include` 头文件包含
+- `#define` 宏展开
+- 条件编译 (`#if`, `#ifdef` 等)
+- 删除注释
 
-- 汇编代码生成目标文件(`.o` 或者 `.obj`)
+## 2.2. 编译(Compilation)
 
-目标文件(Object file)
+将预处理后的C++代码转换为汇编代码。编译器（如g++）进行词法分析、语法分析、语义分析、优化等步骤，生成对应平台的汇编代码文件（通常以`.s`为扩展名）。
 
-- 编译器编译源码后生成的文件叫做目标文件。
+```bash
+# 编译为汇编代码
+g++ -S main.i -o main.s
+```
 
-链接(Linking)
+编译阶段：
 
-- 将库文件(`.lib` 或 `.a`)和二进制文件(`.o` 或 `obi`)通过链接器(ld: linker directive)生成可执行文件(`.out`  output file)。通俗的讲：将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可以被加载到内存并执行。链接可以执行于编译时、加载时、运行时。
+- 词法分析、语法分析、语义分析
+- 生成中间代码
+- 代码优化
+- 生成平台相关的汇编代码
+
+## 2.3. 汇编(Assembly)
+
+将汇编代码转换为机器代码。汇编器（as）将汇编代码翻译成目标机器的二进制代码，生成目标文件（通常以`.o`为扩展名）。目标文件包含了二进制代码和数据，但还没有解决外部符号的地址。
+
+目标文件(Object file)：编译器编译源码后生成的文件叫做目标文件。
+
+```bash
+# 汇编为目标文件
+g++ -c main.s -o main.o
+```
+
+汇编阶段：
+
+- 将汇编代码转换为机器代码
+- 生成可重定位的目标文件 (.o 文件)
+
+**目标文件格式**
+
+- **ELF** (Executable and Linkable Format)：Linux/Unix
+- **PE/COFF** (Portable Executable)：Windows
+- **Mach-O**：macOS
+
+## 2.4. 链接(Linking)
+
+将一个或多个目标文件(`.o` 或 `obi`)以及库文件(`.lib` 或 `.a`)组合在一起，生成最终的可执行文件(`.out`  output file)。
+
+```bash
+# 链接为可执行文件
+g++ main.o utils.o -o program
+```
+
+链接阶段：
+
+- 符号解析
+- 地址重定位
+- 合并多个目标文件
+- 解析库依赖
+
+**特点**
+
+- 可执行文件可以被加载到内存并执行。
+- 链接可以执行于编译时、加载时、运行时。
 - Windows中启动程序由 CRT、DLL 提供，Linux中由 glibc(libs-start.c) 提供。
-- 静态连接(static linking): 将外部函数库拷贝到可执行文件
-- 动态链接(dynamic linking)：外部函数库不进入安装包，只在运行时动态引用
-- 链接器必须完成的两个任务
-  - 符号解析(symbol resolution)：将每个符号引用正好和一个符号定义关联起来。
-  - 重定位：链接器通过把每个符号定义于一个内存位置关联起来，从而重定位这些细节，然后修改所有对这些符号的引用，使它们指向这个内存位置。
+- 静态连接(static linking): 将外部函数库拷贝到可执行文件。
+- 动态链接(dynamic linking)：外部函数库不进入安装包，只在运行时动态引用。
+- 链接器（ld: linker directive）主要完成两个任务：符号解析和重定位。
+  1. 符号解析(symbol resolution)：确保所有符号（函数、变量等）都有定义。
+  2. 重定位：调整符号的地址，使得它们指向正确的内存位置。
 
 例如执行流程：hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hello.exe(可执行)
 
 <div align="center">
     <img width="90%" height="90%" src="./figures/gcc_build_step.png">
 </div>
+## 2.5. 常见的工具链组合
 
-可执行文件
+| 编译器    | 链接器   | 平台    | 特点          |
+| :-------- | :------- | :------ | :------------ |
+| GCC (g++) | GNU ld   | Linux   | 传统组合      |
+| Clang     | lld      | 跨平台  | LLVM生态      |
+| MSVC      | link.exe | Windows | Visual Studio |
+| ICC       | XILK     | Linux   | Intel工具链   |
 
-- 加载器
-  - 运行程序时，加载器首先加载程序到内存中，<font color=red> 被加载程序称为进程 </font>，并由操作系统加载。
-  - 主要作用：
-    - 验证
-    - 从硬盘复制可执行文件到主存中
-    - 配置栈
-    - 配置寄存器
-    - 跳转到程序入口点(_start)
-  - 加载器加载可执行文件时，操作系统使用的步骤
-    1. 加载器请求操作系统创建一个新进程
-    2. 操作系统为新进程建立页表
-    3. 用无效入口标记页表
-    4. 开始执行程序，生成即时页面错误异常
+
+
+
+
+## 2.6. 可执行文件(Execute file)
+
+加载器
+- 运行程序时，加载器首先加载程序到内存中，<font color=red> 被加载程序称为进程 </font>，并由操作系统加载。
+- 主要作用：
+  - 验证
+  - 从硬盘复制可执行文件到主存中
+  - 配置栈
+  - 配置寄存器
+  - 跳转到程序入口点(_start)
+
+加载器加载可执行文件时，操作系统使用的步骤
+
+1. 加载器请求操作系统创建一个新进程
+2. 操作系统为新进程建立页表
+3. 用无效入口标记页表
+4. 开始执行程序，生成即时页面错误异常
 
 <div align="center">
     <img width="80%" height="40%" src="./figures/加载过程.png">
 </div>
+
 
 # 3. 内存四区
 
@@ -177,7 +248,7 @@ Linux 下内存分配管理如下图所示
 
 Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/usr/lib64` 里面。
 
-# 5. 静态库
+## 4.1. 静态库
 
 所有编译器都提供一种机制，将所有相关的目标模块打包成一个单独的文件，成为静态库(static library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
@@ -201,7 +272,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 - 优点：加载速度快。发布程序的时候不需要对应的库(include)文件.
 - 缺点：打包的程序占用很大的空间。程序发生改变时，需要重新编译静态库。
 
-# 6. 动态库
+## 4.2. 动态库
 
 动态库也叫共享库(share library)，它是一个目标模块，在运行或加载时，能加载到任意的内存地址，并链接一个内存中的程序，这个过程就叫动态链接(dynamic linking)，它是由一个叫动态链接器(dynamic linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下以 `.dll` 后缀。
 
@@ -213,7 +284,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
   
   因为在编译的时候，编译器需要知道每一个动态库中提供了哪些符号。
 
-## 6.1. Linux平台
+### 4.2.1. Linux平台
 
 - 命名规则
   - Linux中以 `.so` 结尾。形如：`lib + 库的名字 + .so`
@@ -265,127 +336,26 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 - 发布程序的时候，需要将动态库发布给用户。
 - 加载的速度相对静态库比较慢。 
 
-## 6.2. Windows平台
+### 4.2.2. Windows平台
 
 C++ 在调用 Dll 中的函数的时候，如果是企业内部的话，肯定是希望三件套的方式(.h .lib .dll)。这样做的话，编写方可以在头文件中写入很多信息，方便调用方的调用。但是，一旦是给其他公司的人使用，而不想让别人看到的话，那编写方肯定是不想让别人看到过多的信息的，你只管调用。
 还有一点是 dll 是在调试的时候使用的，lib 是编译的时候使用的，两者是不同时期使用的工具。
 
-# 7. ELF relocatable
+# 5. ELF relocatable
 
 <img src="./figures/ELF-relocatable.png">
 
 查看符号表内容
 
-```
+```bash
 readlf -s main.o
 ```
 
-# 8. GCC
-
-GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言。但其很快扩展，变得可处理 C++，后来又扩展为能够支持更多编程语言，如 Fortran、Pascal、Objective -C、Java、Ada、Go 以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
-
-```sh
-常用参数项
--g(gdb)                生成调试信息
--Wall                  编译时生成调试信息
--E(prEprocessed)       源文件文件 .c 生成 预处理文件 .i
--S(aSsembler)          预处理文件 .i 生成汇编文件 .s
--c(compile小写)         汇编文件 .s 生成可执行文件 .o 
--o(output 小写)         生成可执行的二进制文件(类似于Windows中的.exe文件)
--L(link)                链接库路径
--O(Optimizations 大写)  优化代码
-
--I(dIr)                 指定include头文件
-  gcc test.c -I ./include -o test.out  使用 -I 链接指定目录下(./include)的头文件进行编译生成可执行文件。
-
--D(Defn macro)           指定相关的宏文件(控制日志log输出)
-  链接指定目录下(./include)的头文件进行编译生成可执行文件，并使用 -D 链接定义的 DEBUG 宏，生成调试信息。
-  gcc test.c -I ./include -o test.out -D DEBUG  
-
--fPIC(position independent code)  生成与位置无关的代码
- 
---Woverride-virtual   编译时检查虚函数
 
 
-```
+# 6. Tools
 
-- [GCC 包下载：fedoraproject.org](https://archives.fedoraproject.org/pub/)
-- [gun.org](http://ftp.gnu.org/gnu/)
-- [清华大学 GNU 源镜像](https://mirrors.tuna.tsinghua.edu.cn/gnu/)
-
-## 8.1. 源码编译三部曲
-
-第一步：执行脚本 configure 文件，设置指定的参数，建立 Makefile 文件。
-
-```sh
-./configure --prefix=指定软件路径
-例如：../configure --prefix=/usr/local/gcc-4.9.4 -enable-checking=release -enable-languages=c,c++ -disable-multilib
-
-CentOS7 4.8.4 默认安装时的配置
-../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
-
-参数项
-  --prefix：指定安装路径。
-  --enable-threads=posix：启用POSIX标准的线程支持。要让程序能在符合POSIX规范的linux发布版上正确运行，就应该启用该选项。这里取决于目标操作系统的类型，其它可用值有：aix、dec、solaris、win32等。
-  --disable-checking：不对编译时生成的代码进行一致性检查（检查的话一般设置为：--enable-checking=release）。建议机器硬件配置较低以及不愿等待太久编译时间的童鞋，可以设置为disable，但是这会增加产生未预期的错误的风险。
-  --disable-multilib：如果你的操作系统是32位，默认就已经设置为disable，这意味着gcc仅能生成32位的可执行程序。如果你的操作系统是64位，默认设置为enable，这意味着用gcc编译其它源文件时可以通过-m32选项来决定是否生成32位机器代码。由于我们这里是64位系统上，所以要禁止生成32位代码。
-  --enable-languages=c,c++：支持的高级语言类型和运行时库，可以设置的所有语言还包括ada、Fortran、java、objc、obj-c++、GO等语言。这里只开启了c和c++，因为支持的语言越多，就需要安装越多的相应静态与动态库，等待的时间也越久。
-```
-
-第二部：执行 make 命令
-
-```
-执行 make 命令进行 编译。
-```
-
-第三步：执行 make install
-
-```
-安装软件到第一步 ./configure 后面指定的路径下。
-```
-
-## 8.2. CentOS7 安装高版本 gcc8/g++8
-
-```sh
-1、安装软件仓库包 scl: yum install centos-release-scl
-2、安装 gcc/g++，数字 8 对应的是 gcc/g++8: yum install devtoolset-8-gcc devtoolset-8-gcc-c++
-3、shell 终端临时设置默认版本，重启后失效: scl enable devtoolset-8 -- bash；
-长期有效设置：vim /etc/profile 文件中的最后一行加入: source /opt/rh/devtoolset-8/enable
-```
-
-高版本 GCC 编译器编译 C++11 之下的代码，可能出现的问题？
-
-许多 c++11 功能都需要 C++ 标准库的新 libc++ 实现。但是 libc++ 与旧的 libstdc++ 不兼容，但目前大多数软件通常都与旧的 libstdc++ 链接。
-
-```
-libc++ 使用内联 namespace 来帮助确保 ABI不兼容类型不会被误认为是彼此之间的错误。如果接口(interface) 直接使用 libc++ std::string，则期望 libstdc++ std::string 的库将不会链接到该接口(interface)，因为实际的符号是不同的 :std::string 与 std::__1::string。
-```
-
-## 8.3. 拓展知识点
-
-```sh
-GCC4.8.1 支持 C++11
-  GCC 4.8.1 will be C++11 feature-complete [2013-04-01]
-Support for C++11 ref-qualifiers was added to the GCC 4.8 branch, making G++ the first C++ compiler to implement all the major language features of the C++11 standard. This functionality will be available in GCC 4.8.1.
-```
-
-```sh
-GCC5.3 支持 C++14
-  GCC 5 C++14 language feature-complete [2014-12-23]
-  Support for all C++14 language features has been added to the development sources for GCC, and will be available when GCC 5 is released next year. Contributed by Jason Merrill, Braden Obrzut, Adam Butcher, Edward Smith-Rowland, and Jakub Jelinek.
-```
-
-- [GNU GCC 历史版本发布说明](https://gcc.gnu.org/news.html)
-- [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
-- [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
-- [【推荐】CentOS安装gcc-4.9.4+更新环境+更新动态库)](https://www.cnblogs.com/brishenzhou/p/8820237.html)
-- [**CentOS下离线安装gcc环境，图文详细，方法全面**](https://blog.51cto.com/u_14089205/2485301?u_atoken=0475e265-abfb-432c-bfb1-c97021d375cd&u_asession=01ogsxgS7WqDDhfHxJBA3tySuJoQLPU7Mo1t0qQM8oX1gIjn9NkTPKsfuM9wUeCkZyX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K9T6Skf8G7F5_odZ0I0AeJU88K6FZziwTt7TNrPVU-d_2BkFo3NEHBv0PZUm6pbxQU&u_asig=05NjW6cy-7_DOVLCJ5yY0xUjyZdNii222gZ8CBYNC2-kxLwqNZcRznzNJlTGFikFQNdDeTXXaCH9gxxB_bXfuDd8FLqKsnQLHkUQ1ZHfh3CQ-AEuPGBzKGc0px5fa5PyZE0WZX_farO5ZSDrFzcwrvDd4ss8s7GG-KUqB6plMu8BP9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzUGHsagEujBC_AvKS2HjtZaUdPfTTV87rFMrUrrgd0Lqa8KPmxEvUknfKsop6MC1kO3h9VXwMyh6PgyDIVSG1W9Vksf1-kHx6lS1DDW9Qv6U4c0g9zEGGygqGkD8zIaRcgyMCcOAeA64HiKzlA8DugWt59etCjmgwcMzWzJCS1N4mWspDxyAEEo4kbsryBKb9Q&u_aref=3kSTCuGS3qx%2FcOMR4cQo%2FTU%2B7iE%3D)
-
-
-
-# 9. 工具
-
-## 9.1. readelf
+## 6.1. readelf
 
 读取 ELF(Executable and Linking Format) 文件中信息
 
@@ -404,17 +374,17 @@ GCC5.3 支持 C++14
     
 ```
 
-## 9.2. size
+## 6.2. size
 
  查看object文件或者链接库文件中的object文件的各个段(section)的大小及其总的大小。
 
-## 9.3. nm
+## 6.3. nm
 
 查看静态库或可执行文件里面的内容（list symbols from object files：列出一个函数库文件中的符号表）。
 
 例如：`nm main.out`， `nm mylib.a` 
 
-## 9.4. pmap
+## 6.4. pmap
 
 打印一个进程的内存映射（report memory map of a process）。
 
@@ -424,7 +394,7 @@ GCC5.3 支持 C++14
 pmap 进程PID
 ```
 
-## 9.5. patchelf
+## 6.5. patchelf
 
 patchelf 是一个简单的实用程序，用于修改已存在的 ELF 可执行表（executables）和库（libraries）。它会改变 可执行表的动态加载器（loader），同时也会改变可执行表和库的路径（PATH）。
 
@@ -437,7 +407,7 @@ patchelf 是一个简单的实用程序，用于修改已存在的 ELF 可执行
 
 ```
 
-## 9.6. objdump
+## 6.6. objdump
 
 是 Linux 下的反汇编目标文件或者可执行文件的命令，它以一种可阅读的格式让你更多地了解二进制文件可能带有的附加信息。
 
@@ -511,7 +481,7 @@ objdump -b oasys -m vax -h fu.o
 ```
 
 
-# 10. Build
+# 7. Build
 
 两种编译构建方式。
 
@@ -520,9 +490,9 @@ objdump -b oasys -m vax -h fu.o
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
-# 11. References
+# 8. References
 
 - [C++ Dll 编写入门](https://www.cnblogs.com/daocaoren/archive/2012/05/30/2526495.html)
 - [编译器的工作过程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
 - [内存管理(详细版)](https://www.cnblogs.com/yif1991/p/5049638.html)：详细的解释了内存四区的相关内容。
-- [编译连接出现undefined reference to ""的解决方法 ](https://www.cnblogs.com/yanxin880526/p/8124764.html)
+- [编译连接出现undefined reference to 的解决方法 ](https://www.cnblogs.com/yanxin880526/p/8124764.html)

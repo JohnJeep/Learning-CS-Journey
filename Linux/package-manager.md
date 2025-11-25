@@ -48,7 +48,7 @@ rpm（RPM Package Manager）叫RPM包管理器。
 
 RPM 包安装包的格式，下面以 `autoconf-2.63-5.1.el6.noarch.rpm` 安装包为例子。
 
-![](pictures/rpm-packets.png)
+![](./figures/rpm-packets.png)
 
 ```sh
 # 参数项

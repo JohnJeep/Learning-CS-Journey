@@ -5,7 +5,7 @@
  * @UpdateDate: 2023-07-25 15:06:11
  * @UpdateTime: 2023-05-27 15:41:12
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:27:37
+ * @LastEditTime: 2025-11-20 12:52:51
  * @Description: linux performance analysis
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -35,19 +35,19 @@
     - [4.1.3. 参数](#413-参数)
   - [4.2. vmtouch](#42-vmtouch)
   - [4.3. pmap](#43-pmap)
-  - [3. 内存泄漏检测工具](#3-内存泄漏检测工具)
+  - [4.4. 内存泄漏检测工具](#44-内存泄漏检测工具)
 - [5. I/O](#5-io)
   - [5.1. iostat](#51-iostat)
   - [5.2. iotop](#52-iotop)
-  - [Magical Command](#magical-command)
+  - [5.3. Magical Command](#53-magical-command)
 - [6. Network](#6-network)
   - [6.1. netstat](#61-netstat)
   - [6.2. stress](#62-stress)
   - [6.3. sar](#63-sar)
   - [6.4. iftop](#64-iftop)
-- [2. logs](#2-logs)
-- [1. Others](#1-others)
-- [7. References](#7-references)
+- [7. logs](#7-logs)
+- [8. Others](#8-others)
+- [9. References](#9-references)
 
 
 # 1. Performance optimization
@@ -456,7 +456,7 @@ OPTIONS
 
 
 
-## 3. 内存泄漏检测工具
+## 4.4. 内存泄漏检测工具
 
 - valgrind 
   [valgrind.md](valgrind.md) 
@@ -505,7 +505,7 @@ dm-0              0.00     0.00    0.00    3.00     0.00    24.00     8.00     0
 `iotop` 是 Linux 系统默认自带的一个用来监控磁盘 I/O 使用情况的工具。
 
 
-## Magical Command
+## 5.3. Magical Command
 - [ncdu](https://dev.yorhel.nl/ncdu): 具有文本模式用户界面的磁盘使用情况分析器。
   安装 `sudo apt install ncdu`
 - [mv](https://midnight-commander.org/): 终端下面的 NotePad++
@@ -642,7 +642,7 @@ Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_     
 ```
 
 
-# 2. logs
+# 7. logs
 
 - **spdlog：一个快速的 C++ 日志库，只包含头文件，兼容 C++11。**
 - log4cxx：Java 社区著名的 Log4j 的 C++ 移植版，用于为 C++ 程序提供日志功能，以便开发者对目标程序进行调试和审计。
@@ -658,7 +658,7 @@ Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_     
 - Plog：可移植、简单和可扩展的 C++ 日志库。
 
 
-# 1. Others
+# 8. Others
 
 - DBeaver：一款基于Java 开发，免费开源的通用数据库管理和开发工具。DBeaver适用于所有开发人员、SQL程序员、数据库管理员和分析人员等，它支持任何具有JDBC驱动程序的数据库，EE版本还支持非JDBC数据源（MongoDB，Cassandra，Redis，DynamoDB等）。
 - SysMonTask: 可视化的任务管理器。
@@ -666,7 +666,7 @@ Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_     
 
 
 
-# 7. References
+# 9. References
 
 - [Linux Performance](http://www.brendangregg.com/linuxperf.html)
 - [如何 60 秒内进行 Linux 性能分析](https://mp.weixin.qq.com/s?__biz=MzI0OTA3OTM4MA==&mid=2455110627&idx=1&sn=6452b61a1aa9126cd6874b6f731f03a1&chksm=fe3450d8c943d9ce389372f9da4e5a1c54d6419b98144cc346ccfafa175758901fe68cf99a73&mpshare=1&scene=24&srcid=&sharer_sharetime=1590076651796&sharer_shareid=1813da429599d3785585eac965f1aa77&key=1cb409b1e6845731cbb675abe3379f22acb3e7524678737985c9ea500376d57bbcc18d4b8e7489b2d6893af87959cedd648921fdf755fdf7e84cfa01839bda54e39dc3385f15d8a5536bd178abf3d05aa09fe562f4c63c6aa8caf0cd6d98656ffe9f1bb3464f30260a244d566cf1059e19ef198ee743d49e80051e78a222434d&ascene=14&uin=MTE2MDU5MjIzNA%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A6Io2cPWUakbyRI7AlfF3dA%3D&pass_ticket=aUFZUParu2js4nQ7AaFdbqYXSULD4Aap4Fv2P64VAtlM%2FsR52EPLWAmjVTjvWw97&wx_header=0)

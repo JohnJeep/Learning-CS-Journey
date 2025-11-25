@@ -15,15 +15,13 @@
 - [3. GDB定位 Core 文件](#3-gdb定位-core-文件)
 - [4. References](#4-references)
 
-
-# 1. 什么是 Core dump?
+# 1. 什么是 Core dump
 
 Core dump 中文翻译为“核心转储”，它是进程运行时在突然崩溃的那一刻的一个内存快照。
 
 程序 core 是指应用程序无法保持正常 running 状态而发生的崩溃行为。程序 core 时会生成相关的 core-dump 文件，是程序崩溃时程序状态的数据备份。
 
 操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把内存、处理器、寄存器、程序计数器、栈指针等状态信息保存在一个文件里。该文件是二进制文件，使用 gdb、elfdump、objdump 或者 windows 下的 windebug、solaris下 的 mdb 等工具打开和分析文件的内容。
-
 
 # 2. core 产生原因
 
