@@ -31,3 +31,9 @@ Jetson 系列架构演进
   - 制程工艺: 4nm
   - 预期AI算力: 1000+ TOPS
 ```
+
+
+
+## References
+
+- [GPU学习笔记](https://www.linmao.dev/joy/1148/)
