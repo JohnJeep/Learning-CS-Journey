@@ -150,5 +150,25 @@ tags:
 
 
 
+### 开源
+
+#### 宇树
+
+1. https://www.unitree.com/cn/opensource
+2. https://github.com/unitreerobotics/unitree_guide
+3. 宇树文档中心：https://support.unitree.com/main
+4. 宇树开源整理：https://zhuanlan.zhihu.com/p/29880026964
+
+### 智元
+
+1. 智元灵犀开源：https://www.zhiyuan-robot.com/DOCS/OS
+2. AimRT: https://github.com/AimRT/AimRT/blob/main/README.zh_CN.md
+3. https://github.com/AgibotTech/agibot_x1_infer/blob/main/README.zh_CN.md
+4. 智元灵犀硬件：https://github.com/AgibotTech/agibot_x1_hardware
 
 
+
+灵巧手：电机 + 减速器（谐波减速器、行星减速器）
+
+- 谐波减速器：精准省空间、适合手指。
+- 行星减速器：便宜、适合手掌。
