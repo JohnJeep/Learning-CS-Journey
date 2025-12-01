@@ -109,3 +109,8 @@ Distribution Version
 - Wikipedia BusyBox: https://zh.wikipedia.org/wiki/BusyBox
 - Wikipedia musl: https://zh.wikipedia.org/wiki/Musl
 - musl official: https://musl.libc.org
+
+---
+
+- Linux-Console.net: https://cn.linux-console.net/?p=15215
+- Ubuntu PIT: https://www.ubuntupit.com/
