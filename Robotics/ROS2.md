@@ -305,9 +305,6 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
 
 ### Tools
 
-#### colcon
-
-
 
 #### ament
 
