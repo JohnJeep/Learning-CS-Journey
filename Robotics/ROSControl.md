@@ -36,11 +36,11 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 3. Resource Manager(资源管理器)
 4. Hardware Resources(硬件资源)
 
-![](./Images/ros2_control_architecture.png)
+![](./figures/ros2_control_architecture.png)
 
  UML Class Diagram
 
-![](./Images/ros2_control_UML.png)
+![](./figures/ros2_control_UML.png)
 
 
 
