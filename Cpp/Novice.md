@@ -31,7 +31,6 @@
   - [7.2. function parameter(函数参数)](#72-function-parameter函数参数)
   - [7.3. template function(模板函数)](#73-template-function模板函数)
   - [7.4. conversion function(转换函数)](#74-conversion-function转换函数)
-  - [7.5. functor(仿函数)](#75-functor仿函数)
 - [8. operator overloading(操作运算符重载)](#8-operator-overloading操作运算符重载)
 - [9. Special member function (特别成员函数)](#9-special-member-function-特别成员函数)
   - [9.1. Constructor(构造函数)](#91-constructor构造函数)
@@ -504,15 +503,7 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 <img src="./figures/conversion-function.png">
 
-## 7.5. functor(仿函数)
 
-什么是仿函数？
-
-一个 class 类中重载了函数调用操作运算符 `()`，任何一个东西能接受 `()` 操作运算符，这个东西就叫 `像函数` 或者叫 `仿函数`。
-
-<img src="./figures/functor-like.png">
-
-<font color=red>思考：</font>为什么 C++ 中要把 class 设计成 pointer(智能指针)和 function(仿函数)？
 
 # 8. operator overloading(操作运算符重载)
 
@@ -1799,7 +1790,7 @@ void inc() {
 
 
 ## 18.3. 使用 mutable 的注意事项
-mutable只能作用于类的非静态和非常量数据成员。mutable不能修饰static数据成员，因为static数据成员存储在Data段或BSS段，属于类，不属于类对象，因此类的static数据成员不需要 mutable 的修饰。但常对象和常函数可以对其任意地修改，对于常对象的数据成员一般不可以被修改，若想修改，则需要 mutable 的修饰。
+mutable 只能作用于类的非静态和非常量数据成员。mutable不能修饰 static 数据成员，因为static数据成员存储在Data段或BSS段，属于类，不属于类对象，因此类的static数据成员不需要 mutable 的修饰。但常对象和常函数可以对其任意地修改，对于常对象的数据成员一般不可以被修改，若想修改，则需要 mutable 的修饰。
 
 在一个类中，应尽量或者不用 mutable，大量使用 mutable表示程序设计存在缺陷。
 
@@ -1814,7 +1805,9 @@ mutable const int test;         // 编译出错
 ```
 
 
+
 ## 18.4. 常函数
+
 - 什么是常函数？   
   常函数就是带 `const` 修饰的函数。
 - 为什么要有常函数这个概念？   
