@@ -9,7 +9,11 @@
 # 1. Git Commit 规范约定
 
 ## 1.1. 背景
-Git 每次提交代码都需要写 commit message，否则就不允许提交。一般来说，commit message 应该清晰明了，说明本次提交的目的，具体做了什么操作，但是在日常开发中，大家的 commit message 千奇百怪，中英文混合使用、fix bug 等各种笼统的 message 司空见怪，这就导致后续代码维护成本特别大，有时自己都不知道自己的 fix bug 修改的是什么问题。基于以上这些问题，我们希望通过某种方式来监控用户的 git commit message，让规范更好的服务于质量，提高大家的研发效率。
+Git 每次提交代码都需要写 commit message，否则就不允许提交。一般来说，commit message 应该清晰明了，
+说明本次提交的目的，具体做了什么操作，但是在日常开发中，大家的 commit message 千奇百怪，
+中英文混合使用、fix bug 等各种笼统的 message 司空见怪，这就导致后续代码维护成本特别大，
+有时自己都不知道自己的 fix bug 修改的是什么问题。
+基于以上这些问题，我们希望通过某种方式来监控用户的 git commit message，让规范更好的服务于质量，提高大家的研发效率。
 
 
 ## 1.2. Commit message 结构
@@ -45,6 +49,7 @@ description: 必选项，提交信息的简短描述，不超过 50 个字符。
 
 optional: 是可选项，提交时可以设置也可以不设置，由组内人员或开发者自行约定。
 - scope: 用于说明 commit 发生变动的范围。比如数据层、控制层、视图层等等，视项目不同而不同。
+  
   > 提交信息中带有 scope 的可选项时，后面的花括号应采用英文。
 - body:
 - footer: 脚本。
@@ -87,11 +92,46 @@ feat(Controller): 用户查询接口开发
 - `BREAKING-CHANGE` 作为脚注的令牌时必须是 `BREAKING CHANGE` 的同义词。
 
 
+# 版本规范管理
+
+| **阶段**               | **全称**             | **特点**                               | **适用范围**      |
+| :--------------------- | :------------------- | :------------------------------------- | :---------------- |
+| Pre-Alpha              | Pre-Alpha            | 最早期，功能搭建中，不对外发布         | 内部研发自测      |
+| Alpha                  | Alpha Version        | 功能不完整、不稳定，验证核心功能       | 内部测试团队      |
+| Beta                   | Beta Version         | 功能基本完整，仍有 Bug，分封测/公测    | 小部分或公开用户  |
+| RC                     | Release Candidate    | 候选版本，接近 GA，功能冻结            | 部分用户试用      |
+| EA                     | Early Access         | 提前体验版本，收集早期反馈，可能不稳定 | 受邀用户/早期客户 |
+| Preview / Tech Preview | 技术预览版           | 提前展示新功能，可能缺陷多             | 开发者/技术用户   |
+| GA                     | General Availability | 正式版，功能完整稳定，全面推广         | 所有用户          |
+| Patch / Hotfix         | -                    | 小更新，修复 Bug / 安全漏洞            | 已发布版本用户    |
+| LTS                    | Long Term Support    | 长期支持，数年维护                     | 企业/稳定用户     |
+| EOL                    | End of Life          | 生命周期结束，不再维护                 | -                 |
+
+语义化版本 2.0.0：https://semver.org/lang/zh-CN/
+
+
+# Merge Request 规范
+
+| **分类**     | **规范要求**                                                 | **示例 / 模板**                                              |
+| :----------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| **MR 标题**  | 使用 `[类型]: 简短描述` 格式，遵循 Conventional Commits      | `feat: 增加多路 V4L2 摄像头支持`  `fix: 修复 IMU 时间戳不同步问题` |
+| **类型**     | `feat`（新功能）、`fix`（Bug 修复）、`docs`（文档）、`style`（格式）、`refactor`（重构）、`test`（测试）、`chore`（构建/依赖/CI） | `feat: 支持 DDS io-uring 封装`                               |
+| **MR 描述**  | 推荐使用固定模板，包含变更内容、原因、关联 issue、测试情况   |                                                              |
+| **提交规范** | 每个 commit 信息清晰可读，MR 合并时 **Squash** 成 1 个主干提交 | `git commit -m "fix: 修复摄像头初始化失败的问题"`            |
+| **MR 大小**  | **小步提交**，单个 MR 不要太大，避免包含不相关修改           | 一个 MR 只做一件事：修 Bug / 加功能                          |
+| **评审流程** | 至少 1~2 人 review 通过；作者修改后需 `resolve discussions`  | Reviewer 检查点：功能正确性 / 可维护性 / 性能风险 / 测试覆盖 / 文档更新 |
+| **合并策略** | 默认使用 **Squash Merge**，保持主干简洁；必要时可用 Merge Commit；禁止 Rebase Merge（除非明确要求） | `Squash and merge`                                           |
+| **Draft MR** | 未完成时用 `Draft:` 标题                                     | `Draft: feat: 支持 GPU 零拷贝跨进程通信`                     |
+
+
 # 2. References
-- [Github Angular 项目 commit 约定规范](https://github.com/angular/angular/blob/main/CONTRIBUTING.md)
-- [Conventional Commits](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
-- [阿里巴巴：约束 git commit 提交规范](https://mp.weixin.qq.com/s/vzgST0ko-HZVkFFiSZ2xGg)
-- [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
-- [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
-- [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
-- [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+
+1. [Github Angular 项目 commit 约定规范](https://github.com/angular/angular/blob/main/CONTRIBUTING.md)
+2. [Conventional Commits](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+3. [阿里巴巴：约束 git commit 提交规范](https://mp.weixin.qq.com/s/vzgST0ko-HZVkFFiSZ2xGg)
+4. [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
+5. [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
+6. [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+7. [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+
+   
