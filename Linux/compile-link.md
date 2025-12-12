@@ -131,6 +131,37 @@ g++ main.o utils.o -o program
 <div align="center">
     <img width="90%" height="90%" src="./figures/gcc_build_step.png">
 </div>
+
+
+链接过程中找不到库的情况
+
+1. 库没有加入到 `LD_LIBRARY_PATH`
+
+   解决方式：共享库添加环境变量
+
+   ```bash
+   export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
+   ```
+
+2. 函数只做了 声明，没有具体实现。
+
+3. 通过 CMake 的方式编译
+
+   1. cpp 文件没有加入到工程
+
+   2. CMakeList 文件中 链接时，target（目标）没有加命名空间。比如：链接 behaviortree 时，`behaviortree_cpp.so` 没有加 `behaviortree_cpp` 作用域空间。
+
+      ```cmake
+      target_link_libraries(${PROJECT_NAME} PRIVATE
+        behaviortree_cpp::behaviortree_cpp
+        # behaviortree_cpp 
+      )
+      ```
+
+      注意 target 的命名空间。
+
+
+
 ## 2.5. 常见的工具链组合
 
 | 编译器    | 链接器   | 平台    | 特点          |
@@ -487,6 +518,7 @@ objdump -b oasys -m vax -h fu.o
 
 - 原生(native)编译构建，即编译构建命令所运行(host)的系统环境和编译构建输出目标(target)的系统环境一致；
 - 交叉(cross)编译构建，上述target和host不一致，即在A系统环境构建出在B系统上运行的目标，这在嵌入式开发中尤为多见。
+  
   > 系统环境：GNU的构建工具链中使用CPU指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 
