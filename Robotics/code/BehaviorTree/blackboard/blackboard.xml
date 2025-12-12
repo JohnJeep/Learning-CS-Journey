@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <root main_tree_to_execute="MainTree"> -->
+<root BTCPP_format="4">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="root_sequence">
+      <SaySomething message="Hello, World!"/>
+      <ThinkWhatToSay text="{the answer}" />
+      <SaySomething message="{the answer}" />
+    </Sequence>
+  </BehaviorTree>
+</root>
