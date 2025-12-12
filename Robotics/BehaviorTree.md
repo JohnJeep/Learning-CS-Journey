@@ -54,32 +54,233 @@
 
 ## 2. Basical Concepts
 
-- **Tick**：是一个 signal。tick signal 发送到树的根节点，并通过树传播直到到达叶节点。
+### Tick
 
-- 任何接收到 tick 信号的 TreeNode 都会执行其回调函数(callback)。回调返回的结果如下
+tick是一个 signal。tick signal 发送到树的根节点，并通过树传播直到到达叶节点。
 
-  - 成功(SUCCESS)： 节点已完成其任务。
+任何接收到 tick 信号的 TreeNode 都会执行其回调函数(callback)。回调返回的结果如下
 
-  - 失败(FAILURE)： 节点未能完成其任务。
+- 成功(SUCCESS)： 节点已完成其任务。
 
-  - 运行中(RUNNING)： 节点正在执行中，尚未完成（例如，机器人正在移动中）。这是实现“反应性”的关键。
+- 失败(FAILURE)： 节点未能完成其任务。
 
-- **LeafNodes**：TreeNodes 没有任何的 children，是实际的 命令。
+- 运行中(RUNNING)： 节点正在执行中，尚未完成（例如，机器人正在移动中）。这是实现“反应性”的关键。
 
-- **Blackboard**：是一种由树中所有节点共享的键值存储（ *key/value* storage ）。
-  1. 这不是一个节点，而是**行为树的“共享内存”或“数据库”**。
-  2. 所有节点都可以从 blackboard **读取**数据（如“敌人位置”、“剩余电量”）或向 blackboard **写入**数据（如“设置目标点=”）。
-  3. **作用**：实现节点间的数据通信，解耦逻辑与数据。
-  
-- Port：是一种 nodes 之间可以彼此交换信息的机制。
+### Blackboard
 
-  常用类型：
+Blackboard 是一种简单的  **key/value** 键值对。
 
-  - `double` - 浮点数
-  - `int` - 整数
-  - `bool` - 布尔值
-  - `std::string` - 字符串
-  - `Pose2D` - 位姿（格式：`x;y;theta`）
+1. 树中所有节点都共享键值对。
+2. **entry**：是 Blackboard  的 **key/value pair**。
+3. Input port：可以 read  entry；Out port：可以写数据到 entry。
+4. 所有节点都可以从 blackboard **读取**数据（如“敌人位置”、“剩余电量”）或向 blackboard **写入**数据（如“设置目标点=”）。
+5. **作用**：实现节点间的数据通信，解耦逻辑与数据。
+
+### Port
+
+#### 定义
+
+- 定义：Port 是一种 nodes 之间可以彼此交换信息的机制。本质是数据接口和参数通道。
+- 作用：让节点能够**接收输入参数**和**输出执行结果**。
+- 类比：函数参数和返回值，但更灵活。
+
+#### 常用数据类型
+
+数据类型可以是任意 c++类型。
+
+- `double` - 浮点数
+- `int` - 整数
+- `bool` - 布尔值
+- `std::string` - 字符串
+- `Pose2D` - 位姿（格式：`x;y;theta`）
+
+#### Port 类型
+
+Input port(输入端口)
+
+```cpp
+static BT::PortsList providedPorts() {
+    return {
+        // 基本类型
+        BT::InputPort<int>("count"),
+        BT::InputPort<double>("distance"),
+        BT::InputPort<std::string>("target_name"),
+
+        // 带默认值
+        BT::InputPort<int>("timeout", 5000),  // 默认值 5000ms
+
+        // 复杂类型
+        BT::InputPort<Pose>("target_pose"),
+        BT::InputPort<std::vector<Point>>("path_points")
+    };
+}
+```
+
+Output port(输出端口)
+
+```cpp
+static BT::PortsList providedPorts() {
+    return {
+        BT::OutputPort<bool>("detected"),      // 输出检测结果
+        BT::OutputPort<float>("confidence"),   // 输出置信度
+        BT::OutputPort<Pose>("current_pose")   // 输出当前位置
+    };
+}
+```
+
+BidirectionalPort(双向端口)
+
+```cpp
+static BT::PortsList providedPorts() {
+    return {
+        BT::BidirectionalPort<std::string>("message")  // 可读写
+    };
+}
+```
+
+#### Port 在 XML 中的使用
+
+参数传递示例
+
+```xml
+<root>
+    <BehaviorTree>
+        <!-- 通过端口传递参数 -->
+        <Sequence>
+            <!-- 设置目标点 -->
+            <SetTarget 
+                target_x="10.0" 
+                target_y="5.0" 
+                target_name="桌子"/>
+            
+            <!-- 导航到目标，使用前一个节点的输出 -->
+            <NavigateTo 
+                target="{target_pose}" 
+                timeout_ms="30000"/>
+            
+            <!-- 抓取物体 -->
+            <GraspObject 
+                object_name="{target_name}" 
+                force="0.5"/>
+        </Sequence>
+    </BehaviorTree>
+</root>
+```
+
+数据流示例
+
+```xml
+<root>
+    <BehaviorTree>
+        <Sequence>
+            <!-- 节点A：输出数据 -->
+            <DetectObject 
+                object_id="cup"
+                output_detected="{cup_detected}"
+                output_position="{cup_position}"/>
+            
+            <!-- 节点B：使用节点A的输出作为输入 -->
+            <MoveToObject 
+                target_position="{cup_position}"
+                only_if="{cup_detected}"/>
+            
+            <!-- 节点C：输出新数据 -->
+            <GraspObject 
+                object_position="{cup_position}"
+                output_grasp_success="{grasp_ok}"/>
+            
+            <!-- 节点D：使用多个端口数据 -->
+            <ReportStatus 
+                object_name="cup"
+                detected="{cup_detected}"
+                grasp_result="{grasp_ok}"/>
+        </Sequence>
+    </BehaviorTree>
+</root>
+```
+
+
+
+#### 与网络端口的对比
+
+| 维度     | **BehaviorTree Port** | **网络端口**    |
+| :------- | :-------------------- | :-------------- |
+| **本质** | 数据接口和参数通道    | 网络通信端点    |
+| **用途** | 节点间数据传递        | 网络连接和通信  |
+| **类型** | 输入、输出、双向      | TCP、UDP 等     |
+| **数据** | 任意 C++ 类型         | 字节流          |
+| **范围** | 单个行为树内部        | 网络间通信      |
+| **连接** | 静态/动态绑定         | 网络连接        |
+| **协议** | 无协议，直接访问      | TCP/IP、HTTP 等 |
+
+#### Port 高级特性
+
+1. 动态端口
+
+   ```cpp
+   static BT::PortsList providedPorts() {
+       // 动态端口：运行时决定
+       BT::PortsList ports;
+       ports.insert(BT::InputPort<std::string>("dynamic_input"));
+       ports.insert(BT::OutputPort<int>("dynamic_output"));
+       return ports;
+   }
+   ```
+
+2. Blackboard 机制
+
+   ```cpp
+   // 黑板是全局共享的数据存储
+   BT::Blackboard::Ptr blackboard = BT::Blackboard::create();
+   
+   // 设置全局参数
+   blackboard->set("global_speed", 0.5);
+   blackboard->set("emergency_stop", false);
+   
+   // 在节点中访问
+   BT::NodeStatus MyNode::tick() override {
+       double speed;
+       if (getInput("speed", speed)) {
+           // 使用输入端口的值
+       } else {
+           // 使用黑板的默认值
+           config().blackboard->get("global_speed", speed);
+       }
+       // ...
+   }
+   ```
+
+3. 端口验证和转换
+
+   ```cpp
+   // 自定义端口验证器
+   BT::PortsList providedPorts() {
+       return {
+           BT::InputPort<int>("value", "必须为正数", [](BT::PortInfo& info){
+               auto value = info.getValue<int>();
+               return value > 0;  // 验证输入是否为正数
+           }),
+           
+           BT::InputPort<std::string>("filename", "必须是文本文件", [](BT::PortInfo& info){
+               auto filename = info.getValue<std::string>();
+               return filename.ends_with(".txt");
+           })
+       };
+   }
+   ```
+
+
+
+#### 总结
+
+**BehaviorTree Port 的核心价值**：
+
+1. **参数化**：使节点可配置，提高复用性
+2. **数据流**：在节点间传递数据，实现复杂逻辑
+3. **解耦**：节点不直接依赖具体数据，通过端口交互
+4. **灵活性**：支持运行时参数绑定和修改
+
+理解 Port 机制是掌握 BehaviorTree 高级用法的关键，它让行为树从简单的状态机变成了真正的数据流驱动的决策系统。
 
 ## 3. Nodes
 
@@ -138,7 +339,7 @@ parallel 叫并行节点。
 
 ### 3.3. LeafNode
 
-LeafNode 叫执行节点或者叶子节点。在树的最末端，像树叶，是实际“干活”的节点。
+LeafNode 叫执行节点或者叶子节点。在树的最末端，像树叶，是实际“干活”的节点。它没有任何的 children，是实际的 命令。
 
 #### 3.3.1. ActionNode
 
