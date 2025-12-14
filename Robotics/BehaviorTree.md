@@ -54,7 +54,7 @@
 
 ## 2. Basical Concepts
 
-### Tick
+### 2.1. Tick
 
 tick是一个 signal。tick signal 发送到树的根节点，并通过树传播直到到达叶节点。
 
@@ -66,9 +66,11 @@ tick是一个 signal。tick signal 发送到树的根节点，并通过树传播
 
 - 运行中(RUNNING)： 节点正在执行中，尚未完成（例如，机器人正在移动中）。这是实现“反应性”的关键。
 
-### Blackboard
+### 2.2. Blackboard
 
-Blackboard 是一种简单的  **key/value** 键值对。
+在 BT.CPP 中，Blackboard（黑板）是一个键值（key/value）存储，用于在节点之间共享数据。每个节点可以有一些 input port 和 output port，这些 port 可以与 Blackboard 上的特定键（entry）进行绑定。
+
+特点
 
 1. 树中所有节点都共享键值对。
 2. **entry**：是 Blackboard  的 **key/value pair**。
@@ -76,15 +78,17 @@ Blackboard 是一种简单的  **key/value** 键值对。
 4. 所有节点都可以从 blackboard **读取**数据（如“敌人位置”、“剩余电量”）或向 blackboard **写入**数据（如“设置目标点=”）。
 5. **作用**：实现节点间的数据通信，解耦逻辑与数据。
 
-### Port
+### 2.3. Port
 
-#### 定义
+理解 Port 机制是掌握 BehaviorTree 高级用法的关键，它让行为树从简单的状态机变成了真正的数据流驱动的决策系统。
+
+#### 2.3.1. 定义
 
 - 定义：Port 是一种 nodes 之间可以彼此交换信息的机制。本质是数据接口和参数通道。
 - 作用：让节点能够**接收输入参数**和**输出执行结果**。
 - 类比：函数参数和返回值，但更灵活。
 
-#### 常用数据类型
+#### 2.3.2. 常用数据类型
 
 数据类型可以是任意 c++类型。
 
@@ -94,7 +98,7 @@ Blackboard 是一种简单的  **key/value** 键值对。
 - `std::string` - 字符串
 - `Pose2D` - 位姿（格式：`x;y;theta`）
 
-#### Port 类型
+#### 2.3.3. Port 类型
 
 Input port(输入端口)
 
@@ -138,7 +142,7 @@ static BT::PortsList providedPorts() {
 }
 ```
 
-#### Port 在 XML 中的使用
+#### 2.3.4. Port 在 XML 中的使用
 
 参数传递示例
 
@@ -201,7 +205,7 @@ static BT::PortsList providedPorts() {
 
 
 
-#### 与网络端口的对比
+#### 2.3.5. 与网络端口的对比
 
 | 维度     | **BehaviorTree Port** | **网络端口**    |
 | :------- | :-------------------- | :-------------- |
@@ -213,7 +217,7 @@ static BT::PortsList providedPorts() {
 | **连接** | 静态/动态绑定         | 网络连接        |
 | **协议** | 无协议，直接访问      | TCP/IP、HTTP 等 |
 
-#### Port 高级特性
+#### 2.3.6. Port 高级特性
 
 1. 动态端口
 
@@ -271,7 +275,7 @@ static BT::PortsList providedPorts() {
 
 
 
-#### 总结
+#### 2.3.7. 总结
 
 **BehaviorTree Port 的核心价值**：
 
@@ -280,7 +284,27 @@ static BT::PortsList providedPorts() {
 3. **解耦**：节点不直接依赖具体数据，通过端口交互
 4. **灵活性**：支持运行时参数绑定和修改
 
-理解 Port 机制是掌握 BehaviorTree 高级用法的关键，它让行为树从简单的状态机变成了真正的数据流驱动的决策系统。
+#### 2.3.8. port 与 entry 的关系
+
+1. Port：是 node 定义的一部分，用于指定 node 需要输入的数据或将要输出的数据。在节点类中，通过`providedPorts()`静态方法来声明 port，并在`tick()`函数中使用`getInput()`读取输入 port 或使用`setOutput()`写入输出 port。
+2. Entry：是 blackboard 上存储数据的键值对。每个 entry 有一个键（key）和一个值（value）。在XML中，使用花括号`{key}`来引用 blackboard  上的 条目（entry）。
+3. **绑定关系**：在行为树XML中，将 node 的 port 与 entry 进行绑定。例如：
+   - `<SaySomething message="{the_answer}" />` 表示将SaySomething节点的输入端口"message"与 blackboard  上的 entry "the_answer"绑定。当节点执行时，它会从 blackboard  上的 entry  "the_answer"中读取值作为输入。
+   - `<ThinkWhatToSay text="{the_answer}" />` 表示将ThinkWhatToSay节点的输出端口"text"与 blackboard  上的 entry  "the_answer"绑定。当节点执行时，它输出的值会写入 blackboard  上的 entry  "the_answer"。
+
+**关键区别**
+
+| 特性         | Blackboard Entry | Node Port            |
+| :----------- | :--------------- | :------------------- |
+| **作用域**   | 全局（整个树）   | 局部（单个节点）     |
+| **生命周期** | 与树同生命周期   | 与节点调用同生命周期 |
+| **数量限制** | 无限制           | 在节点类中固定定义   |
+| **访问方式** | 通过键名访问     | 通过端口名访问       |
+| **数据流向** | 存储数据         | 传输数据             |
+
+在节点代码中，使用`getInput`来读取输入 port，使用`setOutput`来写入输出 port。这些函数内部会自动处理与 blackboard 的交互（如果 port 绑定到了entry）。如果port 没有绑定到 entry，而是直接给定了一个固定值，那么`getInput`会直接返回那个固定值。
+
+**Port是节点接口，Entry是共享存储**。它们通过XML中的`{key}`语法建立绑定关系，实现了节点间的**数据解耦**和**灵活通信**。这种设计让节点可以独立开发和测试，通过Blackboard进行数据交换，提高了行为树模块的可重用性。
 
 ## 3. Nodes
 
