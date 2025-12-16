@@ -7,10 +7,32 @@
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
+- [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts快捷键)
+  - [1.1. Folder](#11-folder)
+  - [1.2. Terminal](#12-terminal)
+  - [1.3. Edition](#13-edition)
+  - [1.4. Folding](#14-folding)
+  - [1.5. Groups](#15-groups)
+  - [1.6. Call Hierarchy](#16-call-hierarchy)
+- [2. Configures](#2-configures)
+  - [2.1. Predefined Variable](#21-predefined-variable)
+    - [2.1.1. 📁 通用路径相关变量](#211--通用路径相关变量)
+    - [2.1.2. 🕒 时间与日期变量（仅限部分上下文，如任务/调试）](#212--时间与日期变量仅限部分上下文如任务调试)
+    - [2.1.3. 🔢 行号与光标位置（主要用于调试配置）](#213--行号与光标位置主要用于调试配置)
+    - [2.1.4. 🧩 其他变量](#214--其他变量)
+  - [2.2. Cursor](#22-cursor)
+- [3. Panel(面板)](#3-panel面板)
+- [4. workspace(工作空间)](#4-workspace工作空间)
+- [5. Debugging(调试)](#5-debugging调试)
+- [6. Plugins(插件)](#6-plugins插件)
+  - [6.1. Go](#61-go)
+- [7. References](#7-references)
+
+
 # 1. VS Code Shortcuts(快捷键)
 
-
 ## 1.1. Folder
+
 - `Ctrl + P` 快速打开文件
 - `Ctrl+Shift+P` 或 `F1` 显示命令面板
 - `Ctrl+Shift+N` 打开一个新的窗口
@@ -21,6 +43,7 @@
 
 
 ## 1.2. Terminal
+
 - Ctrl +` 打开或关闭终端集成终端
 - Ctrl Shift ` ：新建集成终端
 - `Ctrl pageUp` ：切换到上一个终端
@@ -29,6 +52,7 @@
 
 
 ## 1.3. Edition
+
 - `Ctrl + Alt +  ← / →` 将当前页面分栏到左边或者右边
 - ` Ctrl + Shift + Home/End ` 删除光标右侧或左侧的所有内容
 - ` Ctrl + Backspace ` 删除上一个单词
@@ -44,18 +68,21 @@
 
 
 ## 1.4. Folding
-- `Ctrl+K+0`  折叠所有代码
+
+- `Ctrl+K+o`  折叠所有代码
 - `Ctrl+K+J`  展开所有代码
 - `Ctrl+Shift+[`  折叠光标所处代码块内的代码
 - `Ctrl+Shift+]`  展开光标所处代码块内的代码
 
 
 ## 1.5. Groups
+
 - `Ctrl \` 拆分编辑器
 - `Ctrl 数字` 在不同的编辑组之间进行切换
 - `Shift + Alt + 0` 切换布局的方向（水平与垂直方向之间切换）
 
-## Call Hierarchy
+
+## 1.6. Call Hierarchy
 
 VS Code 中有一个 `show call hierarchy` 的功能，显示代码之间的调用关系图。选定一个函数时，按下默认的快捷键  `Shift + Alt+H`，会显示选定的函数被谁调用或者选定的函数调用了哪些函数。`show call hierarchy`  提供了两个选项来决定如何显示代码之间的调用关系：
 
@@ -63,7 +90,8 @@ VS Code 中有一个 `show call hierarchy` 的功能，显示代码之间的调�
 - `Show Incoming Calls"`：如果你选择一个函数，并使用 "Show Incoming Calls" 功能，它会展示哪些函数或方法调用了当前选定的函数。
 
 
-# 2. Configures(配置)
+# 2. Configures
+
 VS Code 是以工作区（workspace）来管理工程的，每个工作区下有个隐藏的 `.vscode` 目录，这个文件夹中包含以下几种文件
 
 - `settings.json`：当前工程环境的配置，设置的配置仅仅只对当前的工程有效，对其它的工程或对当前的用户是不生效的。
@@ -103,20 +131,59 @@ VS Code 环境修改支持两种方式：
 
 2. 直接通过界面 `UI` 的方式去修改，是图形化的操作，比较简单，通过快捷键 `Ctrl + ,` 打开配置修改的 `UI` 界面，然后再去修改具体的配置。
 
+## 2.1. Predefined Variable
 
-## 2.1. Variable
+在 Visual Studio Code（VS Code）中，**预定义变量（Predefined Variables）** 是一组可以在 `launch.json`、`tasks.json`、`settings.json` 以及某些扩展配置中使用的占位符。它们在运行时会被 VS Code 自动替换为实际的值（如当前文件路径、工作区路径等）。
 
-一些常见的变量名
+### 2.1.1. 📁 通用路径相关变量
 
-```sh
-${workspaceFolder} - VS Code当前打开工作区文件夹的路径
-${file} - 当前打开文件的绝对路径
-${fileBasename} - 当前打开文件的名称
-${fileBasenameNoExtension} - 当前打开文件的名称，但是不加后缀名
-${fileDirname} - 文件所在的文件夹路径
-```
+| 变量                         | 含义                                                         |
+| ---------------------------- | ------------------------------------------------------------ |
+| `${workspaceFolder}`         | 当前打开的工作区根目录的完整路径（若未打开文件夹，则为空）。 |
+| `${workspaceFolderBasename}` | 工作区文件夹的名称（不含路径）。                             |
+| `${file}`                    | 当前打开文件的完整路径。                                     |
+| `${fileWorkspaceFolder}`     | 当前文件所在的工作区文件夹路径（适用于多根工作区）。         |
+| `${relativeFile}`            | 相对于工作区根目录的当前文件路径。                           |
+| `${relativeFileDirname}`     | 相对于工作区根目录的当前文件所在目录路径。                   |
+| `${fileBasename}`            | 当前文件名（含扩展名），例如 `example.txt`。                 |
+| `${fileBasenameNoExtension}` | 当前文件名（不含扩展名），例如 `example`。                   |
+| `${fileExtname}`             | 当前文件的扩展名（含点），例如 `.txt`。                      |
+| `${fileDirname}`             | 当前文件所在目录的完整路径。                                 |
+| `${cwd}`                     | 启动任务或调试器时的当前工作目录（通常等于 `${workspaceFolder}`）。 |
+
+### 2.1.2. 🕒 时间与日期变量（仅限部分上下文，如任务/调试）
+
+| 变量          | 含义                                                         |
+| ------------- | ------------------------------------------------------------ |
+| `${datetime}` | 当前日期和时间，格式如：`2025-12-16T23:08:00.000Z`（ISO 格式）。 |
+| `${date}`     | 当前日期，格式如：`2025-12-16`。                             |
+| `${time}`     | 当前时间，格式如：`23:08:00`。                               |
+
+> ⚠️ 注意：`${datetime}`、`${date}`、`${time}` 在较新版本的 VS Code 中才支持（通常用于 `tasks.json` 的 `label` 或 `args` 中）。
+
+### 2.1.3. 🔢 行号与光标位置（主要用于调试配置）
+
+| 变量              | 含义                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| `${lineNumber}`   | 当前行号（需在支持上下文的位置使用，如调试配置中的 `stopAtEntry` 或某些扩展）。 |
+| `${selectedText}` | 编辑器中当前选中的文本（部分扩展或调试器支持）。             |
+
+------
+
+### 2.1.4. 🧩 其他变量
+
+| 变量                                   | 含义                                                         |
+| -------------------------------------- | ------------------------------------------------------------ |
+| `${execPath}`                          | VS Code 可执行文件的路径。                                   |
+| `${pathSeparator}`                     | 路径分隔符（Windows 为 `\`，macOS/Linux 为 `/`）。           |
+| `${extensionInstallLocation:<ext-id>}` | 某个扩展的安装路径（例如 `${extensionInstallLocation:ms-python.python}`）。 |
+
+- VS Code Variables Reference: https://code.visualstudio.com/docs/reference/variables-reference
+
+
 
 ## 2.2. Cursor
+
 光标配置美化
 `editor.cursorStyle` ：光标外部样式
 
@@ -164,6 +231,7 @@ ${fileDirname} - 文件所在的文件夹路径
 
 
 # 3. Panel(面板)
+
 使用 `Ctrl Shift P` 或 `F1` 打开命令行的面板（panel），命令面板是根据输入框里的第一个字符来决定提供什么功能的，不同的字符执行的功能不一样。
 
 - `>`：提供所有的命令。
@@ -177,6 +245,7 @@ ${fileDirname} - 文件所在的文件夹路径
 
 
 # 4. workspace(工作空间)
+
 VS Code 则选择了一种相对轻量，而且大家都易于理解的方式，那就是所有的操作都基于文件和文件夹。当你打开一个文件夹，VS Code 的核心功能就会对这个文件夹进行分析，并提供对应的功能。
 
 注意工作台最下方的状态栏，当 VS Code 没有打开任何文件夹的时候，它的颜色是紫色的。而如果在工作台中打开了某个文件夹，状态栏的颜色就会变成蓝色。
@@ -184,6 +253,7 @@ VS Code 则选择了一种相对轻量，而且大家都易于理解的方式，
 
 
 # 5. Debugging(调试)
+
 VS Code 是把调试功能的最终实现交给插件来完成的。VS Code 提供了一套通用的图形界面和交互方式，比如怎么创建断点、如何添加条件断点、如何查看当前调试状态下参数的值，等等。无论你使用哪个编程语言或者调试器，这一套交互流程都是相似的。
 
 VS Code 为插件作者提供了一套统一的接口，叫做 Debug Adapter Protocol（DAP）。当用户在界面上完成一系列调试相关的操作时，VS Code 则通过 `DAP` 唤起调试插件，由插件完成最终的操作。
@@ -206,13 +276,12 @@ VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electr
 
 上图中，绿色的就是插件进程 Extension Host 了。VS Code 创建 Extension Host 进程的方式，就是创建一个新的 Electron 进程，并且以 Node.js 的形式运行。也就是说，这个进程就是一个完整的 Node.js 进程，Node.js 版本就是你使用的 Electron 中的 Node.js 。
 
-# Plugins(插件)
 
-## Go
+# 6. Plugins(插件)
 
-### Built-in Go snippets
+## 6.1. Go
 
-查看 VS Code 中所有 Go 内建的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert Snippet`，就可以看到所有内置的代码片段了。
+查看 VS Code 中所有 Go 内建(built-in)的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert Snippet`，就可以看到所有内置的代码片段了。
 
 | Abbreviation | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
@@ -281,12 +350,12 @@ VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electr
 
 
 
-# 6. References
+# 7. References
+
 - [微软官方 Visual Studio Code 文档](https://code.visualstudio.com)
 - [c_cpp_properties.json 官方文档](https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference)
 -  [微软官方 variable-reference](https://code.visualstudio.com/docs/editor/variables-reference)
 -  VS Code and Go: a superhero's guide: https://bitfieldconsulting.com/golang/vs-code-go
 -  Microsoft vscode go snippets configure: https://github.com/microsoft/vscode-go/blob/master/snippets/go.json
 -  **Microsoft C++ Team Blog**: https://devblogs.microsoft.com/cppblog/
-
 
