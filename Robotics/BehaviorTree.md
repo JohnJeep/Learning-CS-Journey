@@ -409,7 +409,10 @@ decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个
 
 采用 `XML`语描述行为树的内容。
 
+### **XML 文件的作用**
 
+- 定义行为树的结构（哪些节点、怎么组合）。
+- 指定每个节点的 port 要从 blackboard 的哪个 key 读取或写入。
 
 ## 5. ROS 中如何实现行为树？
 
@@ -442,5 +445,6 @@ decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个
 ## 7. References
 
 1. BehaviorTree.CPP: https://www.behaviortree.dev/
+1. **BT::TreeNode Class Reference**:https://docs.ros.org/en/noetic/api/behaviortree_cpp/html/classBT_1_1TreeNode.html
 2. 知乎：ROS2中的行为树 BehaviorTree：https://zhuanlan.zhihu.com/p/534072049
 
