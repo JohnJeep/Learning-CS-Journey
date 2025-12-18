@@ -6,7 +6,7 @@
  * @Description: SVN学习笔记
 -->
 
-# 1. 概念
+# 1. Introduction
 
 什么是Subversion?
  
@@ -42,6 +42,7 @@
 
 
 # 2. 目录约定
+
 - /trunk：开发主线
 - /branches：支线副本
 - /tags：标签副本，一旦创建，不允许修改。
@@ -49,6 +50,7 @@
 
 
 # 3. 图标
+
 - normal：状态正常
 - modified：对本地的副本做了修改，需要提交到服务器
 - conflicted：有冲突
@@ -73,6 +75,7 @@
 
 
 # 4. svn冲突
+
 解决冲突有三种选择：
 - A、放弃自己的更新，使用svn revert（回滚），然后提交。在这种方式下不需要使用svn resolved（解决）
 - B、放弃自己的更新，使用别人的更新。使用最新获取的版本覆盖目标文件，执行resolved filename并提交(选择文件—右键—解决)。
@@ -86,6 +89,7 @@
 
 
 # 5. Git与SVN的区别
+
 - Git是分布式，svn是集中式
 - svn只有一个中央版本库，而git有无限个
 - svn有全局的版本号，git没有
@@ -96,6 +100,7 @@
 
 
 # 6. subversion 常用流程
+
 1. 拷贝版本库中的项目到本地工作环境中
    - `svn checkout xxxx`
 2. 更新你的工作拷贝
@@ -117,7 +122,8 @@
    - `svn commit`
 
 
-# 7. 常用命令
+# 7. Commands
+
 最重要的是帮助命令，遇见不会的命令，需要自己查看帮助文档：`svn help subcommand`，其中 subcommand 为 subversion 的内建命令。
 
 ## 7.1. add
@@ -143,6 +149,7 @@ lock/unlock 表示 加锁  与解锁。
 
 
 ## 7.5. update
+
 更新你的工作拷贝 
 
 - `svn update`： 会把版本库的修改带到工作拷贝,如果没有给定修订版本,它会把你的工作拷贝更新到 HEAD 修订版本,否则,它会把工作拷贝更新到你用 `--revision` 指定的修订版本。为了保持同步, `svn update` 也会删除所有在工作拷贝发现的无效锁定
@@ -172,15 +179,18 @@ lock/unlock 表示 加锁  与解锁。
 
 
 ## 7.6. status
+
 - `svn status`: 打印所有本地修改的文件，默认情况下，不会联系版本库.
 -  `svn status -v`: 显示所有版本控制下的文件。
 
 ## 7.7. delete
+
 - `svn delete aa.txt` 删除工作区远程库中的 aa.txt 文件；若只是在工程中删除 `aa.txt` 文件，不使用 `svn delete` 指令，则远程版本库中还存在 `aa.txt` 文件，使用 `svn update` 命令后，原先已存在 `aa.txt` 文件会再次更新到工作区中。
 
 
 
 ## 7.8. cat
+
 - `svn cat`: 检查一个过去的版本而不希望察看它们的区别
 ```
 $ svn cat -r 2 rules.txt
@@ -191,7 +201,8 @@ Chew with your mouth open
 ```
 
 ## 7.9. list
-- `svn list`  可以在不下载文件到本地目录的情况下来察看服务器远程库目录中的文件
+
+`svn list`  可以在不下载文件到本地目录的情况下来察看服务器远程库目录中的文件
 ```
 $ svn list http://svn.collab.net/repos/svn
 README
@@ -203,6 +214,7 @@ trunk/
 
 
 ## 7.10. diff
+
 - `svn diff file` 将修改的 file 文件与基础版本比较。
   - 例如：`svn diff test.php`
 
@@ -211,17 +223,19 @@ trunk/
   - 简写：svn di
 
 ## 7.11. copy
-- 从主干上创建分支: `svn cp -m "create branch"  http://svn_server/xxx_repository/trunk  http://svn_server/xxx_repository/branches/br_feature001 `
 
+- 从主干上创建分支: `svn cp -m "create branch"  http://svn_server/xxx_repository/trunk  http://svn_server/xxx_repository/branches/br_feature001 `
 - 获得分支: `svn checkout http://svn_server/xxx_repository/branches/br_feature001`
 
 
 ## 7.12. merge
+
 - `svn merge -r m:n path`
 - 例如：`svn merge -r 200:205 test.cpp`（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
 
 
-## 7.13. log 
+## 7.13. log
+
 - `svn log -l 10`: 查看最近提交的10条记录
 - `svn log test.cpp`: 显示这个文件的所有修改记录，及其版本号的变化。
 - `svn log -r {2018-07-03}:{2018-07-09}`: 查看一段时间的日志
@@ -229,6 +243,7 @@ trunk/
 
 
 ## 7.14. info
+
 - `svn info test.cpp`：查看test.cpp文件的详细信息。
   ```
   Path: xxx.cpp
@@ -249,25 +264,62 @@ trunk/
   ```
 
 ## 7.15. resolved
+
 - `svn resolved`: 移除工作副本的目录或文件的“冲突”状态。
 - 用法: `svn resolved PAT`
 - 注意: 本命令不会依语法来解决冲突或是移除冲突标记，它只是移除冲突的相关文件，然后让 PATH 可以再次提交。
 
 
 ## 7.16. switch
+
 - `svn switch (sw)`: 更新工作副本至不同的URL。
   - 1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。
   - 2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系
 
 ## 7.17. revert
+
 - 本地文件发生改变后，想要恢复到未改变之前的状态，可以用 `svn revert` 命令。
 - `svn revert files` 将 files 恢复到未改变之前的状态。
 - `svn revert --recursive build/xxx/file` 将 build/xxx/ 路径下的多个 file 恢复到未改变之前的状态。
 - 注意: 此命令只改变本地工作区的内容，对远程库不行，文件已被 `svn delete` 指令删除，则不会被恢复。
 
 
+# 8. Git-SVN
 
-# 8. 参考
+服务器使用的是 SVN，但是想本地使用 Git 的 local branch 或者离线编辑代码等，这时 `Git-SVN` 就是最好的。
+
+下面是 `Git-SVN` 通用的操作
+
+```sh
+#Download an SVN project and its entire code history and initialize it as a git code base
+$ git svn clone -s [repository]
+
+#View the current version Library
+$ git svn info
+
+#Retrieve changes from all branches of the remote warehouse
+$ git svn fetch
+
+#Retrieve the changes of the current branch of the remote warehouse and merge it with the local branch
+$ git svn rebase 
+
+#Upload the local warehouse of the current branch to the remote warehouse
+$ git svn dcommit
+
+#Pull new branch and submit to remote warehouse
+$ git svn copy [remote_branch] [new_remote_branch] -m [message]
+
+#Create local branch corresponding to remote branch
+$ git checkout -b [local_branch] [remote_branch]
+```
+
+
+# 9. References
+
+- [官方英文文档](https://git-scm.com/docs/git-svn)
+- [Compared with GIT and SVN, this article is easy to understand](https://developpaper.com/compared-with-git-and-svn-this-article-is-easy-to-understand/)
+- [The Best of Git working with Subversion](https://www.taringamberini.com/en/blog/howto/the-best-of-git-working-with-subversion/)
+- [The Dream of a Bi-directional Git-SVN mirror](https://blog.tfnico.com/2011/03/dream-of-bi-directional-git-svn-mirror.html)
 - [linux下svn命令使用大全](http://blog.chinaunix.net/uid-22566367-id-1965771.html)
 - [Linux下常用svn命令](https://www.cnblogs.com/jaspersong/p/9277720.html)
 - [SVN的安装和使用手册](https://blog.csdn.net/sinat_37812785/article/details/80243207)    
