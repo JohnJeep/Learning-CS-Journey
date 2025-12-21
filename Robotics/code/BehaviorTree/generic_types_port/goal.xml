@@ -1,0 +1,10 @@
+<root BTCPP_format="4" >
+    <BehaviorTree ID="MainTree">
+      <Sequence name="root">
+          <CalGoal goal="{GoalPosition}" />
+          <PrintTarget   target="{GoalPosition}" />
+          <Script        code=" OtherGoal:='-1;3' " />
+          <PrintTarget   target="{OtherGoal}" />
+      </Sequence>
+    </BehaviorTree>
+</root>
