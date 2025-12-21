@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
 
   // read the tree from an XML file
   auto tree = factory.createTreeFromFile("../blackboard.xml");
-
+  
   // tree.tickRootWhileRunning(); // BT 3.8
   // tick the root until it returns SUCCESS or FAILURE
   tree.tickWhileRunning();
