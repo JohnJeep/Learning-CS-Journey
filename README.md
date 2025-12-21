@@ -7,7 +7,39 @@
 -->
 
 # 1. Learning Computer Science Journey
-本项目是记录本人学习计算机科学这类学科知识点的历程。从计算机底层硬件到应用层软件等知识点。包括最底层的汇编语言(Assemble)、高级的 C、C++、Go 语言、计算机网络基础(ComputerNetwork)、操数据结构与算法(DataStructure)、设计模式(DesignPattern)、操作系统(Operating System)、Linux 基础与 Linux 环境编程(Linux)、数据库(MySQL、Redis)、脚本语言(Shell)、界面编程(Qt)、轻量级的 Web 服务器(Nginx)、GitHub 和 Git 及 SVN 代码管理工具使用(Git-SVN)、嵌入式系统中 STM 系列芯片模板工程的创建(Embedded)、常用的学习工具和学习网站之谈(StudyTool)、Markdown 和 Jupyter Notebook 基本语法(markdown)、基本的一些哲学思想和英语美句(Philosophy)。
+本项目是记录本人学习计算机科学这类学科知识点的历程，从计算机底层硬件到应用层软件等知识点。
+
+1. 芯片：x86、ARM、NVIDIA
+2. 人工智能 AIGC
+3. 自动驾驶
+4. 最底层的汇编语言：Assemble
+5. 高级语言C、C++、Golang、Python、node.js、JavaScript、TypeScript
+6. 计算机网络基础：Network
+7. 数据结构与算法：DataStructure
+8. 设计模式：DesignPattern
+9. 操作系统：Operating System
+10. Linux 基础、Linux 环境编程
+11. GNU
+12. 数据库：MySQL、Redis
+13. 分布式
+14. 云原生
+    - docker
+    - k8s
+    - Zookeeper
+    - Protobuf
+    - gRPC
+    - Kafka
+15. 脚本语言：Shell
+16. 界面编程：Qt
+17. 轻量级的 Web 服务器：Nginx
+18. 代码版本管理工具：GitHub 、 Git、 SVN 、Git-SVN
+19. 常用开源协议：modbus、Omron、Siemens、WebRTC
+20. 嵌入式编程：STM32 系列
+21. 机器人
+22. 常用的学习工具和学习网站：StudyTool
+23. Markdown工具
+24.  Jupyter Notebook工具
+25. 哲学思想
 
 
 # 2. C 语言
@@ -49,47 +81,48 @@ C 语言是自己接触的第一门语言，基本的语法在大学时就已经
 
 
 # 3. C++
-C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的的强化，但是现代的 C++ 已经与 C 相差很大了，几乎是另一种语言。学习 C++ 需要花费的很长时间，    
-它的知识点不仅广泛还很细粒、灵活性很高。自己在学习时，学习知识点时，学习的快，忘记的也快，因此，自己就把学习过程中的一些理解、笔记和体会记录下来。
+C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的的强化，但是现代的 C++ 已经与 C 相差很大了，几乎是另一种语言。学习 C++ 需要花费的很长时间，它的知识点不仅广泛还很细粒、灵活性很高。自己在学习时，学习知识点时，学习的快，忘记的也快，因此，自己就把学习过程中的一些理解、笔记和体会记录下来。
 
+## 3.1. [C++ 基础](Cpp/Novice.md)
 
-## 3.1. [C++ 基础](C++/01-C++Novice.md)
 这部分主要是 C++ 的基础知识点，常用的语法，该板块涉及的内容比较多。
 
 <img src="./Cpp/figures/toc-1.png">
 
 <img src="./Cpp/figures/toc-2.png">
 
+## 3.2. [C++ 高级](Cpp/Advance.md)
 
-## 3.2. [C++ 高级](C++/02-C++Advanced.md)
 C++ 的核心思想是面向对象，这个板块包含了 C++ 面向对象的内容：封装、继承、多态；泛型编程、输入输出流、元编程等。
 
 <img src="./Cpp/figures/toc-3.png">
 
+## 3.3. C++ 新特性
 
-## 3.3. [C++ 新特性](C++/03-C++Standard.md)
-主要介绍 C++11、C++14、C++17、C++20 的新特性，
+主要介绍 [C++11](Cpp/C++11.md)、[C++14](Cpp/C++14.md)、[C++17](Cpp/C++17.md)、[C++20](Cpp/C++20.md) 的新特性
 
 <img src="./Cpp/figures/toc-c11.png">
 
+## 3.4. [C++ STL](Cpp/STL.md)
 
-## 3.4. [C++STL](C++/04-STL.md)
-标准库是非常重要的，熟练地使用并知道其内部的原理对自己的编码是非常有帮助的。STL 是编写 C++ 的大牛们创造的一个非常优秀的作品，里面有很多的东西值得学习和探讨。
+标准库是非常重要的，熟练地使用并知道其内部的原理对自己的编码是非常有帮助的。
+
+STL 是编写 C++ 的大牛们创造的一个非常优秀的作品，里面有很多的东西值得学习和探讨。
 
 <img src="./Cpp/figures/toc-stl-1.png">
 <img src="./Cpp/figures/toc-stl-2.png">
 <img src="./Cpp/figures/toc-stl-3.png">
 
+## 3.5. [C++ 内存管理](Cpp/MemoryManagement.md)
 
-## 3.5. [C++ 内存管理](./Cpp/05-内存管理.md)
 C++ 不同 Java、Python、GO 等，C++ 没有垃圾回收机制，内存的分配和释放都需自己手动管理，因此真真理解 C++ 编译器中的内存管理机制是非常重要的。这部分的内容，目前只写了部分，后面的内容，以后在完善。
 
-1. [C++ 中 enable_shared_from_this 用法](C++/enable_shared_from_this.md)
+1. [C++ 中 enable_shared_from_this 用法](CPP/enable_shared_from_this.md)
 2. [Core dump 调试用法](Linux/coredump.md)
 3. [Valgrind 内存泄漏检查的利器](Linux/valgrind.md)
-4. [C++ 编程规范](C++/C++StyleGuide.md)
-5. [C++ 中的并发处理](C++/concurrency.md)
-6. [多线程时线程池的使用](C++/ThreadPool.md)
+4. [C++ 编程规范](Cpp/C++StyleGuide.md)
+5. [C++ 中的并发处理](Cpp/concurrency.md)
+6. [多线程时线程池的使用](Cpp/ThreadPool.md)
 7. [非常值得学习的 C/C++ 服务端开源库](OpenSource/OpenSourceProject.md)
 
 # 4. 内功修炼
