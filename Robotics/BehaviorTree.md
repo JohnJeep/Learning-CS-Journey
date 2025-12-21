@@ -213,7 +213,7 @@ void tickEnemyAI() {
 
 - > **Port 是行为树节点与外部数据（尤其是 Blackboard）之间的标准化、类型安全的接口抽象，使得行为树具备高度的灵活性、可配置性和复用性。**
 
-  它不是传统意义上的“网络端口”或“硬件端口”，而是一种 **行为树内部的数据绑定契约机制**。
+  它不是传统意义上的“网络端口”或“硬件端口”，而是一种 **行为树内部的数据绑定契约机制**。提供了一种简介操作，也叫 `remapping`。
 
 - 作用：让节点能够**接收输入参数**和**输出执行结果**。
 
@@ -486,7 +486,7 @@ static BT::PortsList providedPorts() {
   - **花括号 `{}` 表示这是一个 Blackboard 引用**。若不加 {}，仅仅表示普通的字符串。
   - **花括号内的内容就是 Blackboard 的键（key）**。
 
-在 XML 文件使用 `{}` 与 InputPort 和 OutPort 进行绑定 。 当一个节点设置 `port_name="{blackboard_key}"`时，它会将结果存储在 Blackboard  的`blackboard_key`上；其他节点通过 `input="{blackboard_key}"` 可以获取这个值。
+在 XML 文件使用 `{}` 与 InputPort 和 OutPort 进行绑定 。 当一个节点设置 `port_name="{blackboard_key}"`时，它会将结果存储在 Blackboard  的`blackboard_key`上；其他节点通过 `input="{blackboard_key}"` 可以获取这个值。
 
 **示例**：
 
@@ -562,7 +562,25 @@ static BT::PortsList providedPorts() {
 
 在节点代码中，使用`getInput`来读取输入 port，使用`setOutput`来写入输出 port。这些函数内部会自动处理与 blackboard 的交互（如果 port 绑定到了entry）。如果port 没有绑定到 entry，而是直接给定了一个固定值，那么`getInput`会直接返回那个固定值。
 
+#### 注意点
 
+**推荐使用 Port 去操作数据而不是直接使用 Blackboard 去操作数据。**
+
+推荐写：
+
+```cpp
+// example code in your tick()
+getInput("goal", goal);
+setOutput("result", result);
+```
+
+避免写：
+
+```cpp
+// example code in your tick()
+config().blackboard->get("goal", goal);
+config().blackboard->set("result", result);
+```
 
 #### 2.3.5. 底层绑定机制简述
 
@@ -607,11 +625,16 @@ controlNode 叫控制节点。像树干和树枝，负责控制子节点的执�
 
 #### 3.2.1. Sequence
 
-Sequence 叫序列节点。
+Sequence 叫序列节点。最基本和最常用。
 
 - **逻辑**：按顺序执行所有子节点。**只有全部成功，它才返回成功；任何一个失败，则立即停止并返回失败。**
 - **例子**：`序列[接近门，开门，通过，关门]` —— 任何一个步骤失败（如门打不开），整个任务失败。
-- 最基本和最常用。
+
+提供三种类型 nodes
+
+- Sequence
+- SequenceWithMemory
+- ReactiveSequence：响应式序列。
 
 #### 3.2.2. Fallback
 
@@ -621,6 +644,11 @@ FallbackNode 叫选择节点或者选择器(Selector)。
 - **例子**：`选择[用钥匙开门， 用力拉门， 呼叫管理员]` —— 尝试各种开门方法，直到一个成功。
 
 ![](./figures/sequences_fallbacks.png)
+
+提供2中 nodes l类型
+
+- Fallback
+- ReactiveFallback
 
 
 
@@ -656,14 +684,25 @@ ConditionNode 叫条件节点。
 
 ### 3.4. DecoratorNode
 
-decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个子节点的行为。它只能有一个子节点。负责将子节点的结果进行修饰。比如将子节点的结果进行反向，约束子节点的执行次数等等。
+decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个子节点的行为。比如将子节点的结果进行反向，约束子节点的执行次数等等。
+
+**它只能有一个子节点。**
 
 **常用类型**：
 
-- `反转（Not）`：将子节点的结果反转（成功变失败，失败变成功）。
-- `重复（Repeat）`：反复执行子节点N次或直到失败。
-- `直到失败（Until Fails）`：反复执行子节点直到其返回失败。
-- `强制成功/失败（Force Success/Failure）`：无论子节点结果如何，都返回指定状态。
+- invert：将子节点的结果反转（SUCCESS 变 FAILURE ，FAILURE 变SUCCESS ，若一个 child 返回 RUNNING，node 也返回 RUNNING）。
+- Repeat：反复执行子节点 N 次。
+  - child 执行 N 次，若尝试 N 次都返回 SUCCESS ，则 node 总是返回 SUCCESS 。
+  - 若 child 返回 FAILURE  ，则中断循环，node 返回 FAILURE 。
+
+- RetryUntilSuccessful：
+  - child 执行 N 次，若尝试 N 次都返回 FAILURE ，则 node 总是返回 FAILURE 。
+  - 若 child 返回 SUCCESS ，则中断循环，node 返回 SUCCESS。
+
+- KeepRunningUntilFailure：反复执行子节点直到其返回失败。
+- Force Success/Failure：无论子节点结果如何，都返回指定状态（失败或成功）。
+- Delay：指定多久去 tick child。
+- RunOnce：只执行 child 一次。
 
 
 
@@ -720,7 +759,6 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
   ```xml
   <root BTCPP_format="4" main_tree_to_execute="MainTree">
-    
     <!-- 主树定义 -->
     <BehaviorTree ID="MainTree">
       <Sequence>
@@ -736,9 +774,10 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
         <Action ID="Action2"/>
       </Sequence>
     </BehaviorTree>
-    
   </root>
   ```
+
+- `BTCPP_format`：Behavior Tree 的版本。
 
 #### 4.2.2. 行为树定义标签
 
@@ -816,6 +855,53 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
     ```
 
 - `<Remap>`：在 `<SubTree>` 内部用于端口重映射（较新版本中通常直接在属性中完成）。
+
+- `<include>`：引用外部的文件，类似于C++中的 `#include <file>` 的语法。从 2.4 版本开始支持。
+
+  ```xml
+  <!-- 格式 -->
+  <include path="relative_or_absolute_path_to_file">
+  ```
+
+  示例：
+
+  ```xml
+   <!-- file maintree.xml -->
+  
+   <root BTCPP_format="4" >
+  	 
+  	 <include path="grasp.xml"/>
+  	 
+       <BehaviorTree ID="MainTree">
+          <Sequence>
+             <Action  ID="SaySomething"  message="Hello World"/>
+             <SubTree ID="GraspObject"/>
+          </Sequence>
+       </BehaviorTree>
+    </root>
+  ```
+
+  ```xml
+   <!-- file grasp.xml -->
+  
+   <root BTCPP_format="4" >
+       <BehaviorTree ID="GraspObject">
+          <Sequence>
+             <Action ID="OpenGripper"/>
+             <Action ID="ApproachObject"/>
+             <Action ID="CloseGripper"/>
+          </Sequence>
+       </BehaviorTree>  
+   </root>
+  ```
+
+  ROS中的用法
+
+  ```xml
+  <include ros_pkg="name_package"  path="path_relative_to_pkg/grasp.xml"/>
+  ```
+
+  
 
 #### 4.2.7. Ports 与 Blackboard
 
