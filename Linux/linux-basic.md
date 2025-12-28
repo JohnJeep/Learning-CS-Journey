@@ -2,13 +2,13 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:58:06
+ * @LastEditTime: 2025-12-29 01:31:34
  * @Description: Linux 基础用法
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
 - [1. Linux Basic](#1-linux-basic)
-- [2. 硬件基础知识](#2-硬件基础知识)
+- [2. Hardware](#2-hardware)
   - [2.1. MBR](#21-mbr)
   - [2.2. GPT](#22-gpt)
   - [2.3. BIOS与UEFI](#23-bios与uefi)
@@ -38,8 +38,9 @@
   - [5.4. more](#54-more)
   - [5.5. less](#55-less)
   - [5.6. od](#56-od)
-  - [5.7. head 和 tail](#57-head-和-tail)
-  - [5.8. uniq](#58-uniq)
+  - [5.7. head](#57-head)
+  - [5.8. tail](#58-tail)
+  - [5.9. uniq](#59-uniq)
 - [6. 文件 I/O](#6-文件-io)
   - [6.1. 文件权限](#61-文件权限)
   - [6.2. umask](#62-umask)
@@ -60,51 +61,50 @@
   - [7.3. 解压文件](#73-解压文件)
   - [7.4. 打包并压缩](#74-打包并压缩)
   - [7.5. 解压缩包](#75-解压缩包)
-  - [7.6. zcat zless](#76-zcat-zless)
-  - [7.7. zip](#77-zip)
-- [8. link](#8-link)
-  - [8.1. hard links](#81-hard-links)
-  - [8.2. symbolic links](#82-symbolic-links)
-- [9. pipe](#9-pipe)
-- [10. tee](#10-tee)
-- [11. wc](#11-wc)
-- [12. ps](#12-ps)
-- [13. killall 与 pkill](#13-killall-与-pkill)
-- [14. nohup](#14-nohup)
-- [15. pstree](#15-pstree)
-- [16. ltrace](#16-ltrace)
-- [17. strace](#17-strace)
-- [18. pstack](#18-pstack)
-- [19. find](#19-find)
-- [20. xargs](#20-xargs)
-- [21. grep](#21-grep)
-- [22. pgrep](#22-pgrep)
-- [23. PID](#23-pid)
-- [24. dd](#24-dd)
-- [25. ss](#25-ss)
-- [26. lsof](#26-lsof)
-- [27. netcat](#27-netcat)
-- [28. socat](#28-socat)
-- [29. traceroute](#29-traceroute)
-- [30. man](#30-man)
-- [31. ntsysv](#31-ntsysv)
-- [32. wget](#32-wget)
-- [33. SHA](#33-sha)
-- [34. md5](#34-md5)
-- [35. ldconfig](#35-ldconfig)
-- [36. ldd](#36-ldd)
-- [37. chkconfig](#37-chkconfig)
-- [38. LD\_LIBRARY\_PATH](#38-ld_library_path)
-- [39. scp](#39-scp)
-- [40. rsync](#40-rsync)
-- [41. 防火墙](#41-防火墙)
-  - [41.1. ubuntu 下默认的防火墙](#411-ubuntu-下默认的防火墙)
-  - [41.2. CentOS下默认的防火墙](#412-centos下默认的防火墙)
-- [42. SELinux](#42-selinux)
-- [43. QAQ](#43-qaq)
-  - [43.1. Linux 与 Windows相差 8 小时](#431-linux-与-windows相差-8-小时)
-  - [43.2. enca](#432-enca)
-- [44. References](#44-references)
+- [8. zcat zless](#8-zcat-zless)
+- [9. zip](#9-zip)
+- [10. link](#10-link)
+  - [10.1. hard links](#101-hard-links)
+  - [10.2. symbolic links](#102-symbolic-links)
+- [11. pipe](#11-pipe)
+- [12. tee](#12-tee)
+- [13. wc](#13-wc)
+- [14. ps](#14-ps)
+- [15. killall 与 pkill](#15-killall-与-pkill)
+- [16. nohup](#16-nohup)
+- [17. pstree](#17-pstree)
+- [18. ltrace](#18-ltrace)
+- [19. strace](#19-strace)
+- [20. pstack](#20-pstack)
+- [21. find](#21-find)
+- [22. xargs](#22-xargs)
+- [23. grep](#23-grep)
+- [24. pgrep](#24-pgrep)
+- [25. PID](#25-pid)
+- [26. dd](#26-dd)
+- [27. ss](#27-ss)
+- [28. lsof](#28-lsof)
+- [29. netcat](#29-netcat)
+- [30. socat](#30-socat)
+- [31. traceroute](#31-traceroute)
+- [32. man](#32-man)
+- [33. ntsysv](#33-ntsysv)
+- [34. wget](#34-wget)
+- [35. SHA](#35-sha)
+- [36. md5](#36-md5)
+- [37. ldconfig](#37-ldconfig)
+- [38. ldd](#38-ldd)
+- [39. chkconfig](#39-chkconfig)
+- [40. LD\_LIBRARY\_PATH](#40-ld_library_path)
+- [41. scp](#41-scp)
+- [42. rsync](#42-rsync)
+- [43. UFW](#43-ufw)
+- [44. firewalld](#44-firewalld)
+- [45. SELinux](#45-selinux)
+- [46. QAQ](#46-qaq)
+  - [46.1. Linux 与 Windows相差 8 小时](#461-linux-与-windows相差-8-小时)
+  - [46.2. enca](#462-enca)
+- [47. References](#47-references)
 
 
 # 1. Linux Basic
@@ -115,7 +115,7 @@
 
 写文章的初衷：遇见不会的知识和命令，通过网络查找，当时记住了，但过了一段时间后，再一次遇见之前的知识又要查。每次去查不仅要花费很多时间，而且找的东西良莠不齐，因此记下查的知识点，辅助自己，提高效率。
 
-# 2. 硬件基础知识
+# 2. Hardware
 
 磁盘阵列（RAID）：利用硬件技术将数个硬盘整合成为一个大硬盘的方法， 操作系统只会看到最后被整合起来的大硬盘。 由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。 
 
@@ -517,17 +517,32 @@ od(Octal Dump)：默认以二进制的方式读取文件内容。将指定文件
   echo abc | od -t dCc   # 查看字符的 ASCII 表
 ```
 
-## 5.7. head 和 tail
+## 5.7. head 
 
 head、tail：取出文件前几行或最后几行的数据。
 
 ```bash
-示例：
-  在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。 
-  cat -n /etc/man_db.conf | head -n 20 | tail -n 10
+# 在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。 
+cat -n /etc/man_db.conf | head -n 20 | tail -n 10
 ```
 
-## 5.8. uniq
+## 5.8. tail
+
+选项参数
+
+- `-f`: 表示 "follow"，即持续输出文件末尾追加的内容。
+  - 通过**文件描述符（file descriptor）** 跟踪文件。
+  - 若原始文件被删除、重命名或轮转，tail -f 仍然监视旧的 inode（即已被重命名或删除的文件），不会自动切换到新文件。因此你将看不到新写入新文件的内容。
+- `-F`： 是 `--follow=name --retry` 的简写。
+  - 按**文件名**跟踪（而不是 inode）。
+  - 如果文件被删除或轮转，`tail` 会**持续尝试重新打开同名文件**。
+  - 一旦新文件以相同名称出现，`tail -F` 会自动切换到新文件并继续输出其内容。
+
+✅ **最佳实践**：在监控可能被轮转的日志文件时，**优先使用 `tail -F`**。
+
+
+
+## 5.9. uniq
 
 uniq 输出或忽略文件的重复行，常与 sort 排序命令结合使用
 
@@ -546,9 +561,9 @@ CentOS 使用的是 `xfs` 作为默认的文件系统。
 
 文件权限
 
-- 可读（Read），可以读取文件的内容。
-- 可写（Write），可以编辑、新增、或修改该文件的内容，但不具备删除该文件的权限。
-- 可执行（eXecute），Linux下，文件是否能够执行，与文件的后缀名无关，仅由是否具备 `x` 这个权限来决定。注意: X 代表这个文件具有可执行的能力，但能不能执行成功，需要由文件中的内容决定。
+1. 可读（Read），可以读取文件的内容。
+2. 可写（Write），可以编辑、新增、或修改该文件的内容，但不具备删除该文件的权限。
+3. 可执行（eXecute），Linux下，文件是否能够执行，与文件的后缀名无关，仅由是否具备 `x` 这个权限来决定。注意: X 代表这个文件具有可执行的能力，但能不能执行成功，需要由文件中的内容决定。
 
 > 对于文件的 rwx 来说，主要都是针对“文件的内容”而言，与文件文件名的存在与否没有关系，因为文件记录的是实际的数据。文件是存放数据的所在，目录则主要记录文件名列表。因此文件名与目录有强烈的关联。
 
@@ -859,7 +874,7 @@ FHS(Filesystem Hierarchy Standard) ：文件系统分层标准
 /var/run --> /run
 ```
 
-![Alt text](pictures/linux-file-system.png)
+![Alt text](figures/linux-file-system.png)
 
 
 ## 6.9. 绝对路径与相对路径
@@ -960,7 +975,7 @@ tar -zxvf hello.tar.gz -C ~/Exercise_Linux/tmp
 
 - 不加 `-C ~/Exercise_Linux/tmp`，表示只是解压到当前目录下。
 
-## 7.6. zcat zless
+# 8. zcat zless
 
 zcat、zless 命令直接查看压缩文件中的内容。
 
@@ -972,7 +987,7 @@ $ zless test.gz
 hello word
 ```
 
-## 7.7. zip
+# 9. zip
 
 zip 是压缩指令，unzip 是解压指令。zip 指令既可以压缩文件，也可以压缩目录。压缩会自动保留源文件，解压会自动保留压缩文件。
 
@@ -1001,11 +1016,11 @@ unzip  -n  demo.zip
 
 <font color=red>注意：直接使用 unzip 指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，那么会询问是否要覆盖这个文件。</font>
 
-# 8. link
+# 10. link
 
 Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬链接操作，加参数表示软连接操作。
 
-## 8.1. hard links
+## 10.1. hard links
 
 硬链接: 指向磁盘中文件的节点（node），只有文件才能创建硬链接，目录不能创建。
 
@@ -1016,7 +1031,7 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 ln 原文件 新文件 
 ```
 
-## 8.2. symbolic links
+## 10.2. symbolic links
 
 符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件。这两个通过符号链接在一起的文件，彼此的内容并不相同。
 
@@ -1027,7 +1042,7 @@ ln 原文件 新文件
 ln -s source  destination 
 ```
 
-# 9. pipe
+# 11. pipe
 
 pipe 中文翻译过来是管道的意思，用 `|` 表示。
 
@@ -1040,14 +1055,14 @@ pipe 中文翻译过来是管道的意思，用 `|` 表示。
 - `| `: 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'hello' | wc -l
 - `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
 
-# 10. tee
+# 12. tee
 
 man手册英文原意：`tee - read from standard input and write to standard output and files`
 
 - 功能：从标准输入读数据，写到标准输出和文件中。
 - 用法：`echo hello | tee file` 将 hello 字符写到file文件中并显示在标准输出上。
 
-# 11. wc
+# 13. wc
 
 作用：print newline, word, and byte counts for each file. (用来统计一个文件或者指定的多个文件中的行数，单词数和字符数)
 
@@ -1063,7 +1078,7 @@ man手册英文原意：`tee - read from standard input and write to standard ou
   -L --max-line-length 打印最长行的长度
 ```
 
-# 12. ps
+# 14. ps
 
 ps 是进程状态（process status）的缩写，用于查看 Linux 系统中进程的状态情况。
 
@@ -1164,7 +1179,7 @@ lstart: 命令启动时的时间
 
 
 
-# 13. killall 与 pkill
+# 15. killall 与 pkill
 
 根据进程的名称去杀死进程，而不需要知道进程的 ID 号。
 
@@ -1176,7 +1191,7 @@ pkill bash
 
 参考：[Linux批量kill进程 - abce - 博客园](https://www.cnblogs.com/abclife/p/7380397.html)
 
-# 14. nohup
+# 16. nohup
 
 ```bash
 nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
@@ -1185,7 +1200,7 @@ nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
   nohup ping www.baidu.com    让执行 ping 命令的进程在后台运行。
 ```
 
-# 15. pstree
+# 17. pstree
 
 `pstree` 命令是用于查看正在运行的进程之间的关系，用树形图显示，即哪个进程是父进程，哪个是子进程，可以清楚的看出来是谁创建了谁，同时还可以查看一个进程下有多少个子线程。
 
@@ -1231,7 +1246,7 @@ a.out(15821)─┬─{a.out}(15835)
              ├─{a.out}(15844)
 ```
 
-# 16. ltrace
+# 18. ltrace
 
 跟踪进程调用库函数的信息，显示调用哪些库函数。
 
@@ -1331,7 +1346,7 @@ SYS_exit_group(0 <no return ...>
 
 参考：[ltrace命令详解 ](https://www.cnblogs.com/machangwei-8/p/10388938.html)
 
-# 17. strace
+# 19. strace
 
 **为什么要用 strace?**
 
@@ -1405,11 +1420,11 @@ strace 跟踪一个进程的系统调用或信号产生的信息。（strace  - 
 -u username 以username 的UID和GID执行被跟踪的命令
 ```
 
-# 18. pstack
+# 20. pstack
 
 pstack 打印正在运行的进程的堆栈信息。
 
-# 19. find
+# 21. find
 
 find 命令：在指定的目录中共去查找文件。 
 
@@ -1485,7 +1500,7 @@ find 命令：在指定的目录中共去查找文件。
     find . -name "*.ini" | xargs grep "dog"
 ```
 
-# 20. xargs
+# 22. xargs
 
 xargs 又称管道命令。是给命令传递参数的一个过滤器，也是组合多个命令的一个工具，它把一个数据流分割成一些足够小的快，方便过滤器和命令进行处理。
 
@@ -1547,7 +1562,7 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
     a.txt  b.txt
 ```
 
-# 21. grep
+# 23. grep
 
 `grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
 
@@ -1644,7 +1659,7 @@ OPTIONS:
 [20220411_204214_321][I]Get ReportDBTable value: 1[TID:3143]
 ```
 
-# 22. pgrep
+# 24. pgrep
 
 根据进程的名称查找并返回进程的 ID 号到标准输出。与 pidof 功能一样。
 
@@ -1659,13 +1674,13 @@ pidof bash
 3528
 ```
 
-# 23. PID
+# 25. PID
 
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括PID
 - `ps ajx` 显示进程组ID
 - `ulimit -a` 查看资源的上限大小 
 
-# 24. dd
+# 26. dd
 
 `dd` 命令根据指定的操作（OPERAND）去转换（convert）和拷贝（copy）一个文件，同时还能打印拷贝的速度。
 
@@ -1678,18 +1693,20 @@ dd OPTION
 
 
 
-# 25. ss
+# 27. ss
 
 ss 是用于调查套接字的另一个实用程序。
+
+同 `netstat` 命令一样，但比它更好用。
 
 ```bash
 ss 检查端口： 
 
-示例：
-  ss -tunlp
+示例：过滤 80 端口
+  ss -tunlp | grep :80
 ```
 
-# 26. lsof
+# 28. lsof
 
 lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 
@@ -1729,21 +1746,21 @@ lsof 命令输出各列信息的意义如下：
 
 > Tips：查看 xxx 端口的占用情况，有两种方式。第一采用 `lsof -i:xxx` 查看；第二：采用 `netstat -tunlp | grep xxx` 来查看。
 
-# 27. netcat
+# 29. netcat
 
 netcat（通常缩写为nc）是一种计算机联网实用程序，用于使用TCP或UDP读写网络连接。 该命令被设计为可靠的后端，可以直接使用或由其他程序和脚本轻松驱动。 同时，它是功能丰富的网络调试和调查工具，因为它可以产生用户可能需要的几乎任何类型的连接，并具有许多内置功能。netcat被称为网络工具中的瑞士军刀，体积小巧，但功能强大。
 
-# 28. socat
+# 30. socat
 
 Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat的官方网站： http://www.dest-unreach.org/socat/ 
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket等。
 
-# 29. traceroute
+# 31. traceroute
 
 追踪从出发地（源主机）到目的地（目标主机）之间经过了哪些路由器，以及到达各个路由器之间的消耗的时间。默认发送的数据包大小是40字节。
 
-# 30. man
+# 32. man
 
 man是 POSIX(Portable Operating System Interface) 规定的帮助手册程序。
 
@@ -1817,17 +1834,17 @@ whatis (1)           - display one-line manual page descriptions
 - 自定义软件安装路径配置 man page。
   自定义的软件没有安装在 /`usr/local/` 路径时，需手动配置 man page，否则使用 man 去查找软件相关的手册时，会找不到。例如：你安装的软件放置到`/usr/local/software/`， 那么 man page 搜寻的设置中， 可能就得要在 `/etc/man_db.conf `内的 40~50 行左右处， 写入 `MANPATH_MAP /usr/local/software/bin /usr/local/software/man`，这样才可以使用 man 来查询该软件的在线文件。
 
-# 31. ntsysv
+# 33. ntsysv
 
 ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
 
-# 32. wget
+# 34. wget
 
 支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器设置。wget 下载单个文件下载。下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。
 
 参考: [wget命令详解](https://www.cnblogs.com/zhoul/p/9939601.html)
 
-# 33. SHA
+# 35. SHA
 
 - SHA 是安全散列算法（英语：Secure Hash Algorithm，缩写为SHA），它是一个密码散列函数家族，是FIPS所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。
 
@@ -1851,7 +1868,7 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   feeds-master.zip: OK
   ```
 
-# 34. md5
+# 36. md5
 
 md5 是 消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。
 
@@ -1865,13 +1882,13 @@ Tim@computer:~/Downloads$ md5sum -c md.txt
 feeds-master.zip: OK
 ```
 
-# 35. ldconfig
+# 37. ldconfig
 
 ldconfig 是一个动态链接库管理命令，其目的为了让动态链接库为系统所共享。
 
 主要是在默认搜寻目录 `/lib` 和 `/usr/lib` 以及动态库配置文件 `/etc/ld.so.conf` 内所列的目录下，搜索出可共享的动态链接库（格式如 `lib*.so*`），进而创建出动态装入程序(`ld.so`)所需的连接和缓存文件，缓存文件默认为 `/etc/ld.so.cache`，此文件保存已排好序的动态链接库名字列表。linux下的共享库机制采用了类似高速缓存机制，将库信息保存在 `/etc/ld.so.cache`，程序链接的时候首先从这个文件里查找，然后再到 `ld.so.conf` 的路径中查找。为了让动态链接库为系统所共享，需运行动态链接库的管理命令 `ldconfig`，此执行程序存放在 `/sbin` 目录下。
 
-# 36. ldd
+# 38. ldd
 
 作用：判断某个可执行的二进制文件含有什么动态库。
 
@@ -1896,17 +1913,17 @@ ldconfig 是一个动态链接库管理命令，其目的为了让动态链接�
       # 参数 -v 表示该函数来自于哪一个软件
 ```
 
-# 37. chkconfig
+# 39. chkconfig
 
 chkconfig 命令用来更新（启动或停止）和查询系统服务的运行级信息。谨记 chkconfig 不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。
 
-# 38. LD_LIBRARY_PATH
+# 40. LD_LIBRARY_PATH
 
 `LD_LIBRARY_PATH` 是 Linux 下用来处理环境变量的，告诉加载器（loader）在什么路径下去查找非标准库中的共享库。
 
 Linux 运行的时候，是如何管理共享库(*.so)的？
 
-​    在 Linux 下面，共享库的寻找和加载是由 /lib/ld.so 实现的。 ld.so 在标准路经(/lib, /usr/lib) 中寻找应用程序用到的共享库。但是，如果需要用到的共享库在非标准路经，ld.so 怎么找到它呢？
+> 在 Linux 下面，共享库的寻找和加载是由 /lib/ld.so 实现的。 ld.so 在标准路经(/lib, /usr/lib) 中寻找应用程序用到的共享库。但是，如果需要用到的共享库在非标准路经，ld.so 怎么找到它呢？
 
 目前，Linux 通用的做法是将非标准路经加入 /etc/ld.so.conf，然后运行 ldconfig 生成 /etc/ld.so.cache。 ld.so 加载共享库的时候，会从 ld.so.cache 查找。传统上，Linux 的先辈 Unix 还有一个环境变量：LD_LIBRARY_PATH 来处理非标准路经的共享库。ld.so 加载共享库的时候，也会查找这个变量所设置的路经。
 
@@ -1923,7 +1940,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/John/IOV/Libs
 - https://www.csdndocs.com/article/2589063
 - [linux 添加动态链接库路径](https://blog.csdn.net/liu0808/article/details/79012187)
 
-# 39. scp
+# 41. scp
 
 SCP(secure copy) 是基于ssh协议的安全拷贝，用于将文件/目录安全地从本地主机传输到远程主机。
 
@@ -1963,7 +1980,7 @@ test40.txt                                                                      
 -rw-r--r--   1 root    root          12 7月   6 09:41 test40.txt
 ```
 
-# 40. rsync
+# 42. rsync
 
 Rsync (remote synchronize) 实现同步本地主机和远程主机的文件/目录，和 SCP 不同之处在于，首次复制时，Rsync 会复制整个目录，在后面的复制中，不会复制相同的内容，只对差异文件做更新，scp 是把所有文件都复制过去。Rsync 广泛用于备份和镜像。
 
@@ -2042,9 +2059,7 @@ rsync -avp --exclude={log,*.so} * root@192.168.153.222:/home/zhoushuhui/IOV/Serv
 
 
 
-# 41. 防火墙
-
-## 41.1. ubuntu 下默认的防火墙
+# 43. UFW
 
 - `sudo ufw status` 查看防火墙当前状态
 - `sudo ufw enable` 开启防火墙
@@ -2056,8 +2071,7 @@ rsync -avp --exclude={log,*.so} * root@192.168.153.222:/home/zhoushuhui/IOV/Serv
 - `sudo ufw deny 53` 拒绝外部访问53端口
 - `sudo ufw allow from 192.168.0.1` 允许某个IP地址访问本机所有端口
 
-
-## 41.2. CentOS下默认的防火墙
+# 44. firewalld
 
 CentOS7下默认的防火墙为 `firewalld`
 
@@ -2090,15 +2104,15 @@ firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 
 
 
-# 42. SELinux
+# 45. SELinux
 
 SELinux 是 Security Enhanced Linux 的缩写，设计的目的是避免资源的利用。SELinux 是在进行进程、文件等详细权限配置时依据的一个核心模块。由于启动网络服务的也是进程，因此刚好也是能够控制网络服务能否存取系统资源的一道关卡。
 
 SELinux 是通过 MAC(Mandatory Access Control：强制访问控制)的方式来管理进程的，它控制的 subject 是进程，object 是该进程能否读取的文件资源。
 
-# 43. QAQ
+# 46. QAQ
 
-## 43.1. Linux 与 Windows相差 8 小时
+## 46.1. Linux 与 Windows相差 8 小时
 
 新版本的 Ubuntu 使用 `systemd` 启动之后，时间也改成了由 `timedatectl` 来管理，此方法就不适用了。
 `$sudo timedatectl set-local-rtc 1`
@@ -2114,7 +2128,7 @@ $sudo ntpdate time.windows.com
 
 然后将时间更新到硬件上：`$sudo hwclock --localtime --systohc`
 
-## 43.2. enca
+## 46.2. enca
 
 `enca` 是 Linux 下的文件编码转换工具。
 
@@ -2156,7 +2170,7 @@ enca -L zh_CN -x utf-8 *
 源码地址： https://dl.cihar.com/enca/
 
 
-# 44. References
+# 47. References
 
 - [Github上Linux工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于Linux工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在centos上安装clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
