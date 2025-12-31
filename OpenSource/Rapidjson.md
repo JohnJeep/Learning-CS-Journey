@@ -488,10 +488,11 @@ class MemoryPoolAllocator {
 }
 ```
 
-# 3. Reference
+# 3. References
 
 - 官方 Github: https://github.com/Tencent/rapidjson/
 - 英文文档: https://rapidjson.org/
+- **Native JSON Benchmark**: https://github.com/miloyip/nativejson-benchmark
 - 中文文档: https://rapidjson.org/zh-cn/index.html
 - Unicode 字符代码: https://www.rapidtables.org/zh-CN/code/text/unicode-characters.html
 - Unicode 15.0 Character Code Charts: https://www.unicode.org/charts/
