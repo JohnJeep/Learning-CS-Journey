@@ -90,6 +90,20 @@
 | #                        | list paste buffers |
 | q                        | quit               |
 
+
+# config
+
+tmux 的配置文件为 `~/.tmux.conf`
+
+常用设置
+```bash
+set -g mouse on # 开启鼠标支持
+
+# 修改按键：前缀改成ctrl + s
+set -g prefix C-s — ctrl + b
+```
+
+
 ## References
 
 1. Github offical document: https://github.com/tmux/tmux/wiki/Getting-Started
