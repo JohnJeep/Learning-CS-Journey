@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:47:29
+ * @LastEditTime: 2026-01-03 14:21:36
  * @Description: C++ 高级用法
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -33,6 +33,7 @@
 
 - `ofstream`建立一个输出流对象，将数据输出到指定文件中。
 - `ifstream` 建立一个输入流对象，将从文件中读到的数据输出到终端上。
+
 
 # 2. Meata Programming(元编程)
 
@@ -80,6 +81,11 @@ int main()
 }
 ```
 
+
 # 3. Resource acquisition is initialization(RAII)
 
-Resource acquisition is initialization 简写为 RAII，翻译为：资源获取即初始化。RAII要求，资源的有效期与持有资源的对象的生命期严格绑定，即由对象的构造函数完成资源的分配(获取)，同时由析构函数完成资源的释放。在这种要求下，只要对象能正确地析构，就不会出现资源泄露问题。
+Resource acquisition is initialization 简写为 RAII，翻译为：资源获取即初始化。
+
+RAII要求，资源的有效期与持有资源的对象的生命期严格绑定，即由对象的构造函数完成资源的分配(获取)，同时由析构函数完成资源的释放。在这种要求下，只要对象能正确地析构，就不会出现资源泄露问题。
+
+资源的生命周期与对象的生命周期绑定在一起，资源的获取和释放都在对象的构造和析构函数中完成。
