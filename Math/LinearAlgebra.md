@@ -2,18 +2,18 @@
  * @Author: JohnJeep
  * @Date: 2025-12-30 23:24:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-04 00:35:47
- * @Description: 线性代数
+ * @LastEditTime: 2026-01-05 15:58:38
+ * @Description: Linear Algebra
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-# Introduction to Linear Algebra
+# 1. Introduction to Linear Algebra
 
 线性代数的鼻祖：美国 MIT 的 **Gilbert Strang** 教授。
 
 
 线性代数的核心概念包括：向量、矩阵、线性方程组、矩阵乘法、矩阵的逆、行列式、特征值和特征向量。
 
-## Terms
+# 2. Terms
 
 以下是线性代数中常用术语的中英对照表：
 
@@ -167,7 +167,7 @@
 
 
 
-## 练习
+# 3. 练习
 
 实现QR分解、LU分解、Cholesky分解
 
@@ -180,14 +180,20 @@
 实现卡尔曼滤波器（协方差矩阵更新）
 
 
-## python 语言实践
+# 4. python 语言实践
 
 需要使用的库
 
-- NumPy：核心库，提供数组和矩阵运算
-- Matplotlib：绘图库，用于可视化
-- SciPy：基于NumPy，提供更多科学计算工具
-- SymPy：符号计算，用于公式推导
+- numPy: 核心库，提供数组和矩阵运算
+- matplotlib: 绘图库，用于可视化
+- scipy: 基于NumPy，提供更多科学计算工具
+- sympy: 符号计算，用于公式推导
+- tensorflow: 深度学习库，支持张量运算
+- pytorch: 深度学习库，支持动态计算图
+- opencv: 计算机视觉库
+- pyserial: 串口通信库
+- pyusb: USB设备通信库
+
 
 
 置换矩阵(transpose matrix)：就是用来交换矩阵行或列的矩阵。
@@ -239,7 +245,7 @@ columns * rows = matrix
 
 
 
-## references
+# 5. references
 
 - 18.06 Linear Algebra - Gilbert Strang: https://web.mit.edu/18.06/www/
 - github 18.06: https://github.com/mitmath/1806
