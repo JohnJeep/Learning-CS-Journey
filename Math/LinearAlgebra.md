@@ -243,12 +243,14 @@
 - 标量加法(scalar addition)：标量与向量或矩阵的加法运算。
 
 向量 a, b 的内积定义为：
+
 $$
-a^{\Tau}b = a \cdot b = a_1b_1 + a_2b_2 + ... + a_nb_n
+a{^T}b = a \cdot b = a_1b_1 + a_2b_2 + ... + a_nb_n
 $$
 
 
 向量 a, b 的外积定义为：
+
 $$
 a \times b = 
 \begin{vmatrix}
@@ -257,8 +259,6 @@ a_1 & a_2 & a_3 \\
 b_1 & b_2 & b_3
 \end{vmatrix}
 $$
-
-
 
 范数(euclid )定义：向量元素平方和的平方根。
 
@@ -269,22 +269,26 @@ $$
 范数总是非负的，且只有在向量为零向量时范数为零。
 
 向量 x, y 的范数距离
+
 $$
 dist(x, y) = || x - y ||
 $$
 
 
 向量 x, y 的夹角 θ 定义为
+
 $$
 cos(θ) = \frac{ x \cdot y }{ ||x|| \cdot ||y|| }
 $$
 
 向量 x, y 之间的夹角表示为: 
+
 $$
 {\angle(x, y)}
 $$
 
 向量 x 和 y 的正交表示为 
+
 $$
 {x \bot y}
 $$
@@ -295,6 +299,7 @@ $$
 矩阵是写在方括号或圆括号中的一组数字或符号，按行和列排列。矩阵用于表示线性变换和线性方程组。
 
 一个 m x n 的矩阵用 方括号表示为：
+
 $$
 A = 
 \begin{bmatrix}
@@ -306,6 +311,7 @@ a_{m1} & a_{m2} & ... & a_{mn}
 $$
 
 一个 m x n 的矩阵用 圆括号表示为：
+
 $$
 A = 
 \begin{pmatrix}
@@ -347,6 +353,7 @@ $$
 
 ---
 一个 3x3 的单位矩阵表示为：
+
 $$
 I = 
 \begin{bmatrix}
@@ -358,6 +365,7 @@ $$
 
 ---
 一个 3x3 的零矩阵表示为：
+
 $$
 0 = 
 \begin{bmatrix}
@@ -369,6 +377,7 @@ $$
 
 ---
 一个 3x3 的对角矩阵表示为：
+
 $$
 D = 
 \begin{bmatrix}
@@ -377,10 +386,12 @@ d_{11} & 0 & 0 \\
 0 & 0 & d_{33}
 \end{bmatrix}
 $$
+
 一个对角矩阵既是上三角矩阵又是下三角矩阵。
 
 ---
 一个 3x3 的上三角矩阵表示为：
+
 $$
 U = 
 \begin{bmatrix}
@@ -392,6 +403,7 @@ $$
 
 ---
 一个 3x3 的下三角矩阵表示为：
+
 $$
 L = 
 \begin{bmatrix}
@@ -405,27 +417,33 @@ $$
 ## matrix addition
 
 矩阵加法：两个大小相同的矩阵对应元素相加。
+
 $$
 C = A + B
 $$
+
 其中 $C_{ij} = A_{ij} + B_{ij}$。
 
 
 ## matrix subtraction
 
 矩阵减法：两个大小相同的矩阵对应元素相减。
+
 $$
 C = A - B
 $$
+
 其中 $C_{ij} = A_{ij} - B_{ij}$。
 
 
 ## matrix multiplication
 
 矩阵乘法：矩阵 A 的列数必须等于矩阵 B 的行数。矩阵乘法的结果是一个新的矩阵 C，其行数等于矩阵 A 的行数，列数等于矩阵 B 的列数。
+
 $$
 C = AB
 $$
+
 其中 $C_{ij} = \sum_{k=1}^{n} A_{ik} B_{kj}$。
 
 矩阵乘法运算规则：
@@ -446,6 +464,7 @@ columns * rows = matrix
 
 ---
 示例：计算矩阵乘法
+
 $$
 A = 
 \begin{bmatrix}
@@ -461,13 +480,14 @@ B =
 $$
 
 则
+
 $$
 \begin{aligned}
-C &= AB\\[4pt]
+C &= AB\\
 C_{11} &= 1\times7 + 2\times9 + 3\times11 = 58\\
 C_{12} &= 1\times8 + 2\times10 + 3\times12 = 64\\
 C_{21} &= 4\times7 + 5\times9 + 6\times11 = 139\\
-C_{22} &= 4\times8 + 5\times10 + 6\times12 = 154\\[6pt]
+C_{22} &= 4\times8 + 5\times10 + 6\times12 = 154\\
 &\Rightarrow
 C = 
 \begin{bmatrix}
@@ -476,15 +496,18 @@ C =
 \end{bmatrix}
 \end{aligned}
 $$
----
 
+---
 矩阵与向量的乘法：矩阵 A 与向量 x 相乘，结果是一个新的向量 b。
+
 $$
 b = Ax
 $$
+
 其中 $b_i = \sum_{j=1}^{n} A_{ij} x_j$。
 
 示例：
+
 $$
 A = 
 \begin{bmatrix}
@@ -503,9 +526,9 @@ $$
 
 $$
 \begin{aligned}
-b &= Ax\\[4pt]
+b &= Ax\\
 b_{1} &= 1\times7 + 2\times8 + 3\times9 = 50\\
-b_{2} &= 4\times7 + 5\times8 + 6\times9 = 122\\[6pt]
+b_{2} &= 4\times7 + 5\times8 + 6\times9 = 122\\
 &\Rightarrow
 b = 
 \begin{bmatrix}
@@ -525,6 +548,7 @@ $$
 - $(AB)^T = B^T A^T$
 
 示例：一个 2x3 的矩阵 A 
+
 $$
 A = 
 \begin{bmatrix}
@@ -553,7 +577,6 @@ $$
 - 逆矩阵的逆矩阵是它本身。
 - 逆矩阵的乘积等于单位矩阵。
 - 逆矩阵的存在性：只有当矩阵是非奇异的（行列式不为零）时，才存在逆矩阵。
-
 
 ---
 - 逆矩阵的计算可以通过高斯消元法、伴随矩阵法等方法实现。
