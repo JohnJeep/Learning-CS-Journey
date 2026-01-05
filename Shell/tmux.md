@@ -75,6 +75,14 @@
 | CTRL B ]           | paste from buffer    |
 | CTRL L             | clean buffer on pane |
 
+清当前屏幕和滚动历史
+
+```bash
+clear && tmux clear-history
+```
+
+
+
 | **_ copy mode commands** | description        |
 | ------------------------ | ------------------ |
 | space                    | start selection    |
