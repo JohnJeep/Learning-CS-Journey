@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:36:28
+ * @LastEditTime: 2026-01-03 15:08:43
  * @Description: 智能指针用法
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -64,18 +64,23 @@
 
 # 3. unique_ptr
 
-`unique_ptr` 实现的是一种独一无二拥有权 (exclusive ownership) 的概念。保证一个对象和其相应资源同一时间内只能被一个智能指针拥有(ownership)。当 unique_ptr 被销毁时，它所指向的对象也就自动销毁。
+什么是 `unique_ptr`？
+> `unique_ptr` 是 C++11 标准库提供的一种智能指针，用于管理动态分配的内存。它的特点是独占所有权(exclusive ownership)，即同一时间内只能有一个 `unique_ptr` 指向某个对象。当 `unique_ptr` 被销毁时，它所指向的对象也会被自动释放，避免了内存泄漏的问题。
+
+独占所有权是怎么实现的？
+> `unique_ptr` 通过删除拷贝构造(copy constructor)和拷贝赋值(copy assignment)操作来实现独占所有权。这样可以确保同一时间内只有一个 `unique_ptr` 指向某个对象。
+
 
 ## 3.1. 为什么要用 unique_ptr
 
 它对于避免资源泄露，例如以 `new` 创建对象后因为发生异常而忘记调用 `delete`特别有用。 
+
 
 ## 3.2. 初始化
 
 unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数中初始化、移动构造函数中初始化 `std::move()`、采用 `reset()` 成员函数进行初始化。
 
 - **unique_ptr 不允许执行 copy(拷贝) 和 assignment(赋值) 操作**。但是可以用 `std::move()` 语义将对象的拥有权转移。
-
   ```cpp
   // initialize a unique_ptr with a new object
   std::unique_ptr<ClassA> up1(new ClassA);
@@ -86,9 +91,7 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
   // assign the unique_ptr, transfer ownership from up1 to up3
   std::unique_ptr<ClassA> up3(std::move(up1));    // OK
   ```
-
 - 当程序试图将一个 `unique_ptr` 赋值给另一个时，如果源 `unique_ptr` 是个临时右值，编译器允许这么做；如果源 `unique_ptr` 将存在一段时间，编译器将禁止这么做。
-
   ```CPP
     unique_ptr<string> pu1(new string ("hello world")); 
     unique_ptr<string> pu2; 
@@ -96,18 +99,20 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
     unique_ptr<string> pu3; 
     pu3 = unique_ptr<string>(new string ("You"));   // 允许
   ```
-
 - 想要执行 ` pu2 = pu1;` 的操作，又要保证指针的安全。可以用C++有一个标准库函数 `std::move()`，让你能够将一个 `unique_ptr`赋给另一个。
-
   尽管转移所有权后 还是有可能出现原有指针调用（调用就崩溃）的情况。但是这个语法能强调你是在 `转移所有权`，让你清晰的知道自己在做什么，从而`不乱调用原有指针`。
-
+  ```CPP
+    unique_ptr<string> pu1(new string ("hello world")); 
+    unique_ptr<string> pu2; 
+    pu2 = std::move(pu1);   // 转移所有权
+  ```
 - `unique_ptr` 可以转移对象的拥有权。使`unique_ptr` 不必一定拥有对象，它也可以是 empty；例如：当它被默认构造函数创建时。
-
   ```cpp
   std::unique_ptr<std::string> ip;
   ip = nullptr;
   ip.reset();
   ```
+
 
 ## 3.3. 成员函数
 
@@ -117,12 +122,12 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
 - `swap()`: 交换两个指针指向的对象(即交换所拥有的对象)。
 - `get()`: 获得内部对象的指针
 
+
 ## 3.4. deleter
 
-unique_ptr 也有自己的 删除器。
-
+unique_ptr 也有自己的 删除器(deleter)。
 ```cpp
-// 但lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
+// lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
 using func = void(*)(Stu*);    // void 类型的函数指针
 unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){    
   delete p;
@@ -139,13 +144,11 @@ unique_ptr<Stu[]> ptr1(new Stu[3]);
 ```
 
 独占的智能指针能管理数组类型的地址，能够自动释放。
-
 ```cpp
 unique_ptr<Stu[]> ptr1(new Stu[3]);
 ```
 
 C++11 中 shared_ptr 不支持下面的语法，自C++11之后的版本，开始支持下面的语法。
-
 ```cpp
 shared_ptr<Stu[]> ptr1(new Stu[3]); 
 ```
@@ -177,7 +180,9 @@ std::unique_ptr<T> make_unique(Args&& ...args) {
 
 # 4. shared_ptr
 
-`share_ptr` 实现的是一种共享所有权 (shared ownership)的概念。多个智能指针可以指向同一个对象，该对象和它的相关资源会在最后一个指针的指向 (`reference`) 被销毁时，得到释放。
+什么是 `shared_ptr`？
+> `shared_ptr` 是 C++11 标准库提供的一种智能指针，用于管理动态分配的内存。它的特点是共享所有权(shared ownership)，即多个 `shared_ptr` 可以指向同一个对象。当最后一个指向该对象的 `shared_ptr` 被销毁时，所指向的对象也会被自动释放。
+
 
 ## 4.1. 为什么要用 shared_ptr
 
@@ -194,9 +199,11 @@ shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr �
 
 ## 4.3. 底层原理
 
-采用 `引用计数` 的方法，记录当前内存资源被多少个智能指针引用，引用计数的内存在堆上分配。
+采用 `引用计数` 的方法，记录当前内存资源被多少个智能指针引用，引用计数的内存在堆上分配。当新增一个指针时，`引用计数` 加1，当释放时 `引用计数` 减一。只有引用计数为 0 时，智能指针才会自动释放引用的内存资源。
 
-当新增一个指针时，`引用计数` 加1，当释放时 `引用计数` 减一。只有引用计数为0时，智能指针才会自动释放引用的内存资源。
+有两种引用计数：
+1. 强引用计数 (strong reference count)：记录有多少个 `shared_ptr` 指向同一个对象。只有强引用计数为 0 时，才会释放对象所占用的内存。
+2. 弱引用计数 (weak reference count)：记录有多少个 `weak_ptr` 指向同一个对象。弱引用计数不影响对象的生命周期。
 
 **调用 constructor，copy constructor，copy asignment 函数都会导致引用计数增加。**
 
@@ -298,16 +305,15 @@ void test05()
 
 # 5. weak_ptr
 
-`weak_ptr` 是弱引用指针，是一种不控制对象生命周期的智能指针，指向一个 `shared_ptr` 管理的对象。`weak_ptr` 只提供一种访问手段，它不共享指针，不能操作资源。
+什么是 `weak_ptr`？
+> `weak_ptr` 是 C++11 标准库提供的一种智能指针，用于解决 `shared_ptr` 之间的循环引用问题。它的特点是不控制所指向对象的生命周期，允许对 `shared_ptr` 管理的对象进行访问，但不增加引用计数。用来观察 shared_ptr 管理的对象，而不拥有该对象。
+
 
 ## 5.1. 为什么要用 weak_ptr
 
 1. 配合 `shared_ptr` 智能指针来进行工作，解决 `shared_ptr` 智能指针相互引用时死锁的问题。当两个 `shared_ptr`智能指针相互引用时，这两个指针的引用数永远不可能减到 0 ，导致资源永远不会释放。
-
 2. 它是对 对象的一种弱引用，不会增加对象的 **引用计数**。
-
 3. `weak_ptr ` 与 `shared_ptr`之间可以相互转化。`shared_ptr` 可以直接赋值给 `weak_ptr`；而 `weak_ptr `通过调用 `lock()` 函数来获得 `shared_ptr`。
-
    ```cpp
    std::shared_ptr<int> p1(new int(10));
    std::weak_ptr<int> wp = p1; // shared_ptr直接赋值给weak_ptr
@@ -319,7 +325,6 @@ void test05()
 ## 5.2. 初始化
 
 `weak_ptr` 提供三种初始化的方式
-
 1. 构造函数中初始化。
 2. 拷贝构造函数初始化。
 3. 通过隐式类型转换，shared_ptr 对象直接赋值给 weak_ptr 对象来初始化。
@@ -342,10 +347,12 @@ cout << "wt4.use_count = " << wt4.use_count() << endl;
 
 ## 5.3. 底层原理
 
-`weak_ptr` 底层主要依赖于 `counter` 计数器类和 `shared_ptr` 赋值、构造等手段实现的。
+`weak_ptr` 的底层原理是什么？
+> `weak_ptr` 是通过 `shared_ptr` 的控制块来实现的。每个 `shared_ptr` 都有一个控制块，里面包含了引用计数和一个指向所管理对象的指针。而 `weak_ptr` 只持有对这个控制块的一个弱引用，不会影响引用计数。依赖于 `shared_ptr` 的引用计数机制，`weak_ptr` 可以安全地访问所管理的对象，而不会阻止对象的销毁。
 
-- `counter` 对象的目地就是用来申请一个块内存来存引用基数。
+- `counter` 计数器类主要用来管理 `shared_ptr` 和 `weak_ptr` 的引用计数。`shared_ptr` 和 `weak_ptr` 都会持有一个指向同一个 `counter` 对象的指针。
 - `share_ptr` 给出的函数接口为：构造，拷贝构造，赋值，解引用。
+
 
 ## 5.4. 成员函数
 
@@ -355,6 +362,7 @@ cout << "wt4.use_count = " << wt4.use_count() << endl;
 - `use_count()` 返回所监测的 `shared_ptr` 共享对象的引用计数。
 
 代码用例实现在工程库中：[Weak_ptr 智能指针用法](./code/c11/weak_ptr.cpp)
+
 
 ## 5.5. 注意点
 
