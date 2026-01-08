@@ -44,8 +44,21 @@
 | CTRL + B .         | change window number     |
 | CTRL + B ,         | rename window            |
 | CTRL + B F         | search windows           |
-| CTRL + B &         | kill window              |
+| CTRL + B &         | kill current window      |
 | CTRL + B W         | list windows             |
+
+
+```bash
+#To list windows in a specific session:
+tmux list-windows -t my_session
+
+#kill a specific window in a session:
+tmux kill-window -t my_session:my_window
+
+# delete window number 2 in session my_session
+tmux kill-window -t my_session:2
+```
+
 
 ### tmux panes
 
@@ -105,10 +118,14 @@ tmux 的配置文件为 `~/.tmux.conf`
 
 常用设置
 ```bash
-set -g mouse on # 开启鼠标支持
+ # 开启鼠标支持
+set -g mouse on
 
 # 修改按键：前缀改成ctrl + s
 set -g prefix C-s — ctrl + b
+
+# 启用 vi 风格的按键（用于复制模式）
+set -g mode-keys vi
 ```
 
 
