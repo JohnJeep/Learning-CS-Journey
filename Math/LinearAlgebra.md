@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-30 23:24:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-06 00:29:57
+ * @LastEditTime: 2026-01-07 00:51:06
  * @Description: Linear Algebra
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -215,6 +215,15 @@
 - 过拟合(over-fit)：表示向量模型在训练数据上表现过好的现象。
 - 分层(stratified)：表示向量数据按某种标准进行分层的过程。
 - 分类特征(categorical feature)：表示向量数据中的分类变量。
+
+
+核心概念
+- 列空间
+- 秩
+- 线性变换
+- 解空间
+- 特征向量
+
 
 
 # vectors
@@ -539,6 +548,11 @@ b =
 $$
 
 
+矩阵的乘法，用 列视角去求解，将乘法视为空间的变换、拉伸、旋转或投影。从整体层面关注 列与列 之间的变换关系，具有强烈的几何和代数直观。
+
+把矩阵是一个 “函数”，而不是一堆数字的集合。
+
+
 ## transpose matrix
 
 转置矩阵(transpose matrix)：将矩阵的行和列互换得到的矩阵，记作 $A^T$ (或 $A^{\prime}$ 或 $A^*$)。转置矩阵的性质包括：
@@ -616,6 +630,40 @@ QR分解的应用包括求解线性方程组、最小二乘问题等。
 QR分解的性质包括：Q矩阵是正交矩阵，R矩阵是上三角矩阵，QR分解唯一性等。
 
 
+---
+
+column space is a line.
+
+矩阵的 列空间是一个平面（plane）。 
+
+基(base)是线性无关的列。
+
+
+column  space?
+> 所有列向量的线性组合所构成的空间。
+
+
+row  space?
+> 行之间的所有线性组合组成了 行空间。
+  
+
+rank?
+>  矩阵 A 的秩，就是其列向量中独立向量的个数。
+
+什么是 row rank?
+> 行秩(row rank)：矩阵的行秩是指矩阵中线性无关行的最大数量。行秩表示矩阵的行向量所生成的向量空间的维度。行秩与列秩相等，即矩阵的行秩等于其列秩，这一性质称为秩定理(rank theorem)。
+
+```math
+row rank = column rank
+```
+
+row rank 是 行空间维度。
+
+
+什么是 column rank?
+> 列秩(column rank)：矩阵的列秩是指矩阵中线性无关列的最大数量。列秩表示矩阵的列向量所生成的向量空间的维度。列秩与行秩相等，即矩阵的列秩等于其行秩，这一性质称为秩定理(rank theorem)。
+
+
 # apply
 
 ## 3. practice
@@ -658,5 +706,4 @@ notes
 - MIT-Linear-Algebra-Notes(pdf): https://github.com/MLNLP-World/MIT-Linear-Algebra-Notes
 - MIT 18.06 线性代数笔记: https://linalg.apachecn.org/
 - cs-self-learning: https://github.com/pkuflyingpig/cs-self-learning/
-
 
