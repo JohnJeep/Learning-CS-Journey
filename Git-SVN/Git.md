@@ -771,6 +771,14 @@ Git 清空版本库
   git config --system user.email xxxx@gmail.com
   ```
 
+- 关闭 `git branch` 的分页器（pager）
+
+  ```bash
+  git config --global pager.branch false
+  ```
+
+
+
 ## 4.1. credential
 
 设置了一个本地的凭证助手（credential helper）来处理凭证信息，以便在使用 Git 进行远程操作时，不需要每次都输入用户名和密码。
