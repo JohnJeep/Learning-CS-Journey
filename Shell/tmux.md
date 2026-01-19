@@ -126,8 +126,25 @@ set -g prefix C-s — ctrl + b
 
 # 启用 vi 风格的按键（用于复制模式）
 set -g mode-keys vi
+
+bind -n MouseDown3Pane select-pane
+bind -T copy-mode MouseDown3Pane select-pan
 ```
 
+修改配置文件后使之生效
+
+在 tmux 外部，执行下面的命令
+
+```bash
+tmux source-file .tmux.conf
+```
+
+在 tmux 内
+
+```bash
+先按 ctrl b : 再执行
+source-file .tmux.conf
+```
 
 ## References
 
