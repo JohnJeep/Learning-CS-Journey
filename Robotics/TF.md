@@ -46,7 +46,7 @@ ros2 pkg xml tf2_ros --tag version
 
 ```
 
-# tools
+# packages
 
 ros-humble-tf2-tools：安装TF2相关的工具集，提供了一系列调试和可视化TF变换的工具；包含的主要工具有：
 
@@ -59,8 +59,6 @@ transforms3d：一个Python库，用于处理3D空间中的几何变换，提供
 - 旋转矩阵、欧拉角、四元数、轴角之间的转换；
 - 3D变换矩阵的操作；
 - 坐标系变换计算。
-
-
 
 
 

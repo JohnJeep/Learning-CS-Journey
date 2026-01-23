@@ -9,3 +9,9 @@ Rviz（ROS Visualization Tool）是 ROS 的 3D 可视化工具。
 - 加载并显示 **机器人 URDF 模型**
 - 支持交互式目标点设置（如导航目标）
 - 用于 **感知、定位、导航、SLAM 等高级功能的可视化**
+
+
+
+# References
+
+- humble RViz User Guide: https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html

@@ -15,3 +15,12 @@
 9. IMU（惯性测量单元）
 10. 扫描器
 11. 灵巧手：指尖搭载传感器
+
+
+
+
+
+# References
+
+- humble sensor_msgs: https://docs.ros.org/en/humble/p/sensor_msgs/
+- humble std_msgs: https://docs.ros.org/en/humble/p/std_msgs/

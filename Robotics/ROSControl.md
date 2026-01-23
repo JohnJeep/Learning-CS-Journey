@@ -1,4 +1,4 @@
-## 疑问
+## Thinking
 
 避免盲目摸索，快速抓住重点，把理论应用到实际项目中。
 
@@ -21,15 +21,10 @@
 
 1. 如何在自己的项目里应用ROS2 Control？比如怎么集成现有硬件，或者调试控制器。
 
-
-
-Ubuntu deb package install
-
 ```bash
+# Ubuntu deb package install
 sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 ```
-
-
 
 1. Controllers(控制器)
 2. Controller Manager(控制器管理器)
@@ -53,6 +48,8 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 - [Github ROS2 Controllers](https://github.com/ros-controls/ros2_controllers)
 - [os2_control Concepts & Simulation](https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts/)
 - [知乎：ros2-control系列教程](https://www.zhihu.com/column/c_1742342009845788672)
+- ROS 2 官方 `ros2_control` 教程：https://control.ros.org/
+- URDF + ros2_control 示例：[https://github.com/ros-controls/ros2_control_demos](https://github.com/ros-controls/ros2_control_demos?spm=5176.28103460.0.0.2d3c6308fzDXKK)
 
 
 
