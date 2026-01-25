@@ -340,6 +340,14 @@ docker kill <容器ID或容器名>
 docker rm <容器ID或容器名>
 ```
 
+强制批量删除容器
+
+```bash
+docker rm -f $(docker ps -aq)
+```
+
+
+
 ### 9.2.9. docker top
 
 显示一个容器内部运行的进程。
