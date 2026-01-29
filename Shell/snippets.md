@@ -122,6 +122,9 @@ ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d '/'
 
 # 批量杀死进程
 ps aux | grep xxx | grep -v grep | awk '{print "kill -9 " $2}' | sh
+
+# 删除除 xxx.log 最新10个以外的所有日志文件
+ls -t xxx.log | tail -n +11 | xargs rm -f
 ```
 
 # 5. docker
