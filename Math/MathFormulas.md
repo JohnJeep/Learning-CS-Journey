@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-01-31 17:58:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 20:29:31
+ * @LastEditTime: 2026-01-31 20:31:59
  * @Description: math formulas
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -37,9 +37,9 @@ $\tan(A + B) = \frac{\sin A \cos B + \cos A \sin B}{\cos A \cos B - \sin A \sin 
 
 分子： $\frac{\sin A \cos B}{\cos A \cos B} + \frac{\cos A \sin B}{\cos A \cos B} = \tan A + \tan B$
 
-分母：$\frac{\cos A \cos B}{\cos A \cos B} - \frac{\sin A \sin B}{\cos A \cos B} = 1 - \tan A \tan B$
+分母： $\frac{\cos A \cos B}{\cos A \cos B} - \frac{\sin A \sin B}{\cos A \cos B} = 1 - \tan A \tan B$
 
-因此：$\tan(A + B) = \frac{\tan A + \tan B}{1 - \tan A \tan B}$
+因此： $\tan(A + B) = \frac{\tan A + \tan B}{1 - \tan A \tan B}$
 
 
 🔁 差角公式（令 $B \to -B$）：
@@ -54,7 +54,7 @@ $\tan(A + B) = \frac{\sin A \cos B + \cos A \sin B}{\cos A \cos B - \sin A \sin 
 
 计算 $\tan\left(\frac{\pi}{4} + \frac{\pi}{6}\right)$：
 
-$\tan\frac{\pi}{4} = 1$，$\tan\frac{\pi}{6} = \frac{1}{\sqrt{3}}$
+$\tan\frac{\pi}{4} = 1, \tan\frac{\pi}{6} = \frac{1}{\sqrt{3}}$
 
 代入公式：
 
