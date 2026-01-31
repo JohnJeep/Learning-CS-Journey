@@ -2,27 +2,42 @@
  * @Author: JohnJeep
  * @Date: 2025-11-02 16:01:47
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-12-27 15:51:03
+ * @LastEditTime: 2026-01-31 16:55:43
  * @Description: URDF
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. URDF](#1-urdf)
+- [1. Introduction to URDF](#1-introduction-to-urdf)
 - [2. 标签](#2-标签)
-  - [2.1. link](#21-link)
-  - [2.2. joint](#22-joint)
-  - [2.3. Transmission](#23-transmission)
-- [3. Xarco](#3-xarco)
+  - [2.1. `<link>`](#21-link)
+  - [2.2. `<joint>`](#22-joint)
+  - [2.3. `link` 与 `join`t 的关系是什么？](#23-link-与-joint-的关系是什么)
+    - [2.3.1. **树状结构：父子关系**](#231-树状结构父子关系)
+  - [2.4. `<transmission>`](#24-transmission)
+    - [2.4.1. 为什么需要 `<transmission>`？](#241-为什么需要-transmission)
+    - [2.4.2. 基本语法（ROS 2 / `ros2_control` 兼容格式）](#242-基本语法ros-2--ros2_control-兼容格式)
+    - [2.4.3. 关键子元素说明](#243-关键子元素说明)
+    - [2.4.4. ROS 2 中的现代替代方案：`<ros2_control>`](#244-ros-2-中的现代替代方案ros2_control)
+      - [2.4.4.1. 示例（ROS 2 推荐方式）：](#2441-示例ros-2-推荐方式)
+    - [2.4.5. 何时使用 `<transmission>`？](#245-何时使用-transmission)
+    - [2.4.6. 对比](#246-对比)
+- [3. 注意点](#3-注意点)
+- [4. Xarco](#4-xarco)
+- [5. packages](#5-packages)
+  - [5.1. ros-humble-urdf-tutorial](#51-ros-humble-urdf-tutorial)
+    - [5.1.1. 安装](#511-安装)
+    - [5.1.2. 启动示例模型](#512-启动示例模型)
+  - [5.2. check\_urdf](#52-check_urdf)
+- [6. References](#6-references)
 
 
-## 1. URDF
+## 1. Introduction to URDF
 
 URDF(Unified Robot Description Format)，全称是**统一机器人描述格式**。URDF 是一种 XML 格式，用于描述机器人模型的结构、关节、连杆等信息，包括底盘、摄像头、激光雷达、机械臂和不同关节的自由度。
 
-
+URDF 文件主要用于 ROS（Robot Operating System）中，帮助机器人软件理解机器人的物理结构和运动学特性，从而实现仿真、运动规划和控制等功能。
 
 机器人一般是由**硬件结构、驱动系统、传感器系统、控制系统**四大部分组成。
-
 - 硬件结构就是底盘、外壳、电机等实打实可以看到的设备；
 - 驱动系统就是可以驱使这些设备正常使用的装置，比如电机的驱动器，电源管理系统等；
 - 传感系统包括电机上的编码器、板载的IMU、安装的摄像头、雷达等等，便于机器人感知自己的状态和外部的环境；
@@ -112,11 +127,11 @@ joint 的类型决定运动方式。
 
 
 
-### `link` 与 `join`t 的关系是什么？
+### 2.3. `link` 与 `join`t 的关系是什么？
 
 在 URDF（Unified Robot Description Format）中，**`link`** 和 **`joint`**（是两个核心元素，它们共同定义了机器人的**结构**和**运动关系**。**`link` 是“刚体部件”，`joint` 是“连接这些部件的关节”。**
 
-#### **树状结构：父子关系**
+#### 2.3.1. **树状结构：父子关系**
 
 - URDF 描述的是一个**树形结构**（不能有闭环！）。
 - 必须有一个**根 link**（root link），它没有父节点。
@@ -142,7 +157,7 @@ base_link
 | 必需性   | 至少 1 个（根 link）     | 如果只有 1 个 link，则不需要 joint         |
 | 坐标系   | 每个 link 有自己的坐标系 | 定义 child link 坐标系相对于 parent 的位姿 |
 
-### 2.3. `<transmission>`
+### 2.4. `<transmission>`
 
 在 URDF（Unified Robot Description Format）中，`<transmission>` 标签 **不是 URDF 原生标准的一部分**，而是为了与 **ROS 控制系统（如 `ros_control` 或 ROS 2 中的 `ros2_control`）集成**而引入的扩展。它的主要作用是：
 
@@ -150,7 +165,7 @@ base_link
 
 ------
 
-#### 为什么需要 `<transmission>`？
+#### 2.4.1. 为什么需要 `<transmission>`？
 
 URDF 本身只描述**几何结构和运动学关系**（link + joint），但不包含：
 
@@ -162,7 +177,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 ------
 
-#### 基本语法（ROS 2 / `ros2_control` 兼容格式）
+#### 2.4.2. 基本语法（ROS 2 / `ros2_control` 兼容格式）
 
 在 ROS 2 Humble 及以后版本中，推荐使用 **`ros2_control` 的新 URDF 标签体系**，但 `<transmission>` 仍被部分旧系统（或 Gazebo Classic）使用。以下是典型结构：
 
@@ -182,7 +197,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 ------
 
-#### 关键子元素说明
+#### 2.4.3. 关键子元素说明
 
 | 元素                    | 说明                                                         |
 | ----------------------- | ------------------------------------------------------------ |
@@ -192,11 +207,11 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 | `<actuator>`            | 描述执行器（电机）                                           |
 | `<mechanicalReduction>` | 舵机与关节之间的齿轮比（例如齿轮减速比）。值 >1 表示减速，<1 表示增速。 |
 
-#### ROS 2 中的现代替代方案：`<ros2_control>`
+#### 2.4.4. ROS 2 中的现代替代方案：`<ros2_control>`
 
 从 ROS 2 Foxy/Humble 开始，**官方推荐使用 `<ros2_control>` 标签**直接在 URDF 中定义硬件接口和控制器，**不再依赖 `<transmission>`**。
 
-##### 示例（ROS 2 推荐方式）：
+##### 2.4.4.1. 示例（ROS 2 推荐方式）：
 
 ```xml
 <ros2_control name="GazeboSystem" type="system">
@@ -218,7 +233,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 ------
 
-#### 何时使用 `<transmission>`？
+#### 2.4.5. 何时使用 `<transmission>`？
 
 | 场景                                                   | 是否使用 `<transmission>`                  |
 | ------------------------------------------------------ | ------------------------------------------ |
@@ -229,7 +244,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 ------
 
-#### 对比
+#### 2.4.6. 对比
 
 | 对比项            | `<transmission>`            | `<ros2_control>`（现代 ROS 2） |
 | ----------------- | --------------------------- | ------------------------------ |
@@ -243,7 +258,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 
 
-## 注意点
+## 3. 注意点
 
 1. **闭环结构**：URDF 不支持闭环（如四连杆机构），需用 SDF（Gazebo 格式）或 ROS 2 的 `<ros2_control>` + 插件处理。
 2. **缺少根 link**：必须有一个不作为任何 joint 的 child 的 link。
@@ -251,7 +266,7 @@ URDF 本身只描述**几何结构和运动学关系**（link + joint），但�
 
 
 
-## 3. Xarco
+## 4. Xarco
 
 Xacro（XML Macros）是 URDF 的预处理器，是 URDF 的升级版，支持：
 
@@ -265,20 +280,20 @@ Xacro（XML Macros）是 URDF 的预处理器，是 URDF 的升级版，支持�
 
 
 
-## packages
+## 5. packages
 
-### ros-humble-urdf-tutorial 
+### 5.1. ros-humble-urdf-tutorial 
 
 `ros-humble-urdf-tutorial` 是 ROS 2 Humble 版本中用于学习 URDF（Unified Robot Description Format）的一个官方教学包。
 
-#### 安装
+#### 5.1.1. 安装
 
 ```bash
 sudo apt update
 sudo apt install ros-humble-urdf-tutorial
 ```
 
-#### 启动示例模型
+#### 5.1.2. 启动示例模型
 
 该包提供了多个示例 URDF 文件和 launch 文件，用于在 RViz 中可视化机器人模型。文件位于 `/opt/ros/humble/share/urdf_tutorial/urdf/` 目录下。
 
@@ -298,7 +313,7 @@ sudo apt install ros-humble-urdf-tutorial
 ros2 launch urdf_tutorial display.launch.py model:=urdf/01-myfirst.urdf
 ```
 
-### check_urdf
+### 5.2. check_urdf
 
 `check_urdf` 是 URDF 语法检查是否正确的工具。
 
@@ -308,19 +323,14 @@ check_urdf your_model.urdf
 ```
 
 
-
-## References
+## 6. References
 
 - 官方教程文档（ROS 2）：
   [https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html](https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html?spm=5176.28103460.0.0.2d3c6308fzDXKK)
-  
 - URDF 官方规范：
   [http://wiki.ros.org/urdf/XML](http://wiki.ros.org/urdf/XML?spm=5176.28103460.0.0.2d3c6308fzDXKK)
-  
 - Xacro 教程（用于简化 URDF）：
   [https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html](https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html?spm=5176.28103460.0.0.2d3c6308fzDXKK)
-  
 - humble Tutorials: 
-
   https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/URDF-Main.html
 
