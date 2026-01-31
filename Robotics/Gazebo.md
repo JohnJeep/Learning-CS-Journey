@@ -1,10 +1,28 @@
-## Gazebo
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-02 16:38:43
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-01-31 16:17:53
+ * @Description: Gazebo Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. Gazebo](#1-gazebo)
+  - [1.1. 版本](#11-版本)
+  - [1.2. Install](#12-install)
+  - [1.3. Plugins](#13-plugins)
+- [2. 用法](#2-用法)
+  - [2.1. 模型](#21-模型)
+  - [2.2. 为什么只能有一个 world？](#22-为什么只能有一个-world)
+- [3. References](#3-references)
+
+
+# 1. Gazebo
 
 Gazebo 是一个仿真工具，提供逼真的仿真环境。
 
 
-
-## 版本
+## 1.1. 版本
 
 | Platform           | Gazebo Versions                                              |
 | ------------------ | ------------------------------------------------------------ |
@@ -20,7 +38,7 @@ Gazebo 是一个仿真工具，提供逼真的仿真环境。
 
 
 
-## Install
+## 1.2. Install
 
 Binary Installation on Ubuntu
 
@@ -60,31 +78,28 @@ sudo apt remove gz-harmonic && sudo apt autoremove
 
 
 
-## Plugins
+## 1.3. Plugins
 
 两轮差速器：ros-jazzy-gazebo-plugins
 
 
 
-## 用法
+# 2. 用法
 
 模型（model）、链接（link）、关节（joint）、传感器（sensor）
 
 
 
-模型
+## 2.1. 模型
 
 模型可以是一个机器人、一张桌子、一个盒子等。每个模型由一个或多个链接（link）组成，链接之间通过关节（joint）连接。每个链接可以具有多个碰撞（collision）和视觉（visual）属性，以及惯性（inertial）属性。
 
 - 单个模型（model）通常保存为.sdf文件，其中包含一个`<model>`标签（但也可以包含`<world>`，不过通常单个模型文件只包含`<model>`）。
-
 - 场景（world）文件通常保存为`.world`，其中包含一个`<world>`标签，里面可以有多个模型、光照等。
-
 - 每个 `.world` 文件只能有一个 `<world>` 标签：
 
 
-
-## 为什么只能有一个 world？
+## 2.2. 为什么只能有一个 world？
 
 - **设计原则**：每个 SDF 文件代表一个完整的仿真环境
 - **逻辑分离**：不同的仿真场景应该保存在不同的 `.world` 文件中
@@ -93,41 +108,6 @@ sudo apt remove gz-harmonic && sudo apt autoremove
 一个 world 可以包含多个模型（model），但是一个SDF文件通常只包含一个世界。在SDF的顶层结构中，我们使用一个`<world>`标签来定义一个世界，然后在这个世界中可以包含多个模型。
 
 
+# 3. References
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## References
-
-Gazebo harmonic: https://gazebosim.org/docs/harmonic/install_ubuntu/
+- Gazebo harmonic: https://gazebosim.org/docs/harmonic/install_ubuntu/

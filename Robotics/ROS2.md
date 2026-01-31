@@ -1,21 +1,66 @@
----
-created: 2025-10-17T16:20:28
-tags:
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-10-17 16:20:49
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-01-31 16:30:14
+ * @Description: ROS2 Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
----
+- [1. ROS2 Introduction](#1-ros2-introduction)
+- [2. Basic Concepts](#2-basic-concepts)
+  - [2.1. Node](#21-node)
+  - [2.2. Parameter](#22-parameter)
+  - [2.3. Executor](#23-executor)
+    - [2.3.1. 核心思想：事件循环](#231-核心思想事件循环)
+    - [2.3.2. 为什么需要执行器？](#232-为什么需要执行器)
+  - [2.4. Callback Group](#24-callback-group)
+- [3. ROS2 Communication](#3-ros2-communication)
+  - [3.1. Topic](#31-topic)
+  - [3.2. Service](#32-service)
+  - [3.3. Action](#33-action)
+- [4. Workflow](#4-workflow)
+- [5. Tools](#5-tools)
+  - [5.1. ament](#51-ament)
+  - [5.2. qrt](#52-qrt)
+  - [5.3. launch](#53-launch)
+- [6. ROS2 Command](#6-ros2-command)
+  - [6.1. run](#61-run)
+  - [6.2. package](#62-package)
+- [7. ROS2  core packages](#7-ros2--core-packages)
+  - [7.1. rcl](#71-rcl)
+  - [7.2. rclcpp](#72-rclcpp)
+    - [7.2.1. rclcpp::spin(node)](#721-rclcppspinnode)
+    - [7.2.2. internal fundamental](#722-internal-fundamental)
+    - [7.2.3. 什么时候 spin 会结束？](#723-什么时候-spin-会结束)
+    - [7.2.4. spin 的几种用法](#724-spin-的几种用法)
+    - [7.2.5. spin 选择建议](#725-spin-选择建议)
+    - [7.2.6. rclpy](#726-rclpy)
+  - [7.3. rmw](#73-rmw)
+  - [7.4. node](#74-node)
+  - [7.5. timer](#75-timer)
+  - [7.6. parameter](#76-parameter)
+  - [7.7. publisher](#77-publisher)
+  - [7.8. sub](#78-sub)
+  - [7.9. std\_msgs](#79-std_msgs)
+  - [7.10. rosidl](#710-rosidl)
+- [8. urdf](#8-urdf)
+- [9. Hardware](#9-hardware)
+- [10. References](#10-references)
+
+
+# 1. ROS2 Introduction
 
 开发机器人时，可以类比人类的工作方式：大脑、脊髓、神经信号、神经元、神经网络等等概念。
 
-
-
-## 机器人操作系统(ROS2)
-
 ROS 是一个分布式通信框架。
 
-### Node
+
+# 2. Basic Concepts
+
+## 2.1. Node
 
 节点是ROS2中的基本执行单元。每个节点通常负责一个单一的、模块化的功能。例如，一个节点可以控制激光雷达，另一个节点可以处理激光雷达的数据，第三个节点可以负责运动规划。
-
 
 
 讲清楚节点是做什么的？
@@ -27,7 +72,6 @@ ROS 是一个分布式通信框架。
 > 通过 topic、service、action 来通信。
 
 
-
 特点
 
 1. 每个节点的名称具有唯一性。
@@ -36,99 +80,7 @@ ROS 是一个分布式通信框架。
 4. 每个节点都可以发布或订阅话题，也可以提供或使用服务(service)。
 
 
-
-
-
-### Topic
-
-toopic 是节点之间交换信息的一种通信机制。这种通信是单向的、异步的。发布者（Publisher）node 将消息发布到 topic，订阅者（Subscriber）node 从 topic 订阅消息。
-
-特点
-
-- 单向通信：数据从发布者流向订阅者。
-- 异步：发布者和订阅者不需要同时运行，也不需要知道彼此的存在。
-- 多对多：多个发布者和多个订阅者可以同时使用同一个话题。
-
-topic 通信接口的定义使用的是 `.msg`文件，由于是单向传输，只需要描述传输的每一帧数据是什么就行。
-
-`xxx.msg`
-
-```ini
-int32 x
-int32 y
-```
-
-
-
-### Service
-
-服务是节点之间另一种通信机制，这种通信是双向的、同步的。它采用请求(reruest-reponse)-响应模型：一个客户端（Client）节点发送请求，然后等待服务器（Server）节点处理请求并返回响应。例如请求一个路径规划服务。
-
-特点
-
-- 双向通信：包括请求和响应。
-- 同步：客户端发送请求后会阻塞，直到收到响应（当然，ROS2也支持异步服务调用）。
-- 一对多：一个 service server 可以接受多个客户端的请求，但每个请求是串行处理的（除非服务器内部实现多线程）。
-
-service 通信接口的定义使用的是 `.srv` 文件，包含请求和应答两部分定义，通过中间的“---”区分。
-
-`xxx.srv`
-
-```ini
-# request
-int64 a
-int64 b
-
----
-# response
-int64 sum
-```
-
-
-
-### Action
-
-Action是ROS 2中用于处理**长时间运行、可抢占、有反馈**的任务的通信机制。它采用**客户端-服务器**模式，但比Service更复杂。
-
-**Action由三部分组成：**
-
-1. **Goal（目标）**：客户端发送给服务端的任务目标（例如：移动到某个位置）。
-2. **Feedback（反馈）**：服务端在执行过程中定期发送的进度更新（例如：已移动50%）。
-3. **Result（结果）**：任务完成后发送的最终结果（例如：成功到达或失败原因）。
-
-action 用于描述机器人的运动过程。比如：
-
-客户端发送一个运动的目标，想让机器人动起来，服务器端收到之后，就开始控制机器人运动，一边运动，一边反馈当前的状态，如果是一个导航动作，这个反馈可能是当前所处的坐标，如果是机械臂抓取，这个反馈可能又是机械臂的实时姿态。当运动执行结束后，服务器再反馈一个动作结束的信息。整个通信过程就此结束。
-
-**特点**
-
-- ✅ **长时间运行**：任务可能需要几秒、几分钟甚至更长时间。
-- ✅ **可抢占**：客户端可以随时取消正在执行的任务。
-- ✅ **有进度反馈**：服务端定期向客户端发送进度更新。
-- ✅ **双向通信**：客户端发送目标，服务端返回结果和反馈。
-
-
-
-`action`通信接口的定义使用的是 `.action` 文件。
-
-`xxx.action`
-
-```ini
-# goal
-bool enable
-
----
-# result
-bool finish
-
----
-# feedback
-int state
-```
-
-
-
-### Parameter
+## 2.2. Parameter
 
 Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在节点运行时动态修改，而不需要重新编译代码。
 
@@ -157,17 +109,14 @@ Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在
 3. **读取参数**：节点在运行过程中读取参数值。
 4. **监视参数变化**：节点可以设置回调函数来响应参数变化。
 
-
-
 总结：**Topic用于数据流，Service用于即时操作，Action用于长期任务，Parameter用于配置。** 
 
 
-
-### Executor
+## 2.3. Executor
 
 **执行器（Executor）** 它负责让节点“活”起来，并决定节点如何响应外部世界。
 
-#### 核心思想：事件循环
+### 2.3.1. 核心思想：事件循环
 
 在ROS2中，节点可以通过订阅者、计时器、服务服务器、动作服务器等与外部通信。这些组件在创建后，并不会自动运行。它们只是在等待，就像一堆待办事项清单。
 
@@ -182,7 +131,8 @@ Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在
 
 ------
 
-#### 为什么需要执行器？
+
+### 2.3.2. 为什么需要执行器？
 
 没有执行器，你的节点代码会像下面这样，什么也做不了：
 
@@ -209,7 +159,7 @@ executor.add_node(my_node)
 executor.spin() # 程序在这里进入无限循环，处理事件，永远不会退出（除非被中断）
 ```
 
-#### Callback Group
+## 2.4. Callback Group
 
 当使用 `MultiThreadedExecutor` 时，你可以通过 **回调组（Callback Group）** 来更精细地控制回调的执行策略。主要有两种类型：
 
@@ -220,21 +170,101 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
 
 
 
-### 工作流程
+# 3. ROS2 Communication
+
+## 3.1. Topic
+
+topic 是节点之间交换信息的一种通信机制。这种通信是单向的、异步的。发布者（Publisher）node 将消息发布到 topic，订阅者（Subscriber）node 从 topic 订阅消息。
+
+特点
+- 单向通信：数据从发布者流向订阅者。
+- 异步：发布者和订阅者不需要同时运行，也不需要知道彼此的存在。
+- 多对多：多个发布者和多个订阅者可以同时使用同一个话题。
+
+topic 通信接口的定义使用的是 `.msg`文件，由于是单向传输，只需要描述传输的每一帧数据是什么就行。
+
+`xxx.msg`
+```ini
+int32 x
+int32 y
+```
+
+
+## 3.2. Service
+
+服务是节点之间另一种通信机制，这种通信是双向的、同步的。它采用请求(reruest-reponse)-响应模型：一个客户端（Client）节点发送请求，然后等待服务器（Server）节点处理请求并返回响应。例如请求一个路径规划服务。
+
+特点
+- 双向通信：包括请求和响应。
+- 同步：客户端发送请求后会阻塞，直到收到响应（当然，ROS2也支持异步服务调用）。
+- 一对多：一个 service server 可以接受多个客户端的请求，但每个请求是串行处理的（除非服务器内部实现多线程）。
+
+service 通信接口的定义使用的是 `.srv` 文件，包含请求和应答两部分定义，通过中间的“---”区分。
+
+`xxx.srv`
+
+```ini
+# request
+int64 a
+int64 b
+
+---
+# response
+int64 sum
+```
+
+
+
+## 3.3. Action
+
+Action是ROS 2中用于处理**长时间运行、可抢占、有反馈**的任务的通信机制。它采用**客户端-服务器**模式，但比Service更复杂。
+
+**Action由三部分组成：**
+
+1. **Goal（目标）**：客户端发送给服务端的任务目标（例如：移动到某个位置）。
+2. **Feedback（反馈）**：服务端在执行过程中定期发送的进度更新（例如：已移动50%）。
+3. **Result（结果）**：任务完成后发送的最终结果（例如：成功到达或失败原因）。
+
+action 用于描述机器人的运动过程。比如：
+
+客户端发送一个运动的目标，想让机器人动起来，服务器端收到之后，就开始控制机器人运动，一边运动，一边反馈当前的状态，如果是一个导航动作，这个反馈可能是当前所处的坐标，如果是机械臂抓取，这个反馈可能又是机械臂的实时姿态。当运动执行结束后，服务器再反馈一个动作结束的信息。整个通信过程就此结束。
+
+**特点**
+
+- ✅ **长时间运行**：任务可能需要几秒、几分钟甚至更长时间。
+- ✅ **可抢占**：客户端可以随时取消正在执行的任务。
+- ✅ **有进度反馈**：服务端定期向客户端发送进度更新。
+- ✅ **双向通信**：客户端发送目标，服务端返回结果和反馈。
+
+
+`action`通信接口的定义使用的是 `.action` 文件。
+
+`xxx.action`
+
+```ini
+# goal
+bool enable
+
+---
+# result
+bool finish
+
+---
+# feedback
+int state
+```
+
+
+# 4. Workflow
 
 1. 设置ROS2工作空间
-
 2. 用 `ros2 create` 创建一个ROS2包。
-
    ```bash
    # 创建ROS2包
    ros2 pkg create --build-type ament_cmake --node-name hello_world cpp_hello_world
    ```
-
 3. 编写一个发布者节点
-
 4. 修改`CMakeLists.txt` 和 `package.xml`
-
    ```cmake
    cmake_minimum_required(VERSION 3.8)
    project(cpp_hello_world)
@@ -260,9 +290,7 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
    # 生成包配置
    ament_package()
    ```
-
 5. 编译包
-
    ```bash
    cd ~/ros2_ws
    
@@ -275,9 +303,7 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
    # 加载工作空间环境
    source install/setup.bash
    ```
-
 6. 运行节点
-
    ```bash
    # 方法1：直接运行
    ros2 run cpp_hello_world hello_world
@@ -285,9 +311,7 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
    # 方法2：启动并在后台运行
    ros2 run cpp_hello_world hello_world &
    ```
-
 7. 验证节点运行
-
    ```bash
    # 查看运行的节点
    ros2 node list
@@ -299,44 +323,34 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
    ros2 topic echo /rosout
    ```
 
-   
+
+# 5. Tools
+
+
+## 5.1. ament
 
 
 
-### Tools
-
-
-#### ament
-
-
-
-#### qrt
+## 5.2. qrt
 
 qrt_reconfigure：动态调参。
 
 
-
-
-
-#### launch
+## 5.3. launch
 
 ROS 系统中多 node 启动与 配置的一种脚本。
 
 
+# 6. ROS2 Command
 
-
-
-#### ROS2 Command
-
-##### run
+## 6.1. run
 
 ```bash
 ros2 run <package_name> <executable_name>
 ```
 
 
-
-##### package
+## 6.2. package
 
 创建指令
 
@@ -358,30 +372,22 @@ ros2 pkg create --build-type ament_cmake \
 ```
 
 
-
-## ROS2  core packages
+# 7. ROS2  core packages
 
 **ROS Index**: https://index.ros.org/
 
 
-
-### rcl
+## 7.1. rcl
 
 ros doc rcp API: https://docs.ros.org/en/jazzy/p/rcl/
 
 
-
-### rclcpp
+## 7.2. rclcpp
 
 rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 
-### rmw
 
-ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
-
-
-
-#### rclcpp::spin(node)
+### 7.2.1. rclcpp::spin(node)
 
 `rclcpp::spin(node)` 是ROS2节点运行的核心机制
 
@@ -394,7 +400,7 @@ ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
 
-#### 底层原理
+### 7.2.2. internal fundamental
 
 `rclcpp::spin()` 实际上做了这些事情：
 
@@ -409,7 +415,7 @@ ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
 
-#### 什么时候 spin 会结束？
+### 7.2.3. 什么时候 spin 会结束？
 
 ```cpp
 rclcpp::spin(node);  // 这个调用会阻塞，直到：
@@ -421,7 +427,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 // 4. 使用 spin_some() 或带超时的 spin
 ```
 
-#### spin 的几种用法
+### 7.2.4. spin 的几种用法
 
 1. 基本 spin (最常用)
 
@@ -503,37 +509,38 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
        std::chrono::seconds(10));
    ```
 
-#### spin 选择建议
+### 7.2.5. spin 选择建议
 
 1. **默认情况下**，如果节点简单，回调函数短小且不需要并行，使用单线程。
 2. **当节点有多个回调，且其中一个或多个回调可能阻塞时**，使用多线程。
 3. **如果节点有多个回调，且它们之间需要共享数据**，则必须注意线程安全。如果使用多线程，需要适当的同步机制（如互斥锁）。如果使用单线程，则无需担心。
 
-### rclpy
+
+### 7.2.6. rclpy
 
 
+## 7.3. rmw
+
+ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
-
-### node
+## 7.4. node
 
 - QoS
 
-  
 
-#### timer
+## 7.5. timer
 
 - `create_wall_timer()`： 是一个用于创建周期性定时器的工具，但它**不依赖于 ROS 系统的仿真时间或系统时间**，而是基于“挂钟时间”。它通常用于需要稳定、真实时间间隔的任务，例如控制循环、状态监测、或与外部非ROS系统交互。
 
 
+## 7.6. parameter
 
-### parameter
+## 7.7. publisher
 
-### publisher
+## 7.8. sub
 
-### sub
-
-### std_msgs
+## 7.9. std_msgs
 
 在工程中使用`std_msgs`的典型场景和示例：
 
@@ -543,9 +550,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 4. **自定义消息组合**：在自定义消息中，可以使用`std_msgs`中的基本类型作为组成部分。
 
 
-
 标准消息类型
-
 - std_msgs
 - sensor_msgs
 - geometry_msgs
@@ -553,28 +558,20 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 - actionlib_msgs
 
 
-
 自定义消息类型
 
 
 
-### rosidl
+## 7.10. rosidl
 
 [github ros2 idl](https://github.com/ros2/rosidl)
 
 
 
+# 8. urdf
 
 
-### urdf
-
-
-
-
-
-
-
-## Hardware
+# 9. Hardware
 
 1. 应用处理器。用层可能只要毫秒级响应
 
@@ -612,7 +609,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 
 
 
-## References
+# 10. References
 
 - [Offical ROS2](https://ros.org/)
 - [ROS2 Document with jazzy](https://docs.ros.org/en/jazzy/index.html)
@@ -623,9 +620,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 - [offical Nav2](https://navigation.ros.org/)
 - [VSCode, Docker, and ROS2](https://www.allisonthackston.com/articles/vscode-docker-ros2.html)
 
-
 ---
-
 - [古月居 图书资源](https://book.guyuehome.com/)
 - [OriginBot智能机器人开源套件](http://originbot.org/index.html)
 - [动手学ROS2](http://fishros.com/d2lros2/)
@@ -633,52 +628,3 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 - [宇树具身智能](https://www.unifolm.com/)
 - [Lumina 具身智能社区](https://lumina-embodied.ai/)
 - [Github 开源的具身智能社区](https://github.com/TianxingChen/Embodied-AI-Guide)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

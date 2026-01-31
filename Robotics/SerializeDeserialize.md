@@ -1,3 +1,13 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-16 23:09:28
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-01-31 16:41:06
+ * @Description: ROS 2 Serialize and Deserialize
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+
 ### 为什么ROS 2需要序列化/反序列化？
 
 ROS 2是一个基于**匿名发布/订阅**模型的分布式系统。节点可能运行在不同的机器（不同的CPU架构）、不同的操作系统、甚至由不同编程语言（如C++、Python）编写。它们之间需要通过共享内存或网络（最常见）进行通信。

@@ -1,10 +1,30 @@
-### rosbag2
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-02 22:33:28
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-01-31 16:31:48
+ * @Description: ROSBag2 Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. rosbag2](#1-rosbag2)
+- [2. 核心功能](#2-核心功能)
+- [3. 为什么 rosbag2 如此重要？](#3-为什么-rosbag2-如此重要)
+- [4. rosbag2 的关键特性](#4-rosbag2-的关键特性)
+- [5. 使用方法](#5-使用方法)
+  - [5.1. 记录数据](#51-记录数据)
+  - [5.2. 查看记录的信息](#52-查看记录的信息)
+  - [5.3. 回放数据](#53-回放数据)
+- [6. 总结](#6-总结)
+
+
+### 1. rosbag2
 
 **rosbag2** 是 ROS2 系统中的官方数据记录和回放工具。默认使用 **SQLite3** 数据库（`.db3` 文件），但也支持其他格式（如 MCAP）。将数据以发布订阅的方式发布到 指定的 topic。
 
 
 
-### 核心功能
+### 2. 核心功能
 
 - **录制**：监听一个或多个指定的 ROS 2  Topic，并将发布到这些 Topic 上的所有消息序列化后写入磁盘文件。
 - **回放**：读取之前录制的文件，并按照时间顺序将消息重新发布到对应的话题上，模拟出数据当初产生的场景。
@@ -12,7 +32,7 @@
 
 
 
-### 为什么 rosbag2 如此重要？
+### 3. 为什么 rosbag2 如此重要？
 
 1.  **调试与诊断**：
     *   当机器人在真实环境中出现异常行为时，你很难在现场实时调试。使用 rosbag2 记录下问题发生时的所有传感器数据（如摄像头图像、激光雷达、IMU数据）和控制指令，然后回到实验室进行离线、反复的分析和重现，极大地提高了调试效率。
@@ -28,7 +48,7 @@
 
 ---
 
-### rosbag2 的关键特性
+### 4. rosbag2 的关键特性
 
 rosbag2 是 ROS1 rosbag 的继承者，它针对 ROS2 的架构进行了重新设计，具有以下关键特性和改进：
 
@@ -41,11 +61,11 @@ rosbag2 是 ROS1 rosbag 的继承者，它针对 ROS2 的架构进行了重新�
 
 ---
 
-### 使用方法
+### 5. 使用方法
 
 rosbag2 主要通过命令行工具 `ros2 bag` 来操作。
 
-#### 1. 记录数据
+#### 5.1. 记录数据
 
 **记录指定话题：**
 ```bash
@@ -67,7 +87,7 @@ ros2 bag record -o my_test_run /camera/image_raw
 ```
 数据将保存在名为 `my_test_run` 的目录中。
 
-#### 2. 查看记录的信息
+#### 5.2. 查看记录的信息
 
 **列出记录文件的内容：**
 
@@ -87,7 +107,7 @@ Topic information: Topic: /camera/image_raw | Type: sensor_msgs/msg/Image | Coun
                    Topic: /scan | Type: sensor_msgs/msg/LaserScan | Count: 450 | Serialization Format: cdr
 ```
 
-#### 3. 回放数据
+#### 5.3. 回放数据
 
 **基本回放：**
 ```bash
@@ -110,6 +130,6 @@ ros2 bag play my_test_run --topics /scan
 
 ---
 
-### 总结
+### 6. 总结
 
 **rosbag2** 是 ROS2 生态中一个不可或缺的工具，它提供了强大、灵活且可靠的数据记录和回放能力。其基于插件和服务的现代化设计，使其比 ROS1 的 rosbag 更加强大，更适合于复杂的、生产级的机器人应用开发和调试。无论是对于初学者还是资深机器人工程师，熟练掌握 rosbag2 都是必备技能。
