@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-28 11:06:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 17:13:35
+ * @LastEditTime: 2026-02-11 23:44:10
  * @Description: Embodied Intelligence
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -14,30 +14,31 @@
   - [4.1. 理论基础](#41-理论基础)
   - [4.2. 人形机器人技术](#42-人形机器人技术)
   - [4.3. 核心环节](#43-核心环节)
-  - [4.4. 仿真工具](#44-仿真工具)
+  - [4.4. Simulation Tools(仿真工具)](#44-simulation-tools仿真工具)
 - [5. Robotic System(机器人系统)](#5-robotic-system机器人系统)
   - [5.1. 大小脑一体化](#51-大小脑一体化)
-  - [5.2. 系统组成](#52-系统组成)
-- [6. 结构设计](#6-结构设计)
-- [7. 关节模组](#7-关节模组)
+  - [5.2. System Composition(系统组成)](#52-system-composition系统组成)
+- [6. Structure Design(结构设计)](#6-structure-design结构设计)
+- [7. Joint Module(关节模组)](#7-joint-module关节模组)
 - [8. Kinematics(运动学)](#8-kinematics运动学)
-  - [先决条件](#先决条件)
-    - [任务空间(task space)](#任务空间task-space)
-    - [8.1.1. 坐标系](#811-坐标系)
-    - [8.1.2. 末端执行器(end effector)](#812-末端执行器end-effector)
-    - [8.1.3. 笛卡尔空间](#813-笛卡尔空间)
-    - [8.1.4. 雅可比矩阵(Jacobian Matrix)](#814-雅可比矩阵jacobian-matrix)
-    - [8.1.5. 位姿](#815-位姿)
-  - [8.1. Forward Kinematics(正向运动学)](#81-forward-kinematics正向运动学)
-  - [8.2. Inverse Kinematics(逆向运动学)](#82-inverse-kinematics逆向运动学)
+  - [8.1. Prerequisites(先决条件)](#81-prerequisites先决条件)
+    - [8.1.1. task space(任务空间)](#811-task-space任务空间)
+    - [8.1.2. coordinate frame(坐标系)](#812-coordinate-frame坐标系)
+    - [8.1.3. End Effector(末端执行器)](#813-end-effector末端执行器)
+    - [8.1.4. Cartesian Space(笛卡尔空间)](#814-cartesian-space笛卡尔空间)
+    - [8.1.5. Jacobian Matrix(雅可比矩阵)](#815-jacobian-matrix雅可比矩阵)
+    - [8.1.6. pose(位姿)](#816-pose位姿)
+  - [8.2. Forward Kinematics(正向运动学)](#82-forward-kinematics正向运动学)
+  - [8.3. Inverse Kinematics(逆向运动学)](#83-inverse-kinematics逆向运动学)
 - [9. Dynamics(动力学)](#9-dynamics动力学)
   - [9.1. Forward Dynamics(正向动力学)](#91-forward-dynamics正向动力学)
-  - [9.2. 反馈控制](#92-反馈控制)
+  - [9.2. Feedback Control(反馈控制)](#92-feedback-control反馈控制)
 - [10. Control Synthesis(控制综合)](#10-control-synthesis控制综合)
 - [11. ZPM](#11-zpm)
-- [12. 视觉感知](#12-视觉感知)
-  - [12.1. 里程计](#121-里程计)
-  - [12.2. 惯性传感器](#122-惯性传感器)
+- [12. Visual Perception(视觉感知)](#12-visual-perception视觉感知)
+  - [12.1. Odometry(里程计)](#121-odometry里程计)
+  - [12.2. Inertial Measurement Unit (IMU)(惯性传感器)](#122-inertial-measurement-unit-imu惯性传感器)
+- [13. References](#13-references)
 
 # 1. Embodied Intelligence(具身智能)
 
@@ -119,7 +120,7 @@
 6. 决策层
 
 
-## 4.4. 仿真工具
+## 4.4. Simulation Tools(仿真工具)
 
 1. Gazebo
 2. MuJoCo
@@ -158,7 +159,7 @@
 
 
 
-## 5.2. 系统组成
+## 5.2. System Composition(系统组成)
 
 - 主控
 - 驱动
@@ -173,14 +174,14 @@
 
 
 
-# 6. 结构设计
+# 6. Structure Design(结构设计)
 
 机器人结构设计包括机械结构设计和电子电路设计两大部分。
 
 机械结构设计主要涉及机器人的外形设计、关节布局、连杆长度等方面，以确保机器人具备良好的运动性能和稳定性。电子电路设计则包括传感器布置、电机驱动电路、控制系统等，以实现对机器人的精确控制和反馈。
 
 
-# 7. 关节模组
+# 7. Joint Module(关节模组)
 
 机器人关节模组是机器人系统中的关键组成部分，负责实现机器人的运动和姿态调整。
 
@@ -206,9 +207,9 @@
 运动学研究机器人的几何结构和运动特性，而不考虑引起这种运动的力。主要研究如何描述和计算机器人各个连杆的位置、姿态、速度和加速度。
 
 
-## 先决条件
+## 8.1. Prerequisites(先决条件)
 
-### 任务空间(task space)
+### 8.1.1. task space(任务空间)
 
 任务空间是指机器人末端执行器在三维空间中可以达到的位置和姿态的集合。任务空间通常使用笛卡尔坐标系来描述，包括位置（X、Y、Z坐标）和姿态（滚转(roll)、俯仰(pitch)、偏航角度(yaw)）。任务空间反映了机器人在执行特定任务时所需的操作范围和能力。
 
@@ -216,7 +217,7 @@
 机器人位形空间(configuration space)与任务空间(task space)之间并非——映射的关系。机器人的工作空间（workspace）则可以定义为末端执行器所能达到的任务空间的子集。
 
 
-### 8.1.1. 坐标系
+### 8.1.2. coordinate frame(坐标系)
 
 1. 世界坐标系(world coordinate frame)： 通常指机器人所在环境的全局坐标系，一般是固定不变的参考系，用于描述机器人及其操作对象在空间中的位置和姿态。
   > 设定世界坐标系，以初始状态的人形机器人正下方的点为原点，它前方为 x 轴，左方为 y 轴，垂直向上为 z 轴，构成右手坐标系。
@@ -231,21 +232,21 @@
 
 
 
-### 8.1.2. 末端执行器(end effector)
+### 8.1.3. End Effector(末端执行器)
 
 末端执行器是机器人系统中与环境直接交互的部分，通常安装在机器人机械臂的末端。它可以是各种类型的工具或装置，如机械手、夹具、焊接工具、喷涂设备等。末端执行器的设计和功能取决于机器人的应用需求，旨在完成特定的任务，如抓取、操作、加工等。
 
 
-### 8.1.3. 笛卡尔空间
+### 8.1.4. Cartesian Space(笛卡尔空间)
 
 笛卡尔空间是指使用笛卡尔坐标系来描述物体位置和运动的空间。在机器人学中，笛卡尔空间通常用于表示机器人末端执行器的位置和姿态。笛卡尔坐标系由三个互相垂直的轴（通常称为X、Y、Z轴）组成，用于描述三维空间中的点。
 
-### 8.1.4. 雅可比矩阵(Jacobian Matrix)
+### 8.1.5. Jacobian Matrix(雅可比矩阵)
 
 雅可比矩阵是描述机器人关节速度与末端执行器线速度和角速度之间关系的矩阵。它在机器人运动学中起着关键作用，用于将关节空间的速度映射到任务空间的速度。雅可比矩阵的每一列对应一个关节变量对末端执行器位置和姿态的影响。
 
 
-### 8.1.5. 位姿
+### 8.1.6. pose(位姿)
 
 位姿(position and orientation) 是描述物体在空间中位置和姿态的组合。
 
@@ -257,7 +258,7 @@
 3. Z-Y-Z 欧拉角
 
 
-## 8.1. Forward Kinematics(正向运动学)
+## 8.2. Forward Kinematics(正向运动学)
 
 如何根据机器人的关节角度，描述每个连杆的位置和姿态，被称为正向运动学。
 
@@ -278,7 +279,7 @@
 - 位置变量对于时间或者其他变量的高阶微分。
 
 
-## 8.2. Inverse Kinematics(逆向运动学)
+## 8.3. Inverse Kinematics(逆向运动学)
 
 逆运动学研究的是机器人为什么要这么运动？涉及力。即根据每个连杆的位置和姿态，计算所有可到达的机器人关节角度。
 
@@ -306,7 +307,7 @@
 
 
 
-## 9.2. 反馈控制
+## 9.2. Feedback Control(反馈控制)
 
 人形机器人的步态模式要能防止机器人自身在没有干扰的情况下翻到，一般是通过反馈控制来稳定的。
 
@@ -344,12 +345,12 @@ Zero Moment Point（零力矩点）：指机器人脚底从地面承受的力矩
 
 
 
-# 12. 视觉感知
+# 12. Visual Perception(视觉感知)
 
 视觉感知是机器人通过摄像头等视觉传感器获取环境信息，并进行处理和理解的过程。视觉感知在机器人导航、物体识别、环境建模等方面起着关键作用。
 
 
-## 12.1. 里程计
+## 12.1. Odometry(里程计)
 
 里程计（odometry）是通过测量机器人轮子的转动来估计机器人位置和姿态变化的一种方法。它通常使用轮速传感器来获取轮子的转速信息，并结合机器人的运动模型来推算出机器人的位移和旋转。
 
@@ -362,9 +363,15 @@ Zero Moment Point（零力矩点）：指机器人脚底从地面承受的力矩
 - 运动估计和滤波算法（Motion Estimation and Filtering Algorithms）
 
 
-## 12.2. 惯性传感器
+## 12.2. Inertial Measurement Unit (IMU)(惯性传感器)
 
 惯性传感器（Inertial Measurement Unit, IMU）是一种用于测量物体加速度和角速度的传感器，通常由加速度计和陀螺仪组成。IMU 可以提供物体在三维空间中的运动信息，广泛应用于机器人、无人机、汽车导航等领域。
 
 - 加速度计：用于测量物体在各个轴向的线性加速度，通常采用微机电系统（MEMS）技术制造。加速度计可以检测物体的加速和减速，从而推算出物体的位置变化。
 - 陀螺仪：用于测量物体的角速度和旋转速度，从而推算出物体的姿态变化，通常也采用 MEMS 技术制造。
+
+
+# 13. References
+
+- Github whole_body_tracking: https://github.com/HybridRobotics/whole_body_tracking
+- Github mjlab: https://github.com/mujocolab/mjlab
