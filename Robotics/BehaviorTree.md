@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-07 23:39:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-12-21 13:40:28
+ * @LastEditTime: 2026-02-13 11:14:59
  * @Description: BehaviorTree Usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -39,6 +39,7 @@
     - [2.3.2. 特点](#232-特点)
     - [2.3.3. 用法](#233-用法)
     - [2.3.4. port 与 entry 的关系](#234-port-与-entry-的关系)
+    - [注意点](#注意点)
     - [2.3.5. 底层绑定机制简述](#235-底层绑定机制简述)
 - [3. Nodes](#3-nodes)
   - [3.1. Types of nodes](#31-types-of-nodes)
@@ -80,7 +81,6 @@
 可将行为树中的 Node，想象为 乐高积木 中的一个小模块。
 
 
-
 ### 1.2. 特点
 
 行为树是树状的结构，它的逻辑流程是由`xml`文件描述的。
@@ -90,12 +90,10 @@
 可用 Groot 工具来可视化行为树。
 
 
-
 ### 1.3. 优点
 
 1. 调试方便，机器行为的变化都可以追溯。机器行为的变化可记录回放。行为变化也可实时监控。
 2. 代码复用率高。不同的功能只需少量代码的修改和机器行为的重新组织。
-
 
 
 ### 1.4. 行为树与有限状机对比
@@ -111,16 +109,12 @@
 **行为树相比状态机的优势**：
 
 - 模块化与可复用性： 节点（如“导航到A点”）是独立的，可以在树的不同位置重复使用。
-
 - 可维护性： 树形结构非常直观，易于理解、调试和修改。添加新行为就像在树上添加一个新分支。
-
 - 动态性： 行为树可以“反应式”地响应环境变化。例如，当一个机器人正在执行“前往目标点”的任务时，如果电池电量低，它可以立即中断当前任务，转而执行“返回充电”任务。
 - 可伸缩性： 可以轻松地构建非常庞大和复杂的行为逻辑，而不会变得像“意大利面条”一样的代码。
 
 **状态机弊端**：
-
 状态与执行内容是绑定在一起的。当执行内容需要在多个状态中执行时，各个状态下都需要放置执行内容的逻辑。当业务逻辑代码分散在各处时就不太好维护了，特别是对于复杂的机器人系统。
-
 
 
 ## 2. Basical Concepts
@@ -142,19 +136,15 @@
 任何接收到 tick 信号的 TreeNode 都会执行其回调函数(callback)。回调返回的结果如下
 
 - 成功(SUCCESS)： 节点已完成其任务。
-
 - 失败(FAILURE)： 节点未能完成其任务。
-
 - 运行中(RUNNING)： 节点正在执行中，尚未完成（例如，机器人正在移动中）。这是实现“反应性”的关键。
 
 #### 2.1.4. tick 的流程
 
 当行为树被 tick 时，它会从根节点开始，按照节点类型定义的逻辑来遍历子节点。例如：
-
 - **控制流节点**（如序列、选择、并行）会按照特定顺序 tick 其子节点，并根据子节点的返回值决定下一步。
 - **条件节点**（Condition）会检查某个条件，立即返回成功或失败。
 - **动作节点**（Action）会执行一个动作，可能立即完成（返回成功/失败）或持续多帧（返回运行中）。
-
 
 
 #### 2.1.5. Tick 的特性
@@ -210,11 +200,9 @@ void tickEnemyAI() {
 #### 2.2.1. 定义
 
 - 定义：Port 是一种 nodes 之间可以彼此交换信息的机制。Port 允许你在行为树节点（如 ActionNode、ConditionNode、ControlNode 等）之间传递数据，而无需硬编码依赖。
-
 - > **Port 是行为树节点与外部数据（尤其是 Blackboard）之间的标准化、类型安全的接口抽象，使得行为树具备高度的灵活性、可配置性和复用性。**
 
   它不是传统意义上的“网络端口”或“硬件端口”，而是一种 **行为树内部的数据绑定契约机制**。提供了一种简介操作，也叫 `remapping`。
-
 - 作用：让节点能够**接收输入参数**和**输出执行结果**。
 
 #### 2.2.2. 特点
@@ -231,7 +219,6 @@ void tickEnemyAI() {
 #### 2.2.3. 常用数据类型
 
 数据类型可以是任意 c++类型。
-
 - `double` - 浮点数
 - `int` - 整数
 - `bool` - 布尔值
@@ -310,7 +297,6 @@ BehaviorTree.CPP 在解析时会：
 > ```
 
 
-
 ##### 2.2.5.3. BidirectionalPort(双向端口)
 
 ```cpp
@@ -324,7 +310,6 @@ static BT::PortsList providedPorts() {
 #### 2.2.6. Port 在 XML 中的使用
 
 参数传递示例
-
 ```xml
 <root>
     <BehaviorTree>
@@ -351,7 +336,6 @@ static BT::PortsList providedPorts() {
 ```
 
 数据流示例
-
 ```xml
 <root>
     <BehaviorTree>
@@ -383,11 +367,9 @@ static BT::PortsList providedPorts() {
 ```
 
 
-
 #### 2.2.7. Port 高级特性
 
 1. 动态端口
-
    ```cpp
    static BT::PortsList providedPorts() {
        // 动态端口：运行时决定
@@ -399,7 +381,6 @@ static BT::PortsList providedPorts() {
    ```
 
 2. Blackboard 机制
-
    ```cpp
    // Blackboard 是全局共享的数据存储
    BT::Blackboard::Ptr blackboard = BT::Blackboard::create();
@@ -422,7 +403,6 @@ static BT::PortsList providedPorts() {
    ```
 
 3. 端口验证和转换
-
    ```cpp
    // 自定义端口验证器
    BT::PortsList providedPorts() {
@@ -489,9 +469,7 @@ static BT::PortsList providedPorts() {
 在 XML 文件使用 `{}` 与 InputPort 和 OutPort 进行绑定 。 当一个节点设置 `port_name="{blackboard_key}"`时，它会将结果存储在 Blackboard  的`blackboard_key`上；其他节点通过 `input="{blackboard_key}"` 可以获取这个值。
 
 **示例**：
-
 1. 自定义节点声明（C++）
-
    ```cpp
    class MoveTo : public BT::SyncActionNode
    {
@@ -512,7 +490,6 @@ static BT::PortsList providedPorts() {
    ```
 
 2. XML 中绑定 Port 到 Blackboard
-
    ```xml
    <root main_tree_to_execute="MainTree">
      <BehaviorTree ID="MainTree">
@@ -526,18 +503,15 @@ static BT::PortsList providedPorts() {
    ```
 
 3. 运行时：
+  - `target` 的值 = `blackboard.get<Position>("goal")`
+  - 执行后：`blackboard.set<int>("total_steps", steps_value)`
 
-   - `target` 的值 = `blackboard.get<Position>("goal")`
-   - 执行后：`blackboard.set<int>("total_steps", steps_value)`
 
 #### 2.3.4. port 与 entry 的关系
 
 1. Port：是 node 定义的一部分，用于指定 node 需要输入的数据或将要输出的数据。在节点类中，通过`providedPorts()`静态方法来声明 port，并在`tick()`函数中使用`getInput()`读取输入 port 或使用`setOutput()`写入输出 port。
-
 2. Entry：是 blackboard 上存储数据的键值对。每个 entry 有一个键（key）和一个值（value）。在XML中，使用花括号`{key}`来引用 blackboard  上的 条目（entry）。
-
 3. **绑定关系**：在行为树XML中，将 node 的 port 与 entry 进行绑定。例如：
-
    ```xml
    <SaySomething message="{target}" />
    ```
@@ -549,6 +523,7 @@ static BT::PortsList providedPorts() {
    ```
 
    表示将 ThinkWhatToSay 节点的输出端口 "text"与 blackboard  上的 entry  "target" 绑定。当节点执行时，它输出的值会写入 blackboard  上的 entry  "target"。
+
 
 **关键区别**
 
@@ -626,22 +601,20 @@ controlNode 叫控制节点。像树干和树枝，负责控制子节点的执�
 #### 3.2.1. Sequence
 
 Sequence 叫序列节点。最基本和最常用。
-
 - **逻辑**：按顺序执行所有子节点。
 - **例子**：`序列[接近门，开门，通过，关门]` —— 任何一个步骤失败（如门打不开），整个任务失败。
 
 特点：**只有全部成功，它才返回成功；任何一个失败，则立即停止并返回失败。**
 
 提供三种类型 nodes
-
 - Sequence
 - SequenceWithMemory
 - ReactiveSequence：响应式序列。
 
+
 #### 3.2.2. Fallback
 
 FallbackNode 叫选择节点或者选择器(Selector)。
-
 - **逻辑**：按顺序执行子节点，**直到有一个成功为止**。即“尝试方案A，不行就试B，还不行就试C...”。
 - **例子**：`选择[用钥匙开门， 用力拉门， 呼叫管理员]` —— 尝试各种开门方法，直到一个成功。
 
@@ -650,19 +623,15 @@ FallbackNode 叫选择节点或者选择器(Selector)。
 特点：**一旦某个子节点成功，立即停止后续子节点。**
 
 提供2中 nodes 类型
-
 - Fallback
 - ReactiveFallback
-
 
 
 #### 3.2.3. Parallel
 
 parallel 叫并行节点。
-
 - **逻辑**：同时执行所有子节点。可根据成功/失败数量阈值来决定自身返回结果。
 - **例子**：`并行[播放音乐， 闪烁灯光]` —— 同时完成多个动作，营造氛围。
-
 
 
 ### 3.3. LeafNode
@@ -681,10 +650,10 @@ ActionNode 叫动作节点，**最常用的类型**。
 #### 3.3.2. ConditionNode
 
 ConditionNode 叫条件节点。
-
 - 条件控制节点。比如判断电池电量，某一开关信号等等。
 - **检查什么**：检查一个世界状态是否成立（如“生命值<30%？”、“看到敌人了吗？”）。
 - **特点**：瞬间完成，只返回**成功**或**失败**，不改变世界状态。
+
 
 ### 3.4. DecoratorNode
 
@@ -693,21 +662,17 @@ decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个
 **它只能有一个子节点。**
 
 **常用类型**：
-
 - invert：将子节点的结果反转（SUCCESS 变 FAILURE ，FAILURE 变SUCCESS ，若一个 child 返回 RUNNING，node 也返回 RUNNING）。
 - Repeat：反复执行子节点 N 次。
   - child 执行 N 次，若尝试 N 次都返回 SUCCESS ，则 node 总是返回 SUCCESS 。
   - 若 child 返回 FAILURE  ，则中断循环，node 返回 FAILURE 。
-
 - RetryUntilSuccessful：
   - child 执行 N 次，若尝试 N 次都返回 FAILURE ，则 node 总是返回 FAILURE 。
   - 若 child 返回 SUCCESS ，则中断循环，node 返回 SUCCESS。
-
 - KeepRunningUntilFailure：反复执行子节点直到其返回失败。
 - Force Success/Failure：无论子节点结果如何，都返回指定状态（失败或成功）。
 - Delay：指定多久去 tick child。
 - RunOnce：只执行 child 一次。
-
 
 
 ### 3.5. Custom nodes
@@ -719,17 +684,18 @@ decoratorNode 叫装饰节点。像树上的装饰，用于修饰或调整单个
 - `DecoratorNode`
 
 
-
 ## 4. XML schema
 
 `BehaviorTree.CPP` 是一个用 C++ 编写的强大且灵活的行为树（Behavior Tree）库，广泛用于机器人、游戏 AI 等领域。它支持通过 XML 文件来定义行为树的结构和逻辑，使得行为树可以在运行时动态加载和修改。
 
 在 `BehaviorTree.CPP` 中，XML 文件主要用于描述**行为树的结构**，而不是具体节点的实现逻辑（节点的实现仍需在 C++ 代码中注册）。
 
+
 ### 4.1. XML 的作用
 
 - 定义行为树的结构（哪些节点、怎么组合）。
 - 指定每个节点的 port 要从 blackboard 的哪个 key 读取或写入。
+
 
 ### 4.2. 内置标签
 
@@ -746,8 +712,6 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
 因此，**标准内置标签大约 20 个左右**，加上用户自定义的叶子节点，总数是可扩展的。
 
-
-
 主要分为以下几类：
 
 #### 4.2.1. 根标签
@@ -755,7 +719,6 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 `<root>`：XML 文件的根元素。
 
 可选属性：
-
 - `main_tree_to_execute`：指定要执行的主行为树名称（当 XML 中定义了多个树时使用）。
 
   1. **主树入口**：当 XML 文件中包含多个行为树时，`main_tree_to_execute` 指定了 **程序启动时默认执行哪一个树**。XML 中只有一个行为树时，可以不用写。
@@ -780,17 +743,14 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
     </BehaviorTree>
   </root>
   ```
-
 - `BTCPP_format`：Behavior Tree 的版本。
+
 
 #### 4.2.2. 行为树定义标签
 
 `<BehaviorTree>`：定义一棵行为树。
-
 - 必须有 `ID` 属性，作为该树的唯一标识。
-
 - 示例：
-
   ```xml
   <BehaviorTree ID="MainTree">
     <!-- 节点内容 -->
@@ -843,23 +803,18 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
 > 这些标签名必须与你在 `BT::BehaviorTreeFactory` 中注册的名称完全一致。
 
+
 #### 4.2.6. 其他特殊标签
 
 - `<SubTree>`：引用另一棵已定义的行为树（类似函数调用）。
-
   - 属性：
-
     - `ID`：被调用的子树 ID。
     - 可传递端口参数（通过属性或 `<remap>`）。
-
   - 示例：
-
     ```xml
     <SubTree ID="CheckAndRecharge" battery_level="{battery}" />
     ```
-
 - `<Remap>`：在 `<SubTree>` 内部用于端口重映射（较新版本中通常直接在属性中完成）。
-
 - `<include>`：引用外部的文件，类似于C++中的 `#include <file>` 的语法。从 2.4 版本开始支持。
 
   ```xml
@@ -904,27 +859,21 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
   ```xml
   <include ros_pkg="name_package"  path="path_relative_to_pkg/grasp.xml"/>
   ```
-
   
 
 #### 4.2.7. Ports 与 Blackboard
 
 - 节点可通过 `{variable}` 语法访问 Blackboard 上的变量。
-
 - 在 XML 中定义端口，通常通过节点属性完成，例如：
-
   ```xml
   <NodeName port_name="{blackboard_key}" />
   ```
-
 - 节点的输入/输出端口需在 C++ 注册时声明。
-
 
 
 ## 5. BehaviorTree.CPP API
 
 关键类
-
 1. **`Blackboard`**: 存储键值对
 2. **`TreeNode`**: 基类，包含端口映射
 3. **`NodeConfiguration`**: 节点配置，包含端口和黑板引用
@@ -932,31 +881,19 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 5. **`XMLParser`**: 解析 XML 并创建端口映射
 
 
-
 ### 5.1. ActionNode
 
 - `StatefulActionNode`：异步接口。是一个特殊类型的动作节点，它在多个tick之间保持状态，适合处理需要持续执行的动作。
-
   主要用途：
-
   1. **持续执行的动作**
-
      - 移动到一个位置（可能需要多个tick）
-
      - 等待一段时间
-
      - 执行需要多个帧的动画
-
      - 与NPC对话交互
-
   2. **状态保持**
-
      与普通的 `ActionNode` 不同，`StatefulActionNode` 会记住自己的执行状态，即使在多个tick之间也不会重置。
-
 - `SyncActionNode`：同步接口
-
 - `AsyncActionNode`（不推荐，因为`StatefulActionNode`是更好的替代）。需要手动去管理线程。
-
 
 
 ## 6. ROS 中如何实现行为树？
@@ -971,10 +908,10 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 4. **与 ROS 通信**： 你的“动作”和“条件”节点内部是通过 ROS 的**Actionlib**、**Service**、**Topic** 等机制与机器人系统的其他部分（如导航、感知、控制）进行通信的。
 
 
-
 ## 7. Groot
 
 使用 Groot 工具查看 xml 文件时，得加 **节点模型**（`<TreeNodesModel>`）后，groot 编辑器才能渲染后现实，若只有 **树结构**（`<BehaviorTree>`）标签，是不能加载的。
+
 
 ### 7.1. 为什么这样设计？
 
@@ -990,10 +927,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 - **编辑器友好**：Groot 有足够的信息渲染GUI
 
 
-
 ## 8. References
 
 1. BehaviorTree.CPP: https://www.behaviortree.dev/
 1. **BT::TreeNode Class Reference**:https://docs.ros.org/en/noetic/api/behaviortree_cpp/html/classBT_1_1TreeNode.html
-2. 知乎：ROS2中的行为树 BehaviorTree：https://zhuanlan.zhihu.com/p/534072049
-
