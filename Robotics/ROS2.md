@@ -2,51 +2,51 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 16:30:14
+ * @LastEditTime: 2026-02-13 14:18:56
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 - [1. ROS2 Introduction](#1-ros2-introduction)
-- [2. Basic Concepts](#2-basic-concepts)
-  - [2.1. Node](#21-node)
-  - [2.2. Parameter](#22-parameter)
-  - [2.3. Executor](#23-executor)
-    - [2.3.1. 核心思想：事件循环](#231-核心思想事件循环)
-    - [2.3.2. 为什么需要执行器？](#232-为什么需要执行器)
-  - [2.4. Callback Group](#24-callback-group)
-- [3. ROS2 Communication](#3-ros2-communication)
-  - [3.1. Topic](#31-topic)
-  - [3.2. Service](#32-service)
-  - [3.3. Action](#33-action)
-- [4. Workflow](#4-workflow)
-- [5. Tools](#5-tools)
-  - [5.1. ament](#51-ament)
-  - [5.2. qrt](#52-qrt)
-  - [5.3. launch](#53-launch)
-- [6. ROS2 Command](#6-ros2-command)
-  - [6.1. run](#61-run)
-  - [6.2. package](#62-package)
-- [7. ROS2  core packages](#7-ros2--core-packages)
-  - [7.1. rcl](#71-rcl)
-  - [7.2. rclcpp](#72-rclcpp)
-    - [7.2.1. rclcpp::spin(node)](#721-rclcppspinnode)
-    - [7.2.2. internal fundamental](#722-internal-fundamental)
-    - [7.2.3. 什么时候 spin 会结束？](#723-什么时候-spin-会结束)
-    - [7.2.4. spin 的几种用法](#724-spin-的几种用法)
-    - [7.2.5. spin 选择建议](#725-spin-选择建议)
-    - [7.2.6. rclpy](#726-rclpy)
-  - [7.3. rmw](#73-rmw)
-  - [7.4. node](#74-node)
-  - [7.5. timer](#75-timer)
-  - [7.6. parameter](#76-parameter)
-  - [7.7. publisher](#77-publisher)
-  - [7.8. sub](#78-sub)
-  - [7.9. std\_msgs](#79-std_msgs)
-  - [7.10. rosidl](#710-rosidl)
-- [8. urdf](#8-urdf)
-- [9. Hardware](#9-hardware)
-- [10. References](#10-references)
+- [2. Terms](#2-terms)
+- [3. Basic Concepts](#3-basic-concepts)
+  - [3.1. Node](#31-node)
+  - [3.2. Parameter](#32-parameter)
+  - [3.3. Executor](#33-executor)
+    - [3.3.1. 核心思想：事件循环](#331-核心思想事件循环)
+    - [3.3.2. 为什么需要执行器？](#332-为什么需要执行器)
+  - [3.4. Callback Group](#34-callback-group)
+- [4. ROS2 Communication](#4-ros2-communication)
+  - [4.1. Topic](#41-topic)
+  - [4.2. Service](#42-service)
+  - [4.3. Action](#43-action)
+- [5. Workflow](#5-workflow)
+- [6. Tools](#6-tools)
+  - [6.1. ament](#61-ament)
+  - [6.2. launch](#62-launch)
+- [7. ROS2 Command](#7-ros2-command)
+  - [7.1. run](#71-run)
+  - [7.2. package](#72-package)
+- [8. ROS2  core packages](#8-ros2--core-packages)
+  - [8.1. rcl](#81-rcl)
+  - [8.2. rclcpp](#82-rclcpp)
+    - [8.2.1. rclcpp::spin(node)](#821-rclcppspinnode)
+    - [8.2.2. internal fundamental](#822-internal-fundamental)
+    - [8.2.3. 什么时候 spin 会结束？](#823-什么时候-spin-会结束)
+    - [8.2.4. spin 的几种用法](#824-spin-的几种用法)
+    - [8.2.5. spin 选择建议](#825-spin-选择建议)
+    - [8.2.6. rclpy](#826-rclpy)
+  - [8.3. rmw](#83-rmw)
+  - [8.4. node](#84-node)
+  - [8.5. timer](#85-timer)
+  - [8.6. parameter](#86-parameter)
+  - [8.7. publisher](#87-publisher)
+  - [8.8. sub](#88-sub)
+  - [8.9. std\_msgs](#89-std_msgs)
+  - [8.10. rosidl](#810-rosidl)
+- [9. urdf](#9-urdf)
+- [10. Hardware](#10-hardware)
+- [11. References](#11-references)
 
 
 # 1. ROS2 Introduction
@@ -55,10 +55,24 @@
 
 ROS 是一个分布式通信框架。
 
+# 2. Terms
 
-# 2. Basic Concepts
+- IDL: Interface Definition Language
+- QoS: Quality of Service
+- DDS: Data Distribution Service
+- RMW: ROS Middleware
+- RCL: ROS Client Library
+- RCLCPP: ROS Client Library for C++
+- RCLPY: ROS Client Library for Python
+- URDF: Unified Robot Description Format
+- TF: Transform
+- RViz: ROS Visualization
+- Gazebo: ROS Simulation
 
-## 2.1. Node
+
+# 3. Basic Concepts
+
+## 3.1. Node
 
 节点是ROS2中的基本执行单元。每个节点通常负责一个单一的、模块化的功能。例如，一个节点可以控制激光雷达，另一个节点可以处理激光雷达的数据，第三个节点可以负责运动规划。
 
@@ -80,7 +94,7 @@ ROS 是一个分布式通信框架。
 4. 每个节点都可以发布或订阅话题，也可以提供或使用服务(service)。
 
 
-## 2.2. Parameter
+## 3.2. Parameter
 
 Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在节点运行时动态修改，而不需要重新编译代码。
 
@@ -112,11 +126,11 @@ Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在
 总结：**Topic用于数据流，Service用于即时操作，Action用于长期任务，Parameter用于配置。** 
 
 
-## 2.3. Executor
+## 3.3. Executor
 
 **执行器（Executor）** 它负责让节点“活”起来，并决定节点如何响应外部世界。
 
-### 2.3.1. 核心思想：事件循环
+### 3.3.1. 核心思想：事件循环
 
 在ROS2中，节点可以通过订阅者、计时器、服务服务器、动作服务器等与外部通信。这些组件在创建后，并不会自动运行。它们只是在等待，就像一堆待办事项清单。
 
@@ -132,7 +146,7 @@ Parameter是ROS 2中用于动态配置节点(node)的键值对。它们可以在
 ------
 
 
-### 2.3.2. 为什么需要执行器？
+### 3.3.2. 为什么需要执行器？
 
 没有执行器，你的节点代码会像下面这样，什么也做不了：
 
@@ -159,7 +173,7 @@ executor.add_node(my_node)
 executor.spin() # 程序在这里进入无限循环，处理事件，永远不会退出（除非被中断）
 ```
 
-## 2.4. Callback Group
+## 3.4. Callback Group
 
 当使用 `MultiThreadedExecutor` 时，你可以通过 **回调组（Callback Group）** 来更精细地控制回调的执行策略。主要有两种类型：
 
@@ -170,9 +184,53 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
 
 
 
-# 3. ROS2 Communication
+# 4. ROS2 Communication
 
-## 3.1. Topic
+ROS2 提供了多种通信机制，主要包括：**Topic**、**Service** 和 **Action**。每种机制适用于不同的通信场景。
+
+- topic 适用于持续的数据流，例如传感器数据、状态信息等。
+- service 适用于需要即时响应的请求-响应场景，例如控制命令、参数查询等。不能用于长时间运行的任务，因为它是同步的。
+- action 适用于需要长时间运行、可抢占、有反馈的任务，例如导航、路径规划等。
+
+
+message 定义文件格式
+```
+# fieldtype fieldname
+```
+
+built-in message types supported 
+
+| ype name | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
+| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| bool     | bool                                                         | builtins.bool                                                | boolean                                                      |
+| byte     | uint8_t                                                      | builtins.bytes*                                              | octet                                                        |
+| char     | char                                                         | builtins.int*                                                | char                                                         |
+| float32  | float                                                        | builtins.float*                                              | float                                                        |
+| float64  | double                                                       | builtins.float*                                              | double                                                       |
+| int8     | int8_t                                                       | builtins.int*                                                | octet                                                        |
+| uint8    | uint8_t                                                      | builtins.int*                                                | octet                                                        |
+| int16    | int16_t                                                      | builtins.int*                                                | short                                                        |
+| uint16   | uint16_t                                                     | builtins.int*                                                | unsigned short                                               |
+| int32    | int32_t                                                      | builtins.int*                                                | long                                                         |
+| uint32   | uint32_t                                                     | builtins.int*                                                | unsigned long                                                |
+| int64    | int64_t                                                      | builtins.int*                                                | long long                                                    |
+| uint64   | uint64_t                                                     | builtins.int*                                                | unsigned long long                                           |
+| string   | std::string                                                  | builtins.str                                                 | string                                                       |
+| wstring  | std::u16string                                               | builtins.str                                                 | wstring                                                      |
+
+
+每个 built-in-type 可用于定义 array
+
+| Type name               | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
+| ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| static array            | std::array<T, N>                                             | builtins.list*                                               | T[N]                                                         |
+| unbounded dynamic array | std::vector                                                  | builtins.list                                                | sequence                                                     |
+| bounded dynamic array   | custom_class<T, N>                                           | builtins.list*                                               | sequence<T, N>                                               |
+| bounded string          | std::string                                                  | builtins.str*                                                | string                                                       |
+
+
+
+## 4.1. Topic
 
 topic 是节点之间交换信息的一种通信机制。这种通信是单向的、异步的。发布者（Publisher）node 将消息发布到 topic，订阅者（Subscriber）node 从 topic 订阅消息。
 
@@ -185,14 +243,27 @@ topic 通信接口的定义使用的是 `.msg`文件，由于是单向传输，�
 
 `xxx.msg`
 ```ini
+# text
+# fieldtype fieldname
+
 int32 x
 int32 y
 ```
 
+应用场景
+- 传感器数据：例如激光雷达、摄像头等传感器的数据流。
+- 状态信息：例如机器人的位置、速度、电池状态等。
+- 需要持续更新的数据流，例如传感器数据、状态信息等。
+- 不适合需要即时响应的操作，因为它是异步的，订阅者可能会有延迟，无法保证及时处理发布者的消息。
 
-## 3.2. Service
 
-服务是节点之间另一种通信机制，这种通信是双向的、同步的。它采用请求(reruest-reponse)-响应模型：一个客户端（Client）节点发送请求，然后等待服务器（Server）节点处理请求并返回响应。例如请求一个路径规划服务。
+## 4.2. Service
+
+service 是节点之间另一种通信机制，这种通信是双向的、同步的。它采用请求(reruest-reponse)-响应模型：一个客户端（Client）节点发送请求，然后等待服务器（Server）节点处理请求并返回响应。
+
+- client 是 requester
+- server 是 responder
+
 
 特点
 - 双向通信：包括请求和响应。
@@ -202,7 +273,6 @@ int32 y
 service 通信接口的定义使用的是 `.srv` 文件，包含请求和应答两部分定义，通过中间的“---”区分。
 
 `xxx.srv`
-
 ```ini
 # request
 int64 a
@@ -213,14 +283,22 @@ int64 b
 int64 sum
 ```
 
+应用场景
+- 参数查询：客户端请求服务器返回当前参数值。
+- 控制命令：客户端发送控制命令，服务器执行并返回结果。
+- 数据处理：客户端发送数据请求服务器处理并返回结果。
+- 需要即时响应的操作，例如启动或停止某个功能。
+- 需要请求-响应模式的交互，例如查询状态、执行命令等。
+- 不适合长时间运行的任务，因为它是同步的，客户端会被阻塞直到服务器处理完成并返回响应。
 
 
-## 3.3. Action
+## 4.3. Action
 
-Action是ROS 2中用于处理**长时间运行、可抢占、有反馈**的任务的通信机制。它采用**客户端-服务器**模式，但比Service更复杂。
+Action是ROS 2中用于处理 **长时间运行(long-running)、可抢占(preempt)、有反馈(feedback)** 的任务的通信机制。它采用 **客户端-服务器** 模式，但比Service更复杂。
 
-**Action由三部分组成：**
+Action 允许 action client 发送一个目标（Goal）给 action server，action server 在执行过程中可以定期发送反馈（Feedback）给 action client，最后在任务完成后发送结果（Result）给 action client。
 
+Action由三部分组成：
 1. **Goal（目标）**：客户端发送给服务端的任务目标（例如：移动到某个位置）。
 2. **Feedback（反馈）**：服务端在执行过程中定期发送的进度更新（例如：已移动50%）。
 3. **Result（结果）**：任务完成后发送的最终结果（例如：成功到达或失败原因）。
@@ -230,16 +308,25 @@ action 用于描述机器人的运动过程。比如：
 客户端发送一个运动的目标，想让机器人动起来，服务器端收到之后，就开始控制机器人运动，一边运动，一边反馈当前的状态，如果是一个导航动作，这个反馈可能是当前所处的坐标，如果是机械臂抓取，这个反馈可能又是机械臂的实时姿态。当运动执行结束后，服务器再反馈一个动作结束的信息。整个通信过程就此结束。
 
 **特点**
-
 - ✅ **长时间运行**：任务可能需要几秒、几分钟甚至更长时间。
-- ✅ **可抢占**：客户端可以随时取消正在执行的任务。
+- ✅ **可抢占(preempt)**：客户端可以随时取消正在执行的任务。
 - ✅ **有进度反馈**：服务端定期向客户端发送进度更新。
 - ✅ **双向通信**：客户端发送目标，服务端返回结果和反馈。
+- ✅ Action 可保存 goal 的状态，允许客户端查询当前 goal 的状态（如是否正在执行、是否已完成、是否被取消等）。这使得 Action 非常适合需要监控和管理的复杂任务。
 
 
 `action`通信接口的定义使用的是 `.action` 文件。
 
 `xxx.action`
+
+action definition
+```ini
+<request_type> <request_fieldname>
+---
+<response_type> <response_fieldname>
+---
+<feedback_type> <feedback_fieldname>
+```
 
 ```ini
 # goal
@@ -254,8 +341,16 @@ bool finish
 int state
 ```
 
+使用场景
+- 导航：机器人需要从当前位置移动到目标位置，可能需要几秒钟或更长时间。导航过程将走了多远的数据反馈给机器人的控制系统，以便调整路径，并在完成后返回结果。导航过程中，机器人可能会遇到障碍物或其他问题，客户端可以随时取消或者抢占导航任务。
+- 机械臂控制：机器人需要执行一个复杂的抓取动作，可能需要几秒钟或更长时间。
+- 任务执行：机器人需要执行一个复杂的任务，例如清扫房间，可能需要几分钟或更长时间。
+- 需要数秒才能终止的慢速感知程序(Slow perception routines)。
+- 启动底层控制模式(initiating a lower-level control mode)。
+- 更复杂的非阻塞后台处理任务。
 
-# 4. Workflow
+
+# 5. Workflow
 
 1. 设置ROS2工作空间
 2. 用 `ros2 create` 创建一个ROS2包。
@@ -324,36 +419,47 @@ int state
    ```
 
 
-# 5. Tools
+# 6. Tools
 
 
-## 5.1. ament
+## 6.1. ament
+
+ament 是 ROS2 的构建系统和包管理工具。它类似于 ROS1 中的 catkin，但针对 ROS2 进行了优化和改进。
+
+ament 的主要功能包括：
+- 构建和编译 ROS2 包
+- 管理包的依赖关系
+- 生成包的安装文件
+- 支持多种编译系统（如 CMake、Python setuptools 等）
+
+ament 的使用通常通过 colcon 工具来实现，colcon 是一个通用的构建工具，可以同时处理多个包和工作空间。
+```bash
+# 使用 colcon 构建工作空间
+colcon build
+```
+
+colcon 会自动调用 ament 来处理 ROS2 包的构建和安装。
+
+colcon 的详细用法：[colcon](./Colcon.md)
 
 
-
-## 5.2. qrt
-
-qrt_reconfigure：动态调参。
-
-
-## 5.3. launch
+## 6.2. launch
 
 ROS 系统中多 node 启动与 配置的一种脚本。
 
 
-# 6. ROS2 Command
+# 7. ROS2 Command
 
-## 6.1. run
+## 7.1. run
 
 ```bash
 ros2 run <package_name> <executable_name>
 ```
 
 
-## 6.2. package
+## 7.2. package
 
 创建指令
-
 ```bash
 # 创建包含依赖的包
 ros2 pkg create --build-type ament_cmake \
@@ -372,22 +478,22 @@ ros2 pkg create --build-type ament_cmake \
 ```
 
 
-# 7. ROS2  core packages
+# 8. ROS2  core packages
 
 **ROS Index**: https://index.ros.org/
 
 
-## 7.1. rcl
+## 8.1. rcl
 
 ros doc rcp API: https://docs.ros.org/en/jazzy/p/rcl/
 
 
-## 7.2. rclcpp
+## 8.2. rclcpp
 
 rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 
 
-### 7.2.1. rclcpp::spin(node)
+### 8.2.1. rclcpp::spin(node)
 
 `rclcpp::spin(node)` 是ROS2节点运行的核心机制
 
@@ -400,7 +506,7 @@ rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 
 
 
-### 7.2.2. internal fundamental
+### 8.2.2. internal fundamental
 
 `rclcpp::spin()` 实际上做了这些事情：
 
@@ -415,7 +521,7 @@ rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 
 
 
-### 7.2.3. 什么时候 spin 会结束？
+### 8.2.3. 什么时候 spin 会结束？
 
 ```cpp
 rclcpp::spin(node);  // 这个调用会阻塞，直到：
@@ -427,7 +533,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 // 4. 使用 spin_some() 或带超时的 spin
 ```
 
-### 7.2.4. spin 的几种用法
+### 8.2.4. spin 的几种用法
 
 1. 基本 spin (最常用)
 
@@ -509,38 +615,38 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
        std::chrono::seconds(10));
    ```
 
-### 7.2.5. spin 选择建议
+### 8.2.5. spin 选择建议
 
 1. **默认情况下**，如果节点简单，回调函数短小且不需要并行，使用单线程。
 2. **当节点有多个回调，且其中一个或多个回调可能阻塞时**，使用多线程。
 3. **如果节点有多个回调，且它们之间需要共享数据**，则必须注意线程安全。如果使用多线程，需要适当的同步机制（如互斥锁）。如果使用单线程，则无需担心。
 
 
-### 7.2.6. rclpy
+### 8.2.6. rclpy
 
 
-## 7.3. rmw
+## 8.3. rmw
 
 ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
-## 7.4. node
+## 8.4. node
 
 - QoS
 
 
-## 7.5. timer
+## 8.5. timer
 
 - `create_wall_timer()`： 是一个用于创建周期性定时器的工具，但它**不依赖于 ROS 系统的仿真时间或系统时间**，而是基于“挂钟时间”。它通常用于需要稳定、真实时间间隔的任务，例如控制循环、状态监测、或与外部非ROS系统交互。
 
 
-## 7.6. parameter
+## 8.6. parameter
 
-## 7.7. publisher
+## 8.7. publisher
 
-## 7.8. sub
+## 8.8. sub
 
-## 7.9. std_msgs
+## 8.9. std_msgs
 
 在工程中使用`std_msgs`的典型场景和示例：
 
@@ -562,16 +668,16 @@ ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
 
-## 7.10. rosidl
+## 8.10. rosidl
 
 [github ros2 idl](https://github.com/ros2/rosidl)
 
 
 
-# 8. urdf
+# 9. urdf
 
 
-# 9. Hardware
+# 10. Hardware
 
 1. 应用处理器。用层可能只要毫秒级响应
 
@@ -609,18 +715,14 @@ ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 
 
-# 10. References
+# 11. References
 
 - [Offical ROS2](https://ros.org/)
 - [ROS2 Document with jazzy](https://docs.ros.org/en/jazzy/index.html)
-- [ROS on DDS](https://design.ros2.org/articles/ros_on_dds.html)
-- [ros2_control documentation](https://control.ros.org/rolling/index.html)
 - [ROS2 Design Articles](https://design.ros2.org/)
-- [offical moveit](https://moveit.ros.org/): 路径规划
-- [offical Nav2](https://navigation.ros.org/)
-- [VSCode, Docker, and ROS2](https://www.allisonthackston.com/articles/vscode-docker-ros2.html)
 
 ---
+- [VSCode, Docker, and ROS2](https://www.allisonthackston.com/articles/vscode-docker-ros2.html)
 - [古月居 图书资源](https://book.guyuehome.com/)
 - [OriginBot智能机器人开源套件](http://originbot.org/index.html)
 - [动手学ROS2](http://fishros.com/d2lros2/)
