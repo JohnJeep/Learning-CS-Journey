@@ -1,12 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2024-01-06 17:35:56
+ * @LastEditTime: 2026-02-13 10:00:11
  * @LastEditors: JohnJeep
  * @Description: GitHub 开源项目
 --> 
-
-<!-- TOC -->
 
 - [1. GitHub开源项目](#1-github开源项目)
 - [2. C](#2-c)
@@ -18,9 +16,6 @@
 - [8. 数据结构与算法](#8-数据结构与算法)
 - [9. 有价值的开源库](#9-有价值的开源库)
 - [10. 其它](#10-其它)
-
-<!-- /TOC --> 
-
 
 # 1. GitHub开源项目
 
