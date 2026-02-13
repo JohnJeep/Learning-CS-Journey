@@ -2,10 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2025-04-01 00:40:42
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-05 11:21:42
+ * @LastEditTime: 2026-02-13 10:03:27
  * @Description: 
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
+
+
 # Introduction
 
 jq 是 stedolan 开发的一个轻量级的和灵活的命令行 JSON 处理器。
@@ -27,7 +29,6 @@ $ yum install jq
 ```bash
 jq --version
 ```
-
 
 
 # Usage
@@ -78,7 +79,6 @@ jq -c . data.json | jq -sR .
 jq -c "tostring" data.json
 "{\"a\":11,\"b\":22,\"person\":{\"name\":\"Bob\",\"age\":25,\"city\":\"New York\"},\"fruits\":[\"apple\",\"banana\",\"cherry\"],\"meta\":{\"data\":{\"id\":123,\"value\":\"example\"}}}"
 ```
-
 
 
 # References
