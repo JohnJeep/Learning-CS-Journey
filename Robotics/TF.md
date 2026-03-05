@@ -1,4 +1,4 @@
-# Introduction
+# TF2 简介
 
 **TF（TransForm）** 是一个**坐标变换系统**，用于管理和跟踪机器人系统中所有坐标系（Frame）之间的相对位置和方向关系。它是ROS（机器人操作系统）中的核心组件之一。
 
@@ -11,18 +11,12 @@
   - 通过 `tf2_ros` 包中的 `TransformBroadcaster` 发布变换。
   - 通过 `Buffer` 和 `TransformListener` 查询变换。
 
-# 核心功能
+# 安装与运行
 
-1. **坐标变换查询**：获取任意两个坐标系间的变换
-2. **时间旅行**：查询过去或预测未来的坐标关系
-3. **变换广播**：发布坐标系间的相对关系
-4. **可视化**：通过rviz等工具查看坐标框架
-
-# install
+查看系统中是否安装 `tf2`
 
 ```bash
-# 查看系统中是否安装 tf2
-ubt:~/ $ ros2 pkg list | grep tf2                                                         
+jacky:~/ $ ros2 pkg list | grep tf2                                                         
 tf2
 tf2_bullet
 tf2_eigen
@@ -37,14 +31,27 @@ tf2_sensor_msgs
 tf2_tools
 ```
 
-
+查看核心包版本
 
 ```bash
-# 查看核心包版本
 ros2 pkg xml tf2 --tag version
 ros2 pkg xml tf2_ros --tag version
-
 ```
+
+
+
+# TF2 可视化与调试工具介绍
+
+
+
+# 核心功能
+
+1. **坐标变换查询**：获取任意两个坐标系间的变换
+2. **时间旅行**：查询过去或预测未来的坐标关系
+3. **变换广播**：发布坐标系间的相对关系
+4. **可视化**：通过rviz等工具查看坐标框架
+
+
 
 # packages
 
@@ -72,7 +79,7 @@ transforms3d：一个Python库，用于处理3D空间中的几何变换，提供
 
 
 
-**2 种姿态描述vscode-terminal:/55f716cdde799fee830490c286d5e6e9/2**
+2 种姿态描述
 
 1. 四元数形式（qx qy qz qw）
 2. 欧拉角形式
@@ -101,13 +108,7 @@ transforms3d：一个Python库，用于处理3D空间中的几何变换，提供
 
 
 
-
-
-# 广播与监听
-
-
-
-static_transform_publisher
+# 时间处理
 
 
 
@@ -115,20 +116,48 @@ static_transform_publisher
 
 
 
-# 时间处理
-
-
-
-
-
-# 静态 动态TF
-
-
-
-
+# TF2 静态变换发布
 
 1. **静态TF发布器**：发布固定的坐标系关系
-
 2. **动态TF发布器**：随时间移动的坐标系
 
-   
+## TF2 静态变换 C++ 实现
+
+
+
+# **TF2** 动态变换发布
+
+
+
+## TF2 动态变换 C++ 实现
+
+
+
+# TF2 坐标监听
+
+
+
+## TF2 变换监听 C++ 实现
+
+
+
+# **TF2** 坐标系
+
+
+
+##  通过 C++ 编程增加 Frame
+
+
+
+
+
+# **TF2** **的** timeout **与** time travel **介绍**
+
+
+
+## C++ 编程中的应用
+
+
+
+
+
