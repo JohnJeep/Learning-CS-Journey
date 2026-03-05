@@ -1,4 +1,5 @@
 <!--
+
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
@@ -51,9 +52,27 @@
 
 # 1. ROS2 Introduction
 
-开发机器人时，可以类比人类的工作方式：大脑、脊髓、神经信号、神经元、神经网络等等概念。
+机器人已经广泛应用于各种领域，例如自动驾驶、移动机器人、操作机器人、信息机器人等。
 
-ROS 是一个分布式通信框架。
+机器人系统是很多复杂算法模块的集合，如障碍物检测、行为决策、智能控制、环境识别等。 任何机器人平台的软件堆栈都需要多种软件工具，如硬件驱动程序、网络模块、通信架构和多种机器人算法。
+
+ROS 就是一个强大的机器人编程框架，可以简化机器人应用开发。 ROS 不仅仅是一个中间件，而且用于机器人导航，感知，控制，运动规划，模拟等的无数解决方案和软件包的可用性使 ROS 无法消除。
+
+ROS 目前推出了 ROS1 和 ROS2 两个版本。ROS 具有如下局限性
+• ROS 不支持具有相同主节点的多个机器人。
+• ROS 本身不支持实时操作，因此不适合时间关键型应用程序。
+• ROS 需要高计算资源和板载网络连接才能获得最佳性能。
+• 已部署机器人的包管理是有限的。
+• 在商业环境中，多个机器人的监控、记录、分析和维护任务非常困难。
+• 多机器人 / 车队管理和交互是不可能的。
+
+由于这些原因， ROS 2 被引入改进的架构和增强的功能，并正在迅速被机器人社区采用。
+
+如下是 ROS2 的架构概览图：
+
+![](figures/ros2_architecture.png)
+
+
 
 # 2. Terms
 
@@ -68,6 +87,28 @@ ROS 是一个分布式通信框架。
 - TF: Transform
 - RViz: ROS Visualization
 - Gazebo: ROS Simulation
+
+
+
+# ROS1 ROS Compare
+
+ROS 1和 ROS 2的特性对比如下：
+
+| OS 1                                                         | ROS 2                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 使用 TCPROS （ TCP/IP 的自定义版本）通信协议                 | 使用 DDS （数据分发系统）进行通信                            |
+| 使用 ROS Master 进行集中式发现和注册。如果主节点发生故障，完整的通信管道容易发生故障 | 使用 DDS 分布式发现机制。 ROS 2 提供了一个自定义 API 来获取有关节点和主题的所有信息 |
+| ROS 只能在 Ubuntu OS 上运行                                  | ROS 2 与 Ubuntu 、 Windows 10 和 OS X 兼容                   |
+| 使用 C++ 03 和 Python2                                       | 使用 C++ 11 （可能可升级）和 Python3                         |
+| ROS 仅使用 CMake 构建系统                                    | ROS 2 提供了使用其他构建系统的选项                           |
+| 是否具有使用单个 CMakeLists 调用的多个包的组合生成 .txt      | 支持包的独立构建，以更好地处理包间依赖关系                   |
+| 消息文件中的数据类型不支持默认值                             | 消息文件中的数据类型现在可以在初始化时具有默认值             |
+| roslaunch 文件是用 XML 编写的，但功能有限                    | roslaunch 文件是用 Python 编写的，以支持更可配置和有条件的执行 |
+| 即使使用实时操作系统，也无法确定性地支持实时行为             | 支持通过 RTPREEMPT 等                                        |
+
+ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传递实时性更佳，因此 ROS2 更适合应用在工业生产环境。基于 ROS2 的以上特点，该框架被广泛应用与工厂 AGV 作业机器人、智能立体仓库、送餐及快递等服务机器人、自动驾驶、机械手智能控制等新兴智能机器人领域。
+
+
 
 
 # 3. Basic Concepts
@@ -723,6 +764,7 @@ ros rmw API: https://docs.ros.org/en/jazzy/p/rmw/
 
 ---
 - [VSCode, Docker, and ROS2](https://www.allisonthackston.com/articles/vscode-docker-ros2.html)
+- 清华大学自动化系学生科协 ROS入门: https://thuasta.org/docs/summer_training/2025/ros2
 - [古月居 图书资源](https://book.guyuehome.com/)
 - [OriginBot智能机器人开源套件](http://originbot.org/index.html)
 - [动手学ROS2](http://fishros.com/d2lros2/)
