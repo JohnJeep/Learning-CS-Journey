@@ -1,5 +1,20 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-18 10:57:04
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-03-07 15:23:57
+ * @Description: Sensor Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+- [Sensor](#sensor)
+  - [常见传感器](#常见传感器)
+- [References](#references)
+
+
 # Sensor
 
+**传感器** 是机器人系统中用于感知环境和自身状态的关键组件。它们将物理世界的信息转换为数字信号，供机器人处理和决策使用。
 
 
 ## 常见传感器
@@ -15,9 +30,6 @@
 9. IMU（惯性测量单元）
 10. 扫描器
 11. 灵巧手：指尖搭载传感器
-
-
-
 
 
 # References

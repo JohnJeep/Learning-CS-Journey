@@ -1,3 +1,22 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-03 11:00:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-03-07 15:12:01
+ * @Description: Lifecycle Node in ROS 2
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. 为什么需要 Node Lifecycle？](#1-为什么需要-node-lifecycle)
+- [2. 关键状态与转换](#2-关键状态与转换)
+- [3. 状态转换的管理](#3-状态转换的管理)
+- [4. 一个典型的生命周期场景](#4-一个典型的生命周期场景)
+- [5. 如何实现一个 Lifecycle Node？](#5-如何实现一个-lifecycle-node)
+- [6. 优势总结](#6-优势总结)
+- [7. 结论](#7-结论)
+- [8. References](#8-references)
+
+
 1. ### 核心思想：状态机
 
 ROS2 的 Node Lifecycle 将节点的生命周期建模为一个**有限状态机**。这意味着节点在任何时刻都处于一个明确定义的状态，并且只能在特定条件下从一个状态转换到另一个状态。
@@ -5,8 +24,7 @@ ROS2 的 Node Lifecycle 将节点的生命周期建模为一个**有限状态机
 好的，作为一名专业的机器人开发工程师，我很乐意为你深入解释 ROS2 的 Node Lifecycle。这是一个在 ROS2 中提升系统可靠性和健壮性的核心概念。
 
 
-
-### 2. 为什么需要 Node Lifecycle？
+### 1. 为什么需要 Node Lifecycle？
 
 想象一下在复杂的机器人系统中：
 
@@ -17,7 +35,8 @@ ROS2 的 Node Lifecycle 将节点的生命周期建模为一个**有限状态机
 
 在 ROS1 中，实现这些逻辑通常需要开发者在节点内部编写复杂的自定义代码，难以统一管理。ROS2 的 Node Lifecycle 主要用于管理复杂机器人系统中节点的「状态」，确保系统的确定性、安全性和可靠性。
 
-### 3. 关键状态与转换
+
+### 2. 关键状态与转换
 
 Lifecycle Node 的核心状态机包含以下几个主要状态：
 
@@ -39,7 +58,8 @@ Lifecycle Node 的核心状态机包含以下几个主要状态：
 
 此外，还有一些**过渡状态**，如 `Configuring`, `Activating`, `Deactivating`, `CleaningUp`, `ErrorProcessing`。这些状态表示节点正在执行从一个主要状态切换到另一个主要状态所需的操作。
 
-### 4. 状态转换的管理
+
+### 3. 状态转换的管理
 
 状态转换不是自动发生的，而是由**外部管理者**（通常是另一个节点或命令行工具）通过调用 **Lifecycle Service** 来触发的。
 
@@ -55,7 +75,8 @@ Lifecycle Node 的核心状态机包含以下几个主要状态：
 *   `cleanup`： 从 `Inactive` 切换回 `Unconfigured`（清理配置）。
 *   `shutdown` 或 `destroy`： 切换到 `Finalized`。
 
-### 5. 一个典型的生命周期场景
+
+### 4. 一个典型的生命周期场景
 
 让我们以一个**激光雷达驱动节点**为例：
 
@@ -66,7 +87,8 @@ Lifecycle Node 的核心状态机包含以下几个主要状态：
 5.  **重新激活**：问题解决后，管理器再次发送 `activate`，节点重新连接硬件并发布数据。
 6.  **关闭**：当机器人任务完成，管理器发送 `shutdown` 请求。节点安全地关闭硬件，清理所有资源，最终进入 `Finalized` 状态后退出。
 
-### 6. 如何实现一个 Lifecycle Node？
+
+### 5. 如何实现一个 Lifecycle Node？
 
 在代码中，你需要继承 `rclcpp_lifecycle::LifecycleNode` 类，并重写一系列回调函数。这些回调函数在接收到状态转换请求时被调用。
 
@@ -81,27 +103,23 @@ Lifecycle Node 的核心状态机包含以下几个主要状态：
 
 **注意**：在 `on_activate` 和 `on_deactivate` 中，你必须调用父类的方法（`LifecycleNode::on_activate()`），这是状态机正确运作所必需的。
 
-### 7. 优势总结
+### 6. 优势总结
 
 *   **系统可靠性**：确保节点在正确的配置和依赖满足后才开始工作。
 *   **可管理性**：提供了统一的方式来启动、停止、重置节点，便于系统集成和监控。
 *   **错误处理**：当节点在 `Active` 状态发生错误时，可以将其 `deactivate`，进行问题排查后重新 `activate`，而无需重启整个进程。
 *   **资源效率**：在 `Inactive` 状态下，节点不占用通信和计算资源。
 
-### 结论
+
+### 7. 结论
 
 ROS2 的 Node Lifecycle 是面向生产级机器人系统的一项重大改进。它将节点的“生命周期”从一种隐式的、由代码内部逻辑控制的行为，转变为一种显式的、可通过标准接口进行外部管理和监控的“一等公民”。虽然它增加了开发的复杂性，但对于构建长期稳定运行、易于维护和调试的复杂机器人系统来说，这是非常值得的投资。
 
 
-
-### References
+### 8. References
 
 - [offical lifecycle API](https://docs.ros.org/en/jazzy/p/lifecycle/)
 - [managed-life cycle nodes in ROS 2](https://design.ros2.org/articles/node_lifecycle.html)
 
 问题
-
 1. 节点管理问题：节点启动顺序或状态切换不稳定。
-
-
-

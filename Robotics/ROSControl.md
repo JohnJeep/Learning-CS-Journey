@@ -1,10 +1,24 @@
-## Thinking
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-01 16:46:49
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-03-07 15:25:52
+ * @Description: ROS2 Control Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+- [1. Thinking](#1-thinking)
+  - [1.1. ROS2 Control 它是什么？要解决什么问题？](#11-ros2-control-它是什么要解决什么问题)
+- [2. References](#2-references)
+
+
+## 1. Thinking
 
 避免盲目摸索，快速抓住重点，把理论应用到实际项目中。
 
 
 
-### ROS2 Control 它是什么？要解决什么问题？
+### 1.1. ROS2 Control 它是什么？要解决什么问题？
 
 想象一下，你要为一个六轴机械臂写控制程序。最直接的（也是最原始的）方式是：写一个 C++/Python 节点，在一个 `while` 循环里，通过某种库（比如 `libusb`、`socket`）直接读取电机编码器值，然后进行逆运动学计算，再通过同样的库把计算出的目标位置/力矩发送给电机。
 
@@ -41,7 +55,7 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 
 
 
-## References
+## 2. References
 
 - [ros2_control documentation - Jazzy!](https://control.ros.org/jazzy/index.html)
 - [Github ROS2 Control](https://github.com/ros-controls/ros2_control)
