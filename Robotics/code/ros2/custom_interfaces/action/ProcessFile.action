@@ -1,0 +1,10 @@
+#goal
+string file_path
+
+---
+#result
+bool success
+string message
+
+---
+# no feedback
