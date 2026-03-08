@@ -3,13 +3,14 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-02-13 14:18:56
+ * @LastEditTime: 2026-03-09 07:45:19
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 - [1. ROS2 Introduction](#1-ros2-introduction)
 - [2. Terms](#2-terms)
+- [ROS1 ROS Compare](#ros1-ros-compare)
 - [3. Basic Concepts](#3-basic-concepts)
   - [3.1. Node](#31-node)
   - [3.2. Parameter](#32-parameter)
@@ -28,7 +29,7 @@
 - [7. ROS2 Command](#7-ros2-command)
   - [7.1. run](#71-run)
   - [7.2. package](#72-package)
-- [8. ROS2  core packages](#8-ros2--core-packages)
+- [8. ROS2 packages](#8-ros2-packages)
   - [8.1. rcl](#81-rcl)
   - [8.2. rclcpp](#82-rclcpp)
     - [8.2.1. rclcpp::spin(node)](#821-rclcppspinnode)
@@ -106,7 +107,8 @@ ROS 1和 ROS 2的特性对比如下：
 | roslaunch 文件是用 XML 编写的，但功能有限                    | roslaunch 文件是用 Python 编写的，以支持更可配置和有条件的执行 |
 | 即使使用实时操作系统，也无法确定性地支持实时行为             | 支持通过 RTPREEMPT 等                                        |
 
-ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传递实时性更佳，因此 ROS2 更适合应用在工业生产环境。基于 ROS2 的以上特点，该框架被广泛应用与工厂 AGV 作业机器人、智能立体仓库、送餐及快递等服务机器人、自动驾驶、机械手智能控制等新兴智能机器人领域。
+ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传递实时性更佳，因此 ROS2 更适合应用在工业生产环境。
+基于 ROS2 的以上特点，该框架被广泛应用与工厂 AGV 作业机器人、智能立体仓库、送餐及快递等服务机器人、自动驾驶、机械手智能控制等新兴智能机器人领域。
 
 
 
@@ -115,7 +117,8 @@ ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传
 
 ## 3.1. Node
 
-节点是ROS2中的基本执行单元。每个节点通常负责一个单一的、模块化的功能。例如，一个节点可以控制激光雷达，另一个节点可以处理激光雷达的数据，第三个节点可以负责运动规划。
+节点是ROS2中的基本执行单元。每个节点通常负责一个单一的、模块化的功能。
+例如，一个节点可以控制激光雷达，另一个节点可以处理激光雷达的数据，第三个节点可以负责运动规划。
 
 
 讲清楚节点是做什么的？
@@ -518,11 +521,42 @@ ros2 pkg create --build-type ament_cmake \
                 my_licensed_pkg
 ```
 
+# 8. ROS2 packages
 
-# 8. ROS2  core packages
+在 ROS 2（Robot Operating System 2）中，“标准包”通常指由官方维护、为机器人开发提供基础功能的 **核心功能包（Core Packages）** 或 **标准接口包（Common Interfaces）**。
+
+**标准消息接口包 (Common Interfaces)**
+
+这些包定义了通用的数据结构，使不同开发者的节点能够无缝通信。
+
+- **`std_msgs`**: 提供基础数据类型，如 `String`, `Int32`, `Float64`, `Bool` 等。
+- **`geometry_msgs`**: 定义常见的几何图形消息，如点（`Point`）、向量（`Vector3`）、位姿（`Pose`）和速度指令（`Twist`）。
+- **`sensor_msgs`**: 涵盖各种传感器数据格式，如激光雷达（`LaserScan`）、图像（`Image`）、点云（`PointCloud2`）和惯性测量单元（`Imu`）。
+- **`nav_msgs`**: 用于导航的数据，如地图（`OccupancyGrid`）和路径（`Path`）。
+
+**核心系统工具包 (Core Tooling)**
+
+- **`rclcpp` / `rclpy`**: 分别为 C++ 和 Python 提供的客户端库，是编写 ROS 2 节点的标准入口。
+- **`ament_cmake` / `ament_python`**: 用于包构建和管理的标准构建系统。
+- **`launch`**: 用于启动多个节点并管理其生命周期的标准启动系统。
+- **`ros2cli`**: 提供命令行工具（如 `ros2 node`, `ros2 topic`, `ros2 pkg`）的标准包。
+
+**关键中间件与底层包**
+
+- **`rmw` (ROS Middleware)**: 定义了 ROS 2 与底层 DDS 通信的标准接口。
+- **`rcutils`**: 包含 C 语言编写的底层跨平台工具函数。
+
+**功能包的标准结构**
+
+一个标准的 ROS 2 软件包含有特定的文件布局：
+
+- **`package.xml`**: 包含包的元数据（名称、版本、作者、许可证）以及对其他包的依赖声明。
+- **`CMakeLists.txt`** (C++): C++ 包的编译规则文件。
+- **`setup.py`** (Python): Python 包的分发与安装配置文件
+
+
 
 **ROS Index**: https://index.ros.org/
-
 
 ## 8.1. rcl
 
@@ -537,14 +571,12 @@ rclcpp c++ API: https://docs.ros.org/en/jazzy/p/rclcpp/generated/index.html
 ### 8.2.1. rclcpp::spin(node)
 
 `rclcpp::spin(node)` 是ROS2节点运行的核心机制
-
 - 🎯 **作用**：保持节点活跃，处理所有异步事件
 - ⚡ **必要性**：没有它，所有回调函数都不会执行
 - 🔄 **行为**：阻塞当前线程，持续处理事件
 - 🛑 **退出**：通过信号或显式关闭来停止
 
 理解 `spin` 是编写功能完整的ROS2节点的关键！这是节点从"静态代码"变成"动态系统"的魔法所在。 ✨
-
 
 
 ### 8.2.2. internal fundamental
