@@ -10,44 +10,32 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(action_msgs REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
-
-# Generate actions
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/CountUntil.action"
-  "action/ProcessFile.action"
-)
+find_package(custom_interfaces REQUIRED)
 
 # Include generated header files
-include_directories(include ${rclcpp_INCLUDE_DIRS} ${rclcpp_action_INCLUDE_DIRS} ${action_msgs_INCLUDE_DIRS})
-# include_directories(include)
+include_directories(include)
 
 # Add executables for action server and client
 add_executable(count_until_server 
   src/count_until_server.cpp
 )
-target_include_directories(count_until_server PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
 
 ament_target_dependencies(count_until_server 
   rclcpp 
   rclcpp_action 
   action_msgs
+  custom_interfaces
 )
 
 add_executable(count_until_client 
   src/count_until_client.cpp
 )
 
-target_include_directories(count_until_client PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
-
 ament_target_dependencies(count_until_client 
   rclcpp 
   rclcpp_action 
   action_msgs
+  custom_interfaces
 )
 
 # Add executables for file processing action server and client
@@ -58,6 +46,7 @@ ament_target_dependencies(process_file_server
   rclcpp 
   rclcpp_action 
   action_msgs
+  custom_interfaces
 )
 
 add_executable(process_file_client 
@@ -67,6 +56,7 @@ ament_target_dependencies(process_file_client
   rclcpp
   rclcpp_action
   action_msgs
+  custom_interfaces
 )
 
 # Install executables
