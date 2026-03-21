@@ -1,13 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-28 21:24:43
- * @LastEditTime: 2025-11-20 11:50:20
+ * @LastEditTime: 2026-03-21 13:29:24
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
+ * @Description: enable_shared_from_this usage
 -->
 
 - [1. 什么是 enable\_shared\_from\_this?](#1-什么是-enable_shared_from_this)
-- [2. 为什么要用 enable\_shared\_from\_this？](#2-为什么要用-enable_shared_from_this)
+- [2. 为什么要用 enable\_shared\_from\_this](#2-为什么要用-enable_shared_from_this)
   - [2.1. 问题场景](#21-问题场景)
   - [2.2. 解决方案：enable\_shared\_from\_this](#22-解决方案enable_shared_from_this)
 - [3. 什么时候用？](#3-什么时候用)
@@ -26,8 +26,9 @@
 
 # 1. 什么是 enable_shared_from_this?
 
-C++11 开始时支持 `enable_shared_from_this`，它一个模板类，定义在头文件 `<memory>`，其原型为： 
+`enable_shared_from_this` 是一个模板类，从 C++11 开始支持，定义在头文件 `<memory>`。
 
+其原型为： 
 ```cpp
 template< class T > class enable_shared_from_this;
 ```
@@ -36,9 +37,12 @@ template< class T > class enable_shared_from_this;
 
 若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
 
-# 2. 为什么要用 enable_shared_from_this？
 
-用于解决一个特定的问题：**当对象需要获取指向自身的 `shared_ptr` 时，如何安全地创建而不导致重复计数或悬空指针**。
+# 2. 为什么要用 enable_shared_from_this
+
+`enable_shared_from_this` 的主要用途是：在类的内部安全地获取指向当前对象的 `shared_ptr`，避免创建多个控制块，从而防止未定义行为。
+
+
 
 ## 2.1. 问题场景
 
@@ -125,7 +129,6 @@ private:
 ```
 
 
-
 ### 3.1.2. 容器中存储自身指针
 
 ```cpp
@@ -142,7 +145,6 @@ public:
     }
 };
 ```
-
 
 
 ### 3.1.3. 链式调用
@@ -220,7 +222,7 @@ public:
 
 
 
-enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用（例如 std::weak_ptr )。 std::shared_ptr 的构造函数检测无歧义且可访问的 (C++16 起) enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的 std::shared_ptr 为内部存储的弱引用。为另一个 std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined behavior)。
+enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用 (例如 std::weak_ptr )。 std::shared_ptr 的构造函数检测无歧义且可访问的 (C++16 起) enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的 std::shared_ptr 为内部存储的弱引用。为另一个 std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined behavior)。
 
 只允许在先前已被std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++17 前)抛出 std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的 weak_this 的构造函数） (自C++17 起)。
 
@@ -341,7 +343,6 @@ int main()
     return 0;
 }  
 ```
-
 
 
 # 6. References
