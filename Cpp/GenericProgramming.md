@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-11-12 11:26:18
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:46:29
+ * @LastEditTime: 2026-03-21 13:23:42
  * @Description: 泛型编程
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -148,7 +148,8 @@ private:
 
 > 模板特化也叫模板全特化。使用时，给类模板指定具体的参数类型，这样使用类模板的方式就叫模板特化。
 
-<img src="../../GitCode/Learning-CS-Journey/Go/figure/specialization.png">
+<img src="./figures/specialization.png">
+
 
 ### 5.2. Class Partial Specialization(类模板偏特化)
 
@@ -173,12 +174,13 @@ template <typename T>
 **1. 模板个数的偏特化**
 
 > 只指定类模板中部分的参数个数
-> <img src="../../GitCode/Learning-CS-Journey/Go/figure/partial-specialization1.png">
+> <img src="./figures/partial-specialization1.png">
 
 **2. 类模板范围的偏特化**
 
 下图中类模板传入的是一种通用的 T 类型，而另外一个相同的类模板，传入的参数 是 `T*` 类型，类模板的类型从 T 缩小为 `T*` 类型，这种的方式的类模板就是类模板范围的偏特化。
-<img src="../../GitCode/Learning-CS-Journey/Go/figure/partial-specialization2.png">
+<img src="./figures/partial-specialization2.png">
+
 
 ## 6. Member Template(成员模板)
 
@@ -186,7 +188,8 @@ template <typename T>
 
 - STL 标准库中很多的构造函数都使用了，为了让模板类更加有弹性，支持更多的数据类型。
 
-  <img src="../../GitCode/Learning-CS-Journey/Go/figure/member-template.png">
+  <img src="./figures/member-template.png">
+
   <img src="./figures/member-template-instance.png">
 
 
@@ -197,9 +200,12 @@ template <typename T>
 - 模板参数列表里面可以存在模板，称之为模板参数模板。
 
 <img src="./figures/template-template-template1.png">
-<img src="../../GitCode/Learning-CS-Journey/Go/figure/template-template-template2.png">
+
+<img src="./figures/template-template-template2.png">
+
 <img src="./figures/template-template-template3.png">
 
 
 ## 8. References
+
 - [【C++】template template argument 模板参数模板](https://www.cnblogs.com/visayafan/archive/2011/11/29/2268041.html) 
