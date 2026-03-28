@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-30 23:24:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 18:02:45
+ * @LastEditTime: 2026-03-28 22:55:25
  * @Description: Linear Algebra
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -527,4 +527,5 @@ notes
 - MIT-Linear-Algebra-Notes(pdf): https://github.com/MLNLP-World/MIT-Linear-Algebra-Notes
 - MIT 18.06 线性代数笔记: https://linalg.apachecn.org/
 - cs-self-learning: https://github.com/pkuflyingpig/cs-self-learning/
-
+- The-Art-of-Linear-Algebra: https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra
+- Computational Linear Algebra for Coders: https://github.com/fastai/numerical-linear-algebra
