@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-01-31 17:45:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 17:47:34
+ * @LastEditTime: 2026-04-05 12:03:18
  * @Description: Linear Algebra Terms
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -39,6 +39,9 @@
 | specificity                      | 奇异性                |
 | spherical                        | 球面距离              |
 | nonnegative                      | 非负                  |
+
+| 英文术语                         | 中文术语              |
+| :------------------------------- | :-------------------- |
 | **Matrix Related**               | **矩阵相关**          |
 | Row                              | 行                    |
 | Column                           | 列                    |
@@ -67,7 +70,10 @@
 | power of matrix                  | 矩阵的幂              |
 | second difference matrix         | 二阶差分矩阵          |
 | tall matrix                      | 高形矩阵              |
-|                                  |                       |
+|      
+
+| 英文术语                         | 中文术语              |
+| :------------------------------- | :-------------------- |
 | **Vector Space Related**         | **向量空间相关**      |
 | Vector Space                     | 向量空间              |
 | unit vector                      | 单位向量              |
@@ -96,15 +102,16 @@
 | reverse                          | 逆序                  |
 | rotation                         | 旋转                  |
 | trajectory                       | 轨迹                  |
-|                                  |                       |
-|                                  |                       |
+
+
+| 英文术语                         | 中文术语              |
+| :------------------------------- | :-------------------- |
 | **Linear Transformation**        | **线性变换**          |
 | Linear Transformation            | 线性变换              |
 | Kernel / Null Space              | 核空间 / 零空间       |
 | Image / Column Space             | 像空间 / 列空间       |
 | Rank                             | 秩                    |
 | Nullity                          | 零化度                |
-|                                  |                       |
 |                                  |                       |
 | **Eigenvalues and Eigenvectors** | **特征值与特征向量**  |
 | Eigenvalue                       | 特征值                |
@@ -113,6 +120,10 @@
 | Diagonalization                  | 对角化                |
 | Similar Matrices                 | 相似矩阵              |
 |                                  |                       |
+
+
+| 英文术语                         | 中文术语              |
+| :------------------------------- | :-------------------- |
 | **Other Important Concepts**     | **其他重要概念**      |
 | Inner Product / Dot Product      | 内积 / 点积           |
 | Orthogonal                       | 正交                  |
@@ -154,8 +165,7 @@
 | sum of squares                   | 平方和                |
 | root mean square                 | 均方根                |
 | round-off error                  | 舍入误差              |
-|                                  |                       |
-|                                  |                       |
+|                                  |                      |
 
 
 - 线性组合(linear combination)：由向量通过加权求和得到的新向量。
