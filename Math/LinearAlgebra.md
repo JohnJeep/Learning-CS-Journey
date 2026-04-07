@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-30 23:24:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-28 22:55:25
+ * @LastEditTime: 2026-04-07 21:08:53
  * @Description: Linear Algebra
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -521,9 +521,8 @@ row rank 是 行空间维度。
 - MIT 18.065: Matrix Methods In Data Analysis, Signal Processing, And Machine Learning: https://github.com/mitmath/18065
 
 ---
-notes
 
-- MIT 18.06 线性代数笔记: https://github.com/apachecn/mit-18.06-linalg-notes
+notes
 - MIT-Linear-Algebra-Notes(pdf): https://github.com/MLNLP-World/MIT-Linear-Algebra-Notes
 - MIT 18.06 线性代数笔记: https://linalg.apachecn.org/
 - cs-self-learning: https://github.com/pkuflyingpig/cs-self-learning/
