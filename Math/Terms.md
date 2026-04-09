@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-01-31 17:45:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-04-05 12:03:18
+ * @LastEditTime: 2026-04-09 22:40:15
  * @Description: Linear Algebra Terms
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -10,6 +10,9 @@
 # terms
 
 以下是线性代数中常用术语的中英对照表：
+
+
+## General Terms
 
 | 英文术语                         | 中文术语              |
 | :------------------------------- | :-------------------- |
@@ -40,12 +43,14 @@
 | spherical                        | 球面距离              |
 | nonnegative                      | 非负                  |
 
+
+## Matrix Related
+
 | 英文术语                         | 中文术语              |
 | :------------------------------- | :-------------------- |
-| **Matrix Related**               | **矩阵相关**          |
 | Row                              | 行                    |
 | Column                           | 列                    |
-| Entry / Element                  | 元素                  |
+| Entry/Element                    | 元素                  |
 | gradient                         | 梯度                  |
 | Square Matrix                    | 方阵                  |
 | Identity Matrix                  | 单位矩阵              |
@@ -72,9 +77,11 @@
 | tall matrix                      | 高形矩阵              |
 |      
 
+
+## Vector Space Related
+
 | 英文术语                         | 中文术语              |
 | :------------------------------- | :-------------------- |
-| **Vector Space Related**         | **向量空间相关**      |
 | Vector Space                     | 向量空间              |
 | unit vector                      | 单位向量              |
 | column space                     | 列空间                |
@@ -104,16 +111,22 @@
 | trajectory                       | 轨迹                  |
 
 
+## Linear Transformation Related
+
 | 英文术语                         | 中文术语              |
 | :------------------------------- | :-------------------- |
-| **Linear Transformation**        | **线性变换**          |
 | Linear Transformation            | 线性变换              |
-| Kernel / Null Space              | 核空间 / 零空间       |
-| Image / Column Space             | 像空间 / 列空间       |
+| Kernel / NullSpace               | 核空间 / 零空间       |
+| Image / ColumnSpace              | 像空间 / 列空间       |
 | Rank                             | 秩                    |
 | Nullity                          | 零化度                |
 |                                  |                       |
-| **Eigenvalues and Eigenvectors** | **特征值与特征向量**  |
+
+
+## Eigenvalues and Eigenvectors
+
+| 英文术语                         | 中文术语              |
+| :------------------------------- | :-------------------- |
 | Eigenvalue                       | 特征值                |
 | Eigenvector                      | 特征向量              |
 | Characteristic Polynomial        | 特征多项式            |
@@ -122,15 +135,17 @@
 |                                  |                       |
 
 
+## Other Important Concepts
+
 | 英文术语                         | 中文术语              |
 | :------------------------------- | :-------------------- |
-| **Other Important Concepts**     | **其他重要概念**      |
 | Inner Product / Dot Product      | 内积 / 点积           |
 | Orthogonal                       | 正交                  |
 | Orthonormal                      | 标准正交              |
 | Projection                       | 投影                  |
 | Gram-Schmidt Process             | 格拉姆-施密特过程     |
 | Least Squares Solution           | 最小二乘解            |
+| Least Squares approximation      | 最小二乘近似          |
 | Least norm                       | 最小范数              |
 | QR factorization                 | QR分解                |
 | acute angle                      | 锐角                  |
@@ -139,7 +154,6 @@
 | triangle                         | 三角                  |
 | approximation                    | 近似                  |
 | backslash notation               | 反斜杠记号            |
-|                                  |                       |
 | calculus                         | 微积分                |
 | categorical feature              | 分类特征              |
 | optimal                          | 最优                  |
@@ -168,6 +182,8 @@
 |                                  |                      |
 
 
+# Terminology Explanation
+
 - 线性组合(linear combination)：由向量通过加权求和得到的新向量。
 - 线性无关(linearly independent)：一组向量中没有一个可以表示为其他向量的线性组合。
 - 线性相关(linearly dependent)：一组向量中至少有一个可以表示为其他向量的线性组合。
@@ -189,7 +205,6 @@
 - 组合(combination)：表示向量通过加权求和得到的新向量。
 - 投影(projection)：表示将一个向量映射到另一个向量上的过程。
 - 反斜杠记号(backslash notation)：用于表示线性方程组的求解方法。
-- 最小二乘解(least squares solution)：用于求解过定线性方程组的近似解。
 - 最小范数(least norm)：表示向量的最小长度或大小。
 - 锐角(acute angle)：两个向量之间的夹角小于90度。
 - 钝角(obtuse angle)：两个向量之间的夹角大于90度。
@@ -219,3 +234,4 @@
 - 过拟合(over-fit)：表示向量模型在训练数据上表现过好的现象。
 - 分层(stratified)：表示向量数据按某种标准进行分层的过程。
 - 分类特征(categorical feature)：表示向量数据中的分类变量。
+- 最小二乘解(least squares solution)：表示通过最小化向量预测误差来求解线性方程组的近似解。
