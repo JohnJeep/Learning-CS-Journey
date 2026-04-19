@@ -18,6 +18,9 @@ nav:
 
 menu:
   首页: / || fas fa-home
+  开始阅读: /start-here/ || fas fa-route
+  专栏: /columns/ || fas fa-layer-group
+  精选: /featured/ || fas fa-star
   时间轴: /archives/ || fas fa-archive
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
@@ -103,8 +106,7 @@ cover:
   # When cover is not set, the default cover is displayed
   # every article will show the default cover
   default_cover:
-    # - xxx.jpg
-    # - /img/cody-chan.jpg
+    - /img/seele.jpg
 
     
 
@@ -181,7 +183,7 @@ subtitle:
 # 5: Info displayed on the cover
 # 6: Masonry layout - Cover on top, info on the bottom
 # 7: Masonry layout - Info displayed on the cover
-index_layout: 3
+index_layout: 5
 
 # Display the article introduction on homepage
 # 1: description
@@ -296,7 +298,7 @@ aside:
       link: https://github.com/JohnJeep/Learning-CS-Journey
   card_announcement:
     enable: true
-    content: Weekly engineering notes and reproducible practice records.
+    content: <b>新读者入口</b><br><a href="/start-here/">10分钟快速了解本站</a><br><a href="/featured/">查看精选文章</a><br><a href="/atom.xml">订阅 RSS</a>
   card_recent_post:
     enable: true
     # If set 0 will show all
@@ -529,7 +531,7 @@ comments:
   # Leave it empty if you don't need comments
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
   # Format of two comments system : Disqus,Waline
-  use:
+  use: Giscus
   # Display the comment name next to the button
   text: true
   # Lazyload: The comment system will be load when comment element enters the browser's viewport.
@@ -626,12 +628,19 @@ twikoo:
 # Giscus
 # https://giscus.app/
 giscus:
-  repo:
+  repo: JohnJeep/Learning-CS-Journey
+  # Fill repo_id/category_id after enabling Discussions in GitHub and creating a category on giscus.app.
   repo_id:
   category_id:
   light_theme: light
   dark_theme: dark
   js:
+    data-mapping: pathname
+    data-strict: 0
+    data-reactions-enabled: 1
+    data-emit-metadata: 0
+    data-input-position: top
+    data-lang: zh-CN
   option:
 
 # Remark42

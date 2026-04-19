@@ -65,6 +65,18 @@ index_generator:
   per_page: 10
   order_by: -date
 
+# RSS/Atom feed for reader conversion
+feed:
+  type: atom
+  path: atom.xml
+  limit: 30
+  hub:
+  content: false
+  content_limit: 150
+  content_limit_delim: ' '
+  order_by: -date
+  icon: /img/favicon.png
+
 # Category & Tag
 default_category: uncategorized
 category_map:
