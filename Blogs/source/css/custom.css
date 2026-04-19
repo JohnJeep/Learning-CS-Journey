@@ -22,6 +22,25 @@
     --jj-text-soft: #9db2d6;
 }
 
+:root,
+[data-code-theme="light"] {
+    --jj-code-bg: #f6f8fb;
+    --jj-code-bg-strong: #eef2f8;
+    --jj-code-border: rgba(148, 163, 184, 0.32);
+    --jj-code-text: #253041;
+    --jj-code-muted: #7b8798;
+    --jj-inline-code-bg: rgba(15, 23, 42, 0.06);
+}
+
+[data-code-theme="dark"] {
+    --jj-code-bg: #1f2430;
+    --jj-code-bg-strong: #2a3140;
+    --jj-code-border: rgba(255, 255, 255, 0.08);
+    --jj-code-text: #ebf1fb;
+    --jj-code-muted: #9cacc4;
+    --jj-inline-code-bg: rgba(255, 255, 255, 0.12);
+}
+
 body {
     font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background:
@@ -140,10 +159,86 @@ body {
     font-family: "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas, monospace;
 }
 
+#article-container :not(pre) > code,
+#article-container li code,
+#article-container p code {
+    padding: 0.18rem 0.42rem;
+    border-radius: 8px;
+    background: var(--jj-inline-code-bg);
+    color: var(--jj-code-text);
+}
+
 #article-container figure.highlight,
 #article-container pre {
     border-radius: var(--jj-radius-md);
     border: 1px solid var(--jj-border);
+}
+
+#article-container figure.highlight,
+#article-container pre,
+#article-container pre code,
+#article-container .highlight table,
+#article-container .highlight .code pre,
+#article-container .highlight .gutter pre {
+    background: var(--jj-code-bg);
+    color: var(--jj-code-text);
+}
+
+#article-container figure.highlight,
+#article-container pre {
+    overflow: hidden;
+    border-color: var(--jj-code-border);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+#article-container .highlight table td {
+    border: none;
+}
+
+#article-container .highlight .gutter pre,
+#article-container .highlight .line_number,
+#article-container .highlight .gutter {
+    color: var(--jj-code-muted);
+    background: var(--jj-code-bg-strong);
+}
+
+#article-container .highlight .code pre,
+#article-container pre code {
+    color: var(--jj-code-text);
+}
+
+.jj-code-theme-toggle {
+    position: fixed;
+    right: 22px;
+    bottom: 92px;
+    z-index: 1001;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 98px;
+    padding: 10px 14px;
+    border: 1px solid rgba(122, 138, 163, 0.26);
+    border-radius: 999px;
+    background: rgba(248, 250, 255, 0.9);
+    color: #213047;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
+    backdrop-filter: blur(12px);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.jj-code-theme-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.2);
+}
+
+[data-theme="dark"] .jj-code-theme-toggle {
+    background: rgba(18, 26, 41, 0.88);
+    color: #e8eef9;
+    border-color: rgba(152, 171, 204, 0.22);
 }
 
 #aside-content .card-widget .card-content a,
@@ -192,28 +287,30 @@ body {
 #site-info .jj-hero-poetry {
     margin: 18px auto 0;
     width: min(780px, 92vw);
-    padding: 14px 16px;
-    border-radius: 14px;
-    background: rgba(8, 18, 34, 0.38);
-    border: 1px solid rgba(245, 250, 255, 0.26);
-    box-shadow: 0 14px 32px rgba(0, 11, 28, 0.22);
-    backdrop-filter: blur(6px);
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(8, 18, 34, 0.76), rgba(26, 43, 73, 0.62));
+    border: 1px solid rgba(255, 247, 230, 0.22);
+    box-shadow: 0 18px 40px rgba(0, 11, 28, 0.34);
+    backdrop-filter: blur(14px);
 }
 
 #site-info .jj-hero-poetry-line {
     font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
-    color: #f7fbff;
+    color: #fff7e6;
     font-size: clamp(17px, 2vw, 24px);
     letter-spacing: 1px;
     line-height: 1.55;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.3);
 }
 
 #site-info .jj-hero-poetry-source {
     margin-top: 8px;
     text-align: right;
-    color: rgba(235, 244, 255, 0.9);
+    color: rgba(255, 244, 222, 0.9);
     font-size: 13px;
     letter-spacing: 0.3px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
 }
 
 #site-info .jj-hero-poetry-btn {
@@ -223,18 +320,20 @@ body {
     justify-content: center;
     padding: 7px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.42);
-    background: rgba(16, 33, 66, 0.58);
-    color: #f4f9ff;
+    border: 1px solid rgba(255, 244, 222, 0.36);
+    background: rgba(255, 248, 235, 0.14);
+    color: #fff7e6;
     font-size: 12px;
     letter-spacing: 0.8px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 #site-info .jj-hero-poetry-btn:hover {
     transform: translateY(-1px);
-    background: rgba(30, 56, 101, 0.72);
+    background: rgba(255, 248, 235, 0.22);
+    border-color: rgba(255, 244, 222, 0.56);
 }
 
 .jj-featured-list {
@@ -284,6 +383,13 @@ body {
 }
 
 @media screen and (max-width: 900px) {
+    .jj-code-theme-toggle {
+        right: 16px;
+        bottom: 84px;
+        min-width: 90px;
+        padding: 9px 12px;
+    }
+
     #site-info .jj-hero-poetry {
         margin-top: 12px;
         padding: 10px 12px;

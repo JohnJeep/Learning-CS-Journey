@@ -190,7 +190,7 @@ TCP 工作流程
 
 - TCP的首部(head)
   - TCP数据在IP数据报中的封装<p>
-    <img src="./figures/TCP数据在IP数据报中的封装.png"></p>
+    <img src="./figures/tcp-data-in-ip-datagram.png"></p>
   - TCP包的首部数据格式<p>
     <img src="./figures/tcp-header.png">
   - TCP首部中的 `6个 bit标志位`
@@ -214,7 +214,7 @@ TCP 工作流程
 #### 3.1.1.1. ESTABLISHED
 
 需要三次握手，即连接必须是一方主动打开，另一方被动打开的。<p>
-<img src="./figures/TCP三次握手.jpeg">
+<img src="./figures/tcp-three-way-handshake.jpeg">
 
 > `SYN_RECV` 状态：服务端被动打开后,接收到了客户端的SYN并且发送了ACK时的状态。再进一步接收到客户端的ACK就进入ESTABLISHED状态。
 
@@ -247,7 +247,7 @@ TCP 工作流程
 #### 3.1.1.2. CLOSE
 
 需要四次挥手。由于TCP的半关闭造成的。必须是一方主动释放，另一方被动释放。<p>
-![alt text](./figures/TCP四次挥手.jpeg)
+![alt text](./figures/tcp-four-way-wavehand.jpeg)
 
 四次握手的简单过程描述：假设客户端准备中断连接，首先向服务器端发送一个FIN的请求关闭包(FIN=final)，然后由established状态过渡到FIN-WAIT1状态。服务器收到FIN包以后会发送一个ACK，然后自己由established状态进入CLOSE-WAIT状态。此时通信进入半双工状态，即留给服务器一个机会将剩余数据传递给客户端，传递完后服务器发送一个FIN+ACK的包，表示我已经发送完数据可以断开连接了，就这便进入LAST_ACK阶段。客户端收到以后，发送一个ACK表示收到并同意请求，接着由FIN-WAIT2进入TIME-WAIT阶段。服务器收到ACK，结束连接。客户端发送完ACK包之后，客户端还要等待2MSL(MSL=maxinum segment lifetime最长报文生存时间，2MSL就是两倍的MSL)才能真正的关闭连接。
 
@@ -327,7 +327,7 @@ TCP状态变迁<p>
 半打开(half-open)：一端正常关闭或异常终止连接而另一方却还不知道。
 
 同时打开：两个应用程序同时执行主动打开，每一方必须发送 `SYN`，这些 `SYN` 必须发送给对方。<>
-<img src="./figures/同时打开变迁状态图.png">
+<img src="./figures/simultaneous-open-state-diagram.png">
 
 
 TCP选项<p>
@@ -350,7 +350,7 @@ TCP选项<p>
 滑动窗口机制
 
 TCP滑动窗口的可视化表示<p>
-<img src="./figures/TCP滑动窗口的可视化表示.png"></p>
+<img src="./figures/tcp-sliding-window-visualization.png"></p>
 
 
 PUSH标志
@@ -786,13 +786,13 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - `TTL` 字段的目的是防止数据报在选路时无休止地在网络中流动。每次经过一个路由器，其值减一。
 - IP提供不可靠、无连接的数据报传送服务。
 - IP首部为 `20个字节`，若有选项字节，其最大不超过 `40字节` <p>
-<img src="./figures/IP数据报格式及首部中的各字段.png">
+<img src="./figures/ip-datagram-format-and-header-fields.png">
 
 五类通用的互联网地址<p>
 <img src="./figures/ip-adderss-class.png">
 
 各类IP地址的范围<p>
-<img src="./figures/各类IP地址的范围.png">
+<img src="./figures/ip-address-ranges.png">
 
 - 特殊的IP地址
   - 主机号和网络号全为 0，为 `DHCP`
@@ -837,7 +837,7 @@ IP地址=网络地址+主机地址，(又称：主机号和网络号组成)。ip
 - IP首部源站路由选项的通用格式
   
 
-<img src="./figures/IP首部源站路由选项的通用格式.png">
+<img src="./figures/ip-source-route-option-format.png">
 
 - 严格源站：路由的每一跳之间必须是直连。
 - 宽松源站
@@ -915,7 +915,7 @@ ARP的 packet 格式<p>
 作用：测试网络，反映网络中包出现的错误信息。
 
 ICMP封装在IP数据报内部的结构<p>
-<img src="./figures/ICMP封装在IP数据报内部.png">
+<img src="./figures/icmp-inside-ip-datagram.png">
 
 ICMP报文格式
 
@@ -940,13 +940,13 @@ ICMP报文的类型<p>
 - ICMP地址掩码请求与应答
   - 数据报格式
   - ICMP地址掩码 `应答` 必须是收到请求接口的子网掩码。<p>
-  <img src="./figures/ICMP地址掩码请求和应答报文.png">
+  <img src="./figures/icmp-address-mask-request-reply.png">
 
 - ICMP时间戳请求与应答
   - 时间戳：记录穿过所有设备的时间。 
   - ICMP时间戳请求允许系统向另一个系统查询当前的时间。 
   - 时间戳请求与应答数据报格式<p>
-  <img src="./figures/ICMP时间戳请求和应答报文.png">
+  <img src="./figures/icmp-timestamp-request-reply.png">
 
 
 ## 4.12. ping
@@ -956,7 +956,7 @@ ICMP报文的类型<p>
 - ping程序中ICMP请求和响应的数据报格式
   - unix中标识符为进程的ID。TTL计算方法：记下发送包当前的时间，将这个时间直接拷贝到 `选项数据`中，响应数据包时记下响应时间，用响应时间减去开始时间，即为TTL时间。
   - Windows下不管开多少个窗口，ping的标识符都是 `相同的`，每增加一个ping，包的序列号增加 `1`。发包时间和回显时间是在windows操作系统内部计算的，不是他通过ping直接计算。<P>
-  <img src="./figures/ICMP回显请求和回显应答报文格式.png">
+  <img src="./figures/icmp-echo-request-reply-format.png">
 
 
 ## 4.13. Traceroute
@@ -992,7 +992,7 @@ ICMP报文的类型<p>
 ## 5.1. 以太网帧格式
 
 以太网和IEEE 802封装格式<p>
-<img src="./figures/数据帧封装格式.png">
+<img src="./figures/data-frame-encapsulation-format.png">
 
 - 帧(Frame): 通过以太网传输的比特流。
 - 长度必须在 46～1500字节之间。 
@@ -1002,7 +1002,7 @@ ICMP报文的类型<p>
 <img src="./figures/net-packet.png">
 
 数据进入协议栈时的封装过程<P>
-<img src="./figures/数据进入协议栈时的封装过程.png">
+<img src="./figures/data-encapsulation-into-protocol-stack.png">
 
 
 ## 5.2. PPP(点对点协议)
@@ -1038,7 +1038,7 @@ ICMP报文的类型<p>
 让一个网络上的所以系统都知道当前主机所在的多播组。
 
 IGMP报文封装在IP数据报中<p>
-<img src="./figures/IGMP报文封装在IP数据报中.png">
+<img src="./figures/igmp-inside-ip-datagram.png">
 
 多播路由器使用 `IGMP报文` 来记录与该路由器相连网络中组成员的变化情况。
 

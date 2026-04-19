@@ -115,7 +115,7 @@
       return;
     }
 
-    header.style.backgroundImage = 'linear-gradient(120deg, rgba(3, 17, 36, 0.52), rgba(5, 24, 52, 0.36)), url(' + url + ')';
+    header.style.backgroundImage = 'linear-gradient(120deg, rgba(4, 13, 28, 0.72), rgba(10, 27, 54, 0.58)), url(' + url + ')';
     header.style.backgroundSize = 'cover';
     header.style.backgroundPosition = 'center center';
     header.style.backgroundRepeat = 'no-repeat';

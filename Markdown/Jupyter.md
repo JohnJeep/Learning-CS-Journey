@@ -79,7 +79,7 @@
 
 
 ## 2.5. 图片的引用
-插入图片不需要其他按钮，你只需要使用 ![](图片链接地址) 这样的语法即可
+插入图片不需要其他按钮，你只需要使用 ![](tu-pian-lian-jie-di-zhi) 这样的语法即可
 
 ![](http://upload-images.jianshu.io/upload_images/259-0ad0d0bfc1c608b6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

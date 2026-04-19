@@ -62,11 +62,11 @@ Linux 内核学习分为几个阶段
 - gcc 内建了一条用于优化的的指令：`likely()和 unlikely()`。编译器会根据这条指令对条件分支进行优化：判断该条件是经常出现还是很少出现。
 - 内核中的内存都不分页，若你每用掉一个byte时，物理内存就会减少一个byte。
 - 若果一个用户程序试图进行一次非法的内存访问，内核就会出现 `SIGSEGV` 信号，并结束整个进程。若内核自己非法访问了内存，则内核中会发生内存错误，导致oops。因此，在内核中，不应该去做访问非法的内存地址，引用空指针等，否则可能会死掉。   
-<img src="./figures/内核源码结构.png">
+<img src="./figures/kernel-source-layout.png">
 
 
 Linux 内核架构  
-<img src="./figures/linux内核架构.png">
+<img src="./figures/linux-kernel-architecture.png">
 
 **Linux Architecture and features**  
 <img src="./figures/Linux_kernel_map.svg">

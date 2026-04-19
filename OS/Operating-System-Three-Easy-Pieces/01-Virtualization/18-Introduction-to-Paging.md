@@ -36,7 +36,7 @@
     - 存在位(present bit)：表明该页是在物理存储器上还是在磁盘上。
     - 脏位(dirty bit)：表明page被带进内存后是否被修改。
     - 参考位(reference bit)也被称为访问位(accessed bit):有时用于追踪页是否被访问，也用于确定哪些页应该保存子在内存中。
-    <p align="center"><img src="../figures/18-x86页表项.png" /> </p>
+    <p align="center"><img src="../figures/18-x86-page-table-entry.png" /> </p>
   
   
 - 分页很慢(Paging: Also Too Slow)
@@ -50,10 +50,10 @@ mov <virtual address>, %eax
 ```
 
 - 需要将虚拟地址划分为两个部分：VPN和页内偏移量(offset)
-<p align="center"><img src="../figures/18-虚拟地址划分.png"/></p>
+<p align="center"><img src="../figures/18-virtual-address-layout.png"/></p>
 
 - 通过PFN替换VPN来转换虚拟地址，然后将载入发给物理内存。注意：偏移量保持不变，它只是告诉我们页面中的那个字节使我们想要的。
-<p align="center"><img src="../figures/18-地址转换过程.png"/></p>
+<p align="center"><img src="../figures/18-address-translation-process.png"/></p>
 
 
 - 分页的优缺点

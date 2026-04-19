@@ -4,7 +4,7 @@
 
 客户端与服务端实现流程图
 
-![](./figures/tcp实现流程.png)
+![](./figures/tcp-implementation-flow.png)
 
 
 

@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2022-04-09 10:35:45
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:29:27
+ * @LastEditTime: 2026-04-19 20:56:20
  * @Description: document convention
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -29,7 +29,6 @@
 
 ## 博客自动同步约定
 
-- 内容源仓库为当前工程，发布仓库为 `JohnJeep/JohnJeep.github.io`。
 - 同步范围由 `.blog-sync.json` 白名单控制，仅同步指定目录中的 `.md` 文件。
 - 同步脚本为 `add_frontmatter.py`，产物目录为 `Blogs/source/_posts/synced`。
 - 文章时间规则：
@@ -38,5 +37,5 @@
 	- 当文件无 Git 历史时，回退到文件修改时间。
 - 分类规则：按源文件目录层级自动生成 `categories`。
 - 标签规则：按路径和文件名自动生成 `tags`。
-- 每次提交后由 GitHub Actions 自动构建并发布到 `JohnJeep.github.io`。
+- 每次提交后由 GitHub Actions 自动构建并发布。
 - 需要在当前仓库配置 `PAGES_REPO_TOKEN`（具备目标仓库写权限）以支持跨仓库发布。

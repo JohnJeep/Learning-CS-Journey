@@ -6,11 +6,13 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
+from urllib.parse import quote, unquote
 
 
 DEFAULT_CONFIG = {
@@ -30,6 +32,9 @@ DEFAULT_CONFIG = {
 
 HEADING_RE = re.compile(r"^#{1,6}\s+(.+?)\s*$")
 TOKEN_RE = re.compile(r"[^a-zA-Z0-9]+")
+MARKDOWN_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+HTML_IMAGE_RE = re.compile(r"(<img\b[^>]*?\bsrc=)([\"'])(.+?)(\2)", re.IGNORECASE)
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
 
 
 @dataclass(frozen=True)
@@ -190,6 +195,109 @@ def yaml_quote(value: str) -> str:
     return f'"{escaped}"'
 
 
+def is_external_reference(value: str) -> bool:
+    lowered = value.lower()
+    return lowered.startswith(("http://", "https://", "//", "data:", "mailto:", "#", "/"))
+
+
+def split_markdown_target(target: str) -> tuple[str, str, bool]:
+    target = target.strip()
+    if target.startswith("<") and ">" in target:
+        close_index = target.find(">")
+        return target[1:close_index], target[close_index + 1 :], True
+
+    parts = target.split(maxsplit=1)
+    if len(parts) == 1:
+        return parts[0], "", False
+    return parts[0], f" {parts[1]}", False
+
+
+def build_markdown_target(path: str, suffix: str, wrapped: bool) -> str:
+    return f"<{path}>{suffix}" if wrapped else f"{path}{suffix}"
+
+
+def to_site_asset_url(asset_path: Path, site_source_root: Path) -> str:
+    rel_parts = asset_path.relative_to(site_source_root).parts
+    encoded = "/".join(quote(part) for part in rel_parts)
+    return f"/{encoded}"
+
+
+def sync_local_image_reference(
+    raw_ref: str,
+    source_file: Path,
+    repo_root: Path,
+    asset_root: Path,
+    dry_run: bool,
+    expected_assets: set[Path],
+    stats: dict[str, int],
+) -> str | None:
+    ref = raw_ref.strip()
+    if not ref or is_external_reference(ref):
+        return None
+
+    stripped = ref.split("?", 1)[0].split("#", 1)[0]
+    resolved = (source_file.parent / unquote(stripped)).resolve()
+    if not resolved.exists() or not resolved.is_file() or resolved.suffix.lower() not in IMAGE_EXTENSIONS:
+        return None
+
+    try:
+        rel_asset_path = resolved.relative_to(repo_root)
+    except ValueError:
+        return None
+
+    target_asset = asset_root / rel_asset_path
+    expected_assets.add(target_asset)
+    if not dry_run:
+        target_asset.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(resolved, target_asset)
+    stats["assets_written"] += 1
+    return to_site_asset_url(target_asset, repo_root / "Blogs/source")
+
+
+def rewrite_body_image_paths(
+    body: str,
+    source_file: Path,
+    repo_root: Path,
+    asset_root: Path,
+    dry_run: bool,
+    expected_assets: set[Path],
+    stats: dict[str, int],
+) -> str:
+    def replace_markdown(match: re.Match[str]) -> str:
+        alt_text = match.group(1)
+        target = match.group(2)
+        image_ref, suffix, wrapped = split_markdown_target(target)
+        synced_ref = sync_local_image_reference(
+            image_ref,
+            source_file,
+            repo_root,
+            asset_root,
+            dry_run,
+            expected_assets,
+            stats,
+        )
+        if not synced_ref:
+            return match.group(0)
+        return f"![{alt_text}]({build_markdown_target(synced_ref, suffix, wrapped)})"
+
+    def replace_html(match: re.Match[str]) -> str:
+        synced_ref = sync_local_image_reference(
+            match.group(3),
+            source_file,
+            repo_root,
+            asset_root,
+            dry_run,
+            expected_assets,
+            stats,
+        )
+        if not synced_ref:
+            return match.group(0)
+        return f"{match.group(1)}{match.group(2)}{synced_ref}{match.group(4)}"
+
+    body = MARKDOWN_IMAGE_RE.sub(replace_markdown, body)
+    return HTML_IMAGE_RE.sub(replace_html, body)
+
+
 def build_frontmatter(
     title: str,
     created: str,
@@ -245,10 +353,13 @@ def iter_markdown_files(repo_root: Path, config: SyncConfig) -> list[Path]:
 def sync_markdown(repo_root: Path, config: SyncConfig, dry_run: bool, clean: bool) -> dict[str, int]:
     output_root = (repo_root / config.output_subdir).resolve()
     output_root.mkdir(parents=True, exist_ok=True)
+    asset_root = (repo_root / "Blogs/source/img/synced").resolve()
+    asset_root.mkdir(parents=True, exist_ok=True)
 
     markdown_files = iter_markdown_files(repo_root, config)
     created_map, updated_map = build_git_date_cache(repo_root)
     expected_targets: set[Path] = set()
+    expected_assets: set[Path] = set()
 
     stats = {
         "processed": 0,
@@ -256,6 +367,8 @@ def sync_markdown(repo_root: Path, config: SyncConfig, dry_run: bool, clean: boo
         "unchanged": 0,
         "deleted": 0,
         "git_fallback": 0,
+        "assets_written": 0,
+        "assets_deleted": 0,
     }
 
     for source_file in markdown_files:
@@ -268,6 +381,15 @@ def sync_markdown(repo_root: Path, config: SyncConfig, dry_run: bool, clean: boo
 
         raw = source_file.read_text(encoding="utf-8")
         body = strip_frontmatter(raw)
+        body = rewrite_body_image_paths(
+            body,
+            source_file,
+            repo_root,
+            asset_root,
+            dry_run,
+            expected_assets,
+            stats,
+        )
         title = infer_title(source_file, body)
 
         created_iso = created_map.get(rel_posix)
@@ -307,6 +429,16 @@ def sync_markdown(repo_root: Path, config: SyncConfig, dry_run: bool, clean: boo
                 if not dry_run:
                     stale_file.unlink()
 
+        for stale_asset in asset_root.rglob("*"):
+            if stale_asset.is_file() and stale_asset not in expected_assets:
+                stats["assets_deleted"] += 1
+                if not dry_run:
+                    stale_asset.unlink()
+
+        for maybe_empty_dir in sorted(asset_root.rglob("*"), reverse=True):
+            if maybe_empty_dir.is_dir() and not any(maybe_empty_dir.iterdir()):
+                maybe_empty_dir.rmdir()
+
     return stats
 
 
@@ -342,6 +474,8 @@ def main() -> int:
     print(f"  unchanged: {stats['unchanged']}")
     print(f"  deleted: {stats['deleted']}")
     print(f"  git_fallback: {stats['git_fallback']}")
+    print(f"  assets_written: {stats['assets_written']}")
+    print(f"  assets_deleted: {stats['assets_deleted']}")
     print(f"  output_dir: {config.output_subdir}")
     return 0
 

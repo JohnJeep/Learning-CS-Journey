@@ -30,7 +30,7 @@
 - USB:Universal Serial Bus
 - DRAM: dynamic random access memory
 - register file： a small storage device that consists of a collection of word-size registers, each with its own unique name. 
-<p><img src="./figures/计算机系统硬件架构.png"> </p>
+<p><img src="./figures/computer-system-hardware-architecture.png"> </p>
 
 1. buses(总线)
    - 总线是贯穿整个系统的一组电子导管，携带字节信息并负责在各个部件间传递。 
@@ -58,20 +58,20 @@
 
 1. 初始时，shell程序执行它的指令，等待我们输人一个命令。在键盘上输人字符串 `./hello` 后，shell程序将字符逐一读入register，再把它存放到memory中。
 
-   <img src="./figures/hello可执行读取.png">
+   <img src="./figures/hello-executable-read.png">
    
 2. 当在键盘上敲 `enter` 键时，shell程序就知道我们已经结束了命令的输人。然后shell执行一系列指令来加载可执行的 `hello` 文件，这些指令将 `hello` 目标文件中的代码和数据从磁盘(disk)复制到主存(main memory)。数据包括最终会被输出的 `hello,world \n` 字符串。利用直接存储器存取(direct memory access : DMA)技术，数据可以不通过处理器(processor)而直接从磁盘(disk)到达主存(main memory)。
    
-   <img src="./figures/hello可执行加载.png">
+   <img src="./figures/hello-executable-loading.png">
    
 1. 一旦目标文件hello中的代码和数据被加载到主存(main memory)，处理器就开始执行hello程序的main程序中的机器语言指令。这些指令将 `hello,world \n` 字符串中的 `bytes` 从主存复制到寄存器文件(register file)，再从寄存器文件中复制到显示设备，最终显示在屏幕上。
    
-   <img src="./figures/hello可执行显示.png">
+   <img src="./figures/hello-executable-display.png">
 
 
 ## 2.3. cache(缓存)
 
-<img src="./figures/内存分层结构.png">
+<img src="./figures/memory-hierarchy.png">
 
 <img src="./figures/cache-memories.png">
 

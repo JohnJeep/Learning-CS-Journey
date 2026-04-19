@@ -55,10 +55,10 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
   <img width="80%" height="80%" src="../figures/makefile_three_elements.png" />
 </div>
 <div align="center">
-  <img width="80%" height="80%" src="../figures/makefile工作原理-1.png" />
+  <img width="80%" height="80%" src="../figures/makefile-working-principle-1.png" />
 </div>
 <div align="center"> 
-  <img width="80%" height="80%" src="../figures/makefile工作原理-2.png" />
+  <img width="80%" height="80%" src="../figures/makefile-working-principle-2.png" />
 </div>
 
 

@@ -76,7 +76,7 @@
 3 文件指针
 ```
 
-<img src="../figures/库函数与系统函数的关系_3.png">
+<img src="../figures/relationship-between-library-and-system-functions-3.png">
 
 **error**
 
@@ -133,9 +133,9 @@ UNIX 系统正是 C 语言写出来的，系统底层就使用 `LF` 作换行符
 
 库函数与系统函数的关系
 
-<img src="../figures/库函数与系统函数的关系_1.png">
+<img src="../figures/relationship-between-library-and-system-functions-1.png">
 
-<img src="../figures/库函数与系统函数的关系_2.png">
+<img src="../figures/relationship-between-library-and-system-functions-2.png">
 
 ### 1.3.1. open
 
@@ -657,7 +657,7 @@ mmap(shared memory map) 叫共享内存映射。
   - 继续（continue）
 - 忽略 (丢弃) ，并不是不处理信号，而是将信号处理后再进行忽略或丢弃。
 - 捕捉 (调用户处理函数)<p>
-<img src="../figures/信号处理过程.png">
+<img src="../figures/signal-handling-process.png">
 
 
 - 阻塞信号集 (信号屏蔽字)：
@@ -665,7 +665,7 @@ mmap(shared memory map) 叫共享内存映射。
 - 未决信号集
   - 信号产生，未决信号集中描述该信号的位立刻翻转为 1，表信号处于未决状态。当信号被处理对应位翻转回为 0。这一时刻往往非常短暂。
   - 信号产生后由于某些原因 (主要是阻塞) 不能抵达。这类信号的集合称之为未决信号集。在屏蔽解除前，信号一直处于未决状态。
-  <img src="../figures/未决信号集与阻塞信号集.png">
+  <img src="../figures/pending-and-blocked-signals.png">
 
 信号的四要素
 1. 信号的名字

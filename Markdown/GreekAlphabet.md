@@ -107,7 +107,7 @@ $\Psi$  \Psi
 
 $\Omega$  \Omega
 
-![希腊字母](./figures/希腊字母表.png)
+![希腊字母](./figures/greek-alphabet-table.png)
 
 # References
 - [维基百科希腊字母表](https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D)
