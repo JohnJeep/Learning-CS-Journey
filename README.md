@@ -2,378 +2,469 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-02-24 23:40:14
+ * @LastEditTime: 2026-04-19 16:49:45
  * @Description: Project description
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. Learning Computer Science Journey
 
-本项目是记录本人学习计算机科学这类学科知识点的历程，从计算机底层硬件到应用层软件等知识点。
+<div align="center">
 
-1. 芯片：x86、ARM、NVIDIA
-2. 人工智能 AIGC
-3. 自动驾驶
-4. 最底层的汇编语言：Assemble
-5. 高级语言：C、C++、Golang、Python、node.js、JavaScript、TypeScript
-6. 计算机网络基础：Network
-7. 数据结构与算法：DataStructure
-8. 设计模式：DesignPattern
-9. 操作系统：Operating System
-10. Linux 基础、Linux 环境编程
-11. GNU
-12. 数据库：MySQL、Redis
-13. 分布式
-14. 云原生
-    - docker
-    - k8s
-    - Zookeeper
-    - Protobuf
-    - gRPC
-    - Kafka
-15. 脚本语言：Shell
-16. 界面编程：Qt
-17. 轻量级的 Web 服务器：Nginx
-18. 代码版本管理工具：GitHub、Git、SVN、Git-SVN
-19. 常用开源协议：Modbus、Omron、Siemens、WebRTC
-20. 嵌入式编程：STM32 系列
-21. 机器人
-    - ROS2
-    - SLAM
-    - 激光雷达
-    - 机械臂
-22. 常用学习工具：StudyTool
-23. Markdown
-24. Jupyter Notebook
-25. 哲学思想
+# Learning Computer Science Journey
+
+🌱 **持续成长的计算机科学知识库**
+
+*记录从硬件底层到应用层的学习与思考，内容持续更新，欢迎交流与建议！*
+
+[快速导航](#-知识图谱)<br>
+[开始阅读](#-编程语言)<br>
+[参与交流](#-交流反馈)<br>
+[成长足迹](STARCHARTS.md)<br>
+[English README](README.en.md)
+
+</div>
+
+---
+
+## 📖 项目简介
 
 
-# 2. C 语言
+本项目是一份**系统化的计算机科学成长型知识库**，自 2020 年起持续维护，内容涵盖从底层硬件到上层应用的完整学习路径。所有内容均为个人学习、工作与思考的积累，强调“知其然，更知其所以然”。
 
-C 语言是自己接触的第一门语言，基本的语法在大学时就已经学过，这里不再讲基础的语法，仅仅只是记录自己在工作中对 C 语言知识点的补充，常用常更新。包括底层的一些知识点，字符编码、指针、函数指针、结构体、内存分配等常见的点。
+### 特色亮点
 
-1. [字符编码](C/2_character_encoding.md)
-2. [内存存放顺序](C/3_byte_order.md)
-3. [断点调试](C/4_debug.md)
-4. [变量与数据类型](C/5-变量与数据类型.md)
-5. [Volatile 关键字用法解释](C/6_volatile.md)
-6. [为什么会出现段错误](C/7_segment_fault.md)
-7. [C 语言中常见的基础语法的补充](C/8-c_basic_knowledge.md)
-8. [C 语言中精髓之一：指针函数和函数指针](C/9_pointer_function_function_pointer.md)
-9. [Const 关键字](C/10_const.md)
-10. [restrict 关键字](C/11_restrict.md)
-11. [exteren 关键字](C/12_extern.md)
-12. [最常见得 void 含义和用法](C/13_void.md)
-13. [内存初始化函数 memset](C/14-memset.md)
-14. [memcpy 与 strcpy 函数的区别及用法](C/15_strncpy_memcpy.md)
-15. [memcmp 与 strcmp 函数的区别及用法](C/16_memcmp_strcmp.md)
-16. [typedef 用法剖析](C/17_typedef.md)
-17. [C 语言中精髓之一：结构体和字节对齐](C/18_struct_bytealigned.md)
-18. [word, half word, double word 用法及区别](C/20_byte_halfword_word.md)
-19. [C 语言中精髓之一：指针](C/21_pointer.md)
-20. [枚举类型](C/22_enumerations.md)
-21. [C 语言中的状态机](C/23_state_machine.md)
-22. [C 语言中精髓之一：数组与指针的结合](C/24-数组与指针组合.md)
-23. 功能函数
-    - [atoi()](C/25_atoi.md)
-    - [fprintf()](C/26_fprintf.md)
-    - [snprintf()](C/35_snprintf.md)
-24. [常见的转义字符和 ASCII 码](C/29-escape_string_ASCII.md)
-25. [C 语言中最重要的部分：内存分布](C/30_memory.md)
-26. [sizeof() 与 strlen() 的区别](C/31_sizeof_strlen.md)
-27. [程序入口函数 main() 分析](C/32_main.md)
-28. [提高效率之一的 do{...}(false) 用法](C/34_do_while(false).md)
-29. [容易的混淆的 * 和 ++ 的优先级使用](C/36_operate.md)
-30. [C 语言中精髓之一：回调函数](C/37_callback_function.md)
-31. [static 关键字](C/38_static.md)
-32. [细谈 C 语言中的字符串](C/39_static.md)
-33. [编写 C 程序时需遵循的编码规范](C/0_code_of_conduct.md)
+- 🏗️ **体系完整** — 芯片、汇编、C/C++、Go、操作系统、网络、数据库、云原生、机器人等多领域覆盖
+- 📝 **持续更新** — 内容不断扩展，注重原理剖析与实践总结，非简单搬运
+- 🎓 **课程融合** — 融合 MIT、Stanford、清华等名校课程精华
+- 🔧 **实用导向** — 包含代码示例、配置、调试技巧，注重实战
+- 📊 **图文并茂** — 丰富的架构图、思维导图辅助理解
 
+---
 
-# 3. C++
+## 🗺️ 知识图谱
 
-C++ 语言是一门非常复杂的语言，虽然是 C+ 语言是对 C 语言的的强化，但是现代的 C++ 已经与 C 相差很大了，几乎是另一种语言。学习 C++ 需要花费的很长时间，它的知识点不仅广泛还很细粒、灵活性很高。自己在学习时，学习知识点时，学习的快，忘记的也快，因此，自己就把学习过程中的一些理解、笔记和体会记录下来。
+```
+                        ┌──────────────────────┐
+                        │   Learning CS Journey │
+                        └──────────┬───────────┘
+           ┌───────────────┬───────┴───────┬───────────────┐
+           ▼               ▼               ▼               ▼
+    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+    │  硬件 & 底层  │ │  编程语言     │ │  系统 & 网络  │ │  应用 & 前沿  │
+    └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+           │               │               │               │
+    Architecture     C / C++          OS (MIT/THU)   Cloud Native
+    Assembly         Go               Linux           Distributed
+    Embedded         Python           Network(CS144)  AI / AIGC
+    GNU              Shell/JS/TS      MySQL / Redis   Robotics (ROS2)
+                                      Nginx           AutoDrive
+```
 
-## 3.1. [C++ 基础](Cpp/Novice.md)
+---
 
-这部分主要是 C++ 的基础知识点，常用的语法，该板块涉及的内容比较多。
+## 📚 目录
 
-<img src="./Cpp/figures/toc-1.png">
+- [硬件与底层](#-硬件与底层)
+- [编程语言](#-编程语言)
+- [操作系统](#-操作系统)
+- [计算机网络](#-计算机网络)
+- [数据结构与算法](#-数据结构与算法)
+- [设计模式](#-设计模式)
+- [数据库](#-数据库)
+- [云原生与分布式](#-云原生与分布式)
+- [AI 与前沿技术](#-ai-与前沿技术)
+- [开发工具与效率](#-开发工具与效率)
+- [推荐资源](#-推荐资源)
+- [贡献指南](#-贡献指南)
 
-<img src="./Cpp/figures/toc-2.png">
+---
 
-## 3.2. [C++ 高级](Cpp/Advance.md)
+## 🔩 硬件与底层
 
-C++ 的核心思想是面向对象，这个板块包含了 C++ 面向对象的内容：封装、继承、多态；泛型编程、输入输出流、元编程等。
+### 芯片与 CPU 架构
 
-<img src="./Cpp/figures/toc-3.png">
+> 目录: `Architecture/`
 
-## 3.3. C++ 新特性
+涵盖 **x86、ARM、NVIDIA** 三大主流架构的学习笔记，理解计算机最底层的运行原理。
 
-主要介绍 [C++11](Cpp/C++11.md)、[C++14](Cpp/C++14.md)、[C++17](Cpp/C++17.md)、[C++20](Cpp/C++20.md) 的新特性
+### 汇编语言
 
-<img src="./Cpp/figures/toc-c11.png">
+> 目录: `Assembly/`
 
-## 3.4. [C++ STL](Cpp/STL.md)
+- [基础汇编指令解释](Assembly/assembly.md) — 寄存器、寻址模式、常用指令集
 
-标准库是非常重要的，熟练地使用并知道其内部的原理对自己的编码是非常有帮助的。
+### 嵌入式开发
 
-STL 是编写 C++ 的大牛们创造的一个非常优秀的作品，里面有很多的东西值得学习和探讨。
+> 目录: `Embedded/`
 
-<img src="./Cpp/figures/toc-stl-1.png">
-<img src="./Cpp/figures/toc-stl-2.png">
-<img src="./Cpp/figures/toc-stl-3.png">
+STM32 系列 (F103 / F207 / F407) 嵌入式开发，包括驱动编写、外设配置、RTOS 等。
 
-## 3.5. [C++ 内存管理](Cpp/MemoryManagement.md)
+### GNU 工具链
 
-C++ 不同 Java、Python、GO 等，C++ 没有垃圾回收机制，内存的分配和释放都需自己手动管理，因此真真理解 C++ 编译器中的内存管理机制是非常重要的。这部分的内容，目前只写了部分，后面的内容，以后在完善。
+> 目录: `GNU/`
 
-1. [C++ 中 enable_shared_from_this 用法](CPP/enable_shared_from_this.md)
-2. [Core dump 调试用法](Linux/coredump.md)
-3. [Valgrind 内存泄漏检查的利器](Linux/valgrind.md)
-4. [C++ 编程规范](Cpp/C++StyleGuide.md)
-5. [C++ 中的并发处理](Cpp/concurrency.md)
-6. [多线程时线程池的使用](Cpp/ThreadPool.md)
-7. [非常值得学习的 C/C++ 服务端开源库](OpenSource/OpenSourceProject.md)
+GCC 编译器、glibc 标准库、ABI 规范等 GNU 生态核心工具。
 
-# 4. 内功修炼
+---
 
-[计算机底层知识的加深理解](OS/ComputerSystemAProgramm'sPerspective.md)
-
-书籍
-- 《程序员的自我修养—链接、装载与库》
-- 《深入理解计算机系统 第 3 版》，对应的英文版:《Computer Systems. A Programmer’s Perspective [3rd ed]》
-- 《老码识途 从机器码到框架的系统观逆向修炼之路》
-
-视频
-- [B 站：卡内基 · 梅隆大学 - CSAPP](https://www.bilibili.com/video/BV1iW411d7hd)
+## 💻 编程语言
 
 
-# 5. 操作系统
+### C 语言
 
-操作系统是一门与底层硬件结合比较紧密的课程，掌握好操作系统，对自己的软件体系有很好的帮助。一般我是通过看视频和看书来增强这方便的知识。
+> 目录: `C/`
 
-##  5.1. [MIT-CS6.828](OS/MIT-CS6.828/CS6.828.md)
+C 语言是接触的第一门语言，这里重点记录工作中对 C 语言知识的深入补充——底层内存、指针、结构体、回调函数等核心主题。
 
-## 5.2. Operating Systems: Three Easy Pieces
+<details>
+<summary>展开查看完整目录</summary>
 
-[操作系统导论 (Operating Systems: Three Easy Pieces)](http://pages.cs.wisc.edu/~remzi/OSTEP/) 一本非常好的书籍，并且电子版本是免费的。这是自己操作系统的启蒙之书，通过阅读这本书，自己加深了对操作系统的认识和理解，以下是自己在学习过程中整理出来的一些笔记。
+**关键字与修饰符**
+- [volatile](C/6_volatile.md)
+- [const](C/10_const.md)
+- [restrict](C/11_restrict.md)
+- [extern](C/12_extern.md)
+- [static](C/38_static.md)
+- [typedef](C/17_typedef.md)
+- [register & auto](C/33_register_auto.md)
 
---------------------------------------
-Virtualization(虚拟化)
-- [CPU 的虚拟化](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/01-12-CPU-Virtualization.md)
-- [抽象的地址空间](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/13-Abstraction-Address-Space.md)
-- [对内存操作的 API 接口调用分析](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/14-Interlude-Memory-API.md)
-- [地址转换](os/Operating-System-Three-Easy-Pieces/01-Virtualization/15-Address-Translation.md)
-- [分段](os/Operating-System-Three-Easy-Pieces/01-Virtualization/16-Segmentation.md)
-- [操作系统对空闲空间的管理](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/17-Free-Space-Management.md)
-- [分页机制](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/18-Introduction-to-Paging.md)
-- [快速地址转换](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/19-Translation-Lookaside-Buffers.md)
-- [页表机制](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/20-Advanced-Page-Tables.md)
+**指针与内存（精髓）**
+- [指针](C/21_pointer.md)
+- [指针函数与函数指针](C/9_pointer_function_function_pointer.md)
+- [数组与指针](C/24_array_pointer.md)
+- [回调函数](C/37_callback_function.md)
+- [内存分布](C/30_memory.md)
+- [memset](C/14_memset.md)
+- [memcpy vs strncpy](C/15_strncpy_memcpy.md)
+- [memcmp vs strcmp](C/16_memcmp_strcmp.md)
+- [结构体与字节对齐](C/18_struct_bytealigned.md)
+- [\_\_attribute\_\_((packed))](C/28___attribute__((packed)).md)
+- [sizeof vs strlen](C/31_sizeof_strlen.md)
+
+**基础与进阶**
+- [字符编码](C/2_character_encoding.md)
+- [字节序](C/3_byte_order.md)
+- [段错误分析](C/7_segment_fault.md)
+- [枚举类型](C/22_enumerations.md)
+- [状态机](C/23_state_machine.md)
+- [线程池](C/27_thread_pool.md)
+- [动态库](C/40_dynamic_library.md)
+- [编码规范](C/0_code_of_conduct.md)
+
+</details>
+
+
+### C++
+
+> 目录: `Cpp/`
+
+C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到内存管理，系统性地记录学习过程。
+
+- **[C++ 基础](Cpp/Novice.md)** — 基础语法与常用特性
+- **[C++ 高级](Cpp/Advance.md)** — 面向对象：封装、继承、多态；泛型编程、元编程
+- **[C++ 新特性](Cpp/C++11.md)**
+       - [C++11](Cpp/C++11.md)
+       - [C++14](Cpp/C++14.md)
+       - [C++17](Cpp/C++17.md)
+       - [C++20](Cpp/C++20.md)
+- **[STL 标准库](Cpp/STL.md)** — 容器、迭代器、算法、仿函数，附 STL 源码分析
+- **[内存管理](Cpp/MemoryManagement.md)** — 内存模型、智能指针、内存泄漏检测
+- **[并发编程](Cpp/Concurrency.md)** — 多线程、锁、条件变量、[线程池](Cpp/ThreadPool.md)
+- **[移动语义](Cpp/MoveSemantics.md)**
+- **[智能指针](Cpp/SmartPointer.md)**
+- **[编码规范](Cpp/StyleGuide.md)**
+
+
+### Go 语言
+
+> 目录: `Go/`
+
+从语言基础到运行时底层原理，全面覆盖 Go 语言知识体系。
+
+| 分类 | 内容 |
+|------|------|
+| **基础** | [Go 基础](Go/Go.md)<br>[标准库](Go/GoStandardLibrary.md)<br>[编码风格](Go/GolangCodeConduct.md)<br>[测试](Go/GoTest.md) |
+| **进阶** | [CGO](Go/CGO.md)<br>[编译器](Go/Compiler.md)<br>[性能优化](Go/Performance.md)<br>[第三方库](Go/ThirdPackages.md) |
+| **底层原理** | [Go Internals](Go/GoInternals.md)<br>[GPM 调度模型](Go/GPM.md)<br>[Map](Go/Map.md)<br>[Slice](Go/Slice.md) |
+
+### 其他语言
+
+| 语言 | 目录 | 说明 |
+|------|------|------|
+| **Python** | `Python/` | Python 基础与标准库 |
+| **JavaScript** | `JavaScript/` | JavaScript 语言特性 |
+| **TypeScript** | `TypeScript/` | TypeScript 配置与开发 |
+| **Node.js** | `node.js/` | 运行时、npm 包管理 |
+| **Shell** | `Shell/` | [Shell 脚本](Shell/shell.md)、tmux、crontab |
+| **Qt** | `Qt/` | [Qt GUI 框架](Qt/Qt.md) 常见组件与用法 |
+
+---
+
+## 🖥️ 操作系统
+
+> 目录: `OS/`
+
+操作系统是与底层硬件结合最紧密的课程，通过名校课程 + 经典书籍系统性学习。
+
+### MIT 6.828
+
+- [MIT 6.828 操作系统工程](OS/MIT-CS6.828/CS6.828.md) — 配套 xv6 实验
+
+### OSTEP（操作系统导论）
+
+[Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/) — 免费的操作系统启蒙之书。
+
+<details>
+<summary>展开查看详细笔记</summary>
+
+**虚拟化 (Virtualization)**
+- [CPU 虚拟化](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/01-12-CPU-Virtualization.md)
+- [地址空间](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/13-Abstraction-Address-Space.md)
+- [内存 API](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/14-Interlude-Memory-API.md)
+- [地址转换](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/15-Address-Translation.md)
+- [分段](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/16-Segmentation.md)
+- [空闲空间管理](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/17-Free-Space-Management.md)
+- [分页](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/18-Introduction-to-Paging.md)
+- [TLB](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/19-Translation-Lookaside-Buffers.md)
+- [页表](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/20-Advanced-Page-Tables.md)
 - [交换机制](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/21-Swapping-Mechanisms.md)
 - [交换策略](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/22-Swapping-Policies.md)
 
-----------------------------
-Currency(并发)
-- [并发的概念与线程的概念](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/26-Concurrency-and-Threads.md)
-- [线程操作的 API 接口](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/27-Thread-API.md)
-- [线程中锁的机制](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/28-Thread-Lock.md)
+**并发 (Concurrency)**
+- [线程概念](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/26-Concurrency-and-Threads.md)
+- [线程 API](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/27-Thread-API.md)
+- [锁](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/28-Thread-Lock.md)
 - [条件变量](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/29-30-Condition-Variables.md)
 - [信号量](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/31-Semaphore.md)
-- [多线程并发过程中导致线程死锁问题的讨论](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/32-Common-Concurrency-Problems.md)
-- [基于事件的并发问题](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/33-Event-based-Concurrency.md)
+- [并发问题与死锁](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/32-Common-Concurrency-Problems.md)
+- [基于事件的并发](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/33-Event-based-Concurrency.md)
 
-----------------------------
-[很多经典的论点引证](OS/Operating-System-Three-Easy-Pieces/reference.md)
+</details>
 
+### 清华大学 OS
 
-## 5.3. 清华大学 OS
-- [清华大学操作系统课程 (2019)](https://chyyuu.gitbooks.io/os_course_info/content/)：Gitbook 上清华大学操作系统课程 (2019)。
-- [操作系统 (Operating Systems) (2019)](http://os.cs.tsinghua.edu.cn/oscourse/OS2019spring): 清华大学 2019 学期操作系统课程主页。
-- [操作系统 (Operating Systems) (2020)](http://os.cs.tsinghua.edu.cn/oscourse/OS2020spring): 清华大学 2020 学期操作系统课程主页。
-- [uCore OS 实验指导书和源码网址 (2020)](https://learningos.github.io/ucore_os_webdocs/): 清华大学 2020 学期 uCore OS 实验指导书。
-- [Operating System Concepts Ninth Edition](https://www.os-book.com/OS9/): 操作系统概念第九版英文版在线主页。
+- [清华大学操作系统课程 (2019)](https://chyyuu.gitbooks.io/os_course_info/content/)
+- [uCore OS 实验指导书](https://learningos.github.io/ucore_os_webdocs/)
 
+### 内功修炼
 
-# 6. 计算机网络
+推荐书籍：《深入理解计算机系统 (CSAPP)》《程序员的自我修养》《老码识途》
 
-[计算机网络基础知识](Network/NetworkPrimer.md)
-
-<img src="./Network/figures/toc-net-1.png">
-<img src="./Network/figures/toc-net-2.png">
+视频：[CMU CSAPP 课程 (B 站)](https://www.bilibili.com/video/BV1iW411d7hd)
 
 ---
-- [计算机网络常用网络术语缩写](Network/AbbrNetworkTerms.md)
+
+## 🌐 计算机网络
+
+> 目录: `Network/`
+
+- [计算机网络基础](Network/NetworkPrimer.md)
+- [常用术语缩写](Network/AbbrNetworkTerms.md)
 - [HTTP 基础](Network/HTTP.md)
-- [Wireshark 网络抓包工具使用分析](Network/Wireshark.md)
+- [Wireshark 抓包分析](Network/Wireshark.md)
+
+### Stanford CS144
+
+课程：[CS 144: Introduction to Computer Networking](https://cs144.github.io/)
+
+推荐书籍：[《计算机网络：自顶向下方法》第 8 版](http://gaia.cs.umass.edu/kurose_ross/) + [配套 Wireshark Labs](http://gaia.cs.umass.edu/kurose_ross/wireshark.htm)
+
+视频：[Stanford CS144 (B 站)](https://www.bilibili.com/video/BV137411Z7LR)
+
+---
+
+## 🧮 数据结构与算法
+
+> 目录: `DataStructure/`
+
+[数据结构与算法笔记](DataStructure/DataStructure.md) — 涵盖链表、树、栈/堆、排序、查找等经典数据结构与算法。
+
+---
+
+## 🏛️ 设计模式
+
+> 目录: `DesignPattern/`
+
+[23 种设计模式 (C++ 实现)](DesignPattern/DesignPattern.md) — 创建型、结构型、行为型三大类，配合 UML 类图辅助理解。
+
+---
+
+## 🗄️ 数据库
+
+| 数据库 | 内容 |
+|--------|------|
+| **MySQL** | [MySQL 基础](MySQL/MySQL.md) — SQL 优化、连接池、架构原理 |
+| **Redis** | [Redis 基础](Redis/Redis.md) — 数据结构、集群、源码分析 |
+| **Nginx** | [Nginx 基础](Nginx/Nginx.md) — 配置、反向代理、负载均衡 |
+
+---
+
+## ☁️ 云原生与分布式
+
+### 云原生
+
+> 目录: `CloudNative/`
+
+| 技术栈 | 笔记链接 |
+|--------|----------|
+| **容器化** | Docker<br>Kubernetes |
+| **服务通信** | [gRPC](CloudNative/gRPC/)<br>[Protobuf](CloudNative/Probobuf/)<br>[MQTT](CloudNative/Mqtt.md) |
+| **消息队列** | [Kafka](CloudNative/Kafka/)<br>[RocketMQ](CloudNative/RocketMQ/) |
+| **服务治理** | [Zookeeper](CloudNative/Zookeeper/)<br>[Actor 模型](CloudNative/Actor.md) |
+| **监控** | [InfluxDB](CloudNative/Influxdb.md)<br>[Jenkins CI/CD](CloudNative/Jenkins/) |
+
+### 分布式系统
+
+> 目录: `Distributed/`
+
+- MIT 6.824 分布式系统课程 — [B 站视频](https://www.bilibili.com/video/BV1qk4y197bB)
+- 推荐书籍：《数据密集型应用系统设计 (DDIA)》
+- 微服务、API Gateway、Keepalived
+
+---
+
+## 🤖 AI 与前沿技术
+
+### 人工智能
+
+> 目录: `AI/`
+
+- [AIGC](AI/AIGC.md) — 生成式 AI 技术概览
+- [Ollama](AI/Ollama.md) — 本地大模型部署与使用
+
+### 自动驾驶
+
+> 目录: `AutoDrive/`
+
+- [Autoware](AutoDrive/Autoware.md) — 开源自动驾驶框架
 
 
-## 6.1. 斯坦福大学 CS144
+### 机器人
 
-课程官方网站
-- [CS 144: Introduction to Computer Networking, Fall 2020](https://cs144.github.io/)：为主。
-- [CS144: Introduction to Computer Networking, Fall 2010](https://www.scs.stanford.edu/10au-cs144/): 可选。
+> 目录: `Robotics/`
 
-书籍
-- 《计算机网络：自顶向下方法》
-- [Computer Networking: a Top Down Approach 8th edition](http://gaia.cs.umass.edu/kurose_ross/):《计算机网络：自顶向下方法》原书的英文版，最新版本为第八版。
-- [Wireshark Labs](http://gaia.cs.umass.edu/kurose_ross/wireshark.htm): 书籍配套的 Wireshark 实验
-- [Instructor Resources](http://gaia.cs.umass.edu/kurose_ross/instructor.htm): 与该书籍配套的一些重要学习指导资源。
-- [Online presentations Video](http://gaia.cs.umass.edu/kurose_ross/online_lectures.htm): 由于新冠病毒的影响，原书作者之一 Jim Kurose 通过在线学习的方式，给学生授课。每章节不仅包含了授课的 PPT、视频，还有知识点检测以及授课中问题的汇总，总之，质量是非常的好。
-- [Computer-Networking-A-Top-Down-Approach-8th-Edtion](https://github.com/PEGASUS1993/Computer-Networking-A-Top-Down-Approach-8th-Edtion) Github 上一位学习者收集的这本书的一些资料，非常的好。
+ROS2 完整技术栈，从基础到实战：
 
+- **核心框架** — ROS2 基础、DDS 通信、Launch、参数管理
+- **导航与感知** — SLAM、Nav2 导航、激光雷达、点云处理
+- **仿真与控制** — Gazebo 仿真、行为树、ROSControl、电机驱动
+- **建模** — URDF、tf 坐标变换、传感器接入
 
-视频
-- [B 站：斯坦福大学 Introduction to Computer Networking (CS 144)](https://www.bilibili.com/video/BV137411Z7LR)
+---
 
+## 🐧 Linux 系统
 
-他人笔记
-- [知乎：CS144: 什么，你学不会 TCP？那就来自己写一个吧！](https://zhuanlan.zhihu.com/p/175998415)
-- [返回主页康宇 PL's Blog](https://www.cnblogs.com/kangyupl/p/stanford_cs144_labs.html) <font color=red > 笔记很好，需要深入挖掘。 </font>
-- Lab
-- [Github: huangrt01TCP-Lab](https://github.com/huangrt01/TCP-Lab)
-- [Github: CS144 sponge](https://github.com/cs144/sponge): 重点推荐。
+> 目录: `Linux/`
 
+- [Linux 基础](Linux/linux-primer.md) — 文件系统、用户管理、常用命令
+- [编译链接原理](Linux/compile-link.md)
+- [GDB 调试](Linux/gdb.md)
+- [VIM](Linux/vim.md)
+- [CMake](Linux/CMake/cmake-tutorial.md)
+- [Makefile](Linux/CMake/Makefile.md)
+- [inode 分析](Linux/inode.md)
+- [Linux 系统编程](Linux/system-program.md)
+- [常用工具集](Linux/linux-tools.md)
 
-# 7. 数据结构与算法
+---
 
-数据结构与算法分为数据和算法两个大类。复杂的算法都是由基本的数据结构组合而成的。
+## 🔧 开发工具与效率
 
-[数据结构与算法笔记](DataStructure/DataStructure.md)
+### 版本控制
 
-<img src="DataStructure/figures/toc-data-structure.png">
+> 目录: `Git-SVN/`
 
-# 8. 设计模式
+- [Git 从入门到内部原理](Git-SVN/Git.md)
+- [SVN 工具](Git-SVN/SVN.md)
+- [Git 安装与配置](Git-SVN/Install.md)
+- [开发协作指南](Git-SVN/Develop.md)
+- [常见问题](Git-SVN/FAQ.md)
+- [提交规范](Git-SVN/commit-convention.md)
+- [CI/CD Pipeline](Git-SVN/Pipeline.md)
+- [Git Internals](Git-SVN/Internals.md)
 
-[C++ 语言实现的的 23 中设计模式](DesignPattern/DesignPattern.md)
+### 工业协议
 
-<img src="DesignPattern/figures/toc-design-pattern-1.png">
-<img src="DesignPattern/figures/toc-design-pattern-2.png">
-<img src="DesignPattern/figures/toc-design-pattern-3.png">
+> 目录: `Protocol/`
 
+- Modbus
+- Omron
+- Siemens
+- Beckhoff
+- Fanuc
+- WebRTC
+- SMTP
+- 以及其他通信协议
 
-# 9. 数据库
+### 常用工具
 
-[MySQL 数据库基础](MySQL/MySQL.md)
+| 工具 | 链接 |
+|------|------|
+| VSCode | [快捷键与技巧](StudyTool/VSCode.md) |
+| Jetbrains | [插件与使用](StudyTool/JetbrainsPlugins.md) |
+| draw.io | [快捷键](StudyTool/draw.io.md) |
+| Windows 效率 | [Windows 快捷键](StudyTool/Windows10.md) |
+| 平板工具 | [iPad 工具清单](StudyTool/iPad-tools.md) |
+| 学习资源 | [常用网站汇总](StudyTool/WebsiteReferences.md) |
 
-<img src="MySQL/figures/toc-mysql.png">
+### 文档与知识管理
 
+> 目录: `Markdown/`
 
-# 10. Git-SVN
-
-[从最简单的 Git 使用，到 Git 内部原理，一步步带你窥探其的奥秘](Git-SVN/Git.md)<br>
-<img src="Git-SVN/figures/toc-git.png">
-
-[SVN 工具](Git-SVN/SVN.md)<br>
-<img src="Git-SVN/figures/toc-svn.png">
-
-
-# 11. Go
-
-- [Go 语言基础](Go/Go.md)
-- [Go 标准库](Go/GoStandardLibrary.md)
-- [CGO](Go/CGO.md)
-- [Go Compiler](Go/Compiler.md)
-- [Go 编码风格](Go/GolangCodeConduct.md)
-- [Go 测试](Go/GoTest.md)
-- [Go 性能优化](Go/Performance.md)
-- [Go 发布版本](Go/ReleaseHistory.md)
-- [Go 第三方库](Go/ThirdPackages.md)
-
-Golang 底层原理
-- [Go 内部原理](Go/GoInternals.md)
-- [GPM](Go/GPM.md)
-- [Map](Go/Map.md)
-- [Slice](Go/Slice.md)
-- [SlicesByte](Go/SlicesByte.md)
-
-
-# 12. Linux
-
-- [Linux 基础知识点](Linux/linux-primer.md)
-
-<img src="Linux/figures/toc-linux-basics-1.png">
-<img src="Linux/figures/toc-linux-basics-2.png">
-
--------------------------------------------------
-- [编译链接原理及过程分析](Linux/compile-link.md)
-- [GDB 调试常用命令及底层原理探讨](Linux/gdb.md)
-- [具有编辑器之神称为的 VIM 用法探讨](Linux/vim.md)
-- [CMAKE 原理及其语法探讨](Linux/CMake/cmake-tutorial.md)
-- [Makefile 原理和用法](Linux\CMake\Makefile.md)
-- [Linux 下索引节点 inode 分析](Linux/inode.md)
-- [Linux 下常用工具集汇总](Linux/linux-tools.md)
-- [Linux 下重点之一：Linux 环境系统编程](Linux/system-program.md)
-
-
-# 13. Shell
-
-[Shell 脚本用法](Shell/shell.md)<br>
-<img src="Shell/figures/toc-shell.png">
-
-
-# 14. Redis
-
-[Redis 基础用法](Redis/Redis.md)<br>
-<img src="Redis/figures/toc-redis.png">
-
-
-# 15. Nginx
-
-- [Nginx 常用基础用法解释](Nginx/Nginx.md)
-- [XML 基础语法](Nginx/xml.md)
-
-
-# 16. 分布式
-
-视频
-- [B 站：MIT 6.824](https://www.bilibili.com/video/BV1qk4y197bB)
-
-书籍
-- 《数据密集型应用系统设计》
-
-
-# 17. Qt
-
-- [Qt 常见基础组件用法](Qt/Qt.md)   
-<img src="Qt/figures/toc-qt.png">
-
-
-# 18. 汇编语言
-
-- [基础汇编指令解释](Assemble/UniversalRegister.md)
-
-
-# 19. Markdown
-
-- [编写 Markdown 文档的 typora 软件常用使用说明](Markdown/TyporaMarkdown.md)
-- [LaTeX 数学公式编写的利器](Markdown/LaTex.md)
+- [Typora 使用说明](Markdown/TyporaMarkdown.md)
+- [LaTeX 公式](Markdown/LaTex.md)
 - [希腊字母表](Markdown/GreekAlphabet.md)
-- [Jupyter 基础语法讲解](Markdown/MarkdownLatex.ipynb)
+- [Jupyter 使用说明](Markdown/Jupyter.md)
+- [Jupyter Notebook 示例](Markdown/Jupyter.ipynb)
+
+### 仓库维护脚本
+
+> 根目录
+
+- [add_frontmatter.py](add_frontmatter.py): 批量补充文档头部元信息
+- [format_all_md.sh](format_all_md.sh): 批量格式化 Markdown 文档
+- [clean.bat](clean.bat): Windows 环境清理脚本
+
+---
+
+## 📖 推荐资源
+
+### 自学路线
+
+- [cs_study_plan](https://github.com/spring2go/cs_study_plan) — 硬核计算机科学自学计划
+- [TeachYourselfCS-CN](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md) — 自学 CS 推荐课程与书籍
+
+### 推荐书籍
+
+| 领域 | 书籍 |
+|------|------|
+| 计算机系统 | 《深入理解计算机系统》《程序员的自我修养》 |
+| 操作系统 | 《Operating Systems: Three Easy Pieces》 |
+| 计算机网络 | 《计算机网络：自顶向下方法》 |
+| 分布式 | 《数据密集型应用系统设计》 |
+
+---
 
 
-# 20. 工具
+## 💬 交流反馈
 
-- [draw.io 绘图工具常用快捷键](StudyTool/draw.io.md)
-- [Jetbrains 系列软件使用技巧](StudyTool/JetbrainsPlugins.md)
-- [VSCode 常用快捷键](StudyTool/VSCode.md)
-- [掌握这些 windows10 系统快捷键，大幅度提高日常工作效率](StudyTool/Windows10.md)
-- [积累了许多常用的习学习网站](StudyTool/WebsiteReferences.md)
-- [IPAD 比较好的收费的软件](StudyTool/iPad-tools.md)
+欢迎通过 Issue、Discussions 或邮件交流建议与想法！提交前请阅读 [文档写作约定](convention.md)。
 
+提问推荐阅读：
+- [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)
+- [《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545)
 
-# 21. 哲学
-
-自己本身对哲学十分感兴趣，记下自己平时生活中的一些哲学思想。
-
-如何把明面做好，相当于是做一个宣传，需要好好的的规划。
-
-如何把复杂的东西描绘成最简单的东西？让一个门外汉也能看懂自己写的文章。
-
-学习知识形成体系结构，脑海里有概念，对计算机专业学科的一些专业术语要有了解，这样看英文源文档，才看得懂，看的速度才快。
+---
 
 
-# 22. 自学指导
+## 📜 License
 
-- [cs_study_plan](https://github.com/spring2go/cs_study_plan): Github 上一份硬核计算机科学 CS 自学计划
-- [TeachYourselfCS-CN](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md): 自学计算机科学课程，推荐一些比较好的书籍和课程。
+Copyright (c) 2026 by JohnJeep. All Rights Reserved.
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给一个 Star 支持一下！**
+
+</div>
