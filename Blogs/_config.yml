@@ -104,6 +104,6 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: ''
+  repo: 'https://github.com/JohnJeep/JohnJeep.github.io.git'
   branch: 'main'
   message: ''

@@ -26,3 +26,17 @@
 - [《如何向开源社区提问题](https://github.com/seajs/seajs/issues/545)
 - [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/~sgtatham/bugs-cn.html)
 - [《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)。
+
+## 博客自动同步约定
+
+- 内容源仓库为当前工程，发布仓库为 `JohnJeep/JohnJeep.github.io`。
+- 同步范围由 `.blog-sync.json` 白名单控制，仅同步指定目录中的 `.md` 文件。
+- 同步脚本为 `add_frontmatter.py`，产物目录为 `Blogs/source/_posts/synced`。
+- 文章时间规则：
+	- `date` 使用 Git 首次提交时间。
+	- `updated` 使用 Git 最近提交时间。
+	- 当文件无 Git 历史时，回退到文件修改时间。
+- 分类规则：按源文件目录层级自动生成 `categories`。
+- 标签规则：按路径和文件名自动生成 `tags`。
+- 每次提交后由 GitHub Actions 自动构建并发布到 `JohnJeep.github.io`。
+- 需要在当前仓库配置 `PAGES_REPO_TOKEN`（具备目标仓库写权限）以支持跨仓库发布。

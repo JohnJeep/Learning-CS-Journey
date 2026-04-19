@@ -1,0 +1,57 @@
+name: Blog Sync And Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '**/*.md'
+      - 'add_frontmatter.py'
+      - '.blog-sync.json'
+      - 'Blogs/**'
+      - '.github/workflows/blog-sync-deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  sync-build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Sync markdown into Hexo posts
+        run: python add_frontmatter.py --clean
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install blog dependencies
+        working-directory: Blogs
+        run: npm install
+
+      - name: Build static site
+        working-directory: Blogs
+        run: npm run build:ci
+
+      - name: Deploy to JohnJeep.github.io
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PAGES_REPO_TOKEN }}
+          external_repository: JohnJeep/JohnJeep.github.io
+          publish_branch: main
+          publish_dir: ./Blogs/public
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com

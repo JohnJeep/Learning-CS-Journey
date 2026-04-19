@@ -1,0 +1,56 @@
+{
+  "include_roots": [
+    "AI",
+    "Architecture",
+    "Assembly",
+    "AutoDrive",
+    "C",
+    "CloudNative",
+    "Cpp",
+    "DataStructure",
+    "DesignPattern",
+    "Distributed",
+    "Embedded",
+    "Git-SVN",
+    "GNU",
+    "Go",
+    "Interview",
+    "JavaScript",
+    "Linux",
+    "Markdown",
+    "Math",
+    "MySQL",
+    "Network",
+    "Nginx",
+    "node.js",
+    "OpenSource",
+    "OS",
+    "Protocol",
+    "Python",
+    "Qt",
+    "Redis",
+    "Robotics",
+    "Shell",
+    "StudyTool",
+    "TypeScript",
+    "Windows"
+  ],
+  "exclude_prefixes": [
+    "Blogs/",
+    ".git/",
+    ".github/",
+    "Linux/vim/myvim/",
+    "Go/proj-go/"
+  ],
+  "exclude_file_names": [
+    "README.md",
+    "README.en.md"
+  ],
+  "category_aliases": {
+    "Cpp": "C++",
+    "node.js": "Node.js",
+    "CloudNative": "Cloud Native",
+    "Git-SVN": "Git & SVN"
+  },
+  "output_subdir": "Blogs/source/_posts/synced"
+}
