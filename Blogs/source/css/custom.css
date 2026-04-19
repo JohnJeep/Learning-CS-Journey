@@ -186,6 +186,34 @@ body {
 
 #page-header.full_page {
     animation: heroReveal 0.9s ease both;
+    transition: background-image 1.2s ease-in-out;
+}
+
+#site-info .jj-hero-poetry {
+    margin: 18px auto 0;
+    width: min(780px, 92vw);
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(8, 18, 34, 0.38);
+    border: 1px solid rgba(245, 250, 255, 0.26);
+    box-shadow: 0 14px 32px rgba(0, 11, 28, 0.22);
+    backdrop-filter: blur(6px);
+}
+
+#site-info .jj-hero-poetry-line {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+    color: #f7fbff;
+    font-size: clamp(17px, 2vw, 24px);
+    letter-spacing: 1px;
+    line-height: 1.55;
+}
+
+#site-info .jj-hero-poetry-source {
+    margin-top: 8px;
+    text-align: right;
+    color: rgba(235, 244, 255, 0.9);
+    font-size: 13px;
+    letter-spacing: 0.3px;
 }
 
 .jj-featured-list {
@@ -235,6 +263,15 @@ body {
 }
 
 @media screen and (max-width: 900px) {
+    #site-info .jj-hero-poetry {
+        margin-top: 12px;
+        padding: 10px 12px;
+    }
+
+    #site-info .jj-hero-poetry-line {
+        font-size: 16px;
+    }
+
     #recent-posts > .recent-post-item .post_cover img {
         max-height: 220px;
     }
