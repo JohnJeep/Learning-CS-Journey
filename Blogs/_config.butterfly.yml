@@ -183,7 +183,7 @@ subtitle:
 # 5: Info displayed on the cover
 # 6: Masonry layout - Cover on top, info on the bottom
 # 7: Masonry layout - Info displayed on the cover
-index_layout: 5
+index_layout: 3
 
 # Display the article introduction on homepage
 # 1: description
@@ -634,14 +634,14 @@ giscus:
   category_id:
   light_theme: light
   dark_theme: dark
-  js:
+  js: https://giscus.app/client.js
+  option:
     data-mapping: pathname
     data-strict: 0
     data-reactions-enabled: 1
     data-emit-metadata: 0
     data-input-position: top
     data-lang: zh-CN
-  option:
 
 # Remark42
 # https://remark42.com/docs/configuration/frontend/
