@@ -630,8 +630,8 @@ twikoo:
 giscus:
   repo: JohnJeep/Learning-CS-Journey
   # Fill repo_id/category_id after enabling Discussions in GitHub and creating a category on giscus.app.
-  repo_id:
-  category_id:
+  repo_id: MDEwOlJlcG9zaXRvcnkyMDU1NTI2MTQ=
+  category_id: DIC_kwDODEB75s4C7Mts
   light_theme: light
   dark_theme: dark
   js: https://giscus.app/client.js
