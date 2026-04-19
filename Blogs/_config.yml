@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Leaning Computer Science Journey
+title: Learning Computer Science Journey
 subtitle: ''
-description: 'This is a blog about my leaning computer science journey.'
+description: 'A practical computer science learning journey with engineering notes and deep dives.'
 keywords: 'computer, journey'
 author: John Jeep
 language: zh-CN
@@ -18,8 +18,8 @@ url: https://johnjeep.github.io
 permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: false # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -42,8 +42,8 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-relative_link: true
-future: true
+relative_link: false
+future: false
 syntax_highlighter: highlight.js
 highlight:
   line_number: true
@@ -102,8 +102,6 @@ theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+# Deployment is handled by GitHub Actions in this repository.
+# Keep local deploy disabled to avoid CI/local output drift.
 deploy:
-  type: 'git'
-  repo: 'https://github.com/JohnJeep/JohnJeep.github.io.git'
-  branch: 'main'
-  message: ''
