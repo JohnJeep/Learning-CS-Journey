@@ -46,7 +46,7 @@
   <img width="%50" height="%50" src="./figures/cpu-cache.png">
 </div>
 <div algin="center">
-  <img width="%50" height="%50" src="./figures/内存分类.png">
+  <img width="%50" height="%50" src="./figures/nei-cun-fen-lei.png">
 </div>
 
 
