@@ -87,3 +87,7 @@ TypeScript/out/*
 */node_modules/*
 
 .obsidian/
+
+# Python bytecode cache
+__pycache__/
+*.py[cod]
