@@ -1,83 +1,69 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'jj-code-theme';
-  var ROOT_ATTR = 'data-code-theme';
-
-  function getStoredTheme() {
-    try {
-      return window.localStorage.getItem(STORAGE_KEY) || 'light';
-    } catch (error) {
-      return 'light';
-    }
-  }
-
-  function setStoredTheme(theme) {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, theme);
-    } catch (error) {
-      return;
-    }
-  }
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute(ROOT_ATTR, theme);
-  }
+  var BLOCK_SELECTOR = '#article-container pre, #article-container figure.highlight';
+  var BLOCK_CLASS = 'jj-codeblock';
+  var DARK_CLASS = 'jj-code-dark';
+  var BTN_CLASS = 'jj-code-theme-toggle';
 
   function hasCodeBlocks() {
-    return Boolean(document.querySelector('#article-container pre, #article-container figure.highlight'));
+    return Boolean(document.querySelector(BLOCK_SELECTOR));
   }
 
-  function getButtonLabel(theme) {
-    return theme === 'dark' ? '代码暗色' : '代码亮色';
+  function getButtonLabel(isDark) {
+    return isDark ? 'Light' : 'Dark';
   }
 
-  function updateButton(button, theme) {
-    button.textContent = getButtonLabel(theme);
-    button.setAttribute('aria-label', '切换代码块亮暗主题');
-    button.setAttribute('title', '切换代码块亮暗主题');
-  }
-
-  function ensureButton() {
-    var existing = document.querySelector('.jj-code-theme-toggle');
-    if (!hasCodeBlocks()) {
-      if (existing) {
-        existing.remove();
-      }
-      return;
+  function ensureBlockClass(block) {
+    if (!block.classList.contains(BLOCK_CLASS)) {
+      block.classList.add(BLOCK_CLASS);
     }
+  }
 
-    var button = existing;
+  function updateButton(button, block) {
+    button.textContent = getButtonLabel(block.classList.contains(DARK_CLASS));
+    button.setAttribute('aria-label', '切换当前代码块亮暗主题');
+    button.setAttribute('title', '切换当前代码块亮暗主题');
+  }
+
+  function ensureButtonForBlock(block) {
+    ensureBlockClass(block);
+
+    var button = block.querySelector('.' + BTN_CLASS);
     if (!button) {
       button = document.createElement('button');
-      button.className = 'jj-code-theme-toggle';
+      button.className = BTN_CLASS;
       button.type = 'button';
-      document.body.appendChild(button);
+      block.appendChild(button);
     }
 
     if (!button.dataset.bound) {
       button.dataset.bound = '1';
       button.addEventListener('click', function () {
-        var nextTheme = document.documentElement.getAttribute(ROOT_ATTR) === 'dark' ? 'light' : 'dark';
-        applyTheme(nextTheme);
-        setStoredTheme(nextTheme);
-        updateButton(button, nextTheme);
+        block.classList.toggle(DARK_CLASS);
+        updateButton(button, block);
       });
     }
 
-    updateButton(button, getStoredTheme());
+    updateButton(button, block);
   }
 
-  function initCodeTheme() {
-    applyTheme(getStoredTheme());
-    ensureButton();
+  function initCodeThemeButtons() {
+    if (!hasCodeBlocks()) {
+      return;
+    }
+
+    var blocks = document.querySelectorAll(BLOCK_SELECTOR);
+    blocks.forEach(function (block) {
+      ensureButtonForBlock(block);
+    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCodeTheme);
+    document.addEventListener('DOMContentLoaded', initCodeThemeButtons);
   } else {
-    initCodeTheme();
+    initCodeThemeButtons();
   }
 
-  document.addEventListener('pjax:complete', initCodeTheme);
+  document.addEventListener('pjax:complete', initCodeThemeButtons);
 })();

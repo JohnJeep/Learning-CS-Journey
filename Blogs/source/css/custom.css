@@ -22,23 +22,15 @@
     --jj-text-soft: #9db2d6;
 }
 
-:root,
-[data-code-theme="light"] {
-    --jj-code-bg: #f6f8fb;
-    --jj-code-bg-strong: #eef2f8;
-    --jj-code-border: rgba(148, 163, 184, 0.32);
-    --jj-code-text: #253041;
-    --jj-code-muted: #7b8798;
-    --jj-inline-code-bg: rgba(15, 23, 42, 0.06);
-}
-
-[data-code-theme="dark"] {
-    --jj-code-bg: #1f2430;
-    --jj-code-bg-strong: #2a3140;
-    --jj-code-border: rgba(255, 255, 255, 0.08);
-    --jj-code-text: #ebf1fb;
-    --jj-code-muted: #9cacc4;
-    --jj-inline-code-bg: rgba(255, 255, 255, 0.12);
+:root {
+    --jj-code-bg: #f6f8fa;
+    --jj-code-bg-strong: #f6f8fa;
+    --jj-code-border: #d0d7de;
+    --jj-code-text: #24292f;
+    --jj-code-muted: #57606a;
+    --jj-inline-code-bg: rgba(175, 184, 193, 0.2);
+    --jj-code-btn-bg: rgba(255, 255, 255, 0.96);
+    --jj-code-btn-text: #24292f;
 }
 
 body {
@@ -208,37 +200,61 @@ body {
 }
 
 .jj-code-theme-toggle {
-    position: fixed;
-    right: 22px;
-    bottom: 92px;
-    z-index: 1001;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 98px;
-    padding: 10px 14px;
-    border: 1px solid rgba(122, 138, 163, 0.26);
-    border-radius: 999px;
-    background: rgba(248, 250, 255, 0.9);
-    color: #213047;
-    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
-    backdrop-filter: blur(12px);
-    font-size: 13px;
-    font-weight: 600;
+    min-width: 56px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--jj-code-border);
+    border-radius: 6px;
+    background: var(--jj-code-btn-bg);
+    color: var(--jj-code-btn-text);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    font-size: 12px;
+    font-weight: 500;
     letter-spacing: 0.2px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .jj-code-theme-toggle:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.2);
+    background: #f3f4f6;
 }
 
-[data-theme="dark"] .jj-code-theme-toggle {
-    background: rgba(18, 26, 41, 0.88);
-    color: #e8eef9;
-    border-color: rgba(152, 171, 204, 0.22);
+#article-container pre.jj-codeblock,
+#article-container figure.highlight.jj-codeblock {
+    position: relative;
+    padding-top: 36px;
+}
+
+#article-container pre.jj-codeblock.jj-code-dark,
+#article-container figure.highlight.jj-codeblock.jj-code-dark,
+#article-container pre.jj-codeblock.jj-code-dark code,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .highlight,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .code pre,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .gutter pre {
+    background: #161b22;
+    color: #c9d1d9;
+    border-color: #30363d;
+}
+
+#article-container figure.highlight.jj-codeblock.jj-code-dark .gutter,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .line_number,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .gutter pre {
+    color: #8b949e;
+    background: #0d1117;
+}
+
+#article-container pre.jj-codeblock.jj-code-dark .jj-code-theme-toggle,
+#article-container figure.highlight.jj-codeblock.jj-code-dark .jj-code-theme-toggle {
+    background: #21262d;
+    color: #c9d1d9;
+    border-color: #30363d;
 }
 
 #aside-content .card-widget .card-content a,
@@ -384,10 +400,10 @@ body {
 
 @media screen and (max-width: 900px) {
     .jj-code-theme-toggle {
-        right: 16px;
-        bottom: 84px;
-        min-width: 90px;
-        padding: 9px 12px;
+        top: 8px;
+        right: 8px;
+        min-width: 50px;
+        height: 26px;
     }
 
     #site-info .jj-hero-poetry {
