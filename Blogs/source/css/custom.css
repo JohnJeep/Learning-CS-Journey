@@ -216,6 +216,27 @@ body {
     letter-spacing: 0.3px;
 }
 
+#site-info .jj-hero-poetry-btn {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: rgba(16, 33, 66, 0.58);
+    color: #f4f9ff;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#site-info .jj-hero-poetry-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(30, 56, 101, 0.72);
+}
+
 .jj-featured-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
