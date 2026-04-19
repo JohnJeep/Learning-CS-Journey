@@ -1067,7 +1067,6 @@ inject:
     - <link rel="stylesheet" href="/css/custom.css">
   bottom:
     - <script defer src="/js/home-dynamic.js"></script>
-    - <script defer src="/js/code-theme-toggle.js"></script>
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
