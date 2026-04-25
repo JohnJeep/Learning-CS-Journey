@@ -2,11 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-03-28 10:19:40
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 17:29:41
+ * @LastEditTime: 2026-04-25 16:39:19
  * @Description: how to use hexo 
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
 
 # Install
 
@@ -28,8 +27,6 @@ npm install hexo-theme-butterfly --save
 # install hexo-reference to support markdown footnotes
 npm install hexo-reference --save
 ```
-
-
 
 默认页面
 - 首页
@@ -63,31 +60,18 @@ hexo clean && hexo g && hexo d
 使用 `hexo init <folder>` 初始化后，会生成下面的目录
 
 - scaffolds
-
   模版文件
-  
 - source
-
   存放发表后的博客。markdown 文件在 `_post`目录下。
-
 - theme
-  
   博客使用的主题配置目录。
-  
 - node_modules
-
   hexo 安装需要的 npm 模块。
-
 - _config.yml
-  
   yml 语法格式的配置文件。
-  
   注：yaml 语法中， `:`后面需要加上空格，不然会报错。
-  
 - package.json
-  
   模块管理文件。
-
 
 
 # Front-matter
@@ -115,7 +99,6 @@ categories: cpp           # 文章分类，可选
 ---
 
 ```
-
 
 
 # References

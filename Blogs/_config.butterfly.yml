@@ -37,7 +37,7 @@ menu:
 
 code_blocks:
   # Code block theme: darker / pale night / light / ocean / false
-  theme: pale night
+  theme: light
   macStyle: true
   # Code block height limit (unit: px)
   height_limit: false
@@ -108,7 +108,6 @@ cover:
   default_cover:
     - /img/seele.jpg
 
-    
 
 # Replace Broken Images
 error_img:
