@@ -46,10 +46,12 @@
   var fallbackIndex = Math.floor(Math.random() * fallbackPoems.length);
 
   // ── jinrishici v2 token management ────────────────────────────────────────
-  // ROOT CAUSE OF ALWAYS-SAME-POEM BUG:
-  // Without X-User-Token header the API treats every call as a brand-new
-  // anonymous session and always returns poem #0 (春江花月夜).
-  // FIX: persist the token the server returns, send it on the next request.
+  // The API uses X-User-Token to maintain a per-session poem sequence.
+  // We must obtain the token from the /token endpoint (JSON body) because
+  // CORS does not expose custom response headers to JS by default, so
+  // trying to read X-User-Token from /one.json response headers returns null
+  // → token is never persisted → every request is a new anonymous session
+  // → server always returns the same first poem.
   var TOKEN_KEY = 'jrs_v2_token';
 
   function getStoredToken() {
@@ -60,33 +62,60 @@
     try { if (t) localStorage.setItem(TOKEN_KEY, t); } catch (e) {}
   }
 
-  function fetchPoetryFromAPI(callback) {
+  // Fetch a session token from /token (returned in JSON body, CORS-safe).
+  // Calls callback(token) immediately if one is already stored.
+  function ensureToken(callback) {
+    var existing = getStoredToken();
+    if (existing) { callback(existing); return; }
+
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://v2.jinrishici.com/one.json', true);
+    xhr.open('GET', 'https://v2.jinrishici.com/token', true);
     xhr.timeout = 5000;
-    var token = getStoredToken();
-    if (token) xhr.setRequestHeader('X-User-Token', token);
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
-      // Persist token from response for the next request
-      try { saveToken(xhr.getResponseHeader('X-User-Token')); } catch (e) {}
       if (xhr.status === 200) {
         try {
           var resp = JSON.parse(xhr.responseText);
-          if (resp.status === 'success' && resp.data && resp.data.content) {
-            var origin = resp.data.origin || {};
-            var src = (origin.author || '') +
-              (origin.title ? '\u300a' + origin.title + '\u300b' : '');
-            callback({ line: resp.data.content, source: src });
+          if (resp.status === 'success' && resp.data) {
+            saveToken(resp.data);
+            callback(resp.data);
             return;
           }
         } catch (e) {}
       }
-      callback(null);
+      callback(''); // no token — proceed without, server gives anonymous session
     };
-    xhr.onerror   = function () { callback(null); };
-    xhr.ontimeout = function () { callback(null); };
+    xhr.onerror   = function () { callback(''); };
+    xhr.ontimeout = function () { callback(''); };
     xhr.send();
+  }
+
+  function fetchPoetryFromAPI(callback) {
+    ensureToken(function (token) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://v2.jinrishici.com/one.json', true);
+      xhr.timeout = 5000;
+      if (token) xhr.setRequestHeader('X-User-Token', token);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
+        if (xhr.status === 200) {
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            if (resp.status === 'success' && resp.data && resp.data.content) {
+              var origin = resp.data.origin || {};
+              var src = (origin.author || '') +
+                (origin.title ? '\u300a' + origin.title + '\u300b' : '');
+              callback({ line: resp.data.content, source: src });
+              return;
+            }
+          } catch (e) {}
+        }
+        callback(null);
+      };
+      xhr.onerror   = function () { callback(null); };
+      xhr.ontimeout = function () { callback(null); };
+      xhr.send();
+    });
   }
 
   // Fallback: rotate index so each call returns a different poem
