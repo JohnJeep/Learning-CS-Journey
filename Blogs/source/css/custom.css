@@ -189,11 +189,21 @@ body {
     animation: heroReveal 0.8s ease both;
 }
 
+/* Center the poem block inside Butterfly's #site-info wrapper */
+#site-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 /* Poem container — no card, floating text only */
 .jj-verse {
     text-align: center;
     max-width: 720px;
     width: 90vw;
+    margin: 0 auto;
     opacity: 1;
     transition: opacity 0.28s ease;
 }
