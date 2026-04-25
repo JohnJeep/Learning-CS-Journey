@@ -179,10 +179,17 @@ body {
 }
 
 /* ================================================================
-   Hero — pure dark, poem centered (jinrishici style)
+   Hero — gradient backdrop, poem centered (jinrishici style)
+   Day  : deep midnight-blue → indigo → cerulean — echoes #1f6feb accent,
+          warm-gold poem text sits naturally (complementary blue × gold).
+   Night: same hue family, darkened to blend with the dark-mode body.
    ================================================================ */
 #page-header {
-    background: #0d0d14;
+    background: linear-gradient(160deg, #0c1a30 0%, #18103a 55%, #0d2038 100%);
+}
+
+[data-theme="dark"] #page-header {
+    background: linear-gradient(160deg, #060d18 0%, #0d0920 55%, #061218 100%);
 }
 
 #page-header.full_page {
