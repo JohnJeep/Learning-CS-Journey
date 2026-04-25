@@ -320,7 +320,10 @@ body {
 
 @media screen and (max-width: 900px) {
     .jj-verse-line {
-        font-size: 18px;
+        /* Scale with viewport so a ~16-char poem always fits on one line.
+           90vw container at 375px ≈ 338px; 16 chars × 3.8vw × 1.14 letter-spacing ≈ 323px. */
+        font-size: max(13px, 3.8vw);
+        letter-spacing: 0.08em;
     }
 
     .jj-verse-deco {
