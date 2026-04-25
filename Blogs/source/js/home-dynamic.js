@@ -23,7 +23,7 @@
     'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&q=80'
   ];
 
-  // 本地备用诗词池，API 失败时降级使用（覆盖多朝代经典）
+  // 本地备用诗词池，API 失败时降级使用（覆盖多朝代经典，供 换一首 轮换）
   var fallbackPoems = [
     { line: '等闲识得东风面，万紫千红总是春。', source: '朱熹《春日》' },
     { line: '落霞与孤鹜齐飞，秋水共长天一色。', source: '王勃《滕王阁序》' },
@@ -40,8 +40,27 @@
     { line: '人生自古谁无死，留取丹心照汗青。', source: '文天祥《过零丁洋》' },
     { line: '海内存知己，天涯若比邻。', source: '王勃《送杜少府之任蜀州》' },
     { line: '欲穷千里目，更上一层楼。', source: '王之涣《登鹳雀楼》' },
-    { line: '烽火连三月，家书抵万金。', source: '杜甫《春望》' }
+    { line: '烽火连三月，家书抵万金。', source: '杜甫《春望》' },
+    { line: '大漠孤烟直，长河落日圆。', source: '王维《使至塞上》' },
+    { line: '黄河之水天上来，奔流到海不复回。', source: '李白《将进酒》' },
+    { line: '问渠那得清如许，为有源头活水来。', source: '朱熹《观书有感》' },
+    { line: '不识庐山真面目，只缘身在此山中。', source: '苏轼《题西林壁》' },
+    { line: '春风得意马蹄疾，一日看尽长安花。', source: '孟郊《登科后》' },
+    { line: '疏影横斜水清浅，暗香浮动月黄昏。', source: '林逋《山园小梅》' },
+    { line: '醉卧沙场君莫笑，古来征战几人回。', source: '王翰《凉州词》' },
+    { line: '桃花潭水深千尺，不及汪伦送我情。', source: '李白《赠汪伦》' },
+    { line: '少壮不努力，老大徒伤悲。', source: '《长歌行》' },
+    { line: '春色满园关不住，一枝红杏出墙来。', source: '叶绍翁《游园不值》' },
+    { line: '沉舟侧畔千帆过，病树前头万木春。', source: '刘禹锡《酬乐天扬州初逢席上见赠》' },
+    { line: '山重水复疑无路，柳暗花明又一村。', source: '陆游《游山西村》' },
+    { line: '天生我材必有用，千金散尽还复来。', source: '李白《将进酒》' },
+    { line: '安能摧眉折腰事权贵，使我不得开心颜。', source: '李白《梦游天姥吟留别》' },
+    { line: '横眉冷对千夫指，俯首甘为孺子牛。', source: '鲁迅《自嘲》' },
+    { line: '宝剑锋从磨砺出，梅花香自苦寒来。', source: '《警世贤文》' }
   ];
+
+  // 备用诗词轮换索引（每次点击换一首时递增，不依赖固定种子）
+  var fallbackIndex = Math.floor(Math.random() * 32);
 
   function getDailySeed() {
     var d = new Date();
@@ -49,10 +68,10 @@
   }
 
   // 调用今日诗词 API（接入 chinese-poetry 库，30 万+ 经典条目）
+  // 加 _t 时间戳防止浏览器缓存；不传 withCredentials 避免 session 锁定同一首
   function fetchPoetryFromAPI(callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://v2.jinrishici.com/one.json', true);
-    xhr.withCredentials = true;
+    xhr.open('GET', 'https://v2.jinrishici.com/one.json?_t=' + Date.now(), true);
     xhr.timeout = 5000;
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
@@ -75,8 +94,10 @@
     xhr.send();
   }
 
+  // 备用诗词：每次调用递增索引，保证换一首每次不同
   function getFallbackPoem() {
-    return fallbackPoems[getDailySeed() % fallbackPoems.length];
+    fallbackIndex = (fallbackIndex + 1) % fallbackPoems.length;
+    return fallbackPoems[fallbackIndex];
   }
 
   function createPoetryNode() {
