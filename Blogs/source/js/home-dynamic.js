@@ -6,24 +6,7 @@
     return path === '/' || path === '/index.html';
   }
 
-  function getHeaderElement() {
-    return document.getElementById('page-header');
-  }
-
-  function getSiteInfoElement() {
-    return document.getElementById('site-info');
-  }
-
-  var wallpapers = [
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1493244040629-496f6d136cc3?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&q=80'
-  ];
-
-  // 本地备用诗词池，API 失败时降级使用（覆盖多朝代经典，供 换一首 轮换）
+  // Fallback poem pool — used when API is unreachable
   var fallbackPoems = [
     { line: '等闲识得东风面，万紫千红总是春。', source: '朱熹《春日》' },
     { line: '落霞与孤鹜齐飞，秋水共长天一色。', source: '王勃《滕王阁序》' },
@@ -59,29 +42,41 @@
     { line: '宝剑锋从磨砺出，梅花香自苦寒来。', source: '《警世贤文》' }
   ];
 
-  // 备用诗词轮换索引（每次点击换一首时递增，不依赖固定种子）
-  var fallbackIndex = Math.floor(Math.random() * 32);
+  // Rotating index: random start, increments on each fallback call
+  var fallbackIndex = Math.floor(Math.random() * fallbackPoems.length);
 
-  function getDailySeed() {
-    var d = new Date();
-    return d.getFullYear() * 1000 + (d.getMonth() + 1) * 50 + d.getDate();
+  // ── jinrishici v2 token management ────────────────────────────────────────
+  // ROOT CAUSE OF ALWAYS-SAME-POEM BUG:
+  // Without X-User-Token header the API treats every call as a brand-new
+  // anonymous session and always returns poem #0 (春江花月夜).
+  // FIX: persist the token the server returns, send it on the next request.
+  var TOKEN_KEY = 'jrs_v2_token';
+
+  function getStoredToken() {
+    try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
   }
 
-  // 调用今日诗词 API（接入 chinese-poetry 库，30 万+ 经典条目）
-  // 加 _t 时间戳防止浏览器缓存；不传 withCredentials 避免 session 锁定同一首
+  function saveToken(t) {
+    try { if (t) localStorage.setItem(TOKEN_KEY, t); } catch (e) {}
+  }
+
   function fetchPoetryFromAPI(callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://v2.jinrishici.com/one.json?_t=' + Date.now(), true);
+    xhr.open('GET', 'https://v2.jinrishici.com/one.json', true);
     xhr.timeout = 5000;
+    var token = getStoredToken();
+    if (token) xhr.setRequestHeader('X-User-Token', token);
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
+      // Persist token from response for the next request
+      try { saveToken(xhr.getResponseHeader('X-User-Token')); } catch (e) {}
       if (xhr.status === 200) {
         try {
           var resp = JSON.parse(xhr.responseText);
           if (resp.status === 'success' && resp.data && resp.data.content) {
             var origin = resp.data.origin || {};
-            var src = (origin.author ? origin.author : '') +
-              (origin.title ? '《' + origin.title + '》' : '');
+            var src = (origin.author || '') +
+              (origin.title ? '\u300a' + origin.title + '\u300b' : '');
             callback({ line: resp.data.content, source: src });
             return;
           }
@@ -89,109 +84,92 @@
       }
       callback(null);
     };
-    xhr.onerror = function () { callback(null); };
+    xhr.onerror   = function () { callback(null); };
     xhr.ontimeout = function () { callback(null); };
     xhr.send();
   }
 
-  // 备用诗词：每次调用递增索引，保证换一首每次不同
+  // Fallback: rotate index so each call returns a different poem
   function getFallbackPoem() {
     fallbackIndex = (fallbackIndex + 1) % fallbackPoems.length;
     return fallbackPoems[fallbackIndex];
   }
 
-  function createPoetryNode() {
-    var existing = document.querySelector('.jj-hero-poetry');
-    if (existing) {
-      return existing;
-    }
+  // ── DOM ───────────────────────────────────────────────────────────────────
+  function buildHero() {
+    var siteInfo = document.getElementById('site-info');
+    if (!siteInfo || document.querySelector('.jj-verse')) return;
 
-    var siteInfo = getSiteInfoElement();
-    if (!siteInfo) {
-      return null;
-    }
+    // Hide default title/subtitle — poem is the visual centrepiece
+    ['site-title', 'site-subtitle'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
 
-    var wrap = document.createElement('div');
-    wrap.className = 'jj-hero-poetry';
+    var wrap   = document.createElement('div');
+    wrap.className = 'jj-verse';
 
-    var line = document.createElement('div');
-    line.className = 'jj-hero-poetry-line';
+    var deco   = document.createElement('div');
+    deco.className = 'jj-verse-deco';
+    deco.setAttribute('aria-hidden', 'true');
 
-    var source = document.createElement('div');
-    source.className = 'jj-hero-poetry-source';
+    var lineEl = document.createElement('div');
+    lineEl.className = 'jj-verse-line';
+    lineEl.textContent = '\u2026';
 
-    var button = document.createElement('button');
-    button.className = 'jj-hero-poetry-btn';
-    button.type = 'button';
-    button.textContent = '换一首';
+    var srcEl  = document.createElement('div');
+    srcEl.className = 'jj-verse-src';
 
-    wrap.appendChild(line);
-    wrap.appendChild(source);
-    wrap.appendChild(button);
+    var btn    = document.createElement('button');
+    btn.className   = 'jj-verse-btn';
+    btn.type        = 'button';
+    btn.textContent = '\u6362\u4e00\u9996';  // 换一首
+
+    wrap.appendChild(deco);
+    wrap.appendChild(lineEl);
+    wrap.appendChild(srcEl);
+    wrap.appendChild(btn);
     siteInfo.appendChild(wrap);
-
-    return wrap;
   }
 
-  function applyWallpaper(url) {
-    var header = getHeaderElement();
-    if (!header) {
-      return;
-    }
-
-    header.style.backgroundImage = 'linear-gradient(120deg, rgba(4, 13, 28, 0.72), rgba(10, 27, 54, 0.58)), url(' + url + ')';
-    header.style.backgroundSize = 'cover';
-    header.style.backgroundPosition = 'center center';
-    header.style.backgroundRepeat = 'no-repeat';
-  }
-
-  function applyClassic(item) {
-    var wrap = createPoetryNode();
+  function applyPoem(item) {
+    var wrap = document.querySelector('.jj-verse');
     if (!wrap) return;
-    wrap.querySelector('.jj-hero-poetry-line').textContent = item.line;
-    wrap.querySelector('.jj-hero-poetry-source').textContent = item.source;
+    var lineEl = wrap.querySelector('.jj-verse-line');
+    var srcEl  = wrap.querySelector('.jj-verse-src');
+    // Fade out → swap text → fade in
+    wrap.classList.add('jj-verse--out');
+    setTimeout(function () {
+      lineEl.textContent = item.line;
+      srcEl.textContent  = item.source ? '\u2500\u2500\u2500 ' + item.source : '';
+      wrap.classList.remove('jj-verse--out');
+    }, 280);
   }
 
-  // 从今日诗词 API 获取，失败时降级本地备用
   function loadPoetry() {
-    var wrap = createPoetryNode();
-    if (wrap) {
-      var lineNode = wrap.querySelector('.jj-hero-poetry-line');
-      if (lineNode) lineNode.textContent = '正在加载诗词…';
-    }
     fetchPoetryFromAPI(function (item) {
-      applyClassic(item || getFallbackPoem());
+      applyPoem(item || getFallbackPoem());
     });
   }
 
+  // ── Bootstrap ─────────────────────────────────────────────────────────────
   function startDynamicHome() {
     if (!isHomePage()) return;
 
-    var seed = getDailySeed();
-    var wallpaperIndex = seed % wallpapers.length;
-
-    // 直接应用壁纸，不等预加载，消除 seele.jpg 闪烁
-    applyWallpaper(wallpapers[wallpaperIndex]);
-
-    // 从中华诗词 API 动态加载诗词
+    buildHero();
     loadPoetry();
 
-    var poetryWrap = createPoetryNode();
-    if (poetryWrap) {
-      var nextBtn = poetryWrap.querySelector('.jj-hero-poetry-btn');
-      if (nextBtn && !nextBtn.dataset.bound) {
-        nextBtn.dataset.bound = '1';
-        nextBtn.addEventListener('click', function () {
-          loadPoetry();
-        });
-      }
+    var btn = document.querySelector('.jj-verse-btn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        loadPoetry();
+        setTimeout(function () { btn.disabled = false; }, 700);
+      });
     }
 
-    window.setInterval(function () {
-      wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
-      applyWallpaper(wallpapers[wallpaperIndex]);
-      loadPoetry();
-    }, 45000);
+    // Auto-rotate every 60 s
+    setInterval(loadPoetry, 60000);
   }
 
   if (document.readyState === 'loading') {
