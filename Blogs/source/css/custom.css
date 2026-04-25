@@ -31,6 +31,11 @@ body {
     color: var(--jj-text-main);
 }
 
+#page-header {
+  background-color: #0b1628;
+  background-image: linear-gradient(135deg, #0b1628 0%, #132040 60%, #0a1220 100%);
+}
+
 #page-header.nav-fixed #nav {
     background: rgba(252, 254, 255, 0.75);
     backdrop-filter: saturate(130%) blur(12px);
@@ -178,9 +183,15 @@ body {
     text-shadow: 0 6px 26px rgba(12, 33, 66, 0.28);
 }
 
+/* Hero 区初始深色占位：index_img 清空后避免白屏，壁纸加载前保持沉浸感 */
+#page-header {
+    background-color: #0b1628;
+    background-image: linear-gradient(135deg, #0b1628 0%, #132040 60%, #0a1220 100%);
+}
+
 #page-header.full_page {
     animation: heroReveal 0.9s ease both;
-    transition: background-image 1.2s ease-in-out;
+    transition: background-image 0.8s ease-in-out;
 }
 
 #site-info .jj-hero-poetry {

@@ -73,7 +73,7 @@ disable_top_img: false
 default_top_img: 
 
 # The banner image of index page
-index_img: /img/seele.jpg
+index_img:
 
 # Give list pages a cohesive visual language
 archive_img: /img/seele.jpg

@@ -23,36 +23,60 @@
     'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&q=80'
   ];
 
-  var seasonGroups = {
-    spring: [
-      { line: '等闲识得东风面，万紫千红总是春。', source: '朱熹《春日》' },
-      { line: '春风又绿江南岸，明月何时照我还。', source: '王安石《泊船瓜洲》' },
-      { line: '乱花渐欲迷人眼，浅草才能没马蹄。', source: '白居易《钱塘湖春行》' },
-      { line: '竹外桃花三两枝，春江水暖鸭先知。', source: '苏轼《惠崇春江晚景》' }
-    ],
-    summer: [
-      { line: '接天莲叶无穷碧，映日荷花别样红。', source: '杨万里《晓出净慈寺送林子方》' },
-      { line: '小荷才露尖尖角，早有蜻蜓立上头。', source: '杨万里《小池》' },
-      { line: '绿树阴浓夏日长，楼台倒影入池塘。', source: '高骈《山亭夏日》' },
-      { line: '明月别枝惊鹊，清风半夜鸣蝉。', source: '辛弃疾《西江月》' }
-    ],
-    autumn: [
-      { line: '晴空一鹤排云上，便引诗情到碧霄。', source: '刘禹锡《秋词》' },
-      { line: '停车坐爱枫林晚，霜叶红于二月花。', source: '杜牧《山行》' },
-      { line: '落霞与孤鹜齐飞，秋水共长天一色。', source: '王勃《滕王阁序》' },
-      { line: '莫听穿林打叶声，何妨吟啸且徐行。', source: '苏轼《定风波》' }
-    ],
-    winter: [
-      { line: '忽如一夜春风来，千树万树梨花开。', source: '岑参《白雪歌送武判官归京》' },
-      { line: '千山鸟飞绝，万径人踪灭。', source: '柳宗元《江雪》' },
-      { line: '墙角数枝梅，凌寒独自开。', source: '王安石《梅花》' },
-      { line: '晚来天欲雪，能饮一杯无。', source: '白居易《问刘十九》' }
-    ]
-  };
+  // 本地备用诗词池，API 失败时降级使用（覆盖多朝代经典）
+  var fallbackPoems = [
+    { line: '等闲识得东风面，万紫千红总是春。', source: '朱熹《春日》' },
+    { line: '落霞与孤鹜齐飞，秋水共长天一色。', source: '王勃《滕王阁序》' },
+    { line: '接天莲叶无穷碧，映日荷花别样红。', source: '杨万里《晓出净慈寺送林子方》' },
+    { line: '晴空一鹤排云上，便引诗情到碧霄。', source: '刘禹锡《秋词》' },
+    { line: '忽如一夜春风来，千树万树梨花开。', source: '岑参《白雪歌送武判官归京》' },
+    { line: '千山鸟飞绝，万径人踪灭。', source: '柳宗元《江雪》' },
+    { line: '停车坐爱枫林晚，霜叶红于二月花。', source: '杜牧《山行》' },
+    { line: '但愿人长久，千里共婵娟。', source: '苏轼《水调歌头》' },
+    { line: '会当凌绝顶，一览众山小。', source: '杜甫《望岳》' },
+    { line: '举头望明月，低头思故乡。', source: '李白《静夜思》' },
+    { line: '春蚕到死丝方尽，蜡炬成灰泪始干。', source: '李商隐《无题》' },
+    { line: '采菊东篱下，悠然见南山。', source: '陶渊明《饮酒》' },
+    { line: '人生自古谁无死，留取丹心照汗青。', source: '文天祥《过零丁洋》' },
+    { line: '海内存知己，天涯若比邻。', source: '王勃《送杜少府之任蜀州》' },
+    { line: '欲穷千里目，更上一层楼。', source: '王之涣《登鹳雀楼》' },
+    { line: '烽火连三月，家书抵万金。', source: '杜甫《春望》' }
+  ];
 
   function getDailySeed() {
     var d = new Date();
     return d.getFullYear() * 1000 + (d.getMonth() + 1) * 50 + d.getDate();
+  }
+
+  // 调用今日诗词 API（接入 chinese-poetry 库，30 万+ 经典条目）
+  function fetchPoetryFromAPI(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://v2.jinrishici.com/one.json', true);
+    xhr.withCredentials = true;
+    xhr.timeout = 5000;
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) return;
+      if (xhr.status === 200) {
+        try {
+          var resp = JSON.parse(xhr.responseText);
+          if (resp.status === 'success' && resp.data && resp.data.content) {
+            var origin = resp.data.origin || {};
+            var src = (origin.author ? origin.author : '') +
+              (origin.title ? '《' + origin.title + '》' : '');
+            callback({ line: resp.data.content, source: src });
+            return;
+          }
+        } catch (e) {}
+      }
+      callback(null);
+    };
+    xhr.onerror = function () { callback(null); };
+    xhr.ontimeout = function () { callback(null); };
+    xhr.send();
+  }
+
+  function getFallbackPoem() {
+    return fallbackPoems[getDailySeed() % fallbackPoems.length];
   }
 
   function createPoetryNode() {
@@ -78,7 +102,7 @@
     var button = document.createElement('button');
     button.className = 'jj-hero-poetry-btn';
     button.type = 'button';
-    button.textContent = '今日诗词';
+    button.textContent = '换一首';
 
     wrap.appendChild(line);
     wrap.appendChild(source);
@@ -86,27 +110,6 @@
     siteInfo.appendChild(wrap);
 
     return wrap;
-  }
-
-  function getSeasonByMonth(month) {
-    if (month >= 2 && month <= 4) {
-      return 'spring';
-    }
-    if (month >= 5 && month <= 7) {
-      return 'summer';
-    }
-    if (month >= 8 && month <= 10) {
-      return 'autumn';
-    }
-    return 'winter';
-  }
-
-  function preloadImage(url, onLoad) {
-    var img = new Image();
-    img.onload = function () {
-      onLoad(url);
-    };
-    img.src = url;
   }
 
   function applyWallpaper(url) {
@@ -123,30 +126,34 @@
 
   function applyClassic(item) {
     var wrap = createPoetryNode();
-    if (!wrap) {
-      return;
-    }
+    if (!wrap) return;
+    wrap.querySelector('.jj-hero-poetry-line').textContent = item.line;
+    wrap.querySelector('.jj-hero-poetry-source').textContent = item.source;
+  }
 
-    var lineNode = wrap.querySelector('.jj-hero-poetry-line');
-    var sourceNode = wrap.querySelector('.jj-hero-poetry-source');
-    lineNode.textContent = item.line;
-    sourceNode.textContent = item.source;
+  // 从今日诗词 API 获取，失败时降级本地备用
+  function loadPoetry() {
+    var wrap = createPoetryNode();
+    if (wrap) {
+      var lineNode = wrap.querySelector('.jj-hero-poetry-line');
+      if (lineNode) lineNode.textContent = '正在加载诗词…';
+    }
+    fetchPoetryFromAPI(function (item) {
+      applyClassic(item || getFallbackPoem());
+    });
   }
 
   function startDynamicHome() {
-    if (!isHomePage()) {
-      return;
-    }
+    if (!isHomePage()) return;
 
     var seed = getDailySeed();
     var wallpaperIndex = seed % wallpapers.length;
-    var month = new Date().getMonth();
-    var seasonKey = getSeasonByMonth(month);
-    var seasonClassics = seasonGroups[seasonKey];
-    var classicIndex = seed % seasonClassics.length;
 
-    preloadImage(wallpapers[wallpaperIndex], applyWallpaper);
-    applyClassic(seasonClassics[classicIndex]);
+    // 直接应用壁纸，不等预加载，消除 seele.jpg 闪烁
+    applyWallpaper(wallpapers[wallpaperIndex]);
+
+    // 从中华诗词 API 动态加载诗词
+    loadPoetry();
 
     var poetryWrap = createPoetryNode();
     if (poetryWrap) {
@@ -154,17 +161,15 @@
       if (nextBtn && !nextBtn.dataset.bound) {
         nextBtn.dataset.bound = '1';
         nextBtn.addEventListener('click', function () {
-          classicIndex = (classicIndex + 1) % seasonClassics.length;
-          applyClassic(seasonClassics[classicIndex]);
+          loadPoetry();
         });
       }
     }
 
     window.setInterval(function () {
       wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
-      classicIndex = (classicIndex + 1) % seasonClassics.length;
-      preloadImage(wallpapers[wallpaperIndex], applyWallpaper);
-      applyClassic(seasonClassics[classicIndex]);
+      applyWallpaper(wallpapers[wallpaperIndex]);
+      loadPoetry();
     }, 45000);
   }
 
