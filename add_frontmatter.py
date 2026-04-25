@@ -106,7 +106,7 @@ def build_git_date_cache(repo_root: Path) -> tuple[dict[str, str], dict[str, str
         repo_root,
         [
             "log",
-            "--diff-filter=A",
+            "--reverse",
             "--format=__COMMIT__%aI",
             "--name-only",
             "--",
