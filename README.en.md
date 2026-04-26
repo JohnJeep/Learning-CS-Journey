@@ -13,7 +13,8 @@
 
 A continuously evolving computer science knowledge base.
 
-From hardware foundations to application-layer systems, this repository records practical learning notes, deep dives, and long-term growth.
+From hardware foundations to application-layer systems, this repository records practical learning
+notes, deep dives, and long-term growth.
 
 [Knowledge Map](#knowledge-map)<br>
 [Start Reading](#programming-languages)<br>
@@ -27,13 +28,17 @@ From hardware foundations to application-layer systems, this repository records 
 
 ## Project Overview
 
-This project is a structured and continuously maintained computer science knowledge base, developed since 2020. It covers a complete learning path from low-level hardware concepts to high-level software engineering topics.
+This project is a structured and continuously maintained computer science knowledge base,
+developed since 2020. It covers a complete learning path from low-level hardware concepts to
+high-level software engineering topics.
 
-All content comes from personal study, work experience, and hands-on practice, with a strong focus on understanding both how things work and why they work.
+All content comes from personal study, work experience, and hands-on practice,
+with a strong focus on understanding both how things work and why they work.
 
 ### Highlights
 
-- Complete coverage across multiple domains: architecture, assembly, C/C++, Go, OS, networking, databases, cloud native, robotics, and more.
+- Complete coverage across multiple domains: architecture, assembly, C/C++, Go, OS, networking,
+  databases, cloud native, robotics, and more.
 - Continuously updated content with a focus on principles, implementation details, and practical takeaways.
 - Integrated notes from top courses, including MIT, Stanford, and Tsinghua materials.
 - Practice-oriented writing with code examples, configs, and debugging workflows.
@@ -146,7 +151,8 @@ Core GNU ecosystem topics such as GCC, glibc, and ABI details.
 
 Directory: `C/`
 
-C is the first language in this journey. The notes focus on practical and low-level essentials such as memory, pointers, structs, callbacks, and common pitfalls.
+C is the first language in this journey. The notes focus on practical and low-level essentials
+such as memory, pointers, structs, callbacks, and common pitfalls.
 
 <details>
 <summary>Expand key C topics</summary>
@@ -205,11 +211,12 @@ Directory: `Go/`
 
 Comprehensive coverage from language basics to runtime internals.
 
-| Category | Content |
-|------|------|
-| Fundamentals | [Go Basics](Go/Go.md)<br>[Standard Library](Go/GoStandardLibrary.md)<br>[Coding Style](Go/GolangCodeConduct.md)<br>[Testing](Go/GoTest.md) |
-| Advanced | [CGO](Go/CGO.md)<br>[Compiler](Go/Compiler.md)<br>[Performance](Go/Performance.md)<br>[Third-party Packages](Go/ThirdPackages.md) |
-| Internals | [Go Internals](Go/GoInternals.md)<br>[GPM Scheduler](Go/GPM.md)<br>[Map](Go/Map.md)<br>[Slice](Go/Slice.md) |
+- **Fundamentals**: [Go Basics](Go/Go.md), [Standard Library](Go/GoStandardLibrary.md),
+  [Coding Style](Go/GolangCodeConduct.md), [Testing](Go/GoTest.md)
+- **Advanced**: [CGO](Go/CGO.md), [Compiler](Go/Compiler.md), [Performance](Go/Performance.md),
+  [Third-party Packages](Go/ThirdPackages.md)
+- **Internals**: [Go Internals](Go/GoInternals.md), [GPM Scheduler](Go/GPM.md),
+  [Map](Go/Map.md), [Slice](Go/Slice.md)
 
 ### Other Languages
 
@@ -303,7 +310,7 @@ Directory: `CloudNative/`
 | Stack | Notes |
 |------|------|
 | Containerization | Docker, Kubernetes |
-| Service Communication | [gRPC](CloudNative/gRPC/)<br>[Protobuf](CloudNative/Probobuf/)<br>[MQTT](CloudNative/Mqtt.md) |
+| Service Communication | [gRPC](CloudNative/gRPC/), [Protobuf](CloudNative/Probobuf/), [MQTT](CloudNative/Mqtt.md) |
 | Messaging | [Kafka](CloudNative/Kafka/)<br>[RocketMQ](CloudNative/RocketMQ/) |
 | Governance | [Zookeeper](CloudNative/Zookeeper/)<br>[Actor Model](CloudNative/Actor.md) |
 | Observability and CI/CD | [InfluxDB](CloudNative/Influxdb.md)<br>[Jenkins](CloudNative/Jenkins/) |
