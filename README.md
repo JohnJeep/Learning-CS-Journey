@@ -28,8 +28,9 @@
 
 ## 📖 项目简介
 
+本项目是一份**系统化的计算机科学成长型知识库**，自 2020 年起持续维护，内容涵盖从底层硬件到上层应用的完整学习路径。
 
-本项目是一份**系统化的计算机科学成长型知识库**，自 2020 年起持续维护，内容涵盖从底层硬件到上层应用的完整学习路径。所有内容均为个人学习、工作与思考的积累，强调“知其然，更知其所以然”。
+所有内容均为个人学习、工作与思考的积累，强调"知其然，更知其所以然"。
 
 ### 特色亮点
 
@@ -153,7 +154,6 @@ C 语言是接触的第一门语言，这里重点记录工作中对 C 语言知
 
 </details>
 
-
 ### C++
 
 > 目录: `Cpp/`
@@ -163,10 +163,10 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 - **[C++ 基础](Cpp/Novice.md)** — 基础语法与常用特性
 - **[C++ 高级](Cpp/Advance.md)** — 面向对象：封装、继承、多态；泛型编程、元编程
 - **[C++ 新特性](Cpp/C++11.md)**
-       - [C++11](Cpp/C++11.md)
-       - [C++14](Cpp/C++14.md)
-       - [C++17](Cpp/C++17.md)
-       - [C++20](Cpp/C++20.md)
+    - [C++11](Cpp/C++11.md)
+    - [C++14](Cpp/C++14.md)
+    - [C++17](Cpp/C++17.md)
+    - [C++20](Cpp/C++20.md)
 - **[STL 标准库](Cpp/STL.md)** — 容器、迭代器、算法、仿函数，附 STL 源码分析
 - **[内存管理](Cpp/MemoryManagement.md)** — 内存模型、智能指针、内存泄漏检测
 - **[并发编程](Cpp/Concurrency.md)** — 多线程、锁、条件变量、[线程池](Cpp/ThreadPool.md)
@@ -174,18 +174,18 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 - **[智能指针](Cpp/SmartPointer.md)**
 - **[编码规范](Cpp/StyleGuide.md)**
 
-
 ### Go 语言
 
 > 目录: `Go/`
 
 从语言基础到运行时底层原理，全面覆盖 Go 语言知识体系。
 
-| 分类 | 内容 |
-|------|------|
-| **基础** | [Go 基础](Go/Go.md)<br>[标准库](Go/GoStandardLibrary.md)<br>[编码风格](Go/GolangCodeConduct.md)<br>[测试](Go/GoTest.md) |
-| **进阶** | [CGO](Go/CGO.md)<br>[编译器](Go/Compiler.md)<br>[性能优化](Go/Performance.md)<br>[第三方库](Go/ThirdPackages.md) |
-| **底层原理** | [Go Internals](Go/GoInternals.md)<br>[GPM 调度模型](Go/GPM.md)<br>[Map](Go/Map.md)<br>[Slice](Go/Slice.md) |
+- **基础**
+  - [Go 基础](Go/Go.md)、[标准库](Go/GoStandardLibrary.md)、[编码风格](Go/GolangCodeConduct.md)、[测试](Go/GoTest.md)
+- **进阶**
+  - [CGO](Go/CGO.md)、[编译器](Go/Compiler.md)、[性能优化](Go/Performance.md)、[第三方库](Go/ThirdPackages.md)
+- **底层原理**
+  - [Go Internals](Go/GoInternals.md)、[GPM 调度模型](Go/GPM.md)、[Map](Go/Map.md)、[Slice](Go/Slice.md)
 
 ### 其他语言
 
@@ -267,7 +267,9 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 
 课程：[CS 144: Introduction to Computer Networking](https://cs144.github.io/)
 
-推荐书籍：[《计算机网络：自顶向下方法》第 8 版](http://gaia.cs.umass.edu/kurose_ross/) + [配套 Wireshark Labs](http://gaia.cs.umass.edu/kurose_ross/wireshark.htm)
+推荐书籍：
+- [《计算机网络：自顶向下方法》第 8 版](http://gaia.cs.umass.edu/kurose_ross/)
+- [配套 Wireshark Labs](http://gaia.cs.umass.edu/kurose_ross/wireshark.htm)
 
 视频：[Stanford CS144 (B 站)](https://www.bilibili.com/video/BV137411Z7LR)
 
@@ -432,7 +434,8 @@ ROS2 完整技术栈，从基础到实战：
 ### 自学路线
 
 - [cs_study_plan](https://github.com/spring2go/cs_study_plan) — 硬核计算机科学自学计划
-- [TeachYourselfCS-CN](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md) — 自学 CS 推荐课程与书籍
+- [TeachYourselfCS-CN](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
+  — 自学 CS 推荐课程与书籍
 
 ### 推荐书籍
 
@@ -445,7 +448,6 @@ ROS2 完整技术栈，从基础到实战：
 
 ---
 
-
 ## 💬 交流反馈
 
 欢迎通过 Issue、Discussions 或邮件交流建议与想法！提交前请阅读 [文档写作约定](convention.md)。
@@ -455,7 +457,6 @@ ROS2 完整技术栈，从基础到实战：
 - [《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545)
 
 ---
-
 
 ## 📜 License
 
