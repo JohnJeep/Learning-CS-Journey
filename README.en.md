@@ -412,7 +412,6 @@ Directory: `Markdown/`
 Root directory:
 
 - [add_frontmatter.py](add_frontmatter.py): batch-add front matter metadata to documents.
-- [format_all_md.sh](format_all_md.sh): batch-format Markdown files.
 - [clean.bat](clean.bat): cleanup script for Windows environments.
 
 ---

@@ -424,7 +424,6 @@ ROS2 完整技术栈，从基础到实战：
 > 根目录
 
 - [add_frontmatter.py](add_frontmatter.py): 批量补充文档头部元信息
-- [format_all_md.sh](format_all_md.sh): 批量格式化 Markdown 文档
 - [clean.bat](clean.bat): Windows 环境清理脚本
 
 ---
