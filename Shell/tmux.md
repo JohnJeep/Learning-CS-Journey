@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-01-04 09:53:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-04-29 17:53:04
+ * @LastEditTime: 2026-04-29 18:11:46
  * @Description: Tmux Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -185,6 +185,12 @@ run-shell ~/.tmux/plugins/tmux-resurrect/resurrect.tmux
 
 # tmux 外，重新加载 tmux 配置文件
 tmux source-file ~/.tmux.conf
+
+# 保存快捷键
+prefix + Ctrl-s （默认 prefix 键是 Ctrl-b）
+
+# 恢复快捷键
+prefix + Ctrl-r
 ```
 
 Tmux Yank 插件安装：
