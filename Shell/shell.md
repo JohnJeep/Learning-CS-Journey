@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-10-30 09:38:07
- * @LastEditTime: 2025-11-20 12:42:23
+ * @LastEditTime: 2026-05-19 21:01:43
  * @LastEditors: JohnJeep
  * @Description: Shell Usage
 -->
+
 - [1. Introduction](#1-introduction)
 - [2. Bash Terminal Shortcuts](#2-bash-terminal-shortcuts)
   - [2.1. Terminal](#21-terminal)
@@ -48,9 +49,8 @@
   - [11.4. 其他特殊字符](#114-其他特殊字符)
 - [12. tee](#12-tee)
 - [13. sed](#13-sed)
-- [14. awk](#14-awk)
-- [15. expect](#15-expect)
-- [16. References](#16-references)
+- [14. expect](#14-expect)
+- [15. References](#15-references)
 
 
 # 1. Introduction
@@ -732,43 +732,7 @@ sed俗称做流编辑器，以行单位进行字符处理。
   - `-e`: 使用多个脚本语句替换 时，需要用 `-e` 选项。
 
 
-# 14. awk
-以列单位进行字符处理，默认情况下按照TAB或空格对文件进行拆分。
-
-- 格式
-  - `awk 参数 '脚本语句' 带操作文件`。例子：`ps aux | awk '{print $3}'` 打印进程信息中的第三列
-  - `awk 参数 -f '脚本文件' 带操作文件` 
-- 变量
-  - `print`: 打印输出变量，默认打印数据后自动会换行。
-  - `printf`: 类似于C语言中的printf函数用法。  
-  - 两个特殊的条件：BEGIN、END。例子：统计一个文件中的所有空格数 `awk '/^ *$/ {count=count+1} END {print count}' test.txt`
-  - 常用内建变量
-    - FILENAME：当前输入文件的文件名
-    - NR：当前行的行号，R(record)
-    - NF：当前行所拥有的的列数，F(field)
-    - OFS：输出字段的列分隔符，默认是空格
-    - FS：输入文件的列分隔符，默认是空格和TAB
-    - ORS：输出字段的行分隔符，默认是换行符
-    - RS：输入文件的行分隔符，默认是换行符
-- 例子： 使用 awk 批量杀进程的命令：
-    ```sh
-    ps -ef | grep firefox | grep -v grep | awk '{print "kill -9 "$2}'|sh
-    ```
-
-    说明
-    ```sh
-    #列出了当前主机中运行的进程中包含firefox关键字的进程
-    ps -ef | grep firefox | grep -v grep
-
-    #列出了要kill掉这些进程的命令，并将之打印在了屏幕上 
-    ps -ef | grep firefox | grep -v grep | awk '{print "kill -9 "$2}'
-
-    #后面加上|sh后，则执行这些命令，进而杀掉了这些进程
-    ps -ef | grep firefox | grep -v grep | awk '{print "kill -9 "$2}' | sh
-    ```
-
-
-# 15. expect
+# 14. expect
 
 **Expect** 是[Unix](https://zh.wikipedia.org/wiki/Unix)系统中用来进行自动化控制和测试的软件工具，由[Don Libes](https://zh.wikipedia.org/w/index.php?title=Don_Libes&action=edit&redlink=1)制作，作为[Tcl](https://zh.wikipedia.org/wiki/Tcl)脚本语言的一个扩展，应用在交互式[软件](https://zh.wikipedia.org/wiki/软件)中如[telnet](https://zh.wikipedia.org/wiki/Telnet)，[ftp](https://zh.wikipedia.org/wiki/文件传输协议)，[Passwd](https://zh.wikipedia.org/wiki/Passwd)，[fsck](https://zh.wikipedia.org/wiki/Fsck)，[rlogin](https://zh.wikipedia.org/w/index.php?title=Rlogin&action=edit&redlink=1)，[tip](https://zh.wikipedia.org/w/index.php?title=Tip&action=edit&redlink=1)，[ssh](https://zh.wikipedia.org/wiki/Secure_Shell)等等。该工具利用Unix伪终端包装其子进程，允许任意程序通过终端接入进行自动化控制；也可利用[Tk](https://zh.wikipedia.org/wiki/Tk)工具，将交互程序包装在[X11](https://zh.wikipedia.org/wiki/X11)的[图形用户界面](https://zh.wikipedia.org/wiki/图形用户界面)中。
 
@@ -787,7 +751,7 @@ set timeout         设置超时时间
 ```
 
 
-# 16. References
+# 15. References
 
 - Bash快捷键大全: https://linux.cn/article-5660-1.html
 - Terminator The robot future of terminals: https://gnometerminator.blogspot.com/p/introduction.html
