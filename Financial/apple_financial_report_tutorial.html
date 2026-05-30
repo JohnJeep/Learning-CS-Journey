@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手把手读懂 Apple 财报</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --card: #1c2128;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.04);
+  --text: #e6edf3;
+  --muted: #7d8590;
+  --orange: #f0883e;
+  --orange-dim: rgba(240,136,62,0.12);
+  --green: #3fb950;
+  --green-dim: rgba(63,185,80,0.1);
+  --red: #f85149;
+  --red-dim: rgba(248,81,73,0.1);
+  --blue: #58a6ff;
+  --blue-dim: rgba(88,166,255,0.1);
+  --yellow: #e3b341;
+  --yellow-dim: rgba(227,179,65,0.1);
+  --purple: #bc8cff;
+  --purple-dim: rgba(188,140,255,0.1);
+  --mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto;
+}
+.nav-logo {
+  font-size: 14px; font-weight: 700; color: var(--orange);
+  white-space: nowrap; padding: 14px 20px 14px 0;
+  border-right: 1px solid var(--border);
+  margin-right: 16px;
+  font-family: 'Lora', serif;
+  flex-shrink: 0;
+}
+.nav-tab {
+  padding: 14px 16px;
+  font-size: 12px; color: var(--muted);
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+/* ─── LAYOUT ─── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 60px 24px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(240,136,62,0.07) 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--orange-dim); color: var(--orange);
+  border: 1px solid rgba(240,136,62,0.3);
+  font-size: 11px; font-family: var(--mono);
+  padding: 4px 12px; border-radius: 99px;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Lora', serif;
+  font-size: 40px; font-weight: 700;
+  line-height: 1.2; margin-bottom: 16px;
+  position: relative;
+}
+.hero h1 em { color: var(--orange); font-style: italic; }
+.hero-sub {
+  font-size: 15px; color: var(--muted);
+  max-width: 520px; margin: 0 auto 32px;
+  line-height: 1.8;
+}
+.progress-bar-wrap {
+  display: flex; gap: 8px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px;
+}
+.progress-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-family: var(--mono); color: var(--muted);
+  padding: 6px 12px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface); cursor: pointer;
+  transition: all 0.2s;
+}
+.progress-item:hover { border-color: var(--orange); color: var(--orange); }
+.progress-item .num {
+  width: 20px; height: 20px; border-radius: 4px;
+  background: var(--card); display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+
+/* ─── SECTION TITLE ─── */
+.section-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange-dim); color: var(--orange);
+  border: 1px solid rgba(240,136,62,0.25);
+  font-size: 11px; font-family: var(--mono);
+  padding: 4px 12px; border-radius: 6px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  margin-bottom: 12px; margin-top: 48px;
+}
+.sec-title {
+  font-family: 'Lora', serif;
+  font-size: 26px; font-weight: 700;
+  margin-bottom: 6px; line-height: 1.3;
+}
+.sec-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+
+/* ─── INTRO CARD ─── */
+.intro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+.intro-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.intro-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+.intro-card p strong { color: var(--text); font-weight: 500; }
+
+/* ─── ROW BREAKDOWN ─── */
+.statement-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.statement-title {
+  background: var(--card);
+  padding: 14px 20px;
+  font-size: 13px; font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  color: var(--text);
+}
+.statement-title .en {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); font-weight: 400;
+}
+
+.row-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border2);
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+}
+.row-item:last-child { border-bottom: none; }
+.row-item:hover { background: rgba(255,255,255,0.02); }
+.row-item.active { background: rgba(240,136,62,0.05); border-left: 3px solid var(--orange); }
+.row-item.indent { padding-left: 36px; }
+.row-item.subtotal { background: rgba(255,255,255,0.02); }
+.row-item.total {
+  background: rgba(240,136,62,0.05);
+  border-top: 1px solid rgba(240,136,62,0.2);
+}
+
+.row-left { display: flex; flex-direction: column; gap: 3px; }
+.row-name { font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.row-en { font-size: 11px; font-family: var(--mono); color: var(--muted); }
+.row-explain-preview { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+.row-right { text-align: right; flex-shrink: 0; }
+.row-value { font-family: var(--mono); font-size: 15px; font-weight: 500; }
+.row-yoy { font-size: 11px; font-family: var(--mono); margin-top: 2px; }
+.up { color: var(--green); }
+.down { color: var(--red); }
+.neutral { color: var(--yellow); }
+
+/* ─── EXPLAIN PANEL ─── */
+.explain-panel {
+  background: linear-gradient(135deg, rgba(240,136,62,0.06), rgba(240,136,62,0.02));
+  border: 1px solid rgba(240,136,62,0.2);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin: 0 20px 16px;
+  display: none;
+}
+.explain-panel.open { display: block; animation: slideDown 0.2s ease; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+
+.explain-panel h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--orange); }
+.explain-panel .analogy {
+  background: rgba(255,255,255,0.04); border-radius: 8px;
+  padding: 12px 14px; margin: 10px 0;
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  border-left: 3px solid var(--yellow);
+}
+.explain-panel .analogy strong { color: var(--yellow); }
+.explain-panel p { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 6px; }
+.explain-panel p strong { color: var(--text); font-weight: 500; }
+.explain-panel .formula {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--card); padding: 10px 14px; border-radius: 6px;
+  color: var(--blue); margin: 8px 0;
+}
+.explain-panel .insight {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 13px; color: var(--green); margin-top: 8px;
+  line-height: 1.6;
+}
+.explain-panel .insight::before { content: '💡'; flex-shrink: 0; }
+
+/* ─── BADGE ─── */
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: 10px; font-family: var(--mono);
+  padding: 2px 7px; border-radius: 4px; font-weight: 500;
+}
+.badge.click { background: rgba(88,166,255,0.1); color: var(--blue); }
+
+/* ─── SUMMARY CARD ─── */
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+.s-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px;
+}
+.s-card .label { font-size: 11px; color: var(--muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; }
+.s-card .value { font-size: 22px; font-weight: 700; font-family: var(--mono); margin-bottom: 4px; }
+.s-card .note { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ─── FLOW DIAGRAM ─── */
+.flow { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+.flow-item {
+  display: flex; align-items: center; gap: 0;
+}
+.flow-box {
+  flex: 1; padding: 14px 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; text-align: center;
+}
+.flow-box .flow-label { font-size: 12px; color: var(--muted); }
+.flow-box .flow-value { font-size: 18px; font-weight: 700; font-family: var(--mono); margin-top: 2px; }
+.flow-arrow {
+  padding: 0 16px; font-size: 22px; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center;
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  gap: 2px;
+}
+.flow-minus { font-size: 20px; color: var(--red); }
+.flow-equals { font-size: 20px; color: var(--green); }
+.flow-row { display: flex; align-items: center; gap: 12px; margin: 6px 0; }
+
+/* ─── KEY TAKEAWAY ─── */
+.takeaway {
+  background: var(--green-dim); border: 1px solid rgba(63,185,80,0.25);
+  border-radius: 12px; padding: 20px 24px; margin: 24px 0;
+}
+.takeaway h3 { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+.takeaway ul { list-style: none; }
+.takeaway ul li {
+  font-size: 13px; color: var(--text); line-height: 1.7;
+  padding: 4px 0; display: flex; gap: 8px; align-items: flex-start;
+}
+.takeaway ul li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+/* ─── WARNING ─── */
+.warn {
+  background: var(--yellow-dim); border: 1px solid rgba(227,179,65,0.25);
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  margin: 12px 0;
+}
+.warn strong { color: var(--yellow); }
+
+/* ─── QUIZ ─── */
+.quiz-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px; margin: 24px 0;
+}
+.quiz-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+.quiz-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 8px;
+  border: 1px solid var(--border); margin-bottom: 8px;
+  cursor: pointer; font-size: 14px;
+  transition: all 0.2s;
+}
+.quiz-option:hover { border-color: var(--blue); background: var(--blue-dim); }
+.quiz-option.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+.quiz-option.wrong { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+.quiz-option .opt-letter {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--card); display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 12px; flex-shrink: 0; font-weight: 700;
+}
+.quiz-result { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 8px; font-size: 13px; line-height: 1.7; }
+.quiz-result.show { display: block; }
+.quiz-result.right { background: var(--green-dim); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+.quiz-result.wrong { background: var(--red-dim); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+
+/* ─── CHEATSHEET ─── */
+.cheat-table { width: 100%; border-collapse: collapse; }
+.cheat-table th {
+  background: var(--card); font-size: 11px; font-family: var(--mono);
+  text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted);
+  padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.cheat-table td {
+  padding: 12px 14px; font-size: 13px;
+  border-bottom: 1px solid var(--border2);
+  line-height: 1.5;
+}
+.cheat-table tr:last-child td { border-bottom: none; }
+.cheat-table .en-term { font-family: var(--mono); font-size: 12px; color: var(--blue); }
+.cheat-table .cn-term { font-weight: 600; }
+
+/* ─── DIVIDER ─── */
+.divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+/* responsive */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .row-item { grid-template-columns: 1fr; }
+  .row-right { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-logo">🍎 财报入门</div>
+  <div class="nav-tab active" onclick="showPage('home', this)">📖 开始</div>
+  <div class="nav-tab" onclick="showPage('income', this)">① 利润表</div>
+  <div class="nav-tab" onclick="showPage('balance', this)">② 资产负债表</div>
+  <div class="nav-tab" onclick="showPage('cashflow', this)">③ 现金流表</div>
+  <div class="nav-tab" onclick="showPage('cheatsheet', this)">📋 术语速查</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PAGE: HOME -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">手把手入门 · 真实数据</div>
+    <h1>读懂 Apple 财报<br><em>从零开始</em></h1>
+    <p class="hero-sub">用 Apple FY2026 Q2 真实财报，逐行讲解每个英文词汇的含义，配上生活化比喻，让你真正看懂三张报表。</p>
+  </div>
+
+  <div class="wrap">
+    <div class="section-badge">🗺️ 学习路径</div>
+    <div class="sec-title">三张表，一个故事</div>
+    <p class="sec-sub">财报里有三张核心报表，它们各讲一件事，合起来才是公司完整的财务状况。</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div class="intro-card" style="border-top:3px solid var(--orange);cursor:pointer;" onclick="showPage('income', document.querySelector('.nav-tab:nth-child(3)'))">
+        <h3>① 利润表<br><span style="font-size:11px;font-family:var(--mono);color:var(--muted);font-weight:400;">Income Statement</span></h3>
+        <p>就像一张<strong>成绩单</strong>——这个季度公司卖了多少东西、花了多少钱、最终赚了多少。</p>
+        <div style="margin-top:12px;font-size:12px;font-family:var(--mono);color:var(--orange);">点击开始学 →</div>
+      </div>
+      <div class="intro-card" style="border-top:3px solid var(--blue);cursor:pointer;" onclick="showPage('balance', document.querySelector('.nav-tab:nth-child(4)'))">
+        <h3>② 资产负债表<br><span style="font-size:11px;font-family:var(--mono);color:var(--muted);font-weight:400;">Balance Sheet</span></h3>
+        <p>就像一张<strong>家庭资产清单</strong>——公司有哪些家当（资产），欠了多少债（负债），最终净值是多少。</p>
+        <div style="margin-top:12px;font-size:12px;font-family:var(--mono);color:var(--blue);">点击开始学 →</div>
+      </div>
+      <div class="intro-card" style="border-top:3px solid var(--green);cursor:pointer;" onclick="showPage('cashflow', document.querySelector('.nav-tab:nth-child(5)'))">
+        <h3>③ 现金流量表<br><span style="font-size:11px;font-family:var(--mono);color:var(--muted);font-weight:400;">Cash Flow Statement</span></h3>
+        <p>就像一本<strong>银行流水账</strong>——钱从哪里进来、往哪里流出去，看真实的现金流动。</p>
+        <div style="margin-top:12px;font-size:12px;font-family:var(--mono);color:var(--green);">点击开始学 →</div>
+      </div>
+    </div>
+
+    <div class="intro-card" style="border-left:3px solid var(--yellow);">
+      <h3>📌 看财报前，先记住这个核心逻辑</h3>
+      <p>
+        公司每天的经营，最终都会体现在这三张表里。<br><br>
+        <strong>利润表</strong> 告诉你"赚了多少" → 但利润可能被会计方法调整<br>
+        <strong>现金流表</strong> 告诉你"真正进账多少" → 更难造假，更真实<br>
+        <strong>资产负债表</strong> 告诉你"家底有多厚" → 某个时间点的快照<br><br>
+        三张表互相印证，才能判断公司真实状况。单看一张是片面的。
+      </p>
+    </div>
+
+    <div class="section-badge" style="margin-top:40px;">📖 使用说明</div>
+    <div class="intro-card">
+      <h3>怎么使用这个教程？</h3>
+      <p>
+        每张报表页面都会把<strong>原版英文财报的每一行</strong>都列出来。<br><br>
+        👆 <strong>点击任意一行数字</strong>，就会弹出详细解释——包括这个词是什么意思、用什么生活场景来理解、这个数字说明了什么问题。<br><br>
+        建议按顺序学：先利润表 → 再资产负债表 → 最后现金流表。每张表后面都有小测验，帮助你巩固记忆。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PAGE: INCOME STATEMENT -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-income" class="page">
+  <div class="wrap">
+    <div class="section-badge">第一张表</div>
+    <div class="sec-title">利润表<span style="font-family:'DM Mono';font-size:16px;font-weight:400;color:var(--muted);margin-left:12px;">Income Statement</span></div>
+    <p class="sec-sub">这张表回答一个问题：<strong>这个季度，Apple 赚钱了吗？赚了多少？</strong>从上到下，是钱"一层层被扣掉"的过程。</p>
+
+    <div class="intro-card" style="margin-bottom:24px;border-left:3px solid var(--orange);">
+      <h3>💡 先理解这张表的逻辑</h3>
+      <p>
+        想象你开了一家奶茶店：<br>
+        卖奶茶收入 $100（<strong>营收</strong>）→ 减去原料费 $40（<strong>成本</strong>）→ 剩 $60（<strong>毛利润</strong>）→ 减去房租、工资 $20（<strong>运营费用</strong>）→ 剩 $40（<strong>营业利润</strong>）→ 减去税 $5 →  最终净赚 $35（<strong>净利润</strong>）<br><br>
+        Apple 的利润表也是同样的逻辑，只是数字换成了亿美元。
+      </p>
+    </div>
+
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">👇 <strong style="color:var(--text);">点击每一行</strong>查看详细解释 · 数据为 FY26 Q2（单季度，单位：百万美元）</p>
+
+    <!-- NET SALES SECTION -->
+    <div class="statement-block">
+      <div class="statement-title">
+        📦 第一部分：营收（卖了多少东西）
+        <span class="en">Net Sales</span>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('e-iphone')">
+        <div class="row-left">
+          <div class="row-name">iPhone 销售收入 <span class="badge click">点击</span></div>
+          <div class="row-en">Net sales — iPhone</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$56,994M</div>
+          <div class="row-yoy up">▲ +21.7% vs 去年</div>
+        </div>
+      </div>
+      <div id="e-iphone" class="explain-panel">
+        <h4>iPhone 销售收入</h4>
+        <p>这就是 Apple 通过卖手机赚到的钱。<strong>$56,994M = 约570亿美元</strong>，一个季度卖了570亿，平均每天约6.3亿美元。</p>
+        <div class="analogy"><strong>生活比喻：</strong>你开奶茶店，"iPhone收入"就是你卖招牌产品大杯珍奶的总销售额。它是你的主打产品，占你总收入的大头。</div>
+        <p>iPhone 占本季总营收的 <strong>51.3%</strong>，是 Apple 最核心的收入来源。同比增长21.7%，意味着比去年同期多卖了约100亿美元，非常强劲。</p>
+        <div class="insight">iPhone 17系列升级效果显著，大中华区反弹贡献明显。但过度依赖iPhone也是风险——一旦手机市场放缓，整体营收受影响大。</div>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('e-mac')">
+        <div class="row-left">
+          <div class="row-name">Mac 销售收入</div>
+          <div class="row-en">Net sales — Mac</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$8,399M</div>
+          <div class="row-yoy up">▲ +5.7%</div>
+        </div>
+      </div>
+      <div id="e-mac" class="explain-panel">
+        <h4>Mac 销售收入</h4>
+        <p>Apple 电脑（MacBook Air / Pro、iMac 等）的销售额，约 <strong>84亿美元</strong>，占总营收 7.6%。</p>
+        <div class="analogy"><strong>比喻：</strong>这是奶茶店里的"甜点"品类，不是主角，但稳定贡献收入。</div>
+        <p>增速5.7%，较平稳。新M5芯片 MacBook 系列对销量有支撑，但整体 PC 市场成熟，增长有限。</p>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('e-ipad')">
+        <div class="row-left">
+          <div class="row-name">iPad 销售收入</div>
+          <div class="row-en">Net sales — iPad</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$6,914M</div>
+          <div class="row-yoy up">▲ +7.9%</div>
+        </div>
+      </div>
+      <div id="e-ipad" class="explain-panel">
+        <h4>iPad 销售收入</h4>
+        <p>平板电脑销售额，约 <strong>69亿美元</strong>，占总收入约 6.2%。</p>
+        <div class="analogy"><strong>比喻：</strong>奶茶店里的"季节限定款"——有固定客群，但不是每个人都买。</div>
+        <p>iPad 市场相对饱和，增长主要靠 M4 芯片版 iPad Air 带动。教育和企业市场是主要增长来源。</p>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('e-wear')">
+        <div class="row-left">
+          <div class="row-name">可穿戴、家居及配件</div>
+          <div class="row-en">Wearables, Home and Accessories</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$7,901M</div>
+          <div class="row-yoy up">▲ +5.0%</div>
+        </div>
+      </div>
+      <div id="e-wear" class="explain-panel">
+        <h4>可穿戴、家居及配件</h4>
+        <p>包含：AirPods（耳机）、Apple Watch（手表）、Apple TV、HomePod 音箱、以及各类配件。约 <strong>79亿美元</strong>。</p>
+        <div class="analogy"><strong>比喻：</strong>这是奶茶店卖的"周边产品"——杯套、徽章、保温杯。不是主业，但增加客单价。</div>
+        <p>这块增速放缓，Apple Watch 市场渗透率已较高，AirPods 市场竞争激烈（索尼、三星都在追赶）。</p>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('e-svc')">
+        <div class="row-left">
+          <div class="row-name">服务收入 ⭐ 最重要</div>
+          <div class="row-en">Services</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--orange)">$30,976M</div>
+          <div class="row-yoy up">▲ +16.3%</div>
+        </div>
+      </div>
+      <div id="e-svc" class="explain-panel">
+        <h4>⭐ 服务收入 — Apple 的第二增长曲线</h4>
+        <p>包含：App Store（应用商店抽佣）、Apple Music、iCloud 存储、Apple TV+（视频流媒体）、Apple Pay、AppleCare 保修服务、广告收入等。<strong>$30,976M ≈ 310亿美元</strong>。</p>
+        <div class="analogy"><strong>比喻：</strong>你的奶茶店除了卖奶茶，还卖"月度会员卡"——每个月固定收费，不用额外劳动，纯躺赚。这种"订阅制"收入是最香的，因为它<strong>可以预期、持续稳定</strong>。</div>
+        <p>为什么这块这么重要？</p>
+        <p><strong>毛利率极高</strong>：服务的毛利率约 75%（相比产品约 37%），卖出100元服务，留下75元。</p>
+        <p><strong>不受硬件周期影响</strong>：即使人们不换手机，还是每月交 iCloud 费。</p>
+        <p><strong>持续增长</strong>：同比 +16.3%，是各品类中增速最稳的。</p>
+        <div class="insight">分析师认为：未来五年，服务收入占比将从28%提升至35-40%，这将大幅提升Apple整体利润率，也是Apple股票溢价的核心支撑。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('e-total-sales')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--orange);font-weight:700;">🔢 总营收</div>
+          <div class="row-en">Total Net Sales</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--orange)">$111,184M</div>
+          <div class="row-yoy up">▲ +16.6% vs 去年 $95,359M</div>
+        </div>
+      </div>
+      <div id="e-total-sales" class="explain-panel">
+        <h4>总营收 = 所有产品和服务的销售额之和</h4>
+        <div class="formula">总营收 = iPhone + Mac + iPad + 可穿戴 + 服务 = $111,184M</div>
+        <p>换算成人民币约 <strong>8,000亿元</strong>，一个季度。这相当于 Apple 平均每小时收入约 <strong>1.27亿美元（约9亿人民币）</strong>。</p>
+        <p>同比增长16.6%，超市场预期，是近几个季度增速最快的一次，被分析师称为"全面反弹"。</p>
+        <div class="insight">看营收增速时，不仅看绝对数字，更要看"增速是加快还是放缓"。16.6%对Apple这个体量来说非常亮眼。</div>
+      </div>
+    </div>
+
+    <!-- COST OF SALES -->
+    <div class="statement-block">
+      <div class="statement-title">💸 第二部分：卖货成本（赚这笔钱花了多少）<span class="en">Cost of Sales</span></div>
+
+      <div class="row-item" onclick="toggleExplain('e-cost-prod')">
+        <div class="row-left">
+          <div class="row-name">产品成本</div>
+          <div class="row-en">Cost of sales — Products</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">$49,179M</div>
+          <div class="row-yoy" style="color:var(--muted)">产品毛利率 38.7%</div>
+        </div>
+      </div>
+      <div id="e-cost-prod" class="explain-panel">
+        <h4>产品成本</h4>
+        <p>生产 iPhone、Mac、iPad 等产品直接花费的钱，包括：零部件采购（芯片、屏幕、摄像头）、组装（富士康工厂）、运输等。</p>
+        <div class="formula">产品毛利率 = (产品营收 - 产品成本) ÷ 产品营收 = ($80,208 - $49,179) ÷ $80,208 ≈ 38.7%</div>
+        <div class="analogy"><strong>比喻：</strong>你卖一杯100元的奶茶，原料+包装成本是61元，赚了39元毛利。</div>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('e-cost-svc')">
+        <div class="row-left">
+          <div class="row-name">服务成本</div>
+          <div class="row-en">Cost of sales — Services</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">$7,224M</div>
+          <div class="row-yoy" style="color:var(--muted)">服务毛利率 76.7%</div>
+        </div>
+      </div>
+      <div id="e-cost-svc" class="explain-panel">
+        <h4>服务成本</h4>
+        <p>运营 App Store、iCloud 服务器、流媒体内容成本等。只有72亿，但服务营收是310亿。</p>
+        <div class="formula">服务毛利率 = ($30,976 - $7,224) ÷ $30,976 ≈ 76.7%</div>
+        <div class="analogy"><strong>比喻：</strong>你卖一张100元/月的会员卡，服务器和运营成本只需23元，稳赚77元。<strong>这就是为什么科技公司都想做订阅制。</strong></div>
+        <div class="insight">服务毛利率(76.7%)是产品毛利率(38.7%)的近2倍！这解释了为什么所有分析师都强调"服务是未来"。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('e-gross')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--orange);font-weight:700;">🔢 毛利润（Gross Margin）</div>
+          <div class="row-en">= 总营收 − 总成本</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--orange)">$54,781M</div>
+          <div class="row-yoy" style="color:var(--orange)">毛利率 49.3%</div>
+        </div>
+      </div>
+      <div id="e-gross" class="explain-panel">
+        <h4>毛利润 — 扣掉直接成本后剩下的</h4>
+        <div class="formula">毛利润 = 总营收 $111,184M − 总成本 $56,403M = $54,781M</div>
+        <div class="formula">毛利率 = $54,781 ÷ $111,184 = 49.3%</div>
+        <p>每卖出100美元，扣掉直接生产/服务成本，还剩 <strong>49.3美元</strong>。这个数字历史上处于高位，显示产品定价权和供应链议价能力都很强。</p>
+        <div class="analogy"><strong>比喻：</strong>你的奶茶店总销售额100元，原料、包装、外卖平台佣金共花了51元，剩下49元是"毛利润"——但还没算房租和工资。</div>
+        <div class="insight">49.3%的毛利率远超大多数硬件公司（通常20-30%），说明Apple有极强的品牌溢价能力。</div>
+      </div>
+    </div>
+
+    <!-- OPERATING EXPENSES -->
+    <div class="statement-block">
+      <div class="statement-title">🏢 第三部分：运营费用（公司日常运转的开支）<span class="en">Operating Expenses</span></div>
+
+      <div class="row-item" onclick="toggleExplain('e-rd')">
+        <div class="row-left">
+          <div class="row-name">研发费用 <span class="badge" style="background:var(--purple-dim);color:var(--purple)">重点关注</span></div>
+          <div class="row-en">Research and Development (R&D)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$11,419M</div>
+          <div class="row-yoy up">▲ +33.6%！</div>
+        </div>
+      </div>
+      <div id="e-rd" class="explain-panel">
+        <h4>研发费用 — 公司为未来花的钱</h4>
+        <p>Apple 雇用工程师、研究员开发新技术、新产品的花费。本季 <strong>$114亿</strong>，同比猛增 <strong>33.6%</strong>！这是财报里最值得关注的数字之一。</p>
+        <div class="analogy"><strong>比喻：</strong>你的奶茶店在研发新口味、新包装、新设备——这是为未来投资，现在花钱，未来赚钱。</div>
+        <p>为什么研发暴增33.6%？主要原因：<strong>AI 军备竞赛</strong>。苹果正在加速布局 Apple Intelligence（AI 功能），同时传闻在研发自研服务器芯片，应对 OpenAI 等竞争压力。</p>
+        <div class="insight">研发增速快于营收增速，说明公司在主动投资未来，而不仅仅靠老产品躺赚。这通常是积极信号，但短期会压低利润。</div>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('e-sga')">
+        <div class="row-left">
+          <div class="row-name">销售、行政及管理费用</div>
+          <div class="row-en">Selling, General and Administrative (SG&A)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$7,477M</div>
+          <div class="row-yoy up">▲ +11.1%</div>
+        </div>
+      </div>
+      <div id="e-sga" class="explain-panel">
+        <h4>销售、行政及管理费用（SG&A）</h4>
+        <p>包含：市场营销广告费、零售店运营成本、高管薪酬、法律费用、行政人员工资等。</p>
+        <div class="analogy"><strong>比喻：</strong>奶茶店的房租、店员工资、外卖平台广告费、老板自己的工资——这些不直接产生产品，但维持公司运转必不可少。</div>
+        <p>SG&A增速(11.1%)低于营收增速(16.6%)，说明公司在控制行政成本，<strong>规模效应</strong>在发挥作用——营收越大，行政成本占比越低，利润率越高。</p>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('e-opincome')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--orange);font-weight:700;">🔢 营业利润 / 经营收入</div>
+          <div class="row-en">Operating Income = 毛利润 − 运营费用</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--orange)">$35,885M</div>
+          <div class="row-yoy" style="color:var(--orange)">营业利润率 32.3%</div>
+        </div>
+      </div>
+      <div id="e-opincome" class="explain-panel">
+        <h4>营业利润（Operating Income）</h4>
+        <div class="formula">营业利润 = 毛利润 $54,781M − 运营费用 $18,896M = $35,885M</div>
+        <div class="formula">营业利润率 = $35,885 ÷ $111,184 = 32.3%</div>
+        <p>卖出100元，扣掉所有直接成本和运营费用，还剩 <strong>32.3元</strong>——但还没交税。</p>
+        <div class="analogy"><strong>比喻：</strong>奶茶店营业额100元，扣掉原料51元+房租工资广告19元，剩30元。这就是"本业赚了多少"，不含借钱利息和税。</div>
+      </div>
+    </div>
+
+    <!-- BOTTOM LINE -->
+    <div class="statement-block">
+      <div class="statement-title">💰 第四部分：最终净利润（交完税剩下多少）<span class="en">Bottom Line</span></div>
+
+      <div class="row-item" onclick="toggleExplain('e-otherinc')">
+        <div class="row-left">
+          <div class="row-name">其他收入/支出</div>
+          <div class="row-en">Other income/(expense), net</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$52M</div>
+          <div class="row-yoy" style="color:var(--muted)">vs 去年 -$279M</div>
+        </div>
+      </div>
+      <div id="e-otherinc" class="explain-panel">
+        <h4>其他收入/支出</h4>
+        <p>主要是投资收益、利息收入/支出、汇率波动损益等。这个数字通常不大，且波动较大，<strong>分析时不必太纠结</strong>。</p>
+        <p>本季为 -$52M（支出），去年同期 -$279M，说明今年汇率/利息负面影响减小了。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('e-tax')">
+        <div class="row-left">
+          <div class="row-name">所得税</div>
+          <div class="row-en">Provision for Income Taxes</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">$6,255M</div>
+          <div class="row-yoy" style="color:var(--muted)">实际税率 17.5%</div>
+        </div>
+      </div>
+      <div id="e-tax" class="explain-panel">
+        <h4>所得税（Provision for Income Taxes）</h4>
+        <p>交给政府的企业所得税。<strong>$62.5亿</strong>，实际税率约 17.5%（低于美国法定的21%，因为Apple有合法的税务优化安排）。</p>
+        <div class="analogy"><strong>比喻：</strong>政府的"分润"——你的奶茶店赚了钱，政府要收税，剩下的才是你的。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('e-net')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--green);font-weight:700;">🏆 净利润（最终答案）</div>
+          <div class="row-en">Net Income</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$29,578M</div>
+          <div class="row-yoy up">▲ +19.4% vs 去年 $24,780M</div>
+        </div>
+      </div>
+      <div id="e-net" class="explain-panel">
+        <h4>🏆 净利润 — 利润表最重要的数字</h4>
+        <div class="formula">净利润 = 营业利润 $35,885M + 其他 -$52M − 所得税 $6,255M = $29,578M</div>
+        <p><strong>净利润率 = $29,578 ÷ $111,184 = 26.6%</strong></p>
+        <p>Apple 卖出100元，最终净赚26.6元。这已经是极高的净利润率——大多数公司能有10%就不错了。</p>
+        <div class="analogy"><strong>比喻：</strong>奶茶店卖了100元，扣掉原料、房租、工资、税，最终拿到手26元——你说这店值不值得开？当然值！</div>
+        <div class="insight">同比增长19.4%，且增速快于营收增速16.6%，说明利润率在扩张——这是最理想的状态，叫做"经营杠杆"效应。</div>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('e-eps')">
+        <div class="row-left">
+          <div class="row-name">每股摊薄收益 <span class="badge click">关键</span></div>
+          <div class="row-en">Earnings Per Share — Diluted (EPS)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$2.01</div>
+          <div class="row-yoy up">▲ +21.8% vs 去年 $1.65</div>
+        </div>
+      </div>
+      <div id="e-eps" class="explain-panel">
+        <h4>每股摊薄收益（Diluted EPS）— 小股东最直接关心的数字</h4>
+        <div class="formula">EPS = 净利润 ÷ 总股数 = $29,578M ÷ 14,725M股 ≈ $2.01/股</div>
+        <p>你每持有1股 Apple，这个季度就"赚"了 $2.01（当然不会直接打给你，但公司的内在价值增加了）。</p>
+        <p><strong>"摊薄(Diluted)"</strong>是指：假设所有期权、股权激励都行权后的总股数——更保守、更真实的计算方式。</p>
+        <div class="analogy"><strong>比喻：</strong>你和9个朋友合开奶茶店，净利润$20，每人分到$2。EPS就是"你那份"是多少。持股越多，"分到"越多。</div>
+        <p>本季EPS $2.01，超出分析师预期 $1.95，超出幅度3.1%——这叫"盈利超预期（Beat Estimate）"，通常推动股价上涨。</p>
+        <div class="insight">EPS连续多季度增长，且增速(21.8%)超过营收增速(16.6%)，部分原因是Apple不断回购股票，减少了总股数，让每股"分到"的利润更多。</div>
+      </div>
+    </div>
+
+    <!-- 利润表流程图 -->
+    <div class="section-badge">📊 一图看懂</div>
+    <div class="sec-title" style="font-size:20px;margin-bottom:16px;">利润表的"漏斗"结构</div>
+    <div class="statement-block" style="padding:24px 28px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;background:rgba(240,136,62,0.1);border:1px solid rgba(240,136,62,0.3);border-radius:8px;padding:14px 18px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">TOTAL NET SALES · 总营收</div>
+            <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:var(--orange);">$111,184M</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:13px;color:var(--red);">↓ 减去 产品+服务成本 $56,403M</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;background:rgba(240,136,62,0.07);border:1px solid rgba(240,136,62,0.2);border-radius:8px;padding:14px 18px;margin:0 40px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">GROSS MARGIN · 毛利润</div>
+            <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:var(--orange);">$54,781M <span style="font-size:13px;color:var(--muted);">49.3%</span></div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:13px;color:var(--red);">↓ 减去 研发+行政费用 $18,896M</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;background:var(--blue-dim);border:1px solid rgba(88,166,255,0.2);border-radius:8px;padding:14px 18px;margin:0 80px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">OPERATING INCOME · 营业利润</div>
+            <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:var(--blue);">$35,885M <span style="font-size:13px;color:var(--muted);">32.3%</span></div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:13px;color:var(--red);">↓ 减去 其他支出+所得税 $6,307M</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;background:var(--green-dim);border:1px solid rgba(63,185,80,0.3);border-radius:8px;padding:16px 18px;margin:0 120px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">NET INCOME · 净利润 🏆</div>
+            <div style="font-size:22px;font-weight:700;font-family:var(--mono);color:var(--green);">$29,578M <span style="font-size:13px;color:var(--muted);">26.6%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAKEAWAY -->
+    <div class="takeaway">
+      <h3>✅ 利润表 — 看完你应该掌握的3个结论</h3>
+      <ul>
+        <li>Apple FY26 Q2 营收 $1,112亿，同比增 16.6%，是近几年最强劲的季度之一，iPhone 反弹是主要驱动</li>
+        <li>服务毛利率(76.7%) 远高于产品(38.7%)，服务业务占比提升是Apple估值溢价的核心理由</li>
+        <li>净利润率26.6%，EPS $2.01超预期 +3.1%，利润增速(19.4%)快于营收(16.6%)，经营效率提升</li>
+      </ul>
+    </div>
+
+    <!-- QUIZ 1 -->
+    <div class="quiz-card">
+      <h3>🧠 小测验：巩固一下</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Apple 服务收入毛利率约为多少？</p>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">A</div> 约 38%（和产品差不多）</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">B</div> 约 50%（刚好一半）</div>
+      <div class="quiz-option" onclick="checkQuiz(this, true)"><div class="opt-letter">C</div> 约 77%（远高于产品）</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">D</div> 约 26%（和净利润率相同）</div>
+      <div class="quiz-result right">🎉 正确！服务毛利率约76.7%，是产品毛利率(38.7%)的近2倍。这正是分析师都强调"服务是未来"的原因——同样一块钱收入，服务留下的更多。</div>
+      <div class="quiz-result wrong">❌ 再想想。服务（App Store、iCloud、Apple Music等）不需要物理生产，成本极低。计算：($30,976 - $7,224) ÷ $30,976 ≈ 76.7%</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PAGE: BALANCE SHEET -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-balance" class="page">
+  <div class="wrap">
+    <div class="section-badge">第二张表</div>
+    <div class="sec-title">资产负债表<span style="font-family:'DM Mono';font-size:16px;font-weight:400;color:var(--muted);margin-left:12px;">Balance Sheet</span></div>
+    <p class="sec-sub">这张表是一张<strong>某一天</strong>的财务快照（2026年3月28日），回答：<br>Apple 有多少家当？欠了多少债？股东真正拥有多少？</p>
+
+    <div class="intro-card" style="border-left:3px solid var(--blue);margin-bottom:24px;">
+      <h3>💡 铁律：资产 = 负债 + 股东权益</h3>
+      <p>这是会计最基本的恒等式，永远成立。可以这样理解：</p>
+      <p style="margin-top:8px;"><strong>你买了一套房（资产）</strong>：首付20万自己出（股东权益），银行贷款80万（负债）。房子总价100万 = 80万贷款 + 20万自有资金。公司一样的逻辑。</p>
+    </div>
+
+    <!-- ASSETS -->
+    <div class="statement-block">
+      <div class="statement-title" style="color:var(--blue);">🏦 资产部分（Assets）— 公司拥有什么</div>
+
+      <div class="row-item" onclick="toggleExplain('b-cash')">
+        <div class="row-left">
+          <div class="row-name">现金及现金等价物 <span class="badge click">最安全的资产</span></div>
+          <div class="row-en">Cash and Cash Equivalents</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$45,572M</div>
+          <div class="row-yoy up">↑ vs 9月底 $35,934M</div>
+        </div>
+      </div>
+      <div id="b-cash" class="explain-panel">
+        <h4>现金及现金等价物</h4>
+        <p>包括银行存款、3个月内到期的短期国债等随时可用的钱。<strong>$455亿</strong>，半年内从$359亿增加到$455亿。</p>
+        <div class="analogy"><strong>比喻：</strong>你钱包里的现钞 + 银行活期存款，随时可以取用。</div>
+        <p>现金增加的原因：强劲的经营现金流持续流入，超过了回购和分红的支出。这是财务健康的好信号。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-ms')">
+        <div class="row-left">
+          <div class="row-name">有价证券（短期）</div>
+          <div class="row-en">Marketable Securities (Current)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$22,935M</div>
+        </div>
+      </div>
+      <div id="b-ms" class="explain-panel">
+        <h4>短期有价证券</h4>
+        <p>Apple 购买的短期投资产品（如短期国债、企业债券等），在1年内到期，可以变现。</p>
+        <div class="analogy"><strong>比喻：</strong>放在余额宝或理财账户里的钱——比活期存款利息高，但需要几天才能到账。</div>
+        <p>Apple 不傻——账上那么多现金，肯定不全放活期，会买一些稳健的短期投资来提高收益。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-ar')">
+        <div class="row-left">
+          <div class="row-name">应收账款</div>
+          <div class="row-en">Accounts Receivable, net</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$30,339M</div>
+          <div class="row-yoy" style="color:var(--muted)">↓ vs 9月底 $39,777M</div>
+        </div>
+      </div>
+      <div id="b-ar" class="explain-panel">
+        <h4>应收账款（Accounts Receivable）</h4>
+        <p>货已经卖出去、服务已经提供，但钱还没收到——对方（如运营商、经销商）欠Apple的钱。</p>
+        <div class="analogy"><strong>比喻：</strong>你卖了一批奶茶给公司团购，说好月底打款，现在那笔钱就是"应收账款"——是资产，但还没到手。</div>
+        <p>从 $39.8亿 下降到 $30.3亿，说明客户付款速度加快，<strong>回款能力增强</strong>，是好事。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-vntr')">
+        <div class="row-left">
+          <div class="row-name">供应商非贸易应收款</div>
+          <div class="row-en">Vendor Non-Trade Receivables</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$23,172M</div>
+        </div>
+      </div>
+      <div id="b-vntr" class="explain-panel">
+        <h4>供应商非贸易应收款</h4>
+        <p>Apple 委托富士康等供应商采购零部件，Apple 先垫付了零件钱，供应商欠Apple的钱。</p>
+        <div class="analogy"><strong>比喻：</strong>你开餐厅，让供应商帮你采购食材，费用你先出了，供应商欠你这笔采购款。</div>
+        <p>这是Apple独特的供应链安排，通过统一采购获得规模议价权，然后让制造商（富士康等）处理生产。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-inv')">
+        <div class="row-left">
+          <div class="row-name">存货</div>
+          <div class="row-en">Inventories</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$6,747M</div>
+          <div class="row-yoy up">↑ vs 9月底 $5,718M</div>
+        </div>
+      </div>
+      <div id="b-inv" class="explain-panel">
+        <h4>存货（Inventories）</h4>
+        <p>已经生产好、还没卖出去的产品。Apple 的存货历来很低（$67亿），说明供应链管理效率极高。</p>
+        <div class="analogy"><strong>比喻：</strong>你店里仓库里还没卖出去的奶茶原料、打包好的外卖。存货越少越好——积压的货是"沉睡的钱"。</div>
+        <p>$67亿 对比 $1,112亿的季度营收，存货周转率极快（不到一周）。这是Apple"零库存"策略的体现——产品上市前严格保密，一旦发布立刻开售。</p>
+        <div class="insight">存货太多是危险信号（卖不出去）；存货太少可能影响供货。Apple的存货水平一直处于健康区间。</div>
+      </div>
+
+      <div class="row-item subtotal" onclick="toggleExplain('b-cur')">
+        <div class="row-left">
+          <div class="row-name" style="font-weight:700;">流动资产合计</div>
+          <div class="row-en">Total Current Assets</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--blue)">$144,114M</div>
+        </div>
+      </div>
+      <div id="b-cur" class="explain-panel">
+        <h4>流动资产（Current Assets）</h4>
+        <p><strong>"流动"= 1年内可以变成现金的资产</strong>。包括上面所有项目的合计：现金+短期证券+应收账款+存货等。</p>
+        <div class="formula">流动比率 = 流动资产 ÷ 流动负债 = $144,114 ÷ $134,641 ≈ 1.07</div>
+        <p>流动比率1.07，意味着短期偿债能力勉强（通常1.5以上更理想）。但Apple的现金流极强，实际上没有短期偿债压力。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-ltms')">
+        <div class="row-left">
+          <div class="row-name">长期有价证券</div>
+          <div class="row-en">Marketable Securities (Non-current)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$78,088M</div>
+        </div>
+      </div>
+      <div id="b-ltms" class="explain-panel">
+        <h4>长期有价证券</h4>
+        <p>1年以上到期的投资产品，约<strong>780亿美元</strong>——Apple 把大量现金投入长期债券，获取稳定收益。</p>
+        <div class="analogy"><strong>比喻：</strong>你把余钱存了一个5年期理财，利率更高，但不能随时取。</div>
+        <p>现金$455亿 + 短期证券$229亿 + 长期证券$781亿 = <strong>合计约$1,465亿</strong>的"现金储备"，比大多数国家的外汇储备还多！</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-ppe')">
+        <div class="row-left">
+          <div class="row-name">固定资产（厂房设备净值）</div>
+          <div class="row-en">Property, Plant and Equipment, net</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$50,116M</div>
+        </div>
+      </div>
+      <div id="b-ppe" class="explain-panel">
+        <h4>固定资产（PP&E）</h4>
+        <p>包括：Apple Park总部大楼、全球零售店、数据中心服务器、办公设备、研发实验室等硬件资产。</p>
+        <div class="analogy"><strong>比喻：</strong>你奶茶店的设备（奶茶机、冰箱、桌椅）和门店本身——会随时间折旧，但是经营的基础。</div>
+        <p>"净值"= 原始购入价 − 历年折旧。Apple的固定资产相对轻资产（$501亿），因为制造外包给富士康，自己不建工厂。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-intangible')">
+        <div class="row-left">
+          <div class="row-name">无形资产 <span class="badge" style="background:var(--yellow-dim);color:var(--yellow)">大幅增加</span></div>
+          <div class="row-en">Intangible Assets, net</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">$21,334M</div>
+          <div class="row-yoy up">↑ vs 9月底 $11,093M (近翻倍!)</div>
+        </div>
+      </div>
+      <div id="b-intangible" class="explain-panel">
+        <h4>无形资产（Intangible Assets）— 今年的大亮点</h4>
+        <p>看不见、摸不到，但有价值的资产：专利、商标、收购来的技术、软件版权等。</p>
+        <div class="analogy"><strong>比喻：</strong>你奶茶店的"品牌商标权"、独家秘方——不是实物，但值钱。</div>
+        <p>从 $111亿 暴增到 $213亿，几乎翻倍！这很可能意味着 Apple 在上半年<strong>进行了重大收购</strong>（收购AI公司或其他技术公司）。收购带来的技术/专利会计入无形资产。这与研发费用大增33.6%形成印证，说明Apple正在加速AI布局。</p>
+        <div class="insight">注意：无形资产的价值有时会被质疑，需要结合具体收购内容判断。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('b-total-assets')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--blue);font-weight:700;">🔢 总资产</div>
+          <div class="row-en">Total Assets</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--blue)">$371,082M</div>
+          <div class="row-yoy up">↑ vs 9月底 $359,241M</div>
+        </div>
+      </div>
+      <div id="b-total-assets" class="explain-panel">
+        <h4>总资产</h4>
+        <p>Apple 拥有的所有有价值资产之和，<strong>$3,711亿美元</strong>（约2.7万亿人民币），是名副其实的全球最有钱的公司之一。</p>
+        <p>半年内资产从 $3,592亿 增到 $3,711亿，增加约 $119亿，主要来自无形资产大增和现金积累。</p>
+      </div>
+    </div>
+
+    <!-- LIABILITIES -->
+    <div class="statement-block">
+      <div class="statement-title" style="color:var(--red);">💳 负债部分（Liabilities）— 公司欠了什么</div>
+
+      <div class="row-item" onclick="toggleExplain('b-ap')">
+        <div class="row-left">
+          <div class="row-name">应付账款</div>
+          <div class="row-en">Accounts Payable</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">$57,349M</div>
+          <div class="row-yoy" style="color:var(--muted)">↓ vs 9月底 $69,860M</div>
+        </div>
+      </div>
+      <div id="b-ap" class="explain-panel">
+        <h4>应付账款（Accounts Payable）</h4>
+        <p>Apple 已经收到供应商的货/服务，但还没付钱——Apple 欠供应商的钱。</p>
+        <div class="analogy"><strong>比喻：</strong>你在超市进了一批货，说好下个月付款，这笔钱就是"应付账款"——是你的负债。</div>
+        <p>Apple 对供应商有极强的议价能力——可以晚付款（账期很长），相当于免费"借用"供应商的钱来运营。$573亿的应付账款就是供应商免费"借"给Apple的短期资金。</p>
+        <div class="insight">应付账款越大，说明公司对供应商议价能力越强（敢欠钱且不怕供应商闹事）。Apple在这方面处于全球顶端。</div>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('b-debt')">
+        <div class="row-left">
+          <div class="row-name">短期借款 + 长期债务</div>
+          <div class="row-en">Commercial Paper + Term Debt</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">$84,711M</div>
+          <div class="row-yoy" style="color:var(--muted)">短期$10,307 + 长期$74,404</div>
+        </div>
+      </div>
+      <div id="b-debt" class="explain-panel">
+        <h4>借款（Commercial Paper + Term Debt）</h4>
+        <p>Apple 向市场借的钱：<strong>商业票据(短期，1年内)</strong> $20亿 + <strong>短期定期债务</strong> $83亿 + <strong>长期债务</strong> $744亿 = 合计约 $847亿。</p>
+        <div class="analogy"><strong>比喻：</strong>你的房贷——每月还款，但总体利率低、可控，用来撬动更大资产。</div>
+        <p>Apple 主动借钱，不是因为没钱（账上有$1,466亿现金）！而是因为：<strong>美国企业债利率很低，借钱成本比动用海外现金（要交30%税）便宜得多</strong>。这是合法的税务优化策略。</p>
+        <p><strong>净债务 ≈ 总债务$847亿 − 现金$1,466亿 = -$619亿</strong>（负数代表净现金，即现金多于债务）</p>
+        <div class="insight">Apple 是"净现金"公司——即使把所有债还清，账上还剩$619亿现金。财务非常健康。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('b-equity')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--green);font-weight:700;">🔢 股东权益（净资产）</div>
+          <div class="row-en">Total Shareholders' Equity = 总资产 − 总负债</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$106,491M</div>
+          <div class="row-yoy up">↑ vs 9月底 $73,733M (+44%!)</div>
+        </div>
+      </div>
+      <div id="b-equity" class="explain-panel">
+        <h4>股东权益 — 股东真正拥有的价值</h4>
+        <div class="formula">股东权益 = 总资产 $371,082M − 总负债 $264,591M = $106,491M</div>
+        <p>这是如果 Apple 今天把所有资产变现、还清所有债务后，<strong>剩下属于股东的钱</strong>。约 $1,065亿。</p>
+        <div class="analogy"><strong>比喻：</strong>你的房子值100万（资产），银行贷款80万（负债），你的实际净资产就是20万（权益）。</div>
+        <p>半年从$737亿暴增到$1,065亿（+$328亿！），主要因为：净利润$717亿流入（六个月），但同时回购股票$370亿、分红$77亿流出，净增加约$270亿。</p>
+        <div class="insight">注意：苹果留存收益（Retained Earnings）从 -$143亿 转正为 +$124亿，说明今年盈利彻底覆盖了历史积累的亏损分配。</div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <h3>✅ 资产负债表 — 3个核心结论</h3>
+      <ul>
+        <li>现金+证券约$1,466亿，扣除$847亿债务后净现金约$619亿，财务极度健康</li>
+        <li>无形资产从$111亿暴增到$213亿，暗示重大收购/AI布局，需持续关注</li>
+        <li>应付账款$573亿体现对供应商的强大议价权，Apple本质上在"免费使用"供应商资金</li>
+      </ul>
+    </div>
+
+    <div class="quiz-card">
+      <h3>🧠 小测验</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Apple 账上有那么多现金，为什么还要借那么多钱（$847亿债务）？</p>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">A</div> 公司快撑不住了，借钱维持运营</div>
+      <div class="quiz-option" onclick="checkQuiz(this, true)"><div class="opt-letter">B</div> 在美国借债成本低，动用海外现金反而要交更多税，借钱更划算</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">C</div> 监管要求必须保持一定负债</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">D</div> 投资人不让Apple动用现金</div>
+      <div class="quiz-result right">🎉 完全正确！这是Apple的经典税务优化策略——海外利润汇回美国需缴税，在美国本地低息借钱反而更便宜。巴菲特也对这种资本运作赞不绝口。</div>
+      <div class="quiz-result wrong">❌ 不对。Apple账上有$1,466亿现金！它完全可以还清全部债务。借钱是主动选择，因为美国企业债利率低，借钱成本远低于动用海外现金（需缴税）的成本。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PAGE: CASH FLOW -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-cashflow" class="page">
+  <div class="wrap">
+    <div class="section-badge">第三张表</div>
+    <div class="sec-title">现金流量表<span style="font-family:'DM Mono';font-size:16px;font-weight:400;color:var(--muted);margin-left:12px;">Cash Flow Statement</span></div>
+    <p class="sec-sub">如果说利润表是"成绩单"，现金流量表就是"银行流水"——更难造假，<strong>是判断公司真实健康度最重要的报表之一</strong>。数据为上半年（H1 FY26）。</p>
+
+    <div class="intro-card" style="border-left:3px solid var(--green);margin-bottom:24px;">
+      <h3>💡 为什么净利润 ≠ 现金收入？</h3>
+      <p>利润是"应计制"记账——货卖出去了就算收入，哪怕钱还没到。<br>现金流是"收付实现制"——钱真正到账/付出才算。<br><br>
+      举例：你给公司送货，对方说"月底打款"，你记了销售收入（利润增加），但现金还没收到（现金流未增加）。所以<strong>利润高不代表现金多</strong>，有时候"纸面富贵"。</p>
+    </div>
+
+    <!-- OPERATING -->
+    <div class="statement-block">
+      <div class="statement-title" style="color:var(--green);">⚙️ 经营活动现金流 — 最核心的一块<span class="en">Operating Activities</span></div>
+
+      <div class="row-item" onclick="toggleExplain('cf-ni')">
+        <div class="row-left">
+          <div class="row-name">净利润（起点）</div>
+          <div class="row-en">Net Income</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$71,675M</div>
+          <div class="row-yoy" style="color:var(--muted)">六个月合计</div>
+        </div>
+      </div>
+      <div id="cf-ni" class="explain-panel">
+        <h4>净利润（起点）</h4>
+        <p>现金流量表从利润表的净利润出发，然后做各种"调整"，算出真正的现金进出。这 $71,675M 是六个月的总净利润。</p>
+        <div class="analogy"><strong>比喻：</strong>你的成绩单说你月收入10万，但我不信，我要看你的银行流水。现金流表就是这个"银行流水"的推算过程。</div>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('cf-da')">
+        <div class="row-left">
+          <div class="row-name">折旧与摊销（加回）</div>
+          <div class="row-en">Depreciation and Amortization (D&A)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">+$6,653M</div>
+        </div>
+      </div>
+      <div id="cf-da" class="explain-panel">
+        <h4>折旧与摊销 — 为什么要"加回"？</h4>
+        <p>折旧是把固定资产的价值"分摊"到每年的会计费用里。比如花$1亿买台机器，可以用10年，每年计$1千万折旧费用——<strong>但实际上这钱已经在当年付掉了，后续不会再付出现金</strong>。</p>
+        <div class="formula">经营现金流 = 净利润 + 折旧/摊销（非现金支出加回）+ 其他调整</div>
+        <div class="analogy"><strong>比喻：</strong>你成绩单上"折旧费$1万"，但钱早就付了，不影响这个月现金，所以要加回来。</div>
+        <p>$66.5亿的折旧摊销全部加回，因为这是"非现金费用"，不代表本期真正流出了现金。</p>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('cf-sbc')">
+        <div class="row-left">
+          <div class="row-name">股权激励费用（加回）</div>
+          <div class="row-en">Share-based Compensation</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">+$7,122M</div>
+        </div>
+      </div>
+      <div id="cf-sbc" class="explain-panel">
+        <h4>股权激励费用（SBC）</h4>
+        <p>Apple 给员工发股票/期权作为薪酬，这在会计上是"费用"，但<strong>没有实际付出现金</strong>（只是发了股票），所以加回来。</p>
+        <div class="analogy"><strong>比喻：</strong>你给员工发了公司股票（不是现金），成本上记了$1万费用，但你口袋里一分钱没少，所以加回。</div>
+        <p>半年$71亿的股权激励费用相当可观，说明Apple对工程师的吸引力靠的是期权/股票——这也是科技公司的通行做法。</p>
+      </div>
+
+      <div class="row-item indent" onclick="toggleExplain('cf-wc')">
+        <div class="row-left">
+          <div class="row-name">营运资金变化</div>
+          <div class="row-en">Changes in Working Capital</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value">~-$1,106M</div>
+          <div class="row-yoy" style="color:var(--muted)">多项目合计</div>
+        </div>
+      </div>
+      <div id="cf-wc" class="explain-panel">
+        <h4>营运资金变化 — 最复杂但很关键</h4>
+        <p>这里把多个资产负债项目的变化都折算成现金影响：</p>
+        <p>• <strong>应收账款 +$9,295M</strong>（减少了 = 收回了更多钱 = 正的现金影响）</p>
+        <p>• <strong>供应商应收 +$10,008M</strong>（供应商还回来的钱）</p>
+        <p>• <strong>存货 -$1,084M</strong>（增加了 = 压货了 = 付出了现金）</p>
+        <p>• <strong>其他资产 -$14,329M</strong>（增加了 = 付出了现金，可能是预付款等）</p>
+        <p>• <strong>应付账款 -$12,297M</strong>（减少了 = 付给供应商的钱多了 = 负的现金影响）</p>
+        <div class="analogy"><strong>比喻：</strong>银行流水里，收到欠款是+（进账），付了欠款是−（出账），这些变化最终影响你账户余额。</div>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('cf-op')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--green);font-weight:700;">🏆 经营活动现金流（最重要）</div>
+          <div class="row-en">Cash Generated by Operating Activities</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--green)">$82,627M</div>
+          <div class="row-yoy up">▲ +53% vs 去年 $53,887M</div>
+        </div>
+      </div>
+      <div id="cf-op" class="explain-panel">
+        <h4>🏆 经营活动现金流 — 最重要的数字</h4>
+        <p>这是 Apple 日常经营<strong>真实产生的现金</strong>，半年 <strong>$826亿</strong>，同比暴增 <strong>53%</strong>！</p>
+        <p>注意：净利润 $717亿，经营现金流 $826亿——<strong>现金流 > 净利润</strong>，这是极好的信号！说明利润有真实现金支撑，不是会计数字游戏。</p>
+        <div class="analogy"><strong>比喻：</strong>你的成绩单说赚了10万，银行流水证明确实进来了12万。这说明你的收入是真实的，甚至还有"隐性收入"。</div>
+        <div class="insight">巴菲特最爱看经营现金流。他说："利润可以被操纵，但现金流是上帝的眼睛。"Apple的$826亿经营现金流是近年最强劲的，令人印象深刻。</div>
+      </div>
+    </div>
+
+    <!-- INVESTING -->
+    <div class="statement-block">
+      <div class="statement-title" style="color:var(--blue);">💼 投资活动现金流<span class="en">Investing Activities</span></div>
+
+      <div class="row-item" onclick="toggleExplain('cf-capex')">
+        <div class="row-left">
+          <div class="row-name">资本支出（购买设备等）</div>
+          <div class="row-en">Payments for Property, Plant and Equipment (CapEx)</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$4,344M</div>
+        </div>
+      </div>
+      <div id="cf-capex" class="explain-panel">
+        <h4>资本支出（CapEx）</h4>
+        <p>购买厂房、设备、数据中心等长期资产的花费。$43亿，相对于$826亿的经营现金流，<strong>极低</strong>！</p>
+        <div class="formula">自由现金流（FCF）= 经营现金流 − 资本支出 = $82,627M − $4,344M ≈ $78,283M</div>
+        <div class="analogy"><strong>比喻：</strong>你一个月赚了$1万，买了个$500的设备（奶茶机），剩下$9,500是你可以自由支配的"自由现金流"。</div>
+        <p>Apple 是"轻资产"公司——制造外包，不需要大量买工厂设备，所以CapEx很低，自由现金流极高。这正是资本市场喜欢Apple的原因之一。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('cf-sec')">
+        <div class="row-left">
+          <div class="row-name">买卖有价证券（净额）</div>
+          <div class="row-en">Purchases/Proceeds of Marketable Securities</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">净流出 -$5,126M</div>
+        </div>
+      </div>
+      <div id="cf-sec" class="explain-panel">
+        <h4>买卖有价证券</h4>
+        <p>Apple 用现金买债券/基金：购入 -$324亿，债券到期收回 +$187亿，卖出证券 +$86亿，净流出约 -$51亿。</p>
+        <div class="analogy"><strong>比喻：</strong>你用存款买了理财产品，同时有些到期取回——净额就是你在理财账户里新增了多少钱。</div>
+        <p>Apple 积极增加长期证券投资，把空闲现金变成收益，而不是让钱趴在账上不产生回报。</p>
+      </div>
+
+      <div class="row-item subtotal" onclick="toggleExplain('cf-invest')">
+        <div class="row-left">
+          <div class="row-name" style="font-weight:700;">投资活动现金流合计</div>
+          <div class="row-en">Cash used in Investing Activities</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$11,054M</div>
+        </div>
+      </div>
+      <div id="cf-invest" class="explain-panel">
+        <h4>投资活动现金流</h4>
+        <p>投资活动通常是流出（花钱购买资产或投资），是<strong>正常的负值</strong>。</p>
+        <p>-$110亿 主要是买了更多有价证券（$51亿净流出）和资本支出（$43亿）。其他$16亿可能包含收购价款。</p>
+        <div class="analogy"><strong>比喻：</strong>你把赚的钱一部分存进理财、买了新设备——这些是"花出去"的投资，期待未来回报。</div>
+      </div>
+    </div>
+
+    <!-- FINANCING -->
+    <div class="statement-block">
+      <div class="statement-title" style="color:var(--purple);">🏦 融资活动现金流 — 如何回报股东<span class="en">Financing Activities</span></div>
+
+      <div class="row-item" onclick="toggleExplain('cf-buyback')">
+        <div class="row-left">
+          <div class="row-name">股票回购 <span class="badge" style="background:var(--orange-dim);color:var(--orange)">回馈股东</span></div>
+          <div class="row-en">Repurchases of Common Stock</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$36,989M</div>
+        </div>
+      </div>
+      <div id="cf-buyback" class="explain-panel">
+        <h4>股票回购（Buyback）— 最有力的股东回报方式</h4>
+        <p>Apple 用自己的钱从市场买回自家股票，然后注销。半年回购 <strong>$370亿</strong>！</p>
+        <div class="analogy"><strong>比喻：</strong>你和10个朋友合开奶茶店，你用店里的钱买回了3个股东的股份并注销——剩下7个股东，每人持股比例变高了，即使利润没变，每股分到的也更多了。</div>
+        <p>效果：<strong>总股数减少 → EPS（每股盈利）提升 → 股价通常跟着涨</strong>。这是Apple回馈股东的主要方式（比分红更灵活，税务也更优惠）。</p>
+        <div class="insight">Apple 是全球最大的股票回购方之一，过去10年回购了超过$6,000亿的股票，相当于当年市值的好几倍！这也是巴菲特一直重仓苹果的原因之一。</div>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('cf-div')">
+        <div class="row-left">
+          <div class="row-name">现金分红</div>
+          <div class="row-en">Payments for Dividends</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$7,743M</div>
+        </div>
+      </div>
+      <div id="cf-div" class="explain-panel">
+        <h4>现金分红（Dividends）</h4>
+        <p>Apple 直接把钱分给股东——半年分了 <strong>$77亿</strong>，每季度每股 $0.27。</p>
+        <div class="analogy"><strong>比喻：</strong>年底奶茶店盈利，你把一部分钱直接分给股东——这叫"分红"。</div>
+        <p>Apple 股息率约 0.36%，属于很低的水平（Apple 更偏向回购而非分红）。但能持续稳定分红，代表现金流充沛，财务稳健。</p>
+      </div>
+
+      <div class="row-item" onclick="toggleExplain('cf-debt-rep')">
+        <div class="row-left">
+          <div class="row-name">偿还债务</div>
+          <div class="row-en">Repayments of Term Debt + Commercial Paper</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$13,825M</div>
+        </div>
+      </div>
+      <div id="cf-debt-rep" class="explain-panel">
+        <h4>偿还债务</h4>
+        <p>还了 $79亿定期债务 + $59亿商业票据，合计约 $138亿。</p>
+        <p>这是正常的债务管理——旧债到期还款，同时可能再借新债。Apple 的信用评级极高（AAA级），借款成本极低，约1.5-3%利率。</p>
+      </div>
+
+      <div class="row-item total" onclick="toggleExplain('cf-fin')">
+        <div class="row-left">
+          <div class="row-name" style="color:var(--purple);font-weight:700;">融资活动现金流合计</div>
+          <div class="row-en">Cash used in Financing Activities</div>
+        </div>
+        <div class="row-right">
+          <div class="row-value" style="color:var(--red)">-$61,935M</div>
+        </div>
+      </div>
+      <div id="cf-fin" class="explain-panel">
+        <h4>融资活动现金流</h4>
+        <p>-$619亿，主要用于：回购$370亿 + 还债$138亿 + 分红$77亿 + 员工股权税$33亿。</p>
+        <p>融资活动大量流出是<strong>优质公司的特征</strong>——有足够的现金回报股东，不需要向外借钱维持运营。</p>
+        <div class="insight">三类现金流：经营+、投资-、融资- 是最理想的组合，代表公司赚钱能力强，主动投资未来，同时大力回报股东。Apple 完美符合这个特征。</div>
+      </div>
+    </div>
+
+    <!-- 现金流汇总 -->
+    <div class="section-badge">📊 现金流全景图</div>
+    <div class="sec-title" style="font-size:20px;margin-bottom:16px;">上半年现金流总结</div>
+
+    <div class="statement-block" style="padding:24px 28px;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:120px;font-size:13px;color:var(--muted);text-align:right;flex-shrink:0;">⚙️ 经营</div>
+          <div style="flex:1;background:var(--green-dim);border-radius:6px;height:36px;display:flex;align-items:center;padding:0 14px;border:1px solid rgba(63,185,80,0.2);">
+            <span style="font-family:var(--mono);font-size:14px;color:var(--green);font-weight:700;">+$82,627M</span>
+            <span style="margin-left:8px;font-size:12px;color:var(--muted);">日常经营赚到的真实现金</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:120px;font-size:13px;color:var(--muted);text-align:right;flex-shrink:0;">💼 投资</div>
+          <div style="flex:1;background:var(--blue-dim);border-radius:6px;height:36px;display:flex;align-items:center;padding:0 14px;border:1px solid rgba(88,166,255,0.2);">
+            <span style="font-family:var(--mono);font-size:14px;color:var(--blue);font-weight:700;">-$11,054M</span>
+            <span style="margin-left:8px;font-size:12px;color:var(--muted);">买证券+资本支出</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:120px;font-size:13px;color:var(--muted);text-align:right;flex-shrink:0;">🏦 融资</div>
+          <div style="flex:1;background:var(--purple-dim);border-radius:6px;height:36px;display:flex;align-items:center;padding:0 14px;border:1px solid rgba(188,140,255,0.2);">
+            <span style="font-family:var(--mono);font-size:14px;color:var(--purple);font-weight:700;">-$61,935M</span>
+            <span style="margin-left:8px;font-size:12px;color:var(--muted);">回购+分红+还债</span>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--border);margin-top:4px;padding-top:14px;display:flex;align-items:center;gap:16px;">
+          <div style="width:120px;font-size:13px;color:var(--muted);text-align:right;flex-shrink:0;">📈 净增</div>
+          <div style="flex:1;background:var(--orange-dim);border-radius:6px;height:36px;display:flex;align-items:center;padding:0 14px;border:1px solid rgba(240,136,62,0.3);">
+            <span style="font-family:var(--mono);font-size:14px;color:var(--orange);font-weight:700;">+$9,638M</span>
+            <span style="margin-left:8px;font-size:12px;color:var(--muted);">现金净增加（期末$45,572M vs 期初$35,934M）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <h3>✅ 现金流表 — 3个核心结论</h3>
+      <ul>
+        <li>经营现金流 $826亿（半年），同比+53%，远超净利润$717亿，说明利润质量极高，有真实现金支撑</li>
+        <li>自由现金流 ≈ $783亿（半年），苹果是全球自由现金流最高的公司之一，为持续回购和分红提供弹药</li>
+        <li>半年回购$370亿股票+分红$77亿，合计$447亿回报股东，体现极强的股东回报意愿和能力</li>
+      </ul>
+    </div>
+
+    <div class="quiz-card">
+      <h3>🧠 最终测验</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">为什么"经营现金流 > 净利润"是好事？</p>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">A</div> 说明公司税交少了</div>
+      <div class="quiz-option" onclick="checkQuiz(this, true)"><div class="opt-letter">B</div> 说明利润是真实的，有实际现金收入支撑，而不是只停留在账面上</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">C</div> 说明公司借了更多的钱</div>
+      <div class="quiz-option" onclick="checkQuiz(this, false)"><div class="opt-letter">D</div> 说明公司资产增加了</div>
+      <div class="quiz-result right">🎉 满分！经营现金流 > 净利润，说明加上"非现金费用加回"（折旧、股权激励等）后，真实进账的钱更多。这代表利润的"含金量"高，没有水分。这是分析财报时最想看到的信号之一。</div>
+      <div class="quiz-result wrong">❌ 再思考一下。提示：折旧和股权激励是利润表里扣掉了，但实际没有支出现金的费用，加回后，现金流自然比净利润高——说明利润有真实现金对应，而不是"纸面数字"。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PAGE: CHEATSHEET -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-cheatsheet" class="page">
+  <div class="wrap">
+    <div class="section-badge">随时查阅</div>
+    <div class="sec-title">财报英文术语速查表</div>
+    <p class="sec-sub">看财报遇到不认识的英文词汇，在这里查。</p>
+
+    <div class="statement-block">
+      <div class="statement-title">📊 利润表相关术语</div>
+      <table class="cheat-table">
+        <thead><tr><th>英文</th><th>中文</th><th>一句话理解</th></tr></thead>
+        <tbody>
+          <tr><td class="en-term">Net Sales / Revenue</td><td class="cn-term">净销售额 / 营收</td><td>卖东西和服务收到的钱总额</td></tr>
+          <tr><td class="en-term">Cost of Sales / COGS</td><td class="cn-term">销售成本</td><td>直接生产产品/提供服务的花费</td></tr>
+          <tr><td class="en-term">Gross Profit / Gross Margin</td><td class="cn-term">毛利润 / 毛利</td><td>营收 − 直接成本，还没扣运营费用</td></tr>
+          <tr><td class="en-term">Gross Margin %</td><td class="cn-term">毛利率</td><td>毛利润 ÷ 营收，越高越好</td></tr>
+          <tr><td class="en-term">R&D (Research & Development)</td><td class="cn-term">研发费用</td><td>花在开发新产品、新技术上的钱</td></tr>
+          <tr><td class="en-term">SG&A</td><td class="cn-term">销售+行政管理费用</td><td>广告、员工工资、房租等日常运营费</td></tr>
+          <tr><td class="en-term">Operating Income</td><td class="cn-term">营业利润 / 经营利润</td><td>毛利润 − 运营费用，本业核心盈利</td></tr>
+          <tr><td class="en-term">Operating Margin</td><td class="cn-term">营业利润率</td><td>营业利润 ÷ 营收，衡量经营效率</td></tr>
+          <tr><td class="en-term">Net Income</td><td class="cn-term">净利润</td><td>扣掉所有成本和税后，最终赚的钱</td></tr>
+          <tr><td class="en-term">Net Margin</td><td class="cn-term">净利润率</td><td>净利润 ÷ 营收，赚100元最终留几元</td></tr>
+          <tr><td class="en-term">EPS (Earnings Per Share)</td><td class="cn-term">每股收益</td><td>净利润 ÷ 总股数，每股"赚"多少</td></tr>
+          <tr><td class="en-term">Diluted EPS</td><td class="cn-term">摊薄每股收益</td><td>考虑期权行权后，更保守的EPS</td></tr>
+          <tr><td class="en-term">YoY (Year-over-Year)</td><td class="cn-term">同比增长</td><td>与去年同一时期相比增长了多少</td></tr>
+          <tr><td class="en-term">QoQ (Quarter-over-Quarter)</td><td class="cn-term">环比增长</td><td>与上一个季度相比增长了多少</td></tr>
+          <tr><td class="en-term">Beat / Miss Estimate</td><td class="cn-term">超预期 / 低于预期</td><td>实际结果超过/低于分析师预测</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="statement-block" style="margin-top:20px;">
+      <div class="statement-title">🏦 资产负债表相关术语</div>
+      <table class="cheat-table">
+        <thead><tr><th>英文</th><th>中文</th><th>一句话理解</th></tr></thead>
+        <tbody>
+          <tr><td class="en-term">Assets</td><td class="cn-term">资产</td><td>公司拥有的一切有价值的东西</td></tr>
+          <tr><td class="en-term">Current Assets</td><td class="cn-term">流动资产</td><td>一年内可变现的资产（现金、存货等）</td></tr>
+          <tr><td class="en-term">Non-current Assets</td><td class="cn-term">非流动资产</td><td>一年以上才能变现的资产（厂房等）</td></tr>
+          <tr><td class="en-term">Cash and Equivalents</td><td class="cn-term">现金及现金等价物</td><td>随时可动用的现金</td></tr>
+          <tr><td class="en-term">Marketable Securities</td><td class="cn-term">有价证券</td><td>债券、基金等投资，可变现</td></tr>
+          <tr><td class="en-term">Accounts Receivable</td><td class="cn-term">应收账款</td><td>卖了但还没收到的钱（别人欠你）</td></tr>
+          <tr><td class="en-term">Inventories</td><td class="cn-term">存货</td><td>生产好但还没卖出去的产品</td></tr>
+          <tr><td class="en-term">PP&E (Property, Plant & Equipment)</td><td class="cn-term">固定资产</td><td>厂房、机器、设备等实物资产</td></tr>
+          <tr><td class="en-term">Intangible Assets</td><td class="cn-term">无形资产</td><td>专利、商标、品牌、软件版权等</td></tr>
+          <tr><td class="en-term">Liabilities</td><td class="cn-term">负债</td><td>公司欠别人的一切</td></tr>
+          <tr><td class="en-term">Accounts Payable</td><td class="cn-term">应付账款</td><td>收了货但还没付的钱（你欠供应商）</td></tr>
+          <tr><td class="en-term">Term Debt</td><td class="cn-term">定期债务</td><td>银行贷款或发行的债券</td></tr>
+          <tr><td class="en-term">Commercial Paper</td><td class="cn-term">商业票据</td><td>短期（90天以内）的融资工具</td></tr>
+          <tr><td class="en-term">Shareholders' Equity</td><td class="cn-term">股东权益</td><td>总资产 − 总负债，股东的"净值"</td></tr>
+          <tr><td class="en-term">Retained Earnings</td><td class="cn-term">留存收益</td><td>历年净利润扣除分红后留下的积累</td></tr>
+          <tr><td class="en-term">ROE (Return on Equity)</td><td class="cn-term">净资产收益率</td><td>净利润 ÷ 股东权益，越高越好</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="statement-block" style="margin-top:20px;">
+      <div class="statement-title">💰 现金流量表 & 估值术语</div>
+      <table class="cheat-table">
+        <thead><tr><th>英文</th><th>中文</th><th>一句话理解</th></tr></thead>
+        <tbody>
+          <tr><td class="en-term">Operating Cash Flow (OCF)</td><td class="cn-term">经营现金流</td><td>日常经营真实产生的现金，最重要</td></tr>
+          <tr><td class="en-term">Capital Expenditure (CapEx)</td><td class="cn-term">资本支出</td><td>买厂房、设备等长期资产的花费</td></tr>
+          <tr><td class="en-term">Free Cash Flow (FCF)</td><td class="cn-term">自由现金流</td><td>经营现金流 − 资本支出，可自由支配的钱</td></tr>
+          <tr><td class="en-term">D&A (Depreciation & Amortization)</td><td class="cn-term">折旧与摊销</td><td>固定资产/无形资产价值逐年减少，非现金费用</td></tr>
+          <tr><td class="en-term">SBC (Share-Based Compensation)</td><td class="cn-term">股权激励费用</td><td>给员工的股票/期权，是成本但非现金支出</td></tr>
+          <tr><td class="en-term">Buyback / Repurchase</td><td class="cn-term">股票回购</td><td>公司买回自家股票，减少股数，提升EPS</td></tr>
+          <tr><td class="en-term">Dividend</td><td class="cn-term">股息 / 分红</td><td>公司直接发给股东的现金</td></tr>
+          <tr><td class="en-term">P/E Ratio</td><td class="cn-term">市盈率</td><td>股价 ÷ EPS，表示几年回本，衡量是否贵</td></tr>
+          <tr><td class="en-term">Forward P/E</td><td class="cn-term">远期市盈率</td><td>用未来12个月预期EPS算的市盈率</td></tr>
+          <tr><td class="en-term">Market Cap</td><td class="cn-term">市值</td><td>股价 × 总股数，市场对公司的整体估价</td></tr>
+          <tr><td class="en-term">EBITDA</td><td class="cn-term">息税折旧摊销前利润</td><td>扣掉利息、税、折旧、摊销前的利润，衡量运营能力</td></tr>
+          <tr><td class="en-term">TTM (Trailing Twelve Months)</td><td class="cn-term">过去12个月</td><td>用最近四个季度的数据计算，比年报更新</td></tr>
+          <tr><td class="en-term">Guidance</td><td class="cn-term">业绩指引</td><td>管理层对下一季度/年度的预测，市场高度关注</td></tr>
+          <tr><td class="en-term">Consensus Estimate</td><td class="cn-term">分析师共识预期</td><td>多家机构分析师预测的平均值</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="takeaway" style="margin-top:24px;">
+      <h3>🎓 恭喜你！你现在已经掌握了看财报的核心框架</h3>
+      <ul>
+        <li><strong>利润表</strong>：从营收→毛利润→营业利润→净利润，理解每一层扣除的含义，重点看增速和利润率</li>
+        <li><strong>资产负债表</strong>：记住"资产=负债+权益"，关注现金储备、负债健康度、净资产变化</li>
+        <li><strong>现金流表</strong>：经营现金流是最重要的，自由现金流=经营CF−CapEx，大于净利润是好信号</li>
+        <li><strong>核心公式</strong>：毛利率、净利润率、P/E、ROE、自由现金流——记住这5个，你已超过80%散户</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showPage(id, tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleExplain(id) {
+  const panel = document.getElementById(id);
+  const rowItem = panel.previousElementSibling;
+  const isOpen = panel.classList.contains('open');
+  
+  // close all
+  document.querySelectorAll('.explain-panel').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.row-item').forEach(r => r.classList.remove('active'));
+  
+  if (!isOpen) {
+    panel.classList.add('open');
+    rowItem.classList.add('active');
+  }
+}
+
+function checkQuiz(el, isCorrect) {
+  const card = el.closest('.quiz-card');
+  card.querySelectorAll('.quiz-option').forEach(o => o.style.pointerEvents = 'none');
+  const results = card.querySelectorAll('.quiz-result');
+  
+  if (isCorrect) {
+    el.classList.add('correct');
+    results[0].classList.add('show');
+  } else {
+    el.classList.add('wrong');
+    results[1].classList.add('show');
+    // highlight correct
+    const opts = card.querySelectorAll('.quiz-option');
+    opts.forEach(o => {
+      if (o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+}
+</script>
+</body>
+</html>
