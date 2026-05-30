@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>繁简汉字对照学习·通用规范汉字表</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDFCF8;--bg2:#F5F0E8;--bg3:#EDE6D6;--ink:#1A1208;--ink2:#4A3F2F;--ink3:#7A6F5F;--gold:#B8860B;--brd:#D4C9B0;--trad:#8B1A1A;--simp:#1A3A8B;--same:#1A5E3A;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--ink);}
+.hdr{background:linear-gradient(135deg,#1A1208,#3D2B14,#1A1208);padding:2.2rem 2rem 1.8rem;text-align:center;position:relative;overflow:hidden;}
+.hdr h1{font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:700;color:#F5DEB3;letter-spacing:4px;position:relative;z-index:1;}
+.hdr p{color:#C8B090;font-size:.86rem;margin-top:.35rem;letter-spacing:2px;position:relative;z-index:1;}
+.hdr-bg{position:absolute;font-family:'Noto Serif SC',serif;font-size:150px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
+.stats{display:flex;justify-content:center;gap:3rem;padding:1rem 2rem;background:var(--bg);border-bottom:1px solid var(--brd);flex-wrap:wrap;}
+.stat-n{font-size:1.6rem;font-weight:700;font-family:'Noto Serif SC',serif;display:block;}
+.stat-l{font-size:.7rem;color:var(--ink3);letter-spacing:1px;}
+.tabs{display:flex;border-bottom:2px solid var(--brd);background:var(--bg2);overflow-x:auto;}
+.tab{flex-shrink:0;padding:.65rem 1rem;font-size:.84rem;cursor:pointer;border:none;background:transparent;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px;}
+.tab.on{color:var(--trad);border-bottom-color:var(--trad);font-weight:500;background:var(--bg);}
+.tab:hover:not(.on){background:var(--bg3);color:var(--ink2);}
+.wrap{max-width:1100px;margin:0 auto;padding:1.8rem 1.5rem;}
+.sec{display:none;}.sec.on{display:block;}
+.ibox{background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFD54F;border-radius:10px;padding:1rem 1.3rem;margin-bottom:1.8rem;font-size:.86rem;color:#5D4037;line-height:1.8;}
+.ibox strong{color:var(--gold);}
+.ch{display:flex;align-items:center;gap:.8rem;margin:1.6rem 0 .7rem;padding:.7rem 1rem;background:var(--bg2);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;}
+.ch-t{font-family:'Noto Serif SC',serif;font-size:.98rem;color:var(--ink);font-weight:700;}
+.ch-d{font-size:.78rem;color:var(--ink3);flex:1;}
+.ch-b{font-size:.68rem;padding:2px 7px;border-radius:10px;color:#fff;white-space:nowrap;}
+/* 搜索专区 */
+.s-box{background:#fff;border:1px solid var(--brd);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+.s-top{display:flex;gap:10px;margin-bottom:1rem;align-items:stretch;}
+.s-inp{flex:1;padding:.75rem 1rem;border:1.5px solid var(--brd);border-radius:8px;font-size:1.1rem;font-family:'Noto Serif SC',serif;background:#fff;color:var(--ink);outline:none;transition:border-color .2s;}
+.s-inp:focus{border-color:var(--gold);}
+.s-btn{padding:.75rem 1.4rem;background:var(--ink);color:#F5DEB3;border:none;border-radius:8px;font-size:.9rem;cursor:pointer;font-family:'Noto Sans SC';white-space:nowrap;}
+.s-btn:hover{background:#3D2B14;}
+.s-tip{font-size:.78rem;color:var(--ink3);line-height:1.7;margin-bottom:.8rem;}
+.s-hist{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.8rem;min-height:10px;}
+.s-tag{padding:2px 8px;background:var(--bg2);border:1px solid var(--brd);border-radius:12px;font-size:.76rem;color:var(--ink2);cursor:pointer;font-family:'Noto Serif SC',serif;}
+.s-tag:hover{background:var(--bg3);}
+.s-res{min-height:60px;}
+/* 结果卡片 */
+.res-header{font-size:.82rem;color:var(--ink3);margin-bottom:.9rem;padding:.5rem 0;border-bottom:1px solid var(--brd);}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+.rc{border-radius:10px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;cursor:default;transition:box-shadow .15s;}
+.rc:hover{box-shadow:0 2px 12px rgba(26,18,8,.1);}
+.rc.diff{background:#fff;border:1px solid var(--brd);border-left:4px solid var(--trad);}
+.rc.same{background:#F1F8F1;border:1px solid #C8E6C9;border-left:4px solid var(--same);}
+.rc .chars{display:flex;align-items:center;gap:.5rem;min-width:110px;}
+.rc .trad-c{font-family:'Noto Serif SC',serif;font-size:2.2rem;color:var(--trad);line-height:1;}
+.rc .arrow{font-size:1rem;color:var(--ink3);}
+.rc .simp-c{font-family:'Noto Serif SC',serif;font-size:2.2rem;color:var(--simp);line-height:1;}
+.rc.same .trad-c,.rc.same .simp-c{color:var(--same);}
+.rc .info{flex:1;}
+.rc .info-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.25rem;}
+.rc .badge{font-size:.65rem;padding:1px 6px;border-radius:8px;white-space:nowrap;font-weight:500;}
+.rc.diff .badge{background:#FFEBEE;color:var(--trad);}
+.rc.same .badge{background:#E8F5E9;color:var(--same);}
+.rc .char-label{font-size:.82rem;font-weight:500;color:var(--ink);}
+.rc .note{font-size:.74rem;color:var(--ink3);line-height:1.5;}
+/* 一简多繁 */
+.multi-item{background:#fff;border:1px solid #FFCDD2;border-left:4px solid #C0392B;border-radius:10px;padding:1rem 1.2rem;margin-bottom:8px;}
+.multi-head{display:flex;align-items:center;gap:1rem;margin-bottom:.5rem;}
+.multi-simp{font-family:'Noto Serif SC',serif;font-size:2rem;color:var(--simp);}
+.multi-arr{font-size:.85rem;color:var(--ink3);}
+.multi-trads{display:flex;gap:.6rem;flex-wrap:wrap;}
+.multi-trad-item{text-align:center;background:#FFEBEE;border-radius:6px;padding:.3rem .6rem;}
+.multi-trad-c{font-family:'Noto Serif SC',serif;font-size:1.6rem;color:var(--trad);display:block;}
+.multi-trad-m{font-size:.68rem;color:#C0392B;}
+.multi-note{font-size:.76rem;color:#C0392B;margin-top:.4rem;line-height:1.6;}
+/* 无结果 */
+.no-res{text-align:center;padding:2rem;color:var(--ink3);}
+.no-res .big{font-family:'Noto Serif SC',serif;font-size:3rem;color:var(--brd);display:block;margin-bottom:.5rem;}
+/* 分类对比 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:8px;margin-bottom:.7rem;}
+.card{background:#fff;border:1px solid var(--brd);border-radius:9px;padding:.7rem .6rem;text-align:center;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;}
+.card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(26,18,8,.1);border-color:var(--gold);}
+.card.diff{border-top:3px solid var(--trad);}
+.card.multi{border:2px solid #FFCDD2;border-top:3px solid #C0392B;}
+.card.sel{box-shadow:0 0 0 2px var(--gold);}
+.ct{font-family:'Noto Serif SC',serif;font-size:1.85rem;color:var(--trad);line-height:1.1;display:block;}
+.ca{font-size:.78rem;color:var(--ink3);margin:2px 0;display:block;}
+.cs{font-family:'Noto Serif SC',serif;font-size:1.85rem;color:var(--simp);line-height:1.1;display:block;}
+.cp{font-size:.68rem;color:var(--ink3);margin-top:2px;display:block;}
+.cm{font-size:.64rem;color:var(--ink2);margin-top:1px;display:block;}
+.det{background:#fff;border:1px solid var(--brd);border-radius:11px;padding:1.3rem 1.7rem;margin:1rem 0 1.8rem;display:none;animation:fi .18s ease;}
+.det.on{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
+.drow{display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;}
+.dbox{text-align:center;min-width:68px;}
+.dc{font-family:'Noto Serif SC',serif;font-size:3rem;line-height:1;display:block;}
+.dl{font-size:.68rem;color:var(--ink3);margin-top:3px;}
+.darr{font-size:1.4rem;color:var(--brd);align-self:center;}
+.dinfo{flex:1;min-width:160px;}
+.dinfo h3{font-size:.93rem;color:var(--ink);margin-bottom:.4rem;}
+.tbox{background:#FFFDE7;border:1px solid #F0E060;border-radius:7px;padding:.6rem .85rem;margin-top:.6rem;font-size:.79rem;color:#5D4037;line-height:1.7;}
+.mbox{background:#FFEBEE;border:1px solid #FFCDD2;border-radius:7px;padding:.6rem .85rem;margin-top:.6rem;font-size:.77rem;color:#B71C1C;line-height:1.8;}
+/* 相同字格子 */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:6px;margin-bottom:1.2rem;}
+.sc{background:#fff;border:1px solid #C8E6C9;border-radius:7px;border-top:3px solid var(--same);padding:.4rem;text-align:center;font-family:'Noto Serif SC',serif;font-size:1.4rem;color:var(--same);}
+.sc small{display:block;font-size:.56rem;color:var(--ink3);font-family:'Noto Sans SC';margin-top:1px;}
+/* 规律卡 */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.85rem;margin-bottom:1.2rem;}
+.rcard{background:#fff;border:1px solid var(--brd);border-radius:9px;padding:.95rem;border-left:4px solid var(--gold);}
+.rcard h4{font-size:.88rem;color:var(--ink);margin-bottom:.4rem;font-weight:700;}
+.rcard p{font-size:.79rem;color:var(--ink2);line-height:1.7;}
+.rex{display:flex;flex-wrap:wrap;gap:4px;margin-top:.55rem;}
+.rx{font-family:'Noto Serif SC',serif;font-size:.9rem;background:var(--bg2);padding:2px 6px;border-radius:3px;}
+.rx span{color:var(--trad);}
+.rx i{color:var(--simp);}
+/* 测验 */
+.qwrap{max-width:520px;margin:0 auto;text-align:center;}
+.pb{background:var(--bg2);border-radius:20px;height:5px;margin-bottom:.3rem;overflow:hidden;}
+.pf{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--gold),var(--trad));transition:width .4s;}
+.pt{font-size:.72rem;color:var(--ink3);text-align:right;margin-bottom:.8rem;}
+.qs{font-size:.93rem;font-weight:500;color:var(--ink2);margin-bottom:.8rem;}
+.qq{background:#fff;border:1px solid var(--brd);border-radius:11px;padding:1.6rem;margin-bottom:.9rem;}
+.qc{font-family:'Noto Serif SC',serif;font-size:4.2rem;color:var(--trad);line-height:1;display:block;margin-bottom:.3rem;}
+.qp{font-size:.86rem;color:var(--ink3);letter-spacing:1px;}
+.qo{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.9rem;}
+.qb{font-family:'Noto Serif SC',serif;font-size:1.8rem;padding:.8rem;background:#fff;border:2px solid var(--brd);border-radius:9px;cursor:pointer;transition:all .15s;color:var(--ink);}
+.qb:hover{border-color:var(--gold);background:var(--bg2);}
+.qb.ok{border-color:var(--same);background:#E8F5E9;color:var(--same);}
+.qb.err{border-color:var(--trad);background:#FFEBEE;color:var(--trad);}
+.qf{font-size:.83rem;color:var(--ink2);background:var(--bg2);border-radius:7px;padding:.75rem;margin-bottom:.75rem;display:none;text-align:left;line-height:1.7;}
+.qf.on{display:block;}
+.qbtn{padding:.5rem 1.5rem;background:var(--ink);color:#F5DEB3;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:'Noto Sans SC';letter-spacing:1px;display:none;margin:.2rem;}
+.qbtn.on{display:inline-block;}
+.qbtn:hover{background:#3D2B14;}
+.qbtn.g{background:var(--same);}
+@media(max-width:600px){
+  .hdr h1{font-size:1.4rem;}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(95px,1fr));}
+  .dc{font-size:2.5rem;}
+  .qc{font-size:3.2rem;}
+  .tab{padding:.55rem .7rem;font-size:.76rem;}
+  .res-grid{grid-template-columns:1fr;}
+  .s-top{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <span class="hdr-bg" style="top:-10px;left:-5px">繁</span>
+  <h1>繁简汉字对照学习系统</h1>
+  <p>依据《通用规范汉字表》8105字 · 官方规范字与繁体字对照</p>
+  <span class="hdr-bg" style="bottom:-30px;right:-5px">簡</span>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat-n" style="color:#1A5E3A">5500+</span><span class="stat-l">繁简相同字</span></div>
+  <div class="stat"><span class="stat-n" style="color:#8B1A1A">2546</span><span class="stat-l">有繁体对应</span></div>
+  <div class="stat"><span class="stat-n" style="color:#B8860B">8105</span><span class="stat-l">规范汉字总数</span></div>
+</div>
+<div class="tabs" id="tabs">
+  <button class="tab on" data-s="ov">总览说明</button>
+  <button class="tab" data-s="sm">繁简相同</button>
+  <button class="tab" data-s="df">分类对比</button>
+  <button class="tab" data-s="rl">简化规律</button>
+  <button class="tab" data-s="qz">测验练习</button>
+  <button class="tab" data-s="sr">查字搜索</button>
+</div>
+<div class="wrap">
+
+<!-- ===== 查字搜索 ===== -->
+<div class="sec" id="sec-sr">
+<div class="s-box">
+  <div class="s-top">
+    <input class="s-inp" type="text" id="si" placeholder="输入简体字、繁体字搜索（支持多字）" maxlength="10" oninput="doSearch()">
+    <button class="s-btn" onclick="doSearch()">搜　索</button>
+  </div>
+  <div class="s-tip">
+    ✦ 输入<strong>简体字</strong>：显示对应繁体字，或标注「繁简相同」<br>
+    ✦ 输入<strong>繁体字</strong>：反向查询对应简体字<br>
+    ✦ 支持一次输入多个字（如：学习国家）逐一查询
+  </div>
+  <div id="s-hist-wrap" style="display:none"><span style="font-size:.72rem;color:var(--ink3)">最近搜索：</span><div class="s-hist" id="s-hist"></div></div>
+</div>
+<div class="s-res" id="sr2"><div class="no-res"><span class="big">字</span>在上方输入汉字开始查询</div></div>
+</div>
+
+<!-- ===== 总览 ===== -->
+<div class="sec on" id="sec-ov">
+<div class="ibox">
+  <strong>📚 数据来源</strong><br>
+  本系统依据<a href="http://www.moe.gov.cn/jyb_sjzl/ziliao/A19/201306/t20130601_186002.html" target="_blank">《通用规范汉字表》</a>
+  （2013年国务院公布，共8105字）及其附表一《规范字与繁体字、异体字对照表》整理。其中2546个规范字与繁体字有对应关系，其余约5500+字繁简完全相同。<br>
+  <strong>查字搜索</strong>已覆盖全部有差异的字，繁简相同的字搜索后也会标注说明。
+</div>
+<div class="rgrid">
+<div class="rcard"><h4>📊 数字概览</h4><p>8105字中：约5559字繁简相同（不涉及繁体对应）；2546字有对应繁体字；其中96组「一简多繁」最需注意。</p></div>
+<div class="rcard"><h4>🔑 学习路径</h4><p>① 「查字搜索」— 随时查任意字<br>② 「繁简相同」— 建立信心<br>③ 「分类对比」— 按偏旁批量学<br>④ 「简化规律」— 举一反三<br>⑤ 「测验练习」— 巩固检验</p></div>
+<div class="rcard"><h4>🧠 高效记忆法</h4><p>言字旁（訁→讠约60字）、金字旁（金→钅约50字）、纟字旁（糹→纟约55字）三类合计约165字，掌握这三类偏旁规律即可突破大部分繁体阅读障碍。</p></div>
+<div class="rcard"><h4>⚠️ 最大难点</h4><p>「一简多繁」（如「发」=「發/髮」，「干」=「乾/幹」）需根据语境判断对应哪个繁体，共约96组，是学繁体最难的部分。</p></div>
+</div>
+<div class="ch"><div class="ch-t">六大简化类型</div><div class="ch-d">理解这六类逻辑，可以掌握绝大多数繁简差异</div></div>
+<div class="rgrid">
+<div class="rcard" style="border-left-color:#C0392B"><h4>① 偏旁替换（最广）</h4><p>用简化偏旁统一替换，如訁→讠约60字、金→钅约50字、糹→纟约55字。掌握约20个偏旁，覆盖数百字。</p><div class="rex"><span class="rx"><span>語</span>→<i>语</i></span><span class="rx"><span>錢</span>→<i>钱</i></span><span class="rx"><span>馬</span>→<i>马</i></span></div></div>
+<div class="rcard" style="border-left-color:#1A4B7A"><h4>② 草书楷化</h4><p>手写草体固定为楷体，形体改变较大，需单独记忆。</p><div class="rex"><span class="rx"><span>書</span>→<i>书</i></span><span class="rx"><span>長</span>→<i>长</i></span><span class="rx"><span>車</span>→<i>车</i></span></div></div>
+<div class="rcard" style="border-left-color:#2D6A4F"><h4>③ 轮廓保留</h4><p>保留原字外轮廓，省略内部大量笔画。</p><div class="rex"><span class="rx"><span>廣</span>→<i>广</i></span><span class="rx"><span>醫</span>→<i>医</i></span><span class="rx"><span>義</span>→<i>义</i></span></div></div>
+<div class="rcard" style="border-left-color:#8B5A00"><h4>④ 同音替代</h4><p>借同音简单字替代，可能导致一简多繁。</p><div class="rex"><span class="rx"><span>後</span>→<i>后</i></span><span class="rx"><span>裏</span>→<i>里</i></span></div></div>
+<div class="rcard" style="border-left-color:#8B1A1A"><h4>⑤ 多字合并</h4><p>多个繁体合并为一个简体，阅读时需还原。</p><div class="rex"><span class="rx"><span>發/髮</span>→<i>发</i></span><span class="rx"><span>乾/幹</span>→<i>干</i></span></div></div>
+<div class="rcard" style="border-left-color:#5D4037"><h4>⑥ 新造简字</h4><p>重新设计字形，与繁体差异大，多为会意字。</p><div class="rex"><span class="rx"><span>塵</span>→<i>尘</i></span><span class="rx"><span>竈</span>→<i>灶</i></span></div></div>
+</div>
+</div>
+
+<!-- ===== 繁简相同 ===== -->
+<div class="sec" id="sec-sm">
+<div class="ibox"><strong>✅ 这些汉字繁简完全相同——看到繁体直接认！</strong><br>约5500+字繁简一致，以下展示各类高频字。</div>
+<div class="ch" style="border-left-color:#1A5E3A"><div class="ch-t">基础常用字</div><div class="ch-d">最高频基础字，繁简完全相同</div><div class="ch-b" style="background:#1A5E3A">直接使用</div></div>
+<div class="sgrid" id="sg1"></div>
+<div class="ch" style="border-left-color:#1A5E3A"><div class="ch-t">数字（全部相同）</div><div class="ch-d">所有数字繁简完全一致</div><div class="ch-b" style="background:#1A5E3A">完全相同</div></div>
+<div class="sgrid" id="sg2"></div>
+<div class="ch" style="border-left-color:#1A5E3A"><div class="ch-t">方位与时间</div><div class="ch-d">方位词和时间词大多相同</div><div class="ch-b" style="background:#1A5E3A">完全相同</div></div>
+<div class="sgrid" id="sg3"></div>
+<div class="ch" style="border-left-color:#1A5E3A"><div class="ch-t">自然与身体</div><div class="ch-d">自然景物与身体部位大多相同</div><div class="ch-b" style="background:#1A5E3A">完全相同</div></div>
+<div class="sgrid" id="sg4"></div>
+</div>
+
+<!-- ===== 分类对比 ===== -->
+<div class="sec" id="sec-df">
+<div class="det" id="det"></div>
+<div id="dfc"></div>
+</div>
+
+<!-- ===== 规律 ===== -->
+<div class="sec" id="sec-rl">
+<div class="ibox"><strong>📐 掌握偏旁规律，举一反三</strong><br>以下每条规律覆盖数十个字，掌握后可自动推断大量繁体字。</div>
+<div id="rlc"></div>
+</div>
+
+<!-- ===== 测验 ===== -->
+<div class="sec" id="sec-qz">
+<div class="qwrap">
+<div class="pb"><div class="pf" id="qpf" style="width:0%"></div></div>
+<div class="pt" id="qpt">准备开始</div>
+<div class="qs" id="qsc">得分：0 / 0</div>
+<div class="qq"><span class="qc" id="qch">繁</span><span class="qp" id="qpm">点击「开始测验」开始练习</span></div>
+<div class="qo" id="qop"></div>
+<div class="qf" id="qfb"></div>
+<button class="qbtn on g" id="qst" onclick="startQ()">开始测验 ▶</button>
+<button class="qbtn" id="qnx" onclick="nextQ()">下一题 →</button>
+</div>
+</div>
+
+</div><!-- wrap -->
+<script>
+var TRAD_MAP={"万":"萬","与":"與","丑":"醜","专":"專","业":"業","丛":"叢","东":"東","丝":"絲","两":"兩","严":"嚴","丧":"喪","个":"個","丰":"豐","为":"爲","丽":"麗","么":"麽","义":"義","乌":"烏","乐":"樂","乔":"喬","习":"習","乡":"鄉","书":"書","买":"買","乱":"亂","亏":"虧","云":"雲","亚":"亞","产":"産","亩":"畝","亲":"親","亿":"億","仅":"僅","仆":"僕","从":"從","仑":"侖","仓":"倉","仪":"儀","们":"們","价":"價","众":"衆","优":"優","伙":"夥","会":"會","伞":"傘","伟":"偉","传":"傳","伤":"傷","伦":"倫","伪":"僞","体":"體","余":"餘","佣":"傭","儿":"兒","克":"剋","兰":"蘭","关":"關","兴":"興","兽":"獸","册":"冊","写":"寫","军":"軍","农":"農","冬":"鼕","冯":"馮","冲":"衝","冻":"凍","几":"幾","凤":"鳳","出":"齣","击":"擊","划":"劃","刘":"劉","则":"則","刚":"剛","创":"創","别":"彆","劝":"勸","办":"辦","务":"務","动":"動","励":"勵","劲":"勁","劳":"勞","势":"勢","区":"區","医":"醫","千":"韆","华":"華","协":"協","卖":"賣","卜":"蔔","卢":"盧","卤":"鹵/滷","卫":"衛","厂":"廠","厅":"廳","历":"歷/曆","厉":"厲","压":"壓","厌":"厭","厕":"廁","县":"縣","双":"雙","发":"發/髮","只":"衹/隻","台":"臺/颱/檯","叶":"葉","号":"號","叹":"嘆","叽":"嘰","吁":"籲","合":"閤","后":"後","向":"嚮","吓":"嚇","吗":"嗎","吨":"噸","听":"聽","启":"啓","呕":"嘔","员":"員","呛":"嗆","呜":"嗚","回":"迴","团":"團/糰","园":"園","困":"睏","围":"圍","国":"國","圆":"圓","圣":"聖","场":"場","坏":"壞","块":"塊","坚":"堅","坛":"壇","坝":"壩","坟":"墳","坠":"墜","垄":"壟","垒":"壘","堕":"墮","壮":"壯","声":"聲","壳":"殻","壶":"壺","处":"處","复":"復/複","头":"頭","夸":"誇","夹":"夾","夺":"奪","奋":"奮","奖":"獎","妆":"妝","妇":"婦","妈":"媽","孙":"孫","学":"學","宁":"寧","宝":"寶","实":"實","审":"審","宪":"憲","宽":"寬","宾":"賓","对":"對","寻":"尋","导":"導","寿":"壽","将":"將","尔":"爾","尘":"塵","尧":"堯","尽":"盡/儘","层":"層","屿":"嶼","岁":"歲","岂":"豈","岖":"嶇","岗":"崗","岛":"島","巩":"鞏","币":"幣","帅":"帥","师":"師","帐":"帳","帘":"簾","帜":"幟","带":"帶","帮":"幫","干":"乾/幹","广":"廣","庄":"莊","庆":"慶","庐":"廬","库":"庫","应":"應","庙":"廟","庞":"龐","废":"廢","开":"開","弃":"棄","张":"張","归":"歸","当":"當/噹","录":"錄","彻":"徹","忆":"憶","忧":"憂","怀":"懷","态":"態","怜":"憐","总":"總","恋":"戀","恳":"懇","恶":"惡","恻":"惻","恿":"慫","悦":"悅","悬":"懸","悯":"憫","惊":"驚","惧":"懼","惨":"慘","惭":"慚","惮":"憚","惯":"慣","愤":"憤","愿":"願","戏":"戲","战":"戰","才":"纔","扑":"撲","执":"執","扩":"擴","扫":"掃","扬":"揚","扰":"擾","折":"摺","抚":"撫","抡":"掄","抢":"搶","护":"護","报":"報","担":"擔","拟":"擬","拢":"攏","拣":"揀","拥":"擁","拦":"攔","拧":"擰","择":"擇","挠":"撓","挡":"擋","挣":"掙","捞":"撈","损":"損","换":"換","捣":"搗","据":"據","揽":"攬","搅":"攪","摄":"攝","摆":"擺","摊":"攤","撵":"攆","断":"斷","无":"無","旧":"舊","时":"時","旷":"曠","旸":"暘","昙":"曇","昵":"暱","昼":"晝","晋":"晉","晒":"曬","晓":"曉","晔":"曄","晕":"暈","晖":"暉","暂":"暫","暧":"曖","曲":"麯","术":"術","朱":"硃","朴":"樸","机":"機","杀":"殺","杂":"雜","权":"權","条":"條","来":"來","杨":"楊","杰":"傑","板":"闆","极":"極","构":"構","枢":"樞","枣":"棗","枪":"槍","枫":"楓","柜":"櫃","标":"標","栈":"棧","栏":"欄","树":"樹","样":"樣","档":"檔","桥":"橋","桦":"樺","桨":"槳","桩":"樁","欢":"歡","欧":"歐","歼":"殲","殴":"毆","毕":"畢","气":"氣","汇":"匯/彙","汉":"漢","汤":"湯","汹":"洶","沈":"瀋","沟":"溝","沥":"瀝","沦":"淪","沧":"滄","沪":"滬","泪":"淚","泼":"潑","泽":"澤","洒":"灑","浅":"淺","浓":"濃","涌":"湧","涛":"濤","涡":"渦","渔":"漁","满":"滿","滥":"濫","潇":"瀟","灭":"滅","灯":"燈","灵":"靈","灶":"竈","灿":"燦","炉":"爐","炼":"煉","烂":"爛","烛":"燭","烦":"煩","烫":"燙","热":"熱","爷":"爺","牵":"牽","状":"狀","犹":"猶","狈":"狽","玛":"瑪","环":"環","现":"現","电":"電","画":"畫","疗":"療","盏":"盞","盐":"鹽","监":"監","盘":"盤","矿":"礦","码":"碼","砖":"磚","础":"礎","硕":"碩","碍":"礙","礼":"禮","祸":"禍","禅":"禪","称":"稱","穷":"窮","笔":"筆","笼":"籠","筑":"築","筹":"籌","签":"簽","简":"簡","篓":"簍","篮":"籃","类":"類","系":"係/繫","纠":"糾","红":"紅","纤":"縴","约":"約","级":"級","纪":"紀","纫":"紉","纬":"緯","纯":"純","纱":"紗","纲":"綱","纳":"納","纵":"縱","纷":"紛","纸":"紙","纹":"紋","纺":"紡","纽":"紐","线":"線","练":"練","细":"細","经":"經","绑":"綁","结":"結","绕":"繞","绘":"繪","绞":"絞","统":"統","绣":"繡","继":"繼","绩":"績","绪":"緒","续":"續","绯":"緋","绳":"繩","绵":"綿","绷":"繃","绸":"綢","综":"綜","绿":"綠","缀":"綴","缄":"緘","缅":"緬","缆":"纜","缉":"緝","缎":"緞","缓":"緩","缔":"締","编":"編","缘":"緣","缝":"縫","缠":"纏","缩":"縮","缭":"繚","缮":"繕","网":"網","肠":"腸","胀":"脹","胁":"脅","胆":"膽","胫":"脛","胶":"膠","脏":"臟","脓":"膿","脱":"脫","脸":"臉","腊":"臘","腻":"膩","腾":"騰","艺":"藝","节":"節","芜":"蕪","芦":"蘆","苇":"葦","苍":"蒼","苏":"蘇","苹":"蘋","范":"範","茧":"繭","荣":"榮","药":"藥","莲":"蓮","获":"獲","莺":"鶯","萝":"蘿","营":"營","蓝":"藍","虫":"蟲","虾":"蝦","蜡":"蠟","衔":"銜","补":"補","表":"錶","衬":"襯","袄":"襖","袜":"襪","裆":"襠","裤":"褲","见":"見","观":"觀","规":"規","视":"視","览":"覽","觉":"覺","誉":"譽","计":"計","订":"訂","认":"認","讥":"譏","讨":"討","让":"讓","训":"訓","议":"議","讯":"訊","记":"記","讲":"講","讳":"諱","讶":"訝","许":"許","讹":"訛","论":"論","讼":"訟","讽":"諷","设":"設","访":"訪","诀":"訣","证":"證","评":"評","识":"識","诈":"詐","诉":"訴","诊":"診","词":"詞","译":"譯","诗":"詩","诚":"誠","话":"話","诞":"誕","询":"詢","该":"該","详":"詳","语":"語","误":"誤","说":"說","请":"請","诸":"諸","诺":"諾","读":"讀","课":"課","谁":"誰","调":"調","谅":"諒","谈":"談","谋":"謀","谎":"謊","谐":"諧","谓":"謂","谜":"謎","谢":"謝","谦":"謙","谱":"譜","谷":"穀","贝":"貝","贞":"貞","负":"負","贡":"貢","财":"財","责":"責","贤":"賢","账":"賬","货":"貨","贩":"販","贪":"貪","贫":"貧","购":"購","贵":"貴","贷":"貸","贸":"貿","费":"費","贺":"賀","赁":"賃","赃":"贓","赋":"賦","赌":"賭","赎":"贖","赏":"賞","赐":"賜","赔":"賠","赖":"賴","赚":"賺","赞":"贊","赠":"贈","赢":"贏","赵":"趙","车":"車","轧":"軋","轨":"軌","轩":"軒","转":"轉","轮":"輪","软":"軟","轰":"轟","辈":"輩","输":"輸","辙":"轍","辞":"辭","辩":"辯","边":"邊","辽":"遼","达":"達","迁":"遷","过":"過","迈":"邁","运":"運","还":"還","这":"這","进":"進","远":"遠","违":"違","连":"連","迟":"遲","迩":"邇","适":"適","选":"選","逊":"遜","递":"遞","逻":"邏","遗":"遺","遥":"遙","邓":"鄧","邮":"郵","邻":"鄰","里":"裏","鉴":"鑒","针":"針","钉":"釘","钓":"釣","钟":"鐘/鍾","钢":"鋼","钥":"鑰","钦":"欽","钩":"鉤","钱":"錢","钻":"鑽","铁":"鐵","铃":"鈴","铅":"鉛","铐":"銬","铜":"銅","铝":"鋁","铡":"鍘","铧":"鏵","铭":"銘","铰":"鉸","铲":"鏟","铳":"銃","铵":"銨","银":"銀","铸":"鑄","铺":"鋪","链":"鏈","销":"銷","锁":"鎖","锂":"鋰","锄":"鋤","锅":"鍋","锋":"鋒","锌":"鋅","锍":"鋶","锏":"鐧","锐":"銳","错":"錯","锚":"錨","锡":"錫","锤":"錘","锥":"錐","锦":"錦","锨":"鍁","键":"鍵","锯":"鋸","锰":"錳","锻":"鍛","镀":"鍍","镁":"鎂","镂":"鏤","镇":"鎮","镍":"鎳","镐":"鎬","镖":"鏢","镗":"鏜","镜":"鏡","镦":"墩","长":"長","门":"門","闪":"閃","闭":"閉","问":"問","闯":"闖","闰":"閏","闲":"閒","间":"間","闷":"悶","阐":"闡","阑":"闌","阔":"闊","队":"隊","阳":"陽","阴":"陰","阵":"陣","阶":"階","际":"際","陆":"陸","陈":"陳","随":"隨","隐":"隱","韧":"韌","页":"頁","顶":"頂","顷":"頃","顺":"順","须":"須","顾":"顧","顿":"頓","颂":"頌","预":"預","领":"領","颈":"頸","颊":"頰","频":"頻","颓":"頹","题":"題","颜":"顏","额":"額","颠":"顛","风":"風","飞":"飛","饥":"飢","饨":"飩","饭":"飯","饮":"飲","饯":"餞","饰":"飾","饱":"飽","饲":"飼","饵":"餌","饺":"餃","饼":"餅","饿":"餓","馅":"餡","馆":"館","馋":"饞","馒":"饅","马":"馬","驮":"馱","驯":"馴","驰":"馳","驱":"驅","驳":"駁","驴":"驢","驹":"駒","驻":"駐","驼":"駝","驾":"駕","驿":"驛","骄":"驕","骆":"駱","骇":"駭","验":"驗","骏":"駿","骑":"騎","骗":"騙","骚":"騷","骡":"騾","骤":"驟","鲁":"魯","鲈":"鱸","鲍":"鮑","鲜":"鮮","鲤":"鯉","鲫":"鯽","鲶":"鯰","鲸":"鯨","鳄":"鱷","鳕":"鱈","鳞":"鱗","鸟":"鳥","鸡":"雞","鸢":"鳶","鸦":"鴉","鸭":"鴨","鸯":"鴦","鸳":"鴛","鸵":"鴕","鸽":"鴿","鸾":"鸞","鸿":"鴻","鹅":"鵝","鹊":"鵲","鹏":"鵬","鹤":"鶴","鹦":"鸚","鹰":"鷹","麦":"麥","齐":"齊","龄":"齡","龙":"龍","龟":"龜"};
+// ===== 一简多繁详细说明 =====
+var MULTI_DETAIL = {
+"发":{"trads":["發","髮"],"notes":["發：发展、发生、出发","髮：头发、毛发、理发"]},
+"干":{"trads":["乾","幹"],"notes":["乾：干燥、干净、乾坤","幹：树干、干活、才干"]},
+"后":{"trads":["後"],"notes":["後：以后、后来、前后（皇后的「后」不变）"]},
+"里":{"trads":["裏"],"notes":["裏：里面、里边（乡里、一里路的「里」不变）"]},
+"云":{"trads":["雲"],"notes":["雲：云朵、白云（文言义的「云」不变）"]},
+"台":{"trads":["臺","颱","檯"],"notes":["臺：讲台、舞台、台湾","颱：台风（颱風）","檯：台灯、梳妆台"]},
+"几":{"trads":["幾"],"notes":["幾：几个、几乎（茶几的「几」不变）"]},
+"丑":{"trads":["醜"],"notes":["醜：丑陋、丑闻（地支「丑」不变）"]},
+"复":{"trads":["復","複"],"notes":["復：恢复、复习、报复","複：复杂、重复、复印"]},
+"板":{"trads":["闆"],"notes":["闆：老板（木板的「板」不变）"]},
+"钟":{"trads":["鐘","鍾"],"notes":["鐘：时钟、钟声、闹钟","鍾：姓钟、钟情"]},
+"冲":{"trads":["衝"],"notes":["衝：冲撞、冲破（冲茶用「沖」）"]},
+"向":{"trads":["嚮"],"notes":["嚮：向往、向导（方向的「向」不变）"]},
+"划":{"trads":["劃"],"notes":["劃：划分、计划（划船的「划」不变）"]},
+"回":{"trads":["迴"],"notes":["迴：回旋、迂回（回家的「回」不变）"]},
+"汇":{"trads":["匯","彙"],"notes":["匯：汇合、汇报、外汇","彙：词汇、汇编"]},
+"叶":{"trads":["葉"],"notes":["葉：树叶、叶子（姓叶不变）"]},
+"只":{"trads":["衹","隻"],"notes":["衹：只是、只有","隻：一只鸟、只身"]},
+"出":{"trads":["齣"],"notes":["齣：一出戏（其他义的「出」不变）"]},
+"朴":{"trads":["樸"],"notes":["樸：朴素、朴实（姓朴不变）"]},
+"系":{"trads":["係","繫"],"notes":["係：关系、联系（人际关系）","繫：系上、系领带（绑缚）"]},
+"折":{"trads":["摺"],"notes":["摺：折叠（折断的「折」不变）"]},
+"尽":{"trads":["盡","儘"],"notes":["盡：尽力、用尽","儘：尽管、尽量、尽快"]},
+"卤":{"trads":["鹵","滷"],"notes":["鹵：卤素（化学）","滷：卤水、卤肉（烹饪）"]},
+"困":{"trads":["睏"],"notes":["睏：困倦（困难的「困」不变）"]},
+"别":{"trads":["彆"],"notes":["彆：别扭（分别、告别的「别」不变）"]},
+"克":{"trads":["剋"],"notes":["剋：克制、相克（克重量单位不变）"]},
+"余":{"trads":["餘"],"notes":["餘：余额、多余（姓余不变）"]},
+"谷":{"trads":["穀"],"notes":["穀：稻谷、五谷（山谷的「谷」不变）"]},
+"历":{"trads":["歷","曆"],"notes":["歷：历史、经历","曆：日历、农历"]},
+"表":{"trads":["錶"],"notes":["錶：手表、怀表（表示的「表」不变）"]},
+"当":{"trads":["當","噹"],"notes":["當：当然、当时","噹：当当响（象声）"]},
+"曲":{"trads":["麯"],"notes":["麯：酒曲（歌曲、曲折的「曲」不变）"]},
+"团":{"trads":["團","糰"],"notes":["團：团体、团结","糰：汤团、饭团"]},
+"合":{"trads":["閤"],"notes":["閤：合家（其他义的「合」不变）"]},
+"朱":{"trads":["硃"],"notes":["硃：朱砂（姓朱不变）"]},
+"千":{"trads":["韆"],"notes":["韆：秋千（数字千不变）"]},
+"才":{"trads":["纔"],"notes":["纔：刚才（文言义，现代通用「才」）"]},
+"卜":{"trads":["蔔"],"notes":["蔔：萝卜（占卜的「卜」不变）"]},
+"丰":{"trads":["豐"],"notes":["豐：丰收、丰盛"]},
+"冬":{"trads":["鼕"],"notes":["鼕：冬冬（鼓声象声词，季节义不变）"]}
+};
+
+// ===== 反向查询（繁体→简体）=====
+var TRAD_TO_SIMP = {};
+(function(){
+  for(var s in TRAD_MAP){
+    var tv = TRAD_MAP[s];
+    var ts = tv.split("/");
+    ts.forEach(function(t){
+      if(!TRAD_TO_SIMP[t]) TRAD_TO_SIMP[t] = [];
+      if(TRAD_TO_SIMP[t].indexOf(s)<0) TRAD_TO_SIMP[t].push(s);
+    });
+  }
+})();
+
+// ===== 搜索历史 =====
+var searchHistory = [];
+
+function doSearch(){
+  var raw = document.getElementById('si').value.trim();
+  var res = document.getElementById('sr2');
+  if(!raw){
+    res.innerHTML = '<div class="no-res"><span class="big">字</span>在上方输入汉字开始查询</div>';
+    return;
+  }
+  // 去重，收集所有要查的字
+  var chars = [];
+  var seen = {};
+  for(var i=0;i<raw.length;i++){
+    var c = raw[i];
+    if(!seen[c] && c.trim()){seen[c]=1;chars.push(c);}
+  }
+  if(!chars.length){res.innerHTML='<div class="no-res"><span class="big">?</span>请输入汉字</div>';return;}
+  
+  // 加入历史
+  if(searchHistory.indexOf(raw)<0){
+    searchHistory.unshift(raw);
+    if(searchHistory.length>8) searchHistory.pop();
+    renderHistory();
+  }
+  
+  var html = '<div class="res-header">查询「' + raw + '」，共 ' + chars.length + ' 个字</div>';
+  html += '<div class="res-grid">';
+  
+  chars.forEach(function(c){
+    html += renderOneChar(c);
+  });
+  
+  html += '</div>';
+  res.innerHTML = html;
+}
+
+function renderOneChar(c){
+  // 1. 先查简体→繁体
+  var tradVal = TRAD_MAP[c];
+  if(tradVal){
+    var trads = tradVal.split("/");
+    if(trads.length > 1){
+      // 一简多繁
+      return renderMulti(c, trads);
+    } else {
+      // 一简一繁
+      return renderDiff(c, trads[0]);
+    }
+  }
+  // 2. 查繁体→简体（反向）
+  var simpList = TRAD_TO_SIMP[c];
+  if(simpList && simpList.length){
+    var s = simpList[0];
+    return renderReverse(c, s);
+  }
+  // 3. 繁简相同
+  return renderSame(c);
+}
+
+function renderSame(c){
+  return '<div class="rc same">'
+    +'<div class="chars">'
+    +'<span class="trad-c">'+c+'</span>'
+    +'</div>'
+    +'<div class="info">'
+    +'<div class="info-top"><span class="badge">繁简相同</span></div>'
+    +'<div class="char-label">'+c+'</div>'
+    +'<div class="note">此字繁简写法完全一致，无需区分</div>'
+    +'</div></div>';
+}
+
+function renderDiff(simp, trad){
+  return '<div class="rc diff">'
+    +'<div class="chars">'
+    +'<span class="trad-c">'+trad+'</span>'
+    +'<span class="arrow">↔</span>'
+    +'<span class="simp-c">'+simp+'</span>'
+    +'</div>'
+    +'<div class="info">'
+    +'<div class="info-top"><span class="badge">有繁体字</span></div>'
+    +'<div class="char-label">简体「'+simp+'」↔ 繁体「'+trad+'」</div>'
+    +'<div class="note">繁体写法：<strong style="font-family:\'Noto Serif SC\',serif;color:var(--trad)">'+trad+'</strong>　简体写法：<strong style="font-family:\'Noto Serif SC\',serif;color:var(--simp)">'+simp+'</strong></div>'
+    +'</div></div>';
+}
+
+function renderMulti(simp, trads){
+  var detail = MULTI_DETAIL[simp];
+  var html = '<div class="rc diff" style="flex-direction:column;align-items:flex-start">'
+    +'<div style="display:flex;align-items:center;gap:.7rem;width:100%;margin-bottom:.6rem">'
+    +'<div class="chars">'
+    +'<span class="trad-c">'+trads[0]+'</span>'
+    +'<span class="arrow">…</span>'
+    +'<span class="simp-c">'+simp+'</span>'
+    +'</div>'
+    +'<div class="info">'
+    +'<div class="info-top"><span class="badge" style="background:#FFEBEE;color:#C0392B">一简多繁</span></div>'
+    +'<div class="char-label">简体「'+simp+'」对应'+trads.length+'个繁体字</div>'
+    +'</div></div>'
+    +'<div style="display:flex;gap:.5rem;flex-wrap:wrap;width:100%">';
+  trads.forEach(function(t,i){
+    var note = (detail && detail.notes[i]) ? detail.notes[i] : '';
+    html += '<div class="multi-trad-item">'
+      +'<span class="multi-trad-c">'+t+'</span>'
+      +'<span class="multi-trad-m">'+note+'</span>'
+      +'</div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderReverse(trad, simp){
+  return '<div class="rc diff">'
+    +'<div class="chars">'
+    +'<span class="trad-c">'+trad+'</span>'
+    +'<span class="arrow">↔</span>'
+    +'<span class="simp-c">'+simp+'</span>'
+    +'</div>'
+    +'<div class="info">'
+    +'<div class="info-top"><span class="badge">繁→简</span></div>'
+    +'<div class="char-label">繁体「'+trad+'」↔ 简体「'+simp+'」</div>'
+    +'<div class="note">您输入的是繁体字，对应简体为「<strong style="color:var(--simp)">'+simp+'</strong>」</div>'
+    +'</div></div>';
+}
+
+function renderHistory(){
+  if(searchHistory.length===0){document.getElementById('s-hist-wrap').style.display='none';return;}
+  document.getElementById('s-hist-wrap').style.display='block';
+  document.getElementById('s-hist').innerHTML = searchHistory.map(function(h){
+    return '<span class="s-tag" onclick="setSearch(\''+h+'\')">'+h+'</span>';
+  }).join('');
+}
+function setSearch(v){
+  document.getElementById('si').value=v;
+  doSearch();
+}
+
+// ===== 分类对比数据 =====
+var CAT_CHARS = {
+  yan:[["订","訂","dìng","订购"],["计","計","jì","计划"],["讨","討","tǎo","讨论"],["让","讓","ràng","让步"],["训","訓","xùn","训练"],["议","議","yì","议论"],["讯","訊","xùn","通讯"],["记","記","jì","记录"],["讲","講","jiǎng","讲话"],["认","認","rèn","认识"],["许","許","xǔ","许可"],["论","論","lùn","讨论"],["词","詞","cí","词语"],["诉","訴","sù","诉说"],["诊","診","zhěn","诊断"],["评","評","píng","评论"],["识","識","shí","认识"],["证","證","zhèng","证明"],["话","話","huà","话语"],["说","說","shuō","说话"],["请","請","qǐng","请求"],["谁","誰","shuí","谁"],["谋","謀","móu","谋划"],["谢","謝","xiè","感谢"],["语","語","yǔ","语言"],["读","讀","dú","读书"],["课","課","kè","课程"],["调","調","diào","调整"],["谈","談","tán","谈话"],["谜","謎","mí","谜语"],["误","誤","wù","错误"],["译","譯","yì","翻译"],["谱","譜","pǔ","乐谱"],["誉","譽","yù","名誉"],["诚","誠","chéng","诚实"],["详","詳","xiáng","详细"],["询","詢","xún","询问"]],
+  jin:[["钱","錢","qián","钱财"],["银","銀","yín","银子"],["铁","鐵","tiě","铁"],["铜","銅","tóng","铜"],["针","針","zhēn","针"],["钟","鐘","zhōng","时钟"],["钢","鋼","gāng","钢铁"],["销","銷","xiāo","销售"],["键","鍵","jiàn","键盘"],["镜","鏡","jìng","镜子"],["锋","鋒","fēng","锋利"],["错","錯","cuò","错误"],["锅","鍋","guō","锅"],["铃","鈴","líng","铃"],["铝","鋁","lǚ","铝"],["锁","鎖","suǒ","锁"],["锤","錘","chuí","锤子"],["钻","鑽","zuàn","钻石"],["链","鏈","liàn","链条"],["锡","錫","xī","锡"],["镇","鎮","zhèn","镇压"],["锻","鍛","duàn","锻炼"],["铭","銘","míng","铭记"],["钉","釘","dīng","钉子"],["钓","釣","diào","钓鱼"],["录","錄","lù","录音"],["铲","鏟","chǎn","铲子"],["铅","鉛","qiān","铅"],["锄","鋤","chú","锄头"]],
+  si:[["纠","糾","jiū","纠正"],["纪","紀","jì","纪律"],["红","紅","hóng","红色"],["纽","紐","niǔ","纽扣"],["约","約","yuē","约定"],["级","級","jí","级别"],["纯","純","chún","纯洁"],["纺","紡","fǎng","纺织"],["织","織","zhī","织布"],["绕","繞","rào","绕行"],["结","結","jié","结果"],["绿","綠","lǜ","绿色"],["绩","績","jì","成绩"],["练","練","liàn","练习"],["线","線","xiàn","线条"],["纲","綱","gāng","纲领"],["细","細","xì","细节"],["续","續","xù","续集"],["缘","緣","yuán","缘分"],["丝","絲","sī","丝绸"],["纸","紙","zhǐ","纸张"],["绸","綢","chóu","绸缎"],["编","編","biān","编写"],["绪","緒","xù","情绪"],["统","統","tǒng","统一"],["绳","繩","shéng","绳子"],["缓","緩","huǎn","缓慢"],["继","繼","jì","继续"],["经","經","jīng","经过"],["缩","縮","suō","缩小"]],
+  bei:[["贝","貝","bèi","贝壳"],["贡","貢","gòng","贡献"],["财","財","cái","财富"],["账","賬","zhàng","账目"],["货","貨","huò","货物"],["贩","販","fàn","贩卖"],["贪","貪","tān","贪心"],["贫","貧","pín","贫穷"],["购","購","gòu","购买"],["贷","貸","dài","贷款"],["贸","貿","mào","贸易"],["费","費","fèi","费用"],["赌","賭","dǔ","赌博"],["赔","賠","péi","赔偿"],["贵","貴","guì","贵重"],["赠","贈","zèng","赠送"],["贺","賀","hè","贺喜"],["赏","賞","shǎng","奖赏"],["赢","贏","yíng","赢得"],["赞","贊","zàn","赞扬"],["贤","賢","xián","贤能"],["赚","賺","zhuàn","赚钱"]],
+  ma:[["马","馬","mǎ","马"],["骑","騎","qí","骑马"],["验","驗","yàn","验证"],["驾","駕","jià","驾车"],["驻","駐","zhù","驻扎"],["骗","騙","piàn","欺骗"],["驰","馳","chí","奔驰"],["腾","騰","téng","腾飞"],["骤","驟","zhòu","骤然"],["骚","騷","sāo","骚扰"],["驹","駒","jū","马驹"],["骄","驕","jiāo","骄傲"],["驱","驅","qū","驱动"],["驼","駝","tuó","骆驼"],["骡","騾","luó","骡子"],["骏","駿","jùn","骏马"]],
+  men:[["门","門","mén","门"],["开","開","kāi","打开"],["关","關","guān","关闭"],["间","間","jiān","中间"],["闭","閉","bì","关闭"],["阅","閱","yuè","阅读"],["阔","闊","kuò","宽阔"],["闪","閃","shǎn","闪光"],["闯","闖","chuǎng","闯荡"],["闸","閘","zhá","闸门"],["阁","閣","gé","阁楼"],["阀","閥","fá","阀门"],["问","問","wèn","问题"],["闷","悶","mēn","闷热"],["闲","閒","xián","空闲"],["闻","聞","wén","听闻"],["闹","鬧","nào","热闹"]],
+  ye:[["页","頁","yè","页面"],["头","頭","tóu","头部"],["顾","顧","gù","照顾"],["题","題","tí","题目"],["额","額","é","额头"],["频","頻","pín","频率"],["顺","順","shùn","顺序"],["须","須","xū","必须"],["预","預","yù","预备"],["颈","頸","jǐng","颈部"],["颠","顛","diān","颠倒"],["颜","顏","yán","颜色"],["顿","頓","dùn","顿时"],["颤","顫","chàn","颤抖"],["领","領","lǐng","领导"],["顶","頂","dǐng","顶端"],["烦","煩","fán","烦恼"]],
+  shi:[["饭","飯","fàn","米饭"],["饿","餓","è","饥饿"],["馆","館","guǎn","旅馆"],["饮","飲","yǐn","饮食"],["饱","飽","bǎo","吃饱"],["饼","餅","bǐng","饼"],["饺","餃","jiǎo","饺子"],["饲","飼","sì","饲料"],["馒","饅","mán","馒头"],["饥","飢","jī","饥饿"],["饰","飾","shì","装饰"],["馅","餡","xiàn","馅料"],["馋","饞","chán","嘴馋"]],
+  niao:[["鸟","鳥","niǎo","鸟"],["鸡","雞","jī","鸡"],["鸭","鴨","yā","鸭"],["鹅","鵝","é","鹅"],["鸽","鴿","gē","鸽子"],["鹰","鷹","yīng","老鹰"],["鸦","鴉","yā","乌鸦"],["鹤","鶴","hè","仙鹤"],["鸿","鴻","hóng","鸿雁"],["鹊","鵲","què","喜鹊"],["鸵","鴕","tuó","鸵鸟"],["鹏","鵬","péng","大鹏"],["鸣","鳴","míng","鸣叫"],["鸾","鸞","luán","鸾凤"]],
+  yu:[["鱼","魚","yú","鱼"],["鲁","魯","lǔ","鲁莽"],["鲜","鮮","xiān","新鲜"],["鲸","鯨","jīng","鲸鱼"],["鲤","鯉","lǐ","鲤鱼"],["鲫","鯽","jì","鲫鱼"],["鲍","鮑","bào","鲍鱼"],["鳄","鱷","è","鳄鱼"],["鳞","鱗","lín","鱼鳞"],["鲈","鱸","lú","鲈鱼"]],
+  multi:[["发","發/髮","fā/fà","发展/头发"],["干","乾/幹","gān/gàn","干燥/树干"],["后","後/后","hòu","以后/皇后"],["里","裏/里","lǐ","里面/乡里"],["台","臺/颱/檯","tái","讲台/台风/台灯"],["复","復/複","fù","恢复/复杂"],["汇","匯/彙","huì","汇合/词汇"],["系","係/繫","xì","关系/系领带"],["历","歷/曆","lì","历史/日历"],["尽","盡/儘","jìn","尽力/尽管"],["卤","鹵/滷","lǔ","卤素/卤肉"],["只","衹/隻","zhǐ","只是/一只"]],
+  other:[["书","書","shū","书"],["车","車","chē","车"],["龟","龜","guī","龟"],["寿","壽","shòu","寿"],["爱","愛","ài","爱"],["兴","興","xīng","兴"],["医","醫","yī","医"],["义","義","yì","义"],["来","來","lái","来"],["国","國","guó","国"],["学","學","xué","学"],["机","機","jī","机"],["体","體","tǐ","体"],["点","點","diǎn","点"],["会","會","huì","会"],["这","這","zhè","这"],["对","對","duì","对"],["实","實","shí","实"],["为","爲","wèi","为"],["样","樣","yàng","样"],["长","長","cháng","长"],["东","東","dōng","东"],["业","業","yè","业"],["旧","舊","jiù","旧"],["归","歸","guī","归"],["飞","飛","fēi","飞"],["习","習","xí","习"],["马","馬","mǎ","马"],["无","無","wú","无"],["专","專","zhuān","专"],["龙","龍","lóng","龙"],["战","戰","zhàn","战"],["边","邊","biān","边"],["礼","禮","lǐ","礼"],["写","寫","xiě","写"],["宁","寧","níng","宁"],["兰","蘭","lán","兰"],["汉","漢","hàn","汉"],["国","國","guó","国"],["宝","寶","bǎo","宝"],["声","聲","shēng","声"],["农","農","nóng","农"],["类","類","lèi","类"],["带","帶","dài","带"],["树","樹","shù","树"],["桥","橋","qiáo","桥"],["样","樣","yàng","样"],["梦","夢","mèng","梦"],["热","熱","rè","热"],["获","獲","huò","获"]]
+};
+
+var CAT_CFG = {
+  yan:{name:"言字旁（訁→讠）",rule:"凡简体有「讠」旁，繁体对应「訁」旁",color:"#C0392B"},
+  jin:{name:"金字旁（金→钅）",rule:"凡简体有「钅」旁，繁体对应「金」旁",color:"#B8860B"},
+  si:{name:"纟字旁（糹→纟）",rule:"凡简体有「纟」旁，繁体对应「糹/糸」旁",color:"#8E44AD"},
+  bei:{name:"贝字旁（貝→贝）",rule:"凡简体有「贝」旁，繁体对应「貝」旁",color:"#8B5A00"},
+  ma:{name:"马字旁（馬→马）",rule:"凡简体有「马」旁，繁体对应「馬」旁",color:"#6B4226"},
+  men:{name:"门字框（門→门）",rule:"凡简体有「门」框，繁体对应「門」框",color:"#1A4B7A"},
+  ye:{name:"页字旁（頁→页）",rule:"凡简体有「页」旁，繁体对应「頁」旁",color:"#5D4037"},
+  shi:{name:"食字旁（飠→饣）",rule:"凡简体有「饣」旁，繁体对应「飠」旁",color:"#2D6A4F"},
+  niao:{name:"鸟字旁（鳥→鸟）",rule:"凡简体有「鸟」旁，繁体对应「鳥」旁",color:"#1A5E3A"},
+  yu:{name:"鱼字旁（魚→鱼）",rule:"凡简体有「鱼」旁，繁体对应「魚」旁",color:"#2980B9"},
+  multi:{name:"一简多繁（重点难点）",rule:"一个简体对应多个繁体，需根据语境判断",color:"#C0392B"},
+  other:{name:"字形大变·高频必背",rule:"日常阅读中频率极高的繁简差异字",color:"#27AE60"}
+};
+
+var SAME_DATA = {
+  s1:[{c:"一",p:"yī"},{c:"乙",p:"yǐ"},{c:"二",p:"èr"},{c:"十",p:"shí"},{c:"人",p:"rén"},{c:"大",p:"dà"},{c:"小",p:"xiǎo"},{c:"口",p:"kǒu"},{c:"山",p:"shān"},{c:"土",p:"tǔ"},{c:"力",p:"lì"},{c:"子",p:"zǐ"},{c:"女",p:"nǚ"},{c:"也",p:"yě"},{c:"上",p:"shàng"},{c:"下",p:"xià"},{c:"工",p:"gōng"},{c:"士",p:"shì"},{c:"又",p:"yòu"},{c:"公",p:"gōng"},{c:"月",p:"yuè"},{c:"木",p:"mù"},{c:"水",p:"shuǐ"},{c:"火",p:"huǒ"},{c:"心",p:"xīn"},{c:"手",p:"shǒu"},{c:"目",p:"mù"},{c:"耳",p:"ěr"},{c:"足",p:"zú"},{c:"白",p:"bái"},{c:"黑",p:"hēi"},{c:"高",p:"gāo"},{c:"多",p:"duō"},{c:"少",p:"shǎo"},{c:"中",p:"zhōng"},{c:"生",p:"shēng"},{c:"正",p:"zhèng"},{c:"用",p:"yòng"},{c:"古",p:"gǔ"},{c:"本",p:"běn"},{c:"可",p:"kě"},{c:"左",p:"zuǒ"},{c:"右",p:"yòu"},{c:"田",p:"tián"},{c:"平",p:"píng"},{c:"同",p:"tóng"},{c:"名",p:"míng"},{c:"行",p:"xíng"},{c:"合",p:"hé"},{c:"走",p:"zǒu"},{c:"看",p:"kàn"},{c:"明",p:"míng"},{c:"知",p:"zhī"}],
+  s2:[{c:"一",p:"yī"},{c:"二",p:"èr"},{c:"三",p:"sān"},{c:"四",p:"sì"},{c:"五",p:"wǔ"},{c:"六",p:"liù"},{c:"七",p:"qī"},{c:"八",p:"bā"},{c:"九",p:"jiǔ"},{c:"十",p:"shí"},{c:"百",p:"bǎi"},{c:"千",p:"qiān"},{c:"零",p:"líng"},{c:"半",p:"bàn"}],
+  s3:[{c:"东",p:"dōng"},{c:"南",p:"nán"},{c:"西",p:"xī"},{c:"北",p:"běi"},{c:"上",p:"shàng"},{c:"下",p:"xià"},{c:"左",p:"zuǒ"},{c:"右",p:"yòu"},{c:"前",p:"qián"},{c:"后",p:"hòu"},{c:"中",p:"zhōng"},{c:"内",p:"nèi"},{c:"外",p:"wài"},{c:"年",p:"nián"},{c:"月",p:"yuè"},{c:"日",p:"rì"},{c:"今",p:"jīn"},{c:"早",p:"zǎo"},{c:"晚",p:"wǎn"},{c:"春",p:"chūn"},{c:"夏",p:"xià"},{c:"秋",p:"qiū"},{c:"冬",p:"dōng"}],
+  s4:[{c:"人",p:"rén"},{c:"口",p:"kǒu"},{c:"手",p:"shǒu"},{c:"足",p:"zú"},{c:"目",p:"mù"},{c:"耳",p:"ěr"},{c:"心",p:"xīn"},{c:"骨",p:"gǔ"},{c:"肉",p:"ròu"},{c:"皮",p:"pí"},{c:"血",p:"xuè"},{c:"身",p:"shēn"},{c:"天",p:"tiān"},{c:"地",p:"dì"},{c:"日",p:"rì"},{c:"月",p:"yuè"},{c:"星",p:"xīng"},{c:"水",p:"shuǐ"},{c:"火",p:"huǒ"},{c:"山",p:"shān"},{c:"石",p:"shí"},{c:"雨",p:"yǔ"},{c:"雪",p:"xuě"}]
+};
+
+var RULES = [
+  {t:"言字旁 訁→讠",d:"凡简体「讠」旁对应繁体「訁」旁，约60字",c:"#C0392B",p:[["語","语"],["說","说"],["話","话"],["請","请"],["謝","谢"],["認","认"],["識","识"],["評","评"],["論","论"],["調","调"],["訓","训"],["誤","误"],["諾","诺"],["詞","词"],["詩","诗"],["讀","读"],["譯","译"]]},
+  {t:"金字旁 金→钅",d:"凡简体「钅」旁对应繁体「金」旁，约50字",c:"#B8860B",p:[["錢","钱"],["銀","银"],["鐵","铁"],["銅","铜"],["針","针"],["鐘","钟"],["錄","录"],["鑰","钥"],["鋼","钢"],["銷","销"],["鍵","键"],["鏡","镜"],["鑄","铸"],["鋒","锋"],["錯","错"],["鍋","锅"],["鈴","铃"]]},
+  {t:"纟字旁 糹→纟",d:"凡简体「纟」旁对应繁体「糹/糸」旁，约55字",c:"#8E44AD",p:[["糾","纠"],["紀","纪"],["紅","红"],["紐","纽"],["約","约"],["級","级"],["純","纯"],["紡","纺"],["織","织"],["繞","绕"],["結","结"],["綠","绿"],["線","线"],["綱","纲"],["統","统"],["續","续"],["繼","继"]]},
+  {t:"贝字旁 貝→贝",d:"凡简体「贝」旁对应繁体「貝」旁，约30字",c:"#8B5A00",p:[["貝","贝"],["貢","贡"],["財","财"],["貨","货"],["販","贩"],["貪","贪"],["貧","贫"],["購","购"],["費","费"],["賠","赔"],["贏","赢"],["贊","赞"],["賢","贤"]]},
+  {t:"马字旁 馬→马",d:"凡简体「马」旁对应繁体「馬」旁，约20字",c:"#6B4226",p:[["騎","骑"],["驗","验"],["駕","驾"],["駐","驻"],["騙","骗"],["馳","驰"],["驟","骤"],["騰","腾"],["騷","骚"],["駒","驹"],["驕","骄"],["驅","驱"]]},
+  {t:"门字框 門→门",d:"凡简体「门」框对应繁体「門」框，约20字",c:"#1A4B7A",p:[["間","间"],["閉","闭"],["閱","阅"],["闊","阔"],["閃","闪"],["闖","闯"],["閘","闸"],["閣","阁"],["閥","阀"],["開","开"],["關","关"],["問","问"],["悶","闷"]]},
+  {t:"页字旁 頁→页",d:"凡简体「页」旁对应繁体「頁」旁，约22字",c:"#5D4037",p:[["頭","头"],["顏","颜"],["題","题"],["額","额"],["頻","频"],["順","顺"],["須","须"],["預","预"],["頸","颈"],["顛","颠"],["顧","顾"],["頂","顶"]]},
+  {t:"食字旁 飠→饣",d:"凡简体「饣」旁对应繁体「飠」旁，约16字",c:"#2D6A4F",p:[["飯","饭"],["餓","饿"],["館","馆"],["飲","饮"],["飽","饱"],["餅","饼"],["餃","饺"],["飼","饲"],["饅","馒"],["飢","饥"],["飾","饰"]]},
+  {t:"鸟字旁 鳥→鸟",d:"凡简体「鸟」旁对应繁体「鳥」旁，约18字",c:"#1A5E3A",p:[["雞","鸡"],["鴨","鸭"],["鵝","鹅"],["鴿","鸽"],["鷹","鹰"],["鴉","鸦"],["鶴","鹤"],["鴻","鸿"],["鵬","鹏"],["鳴","鸣"],["鸞","鸾"]]},
+  {t:"鱼字旁 魚→鱼",d:"凡简体「鱼」旁对应繁体「魚」旁，约12字",c:"#2980B9",p:[["魚","鱼"],["魯","鲁"],["鮮","鲜"],["鯨","鲸"],["鯉","鲤"],["鯽","鲫"],["鮑","鲍"],["鱷","鳄"],["鱗","鳞"]]}
+];
+
+// ===== BUILD =====
+function buildSame(){
+  function r(id,arr){var el=document.getElementById(id);if(!el)return;el.innerHTML=arr.map(function(i){return '<div class="sc">'+i.c+'<small>'+i.p+'</small></div>';}).join('');}
+  r('sg1',SAME_DATA.s1);r('sg2',SAME_DATA.s2);r('sg3',SAME_DATA.s3);r('sg4',SAME_DATA.s4);
+}
+
+var selKey=null;
+function buildDiff(){
+  var h='';
+  Object.keys(CAT_CHARS).forEach(function(k,ci){
+    var cfg=CAT_CFG[k],arr=CAT_CHARS[k];
+    h+='<div class="ch" style="border-left-color:'+cfg.color+'">'
+      +'<div class="ch-t">'+cfg.name+'</div>'
+      +'<div class="ch-d">'+cfg.rule+'</div>'
+      +'<div class="ch-b" style="background:'+cfg.color+'">'+arr.length+'字</div></div>';
+    h+='<div class="grid">';
+    arr.forEach(function(c,i){
+      var isM=k==='multi';
+      h+='<div class="card '+(isM?'multi':'diff')+'" onclick="showD(\''+k+'\','+i+')" id="cd-'+k+'-'+i+'">'
+        +'<span class="ct">'+c[1].split('/')[0]+'</span><span class="ca">↓</span>'
+        +'<span class="cs">'+c[0]+'</span>'
+        +'<span class="cp">'+c[2]+'</span>'
+        +'<span class="cm">'+c[3]+'</span></div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('dfc').innerHTML=h;
+}
+
+function showD(k,i){
+  var arr=CAT_CHARS[k],c=arr[i],cfg=CAT_CFG[k];
+  var panel=document.getElementById('det');
+  if(selKey){var old=document.getElementById(selKey);if(old)old.classList.remove('sel');}
+  var nk='cd-'+k+'-'+i;selKey=nk;
+  var el=document.getElementById(nk);if(el)el.classList.add('sel');
+  var extra='';
+  if(k==='multi'){
+    var md=MULTI_DETAIL[c[0]];
+    if(md){
+      extra='<div class="mbox">⚠️ <strong>一简多繁详解：</strong><br>';
+      md.notes.forEach(function(n,j){extra+='「'+md.trads[j]+'」'+n+'<br>';});
+      extra+='</div>';
+    }
+  } else {
+    extra='<div class="tbox"><strong>💡 记忆规律：</strong> '+cfg.rule+'</div>';
+  }
+  panel.innerHTML='<div class="drow">'
+    +'<div class="dbox"><span class="dc" style="color:var(--trad)">'+c[1].split('/')[0]+'</span><div class="dl">繁体</div></div>'
+    +'<div class="darr">→</div>'
+    +'<div class="dbox"><span class="dc" style="color:var(--simp)">'+c[0]+'</span><div class="dl">简体</div></div>'
+    +'<div class="dinfo"><h3>'+c[3]+'　<small style="font-weight:400;color:var(--ink3);font-size:.78rem">'+c[2]+'</small></h3>'
+    +'<p style="font-size:.82rem;color:var(--ink2);line-height:1.7">类别：<strong>'+cfg.name+'</strong><br>'
+    +'繁体：<strong style="font-family:\'Noto Serif SC\',serif;color:var(--trad);font-size:1.05rem">'+c[1]+'</strong>　'
+    +'简体：<strong style="font-family:\'Noto Serif SC\',serif;color:var(--simp);font-size:1.05rem">'+c[0]+'</strong></p>'
+    +extra+'</div></div>';
+  panel.classList.add('on');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function buildRules(){
+  var h='';
+  RULES.forEach(function(r){
+    h+='<div class="ch" style="border-left-color:'+r.c+'"><div class="ch-t">'+r.t+'</div><div class="ch-d">'+r.d+'</div></div>';
+    h+='<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(95px,1fr))">';
+    r.p.forEach(function(p){
+      h+='<div class="card diff" style="border-top-color:'+r.c+'"><span class="ct" style="font-size:1.65rem">'+p[0]+'</span><span class="ca">↓</span><span class="cs" style="font-size:1.65rem">'+p[1]+'</span></div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('rlc').innerHTML=h;
+}
+
+// ===== QUIZ =====
+var qpool=[],qidx=0,qscr=0,qtot=0,qans=false;
+function buildQPool(){
+  var p=[];
+  Object.keys(CAT_CHARS).forEach(function(k){
+    CAT_CHARS[k].forEach(function(c){
+      if(c[1].indexOf('/')===-1) p.push({t:c[1],s:c[0],m:c[3],k:k});
+    });
+  });
+  return p;
+}
+function startQ(){
+  document.getElementById('qst').classList.remove('on');
+  var all=buildQPool();
+  qpool=all.sort(function(){return Math.random()-.5;}).slice(0,25);
+  qidx=0;qscr=0;qtot=0;qans=false;
+  document.getElementById('qsc').textContent='得分：0 / 0';
+  showQ();
+}
+function showQ(){
+  if(qidx>=qpool.length){
+    document.getElementById('qch').textContent='🎉';
+    document.getElementById('qpm').textContent='完成！得分：'+qscr+' / '+qtot;
+    document.getElementById('qop').innerHTML='';
+    document.getElementById('qfb').textContent=qscr>=20?'🏆 优秀！':qscr>=15?'👍 良好！':'💪 加油！';
+    document.getElementById('qfb').classList.add('on');
+    document.getElementById('qnx').classList.remove('on');
+    document.getElementById('qst').textContent='再来一遍 ↺';
+    document.getElementById('qst').classList.add('on');
+    return;
+  }
+  var q=qpool[qidx];
+  document.getElementById('qch').textContent=q.t;
+  document.getElementById('qpm').textContent='繁体字对应的简体字？（'+CAT_CFG[q.k].name.split('（')[0]+'）';
+  document.getElementById('qfb').classList.remove('on');
+  document.getElementById('qnx').classList.remove('on');
+  qans=false;
+  var all=buildQPool();
+  var wrongs=all.filter(function(r){return r.s!==q.s;}).sort(function(){return Math.random()-.5;}).slice(0,3).map(function(r){return r.s;});
+  var opts=[q.s].concat(wrongs).sort(function(){return Math.random()-.5;});
+  document.getElementById('qop').innerHTML=opts.map(function(o){
+    return '<button class="qb" onclick="ansQ(\''+o+'\',\''+q.s+'\',\''+q.m.replace(/'/g,"&#39;")+'\')">'+o+'</button>';
+  }).join('');
+  document.getElementById('qpf').style.width=Math.round((qidx/qpool.length)*100)+'%';
+  document.getElementById('qpt').textContent='第 '+(qidx+1)+' / '+qpool.length+' 题';
+}
+function ansQ(c,ok,m){
+  if(qans)return;qans=true;qtot++;
+  document.querySelectorAll('.qb').forEach(function(b){
+    if(b.textContent===ok)b.classList.add('ok');
+    else if(b.textContent===c&&c!==ok)b.classList.add('err');
+  });
+  if(c===ok){qscr++;document.getElementById('qfb').textContent='✅ 正确！「'+ok+'」';}
+  else{document.getElementById('qfb').textContent='❌ 错了。正确是「'+ok+'」（'+m+'）';}
+  document.getElementById('qfb').classList.add('on');
+  document.getElementById('qsc').textContent='得分：'+qscr+' / '+qtot;
+  document.getElementById('qnx').classList.add('on');
+}
+function nextQ(){qidx++;showQ();}
+
+// ===== TABS =====
+document.getElementById('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('.tab');if(!b)return;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on');});
+  b.classList.add('on');
+  document.getElementById('sec-'+b.dataset.s).classList.add('on');
+});
+
+// 键盘回车搜索
+document.getElementById('si').addEventListener('keydown',function(e){
+  if(e.key==='Enter') doSearch();
+});
+
+buildSame();buildDiff();buildRules();
+</script>
+</body>
+</html>
