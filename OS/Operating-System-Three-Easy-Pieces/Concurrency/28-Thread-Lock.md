@@ -1,12 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-20 22:25:04
- * @LastEditTime: 2020-08-11 20:40:43
- * @LastEditors: Please set LastEditors
- * @Description: 线程锁问题
---> 
-# Thread-Lock
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:56:19
+ * @Description: thread lock
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## 什么是锁(lock)?
+
 - 是一个某种类型的变量。
 - 这个锁变量(简称锁)保持了锁在某一刻的状态。要么是可用的(available or or unlocked or free)，表示当前没有线程持有锁，线程可以使用该锁；要么是被占用的(acquired or locked or held)，表示当前有线程在临界区( critical section)使用锁。
 - 锁的持有者(the owner of the lock): Calling the routine lock() tries to acquire the lock; if no other thread holds the lock (i.e., it is free), the thread will acquire the lock and enter the critical section;
@@ -17,12 +19,14 @@
 
 
 ## 如何实现一种高效的锁？
+
 - 提供互斥(mutual exclusion)。阻止多线程进入临界区。
 - 公平性(fairness)。是否每一个竞争(contend)线程都有公平的机会抢到锁。
 - 性能(performance)。使用锁增加的时间开销。
 
 
 ## 控制中断(Controlling Interrupts)
+
 - 任何一个调用的线程需要执行一个特权的指令去打开和关闭中断，并且信任线程不会滥用资源。
 - 不能在多处理器上实现。
 - 长时间关闭中断会导致中断丢失，导致系统会出现一些问题。
@@ -31,6 +35,7 @@ interrupts)往往会被现代CPU缓慢执行。
 
 
 ## 自旋锁(Spin Locks)
+
 - test-and-set instruction也叫原子交换（atomic exchange）。
 - 互斥锁怎样工作
   > 通过测试旧锁的值和设置新锁的值，进行单个原子操作 ，确保只有一个线程获得该锁。
@@ -59,11 +64,13 @@ void lock(lock_t *lock) {
 
 
 ## 存储条件指令和加载链接指令（Load-Linked and Store-Conditional）
+
 - Load-Linked: 从内存中取出值存到寄存器中。
 - Store-Conditional: 只有在没有发生中间存储到相应地址的情况下，Store-Conditional才会成功（并更新存储在Load-Linked地址上的值）。成功时，返回值为1，并将ptr指向的值更新为value；失败时，返回值为0，不会更新值。
 
 
 ## 获得和增加指令（Fetch-And-Add）
+
 - 原子性的增加一个值，并在特定的地址返回一个旧的值
 - 采用 `Fetch-And-Add` 指令能够保证所有的线程都能抢到锁
 ```
@@ -75,6 +82,7 @@ int FetchAndAdd(int *ptr) {
 ```
 
 ## 如何避免锁在CPU上浪费过多的自旋等待(spin)？
+
 不仅需要硬件的支持，还需要 OS 的支持
 
 - 当前线程在等待（spin）的时候，让出或放弃CPU（just yield）
@@ -87,6 +95,7 @@ int FetchAndAdd(int *ptr) {
 
 
 ## 使用队列：睡眠替代一直等待(Using Queues: Sleeping Instead Of Spinning)
+
 - 使用队列的目的：处理等待的线程，谁在接下来可以获得锁。
 - 在Solaris系统中共采用 `park()` 函数：让调用的线程休眠
 - 在Solaris系统中共采用 `unpack()` 函数：通过 `threadID` 唤醒特定的线程。使用 `unpack()` 和 `pack()` 这两个函数，让调用者在获取不到线程时休眠（sleep），在有锁可用时被唤醒（wake）。
@@ -109,4 +118,3 @@ int FetchAndAdd(int *ptr) {
 
 - Linux系统采用的就是两阶锁，但是它 `自旋的时间` 仅仅只有一次。
 - 常见的方式：在使用 `futex` 睡眠之前，在循环中固定 `自旋的时间` 的次数。
-

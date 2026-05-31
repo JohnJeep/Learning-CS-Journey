@@ -1,11 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-19 08:16:21
- * @LastEditTime: 2020-08-11 20:35:10
- * @LastEditors: Please set LastEditors
- * @Description:  VAX/VMS 虚拟内存系统
---> 
-# Virtual-Memory-Systems
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:58:02
+ * @Description: Virtual-Memory-Systems
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## VMS(virtual Memory System)
 - RSS(res-ident set size): 驻留集大小
 - demand zeroing：按需置零

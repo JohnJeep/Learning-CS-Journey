@@ -1,16 +1,19 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-12 21:34:44
- * @LastEditTime: 2020-08-11 20:34:55
- * @LastEditors: Please set LastEditors
- * @Description: 物理内存之外: 策略部分(Policies)
---> 
-# Swapping-Policies
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:58:36
+ * @Description: Swapping-Policies
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## 问题(crux of the problem)
+
 - OS如何决定从内存中踢出哪个页？
 
 
 ## Cache Management
+
 - AMAT(average memory access time): 内存平均访问时间
   - $T_M$：the cost of accessing memory
   - $T_D$：the cost of accessing disk
@@ -19,17 +22,18 @@ $$AMAT = T_M + (P_Miss · T_D)$$
 
 
 ## The Optimal Replacement Policy(最优替换策略)
+
 - 最优替换策略的结果：使总体未命中TLB的数量最少。
 - 最优替换策略只能作为理想的策略作为比较，在实际中很难实现。
 - 3种缓存未命中的类型
   - compulsory miss：强制性未命中
   - capacity miss：容量未命中
   - conflict miss：冲突未命中
-
 - 采用FIFO和Random策略都可能会踢出重要的page，这个page也许会马上被引用。
 
 
 ## 基于历史信息的算法去实现一些策略 
+
 - **LRU**(Least-Recently-Used)：最少最近使用
 - LFU(Least-Frequently-Used): 最不经常使用
 - MFU(Most-Frequently-Used): 最经常使用

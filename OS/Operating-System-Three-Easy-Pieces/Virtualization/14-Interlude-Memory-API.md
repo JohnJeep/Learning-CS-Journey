@@ -1,14 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2020-08-11 20:04:36
- * @LastEditors: Please set LastEditors
- * @Description: 内存操作API
---> 
-
-# 内存操作API
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:09:21
+ * @Description: Interlude-Memory-API
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 ## 动态分配内存常见误区
+
 - 忘记分配内存（Forgetting To Allocate Memory）
    ```
     char *src = "hello";
@@ -31,14 +31,14 @@
 - 错误的调用free()
 
 
-
 ## 查看内存泄露工具
+
 - Purify：现在是商业产品
 - valgrind：开源工具。（参考：[应用 Valgrind 发现 Linux 程序的内存问题](https://www.ibm.com/developerworks/cn/linux/l-cn-valgrind/index.html)）
 
 
 ## 底层操作系统支持
+
 - malloc()与free()函数不是系统调用，而是库调用。malloc库管理虚拟地址空间内的空间。
 - malloc()与free()基于**brk**或**sbrk**系统调用之上。**brk**作用：改变程序分段的位置，堆结束的位置。
 - 调用mmap()，从操作系统获取内存。mmap()在程序中创建一个匿名内存区域，这个区域不与任何特定文件相关联，而是与交换空间（swap space）相关联。
-

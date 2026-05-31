@@ -1,21 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-18 23:22:46
- * @LastEditTime: 2020-05-30 18:12:08
- * @LastEditors: Please set LastEditors
- * @Description: Operation System Three Easy Pieces书中优秀的参考文献
---> 
-
-<!-- TOC -->
-
-- [1. Reference](#1-reference)
-  - [1.1. 线程API接口](#11-线程api接口)
-  - [1.2. 线程锁](#12-线程锁)
-  - [1.3. 条件变量](#13-条件变量)
-  - [1.4. 信号量](#14-信号量)
-  - [1.5. 并发问题](#15-并发问题)
-
-<!-- /TOC -->
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:54:33
+ * @Description: Operation System Three Easy Pieces references
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. Reference
 ## 1.1. 线程API接口
