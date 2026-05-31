@@ -22,8 +22,8 @@ comments: false
 
 ## 其他专栏
 
-- 语言学习: [/Language/](/Language/)
-- 金融与财务: [/Financial/](/Financial/)
+- 语言学习 (繁简汉字对照): [traditional_chinese_learning.html](/Language/traditional_chinese_learning.html)
+- 金融与财务 (苹果财报解读): [apple_financial_report_tutorial.html](/Financial/apple_financial_report_tutorial.html)
 
 ## 使用建议
 

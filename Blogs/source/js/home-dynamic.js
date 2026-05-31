@@ -205,6 +205,90 @@
     });
   }
 
+  // ── 专栏卡片 (Language & Financial) ──────────────────────────────────────
+  function buildColumnSection() {
+    if (document.querySelector('.jj-col-section')) return;
+    var recentPosts = document.getElementById('recent-posts');
+    if (!recentPosts) return;
+
+    var columns = [
+      {
+        icon: '文',
+        title: '语言学习',
+        subtitle: 'Language',
+        desc: '繁简汉字对照查询，收录通用规范汉字表，系统化对比繁体字与简化字的对应关系。',
+        href: '/Language/traditional_chinese_learning.html',
+      },
+      {
+        icon: '财',
+        title: '金融财务',
+        subtitle: 'Financial',
+        desc: '苹果公司财报解读教程，深入理解财务报表的结构、核心指标与量化分析方法。',
+        href: '/Financial/apple_financial_report_tutorial.html',
+      },
+    ];
+
+    var section = document.createElement('section');
+    section.className = 'jj-col-section';
+
+    var heading = document.createElement('div');
+    heading.className = 'jj-col-heading';
+    var headText = document.createElement('span');
+    headText.className = 'jj-col-heading-text';
+    headText.textContent = '专 栏';
+    heading.appendChild(headText);
+    section.appendChild(heading);
+
+    var grid = document.createElement('div');
+    grid.className = 'jj-col-grid';
+
+    columns.forEach(function (col) {
+      var card = document.createElement('a');
+      card.className = 'jj-col-card';
+      card.href = col.href;
+      card.target = '_blank';
+      card.rel = 'noopener';
+
+      var iconEl = document.createElement('div');
+      iconEl.className = 'jj-col-icon';
+      iconEl.setAttribute('aria-hidden', 'true');
+      iconEl.textContent = col.icon;
+
+      var body = document.createElement('div');
+      body.className = 'jj-col-body';
+
+      var titleEl = document.createElement('div');
+      titleEl.className = 'jj-col-title';
+      titleEl.textContent = col.title;
+
+      var subtitleEl = document.createElement('div');
+      subtitleEl.className = 'jj-col-subtitle';
+      subtitleEl.textContent = col.subtitle;
+
+      var descEl = document.createElement('p');
+      descEl.className = 'jj-col-desc';
+      descEl.textContent = col.desc;
+
+      var labelEl = document.createElement('span');
+      labelEl.className = 'jj-col-label';
+      labelEl.textContent = '进入专栏 →';
+
+      body.appendChild(titleEl);
+      body.appendChild(subtitleEl);
+      body.appendChild(descEl);
+      body.appendChild(labelEl);
+      card.appendChild(iconEl);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+
+    // Insert above the post-listing/sidebar flex row
+    var layoutRow = recentPosts.closest('.layout') || recentPosts.parentNode;
+    layoutRow.parentNode.insertBefore(section, layoutRow);
+  }
+
   // ── Bootstrap ─────────────────────────────────────────────────────────────
   function startDynamicHome() {
     if (!isHomePage()) return;
@@ -212,6 +296,7 @@
     buildHero();
     addInkDots();
     loadPoetry();
+    buildColumnSection();
 
     var btn = document.querySelector('.jj-verse-btn');
     if (btn) {
