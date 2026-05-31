@@ -3,8 +3,8 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:32:25
- * @Description: C++ 高级
+ * @LastEditTime: 2026-05-31 18:32:05
+ * @Description: C++ object oriented programming
  * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
 -->
 

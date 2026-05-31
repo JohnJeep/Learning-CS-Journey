@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-06 14:19:42
- * @LastEditTime: 2025-11-20 10:55:11
+ * @LastEditTime: 2026-05-31 20:32:57
  * @LastEditors: JohnJeep
  * @Description: MySQL 面试题
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 - [1. 说一下一下MySQL的索引](#1-说一下一下mysql的索引)

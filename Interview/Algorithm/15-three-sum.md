@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-26 21:05:36
- * @LastEditTime: 2021-04-26 22:16:24
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 20:42:53
+ * @LastEditors: JohnJeep
+ * @Description: three sum
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 15-三数之和
 
 # 题目描述

@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-07-10 09:54:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-15 17:53:44
+ * @LastEditTime: 2026-05-31 20:29:58
  * @Description: golang internal fundamental
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -14,7 +14,7 @@ golang 官方源码研读。
 
 # 目录结构
 
-```
+```bash
 go
 ├── .gitattributes
 │   └── 用于定义 Git 仓库中文件的属性，例如文件的换行符格式、是否进行二进制文件处理等。
@@ -114,7 +114,7 @@ go
 
 src 目录
 
-```
+```bash
 go/src
 ├── cmd
 │   ├── compile
@@ -271,5 +271,3 @@ Golang 使用系列---- Net/Http 应用层: https://kingjcy.github.io/post/golan
 - Go 标准库-双向链表 (container/list) 源码解析: https://blog.csdn.net/eight_eyes/article/details/121068799
 - 链表: 深入理解container/list&LRU缓存的实现: https://lailin.xyz/post/list.html
 - 极客书房 Go 数据结构和算法篇（一）链表: https://study.geekai.co/posts/go-data-structure-linked-list 
-
-

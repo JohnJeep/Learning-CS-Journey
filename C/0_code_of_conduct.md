@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-01-11 17:49:16
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:14:11
+ * @Description: Code of Conduct
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ### 1、清晰第一
 
 清晰性是易于维护、易于重构的程序必需具备的特征。代码首先是给人读的,好的代码应当可以像文章一样发声朗诵出来。

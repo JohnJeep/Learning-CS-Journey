@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-10-21 19:00:34
- * @LastEditTime: 2021-04-02 13:51:38
- * @LastEditors: Please set LastEditors
- * @Description: C语言const关键字
+ * @LastEditTime: 2026-05-31 18:19:12
+ * @LastEditors: JohnJeep
+ * @Description: const keyword notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 --> 
 
 - C90新增两个限定符：`const` ` volatile`

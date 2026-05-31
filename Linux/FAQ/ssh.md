@@ -2,16 +2,19 @@
  * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-05 11:31:51
+ * @LastEditTime: 2026-05-31 20:25:33
  * @Description: ssh learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 # SSH 配置
 
-SSH 由客户端和服务端的软件组成，客户端可以使用的软件有 SecureCRT、putty、Xshell 等，服务器端运行的是一个 `sshd` 的服务，通过使用 SSH，可以把所有传输的数据进行加密，而且也能够防止 dns 和 IP 欺骗，SSH 传输的数据是经过压缩的，可以加快传输速度。
+SSH 由客户端和服务端的软件组成，客户端可以使用的软件有 SecureCRT、putty、Xshell 等，
+服务器端运行的是一个 `sshd` 的服务，通过使用 SSH，可以把所有传输的数据进行加密，
+而且也能够防止 dns 和 IP 欺骗，SSH 传输的数据是经过压缩的，可以加快传输速度。
 
-OpenSSH（即常说的ssh）常用配置文件有两个 `ssh_config` 和 `sshd_config`。其中 `/etc/ssh/ssh_config`为客户端配置文件，`/etc/ssh/sshd_config` 为服务器端配置文件。
+OpenSSH（即常说的ssh）常用配置文件有两个 `ssh_config` 和 `sshd_config`。
+其中 `/etc/ssh/ssh_config`为客户端配置文件，`/etc/ssh/sshd_config` 为服务器端配置文件。
 
 ```
 Tips：

@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-10 15:58:00
- * @LastEditTime: 2025-04-05 11:21:19
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 19:06:28
+ * @Description: MIT-CS6.828 course
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 课程

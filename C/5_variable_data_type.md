@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-22 11:28:29
- * @LastEditTime: 2025-04-04 19:47:25
+ * @LastEditTime: 2026-05-31 18:17:19
  * @LastEditors: JohnJeep
- * @Description: 变量与数据类型
+ * @Description: variable and data type notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 --> 
 
 # 1. 变量与数据类型

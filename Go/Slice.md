@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:27:01
+ * @Description: golang slice
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Slice(切片)
 
 今天给大家介绍的是 Golang 语言中的 Slice，也就是切片。自己学习 Golang 很久了，但有时候，对一些问题点很模糊，不是特别的清楚和熟悉，没有形成系统化，因此根据我自己学习的经验，把这部分的知识分享出来。

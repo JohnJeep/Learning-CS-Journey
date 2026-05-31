@@ -2,9 +2,10 @@
 
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2025-04-24 09:02:39
+ * @LastEditTime: 2026-05-31 18:33:30
  * @LastEditors: JohnJeep
- * @Description: 设计模式学习
+ * @Description: Design pattern notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. Thinking

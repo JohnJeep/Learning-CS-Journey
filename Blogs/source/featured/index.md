@@ -9,8 +9,6 @@ comments: false
 
 这是一份手工维护的置顶清单，优先筛选“读完能直接用于工程实践”的文章。
 
-更新时间: 2026-04-19
-
 <div class="jj-featured-list">
 
 <article class="jj-featured-item">
@@ -52,7 +50,7 @@ comments: false
 	<h3>06. 操作系统地址空间与地址转换</h3>
 	<p class="jj-featured-meta">阅读时长: 16 min · 难度: 中高级</p>
 	<p>理解虚拟内存核心机制，帮助你将系统原理映射到程序性能与稳定性问题上。</p>
-	<p><a href="/OS/Operating-System-Three-Easy-Pieces/01-Virtualization/synced/OS/Operating-System-Three-Easy-Pieces/01-Virtualization/15-Address-Translation/">开始阅读</a> · <a href="/categories/OS/">同专栏</a></p>
+	<p><a href="/OS/Operating-System-Three-Easy-Pieces/Virtualization/synced/OS/Operating-System-Three-Easy-Pieces/Virtualization/15-Address-Translation">开始阅读</a> · <a href="/categories/OS/">同专栏</a></p>
 </article>
 
 </div>

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:27:48
+ * @Description: Release History 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Release History
 
 以下是 Go 语言（Golang）从 **1.0 版本** 到当前最新版本（**1.24**）的主要功能更新和关键改进的总结。每个版本均遵循 Go 的向后兼容性承诺，重大功能会逐步引入。

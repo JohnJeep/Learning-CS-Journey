@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-07-25 14:51:53
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:22:48
+ * @Description: linux timer usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 高性能定时器
 
 ## 结构
@@ -21,8 +30,6 @@
 
 
 
-
-
 ## 如何设计高效的定时器
 
 实现多级时间轮的高效定时器需要考虑以下几个方面：
@@ -40,7 +47,7 @@
 - nginx：红黑树最小堆算法。
 - linux 内核：Hierarchy 时间轮算法。
 
-#  Reference
+# Reference
 
 - 深入Linux C/C++ Timer定时器的实现核心原理: https://www.cnblogs.com/sunsky303/p/14154190.html
 - Linux内核时钟系统和定时器实现: http://walkerdu.com/2016/07/25/linux-kernel-timer
@@ -50,6 +57,3 @@
 - 《Linux-UNIX系统编程手册-上下册》
 - 《the linux programming interface》
 - 《Linux高性能服务器编程·游双》
-
-
-

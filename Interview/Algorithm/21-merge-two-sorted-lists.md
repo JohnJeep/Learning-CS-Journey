@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-20 21:37:13
- * @LastEditTime: 2021-04-20 22:36:07
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 20:42:27
+ * @LastEditors: JohnJeep
+ * @Description: 21-merge-two-sorted-lists
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 21-合并两个有序链表
 
 # 题目描述

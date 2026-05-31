@@ -1,18 +1,11 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2021-04-07 23:25:09
- * @LastEditTime: 2026-01-01 15:22:01
  * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:13:06
  * @Description: Makefile usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. 什么是 Makefile](#1-什么是-makefile)
-- [2. 什么是 Make 和 configure](#2-什么是-make-和-configure)
-- [3. 检测程序会检测哪些内容？](#3-检测程序会检测哪些内容)
-- [4. 源码下载](#4-源码下载)
-- [5. 操作步骤](#5-操作步骤)
-- [6. 三个基本要素](#6-三个基本要素)
 
 ## 1. 什么是 Makefile
 
@@ -22,7 +15,8 @@
 
 make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 
 
-通常软件开发商都会写一个检测程序来侦测使用户的操作环境， 以及操作环境是否有软件开发商所需要的其他功能，该检测程序检测完毕后， 就会主动的建立这个 Makefile 的规则文件， 通常这个检测程序的文件名为 configure 或者是 config 。
+通常软件开发商都会写一个检测程序来侦测使用户的操作环境， 以及操作环境是否有软件开发商所需要的其他功能，
+该检测程序检测完毕后， 就会主动的建立这个 Makefile 的规则文件， 通常这个检测程序的文件名为 configure 或者是 config 。
 
 
 ## 3. 检测程序会检测哪些内容？

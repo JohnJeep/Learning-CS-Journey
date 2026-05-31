@@ -2,18 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-12-01 11:04:14
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:15:48
+ * @LastEditTime: 2026-05-31 18:47:52
  * @Description: ROS2 Node Composition
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. ROS2 Node Composition（节点组合）](#1-ros2-node-composition节点组合)
-  - [1.1. 为什么需要 Node Composition？](#11-为什么需要-node-composition)
-    - [1.1.1. 默认方式：独立进程（非组合）](#111-默认方式独立进程非组合)
-    - [1.1.2. 组合方式：单进程内协作](#112-组合方式单进程内协作)
-  - [1.2. Node Composition 的三种实现方式](#12-node-composition-的三种实现方式)
-  - [1.3. 如何选择？总结与对比](#13-如何选择总结与对比)
-  - [1.4. 结论](#14-结论)
 
 # 1. ROS2 Node Composition（节点组合）
 

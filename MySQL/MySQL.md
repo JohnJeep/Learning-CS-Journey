@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
- * @LastEditTime: 2024-01-06 17:33:53
  * @LastEditors: JohnJeep
- * @Description:  MySQL 基础知识学习，作为一个使用者的角度
+ * @LastEditTime: 2026-05-31 19:35:37
+ * @Description: mysql usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. MySQL 介绍

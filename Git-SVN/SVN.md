@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-11-20 10:59:05
- * @LastEditTime: 2025-04-04 19:19:59
+ * @LastEditTime: 2026-05-31 18:37:41
  * @LastEditors: JohnJeep
- * @Description: SVN学习笔记
+ * @Description: SVN usage and configuration
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. Introduction

@@ -2,11 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-05-27 14:21:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 15:41:19
- * @Description: Linux Network 知识
+ * @LastEditTime: 2026-05-31 19:43:12
+ * @Description: Linux Network
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
-
 
 # Linux Network
 
@@ -41,10 +40,7 @@ Iptables Tutorial 1.2.2: https://www.frozentux.net/iptables-tutorial/iptables-tu
 - [Introduction to Linux interfaces for virtual networking](https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking#)  介绍虚拟网络：Bridge、VLAN等
 - [Linux 基金开源协会讲解 napi ](https://wiki.linuxfoundation.org/networking/napi)
 - 经典书籍
-
   **《The Linux Networking Architecture》**
-
   **《Understanding Linux Network Internals》**
-
 - Wikipedia 解释 Network scheduler：https://en.wikipedia.org/wiki/Network_scheduler
 - Linux 线上系统调优备忘: https://skywind.me/blog/archives/1893

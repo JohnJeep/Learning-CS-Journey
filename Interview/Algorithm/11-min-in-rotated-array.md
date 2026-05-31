@@ -1,11 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-14 23:31:33
- * @LastEditTime: 2021-01-14 23:38:41
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * 
-    -->
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:43:07
+ * @Description: 11-min-in-rotated-array
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 第11题：旋转数组的最小数字
 
 >   题目描述：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。

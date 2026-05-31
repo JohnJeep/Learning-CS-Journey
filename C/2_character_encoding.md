@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-23 11:58:29
- * @LastEditTime: 2025-04-04 19:51:38
+ * @LastEditTime: 2026-05-31 18:17:37
  * @LastEditors: JohnJeep
- * @Description: 字符编码
+ * @Description: character encoding notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 --> 
 
 # 1. 基本概念

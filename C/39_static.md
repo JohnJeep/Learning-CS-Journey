@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-05-19 21:58:05
- * @LastEditTime: 2021-05-19 22:05:32
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:57:24
+ * @Description: 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 1. 字符串
 - 字符串是一种特殊的 char 类型的数组，指向 char 类型数组的指针。
 - 字符串与 char 数组的区别在于长度，字符会自动在尾部加上一个长度 `\0`，而 char 型数组的长度就是其字符的个数。

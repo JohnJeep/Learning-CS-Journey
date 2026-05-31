@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-09-05 23:49:23
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:30:26
+ * @Description: golang debug for vscode
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Debug
 
 vscode 下调试 go 文件。

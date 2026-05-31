@@ -1,10 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-25 21:25:38
- * @LastEditTime: 2021-01-25 21:36:34
- * @LastEditors: Please set LastEditors
- * @Description: snprintf()函数的使用
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:59:23
+ * @Description: snprintf() usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
+snprintf() 函数
+
 - 函数原型
     ```C
     int snprintf(char *str, size_t size, const char *format, ...)

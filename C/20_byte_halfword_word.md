@@ -1,12 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 15:05:29
- * @LastEditTime: 2025-04-04 19:36:46
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 19:26:16
+ * @Description: byte, halfword, word in C language
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1.1. 概念
+
 - 字定义：总线是一般设计用来传输固定大小的数据，这块数据被称为字（word）。一个字包含的字节数(即字的大小)是各种计算机系统里面的基本参数，而且这个参数在不同的操作系统里通常是不同的。
 
 - CPU按照其处理信息的字长可以分为：8位微处理器、16位微处理器、32位微处理器以及64位微处理器
@@ -25,9 +27,7 @@
 
 - 字的大小取决去具体系统的总线宽度，如果是32位的系统，则一个字(word)是4个字节(byte)，如果是64位，则是8个字节(byte)。
 - 无论操作系统的 `位宽` 是多少，`1byte=8bite`，半字为字的一半，双字(double word)为字(word)的2倍永远不变。
-
 - 一个ASCII字母占用 `1 byte`，一个汉字占用 `2 byte`
-
 - Intel公司中用术语 `字(word)` 表示16位数据类型，`双字(double word)` 表示32位数据类型，`四字(quad word)` 表示64位数据类型。Intel公司中无论是32位架构的机器还是64位架构的机器，它们都是从16位架构的基础上扩展的。
 
 

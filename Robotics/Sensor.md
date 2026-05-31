@@ -2,12 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-18 10:57:04
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:23:57
+ * @LastEditTime: 2026-05-31 18:46:39
  * @Description: Sensor Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-
 
 # Sensor
 
@@ -29,9 +27,6 @@
   - 舵机
 
 **交互方式：** 这些传感器数据通常通过高速、实时的总线（如 **EtherCAT, CAN bus, SPI, I²C**）以固定的频率发布到机器人内部网络中。
-
-
-
 
 
 

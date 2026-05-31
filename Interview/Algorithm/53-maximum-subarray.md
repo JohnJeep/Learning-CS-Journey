@@ -1,9 +1,10 @@
 <!--
-* @Author: JohnJeep
+ * @Author: JohnJeep
  * @Date: 2021-04-21 21:38:17
- * @LastEditTime: 2021-04-26 21:14:49
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:40:59
+ * @Description: 53-maximum-subarray
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 53-最大子序和

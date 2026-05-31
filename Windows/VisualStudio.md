@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:39:01
+ * @Description: Windows visual studio usage and tips
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## VisualStudio 版本对比
 
 因为微软的版本比较乱，所以要理清版本，首先需要区分 VS 和 VC 的含义：

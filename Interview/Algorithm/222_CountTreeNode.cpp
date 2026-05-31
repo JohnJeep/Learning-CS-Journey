@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-21 11:31:30
- * @LastEditTime: 2020-08-21 11:58:44
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2026-05-31 20:38:38
+ * @LastEditors: JohnJeep
  * @Description: 题目：统计完全二叉树多少个节点
  *               描述：Given a complete binary tree, count the number of nodes.
  *               Example: Input
@@ -18,6 +18,7 @@
  *                  1、二叉树的高度为h，当完全二叉树为满二叉树时，结点总数为 2的h次方减1
  *                  2、当为满二叉树时，结点总数为左右子树的结点总数之和再加根结点。
  *                  3、左右子树的结点个数通过递归来计算
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
  */
 #include <iostream>
 #include <cstdio>

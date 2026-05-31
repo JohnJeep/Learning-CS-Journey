@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-04-04 23:29:59
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:37:17
+ * @Description: Git Pipeline
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## Git Pipeline
 
 Gitlab Pipeline Rules

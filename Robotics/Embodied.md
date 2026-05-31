@@ -2,43 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-12-28 11:06:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-02-11 23:44:10
+ * @LastEditTime: 2026-05-31 18:48:16
  * @Description: Embodied Intelligence
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Embodied Intelligence(具身智能)](#1-embodied-intelligence具身智能)
-- [2. Terms](#2-terms)
-- [3. 线性代数在机器人领域的应用](#3-线性代数在机器人领域的应用)
-- [4. 机器人学习](#4-机器人学习)
-  - [4.1. 理论基础](#41-理论基础)
-  - [4.2. 人形机器人技术](#42-人形机器人技术)
-  - [4.3. 核心环节](#43-核心环节)
-  - [4.4. Simulation Tools(仿真工具)](#44-simulation-tools仿真工具)
-- [5. Robotic System(机器人系统)](#5-robotic-system机器人系统)
-  - [5.1. 大小脑一体化](#51-大小脑一体化)
-  - [5.2. System Composition(系统组成)](#52-system-composition系统组成)
-- [6. Structure Design(结构设计)](#6-structure-design结构设计)
-- [7. Joint Module(关节模组)](#7-joint-module关节模组)
-- [8. Kinematics(运动学)](#8-kinematics运动学)
-  - [8.1. Prerequisites(先决条件)](#81-prerequisites先决条件)
-    - [8.1.1. task space(任务空间)](#811-task-space任务空间)
-    - [8.1.2. coordinate frame(坐标系)](#812-coordinate-frame坐标系)
-    - [8.1.3. End Effector(末端执行器)](#813-end-effector末端执行器)
-    - [8.1.4. Cartesian Space(笛卡尔空间)](#814-cartesian-space笛卡尔空间)
-    - [8.1.5. Jacobian Matrix(雅可比矩阵)](#815-jacobian-matrix雅可比矩阵)
-    - [8.1.6. pose(位姿)](#816-pose位姿)
-  - [8.2. Forward Kinematics(正向运动学)](#82-forward-kinematics正向运动学)
-  - [8.3. Inverse Kinematics(逆向运动学)](#83-inverse-kinematics逆向运动学)
-- [9. Dynamics(动力学)](#9-dynamics动力学)
-  - [9.1. Forward Dynamics(正向动力学)](#91-forward-dynamics正向动力学)
-  - [9.2. Feedback Control(反馈控制)](#92-feedback-control反馈控制)
-- [10. Control Synthesis(控制综合)](#10-control-synthesis控制综合)
-- [11. ZPM](#11-zpm)
-- [12. Visual Perception(视觉感知)](#12-visual-perception视觉感知)
-  - [12.1. Odometry(里程计)](#121-odometry里程计)
-  - [12.2. Inertial Measurement Unit (IMU)(惯性传感器)](#122-inertial-measurement-unit-imu惯性传感器)
-- [13. References](#13-references)
 
 # 1. Embodied Intelligence(具身智能)
 

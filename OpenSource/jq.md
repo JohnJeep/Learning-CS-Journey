@@ -2,11 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-04-01 00:40:42
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-02-13 10:03:27
- * @Description: 
+ * @LastEditTime: 2026-05-31 19:37:08
+ * @Description: jq usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
 
 # Introduction
 

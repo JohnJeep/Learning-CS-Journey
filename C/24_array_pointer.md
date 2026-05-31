@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-01-16 11:20:34
- * @LastEditTime: 2025-04-04 20:00:27
  * @LastEditors: JohnJeep
- * @Description: 指针、数组、字符串综合
---> 
+ * @LastEditTime: 2026-05-31 19:29:30
+ * @Description: pointer, array and string comprehensive
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 数组
 ## 1.1. 一维数组

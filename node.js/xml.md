@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-25 09:18:04
- * @LastEditTime: 2025-03-30 23:22:09
  * @LastEditors: JohnJeep
- * @Description: Xml学习记录
+ * @LastEditTime: 2026-05-31 19:38:13
+ * @Description: xml learning
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 概念

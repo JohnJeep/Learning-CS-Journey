@@ -2,17 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 11:53:34
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:15:17
+ * @LastEditTime: 2026-05-31 18:48:02
  * @Description: MoveIt in ROS framework
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. MoveIt 的主要组件](#2-moveit-的主要组件)
-- [3. MoveIt 的工作流程](#3-moveit-的工作流程)
-- [4. MoveIt 的优势](#4-moveit-的优势)
-- [5. 适用场景](#5-适用场景)
-- [6. references](#6-references)
 
 # 1. Introduction
 

@@ -2,15 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-07-25 14:51:53
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:30:43
+ * @LastEditTime: 2026-05-31 20:24:19
  * @Description: Linux 下常用信号解释
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
-- [1. Linux 下常用信号解释](#1-linux-下常用信号解释)
-- [2. SIGINT](#2-sigint)
-- [3. SIGTERM](#3-sigterm)
-- [4. SIGHUP](#4-sighup)
-
 
 ## 1. Linux 下常用信号解释
 

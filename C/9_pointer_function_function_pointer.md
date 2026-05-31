@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-29 21:45:27
- * @LastEditTime: 2025-04-04 19:47:01
+ * @LastEditTime: 2026-05-31 18:18:41
  * @LastEditors: JohnJeep
- * @Description: 函数指针与指针函数的基础知识
+ * @Description: pointer, function and function pointer notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 --> 
 
 # 1. 指针函数

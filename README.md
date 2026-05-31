@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:20:56
+ * @LastEditTime: 2026-05-31 20:15:20
  * @Description: Project description
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -218,26 +218,26 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 <summary>展开查看详细笔记</summary>
 
 **虚拟化 (Virtualization)**
-- [CPU 虚拟化](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/01-12-CPU-Virtualization.md)
-- [地址空间](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/13-Abstraction-Address-Space.md)
-- [内存 API](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/14-Interlude-Memory-API.md)
-- [地址转换](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/15-Address-Translation.md)
-- [分段](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/16-Segmentation.md)
-- [空闲空间管理](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/17-Free-Space-Management.md)
-- [分页](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/18-Introduction-to-Paging.md)
-- [TLB](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/19-Translation-Lookaside-Buffers.md)
-- [页表](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/20-Advanced-Page-Tables.md)
-- [交换机制](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/21-Swapping-Mechanisms.md)
-- [交换策略](OS/Operating-System-Three-Easy-Pieces/01-Virtualization/22-Swapping-Policies.md)
+- [CPU 虚拟化](OS/Operating-System-Three-Easy-Pieces/Virtualization/01-12-CPU-Virtualization.md)
+- [地址空间](OS/Operating-System-Three-Easy-Pieces/Virtualization/13-Abstraction-Address-Space.md)
+- [内存 API](OS/Operating-System-Three-Easy-Pieces/Virtualization/14-Interlude-Memory-API.md)
+- [地址转换](OS/Operating-System-Three-Easy-Pieces/Virtualization/15-Address-Translation.md)
+- [分段](OS/Operating-System-Three-Easy-Pieces/Virtualization/16-Segmentation.md)
+- [空闲空间管理](OS/Operating-System-Three-Easy-Pieces/Virtualization/17-Free-Space-Management.md)
+- [分页](OS/Operating-System-Three-Easy-Pieces/Virtualization/18-Introduction-to-Paging.md)
+- [TLB](OS/Operating-System-Three-Easy-Pieces/Virtualization/19-Translation-Lookaside-Buffers.md)
+- [页表](OS/Operating-System-Three-Easy-Pieces/Virtualization/20-Advanced-Page-Tables.md)
+- [交换机制](OS/Operating-System-Three-Easy-Pieces/Virtualization/21-Swapping-Mechanisms.md)
+- [交换策略](OS/Operating-System-Three-Easy-Pieces/Virtualization/22-Swapping-Policies.md)
 
 **并发 (Concurrency)**
-- [线程概念](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/26-Concurrency-and-Threads.md)
-- [线程 API](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/27-Thread-API.md)
-- [锁](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/28-Thread-Lock.md)
-- [条件变量](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/29-30-Condition-Variables.md)
-- [信号量](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/31-Semaphore.md)
-- [并发问题与死锁](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/32-Common-Concurrency-Problems.md)
-- [基于事件的并发](OS/Operating-System-Three-Easy-Pieces/02-Concurrency/33-Event-based-Concurrency.md)
+- [线程概念](OS/Operating-System-Three-Easy-Pieces/Concurrency/26-Concurrency-and-Threads.md)
+- [线程 API](OS/Operating-System-Three-Easy-Pieces/Concurrency/27-Thread-API.md)
+- [锁](OS/Operating-System-Three-Easy-Pieces/Concurrency/28-Thread-Lock.md)
+- [条件变量](OS/Operating-System-Three-Easy-Pieces/Concurrency/29-30-Condition-Variables.md)
+- [信号量](OS/Operating-System-Three-Easy-Pieces/Concurrency/31-Semaphore.md)
+- [并发问题与死锁](OS/Operating-System-Three-Easy-Pieces/Concurrency/32-Common-Concurrency-Problems.md)
+- [基于事件的并发](OS/Operating-System-Three-Easy-Pieces/Concurrency/33-Event-based-Concurrency.md)
 
 </details>
 

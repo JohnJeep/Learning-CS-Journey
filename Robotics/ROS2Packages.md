@@ -2,30 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2026-03-09 18:54:36
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-09 19:10:28
+ * @LastEditTime: 2026-05-31 18:47:25
  * @Description: ROS2 packages Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. rcl](#2-rcl)
-- [3. rclcpp](#3-rclcpp)
-  - [3.1. rclcpp::spin(node)](#31-rclcppspinnode)
-  - [3.2. internal fundamental](#32-internal-fundamental)
-  - [3.3. 什么时候 spin 会结束？](#33-什么时候-spin-会结束)
-  - [3.4. spin 的几种用法](#34-spin-的几种用法)
-  - [3.5. spin 选择建议](#35-spin-选择建议)
-- [4. rclpy](#4-rclpy)
-- [5. rmw](#5-rmw)
-- [6. node](#6-node)
-- [7. timer](#7-timer)
-- [8. parameter](#8-parameter)
-- [9. publisher](#9-publisher)
-- [10. sub](#10-sub)
-- [12. rosidl](#12-rosidl)
-- [13. urdf](#13-urdf)
-- [14. References](#14-references)
-
 
 # 1. Introduction
 

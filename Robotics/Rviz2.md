@@ -2,13 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-23 21:29:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:25:00
+ * @LastEditTime: 2026-05-31 18:46:45
  * @Description: Rviz2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. References](#2-references)
 
 # 1. Introduction
 

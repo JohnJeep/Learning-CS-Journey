@@ -1,21 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2026-02-13 10:00:11
  * @LastEditors: JohnJeep
- * @Description: GitHub 开源项目
---> 
-
-- [1. GitHub开源项目](#1-github开源项目)
-- [2. C](#2-c)
-- [3. C++](#3-c)
-- [4. Java](#4-java)
-- [5. 网络](#5-网络)
-- [6. Linux](#6-linux)
-- [7. Go](#7-go)
-- [8. 数据结构与算法](#8-数据结构与算法)
-- [9. 有价值的开源库](#9-有价值的开源库)
-- [10. 其它](#10-其它)
+ * @LastEditTime: 2026-05-31 19:37:32
+ * @Description: open source projects
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. GitHub开源项目
 

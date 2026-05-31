@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-05 11:32:00
+ * @LastEditTime: 2026-05-31 20:25:46
  * @Description: linux 中常见问题排查
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -11,17 +11,13 @@
 
 ## 1.1. 分类
 
-- 内核日志
-
+- 内核日志: 
   由系统服务 `syslog` 或 `rsyslog` 同一管理，根据配置文件 `/etc/syslog.conf` 或  `/etc/rsyslog.conf` 中的内容，决定将内核消息和各种系统程序的信息记录什么位置。
-
-- 用户日志
-
+- 用户日志:
   用于记录 Linux 系统用户登录、登出系统的相关信息，包括用户名、登录的终端、登录时间、正在使用的进程操作等。
-
-- 应用程序日志
-
+- 应用程序日志:
   第三方应用程序的日志信息。比如公司开发的程序有一套日志记录的模块，来记录程序运行过程中的各种事件信息，便于出错时问题的排查。
+
 
 ## 1.2. 日志文件解读
 

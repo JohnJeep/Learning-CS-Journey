@@ -1,10 +1,15 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-04-09 15:34:38
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:52:00
+ * @Description: Beckoff Protocol Usage and Development
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Beckoff Protocol
 
 倍福设备协议。
-
-
-
-
 
 ## TWINCAT
 

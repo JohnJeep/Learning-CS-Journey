@@ -1,10 +1,12 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-04-03 18:15:55
- * @LastEditTime: 2021-04-05 00:12:38
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 20:40:25
+ * @LastEditors: JohnJeep
+ * @Description: 142.linked-list-cycle-ii
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
  */
+
 /*
  * @lc app=leetcode id=142 lang=cpp
  *

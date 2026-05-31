@@ -1,56 +1,17 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2022-05-11 21:46:10
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-01 17:55:37
+ * @LastEditTime: 2026-05-31 20:12:30
  * @Description: CMake useage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. Introduction](#1-introduction)
-- [2. variables](#2-variables)
-- [3. Commands](#3-commands)
-  - [3.1. Scripting Commands](#31-scripting-commands)
-    - [3.1.1. cmake\_minimum\_required](#311-cmake_minimum_required)
-    - [3.1.2. messge](#312-messge)
-    - [3.1.3. set](#313-set)
-    - [3.1.4. unset](#314-unset)
-    - [3.1.5. if/elseif](#315-ifelseif)
-    - [3.1.6. file](#316-file)
-    - [3.1.7. option](#317-option)
-  - [3.2. Project Commands](#32-project-commands)
-    - [3.2.1. project](#321-project)
-    - [3.2.2. add\_definitions](#322-add_definitions)
-    - [3.2.3. add\_compile\_options](#323-add_compile_options)
-    - [3.2.4. add\_library](#324-add_library)
-    - [3.2.5. add\_executable](#325-add_executable)
-    - [3.2.6. add\_subdirectory](#326-add_subdirectory)
-    - [3.2.7. include\_directories](#327-include_directories)
-    - [3.2.8. link\_directories](#328-link_directories)
-    - [3.2.9. target\_sources](#329-target_sources)
-    - [3.2.10. target\_include\_directories](#3210-target_include_directories)
-    - [3.2.11. target\_link\_libraries](#3211-target_link_libraries)
-    - [3.2.12. install](#3212-install)
-      - [3.2.12.1. 语法](#32121-语法)
-      - [3.2.12.2. 安装前缀(prefix)](#32122-安装前缀prefix)
-      - [3.2.12.3. 安装目标(TARGETS)](#32123-安装目标targets)
-      - [3.2.12.4. 安装普通文件(FILES)](#32124-安装普通文件files)
-      - [3.2.12.5. 安装目录(DIRECTORY)](#32125-安装目录directory)
-      - [3.2.12.6. 安装程序(PROGRAMS)](#32126-安装程序programs)
-      - [3.2.12.7. 安装脚本或代码(SCRIPT / CODE)](#32127-安装脚本或代码script--code)
-      - [3.2.12.8. 导出目标供其他项目使用（EXPORT）](#32128-导出目标供其他项目使用export)
-      - [3.2.12.9. 组件(COMPONENT)](#32129-组件component)
-      - [3.2.12.10. 示例](#321210-示例)
-- [4. Build](#4-build)
-  - [4.1. 内部构建](#41-内部构建)
-  - [4.2. 外部构建](#42-外部构建)
-- [5. Usage](#5-usage)
-- [6. References](#6-references)
-
 # 1. Introduction
 
-CMake 是一个开源的、跨平台的**构建系统生成器**（build system generator），用于管理软件项目的编译过程。它本身并不直接编译代码，而是根据项目配置文件（通常是 `CMakeLists.txt`）生成适用于特定平台和编译器的构建文件（如 Makefile、Visual Studio 项目、Xcode 项目、Ninja 构建脚本等）。
+CMake 是一个开源的、跨平台的**构建系统生成器**（build system generator），用于管理软件项目的编译过程。它本身并不直接编译代码，
+而是根据项目配置文件（通常是 `CMakeLists.txt`）生成适用于特定平台和编译器的
+构建文件（如 Makefile、Visual Studio 项目、Xcode 项目、Ninja 构建脚本等）。
 
 可以把CMake 理解成是一门脚本语言。
 

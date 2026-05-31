@@ -2,10 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2019-08-29 21:45:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:45:30
+ * @LastEditTime: 2026-05-31 18:18:09
  * @Description: basic knowledgement
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
+
+
 # 1. 理解面向对象和面向过程编程
 
 - 面向对象

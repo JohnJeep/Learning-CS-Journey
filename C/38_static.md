@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-06 14:33:16
- * @LastEditTime: 2025-04-04 20:00:22
  * @LastEditors: JohnJeep
- * @Description: static关键的用法
+ * @LastEditTime: 2026-05-31 18:57:42
+ * @Description: static keyword usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 #  static 关键字

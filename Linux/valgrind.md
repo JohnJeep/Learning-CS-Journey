@@ -1,16 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-05 22:07:57
- * @LastEditTime: 2025-11-20 12:28:35
+ * @LastEditTime: 2026-05-31 20:17:21
  * @LastEditors: JohnJeep
  * @Description: Valgrind工具使用
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
-
-- [1. 简介](#1-简介)
-- [2. 用法](#2-用法)
-  - [2.1. Valgrind 工具详解](#21-valgrind-工具详解)
-- [3. Options](#3-options)
-- [4. References](#4-references)
 
 # 1. 简介
 

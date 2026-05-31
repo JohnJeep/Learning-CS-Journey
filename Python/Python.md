@@ -1,39 +1,11 @@
-- [1. Introduction](#1-introduction)
-- [2. 设计哲学](#2-设计哲学)
-- [3. 代码风格约定](#3-代码风格约定)
-- [4. DataType](#4-datatype)
-  - [4.1. str](#41-str)
-  - [4.2. int](#42-int)
-  - [4.3. float](#43-float)
-  - [4.4. bool](#44-bool)
-  - [4.5. NoneType: `None`](#45-nonetype-none)
-  - [4.6. Function](#46-function)
-  - [4.7. Built-in Functions](#47-built-in-functions)
-- [5. Data Structures](#5-data-structures)
-  - [5.1. list](#51-list)
-  - [5.2. tuple](#52-tuple)
-  - [5.3. str](#53-str)
-  - [5.4. set](#54-set)
-  - [5.5. dict](#55-dict)
-    - [5.5.1. 创建字典](#551-创建字典)
-    - [5.5.2. 访问值](#552-访问值)
-    - [5.5.3. 修改和添加元素](#553-修改和添加元素)
-    - [5.5.4. 删除元素](#554-删除元素)
-    - [5.5.5. 常用方法](#555-常用方法)
-    - [5.5.6. 字典推导式（Dict Comprehension）](#556-字典推导式dict-comprehension)
-    - [5.5.7. 注意事项](#557-注意事项)
-    - [5.5.8. 示例：综合使用](#558-示例综合使用)
-- [6. Compound statements](#6-compound-statements)
-  - [6.1. with](#61-with)
-    - [6.1.1. 基本语法](#611-基本语法)
-    - [6.1.2. 最常见的例子：文件操作](#612-最常见的例子文件操作)
-      - [6.1.2.1. 不使用 `with`（不推荐）](#6121-不使用-with不推荐)
-      - [6.1.2.2. 使用 `with`（推荐）](#6122-使用-with推荐)
-    - [6.1.3. 自定义上下文管理器](#613-自定义上下文管理器)
-    - [6.1.4. 实际应用场景](#614-实际应用场景)
-- [7. Class](#7-class)
-- [8. References](#8-references)
-
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-04-19 17:31:46
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:51:10
+ * @Description: Python Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. Introduction
 

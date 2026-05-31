@@ -1,9 +1,10 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-04-15 01:01:46
- * @LastEditTime: 2021-04-15 01:08:13
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:36:25
+ * @Description: 1291.sequential-digits
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
  */
 
 /*

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-05-27 16:55:08
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:56:45
+ * @Description: statistic memory usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## 背景
 
 在程序中插入自定义的统计代码，来记录内存的使用情况。通过在关键位置调用操作系统提供的内存使用统计函数，如`getrusage()`或`mallinfo()`等，可以获取程序的内存使用情况，并将其记录下来。这样你就可以在程序运行过程中实时监测内存的使用情况。

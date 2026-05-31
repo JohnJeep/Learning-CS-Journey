@@ -1,10 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-28 14:15:17
- * @LastEditTime: 2025-04-04 19:53:39
  * @LastEditors: JohnJeep
- * @Description: main()理解
- * 
+ * @LastEditTime: 2026-05-31 19:01:44
+ * @Description: main() usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # main() 中参数传递

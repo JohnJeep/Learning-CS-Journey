@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-23 23:07:47
- * @LastEditTime: 2021-04-23 23:32:16
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:33:57
+ * @Description: two sum
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 1-两数之和
 
 # 题目描述
@@ -14,7 +16,6 @@
 
 你可以按任意顺序返回答案。
 
- 
 
 示例 1：
 ```

@@ -2,9 +2,10 @@
 
  * @Author: JohnJeep
  * @Date: 2020-05-21 15:05:29
- * @LastEditTime: 2023-05-27 17:00:23
+ * @LastEditTime: 2026-05-31 18:20:21
  * @LastEditors: JohnJeep
- * @Description: static 和 extern 关键字
+ * @Description: static & extern keywords
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # extern

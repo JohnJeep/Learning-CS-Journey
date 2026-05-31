@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:44:01
+ * @Description: ccat usage and tips
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 自带语法高亮的 cat – ccat
 
 让 cat 源代码时如果带上语法高亮，会不会让工作效率更高一些呢？

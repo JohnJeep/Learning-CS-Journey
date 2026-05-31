@@ -2,22 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:54:38
+ * @LastEditTime: 2026-05-31 20:18:31
  * @Description: NTP 用法
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. 简介](#1-简介)
-- [2. 安装 `ntpd`](#2-安装-ntpd)
-- [3. 配置 `ntpd`](#3-配置-ntpd)
-- [4. 启动并启用 `ntpd`](#4-启动并启用-ntpd)
-- [5. 检查同步状态](#5-检查同步状态)
-- [6. 手动同步时间](#6-手动同步时间)
-- [7. 常见问题排查](#7-常见问题排查)
-- [8. 总结](#8-总结)
-- [9. 示例](#9-示例)
-- [10. 例子分析](#10-例子分析)
-
 
 ### 1. 简介
 

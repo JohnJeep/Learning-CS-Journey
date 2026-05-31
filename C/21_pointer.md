@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-20 15:05:29
- * @LastEditTime: 2025-11-13 20:32:48
  * @LastEditors: JohnJeep
- * @Description: 深入理解指针
---> 
+ * @LastEditTime: 2026-05-31 19:27:01
+ * @Description: deep understanding of pointer
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 概念
 

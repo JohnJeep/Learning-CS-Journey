@@ -2,27 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2022-05-10 09:36:06
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:02:51
+ * @LastEditTime: 2026-05-31 20:22:09
  * @Description: curl usage
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Curl](#1-curl)
-- [2. API](#2-api)
-  - [2.1. `CURLcode curl_global_init(long flags);`](#21-curlcode-curl_global_initlong-flags)
-  - [2.2. `void curl_global_cleanup(void);`](#22-void-curl_global_cleanupvoid)
-  - [2.3. `char *curl_version( );`](#23-char-curl_version-)
-- [3. The Easy interface](#3-the-easy-interface)
-  - [3.1. `CURL *curl_easy_init( );`](#31-curl-curl_easy_init-)
-  - [3.2. `void curl_easy_cleanup(CURL *handle);`](#32-void-curl_easy_cleanupcurl-handle)
-  - [3.3. CURLcode curl\_easy\_setopt(CURL \*handle, CURLoption option, parameter)](#33-curlcode-curl_easy_setoptcurl-handle-curloption-option-parameter)
-- [4. `CURLcode curl_easy_perform(CURL *handle);`](#4-curlcode-curl_easy_performcurl-handle)
-  - [4.1. Multi interface](#41-multi-interface)
-  - [4.2. multi-socket interface](#42-multi-socket-interface)
-- [5. The primary structs](#5-the-primary-structs)
-  - [5.1. 命令参数](#51-命令参数)
-- [6. References](#6-references)
-
 
 # 1. Curl 
 

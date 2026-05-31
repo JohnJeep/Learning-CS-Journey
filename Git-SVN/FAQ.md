@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2022-09-30 16:42:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-06 13:40:31
- * @Description:
+ * @LastEditTime: 2026-05-31 18:36:25
+ * @Description: Git FAQ
  * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-12-31 21:17:16
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:12:30
+ * @Description: ARM Usage and Development
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ARM（Advanced RISC Machine）架构自1985年诞生以来，已经经历了多个重要的发展阶段：
 
 **ARMv7架构（32位时代）**

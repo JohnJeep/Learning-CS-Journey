@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-03 20:46:29
- * @LastEditTime: 2025-04-03 00:05:34
+ * @LastEditTime: 2026-05-31 18:18:01
  * @LastEditors: JohnJeep
- * @Description: C语言提高思想
+ * @Description: C language thinking notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 --> 
 
 # 如何看懂一个复杂的算法程序？

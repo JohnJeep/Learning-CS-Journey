@@ -2,54 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-02 16:01:47
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:20:39
+ * @LastEditTime: 2026-05-31 18:45:35
  * @Description: URDF Usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction to URDF](#1-introduction-to-urdf)
-- [2. 标签](#2-标签)
-  - [2.1. `<link>`](#21-link)
-  - [2.2. `<joint>`](#22-joint)
-  - [2.3. `link` 与 `join`t 的关系是什么？](#23-link-与-joint-的关系是什么)
-      - [2.3.0.1. **树状结构：父子关系**](#2301-树状结构父子关系)
-  - [2.4. `<transmission>`](#24-transmission)
-    - [2.4.1. 为什么需要 `<transmission>`？](#241-为什么需要-transmission)
-      - [2.4.1.1. 基本语法（ROS 2 / `ros2_control` 兼容格式）](#2411-基本语法ros-2--ros2_control-兼容格式)
-    - [2.4.2. 关键子元素说明](#242-关键子元素说明)
-      - [2.4.2.1. ROS 2 中的现代替代方案：`<ros2_control>`](#2421-ros-2-中的现代替代方案ros2_control)
-        - [2.4.2.1.1. 示例（ROS 2 推荐方式）：](#24211-示例ros-2-推荐方式)
-    - [2.4.3. 何时使用 `<transmission>`？](#243-何时使用-transmission)
-      - [2.4.3.1. 对比](#2431-对比)
-  - [2.5. 注意点](#25-注意点)
-- [3. Xarco](#3-xarco)
-- [4. packages](#4-packages)
-  - [4.1. ros-humble-urdf-tutorial](#41-ros-humble-urdf-tutorial)
-      - [4.1.0.1. 安装](#4101-安装)
-  - [4.2. 启动示例模型](#42-启动示例模型)
-  - [4.3. check\_urdf](#43-check_urdf)
-- [5. 利用 URDF 创建静态机器人模型](#5-利用-urdf-创建静态机器人模型)
-- [6. 用 URDF 创建动态机器人模型](#6-用-urdf-创建动态机器人模型)
-  - [6.1. 头部创建](#61-头部创建)
-  - [6.2. 手指创建](#62-手指创建)
-  - [6.3. 手臂创建](#63-手臂创建)
-  - [6.4. 运动关节创建](#64-运动关节创建)
-  - [6.5. 模型加载与运行](#65-模型加载与运行)
-- [7. URDF 中添加物理属性](#7-urdf-中添加物理属性)
-  - [7.1. 惯性属性添加](#71-惯性属性添加)
-  - [7.2. 碰撞属性添加](#72-碰撞属性添加)
-  - [7.3. 关节运动参数添加](#73-关节运动参数添加)
-- [8. XACRO 如何简化 URDF 文件](#8-xacro-如何简化-urdf-文件)
-  - [8.1. Xacro 文件的作用介绍](#81-xacro-文件的作用介绍)
-  - [8.2. 如何使用 Xacro](#82-如何使用-xacro)
-  - [8.3. Macros 的简化与参数化](#83-macros-的简化与参数化)
-- [9. URDF 与 robot\_state\_publisher](#9-urdf-与-robot_state_publisher)
-  - [9.1. 创建 package 与 URDF 文件](#91-创建-package-与-urdf-文件)
-    - [9.1.1. 发布机器人状态信息](#911-发布机器人状态信息)
-    - [9.1.2. 创建 launch 文件](#912-创建-launch-文件)
-    - [9.1.3. Setup 配置](#913-setup-配置)
-    - [9.1.4. Package 安装与使用](#914-package-安装与使用)
-  - [9.2. References](#92-references)
 
 
 # 1. Introduction to URDF

@@ -1,10 +1,12 @@
 /*
  * @Author: JohnJeep
  * @Date: 2021-04-04 17:54:32
- * @LastEditTime: 2021-04-04 18:11:49
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:39:17
+ * @Description: 167.two-sum-ii-input-array-is-sorted
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
  */
+
 /*
  * @lc app=leetcode id=167 lang=cpp
  *

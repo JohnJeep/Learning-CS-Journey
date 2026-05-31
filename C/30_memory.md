@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-07-17 14:34:30
- * @LastEditTime: 2025-04-04 20:00:23
  * @LastEditors: JohnJeep
- * @Description: 内存管理
---> 
+ * @LastEditTime: 2026-05-31 19:02:52
+ * @Description: memory management
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 概念
 

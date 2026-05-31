@@ -2,10 +2,11 @@
  * @Author: JohnJeep
  * @Date: 2025-03-15 13:18:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-25 00:27:33
+ * @LastEditTime: 2026-05-31 18:39:16
  * @Description: TypeScript learning
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
+
 # TypeScript Tutorial
 
 TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces to help you build robust components.

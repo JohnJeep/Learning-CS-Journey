@@ -2,31 +2,10 @@
  * @Author: JohnJeep
  * @Date: Wednesday, August 19th 2020, 18:58:33 PM
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:56:52
+ * @LastEditTime: 2026-05-31 20:19:34
  * @Description: Linux kernal 学习
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
-
-- [1. 理解内核的秘籍](#1-理解内核的秘籍)
-- [2. 如何学习内核](#2-如何学习内核)
-  - [2.1. 核心的东西：最基础、最原始的概念。](#21-核心的东西最基础最原始的概念)
-- [3. Linux 内核体系结构](#3-linux-内核体系结构)
-  - [3.1. 内核模式与体系结构](#31-内核模式与体系结构)
-  - [3.2. struct](#32-struct)
-  - [3.3. 内核中断](#33-内核中断)
-  - [3.4. 内核进程](#34-内核进程)
-- [4. Linux 内核源码结构](#4-linux-内核源码结构)
-  - [4.1. Linux 内核源码宏观结构](#41-linux-内核源码宏观结构)
-  - [4.2. Linux 内核源码各级源码分类](#42-linux-内核源码各级源码分类)
-  - [4.3. Linux 内核源码解析第一刀](#43-linux-内核源码解析第一刀)
-- [5. Linux 内核引导程序](#5-linux-内核引导程序)
-  - [5.1. Linux 内核启动程序分析](#51-linux-内核启动程序分析)
-  - [5.2. Linux 内核初始化程序分析](#52-linux-内核初始化程序分析)
-  - [5.3. Linux 第一个进程分析](#53-linux-第一个进程分析)
-- [6. The Linux Storage Stack Diagram](#6-the-linux-storage-stack-diagram)
-- [7. 内核优化](#7-内核优化)
-- [8. References](#8-references)
-
 
 # 1. 理解内核的秘籍
 - 以一个设计者的角度来阅读内核

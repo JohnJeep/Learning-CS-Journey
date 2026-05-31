@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 21:22:08
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-21 17:12:38
- * @Description: Scoket 套接字用法
+ * @LastEditTime: 2026-05-31 19:42:55
+ * @Description: Scoket usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 

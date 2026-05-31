@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-07-28 21:54:53
- * @LastEditTime: 2021-05-20 23:06:25
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2026-05-31 18:16:23
+ * @LastEditors: JohnJeep
+ * @Description: segmentation fault notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
  -->
-# Segmentation Fault
 
 # 1. C语言中常见的问题
 - 内存重叠的处理

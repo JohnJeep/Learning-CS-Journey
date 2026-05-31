@@ -3,35 +3,10 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-09 19:06:23
+ * @LastEditTime: 2026-05-31 18:47:32
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. ROS2 Introduction](#1-ros2-introduction)
-- [2. Terms](#2-terms)
-- [3. ROS1 ROS Compare](#3-ros1-ros-compare)
-- [4. Basic Concepts](#4-basic-concepts)
-  - [4.1. Node](#41-node)
-  - [4.2. Parameter](#42-parameter)
-  - [4.3. Executor](#43-executor)
-    - [4.3.1. 核心思想：事件循环](#431-核心思想事件循环)
-    - [4.3.2. 为什么需要执行器？](#432-为什么需要执行器)
-  - [4.4. Callback Group](#44-callback-group)
-- [5. ROS2 Communication](#5-ros2-communication)
-  - [5.1. Topic](#51-topic)
-  - [5.2. Service](#52-service)
-  - [5.3. Action](#53-action)
-- [6. Workflow](#6-workflow)
-- [7. Tools](#7-tools)
-  - [7.1. ament](#71-ament)
-  - [7.2. launch](#72-launch)
-- [8. ROS2 Command](#8-ros2-command)
-  - [8.1. run](#81-run)
-  - [8.2. package](#82-package)
-- [9. Hardware](#9-hardware)
-- [10. References](#10-references)
-
 
 # 1. ROS2 Introduction
 

@@ -1,7 +1,12 @@
----
-created: 2025-11-15T21:59:43
-tags:
----
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-11-15 21:17:16
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:45:55
+ * @Description: Robotics Skills and Knowledge
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 机器人岗位：重点关注 <font color="#ff0000">ROS2、运动控制、传感器处理</font>
 
 ### ROS2

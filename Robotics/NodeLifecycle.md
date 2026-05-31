@@ -2,20 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-03 11:00:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:12:01
+ * @LastEditTime: 2026-05-31 18:47:41
  * @Description: Lifecycle Node in ROS 2
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. 为什么需要 Node Lifecycle？](#1-为什么需要-node-lifecycle)
-- [2. 关键状态与转换](#2-关键状态与转换)
-- [3. 状态转换的管理](#3-状态转换的管理)
-- [4. 一个典型的生命周期场景](#4-一个典型的生命周期场景)
-- [5. 如何实现一个 Lifecycle Node？](#5-如何实现一个-lifecycle-node)
-- [6. 优势总结](#6-优势总结)
-- [7. 结论](#7-结论)
-- [8. References](#8-references)
-
 
 1. ### 核心思想：状态机
 

@@ -1,8 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2022-03-30 22:59:03
- * @LastEditTime: 2023-08-04 16:00:37
+ * @LastEditTime: 2026-05-31 18:29:36
  * @LastEditors: JohnJeep
+  * @Description: C++ Sheet
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. C++ 面试八股文

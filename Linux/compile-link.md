@@ -2,30 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 11:39:12
+ * @LastEditTime: 2026-05-31 20:22:29
  * @Description: Compile and Link
  * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. Abbreviation](#2-abbreviation)
-  - [2.1. Preprocessing](#21-preprocessing)
-  - [2.2. Compilation](#22-compilation)
-  - [2.3. Assembly](#23-assembly)
-  - [2.4. Linking](#24-linking)
-  - [2.5. Toolchain Combination](#25-toolchain-combination)
-  - [2.6. Loader](#26-loader)
-- [3. Memory Layout](#3-memory-layout)
-  - [3.1. 常见的内存错误](#31-常见的内存错误)
-- [4. 函数库](#4-函数库)
-  - [4.1. Static Library](#41-static-library)
-  - [4.2. Dybamic Library](#42-dybamic-library)
-    - [4.2.1. Linux平台](#421-linux平台)
-    - [4.2.2. Windows平台](#422-windows平台)
-- [5. ELF relocatable](#5-elf-relocatable)
-- [6. Build](#6-build)
-- [7. References](#7-references)
-
 
 # 1. Introduction
 

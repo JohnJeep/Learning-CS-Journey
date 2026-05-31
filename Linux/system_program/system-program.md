@@ -1,61 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-23 23:12:17
- * @LastEditTime: 2025-12-20 18:48:13
  * @LastEditors: JohnJeep
- * @Description: Linux 环境系统编程基础知识
+ * @LastEditTime: 2026-05-31 20:23:47
+ * @Description: linux system API
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. System function](#1-system-function)
-  - [1.1. Core concept](#11-core-concept)
-  - [1.2. Carriage Return \&\& Line Feed(终端换行)](#12-carriage-return--line-feed终端换行)
-  - [1.3. File I/O](#13-file-io)
-    - [1.3.1. open](#131-open)
-    - [1.3.2. read/write](#132-readwrite)
-    - [1.3.3. lseek](#133-lseek)
-    - [1.3.4. fsync](#134-fsync)
-    - [1.3.5. stat](#135-stat)
-    - [1.3.6. lstat](#136-lstat)
-    - [1.3.7. access](#137-access)
-    - [1.3.8. chmod](#138-chmod)
-    - [1.3.9. truncate](#139-truncate)
-    - [1.3.10. readlink](#1310-readlink)
-    - [1.3.11. unlink](#1311-unlink)
-    - [1.3.12. chdir](#1312-chdir)
-    - [1.3.13. opendir](#1313-opendir)
-    - [1.3.14. readdir](#1314-readdir)
-    - [1.3.15. closedir](#1315-closedir)
-    - [1.3.16. dup \&\& dup2](#1316-dup--dup2)
-    - [1.3.17. fcntl](#1317-fcntl)
-  - [1.4. Environment variables](#14-environment-variables)
-- [2. Process](#2-process)
-  - [2.1. fork](#21-fork)
-  - [2.2. exec](#22-exec)
-  - [2.3. wait](#23-wait)
-  - [2.4. IPC](#24-ipc)
-    - [2.4.1. Pipe(管道)](#241-pipe管道)
-      - [2.4.1.1. unamed pipe(匿名管道)](#2411-unamed-pipe匿名管道)
-      - [2.4.1.2. named pipe(有名管道)](#2412-named-pipe有名管道)
-    - [2.4.2. mmap](#242-mmap)
-    - [2.4.3. Signal(信号)](#243-signal信号)
-    - [2.4.4. Semaphore(信号量)](#244-semaphore信号量)
-    - [2.4.5. Message queues(消息队列)](#245-message-queues消息队列)
-    - [2.4.6. Socket(套接字)](#246-socket套接字)
-  - [2.5. Race condition(时序竞态)](#25-race-condition时序竞态)
-  - [2.6. Terminal](#26-terminal)
-  - [2.7. Process group](#27-process-group)
-  - [2.8. Daemon(守护进程)](#28-daemon守护进程)
-- [3. Thread](#3-thread)
-  - [3.1. Core concepts](#31-core-concepts)
-  - [3.2. API](#32-api)
-  - [3.3. thread attr](#33-thread-attr)
-  - [3.4. 注意事项](#34-注意事项)
-  - [3.5. 线程同步](#35-线程同步)
-  - [3.6. 线程之间死锁的原因](#36-线程之间死锁的原因)
-  - [3.7. Mutex(线程互斥)](#37-mutex线程互斥)
-- [4. References](#4-references)
-
-
 
 # 1. System function
 

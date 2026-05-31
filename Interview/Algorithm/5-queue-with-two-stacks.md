@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-11 22:23:18
- * @LastEditTime: 2021-09-23 18:44:22
- * @LastEditors: Windows10
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 20:43:34
+ * @LastEditors: JohnJeep
+ * @Description: 5-queue-with-two-stacks
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 #  第5题：用两个栈实现队列
