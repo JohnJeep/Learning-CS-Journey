@@ -22,7 +22,7 @@ comments: false
 	<h3>02. C++ Move Semantics 深入理解</h3>
 	<p class="jj-featured-meta">阅读时长: 15 min · 难度: 中级</p>
 	<p>解释右值引用、资源转移、性能收益和常见误区，帮助你写出更现代的 C++ 代码。</p>
-	<p><a href="/C/synced/Cpp/MoveSemantics/">开始阅读</a> · <a href="/categories/C++/">同专栏</a></p>
+	<p><a href="/C/synced/Cpp/MoveSemantics/">开始阅读</a> · <a href="/categories/C/">同专栏</a></p>
 </article>
 
 <article class="jj-featured-item">
@@ -43,7 +43,7 @@ comments: false
 	<h3>05. gRPC 基础与工程化落地</h3>
 	<p class="jj-featured-meta">阅读时长: 14 min · 难度: 中级</p>
 	<p>覆盖 gRPC 核心概念、通信模型与服务治理入口，适合云原生与微服务项目。</p>
-	<p><a href="/Cloud-Native/gRPC/synced/CloudNative/gRPC/gRPCFoundation/">开始阅读</a> · <a href="/categories/CloudNative/">同专栏</a></p>
+	<p><a href="/Cloud-Native/gRPC/synced/CloudNative/gRPC/gRPCFoundation/">开始阅读</a> · <a href="/categories/Cloud-Native/">同专栏</a></p>
 </article>
 
 <article class="jj-featured-item">
