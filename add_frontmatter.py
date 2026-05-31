@@ -183,9 +183,6 @@ def get_tags(rel_path: Path) -> list[str]:
         tag = normalize_tag(part)
         if tag:
             tokens.append(tag)
-    stem_tag = normalize_tag(rel_path.stem)
-    if stem_tag:
-        tokens.append(stem_tag)
     unique = sorted(set(tokens))
     return unique or ["notes"]
 

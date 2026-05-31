@@ -12,7 +12,7 @@
 nav:
   # Navigation bar logo image
   logo: 
-  display_title: false
+  display_title: true
   # Whether to fix navigation bar
   fixed: true
 
@@ -37,7 +37,7 @@ menu:
 
 code_blocks:
   # Code block theme: darker / pale night / light / ocean / false
-  theme: light
+  theme: ocean
   macStyle: true
   # Code block height limit (unit: px)
   height_limit: false
@@ -55,6 +55,7 @@ Formal:
   icon: link || the description || color
 social:
   fab fa-github: https://github.com/JohnJeep || Github || '#24292e'
+  fas fa-rss: /atom.xml || RSS || '#ff6600'
 
 # --------------------------------------
 # Image Settings
@@ -76,9 +77,9 @@ default_top_img:
 index_img:
 
 # Give list pages a cohesive visual language
-archive_img: /img/seele.jpg
-tag_img: /img/seele.jpg
-category_img: /img/seele.jpg
+archive_img: /img/banner-archive.jpg
+tag_img: /img/banner-tags.jpg
+category_img: /img/banner-category.jpg
 
 # The banner image of tag page, you can set the banner image for each tag
 # Format:
@@ -96,7 +97,7 @@ footer_img: false
 # Website Background
 # Can set it to color or image url
 # background: 'linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347)'
-background: 
+background: '#f5f7fa'
 
 cover:
   # Disable the cover or not
@@ -106,7 +107,11 @@ cover:
   # When cover is not set, the default cover is displayed
   # every article will show the default cover
   default_cover:
-    - /img/seele.jpg
+    - /img/cover-systems.jpg
+    - /img/cover-code.jpg
+    - /img/cover-network.jpg
+    - /img/cover-algo.jpg
+    - /img/cover-hardware.jpg
 
 
 # Replace Broken Images
@@ -202,7 +207,7 @@ toc:
   post: true
   page: false
   number: true
-  expand: false
+  expand: true
   # Only for post
   style_simple: false
   scroll_percent: true
@@ -250,15 +255,15 @@ post_pagination: 1
 
 # Displays outdated notice for a post
 noticeOutdate:
-  enable: false
+  enable: true
   # Style: simple / flat
   style: flat
   # When will it be shown
   limit_day: 365
   # Position: top / bottom
   position: top
-  message_prev: It has been
-  message_next: days since the last update, the content of the article may be outdated.
+  message_prev: "此文章已超过 "
+  message_next: " 天未更新，内容可能已过时，请注意甄别。"
 
 # --------------------------------------
 # Footer Settings
@@ -313,7 +318,7 @@ aside:
     storage: 10
     avatar: true
   card_categories:
-    enable: true
+    enable: false
     # If set 0 will show all
     limit: 8
     # Choose: none / true / false
@@ -322,15 +327,15 @@ aside:
   card_tags:
     enable: true
     # If set 0 will show all
-    limit: 40
-    color: false
+    limit: 30
+    color: true
     # Order of tags, random/name/length
     orderby: name
     # Sort of order. 1, asc for ascending; -1, desc for descending
     order: 1
     sort_order:
   card_archives:
-    enable: true
+    enable: false
     # Type: monthly / yearly
     type: monthly
     # Eg: YYYY年MM月
