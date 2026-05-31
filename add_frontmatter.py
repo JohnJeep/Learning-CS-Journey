@@ -95,6 +95,7 @@ def build_git_date_cache(repo_root: Path) -> tuple[dict[str, str], dict[str, str
     updated_raw = run_git(
         repo_root,
         [
+            "-c", "core.quotepath=false",
             "log",
             "--format=__COMMIT__%aI",
             "--name-only",
@@ -105,6 +106,7 @@ def build_git_date_cache(repo_root: Path) -> tuple[dict[str, str], dict[str, str
     created_raw = run_git(
         repo_root,
         [
+            "-c", "core.quotepath=false",
             "log",
             "--reverse",
             "--format=__COMMIT__%aI",
