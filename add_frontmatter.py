@@ -35,6 +35,8 @@ TOKEN_RE = re.compile(r"[^a-zA-Z0-9]+")
 MARKDOWN_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 HTML_IMAGE_RE = re.compile(r"(<img\b[^>]*?\bsrc=)([\"'])(.+?)(\2)", re.IGNORECASE)
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
+FILE_DATE_RE = re.compile(r"@Date:\s*(\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})")
+FILE_LAST_EDIT_RE = re.compile(r"@LastEditTime:\s*(\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})")
 
 
 @dataclass(frozen=True)
@@ -137,10 +139,22 @@ def to_hexo_time(iso_time: str | None, fallback_epoch: float) -> str:
     if iso_time:
         try:
             dt = datetime.fromisoformat(iso_time.replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                return dt.strftime("%Y-%m-%d %H:%M:%S")
             return dt.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         except ValueError:
             pass
     return datetime.fromtimestamp(fallback_epoch, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def extract_file_dates(raw: str) -> tuple[str | None, str | None]:
+    header = "\n".join(raw.splitlines()[:30])
+    date_match = FILE_DATE_RE.search(header)
+    edit_match = FILE_LAST_EDIT_RE.search(header)
+    return (
+        date_match.group(1) if date_match else None,
+        edit_match.group(1) if edit_match else None,
+    )
 
 
 def strip_frontmatter(content: str) -> str:
@@ -391,9 +405,10 @@ def sync_markdown(repo_root: Path, config: SyncConfig, dry_run: bool, clean: boo
         )
         title = infer_title(source_file, body)
 
-        created_iso = created_map.get(rel_posix)
-        updated_iso = updated_map.get(rel_posix)
-        if not created_iso or not updated_iso:
+        file_created, file_updated = extract_file_dates(raw)
+        created_iso = file_created or created_map.get(rel_posix)
+        updated_iso = file_updated or updated_map.get(rel_posix)
+        if not file_created or not file_updated:
             stats["git_fallback"] += 1
 
         created = to_hexo_time(created_iso, source_file.stat().st_mtime)
