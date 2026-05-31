@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:45:09
+ * @LastEditTime: 2026-05-31 21:50:39
  * @Description: snippets for shell commands
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -14,10 +14,10 @@
 service influxdb start
 
 // 远程登录
-influx -host 172.26.165.132 -port 8086 -username admin -password 123456 -precision rfc3339
+influx -host xxx.xxx.xxx.xxx -port 8086 -username admin -password 123456 -precision rfc3339
 
 // UTC时间戳显示 本地登录
-influx -precision rfc3339 -username iottest -password Lanyou@2020
+influx -precision rfc3339 -username iottest -password xxx
 
 // 查询表
 show measurements;
@@ -33,17 +33,16 @@ select * from "RT-D-ZX-214" order by time DESC limit 500;
 select * from "RT-D-ZX-214" where time >= '2024-07-19T15:07:00Z' and time < '2024-07-22T08:00:00Z';
 
 # 导出
-influx_inspect export -datadir "/home/iot-services/influxdb/data" -waldir "/home/iot-services/influxdb/wal" -out "influxdb_foundry_out" -database "iotdata" -start "2024-05-03T00:00:00Z"
+influx_inspect export -datadir "/home/services/influxdb/data" -waldir "/home/services/influxdb/wal" -out "influxdb_foundry_out" -database "iotdata" -start "2024-05-03T00:00:00Z"
 
 # 导入
 influx -import -path=/root/influxdb_dump_out -precision=ns
 
 其中：
-  import: 标识导入
-  path: 导入文件
-  precision: 导入的数据时间精度
+import: 标识导入
+path: 导入文件
+precision: 导入的数据时间精度
 ```
-
 
 
 # 2. find
@@ -54,7 +53,6 @@ find ./*.log -type f -mmin +60 -exec rm -rf {} \;
 
 # 删除超过七天的日志
 find ./*.log -type f -mtime +7 -exec rm -rf {} \;
-
 ```
 
 # 3. mysql
@@ -130,4 +128,3 @@ docker save -o images.tar images:tag
 # 镜像导入
 docker load images.tar
 ```
-
