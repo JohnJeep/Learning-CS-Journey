@@ -34,7 +34,7 @@
     { line: '桃花潭水深千尺，不及汪伦送我情。', source: '李白《赠汪伦》' },
     { line: '少壮不努力，老大徒伤悲。', source: '《长歌行》' },
     { line: '春色满园关不住，一枝红杏出墙来。', source: '叶绍翁《游园不值》' },
-    { line: '沉舟侧畔千帆过，病树前头万木春。', source: '刘禹锡《酬乐天扬州初逢席上见赠》' },
+    { line: '沉舟侧畔千帆过，病树前头万木春。', source: '刘禹锡《酬乐天扬州初逢席上见赠席上见赠》' },
     { line: '山重水复疑无路，柳暗花明又一村。', source: '陆游《游山西村》' },
     { line: '天生我材必有用，千金散尽还复来。', source: '李白《将进酒》' },
     { line: '安能摧眉折腰事权贵，使我不得开心颜。', source: '李白《梦游天姥吟留别》' },
@@ -42,16 +42,9 @@
     { line: '宝剑锋从磨砺出，梅花香自苦寒来。', source: '《警世贤文》' }
   ];
 
-  // Rotating index: random start, increments on each fallback call
   var fallbackIndex = Math.floor(Math.random() * fallbackPoems.length);
 
   // ── jinrishici v2 token management ────────────────────────────────────────
-  // The API uses X-User-Token to maintain a per-session poem sequence.
-  // We must obtain the token from the /token endpoint (JSON body) because
-  // CORS does not expose custom response headers to JS by default, so
-  // trying to read X-User-Token from /one.json response headers returns null
-  // → token is never persisted → every request is a new anonymous session
-  // → server always returns the same first poem.
   var TOKEN_KEY = 'jrs_v2_token';
 
   function getStoredToken() {
@@ -62,8 +55,6 @@
     try { if (t) localStorage.setItem(TOKEN_KEY, t); } catch (e) {}
   }
 
-  // Fetch a session token from /token (returned in JSON body, CORS-safe).
-  // Calls callback(token) immediately if one is already stored.
   function ensureToken(callback) {
     var existing = getStoredToken();
     if (existing) { callback(existing); return; }
@@ -83,7 +74,7 @@
           }
         } catch (e) {}
       }
-      callback(''); // no token — proceed without, server gives anonymous session
+      callback('');
     };
     xhr.onerror   = function () { callback(''); };
     xhr.ontimeout = function () { callback(''); };
@@ -104,7 +95,7 @@
             if (resp.status === 'success' && resp.data && resp.data.content) {
               var origin = resp.data.origin || {};
               var src = (origin.author || '') +
-                (origin.title ? '\u300a' + origin.title + '\u300b' : '');
+                (origin.title ? '《' + origin.title + '》' : '');
               callback({ line: resp.data.content, source: src });
               return;
             }
@@ -118,10 +109,37 @@
     });
   }
 
-  // Fallback: rotate index so each call returns a different poem
   function getFallbackPoem() {
     fallbackIndex = (fallbackIndex + 1) % fallbackPoems.length;
     return fallbackPoems[fallbackIndex];
+  }
+
+  // ── 浮动墨点 (注入到 #page-header 背景层) ─────────────────────────────────
+  function addInkDots() {
+    var header = document.getElementById('page-header');
+    if (!header) return;
+
+    // [size(px), top(%), left(%), duration(s), delay(s)]
+    var dots = [
+      { s: 5, t: '13%', l: '8%',  d: '9s',  dl: '0s'   },
+      { s: 3, t: '24%', l: '83%', d: '13s', dl: '2.4s' },
+      { s: 7, t: '52%', l: '91%', d: '10s', dl: '1.2s' },
+      { s: 4, t: '38%', l: '5%',  d: '15s', dl: '4s'   },
+      { s: 6, t: '68%', l: '20%', d: '11s', dl: '3.1s' },
+      { s: 3, t: '62%', l: '74%', d: '14s', dl: '5.8s' },
+      { s: 8, t: '18%', l: '55%', d: '17s', dl: '7s'   },
+      { s: 4, t: '44%', l: '40%', d: '12s', dl: '0.8s' },
+    ];
+
+    dots.forEach(function (p) {
+      var el = document.createElement('div');
+      el.className = 'jj-ink-dot';
+      el.style.cssText =
+        'width:' + p.s + 'px;height:' + p.s + 'px;' +
+        'top:' + p.t + ';left:' + p.l + ';' +
+        '--duration:' + p.d + ';--delay:' + p.dl;
+      header.appendChild(el);
+    });
   }
 
   // ── DOM ───────────────────────────────────────────────────────────────────
@@ -129,7 +147,7 @@
     var siteInfo = document.getElementById('site-info');
     if (!siteInfo || document.querySelector('.jj-verse')) return;
 
-    // Hide default title/subtitle — poem is the visual centrepiece
+    // 隐藏 Butterfly 默认标题/副标题，以诗句为视觉中心
     ['site-title', 'site-subtitle'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -144,7 +162,7 @@
 
     var lineEl = document.createElement('div');
     lineEl.className = 'jj-verse-line';
-    lineEl.textContent = '\u2026';
+    lineEl.textContent = '…'; // …
 
     var srcEl  = document.createElement('div');
     srcEl.className = 'jj-verse-src';
@@ -152,12 +170,19 @@
     var btn    = document.createElement('button');
     btn.className   = 'jj-verse-btn';
     btn.type        = 'button';
-    btn.textContent = '\u6362\u4e00\u9996';  // 换一首
+    btn.textContent = '换一首'; // 换一首
+
+    // 红色印章「诗」— 微倾仿朱砂印
+    var seal = document.createElement('div');
+    seal.className = 'jj-verse-seal';
+    seal.setAttribute('aria-hidden', 'true');
+    seal.textContent = '诗'; // 诗
 
     wrap.appendChild(deco);
     wrap.appendChild(lineEl);
     wrap.appendChild(srcEl);
     wrap.appendChild(btn);
+    wrap.appendChild(seal);
     siteInfo.appendChild(wrap);
   }
 
@@ -166,13 +191,12 @@
     if (!wrap) return;
     var lineEl = wrap.querySelector('.jj-verse-line');
     var srcEl  = wrap.querySelector('.jj-verse-src');
-    // Fade out → swap text → fade in
     wrap.classList.add('jj-verse--out');
     setTimeout(function () {
       lineEl.textContent = item.line;
-      srcEl.textContent  = item.source ? '\u2500\u2500\u2500 ' + item.source : '';
+      srcEl.textContent  = item.source ? '─── ' + item.source : '';
       wrap.classList.remove('jj-verse--out');
-    }, 280);
+    }, 300);
   }
 
   function loadPoetry() {
@@ -186,6 +210,7 @@
     if (!isHomePage()) return;
 
     buildHero();
+    addInkDots();
     loadPoetry();
 
     var btn = document.querySelector('.jj-verse-btn');
@@ -197,7 +222,7 @@
       });
     }
 
-    // Auto-rotate every 60 s
+    // 每 60 秒自动换一首
     setInterval(loadPoetry, 60000);
   }
 

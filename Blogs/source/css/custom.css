@@ -1,36 +1,49 @@
+/* ================================================================
+   CSS design tokens
+   ================================================================ */
 :root {
-    --jj-bg-primary: #f5f8fc;
-    --jj-bg-surface: rgba(255, 255, 255, 0.8);
-    --jj-card-shadow: 0 12px 30px rgba(35, 61, 98, 0.12);
-    --jj-border: rgba(31, 111, 235, 0.16);
-    --jj-accent: #1f6feb;
+    --jj-bg-primary:    #f5f8fc;
+    --jj-bg-surface:    rgba(255, 255, 255, 0.8);
+    --jj-card-shadow:   0 12px 30px rgba(35, 61, 98, 0.12);
+    --jj-border:        rgba(31, 111, 235, 0.16);
+    --jj-accent:        #1f6feb;
     --jj-accent-strong: #0b57d0;
-    --jj-text-main: #1f2a44;
-    --jj-text-soft: #5e6c84;
-    --jj-radius-lg: 18px;
-    --jj-radius-md: 12px;
+    --jj-text-main:     #1f2a44;
+    --jj-text-soft:     #5e6c84;
+    --jj-radius-lg:     18px;
+    --jj-radius-md:     12px;
+    --jj-gold:          rgba(210, 185, 140, 1);
+    --jj-gold-dim:      rgba(200, 175, 120, 0.6);
+    --jj-gold-faint:    rgba(200, 175, 120, 0.22);
 }
 
 [data-theme="dark"] {
-    --jj-bg-primary: #0b1220;
-    --jj-bg-surface: rgba(17, 26, 42, 0.76);
-    --jj-card-shadow: 0 12px 32px rgba(4, 10, 18, 0.55);
-    --jj-border: rgba(114, 161, 255, 0.2);
-    --jj-accent: #7aa9ff;
+    --jj-bg-primary:    #0b1220;
+    --jj-bg-surface:    rgba(17, 26, 42, 0.76);
+    --jj-card-shadow:   0 12px 32px rgba(4, 10, 18, 0.55);
+    --jj-border:        rgba(114, 161, 255, 0.2);
+    --jj-accent:        #7aa9ff;
     --jj-accent-strong: #9fc0ff;
-    --jj-text-main: #dae6ff;
-    --jj-text-soft: #9db2d6;
+    --jj-text-main:     #dae6ff;
+    --jj-text-soft:     #9db2d6;
 }
 
+/* ================================================================
+   Base
+   ================================================================ */
 body {
-    font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background:
         radial-gradient(circle at 15% 10%, rgba(31, 111, 235, 0.12), transparent 42%),
-        radial-gradient(circle at 80% 20%, rgba(11, 87, 208, 0.08), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(11, 87, 208, 0.08),  transparent 40%),
         var(--jj-bg-primary);
     color: var(--jj-text-main);
 }
 
+/* ================================================================
+   Navigation
+   ================================================================ */
 #page-header.nav-fixed #nav {
     background: rgba(252, 254, 255, 0.75);
     backdrop-filter: saturate(130%) blur(12px);
@@ -47,13 +60,12 @@ body {
     letter-spacing: 0.2px;
 }
 
+/* ================================================================
+   Card surface — posts, sidebar widgets, pages
+   ================================================================ */
 #recent-posts > .recent-post-item,
 #aside-content .card-widget,
-#post,
-#page,
-#archive,
-#tag,
-#category {
+#post, #page, #archive, #tag, #category {
     border-radius: var(--jj-radius-lg);
     background: var(--jj-bg-surface);
     border: 1px solid var(--jj-border);
@@ -105,15 +117,16 @@ body {
     line-height: 1.3;
 }
 
+/* ================================================================
+   Article body
+   ================================================================ */
 #article-container {
     line-height: 1.9;
     color: var(--jj-text-main);
 }
 
 #article-container p,
-#article-container li {
-    color: var(--jj-text-main);
-}
+#article-container li { color: var(--jj-text-main); }
 
 #article-container h1,
 #article-container h2,
@@ -140,6 +153,9 @@ body {
     font-family: "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas, monospace;
 }
 
+/* ================================================================
+   Links
+   ================================================================ */
 #aside-content .card-widget .card-content a,
 #article-container a {
     color: var(--jj-accent);
@@ -148,10 +164,11 @@ body {
 }
 
 #aside-content .card-widget .card-content a:hover,
-#article-container a:hover {
-    color: var(--jj-accent-strong);
-}
+#article-container a:hover { color: var(--jj-accent-strong); }
 
+/* ================================================================
+   Footer
+   ================================================================ */
 #footer {
     background: rgba(246, 250, 255, 0.65);
     border-top-right-radius: 24px;
@@ -160,44 +177,64 @@ body {
     backdrop-filter: saturate(120%) blur(10px);
 }
 
-[data-theme="dark"] #footer {
-    background: rgba(11, 17, 29, 0.72);
-}
+[data-theme="dark"] #footer { background: rgba(11, 17, 29, 0.72); }
 
-#footer::before {
-    background: transparent;
-}
+#footer::before { background: transparent; }
 
 #footer #footer-wrap,
-#footer #footer-wrap a {
-    color: var(--jj-text-soft);
-}
-
-#page-header #site-title,
-#page-header #site-subtitle {
-    text-shadow: 0 6px 26px rgba(12, 33, 66, 0.28);
-}
+#footer #footer-wrap a { color: var(--jj-text-soft); }
 
 /* ================================================================
-   Hero — gradient backdrop, poem centered (jinrishici style)
-   Day  : deep midnight-blue → indigo → cerulean — echoes #1f6feb accent,
-          warm-gold poem text sits naturally (complementary blue × gold).
-   Night: same hue family, darkened to blend with the dark-mode body.
+   Hero — 水墨古诗意境
+   深夜墨色底调，烛晕金光，远山轮廓，浮动墨点
    ================================================================ */
+
 #page-header {
-    background: linear-gradient(160deg, #0c1a30 0%, #18103a 55%, #0d2038 100%);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0c1a30 0%, #1a1038 50%, #0d2038 100%);
 }
 
 [data-theme="dark"] #page-header {
-    background: linear-gradient(160deg, #060d18 0%, #0d0920 55%, #061218 100%);
+    background: linear-gradient(160deg, #060d18 0%, #0e0820 50%, #061018 100%);
 }
 
-#page-header.full_page {
-    animation: heroReveal 0.8s ease both;
+/* 暖烛晕 — 诗句后方的金色漫射光 */
+#page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 58% 52% at 50% 44%,
+            rgba(212, 185, 125, 0.09), transparent 65%),
+        radial-gradient(ellipse 35% 40% at 12% 22%,
+            rgba(31,  90, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 28% 35% at 88% 28%,
+            rgba(20,  60, 140, 0.14), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-/* Center the poem block inside Butterfly's #site-info wrapper */
+/* 远山轮廓 — 两层 SVG 山脉叠加营造纵深 */
+#page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 44%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 280' preserveAspectRatio='none'%3E%3Cpath fill='rgba(255%2C255%2C255%2C0.048)' d='M0%2C185 L70%2C148 L160%2C168 L260%2C118 L370%2C152 L480%2C96 L590%2C132 L700%2C82 L810%2C122 L920%2C74 L1030%2C112 L1150%2C86 L1270%2C104 L1360%2C76 L1440%2C90 L1440%2C280 L0%2C280Z'%2F%3E%3Cpath fill='rgba(190%2C175%2C145%2C0.038)' d='M0%2C232 L140%2C204 L280%2C222 L440%2C192 L600%2C218 L760%2C188 L920%2C212 L1080%2C182 L1240%2C205 L1380%2C188 L1440%2C198 L1440%2C280 L0%2C280Z'%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: bottom;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 保证诗词层浮于伪元素之上 */
 #site-info {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -205,73 +242,168 @@ body {
     width: 100%;
 }
 
-/* Poem container — no card, floating text only */
+#page-header #site-title,
+#page-header #site-subtitle {
+    text-shadow: 0 6px 26px rgba(12, 33, 66, 0.28);
+}
+
+/* Hero 入场动画 */
+#page-header.full_page {
+    animation: heroReveal 0.9s ease both;
+}
+
+@keyframes heroReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================================
+   古诗词区块
+   ================================================================ */
+
+/* 外层容器 — 侧边竖线用伪元素实现 */
 .jj-verse {
+    position: relative;
     text-align: center;
-    max-width: 720px;
+    max-width: 680px;
     width: 90vw;
     margin: 0 auto;
+    padding: 0 32px;
     opacity: 1;
-    transition: opacity 0.28s ease;
+    transition: opacity 0.3s ease;
 }
 
-.jj-verse--out {
-    opacity: 0;
+.jj-verse--out { opacity: 0; }
+
+/* 两侧竖线 — 仿卷轴边缘 */
+.jj-verse::before,
+.jj-verse::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 58%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--jj-gold-faint) 22%,
+        var(--jj-gold-faint) 78%,
+        transparent
+    );
+    pointer-events: none;
 }
 
-/* Thin horizontal rule above the poem */
+.jj-verse::before { left: 0; }
+.jj-verse::after  { right: 0; }
+
+/* 三点墨滴装饰 — 用 box-shadow 模拟两侧点 */
 .jj-verse-deco {
-    width: 36px;
-    height: 1px;
-    background: rgba(210, 185, 140, 0.4);
-    margin: 0 auto 36px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--jj-gold-dim);
+    margin: 0 auto 42px;
+    box-shadow:
+        -20px 0 0 1.5px rgba(200, 175, 120, 0.3),
+         20px 0 0 1.5px rgba(200, 175, 120, 0.3);
 }
 
-/* Main poem line */
+/* 诗句正文 */
 .jj-verse-line {
     font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
-    font-size: clamp(22px, 3.2vw, 40px);
+    font-size: clamp(20px, 2.8vw, 36px);
     color: #f0e8d2;
-    letter-spacing: 0.14em;
-    line-height: 1.75;
-    text-shadow: 0 2px 28px rgba(0, 0, 0, 0.6);
-    min-height: 1.8em;
+    letter-spacing: 0.2em;
+    line-height: 1.85;
+    text-shadow:
+        0 2px 30px rgba(0, 0, 0, 0.55),
+        0 0  20px rgba(212, 185, 125, 0.2);
+    min-height: 1.85em;
 }
 
-/* Source attribution */
+/* 出处 */
 .jj-verse-src {
-    margin-top: 22px;
-    color: rgba(200, 175, 120, 0.7);
-    font-size: 13px;
-    letter-spacing: 0.18em;
+    margin-top: 28px;
+    color: var(--jj-gold-dim);
+    font-size: 12px;
+    letter-spacing: 0.25em;
     font-family: "Noto Serif SC", "Songti SC", serif;
 }
 
-/* Next poem button */
+/* 红色印章 — 由 JS 注入 */
+.jj-verse-seal {
+    position: absolute;
+    bottom: -12px;
+    right: 4px;
+    width: 32px;
+    height: 32px;
+    background: #8b1919;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 13px;
+    color: rgba(252, 238, 215, 0.92);
+    line-height: 1;
+    transform: rotate(5deg);
+    box-shadow:
+        0 3px 14px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 200, 150, 0.1);
+    user-select: none;
+    z-index: 2;
+}
+
+/* 换一首按钮 — 矩形、古典感 */
 .jj-verse-btn {
-    margin-top: 32px;
-    padding: 8px 22px;
-    border-radius: 999px;
+    margin-top: 40px;
+    padding: 6px 22px;
+    border-radius: 2px;
     border: 1px solid rgba(200, 175, 120, 0.28);
     background: transparent;
-    color: rgba(200, 175, 120, 0.55);
-    font-size: 12px;
-    letter-spacing: 1.4px;
+    color: rgba(200, 175, 120, 0.5);
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    font-family: "Noto Serif SC", serif;
     cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    transition: border-color 0.22s, color 0.22s, letter-spacing 0.22s, background 0.22s;
 }
 
 .jj-verse-btn:hover:not(:disabled) {
-    border-color: rgba(200, 175, 120, 0.65);
-    color: rgba(210, 190, 140, 0.9);
-    background: rgba(200, 175, 120, 0.08);
+    border-color: rgba(200, 175, 120, 0.62);
+    color: rgba(215, 193, 145, 0.92);
+    background: rgba(200, 175, 120, 0.07);
+    letter-spacing: 3.5px;
 }
 
 .jj-verse-btn:disabled {
-    opacity: 0.35;
+    opacity: 0.3;
     cursor: default;
 }
 
+/* ================================================================
+   浮动墨点 (JS 注入到 #page-header)
+   ================================================================ */
+.jj-ink-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(210, 185, 130, 0.1);
+    pointer-events: none;
+    z-index: 0;
+    animation: inkFloat var(--duration, 10s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes inkFloat {
+    0%, 100% { transform: translate(0,    0  ) scale(1);    opacity: 0.28; }
+    33%       { transform: translate(7px, -30px) scale(1.14); opacity: 0.1;  }
+    66%       { transform: translate(-5px,-18px) scale(0.88); opacity: 0.18; }
+}
+
+/* ================================================================
+   精选/专栏页文章列表
+   ================================================================ */
 .jj-featured-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -303,52 +435,34 @@ body {
     font-size: 13px;
 }
 
-.jj-featured-item p {
-    margin: 0 0 10px;
-}
+.jj-featured-item p { margin: 0 0 10px; }
 
-@keyframes heroReveal {
-    from {
-        opacity: 0;
-        transform: translateY(22px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* ================================================================
+   响应式
+   ================================================================ */
 @media screen and (max-width: 900px) {
+    .jj-verse { padding: 0 20px; }
+
     .jj-verse-line {
-        /* Scale with viewport so a ~16-char poem always fits on one line.
-           90vw container at 375px ≈ 338px; 16 chars × 3.8vw × 1.14 letter-spacing ≈ 323px. */
-        font-size: max(13px, 3.8vw);
-        letter-spacing: 0.08em;
+        font-size: max(17px, 4.4vw);
+        letter-spacing: 0.1em;
     }
 
-    .jj-verse-deco {
-        margin-bottom: 24px;
-    }
+    .jj-verse-deco { margin-bottom: 28px; }
 
-    #recent-posts > .recent-post-item .post_cover img {
-        max-height: 220px;
-    }
+    /* 移动端空间不足，隐藏竖线 */
+    .jj-verse::before,
+    .jj-verse::after { display: none; }
 
-    .jj-featured-list {
-        grid-template-columns: 1fr;
-    }
+    #recent-posts > .recent-post-item .post_cover img { max-height: 220px; }
 
-    #article-container {
-        font-size: 15px;
-    }
+    .jj-featured-list { grid-template-columns: 1fr; }
+
+    #article-container { font-size: 15px; }
 
     #recent-posts > .recent-post-item,
     #aside-content .card-widget,
-    #post,
-    #page,
-    #archive,
-    #tag,
-    #category {
+    #post, #page, #archive, #tag, #category {
         border-radius: 14px;
     }
 }
