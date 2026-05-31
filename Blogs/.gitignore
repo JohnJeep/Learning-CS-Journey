@@ -3,7 +3,6 @@ db.json
 .deploy*/
 # !node_modules/hexo-theme-butterfly/
 public/
-source/_posts/*
-!source/_posts/.gitkeep
+source/_posts/synced/
 _multiconfig.yml
 package-lock.json
