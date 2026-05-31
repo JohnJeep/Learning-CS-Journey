@@ -2,18 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2023-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 11:45:27
+ * @LastEditTime: 2026-05-31 20:22:35
  * @Description: Linux clock usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. introduction](#1-introduction)
-- [2. date](#2-date)
-- [3. hwclock](#3-hwclock)
-- [4. ntpd](#4-ntpd)
-- [5. public time servers](#5-public-time-servers)
-- [6. references](#6-references)
-
 
 # 1. introduction
 

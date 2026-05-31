@@ -2,24 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:56:09
+ * @LastEditTime: 2026-05-31 20:19:01
  * @Description: Linux 使用技巧
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-linux system tricks and tips
-- [1. 系统](#1-系统)
-- [2. 资源](#2-资源)
-- [3. 磁盘和分区](#3-磁盘和分区)
-- [4. 网络](#4-网络)
-- [5. 进程](#5-进程)
-- [6. 用户](#6-用户)
-- [7. 服务](#7-服务)
-- [8. 程序](#8-程序)
-- [9. 内存信息](#9-内存信息)
-- [10. 机器型号](#10-机器型号)
-- [11. 网卡信息](#11-网卡信息)
-
 
 ## 1. 系统
 

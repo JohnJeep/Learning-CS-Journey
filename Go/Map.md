@@ -1,6 +1,17 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:28:43
+ * @Description: golang map
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Introduction
 
-Swiss Table是由Google工程师于2017年开发的一种高效哈希表实现，旨在优化内存使用和提升性能，解决Google内部代码库中广泛使用的 `std::unordered_map` 所面临的性能问题。[Google工程师Matt Kulukundis在2017年CppCon大会上详细介绍了他们在Swiss Table上的工作](https://www.youtube.com/watch?v=ncHmEUmJZf4)：
+Swiss Table是由Google工程师于2017年开发的一种高效哈希表实现，旨在优化内存使用和提升性能，
+解决Google内部代码库中广泛使用的 `std::unordered_map` 所面临的性能问题。
+[Google工程师Matt Kulukundis在2017年CppCon大会上详细介绍了他们在Swiss Table上的工作](https://www.youtube.com/watch?v=ncHmEUmJZf4)：
 
 
 

@@ -2,15 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-29 15:49:25
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:14:37
+ * @LastEditTime: 2026-05-31 18:48:07
  * @Description: Motor Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. 电机分类](#1-电机分类)
-  - [1.1. 普通电机](#11-普通电机)
-  - [1.2. 控制电机](#12-控制电机)
-  - [1.3. 直驱电机](#13-直驱电机)
 
 ## 1. 电机分类
 

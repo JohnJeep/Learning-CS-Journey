@@ -2,14 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2026-03-09 19:03:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-09 19:33:08
+ * @LastEditTime: 2026-05-31 18:47:20
  * @Description: ROS2 messages, service, action and custom interfaces Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. std\_msgs](#2-std_msgs)
-- [References](#references)
 
 # 1. Introduction
 

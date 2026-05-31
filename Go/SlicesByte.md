@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:26:36
+ * @Description: golang slices bytes
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # [] byte 字节切片
 
 日常工作中，`[]byte` 会经常遇到，但对这个知识点总是模模糊糊的，有些地方不是特别的清楚，因此把自己对 `[]byte` 的理解梳理出来，供大家分享。

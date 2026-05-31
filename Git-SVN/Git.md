@@ -2,55 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-12-11 16:24:47
+ * @LastEditTime: 2026-05-31 18:36:40
  * @Description: Git Usage
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
-
-- [1. Git Command](#1-git-command)
-  - [1.1. Git init](#11-git-init)
-  - [1.2. Git add](#12-git-add)
-  - [1.3. Git log](#13-git-log)
-  - [1.4. Git tag](#14-git-tag)
-  - [1.5. Git alias](#15-git-alias)
-  - [1.6. Git checkout](#16-git-checkout)
-  - [1.7. Git commit](#17-git-commit)
-  - [1.8. Git diff](#18-git-diff)
-  - [1.9. Git push](#19-git-push)
-  - [1.10. Git pull](#110-git-pull)
-  - [1.11. Git stash](#111-git-stash)
-  - [1.12. Git blame](#112-git-blame)
-  - [1.13. Git cherry-pick](#113-git-cherry-pick)
-  - [1.14. Git bisect](#114-git-bisect)
-  - [1.15. Git revert](#115-git-revert)
-  - [1.16. Git Reset](#116-git-reset)
-  - [1.17. Remove or Restore](#117-remove-or-restore)
-    - [1.17.1. remove](#1171-remove)
-    - [1.17.2. restore](#1172-restore)
-  - [1.18. other command](#118-other-command)
-- [2. Git Branch](#2-git-branch)
-  - [2.1. Local repo branch](#21-local-repo-branch)
-  - [2.2. Remote repo branch](#22-remote-repo-branch)
-  - [2.3. Branches Principle](#23-branches-principle)
-  - [2.4. Branches conflict](#24-branches-conflict)
-    - [2.4.1. Git rebase](#241-git-rebase)
-    - [2.4.2. Git merge](#242-git-merge)
-  - [2.5.](#25)
-- [3. Git Area](#3-git-area)
-  - [3.1. Workspace](#31-workspace)
-  - [3.2. Index](#32-index)
-  - [3.3. Local repository](#33-local-repository)
-  - [3.4. Remote repository](#34-remote-repository)
-    - [3.4.1. Git remote](#341-git-remote)
-    - [3.4.2. Git pull \&\& Git fetch](#342-git-pull--git-fetch)
-    - [3.4.3. Remote and local repository](#343-remote-and-local-repository)
-- [4. Git Config](#4-git-config)
-  - [4.1. credential](#41-credential)
-  - [4.2. .gitignore](#42-gitignore)
-- [5. Git Proxy](#5-git-proxy)
-- [6. Git LFS](#6-git-lfs)
-- [7. References](#7-references)
-
 
 # 1. Git Command
 

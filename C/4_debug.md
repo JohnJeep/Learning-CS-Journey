@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-09-06 09:49:29
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:15:17
+ * @Description: Debugging Notes
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 F8：step over 单步 遇到断点后，程序停止运行，按F8单步运行。
 
 F7：step into 进入 配合F8使用。单步调试F8时，如果某行调用其他模块的函数，在此行F7，可以进入函数内部，如果是F8则不会进入函数内容，直接单步到下一行。

@@ -1,6 +1,20 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-03-31 22:59:03
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:29:43
+ * @Description: STL Queue max push element
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # STL Queue 中 最大能 push 多少元素？
 
-阅读标准库中的源码可知：Queue 底层是基于 deque 实现的。源码中 `push` 函数调用的是 deque 容器中的 `push_back` 函数，而 deque 容器中队列能分配最大的值由 `max_size` 函数决定，`max_size` 函数的返回的类型为 `size_type`。一步一步追踪朔源，发现 `size_type` 是 `size_t` 的别名，而 `size_t` 又是 `__SIZE_TYPE__` 的别名，`__SIZE_TYPE__` 最终是 `long unsigned int` 的别名。终于找到源头了，STL 标准库的 Queue 容器最大能 push 多少个值由 `long unsigned int` 值决定的，而数据类型是跟操作系统的位数相关的，32 位与 64 位操作系统中  `long unsigned int` 的值是不一样。32 位系统中数值为 $2^{32}$，64 位系统中数值为 $2^{64}$。
+阅读标准库中的源码可知：Queue 底层是基于 deque 实现的。源码中 `push` 函数调用的是 deque 容器中的 `push_back` 函数，
+而 deque 容器中队列能分配最大的值由 `max_size` 函数决定，`max_size` 函数的返回的类型为 `size_type`。
+一步一步追踪朔源，发现 `size_type` 是 `size_t` 的别名，而 `size_t` 又是 `__SIZE_TYPE__` 的别名，`__SIZE_TYPE__` 
+最终是 `long unsigned int` 的别名。终于找到源头了，STL 标准库的 Queue 容器最大能 push 多少个
+值由 `long unsigned int` 值决定的，而数据类型是跟操作系统的位数相关的，
+32 位与 64 位操作系统中  `long unsigned int` 的值是不一样。32 位系统中数值为 $2^{32}$，64 位系统中数值为 $2^{64}$。
 
 下面列出 STL 中的用到的源码部分
 

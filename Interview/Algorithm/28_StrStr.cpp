@@ -1,8 +1,8 @@
 /*
  * @Author: JohnJeep
  * @Date: 2020-08-25 15:01:07
- * @LastEditTime: 2020-08-25 16:02:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2026-05-31 20:41:51
+ * @LastEditors: JohnJeep
  * @Description: 题目：实现 strStr() 函数
  *               描述：给定一个 haystack 字符串和一个 needle 字符串，
  *                     在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回-1。
@@ -19,6 +19,7 @@
  *                       如果对应位置有不等的，则跳出循环，如果一直都没有跳出循环，则说明子字符串出现了，则返回起始位置。
  * 
  *               复杂度：(m-n)n
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
  */
 #include <iostream>
 #include <cstdio>

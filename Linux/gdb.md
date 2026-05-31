@@ -1,77 +1,20 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-23 20:37:04
- * @LastEditTime: 2025-11-20 11:59:30
+ * @LastEditTime: 2026-05-31 20:20:55
  * @LastEditors: JohnJeep
  * @Description: GDB Usage
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 --> 
-
-- [1. 简介](#1-简介)
-- [2. 安装 GDB](#2-安装-gdb)
-  - [2.1. 在线安装](#21-在线安装)
-  - [2.2. 源码安装](#22-源码安装)
-- [3. Invoking GDB](#3-invoking-gdb)
-- [4. Shell Commands](#4-shell-commands)
-- [5. Logging Output](#5-logging-output)
-- [6. 常用命令](#6-常用命令)
-  - [6.1. run](#61-run)
-    - [6.1.1. arguments](#611-arguments)
-    - [6.1.2. environment](#612-environment)
-    - [6.1.3. working directory](#613-working-directory)
-    - [6.1.4. standard input and output](#614-standard-input-and-output)
-  - [6.2. start](#62-start)
-  - [6.3. starti](#63-starti)
-  - [6.4. continue](#64-continue)
-  - [6.5. quit](#65-quit)
-  - [6.6. list](#66-list)
-  - [6.7. break](#67-break)
-  - [6.8. delete](#68-delete)
-  - [6.9. next](#69-next)
-  - [6.10. next into](#610-next-into)
-  - [6.11. step](#611-step)
-  - [6.12. step into](#612-step-into)
-  - [6.13. finish](#613-finish)
-  - [6.14. until](#614-until)
-  - [6.15. print](#615-print)
-  - [6.16. ptype](#616-ptype)
-  - [6.17. display](#617-display)
-  - [6.18. undisplay](#618-undisplay)
-  - [6.19. whatis](#619-whatis)
-  - [6.20. set](#620-set)
-  - [6.21. call](#621-call)
-  - [6.22. clear](#622-clear)
-  - [6.23. dir](#623-dir)
-  - [6.24. info](#624-info)
-  - [6.25. show](#625-show)
-  - [6.26. command](#626-command)
-  - [6.27. help](#627-help)
-  - [6.28. Others](#628-others)
-- [7. TUI](#7-tui)
-  - [7.1. TUI 中的断点](#71-tui-中的断点)
-  - [7.2. 快捷键](#72-快捷键)
-- [8. Examining Source Files](#8-examining-source-files)
-  - [8.1. 查看源码](#81-查看源码)
-  - [8.2. 编辑源码](#82-编辑源码)
-  - [8.3. 改变源码路径](#83-改变源码路径)
-- [9. 调试多进程](#9-调试多进程)
-- [10. 调试多线程](#10-调试多线程)
-- [11. 查看内存](#11-查看内存)
-  - [11.1. backtrace](#111-backtrace)
-  - [11.2. examine](#112-examine)
-- [12. Watchpoints](#12-watchpoints)
-- [13. Catchpoints](#13-catchpoints)
-- [14. 调试正在运行的程序](#14-调试正在运行的程序)
-- [15. 设置动态库](#15-设置动态库)
-- [16. Reverse](#16-reverse)
-- [17. 底层原理](#17-底层原理)
-- [18. References](#18-references)
-
 
 # 1. 简介
 
 GDB 是什么？
 
-GDB 全称“GNU symbolic debugger”，从名称上不难看出，它诞生于 GNU 计划（同时诞生的还有 GCC、Emacs 等），是 Linux 下常用的程序调试器。发展至今，GDB 已经迭代了诸多个版本，当下的 GDB 支持调试多种编程语言编写的程序，包括 C、C++、Go、Objective-C、OpenCL、Ada 等。实际场景中，GDB 更常用来调试 C 和 C++ 程序。一般来说，GDB主要帮助我们完成以下四个方面的功能：
+GDB 全称“GNU symbolic debugger”，从名称上不难看出，它诞生于 GNU 计划（同时诞生的还有 GCC、Emacs 等），
+是 Linux 下常用的程序调试器。发展至今，GDB 已经迭代了诸多个版本，当下的 GDB 支持调试多种编程语言编写的程序，
+包括 C、C++、Go、Objective-C、OpenCL、Ada 等。实际场景中，GDB 更常用来调试 C 和 C++ 程序。
+一般来说，GDB主要帮助我们完成以下四个方面的功能：
 
 1. 启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。
 2. 在某个指定的地方或条件下暂停程序。

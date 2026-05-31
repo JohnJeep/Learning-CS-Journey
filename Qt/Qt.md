@@ -1,10 +1,10 @@
 <!--
- * @Author: JOhnJeep
+ * @Author: JohnJeep
  * @Date: 2020-09-07 09:18:32
- * @LastEditTime: 2025-04-04 20:06:32
  * @LastEditors: JohnJeep
- * @Description: QT基础知识
- * 
+ * @LastEditTime: 2026-05-31 18:50:36
+ * @Description: Qt Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 信号与槽函数

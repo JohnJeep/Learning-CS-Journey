@@ -1,19 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-12 09:47:29
- * @LastEditTime: 2021-09-09 22:37:12
- * @LastEditors: Windows10
- * @Description: memcmp()函数与strcmp()函数用法
---> 
-
-<!-- TOC -->
-
-- [1. memcmp()](#1-memcmp)
-- [2. strcmp()](#2-strcmp)
-- [3. memcmp()与strcmp()区别](#3-memcmp与strcmp区别)
-- [4. 参考](#4-参考)
-
-<!-- /TOC -->
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:05:05
+ * @Description: memcmp() && strcmp() usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. memcmp()
 - 函数原型：` int memcmp(const void *str1, const void *str2, size_t n)); `

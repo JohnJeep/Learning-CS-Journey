@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2019-04-14 23:28:59
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:36:47
+ * @Description: Git installation and configuration
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Git 安装
 
 Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Linux/Unix、macOS 等不同的操作系统上。下面讲解在不同平台上的安装。

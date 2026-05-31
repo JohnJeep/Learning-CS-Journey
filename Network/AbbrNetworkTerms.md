@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-07 15:20:08
- * @LastEditTime: 2025-04-04 20:01:31
  * @LastEditors: JohnJeep
- * @Description: 网络术语缩写
+ * @LastEditTime: 2026-05-31 19:45:56
+ * @Description: network abbr terms
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 常用网络术语缩写

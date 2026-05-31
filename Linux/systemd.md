@@ -1,14 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2022-05-20 17:20:51
- * @LastEditTime: 2025-11-20 12:11:00
+ * @LastEditTime: 2026-05-31 20:16:21
  * @LastEditors: JohnJeep
  * @Description: systemd usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [systemd](#systemd)
-- [Unit](#unit)
-- [配置 Uinit 地址](#配置-uinit-地址)
 
 ## systemd
 

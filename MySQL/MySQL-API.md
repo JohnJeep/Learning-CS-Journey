@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:36:15
+ * @Description: mysql c++ API
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # c++ connect API
 
 ```

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-11-02 23:37:28
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:33:59
+ * @Description: JDK environment configuration
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 JDK 环境配置
 
 ## Linux

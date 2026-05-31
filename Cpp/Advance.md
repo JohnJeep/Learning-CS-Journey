@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-03 14:21:36
- * @Description: C++ 高级用法
+ * @LastEditTime: 2026-05-31 18:30:43
+ * @Description: C++ advance knowledge
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 

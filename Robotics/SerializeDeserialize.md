@@ -2,24 +2,11 @@
  * @Author: JohnJeep
  * @Date: 2025-11-16 23:09:28
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:26:26
+ * @LastEditTime: 2026-05-31 18:46:27
  * @Description: ROS 2 Serialize and Deserialize
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. 为什么ROS 2需要序列化/反序列化？](#1-为什么ros-2需要序列化反序列化)
-- [2. ROS 2序列化/反序列化机制详解](#2-ros-2序列化反序列化机制详解)
-  - [2.1. 基于IDL和代码生成](#21-基于idl和代码生成)
-  - [2.2. CDR格式](#22-cdr格式)
-  - [2.3. 序列化过程（以C++为例）](#23-序列化过程以c为例)
-  - [2.4. 反序列化过程（以C++为例）](#24-反序列化过程以c为例)
-- [3. 优化序列化/反序列化的方法](#3-优化序列化反序列化的方法)
-  - [3.1. 进程内通信(Intra-Process Communication)](#31-进程内通信intra-process-communication)
-  - [3.2. 应用场景](#32-应用场景)
-  - [3.3. 零拷贝传输(Zero-Copy Transports)](#33-零拷贝传输zero-copy-transports)
-  - [3.4. 应用场景](#34-应用场景)
-  - [3.5. 数据传输优化 - 减少传输次数](#35-数据传输优化---减少传输次数)
-  - [3.6. 通信方式对比总结](#36-通信方式对比总结)
 
 ### 1. 为什么ROS 2需要序列化/反序列化？
 

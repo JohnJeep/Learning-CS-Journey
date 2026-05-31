@@ -1,26 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-03-13 09:55:36
- * @LastEditTime: 2026-01-05 21:50:58
  * @LastEditors: JohnJeep
- * @Description: LaTeX Usage in Markdown
+ * @LastEditTime: 2026-05-31 19:33:52
+ * @Description: latex usage in markdown
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. LaTex](#1-latex)
-  - [1.1. 插入公式](#11-插入公式)
-  - [1.2. 上下标](#12-上下标)
-  - [1.3. 指定字体](#13-指定字体)
-  - [1.4. 和号和积分号](#14-和号和积分号)
-  - [1.5. 集合运算符](#15-集合运算符)
-  - [1.6. 对数运算符](#16-对数运算符)
-  - [1.7. 三角运算符](#17-三角运算符)
-  - [1.8. 微积分运算符](#18-微积分运算符)
-  - [1.9. 逻辑运算符](#19-逻辑运算符)
-  - [1.10. 戴帽符号](#110-戴帽符号)
-  - [1.11. 箭头符号](#111-箭头符号)
-  - [1.12. 连线符号](#112-连线符号)
-- [2. References](#2-references)
-
 
 # 1. LaTex
 

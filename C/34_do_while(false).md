@@ -1,11 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-18 19:18:53
- * @LastEditTime: 2022-07-08 18:05:38
- * @LastEditors: DESKTOP-0S33AUT
- * @Description: do {
- *                                        ...
- *                                        } while(false)  使用
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:00:23
+ * @Description: do {..} while (false)
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 ## 为什么要使用 do {.. } while (false)?

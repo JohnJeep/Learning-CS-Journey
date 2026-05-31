@@ -2,24 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-10-26 16:46:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-09 19:43:12
+ * @LastEditTime: 2026-05-31 18:48:27
  * @Description: DDS fundamental concepts and usage in ROS 2
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction to DDS](#1-introduction-to-dds)
-- [2. DDS 核心原理](#2-dds-核心原理)
-  - [2.1. 以 “数据为中心” 的通信模型](#21-以-数据为中心-的通信模型)
-  - [2.2. 关键概念：Domain、Topic、QoS](#22-关键概念domaintopicqos)
-  - [2.3. 自动发现与动态匹配](#23-自动发现与动态匹配)
-  - [2.4. 数据序列化与传输](#24-数据序列化与传输)
-  - [2.5. 5.实时发布订阅协议](#25-5实时发布订阅协议)
-- [3. DDS 在 ROS 2中的用法](#3-dds-在-ros-2中的用法)
-  - [3.1. 实践指南与技巧](#31-实践指南与技巧)
-- [4. FastDDS](#4-fastdds)
-- [5. CycloneDDS](#5-cyclonedds)
-- [6. References](#6-references)
-
 
 # 1. Introduction to DDS
 

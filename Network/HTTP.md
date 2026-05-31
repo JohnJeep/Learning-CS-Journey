@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
+ * @Date: 2025-05-11 17:49:17
  * @Date: 2020-07-06 22:22:11
- * @LastEditTime: 2025-03-26 18:20:17
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
---> 
+ * @LastEditTime: 2026-05-31 19:43:37
+ * @Description: HTTP protocol
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. http
 

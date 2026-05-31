@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-20 10:31:26
- * @LastEditTime: 2021-08-15 16:27:15
- * @LastEditors: Windows10
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:41:40
+ * @Description: wireshark usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 功能
@@ -49,10 +50,7 @@ Ethereal是Wireshark的前身，2006年改名为Wireshark。
 5.  导出数据包
 
 
-
-
 # 7. References
-1.  [Wireshark.org](https://www.wireshark.org/news/): 官网
-2.  [Wireshark Wiki](https://wiki.wireshark.org/): 维基网站
-3.  [Wiresharkbook](https://www.chappell-university.com/books): 书籍推荐网站
-
+1. [Wireshark.org](https://www.wireshark.org/news/): 官网
+2. [Wireshark Wiki](https://wiki.wireshark.org/): 维基网站
+3. [Wiresharkbook](https://www.chappell-university.com/books): 书籍推荐网站

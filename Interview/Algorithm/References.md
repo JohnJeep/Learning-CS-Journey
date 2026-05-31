@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-08-16 17:18:59
- * @LastEditTime: 2025-04-16 15:01:55
+ * @LastEditTime: 2026-05-31 20:35:28
  * @LastEditors: JohnJeep
  * @Description: LeetCode
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 - [Coding4Interviews](https://github.com/nlpjoe/Coding4Interviews) 仓库中有剑指offer和LeetCode的题解

@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-11-29 22:45:38
- * @LastEditTime: 2021-11-30 00:14:06
- * @LastEditors: Windows10
- * @Description: 虚拟网络知识
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:41:53
+ * @Description: virtual network
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # Terminology
@@ -19,8 +20,5 @@
 | vNIC                                | 虚拟网卡     |
 | SDN(Software Defined Network)       | 软件定义网络 |
 | CNI(Container Network Interface)    | 容器网络接口 |
-|                                     |              |
-|                                     |              |
-|                                     |              |
 |                                     |              |
 

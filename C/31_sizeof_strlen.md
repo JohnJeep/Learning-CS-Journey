@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
- * @Date: 2020-08-13 21:14:28
- * @LastEditTime: 2025-11-13 20:04:17
+ * @Date: 2025-12-31 21:17:16
  * @LastEditors: JohnJeep
- * @Description: sizeof与strlen区别
+ * @LastEditTime: 2026-05-31 19:02:17
+ * @Description: sizeof & strlen difference
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 在C++中，`sizeof`和`strlen`都是用于获取长度的操作，但它们的工作方式和应用场景有显著的不同。

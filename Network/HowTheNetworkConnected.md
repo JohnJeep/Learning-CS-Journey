@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-12-27 21:05:38
- * @LastEditTime: 2025-04-04 20:01:37
  * @LastEditors: JohnJeep
- * @Description: 读网络是怎样连接的笔记
---> 
+ * @LastEditTime: 2026-05-31 19:44:06
+ * @Description: How's the network connected
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 浏览器生成消息的步骤
 

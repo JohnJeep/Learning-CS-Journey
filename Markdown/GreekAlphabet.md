@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-11 22:14:21
- * @LastEditTime: 2023-08-04 14:52:34
  * @LastEditors: JohnJeep
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 19:33:06
+ * @Description: greek alphabet in LaTeX
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 希腊字母表
 
 ## 小写希腊字母

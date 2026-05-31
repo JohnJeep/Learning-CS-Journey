@@ -1,14 +1,18 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:42:59
- * @LastEditTime: 2025-04-04 20:07:50
  * @LastEditors: JohnJeep
- * @Description: Nginx learning
- * -->
+ * @LastEditTime: 2026-05-31 19:38:58
+ * @Description: nginx usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. Introduce
 
-nginx ("*engine x*") is an HTTP web server, reverse proxy, content cache, load balancer, TCP/UDP proxy server, and mail proxy server. Originally written by [Igor Sysoev](http://sysoev.ru/en/) and distributed under the [2-clause BSD License](https://nginx.org/LICENSE).
+nginx ("*engine x*") is an HTTP web server, reverse proxy, content cache, load balancer, 
+TCP/UDP proxy server, and mail proxy server.
+Originally written by [Igor Sysoev](http://sysoev.ru/en/)
+and distributed under the [2-clause BSD License](https://nginx.org/LICENSE).
 
 
 

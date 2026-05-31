@@ -1,10 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-19 20:38:31
- * @LastEditTime: 2021-04-20 21:38:39
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:34:35
+ * @Description: 3-longest-substring-no-repeat
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
+
 # 3-无重复字符串的最长子串
 
 # 题目描述

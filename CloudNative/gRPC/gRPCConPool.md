@@ -2,10 +2,11 @@
  * @Author: JohnJeep
  * @Date: 2023-04-20 18:08:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-21 17:26:27
- * @Description: gRPC 连接池用法
+ * @LastEditTime: 2026-05-31 18:22:27
+ * @Description: gRPC connection pool
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
+
 ## gRPC 多路复用
 
 

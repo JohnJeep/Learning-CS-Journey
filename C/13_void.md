@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-02 09:28:29
- * @LastEditTime: 2021-08-14 09:13:52
- * @LastEditors: Windows10
- * @Description: void用法
+ * @LastEditTime: 2026-05-31 18:20:41
+ * @LastEditors: JohnJeep
+ * @Description: void usage
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 --> 
+
 # 1. Void Keywords 
 ## 1.1. 函数用法
 - 使用规则

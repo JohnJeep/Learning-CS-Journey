@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 15:05:29
- * @LastEditTime: 2025-04-04 19:34:17
  * @LastEditors: JohnJeep
- * @Description: How to use state machine
+ * @LastEditTime: 2026-05-31 19:29:01
+ * @Description: state machine in C language
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 为什么要用状态机？

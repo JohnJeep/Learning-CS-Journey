@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-08-08 01:18:00
- * @LastEditTime: 2025-11-20 11:47:49
+ * @LastEditTime: 2026-05-31 18:31:37
  * @LastEditors: JohnJeep
- * @Description: 多线程并发
+ * @Description: C++ concurrency
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 ## 1. 阻塞

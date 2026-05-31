@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2022-05-20 17:20:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:16:31
+ * @Description: linux signal
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Linux Signal
 
 ## SIGINT (Signal Interrupt)

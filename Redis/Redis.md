@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-05 23:51:27
- * @LastEditTime: 2025-04-04 20:02:42
  * @LastEditors: JohnJeep
- * @Description: redis学习
+ * @LastEditTime: 2026-05-31 18:49:09
+ * @Description: Redis Usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 如何学 Redis

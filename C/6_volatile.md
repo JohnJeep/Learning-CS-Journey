@@ -1,22 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-08-22 11:50:29
- * @LastEditTime: 2021-03-06 18:14:44
- * @LastEditors: Please set LastEditors
- * @Description: volatile 关键字
+ * @LastEditTime: 2026-05-31 18:17:15
+ * @LastEditors: JohnJeep
+ * @Description: volatile keyword notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 --> 
-
-<!-- TOC -->
-
-- [1. Volatile关键字](#1-volatile关键字)
-  - [1.1. 编译器的优化介绍](#11-编译器的优化介绍)
-  - [1.2. 概念](#12-概念)
-  - [1.3. 为什么使用 volatile 关键字修饰的语句会影响编译器的优化？](#13-为什么使用-volatile-关键字修饰的语句会影响编译器的优化)
-  - [1.4. 什么情况下使用 volatile？](#14-什么情况下使用-volatile)
-  - [1.5. 注意点](#15-注意点)
-  - [1.6. Reference](#16-reference)
-
-<!-- /TOC -->
 
 # 1. Volatile关键字
 

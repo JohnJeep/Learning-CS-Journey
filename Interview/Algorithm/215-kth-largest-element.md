@@ -1,10 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-09 11:29:58
- * @LastEditTime: 2021-04-09 16:14:59
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:38:47
+ * @Description: 215-kth-largest-element
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
+
 # 题目：数组中的第K个最大元素
 
 描述

@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2020-09-26 18:32:46
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:40:58
+ * @Description: Layout and formatting for study notes
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 公众号排版
 
 ## 留白+重点部分标注

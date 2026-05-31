@@ -2,16 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-03-21 14:58:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:57:34
+ * @LastEditTime: 2026-05-31 20:19:40
  * @Description: linux distribution
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Distribution](#1-distribution)
-- [2. Debian](#2-debian)
-- [3. Ubuntu](#3-ubuntu)
-- [4. Alpine](#4-alpine)
-- [5. References](#5-references)
 
 ## 1. Distribution
 

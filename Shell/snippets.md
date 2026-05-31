@@ -2,16 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:43:49
- * @Description: 常用代码片段 
+ * @LastEditTime: 2026-05-31 18:45:09
+ * @Description: snippets for shell commands
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-- [1. Influxdb](#1-influxdb)
-- [2. find](#2-find)
-- [3. mysql](#3-mysql)
-- [4. shell](#4-shell)
-- [5. docker](#5-docker)
-
 
 # 1. Influxdb
 

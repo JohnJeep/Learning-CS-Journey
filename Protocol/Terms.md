@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-12-31 21:17:16
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:53:36
+ * @Description: Protocol Terms
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Protocol Terms
 
 - pattern

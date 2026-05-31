@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-12-31 21:17:16
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:12:53
+ * @Description: NVIDIA GPU Architecture Evolution
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
+-->
+
 Jetson 系列架构演进
 
 ```yaml

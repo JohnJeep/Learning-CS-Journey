@@ -1,11 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-09-04 11:42:29
- * @LastEditTime: 2021-08-14 10:08:50
- * @LastEditors: Windows10
- * @Description: memset()函数用法
---> 
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:23:21
+ * @Description: memset() usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 函数
+
 - 定义 `void *memset(void *s, int ch, size_t n);`
   - 函数解释：将s中当前位置后面的n个字节 （typedef unsigned int size_t ）用 ch 替换并返回 s 
   - 该函数只能取ch的后八位赋值给你所输入的范围的每个字节，无论ch多大只有后八位二进制有效

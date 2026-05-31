@@ -2,17 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 11:10:57
+ * @LastEditTime: 2026-05-31 19:32:35
  * @Description: GCC Usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Introduction](#1-introduction)
-- [2. Source Code Compilation Trilogy](#2-source-code-compilation-trilogy)
-- [3. CentOS7 安装高版本 gcc8/g++8](#3-centos7-安装高版本-gcc8g8)
-- [4. Extended Knowledge](#4-extended-knowledge)
-- [5. References](#5-references)
-
 
 # 1. Introduction
 

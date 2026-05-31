@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-08-04 14:40:59
- * @Description: Typora 使用手册
+ * @LastEditTime: 2026-05-31 19:34:29
+ * @Description: Typora usage manual
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 

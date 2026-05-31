@@ -2,12 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2024-12-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-18 17:29:06
+ * @LastEditTime: 2026-05-31 19:39:53
  * @Description: Ollama Usage
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-
 
 # Introduction
 

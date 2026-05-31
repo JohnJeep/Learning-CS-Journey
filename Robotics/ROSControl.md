@@ -2,15 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-01 16:46:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:25:52
+ * @LastEditTime: 2026-05-31 18:46:54
  * @Description: ROS2 Control Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Thinking](#1-thinking)
-  - [1.1. ROS2 Control 它是什么？要解决什么问题？](#11-ros2-control-它是什么要解决什么问题)
-- [2. References](#2-references)
-
 
 ## 1. Thinking
 

@@ -1,20 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
- * @LastEditTime: 2025-11-20 11:58:38
+ * @LastEditTime: 2026-05-31 20:20:40
  * @LastEditors: JohnJeep
  * @Description: iNode 用法
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 --> 
-
-- [1. 查看iNode的命令](#1-查看inode的命令)
-- [2. 什么是iNode](#2-什么是inode)
-- [3. iNode包含内容](#3-inode包含内容)
-- [4. 操作系统是如何打开文件的](#4-操作系统是如何打开文件的)
-- [5. 目录文件](#5-目录文件)
-- [6. iNode的应用](#6-inode的应用)
-- [7. 硬链接与符号链接](#7-硬链接与符号链接)
-- [8. References](#8-references)
-
 
 # 1. 查看iNode的命令
 

@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2018-09-20 19:59:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-21 18:40:31
- * @Description: 数据结构与算法学习
+ * @LastEditTime: 2026-05-31 18:32:53
+ * @Description: Data structure and algorithm
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 

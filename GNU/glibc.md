@@ -2,33 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2021-03-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 11:27:04
+ * @LastEditTime: 2026-05-31 19:32:29
  * @Description:  GNU tools chain
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. binutils](#1-binutils)
-  - [1.1. readelf](#11-readelf)
-  - [1.2. objdump](#12-objdump)
-  - [1.3. size](#13-size)
-  - [1.4. nm](#14-nm)
-  - [1.5. ar](#15-ar)
-  - [1.6. ld](#16-ld)
-  - [1.7. as](#17-as)
-  - [1.8. strings](#18-strings)
-  - [1.9. file](#19-file)
-  - [1.10. pmap](#110-pmap)
-  - [1.11. patchelf](#111-patchelf)
-  - [1.12. c++filt](#112-cfilt)
-- [2. glibc](#2-glibc)
-  - [2.1. compare glibc libc](#21-compare-glibc-libc)
-  - [2.2. glibc version](#22-glibc-version)
-- [3. libstdc++](#3-libstdc)
-- [4. libc++](#4-libc)
-- [5. net-tools](#5-net-tools)
-- [6. apache2-tools](#6-apache2-tools)
-- [7. references](#7-references)
-
 
 # 1. binutils
 

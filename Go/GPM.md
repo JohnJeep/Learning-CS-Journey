@@ -2,10 +2,11 @@
  * @Author: JohnJeep
  * @Date: 2025-04-09 10:36:30
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-14 18:13:20
+ * @LastEditTime: 2026-05-31 20:29:02
  * @Description: golang Schedule
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
+
 # 1. GPM Model
 
 Go语言的协程（goroutine）调度机制采用了高效的**M:N模型**，通过**G-M-P调度器**实现并发管理。

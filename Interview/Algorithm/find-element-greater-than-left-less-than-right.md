@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-09-07 22:15:35
- * @LastEditTime: 2021-09-07 22:32:03
- * @LastEditors: Windows10
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:36:02
+ * @Description: find-element-greater-than-left-less-than-right
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 题目

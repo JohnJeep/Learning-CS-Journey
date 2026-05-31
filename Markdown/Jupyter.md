@@ -2,8 +2,8 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-08-04 11:29:23
- * @Description: Jupyter 基础语法
+ * @LastEditTime: 2026-05-31 19:33:42
+ * @Description: Jupyter use and tips
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 

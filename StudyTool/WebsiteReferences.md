@@ -1,10 +1,10 @@
 <!--
-
  * @Author: JohnJeep
  * @Date: 2019-04-12 15:13:31
- * @LastEditTime: 2024-11-25 10:01:09
  * @LastEditors: JohnJeep
- * @Description: 积累一些学习的网站。
+ * @LastEditTime: 2026-05-31 18:40:16
+ * @Description: website references
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 1. 博客和知识社区

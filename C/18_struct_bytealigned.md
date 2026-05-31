@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-16 20:47:29
- * @LastEditTime: 2025-04-04 20:00:25
  * @LastEditors: JohnJeep
- * @Description: C语言结构体与字节对齐的理解
---> 
+ * @LastEditTime: 2026-05-31 19:25:07
+ * @Description: struct and byte-aligned in C language
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 结构体定义（3种）
 

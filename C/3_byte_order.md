@@ -1,12 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-06 09:49:29
- * @LastEditTime: 2025-04-05 11:12:30
+ * @LastEditTime: 2026-05-31 18:17:26
  * @LastEditors: JohnJeep
- * @Description: 内存存放顺序笔记
---> 
-# 内存存放顺序
+ * @Description: Byte Order Notes
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+-->
+
 ## 原则
+
 - 整数类型内部
   - 低地址存储低位，高地址存储高位
 - 栈
@@ -19,7 +21,8 @@
 <img src="./figures/Memory-assignment-sequence.png">
 
 
-## 参考
+## References
+
 - [大端小端（Big- Endian和Little-Endian）](https://my.oschina.net/alphajay/blog/5478)
 - [详解大端模式和小端模式](https://blog.csdn.net/ce123_zhouwei/article/details/6971544)
 

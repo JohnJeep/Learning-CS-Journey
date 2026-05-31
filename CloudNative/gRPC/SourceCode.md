@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2023-05-06 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:25:37
+ * @Description: gRPC Source Code Analysis
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # 1. 目标
 
 gRPC C++ 源码的质量很高，学习 Google 工程师门优秀的抽象和设计能力。

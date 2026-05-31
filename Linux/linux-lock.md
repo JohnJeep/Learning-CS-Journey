@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2024-10-10 15:31:51
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:19:07
+ * @Description: linux lock
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 # Linux lock
 
 Linux 内核设计了多种锁机制，比如 **读写锁**、**自旋锁** 和 **信号量** 等。为什么要设计这么多锁机制呢？这是因为不同的锁机制适用于不同的场景。

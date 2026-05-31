@@ -6,9 +6,10 @@
  * @UpdateTime: 2025-11-16 17:37
  * @UpdateTime: 2025-11-18 12:36
  * @UpdateTime: 2025-11-20 10:30
- * @LastEditTime: 2026-01-03 15:56:03
+ * @LastEditTime: 2026-05-31 20:32:36
  * @LastEditors: JohnJeep
  * @Description: C/C++ 面试常见的问题
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 - [1. new/malloc](#1-newmalloc)

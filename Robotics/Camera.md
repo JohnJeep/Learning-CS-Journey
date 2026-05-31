@@ -2,17 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2026-03-06 23:45:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-07 15:10:49
+ * @LastEditTime: 2026-05-31 18:48:36
  * @Description: Camera Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Camera](#1-camera)
-  - [1.1. color camera](#11-color-camera)
-  - [1.2. ir camera](#12-ir-camera)
-  - [1.3. depth camera](#13-depth-camera)
-- [2. References](#2-references)
-
 
 # 1. Camera
 

@@ -1,17 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2022-04-07 14:19:12
- * @LastEditTime: 2025-11-20 11:54:00
+ * @LastEditTime: 2026-05-31 20:18:53
  * @LastEditors: JohnJeep
  * @Description: Microsoft wsl 用法
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. 安装](#1-安装)
-- [2. WSL 中修改 hostname](#2-wsl-中修改-hostname)
-- [3. wsl 下安装 zsh](#3-wsl-下安装-zsh)
-- [4. Trouble Shooting](#4-trouble-shooting)
-  - [4.1. WSL莫名奇怪不能连接网络](#41-wsl莫名奇怪不能连接网络)
-- [5. References](#5-references)
 
 ## 1. 安装
 

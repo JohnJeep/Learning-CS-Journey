@@ -2,22 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-04-01 00:40:42
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 11:08:43
+ * @LastEditTime: 2026-05-31 20:18:14
  * @Description: package management
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Package Management](#1-package-management)
-- [2. 软件仓库](#2-软件仓库)
-- [3. RPM](#3-rpm)
-- [4. Epel](#4-epel)
-- [5. Yum](#5-yum)
-- [6. apt](#6-apt)
-  - [6.1. apt-cache](#61-apt-cache)
-  - [6.2. apt-get](#62-apt-get)
-  - [6.3. apt-file](#63-apt-file)
-- [7. dpkg](#7-dpkg)
-- [8. References](#8-references)
 
 # 1. Package Management
 

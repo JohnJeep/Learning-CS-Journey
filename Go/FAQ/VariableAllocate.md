@@ -1,4 +1,13 @@
-### How do I know whether a variable is allocated on the heap or the stack?
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:31:15
+ * @Description: variable allocate
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+# How do I know whether a variable is allocated on the heap or the stack?
 
 一、C语言中返回函数中局部变量值和指针
 (1) 在C语言中，一个函数可以直接返回函数中定义的局部变量，其实在函数返回后，局部变量是被系统自动回收的，因为局部变量是分配在栈空间，那为什么还可以返回局部变量，其实这里返回的是局部变量的副本（拷贝）。
@@ -44,7 +53,7 @@ In the current compilers, if a variable has its address taken, that variable is 
 结论：
 函数内部局部变量，无论是动态new出来的变量还是创建的局部变量，它被分配在堆还是栈，是由编译器做逃逸分析之后做出的决定。
 
-### References
+# References
 
 - Go FAQ: https://go.dev/doc/faq#stack_or_heap
 - CSDN Go语言---函数返回局部变量地址：https://blog.csdn.net/li_101357/article/details/80209413

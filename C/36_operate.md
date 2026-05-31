@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-02-26 10:15:21
- * @LastEditTime: 2025-04-03 00:08:21
  * @LastEditors: JohnJeep
- * @Description: 探究*和++优先级
+ * @LastEditTime: 2026-05-31 18:58:53
+ * @Description: operator precedence
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 在项目中遇见了 `*p++` 这种操作，但不明白在 `*p++`中 `++` 和 `*` 是怎样执行的？现在我们来一一剖析它的运算过程。

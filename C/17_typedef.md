@@ -1,25 +1,12 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-09-06 9:18:29
- * @LastEditTime: 2021-01-20 23:18:27
- * @LastEditors: Please set LastEditors
- * @Description: typedef基础用法
---> 
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:04:30
+ * @Description: typedef usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
-<!-- TOC -->
-
-- [1. Typedef Kyewords](#1-typedef-kyewords)
-  - [1.1. 为什么使用typedef](#11-为什么使用typedef)
-  - [1.2. 基本语法](#12-基本语法)
-  - [1.3. typedef与数组](#13-typedef与数组)
-  - [1.4. typedef与函数指针](#14-typedef与函数指针)
-  - [1.5. 与#define比较](#15-与define比较)
-  - [1.6. 参考](#16-参考)
-
-<!-- /TOC -->
-
-
-# 1. Typedef Kyewords
 ## 1.1. 为什么使用typedef
 - 使用 typedef来编写更美观和可读的代码。所谓美观，意指 typedef 能隐藏笨拙的语法构造以及平台相关的数据类型，从而增强可移植性和以及未来的可维护性。 
 - 给变量取一个好记且意义明确的新名字，

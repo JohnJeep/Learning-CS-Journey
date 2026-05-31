@@ -5,50 +5,10 @@
  * @UpdateDate: 2023-07-25 15:06:11
  * @UpdateTime: 2023-05-27 15:41:12
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:52:51
+ * @LastEditTime: 2026-05-31 20:17:38
  * @Description: linux performance analysis
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Performance optimization](#1-performance-optimization)
-  - [1.1. 怎样做性能优化？](#11-怎样做性能优化)
-  - [1.2. 如何去分析](#12-如何去分析)
-    - [1.2.1. 工具](#121-工具)
-    - [1.2.2. 代码编写](#122-代码编写)
-  - [1.3. 优化到多少？](#13-优化到多少)
-  - [1.4. 其它](#14-其它)
-- [2. process and system](#2-process-and-system)
-  - [2.1. top](#21-top)
-  - [2.2. htop](#22-htop)
-  - [2.3. uptime](#23-uptime)
-  - [2.4. pidstat](#24-pidstat)
-  - [2.5. dmesg](#25-dmesg)
-  - [2.6. gprof](#26-gprof)
-  - [2.7. oprofile](#27-oprofile)
-  - [2.8. gperftools](#28-gperftools)
-- [3. CPU](#3-cpu)
-  - [3.1. mpstat](#31-mpstat)
-- [4. Memory](#4-memory)
-  - [4.1. vmstat](#41-vmstat)
-    - [4.1.1. 虚拟内存原理](#411-虚拟内存原理)
-    - [4.1.2. 格式](#412-格式)
-    - [4.1.3. 参数](#413-参数)
-  - [4.2. vmtouch](#42-vmtouch)
-  - [4.3. pmap](#43-pmap)
-  - [4.4. 内存泄漏检测工具](#44-内存泄漏检测工具)
-- [5. I/O](#5-io)
-  - [5.1. iostat](#51-iostat)
-  - [5.2. iotop](#52-iotop)
-  - [5.3. Magical Command](#53-magical-command)
-- [6. Network](#6-network)
-  - [6.1. netstat](#61-netstat)
-  - [6.2. stress](#62-stress)
-  - [6.3. sar](#63-sar)
-  - [6.4. iftop](#64-iftop)
-- [7. logs](#7-logs)
-- [8. Others](#8-others)
-- [9. References](#9-references)
-
 
 # 1. Performance optimization
 

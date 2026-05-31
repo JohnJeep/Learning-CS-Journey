@@ -1,10 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-06-01 21:30:44
- * @LastEditTime: 2020-06-01 21:41:17
- * @LastEditors: Please set LastEditors
- * @Description: windows10 常用快捷键
---> 
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:39:38
+ * @Description: Windows 10 usage and tips
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # Win10 快捷键
 
@@ -48,5 +49,4 @@ netsh wlan show profile
 ```shell
 netsh wlan show profile "ziroom608" key=clear
 ```
-
 

@@ -1,13 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-06 14:05:57
- * UpdateTime: 2021-04-06 14:05
- * @LastEditTime: 2025-11-20 10:57:05
  * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:33:04
  * @Description: 网络基础
-    -->
-
-
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 - [1. client-server 模型](#1-client-server-模型)
   - [1.1. 关闭client端，服务器端如何处理？](#11-关闭client端服务器端如何处理)

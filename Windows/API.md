@@ -1,3 +1,12 @@
+<!--
+ * @Author: JohnJeep
+ * @Date: 2025-05-11 17:49:17
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:38:45
+ * @Description: Windows API
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## Win32 API 后缀
 
 - `A` 表示使用ANSI编码作为标准输入与输出流的文本编码

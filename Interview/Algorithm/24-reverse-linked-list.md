@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-07 16:09:27
- * @LastEditTime: 2021-04-18 23:17:14
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2026-05-31 20:42:00
+ * @LastEditors: JohnJeep
+ * @Description: 24-reverse-linked-list
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 # 题目：反转链表

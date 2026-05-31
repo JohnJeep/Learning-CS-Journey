@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-21 15:05:29
- * @LastEditTime: 2021-04-02 11:38:51
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:03:14
+ * @Description: escape string & ASCII code
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 说明 | 转义字符 | 十六进制(hex) | 十进制(dec)

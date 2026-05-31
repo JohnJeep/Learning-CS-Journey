@@ -2,20 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2025-11-02 16:38:43
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-31 16:17:53
+ * @LastEditTime: 2026-05-31 18:48:11
  * @Description: Gazebo Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. Gazebo](#1-gazebo)
-  - [1.1. 版本](#11-版本)
-  - [1.2. Install](#12-install)
-  - [1.3. Plugins](#13-plugins)
-- [2. 用法](#2-用法)
-  - [2.1. 模型](#21-模型)
-  - [2.2. 为什么只能有一个 world？](#22-为什么只能有一个-world)
-- [3. References](#3-references)
-
 
 # 1. Gazebo
 
