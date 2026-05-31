@@ -26,9 +26,8 @@ jobs:
 
       - name: Copy HTML files to Hexo source
         run: |
-          mkdir -p Blogs/source/Language Blogs/source/Financial
-          find Language -maxdepth 1 -name "*.html" -exec cp {} Blogs/source/Language/ \;
-          find Financial -maxdepth 1 -name "*.html" -exec cp {} Blogs/source/Financial/ \;
+          cp -r Language Blogs/source/Language || true
+          cp -r Financial Blogs/source/Financial || true
 
       - name: Sync markdown into Hexo posts
         run: python add_frontmatter.py --clean
