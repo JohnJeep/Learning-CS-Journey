@@ -11,11 +11,13 @@
     "DesignPattern",
     "Distributed",
     "Embedded",
+    "Financial",
     "Git-SVN",
     "GNU",
     "Go",
     "Interview",
     "JavaScript",
+    "Language",
     "Linux",
     "Markdown",
     "Math",
@@ -39,12 +41,16 @@
     "Blogs/",
     ".git/",
     ".github/",
+    ".vscode",
+    ".claude",
     "Linux/vim/myvim/",
     "Go/proj-go/"
   ],
   "exclude_file_names": [
     "README.md",
-    "README.en.md"
+    "README.en.md",
+    "STARCHARTS.md",
+    "CLAUDE.md"
   ],
   "category_aliases": {
     "Cpp": "C++",
