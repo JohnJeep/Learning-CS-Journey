@@ -12,10 +12,10 @@ comments: false
 ## 核心专栏
 
 - C 语言基础与工程实践: [/categories/C/](/categories/C/)
-- C++ 进阶与现代特性: [/categories/C++/](/categories/C++/)
+- C++ 进阶与现代特性: [/categories/C/](/categories/C/)
 - Linux 与系统编程: [/categories/Linux/](/categories/Linux/)
 - 网络与协议: [/categories/Network/](/categories/Network/)
-- 云原生与分布式: [/categories/CloudNative/](/categories/CloudNative/)
+- 云原生与分布式: [/categories/Cloud-Native/](/categories/Cloud-Native/)
 - 机器人与 ROS: [/categories/Robotics/](/categories/Robotics/)
 - 操作系统: [/categories/OS/](/categories/OS/)
 - 算法与面试手册: [/categories/Interview/](/categories/Interview/)
