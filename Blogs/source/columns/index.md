@@ -22,8 +22,8 @@ comments: false
 
 ## 其他专栏
 
-- 语言学习: [/categories/Language/](/categories/Language/)
-- 金融与财务: [/categories/Financial/](/categories/Financial/)
+- 语言学习: [/Language/](/Language/)
+- 金融与财务: [/Financial/](/Financial/)
 
 ## 使用建议
 
