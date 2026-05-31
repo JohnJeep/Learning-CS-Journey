@@ -1,12 +1,14 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-27 08:29:51
- * @LastEditTime: 2020-08-11 20:42:02
- * @LastEditors: Please set LastEditors
- * @Description: 锁的并发数据结构笔记
---> 
-# Condition-Variables
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:55:26
+ * @Description: Condition Variables
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## 锁的并发数据结构
+
 - 并发计数器（Concurrent Counters）
 - 并发链表（Concurrent Linked Lists）
 - 并发队列（Concurrent Queues）
@@ -14,6 +16,7 @@
 
 
 ## 条件变量（Condition Variables）
+
 - `join()` 父线程检查子线程是否实行完毕。
 - 条件变量有两种相关操作
   - `wait()`    线程希望自己睡眠的时候，调用
@@ -22,6 +25,7 @@
 
 
 ## 生产者和消费者
+
 - 生产者和消费者问题也叫有界缓冲问题，（The Producer/Consumer (Bounded Buffer) Problem）
 - 多线程在检查条件变量（condition variables）时，应使用 `while`，而少使用 `if` 进行循环。
 - 使用两个条件变量替代一个条件变量来正确的发信号，指示在系统状态改变时，哪类线程应该被唤醒。

@@ -1,24 +1,24 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
- * @LastEditTime: 2020-08-11 20:14:31
- * @LastEditors: Please set LastEditors
- * @Description: 空闲空间管理
---> 
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 20:04:18
+ * @Description: free space management
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
-# 空闲空间管理(free space management)
-## 问题？
+## 问题
+
 1. 如果空闲空间是由大小不同的单元构成，如何管理空间？
 2. 什么策略可以让碎片最小化?
 3. 不同的方法在时间和空间上的开销如何？
 
 
 ## 底层机制
+
 - 空间分割与合并(basics of splitting and coalescing)
   - 空闲的空间可以被分割成许多空闲的小块，但是遇到申请大于内存中剩余空闲的块时，则不会成功，虽然有空闲的块空间。
   - 将内存中散碎的剩余空间结合在一起，因此有了合并机制。在归还一块内存时，查看要归还的内存地址以及邻近的空闲空间块，如果新归还的空间与一个原有空间块相邻，它们就合并为一个较大的空闲空间。
-
-
 - 追踪已分配空间的大小(track the size of allocated regions)
   - 内存用完后，实际释放的空间为：头块的大小加上分配给用户空间的大小。
 
@@ -38,6 +38,7 @@
 
 
 ## 管理空间的基本策略(Basic Strategies)
+
 1. 最优匹配(best fit)
    - 原理：遍历整个空闲列表，找到和请求一样大小或最大的空闲块，然后返回该组候选组中最小的块
    - 优点：避免了空间的浪费。

@@ -1,25 +1,29 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-22 21:33:13 
- * @LastEditTime: 2021-08-15 23:42:22
- * @LastEditors: Windows10
- * @Description: 让页表更小
---> 
-# Paging: Smaller Tables
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:59:56
+ * @Description: Paging: Smaller Tables
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
 ## 问题
+
 - 如何让页表更小？关键思路是什么？
 - 使用新的数据结构，会导致哪些效率低下？
 
 
 ## 解决方案
+
 - 为什么要提出用较小的页表？
   - 基于简单的线性页表太大，消耗的内存太多，系统负担大。
 
 
 ### bigger pages
-  - 大内存会导致每页的内部浪费，产生内部碎片(internal fragmentation)。
-  - 产生的结果：应用程序会分配页，但只使用每页的一小部分，而内存很快就被占满。因此。大多数系统在常见的情况下使用相对较小的页大小(page sizes)。 
-   
+
+- 大内存会导致每页的内部浪费，产生内部碎片(internal fragmentation)。
+- 产生的结果：应用程序会分配页，但只使用每页的一小部分，而内存很快就被占满。因此。大多数系统在常见的情况下使用相对较小的页大小(page sizes)。 
+
 
 - Hybrid Approach: Paging and Segments
 <p align="center"><img src="../figures/20-SegmentAndPage.png"></p>
@@ -46,6 +50,7 @@
 
  
 ### Multi-level Page Tables(多级页表)
+
 - 为什么要用多级页表？
   - 去掉页表中的所有无效区域，而不是将它们全部保存在内存中。
 - 原理
@@ -77,7 +82,9 @@
     > 页表项(PTE)地址：`PTEAddr = (PDE.PFN << SHIFT) + (PTIndex * sizeof(PTE))`
     <p align="center"><img src="../figures/20-page-table-index.png"></p>
 
+
 ## 超过两级页表
+
 - 理想的多级页表：页表的每一部分都能放入一个page。两级页表没能满足情况。因此采用别的方法。
 
 - 实现方法：给tree在加一层，将page directory本身拆成多个页，然后在page上添加另一个page directory，指向page directory的page。虚拟地址分割如下：

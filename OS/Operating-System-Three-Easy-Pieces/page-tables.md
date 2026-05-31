@@ -1,11 +1,11 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-04-25 19:37:43
- * @LastEditTime: 2020-06-01 13:53:18
- * @LastEditors: Please set LastEditors
- * @Description: 页表笔记
---> 
-
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:55:07
+ * @Description: Page tables
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 - 逻辑地址空间是应用程序直接使用的地址空间。
 - 段机制启动、页机制未启动：逻辑地址->段机制处理->线性地址=物理地址

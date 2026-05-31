@@ -1,12 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2020-05-18 18:49:26
- * @LastEditTime: 2020-08-11 20:37:48
- * @LastEditors: Please set LastEditors
- * @Description: Concurrency: 并发问题
---> 
-# Concurrency-and-Threads
-## 为什么要使用线程（Thread)？
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 18:55:50
+ * @Description: Concurrency and Threads
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
+
+## 为什么要使用线程(Thread)
 - 实现并发性(parallelism)。多个CPU处理多个线程.
 - 避免由于慢速的I/O阻塞(block)程序的运行。
 

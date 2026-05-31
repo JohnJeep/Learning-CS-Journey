@@ -1,24 +1,11 @@
 <!--
  * @Author: JohnJeep
- * @Date: 2020-06-01 08:42:34
  * @LastEditTime: 2021-04-08 23:28:53
- * @LastEditors: Please set LastEditors
- * @Description: 讨论并发中常见的死锁问题
---> 
-
-<!-- TOC -->
-
-- [1. 并发编程中出现的缺陷(What Types Of Bugs Exist?)](#1-并发编程中出现的缺陷what-types-of-bugs-exist)
-  - [1.1. Non-Deadlock Bugs(非死锁缺陷)](#11-non-deadlock-bugs非死锁缺陷)
-    - [1.1.1. Atomicity-Violation Bugs(违反原子性缺陷)](#111-atomicity-violation-bugs违反原子性缺陷)
-    - [1.1.2. Order-Violation Bugs(违反顺序性缺陷)](#112-order-violation-bugs违反顺序性缺陷)
-  - [1.2. Deadlock(死锁)](#12-deadlock死锁)
-    - [1.2.1. What is Deadlock(什么是死锁？)](#121-what-is-deadlock什么是死锁)
-    - [1.2.2. Why Do Deadlocks Occur?(为什么会发什么死锁？)](#122-why-do-deadlocks-occur为什么会发什么死锁)
-    - [1.2.3. Conditions for Deadlock(产生死锁的条件)](#123-conditions-for-deadlock产生死锁的条件)
-    - [1.2.4. Prevention(怎样阻止死锁的发生？)](#124-prevention怎样阻止死锁的发生)
-
-<!-- /TOC -->
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 19:53:56
+ * @Description: concurreny lock dead problems
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 并发编程中出现的缺陷(What Types Of Bugs Exist?)
 
