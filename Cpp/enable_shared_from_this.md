@@ -6,24 +6,6 @@
  * @Description: enable_shared_from_this usage
 -->
 
-- [1. 什么是 enable\_shared\_from\_this?](#1-什么是-enable_shared_from_this)
-- [2. 为什么要用 enable\_shared\_from\_this](#2-为什么要用-enable_shared_from_this)
-  - [2.1. 问题场景](#21-问题场景)
-  - [2.2. 解决方案：enable\_shared\_from\_this](#22-解决方案enable_shared_from_this)
-- [3. 什么时候用？](#3-什么时候用)
-  - [3.1. 主要使用场景](#31-主要使用场景)
-    - [3.1.1. 异步回调](#311-异步回调)
-    - [3.1.2. 容器中存储自身指针](#312-容器中存储自身指针)
-    - [3.1.3. 链式调用](#313-链式调用)
-  - [3.2. 重要注意事项](#32-重要注意事项)
-    - [3.2.1. 必须在已有 shared\_ptr 的情况下使用](#321-必须在已有-shared_ptr-的情况下使用)
-    - [3.2.2. 构造函数中不能使用](#322-构造函数中不能使用)
-    - [3.2.3. 继承要求](#323-继承要求)
-- [4. 标准库中源码](#4-标准库中源码)
-- [5. 代码示例](#5-代码示例)
-- [6. References](#6-references)
-
-
 # 1. 什么是 enable_shared_from_this?
 
 `enable_shared_from_this` 是一个模板类，从 C++11 开始支持，定义在头文件 `<memory>`。

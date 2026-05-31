@@ -7,11 +7,6 @@
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. IOStream(输入输出流)](#1-iostream输入输出流)
-- [2. Meata Programming(元编程)](#2-meata-programming元编程)
-- [3. Resource acquisition is initialization(RAII)](#3-resource-acquisition-is-initializationraii)
-
-
 # 1. IOStream(输入输出流)
 
 输入流 `cin`

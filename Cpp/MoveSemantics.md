@@ -7,32 +7,6 @@
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. Move Semantics(移动语义)](#1-move-semantics移动语义)
-  - [1.1. 拷贝语义](#11-拷贝语义)
-  - [1.2. 移动语义](#12-移动语义)
-  - [1.3. 技术实现机制](#13-技术实现机制)
-- [2. 何为左值(lvalue reference)](#2-何为左值lvalue-reference)
-- [3. 何为右值引用(rvalue reference)](#3-何为右值引用rvalue-reference)
-- [4. Move constructor(移动构造)](#4-move-constructor移动构造)
-  - [4.1. 移动构造和右值引用的关系](#41-移动构造和右值引用的关系)
-  - [4.2. 移动 vs. 拷贝](#42-移动-vs-拷贝)
-- [5. Move Assignment Operator(移动赋值)](#5-move-assignment-operator移动赋值)
-  - [5.1. 基本概念](#51-基本概念)
-  - [5.2. 语法](#52-语法)
-  - [5.3. 实现原理](#53-实现原理)
-  - [5.4. 与拷贝赋值操作符的区别](#54-与拷贝赋值操作符的区别)
-  - [5.5. 编译器自动生成的条件](#55-编译器自动生成的条件)
-  - [5.6. 注意事项](#56-注意事项)
-  - [5.7. Move Constructor 和 Move Assignment Operator 区别](#57-move-constructor-和-move-assignment-operator-区别)
-- [6. std::move](#6-stdmove)
-  - [6.1. 什么是 std::move](#61-什么是-stdmove)
-  - [6.2. 为什么要用 std::move](#62-为什么要用-stdmove)
-  - [6.3. 用法](#63-用法)
-  - [6.4. 注意点](#64-注意点)
-  - [6.5. 主要用途](#65-主要用途)
-  - [6.6. 关键点](#66-关键点)
-
-
 ## 1. Move Semantics(移动语义)
 
 **移动语义** 是 C++11 引入的一种革命性特性，允许将一个对象的资源（如动态内存、文件句柄等）从一个对象转移到另一个对象，而不是进行深拷贝。这通常比拷贝更高效，因为它避免了复制大量数据和分配新内存的开销。

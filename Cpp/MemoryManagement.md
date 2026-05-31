@@ -6,24 +6,9 @@
  * @Description: 探究内存管理
 -->
 
-- [1. History(历史)](#1-history历史)
-- [2. 内存管理层级](#2-内存管理层级)
-- [3. 内存库作品](#3-内存库作品)
-- [4. 优化内存布局](#4-优化内存布局)
-  - [4.1. 分析工具](#41-分析工具)
-    - [4.1.1. pahole](#411-pahole)
-    - [4.1.2. structpack](#412-structpack)
-    - [4.1.3. XLA](#413-xla)
-    - [4.1.4. MNN推理引擎](#414-mnn推理引擎)
-  - [4.2. 🛠️ 使用技巧](#42-️-使用技巧)
-- [5. Bibliography(书目)](#5-bibliography书目)
-- [6. Reference(参考)](#6-reference参考)
-
-
 # 1. History(历史)
 
 Doug Lea自1986年开始研究malloc算法，他的作品被称为 DL Malloc，目前linux中的glibc的malloc算法就是直接来自Doug Lea，其它平台的malloc的实现或多或少受到DL的影响。
-
 
 
 # 2. 内存管理层级
