@@ -2,14 +2,15 @@
  * @Author: JohnJeep
  * @Date: 2025-10-22 11:13:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:47:14
+ * @LastEditTime: 2026-05-31 21:53:51
  * @Description: new/delete 底层是怎样用的？
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
 ## 1. 整体概括
 
-在C++中，`new`和`delete`是动态内存管理的关键字，它们的底层实现通常依赖于C运行时库（如glibc）提供的`malloc`和`free`函数。在Linux系统下，`malloc`和`free`则进一步通过系统调用来管理内存。主要涉及的系统调用有两个：`brk`（或`sbrk`）和`mmap`。
+在C++中，`new`和`delete`是动态内存管理的关键字，它们的底层实现通常依赖于C运行时库（如glibc）提供的`malloc`和`free`函数。
+在Linux系统下，`malloc`和`free`则进一步通过系统调用来管理内存。主要涉及的系统调用有两个：`brk`（或`sbrk`）和`mmap`。
 
 完整的 new 流程如下
 

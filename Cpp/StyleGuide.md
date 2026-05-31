@@ -1,12 +1,13 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2019-01-04 10:57:29
- * @LastEditTime: 2025-04-04 19:24:07
- * @Description: 命名规范笔记
---> 
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 21:55:07
+ * @Description: cpp style guide
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+-->
 
 # 1. 编程规范笔记
-
 
 
 ## 1.1. 不同操作系统

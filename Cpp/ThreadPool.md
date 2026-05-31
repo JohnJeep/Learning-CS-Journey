@@ -1,9 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-08-03 14:58:43
- * @LastEditTime: 2021-08-09 00:27:39
- * @LastEditors: Windows10
- * @Description: 线程池工作原理
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-05-31 21:55:37
+ * @Description: cpp thread pool
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
 维基百科解释线程池
