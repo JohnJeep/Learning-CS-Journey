@@ -10,28 +10,6 @@
 
 Object Oriented Programming(OOP)叫面向对象编程。 class without pointer members(类中的成员不带有指针)。 class with pointer members(类中的成员带有指针)。
 
-- [1. Encapsulation(封装)](#1-encapsulation封装)
-- [2. Composition(复合)](#2-composition复合)
-- [3. Delegation(委托)](#3-delegation委托)
-  - [3.1. copy on write](#31-copy-on-write)
-  - [3.2. pImpl Idiom](#32-pimpl-idiom)
-- [4. Inheritance(继承)](#4-inheritance继承)
-  - [4.1. 父类与子类的关系](#41-父类与子类的关系)
-  - [4.2. 继承中的构造与析构调用原则](#42-继承中的构造与析构调用原则)
-  - [4.3. 继承中同名成员变量处理方法](#43-继承中同名成员变量处理方法)
-  - [4.4. Composite, Inheritance, Delegation 对比](#44-composite-inheritance-delegation-对比)
-  - [4.5. Inheritance and virtual function](#45-inheritance-and-virtual-function)
-- [5. Polymorphism(多态)](#5-polymorphism多态)
-  - [5.1. 虚函数](#51-虚函数)
-  - [5.2. 纯虚函数](#52-纯虚函数)
-  - [5.3. 虚析构函数](#53-虚析构函数)
-  - [5.4. vptr(虚指针)和vtbl(虚函数表)](#54-vptr虚指针和vtbl虚函数表)
-- [6. 耦合与解耦](#6-耦合与解耦)
-- [7. Aggregation: 聚合](#7-aggregation-聚合)
-- [8. Acquaintance: 相识](#8-acquaintance-相识)
-- [9. References](#9-references)
-
-
 ## 1. Encapsulation(封装)
 
 封装这个术语用来描述在过程接口后面隐藏实现细节的概念。

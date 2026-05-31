@@ -7,13 +7,6 @@
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. C++ Optimize](#1-c-optimize)
-- [2. 开销来自哪里](#2-开销来自哪里)
-- [3. 编写高效的 C++ 程序](#3-编写高效的-c-程序)
-- [4. 虚函数性能开销](#4-虚函数性能开销)
-- [5. References](#5-references)
-
-
 # 1. C++ Optimize
 
 C++ 优化的核心在于编写高效的算法、避免不必要的计算和步骤，以及选择恰当的优化设计策略。

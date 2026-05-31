@@ -7,18 +7,6 @@
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. Generic Programming(泛型编程)](#1-generic-programming泛型编程)
-- [2. Parameterized Type(参数化类型)](#2-parameterized-type参数化类型)
-- [3. 模板编译](#3-模板编译)
-- [4. Function Template(函数模板)](#4-function-template函数模板)
-- [5. Class Template(类模板)](#5-class-template类模板)
-  - [5.1. Specialization(模板特化)](#51-specialization模板特化)
-  - [5.2. Class Partial Specialization(类模板偏特化)](#52-class-partial-specialization类模板偏特化)
-- [6. Member Template(成员模板)](#6-member-template成员模板)
-- [7. template template parameter](#7-template-template-parameter)
-- [8. References](#8-references)
-
-
 ## 1. Generic Programming(泛型编程)
 
 Generic Programming(泛型编程): 操作(operations)使用相同的接口，但是其类型(type)不相同，即使用模板(template)将泛型操作公式化。其中STL是泛型编程(GP)最成功的一个作品。
