@@ -24,6 +24,12 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Copy HTML files to Hexo source
+        run: |
+          mkdir -p Blogs/source/Language Blogs/source/Financial
+          find Language -maxdepth 1 -name "*.html" -exec cp {} Blogs/source/Language/ \;
+          find Financial -maxdepth 1 -name "*.html" -exec cp {} Blogs/source/Financial/ \;
+
       - name: Sync markdown into Hexo posts
         run: python add_frontmatter.py --clean
 

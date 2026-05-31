@@ -20,6 +20,11 @@ comments: false
 - 操作系统: [/categories/OS/](/categories/OS/)
 - 算法与面试手册: [/categories/Interview/](/categories/Interview/)
 
+## 其他专栏
+
+- 语言学习: [/categories/Language/](/categories/Language/)
+- 金融与财务: [/categories/Financial/](/categories/Financial/)
+
 ## 使用建议
 
 1. 先选一个主线专栏持续阅读
