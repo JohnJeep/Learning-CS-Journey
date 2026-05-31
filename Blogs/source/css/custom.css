@@ -316,6 +316,7 @@ body {
     color: #f0e8d2;
     letter-spacing: 0.2em;
     line-height: 1.85;
+    white-space: nowrap;
     text-shadow:
         0 2px 30px rgba(0, 0, 0, 0.55),
         0 0  20px rgba(212, 185, 125, 0.2);
@@ -557,8 +558,9 @@ body {
     .jj-verse { padding: 0 20px; }
 
     .jj-verse-line {
-        font-size: max(17px, 4.4vw);
-        letter-spacing: 0.1em;
+        font-size: clamp(14px, 4.2vw, 22px);
+        letter-spacing: 0.08em;
+        white-space: nowrap;
     }
 
     .jj-verse-deco { margin-bottom: 28px; }
