@@ -3,27 +3,10 @@
  * @Author: JohnJeep
  * @Date: 2025-12-30 23:24:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-04-07 21:08:53
+ * @LastEditTime: 2026-06-01 21:37:54
  * @Description: Linear Algebra
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
-- [1. introduction to linear algebra](#1-introduction-to-linear-algebra)
-- [vectors](#vectors)
-- [matrices](#matrices)
-  - [matrix addition](#matrix-addition)
-  - [matrix subtraction](#matrix-subtraction)
-  - [matrix multiplication](#matrix-multiplication)
-  - [transpose matrix](#transpose-matrix)
-  - [inverse matrix](#inverse-matrix)
-  - [square matrix](#square-matrix)
-  - [determinant](#determinant)
-  - [QR decomposition](#qr-decomposition)
-- [apply](#apply)
-  - [3. practice](#3-practice)
-  - [4. python library](#4-python-library)
-- [5. references](#5-references)
-
 
 # 1. introduction to linear algebra
 
