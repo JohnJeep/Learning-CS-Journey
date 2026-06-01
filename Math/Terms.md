@@ -2,12 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2026-01-31 17:45:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-04-09 22:40:15
+ * @LastEditTime: 2026-06-01 21:39:07
  * @Description: Linear Algebra Terms
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
-# terms
+# 线性代数中英术语对照
 
 以下是线性代数中常用术语的中英对照表：
 
