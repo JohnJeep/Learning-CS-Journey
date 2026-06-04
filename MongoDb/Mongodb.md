@@ -7,13 +7,6 @@
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
-- [常见系统命令](#常见系统命令)
-- [连接 mongosh](#连接-mongosh)
-- [数据库查看命令](#数据库查看命令)
-- [查看配文件](#查看配文件)
-- [命令行工具](#命令行工具)
-- [References](#references)
-
 
 # 常见系统命令
 
@@ -45,7 +38,7 @@ sudo rm -r /var/lib/mongodb
 
 ```
 
-# 连接 mongosh
+# mongosh
 
 在与 [`mongod`](https://www.mongodb.com/zh-cn/docs/manual/reference/program/mongod/#mongodb-binary-bin.mongod) 相同的主机上启动 [`mongosh`](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#mongodb-binary-bin.mongosh) 会话。您可以在不使用任何命令行选项的情况下运行 [`mongosh`](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#mongodb-binary-bin.mongosh)，从而连接在本地主机上运行且默认端口号为 27017 的 [`mongod`](https://www.mongodb.com/zh-cn/docs/manual/reference/program/mongod/#mongodb-binary-bin.mongod)。
 
@@ -53,11 +46,11 @@ sudo rm -r /var/lib/mongodb
 # 本地连接（默认端口27017）
 mongo
 
-# 或者指定主机和端口
+# 指定主机和端口
 mongo --host 127.0.0.1 --port 27017
 
-# 需要认证的连接
-mongo -u username -p password --authenticationDatabase admin
+# 指定IP和port认证的连接
+mongo --host x.x.x.x --port xxxx -u username -p password --authenticationDatabase admin
 ```
 
 
@@ -83,8 +76,8 @@ show tables
 db.yourCollectionName.find()
 db.collection_name.find().pretty()
 
-# 查看集合的统计信息
-
+# 例如
+db.shadow.find({sn:"xxxx","productName":"aaa"})
 
 # 查看数据库统计信息
 db.stats()
@@ -121,6 +114,7 @@ mongotop
 # 指定间隔时间
 mongotop 5
 ```
+
 
 
 # References
