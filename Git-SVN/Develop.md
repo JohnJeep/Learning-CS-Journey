@@ -2,12 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 12:45:11
+ * @LastEditTime: 2026-06-05 17:46:37
  * @Description: Git develop flow
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 开发流程
+# Develop Workflow
 
 1. 克隆仓库，拉取最新代码
    ```shell
@@ -27,7 +27,7 @@
 
 4. 功能开发完成，先拉取远程仓库最新的代码到本地开发分支，若有冲突，则解决冲突，解决完成后，合并到本地 dev 分支，最后推送到远程的 dev 分支。
    采用 merge 方式：
-   ```shell
+   ```bash
    // feature分支下
    git pull origin dev
    
@@ -48,7 +48,7 @@
    
    采用 rebase 方式：
    
-   ```shell
+   ```bash
    // feature分支下未做任何的提交
    git pull origin dev
    
@@ -69,7 +69,9 @@
    ```
    
 
-# Git 常用命令
+# Git CLI
+
+开发过程中常用的 git 命令。
 
 - `git init` 初始化一个 Git 仓库 。
 - `git add <file>` 添加文件到暂存区。
@@ -83,3 +85,66 @@
 - `git reset --hard HEAD^` 回退到 `HEAD^` 版本。
 - `git config --list` 列出 Git 所有当的配置信息。
 - `git help <verb>` 查看帮助，verb 为 Git 的关键字。
+
+
+
+# Command line instructions
+
+You can also upload existing files from your computer using the instructions below.
+
+
+
+## Configure your Git identity
+
+```bash
+# local
+git config --local user.name "xxx"
+git config --local user.email "xxx"
+
+# global
+git config --global user.name "xxx"
+git config --global user.email "xxx"
+```
+
+
+
+## Create a new repository
+
+Push files to this repository using SSH or HTTPS. If you're unsure, we recommend SSH.
+
+```
+git clone https://xxxx.git
+cd your folder
+git switch --create main
+touch README.md
+git add README.md
+git commit -m "add README"
+git push --set-upstream origin main
+```
+
+## Push an existing folder
+
+```bash
+# go to your folder
+cd existing_folder
+
+# configure the git repository
+git init --initial-branch=main
+git remote add origin https://xxxx.git
+git add .
+git commit -m "Initial commit"
+git push --set-upstream origin main
+```
+
+## Push an existing Git repository
+
+```bash
+# go to your repository
+cd existing_repo
+
+# configure the git repository
+git remote rename origin old-origin
+git remote add origin https://xxxx.git
+git push --set-upstream origin --all
+git push --set-upstream origin --tags
+```
