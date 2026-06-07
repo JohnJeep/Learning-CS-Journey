@@ -13,7 +13,7 @@ comments: false
 ## 核心专栏
 
 - C 语言基础与工程实践: [/categories/C/](/categories/C/)
-- C++ 进阶与现代特性: [/categories/C++/](/categories/C++/)
+- C++ 进阶与现代特性: [/categories/cpp/](/categories/cpp/)
 - Linux 与系统编程: [/categories/Linux/](/categories/Linux/)
 - 网络与协议: [/categories/Network/](/categories/Network/)
 - 云原生与分布式: [/categories/Cloud-Native/](/categories/Cloud-Native/)

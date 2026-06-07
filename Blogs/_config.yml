@@ -82,6 +82,7 @@ feed:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  C++: cpp
 tag_map:
 
 # Metadata elements
