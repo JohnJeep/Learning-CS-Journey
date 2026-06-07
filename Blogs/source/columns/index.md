@@ -9,10 +9,11 @@ comments: false
 
 这里按主题组织内容，适合系统化学习。
 
+
 ## 核心专栏
 
 - C 语言基础与工程实践: [/categories/C/](/categories/C/)
-- C++ 进阶与现代特性: [/categories/C/](/categories/C/)
+- C++ 进阶与现代特性: [/categories/C++/](/categories/C++/)
 - Linux 与系统编程: [/categories/Linux/](/categories/Linux/)
 - 网络与协议: [/categories/Network/](/categories/Network/)
 - 云原生与分布式: [/categories/Cloud-Native/](/categories/Cloud-Native/)
@@ -20,10 +21,12 @@ comments: false
 - 操作系统: [/categories/OS/](/categories/OS/)
 - 算法与面试手册: [/categories/Interview/](/categories/Interview/)
 
+
 ## 其他专栏
 
 - [语言学习 (繁简汉字对照)](/Language/traditional_chinese_learning.html)
 - [金融与财务 (苹果财报解读)](/Financial/apple_financial_report_tutorial.html)
+
 
 ## 使用建议
 
