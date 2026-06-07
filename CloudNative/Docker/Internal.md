@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-03-30 15:33:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-25 00:47:14
+ * @LastEditTime: 2026-06-07 17:23:28
  * @Description:  Docker 内部原理探究
  * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
 -->
@@ -33,7 +33,5 @@ linux 内核提拱了 6 种 namespace 隔离的系统调用，如下图所示，
 
 
 # 2. References
+
 - Docker Internals: http://docker-saigon.github.io/post/Docker-Internals/
-
-
-
