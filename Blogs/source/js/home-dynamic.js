@@ -226,6 +226,13 @@
         desc: '苹果公司财报解读教程，深入理解财务报表的结构、核心指标与量化分析方法。',
         href: '/Financial/apple_financial_report_tutorial.html',
       },
+      {
+        icon: '史',
+        title: '历史',
+        subtitle: 'History',
+        desc: '中国古代朝代变迁，从夏商周到清朝，梳理五千年历史脉络与各朝代帝王世系。',
+        href: '/History/china_history_index.html',
+      },
     ];
 
     var section = document.createElement('section');

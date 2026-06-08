@@ -26,6 +26,7 @@ comments: false
 
 - [语言学习 (繁简汉字对照)](/Language/traditional_chinese_learning.html)
 - [金融与财务 (苹果财报解读)](/Financial/apple_financial_report_tutorial.html)
+- [历史 (中国王朝史)](/History/china_history_index.html)
 
 
 ## 使用建议
