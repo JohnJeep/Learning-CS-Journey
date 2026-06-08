@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国清朝皇帝列表</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #8B0000;
+            text-align: center;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .dynasty-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        .note {
+            background-color: #f5f5f5;
+            border-left: 4px solid #8B0000;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        .era-highlight {
+            color: #8B0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>中国清朝皇帝列表 (1636年-1912年)</h1>
+    
+    <div class="dynasty-info">
+        <p><strong>清朝简介：</strong>清朝是中国历史上最后一个封建王朝，由满族人建立，共传十二帝，享国276年。1636年皇太极改国号为"大清"，1644年入关定都北京，1912年溥仪退位。清朝前期开创"康乾盛世"，后期因闭关锁国导致衰落，最终被辛亥革命推翻。</p>
+    </div>
+
+    <table id="qingEmperors">
+        <thead>
+            <tr>
+                <th width="12%">庙号/谥号</th>
+                <th width="12%">姓名</th>
+                <th width="15%">年号</th>
+                <th width="15%">在位时间</th>
+                <th width="46%">重要事件/评价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>太祖</td>
+                <td>努尔哈赤</td>
+                <td>天命</td>
+                <td>1616-1626</td>
+                <td>建立后金，创建八旗制度</td>
+            </tr>
+            <tr>
+                <td>太宗</td>
+                <td>皇太极</td>
+                <td>天聪/崇德</td>
+                <td>1626-1643</td>
+                <td>改国号为"大清"，为入主中原奠定基础</td>
+            </tr>
+            <tr>
+                <td>世祖</td>
+                <td>福临</td>
+                <td>顺治</td>
+                <td>1643-1661</td>
+                <td>清军入关，定都北京，完成统一</td>
+            </tr>
+            <tr>
+                <td>圣祖</td>
+                <td>玄烨</td>
+                <td>康熙</td>
+                <td>1661-1722</td>
+                <td>平定三藩、收复台湾，开创<span class="era-highlight">康乾盛世</span></td>
+            </tr>
+            <tr>
+                <td>世宗</td>
+                <td>胤禛</td>
+                <td>雍正</td>
+                <td>1722-1735</td>
+                <td>设立军机处，推行"摊丁入亩"改革</td>
+            </tr>
+            <tr>
+                <td>高宗</td>
+                <td>弘历</td>
+                <td>乾隆</td>
+                <td>1735-1796</td>
+                <td><span class="era-highlight">康乾盛世</span>达到顶峰，后期闭关锁国</td>
+            </tr>
+            <tr>
+                <td>仁宗</td>
+                <td>颙琰</td>
+                <td>嘉庆</td>
+                <td>1796-1820</td>
+                <td>白莲教起义爆发，清朝由盛转衰</td>
+            </tr>
+            <tr>
+                <td>宣宗</td>
+                <td>旻宁</td>
+                <td>道光</td>
+                <td>1820-1850</td>
+                <td>鸦片战争失败，签订《南京条约》</td>
+            </tr>
+            <tr>
+                <td>文宗</td>
+                <td>奕詝</td>
+                <td>咸丰</td>
+                <td>1850-1861</td>
+                <td>太平天国运动，英法联军火烧圆明园</td>
+            </tr>
+            <tr>
+                <td>穆宗</td>
+                <td>载淳</td>
+                <td>同治</td>
+                <td>1861-1874</td>
+                <td>"同治中兴"，慈禧太后垂帘听政开始</td>
+            </tr>
+            <tr>
+                <td>德宗</td>
+                <td>载湉</td>
+                <td>光绪</td>
+                <td>1874-1908</td>
+                <td>甲午战争失败，戊戌变法，八国联军侵华</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>溥仪</td>
+                <td>宣统</td>
+                <td>1908-1912</td>
+                <td>清朝末代皇帝，辛亥革命后退位</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="download-btn" onclick="exportToExcel()">下载Excel格式</a>
+    
+    <div class="note">
+        <p><strong>注：</strong></p>
+        <p>1. 清朝共12位皇帝，从努尔哈赤到溥仪，实际统治中国268年（1644-1912）。</p>
+        <p>2. 努尔哈赤和皇太极时期（1616-1643）为后金政权，1636年改国号为"大清"。</p>
+        <p>3. 清朝皇帝谥号多为21-25字（如康熙帝谥"合天弘运文武睿哲恭俭宽裕孝敬诚信中和功德大成仁皇帝"）。</p>
+        <p>4. 溥仪退位后，1917年曾短暂复辟（张勋复辟），1932-1945年任伪满洲国"皇帝"。</p>
+    </div>
+
+    <script>
+        function exportToExcel() {
+            let html = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <x:ExcelWorkbook>
+                            <x:ExcelWorksheets>
+                                <x:ExcelWorksheet>
+                                    <x:Name>清朝皇帝列表</x:Name>
+                                    <x:WorksheetOptions>
+                                        <x:DisplayGridlines/>
+                                    </x:WorksheetOptions>
+                                </x:ExcelWorksheet>
+                            </x:ExcelWorksheets>
+                        </x:ExcelWorkbook>
+                    </xml>
+                    <![endif]-->
+                    <style>
+                        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; font-weight: bold; }
+                        .title { font-size: 18px; font-weight: bold; text-align: center; margin: 20px 0; color: #8B0000; }
+                        .era-highlight { color: #8B0000; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="title">中国清朝皇帝列表 (1636-1912)</div>
+                    <table>
+                        ${document.getElementById('qingEmperors').innerHTML}
+                    </table>
+                </body>
+                </html>
+            `;
+            
+            let blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '清朝皇帝列表.xls';
+            link.click();
+        }
+    </script>
+</body>
+</html>

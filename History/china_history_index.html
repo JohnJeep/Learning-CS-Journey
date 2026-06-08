@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国古代朝代变迁</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #8B0000;
+        }
+        h1 {
+            color: #8B0000;
+            font-size: 2.5em;
+        }
+        .intro {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #8B0000;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .dynasty {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .dynasty::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: #f9f9f9;
+            border: 4px solid #8B0000;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .right::after {
+            left: -12px;
+        }
+        .dynasty-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .dynasty-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dynasty h2 {
+            color: #8B0000;
+            margin-top: 0;
+        }
+        .dynasty p {
+            margin-bottom: 10px;
+        }
+        .dynasty a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #8B0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .dynasty a:hover {
+            background-color: #6d0000;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .dynasty {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .dynasty::after {
+                left: 18px;
+            }
+            .left::after, .right::after {
+                left: 18px;
+            }
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>中国古代朝代变迁</h1>
+        <p>探索中国五千年的历史长河</p>
+    </header>
+
+    <div class="intro">
+        <p>中国是世界上历史最悠久的文明古国之一，拥有五千多年的文明史。从夏商周的古代王朝，到秦汉的大一统帝国，再到唐宋的繁荣盛世，直至明清的封建王朝，中国历史经历了无数朝代的更迭与变迁。</p>
+        <p>每个朝代都有其独特的政治制度、文化成就和历史事件，共同构成了丰富多彩的中华文明。通过了解这些朝代的变迁，我们可以更好地理解中国历史的发展脉络和文化传承。</p>
+    </div>
+
+    <div class="timeline">
+        <!-- 史前夏商 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>史前夏商时期</h2>
+                <p><strong>时间：</strong>约前2070年-前1046年</p>
+                <p><strong>特点：</strong>中国最早的王朝，青铜文明，甲骨文</p>
+                <a href="prehistoric_xia_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 西周 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>西周</h2>
+                <p><strong>时间：</strong>约前1046年-前771年</p>
+                <p><strong>特点：</strong>分封制，礼乐文明，成康之治</p>
+                <a href="western_zhou_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 春秋 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>春秋时期</h2>
+                <p><strong>时间：</strong>前770年-前476年</p>
+                <p><strong>特点：</strong>诸侯争霸，礼崩乐坏，春秋五霸</p>
+                <a href="chunqiu_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 战国 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>战国时期</h2>
+                <p><strong>时间：</strong>前475年-前221年</p>
+                <p><strong>特点：</strong>七雄争霸，百家争鸣，商鞅变法</p>
+                <a href="zhanguo_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 秦 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>秦朝</h2>
+                <p><strong>时间：</strong>前221年-前206年</p>
+                <p><strong>特点：</strong>中国首次大一统，中央集权，焚书坑儒</p>
+                <a href="qin_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 汉 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>汉朝</h2>
+                <p><strong>时间：</strong>前202年-220年</p>
+                <p><strong>特点：</strong>文景之治，汉武盛世，丝绸之路</p>
+                <a href="han_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 三国 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>三国</h2>
+                <p><strong>时间：</strong>220年-280年</p>
+                <p><strong>特点：</strong>魏蜀吴鼎立，赤壁之战，诸葛亮北伐</p>
+                <a href="wei_shu_wu_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 晋 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>晋朝</h2>
+                <p><strong>时间：</strong>265年-420年</p>
+                <p><strong>特点：</strong>短暂统一，八王之乱，五胡乱华</p>
+                <a href="western_eastern_jin.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 南北朝 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>南北朝</h2>
+                <p><strong>时间：</strong>420年-589年</p>
+                <p><strong>特点：</strong>南北对峙，民族融合，佛教兴盛</p>
+                <a href="south_north_dynasty.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 隋 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>隋朝</h2>
+                <p><strong>时间：</strong>581年-618年</p>
+                <p><strong>特点：</strong>开皇之治，大运河，科举制度</p>
+                <a href="sui_emperors.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 唐 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>唐朝</h2>
+                <p><strong>时间：</strong>618年-907年</p>
+                <p><strong>特点：</strong>贞观之治，开元盛世，安史之乱</p>
+                <a href="tang_emperors.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 五代十国两宋 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>五代十国与两宋</h2>
+                <p><strong>时间：</strong>907年-1279年</p>
+                <p><strong>特点：</strong>五代更迭，宋朝文治，经济繁荣</p>
+                <a href="wudaishiguo_liangsong_emperors.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 元 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>元朝</h2>
+                <p><strong>时间：</strong>1271年-1368年</p>
+                <p><strong>特点：</strong>蒙古统治，行省制度，中西交流</p>
+                <a href="yuan_emperors.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 明 -->
+        <div class="dynasty right">
+            <div class="dynasty-content">
+                <h2>明朝</h2>
+                <p><strong>时间：</strong>1368年-1644年</p>
+                <p><strong>特点：</strong>洪武之治，永乐大典，郑和下西洋</p>
+                <a href="ming_emperors.html">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 清 -->
+        <div class="dynasty left">
+            <div class="dynasty-content">
+                <h2>清朝</h2>
+                <p><strong>时间：</strong>1636年-1912年</p>
+                <p><strong>特点：</strong>康乾盛世，闭关锁国，鸦片战争</p>
+                <a href="qing_emperors.html">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 中国古代历史网站 | 资料来源于历史文献</p>
+    </footer>
+</body>
+</html>

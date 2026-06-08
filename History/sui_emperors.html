@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国隋朝皇帝列表</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #8B0000;
+            text-align: center;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .dynasty-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        .note {
+            background-color: #f5f5f5;
+            border-left: 4px solid #8B0000;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        .era-highlight {
+            color: #8B0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>中国隋朝皇帝列表 (581年-618年)</h1>
+    
+    <div class="dynasty-info">
+        <p><strong>隋朝简介：</strong>隋朝是中国历史上承南北朝、下启唐朝的大一统王朝，共传二帝，享国37年。581年杨坚受禅建立隋朝，589年灭南陈统一中国，开创了<span class="era-highlight">开皇之治</span>。隋朝创立三省六部制、科举制度等影响深远的制度，但因隋炀帝滥用民力导致速亡。</p>
+    </div>
+
+    <table id="suiEmperors">
+        <thead>
+            <tr>
+                <th width="15%">庙号/谥号</th>
+                <th width="15%">姓名</th>
+                <th width="15%">年号</th>
+                <th width="15%">在位时间</th>
+                <th width="40%">重要事件/评价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>高祖</td>
+                <td>杨坚</td>
+                <td>开皇、仁寿</td>
+                <td>581-604</td>
+                <td>建立隋朝，统一中国，开创<span class="era-highlight">开皇之治</span>，创立科举制</td>
+            </tr>
+            <tr>
+                <td>炀帝</td>
+                <td>杨广</td>
+                <td>大业</td>
+                <td>604-618</td>
+                <td>修建大运河、东都洛阳，三征高句丽，导致民变四起</td>
+            </tr>
+            <tr>
+                <td>恭帝</td>
+                <td>杨侑</td>
+                <td>义宁</td>
+                <td>617-618</td>
+                <td>李渊拥立的傀儡皇帝，次年禅位于李渊</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>杨浩</td>
+                <td>-</td>
+                <td>618</td>
+                <td>宇文化及弑炀帝后拥立，不久被杀</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="download-btn" onclick="exportToExcel()">下载Excel格式</a>
+    
+    <div class="note">
+        <p><strong>注：</strong></p>
+        <p>1. 隋朝实际统治中国的皇帝只有杨坚和杨广两位，杨侑和杨浩为隋末群雄割据时期的傀儡皇帝。</p>
+        <p>2. 隋朝虽然短暂，但创立了影响中国千余年的三省六部制和科举制度。</p>
+        <p>3. 隋炀帝杨广谥号"炀"为唐朝所追谥，意为"逆天虐民"。</p>
+        <p>4. 隋朝从统一(589年)到灭亡(618年)仅29年，是中国历史上最短命的大一统王朝之一。</p>
+    </div>
+
+    <script>
+        function exportToExcel() {
+            let html = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <x:ExcelWorkbook>
+                            <x:ExcelWorksheets>
+                                <x:ExcelWorksheet>
+                                    <x:Name>隋朝皇帝列表</x:Name>
+                                    <x:WorksheetOptions>
+                                        <x:DisplayGridlines/>
+                                    </x:WorksheetOptions>
+                                </x:ExcelWorksheet>
+                            </x:ExcelWorksheets>
+                        </x:ExcelWorkbook>
+                    </xml>
+                    <![endif]-->
+                    <style>
+                        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; font-weight: bold; }
+                        .title { font-size: 18px; font-weight: bold; text-align: center; margin: 20px 0; color: #8B0000; }
+                        .era-highlight { color: #8B0000; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="title">中国隋朝皇帝列表 (581-618)</div>
+                    <table>
+                        ${document.getElementById('suiEmperors').innerHTML}
+                    </table>
+                </body>
+                </html>
+            `;
+            
+            let blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '隋朝皇帝列表.xls';
+            link.click();
+        }
+    </script>
+</body>
+</html>
