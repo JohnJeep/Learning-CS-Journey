@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国元朝皇帝列表</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #8B0000;
+            text-align: center;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+        }
+        .dynasty-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>中国元朝皇帝列表 (1271年-1368年)</h1>
+    
+    <div class="dynasty-info">
+        <p><strong>元朝简介：</strong>元朝（1271年－1368年）是中国历史上首个由少数民族（蒙古族）建立的大一统王朝，由忽必烈建立，定都大都（今北京）。元朝继承蒙古帝国主体，统治中国97年。</p>
+    </div>
+
+    <table id="yuanEmperors">
+        <thead>
+            <tr>
+                <th>庙号/谥号</th>
+                <th>姓名</th>
+                <th>蒙古名</th>
+                <th>在位时间</th>
+                <th>年号</th>
+                <th>重要事件</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>世祖</td>
+                <td>忽必烈</td>
+                <td>薛禅汗</td>
+                <td>1260-1294</td>
+                <td>中统、至元</td>
+                <td>建立元朝，灭南宋统一中国</td>
+            </tr>
+            <tr>
+                <td>成宗</td>
+                <td>铁穆耳</td>
+                <td>完泽笃汗</td>
+                <td>1294-1307</td>
+                <td>元贞、大德</td>
+                <td>守成之君，停止对外扩张</td>
+            </tr>
+            <tr>
+                <td>武宗</td>
+                <td>海山</td>
+                <td>曲律汗</td>
+                <td>1307-1311</td>
+                <td>至大</td>
+                <td>财政混乱，滥封赏赐</td>
+            </tr>
+            <tr>
+                <td>仁宗</td>
+                <td>爱育黎拔力八达</td>
+                <td>普颜笃汗</td>
+                <td>1311-1320</td>
+                <td>皇庆、延祐</td>
+                <td>恢复科举（但歧视汉人）</td>
+            </tr>
+            <tr>
+                <td>英宗</td>
+                <td>硕德八剌</td>
+                <td>格坚汗</td>
+                <td>1320-1323</td>
+                <td>至治</td>
+                <td>推行新政被弑（南坡之变）</td>
+            </tr>
+            <tr>
+                <td>泰定帝</td>
+                <td>也孙铁木儿</td>
+                <td>-</td>
+                <td>1323-1328</td>
+                <td>泰定、致和</td>
+                <td>维稳时期</td>
+            </tr>
+            <tr>
+                <td>天顺帝</td>
+                <td>阿速吉八</td>
+                <td>-</td>
+                <td>1328</td>
+                <td>天顺</td>
+                <td>在位仅1月（两都之战失败）</td>
+            </tr>
+            <tr>
+                <td>文宗</td>
+                <td>图帖睦尔</td>
+                <td>札牙笃汗</td>
+                <td>1328-1332</td>
+                <td>天历、至顺</td>
+                <td>文化兴盛，编修《经世大典》</td>
+            </tr>
+            <tr>
+                <td>宁宗</td>
+                <td>懿璘质班</td>
+                <td>-</td>
+                <td>1332</td>
+                <td>至顺</td>
+                <td>7岁夭折</td>
+            </tr>
+            <tr>
+                <td>顺帝（惠宗）</td>
+                <td>妥懽帖睦尔</td>
+                <td>乌哈噶图汗</td>
+                <td>1333-1368</td>
+                <td>元统、至元、至正</td>
+                <td>元末农民起义爆发，逃亡漠北</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="download-btn" onclick="exportToExcel()">下载Excel格式</a>
+    
+    <div class="note">
+        <p><strong>注：</strong></p>
+        <p>1. 元朝实际统治时间从1271年忽必烈定国号"大元"开始，至1368年明军攻占大都结束。</p>
+        <p>2. 元顺帝北逃后，史称"北元"，持续至1388年。</p>
+        <p>3. 元朝共11位皇帝（含追尊），实际统治中国97年。</p>
+    </div>
+
+    <script>
+        function exportToExcel() {
+            let html = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <x:ExcelWorkbook>
+                            <x:ExcelWorksheets>
+                                <x:ExcelWorksheet>
+                                    <x:Name>元朝皇帝列表</x:Name>
+                                    <x:WorksheetOptions>
+                                        <x:DisplayGridlines/>
+                                    </x:WorksheetOptions>
+                                </x:ExcelWorksheet>
+                            </x:ExcelWorksheets>
+                        </x:ExcelWorkbook>
+                    </xml>
+                    <![endif]-->
+                </head>
+                <body>
+                    <table>
+                        ${document.getElementById('yuanEmperors').innerHTML}
+                    </table>
+                </body>
+                </html>
+            `;
+            
+            let blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '元朝皇帝列表.xls';
+            link.click();
+        }
+    </script>
+</body>
+</html>
