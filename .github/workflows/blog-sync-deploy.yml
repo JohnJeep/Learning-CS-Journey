@@ -28,6 +28,7 @@ jobs:
         run: |
           cp -r Language Blogs/source/Language || true
           cp -r Financial Blogs/source/Financial || true
+          cp -r History Blogs/source/History || true
 
       - name: Sync markdown into Hexo posts
         run: python add_frontmatter.py --clean
