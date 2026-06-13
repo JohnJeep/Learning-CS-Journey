@@ -30,7 +30,8 @@
 
 # 1. EMQX
 
-EMQX 是一个高性能的 MQTT 消息中间件，通常用于物联网和实时消息应用。为了确保 EMQX 可以正常运行并允许客户端连接，你需要在防火墙上开放一些特定的端口。
+EMQX 是一个高性能的 MQTT 消息中间件，通常用于物联网和实时消息应用。为了确保 EMQX
+可以正常运行并允许客户端连接，你需要在防火墙上开放一些特定的端口。
 
 ## 1.1. Port
 
@@ -52,7 +53,8 @@ EMQX 使用多个端口来处理不同类型的通信。以下是 EMQX 需要开
 6. **HTTP API 端口（可选）**
    - **默认端口：`8080` (TCP)**：用于 EMQX HTTP API 的端口，如果你使用 EMQX 提供的 REST API 进行集成，可以开放此端口。
 7. **用于 MQTT Bridge 的端口（可选）**
-   - **默认端口：`1883` 或 `8883` (TCP)**：如果你配置了 MQTT Bridge（用于连接不同的 EMQX 实例或第三方 MQTT 服务器），你需要确保桥接端口也被开放。
+   - **默认端口：`1883` 或 `8883` (TCP)**：如果你配置了 MQTT Bridge（用于连接不同的 EMQX 实例或第三方 MQTT
+     服务器），你需要确保桥接端口也被开放。
 
 
 ### 1.1.1. 开放防火墙端口
@@ -104,12 +106,14 @@ firewall-cmd --list-ports
 
 ## 1.2. env
 
-将 EMQX 添加到系统的环境变量中，可以让你在任何位置执行 EMQX 的命令，而不需要每次都进入其安装目录。以下是将 EMQX 添加到环境变量的步骤。
+将 EMQX 添加到系统的环境变量中，可以让你在任何位置执行 EMQX 的命令，而不需要每次都进入其安装目录。以下是将 EMQX
+添加到环境变量的步骤。
 
 
 ### 1.2.1. 查找 EMQX 安装目录
 
-首先，确认你的 EMQX 安装目录。假设你是按照标准方式安装的 EMQX，那么默认情况下，EMQX 应该安装在 `/opt/emqx` 或 `/usr/local/emqx` 目录下。
+首先，确认你的 EMQX 安装目录。假设你是按照标准方式安装的 EMQX，那么默认情况下，EMQX 应该安装在 `/opt/emqx` 或
+`/usr/local/emqx` 目录下。
 
 如果你不确定安装路径，可以通过以下命令查找 EMQX 的路径：
 
@@ -124,7 +128,8 @@ whereis emqx
 假设你的 EMQX 安装目录为 `/opt/emqx`，并且你想将其添加到环境变量中，使得你可以在任何地方通过命令行启动 EMQX。
 
 1. **打开 shell 配置文件**：
-   根据你使用的 shell 类型（`bash`、`zsh` 等），编辑相应的配置文件。假设你使用的是 `bash`，配置文件通常是 `~/.bashrc` 或 `/etc/bash.bashrc`（对于系统级别的环境变量）。
+   根据你使用的 shell 类型（`bash`、`zsh` 等），编辑相应的配置文件。假设你使用的是 `bash`，配置文件通常是 `~/.bashrc`
+   或 `/etc/bash.bashrc`（对于系统级别的环境变量）。
 
    打开 `~/.bashrc` 文件：
    ```bash
@@ -166,7 +171,8 @@ emqx version
 
 ### 1.2.4. 系统级环境变量（可选）
 
-如果你想要让所有用户都能够访问 EMQX 命令，你可以将路径添加到系统级环境变量中。对于所有用户，可以编辑 `/etc/profile` 或 `/etc/bash.bashrc` 文件：
+如果你想要让所有用户都能够访问 EMQX 命令，你可以将路径添加到系统级环境变量中。对于所有用户，可以编辑 `/etc/profile`
+或 `/etc/bash.bashrc` 文件：
 
 ```bash
 sudo nano /etc/profile
@@ -201,11 +207,13 @@ source /etc/profile
 
 ## 1.4. 介绍
 
-ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是隔离的，故实际上 CoreID + ClientID 唯一标识了一个客户端连接。
+ClientID 是 MQTT 连接的唯一标识符。在 IoTCore 中，不同实例之间是隔离的，故实际上 CoreID + ClientID
+唯一标识了一个客户端连接。
 
-如果多个客户端使用相同的 ClientID 连接到MQTT服务器，那么只有最后一个连接会被保留，其他连接会被强制断开。
+如果多个客户端使用相同的 ClientID 连接到 MQTT 服务器，那么只有最后一个连接会被保留，其他连接会被强制断开。
 
-在使用MQTT连接时，客户端ID应该是唯一的，并且应该易于识别。一个**通常的做法**是，使用固定前缀加上随机生成的UUID作为ClientID：前缀可以用来标识客户端的身份或分组，UUID保证了唯一性。
+在使用 MQTT 连接时，客户端 ID 应该是唯一的，并且应该易于识别。一个**通常的做法**是，使用固定前缀加上随机生成的 UUID
+作为 ClientID：前缀可以用来标识客户端的身份或分组，UUID 保证了唯一性。
 
 
 ## 1.5. 冲突的 MQTT 客户端 ID
@@ -214,16 +222,18 @@ ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是
   多个设备使用同一客户端 ID 连接，导致每次有新的数据发送时，原来的连接被断开后重连。
 
 - 分析：
-  多个设备使用同一客户端 ID 连接，使用同一客户端 ID 建立了多个连接，从而导致已连接的设备断开连接。MQTT 规范只允许每个客户端 ID 有一个活动连接，因此当另一个设备使用同一客户端 ID 连接时，它会使前一个连接断开。
+  多个设备使用同一客户端 ID 连接，使用同一客户端 ID 建立了多个连接，从而导致已连接的设备断开连接。MQTT
+  规范只允许每个客户端 ID 有一个活动连接，因此当另一个设备使用同一客户端 ID 连接时，它会使前一个连接断开。
 
 - 导致的问题：
   ID 相冲突的设备将被迫不断重新连接，这可能导致消息丢失或致使设备无法连接。
 
-  这可能表示设备或设备的凭证已遭破坏，并可能是 DDoS 攻击的一部分。也有可能是设备未在账户中得到正确配置，或者设备连接效果不佳，被迫每分钟重新连接多次。
+  这可能表示设备或设备的凭证已遭破坏，并可能是 DDoS 攻击的一部分。也有可能是设备未在账户中得到正确配置，或者设备连接效
+  果不佳，被迫每分钟重新连接多次。
 
 - 解决方式：
   1. MQTT 连接设备时使用 UUID 作为客户端 ID。
-  2. 将每个设备注册为唯一的 客户端ID。
+  2. 将每个设备注册为唯一的 客户端 ID。
 
 
 ## 1.6. 参数配置
@@ -253,13 +263,15 @@ ClientID 是MQTT连接的唯一标识符。在IoTCore中，不同实例之间是
 - **`retain`** 是在发布消息时设置的，用于决定服务器是否应保留该消息。
 - **`retainHandling`** 是在订阅时设置的，用于控制客户端是否接收服务器上已经保留的消息。
 
-例如，在某些场景中，用户可能希望只接收新的消息（不包括以前保留的消息），那么可以在订阅时将 `retainHandling` 设置为 `2`。
+例如，在某些场景中，用户可能希望只接收新的消息（不包括以前保留的消息），那么可以在订阅时将 `retainHandling` 设置为
+`2`。
 
 
 
 # 2. mosquitto
 
-mosquitto 是一个开源的 MQTT 代理（服务器）和客户端库，广泛用于物联网（IoT）应用中。它支持 MQTT 协议的多个版本，包括 MQTT v3.1、v3.1.1 和 v5.0。
+mosquitto 是一个开源的 MQTT 代理（服务器）和客户端库，广泛用于物联网（IoT）应用中。它支持 MQTT 协议的多个版本，包括
+MQTT v3.1、v3.1.1 和 v5.0。
 
 
 ## 2.1. install
@@ -374,5 +386,5 @@ mosquitto_pub -h mqtt.example.com -u myuser -P mypass -t "home/light" -m "ON"
 - Eclipse Paho offical documentation: https://eclipse.dev/paho/documentation
 - MQTT 教程: https://www.emqx.com/zh/blog/category/mqtt-protocol
 - MQTT control packet: https://www.emqx.com/zh/blog/introduction-to-mqtt-control-packets
-- centos7设置emqx开机自启动: http://iotts.com.cn/blog/2023/06/28/centos7%E8%AE%BE%E7%BD%AEemqx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/
+- centos7 设置 emqx 开机自启动: http://iotts.com.cn/blog/2023/06/28/centos7%E8%AE%BE%E7%BD%AEemqx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/
 - https://bifromq.io/zh-Hans/docs/2.0.0/best_practices/mqtt_parameters/

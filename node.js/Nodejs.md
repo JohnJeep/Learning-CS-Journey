@@ -27,6 +27,6 @@ Nodejs 中的 JavaScript 运行环境
 # References
 
 - Node.js official: http://nodejs.cn/learn/introduction-to-nodejs
-- 英文文章从原理讲解Nodejs: https://www.sitepoint.com/asynchronous-programming-using-async-await-in-c
+- 英文文章从原理讲解 Nodejs: https://www.sitepoint.com/asynchronous-programming-using-async-await-in-c
 
 

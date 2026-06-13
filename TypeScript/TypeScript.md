@@ -9,7 +9,8 @@
 
 # TypeScript Tutorial
 
-TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces to help you build robust components.
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and
+interfaces to help you build robust components.
 
 
 ## Compile

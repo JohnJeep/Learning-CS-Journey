@@ -76,7 +76,7 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
     - `CPPFLAGS` 预处理所需要的的选项。如：`-I`
     - `CFLAGS  ` 编译时使用的参数。`-Wall, -g, -c`
     - `LDFLAGS ` 链接库使用的选项。`-L -l(小写)`
-    - `CC` 等于gcc
+    - `CC` 等于 gcc
 - 伪目标 `.PHONY` 。它只是一个标签，并不生成实际的文件。
   ```makefile
   # 显示的告诉 make clean 是一个伪目标

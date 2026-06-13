@@ -9,4 +9,4 @@
 
 # References
 - [yaml 官方教程](https://yaml.org/) 
-- [yaml语言教程](https://ivanzz1001.github.io/records/post/docker/2018/03/10/docker-yaml)
+- [yaml 语言教程](https://ivanzz1001.github.io/records/post/docker/2018/03/10/docker-yaml)

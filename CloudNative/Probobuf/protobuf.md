@@ -80,8 +80,10 @@ protobuf 中定义服务
 
 ### 处理大数据包局限
 
-1. 内存占用：在反序列化大型 Protobuf 数据包时，需要将整个数据包加载到内存中。这可能导致内存占用较高，因此在处理非常大的数据包时，可能需要考虑分块处理或其他优化策略。
-2. 消息大小限制：Protobuf 有一个默认的消息大小限制（默认为 64MB），超过该限制的数据包将无法正常处理。可以通过调整配置或使用流式处理来解决此问题，但需要注意潜在的影响。
+1. 内存占用：在反序列化大型 Protobuf 数据包时，需要将整个数据包加载到内存中。这可能导致内存占用较高，因此在处理非常大
+   的数据包时，可能需要考虑分块处理或其他优化策略。
+2. 消息大小限制：Protobuf 有一个默认的消息大小限制（默认为 64MB），超过该限制的数据包将无法正常处理。可以通过调整配置
+   或使用流式处理来解决此问题，但需要注意潜在的影响。
 
 
 
@@ -101,7 +103,8 @@ protobuf 中定义服务
 
   - 消息名使用首字母大写驼峰风格(CamelCase)，例如`message StudentRequest { ... }`
   - 字段名使用小写下划线的风格，例如 `string status_code = 1`
-  - 枚举类型，枚举名使用首字母大写驼峰风格，例如 `enum FooBar`，枚举值使用全大写下划线隔开的风格(CAPITALS_WITH_UNDERSCORES )，例如 FOO_DEFAULT=1
+  - 枚举类型，枚举名使用首字母大写驼峰风格，例如 `enum FooBar`，枚举值使用全大写下划线隔开的风格(CAPITALS_WITH_UNDERSC
+    ORES )，例如 FOO_DEFAULT=1
 
 - 服务(Services)
 
@@ -117,7 +120,7 @@ protobuf 中定义服务
 
 - Google 官网教程：https://developers.google.com/protocol-buffers
 - Github 地址：https://github.com/protocolbuffers/protobuf
-- Protocol Buffers V3中文语法指南：https://www.liwenzhou.com/posts/Go/Protobuf3-language-guide-zh/
+- Protocol Buffers V3 中文语法指南：https://www.liwenzhou.com/posts/Go/Protobuf3-language-guide-zh/
 - Github Google APIs: https://github.com/googleapis/googleapis/tree/master
 - Google APIs: https://google.aip.dev/general
 

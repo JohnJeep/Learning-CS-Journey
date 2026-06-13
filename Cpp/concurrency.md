@@ -21,7 +21,8 @@
 
 异步模型中，允许同一时间发生（处理）多个事件。
 
-在异步编程中，通常会针对比较耗时的功能提供一个函数，函数的参数中包含一个额外的参数，用于回调。而这个函数往往称作回调函数。当比较耗时的功能执行完毕时，通过回调函数将结果返回。
+在异步编程中，通常会针对比较耗时的功能提供一个函数，函数的参数中包含一个额外的参数，用于回调。而这个函数往往称作回调函
+数。当比较耗时的功能执行完毕时，通过回调函数将结果返回。
 
 多线程或单线程都实现异步。
 
@@ -33,7 +34,8 @@
 
 ## 5. 并行
 
-当系统有一个以上CPU时，则线程的操作有可能非并发。当一个 CPU 执行一个线程时，另一个 CPU 可以执行另一个线程，两个线程互不抢占 CPU 资源，可以同时进行，这种方式我们称之为并行（Parallel）。
+当系统有一个以上 CPU 时，则线程的操作有可能非并发。当一个 CPU 执行一个线程时，另一个 CPU
+可以执行另一个线程，两个线程互不抢占 CPU 资源，可以同时进行，这种方式我们称之为并行（Parallel）。
 
 
 
@@ -47,7 +49,7 @@
 
 - 电商的高并发
 - 抖音的高并发
-- 12306卖火车票的高并发
+- 12306 卖火车票的高并发
 - 基金交易系统的高并发
 - 海量数据处理的高并发
 
@@ -88,8 +90,10 @@ Waiting and Polling (等待和轮训)
 - `wait(ul)`: 使用 `unique_lock` 锁来等待通知
 - `wait(ul, pred)`: 使用 `unique_lock`锁来等待通知，直到 pred 在一次苏醒之后结果为 true。
 - `wait_for(ul, duration)`: 使用 `unique_lock`锁来等待通知，等带期限是一个时间段 duration。
-- `wait_for(ul, duration, pred)`: 使用 `unique_lock`锁来等待通知，等带期限是一个时间段 duration 或直到 pred 在一次苏醒之后结果为 true。
+- `wait_for(ul, duration, pred)`: 使用 `unique_lock`锁来等待通知，等带期限是一个时间段 duration 或直到 pred
+  在一次苏醒之后结果为 true。
 - `wait_until(ul, timepoint)`: 使用 `unique_lock`锁来等待通知，直到某个时间点 time point。
-- `wait_until(ul, timepoint, pred)`: 使用 `unique_lock`锁来等待通知，直到某个时间点 time point 或直到 pred 在一次苏醒之后结果为 true。
+- `wait_until(ul, timepoint, pred)`: 使用 `unique_lock`锁来等待通知，直到某个时间点 time point 或直到 pred
+  在一次苏醒之后结果为 true。
 - `notify_one()`: 唤醒一个等待者（线程）。
 - `notify_all()`: 唤醒所有的等待者（线程）。

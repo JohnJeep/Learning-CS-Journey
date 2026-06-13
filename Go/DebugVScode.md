@@ -13,7 +13,7 @@ vscode 下调试 go 文件。
 
 ## 安装 delve
 
-Delve 是Golang的调试工具。
+Delve 是 Golang 的调试工具。
 
 linux 下安装
 
@@ -25,7 +25,8 @@ go get -u github.com/go-delve/delve/cmd/dlv
 
 ## 设置 launch.json 配置文件
 
-`ctrl+shift+p` 输入 `Debug: Open launch.json` 打开 `launch.json` 文件，如果第一次打开,会新建一个配置文件，默认配置内容如下
+`ctrl+shift+p` 输入 `Debug: Open launch.json` 打开 `launch.json`
+文件，如果第一次打开,会新建一个配置文件，默认配置内容如下
 
 ```json
 {
@@ -47,7 +48,7 @@ go get -u github.com/go-delve/delve/cmd/dlv
 | 属性       | 介绍                                                         |
 | ---------- | ------------------------------------------------------------ |
 | name       | 调试界面下拉选择项的名称                                     |
-| type       | 设置为go无需改动，是 vs code 用于计算调试代码需要用哪个扩展  |
+| type       | 设置为 go 无需改动，是 vs code 用于计算调试代码需要用哪个扩展  |
 | mode       | 可以设置为 `auto`, `debug`, `remote`, `test`, `exec` 中的一个 |
 | program    | 调试程序的路径（绝对路径）                                   |
 | env        | 调试时使用的环境变量。例如:`{ "ENVNAME": "ENVVALUE" }`       |

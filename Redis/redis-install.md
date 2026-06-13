@@ -9,7 +9,8 @@
 
 # Redis 安装教程
 
-生产环境下不能连接外部网络，需用源码的方式编译 Redis 进行安装。在编译之前，先在有网的机器上，下载所需编译的依赖，然后拷贝到目标机器上执行依赖安装，最后再编译 Redis 源码执行安装。
+生产环境下不能连接外部网络，需用源码的方式编译 Redis 进行安装。在编译之前，先在有网的机器上，下载所需编译的依赖，然后
+拷贝到目标机器上执行依赖安装，最后再编译 Redis 源码执行安装。
 
 ## 1. 查看系统版本
 
@@ -22,9 +23,9 @@ Release:	20.04
 Codename:	focal
 ```
 
-## 2. 下载Reids源码
+## 2. 下载 Reids 源码
 
-可以从Redis官网的下载页面下载到最新的源码：
+可以从 Redis 官网的下载页面下载到最新的源码：
 
 https://redis.io/downloads/
 
@@ -59,7 +60,7 @@ make hiredis linenoise hdr_histogram lua jemalloc -j16
 make USE_SYSTEMD=yes
 ```
 
-如果系统为多核可以加 `-j` 线程数来开启多线程编译提升速度，如下文代码所示(此处使用16线程)：
+如果系统为多核可以加 `-j` 线程数来开启多线程编译提升速度，如下文代码所示(此处使用 16 线程)：
 
 ```bash
 make USE_SYSTEMD=yes -j16
@@ -74,9 +75,11 @@ apt install tcl
 make test
 ```
 
-> `Tcl` 是一种脚本语言（**Tool Command Language**），它的库和工具在许多应用中作为嵌入式语言或测试脚本使用。在 Redis 的编译过程中，它主要用于运行 Redis 的测试脚本。
+> `Tcl` 是一种脚本语言（**Tool Command Language**），它的库和工具在许多应用中作为嵌入式语言或测试脚本使用。在 Redis
+> 的编译过程中，它主要用于运行 Redis 的测试脚本。
 >
-> Tcl 在 Redis 中 **并非用于核心功能**，而是用于 **运行测试脚本**。Redis 的测试框架依赖 Tcl 解释器来执行测试套件，因此需要在编译后运行 `make test` 时安装该依赖。
+> Tcl 在 Redis 中 **并非用于核心功能**，而是用于 **运行测试脚本**。Redis 的测试框架依赖 Tcl
+> 解释器来执行测试套件，因此需要在编译后运行 `make test` 时安装该依赖。
 
 接着将其安装到系统
 
@@ -100,7 +103,7 @@ redis-server --help | grep systemd
 
 这里我们使用 systemd 来创建服务，而不是使用过时的 `init.d`
 
-首先复制一份redis配置到/etc下
+首先复制一份 redis 配置到/etc 下
 
 ```bash
 cp redis.conf /etc/
@@ -108,7 +111,7 @@ cp redis.conf /etc/
 
 打开`redis.conf`，修改**以下内容**：
 
-修改监听IP，开启外网连接：
+修改监听 IP，开启外网连接：
 
 ```bash
 bind 0.0.0.0
@@ -120,7 +123,7 @@ bind 0.0.0.0
 supervised systemd
 ```
 
-然后为redis设置密码：
+然后为 redis 设置密码：
 
 找到 `requirepass` 并去掉注释，将"foobared"修改为你自己需要的密码，**这点很重要，没设置容易被攻击！！**
 
@@ -128,7 +131,7 @@ supervised systemd
 requirepass foobared
 ```
 
-然后复制redis自带的示例服务文件到systemd，并且创建好redis的数据目录
+然后复制 redis 自带的示例服务文件到 systemd，并且创建好 redis 的数据目录
 
 ```bash
 cd utils
@@ -188,7 +191,7 @@ WantedBy=multi-user.target
 
 ## 7. 开启服务并设置开机启动
 
-首先看一下服务配的对不对，如果status 显示 Active 则正常。
+首先看一下服务配的对不对，如果 status 显示 Active 则正常。
 
 ```bash
 systemctl start redis-server.service
@@ -225,7 +228,7 @@ systemctl is-enabled redis
 systemctl list-unit-files --type=service | grep enabled
 ```
 
-## 8. 非root用户运行redis
+## 8. 非 root 用户运行 redis
 
 首先创建用户
 
@@ -243,13 +246,13 @@ User=redis
 Group=redis
 ```
 
-设置完成之后重载systemd并且重启redis-server
+设置完成之后重载 systemd 并且重启 redis-server
 
 ```bash
 systemctl daemon-reload && systemctl restart redis-server.service
 ```
 
-配置完成后可以查看下是不是redis用户在跑，显示User=redis就说明配置成功
+配置完成后可以查看下是不是 redis 用户在跑，显示 User=redis 就说明配置成功
 
 ```bash
 root@VM-8-10-ubuntu:/var/lib# systemctl show -pUser redis-server.service 
@@ -280,7 +283,8 @@ User=redis
   bind 0.0.0.0
   ```
 
-- **端口配置**：Redis 集群每个节点需要至少 2 个端口（一个是标准端口，另一个用于集群通信）。默认端口是 6379，而集群通信端口是 `6379 + 10000`。
+- **端口配置**：Redis 集群每个节点需要至少 2 个端口（一个是标准端口，另一个用于集群通信）。默认端口是
+  6379，而集群通信端口是 `6379 + 10000`。
 
   ```bash
   port 6379
@@ -307,7 +311,8 @@ redis-server /path/to/redis-7005.conf
 
 ### 9.3. 创建 Redis 集群
 
-在一台机器上（或集群中的任意机器），使用 `redis-cli` 创建集群。假设你已经启动了 6 个 Redis 实例，且它们分别监听在 7000 到 7005 端口。
+在一台机器上（或集群中的任意机器），使用 `redis-cli` 创建集群。假设你已经启动了 6 个 Redis 实例，且它们分别监听在
+7000 到 7005 端口。
 
 使用以下命令创建集群：
 

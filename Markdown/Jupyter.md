@@ -31,7 +31,8 @@
 
 ## 1.2. 编辑和运行
 1. 执行当前 cell，并自动跳到下一个 cell：Shift Enter
-2. 执行当前 cell，执行后不自动调转到下一个 cell：Ctrl-Enter  （Ctrl+Enter：结束编辑，对于代码单元将运行其中的代码，对于标题单元和 markdown 单元将格格式化显示）
+2. 执行当前 cell，执行后不自动调转到下一个 cell：Ctrl-Enter
+   （Ctrl+Enter：结束编辑，对于代码单元将运行其中的代码，对于标题单元和 markdown 单元将格格式化显示）
 3. 当前 cell 进入编辑模式：Enter
 4. 退出当前 cell 的编辑模式：Esc
 5. Alt+Enter：运行当前的代码并在下面插入新的单元
@@ -48,9 +49,11 @@
 
 ## 1.3. 操作运算核   
 1. 如果进入了 Python 的死循环，可以在命令模式下按两下 **i** 按键终止循环。
-2. 如果 i 按键不能终止编译代码中的死循环，可以按两次** 0**（是零不是 o）按键重新启动运算核心，当前运行环境中的所有对象都将消失
+2. 如果 i 按键不能终止编译代码中的死循环，可以按两次** 0**（是零不是
+   o）按键重新启动运算核心，当前运行环境中的所有对象都将消失
 
-注意：**右上角图标从空心圈变为实心圈，表示运算核正在工作，无法执行新的代码。请按两下 **i** 按键终止循环，注意右上角的图标变回空心圈**
+注意：**右上角图标从空心圈变为实心圈，表示运算核正在工作，无法执行新的代码。请按两下 **i**
+按键终止循环，注意右上角的图标变回空心圈**
 
 
 # 2. jupyter notebook 命令
@@ -175,7 +178,8 @@ plt.plot(x,y)
 
 
 ## 6.1. magic 命令用法
-1. 魔法命令都以 **%** 或者 **%%** 开头，以 **%** 开头的成为**行命令**，**%%** 开头的称为**单元命令**。行命令只对命令所在的行有效，而单元命令则必须出现在单元的第一行，对整个单元的代码进行处理。
+1. 魔法命令都以 **%** 或者 **%%** 开头，以 **%** 开头的成为**行命令**，**%%**
+   开头的称为**单元命令**。行命令只对命令所在的行有效，而单元命令则必须出现在单元的第一行，对整个单元的代码进行处理。
 2. 在 Jupyter 中执行 **%lsmagic** 可以列举所有的魔法命令；
 3. **%magic** 可以查看关于各个命令的说明，
 4. 在%命令之后添加 **?** 可以查看该命令的详细说明（例如：%magic?）
@@ -204,10 +208,19 @@ plt.plot(x,y)
 %lsmagic
 ```
     Available line magics:
-    %alias  %alias_magic  %autocall  %automagic  %autosave  %bookmark  %cd  %clear  %cls  %colors  %config  %connect_info  %copy  %ddir  %debug  %dhist  %dirs  %doctest_mode  %echo  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %macro  %magic  %matplotlib  %mkdir  %more  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %popd  %pprint  %precision  %profile  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode
+    %alias  %alias_magic  %autocall  %automagic  %autosave  %bookmark  %cd  %clear  %cls  %colors  %config
+    %connect_info  %copy  %ddir  %debug  %dhist  %dirs  %doctest_mode  %echo  %ed  %edit  %env  %gui  %hist  %history
+    %killbgscripts  %ldir  %less  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls
+    %lsmagic  %macro  %magic  %matplotlib  %mkdir  %more  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile
+    %pinfo  %pinfo2  %popd  %pprint  %precision  %profile  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab
+    %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run
+    %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos
+    %xdel  %xmode
     
     Available cell magics:
-    %%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile
+    %%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown
+    %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time
+    %%timeit  %%writefile
     
     Automagic is ON, % prefix IS NOT needed for line magics.
 
@@ -232,12 +245,14 @@ plt.plot(x,y)
 ## 7.1. 错误异常与代码调试
 1. 执行 `%xmode Plain` 可以设置为当异常发生时只展示简单的异常信息
 2. 执行 `%xmode Verbose` 来还原显示详细异常信息的模式
-3. 使用 `%debug` 进入调试模式，输入** quit **退出调试模，调试模式下，我们也可以通过输入** up **来对外层函数进行调试，查看其中的变量情况。
+3. 使用 `%debug` 进入调试模式，输入** quit **退出调试模，调试模式下，我们也可以通过输入** up
+   **来对外层函数进行调试，查看其中的变量情况。
 4. 执行 `%pdb on` 可以设置为当异常发生时自动进入调试式 2
 
 
 ## 7.2. 使用 pdb 进行调试
-**pdb** 是 python 自带的一个包，为 python 程序提供了一种交互的源代码调试功能，主要特性包括设置断点、单步调试、进入函数调试、查看当前代码、查看栈片段、动态改变变量的值等
+**pdb** 是 python 自带的一个包，为 python 程序提供了一种交互的源代码调试功能，主要特性包括设置断点、单步调试、进入函数
+调试、查看当前代码、查看栈片段、动态改变变量的值等
 
 pdb 常用的调试命令
 
@@ -256,9 +271,12 @@ pdb 常用的调试命令
 
 # 8. 在线帮助和自动完成
 Notebook 支持显示函数和方法的文档和源代码，以及自动完成对象的属性。
-- 输入代码时，按 **[TAB]** 键可以显示自动完成提示框。自动完成支持当前执行环境中已知的模块名、变量名、对象的属性名，以及文件和目录名
-- 对于当前环境中已知的对象，可以在其后面添加问号 **?** 查看相应的说明信息和文档，添加两个问号 **??** 可以查看对象对应的源程序。按 **Ctrl+Enter** 显示文档的内容
-- 调用函数时，按 **[shift+tab]** 组合键可以显示函数的调用参数和说明文档，按 **一次** 组合键显示基本信息，**两次** 显示详细信息，**三次** 延时停留信息框，**四次** 则将信息显示在下方的滑动窗口中。
+- 输入代码时，按 **[TAB]** 键可以显示自动完成提示框。自动完成支持当前执行环境中已知的模块名、变量名、对象的属性名，以
+  及文件和目录名
+- 对于当前环境中已知的对象，可以在其后面添加问号 **?** 查看相应的说明信息和文档，添加两个问号 **??**
+  可以查看对象对应的源程序。按 **Ctrl+Enter** 显示文档的内容
+- 调用函数时，按 **[shift+tab]** 组合键可以显示函数的调用参数和说明文档，按 **一次** 组合键显示基本信息，**两次**
+  显示详细信息，**三次** 延时停留信息框，**四次** 则将信息显示在下方的滑动窗口中。
 
 ```python
 list?

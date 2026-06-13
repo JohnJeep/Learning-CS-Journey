@@ -13,7 +13,7 @@ SSH 由客户端和服务端的软件组成，客户端可以使用的软件有 
 服务器端运行的是一个 `sshd` 的服务，通过使用 SSH，可以把所有传输的数据进行加密，
 而且也能够防止 dns 和 IP 欺骗，SSH 传输的数据是经过压缩的，可以加快传输速度。
 
-OpenSSH（即常说的ssh）常用配置文件有两个 `ssh_config` 和 `sshd_config`。
+OpenSSH（即常说的 ssh）常用配置文件有两个 `ssh_config` 和 `sshd_config`。
 其中 `/etc/ssh/ssh_config`为客户端配置文件，`/etc/ssh/sshd_config` 为服务器端配置文件。
 
 ```
@@ -194,18 +194,25 @@ Subsystem sftp internal-sftp
 #	ForceCommand cvs server
 ```
 
-CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的是 OpenSSH_5.3p1。
+CentOS7 默认安装的是 OpenSSH_7.4p1 版本 SSH，而 CentOS6 默认安装的是 OpenSSH_5.3p1。
 
 
 # SSH 免密钥登录
 
 - 原理
 
-  不同操作系统间免密访问原理都是一样的，A 主机免密访问 B 主机，需要 A 主机生成的公钥添加到 B 主机的`～/.ssh/authorized_keys`文件中，这样 A 访问 B，B 拿到 A 的用户连接信息，然后去自己的 `authorized_keys` 文件中查询看看有没有对应的信息，有就用A的公钥加密一段生成的信息，发给A后用A的私钥解开，之后 A 将解开后的明文信息发送给 B 进行对比，开始否正确，若正确则表明了 A 的公钥是由 A 本人的私钥解开的，即验证了身份的正确性，所以这也是为什么你要免密访问对方主机就要把自己的公钥丢过去的原因。当然这只是个很笼统的说法，只是为了帮助大家快速感性的有个大概认识。
+  不同操作系统间免密访问原理都是一样的，A 主机免密访问 B 主机，需要 A 主机生成的公钥添加到 B
+  主机的`～/.ssh/authorized_keys`文件中，这样 A 访问 B，B 拿到 A 的用户连接信息，然后去自己的
+  `authorized_keys` 文件中查询看看有没有对应的信息，有就用 A 的公钥加密一段生成的信息，发给 A 后用 A 的私钥解开，之后
+  A 将解开后的明文信息发送给 B 进行对比，开始否正确，若正确则表明了 A 的公钥是由
+  A 本人的私钥解开的，即验证了身份的正确性，所以这也是为什么你要免密访问对方主机就要把自己的公钥丢过去的原因。当然这只
+  是个很笼统的说法，只是为了帮助大家快速感性的有个大概认识。
 
 设置步骤：
 
-1. 在一台 Linux/Mac/Windows 机器上，打开终端，在终端输入 `ssh-keygen -t rsa` 命令，执行后，要你输入，这一步，直接按回车键，直到完成即可。完成后会在本地主机上的用户目录下 `.ssh` 文件中生成公钥 `id_rsa.pub 和私钥 `id_rsa` 文件。
+1. 在一台 Linux/Mac/Windows 机器上，打开终端，在终端输入 `ssh-keygen -t rsa`
+   命令，执行后，要你输入，这一步，直接按回车键，直到完成即可。完成后会在本地主机上的用户目录下 `.ssh`
+   文件中生成公钥 `id_rsa.pub 和私钥 `id_rsa` 文件。
 
    ```sh
    [tim@KF ~]$ ssh-keygen -t rsa
@@ -240,7 +247,9 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的
    
    ```
 
-2. 将本地主机公钥 `id_rsa.pub` 中的内容拷贝到远程目标机器的 `.ssh/authorized_keys` 文件中，若远程机器 `.ssh` 目录下不存在 `authorized_keys` 文件，则新建一个，并赋予 `600` 的权限。
+2. 将本地主机公钥 `id_rsa.pub` 中的内容拷贝到远程目标机器的 `.ssh/authorized_keys` 文件中，若远程机器 `.ssh`
+   目录下不存在 `authorized_keys` 文件，则新建一个，并赋予
+   `600` 的权限。
 
    ```sh
    [John@AP2 .ssh]$ pwd
@@ -275,7 +284,7 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的
 
 完成上述步骤后，就可以远程免密登录了。
 
-为保证 linux 系统的安全，linux 有个很坑的规定，服务端的 linux下必须保证：
+为保证 linux 系统的安全，linux 有个很坑的规定，服务端的 linux 下必须保证：
 
 - `～/.ssh` 目录权限必须是 700
 - 非 root 用户的 home 目录权限必须是 700，比如 `/home/John` 目录权限必须是 700
@@ -290,7 +299,7 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本SSH，而 CentOS6 默认安装的
 
 - [sshd_config(5) — Linux manual page](https://man7.org/linux/man-pages/man5/sshd_config.5.html)
 - [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)  SSH.com 官方讲解 SSH 用法，很全面。
-- [SSH远程登录配置文件sshd_config详解](https://blog.csdn.net/field_yang/article/details/51568861)
-- [CentOS6.9下升级默认的OpenSSH操作记录（升级到OpenSSH_7.6p1）](https://cloud.tencent.com/developer/article/1193007)
+- [SSH 远程登录配置文件 sshd_config 详解](https://blog.csdn.net/field_yang/article/details/51568861)
+- [CentOS6.9 下升级默认的 OpenSSH 操作记录（升级到 OpenSSH_7.6p1）](https://cloud.tencent.com/developer/article/1193007)
 - SSH 教程: https://wangdoc.com/ssh/key
 

@@ -22,7 +22,7 @@ Nginx 优点
 - 可扩展性好
 - 高可靠性
 - 热部署
-- BSD许可证
+- BSD 许可证
 
 
 
@@ -73,7 +73,7 @@ Nginx 编译参数
 | `--conf-path=`                           | 指向配置文件（`nginx.conf`）                                 |
 | `--error-log-path=`                      | 指向错误日志目录                                             |
 | `--pid-path=`                            | 指向 `pid` 文件（`nginx.pid`）                               |
-| `--lock-path=`                           | 指向 `lock` 文件（`nginx.lock`）（安装文件锁定，防止安装文件被别人利用，或自己误操作。）进程ID文件 |
+| `--lock-path=`                           | 指向 `lock` 文件（`nginx.lock`）（安装文件锁定，防止安装文件被别人利用，或自己误操作。）进程 ID 文件 |
 | `--user=`                                | 指定程序运行时的用户名                                       |
 | `--group=`                               | 指定程序运行时的用户组名                                     |
 | `--builddir=`                            | 指向编译目录                                                 |
@@ -119,7 +119,7 @@ Nginx 编译参数
 | `--with-http_gzip_static_module`         | 启用 ngx_http_gzip_static_module 支持（在线实时压缩输出数据流） |
 | `--with-http_random_index_module`        | 启用 `ngx_http_random_index_module` 支持（从目录中随机挑选一个目录索引） |
 | `--with-http_secure_link_module`         | 启用 ngx_http_secure_link_module 支持（计算和检查要求所需的安全链接网址） |
-| `--with-http_degradation_module`         | 启用 ngx_http_degradation_module 支持（允许在内存不足的情况下返回204或444码） |
+| `--with-http_degradation_module`         | 启用 ngx_http_degradation_module 支持（允许在内存不足的情况下返回 204 或 444 码） |
 | `--with-http_stub_status_module`         | 启用 ngx_http_stub_status_module 支持（获取 Nginx 自上次启动以来的工作状态） |
 | `--without-http_charset_module`          | 禁用 ngx_http_charset_module 支持（重新编码 WEB 页面，但只能是一个方向--服务器端到客户端，并且只有一个字节的编码可以被重新编码） |
 | `--without-http_gzip_module`             | 禁用 ngx_http_gzip_module 支持（该模块同 `--with-http_gzip_static_module` 功能一样） |
@@ -128,22 +128,22 @@ Nginx 编译参数
 | `--without-http_access_module`           | 禁用 ngx_http_access_module 支持（该模块提供了一个简单的基于主机的访问控制。允许/拒绝基于 IP 地址） |
 | `--without-http_auth_basic_module`       | 禁用 ngx_http_auth_basic_module（该模块是可以使用用户名和密码基于 HTTP 基本认证方法来保护你的站点或其部分内容） |
 | `--without-http_autoindex_module`        | 禁用 ngx_http_autoindex_module 支持（该模块用于自动生成目录列表，只在 `ngx_http_index_module` 模块未找到索引文件时发出请求。） |
-| `--without-http_geo_module`              | 禁用 ngx_http_geo_module 支持（创建一些变量，其值依赖于客户端的IP地址） |
+| `--without-http_geo_module`              | 禁用 ngx_http_geo_module 支持（创建一些变量，其值依赖于客户端的 IP 地址） |
 | `--without-http_map_module`              | 禁用 ngx_http_map_module 支持（使用任意的键/值对设置配置变量） |
-| `--without-http_split_clients_module`    | 禁用 ngx_http_split_clients_module 支持（该模块用来基于某些条件划分用户。条件如：ip地址、报头、cookies等等） |
-| `--without-http_referer_module`          | 禁用 ngx_http_referer_module支持（该模块用来过滤请求，拒绝报头中 Referer 值不正确的请求） |
+| `--without-http_split_clients_module`    | 禁用 ngx_http_split_clients_module 支持（该模块用来基于某些条件划分用户。条件如：ip 地址、报头、cookies 等等） |
+| `--without-http_referer_module`          | 禁用 ngx_http_referer_module 支持（该模块用来过滤请求，拒绝报头中 Referer 值不正确的请求） |
 | `--without-http_rewrite_module`          | 禁用 ngx_http_rewrite_module ，链接重写                      |
 | `--without-http_proxy_module`            | 禁用 ngx_http_proxy_module 支持（有关代理服务器）            |
 | `--without-http_fastcgi_module`          | 禁用 ngx_http_fastcgi_module 支持（该模块允许 Nginx 与 FastCGI 进程交互，并通过传递参数来控制 FastCGI 进程工作。 ）FastCGI 一个常驻型的公共网关接口。 |
-| `--without-http_uwsgi_module`            | 禁用 ngx_http_uwsgi_module 支持（该模块用来医用uwsgi协议，uWSGI服务器相关） |
-| `--without-http_scgi_module`             | 禁用 ngx_http_scgi_module支持                                |
+| `--without-http_uwsgi_module`            | 禁用 ngx_http_uwsgi_module 支持（该模块用来医用 uwsgi 协议，uWSGI 服务器相关） |
+| `--without-http_scgi_module`             | 禁用 ngx_http_scgi_module 支持                                |
 | `--without-http_memcached_module`        | 禁用 ngx_http_memcached_module 支持（该模块用来提供简单的缓存，以提高系统效率） |
 | `-without-http_limit_zone_module`        | 禁用 ngx_http_limit_zone_module 支持（该模块可以针对条件，进行会话的并发连接数控制） |
-| `--without-http_limit_req_module`        | 禁用 ngx_http_limit_req_module 支持（该模块允许你对于一个地址进行请求数量的限制用一个给定的session或一个特定的事件） |
-| `--without-http_empty_gif_module`        | 禁用 `ngx_http_empty_gif_module` 支持（该模块在内存中常驻了一个1*1的透明GIF图像，可以被非常快速的调用） |
+| `--without-http_limit_req_module`        | 禁用 ngx_http_limit_req_module 支持（该模块允许你对于一个地址进行请求数量的限制用一个给定的 session 或一个特定的事件） |
+| `--without-http_empty_gif_module`        | 禁用 `ngx_http_empty_gif_module` 支持（该模块在内存中常驻了一个 1*1 的透明 GIF 图像，可以被非常快速的调用） |
 | `--without-http_browser_module`          | 禁用 ngx_http_browser_module 支持                            |
 | `--without-http_upstream_ip_hash_module` | 禁用 ngx_http_upstream_ip_hash_module 支持（该模块用于简单的负载均衡） |
-| `--with-http_perl_module`                | 启用 ngx_http_perl_module 支持（该模块使nginx可以直接使用perl或通过ssi调用perl） |
+| `--with-http_perl_module`                | 启用 ngx_http_perl_module 支持（该模块使 nginx 可以直接使用 perl 或通过 ssi 调用 perl） |
 | `--with-perl_modules_path=`              | 设定 perl 模块路径                                           |
 | `--http-log-path=`                       | 设定 access log 路径                                         |
 | `--http-client-body-temp-path=`          | 设定 HTTP 客户端请求临时文件路径                             |
@@ -161,7 +161,8 @@ Nginx 编译参数
 | `--with-google_perftools_module`         | 启用 ngx_google_perftools_module 支持（调试用，剖析程序性能瓶颈） |
 | `--with-cpp_test_module`                 | 启用 ngx_cpp_test_module 支持                                |
 
-使用源码安装的 nginx 是没有 `nginx.service` 的，需要手动配置后，才能设置为开机自启。一般 `nginx.service` 位于 `/lib/systemd/system/nginx.service`
+使用源码安装的 nginx 是没有 `nginx.service` 的，需要手动配置后，才能设置为开机自启。一般 `nginx.service` 位于
+`/lib/systemd/system/nginx.service`
 
 `nginx.service`
 ```shell
@@ -308,26 +309,26 @@ nginx 配置文件中的内置变量，也是全局变量
 | Variable          | 描述                                               |
 | ----------------- | -------------------------------------------------- |
 | $args             | 这个变量等于请求行中的参数，同$query_string        |
-| $content_length   | 请求头中的Content-length字段                       |
-| $content_type     | 请求头中的Content-Type字段                         |
-| $document_root    | 当前请求在root指令中指定的值                       |
+| $content_length   | 请求头中的 Content-length 字段                       |
+| $content_type     | 请求头中的 Content-Type 字段                         |
+| $document_root    | 当前请求在 root 指令中指定的值                       |
 | $host             | 请求主机头字段，否则为服务器名称                   |
-| $http_user_agent  | 客户端agent信息                                    |
-| $http_cookie      | 客户端cookie信息                                   |
+| $http_user_agent  | 客户端 agent 信息                                    |
+| $http_cookie      | 客户端 cookie 信息                                   |
 | $limit_rate       | 限制连接速率                                       |
-| $request_method   | 客户端请求的动作，通常为GET或POST                  |
-| $remote_addr      | 客户端的IP地址                                     |
+| $request_method   | 客户端请求的动作，通常为 GET 或 POST                  |
+| $remote_addr      | 客户端的 IP 地址                                     |
 | $remote_port      | 客户端的端口                                       |
-| $remote_user      | 经过Auth Basic Module验证的用户名                  |
-| $request_filename | 当前请求的文件路径，由root或alias指令与URI请求生成 |
-| $scheme           | HTTP方法（如http，https）                          |
+| $remote_user      | 经过 Auth Basic Module 验证的用户名                  |
+| $request_filename | 当前请求的文件路径，由 root 或 alias 指令与 URI 请求生成 |
+| $scheme           | HTTP 方法（如 http，https）                          |
 | $server_protocol  | 请求使用的协议                                     |
 | $server_addr      | 服务器地址                                         |
 | $server_name      | 服务器名称                                         |
 | $server_port      | 请求到达服务器的端口号                             |
-| $request_uri      | 包含请求参数的原始URI，不包含主机名                |
-| $uri              | 不带请求参数的当前URL                              |
-| $document_uri     | 与$uri相同                                         |
+| $request_uri      | 包含请求参数的原始 URI，不包含主机名                |
+| $uri              | 不带请求参数的当前 URL                              |
+| $document_uri     | 与$uri 相同                                         |
 
 
 Nginx configure architecture
@@ -368,7 +369,7 @@ location
 
 # 5. Nginx Application
 
-- Web服务器
+- Web 服务器
 - 反向代理
 - 负载均衡
 - 动态分离

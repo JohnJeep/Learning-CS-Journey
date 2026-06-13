@@ -7,4 +7,4 @@
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
-[线程池原理及C语言实现线程池](https://blog.csdn.net/qq_36359022/article/details/78796784)
+[线程池原理及 C 语言实现线程池](https://blog.csdn.net/qq_36359022/article/details/78796784)

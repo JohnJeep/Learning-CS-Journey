@@ -147,7 +147,7 @@
 | Least Squares Solution           | 最小二乘解            |
 | Least Squares approximation      | 最小二乘近似          |
 | Least norm                       | 最小范数              |
-| QR factorization                 | QR分解                |
+| QR factorization                 | QR 分解                |
 | acute angle                      | 锐角                  |
 | obtuse angle                     | 钝角                  |
 | orthogonal angle                 | 直角                  |
@@ -206,9 +206,9 @@
 - 投影(projection)：表示将一个向量映射到另一个向量上的过程。
 - 反斜杠记号(backslash notation)：用于表示线性方程组的求解方法。
 - 最小范数(least norm)：表示向量的最小长度或大小。
-- 锐角(acute angle)：两个向量之间的夹角小于90度。
-- 钝角(obtuse angle)：两个向量之间的夹角大于90度。
-- 直角(orthogonal angle)：两个向量之间的夹角等于90度。
+- 锐角(acute angle)：两个向量之间的夹角小于 90 度。
+- 钝角(obtuse angle)：两个向量之间的夹角大于 90 度。
+- 直角(orthogonal angle)：两个向量之间的夹角等于 90 度。
 - 近似(approximation)：表示向量的近似值或近似解。
 - 微积分(calculus)：用于描述向量变化的数学工具。
 - 最优(optimal)：表示向量在某种意义下的最佳状态。
@@ -229,7 +229,7 @@
 - 供应链(supply chain)：表示与向量相关的供应链管理问题。
 - 高斯消元法(Gaussian elimination)：用于求解线性方程组的向量运算方法。
 - 格拉姆-施密特过程(Gram-Schmidt process)：用于构造正交向量组的向量运算方法。
-- QR分解(QR factorization)：用于将矩阵分解为正交矩阵和上三角矩阵的向量运算方法。
+- QR 分解(QR factorization)：用于将矩阵分解为正交矩阵和上三角矩阵的向量运算方法。
 - 损失函数(loss function)：用于衡量向量预测误差的函数。
 - 过拟合(over-fit)：表示向量模型在训练数据上表现过好的现象。
 - 分层(stratified)：表示向量数据按某种标准进行分层的过程。

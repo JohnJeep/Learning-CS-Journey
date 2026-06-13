@@ -83,7 +83,7 @@ mysql_use_result() 初始化一个一行一行地结果集合的检索。
 
 # 异步
 
-回调函数接收 DB的返回值
+回调函数接收 DB 的返回值
 
 
 
@@ -103,4 +103,4 @@ mysql_use_result() 初始化一个一行一行地结果集合的检索。
 # References
 
 1. [**max_connections**](https://releem.com/docs/mysql-performance-tuning/max_connections)
-2. [MySQL服务器最大连接数怎么设置才合理](https://www.cnblogs.com/helloyb/p/5025782.html)
+2. [MySQL 服务器最大连接数怎么设置才合理](https://www.cnblogs.com/helloyb/p/5025782.html)

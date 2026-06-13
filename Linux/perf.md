@@ -9,7 +9,9 @@
 
 # 1. perf
 
-perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL(Performance Counters for Linux)，是 Linux 下的一个性能分析的工具(Performance analysis tools for Linux)，从 2009 年发行的 Linux 内核 2.6.31 版本开始支持。
+perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL(Performance Counters for Linux)，是 Linux
+下的一个性能分析的工具(Performance
+analysis tools for Linux)，从 2009 年发行的 Linux 内核 2.6.31 版本开始支持。
 
 
 ## 1.1. Subcommands

@@ -119,5 +119,5 @@ Tools
 ---
 Blog
 - 用『Hexo』搭建个人博客: https://liarrdev.github.io/post/Build-a-Blog-with-Hexo
-- Hexo-Butterfly主题搭建记录: https://www.drflower.top/posts/5920b38e/
+- Hexo-Butterfly 主题搭建记录: https://www.drflower.top/posts/5920b38e/
 - 关于我 Butterfly 主题的所有美化: https://blog.imzjw.cn/posts/b74f504f

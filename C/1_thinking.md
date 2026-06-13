@@ -21,4 +21,4 @@ C was developed from 1969 to 1973 by Dennis Ritchie(丹尼斯·里奇) of Bell L
 # References
 
 - [GCC online documentation](https://gcc.gnu.org/onlinedocs/)：GCC在线的官方文档，很权威。
-- [2019年，CSDN有哪些值得学习的专栏？](https://blog.csdn.net/csdngkk/article/details/103682497)
+- [2019 年，CSDN 有哪些值得学习的专栏？](https://blog.csdn.net/csdngkk/article/details/103682497)

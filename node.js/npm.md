@@ -48,13 +48,16 @@ npm init -y
 
 # 3. package.json
 
-每个 JavaScript 项目（无论是 Node.js 还是浏览器应用程序）都可以被当作 npm 软件包，并且通过 package.json 来描述项目和软件包信息。简单来说 `package.json` 是管理需要安装的所有依赖文件。
+每个 JavaScript 项目（无论是 Node.js 还是浏览器应用程序）都可以被当作 npm 软件包，并且通过 package.json
+来描述项目和软件包信息。简单来说 `package.json`
+是管理需要安装的所有依赖文件。
 
 
 当运行 npm init 初始化 JavaScript/Node.js 项目时，将生成 package.json 文件，文件内的内容由开发人员提供：
 
 - name：JavaScript 项目或库的名称。
-- version：项目的版本。通常，在应用程序开发中，由于没有必要对开源库进行版本控制，因此经常忽略这一块。但是，仍可以用它来定义版本。
+- version：项目的版本。通常，在应用程序开发中，由于没有必要对开源库进行版本控制，因此经常忽略这一块。但是，仍可以用它
+  来定义版本。
 - description：项目的描述。
 - license：项目的许可证。
 - scripts: 项目本地允许的命令行工具。
@@ -62,7 +65,8 @@ npm init -y
 
 # 4. package-lock.json
 
-该文件描述了 npm JavaScript 项目中使用的依赖项的确切版本。如果 package.json 是通用的描述性标签，则 package-lock.json 是成分表。
+该文件描述了 npm JavaScript 项目中使用的依赖项的确切版本。如果 package.json 是通用的描述性标签，则 package-lock.json
+是成分表。
 
 
 

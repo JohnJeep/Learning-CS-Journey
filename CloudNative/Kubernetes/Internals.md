@@ -13,4 +13,4 @@
 
 ## References
 
-- 云计算K8s系列---- K8s controller：https://kingjcy.github.io/post/cloud/paas/base/kubernetes/k8s-controller
+- 云计算 K8s 系列---- K8s controller：https://kingjcy.github.io/post/cloud/paas/base/kubernetes/k8s-controller

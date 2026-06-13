@@ -10,37 +10,40 @@
 
 # Windows 编程基本概念
 
-- 宽字符：Unicode字符，双字节
+- 宽字符：Unicode 字符，双字节
 
-- 窄字符：ASCII字符，单字节
+- 窄字符：ASCII 字符，单字节
 
 
 - Windows 中所有的底层函数都是 Unicode 编码。
 
-  `_UNICODE` 的例子你可以在 `TCHAR.H` 中找到，它用来解析`TCHAR`等类型是宽字符还是单字节字符，以及一些字符串宏的处理结果是宽字符还是单字节。
+  `_UNICODE` 的例子你可以在 `TCHAR.H` 中找到，它用来解析`TCHAR`等类型是宽字符还是单字节字符，以及一些字符串宏的处理结
+  果是宽字符还是单字节。
 
-- COM 组件必须使用 Unicode编码（COM组件可以理解为DLL，主要是用于代码重用）。
+- COM 组件必须使用 Unicode 编码（COM 组件可以理解为 DLL，主要是用于代码重用）。
 
-  比如在Windows API中：`FindWindowW`和`FindWindowA`。W的意思为wide（宽），A的意思为ASCII
+  比如在 Windows API 中：`FindWindowW`和`FindWindowA`。W 的意思为 wide（宽），A 的意思为 ASCII
 
 - 在 `Windows.h`中有一个`UNICODE`宏，底层调用宽字节版本，窄字节版本仅作编码转换。
 
-- Unicode：一个中文字符长度为1；多字节字符集：一个中文字符长度为2
+- Unicode：一个中文字符长度为 1；多字节字符集：一个中文字符长度为 2
 
 # 字符
 
-- L表示long
-- P表示pointer
-- C表示constant
-- W表示wide
-- T：win32环境中有一个_T宏，用来标识字符是否采用Unicode编码（两字节表示一个字符），若程序中定义了Unicode，该字符/字符串被作为Unicode字符串，否则就是标准的ANSI（单字节表示一个字符）字符串。
-- STR表示这个变量是一个字符串。
+- L 表示 long
+- P 表示 pointer
+- C 表示 constant
+- W 表示 wide
+- T：win32 环境中有一个_T 宏，用来标识字符是否采用 Unicode 编码（两字节表示一个字符），若程序中定义了
+  Unicode，该字符/字符串被作为 Unicode 字符串，否则就是标准的
+  ANSI（单字节表示一个字符）字符串。
+- STR 表示这个变量是一个字符串。
 
-LPCSTR: long pointer const string，可看成const char*，与PCSTR相似
+LPCSTR: long pointer const string，可看成 const char*，与 PCSTR 相似
 
-LPSTR：可看成char*，与PSTR相似
+LPSTR：可看成 char*，与 PSTR 相似
 
-**关于wchar_t\*的：**
+**关于 wchar_t\*的：**
 
 LPCWSTR，PCWSTR，LPWSTR，PWSTR
 
@@ -78,7 +81,7 @@ std::wstring AsciiToUnicode( const std::string& in_str )
 }
 ```
 
-# Utf8和Unicode的互转
+# Utf8 和 Unicode 的互转
 
 ```cpp
 //utf8转为unicode
@@ -112,7 +115,7 @@ std::string UnicodeToUTF8( const std::wstring& in_wStr )
 }
 ```
 
-# Ascii和Utf8的互转
+# Ascii 和 Utf8 的互转
 
 ```cpp
  //ascii转为utf8
@@ -128,7 +131,7 @@ std::string UTF8ToAscii(const std::string& in_utf8Str)
 }
 ```
 
-# GB2312和Unicode的互转
+# GB2312 和 Unicode 的互转
 
 ```cpp
  
@@ -172,8 +175,8 @@ std::string UnicodeToBIG5(const std::wstring& strUnicodeString)
 
 # References
 
--  [Windows下的字符集转换](https://blog.csdn.net/r5014/article/details/112220672)
+-  [Windows 下的字符集转换](https://blog.csdn.net/r5014/article/details/112220672)
 -  https://blog.csdn.net/luoyeaijiao/article/details/7266490
--  [多字节字符集与Unicode字符集](https://www.cnblogs.com/gaohongchen01/p/4006700.html)
+-  [多字节字符集与 Unicode 字符集](https://www.cnblogs.com/gaohongchen01/p/4006700.html)
 -  [Unicode 和多字节字符集 (MBCS) 支持](https://www.cnblogs.com/ccjt/p/4320244.html)
 

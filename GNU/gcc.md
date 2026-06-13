@@ -9,7 +9,9 @@
 
 # 1. Introduction
 
-GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言。但其很快扩展，变得可处理 C++，后来又扩展为能够支持更多编程语言，如 Fortran、Pascal、Objective -C、Java、Ada、Go 以及各类处理器架构上的汇编语言等，所以改名GNU编译器套件（GNU Compiler Collection）
+GCC 原名为 GNU C 语言编译器（GNU C Compiler），只能处理 C 语言。但其很快扩展，变得可处理
+C++，后来又扩展为能够支持更多编程语言，如 Fortran、Pascal、Objective
+-C、Java、Ada、Go 以及各类处理器架构上的汇编语言等，所以改名 GNU 编译器套件（GNU Compiler Collection）
 
 ```bash
 常用参数项
@@ -82,7 +84,8 @@ CentOS7 4.8.4 默认安装时的配置
 
 高版本 GCC 编译器编译 C++11 之下的代码，可能出现的问题？
 
-许多 c++11 功能都需要 C++ 标准库的新 libc++ 实现。但是 libc++ 与旧的 libstdc++ 不兼容，但目前大多数软件通常都与旧的 libstdc++ 链接。
+许多 c++11 功能都需要 C++ 标准库的新 libc++ 实现。但是 libc++ 与旧的 libstdc++ 不兼容，但目前大多数软件通常都与旧的
+libstdc++ 链接。
 
 ```
 libc++ 使用内联 namespace 来帮助确保 ABI不兼容类型不会被误认为是彼此之间的错误。如果接口(interface) 直接使用 libc++ std::string，则期望 libstdc++ std::string 的库将不会链接到该接口(interface)，因为实际的符号是不同的 :std::string 与 std::__1::string。
@@ -106,4 +109,4 @@ GCC5.3 支持 C++14
 
 - [GNU GCC 历史版本发布说明](https://gcc.gnu.org/news.html)
 - [离线 GCC 安装教程](https://cloud.tencent.com/developer/article/1176706)
-- [Linux编译安装GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)
+- [Linux 编译安装 GNU gcc 4.9.4](https://blog.csdn.net/dhy012345/article/details/89642421)

@@ -15,14 +15,20 @@
 template< class T > class enable_shared_from_this;
 ```
 
-`std::enable_shared_from_this` 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt 管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0, pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
+`std::enable_shared_from_this` 能让其一个对象（假设其名为 t ，且已被一个 std::shared_ptr 对象 pt
+管理）安全地生成其他额外的 std::shared_ptr 实例（假设名为 pt0,
+pt2, ... ） ，它们与 pt 共享对象 t 的所有权。
 
-若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t 被一个为名为 pt 的 std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt 共享 t 的所有权。
+若一个类 T 继承 std::enable_shared_from_this<T> ，则会为该类 T 提供成员函数： shared_from_this 。 当 T 类型对象 t
+被一个为名为 pt 的
+std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数，将会返回一个新的 std::shared_ptr<T> 对象，它与 pt
+共享 t 的所有权。
 
 
 # 2. 为什么要用 enable_shared_from_this
 
-`enable_shared_from_this` 的主要用途是：在类的内部安全地获取指向当前对象的 `shared_ptr`，避免创建多个控制块，从而防止未定义行为。
+`enable_shared_from_this` 的主要用途是：在类的内部安全地获取指向当前对象的
+`shared_ptr`，避免创建多个控制块，从而防止未定义行为。
 
 
 
@@ -46,7 +52,8 @@ int main() {
 }
 ```
 
-这里的问题是：`widget` 已经有一个 `shared_ptr` 在管理它，但在 `process()` 中又用 `this` 创建了另一个 `shared_ptr`，这会创建新的控制块，导致对象被多次删除。
+这里的问题是：`widget` 已经有一个 `shared_ptr` 在管理它，但在 `process()` 中又用 `this` 创建了另一个
+`shared_ptr`，这会创建新的控制块，导致对象被多次删除。
 
 ## 2.2. 解决方案：enable_shared_from_this
 
@@ -81,11 +88,14 @@ int main() {
 - **避免创建多个控制块导致的重复计数问题**
 - **在异步操作、回调函数等场景中保持对象生命周期**
 
-总结：使用`enable_shared_from_this`是为了在类的内部安全地获取指向当前对象的`shared_ptr`，避免创建多个控制块，从而防止未定义行为。
+总结：使用`enable_shared_from_this`是为了在类的内部安全地获取指向当前对象的`shared_ptr`，避免创建多个控制块，从而防止
+未定义行为。
 
 # 3. 什么时候用？
 
-使用`enable_shared_from_this`的主要场景是：在类的成员函数中，需要获取指向当前对象的`shared_ptr`。如果直接使用`this`指针来创建另一个`shared_ptr`，则会创建一个新的控制块，这与原有的`shared_ptr`的控制块是分离的，会导致同一个对象被多个控制块管理，这是错误的。
+使用`enable_shared_from_this`的主要场景是：在类的成员函数中，需要获取指向当前对象的`shared_ptr`。如果直接使用`this`指
+针来创建另一个`shared_ptr`，则会创建一个新的控制块，这与原有的`
+shared_ptr`的控制块是分离的，会导致同一个对象被多个控制块管理，这是错误的。
 
 ## 3.1. 主要使用场景
 
@@ -204,11 +214,19 @@ public:
 
 
 
-enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用 (例如 std::weak_ptr )。 std::shared_ptr 的构造函数检测无歧义且可访问的 (C++16 起) enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的 std::shared_ptr 为内部存储的弱引用。为另一个 std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined behavior)。
+enable_shared_from_this 的常见实现为：其内部保存着一个对 this 的弱引用 (例如 std::weak_ptr )。 std::shared_ptr
+的构造函数检测无歧义且可访问的 (C++16 起)
+enable_shared_from_this 基类，并且若内部存储的弱引用没有被以存在的 std::shared_ptr 占有，则 (C++17 起)赋值新建的
+std::shared_ptr 为内部存储的弱引用。为另一个
+std::shared_ptr 所管理的对象构造一个 std::shared_ptr ，将不会考虑内部存储的弱引用，从而将导致未定义行为(undefined
+behavior)。
 
-只允许在先前已被std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++17 前)抛出 std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的 weak_this 的构造函数） (自C++17 起)。
+只允许在先前已被 std::shared_ptr 管理的对象上调用 shared_from_this 。否则调用行为未定义 (C++17 前)抛出
+std::bad_weak_ptr 异常（通过 shared_ptr 从默认构造的
+weak_this 的构造函数） (自 C++17 起)。
 
-enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this) 这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
+enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<T>(this)
+这样的表达式（这种不安全的表达式可能会导致 this 被多个互不知晓的所有者析构）。
 
 # 4. 标准库中源码
 
@@ -329,5 +347,5 @@ int main()
 
 # 6. References
 
-- [cpp reference解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
-- [enable_shared_from_this用法分析](https://bbs.huaweicloud.com/blogs/136193)
+- [cpp reference 解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
+- [enable_shared_from_this 用法分析](https://bbs.huaweicloud.com/blogs/136193)

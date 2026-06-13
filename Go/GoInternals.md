@@ -269,5 +269,5 @@ Golang 使用系列---- Net/Http 应用层: https://kingjcy.github.io/post/golan
 环形双向链表
 
 - Go 标准库-双向链表 (container/list) 源码解析: https://blog.csdn.net/eight_eyes/article/details/121068799
-- 链表: 深入理解container/list&LRU缓存的实现: https://lailin.xyz/post/list.html
+- 链表: 深入理解 container/list&LRU 缓存的实现: https://lailin.xyz/post/list.html
 - 极客书房 Go 数据结构和算法篇（一）链表: https://study.geekai.co/posts/go-data-structure-linked-list 

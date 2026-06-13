@@ -84,7 +84,7 @@
 # rpm -qa        # 查看所有安装的软件包
 ```
 
-**查看CPU信息（型号）** 
+**查看 CPU 信息（型号）** 
 
 ```shell
 # cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c 

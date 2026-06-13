@@ -13,21 +13,22 @@
 
 ## 介绍
 
-以列单位进行字符处理，默认情况下按照TAB或空格对文件进行拆分。
+以列单位进行字符处理，默认情况下按照 TAB 或空格对文件进行拆分。
 
 - 格式
   - `awk 参数 '脚本语句' 带操作文件`。例子：`ps aux | awk '{print $3}'` 打印进程信息中的第三列
   - `awk 参数 -f '脚本文件' 带操作文件` 
 - 变量
   - `print`: 打印输出变量，默认打印数据后自动会换行。
-  - `printf`: 类似于C语言中的printf函数用法。  
-  - 两个特殊的条件：BEGIN、END。例子：统计一个文件中的所有空格数 `awk '/^ *$/ {count=count+1} END {print count}' test.txt`
+  - `printf`: 类似于 C 语言中的 printf 函数用法。  
+  - 两个特殊的条件：BEGIN、END。例子：统计一个文件中的所有空格数 `awk '/^ *$/ {count=count+1} END {print count}'
+    test.txt`
   - 常用内建变量
     - FILENAME：当前输入文件的文件名
     - NR：当前行的行号，R(record)
     - NF：当前行所拥有的的列数，F(field)
     - OFS：输出字段的列分隔符，默认是空格
-    - FS：输入文件的列分隔符，默认是空格和TAB
+    - FS：输入文件的列分隔符，默认是空格和 TAB
     - ORS：输出字段的行分隔符，默认是换行符
     - RS：输入文件的行分隔符，默认是换行符
 - 例子： 使用 awk 批量杀进程的命令：
@@ -61,7 +62,7 @@ echo "a b c" | awk '{print $(NF-1)}'              # b (倒数第二列)
 
 ## 二、80% 工程场景用这些模式
 
-### 场景1：提取特定列（最常用）
+### 场景 1：提取特定列（最常用）
 ```bash
 # 从日志提取第3列（如IP地址、时间戳）
 awk '{print $3}' access.log
@@ -74,7 +75,7 @@ awk '{print $1":"$3":"$5}' data.txt
 awk '/ERROR/ {print $2, $4}' app.log
 ```
 
-### 场景2：条件过滤（替代 grep 的 AND/OR）
+### 场景 2：条件过滤（替代 grep 的 AND/OR）
 ```bash
 # 第3列 > 100 且第5列包含 "FAIL"
 awk '$3 > 100 && $5 ~ /FAIL/ {print $0}' data.txt
@@ -86,7 +87,7 @@ awk '$2 == "ERROR" || $4 == "WARN" {print}'
 awk '$1 != "localhost" {print}'
 ```
 
-### 场景3：统计与聚合（比 Excel 快）
+### 场景 3：统计与聚合（比 Excel 快）
 ```bash
 # 统计文件行数
 awk 'END {print NR}' file.txt
@@ -101,7 +102,7 @@ awk '{sum += $3; count++} END {print "Avg:", sum/count}'
 awk '{count[$1]++} END {for(k in count) print k, count[k]}' access.log
 ```
 
-### 场景4：处理 CSV/TSV
+### 场景 4：处理 CSV/TSV
 ```bash
 # CSV 文件（逗号分隔）
 awk -F',' '{print $2, $4}' data.csv
@@ -113,7 +114,7 @@ awk -F'\t' '{print $1, $3}' data.tsv
 awk -F',' '{gsub(/"/, "", $0); print $1}'
 ```
 
-### 场景5：格式化输出（对齐表格）
+### 场景 5：格式化输出（对齐表格）
 ```bash
 # 左对齐，宽度20
 awk '{printf "%-20s %-10s %5d\n", $1, $2, $3}'
@@ -127,7 +128,7 @@ ps aux | awk '{printf "%-8s %6s %s\n", $1, $3, $11}'
 
 ## 三、工程实战技巧
 
-### 技巧1：多个模式匹配（AND/OR）
+### 技巧 1：多个模式匹配（AND/OR）
 ```bash
 # 同时包含 shadow 和 desired
 awk '/shadow/ && /desired/ {print NR, $0}' log.txt
@@ -139,7 +140,7 @@ awk '/shadow/ || /desired/ {print}'
 awk '$3 ~ /^error/i {print}'  # 忽略大小写
 ```
 
-### 技巧2：处理时间范围
+### 技巧 2：处理时间范围
 ```bash
 # 过滤 10:00:00 到 11:00:00 的日志
 awk '$2 >= "10:00:00" && $2 <= "11:00:00"' app.log
@@ -148,7 +149,7 @@ awk '$2 >= "10:00:00" && $2 <= "11:00:00"' app.log
 awk '{time[NR]=$2} NR>1 {print $2 - time[NR-1]}' log.txt
 ```
 
-### 技巧3：去重（类似 sort -u）
+### 技巧 3：去重（类似 sort -u）
 ```bash
 # 保留第一次出现的顺序
 awk '!seen[$1]++ {print}' file.txt
@@ -157,7 +158,7 @@ awk '!seen[$1]++ {print}' file.txt
 awk '{count[$0]++} END {for(ln in count) print count[ln], ln}' file.txt
 ```
 
-### 技巧4：内置变量速查
+### 技巧 4：内置变量速查
 ```bash
 NR  # 当前行号（总行数）
 NF  # 当前行的字段数
@@ -168,7 +169,7 @@ RS  # 输入记录分隔符（默认换行）
 ORS # 输出记录分隔符（默认换行）
 ```
 
-### 技巧5：BEGIN/END 块
+### 技巧 5：BEGIN/END 块
 ```bash
 # BEGIN：处理第一行前执行（设置分隔符、打印表头）
 # END：处理最后一行后执行（打印统计）
@@ -180,7 +181,7 @@ awk 'BEGIN {FS=","; print "=== Report ==="}
 
 ## 四、真实工程案例
 
-### 案例1：分析 Nginx 日志
+### 案例 1：分析 Nginx 日志
 ```bash
 # 统计每个 IP 的访问次数
 awk '{print $1}' access.log | sort | uniq -c | sort -rn | head -10
@@ -192,7 +193,7 @@ awk '{ip[$1]++} END {for(k in ip) print ip[k], k}' access.log | sort -rn | head 
 awk '{code[$9]++} END {for(c in code) print c, code[c]}' access.log
 ```
 
-### 案例2：监控系统性能
+### 案例 2：监控系统性能
 ```bash
 # CPU 使用率（从 top 输出）
 top -bn1 | awk '/%Cpu/ {print "CPU User:", $2, "% System:", $4}'
@@ -202,7 +203,7 @@ awk '/MemTotal/ {total=$2} /MemAvailable/ {avail=$2}
      END {printf "Used: %.1f%%\n", (total-avail)/total*100}' /proc/meminfo
 ```
 
-### 案例3：处理多行记录
+### 案例 3：处理多行记录
 ```bash
 # 处理以 "---" 分隔的多行记录
 awk 'BEGIN {RS="---\n"} /ERROR/ {print "Found in record", NR, $0}' log.txt
@@ -211,7 +212,7 @@ awk 'BEGIN {RS="---\n"} /ERROR/ {print "Found in record", NR, $0}' log.txt
 awk '/^[[:space:]]/ {printf "%s", $0} !/^[[:space:]]/ {print ""; printf "%s", $0}' file.txt
 ```
 
-### 案例4：实时监控日志
+### 案例 4：实时监控日志
 ```bash
 # 实时 tail 日志并提取关键信息
 tail -f app.log | awk '/ERROR/ {print strftime("%H:%M:%S"), $0}'
@@ -222,7 +223,7 @@ tail -f metrics.log | awk '$3 > 90 {print "ALERT: High value", $3, "at line", NR
 
 ## 五、常见陷阱与解决
 
-### 陷阱1：变量引用
+### 陷阱 1：变量引用
 ```bash
 # ❌ 错误：Shell 变量在单引号内无效
 name="error"
@@ -233,7 +234,7 @@ awk "/$name/ {print}" log.txt
 awk -v pat="$name" '$0 ~ pat {print}' log.txt
 ```
 
-### 陷阱2：比较数字 vs 字符串
+### 陷阱 2：比较数字 vs 字符串
 ```bash
 # 数字比较
 awk '$3 > 10'          # 正确
@@ -243,7 +244,7 @@ awk '$3 > "10"'        # 字符串比较，可能出错
 awk '$2 == "OK"'       # 正确
 ```
 
-### 陷阱3：字段分隔符
+### 陷阱 3：字段分隔符
 ```bash
 # 多个连续空格会被当做一个
 echo "a  b   c" | awk '{print $2}'  # b
@@ -271,5 +272,5 @@ awk 'NF>0'                           # 过滤空行
 awk 'END{print NR}'                  # 计数
 ```
 
-**记住**：awk 最大的价值在于**不需要写循环**就能处理列数据，30秒能解决的问题没必要写 Python 脚本。
+**记住**：awk 最大的价值在于**不需要写循环**就能处理列数据，30 秒能解决的问题没必要写 Python 脚本。
 

@@ -7,7 +7,7 @@
  * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
 -->
 
-- [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts快捷键)
+- [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts 快捷键)
   - [1.1. Folder](#11-folder)
   - [1.2. Terminal](#12-terminal)
   - [1.3. Edition](#13-edition)
@@ -21,10 +21,10 @@
     - [2.1.3. 🔢 行号与光标位置（主要用于调试配置）](#213--行号与光标位置主要用于调试配置)
     - [2.1.4. 🧩 其他变量](#214--其他变量)
   - [2.2. Cursor](#22-cursor)
-- [3. Panel(面板)](#3-panel面板)
-- [4. workspace(工作空间)](#4-workspace工作空间)
-- [5. Debugging(调试)](#5-debugging调试)
-- [6. Plugins(插件)](#6-plugins插件)
+- [3. Panel(面板)](#3-panel 面板)
+- [4. workspace(工作空间)](#4-workspace 工作空间)
+- [5. Debugging(调试)](#5-debugging 调试)
+- [6. Plugins(插件)](#6-plugins 插件)
   - [6.1. Go](#61-go)
 - [7. References](#7-references)
 
@@ -64,7 +64,8 @@
 - `Ctrl Shift o` 当前文件中搜索 symbols（匹配到相关的）
 - `Ctrl T` 当前 workspace 中搜索 symbols
 - `Ctrl + B` 打开或者关闭整个视图
-- `Ctrl K Z` 切换禅模式(Toggle Zen Mode)，就可以把侧边栏、面板等全部隐藏。进入禅模式后，按 2次 Escape 键，退出禅模式。
+- `Ctrl K Z` 切换禅模式(Toggle Zen Mode)，就可以把侧边栏、面板等全部隐藏。进入禅模式后，按 2 次 Escape
+  键，退出禅模式。
 
 
 ## 1.4. Folding
@@ -84,10 +85,13 @@
 
 ## 1.6. Call Hierarchy
 
-VS Code 中有一个 `show call hierarchy` 的功能，显示代码之间的调用关系图。选定一个函数时，按下默认的快捷键  `Shift + Alt+H`，会显示选定的函数被谁调用或者选定的函数调用了哪些函数。`show call hierarchy`  提供了两个选项来决定如何显示代码之间的调用关系：
+VS Code 中有一个 `show call hierarchy` 的功能，显示代码之间的调用关系图。选定一个函数时，按下默认的快捷键  `Shift +
+Alt+H`，会显示选定的函数被谁调用或者选定的函数调用了哪些函数。`show
+call hierarchy`  提供了两个选项来决定如何显示代码之间的调用关系：
 
 - `Show Outgoing Calls`：如果你选择一个函数，并使用 "Show Outgoing Calls" 功能，它会展示出该函数调用的其他函数或方法。
-- `Show Incoming Calls"`：如果你选择一个函数，并使用 "Show Incoming Calls" 功能，它会展示哪些函数或方法调用了当前选定的函数。
+- `Show Incoming Calls"`：如果你选择一个函数，并使用 "Show Incoming Calls"
+  功能，它会展示哪些函数或方法调用了当前选定的函数。
 
 
 # 2. Configures
@@ -103,7 +107,11 @@ VS Code 是以工作区（workspace）来管理工程的，每个工作区下有
 VS Code 环境修改支持两种方式：
 
 1. `Json` 文件中修改。环境设置都放在 `setting.son` 文件中。
-   - 每个用户有个用户级别的环境配置文件，windows 下位于 `C:\Users\user_name\AppData\Roaming\Code\User\settings.json` ，其中 `user_name` 为当前用户的名字，要根据具体的用户去找到对应的路径。 VS Code 中用快捷键 `Ctrl+Shift+P` 打开命令面板，在面板中输入 `Preferences: Open Settings (JSON)` 并选择该选项，将会打开用户级别的设置`settings.json` 文件，然后就可以按照自己的需求编写自己的配置环境。
+   - 每个用户有个用户级别的环境配置文件，windows 下位于 `C:\Users\user_name\AppData\Roaming\Code\User\settings.json`
+     ，其中 `user_name`
+     为当前用户的名字，要根据具体的用户去找到对应的路径。 VS Code 中用快捷键 `Ctrl+Shift+P`
+     打开命令面板，在面板中输入 `Preferences: Open Settings (JSON)`
+     并选择该选项，将会打开用户级别的设置`settings.json` 文件，然后就可以按照自己的需求编写自己的配置环境。
    - ``settings.json`文件的优先级：用户级（user） > 工作区(workspace)。
 
    下面是个人一些常用的设置，是通过 `Json` 格式修改的。
@@ -129,11 +137,14 @@ VS Code 环境修改支持两种方式：
    },
    ```
 
-2. 直接通过界面 `UI` 的方式去修改，是图形化的操作，比较简单，通过快捷键 `Ctrl + ,` 打开配置修改的 `UI` 界面，然后再去修改具体的配置。
+2. 直接通过界面 `UI` 的方式去修改，是图形化的操作，比较简单，通过快捷键 `Ctrl + ,` 打开配置修改的 `UI`
+   界面，然后再去修改具体的配置。
 
 ## 2.1. Predefined Variable
 
-在 Visual Studio Code（VS Code）中，**预定义变量（Predefined Variables）** 是一组可以在 `launch.json`、`tasks.json`、`settings.json` 以及某些扩展配置中使用的占位符。它们在运行时会被 VS Code 自动替换为实际的值（如当前文件路径、工作区路径等）。
+在 Visual Studio Code（VS Code）中，**预定义变量（Predefined Variables）** 是一组可以在
+`launch.json`、`tasks.json`、`settings.json`
+以及某些扩展配置中使用的占位符。它们在运行时会被 VS Code 自动替换为实际的值（如当前文件路径、工作区路径等）。
 
 ### 2.1.1. 📁 通用路径相关变量
 
@@ -159,7 +170,8 @@ VS Code 环境修改支持两种方式：
 | `${date}`     | 当前日期，格式如：`2025-12-16`。                             |
 | `${time}`     | 当前时间，格式如：`23:08:00`。                               |
 
-> ⚠️ 注意：`${datetime}`、`${date}`、`${time}` 在较新版本的 VS Code 中才支持（通常用于 `tasks.json` 的 `label` 或 `args` 中）。
+> ⚠️ 注意：`${datetime}`、`${date}`、`${time}` 在较新版本的 VS Code 中才支持（通常用于 `tasks.json` 的 `label` 或
+> `args` 中）。
 
 ### 2.1.3. 🔢 行号与光标位置（主要用于调试配置）
 
@@ -232,7 +244,8 @@ VS Code 环境修改支持两种方式：
 
 # 3. Panel(面板)
 
-使用 `Ctrl Shift P` 或 `F1` 打开命令行的面板（panel），命令面板是根据输入框里的第一个字符来决定提供什么功能的，不同的字符执行的功能不一样。
+使用 `Ctrl Shift P` 或 `F1` 打开命令行的面板（panel），命令面板是根据输入框里的第一个字符来决定提供什么功能的，不同的
+字符执行的功能不一样。
 
 - `>`：提供所有的命令。
 - `@`：扫描当前文件，显示和跳转文件中的符号（Symbols），在 @ 符号后添加冒号：则可以把符号们按类别归类。
@@ -246,17 +259,22 @@ VS Code 环境修改支持两种方式：
 
 # 4. workspace(工作空间)
 
-VS Code 则选择了一种相对轻量，而且大家都易于理解的方式，那就是所有的操作都基于文件和文件夹。当你打开一个文件夹，VS Code 的核心功能就会对这个文件夹进行分析，并提供对应的功能。
+VS Code 则选择了一种相对轻量，而且大家都易于理解的方式，那就是所有的操作都基于文件和文件夹。当你打开一个文件夹，VS
+Code 的核心功能就会对这个文件夹进行分析，并提供对应的功能。
 
-注意工作台最下方的状态栏，当 VS Code 没有打开任何文件夹的时候，它的颜色是紫色的。而如果在工作台中打开了某个文件夹，状态栏的颜色就会变成蓝色。
+注意工作台最下方的状态栏，当 VS Code 没有打开任何文件夹的时候，它的颜色是紫色的。而如果在工作台中打开了某个文件夹，状
+态栏的颜色就会变成蓝色。
 
 
 
 # 5. Debugging(调试)
 
-VS Code 是把调试功能的最终实现交给插件来完成的。VS Code 提供了一套通用的图形界面和交互方式，比如怎么创建断点、如何添加条件断点、如何查看当前调试状态下参数的值，等等。无论你使用哪个编程语言或者调试器，这一套交互流程都是相似的。
+VS Code 是把调试功能的最终实现交给插件来完成的。VS Code 提供了一套通用的图形界面和交互方式，比如怎么创建断点、如何添加
+条件断点、如何查看当前调试状态下参数的值，等等。无论你使用哪个编程语言或者调试器，这一套交互流程都是相
+似的。
 
-VS Code 为插件作者提供了一套统一的接口，叫做 Debug Adapter Protocol（DAP）。当用户在界面上完成一系列调试相关的操作时，VS Code 则通过 `DAP` 唤起调试插件，由插件完成最终的操作。
+VS Code 为插件作者提供了一套统一的接口，叫做 Debug Adapter Protocol（DAP）。当用户在界面上完成一系列调试相关的操作时，
+VS Code 则通过 `DAP` 唤起调试插件，由插件完成最终的操作。
 
 下面这张 VS Code DAP 的流程图也很好地做出了解释：
 
@@ -266,22 +284,31 @@ VS Code 为插件作者提供了一套统一的接口，叫做 Debug Adapter Pro
 
 插件架构
 
-VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electron 实现跨平台的，而 Electron 则是基于 Chromium 和 Node.js，比如 VS Code 的界面，就是通过 Chromium 进行渲染的。同时， VS Code 是多进程架构，当 VS Code 第一次被启动时会创建一个主进程（main process），然后每个窗口，都会创建一个渲染进程（ Renderer Process）。与此同时，VS Code 会为每个窗口创建一个进程专门来执行插件，也就是 Extension Host。
+VS Code 主要用 Javascript 和 Node.js 来开发的。VS Code 是通过 Electron 实现跨平台的，而 Electron 则是基于 Chromium 和
+Node.js，比如 VS Code
+的界面，就是通过 Chromium 进行渲染的。同时， VS Code 是多进程架构，当 VS Code 第一次被启动时会创建一个主进程（main
+process），然后每个窗口，都会创建一个渲染进程（ Renderer
+Process）。与此同时，VS Code 会为每个窗口创建一个进程专门来执行插件，也就是 Extension Host。
 
-除了这三个主要的进程以外，还有两种特殊的进程。第一种是调试进程，VS Code 为调试器专门创建了 Debug Adapter 进程，渲染进程会通过 VS Code Debug Protocol 跟 Debug Adapter 进程通讯。另一种则是 Language Server。
+除了这三个主要的进程以外，还有两种特殊的进程。第一种是调试进程，VS Code 为调试器专门创建了 Debug Adapter
+进程，渲染进程会通过 VS Code Debug Protocol 跟 Debug Adapter
+进程通讯。另一种则是 Language Server。
 
 下面是 VS Code 的进程架构图
 
 ![](figures/vscode-framework.png)
 
-上图中，绿色的就是插件进程 Extension Host 了。VS Code 创建 Extension Host 进程的方式，就是创建一个新的 Electron 进程，并且以 Node.js 的形式运行。也就是说，这个进程就是一个完整的 Node.js 进程，Node.js 版本就是你使用的 Electron 中的 Node.js 。
+上图中，绿色的就是插件进程 Extension Host 了。VS Code 创建 Extension Host 进程的方式，就是创建一个新的 Electron
+进程，并且以 Node.js 的形式运行。也就是说，这个进程就是一个完整的
+Node.js 进程，Node.js 版本就是你使用的 Electron 中的 Node.js 。
 
 
 # 6. Plugins(插件)
 
 ## 6.1. Go
 
-查看 VS Code 中所有 Go 内建(built-in)的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert Snippet`，就可以看到所有内置的代码片段了。
+查看 VS Code 中所有 Go 内建(built-in)的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert
+Snippet`，就可以看到所有内置的代码片段了。
 
 | Abbreviation | Description                                                  |
 | ------------ | ------------------------------------------------------------ |

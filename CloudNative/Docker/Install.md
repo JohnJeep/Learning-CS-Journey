@@ -11,7 +11,7 @@
 
 ## 更换方法
 
-Ubuntu采用`apt`作为软件安装工具，其镜像源列表记录在`/etc/apt/source.list`文件中。
+Ubuntu 采用`apt`作为软件安装工具，其镜像源列表记录在`/etc/apt/source.list`文件中。
 首先将`source.list`复制为`source.list.bak`备份，然后将`source.list`内容改为需要的镜像源列表即可。
 修改完成后保存`source.list`文件，执行：
 
@@ -25,7 +25,7 @@ sudo apt update
 
 本节均为 Ubuntu 20.04 的镜像源列表。若为其他版本，将所有`focal`更改为其他版本代号即可。
 
-常用的Ubuntu版本代号如下：
+常用的 Ubuntu 版本代号如下：
 
 ```sh
 Ubuntu 22.04：jammy
@@ -36,7 +36,8 @@ Ubuntu 16.04：xenial
 
 Ubuntu 通常采用“形容词+小动物”作为版本代号（默认的壁纸），在镜像源列表中只有第一个词。
 此外，默认注释了代码源以提高速度，注释了预发布软件源（可能不稳定）。如有需要可以取消注释。
-建议将所有常用镜像源保存在`/etc/apt`目录下，并命名为类似`source.list.aliyun`的形式，需要使用时直接复制替换`source.list`文件即可。
+建议将所有常用镜像源保存在`/etc/apt`目录下，并命名为类似`source.list.aliyun`的形式，需要使用时直接复制替换`source.list
+`文件即可。
 
 ### 阿里云
 
@@ -92,7 +93,7 @@ deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe 
 # deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
 ```
 
-### 网易163
+### 网易 163
 
 ```sh
 deb http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse
@@ -120,7 +121,9 @@ deb http://mirrors.163.com/ubuntu/ focal-backports main restricted universe mult
 
 ## 5.1. CenOS7 下安装
 
-Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Linux 内核环境。Docker 实际上是在已运行的 Linux 下制造了一个隔离的文件环境，因此它执行的效率几乎等同于所部署的 Linux 主机。Docker 必须部署在带有Linux 内核的系统上。
+Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Linux 内核环境。Docker 实际上是在已运行的 Linux
+下制造了一个隔离的文件环境，因此它执行的效率几乎等同于所部署的 Linux 主机。Docker
+必须部署在带有 Linux 内核的系统上。
 
 安装前提条件
 
@@ -142,11 +145,12 @@ Linux redis_181 3.10.0-1160.49.1.el7.x86_64 #1 SMP Tue Nov 30 15:51:32 UTC 2021 
 
 ## 5.2. Windows 下安装
 
-Docker 官网介绍 Windows下安装 Docker有两种方式，一种是在 Windows 子系统（WSL）中安装 Docker，另一种在带有 Windows 虚拟化技术的 Windows 容器中安装。
+Docker 官网介绍 Windows 下安装 Docker 有两种方式，一种是在 Windows 子系统（WSL）中安装 Docker，另一种在带有 Windows
+虚拟化技术的 Windows 容器中安装。
 
 ### 5.2.1. WSL 下安装
 
-WSL 已安装好后，在WSL2 里面的终端按照下面的步骤执行：
+WSL 已安装好后，在 WSL2 里面的终端按照下面的步骤执行：
 
 1. 配置 docker 源
 
@@ -182,7 +186,7 @@ sudo apt-get remove docker docker-engine docker-ce docker.io
 sudo apt-get update
 ```
 
-添加docker的使用的公钥
+添加 docker 的使用的公钥
 
 ```shell
 # Add Docker's official GPG key:
@@ -200,24 +204,24 @@ echo \
 sudo apt-get update
 ```
 
-安装docker-ce
+安装 docker-ce
 ```
 sudo apt-get install -y docker-ce
 ```
 
-启动docker
+启动 docker
 ```
 sudo systemctl status docker
 ```
 
-运行hello-world
+运行 hello-world
 ```sh
 sudo docker run hello-world
 ```
 
 
 # Docker mirror
-- [yandex.ru](https://mirror.yandex.ru/): 俄罗斯Yandex镜像网站
+- [yandex.ru](https://mirror.yandex.ru/): 俄罗斯 Yandex 镜像网站
    ```sh
    # 用法
    docker pull cr.yandex/mirror/nginx

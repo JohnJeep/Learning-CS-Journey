@@ -26,7 +26,9 @@ int open(const char *pathname, int flags, mode_t mode);
 
 `fopen()` 是 C 语言中的库函数，在不同的操作系统中调用不同的内核 `API`， 返回的是一个指向 `FILE` 结构体的指针。
 
-Linux 中实底层源码中的 `FILE` 结构体是 `_IO_FILE` 结构体的别名，其源码为：`typedef struct _IO_FILE FILE;`，最终调用的是 Linux 操作系统的 API 函数 `open`。其 `_IO_FILE` 结构体源码
+Linux 中实底层源码中的 `FILE` 结构体是 `_IO_FILE` 结构体的别名，其源码为：`typedef struct _IO_FILE
+FILE;`，最终调用的是 Linux 操作系统的 API 函数 `open`。其
+`_IO_FILE` 结构体源码
 
 ```cpp
 struct _IO_FILE {
@@ -73,7 +75,8 @@ struct _IO_FILE {
 };
 ```
 
-而 windows 中实底层源码中的 `FILE` 结构体是 `_iobuf`，最终调用的是 Windows 操作系统的 API 函数 `CreateFile`。其 `_iobuf` 源码为
+而 windows 中实底层源码中的 `FILE` 结构体是 `_iobuf`，最终调用的是 Windows 操作系统的 API 函数 `CreateFile`。其
+`_iobuf` 源码为
 
 ```cpp
 typedef struct _iobuf
@@ -141,11 +144,12 @@ int main(void)
 1. Windows 下 `CreateFile` 可以通过参数来制定，保证读写是否线程安全，而 `fopen` 则不可以。
 2. `fopen` 工作在用户空间，`open` 是 Linux 的系统调用，所以工作在内核空间。
 
-不同的进程同时访问一个文件，给文件加锁是有效的；而一个进程中的多个线程或协程同时对同一个文件进行加锁会互相覆盖掉，是无效的。
+不同的进程同时访问一个文件，给文件加锁是有效的；而一个进程中的多个线程或协程同时对同一个文件进行加锁会互相覆盖掉，是无
+效的。
 
 
 ## Reference
 
 - [Windows API](https://zh.wikipedia.org/wiki/Windows_API)
-- [关于C++：为什么std::fstreams这么慢？ | 码农家园](https://www.codenong.com/26095160/)
-- [C/C++读写文件的几种方法fstream fopen、fwrite()、fread()操作](https://www.cnblogs.com/ZY-Dream/p/11181924.html)
+- [关于 C++：为什么 std::fstreams 这么慢？ | 码农家园](https://www.codenong.com/26095160/)
+- [C/C++读写文件的几种方法 fstream fopen、fwrite()、fread()操作](https://www.cnblogs.com/ZY-Dream/p/11181924.html)
