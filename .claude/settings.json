@@ -1,5 +1,11 @@
 {
   "enabledPlugins": {
     "clangd-lsp@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "Edit",
+      "Bash(*)"
+    ]
   }
 }
