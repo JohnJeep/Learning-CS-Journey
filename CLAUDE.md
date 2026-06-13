@@ -1,10 +1,8 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## What this repo is
 
-A personal CS knowledge base (notes, code examples, and reference material) spanning hardware, systems, languages, databases, cloud-native, and AI topics. The primary output is a Hexo static blog, auto-synced from the Markdown files in this repo.
+A personal CS knowledge base (notes, code examples, and reference material) spanning hardware, systems, languages, \
+databases, cloud-native, and AI topics. The primary output is a Hexo static blog, \
+auto-synced from the Markdown files in this repo.
 
 ## Blog / sync workflow
 
@@ -40,7 +38,8 @@ npm run build:ci     # hexo clean + hexo generate → ./public/
 
 ### CI / deploy
 
-Pushing to `master` triggers GitHub Actions (`.github/workflows/`), which runs `add_frontmatter.py --clean`, builds the Hexo site, and deploys to `JohnJeep/JohnJeep.github.io` via `PAGES_REPO_TOKEN`.
+Pushing to `master` triggers GitHub Actions (`.github/workflows/`), which runs `add_frontmatter.py --clean`, \
+builds the Hexo site, and deploys to `JohnJeep/JohnJeep.github.io` via `PAGES_REPO_TOKEN`.
 
 ## Repository structure
 
@@ -67,16 +66,13 @@ All other top-level directories (`AI`, `Architecture`, `Assembly`, `CloudNative`
 ## Document conventions
 
 From `convention.md`:
-- One space between Chinese and Latin characters.
-- Chinese punctuation (commas, periods) uses half-width characters.
-- Colons between Chinese and English use English half-width `:`.
-- Follow [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines) typesetting rules.
 
 ---
 
 ## Coding behavior guidelines
 
-Derived from Andrej Karpathy's observations on LLM coding pitfalls. These apply whenever writing or editing code in this repo (`add_frontmatter.py`, Go/Cpp/C examples, Hexo config, shell scripts, etc.).
+Derived from Andrej Karpathy's observations on LLM coding pitfalls. These apply whenever writing or editing code \
+in this repo (`add_frontmatter.py`, Go/Cpp/C examples, Hexo config, shell scripts, etc.).
 
 **Tradeoff:** These guidelines bias toward caution over speed. Use judgment for trivial one-liners.
 

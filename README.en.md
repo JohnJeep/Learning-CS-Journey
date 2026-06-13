@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-04-19
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:21:31
+ * @LastEditTime: 2026-06-13 16:42:09
  * @Description: English project overview
  * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
@@ -121,25 +121,17 @@ with a strong focus on understanding both how things work and why they work.
 
 ### Chip and CPU Architecture
 
-Directory: `Architecture/`
-
 Learning notes on major architectures including x86, ARM, and NVIDIA.
 
 ### Assembly Language
-
-Directory: `Assembly/`
 
 - [Assembly Fundamentals](Assembly/assembly.md): registers, addressing modes, and common instructions.
 
 ### Embedded Development
 
-Directory: `Embedded/`
-
 STM32-focused notes and code (F103 / F207 / F407), including peripherals, drivers, and RTOS-related topics.
 
 ### GNU Toolchain
-
-Directory: `GNU/`
 
 Core GNU ecosystem topics such as GCC, glibc, and ABI details.
 
@@ -148,52 +140,6 @@ Core GNU ecosystem topics such as GCC, glibc, and ABI details.
 ## Programming Languages
 
 ### C
-
-Directory: `C/`
-
-C is the first language in this journey. The notes focus on practical and low-level essentials
-such as memory, pointers, structs, callbacks, and common pitfalls.
-
-<details>
-<summary>Expand key C topics</summary>
-
-**Keywords and specifiers**
-- [volatile](C/6_volatile.md)
-- [const](C/10_const.md)
-- [restrict](C/11_restrict.md)
-- [extern](C/12_extern.md)
-- [static](C/38_static.md)
-- [typedef](C/17_typedef.md)
-- [register and auto](C/33_register_auto.md)
-
-**Pointers and memory**
-- [Pointer basics](C/21_pointer.md)
-- [Function pointers](C/9_pointer_function_function_pointer.md)
-- [Arrays and pointers](C/24_array_pointer.md)
-- [Callbacks](C/37_callback_function.md)
-- [Memory layout](C/30_memory.md)
-- [memset](C/14_memset.md)
-- [memcpy vs strncpy](C/15_strncpy_memcpy.md)
-- [memcmp vs strcmp](C/16_memcmp_strcmp.md)
-- [Struct alignment](C/18_struct_bytealigned.md)
-- [packed attribute](C/28___attribute__((packed)).md)
-- [sizeof vs strlen](C/31_sizeof_strlen.md)
-
-**Fundamentals and advanced practice**
-- [Character encoding](C/2_character_encoding.md)
-- [Byte order](C/3_byte_order.md)
-- [Segmentation fault analysis](C/7_segment_fault.md)
-- [Enumerations](C/22_enumerations.md)
-- [State machines](C/23_state_machine.md)
-- [Thread pool](C/27_thread_pool.md)
-- [Dynamic libraries](C/40_dynamic_library.md)
-- [Coding conventions](C/0_code_of_conduct.md)
-
-</details>
-
-### C++
-
-Directory: `Cpp/`
 
 Systematic notes from fundamentals to modern C++ features, STL internals, memory management, and concurrency.
 
@@ -206,8 +152,6 @@ Systematic notes from fundamentals to modern C++ features, STL internals, memory
 - [Move Semantics](Cpp/MoveSemantics.md), [Smart Pointers](Cpp/SmartPointer.md), [Style Guide](Cpp/StyleGuide.md)
 
 ### Go
-
-Directory: `Go/`
 
 Comprehensive coverage from language basics to runtime internals.
 
@@ -232,8 +176,6 @@ Comprehensive coverage from language basics to runtime internals.
 ---
 
 ## Operating Systems
-
-Directory: `OS/`
 
 A structured OS learning path combining top courses and classic references.
 
@@ -261,8 +203,6 @@ A structured OS learning path combining top courses and classic references.
 
 ## Computer Networks
 
-Directory: `Network/`
-
 - [Network Fundamentals](Network/NetworkPrimer.md)
 - [Network Terms and Abbreviations](Network/AbbrNetworkTerms.md)
 - [HTTP Basics](Network/HTTP.md)
@@ -277,15 +217,11 @@ Directory: `Network/`
 
 ## Data Structures and Algorithms
 
-Directory: `DataStructure/`
-
 - [Data Structures and Algorithms Notes](DataStructure/DataStructure.md)
 
 ---
 
 ## Design Patterns
-
-Directory: `DesignPattern/`
 
 - [23 Design Patterns in C++](DesignPattern/DesignPattern.md)
 
@@ -305,8 +241,6 @@ Directory: `DesignPattern/`
 
 ### Cloud Native
 
-Directory: `CloudNative/`
-
 | Stack | Notes |
 |------|------|
 | Containerization | Docker, Kubernetes |
@@ -317,8 +251,6 @@ Directory: `CloudNative/`
 
 ### Distributed Systems
 
-Directory: `Distributed/`
-
 - MIT 6.824-related learning path and references.
 - Topics include microservices, API gateway, and high-availability practices.
 
@@ -328,20 +260,14 @@ Directory: `Distributed/`
 
 ### AI
 
-Directory: `AI/`
-
 - [AIGC Overview](AI/AIGC.md)
 - [Ollama](AI/Ollama.md): local LLM deployment and usage notes
 
 ### Autonomous Driving
 
-Directory: `AutoDrive/`
-
 - [Autoware](AutoDrive/Autoware.md)
 
 ### Robotics
-
-Directory: `Robotics/`
 
 ROS2-focused learning path from fundamentals to practical workflows:
 
@@ -355,8 +281,6 @@ ROS2-focused learning path from fundamentals to practical workflows:
 
 ## Linux Systems
 
-Directory: `Linux/`
-
 - [Linux Fundamentals](Linux/linux-primer.md)
 - [Compile and Link](Linux/compile-link.md)
 - [GDB](Linux/gdb.md), [VIM](Linux/vim.md)
@@ -369,8 +293,6 @@ Directory: `Linux/`
 
 ### Version Control
 
-Directory: `Git-SVN/`
-
 - [Git: From Basics to Internals](Git-SVN/Git.md)
 - [SVN](Git-SVN/SVN.md)
 - [Install and Setup](Git-SVN/Install.md)
@@ -381,8 +303,6 @@ Directory: `Git-SVN/`
 - [Git Internals](Git-SVN/Internals.md)
 
 ### Industrial Protocols
-
-Directory: `Protocol/`
 
 Covers Modbus, Omron, Siemens, Beckhoff, Fanuc, WebRTC, SMTP, and related protocol notes.
 
@@ -398,8 +318,6 @@ Covers Modbus, Omron, Siemens, Beckhoff, Fanuc, WebRTC, SMTP, and related protoc
 | Learning Resources | [Useful websites](StudyTool/WebsiteReferences.md) |
 
 ### Documentation and Knowledge Management
-
-Directory: `Markdown/`
 
 - [Typora guide](Markdown/TyporaMarkdown.md)
 - [LaTeX formulas](Markdown/LaTex.md)
