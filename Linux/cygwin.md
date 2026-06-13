@@ -8,12 +8,12 @@
 --> 
 
 ## 1.1. Command(命令)
-- 查看当前cygwin版本：`cygcheck -c cygwin`
-- 显示Windows下的进程 `ps -aW` 
+- 查看当前 cygwin 版本：`cygcheck -c cygwin`
+- 显示 Windows 下的进程 `ps -aW` 
 - `iconv` 将文本文件从一种字符编码转换为另一种字符编码  ` iconv -f  输入编码  -t  输出编码  输入文件 > 输出文件`
 - `cygcheck` 包管理，查找或者显示包的信息
 
 ## 1.2. References
 
-- [Cygwin的使用方法](https://blog.csdn.net/springone/article/details/676667)
-- [Cygwin工具使用入门教程](https://www.linuxidc.com/Linux/2019-02/156967.htm)
+- [Cygwin 的使用方法](https://blog.csdn.net/springone/article/details/676667)
+- [Cygwin 工具使用入门教程](https://www.linuxidc.com/Linux/2019-02/156967.htm)

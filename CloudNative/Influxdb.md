@@ -9,26 +9,28 @@
 
 # 1. InfluxDB
 
-InfluxDB 是一个高性能的时序数据库，专门用于处理高写入负载的数据存储，尤其是时间序列数据，比如物联网传感器数据、性能监控数据和实时分析数据等。以下是InfluxDB的一些基本概念和操作介绍：
+InfluxDB 是一个高性能的时序数据库，专门用于处理高写入负载的数据存储，尤其是时间序列数据，比如物联网传感器数据、性能监
+控数据和实时分析数据等。以下是 InfluxDB 的一些基本概念和操作介绍：
 
-### 什么是InfluxDB？
+### 什么是 InfluxDB？
 
-InfluxDB 是由InfluxData公司开发的一款开源时序数据库（Time Series Database，TSDB），设计用于高性能的写入和查询操作，特别是针对时间序列数据。它的主要特点包括：
+InfluxDB 是由 InfluxData 公司开发的一款开源时序数据库（Time Series
+Database，TSDB），设计用于高性能的写入和查询操作，特别是针对时间序列数据。它的主要特点包括：
 
 - **高性能写入和查询**：适用于高吞吐量的数据写入和快速的查询操作。
 - **Schemaless（无模式）**：不需要预定义数据模式，数据可以灵活地添加。
 - **内置的数据压缩和持久化**：有效地存储和管理大量数据。
-- **丰富的查询语言（InfluxQL）**：提供类SQL的查询语言，便于数据操作和分析。
+- **丰富的查询语言（InfluxQL）**：提供类 SQL 的查询语言，便于数据操作和分析。
 
 ### 基本概念
 
-1. **Database（数据库）**：InfluxDB中数据的集合，每个数据库包含多个测量、序列和数据点。
+1. **Database（数据库）**：InfluxDB 中数据的集合，每个数据库包含多个测量、序列和数据点。
 2. **Measurement（测量）**：相当于传统数据库中的表，用来存储一类数据。
 3. **Tag（标签）**：用于数据的元数据，类似于数据库中的索引，帮助快速查询和过滤数据。标签是字符串类型。
 4. **Field（字段）**：存储实际数据，字段可以是多种类型（整数、浮点数、字符串等）。
 5. **Timestamp（时间戳）**：每个数据点都有一个时间戳，表示数据记录的时间。
 
-# 2. 连接InfluxDB
+# 2. 连接 InfluxDB
 
 ```sql
 influx --username 'admin' --password 'password'
@@ -38,7 +40,8 @@ influx --username 'admin' --password 'password'
 
 1. 创建管理员用户
 
-首先，你需要创建一个具有管理员权限的用户。这通常是在首次设置InfluxDB时完成的。如果你还没有创建管理员用户，可以使用以下命令：
+首先，你需要创建一个具有管理员权限的用户。这通常是在首次设置 InfluxDB
+时完成的。如果你还没有创建管理员用户，可以使用以下命令：
 
 ```sql
 CREATE USER admin WITH PASSWORD 'adminpassword' WITH ALL PRIVILEGES
@@ -46,7 +49,8 @@ CREATE USER admin WITH PASSWORD 'adminpassword' WITH ALL PRIVILEGES
 
 2. 启用认证
 
-确保在InfluxDB配置文件中启用了认证。配置文件通常位于 `/etc/influxdb/influxdb.conf`（Linux）或 `/usr/local/etc/influxdb.conf`（MacOS）。
+确保在 InfluxDB 配置文件中启用了认证。配置文件通常位于 `/etc/influxdb/influxdb.conf`（Linux）或
+`/usr/local/etc/influxdb.conf`（MacOS）。
 
 找到 `[http]` 部分，并确保以下行被设置：
 
@@ -55,7 +59,7 @@ CREATE USER admin WITH PASSWORD 'adminpassword' WITH ALL PRIVILEGES
   auth-enabled = true
 ```
 
-重启InfluxDB服务：
+重启 InfluxDB 服务：
 
 ```bash
 service influxdb restart
@@ -78,7 +82,7 @@ GRANT ALL ON iotdata TO iottest
 
 4. 连接并使用认证
 
-确保你在连接InfluxDB时使用了正确的用户名和密码。如果你使用的是CLI，可以在连接时指定用户：
+确保你在连接 InfluxDB 时使用了正确的用户名和密码。如果你使用的是 CLI，可以在连接时指定用户：
 
 ```bash
 influx -username 'admin' -password 'adminpassword'
@@ -107,15 +111,17 @@ SHOW GRANTS FOR "iottest"
 
 ## 2.2. influxdb 账户密码忘记
 
-如果你忘记了InfluxDB的账户密码，可以通过以下几种方式解决问题，具体取决于你是否能够直接访问InfluxDB的配置文件和数据文件。
+如果你忘记了 InfluxDB 的账户密码，可以通过以下几种方式解决问题，具体取决于你是否能够直接访问 InfluxDB
+的配置文件和数据文件。
 
 **停用认证临时修改密码**
 
-这是最常用的解决方案，适用于你能够访问InfluxDB的配置文件并且可以重启InfluxDB服务。
+这是最常用的解决方案，适用于你能够访问 InfluxDB 的配置文件并且可以重启 InfluxDB 服务。
 
 步骤：
 
-1. **编辑配置文件**： 打开InfluxDB的配置文件，通常位于 `/etc/influxdb/influxdb.conf`（Linux）或 `/usr/local/etc/influxdb.conf`（MacOS）。
+1. **编辑配置文件**： 打开 InfluxDB 的配置文件，通常位于 `/etc/influxdb/influxdb.conf`（Linux）或
+   `/usr/local/etc/influxdb.conf`（MacOS）。
 
    找到 `[http]` 部分，并将 `auth-enabled` 设置为 `false`：
 
@@ -124,13 +130,13 @@ SHOW GRANTS FOR "iottest"
      auth-enabled = false
    ```
 
-2. **重启InfluxDB服务**：
+2. **重启 InfluxDB 服务**：
 
    ```bash
    service influxdb restart
    ```
 
-3. **修改用户密码**： 现在你可以不使用认证直接连接到InfluxDB：
+3. **修改用户密码**： 现在你可以不使用认证直接连接到 InfluxDB：
 
    ```bash
    influx
@@ -149,7 +155,7 @@ SHOW GRANTS FOR "iottest"
    SET PASSWORD FOR "iottest" = 'newpassword'
    ```
 
-4. **重新启用认证**： 编辑配置文件，将 `auth-enabled` 设置为 `true`，然后重启InfluxDB服务：
+4. **重新启用认证**： 编辑配置文件，将 `auth-enabled` 设置为 `true`，然后重启 InfluxDB 服务：
 
    ```conf
    [http]
@@ -184,7 +190,7 @@ use mydb
 
 ## 2.2. 插入数据
 
-在InfluxDB中，数据是以时间序列的形式存储的，每条数据称为一个点（point）。一个点包含以下几个部分：
+在 InfluxDB 中，数据是以时间序列的形式存储的，每条数据称为一个点（point）。一个点包含以下几个部分：
 
 - measurement（测量）：相当于数据库中的表。
 - tags（标签）：用于存储元数据，类似于数据库中的索引列。
@@ -205,7 +211,7 @@ INSERT temperature,location=office value=23.5 1622547800000000000
 
 ## 2.3. 查询数据
 
-你可以使用InfluxQL（类似于SQL的查询语言）来查询数据。基本查询语法如下：
+你可以使用 InfluxQL（类似于 SQL 的查询语言）来查询数据。基本查询语法如下：
 
 ```sql
 SELECT field_key FROM measurement WHERE tag_key='tag_value'
@@ -227,7 +233,7 @@ SELECT value FROM temperature WHERE location='office' AND time > now() - 1h
 
 1. **根据条件查询**
 
-   可以使用 `WHERE` 子句根据条件查询数据。例如，查询办公室温度高于24度的数据：
+   可以使用 `WHERE` 子句根据条件查询数据。例如，查询办公室温度高于 24 度的数据：
 
    ```sql
    SELECT * FROM temperature WHERE location = 'office' AND value > 24
@@ -235,7 +241,7 @@ SELECT value FROM temperature WHERE location='office' AND time > now() - 1h
 
 2. **限制返回结果的数量**
 
-   使用 `LIMIT` 子句限制返回结果的数量。例如，只返回最近的5条记录：
+   使用 `LIMIT` 子句限制返回结果的数量。例如，只返回最近的 5 条记录：
 
    ```sql
    SELECT * FROM temperature LIMIT 5
@@ -243,7 +249,7 @@ SELECT value FROM temperature WHERE location='office' AND time > now() - 1h
 
 3. **按时间范围查询**
 
-   使用 `time` 字段按时间范围查询数据。例如，查询过去1小时的数据：
+   使用 `time` 字段按时间范围查询数据。例如，查询过去 1 小时的数据：
 
    ```sql
    SELECT * FROM temperature WHERE time > now() - 1h
@@ -283,7 +289,7 @@ DROP MEASUREMENT measurement_name
 DROP DATABASE database_name
 ```
 
-## 2.5. 操作MEASUREMENTS(表)
+## 2.5. 操作 MEASUREMENTS(表)
 
 ### 2.5.1. 所有表
 

@@ -28,9 +28,10 @@ Why is the IP service so simple?
 1.  让网络保持简单、最小化。更快、更简化的特性，使其降低维护成本，不需要经常升级。
 2.  端到端原则（end-to-end principle）：尽可能正在端主机中实现功能。
 3.  允许在顶部构建各种可靠（或不可靠）的服务。
-4.  工作于任何的链路层（link layer）：IP对下层链路层的期望很小，连接可以是无线的，也可以是有线的，不需要重传和拥塞控制。
+4.  工作于任何的链路层（link layer）：IP 对下层链路层的期望很小，连接可以是无线的，也可以是有线的，不需要重传和拥塞控
+    制。
 
-**什么是Reliable byte stream?（可靠的字节流）**
+**什么是 Reliable byte stream?（可靠的字节流）**
 
 >  Sequence of bytes (in each direction) delivered in order, correctly
 
@@ -38,4 +39,4 @@ RPC: Remote Procedure Call
 
 更深入的细节
 
-1.  IP尝试阻止数据包永远循环。因为IP 路由器通过Internet逐跳转发数据包。
+1.  IP 尝试阻止数据包永远循环。因为 IP 路由器通过 Internet 逐跳转发数据包。

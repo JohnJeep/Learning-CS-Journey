@@ -43,14 +43,16 @@ comments: false
 	<h3>05. gRPC 基础与工程化落地</h3>
 	<p class="jj-featured-meta">阅读时长: 14 min · 难度: 中级</p>
 	<p>覆盖 gRPC 核心概念、通信模型与服务治理入口，适合云原生与微服务项目。</p>
-	<p><a href="/Cloud-Native/gRPC/synced/CloudNative/gRPC/gRPCFoundation/">开始阅读</a> · <a href="/categories/Cloud-Native/">同专栏</a></p>
+	<p><a href="/Cloud-Native/gRPC/synced/CloudNative/gRPC/gRPCFoundation/">开始阅读</a> · <a
+	href="/categories/Cloud-Native/">同专栏</a></p>
 </article>
 
 <article class="jj-featured-item">
 	<h3>06. 操作系统地址空间与地址转换</h3>
 	<p class="jj-featured-meta">阅读时长: 16 min · 难度: 中高级</p>
 	<p>理解虚拟内存核心机制，帮助你将系统原理映射到程序性能与稳定性问题上。</p>
-	<p><a href="/OS/Operating-System-Three-Easy-Pieces/Virtualization/synced/OS/Operating-System-Three-Easy-Pieces/Virtualization/15-Address-Translation">开始阅读</a> · <a href="/categories/OS/">同专栏</a></p>
+	<p><a href="/OS/Operating-System-Three-Easy-Pieces/Virtualization/synced/OS/Operating-System-Three-Easy-Pieces/Virtua
+	lization/15-Address-Translation">开始阅读</a> · <a href="/categories/OS/">同专栏</a></p>
 </article>
 
 </div>

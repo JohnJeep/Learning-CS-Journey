@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2022-04-09 10:35:45
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-13 16:33:27
+ * @LastEditTime: 2026-06-13 17:00:54
  * @Description: document convention
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
@@ -14,6 +14,7 @@
 - 中文与英文之间的冒号均采用英文半角字符；
 - 汉字与汉字之间的的花括号均采用中文半角字符，英文与英文之间均采用英文半角字符，汉字与英文之间采用英文半角字符；
 - Markdown 英文标题的开头英文单词的首字母大写，后面均小写；
+- 每行文本不超过 118，超过换行；
 
 
 ## 博客自动同步约定

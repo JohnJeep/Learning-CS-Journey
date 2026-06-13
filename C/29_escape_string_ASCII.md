@@ -23,4 +23,4 @@
 
 参考
 - [百度百科--ASCII](https://baike.baidu.com/item/ASCII/309296?fromtitle=ascii%E7%A0%81%E8%A1%A8&fromid=19660475&fr=aladdin)
-- [C语言转义字符表和ASCII码表](https://www.cnblogs.com/kanhaoniao/p/11323166.html)
+- [C 语言转义字符表和 ASCII 码表](https://www.cnblogs.com/kanhaoniao/p/11323166.html)

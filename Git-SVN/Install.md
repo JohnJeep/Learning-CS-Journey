@@ -9,15 +9,19 @@
 
 # Git 安装
 
-Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Linux/Unix、macOS 等不同的操作系统上。下面讲解在不同平台上的安装。
+Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Linux/Unix、macOS
+等不同的操作系统上。下面讲解在不同平台上的安装。
 
 # Windows
 
 # Linux
 
-电脑连接了网络，安装操作步骤很简单。比如在 Ubuntu 平台下，只需要执行 `sudo apt install git` 就可以；但在 Centos 系统中，使用 yum 源安装的 git 版本是1.7.1，太老了，Github 需要的 Git 版本最低都不能低于1.7.2 。
+电脑连接了网络，安装操作步骤很简单。比如在 Ubuntu 平台下，只需要执行 `sudo apt install git` 就可以；但在 Centos
+系统中，使用 yum 源安装的 git 版本是 1.7.1，太老了，Github
+需要的 Git 版本最低都不能低于 1.7.2 。
 
-所以我们一般不用上面的方法。而是下载 git 源码，编译安装，或者因环境的保密性，工作电脑没有连接外网，需要采用源码的形式安装 Git。
+所以我们一般不用上面的方法。而是下载 git 源码，编译安装，或者因环境的保密性，工作电脑没有连接外网，需要采用源码的形式
+安装 Git。
 
 源码的安装一般分为三部：配置(configure)、编译(make)、安装(make install)
 
@@ -27,7 +31,8 @@ Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Li
    yum remove git
    ```
 
-2. 首先下载 Git 相应的依赖环境，可以在一台有网的电脑中执行下面的命令，将下载好的依赖通过 ftp 工具上传到要安装的服务器中。
+2. 首先下载 Git 相应的依赖环境，可以在一台有网的电脑中执行下面的命令，将下载好的依赖通过 ftp
+   工具上传到要安装的服务器中。
    
    ```bash
    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
@@ -51,7 +56,8 @@ Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Li
    [root@KF-CFT-AP2 git-2.34.1]# ./configure --prefix=/usr/local/git
    ```
    
-    若不配置安装路径，操作系统把 git 默认安装到 `/usr/local/bin/` 路径下，配置了安装路径，执行 `./configure` 命令后，设置 git 的安装路径到指定的位置。 
+    若不配置安装路径，操作系统把 git 默认安装到 `/usr/local/bin/` 路径下，配置了安装路径，执行 `./configure`
+    命令后，设置 git 的安装路径到指定的位置。 
 
 6. 编译
    
@@ -59,7 +65,7 @@ Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Li
    [root@KF-CFT-AP2 git-2.34.1]# make
    ```
 
-7. 安装。执行make install 会将 git 安装到第三步指定的 `/usr/local/git` 路径下
+7. 安装。执行 make install 会将 git 安装到第三步指定的 `/usr/local/git` 路径下
    
    ```bash
    [root@KF-CFT-AP2 git-2.34.1]# make install
@@ -75,7 +81,9 @@ Git 是一个开源跨平台的版本管理软件，可以运行在 Windows、Li
    git version 2.34.1
    ```
 
-9. 配置环境变量。`/etc/profile` 文件的最后追加 git 的可执行文件的路径 `export PATH=/usr/local/git/bin:$PATH`，修改完成之后，执行 `source /etc/profile` 命令，生效配置文件。若在第五步中没有设置安装路径，则这一步骤可以省略。
+9. 配置环境变量。`/etc/profile` 文件的最后追加 git 的可执行文件的路径 `export
+   PATH=/usr/local/git/bin:$PATH`，修改完成之后，执行 `source /etc/profile`
+   命令，生效配置文件。若在第五步中没有设置安装路径，则这一步骤可以省略。
    
    ```bash
    vi /etc/profile

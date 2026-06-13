@@ -10,7 +10,7 @@
 
 # Jenkins 
 
-Jenkins是一款开源 CI&CD 软件，用于自动化各种任务，包括构建、测试和部署软件。
+Jenkins 是一款开源 CI&CD 软件，用于自动化各种任务，包括构建、测试和部署软件。
 
 ![](../figures/jenkins-workflow.png)
 
@@ -20,12 +20,14 @@ Jenkins是一款开源 CI&CD 软件，用于自动化各种任务，包括构建
 
 ![](../figures/ci-cd.png)
 
-开发人员将代码push到gitlab中，触发jenkins的自动pull拉取代码，通过maven编译、打包，然后通过执行shell脚本使docker构建镜像并push到私服（或者阿里云）仓库，此操作完成后jenkins服务器上再执行SSH命令登录到部署服务器，docker从仓库（私服）拉取镜像，启动容器。整个操作流程完成。
+开发人员将代码 push 到 gitlab 中，触发 jenkins 的自动 pull 拉取代码，通过 maven 编译、打包，然后通过执行 shell 脚本使
+docker 构建镜像并 push 到私服（或者阿里云）仓库，此操作完成后
+jenkins 服务器上再执行 SSH 命令登录到部署服务器，docker 从仓库（私服）拉取镜像，启动容器。整个操作流程完成。
 
 
 
 # References
 - 【Linux】Docker 搭建 Jenkins: https://open.alipay.com/portal/forum/post/125401045
 - https://www.cnblogs.com/kevinwan/p/16007379.html
-- 微服务从代码到k8s部署应有尽有大结局(k8s部署)：https://www.cnblogs.com/kevinwan/p/16007379.html
+- 微服务从代码到 k8s 部署应有尽有大结局(k8s 部署)：https://www.cnblogs.com/kevinwan/p/16007379.html
 

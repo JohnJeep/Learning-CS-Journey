@@ -9,9 +9,9 @@
 
 # 1. 为什么要修改可打开的文件描述符的数量
 
-进程每打开一个文件（linux下一切皆文件，包括socket），都会消耗一定的内存资源。
+进程每打开一个文件（linux 下一切皆文件，包括 socket），都会消耗一定的内存资源。
 如果有不怀好心的人启动一个进程来无限的创建和打开新的文件，会让服务器崩溃。
-所以linux系统出于安全角度的考虑，在多个位置都限制了可打开的文件描述符的数量，
+所以 linux 系统出于安全角度的考虑，在多个位置都限制了可打开的文件描述符的数量，
 包括系统级、用户级、进程级。这三个限制的含义和修改方式如下：
 
 - 系统级：当前系统可打开的最大数量，通过 `fs.file-max` 参数可修改
@@ -52,7 +52,7 @@ file locks                      (-x) unlimited
 
 ## 1.4. root 用户修改后其他用户不生效
 
-在root用户修改为65536后，用其他用户登录服务器检测`ulimit -n` 还是1024。那么就是该用户未生效。
+在 root 用户修改为 65536 后，用其他用户登录服务器检测`ulimit -n` 还是 1024。那么就是该用户未生效。
 
 修改 `/etc/ssh/sshd_config` 中配置，将 UsePAM 项值设置为 yes，表示使用 PAM 模块来加载。 
 
@@ -135,19 +135,25 @@ service sshd restart
 注意：有时修改了 `/etc/security/limits.conf` 文件并没有达到自己所预期的内容，感觉是没有生效。可能的原因：
 
 1. 加载了系统中 `/etc/profile` 文件中对系统参数的修改。优先级第二高
-2. 加载了系统中 `/etc/security/limits.d/` 目录下文件的修改，比如：`90-nproc.conf` 或者 `20-nproc.conf`文件。优先级第三高
+2. 加载了系统中 `/etc/security/limits.d/` 目录下文件的修改，比如：`90-nproc.conf` 或者
+   `20-nproc.conf`文件。优先级第三高
 
-hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系统当前限制。当你设置 hard limit 后，soft limit 的值就只能小于 hard limit 。普通用户可以降低 hard limit 的值，但是不能提高它，只有 root 用户才能提高 hard limit。
+hard limit 只是作为 soft limit 的上限，soft limit 才是你设置的系统当前限制。当你设置 hard limit 后，soft limit
+的值就只能小于 hard limit 。普通用户可以降低 hard
+limit 的值，但是不能提高它，只有 root 用户才能提高 hard limit。
 
 
 
 -------------------
 
-于nproc配置信息的扩展说明:
+于 nproc 配置信息的扩展说明:
 
-对`max user processes`的配置, Linux系统默认先读取`/etc/security/limits.conf` 中的信息, 如果`/etc/security/limits.d/`目录下还有配置文件的话, 也会依次遍历读取, 最终, `/etc/security/limits.d/`中的配置会覆盖`/etc/security/limits.conf` 中的配置.
+对`max user processes`的配置, Linux 系统默认先读取`/etc/security/limits.conf` 中的信息,
+如果`/etc/security/limits.d/`目录下还有配置文件的话,
+也会依次遍历读取, 最终, `/etc/security/limits.d/`中的配置会覆盖`/etc/security/limits.conf` 中的配置.
 
-另外, `max open files`和`max user processes`是不能配置`unlimited`的 —— 极不安全的设置, 此时系统会使用默认的配置值. 对`nproc`而言, 默认值的计算方法为:
+另外, `max open files`和`max user processes`是不能配置`unlimited`的 —— 极不安全的设置, 此时系统会使用默认的配置值.
+对`nproc`而言, 默认值的计算方法为:
 
 ```sh
 # 查看系统的 max user processes
@@ -177,14 +183,15 @@ ulimit -u
 
 ------------------
 
-用户登录的时候执行sh脚本的顺序： 
+用户登录的时候执行 sh 脚本的顺序： 
     /etc/profile.d/file 
     /etc/profile 
     /etc/bashrc 
     /mingjie/.bashrc 
     /mingjie/.bash_profile 
 
-    由于ulimit -n的脚本命令加载在第二部分，用户登录时由于权限原因在第二步还不能完成ulimit的修改，所以ulimit的值还是系统默认的1024。
+    由于 ulimit -n 的脚本命令加载在第二部分，用户登录时由于权限原因在第二步还不能完成 ulimit 的修改，所以 ulimit
+    的值还是系统默认的 1024。
 
 
 
@@ -193,8 +200,8 @@ ulimit -u
 
 - [/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
 - [Linux-PAM 官方文档](http://www.linux-pam.org/)
-- [Linux下PAM模块学习总结](https://www.cnblogs.com/kevingrace/p/8671964.html)
-- [Linux下设置最大文件打开数nofile及nr_open、file-max](https://www.cnblogs.com/zengkefu/p/5635153.html)
-- [Linux - 修改系统的max open files、max user processes ](https://www.cnblogs.com/shoufeng/p/10620480.html)
-- [一台Linux服务器最多能支撑多少个TCP连接？](https://mp.weixin.qq.com/s/QuCxkSjdM_E12lXlpnhKIQ) 从底层原理去解释。
+- [Linux 下 PAM 模块学习总结](https://www.cnblogs.com/kevingrace/p/8671964.html)
+- [Linux 下设置最大文件打开数 nofile 及 nr_open、file-max](https://www.cnblogs.com/zengkefu/p/5635153.html)
+- [Linux - 修改系统的 max open files、max user processes ](https://www.cnblogs.com/shoufeng/p/10620480.html)
+- [一台 Linux 服务器最多能支撑多少个 TCP 连接？](https://mp.weixin.qq.com/s/QuCxkSjdM_E12lXlpnhKIQ) 从底层原理去解释。
 

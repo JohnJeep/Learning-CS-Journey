@@ -24,5 +24,5 @@ Go trace 工具查看协程的调度耗时。
 # References
 
 - 微信公众号深入浅出 Go trace：https://mp.weixin.qq.com/s/I9xSMxy32cALSNQAN8wlnQ
-- 我是如何实现Go性能5倍提升的？https://mp.weixin.qq.com/s/SlPdSoMs1po1l19uaNMrIQ
+- 我是如何实现 Go 性能 5 倍提升的？https://mp.weixin.qq.com/s/SlPdSoMs1po1l19uaNMrIQ
 

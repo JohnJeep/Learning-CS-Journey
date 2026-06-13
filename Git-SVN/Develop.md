@@ -19,13 +19,14 @@
    ```shell
    git checkout -b <new_branch_name>
    ```
-3. 功能开发，提交commit
+3. 功能开发，提交 commit
    ```shell
    git add 
    git commit
    ```
 
-4. 功能开发完成，先拉取远程仓库最新的代码到本地开发分支，若有冲突，则解决冲突，解决完成后，合并到本地 dev 分支，最后推送到远程的 dev 分支。
+4. 功能开发完成，先拉取远程仓库最新的代码到本地开发分支，若有冲突，则解决冲突，解决完成后，合并到本地 dev
+   分支，最后推送到远程的 dev 分支。
    采用 merge 方式：
    ```bash
    // feature分支下

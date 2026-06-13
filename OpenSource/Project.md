@@ -7,7 +7,7 @@
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
-# 1. GitHub开源项目
+# 1. GitHub 开源项目
 
 # 2. C
 1.  [ip2region](https://github.com/lionsoul2014/ip2region)：准确率99.9%的离线IP地址定位库，0.0x毫秒级查询
@@ -30,9 +30,9 @@
 4. [modern-cpp-features](https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md)：该项目介绍了现代 C++（C++11 以及之后的版本）语言和库的新特性。
 5. [ThreadPool](https://github.com/progschj/ThreadPool)：一个简单的 C++11 线程池实现
 6. [indicators](https://github.com/p-ranav/indicators)：一个使用 C++ 编写的进度条库，你可以用它在命令行中实现美观的进度条。
-7. [Flameshot](https://github.com/lupoDharkael/flameshot) 开源的截图工具，使用C++和Qt工具开发的。
-8. [notepanda](https://github.com/ChungZH/notepanda)  简单的Notepanda编辑器的实现，采用C++和Qt工具开发。
-9. [MyTinySTL](https://github.com/Alinshans/MyTinySTL) 基于C++11的tinySTL，其中实现了大部分STL中的容器与函数。
+7. [Flameshot](https://github.com/lupoDharkael/flameshot) 开源的截图工具，使用 C++和 Qt 工具开发的。
+8. [notepanda](https://github.com/ChungZH/notepanda)  简单的 Notepanda 编辑器的实现，采用 C++和 Qt 工具开发。
+9. [MyTinySTL](https://github.com/Alinshans/MyTinySTL) 基于 C++11 的 tinySTL，其中实现了大部分 STL 中的容器与函数。
 10. [libevent](https://github.com/libevent/libevent) libevent 是广泛应用的 C++ 网络库，也是现在很多 C/C++ 网络库的雏形，想了解 C/C++ 网络库最初的形态、设计与演化思想一定要好好学习一下这个库。
 11. [uWebSocket](https://github.com/uNetworking/uWebSockets) uWebSocket 是一款开源的 WebSocket 库，最新版使用了大量 C++17 的语法，代码量非常少。
 
@@ -44,24 +44,24 @@
 # 5. 网络
 1. [WebServer](https://github.com/linyacool/WebServer)：牛客大佬健康成长天线宝宝写的『HTTP』的服务器。
 2. [NetServer](https://github.com/chenshuaihao/NetServer)：本项目为C++11编写的基于『epoll』的多线程网络服务器框架，应用层实现了简单的HTTP服务器HttpServer和一个回显服务器EchoServer，其中『HTTP』服务器实现了HTTP的解析和get方法请求，目前支持静态资源访问，支持HTTP长连接；该框架不限于这两类服务器，用户可根据需要编写应用层服务。通过该项目你可以了解到部分C++11的语法和编码规范、学习巩固网络编程、网络IO模型、多线程、git使用、Linux命令、性能分析、TCP/IP、HTTP协议等知识。
-3. [Sylar](https://github.com/sylar-yin/sylar)：这是一个『C++』高性能分布式服务器框架 的项目。该项目主要有 13 大模块组成，分别是日志模块、配置模块、线程模块、协程模块、协程调度模块、IO协程调度模块、Hook模块、Socket模块、ByteArray序列化模块、TcpServer模块、Stream模块、HTTP模块、Servlet模块。
-[B站视频](https://www.bilibili.com/video/av53602631?from=search&seid=9029288577396826503)
+3. [Sylar](https://github.com/sylar-yin/sylar)：这是一个『C++』高性能分布式服务器框架 的项目。该项目主要有 13 大模块组成，分别是日志模块、配置模块、线程模块、协程模块、协程调度模块、IO 协程调度模块、Hook 模块、Socket 模块、ByteArray 序列化模块、TcpServer 模块、Stream 模块、HTTP 模块、Servlet 模块。
+[B 站视频](https://www.bilibili.com/video/av53602631?from=search&seid=9029288577396826503)
 4. [MIT6.828](https://github.com/woai3c/MIT6.828)：《CSAPP》课后lab
-5. [Drogon](https://github.com/an-tao/drogon/blob/master/README.zh-CN.md): 是一个基于C++14/17的Http应用框架，使用Drogon可以方便的使用C++构建各种类型的Web应用服务端程序。 
+5. [Drogon](https://github.com/an-tao/drogon/blob/master/README.zh-CN.md): 是一个基于 C++14/17 的 Http 应用框架，使用 Drogon 可以方便的使用 C++构建各种类型的 Web 应用服务端程序。 
 
 
 
 
 # 6. Linux
-1. [Linux内核揭秘](https://github.com/MintCN/linux-insides-zh)：分享对 Linux 内核内在机理的一点知识，帮助对 Linux 内核内在机理感兴趣的人，和其他低级话题。
+1. [Linux 内核揭秘](https://github.com/MintCN/linux-insides-zh)：分享对 Linux 内核内在机理的一点知识，帮助对 Linux 内核内在机理感兴趣的人，和其他低级话题。
 2. [命令行的艺术](https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8)：常用命令行总结
 3. [Commit messages guide](https://github.com/RomuloOliveira/commit-messages-guide/blob/master/README_zh-CN.md)：git 提交信息说明
 4. **[Netdata](https://github.com/netdata/netdata)**：Linux 系统性能实时监控工具
 
 
 # 7. Go
-- [Go语言高级编程](https://github.com/chai2010/advanced-go-programming-book)  《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题。
-- [Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
+- [Go 语言高级编程](https://github.com/chai2010/advanced-go-programming-book)  《Go 语言高级编程》开源图书，涵盖 CGO、Go 汇编语言、RPC 实现、Protobuf 插件实现、Web 框架实现、分布式系统等高阶主题。
+- [Go 语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
 
 
 # 8. 数据结构与算法
@@ -70,19 +70,19 @@
 
 # 9. 有价值的开源库
 
-- [Abseil](https://github.com/abseil/abseil-cpp): Abseil已在Google历经十多年的开发，它的目的是为Google编程人员在各种项目上的工作需求提供支持，这些项目包括Protocol Buffers、gRPC和TensorFlow等。Google评价Abseil为：它是从Google内部代码块中抽取出来的一系列最基础的软件库。作为基本的组成部分，这些软件库支撑了几乎全部Google在运行的项目。以前这些API是零零散散地嵌入在Google的大部分开源项目中，现在我们将它们规整在一起，形成这样一个全面的项目。Abseil是Google代码库的最基本构建模块，其代码经过了生产环节测试，此后还会继续得到完全的维护。
-- [protobuf](https://github.com/protocolbuffers/protobuf): Google出品，protobuf一个具有高效的协议数据交换格式工具库(类似Json)，但相比于Json，Protobuf有更高的转化效率，时间效率和空间效率都是JSON的3-5倍。
-- [folly](https://github.com/facebook/folly): Facebook开源的基于C++14的库，在facebook内部广泛使用。Folly的全称为Facebook Open-source Library，目的不是为了替代标准库，而是对标准库的一种补充，尤其是大规模下的性能。中文文档可能太少，需要多看源码。
-- [zeromq](https://github.com/zeromq/libzmq): 一个为可伸缩的分布式或并发应用程序设计的高性能异步消息库。它提供一个高性能消息队列，该库设计成常见的套接字风格的API。
-- [asio](https://think-async.com/Asio/): 一个跨平台的C++网络编程框架，通过先进的C++方法为开发人员提供连续异步模型。
+- [Abseil](https://github.com/abseil/abseil-cpp): Abseil 已在 Google 历经十多年的开发，它的目的是为 Google 编程人员在各种项目上的工作需求提供支持，这些项目包括 Protocol Buffers、gRPC 和 TensorFlow 等。Google 评价 Abseil 为：它是从 Google 内部代码块中抽取出来的一系列最基础的软件库。作为基本的组成部分，这些软件库支撑了几乎全部 Google 在运行的项目。以前这些 API 是零零散散地嵌入在 Google 的大部分开源项目中，现在我们将它们规整在一起，形成这样一个全面的项目。Abseil 是 Google 代码库的最基本构建模块，其代码经过了生产环节测试，此后还会继续得到完全的维护。
+- [protobuf](https://github.com/protocolbuffers/protobuf): Google 出品，protobuf 一个具有高效的协议数据交换格式工具库(类似 Json)，但相比于 Json，Protobuf 有更高的转化效率，时间效率和空间效率都是 JSON 的 3-5 倍。
+- [folly](https://github.com/facebook/folly): Facebook 开源的基于 C++14 的库，在 facebook 内部广泛使用。Folly 的全称为 Facebook Open-source Library，目的不是为了替代标准库，而是对标准库的一种补充，尤其是大规模下的性能。中文文档可能太少，需要多看源码。
+- [zeromq](https://github.com/zeromq/libzmq): 一个为可伸缩的分布式或并发应用程序设计的高性能异步消息库。它提供一个高性能消息队列，该库设计成常见的套接字风格的 API。
+- [asio](https://think-async.com/Asio/): 一个跨平台的 C++网络编程框架，通过先进的 C++方法为开发人员提供连续异步模型。
 
 
-- **[POCO](https://github.com/pocoproject/poco):** POCO是一个开源的C++类库的集合，它主要提供简单的、快速的网络和可移植应用程序的C++开发，这个类库和C++标准库可以很好的集成并填补C++标准库的功能空缺。POCO库的模块化、高效的设计及实现使得特别适合嵌入式开发。
-- [libevent](https://github.com/libevent/libevent): Libevent 是一个用C语言编写的、轻量级的开源高性能事件通知库，主要有以下几个亮点：事件驱动，高性能，轻量级，专注于网络，不如 ACE 那么臃肿庞大；源代码相当精炼、易读；跨平台；支持多种 I/O 多路复用技术：epoll、poll、select 和 kqueue 等；支持 I/O，定时器和信号等事件；注册事件优先级等。
-- [workflow](https://github.com/sogou/workflow): 搜狗公司C++服务器引擎，支撑搜狗几乎所有后端C++在线服务，包括所有搜索服务，云输入法，在线广告等，每日处理超百亿请求。这是一个设计轻盈优雅的企业级程序引擎，可以满足大多数C++后端开发需求。
-- [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page): 是一个线性算术的C++模板库，功能强大、快速、优雅以及支持多平台。想找关于数学运算的三方库，首选Eigen就对了！直接使用 JupyterNoteBook，以 Python 的方式会更好。
+- **[POCO](https://github.com/pocoproject/poco):** POCO 是一个开源的 C++类库的集合，它主要提供简单的、快速的网络和可移植应用程序的 C++开发，这个类库和 C++标准库可以很好的集成并填补 C++标准库的功能空缺。POCO 库的模块化、高效的设计及实现使得特别适合嵌入式开发。
+- [libevent](https://github.com/libevent/libevent): Libevent 是一个用 C 语言编写的、轻量级的开源高性能事件通知库，主要有以下几个亮点：事件驱动，高性能，轻量级，专注于网络，不如 ACE 那么臃肿庞大；源代码相当精炼、易读；跨平台；支持多种 I/O 多路复用技术：epoll、poll、select 和 kqueue 等；支持 I/O，定时器和信号等事件；注册事件优先级等。
+- [workflow](https://github.com/sogou/workflow): 搜狗公司 C++服务器引擎，支撑搜狗几乎所有后端 C++在线服务，包括所有搜索服务，云输入法，在线广告等，每日处理超百亿请求。这是一个设计轻盈优雅的企业级程序引擎，可以满足大多数 C++后端开发需求。
+- [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page): 是一个线性算术的 C++模板库，功能强大、快速、优雅以及支持多平台。想找关于数学运算的三方库，首选 Eigen 就对了！直接使用 JupyterNoteBook，以 Python 的方式会更好。
 - 腾讯 Tars 框架: https://github.com/TarsCloud/TarsCpp
-- 腾讯Go 实现的grpc: https://github.com/trpc-group/trpc-go
+- 腾讯 Go 实现的 grpc: https://github.com/trpc-group/trpc-go
 
 
 

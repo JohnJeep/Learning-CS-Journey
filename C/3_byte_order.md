@@ -23,6 +23,6 @@
 
 ## References
 
-- [大端小端（Big- Endian和Little-Endian）](https://my.oschina.net/alphajay/blog/5478)
+- [大端小端（Big- Endian 和 Little-Endian）](https://my.oschina.net/alphajay/blog/5478)
 - [详解大端模式和小端模式](https://blog.csdn.net/ce123_zhouwei/article/details/6971544)
 

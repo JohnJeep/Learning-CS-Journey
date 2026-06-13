@@ -45,4 +45,4 @@ Jetson 系列架构演进
 
 ## References
 
-- [GPU学习笔记](https://www.linmao.dev/joy/1148/)
+- [GPU 学习笔记](https://www.linmao.dev/joy/1148/)

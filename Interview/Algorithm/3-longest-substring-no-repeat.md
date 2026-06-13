@@ -77,6 +77,6 @@ public:
 
 
 # 参考
-- [无重复字符的最长子串 c++实现三种解法 多重循环，hashmap优化，桶优化](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-cshi-xian-/)
+- [无重复字符的最长子串 c++实现三种解法 多重循环，hashmap 优化，桶优化](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-cshi-xian-/)
 - [滑动窗口](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/)
 - [[LeetCode] 3. Longest Substring Without Repeating Characters](https://github.com/grandyang/leetcode/issues/3)

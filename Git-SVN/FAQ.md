@@ -10,7 +10,8 @@
 # 1. FAQ
 
 ## 1.1. git 远程仓库更换名称，本地如何修改？
-- 适用于本地和远程的代码没得任何问题，就是远程仓库改了个名称，直接在本地修改远程仓库地址即可： `git remote set-url origin new_address`
+- 适用于本地和远程的代码没得任何问题，就是远程仓库改了个名称，直接在本地修改远程仓库地址即可： `git remote set-url
+  origin new_address`
 - 另外还可以先删除，然后添加地址：
   ```bash
   git remote rm origin
@@ -24,9 +25,13 @@
 
 
 ## 1.3. LF or CRLF
-Git 多平台换行符问题 (LF or CRLF)。文本文件所使用的换行符，在不同的系统平台上是不一样的。UNIX/Linux 使用的是 0x0A（LF），早期的 Mac OS 使用的是 0x0D（CR），后来的 OS X 在更换内核后与 UNIX 保持一致了。但 DOS/Windows 一直使用 0x0D0A（CRLF） 作为换行符。
+Git 多平台换行符问题 (LF or CRLF)。文本文件所使用的换行符，在不同的系统平台上是不一样的。UNIX/Linux 使用的是
+0x0A（LF），早期的 Mac OS 使用的是 0x0D（CR），后来的 OS X
+在更换内核后与 UNIX 保持一致了。但 DOS/Windows 一直使用 0x0D0A（CRLF） 作为换行符。
 
-跨平台协作开发是常有的，不统一的换行符确实对跨平台的文件交换带来了麻烦。最大的问题是，在不同平台上，换行符发生改变时，Git 会认为整个文件被修改，这就造成我们没法 diff，不能正确反映本次的修改。还好 Git 在设计时就考虑了这一点，其提供了一个 autocrlf 的配置项，用于在提交和检出时自动转换换行符，该配置有三个可选项：
+跨平台协作开发是常有的，不统一的换行符确实对跨平台的文件交换带来了麻烦。最大的问题是，在不同平台上，换行符发生改变时，
+Git 会认为整个文件被修改，这就造成我们没法 diff，不能正确反映本次的修改。还好 Git
+在设计时就考虑了这一点，其提供了一个 autocrlf 的配置项，用于在提交和检出时自动转换换行符，该配置有三个可选项：
 
 ```bash
 # 提交时转换为 LF，检出时转换为 CRLF
@@ -39,7 +44,8 @@ git config --global core.autocrlf input
 git config --global core.autocrlf false
 ```
 
-如果把 `autocrlf` 设置为 false 时，那另一个配置项 `safecrlf` 最好设置为 ture。该选项用于检查文件是否包含混合换行符，其有三个可选项：
+如果把 `autocrlf` 设置为 false 时，那另一个配置项 `safecrlf` 最好设置为
+ture。该选项用于检查文件是否包含混合换行符，其有三个可选项：
 
 ```bash
 # 拒绝提交包含混合换行符的文件

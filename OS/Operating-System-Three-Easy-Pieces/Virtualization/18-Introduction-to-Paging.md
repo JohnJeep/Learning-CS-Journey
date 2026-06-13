@@ -24,7 +24,8 @@
   - 为了记录地址空间的每个虚拟地址页放在物理内存中的位置，操作系统为每个进程保存一个数据结构，称为页。
 - 作用
   - 为虚拟地址空间的每个虚拟页保存地址转换(address translation)，让我们知道每个页在物理内存中的位置。
-- 一般来讲，系统中的每个进程都有一个页表，页表的确切结构要么由硬件决定 (older systems)，要么由操作系统灵活的管理 (modern systems)。
+- 一般来讲，系统中的每个进程都有一个页表，页表的确切结构要么由硬件决定 (older systems)，要么由操作系统灵活的管理
+  (modern systems)。
 
 
 ## 重要概念
@@ -36,7 +37,7 @@
   - 有效位(vaid bit): 用于指示特定地址转换是否有效。对于支持稀疏地址空间很重要。
   - 保护位(protection bit): 表明页是否可以读取(read)、写入(write)或执行(execute).
   - 存在位(present bit)：表明该页是在物理存储器上还是在磁盘上。
-  - 脏位(dirty bit)：表明page被带进内存后是否被修改。
+  - 脏位(dirty bit)：表明 page 被带进内存后是否被修改。
   - 参考位(reference bit)也被称为访问位(accessed bit):有时用于追踪页是否被访问，也用于确定哪些页应该保存子在内存中。
   <p align="center"><img src="../figures/18-x86-page-table-entry.png" /> </p>
 - 分页很慢(Paging: Also Too Slow)
@@ -50,9 +51,10 @@
 mov <virtual address>, %eax
 ```
 
-- 需要将虚拟地址划分为两个部分：VPN和页内偏移量(offset)
+- 需要将虚拟地址划分为两个部分：VPN 和页内偏移量(offset)
 <p align="center"><img src="../figures/18-virtual-address-layout.png"/></p>
-- 通过PFN替换VPN来转换虚拟地址，然后将载入发给物理内存。注意：偏移量保持不变，它只是告诉我们页面中的那个字节使我们想要的。
+- 通过 PFN 替换 VPN 来转换虚拟地址，然后将载入发给物理内存。注意：偏移量保持不变，它只是告诉我们页面中的那个字节使我们
+  想要的。
 <p align="center"><img src="../figures/18-address-translation-process.png"/></p>
 
 

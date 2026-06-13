@@ -62,7 +62,8 @@ feat(Controller): 用户查询接口开发
 
 ## 1.3. Commit 约定遵循准则
 
-- 每个提交都必须使用类型字段前缀，它由一个名词构成，诸如 feat 或 fix ， 其后接可选的范围字段，可选的 !范围，以及必要的冒号（英文半角）和空格。
+- 每个提交都必须使用类型字段前缀，它由一个名词构成，诸如 feat 或 fix ， 其后接可选的范围字段，可选的
+  !范围，以及必要的冒号（英文半角）和空格。
 - 当一个提交为应用或类库实现了新功能时，必须使用 feat 类型。
 - 当一个提交为应用修复了 bug 时，必须使用 fix 类型。
 - 范围字段可以跟随在类型字段后面。范围必须是一个描述某部分代码的名词，并用圆括号包围，例如： 
@@ -75,15 +76,19 @@ feat(Controller): 用户查询接口开发
   ```
 - 在简短描述之后，可以编写较长的提交正文，为代码变更提供额外的上下文信息。正文必须起始于描述字段结束的一个空行后。
 - 提交的正文内容自由编写，并可以使用空行分隔不同段落。
-- 在正文结束的一个空行之后，可以编写一行或多行脚注。每行脚注都必须包含 一个令牌（token），后面紧跟 `:<space>` 或 `<space>#` 作为分隔符，后面再紧跟令牌的值（受 git trailer convention 启发）。
-- 脚注的令牌必须使用 `-` 作为连字符，比如 Acked-by (这样有助于区分脚注和多行正文)。有一种例外情况就是 `BREAKING CHANGE`，它可以被认为是一个令牌。
+- 在正文结束的一个空行之后，可以编写一行或多行脚注。每行脚注都必须包含 一个令牌（token），后面紧跟 `:<space>` 或
+  `<space>#` 作为分隔符，后面再紧跟令牌的值（受 git trailer convention
+  启发）。
+- 脚注的令牌必须使用 `-` 作为连字符，比如 Acked-by (这样有助于区分脚注和多行正文)。有一种例外情况就是 `BREAKING
+  CHANGE`，它可以被认为是一个令牌。
 - 脚注的值可以包含空格和换行，值的解析过程必须直到下一个脚注的令牌/分隔符出现为止。
 - 破坏性变更必须在提交信息中标记出来，要么在 `<类型>(范围)` 前缀中标记，要么作为脚注的一项。
 - 包含在脚注中时，破坏性变更必须包含大写的文本 BREAKING CHANGE，后面紧跟着冒号、空格，然后是描述，例如：
   ```sh
   BREAKING CHANGE: environment variables now take precedence over config files 
   ```
-- 包含在 `<类型>(范围)` 前缀时，破坏性变更必须通过把 ! 直接放在 : 前面标记出来。 如果使用了 !，那么脚注中可以不写 BREAKING CHANGE:， 同时提交信息的描述中应该用来描述破坏性变更。
+- 包含在 `<类型>(范围)` 前缀时，破坏性变更必须通过把 ! 直接放在 : 前面标记出来。 如果使用了 !，那么脚注中可以不写
+  BREAKING CHANGE:， 同时提交信息的描述中应该用来描述破坏性变更。
 - 在提交说明中，可以使用 feat 和 fix 之外的类型，比如：
   ```
   docs: updated ref docs
@@ -130,8 +135,8 @@ feat(Controller): 用户查询接口开发
 2. [Conventional Commits](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
 3. [阿里巴巴：约束 git commit 提交规范](https://mp.weixin.qq.com/s/vzgST0ko-HZVkFFiSZ2xGg)
 4. [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
-5. [Git 修改已提交的commit注释](https://www.jianshu.com/p/098d85a58bf1)
+5. [Git 修改已提交的 commit 注释](https://www.jianshu.com/p/098d85a58bf1)
 6. [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
-7. [git rebase vs git merge详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
+7. [git rebase vs git merge 详解](https://www.cnblogs.com/kidsitcn/p/5339382.html)
 
    

@@ -8,7 +8,7 @@
 -->
 
 # 1. Reference
-## 1.1. 线程API接口
+## 1.1. 线程 API 接口
 - “Programming With Threads” by Steve Kleiman, Devang Shah, Bart Smaalders. Prentice Hall, January 1996.
 
 
@@ -28,9 +28,13 @@
 
 
 ## 1.5. 并发问题
-- “System Deadlocks” by E.G. Coffman, M.J. Elphick, A. Shoshani. ACM Computing Surveys, 3:2, June 1971. The classic paper outlining the conditions for deadlock and how you might go about dealing with it. There are certainly some earlier papers on this topic; see the references within this paper for details. 
+- “System Deadlocks” by E.G. Coffman, M.J. Elphick, A. Shoshani. ACM Computing Surveys, 3:2, June 1971. The classic
+  paper outlining the conditions for deadlock and how you might go about dealing with it. There are certainly some
+  earlier papers on this topic; see the references within this paper for details. 
 - “Een algorithme ter voorkoming van de dodelijke omarming” by Edsger Dijkstra. 1964. Available: http://www.cs.utexas.edu/users/EWD/ewd01xx/EWD108.PDF. Indeed, not only did Dijkstra come up with a number of solutions to the deadlock problem, he was the first to note its existence, at least in written form. However, he called it the “deadly embrace”, which (thankfully) did not catch on.
-- “Deadlock Immunity: Enabling Systems To Defend Against Deadlocks” by Horatiu Jula, Daniel Tralamazza, Cristian Zamfir, George Candea. OSDI ’08, San Diego, CA, December 2008. An excellent recent paper on deadlocks and how to avoid getting caught in the same ones over and over again in a particular system.
+- “Deadlock Immunity: Enabling Systems To Defend Against Deadlocks” by Horatiu Jula, Daniel Tralamazza, Cristian
+  Zamfir, George Candea. OSDI ’08, San Diego, CA, December 2008. An excellent recent paper on deadlocks and how to
+  avoid getting caught in the same ones over and over again in a particular system.
 - “Linux File Memory Map Code” by Linus Torvalds and many others. Available online at: http://lxr.free-electrons.com/source/mm/filemap.c. Thanks to Michael Walfish (NYU) for pointing out this precious example. The real world, as you can see in this file, can be a bit more complex than the simple clarity found in textbooks...
 
 

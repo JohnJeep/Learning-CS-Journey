@@ -18,7 +18,10 @@ Terminology
 
 ## 2. Debian
 
-Debian is an operating system which is composed primarily of free and open-source software, most of which is under the GNU General Public License, and developed by a group of individuals known as the Debian project. Debian is one of the most popular Linux distributions for personal computers and network servers, and has been used as a base for several other Linux distributions.
+Debian is an operating system which is composed primarily of free and open-source software, most of which is under the
+GNU General Public License, and developed by a group of individuals known as the Debian project. Debian is one of the
+most popular Linux distributions for personal computers and network servers, and has been used as a base for several
+other Linux distributions.
 
 - Debian 4.0 (Etch) was released in April 2007
 - Debian 5.0 (Lenny) was released in February 2009
@@ -65,7 +68,7 @@ Distribution Version
 
 ## 4. Alpine
 
-|  版本号  | 发布日期[[12\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-12) | 支持结束日期[[13\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-13) | Linux内核版本 |
+|  版本号  | 发布日期[[12\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-12) | 支持结束日期[[13\]](https://zh.wikipedia.org/wiki/Alpine_Linux#cite_note-13) | Linux 内核版本 |
 | :------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-----------: |
 |   3.2    |                          2015-05-26                          |                          2017-05-01                          |    3.18.xx    |
 |   3.3    |                          2016-01-06                          |                          2017-11-01                          |    4.1.xx     |

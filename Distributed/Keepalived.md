@@ -78,4 +78,4 @@ watch ipvsadm -Ln --stats
 
 - [keepalived centos 安装教程](https://blog.csdn.net/qq_42825214/article/details/105314603)
 - [LVS+Keepalived 高可用环境部署记录（主主和主从模式）](https://www.cnblogs.com/kevingrace/p/5574486.html)
-- [LVS+KeepAlived高可用部署架构](https://www.cnblogs.com/dooor/p/lvskeepalived0226.html)
+- [LVS+KeepAlived 高可用部署架构](https://www.cnblogs.com/dooor/p/lvskeepalived0226.html)

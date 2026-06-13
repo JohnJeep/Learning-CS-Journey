@@ -9,7 +9,8 @@
 
 # 1. Introduction
 
-Colcon 是一个用于构建和管理多个软件包的命令行工具，广泛应用于 ROS 2（Robot Operating System 2）生态系统中。它旨在简化复杂项目的构建过程，支持多种编程语言和构建系统，如 CMake 和 Python。
+Colcon 是一个用于构建和管理多个软件包的命令行工具，广泛应用于 ROS 2（Robot Operating System
+2）生态系统中。它旨在简化复杂项目的构建过程，支持多种编程语言和构建系统，如 CMake 和 Python。
 
 Colcon 提供了一种统一的方式来处理依赖关系、构建顺序和安装过程，使开发者能够更高效地管理大型代码库。
 

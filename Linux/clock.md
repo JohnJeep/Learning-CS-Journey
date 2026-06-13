@@ -9,7 +9,8 @@
 
 # 1. introduction
 
-Linux 系统提供了多种方法来查看和设置系统时间，包括 `date` 命令、硬件时钟（`hwclock`）以及网络时间协议（NTP）服务。本文将介绍这些方法的使用。
+Linux 系统提供了多种方法来查看和设置系统时间，包括 `date` 命令、硬件时钟（`hwclock`）以及网络时间协议（NTP）服务。本文
+将介绍这些方法的使用。
 
 
 # 2. date
@@ -29,7 +30,7 @@ Tue Feb 25 20:16:00 CST 2024
 
 - **MM**：月份（两位数，01-12）
 - **DD**：日期（两位数，01-31）
-- **hh**：小时（两位数，00-23，24小时制）
+- **hh**：小时（两位数，00-23，24 小时制）
 - **mm**：分钟（两位数，00-59）
 - **YYYY**：年份（四位数）
 
@@ -54,14 +55,17 @@ hwclock -s, --hctosys   # he Hardware Clock to System Clock
 
 # 4. ntpd
 
-NTP（Network Time Protocol）是一种网络协议，用于同步计算机系统的时间。`ntpd` 是 NTP 的守护进程，可以让系统的时间与远程 NTP 服务器持续保持同步。它适合长期在线的服务器，能逐步调整系统时钟，保持时间的精准性。
+NTP（Network Time Protocol）是一种网络协议，用于同步计算机系统的时间。`ntpd` 是 NTP
+的守护进程，可以让系统的时间与远程 NTP
+服务器持续保持同步。它适合长期在线的服务器，能逐步调整系统时钟，保持时间的精准性。
 
 NTP 的使用方法请见：[NTP](./ntp.md)
 
 
 # 5. public time servers
 
-公共时间服务器是由第三方提供的 NTP 服务器，任何人都可以使用它们来同步系统时间。阿里云提供了公共时间服务器，授时信号来自 GPS、北斗两套卫星信号，并配备原子钟守时，以下7个域名提供服务，大家可以直接使用。
+公共时间服务器是由第三方提供的 NTP 服务器，任何人都可以使用它们来同步系统时间。阿里云提供了公共时间服务器，授时信号来
+自 GPS、北斗两套卫星信号，并配备原子钟守时，以下 7 个域名提供服务，大家可以直接使用。
 
 ```
 http://time1.aliyun.com
@@ -81,5 +85,5 @@ ntpdate -u time.pool.aliyun.com
 
 # 6. references
 
-- [ntp时间服务器 时间同步](https://www.cnblogs.com/centos2017/p/7896704.html)
-- [Linux系统时间同步方法小结](https://www.cnblogs.com/williamjie/p/10768657.html)
+- [ntp 时间服务器 时间同步](https://www.cnblogs.com/centos2017/p/7896704.html)
+- [Linux 系统时间同步方法小结](https://www.cnblogs.com/williamjie/p/10768657.html)

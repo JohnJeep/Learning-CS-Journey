@@ -7,7 +7,7 @@
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
 
-# 构建一个稳定、高性能Redis集群
+# 构建一个稳定、高性能 Redis 集群
 
 1️⃣数据怕丢失 -> 持久化（RDB/AOF）
 

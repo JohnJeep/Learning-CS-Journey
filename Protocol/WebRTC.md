@@ -11,4 +11,4 @@
 
 ## References
 
-- [给好奇者的WebRTC](https://webrtcforthecurious.com/zh/)
+- [给好奇者的 WebRTC](https://webrtcforthecurious.com/zh/)

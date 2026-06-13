@@ -19,9 +19,12 @@
 - 复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引
 - 索引：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构
 - 参照完整性: 要求关系中不允许引用不存在的实体。目的是保证数据的一致性
-- DDL(Data Definition Languages) 语句：数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter 等。
-- DML(Data Manipulation Language) 语句：数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性，常用的语句关键字主要包括 insert、delete、udpate 和 select 等。
-- DCL(Data Control Language) 语句：数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括 grant、revoke 等。
+- DDL(Data Definition Languages) 语句：数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定
+  义。常用的语句关键字主要包括 create、drop、alter 等。
+- DML(Data Manipulation Language) 语句：数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性，常用的语
+  句关键字主要包括 insert、delete、udpate 和 select 等。
+- DCL(Data Control Language) 语句：数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、
+  表、字段、用户的访问权限和安全级别。主要的语句关键字包括 grant、revoke 等。
 
 ## 1.2. 语句规范
 
@@ -32,7 +35,8 @@
 
 ## 1.3. 安装操作
 
-- windows 下以管理员身份运行 cmd，进入到 MySQL 的 bin 目录，执行初始化命令：`mysqld --initialize --user=mysql --console`
+- windows 下以管理员身份运行 cmd，进入到 MySQL 的 bin 目录，执行初始化命令：`mysqld --initialize --user=mysql
+  --console`
 - 执行命令进行 MySQL 服务安装：`mysqld –install mysql`
 - Windows 启动 MySQL 服务：`net start mysql`
 - Windows 停止 mysql 服务：`net stop mysql`
@@ -151,7 +155,7 @@ select version();
 
 常用命令
 
-- 创建用户并授予指定数据库全部权限：适用于Web应用创建MySQL用户
+- 创建用户并授予指定数据库全部权限：适用于 Web 应用创建 MySQL 用户
 
   ```sql
   // 创建了用户zhangsan，并将数据库zhangsanDB的所有权限授予zhangsan。
@@ -160,7 +164,7 @@ select version();
   flush  privileges;
   ```
 
-- 使zhangsan可以从本机登录，那么可以多赋予localhost权限：
+- 使 zhangsan 可以从本机登录，那么可以多赋予 localhost 权限：
 
   ```sql
   grant all privileges on zhangsanDb.* to zhangsan@'localhost' identified by 'zhangsan';
@@ -191,14 +195,20 @@ select version();
 - Connectors：指的是不同语言中与 SQL 的交互。
 - Management Serveices & Utilities： 系统管理和控制工具
 - Connection Pool：连接池
-  - 管理缓冲用户连接，线程处理等需要缓存的需求。负责监听对 MySQL Server 的各种请求，接收连接请求，转发所有连接请求到线程管理模块。
-  - 每一个连接上 MySQL Server 的客户端请求都会被分配（或创建）一个连接线程为其单独服务。而连接线程的主要工作就是负责 MySQL Server 与客户端的通信。接受客户端的命令请求，传递 Server 端的结果信息等。线程管理模块则负责管理维护这些连接线程。包括线程的创建，线程的 cache 等。
+  - 管理缓冲用户连接，线程处理等需要缓存的需求。负责监听对 MySQL Server
+    的各种请求，接收连接请求，转发所有连接请求到线程管理模块。
+  - 每一个连接上 MySQL Server 的客户端请求都会被分配（或创建）一个连接线程为其单独服务。而连接线程的主要工作就是负责
+    MySQL Server 与客户端的通信。接受客户端的命令请求，传递 Server
+    端的结果信息等。线程管理模块则负责管理维护这些连接线程。包括线程的创建，线程的 cache 等。
 - SQL Interface：SQL 接口。接受用户的 SQL 命令，并且返回用户需要查询的结果。比如 select from 就是调用 SQL Interface。
 - Parser：解析器
   - QL 命令传递到解析器的时候会被解析器验证和解析。解析器是由 Lex 和 YACC 实现的，是一个很长的脚本。
-  - 在 MySQL 中我们习惯将所有 Client 端发送给 Server 端的命令都称为 Query，在 MySQL Server 里面，连接线程接收到客户端的一个 Query 后，会直接将该 Query 传递给专门负责将各种 Query 进行分类然后转发给各个对应的处理模块。
+  - 在 MySQL 中我们习惯将所有 Client 端发送给 Server 端的命令都称为 Query，在 MySQL Server
+    里面，连接线程接收到客户端的一个 Query 后，会直接将该 Query 传递给专门负责将各种
+    Query 进行分类然后转发给各个对应的处理模块。
   - 解析器的主要功能：
-    - 将 SQL 语句进行语义和语法的分析，分解成数据结构，然后按照不同的操作类型进行分类，然后做出针对性的转发到后续步骤，以后 SQL 语句的传递和处理就是基于这个结构的。
+    - 将 SQL 语句进行语义和语法的分析，分解成数据结构，然后按照不同的操作类型进行分类，然后做出针对性的转发到后续步骤
+      ，以后 SQL 语句的传递和处理就是基于这个结构的。
     - 如果在分解构成中遇到错误，那么就说明这个 sql 语句是不合理的
 - Optimizer：查询优化器
 - Cache 和 Buffer：查询缓存
@@ -215,7 +225,8 @@ select version();
 - INT: 4 字节
   - int(M): M 表示宽度， 常与 zerofill 连用
 
-    > 显示宽度，如果某个数不够定义字段时设置的位数，则前面以 0 补填，zerofill 属性修改。例如：int(5)   插入一个数'123'，补填后为'00123'
+    > 显示宽度，如果某个数不够定义字段时设置的位数，则前面以 0 补填，zerofill 属性修改。例如：int(5)
+    > 插入一个数'123'，补填后为'00123'
 - 浮点数
   - FLOAT: 4 字节
   - DOUBLE: 8 字节
@@ -229,11 +240,14 @@ select version();
 
 - YEAR(1 字节)；表示：年份值  `YYYY`
 
-- DATETIME: 8 字节；表示：混合日期和时间值  `YYYY-MM-DD HH:MM:SS`；要记录年月日时分秒，并且记录的年份比较久远，那么最好使用 `DATETIME`。
+- DATETIME: 8 字节；表示：混合日期和时间值  `YYYY-MM-DD HH:MM:SS`；要记录年月日时分秒，并且记录的年份比较久远，那么最
+  好使用 `DATETIME`。
 
 - TIMESTAMP：记录的日期需要让不同时区的用户使用，那么最好使用 `TIMESTAMP`，因为日期类型中只有它能够和实际时区相对应。
 
-  > 需要经常插入或者更新日期为当前系统时间，则通常使用 TIMESTAMP 来表示。TIMESTAMP 值返回后显示为 “YYYY-MM-DD HH:MM:SS” 格式的字符串，显示宽度固定为 19 个字符。如果想要获得数字值，应在 TIMESTAMP 列添加 + 0。
+  > 需要经常插入或者更新日期为当前系统时间，则通常使用 TIMESTAMP 来表示。TIMESTAMP 值返回后显示为 “YYYY-MM-DD
+  > HH:MM:SS” 格式的字符串，显示宽度固定为 19 个字符。如果想要获得数字值，应在
+  > TIMESTAMP 列添加 + 0。
 
 ## 2.3. 字符串
 
@@ -247,7 +261,9 @@ select version();
 
 - BLOB: 也是存储更大的文本文件，BLOB 能用来保存二进制数据，比如照片等。
 
-  BLOB 和 TEXT 值会引起一些性能问题，特别是在执行了大量的删除操作时。删除操作会在数据表中留下很大的 “空洞”，以后填入这些“空洞” 的记录在插入的性能上会有影响。为了提高性能，建议定期使用 OPTIMIZE TABLE 功能对这类表进行碎片整理，避免因为 “空洞” 导致性能问题。
+  BLOB 和 TEXT 值会引起一些性能问题，特别是在执行了大量的删除操作时。删除操作会在数据表中留下很大的
+  “空洞”，以后填入这些“空洞” 的记录在插入的性能上会有影响。为了提高性能，建议定期使用 OPTIMIZE TABLE
+  功能对这类表进行碎片整理，避免因为 “空洞” 导致性能问题。
 
 MySQL 5.0 以上的版本：1、一个汉字占多少长度与编码有关：2、UTF－8：一个汉字＝3 个字节; 3、GBK：一个汉字＝2 个字节
 
@@ -257,13 +273,15 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 ## 2.4. SHOW
 
-在 MySQL 中，`SHOW` 命令是用于查看数据库对象和系统信息的命令，并不是针对用户级别的。`SHOW` 命令用于查看数据库服务器的各种信息，例如数据库列表、表信息、列信息、用户权限、服务器状态等。
+在 MySQL 中，`SHOW` 命令是用于查看数据库对象和系统信息的命令，并不是针对用户级别的。`SHOW`
+命令用于查看数据库服务器的各种信息，例如数据库列表、表信息、列信息、用户权限、服务器状态等。
 
 以下是一些常用的 `SHOW` 命令及其用途：
 
 1. `SHOW DATABASES;`：显示 MySQL 数据库管理系统的所有数据库列表。
 2. `SHOW TABLES;`：显示当前数据库中所有表的列表。
-3. `SHOW COLUMNS FROM table_name;`：显示指定表的所有列信息。包括数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息，即查看表的结构。
+3. `SHOW COLUMNS FROM table_name;`：显示指定表的所有列信息。包括数据表的属性，属性类型，主键信息 ，是否为
+   NULL，默认值等其他信息，即查看表的结构。
 4. `SHOW INDEX FROM 数据表 `:  显示数据表的详细索引信息，包括 `PRIMARY KEY`（主键）
 5. `SHOW GRANTS FOR user_name@host_name;`：显示指定用户的权限信息。
 6. `SHOW STATUS;`：显示当前服务器状态信息。
@@ -500,7 +518,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
       - 删除索引: `ALTER TABLE tab_name DROP INDEX 索引名 `
 
-      - 添加外键约束 `ALTER TABLE tab_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name] (index_col_name, ...) reference_definition`
+      - 添加外键约束 `ALTER TABLE tab_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name] (index_col_name, ...)
+        reference_definition`
 
         > 例如：`ALTER TABLE county ADD FOREIGN KEY(pid) REFERENCES provinces(id);` pid 为子键，id 为父键
 
@@ -577,7 +596,9 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
   update tab_name set 字段名 = null where 执行的条件;
   ```
 
-- 多表更新:。更新表 `emp_1` 与表 `emp_2` 的 `deptno` 列相等的值，使表 `emp_1` 的 `sal` 列的值为 `emp_1.sal * emp_2.deptno`，表 `emp_2` 列 `deptname` 的值为 `emp_1.name`
+- 多表更新:。更新表 `emp_1` 与表 `emp_2` 的 `deptno` 列相等的值，使表 `emp_1` 的 `sal` 列的值为 `emp_1.sal *
+  emp_2.deptno`，表 `emp_2` 列
+  `deptname` 的值为 `emp_1.name`
 
   ```sql
   update emp_1, emp_2 set emp_1.sal = emp_1.sal * emp_2.deptno, emp_2.deptname = emp_1.name where emp_1.deptno=emp_2.deptno;
@@ -602,7 +623,10 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 - truncate、delete 清空表数据的区别
   - truncate 是整体删除 (速度较快)，delete 是逐条删除 (速度较慢)
   - truncate 不写服务器 log，delete 写服务器 log，也就是 truncate 效率比 delete 高的原因
-  - truncate 不激活 trigger (触发器)，但是会重置 Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从 1 开始记录，而不是接着原来的 ID 数。而 delete 删除以后，identity 依旧是接着被删除的最近的那一条记录 ID 加 1 后进行记录。如果只需删除表中的部分记录，只能使用 DELETE 语句配合 where 条件
+  - truncate 不激活 trigger (触发器)，但是会重置 Identity (标识列、自增字段)，相当于自增列会被置为初始值，又重新从 1
+    开始记录，而不是接着原来的 ID 数。而 delete
+    删除以后，identity 依旧是接着被删除的最近的那一条记录 ID 加 1 后进行记录。如果只需删除表中的部分记录，只能使用
+    DELETE 语句配合 where 条件
 
 ### 2.8.4. 查询 (检索) 表数据(select)
 
@@ -619,8 +643,11 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
   - 采用 `AND`、 `OR` 关键字; 注意：在计算机中 AND 的优先级高于 OR 运算
   - 关键字 `IN`: 对指定范围的内容进行匹配，与 `OR` 等效；
   - 关键字 `NOT`: 对 IN 、BETWEEN 和 EXISTS 子句取反
-  - like , not like ('%'匹配任何字符出现任意次数,'_'匹配任意单个字符) `SELECT col_name FROM tab_name WHERE tab_name LIKE 'char%' `
-  - 检查是否为空值 (is null 或 is not null): `SELECT col_name1, col_name2, ..., col_nameN FROM tab_name WHERE [CONDITION] IS NULL`
+  - like , not like ('%'匹配任何字符出现任意次数,'_'匹配任意单个字符) `SELECT col_name FROM tab_name WHERE tab_name
+    LIKE 'char%' `
+  - 检查是否为空值 (is null 或 is not null): `SELECT col_name1, col_name2, ..., col_nameN FROM tab_name WHERE
+    [CONDITION] IS
+    NULL`
 
 - 分组 `(group by)`：表示要进行分类聚合的字段，通常与聚合函数一起使用
 
@@ -637,7 +664,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
     - MIN(): 求某列的最小值
     - SUN(): 对某列值之和 `SELECT SUN(column) FROM tab_name;`
 
-  > <font color=red> 注意：select 选择的列 (a,b,c) 必须在 group by 分组的列名 (a, b, c, d, e) 中，否则会报错。但是 select 中可以包含聚合函数和别名</font>
+  > <font color=red> 注意：select 选择的列 (a,b,c) 必须在 group by 分组的列名 (a, b, c, d, e) 中，否则会报错。但是
+  > select 中可以包含聚合函数和别名</font>
 
 - `HAVING`: 对聚合分类后的 <font color=red> 结果集 </font > 合再进行条件的筛选，过滤分组
   - 与 where 功能、用法相同，执行时机不同。
@@ -668,7 +696,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 - exist 型子查询：把外层 SQL 查询的结果拿到内层 SQL 中去测试，如果内层 SQL 成立，则该行取出。
 - <font color=red> NULL 说用 </font>
   
-  > null 是一种类型，比较时只能用 `is null` 或 `is not null`; 碰见运算符时，一律返回为 null。使用 null 效率不高，影响索引的效果
+  > null 是一种类型，比较时只能用 `is null` 或 `is not null`; 碰见运算符时，一律返回为 null。使用 null
+  > 效率不高，影响索引的效果
 
 
 子查询关键字
@@ -714,7 +743,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 ## 3.1. count
 
-`count()` 是一个聚合函数，函数的参数不仅可以是字段名，也可以是其他任意表达式，该函数作用是 ** 统计符合查询条件的记录中，函数指定的参数不为 NULL 的记录有多少个 **。
+`count()` 是一个聚合函数，函数的参数不仅可以是字段名，也可以是其他任意表达式，该函数作用是 **
+统计符合查询条件的记录中，函数指定的参数不为 NULL 的记录有多少个 **。
 
 - `count(column_name)` 函数：统计 `table_name` 表中 `column_name`  列字段不为 `NULL` 的行数。
 
@@ -765,7 +795,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
   - 分表时使用
 - 表的变化直接影响视图的变化
 - 视图压根不能改。
-- 视图在某些条件下也可以改变 (drop、delete、alter)，必须是视图的数据与表的数据呈现一一对应才可以改变。若使用 `order by ` 和 `limit` 之后，表里面的数据域视图里的数据不是一一对应关系。
+- 视图在某些条件下也可以改变 (drop、delete、alter)，必须是视图的数据与表的数据呈现一一对应才可以改变。若使用 `order
+  by ` 和 `limit` 之后，表里面的数据域视图里的数据不是一一对应关系。
 - `algorithm` 用法
   - 有三个参数组成
     - merge：条件合并。（简单的视图，并没有建立临时表，而是把条件存储起来，下次查询时再把条件合并，然后再去查表）
@@ -793,7 +824,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 # 6. 存储架构
 - 和其它数据库相比，MySQL 有点与众不同，它的架构可以在多种不同场景中应用并发挥良好作用。主要体现在存储引擎的架构上。
-- Pluggable Storage Engines. 插件式的存储引擎架构将查询处理和其它的系统任务以及数据的存储提取分离。这种架构可以根据业务的需求和实际需求选择合适的存储引擎。
+- Pluggable Storage Engines. 插件式的存储引擎架构将查询处理和其它的系统任务以及数据的存储提取分离。这种架构可以根据业
+  务的需求和实际需求选择合适的存储引擎。
 
 
 ## 6.1. Engine
@@ -824,7 +856,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 - 什么是 latch？
 
-  latch 一般叫为闩锁（轻量级的锁）。在 innodb 引擎中，latch 有分为 mutex 和 rwlock。目的是：用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。
+  latch 一般叫为闩锁（轻量级的锁）。在 innodb 引擎中，latch 有分为 mutex 和
+  rwlock。目的是：用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。
 
 - 什么是 lock？
 
@@ -834,7 +867,8 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
   用于管理对共享资源的并发问题，提供数据的完整性和一致性。
 
-- lock 的对象是事务，用来锁定数据库中的对象，如 tables，pages，rows，一般的 lock 的对象仅在事务 commit 和 rollback 后进行释放，lock 是有死锁机制的。
+- lock 的对象是事务，用来锁定数据库中的对象，如 tables，pages，rows，一般的 lock 的对象仅在事务 commit 和 rollback
+  后进行释放，lock 是有死锁机制的。
 
 - 查看当前数据库中锁的请求。
 
@@ -846,18 +880,23 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 
 - 什么叫 transaction？
 
-  一个 SQL 语句或者一组复杂的 SQL 语句就是一个事务（transaction）。事务时访问并更新数据库中各数据项的一个程序执行单元。
+  一个 SQL 语句或者一组复杂的 SQL 语句就是一个事务（transaction）。事务时访问并更新数据库中各数据项的一个程序执行单元
+  。
 
 - 为什么要有 transaction？
 
-  事务会把数据库从一种一致状态转换为另一种一致状态，在数据库提交工作时，可以确保要么所有修改都已经保存了，要么所有修改都不保存。
+  事务会把数据库从一种一致状态转换为另一种一致状态，在数据库提交工作时，可以确保要么所有修改都已经保存了，要么所有修改
+  都不保存。
 
 - 事务的四大特性（ACID）
 
-  - 原子性（Atomicity）：用于保证数据的一致性，由一组相关的 DML 语句组成，修改的操作要么全部成功，要么全部失败。（失败的时候要进行回滚操作 [rollback]）
+  - 原子性（Atomicity）：用于保证数据的一致性，由一组相关的 DML
+    语句组成，修改的操作要么全部成功，要么全部失败。（失败的时候要进行回滚操作 [rollback]）
   - 一致性（Consistency）：一个事务执行之前和执行之后都必须处于一致性状态，即操作前后值得变化，逻辑上保持一致。
   - 隔离性（Isolation）：如果多个事务同时并发执行，但每个事务会各自独立执行，不能被其他事务的操作所干扰。
-  - 持久性（Durability）：事务一旦完成，无法撤销。一个事务一旦被提交了，对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。通过 `redo log(重做日志)` 和 `undo log` 操作来保证事务的一致性。
+  - 持久性（Durability）：事务一旦完成，无法撤销。一个事务一旦被提交了，对数据库中的数据的改变就是永久性的，即便是在数
+    据库系统遇到故障的情况下也不会丢失提交事务的操作。通过 `redo log(重做日志)` 和 `undo
+    log` 操作来保证事务的一致性。
     - redo: 通常是物理日志，记录页的物理修改操作；redo 是恢复提交事务修改的页操作。
     - undo：通常是逻辑日志，根据每行记录来进行记录；undo 是回滚行记录到某个特定的版本。
 

@@ -9,24 +9,29 @@
 
 # 1. Introduction
 
-什么是Subversion?
+什么是 Subversion?
  
-> Subversion的版本库是一种特别的文件版本库，它会记录每一次改变：每个文件的改变，甚至是目
+> Subversion 的版本库是一种特别的文件版本库，它会记录每一次改变：每个文件的改变，甚至是目
 录树本身的改变。
 
 文件共享
 - 一般的文件共享采用的是 `lock-modify-unlock` 的方式
-- Subversion、VS和一些版本控制系统使用  `copy-modify-merge`模型。
-  > 在这种模型里，每一个客户联系项目版本库建立一个个人工作拷贝—版本库中文件和目录的本地映射。用户并行工作，修改各自的工作拷贝，最终，各个私有的拷贝合并在一起，成为最终的版本，这种系统通常可以辅助合并操作，但是最终要靠人工去确定正误。
+- Subversion、VS 和一些版本控制系统使用  `copy-modify-merge`模型。
+  > 在这种模型里，每一个客户联系项目版本库建立一个个人工作拷贝—版本库中文件和目录的本地映射。用户并行工作，修改各自的
+  > 工作拷贝，最终，各个私有的拷贝合并在一起，成为最终的版本，这种系统通常可以辅助合并操作，但是最终要靠人工去确定正误
+  > 。
 
 工作副本
 
->  `.svn `为名的文件夹，也被叫做工作副本的管理目录，这个目录里的文件能够帮助 Subversion 识别哪些文件做过修改，哪些文件相对于别人的工作已经过期。
+>  `.svn `为名的文件夹，也被叫做工作副本的管理目录，这个目录里的文件能够帮助 Subversion
+> 识别哪些文件做过修改，哪些文件相对于别人的工作已经过期。
 
 
 修订版本
 
-> 每当版本库接受了一个提交，文件系统进入了一个新的状态，叫做一次修订`(revision)`，每一个修订版本被赋予一个独一无二的自然数，一个比一个大，初始修订号是0，只创建了一个空目录，没有任何内容。版本库每一次的提交，保存的是工作副本中改变的快照，并不是整个工作副本的快照。
+> 每当版本库接受了一个提交，文件系统进入了一个新的状态，叫做一次修订`(revision)`，每一个修订版本被赋予一个独一无二的自
+> 然数，一个比一个大，初始修订号是
+> 0，只创建了一个空目录，没有任何内容。版本库每一次的提交，保存的是工作副本中改变的快照，并不是整个工作副本的快照。
 <img src="./figure/svnban-ben-ku.png">
 
 
@@ -36,8 +41,11 @@
 -  工作副本中的四中状态
    - 未修改且是当前的。文件在工作目录里没有修改，在工作修订版本之后没有修改提交到版本库。
    - 本地已修改且是当前的。文件在工作目录里已经修改，在工作修订版本之后没有修改提交到版本库。
-   - Unchanged, and out of date。这个文件在工作目录没有修改，但在版本库中已经修了。这个文件最终将更新到最新版本，成为当时的公共修订版本。
-   - Locally changed, and out of date。这个文件在工作目录和版本库都得到修改。一个svn commit将会失败，这个文件必须首先更新，svn update命令会合并公共和本地修改，如果Subversion不可以自动完成，将会让用户解决冲突。
+   - Unchanged, and out of date。这个文件在工作目录没有修改，但在版本库中已经修了。这个文件最终将更新到最新版本，成为
+     当时的公共修订版本。
+   - Locally changed, and out of date。这个文件在工作目录和版本库都得到修改。一个 svn commit
+     将会失败，这个文件必须首先更新，svn update 命令会合并公共和本地修改，如果
+     Subversion 不可以自动完成，将会让用户解决冲突。
 
 
 
@@ -75,28 +83,30 @@
 
 
 
-# 4. svn冲突
+# 4. svn 冲突
 
 解决冲突有三种选择：
-- A、放弃自己的更新，使用svn revert（回滚），然后提交。在这种方式下不需要使用svn resolved（解决）
-- B、放弃自己的更新，使用别人的更新。使用最新获取的版本覆盖目标文件，执行resolved filename并提交(选择文件—右键—解决)。
-- C、手动解决：冲突发生时，通过和其他用户沟通之后，手动更新目标文件。然后执行resolved filename来解除冲突，最后提交。
+- A、放弃自己的更新，使用 svn revert（回滚），然后提交。在这种方式下不需要使用 svn resolved（解决）
+- B、放弃自己的更新，使用别人的更新。使用最新获取的版本覆盖目标文件，执行 resolved filename
+  并提交(选择文件—右键—解决)。
+- C、手动解决：冲突发生时，通过和其他用户沟通之后，手动更新目标文件。然后执行 resolved filename 来解除冲突，最后提交。
 
 
 如何降低冲突解决的复杂度？
 - 1、当文档编辑完成后，尽快提交，频繁的提交/更新可以降低在冲突发生的概率，以及发生时解决冲突的复杂度。
-- 2、在提交时，写上明确的message，方便以后查找用户更新的原因，毕竟随着时间的推移，对当初更新的原因有可能会遗忘
-- 3、养成良好的使用习惯，使用SVN时每次都是先提交，后更新。每天早上打开后，首先要从版本库获取最新版本。每天下班前必须将已经编辑过的文档都提交到版本库。
+- 2、在提交时，写上明确的 message，方便以后查找用户更新的原因，毕竟随着时间的推移，对当初更新的原因有可能会遗忘
+- 3、养成良好的使用习惯，使用 SVN 时每次都是先提交，后更新。每天早上打开后，首先要从版本库获取最新版本。每天下班前必须
+  将已经编辑过的文档都提交到版本库。
 
 
-# 5. Git与SVN的区别
+# 5. Git 与 SVN 的区别
 
-- Git是分布式，svn是集中式
-- svn只有一个中央版本库，而git有无限个
-- svn有全局的版本号，git没有
-- git不必联网就可以看到所有的log，svn必须联网
-- git保存的是元数据，svn是复制整个文档
-- git强调分支，svn只是不同的文件目录，就是copy
+- Git 是分布式，svn 是集中式
+- svn 只有一个中央版本库，而 git 有无限个
+- svn 有全局的版本号，git 没有
+- git 不必联网就可以看到所有的 log，svn 必须联网
+- git 保存的是元数据，svn 是复制整个文档
+- git 强调分支，svn 只是不同的文件目录，就是 copy
 
 
 
@@ -125,20 +135,21 @@
 
 # 7. Commands
 
-最重要的是帮助命令，遇见不会的命令，需要自己查看帮助文档：`svn help subcommand`，其中 subcommand 为 subversion 的内建命令。
+最重要的是帮助命令，遇见不会的命令，需要自己查看帮助文档：`svn help subcommand`，其中 subcommand 为 subversion
+的内建命令。
 
 ## 7.1. add
 - 往版本库中添加新的文件 
 - `svn add *.php` 添加当前目录下所有后缀名为 `.php` 的文件。
 
 ## 7.2. checkout
-- 将从SVN版本库中拷贝项目到本地工作目录中，得到一个本地拷贝，这个拷贝包括了命令行指定版本库中的HEAD(最新的)版本。
+- 将从 SVN 版本库中拷贝项目到本地工作目录中，得到一个本地拷贝，这个拷贝包括了命令行指定版本库中的 HEAD(最新的)版本。
 -  例如：`svn checkout svn://192.168.1.131/45dian/brand`
 
 
 ## 7.3. commit
-- 将本地版本库中改变的文件提交到SVN版本库中
-- `svn commit -m “LogMessage“ [-N] [--no-unlock] PATH` (如果选择了保持锁，就使用–no-unlock开关)
+- 将本地版本库中改变的文件提交到 SVN 版本库中
+- `svn commit -m “LogMessage“ [-N] [--no-unlock] PATH` (如果选择了保持锁，就使用–no-unlock 开关)
  - 例如：`svn commit -m “add test file for my test“ test.php`
 
 
@@ -153,7 +164,9 @@ lock/unlock 表示 加锁  与解锁。
 
 更新你的工作拷贝 
 
-- `svn update`： 会把版本库的修改带到工作拷贝,如果没有给定修订版本,它会把你的工作拷贝更新到 HEAD 修订版本,否则,它会把工作拷贝更新到你用 `--revision` 指定的修订版本。为了保持同步, `svn update` 也会删除所有在工作拷贝发现的无效锁定
+- `svn update`： 会把版本库的修改带到工作拷贝,如果没有给定修订版本,它会把你的工作拷贝更新到 HEAD
+  修订版本,否则,它会把工作拷贝更新到你用 `--revision` 指定的修订版本。为了保持同步, `svn
+  update` 也会删除所有在工作拷贝发现的无效锁定
 - 每个更新的项目开头都有一个表示所做动作的字符
   - A: add
   - B: Broken lock (third column only)
@@ -174,7 +187,7 @@ lock/unlock 表示 加锁  与解锁。
   - `svn update` 后面没有加目录，表示默认更新当前目录及子目录的所有文件到最新版本。
   - `svn update -r 200 test.php` 将版本库中的 test.php 文件还原到 200 版本。
 
-- update命令还可以进行文件恢复。
+- update 命令还可以进行文件恢复。
   - 不小心写错了很多东西，想撤销所写的东西（已经把修改提交到服务器）`svn update -r 版本号`
   - 不小心删错了文件，想把文件恢复回来（已经把删除提交到服务器）`svn update -r 版本号` 
 
@@ -186,7 +199,9 @@ lock/unlock 表示 加锁  与解锁。
 
 ## 7.7. delete
 
-- `svn delete aa.txt` 删除工作区远程库中的 aa.txt 文件；若只是在工程中删除 `aa.txt` 文件，不使用 `svn delete` 指令，则远程版本库中还存在 `aa.txt` 文件，使用 `svn update` 命令后，原先已存在 `aa.txt` 文件会再次更新到工作区中。
+- `svn delete aa.txt` 删除工作区远程库中的 aa.txt 文件；若只是在工程中删除 `aa.txt` 文件，不使用 `svn delete`
+  指令，则远程版本库中还存在 `aa.txt` 文件，使用 `svn
+  update` 命令后，原先已存在 `aa.txt` 文件会再次更新到工作区中。
 
 
 
@@ -219,7 +234,7 @@ trunk/
 - `svn diff file` 将修改的 file 文件与基础版本比较。
   - 例如：`svn diff test.php`
 
-- `svn diff -r m:n path`: 对版本m和版本n比较差异
+- `svn diff -r m:n path`: 对版本 m 和版本 n 比较差异
   - 例如：`svn diff -r 200:201 test.php`
   - 简写：svn di
 
@@ -232,12 +247,13 @@ trunk/
 ## 7.12. merge
 
 - `svn merge -r m:n path`
-- 例如：`svn merge -r 200:205 test.cpp`（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
+- 例如：`svn merge -r 200:205 test.cpp`（将版本 200 与 205 之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一
+  下）
 
 
 ## 7.13. log
 
-- `svn log -l 10`: 查看最近提交的10条记录
+- `svn log -l 10`: 查看最近提交的 10 条记录
 - `svn log test.cpp`: 显示这个文件的所有修改记录，及其版本号的变化。
 - `svn log -r {2018-07-03}:{2018-07-09}`: 查看一段时间的日志
 - `svn log -r r196674 -v`: 查看某一版本所修改的文件列表及说明
@@ -245,7 +261,7 @@ trunk/
 
 ## 7.14. info
 
-- `svn info test.cpp`：查看test.cpp文件的详细信息。
+- `svn info test.cpp`：查看 test.cpp 文件的详细信息。
   ```
   Path: xxx.cpp
   Name: xxx.cpp
@@ -273,9 +289,11 @@ trunk/
 
 ## 7.16. switch
 
-- `svn switch (sw)`: 更新工作副本至不同的URL。
-  - 1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。
-  - 2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系
+- `svn switch (sw)`: 更新工作副本至不同的 URL。
+  - 1、更新你的工作副本，映射到一个新的 URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副
+    本对应到同一仓库中某个分支或者标记的方法。
+  - 2、改写工作副本的 URL 元数据，以反映单纯的 URL 上的改变。当仓库的根 URL
+    变动(比主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系
 
 ## 7.17. revert
 
@@ -321,10 +339,10 @@ $ git checkout -b [local_branch] [remote_branch]
 - [Compared with GIT and SVN, this article is easy to understand](https://developpaper.com/compared-with-git-and-svn-this-article-is-easy-to-understand/)
 - [The Best of Git working with Subversion](https://www.taringamberini.com/en/blog/howto/the-best-of-git-working-with-subversion/)
 - [The Dream of a Bi-directional Git-SVN mirror](https://blog.tfnico.com/2011/03/dream-of-bi-directional-git-svn-mirror.html)
-- [linux下svn命令使用大全](http://blog.chinaunix.net/uid-22566367-id-1965771.html)
-- [Linux下常用svn命令](https://www.cnblogs.com/jaspersong/p/9277720.html)
-- [SVN的安装和使用手册](https://blog.csdn.net/sinat_37812785/article/details/80243207)    
-- [SVN简介](https://blog.csdn.net/weixin_37654790/article/details/85367741)
-- [windows下使用SVN命令行](https://www.cnblogs.com/ysk123/p/9910461.html)
-- [版本控制器：SVN教程](http://www.flyne.org/article/851)
-- [SVN教程](https://easydoc.top/s/78711005/uSJD1CDg/60815798)
+- [linux 下 svn 命令使用大全](http://blog.chinaunix.net/uid-22566367-id-1965771.html)
+- [Linux 下常用 svn 命令](https://www.cnblogs.com/jaspersong/p/9277720.html)
+- [SVN 的安装和使用手册](https://blog.csdn.net/sinat_37812785/article/details/80243207)    
+- [SVN 简介](https://blog.csdn.net/weixin_37654790/article/details/85367741)
+- [windows 下使用 SVN 命令行](https://www.cnblogs.com/ysk123/p/9910461.html)
+- [版本控制器：SVN 教程](http://www.flyne.org/article/851)
+- [SVN 教程](https://easydoc.top/s/78711005/uSJD1CDg/60815798)

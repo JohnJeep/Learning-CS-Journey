@@ -62,7 +62,8 @@ public:
 
 
 ## 法二：利用 hashtable 实现
-将数组中的元素用hashtable存储，并在这个hashtable中查找 target 与数组中当前位置元素值的差值是否也在当前这个hashtable中，若存在，就将各自对应的下标值输出。
+将数组中的元素用 hashtable 存储，并在这个 hashtable 中查找 target 与数组中当前位置元素值的差值是否也在当前这个
+hashtable 中，若存在，就将各自对应的下标值输出。
 >注意：先查询哈希表中是否存在 target - nums[i]，然后再将 nums[i] 插入到哈希表中，保证不会让 nums[i] 和得到的差值重复。
 
 ```cpp
@@ -85,4 +86,4 @@ public:
 ```
 算法复杂
 时间复杂度：$\Omicron(n)$
-空间复杂度：$\Omicron(n)$，主要为hashtable的开销。
+空间复杂度：$\Omicron(n)$，主要为 hashtable 的开销。

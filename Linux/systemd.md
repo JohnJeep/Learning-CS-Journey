@@ -9,22 +9,25 @@
 
 ## systemd
 
-Systemd（系统管理守护进程），最开始以GNU GPL协议授权开发，现在已转为使用GNU LGPL协议。字母d是daemon的缩写它取替并兼容传统的SysV init。事实上，CentOS和Debian，现在默认都是使用Systemd：
+Systemd（系统管理守护进程），最开始以 GNU GPL 协议授权开发，现在已转为使用 GNU LGPL 协议。字母 d 是 daemon
+的缩写它取替并兼容传统的 SysV init。事实上，CentOS 和
+Debian，现在默认都是使用 Systemd：
 
-- CentOS 7开始预设并使用Systemd
-- Ubuntu 15.04开始并预设使用Systemd
+- CentOS 7 开始预设并使用 Systemd
+- Ubuntu 15.04 开始并预设使用 Systemd
 
-使用Systemd的优点：
+使用 Systemd 的优点：
 
 - 按需启动进程，减少系统资源消耗
 - 并行启动进程，提高系统启动速度
 
 
 ## Unit
-Systemd引入了一个核心配置：Unit（单元配置）。事实上，Systemd管理的每个进程，都是一个Unit。相当于任务块。一个有12种模式：
+Systemd 引入了一个核心配置：Unit（单元配置）。事实上，Systemd 管理的每个进程，都是一个 Unit。相当于任务块。一个有 12
+种模式：
 
 Service unit：系统服务
-Target unit：多个Unit构成的一个组
+Target unit：多个 Unit 构成的一个组
 Device Unit：硬件设备
 Mount Unit：文件系统的挂载点
 Automount Unit：自动挂载点
@@ -87,17 +90,17 @@ systemctl start service_name
 systemctl stop service_name
 ```
 
-systemctl设置开机自启
+systemctl 设置开机自启
 ```
 systemctl enable service_name
 ```
 
-查看Unit单元是否设置了开机自启
+查看 Unit 单元是否设置了开机自启
 ```
 systemctl is-enable service_name
 ```
 
-systemctl取消开机自启
+systemctl 取消开机自启
 ```
 systemctl enable service_name
 ```
