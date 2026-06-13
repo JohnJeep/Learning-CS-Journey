@@ -2,11 +2,10 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:15:20
+ * @LastEditTime: 2026-06-13 16:39:48
  * @Description: Project description
  * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
 -->
-
 
 <div align="center">
 
@@ -84,25 +83,17 @@
 
 ### 芯片与 CPU 架构
 
-> 目录: `Architecture/`
-
 涵盖 **x86、ARM、NVIDIA** 三大主流架构的学习笔记，理解计算机最底层的运行原理。
 
 ### 汇编语言
-
-> 目录: `Assembly/`
 
 - [基础汇编指令解释](Assembly/assembly.md) — 寄存器、寻址模式、常用指令集
 
 ### 嵌入式开发
 
-> 目录: `Embedded/`
-
 STM32 系列 (F103 / F207 / F407) 嵌入式开发，包括驱动编写、外设配置、RTOS 等。
 
 ### GNU 工具链
-
-> 目录: `GNU/`
 
 GCC 编译器、glibc 标准库、ABI 规范等 GNU 生态核心工具。
 
@@ -112,8 +103,6 @@ GCC 编译器、glibc 标准库、ABI 规范等 GNU 生态核心工具。
 
 
 ### C 语言
-
-> 目录: `C/`
 
 C 语言是接触的第一门语言，这里重点记录工作中对 C 语言知识的深入补充——底层内存、指针、结构体、回调函数等核心主题。
 
@@ -156,8 +145,6 @@ C 语言是接触的第一门语言，这里重点记录工作中对 C 语言知
 
 ### C++
 
-> 目录: `Cpp/`
-
 C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到内存管理，系统性地记录学习过程。
 
 - **[C++ 基础](Cpp/Novice.md)** — 基础语法与常用特性
@@ -175,8 +162,6 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 - **[编码规范](Cpp/StyleGuide.md)**
 
 ### Go 语言
-
-> 目录: `Go/`
 
 从语言基础到运行时底层原理，全面覆盖 Go 语言知识体系。
 
@@ -201,8 +186,6 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 ---
 
 ## 🖥️ 操作系统
-
-> 目录: `OS/`
 
 操作系统是与底层硬件结合最紧密的课程，通过名校课程 + 经典书籍系统性学习。
 
@@ -256,8 +239,6 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 
 ## 🌐 计算机网络
 
-> 目录: `Network/`
-
 - [计算机网络基础](Network/NetworkPrimer.md)
 - [常用术语缩写](Network/AbbrNetworkTerms.md)
 - [HTTP 基础](Network/HTTP.md)
@@ -277,15 +258,11 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 
 ## 🧮 数据结构与算法
 
-> 目录: `DataStructure/`
-
 [数据结构与算法笔记](DataStructure/DataStructure.md) — 涵盖链表、树、栈/堆、排序、查找等经典数据结构与算法。
 
 ---
 
 ## 🏛️ 设计模式
-
-> 目录: `DesignPattern/`
 
 [23 种设计模式 (C++ 实现)](DesignPattern/DesignPattern.md) — 创建型、结构型、行为型三大类，配合 UML 类图辅助理解。
 
@@ -305,8 +282,6 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 
 ### 云原生
 
-> 目录: `CloudNative/`
-
 | 技术栈 | 笔记链接 |
 |--------|----------|
 | **容器化** | Docker<br>Kubernetes |
@@ -316,8 +291,6 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 | **监控** | [InfluxDB](CloudNative/Influxdb.md)<br>[Jenkins CI/CD](CloudNative/Jenkins/) |
 
 ### 分布式系统
-
-> 目录: `Distributed/`
 
 - MIT 6.824 分布式系统课程 — [B 站视频](https://www.bilibili.com/video/BV1qk4y197bB)
 - 推荐书籍：《数据密集型应用系统设计 (DDIA)》
@@ -329,21 +302,15 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 
 ### 人工智能
 
-> 目录: `AI/`
-
 - [AIGC](AI/AIGC.md) — 生成式 AI 技术概览
 - [Ollama](AI/Ollama.md) — 本地大模型部署与使用
 
 ### 自动驾驶
 
-> 目录: `AutoDrive/`
-
 - [Autoware](AutoDrive/Autoware.md) — 开源自动驾驶框架
 
 
 ### 机器人
-
-> 目录: `Robotics/`
 
 ROS2 完整技术栈，从基础到实战：
 
@@ -355,8 +322,6 @@ ROS2 完整技术栈，从基础到实战：
 ---
 
 ## 🐧 Linux 系统
-
-> 目录: `Linux/`
 
 - [Linux 基础](Linux/linux-primer.md) — 文件系统、用户管理、常用命令
 - [编译链接原理](Linux/compile-link.md)
@@ -374,8 +339,6 @@ ROS2 完整技术栈，从基础到实战：
 
 ### 版本控制
 
-> 目录: `Git-SVN/`
-
 - [Git 从入门到内部原理](Git-SVN/Git.md)
 - [SVN 工具](Git-SVN/SVN.md)
 - [Git 安装与配置](Git-SVN/Install.md)
@@ -386,8 +349,6 @@ ROS2 完整技术栈，从基础到实战：
 - [Git Internals](Git-SVN/Internals.md)
 
 ### 工业协议
-
-> 目录: `Protocol/`
 
 - Modbus
 - Omron
@@ -411,8 +372,6 @@ ROS2 完整技术栈，从基础到实战：
 
 ### 文档与知识管理
 
-> 目录: `Markdown/`
-
 - [Typora 使用说明](Markdown/TyporaMarkdown.md)
 - [LaTeX 公式](Markdown/LaTex.md)
 - [希腊字母表](Markdown/GreekAlphabet.md)
@@ -420,8 +379,6 @@ ROS2 完整技术栈，从基础到实战：
 - [Jupyter Notebook 示例](Markdown/Jupyter.ipynb)
 
 ### 仓库维护脚本
-
-> 根目录
 
 - [add_frontmatter.py](add_frontmatter.py): 批量补充文档头部元信息
 - [clean.bat](clean.bat): Windows 环境清理脚本
