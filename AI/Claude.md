@@ -141,25 +141,90 @@ export HTTPS_PROXY="http://${WIN_IP}:7897"
 
 ### 2.2. ubuntu Container Proxy
 
-VS Code 的 Claude 插件（Claude Code for VS Code）在进行 OAuth 登录时，使用的是 VS Code 自身的网络栈，而不是 WSL2
-终端的环境变量。
-你在 WSL2 bash 里设置的 HTTPS_PROXY 对 VS Code 图形界面的插件不生效。
+Clash Verge 在 Windows 上通常监听 `127.0.0.1:7897`（HTTP/SOCKS5 混合端口，具体看你 Clash Verge 的端口设置）。容器要访问这个代理，需要用宿主机的地址而不是 `127.0.0.1`（容器里的 `127.0.0.1` 指向容器自己）。
 
-打开 VS Code 设置 (Ctrl+,)，搜索 http.proxy，填入：
+**第一步：确认 Clash Verge 端口和监听地址**
+
+- 打开 Clash Verge → 设置，看 "混合端口" 或 "HTTP 端口"（默认常见是 7890）
+- 确保 Clash Verge 允许局域网连接（Allow LAN / 允许局域网连接 开关打开），否则容器连不进来
+
+**第二步：容器内配置代理**
+
+Hyper-V 后端下，从容器访问 Windows 宿主机，通常用 `host.docker.internal` 这个特殊域名（Docker Desktop 自动配置好的）：
+
+临时测试（在容器内执行）：
+
 ```bash
-# 宿主机 IP，通过 cat /etc/resolv.conf 查看 IP
-http://HOST_IP:7897
+export http_proxy=http://host.docker.internal:7890
+export https_proxy=http://host.docker.internal:7890
 ```
 
-同时也在 .bashrc 或者 .zshrc 中添加对应的代理配置
+测试：
+
+```bash
+curl -I https://www.google.com
+```
+
+**第三步：固化到 `.zshrc`（如果想长期生效）**
+
+```bash
+echo 'export http_proxy=http://host.docker.internal:7890' >> ~/.zshrc
+echo 'export https_proxy=http://host.docker.internal:7890' >> ~/.zshrc
+echo 'export no_proxy=localhost,127.0.0.1' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**第四步：apt 也走代理（可选）**
+
+```bash
+sudo tee /etc/apt/apt.conf.d/proxy.conf << 'EOF'
+Acquire::http::Proxy "http://host.docker.internal:7890";
+Acquire::https::Proxy "http://host.docker.internal:7890";
+EOF
+```
+
+**注意：**
+
+1. **Clash Verge 必须开启"允许局域网连接"**，否则容器（对 Clash 来说相当于局域网内的另一台机器）连不上
+2. 如果 `host.docker.internal` 解析不通，可以试试用宿主机的实际局域网 IP 替代
+3. 如果你的 Clash Verge 设置了"仅本地回环监听"，需要改成监听 `0.0.0.0` 才能被容器访问
+
+先检查一下 Clash Verge 里"允许局域网连接"是否开启，这是最常见的卡点。
+
+---
+
+**如果 `host.docker.internal` 不可用**（某些网络模式下可能没有），备选方案是查看 `eth0` 的网关地址，Docker bridge 网络下网关通常就是宿主机在该虚拟网络里的地址：
+
+```bash
+ip route | grep default
+```
+
+输出类似：
+
+```
+default via 172.17.0.1 dev eth0
+```
+
+这个 `172.17.0.1` 通常就是宿主机侧的网关地址。然后在 .bashrc 或者 .zshrc 中添加对应的代理配置
+
 ```bash
 # clash-verge 的混合 port 是 7897
-export HOST_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export HOST_IP=$(ip route | grep default | awk '{print $3}')
 export HTTP_PROXY="http://${HOST_IP}:7897"
 export HTTPS_PROXY="http://${HOST_IP}:7897"
 
 # 验证是否能访问claude API
 #curl -v https://api.anthropic.com/v1/models
+```
+
+排序检查
+
+```bash
+# 1. 先用 host.docker.internal 测试
+curl -I --connect-timeout 5 -x http://host.docker.internal:7897 https://www.google.com
+
+# 2. 不行的话用网关地址测试
+curl -I --connect-timeout 5 -x http://172.17.0.1:7897 https://www.google.com
 ```
 
 
