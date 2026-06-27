@@ -55,14 +55,15 @@ jq --version
 }
 ```
 
-json 字符串紧凑输出
+## 标准 JSON 数据格式化输出
 
+只压缩成一行，不进行转义
 ```bash
-q -c . data.json
+jq -c . data.json
 {"a":11,"b":22,"person":{"name":"Bob","age":25,"city":"New York"},"fruits":["apple","banana","cherry"],"meta":{"data":{"id":123,"value":"example"}}}
 ```
 
-将 json 转义为字符串
+## 将 json 数据转义为字符串，但中间的换行符也会被转义
 
 ```bash
 jq -sR . data.json 
@@ -70,15 +71,43 @@ jq -sR . data.json
 
 ```
 
-json 转义为字符串并紧凑输出
+## 将标准 JSON 转换为转义后的 JSON 字符串格式，去掉中间的换行符
 
 ```bash
-jq -c . data.json | jq -sR .
-"{\"a\":11,\"b\":22,\"person\":{\"name\":\"Bob\",\"age\":25,\"city\":\"New York\"},\"fruits\":[\"apple\",\"banana\",\"cherry\"],\"meta\":{\"data\":{\"id\":123,\"value\":\"example\"}}}\n"
+jq 'tojson' data.json
+"{\"a\":11,\"b\":22,\"person\":{\"name\":\"Bob\",\"age\":25,\"city\":\"New York\"},\"fruits\":[\"apple\",\"banana\",\"cherry\"],\"meta\":{\"data\":{\"id\":123,\"value\":\"example\"}}}"
 
 # 另外一种写法
-jq -c "tostring" data.json
+jq -c . data.json | jq -sR .
+"{\"a\":11,\"b\":22,\"person\":{\"name\":\"Bob\",\"age\":25,\"city\":\"New York\"},\"fruits\":[\"apple\",\"banana\",\"cherry\"],\"meta\":{\"data\":{\"id\":123,\"value\":\"example\"}}}\n"
+```
+
+## 将转义后的 JSON 字符串格式转换为标准 JSON 格式
+
+字符串的内容为下面的内容，存在 escape.txt 中
+```
 "{\"a\":11,\"b\":22,\"person\":{\"name\":\"Bob\",\"age\":25,\"city\":\"New York\"},\"fruits\":[\"apple\",\"banana\",\"cherry\"],\"meta\":{\"data\":{\"id\":123,\"value\":\"example\"}}}"
+```
+
+执行 `jq 'fromjson' escape.txt` 后，输出结果为：
+```json
+{
+  "a":11,
+  "b":22,
+  "person": {
+      "name": "Bob",
+      "age": 25,
+      "city": "New York"
+  },
+  "fruits": ["apple", "banana", "cherry"],
+  "meta": {
+    "data" :{
+      "id": 123,
+      "value": "example"
+    }
+  }
+}
+
 ```
 
 
