@@ -165,8 +165,8 @@ Hyper-V 后端下，从容器访问 Windows 宿主机，通常用 `host.docker.i
 临时测试（在容器内执行）：
 
 ```bash
-export http_proxy=http://host.docker.internal:7890
-export https_proxy=http://host.docker.internal:7890
+export http_proxy=http://host.docker.internal:7897
+export https_proxy=http://host.docker.internal:7897
 ```
 
 测试：
@@ -178,8 +178,8 @@ curl -I https://www.google.com
 **第三步：固化到 `.zshrc`（如果想长期生效）**
 
 ```bash
-echo 'export http_proxy=http://host.docker.internal:7890' >> ~/.zshrc
-echo 'export https_proxy=http://host.docker.internal:7890' >> ~/.zshrc
+echo 'export http_proxy=http://host.docker.internal:7897' >> ~/.zshrc
+echo 'export https_proxy=http://host.docker.internal:7897' >> ~/.zshrc
 echo 'export no_proxy=localhost,127.0.0.1' >> ~/.zshrc
 source ~/.zshrc
 ```
@@ -188,8 +188,8 @@ source ~/.zshrc
 
 ```bash
 sudo tee /etc/apt/apt.conf.d/proxy.conf << 'EOF'
-Acquire::http::Proxy "http://host.docker.internal:7890";
-Acquire::https::Proxy "http://host.docker.internal:7890";
+Acquire::http::Proxy "http://host.docker.internal:7899";
+Acquire::https::Proxy "http://host.docker.internal:7899";
 EOF
 ```
 
@@ -225,16 +225,6 @@ export HTTPS_PROXY="http://${HOST_IP}:7897"
 
 # 验证是否能访问claude API
 #curl -v https://api.anthropic.com/v1/models
-```
-
-排序检查
-
-```bash
-# 1. 先用 host.docker.internal 测试
-curl -I --connect-timeout 5 -x http://host.docker.internal:7897 https://www.google.com
-
-# 2. 不行的话用网关地址测试
-curl -I --connect-timeout 5 -x http://172.17.0.1:7897 https://www.google.com
 ```
 
 
