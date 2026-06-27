@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-05-31 10:13:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-07 22:04:34
+ * @LastEditTime: 2026-06-27 21:55:26
  * @Description: Claude Code Using
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -37,7 +37,6 @@ Claude 的"永久说明书"。
 - 所有 API 调用必须加错误处理
 - 禁止直接修改 node_modules
 ```
-
 - 全局的`~/.claude/CLAUDE.md` 最好控制在 200 行以内。超过这个范围后，Claude
   对指令的遵守程度会明显下降。如果上下文越来越大，可以用 `.claude/rules/` 目录做模块化规则管理。
 - 写入你的语言偏好、技术栈、代码风格规则，以及任何你已经重复解释超过两次的东西。
@@ -546,5 +545,15 @@ UDE.local.md`（本地私有）——Auto Memory
 
 
 
+## 10. Claude Code develop
 
+Claude Code 的客户端是用 **TypeScript** 开发的，运行在 **Node.js / Bun** 运行时上。具体技术栈如下：
 
+- **语言**：[TypeScript](https://www.typescriptlang.org/docs/)
+- **运行时**：[Bun](https://bun.com/)（推荐）或 [Node.js](https://nodejs.org/en)
+- **终端 UI**：[React](https://react.dev/) + [Ink](https://github.com/vadimdemedes/ink)（一个用 React 构建命令行界面的库）+ [chalk](https://github.com/chalk/chalk) (终端彩色输出)
+- **CLI 框架**：[Commander.js](https://github.com/tj/commander.js)
+
+Claude Code 的终端界面相当复杂（流式输出、多面板、交互操作），而 [Ink](https://github.com/vadimdemedes/ink) 允许用 React 组件写 TUI（Terminal UI）。TypeScript 天然支持 JSX/TSX，这个技术栈几乎没有其他语言能直接替代。
+
+Anthropic 官方的 `@anthropic-ai/sdk` 本身是 TypeScript 写的，Claude Code 调用自家 API 时可以直接获得完整的类型提示和 IntelliSense，开发效率更高。
