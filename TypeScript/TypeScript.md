@@ -12,28 +12,130 @@
 TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and
 interfaces to help you build robust components.
 
+TypeScript 是一种有类型检查的 JavaScript。**类型只在编译期存在，运行时是纯 JavaScript**。
+
+这意味着：
+
+- 编译器 `tsc` 做类型检查，然后把 `.ts` 擦除成 `.js`
+- 运行时没有 `int`、`string` 这些类型，全部消失
+- 你写的类型注解是给开发者和编译器看的，不是给 CPU 看的
+
+## 工程构建流程
+
+从零开始写一个 TypeScript Hello World，非常简单，下面一步步来：
+
+### 1. 初始化项目
+
+```bash
+mkdir hello-ts && cd hello-ts
+npm init -y
+```
+
+### 2. 安装 TypeScript
+
+```bash
+npm install typescript --save-dev
+```
+
+### 3. 初始化 TypeScript 配置
+
+```bash
+npx tsc --init
+```
+
+这会生成一个 `tsconfig.json`，核心配置如下（默认即可）：
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "commonjs",
+    "strict": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  }
+}
+```
+
+> 建议手动加上 `"outDir": "./dist"` 和 `"rootDir": "./src"`，让输出更整洁。
+
+### 4. 写代码
+
+新建 `src/index.ts`：
+
+```typescript
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+const message: string = greet("World");
+console.log(message);
+```
+
+这里用了 TypeScript 最基础的特性：**类型注解**（`: string`）。
+
+### 5. 编译并运行
+
+```bash
+npx tsc          # 编译 → 生成 dist/index.js
+node dist/index.js
+```
+
+输出：
+
+```
+Hello, World!
+```
+
+------
+
+### 更快的开发方式（可选）
+
+每次改完都要编译再运行比较繁琐，可以用 `ts-node` 直接运行 `.ts` 文件：
+
+```bash
+npm install ts-node --save-dev
+npx ts-node src/index.ts
+```
+
+或者用 `tsx`（更快，基于 esbuild）：
+
+```bash
+npm install tsx --save-dev
+npx tsx src/index.ts
+```
+
+------
+
+### 最终目录结构
+
+```
+hello-ts/
+├── src/
+│   └── index.ts       ← 你写的代码
+├── dist/
+│   └── index.js       ← 编译后的产物
+├── tsconfig.json
+└── package.json
+```
+
+整个流程就这些。TypeScript 的核心价值就是在 `.ts` 文件里加类型，编译成普通 JS 运行——你已经上手了。
+
+
 
 ## Compile
-安装 typescript 编译器，终端执行下面的命令，前提是已经安装好 `npm` 软件包。
-```shell
-sudo npm i typescript -g 
-```
 
-静态编译，每次文件改变后，终端运行 TypeScript 编译器进行编译
-```shell
-tsc [filename]
-```
-不推荐这种方式，这种方式太麻烦了，推荐使用自动化编译。
+`tsc` 是 typescript 的编译器。
 
 
-动态编译 TS 工程文件同时监测内容的变化，自动生成 js 文件
-1. 终端输入：`tsc --init`，执行完成后，自动生成一个 `tsconfig.json` 配置文件。此配置文件是对 ts 文件的全局配置。
-2. 终端输入：`tsc --watch`，监控所有 js 文件的变化，同时自动将 ts 转换为 js。
 
 ## 类型声明
 
 
+
 ## 类型推断
+
+
 
 ## 数据类型
 
