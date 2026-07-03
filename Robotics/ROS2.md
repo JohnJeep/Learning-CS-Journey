@@ -395,7 +395,112 @@ int state
 - 更复杂的非阻塞后台处理任务。
 
 
+## 5.4. QoS Policy
+
+QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质量控制机制。发布者和订阅者需要 QoS 兼容才能建立连接。
+
+### 5.4.1. 核心策略
+
+| 策略 | 选项 | 说明 |
+|---|---|---|
+| **Reliability** | `RELIABLE` | 保证消息必达，有重传机制 |
+| | `BEST_EFFORT` | 尽力投递，允许丢包，延迟更低 |
+| **Durability** | `VOLATILE` | 只有订阅者已连接时才投递消息 |
+| | `TRANSIENT_LOCAL` | 新订阅者加入时，发布者会重发历史消息 |
+| **History** | `KEEP_LAST(N)` | 只保留最近 N 条消息（默认 N=10） |
+| | `KEEP_ALL` | 保留所有消息（受系统资源限制） |
+| **Deadline** | 时间间隔 | 发布者必须在此间隔内至少发送一条消息 |
+| **Liveliness** | `AUTOMATIC` / `MANUAL` | 检测发布者是否仍然存活 |
+| **Lifespan** | 时间间隔 | 消息超过此时间未被订阅则丢弃 |
+
+兼容性规则（发布者与订阅者 QoS 必须兼容）：
+- Reliability：发布者 `RELIABLE` 兼容订阅者 `RELIABLE` 或 `BEST_EFFORT`；发布者 `BEST_EFFORT` 只兼容订阅者 `BEST_EFFORT`
+- Durability：发布者 `TRANSIENT_LOCAL` 兼容任何订阅者；发布者 `VOLATILE` 只兼容订阅者 `VOLATILE`
+
+### 5.4.2. 常用预定义 QoS Profile
+
+ROS2 内置了几种常用 QoS 配置：
+
+| Profile | Reliability | Durability | History | 典型用途 |
+|---|---|---|---|---|
+| `SensorDataQoS` | BEST_EFFORT | VOLATILE | KEEP_LAST(5) | 激光雷达、IMU 等传感器 |
+| `ServicesQoS` | RELIABLE | VOLATILE | KEEP_LAST(10) | Service 通信（默认） |
+| `ParametersQoS` | RELIABLE | VOLATILE | KEEP_LAST(1000) | 参数服务器 |
+| `ClockQoS` | BEST_EFFORT | VOLATILE | KEEP_LAST(1) | 时钟话题 |
+| `SystemDefaultsQoS` | RELIABLE | VOLATILE | KEEP_LAST(10) | 默认配置 |
+
+### 5.4.3. 使用示例
+
+**C++**
+
+```cpp
+#include "rclcpp/rclcpp.hpp"
+#include "sensor_msgs/msg/laser_scan.hpp"
+
+// 使用预定义 profile
+auto qos = rclcpp::SensorDataQoS();
+auto pub = node->create_publisher<sensor_msgs::msg::LaserScan>("/scan", qos);
+
+// 自定义 QoS
+rclcpp::QoS custom_qos(10);  // history depth = 10
+custom_qos.reliability(RMW_QOS_POLICY_RELIABILITY_RELIABLE);
+custom_qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+auto sub = node->create_subscription<std_msgs::msg::String>(
+    "/topic", custom_qos, callback);
+```
+
+**Python**
+
+```python
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
+from rclpy.qos import qos_profile_sensor_data
+
+# 使用预定义 profile
+self.pub = self.create_publisher(LaserScan, '/scan', qos_profile_sensor_data)
+
+# 自定义 QoS
+qos = QoSProfile(
+    reliability=ReliabilityPolicy.RELIABLE,
+    durability=DurabilityPolicy.TRANSIENT_LOCAL,
+    history=HistoryPolicy.KEEP_LAST,
+    depth=10,
+)
+self.sub = self.create_subscription(String, '/topic', self.callback, qos)
+```
+
+
 # 6. Workflow
+
+## 6.1. Workspace 结构
+
+ROS2 使用**工作空间（workspace）**来组织和构建代码。工作空间的标准目录结构如下：
+
+```
+ros2_ws/
+├── src/       # 所有源码包放在这里，手动管理
+├── build/     # colcon 构建的中间文件（自动生成，不提交 git）
+├── install/   # 安装产物，source 此目录即可激活工作空间
+└── log/       # 构建日志（自动生成）
+```
+
+初始化工作空间：
+
+```bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws
+colcon build
+```
+
+激活工作空间（每次打开新终端都需要执行，或写入 `~/.bashrc`）：
+
+```bash
+source ~/ros2_ws/install/setup.bash
+```
+
+叠加激活多个工作空间时，后 source 的优先级更高，会覆盖前一个工作空间中的同名包。
+
+
+## 6.2. 开发流程
 
 1. 设置 ROS2 工作空间
 2. 用 `ros2 create` 创建一个 ROS2 包。
@@ -490,7 +595,129 @@ colcon 的详细用法：[colcon](./Colcon.md)
 
 ## 7.2. launch
 
-ROS 系统中多 node 启动与 配置的一种脚本。
+ROS2 系统中用于同时启动多个节点、设置参数、配置命名空间和话题重映射的脚本机制。ROS2 的 launch 文件使用 **Python** 编写（ROS1 用 XML），拥有完整的编程能力。
+
+launch 文件通常放在包的 `launch/` 目录下，命名约定为 `xxx_launch.py`。
+
+### 7.2.1. 基本结构
+
+每个 launch 文件必须实现 `generate_launch_description()` 函数，返回一个 `LaunchDescription` 对象：
+
+```python
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        # 在这里放节点、参数声明、包含其他 launch 文件等
+    ])
+```
+
+### 7.2.2. 启动节点
+
+```python
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='my_pkg',           # 包名
+            executable='my_node',       # 可执行文件名
+            name='custom_node_name',    # 节点名（可选，默认用可执行文件名）
+            namespace='my_ns',          # 命名空间（可选）
+            output='screen',            # 输出到终端
+            parameters=[                # 参数（列表，每项为字典或 yaml 文件路径）
+                {'max_speed': 1.0, 'use_sim_time': False}
+            ],
+            remappings=[                # 话题重映射 [(原名, 新名)]
+                ('/cmd_vel', '/robot/cmd_vel'),
+            ],
+        ),
+    ])
+```
+
+### 7.2.3. 传递 Launch 参数
+
+通过 `DeclareLaunchArgument` 声明参数，`LaunchConfiguration` 读取参数值，实现 launch 文件的可配置化：
+
+```python
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    use_sim_time_arg = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false',
+        description='Use simulation (Gazebo) clock if true',
+    )
+
+    return LaunchDescription([
+        use_sim_time_arg,
+        Node(
+            package='my_pkg',
+            executable='my_node',
+            parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+        ),
+    ])
+```
+
+命令行传入参数：
+
+```bash
+ros2 launch my_pkg my_launch.py use_sim_time:=true
+```
+
+### 7.2.4. 引入其他 Launch 文件
+
+```python
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+import os
+
+def generate_launch_description():
+    nav2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('nav2_bringup'),
+                'launch', 'navigation_launch.py',
+            )
+        ),
+        launch_arguments={'use_sim_time': 'true'}.items(),
+    )
+
+    return LaunchDescription([nav2_launch])
+```
+
+### 7.2.5. 条件启动
+
+```python
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import LaunchConfiguration
+
+enable_rviz_arg = DeclareLaunchArgument('enable_rviz', default_value='true')
+
+rviz_node = Node(
+    package='rviz2',
+    executable='rviz2',
+    condition=IfCondition(LaunchConfiguration('enable_rviz')),  # 仅在 enable_rviz=true 时启动
+)
+```
+
+### 7.2.6. CMakeLists.txt 安装 launch 文件
+
+launch 文件需要通过 CMake 安装才能被 `ros2 launch` 找到：
+
+```cmake
+install(DIRECTORY launch/
+  DESTINATION share/${PROJECT_NAME}/launch
+)
+```
 
 
 # 8. ROS2 Command
@@ -521,6 +748,143 @@ ros2 pkg create --build-type ament_cmake \
                 --license Apache-2.0 \
                 my_licensed_pkg
 ```
+
+## 8.3. node
+
+```bash
+# 列出当前所有运行的节点
+ros2 node list
+
+# 查看节点详情（发布的话题、订阅的话题、服务、参数等）
+ros2 node info /node_name
+```
+
+
+## 8.4. topic
+
+```bash
+# 列出当前所有话题
+ros2 topic list
+
+# 列出话题并显示消息类型
+ros2 topic list -t
+
+# 查看话题详情（类型、发布者数量、订阅者数量）
+ros2 topic info /topic_name
+
+# 实时打印话题消息
+ros2 topic echo /topic_name
+
+# 查看话题发布频率（Hz）
+ros2 topic hz /topic_name
+
+# 手动发布一条消息（一次性）
+ros2 topic pub --once /topic_name std_msgs/msg/String '{"data": "hello"}'
+
+# 以指定频率持续发布
+ros2 topic pub --rate 10 /cmd_vel geometry_msgs/msg/Twist \
+  '{"linear": {"x": 0.5}, "angular": {"z": 0.0}}'
+```
+
+
+## 8.5. service
+
+```bash
+# 列出当前所有服务
+ros2 service list
+
+# 查看服务的消息类型
+ros2 service type /service_name
+
+# 列出服务并显示类型
+ros2 service list -t
+
+# 调用服务
+ros2 service call /service_name srv_type '{"field": value}'
+
+# 示例：调用加法服务
+ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts \
+  '{"a": 1, "b": 2}'
+```
+
+
+## 8.6. action
+
+```bash
+# 列出当前所有 action
+ros2 action list
+
+# 列出 action 并显示类型
+ros2 action list -t
+
+# 查看 action 详情
+ros2 action info /action_name
+
+# 发送 goal
+ros2 action send_goal /action_name action_type '{"goal_field": value}'
+
+# 发送 goal 并打印反馈
+ros2 action send_goal --feedback /action_name action_type '{"goal_field": value}'
+```
+
+
+## 8.7. param
+
+```bash
+# 列出节点的所有参数
+ros2 param list /node_name
+
+# 获取参数值
+ros2 param get /node_name param_name
+
+# 设置参数值（运行时动态修改）
+ros2 param set /node_name param_name value
+
+# 将节点参数导出到 yaml 文件
+ros2 param dump /node_name --output-dir ./
+
+# 从 yaml 文件加载参数
+ros2 param load /node_name params.yaml
+```
+
+
+## 8.8. interface
+
+```bash
+# 列出所有可用接口（msg/srv/action）
+ros2 interface list
+
+# 查看消息定义
+ros2 interface show std_msgs/msg/String
+
+# 查看服务定义
+ros2 interface show example_interfaces/srv/AddTwoInts
+
+# 查看 action 定义
+ros2 interface show nav2_msgs/action/NavigateToPose
+
+# 列出某个包的所有接口
+ros2 interface packages
+ros2 interface package std_msgs
+```
+
+
+## 8.9. launch
+
+```bash
+# 启动 launch 文件
+ros2 launch <package_name> <launch_file.py>
+
+# 示例
+ros2 launch my_robot bringup_launch.py
+
+# 传入参数
+ros2 launch my_robot bringup_launch.py use_sim_time:=true
+
+# 查看 launch 文件支持的参数（不实际启动）
+ros2 launch my_robot bringup_launch.py --show-args
+```
+
 
 # 9. Hardware
 
@@ -560,7 +924,14 @@ ros2 pkg create --build-type ament_cmake \
 
 
 
-# 10. References
+# 10. TF2 Transform Framework
+
+TF2 是 ROS2 中用于管理坐标系变换的核心库，涵盖坐标系树、静态/动态变换发布、坐标查询、坐标点转换等内容。
+
+详细内容见：[TF.md](./TF.md)
+
+
+# 11. References
 
 - [Offical ROS2](https://ros.org/)
 - [ROS2 Document with jazzy](https://docs.ros.org/en/jazzy/index.html)
@@ -572,7 +943,6 @@ ros2 pkg create --build-type ament_cmake \
 - [古月居 图书资源](https://book.guyuehome.com/)
 - [OriginBot 智能机器人开源套件](http://originbot.org/index.html)
 - [动手学 ROS2](http://fishros.com/d2lros2/)
-- [鱼香 ROS 机器人](http://fishros.com/)
 - [宇树具身智能](https://www.unifolm.com/)
 - [Lumina 具身智能社区](https://lumina-embodied.ai/)
 - [Github 开源的具身智能社区](https://github.com/TianxingChen/Embodied-AI-Guide)
