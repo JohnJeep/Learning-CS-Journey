@@ -45,7 +45,8 @@
     ".vscode",
     ".claude",
     "Linux/vim/myvim/",
-    "Go/proj-go/"
+    "Go/proj-go/",
+    "Robotics/code/"
   ],
   "exclude_file_names": [
     "README.md",
