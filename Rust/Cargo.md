@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:52:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-07-04 17:28:58
+ * @LastEditTime: 2026-07-06 01:00:06
  * @Description: rust cargo usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -12,8 +12,7 @@
 - C++ 里的 CMake + vcpkg/Conan（构建 + 依赖管理二合一）
 - Golang 里的 `go build` + `go mod`
 
-**它主要做这几件事**
-
+它主要做这几件事
 1. **依赖管理**：项目根目录下的 `Cargo.toml` 文件里声明依赖的库（叫 "crate"），Cargo 会自动从 crates.io（Rust 的包仓库，类似 npm 的 registry）下载并解析版本冲突。
 2. **构建项目**：`cargo build` 编译项目，`cargo build --release` 编译优化版本（类似 CMake 的 Release 模式）。
 3. **运行/测试**：`cargo run` 编译并运行，`cargo test` 跑测试，一条命令搞定，不用自己拼编译命令。
