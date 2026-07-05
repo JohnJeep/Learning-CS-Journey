@@ -23,7 +23,7 @@
     "MySQL",
     "Network",
     "Nginx",
-    "node.js",
+    "NodeJs",
     "OpenSource",
     "OS",
     "Protocol",
@@ -55,7 +55,7 @@
   ],
   "category_aliases": {
     "Cpp": "C++",
-    "node.js": "Node.js",
+    "NodeJs": "Node Js",
     "CloudNative": "Cloud Native",
     "Git-SVN": "Git & SVN"
   },
