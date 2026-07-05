@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:47:32
+ * @LastEditTime: 2026-07-05 14:54:42
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -31,7 +31,6 @@ ROS 目前推出了 ROS1 和 ROS2 两个版本。ROS 具有如下局限性
 如下是 ROS2 的架构概览图：
 
 ![](figures/ros2_architecture.png)
-
 
 
 # 2. Terms
