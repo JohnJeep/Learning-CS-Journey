@@ -137,7 +137,7 @@ post_meta:
     label: true
   post:
     # Choose: left / center
-    position: left
+    position: center
     # Choose: created / updated / both
     date_type: both
     # Choose: date / relative
