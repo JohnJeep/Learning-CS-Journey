@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:55:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-07-06 00:14:08
+ * @LastEditTime: 2026-07-06 00:59:54
  * @Description: rust usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
@@ -16,7 +16,6 @@ rust 是一门系统级编程语言，类似 C/C++，但更安全、更现代化
 - **并发安全**：通过所有权和类型系统防止数据竞争，轻松编写安全的并发程序。
 - **现代化语法**：语法简洁，支持模式匹配、泛型、闭包等现代编程特性。
 - **丰富的生态**：Cargo 包管理器和 crates.io 提供了丰富的库和工具，方便快速开发。
-
 
 
 **如何学习 Rust？**
