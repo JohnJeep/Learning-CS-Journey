@@ -2,13 +2,14 @@
  * @Author: JohnJeep
  * @Date: 2026-07-19 11:53:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-07-19 23:51:08
+ * @LastEditTime: 2026-08-02 10:13:18
  * @Description: Raspberry Pi related content for Robotics.
  * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
 -->
 
+# 1. Raspberry Pi
 
-## 0.1. Raspberry Pi Zero W
+## 1.1. Raspberry Pi Zero W
 
 产品规格
 
@@ -42,7 +43,7 @@
 
 
 
-## 0.2. Raspberry Pi 3 Model B+
+## 1.2. Raspberry Pi 3 Model B+
 
 The Raspberry Pi 3 Model B+ is the final revision in the Raspberry Pi 3 range.
 
@@ -66,7 +67,7 @@ ARMv7 架构；
 
 
 
-## 0.3. 交叉构建Buildroot
+## 1.3. 交叉构建Buildroot
 
 |                     | Pi 3B+                                       | Pi Zero W                 |
 | ------------------- | -------------------------------------------- | ------------------------- |
@@ -164,8 +165,21 @@ make -j$(nproc)
 4、将构建好的产物烧录到板子上；
 
 
+## 1.4. 烧录 img 到 SD 卡
 
-# 1. References
+假设你的镜像文件路径是 /home/john/Downloads/raspberrypi.img（请替换成你的实际路径）：
+```bash
+sudo dd if=/home/john/Downloads/your_image.img of=/dev/sdd bs=4M status=progress
+```
+
+解释：
+- if= = 输入文件（你的镜像）
+- of= = 输出设备（整个 SD 卡，不是分区）
+- bs=4M = 每次读写 4MB，加快速度
+- status=progress = 显示进度条
+
+
+# 2. References
 
 - https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
 
