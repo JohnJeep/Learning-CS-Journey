@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-04-14 17:20:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 10:53:19
+ * @LastEditTime: 2026-08-09 14:02:43
  * @Description: golang 面试题
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 - [1. Golang 方向](#1-golang-方向)
@@ -51,7 +51,7 @@
 - **交通与零售(10%):** Amazon, Uber, DeliveryHero, HelloFresh...
 - **媒体/游戏(7%):** Netflix, Bytedance, Tencent, Reddit, Snap...
 
- 
+
 
 ### 1.3. 使用 go 能干什么
 
@@ -65,14 +65,14 @@
 
 4. **云服务、微服务**
 
- 
+
 
 ### 1.4. 优势
 
 - Go: 容易上手，强调快速开发（**time to value**）和可伸缩性
 - **Rust:** 性能极致，适用于性能密集型、底层嵌入式开发，但**复杂性更高，开发成本和时间也更高**。
 
- 
+
 
 References
 
@@ -116,15 +116,15 @@ goroutine 内存泄漏基本上是因为异常导致阻塞, 可以导致阻塞�
 
 也可以借助第三方库：godeadlock，帮助检测死锁。
 
- 
+
 
 ### 2.3. 讲一下协程和线程的区别？
 
- 
+
 
 ### 2.4. 讲一下**golang 协程是如何调度的**
 
- 
+
 
 ### 2.5. slice 和 array 的区别，讲一下底层的结构 ,其 len，cap，共享，扩容 是怎样的？
 
@@ -138,13 +138,13 @@ slice 本质上是一个动态数组的封装，底层指向不是一个固定�
 
 channel 是 golang 协程之间的数据交互的重要工具，相当于与进程内的一个消息队列。
 
-注意点: 最重要的是 chan 的 close 处理, 不然很容易出现异常, 
+注意点: 最重要的是 chan 的 close 处理, 不然很容易出现异常,
 
 1. 写数据 goroutine 中调用 close,
 2.  不要多次调用 close,
 3.  使用信号通知 chan close 底层结构
 
- 
+
 
 ### 2.7. go 底层里面有没有自动回收对象的机制？
 
@@ -173,11 +173,11 @@ runtime.finalizer
        })
        r.Run()
    }
-   
+
    ```
 
 2. **Recovery 中间件
-   ** 
+   **
 
    Recovery 中间件用于捕获并恢复处理过程中发生的 panic，避免因某个请求处理时的 panic，导致整个服务崩溃。在上面使用
    `gin.Default()` 创建引擎时，已经默认使用了该中间件。
@@ -247,7 +247,7 @@ runtime.finalizer
    }
    ```
 
-   
+
 
 ### 2.9. grpc、proto 编写规则
 
@@ -289,8 +289,8 @@ runtime.finalizer
 
 ```go
 type Person struct {
-    Name string
-    Age  int
+  Name string
+  Age  int
 }
 
 p1 := Person{"Alice", 25}
@@ -314,8 +314,8 @@ fmt.Println(p1 == p3) // false
 
 ```go
 type Container struct {
-    Data []int      // 切片不可比较
-    // Mutex sync.Mutex // 互斥锁不可比较
+  Data []int      // 切片不可比较
+  // Mutex sync.Mutex // 互斥锁不可比较
 }
 
 c1 := Container{Data: []int{1, 2, 3}}
@@ -347,15 +347,15 @@ fmt.Println(reflect.DeepEqual(c1, c2)) // true
 
 ```go
 func (c1 Container) Equal(c2 Container) bool {
-    if len(c1.Data) != len(c2.Data) {
-        return false
+  if len(c1.Data) != len(c2.Data) {
+    return false
+  }
+  for i, v := range c1.Data {
+    if v != c2.Data[i] {
+      return false
     }
-    for i, v := range c1.Data {
-        if v != c2.Data[i] {
-            return false
-        }
-    }
-    return true
+  }
+  return true
 }
 
 fmt.Println(c1.Equal(c2)) // true
@@ -390,4 +390,3 @@ go tool pprof http://localhost:6060/debug/pprof/profile  # CPU分析
 go tool pprof http://localhost:6060/debug/pprof/heap     # 内存分析
 go tool pprof -http=:8080 profile.out                    # 网页可视化
 ```
-

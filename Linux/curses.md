@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:53
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:21:59
+ * @LastEditTime: 2026-08-09 14:01:30
  * @Description: linux curses usage
- * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 介绍
@@ -50,23 +50,22 @@ yum install ncurses-devel
 #include <ncurses.h>
 
 int main(int argc,char* argv[]){
-    initscr();
-    raw();
-    noecho();
-    curs_set(0);
+  initscr();
+  raw();
+  noecho();
+  curs_set(0);
 
-    char* ptr = "Hello, StephenWen!";
+  char* ptr = "Hello, StephenWen!";
 
-    mvprintw(LINES/2,(COLS-strlen(ptr))/2,ptr);
-    refresh();
+  mvprintw(LINES/2,(COLS-strlen(ptr))/2,ptr);
+  refresh();
 
-    getch();
-    endwin();
+  getch();
+  endwin();
 
-    return 0;
+  return 0;
 }
 ```
-
 
 
 # 4. References

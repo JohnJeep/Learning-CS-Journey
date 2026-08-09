@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 21:22:08
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:42:55
+ * @LastEditTime: 2026-08-09 13:49:48
  * @Description: Scoket usage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. socket 套接字
@@ -30,7 +30,7 @@
 
 - `htons、ntohs、htonl和ntohl`函数
   - 主机字节序(本地)与网络字节序之间相互转换的几组 API 函数，本地套接字一般按照 `小端法` 存储，网络字节序一般按照
-    `大端法` 存储。 
+    `大端法` 存储。
   - 注意缩写：`h`：host，`n`：net，`l`：long，`s`：short
     ```c
     #include <netinet/in.h>
@@ -59,7 +59,7 @@
  }
  ```
 
-- `struct sockaddr_in` 
+- `struct sockaddr_in`
   - 是网络套接字地址结构，大小为 `16字节`，定义在<netinet/in>头文件中，可用 `man 7 ip` 命令查看位置。
   - 一般我们在程序中是使用该结构体时，作为参数传递给套接字函数时需要强转为 `sockaddr` 类型，注意该结构体中 `port`和
     `addr` 成员是网络序的(大端结构)。即定义时需要定义为 `struct
@@ -77,7 +77,7 @@
 
 ## 1.2. Socket GAPI
 
-- `socket()` 
+- `socket()`
   - 作用：创建一个套接字
   - 参数
     - `domain`: 对于 IPv4，`domain` 设置为 `AF_IENT`
@@ -88,7 +88,7 @@
     - 成功: 返回指向新创建 socket 的文件描述符
     - 失败：返回 `-1`
 
-- `bind()` 服务器调用 `bind` 绑定固定的网络地址和端口号 
+- `bind()` 服务器调用 `bind` 绑定固定的网络地址和端口号
 - `listen()` 服务器允许客户端同一时间可以建立多少连接，即最多允许有多少个客户端处于连接等待状态。
 - `accept()` 服务器端的套接字上接受一个连接请求。
   - 返回值
@@ -102,7 +102,7 @@
   - 返回值等你 `0` 时，`read()` 函数数据才读完。
   - 返回值等于 `-1` 时，出现异常
     - `errno == EINTR` 时，read 函数被信号中断，则需要重启或退出(quit)。
-    - `errno == EAGAIN` 时，以非阻塞(EWOULDBLOCK)的方式去读，但是读到的没有数据。 
+    - `errno == EAGAIN` 时，以非阻塞(EWOULDBLOCK)的方式去读，但是读到的没有数据。
     - 出现其它的值时，则执行 `perror()` 函数显示错误提示。
 
 
@@ -110,10 +110,10 @@
 
 > 注意点：在使用套接字函数时，需要对函数做错误检查，保证代码的鲁棒性，可以把错误检查的代码封装在一起。
 
-- `shutdown(int sockfd, int how)` 在应用程序中执行一个半关闭的状态 
-  - 参数 how 
-    - `SHUT_RD` 关闭 sockfd 套接字上的读共能 
-    - `SHUT_WR` 关闭 sockfd 套接字上的写共能 
+- `shutdown(int sockfd, int how)` 在应用程序中执行一个半关闭的状态
+  - 参数 how
+    - `SHUT_RD` 关闭 sockfd 套接字上的读共能
+    - `SHUT_WR` 关闭 sockfd 套接字上的写共能
     - `SHUT_RDWR` 关闭 sockfd 套接字上的读写共能，相当于两次调用 `shutdown()`, 第一次以 `SHUT_RD`调用，第二次以
       `SHUT_WR` 调用。
   - 注意点
@@ -203,7 +203,7 @@ client 与 server 之间的连接如果一直不关闭的话，会存在一个�
 # 5. 轮询
 
 短轮询：浏览器发起一个“询问”请求，服务器无论有无新数据，都立即响应（有就返回新数据，没有就返回一个表示’空’的自定义数据
-格式），一个 HTTP 连接结束。 
+格式），一个 HTTP 连接结束。
 
 
 长轮询：长轮询的经典实现 —— Comet：基于 HTTP 长连接的“服务器推”技术。

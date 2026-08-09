@@ -4,8 +4,8 @@
  * @LastEditTime: 2026-05-31 20:20:55
  * @LastEditors: JohnJeep
  * @Description: GDB Usage
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
---> 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
+-->
 
 # 1. 简介
 
@@ -21,7 +21,7 @@ GDB 全称“GNU symbolic debugger”，从名称上不难看出，它诞生于 
 3. 当程序被停住时，可以检查此时你的程序中所发生的事。
 4. 在程序执行过程中修改程序中的变量或条件，将一个 bug 产生的影响修正从而测试其他 bug。
 
-**简单的讲，GDB 就是一个程序，只不过这个程序通过一些手段可以去调试其它的程序。** 
+**简单的讲，GDB 就是一个程序，只不过这个程序通过一些手段可以去调试其它的程序。**
 
 
 
@@ -44,7 +44,7 @@ yum install gdb
   [root@KF-CFT-AP2 ~]# cd gdb-10.2
 3. 设置配置，configure 后面可设置参数和安装路径，
   [root@KF-CFT-AP2 gdb-10.2]# ./configure
-  
+
   配置参数项
   configure [--help]
             [--prefix=dir]  自定义配置路径
@@ -54,7 +54,7 @@ yum install gdb
             --enable-tui=yes  配置 TUI模式
             --with-ncurses    带 ncurses 库
             --with-python=yes 带 python 脚本
-            
+
 4. 编译，执行make
   [root@KF-CFT-AP2 gdb-10.2]# make
 5. 安装
@@ -81,7 +81,7 @@ GDB 是一个非常重要的调试工具，要用 GDB，首先要知道如何去
 启动前提：
 
 ```
-使用 gdb 调试程序之前，必须使用 -g 或 –ggdb 编译选项编译源文件：gcc xxx.c -g -o xxx.out 
+使用 gdb 调试程序之前，必须使用 -g 或 –ggdb 编译选项编译源文件：gcc xxx.c -g -o xxx.out
 ```
 
 第一种：直接启动可执行文件，gdb 后面跟一个参数：可执行文件。其中 a.out 是带有调试信息的可执行文件
@@ -99,7 +99,7 @@ Type "show configuration" for configuration details.
 For bug reporting instructions, please see:
 <https://www.gnu.org/software/gdb/bugs/>.
 Find the GDB manual and other documentation resources online at:
-    <http://www.gnu.org/software/gdb/documentation/>.
+  <http://www.gnu.org/software/gdb/documentation/>.
 
 For help, type "help".
 Type "apropos word" to search for commands related to "word"...
@@ -142,12 +142,12 @@ gdb --args a.out  ini/hello.ini
 (gdb) gdb a.out core.3256
 ```
 
-# 4. Shell Commands  
+# 4. Shell Commands
 
 在 GDB 调试的过程中，需要执行外部的 shell 命令，但同时又不想退出当前 GDB 或悬挂当前 GDB 的情况下，要怎么去执行 Shell
 命令。
 
-有 2 种方式去实现。一种在命令前添加 shell 关键字即可；另一种在命令前加 `!`，表示去执行外部的 shell 命令。 
+有 2 种方式去实现。一种在命令前添加 shell 关键字即可；另一种在命令前加 `!`，表示去执行外部的 shell 命令。
 
 ```
 (gdb) shell pwd
@@ -164,12 +164,12 @@ GDB 程序中可以直接执行 make 命令，不需要用 `shell make` 这样�
 ```
 格式：
   make make-args   执行 make 程序，后面指定个参数，参数为可选项。
-  
+
  (gdb) make
  gdb) make clean
 ```
 
-# 5. Logging Output  
+# 5. Logging Output
 
 将 GDB 的命令保存到文件中，可用 GDB 的 logging 命令。
 
@@ -207,7 +207,7 @@ GDB 程序中执行 `run` 命令，GDB 会创建一个子进程，让创建的�
 程序开始后生效。因为你要调试程序的执行受到它从父进程（GDB
 程序）那里接收到的某些信息的影响。而这些信息被划分为下面的 4 大类：
 
-### 6.1.1. arguments  
+### 6.1.1. arguments
 
 调试程序的参数。有些程序运行带有参数项，在执行 `run` 命令开始前，需要指定参数项才能让程序运行起来。
 
@@ -253,13 +253,13 @@ Argument list to give program being debugged when it is started is "ini/hello.in
 调试程序的环境变量。你要调试程序的环境通常继承自 GDB 程序。你也可以用 `set environmen `和 `unset environmen`
 命令来改变你要调试程序的环境。
 
-- path directory  
+- path directory
 
   将目录名 `directory` 添加到 PATH 环境变量（可执行文件的搜索路径）的前面，环境变量将值传递给你要调试的程序，而 gdb
   程序使用的 PATH 值不会更改。你也可以同时指定多个目录名（directory
-  ），用空格或操作系统依赖的分隔符（‘:’ on Unix, ‘;’on MS-DOS and MS-Windows  ）分割开。 
+  ），用空格或操作系统依赖的分隔符（‘:’ on Unix, ‘;’on MS-DOS and MS-Windows  ）分割开。
 
-- show paths  
+- show paths
 
   显示可执行文件的搜索路径列表。
 
@@ -269,7 +269,7 @@ Argument list to give program being debugged when it is started is "ini/hello.in
   (gdb)
   ```
 
-- show environment [varname]  
+- show environment [varname]
 
   打印你给调试程序设置的环境变量值`varname` 。若没有给设定的值
   `varname`，将会打印你的调试程序中所有的环境变量和名字。`environment` 可简写为 `env`。
@@ -278,7 +278,7 @@ Argument list to give program being debugged when it is started is "ini/hello.in
   (gdb) show env
   ```
 
-- set environment varname [=value]  
+- set environment varname [=value]
 
   设置环境变量的名字等于某个值 `value`。这个值会改变你要调试程序的环境变量，但不会改变 GDB 程序自身的环境变量。若
   `value` 值被忽略，则变量名将被设置为 `null`。
@@ -288,7 +288,7 @@ Argument list to give program being debugged when it is started is "ini/hello.in
   (gdb) set env kk=foo
   ```
 
-- unset environment varname  
+- unset environment varname
 
   从被调试程序的环境变量表中移除环境变量 `varname`。
 
@@ -298,14 +298,14 @@ Argument list to give program being debugged when it is started is "ini/hello.in
 debugging），你调试的程序继承自 GDB
 程序的工作路径；若用远程调试，你调试的程序继承自远程服务器的工作路径。
 
-- set cwd [directory]  
+- set cwd [directory]
 
   设置子程序的工作路径为 `directory`。若没有指定参数`directory`，该命令将重置以前设置的路径，并将路径设置一个空的状态
   。设置的路径不会影响 GDB 程序的工作路径，只会影响下次你启动的子进程（inferior）。
 
   > ~ 表示 `home` 目录。
 
-- show cwd   
+- show cwd
 
   current working directory，简写为 cwd。`show cwd` 命令表示显示子进程（inferior）的工作路径。若没有指定子进程的工作路
   径，子进程默认继承自 GDB 程序的工作路径。
@@ -316,7 +316,7 @@ debugging），你调试的程序继承自 GDB
   Current working directory that will be used when starting the inferior is "~".
   ```
 
-- cd [directory]  
+- cd [directory]
 
   设置 GDB 程序的工作路径为某个目录 `directory`。若没有指定参数 `directory` 值，则 `directory` 参数默认使用 `~` 路径。
 
@@ -333,7 +333,7 @@ debugging），你调试的程序继承自 GDB
   (gdb)
   ```
 
-- pwd  
+- pwd
 
   打印 GDB 程序的工作目录。
 
@@ -422,23 +422,23 @@ Program stopped.
 list 从当前位置开始处，打印 10 行源码
 
 list linenum   以 linenum 行为中心行，开始打印源码
-  
+
 list function  以 function 函数处为中心行，开始打印源码
 
 list -  在上一次打印行的最后一行处，往前面开始打印源码，- 后面可跟行号或函数名
 
 list +  在上次打印行之后开始打印源码，- 后面可跟行号或函数名
 
-list num1,num2  指定位置，打印 num1 到 num2 之间的源码 
-  
+list num1,num2  指定位置，打印 num1 到 num2 之间的源码
+
 ```
 
 用 `set listsize` 命令改变默认打印源码的行数。
 
 ```
 set listsize count      设置默认打印 count 行
-		set listsize 20     改为默认打印 20 行
-		
+  set listsize 20     改为默认打印 20 行
+
 set listsize unlimited  默认打印的行数没有限制
 ```
 
@@ -453,12 +453,12 @@ Number of source lines gdb will list by default is 10.
 
 ```
 list -offset   参数 offset 为偏移量，表明是向前还是向后打印，从上一次打印的最后一行处开始算
-list +offset  
+list +offset
 
 list filename:function
-	list xxx.c:func 查看 xxx.c 文件中的 func 函数
-	
-filename:linenum	
+  list xxx.c:func 查看 xxx.c 文件中的 func 函数
+
+filename:linenum
   list xxx.c:100 从第 100 行开始查看 xxx.c 文件中内容
 ```
 
@@ -475,7 +475,7 @@ break 命令用来设置断点，缩写为 `b` 。
 
 ```
 // 示例
-break mian 在 main 函数处设置断点。  
+break mian 在 main 函数处设置断点。
 break 20   在 20行 处设置断点。
 
 // 设置条件断点
@@ -509,9 +509,9 @@ b 22 if i==10   在22行处，当 i==10 时设置一个断点。可以直接在�
 
 ```sh
 用法
-  1. 单步执行一次：n 
+  1. 单步执行一次：n
   2. 单步执行多次，N表示重复的次数：n [N]
-  
+
 (gdb)
 (gdb) l
 1       #include <iostream>
@@ -603,7 +603,7 @@ $3 = 30
 查看指定变量值
 
 ```
-print(p) 变量名 
+print(p) 变量名
 ```
 
 查看和设置 GDB 中的显示项，查看用 `show` 命令，设置用 `set` 命令。
@@ -648,7 +648,7 @@ Printing of addresses is on.
 查看变量的类型
 
 ```
-  ptype 变量名 
+  ptype 变量名
 ```
 
 ## 6.17. display
@@ -671,7 +671,7 @@ Printing of addresses is on.
 设置变量的值
 
 ```
-set var=value 
+set var=value
 ```
 
 
@@ -713,20 +713,20 @@ info subcommands
 (gdb) info files
 Symbols from "/home/John/IOV/Server/HttpClient".
 Local exec file:
-        `/home/John/IOV/Server/HttpClient', file type elf64-x86-64.
-        Entry point: 0x400840
-        0x0000000000400200 - 0x000000000040021c is .interp
-        0x000000000040021c - 0x000000000040023c is .note.ABI-tag
-        0x0000000000400240 - 0x0000000000400298 is .hash
-        0x0000000000400298 - 0x0000000000400430 is .dynsym
-        0x0000000000400430 - 0x0000000000400697 is .dynstr
-        0x0000000000400698 - 0x00000000004006ba is .gnu.version
+  `/home/John/IOV/Server/HttpClient', file type elf64-x86-64.
+  Entry point: 0x400840
+  0x0000000000400200 - 0x000000000040021c is .interp
+  0x000000000040021c - 0x000000000040023c is .note.ABI-tag
+  0x0000000000400240 - 0x0000000000400298 is .hash
+  0x0000000000400298 - 0x0000000000400430 is .dynsym
+  0x0000000000400430 - 0x0000000000400697 is .dynstr
+  0x0000000000400698 - 0x00000000004006ba is .gnu.version
 
 //  查看设置的断点信息内容
 info break
 
 // 查看程序的是否在运行，进程号，被暂停的原因。
-(gdb)info program 
+(gdb)info program
 
 // 打印出当前函数中所有局部变量及其值
 info locals
@@ -752,7 +752,7 @@ For bug reporting instructions, please see:
 <http://www.gnu.org/software/gdb/bugs/>.
 
 // 查看程序运行路径
-(gdb) show paths  
+(gdb) show paths
 ```
 
 官方参考：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
@@ -771,7 +771,7 @@ help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、�
    ```
    (gdb) help
    List of classes of commands:
-   
+
    aliases -- Aliases of other commands
    breakpoints -- Making program stop at certain points
    data -- Examining data
@@ -784,7 +784,7 @@ help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、�
    support -- Support facilities
    tracepoints -- Tracing of program execution without stopping the program
    user-defined -- User-defined commands
-   
+
    Type "help" followed by a class name for a list of commands in that class.
    Type "help all" for the list of all commands.
    Type "help" followed by command name for full documentation.
@@ -804,15 +804,15 @@ help 命令查看 GDB 的帮助信息。 帮助手册是学习 GDB 最权威、�
    If an address is specified, break at that exact address.
    With no LOCATION, uses current execution address of the selected
    stack frame.  This is useful for breaking on return to a stack frame.
-   
+
    THREADNUM is the number from "info threads".
    CONDITION is a boolean expression.
-   
+
    Multiple breakpoints at one place are permitted, and useful if their
    conditions are different.
-   
+
    Do "help breakpoints" for info on other commands dealing with breakpoints.
-   
+
    ```
 
    官网地址：https://sourceware.org/gdb/onlinedocs/gdb/Help.html
@@ -823,7 +823,7 @@ GDB 中特殊的命令。
 
 - `enter` 键执行上一次输入过的命令
 
-# 7. TUI 
+# 7. TUI
 TUI（Text User Interface）进行交互式的源码调试。进入图形界面的进行调试有下面两种方式。
 
 第一种：终端下直接执行 `gdb program -tui`命令。
@@ -885,7 +885,7 @@ TUI 窗口绑定的快捷键。
 
 
 
-# 8. Examining Source Files  
+# 8. Examining Source Files
 
 源文件检查包括查看源码、编辑源文件、搜索源文件、指定源码路径、源码和汇编代码、禁止读源码等内容。
 
@@ -945,7 +945,7 @@ path` 中找源文件。
 
 ```
 (gdb) i source
-	Current source file is ../../Src/FrameWorkServer.cpp
+  Current source file is ../../Src/FrameWorkServer.cpp
   Compilation directory is /home/John/SrcCompile/Src/FrameWorkServer/Makefile/Debug
   Located in /home/John/SrcCompile/Src/FrameWorkServer/Src/FrameWorkServer.cpp
   Contains 65 lines.
@@ -976,8 +976,8 @@ $ readelf a.out -p .debug_str
 `/home/user`，GDB　将会从下面的位置中搜索源文件的路径：
 
 ```
-/usr/src/foo-1.0/lib/foo.c             
-/mnt/cross/usr/src/foo-1.0/lib/foo.c   
+/usr/src/foo-1.0/lib/foo.c
+/mnt/cross/usr/src/foo-1.0/lib/foo.c
 /project/build/usr/src/foo-1.0/lib/foo.c
 /home/user/usr/src/foo-1.0/lib/foo.c
 /mnt/cross/project/build/usr/src/foo-1.0/lib/foo.c
@@ -1032,14 +1032,14 @@ show substitute-path [path]
 
 ```
 // 查看源路径列表中包含的目录
-(gdb) show dir    
+(gdb) show dir
 Source directories searched: $cdir:$cwd
 
-// dir 后面不跟路径，Linux 系统下则默认设置为 $cdir:$cwd 
+// dir 后面不跟路径，Linux 系统下则默认设置为 $cdir:$cwd
 (gdb) dir
 
 // 设置源码的路径为 xxxx
-(gdb) dir   xxxx  
+(gdb) dir   xxxx
 
 // 指定多个路径，linux 下每个路径名之间用冒号（:）分隔开，window下用分号（;）分隔开
 (gdb) dir dirname1:dirname2:dirname3
@@ -1058,8 +1058,8 @@ man 手册中查看 GDB `-x` 参数说明。
 
 ```
 man gdb
-       -x file
-               Execute GDB commands from file file.
+  -x file
+    Execute GDB commands from file file.
 ```
 
 示例：新建一个 `source-path-file` 文件，里面放入要执行的命令。
@@ -1108,7 +1108,7 @@ GDB 多线程调试的术语
 
 - replay mode        回放模式
 
-  
+
 
 使用 GDB 调试多线程程序时，默认的调试模式为：一个线程暂停运行，其它线程也随即暂停；一个线程启动运行，其它线程也随即启
 动。要知道，这种调试机制确实能帮我们更好地监控各个线程的“一举一动”，但并非适用于所有场景。
@@ -1152,19 +1152,19 @@ set scheduler-locking 命令的语法格式如下：
 (gdb) bt
 ```
 
-## 11.2. examine 
+## 11.2. examine
 
 `examine` 查看内存地址中的值，简写 `x`。作用：在堆栈中从指定的哪个地址开始，以什么样的格式显示多长的数据。
 
 ```
 // 格式
 x/nfu addr
-x addr 
+x addr
 ```
 
 参数 n，f，u，都是可选项。
 - `n` 是一个十进制的整数，默认值为 `1`， 表示显示多大的内存，有后面的单位 `u`
-  来定。也就是说从当前地址向后显示多少地址的内容。 
+  来定。也就是说从当前地址向后显示多少地址的内容。
 - `f(format)` 显示的格式，默认是以 16 进制显示。  这些格式可以是：‘x’, ‘d’, ‘u’, ‘o’, ‘t’,‘a’, ‘c’, ‘f’, ‘s’  。
 - `u` 表示单位大小 unit。从当前地址往后请求的字节数，如果不指定的话，GDB 默认是 4 个 bytes。b 表示 bytes，h 表示
   Halfwords (two bytes)，w 表示 Words (four
@@ -1196,7 +1196,7 @@ x addr
 Bug。只有某个变量或者表达式的值发生了改变，程序才会停止执行。相比普通断点，观察断点不需要我们预测变量（表达式）值发生
 改变的具体位置。
 
-用法 
+用法
 ```
 (gdb) watch var_name
 ```
@@ -1215,21 +1215,21 @@ int g_var = 0;
 
 void* thread_func(void* args)
 {
-    sleep(5);
-    g_var = 1;
+  sleep(5);
+  g_var = 1;
 }
 
 int main()
 {
-    int i = 0;
-    pthread_t tid = 0;
+  int i = 0;
+  pthread_t tid = 0;
 
-    pthread_create(&tid, NULL, thread_func, NULL);
+  pthread_create(&tid, NULL, thread_func, NULL);
 
-    for(i=0; i<10; i++) {
-        printf("g_var = %d, tid = %ld\n", g_var, tid);
-        sleep(1);
-    }
+  for(i=0; i<10; i++) {
+    printf("g_var = %d, tid = %ld\n", g_var, tid);
+    sleep(1);
+  }
 }
 
 ```
@@ -1251,8 +1251,8 @@ GDB 可以对正在执行的程序进行调度，它允许开发人员中断程�
 3、 当 attach 进程时，会停止进程的运行，这时使进程继续运行需要使用 continue/c 命令。
 
 4、 当程序停止时，用其它的命令查看其它信息
-  - `bt` 查看堆栈信息 
-  - `b(break)` 设置断点 
+  - `bt` 查看堆栈信息
+  - `b(break)` 设置断点
   - `watch var` 监控变量 var 的值
   - `info thread` 查看当前进程的所有线程信息
   - `info proc` 显示进程信息
@@ -1301,5 +1301,5 @@ gdb 底层的调试机制是怎样的？
 - [100 个 gdb 小技巧](https://wizardforcel.gitbooks.io/100-gdb-tips/content/set-watchpoint.html)
 - [打印 STL 容器中的内容](https://wizardforcel.gitbooks.io/100-gdb-tips/content/print-STL-container.html)
 - [线程的查看以及利用 gdb 调试多线程](https://blog.csdn.net/zhangye3017/article/details/80382496)
-- [YouTube: MyGeekAdventures 临场演示如何使用 GBD 去调试代码](https://www.youtube.com/watch?v=xQ0ONbt-qPs&list=PL5Py8jKS3yHOco9op3r_6JN2IKmopTt7s) 
+- [YouTube: MyGeekAdventures 临场演示如何使用 GBD 去调试代码](https://www.youtube.com/watch?v=xQ0ONbt-qPs&list=PL5Py8jKS3yHOco9op3r_6JN2IKmopTt7s)
 - [ Linux Tools Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)

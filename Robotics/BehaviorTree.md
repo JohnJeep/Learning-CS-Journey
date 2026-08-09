@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-12-07 23:39:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:48:44
+ * @LastEditTime: 2026-08-09 13:44:09
  * @Description: BehaviorTree Usage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. BehaviorTree
@@ -36,12 +36,12 @@ AI、机器人、自动驾驶等领域，以实现复杂、响应式且易于调
 
 ### 1.4. 行为树与有限状机对比
 
-| 特性       | **有限状态机**(FSM)                                      | **行为树**                                                   |
-| :--------- | :------------------------------------------------------- | :----------------------------------------------------------- |
-| **结构**   | 网状。状态之间互相跳转，关系复杂。                       | **树状**。层次清晰，从根到叶单向流动。                       |
-| **扩展性** | 添加新状态时，需修改多个现有状态间的跳转逻辑，容易出错。 | **模块化强**。添加新分支/节点通常不影响现有逻辑。            |
-| **可读性** | 状态多时，“意大利面条”式的跳转线难以理解。               | **直观**。树形结构一目了然，逻辑易于理解和沟通。             |
-| **复用性** | 状态逻辑通常绑定具体任务，复用性差。                     | **节点可高度复用**。一个“移动到某点”节点可被多处调用。       |
+| 特性       | **有限状态机**(FSM)                                      | **行为树**                                                     |
+| :--------- | :------------------------------------------------------- | :------------------------------------------------------------- |
+| **结构**   | 网状。状态之间互相跳转，关系复杂。                       | **树状**。层次清晰，从根到叶单向流动。                         |
+| **扩展性** | 添加新状态时，需修改多个现有状态间的跳转逻辑，容易出错。 | **模块化强**。添加新分支/节点通常不影响现有逻辑。              |
+| **可读性** | 状态多时，“意大利面条”式的跳转线难以理解。               | **直观**。树形结构一目了然，逻辑易于理解和沟通。               |
+| **复用性** | 状态逻辑通常绑定具体任务，复用性差。                     | **节点可高度复用**。一个“移动到某点”节点可被多处调用。         |
 | **反应性** | 需要在每个状态中检查外部事件，实现较笨拙。               | **天生反应式**。每次“滴答”都从根节点重新评估，能快速响应变化。 |
 
 **行为树相比状态机的优势**：
@@ -114,16 +114,16 @@ AI、机器人、自动驾驶等领域，以实现复杂、响应式且易于调
 
 ```cpp
 class ChargingAttack : public BT::StatefulActionNode {
-    float charge_time = 0;
-    NodeStatus onRunning() override {
-        charge_time += getDeltaTime();
-        if (charge_time >= 3.0f) {
-            releaseAttack();  // 释放攻击
-            return NodeStatus::SUCCESS;
-        }
-        continueCharging();   // 继续蓄力
-        return NodeStatus::RUNNING;  // 告诉行为树："我还没完成"
+  float charge_time = 0;
+  NodeStatus onRunning() override {
+    charge_time += getDeltaTime();
+    if (charge_time >= 3.0f) {
+      releaseAttack();  // 释放攻击
+      return NodeStatus::SUCCESS;
     }
+    continueCharging();   // 继续蓄力
+    return NodeStatus::RUNNING;  // 告诉行为树："我还没完成"
+  }
 };
 ```
 
@@ -132,10 +132,10 @@ class ChargingAttack : public BT::StatefulActionNode {
 ```cpp
 // 每帧都可以根据新情况做决策
 void tickEnemyAI() {
-    // Tick 1: 玩家在远处 -> 选择"巡逻"分支
-    // Tick 2: 玩家进入视野 -> 切换到"追击"分支
-    // Tick 3: 玩家逃跑 -> 切换到"返回巡逻"分支
-    // Tick 4: 玩家进入攻击范围 -> 切换到"攻击"分支
+  // Tick 1: 玩家在远处 -> 选择"巡逻"分支
+  // Tick 2: 玩家进入视野 -> 切换到"追击"分支
+  // Tick 3: 玩家逃跑 -> 切换到"返回巡逻"分支
+  // Tick 4: 玩家进入攻击范围 -> 切换到"攻击"分支
 }
 ```
 
@@ -197,19 +197,19 @@ port 以下几种类型。
 
 ```cpp
 static BT::PortsList providedPorts() {
-    return {
-        // 基本类型
-        BT::InputPort<int>("count"),
-        BT::InputPort<double>("distance"),
-        BT::InputPort<std::string>("target_name"),
+  return {
+    // 基本类型
+    BT::InputPort<int>("count"),
+    BT::InputPort<double>("distance"),
+    BT::InputPort<std::string>("target_name"),
 
-        // 带默认值
-        BT::InputPort<int>("timeout", 5000),  // 默认值 5000ms
+    // 带默认值
+    BT::InputPort<int>("timeout", 5000),  // 默认值 5000ms
 
-        // 复杂类型
-        BT::InputPort<Pose>("target_pose"),
-        BT::InputPort<std::vector<Point>>("path_points")
-    };
+    // 复杂类型
+    BT::InputPort<Pose>("target_pose"),
+    BT::InputPort<std::vector<Point>>("path_points")
+  };
 }
 ```
 
@@ -217,11 +217,11 @@ static BT::PortsList providedPorts() {
 
 ```cpp
 static BT::PortsList providedPorts() {
-    return {
-        BT::OutputPort<bool>("detected"),      // 输出检测结果
-        BT::OutputPort<float>("confidence"),   // 输出置信度
-        BT::OutputPort<Pose>("current_pose")   // 输出当前位置
-    };
+  return {
+    BT::OutputPort<bool>("detected"),      // 输出检测结果
+    BT::OutputPort<float>("confidence"),   // 输出置信度
+    BT::OutputPort<Pose>("current_pose")   // 输出当前位置
+  };
 }
 ```
 
@@ -243,7 +243,7 @@ BehaviorTree.CPP 在解析时会：
 > ```cpp
 > // 你在 tick() 中写的
 > setOutput("output", 11);
-> 
+>
 > // 框架实际执行的
 > blackboard->set("result", 11);  // 因为 XML 中 output="{result}"
 > ```
@@ -253,9 +253,9 @@ BehaviorTree.CPP 在解析时会：
 
 ```cpp
 static BT::PortsList providedPorts() {
-    return {
-        BT::BidirectionalPort<std::string>("message")  // 可读写
-    };
+  return {
+    BT::BidirectionalPort<std::string>("message")  // 可读写
+  };
 }
 ```
 
@@ -264,57 +264,57 @@ static BT::PortsList providedPorts() {
 参数传递示例
 ```xml
 <root>
-    <BehaviorTree>
-        <!-- 通过端口传递参数 -->
-        <Sequence>
-            <!-- 设置目标点 -->
-            <SetTarget 
-                target_x="10.0" 
-                target_y="5.0" 
-                target_name="桌子"/>
-            
-            <!-- 导航到目标，使用前一个节点的输出 -->
-            <NavigateTo 
-                target="{target_pose}" 
-                timeout_ms="30000"/>
-            
-            <!-- 抓取物体 -->
-            <GraspObject 
-                object_name="{target_name}" 
-                force="0.5"/>
-        </Sequence>
-    </BehaviorTree>
+  <BehaviorTree>
+    <!-- 通过端口传递参数 -->
+    <Sequence>
+      <!-- 设置目标点 -->
+      <SetTarget
+        target_x="10.0"
+        target_y="5.0"
+        target_name="桌子"/>
+
+      <!-- 导航到目标，使用前一个节点的输出 -->
+      <NavigateTo
+        target="{target_pose}"
+        timeout_ms="30000"/>
+
+      <!-- 抓取物体 -->
+      <GraspObject
+        object_name="{target_name}"
+        force="0.5"/>
+    </Sequence>
+  </BehaviorTree>
 </root>
 ```
 
 数据流示例
 ```xml
 <root>
-    <BehaviorTree>
-        <Sequence>
-            <!-- 节点A：输出数据 -->
-            <DetectObject 
-                object_id="cup"
-                output_detected="{cup_detected}"
-                output_position="{cup_position}"/>
-            
-            <!-- 节点B：使用节点A的输出作为输入 -->
-            <MoveToObject 
-                target_position="{cup_position}"
-                only_if="{cup_detected}"/>
-            
-            <!-- 节点C：输出新数据 -->
-            <GraspObject 
-                object_position="{cup_position}"
-                output_grasp_success="{grasp_ok}"/>
-            
-            <!-- 节点D：使用多个端口数据 -->
-            <ReportStatus 
-                object_name="cup"
-                detected="{cup_detected}"
-                grasp_result="{grasp_ok}"/>
-        </Sequence>
-    </BehaviorTree>
+  <BehaviorTree>
+    <Sequence>
+      <!-- 节点A：输出数据 -->
+      <DetectObject
+        object_id="cup"
+        output_detected="{cup_detected}"
+        output_position="{cup_position}"/>
+
+      <!-- 节点B：使用节点A的输出作为输入 -->
+      <MoveToObject
+        target_position="{cup_position}"
+        only_if="{cup_detected}"/>
+
+      <!-- 节点C：输出新数据 -->
+      <GraspObject
+        object_position="{cup_position}"
+        output_grasp_success="{grasp_ok}"/>
+
+      <!-- 节点D：使用多个端口数据 -->
+      <ReportStatus
+        object_name="cup"
+        detected="{cup_detected}"
+        grasp_result="{grasp_ok}"/>
+    </Sequence>
+  </BehaviorTree>
 </root>
 ```
 
@@ -336,11 +336,11 @@ static BT::PortsList providedPorts() {
    ```cpp
    // Blackboard 是全局共享的数据存储
    BT::Blackboard::Ptr blackboard = BT::Blackboard::create();
-   
+
    // 设置全局参数
    blackboard->set("global_speed", 0.5);
    blackboard->set("emergency_stop", false);
-   
+
    // 在节点中访问
    BT::NodeStatus MyNode::tick() override {
        double speed;
@@ -363,7 +363,7 @@ static BT::PortsList providedPorts() {
                auto value = info.getValue<int>();
                return value > 0;  // 验证输入是否为正数
            }),
-           
+
            BT::InputPort<std::string>("filename", "必须是文本文件", [](BT::PortInfo& info){
                auto filename = info.getValue<std::string>();
                return filename.ends_with(".txt");
@@ -434,7 +434,7 @@ static BT::PortsList providedPorts() {
    public:
        MoveTo(const std::string& name, const BT::NodeConfig& config)
            : BT::SyncActionNode(name, config) {}
-   
+
        static BT::PortsList providedPorts()
        {
            return {
@@ -442,7 +442,7 @@ static BT::PortsList providedPorts() {
                BT::OutputPort<int>("steps_moved")     // 输出端口
            };
        }
-   
+
        BT::NodeStatus tick() override { /* ... */ }
    };
    ```
@@ -474,7 +474,7 @@ static BT::PortsList providedPorts() {
    中，使用花括号`{key}`来引用 blackboard  上的 条目（entry）。
 3. **绑定关系**：在行为树 XML 中，将 node 的 port 与 entry 进行绑定。例如：
    ```xml
-   <SaySomething message="{target}" />
+  <SaySomething message="{target}" />
    ```
 
    表示将 SaySomething 节点的输入端口"message"与 blackboard  上的 entry "target" 绑定。当节点执行时，它会从
@@ -482,7 +482,7 @@ static BT::PortsList providedPorts() {
    "target"中读取值作为输入。
 
    ```xml
-   <ThinkWhatToSay text="{target}" />
+  <ThinkWhatToSay text="{target}" />
    ```
 
    表示将 ThinkWhatToSay 节点的输出端口 "text"与 blackboard  上的 entry  "target"
@@ -553,12 +553,12 @@ config().blackboard->set("result", result);
    1. ActionNode：要区分 synchronous, asynchronous nodes
    2. ConditionNode
 
-| Type of TreeNode | Children Count | Notes                                                        |
-| ---------------- | -------------- | ------------------------------------------------------------ |
-| ControlNode      | 1...N          | Usually, ticks a child based on the result of its siblings or/and its own state. |
+| Type of TreeNode | Children Count | Notes                                                                               |
+| ---------------- | -------------- | ----------------------------------------------------------------------------------- |
+| ControlNode      | 1...N          | Usually, ticks a child based on the result of its siblings or/and its own state.    |
 | DecoratorNode    | 1              | Among other things, it may alter the result of its child or tick it multiple times. |
-| ConditionNode    | 0              | Should not alter the system. Shall not return RUNNING.       |
-| ActionNode       | 0              | This is the Node that "does something"                       |
+| ConditionNode    | 0              | Should not alter the system. Shall not return RUNNING.                              |
+| ActionNode       | 0              | This is the Node that "does something"                                              |
 
 ### 3.2. controlNode
 
@@ -712,7 +712,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
         <SubTree ID="SubTree1"/>
       </Sequence>
     </BehaviorTree>
-    
+
     <!-- 子树定义 -->
     <BehaviorTree ID="SubTree1">
       <Sequence>
@@ -740,15 +740,15 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
 这些节点用于控制子节点的执行流程：
 
-| 标签名               | 功能说明                                                     |
-| -------------------- | ------------------------------------------------------------ |
-| `<Sequence>`         | 顺序节点：依次执行子节点，一旦某个子节点返回 FAILURE，则停止并返回 FAILURE；全部成功才返回 SUCCESS。 |
-| `<SequenceStar>`     | 带记忆的 Sequence（状态持久化），用于中断恢复。              |
+| 标签名               | 功能说明                                                                                                         |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `<Sequence>`         | 顺序节点：依次执行子节点，一旦某个子节点返回 FAILURE，则停止并返回 FAILURE；全部成功才返回 SUCCESS。             |
+| `<SequenceStar>`     | 带记忆的 Sequence（状态持久化），用于中断恢复。                                                                  |
 | `<Fallback>`         | 选择节点（Selector）：依次执行子节点，一旦某个子节点返回 SUCCESS，则停止并返回 SUCCESS；全部失败才返回 FAILURE。 |
-| `<FallbackStar>`     | 带记忆的 Fallback。                                          |
+| `<FallbackStar>`     | 带记忆的 Fallback。                                                                                              |
 | `<Parallel>`         | 并行节点：同时执行所有子节点，根据成功/失败阈值决定返回值。可带属性 `success_threshold` 和 `failure_threshold`。 |
-| `<ReactiveSequence>` | 非记忆型 Sequence，每 tick 从头开始评估。                    |
-| `<ReactiveFallback>` | 非记忆型 Fallback。                                          |
+| `<ReactiveSequence>` | 非记忆型 Sequence，每 tick 从头开始评估。                                                                        |
+| `<ReactiveFallback>` | 非记忆型 Fallback。                                                                                              |
 
 > 注意：旧版本中可能使用 `<Selector>`，但在 v3+ 中推荐使用 `<Fallback>`。
 
@@ -791,7 +791,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
     - 可传递端口参数（通过属性或 `<remap>`）。
   - 示例：
     ```xml
-    <SubTree ID="CheckAndRecharge" battery_level="{battery}" />
+  <SubTree ID="CheckAndRecharge" battery_level="{battery}" />
     ```
 - `<Remap>`：在 `<SubTree>` 内部用于端口重映射（较新版本中通常直接在属性中完成）。
 - `<include>`：引用外部的文件，类似于 C++中的 `#include <file>` 的语法。从 2.4 版本开始支持。
@@ -805,11 +805,11 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
   ```xml
    <!-- file maintree.xml -->
-  
+
    <root BTCPP_format="4" >
-  	 
-  	 <include path="grasp.xml"/>
-  	 
+
+     <include path="grasp.xml"/>
+
        <BehaviorTree ID="MainTree">
           <Sequence>
              <Action  ID="SaySomething"  message="Hello World"/>
@@ -821,7 +821,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
 
   ```xml
    <!-- file grasp.xml -->
-  
+
    <root BTCPP_format="4" >
        <BehaviorTree ID="GraspObject">
           <Sequence>
@@ -829,7 +829,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
              <Action ID="ApproachObject"/>
              <Action ID="CloseGripper"/>
           </Sequence>
-       </BehaviorTree>  
+       </BehaviorTree>
    </root>
   ```
 
@@ -838,7 +838,7 @@ XML 的标签遵循一定的规则，**XML 属性值必须加引号**。
   ```xml
   <include ros_pkg="name_package"  path="path_relative_to_pkg/grasp.xml"/>
   ```
-  
+
 
 #### 4.2.7. Ports 与 Blackboard
 

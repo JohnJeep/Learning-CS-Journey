@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2022-05-11 21:46:10
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:12:30
+ * @LastEditTime: 2026-08-09 13:56:19
  * @Description: CMake useage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -256,17 +256,17 @@ message([<mode>] "message text")
 
 消息模式（mode）详解。
 
-| 模式             | 行为说明                                                     |
-| ---------------- | ------------------------------------------------------------ |
-| (无) 或 `STATUS` | 输出普通状态信息（绿色前缀 `--`），不会中断配置。            |
-| `WARNING`        | 输出警告（黄色），继续配置。                                 |
-| `AUTHOR_WARNING` | 面向项目作者的警告（通常用于 CMake 脚本开发者），继续配置。  |
+| 模式             | 行为说明                                                         |
+| ---------------- | ---------------------------------------------------------------- |
+| (无) 或 `STATUS` | 输出普通状态信息（绿色前缀 `--`），不会中断配置。                |
+| `WARNING`        | 输出警告（黄色），继续配置。                                     |
+| `AUTHOR_WARNING` | 面向项目作者的警告（通常用于 CMake 脚本开发者），继续配置。      |
 | `SEND_ERROR`     | 报错但不立即停止配置；CMake 会在当前处理完成后退出（非零状态）。 |
-| `FATAL_ERROR`    | 立即终止 CMake 配置过程，并返回错误（最常用在严重错误时）。  |
-| `DEPRECATION`    | 显示弃用警告（行为类似 `AUTHOR_WARNING`，但语义更明确）。    |
-| `NOTICE`         | 类似 `STATUS`，但用于更正式的通知（CMake 3.17+）。           |
-| `VERBOSE`        | 仅在启用详细输出（如 `-Wdev` 或高日志级别）时显示。          |
-| `DEBUG`          | 仅在调试模式下显示（需设置 `CMAKE_DEBUG_OUTPUT=ON` 等）。    |
+| `FATAL_ERROR`    | 立即终止 CMake 配置过程，并返回错误（最常用在严重错误时）。      |
+| `DEPRECATION`    | 显示弃用警告（行为类似 `AUTHOR_WARNING`，但语义更明确）。        |
+| `NOTICE`         | 类似 `STATUS`，但用于更正式的通知（CMake 3.17+）。               |
+| `VERBOSE`        | 仅在启用详细输出（如 `-Wdev` 或高日志级别）时显示。              |
+| `DEBUG`          | 仅在调试模式下显示（需设置 `CMAKE_DEBUG_OUTPUT=ON` 等）。        |
 
 💡 提示：`STATUS` 是默认模式，所以 `message("Hello")` 等价于 `message(STATUS "Hello")`。
 
@@ -309,7 +309,7 @@ message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
 ### 3.1.3. set
 
- `set()` 是变量赋值命令。在一条 set 命令中可以同时设置多个变量。 
+ `set()` 是变量赋值命令。在一条 set 命令中可以同时设置多个变量。
 
 **功能**
 
@@ -334,7 +334,7 @@ set(MY_CACHE_VAR "value" CACHE STRING "A cached variable")  # 缓存变量
 
 ```cmake
 # 添加c++11标准支持
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")    
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # 默认c编译器
 set(CMAKE_C_COMPILER "gcc.exe")
@@ -356,10 +356,10 @@ GDB 调试设置
 set(CMAKE_BUILD_TYPE "Debug")
 
 # debug模式下 gdb相关选项
-set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")  
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
 
 # release模式下 gdb相关选项
-set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")  
+set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 # 开启调试 出现问题时开启
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -369,7 +369,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 ```cmake
 # 设置可执行文件输出的目录
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)   
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 ```
 
 ### 3.1.4. unset
@@ -439,12 +439,12 @@ file(<MODE> [arguments...])
 
 **注意事项**
 
-| 事项             | 说明                                                         |
-| ---------------- | ------------------------------------------------------------ |
+| 事项             | 说明                                                                           |
+| ---------------- | ------------------------------------------------------------------------------ |
 | 执行时机         | 大多数 `file()` 操作在 configure 阶段（运行 `cmake` 时）执行，不是 `make` 时。 |
-| 路径分隔符       | CMake 内部统一使用 `/`，即使在 Windows 上也有效。            |
-| 变量展开         | 在 `WRITE`/`READ` 等内容操作中，`${VAR}` 会被展开（除非用 `[[ ]]` 或转义）。 |
-| 避免 GLOB 源文件 | 自动收集源文件会导致构建系统无法感知新增文件，需手动重跑 CMake。 |
+| 路径分隔符       | CMake 内部统一使用 `/`，即使在 Windows 上也有效。                              |
+| 变量展开         | 在 `WRITE`/`READ` 等内容操作中，`${VAR}` 会被展开（除非用 `[[ ]]` 或转义）。   |
+| 避免 GLOB 源文件 | 自动收集源文件会导致构建系统无法感知新增文件，需手动重跑 CMake。               |
 
 ### 3.1.7. option
 
@@ -478,13 +478,13 @@ cmake -DBUILD_TESTS=OFF -DUSE_OPENMP=ON ..
 
 ```cmake
 if(BUILD_TESTS)
-    enable_testing()
-    add_subdirectory(tests)
+  enable_testing()
+  add_subdirectory(tests)
 endif()
 
 if(USE_OPENMP)
-    find_package(OpenMP REQUIRED)
-    target_link_libraries(myapp PRIVATE OpenMP::OpenMP_CXX)
+  find_package(OpenMP REQUIRED)
+  target_link_libraries(myapp PRIVATE OpenMP::OpenMP_CXX)
 endif()
 ```
 
@@ -516,11 +516,11 @@ endif()
 语法：
 project(<PROJECT-NAME> [<language-name>...])
 project(<PROJECT-NAME>
-        [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
-        [DESCRIPTION <project-description-string>]
-        [HOMEPAGE_URL <url-string>]
-        [LANGUAGES <language-name>...])
-        
+  [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
+  [DESCRIPTION <project-description-string>]
+  [HOMEPAGE_URL <url-string>]
+  [LANGUAGES <language-name>...])
+
 # 项目名称
 project(TestProj)
 ```
@@ -533,7 +533,7 @@ project(TestProj)
  设置字符集
 
 ```cmake
-add_definitions(-DUNICODE -D_UTF-8) 
+add_definitions(-DUNICODE -D_UTF-8)
 ```
 
 ### 3.2.3. add_compile_options
@@ -691,11 +691,11 @@ target_sources(<target>
 
 **可见性解释**
 
-| 关键字      | 含义                                                         |
-| ----------- | ------------------------------------------------------------ |
-| `PRIVATE`   | 源文件仅用于构建当前目标本身，不暴露给依赖此目标的其他目标。适用于实现文件（如 `.cpp`）。 |
+| 关键字      | 含义                                                                                                       |
+| ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `PRIVATE`   | 源文件仅用于构建当前目标本身，不暴露给依赖此目标的其他目标。适用于实现文件（如 `.cpp`）。                  |
 | `PUBLIC`    | 源文件既用于构建当前目标，也暴露给依赖者。通常用于头文件（尤其是模板或 inline 函数定义在 `.h` 中的情况）。 |
-| `INTERFACE` | 源文件不参与当前目标的构建，但会暴露给依赖者。极少用于源文件，更多用于接口库（`INTERFACE` 库）。 |
+| `INTERFACE` | 源文件不参与当前目标的构建，但会暴露给依赖者。极少用于源文件，更多用于接口库（`INTERFACE` 库）。           |
 
 📌 对于**普通可执行文件或静态/动态库**，绝大多数源文件（`.cpp`）应使用 `PRIVATE`；头文件一般不需要列在
 `target_sources` 中（除非是自动生成的或需要安装），但若要包含，通常用 `PUBLIC` 或
@@ -709,14 +709,14 @@ add_executable(myapp "")
 
 # 添加源文件
 target_sources(myapp PRIVATE
-    src/main.cpp
-    src/utils.cpp
-    src/logger.cpp
+  src/main.cpp
+  src/utils.cpp
+  src/logger.cpp
 )
 
 # 可以多次调用 target_sources 扩展源文件
 target_sources(myapp PRIVATE
-    src/network.cpp
+  src/network.cpp
 )
 ```
 
@@ -747,11 +747,8 @@ target_include_directories(mymath
 **优点**
 
 1. **作用域明确**：通过 `PRIVATE/PUBLIC` 控制依赖传播，符合现代 CMake 的“目标中心”思想。
-
 2. **可组合性强**：可在多个 `CMakeLists.txt` 中逐步添加源文件，适合大型项目。
-
 3. **与 `target_include_directories`、`target_link_libraries` 风格统一**，形成一致的 API。
-
 4. **支持生成器表达式**（如 `$<CONFIG>`），可按构建类型选择不同源文件：
 
    ```cmake
@@ -760,7 +757,7 @@ target_include_directories(mymath
    )
    ```
 
-   
+
 
 
 
@@ -772,8 +769,8 @@ target_include_directories(mymath
 
 ```cmake
 target_include_directories(target
-    [PRIVATE|PUBLIC|INTERFACE] dirs...
-    ...
+  [PRIVATE|PUBLIC|INTERFACE] dirs...
+  ...
 )
 ```
 
@@ -806,7 +803,7 @@ target_link_libraries(myapp mymath)  # 自动继承 mymath 的 PUBLIC include �
 
 ```cmake
 target_link_libraries(target
-    [PRIVATE|PUBLIC|INTERFACE] item1 [item2 ...]
+  [PRIVATE|PUBLIC|INTERFACE] item1 [item2 ...]
 )
 ```
 
@@ -884,20 +881,20 @@ cmake -DCMAKE_INSTALL_PREFIX=/opt/myapp ..
 **语法**：
 ```cmake
 install(TARGETSJ targets...
-        [ARCHIVE DESTINATION <dir> [PERMISSIONS ...] [CONFIGURATIONS [Debug|Release|...]]]
-        [LIBRARY DESTINATION <dir> ...]
-        [RUNTIME DESTINATION <dir> ...]
-        [OBJECTS DESTINATION <dir> ...]
-        [FRAMEWORK DESTINATION <dir> ...]
-        [BUNDLE DESTINATION <dir> ...]
-        [PUBLIC_HEADER DESTINATION <dir> ...]
-        [PRIVATE_HEADER DESTINATION <dir> ...]
-        [RESOURCE DESTINATION <dir> ...]
-        [OPTIONAL]
-        [EXCLUDE_FROM_ALL]
-        [NAMELINK_COMPONENT <component>]
-        [NAMELINK_ONLY | NAMELINK_SKIP]
-        [INCLUDES DESTINATION [<dir> ...]]
+  [ARCHIVE DESTINATION <dir> [PERMISSIONS ...] [CONFIGURATIONS [Debug|Release|...]]]
+  [LIBRARY DESTINATION <dir> ...]
+  [RUNTIME DESTINATION <dir> ...]
+  [OBJECTS DESTINATION <dir> ...]
+  [FRAMEWORK DESTINATION <dir> ...]
+  [BUNDLE DESTINATION <dir> ...]
+  [PUBLIC_HEADER DESTINATION <dir> ...]
+  [PRIVATE_HEADER DESTINATION <dir> ...]
+  [RESOURCE DESTINATION <dir> ...]
+  [OPTIONAL]
+  [EXCLUDE_FROM_ALL]
+  [NAMELINK_COMPONENT <component>]
+  [NAMELINK_ONLY | NAMELINK_SKIP]
+  [INCLUDES DESTINATION [<dir> ...]]
 )
 ```
 
@@ -908,9 +905,9 @@ add_executable(myapp src/main.cpp)
 
 # 安装 mylib 到 lib 目录，myapp 到 bin 目录
 install(TARGETS mylib myapp
-        LIBRARY DESTINATION lib    # Linux/macOS 共享库
-        ARCHIVE DESTINATION lib    # 静态库
-        RUNTIME DESTINATION bin    # 可执行文件（Windows/Linux）
+  LIBRARY DESTINATION lib    # Linux/macOS 共享库
+  ARCHIVE DESTINATION lib    # 静态库
+  RUNTIME DESTINATION bin    # 可执行文件（Windows/Linux）
 )
 ```
 
@@ -928,11 +925,11 @@ install(TARGETS mylib myapp
 
 ```cmake
 install(FILES files...
-        DESTINATION <dir>
-        [PERMISSIONS permissions...]
-        [CONFIGURATIONS [Debug|Release|...]]
-        [RENAME <name>]
-        [OPTIONAL]
+  DESTINATION <dir>
+  [PERMISSIONS permissions...]
+  [CONFIGURATIONS [Debug|Release|...]]
+  [RENAME <name>]
+  [OPTIONAL]
 )
 ```
 
@@ -950,10 +947,10 @@ install(FILES README.md LICENSE DESTINATION share/doc/myproject)
 
 ```cmake
 install(FILES myscript.sh
-        DESTINATION bin
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
-                    GROUP_READ GROUP_EXECUTE
-                    WORLD_READ WORLD_EXECUTE)
+  DESTINATION bin
+  PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE)
 ```
 
 这行代码的意思是：安装 `my_script.sh` 到 `bin` 目录，并设置其权限为：
@@ -991,15 +988,15 @@ install(FILES myscript.sh
 
 ```cmake
 install(DIRECTORY dirs...
-        DESTINATION <dir>
-        [FILE_PERMISSIONS ...]
-        [DIRECTORY_PERMISSIONS ...]
-        [USE_SOURCE_PERMISSIONS]
-        [CONFIGURATIONS [Debug|Release|...]]
-        [FILES_MATCHING]
-        [PATTERN <pattern> | REGEX <regex>]
-        [EXCLUDE]
-        [PERMISSIONS ...]
+  DESTINATION <dir>
+  [FILE_PERMISSIONS ...]
+  [DIRECTORY_PERMISSIONS ...]
+  [USE_SOURCE_PERMISSIONS]
+  [CONFIGURATIONS [Debug|Release|...]]
+  [FILES_MATCHING]
+  [PATTERN <pattern> | REGEX <regex>]
+  [EXCLUDE]
+  [PERMISSIONS ...]
 )
 ```
 
@@ -1044,16 +1041,16 @@ install(CODE "message(\"Installation complete!\")")
 
 ```cmake
 install(TARGETS mylib
-        EXPORT MyLibTargets
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        PUBLIC_HEADER DESTINATION include
+  EXPORT MyLibTargets
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  PUBLIC_HEADER DESTINATION include
 )
 
 install(EXPORT MyLibTargets
-        FILE MyLibTargets.cmake
-        NAMESPACE MyLib::
-        DESTINATION lib/cmake/MyLib
+  FILE MyLibTargets.cmake
+  NAMESPACE MyLib::
+  DESTINATION lib/cmake/MyLib
 )
 ```
 
@@ -1091,9 +1088,9 @@ target_link_libraries(myapp mylib)
 
 # 安装库和可执行文件
 install(TARGETS mylib myapp
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
 )
 
 # 安装头文件
@@ -1104,13 +1101,13 @@ install(DIRECTORY config/ DESTINATION etc/myapp)
 
 # 导出目标
 install(TARGETS mylib
-        EXPORT MyLibTargets
-        PUBLIC_HEADER DESTINATION include
+  EXPORT MyLibTargets
+  PUBLIC_HEADER DESTINATION include
 )
 install(EXPORT MyLibTargets
-        FILE MyLibTargets.cmake
-        NAMESPACE MyLib::
-        DESTINATION lib/cmake/MyLib
+  FILE MyLibTargets.cmake
+  NAMESPACE MyLib::
+  DESTINATION lib/cmake/MyLib
 )
 ```
 
@@ -1145,7 +1142,7 @@ mkdir build
 cd build
 
 # 编译上级目录的 CMakeLists.txt 文件，生成 Makefile 和其它文件
-# cmake path，path 是上一级 CMakeLists.txt 文件的路径 
+# cmake path，path 是上一级 CMakeLists.txt 文件的路径
 cmake ..
 
 # 执行 make 命令，生成 target

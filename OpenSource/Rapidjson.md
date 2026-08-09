@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-05 11:23:23
+ * @LastEditTime: 2026-08-09 13:49:20
  * @Description: rapidjson learning
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 基础用法
@@ -86,20 +86,20 @@ s.SetInt(s.GetInt() + 1);
 
 rapidjson::Value& infoArray = doc["Info"];
 if (infoArray.IsArray()) {
-    for (int i = 0; i < infoArray.Size(); i++) {
-        const rapidjson::Value& object = infoArray[i];
-        int lots = object["lots"].GetInt();
-        std::string order_algorithm = object["order_algorithm"].GetString();
-        std::cout << "int lots = " << lots << std::endl;
-        std::cout << "string order_algorithm = " << order_algorithm << std::endl;
-        const rapidjson::Value& info_object = object["list_instrument_id"];
-        if (info_object.IsArray()) {
-            for (int j = 0; j < info_object.Size(); j++) {
-                std::string instrument = info_object[j].GetString();
-                std::cout << "instrument[" << j << "] = " << instrument << std::endl;
-            }
-        }
+  for (int i = 0; i < infoArray.Size(); i++) {
+    const rapidjson::Value& object = infoArray[i];
+    int lots = object["lots"].GetInt();
+    std::string order_algorithm = object["order_algorithm"].GetString();
+    std::cout << "int lots = " << lots << std::endl;
+    std::cout << "string order_algorithm = " << order_algorithm << std::endl;
+    const rapidjson::Value& info_object = object["list_instrument_id"];
+    if (info_object.IsArray()) {
+      for (int j = 0; j < info_object.Size(); j++) {
+        std::string instrument = info_object[j].GetString();
+        std::cout << "instrument[" << j << "] = " << instrument << std::endl;
+      }
     }
+  }
 }
 
 // 3. Stringify the DOM
@@ -131,21 +131,21 @@ doc.AddMember("MsgRef", 1, allocator);
 rapidjson::Value info_array(rapidjson::kArrayType);
 
 for (int i = 0; i < 2; i++) {
-    rapidjson::Value info_object(rapidjson::kObjectType); // 调用构造函数，参数类型为：json vale type
-    info_object.SetObject();
-    info_object.AddMember("lots", 10 + i, allocator);
-    info_object.AddMember("order_algorithm", "01", allocator);
+  rapidjson::Value info_object(rapidjson::kObjectType); // 调用构造函数，参数类型为：json vale type
+  info_object.SetObject();
+  info_object.AddMember("lots", 10 + i, allocator);
+  info_object.AddMember("order_algorithm", "01", allocator);
 
-    rapidjson::Value instrument_array(rapidjson::kArrayType);
-    for (int j = 0; j < 2; j++) {
-        rapidjson::Value instrument_object(rapidjson::kObjectType);
-        instrument_object.SetObject();
-        instrument_object.SetString("cu1701");
-        instrument_array.PushBack(instrument_object, allocator);
-    }
+  rapidjson::Value instrument_array(rapidjson::kArrayType);
+  for (int j = 0; j < 2; j++) {
+    rapidjson::Value instrument_object(rapidjson::kObjectType);
+    instrument_object.SetObject();
+    instrument_object.SetString("cu1701");
+    instrument_array.PushBack(instrument_object, allocator);
+  }
 
-    info_object.AddMember("list_instrument_id", instrument_array, allocator);
-    info_array.PushBack(info_object, allocator);
+  info_object.AddMember("list_instrument_id", instrument_array, allocator);
+  info_array.PushBack(info_object, allocator);
 }
 
 doc.AddMember("Info", info_array, allocator);
@@ -162,13 +162,13 @@ std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的�
 - RapidJSON 在类型转换时会检查数值的范围。
 
 - 字符串字面量的优化
-  
+
   - 只储存指针，不作复制
-  
+
 - 优化“短”字符串
   - 在 `Value` 内储存短字符串，无需额外分配。
   - 对 UTF-8 字符串来说，32 位架构下可存储最多 11 字符，64 位下 21 字符（x86-64 下 13 字符）。
-  
+
 - 可选地支持 `std::string`（定义 `RAPIDJSON_HAS_STDSTRING=1`）
 
 - 最小化 DOM 的内存开销。
@@ -185,7 +185,7 @@ std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的�
   - 右值引用（rvalue reference）
   - 支持 `noexcept` 修饰符
   - 支持简洁的范围 for 循环
-  
+
 - Value 赋值使用 move 语义，而不是 copy 语义。也就是说，拷贝构造和拷贝赋值函数都是用 move 语义实现的。
 
 - 当 string 的生命周期不足时，Value 应该使用 Copy-string 存储策略，否则 value 无法长期存储字符串。
@@ -216,15 +216,15 @@ std::cout << buffer.GetString() << std::endl; // GetString() 获取缓冲区的�
 
   ```c++
   // 普通查询
-  static const char* kTypeNames[] = 
+  static const char* kTypeNames[] =
       { "Null", "False", "True", "Object", "Array", "String", "Number" };
-   
+
   for (Value::ConstMemberIterator itr = document.MemberBegin();
       itr != document.MemberEnd(); ++itr) {
       printf("Type of member %s is %s\n",
           itr->name.GetString(), kTypeNames[itr->value.GetType()]);
   }
-  
+
   // 采用FindMember()
   Value::ConstMemberIterator itr = document.FindMember("hello");
   if (itr != document.MemberEnd()) {
@@ -277,14 +277,14 @@ RapidJSON 提供两个 String 的存储策略。
 
 `Reader` 从输入流解析一个 JSON。当它从流中读取字符时，它会基于 JSON 的语法去分析字符，并向处理器发送事件。
 
-`Reader` 是 `GenericReader` 模板类的别名，位于 `reader.h` 文件中。 
+`Reader` 是 `GenericReader` 模板类的别名，位于 `reader.h` 文件中。
 
 ```cpp
 namespace rapidjson {
 
 template <typename SourceEncoding, typename TargetEncoding, typename Allocator = MemoryPoolAllocator<> >
 class GenericReader {
-    // ...
+  // ...
 };
 
 typedef GenericReader<UTF8<>, UTF8<> > Reader;
@@ -294,7 +294,7 @@ typedef GenericReader<UTF8<>, UTF8<> > Reader;
 
 
 
-## 2.2. Writer  
+## 2.2. Writer
 
 `Writer`: （`GenericWriter<...>` 的 typedef）是 JSON 的 SAX 风格**生成器**。`Writer` 将数据生成 Json 格式数据。
 
@@ -302,34 +302,34 @@ typedef GenericReader<UTF8<>, UTF8<> > Reader;
 
 ```cpp
 namespace rapidjson {
-    
+
 template<typename OutputStream, typename SourceEncoding = UTF8<>, typename TargetEncoding = UTF8<>, typename StackAllocator = CrtAllocator, unsigned writeFlags = kWriteDefaultFlags>
 class Writer {
 public:
-    typedef typename SourceEncoding::Ch Ch;
+  typedef typename SourceEncoding::Ch Ch;
 
-    static const int kDefaultMaxDecimalPlaces = 324;
+  static const int kDefaultMaxDecimalPlaces = 324;
 
-    //! Constructor
-    /*! \param os Output stream.
-        \param stackAllocator User supplied allocator. If it is null, it will create a private one.
-        \param levelDepth Initial capacity of stack.
-    */
-    explicit
-    Writer(OutputStream& os, StackAllocator* stackAllocator = 0, size_t levelDepth = kDefaultLevelDepth) : 
-        os_(&os), level_stack_(stackAllocator, levelDepth * sizeof(Level)), maxDecimalPlaces_(kDefaultMaxDecimalPlaces), hasRoot_(false) {}
+  //! Constructor
+  /*! \param os Output stream.
+    \param stackAllocator User supplied allocator. If it is null, it will create a private one.
+    \param levelDepth Initial capacity of stack.
+  */
+  explicit
+  Writer(OutputStream& os, StackAllocator* stackAllocator = 0, size_t levelDepth = kDefaultLevelDepth) :
+    os_(&os), level_stack_(stackAllocator, levelDepth * sizeof(Level)), maxDecimalPlaces_(kDefaultMaxDecimalPlaces), hasRoot_(false) {}
 
-    explicit
-    Writer(StackAllocator* allocator = 0, size_t levelDepth = kDefaultLevelDepth) :
-        os_(0), level_stack_(allocator, levelDepth * sizeof(Level)), maxDecimalPlaces_(kDefaultMaxDecimalPlaces), hasRoot_(false) {}
+  explicit
+  Writer(StackAllocator* allocator = 0, size_t levelDepth = kDefaultLevelDepth) :
+    os_(0), level_stack_(allocator, levelDepth * sizeof(Level)), maxDecimalPlaces_(kDefaultMaxDecimalPlaces), hasRoot_(false) {}
 
 #if RAPIDJSON_HAS_CXX11_RVALUE_REFS
-    Writer(Writer&& rhs) :
-        os_(rhs.os_), level_stack_(std::move(rhs.level_stack_)), maxDecimalPlaces_(rhs.maxDecimalPlaces_), hasRoot_(rhs.hasRoot_) {
-        rhs.os_ = 0;
-    }
+  Writer(Writer&& rhs) :
+    os_(rhs.os_), level_stack_(std::move(rhs.level_stack_)), maxDecimalPlaces_(rhs.maxDecimalPlaces_), hasRoot_(rhs.hasRoot_) {
+    rhs.os_ = 0;
+  }
 };
-    
+
 }
 ```
 
@@ -337,46 +337,46 @@ public:
 
 1. 用字符串缓冲结合 `Writer`。
 
-   ```cpp
-   #include "rapidjson/writer.h"
-   #include "rapidjson/stringbuffer.h"
-   #include <iostream>
-    
-   using namespace rapidjson;
-   using namespace std;
-    
-   void main() {
-       StringBuffer s;
-       Writer<StringBuffer> writer(s);
-       
-       writer.StartObject();
-       writer.Key("hello");
-       writer.String("world");
-       writer.Key("t");
-       writer.Bool(true);
-       writer.Key("f");
-       writer.Bool(false);
-       writer.Key("n");
-       writer.Null();
-       writer.Key("i");
-       writer.Uint(123);
-       writer.Key("pi");
-       writer.Double(3.1416);
-       writer.Key("a");
-       writer.StartArray();
-       for (unsigned i = 0; i < 4; i++)
-           writer.Uint(i);
-       writer.EndArray();
-       writer.EndObject();
-    
-       cout << s.GetString() << endl;
-   }
-   ```
+```cpp
+  #include "rapidjson/writer.h"
+  #include "rapidjson/stringbuffer.h"
+  #include <iostream>
 
-   ```cpp
-   // 输出
-   {"hello":"world","t":true,"f":false,"n":null,"i":123,"pi":3.1416,"a":[0,1,2,3]}
-   ```
+  using namespace rapidjson;
+  using namespace std;
+
+  void main() {
+    StringBuffer s;
+    Writer<StringBuffer> writer(s);
+
+    writer.StartObject();
+    writer.Key("hello");
+    writer.String("world");
+    writer.Key("t");
+    writer.Bool(true);
+    writer.Key("f");
+    writer.Bool(false);
+    writer.Key("n");
+    writer.Null();
+    writer.Key("i");
+    writer.Uint(123);
+    writer.Key("pi");
+    writer.Double(3.1416);
+    writer.Key("a");
+    writer.StartArray();
+    for (unsigned i = 0; i < 4; i++)
+        writer.Uint(i);
+    writer.EndArray();
+    writer.EndObject();
+
+    cout << s.GetString() << endl;
+  }
+```
+
+```cpp
+  // 输出
+  {"hello":"world","t":true,"f":false,"n":null,"i":123,"pi":3.1416,"a":[0,1,2,3]}
+```
 
 2. 用 `Document` 类、分配器(Allocator)结合 `AddMember()` 函数。
 
@@ -390,12 +390,12 @@ namespace rapidjson {
 template <typename Encoding, typename Allocator = RAPIDJSON_DEFAULT_ALLOCATOR, typename StackAllocator = RAPIDJSON_DEFAULT_STACK_ALLOCATOR >
 class GenericDocument : public GenericValue<Encoding, Allocator> {
 public:
-    ...
+  ...
 };
 
 //! GenericDocument with UTF8 encoding
 typedef GenericDocument<UTF8<> > Document;
-    
+
 }
 ```
 
@@ -405,11 +405,11 @@ typedef GenericDocument<UTF8<> > Document;
 
 ```cpp
 namespace rapidjson {
-    
+
 template <typename Encoding, typename Allocator = RAPIDJSON_DEFAULT_ALLOCATOR >
 class GenericValue {
 public:
-    ...
+  ...
 };
 
 //! GenericValue with UTF8 encoding
@@ -473,7 +473,7 @@ namespace rapidjson {
 class CrtAllocator {
 public:
     static const bool kNeedFree = true;
-    void* Malloc(size_t size) { 
+    void* Malloc(size_t size) {
         if (size) //  behavior of malloc(0) is implementation defined.
             return RAPIDJSON_MALLOC(size);
         else
@@ -496,13 +496,13 @@ public:
         return false;
     }
 };
-    
-    
+
+
 template <typename BaseAllocator = CrtAllocator>
 class MemoryPoolAllocator {
-	...
+  ...
 };
-	
+
 }
 ```
 
@@ -514,4 +514,3 @@ class MemoryPoolAllocator {
 - 中文文档: https://rapidjson.org/zh-cn/index.html
 - Unicode 字符代码: https://www.rapidtables.org/zh-CN/code/text/unicode-characters.html
 - Unicode 15.0 Character Code Charts: https://www.unicode.org/charts/
-

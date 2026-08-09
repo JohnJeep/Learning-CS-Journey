@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 18:51:10
  * @Description: Python Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -45,10 +45,10 @@ Python 的设计理念核心在于 **动态类型（Dynamic Typing）** 。
    # 运行时确定类型
    x = 10          # 现在是 int
    x = "hello"     # ✅ 现在是 str，完全合法
-   
+
    def add(a, b):  # 参数可以是任何类型
        return a + b  # 只要支持 + 操作
-   
+
    add(1, 2)       # ✅ 返回 3
    add("a", "b")   # ✅ 返回 "ab"
    add([1], [2])   # ✅ 返回 [1, 2]
@@ -64,8 +64,8 @@ Python 的设计理念核心在于 **动态类型（Dynamic Typing）** 。
    # Python：这个函数可以用于整数、浮点数、字符串等，只要这些类型支持“+”操作
    def add(a, b):
    return a + b
-   
-   
+
+
    # C++：这个函数只能用于整数，如果传入浮点数，会被截断为整数（除非重载）
    int add(int a, int b) {
    return a + b;
@@ -203,8 +203,8 @@ print(greet.desc)
 
 ## 4.7. Built-in Functions
 
-| Built-in Functions                                           |                                                              |                                                              |                                                              |
-| :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Built-in Functions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A**[`abs()`](https://docs.python.org/3.14/library/functions.html#abs)[`aiter()`](https://docs.python.org/3.14/library/functions.html#aiter)[`all()`](https://docs.python.org/3.14/library/functions.html#all)[`anext()`](https://docs.python.org/3.14/library/functions.html#anext)[`any()`](https://docs.python.org/3.14/library/functions.html#any)[`ascii()`](https://docs.python.org/3.14/library/functions.html#ascii) **B**[`bin()`](https://docs.python.org/3.14/library/functions.html#bin)[`bool()`](https://docs.python.org/3.14/library/functions.html#bool)[`breakpoint()`](https://docs.python.org/3.14/library/functions.html#breakpoint)[`bytearray()`](https://docs.python.org/3.14/library/functions.html#func-bytearray)[`bytes()`](https://docs.python.org/3.14/library/functions.html#func-bytes) **C**[`callable()`](https://docs.python.org/3.14/library/functions.html#callable)[`chr()`](https://docs.python.org/3.14/library/functions.html#chr)[`classmethod()`](https://docs.python.org/3.14/library/functions.html#classmethod)[`compile()`](https://docs.python.org/3.14/library/functions.html#compile)[`complex()`](https://docs.python.org/3.14/library/functions.html#complex) **D**[`delattr()`](https://docs.python.org/3.14/library/functions.html#delattr)[`dict()`](https://docs.python.org/3.14/library/functions.html#func-dict)[`dir()`](https://docs.python.org/3.14/library/functions.html#dir)[`divmod()`](https://docs.python.org/3.14/library/functions.html#divmod) | **E**[`enumerate()`](https://docs.python.org/3.14/library/functions.html#enumerate)[`eval()`](https://docs.python.org/3.14/library/functions.html#eval)[`exec()`](https://docs.python.org/3.14/library/functions.html#exec) **F**[`filter()`](https://docs.python.org/3.14/library/functions.html#filter)[`float()`](https://docs.python.org/3.14/library/functions.html#float)[`format()`](https://docs.python.org/3.14/library/functions.html#format)[`frozenset()`](https://docs.python.org/3.14/library/functions.html#func-frozenset) **G**[`getattr()`](https://docs.python.org/3.14/library/functions.html#getattr)[`globals()`](https://docs.python.org/3.14/library/functions.html#globals) **H**[`hasattr()`](https://docs.python.org/3.14/library/functions.html#hasattr)[`hash()`](https://docs.python.org/3.14/library/functions.html#hash)[`help()`](https://docs.python.org/3.14/library/functions.html#help)[`hex()`](https://docs.python.org/3.14/library/functions.html#hex) **I**[`id()`](https://docs.python.org/3.14/library/functions.html#id)[`input()`](https://docs.python.org/3.14/library/functions.html#input)[`int()`](https://docs.python.org/3.14/library/functions.html#int)[`isinstance()`](https://docs.python.org/3.14/library/functions.html#isinstance)[`issubclass()`](https://docs.python.org/3.14/library/functions.html#issubclass)[`iter()`](https://docs.python.org/3.14/library/functions.html#iter) | **L**[`len()`](https://docs.python.org/3.14/library/functions.html#len)[`list()`](https://docs.python.org/3.14/library/functions.html#func-list)[`locals()`](https://docs.python.org/3.14/library/functions.html#locals) **M**[`map()`](https://docs.python.org/3.14/library/functions.html#map)[`max()`](https://docs.python.org/3.14/library/functions.html#max)[`memoryview()`](https://docs.python.org/3.14/library/functions.html#func-memoryview)[`min()`](https://docs.python.org/3.14/library/functions.html#min) **N**[`next()`](https://docs.python.org/3.14/library/functions.html#next) **O**[`object()`](https://docs.python.org/3.14/library/functions.html#object)[`oct()`](https://docs.python.org/3.14/library/functions.html#oct)[`open()`](https://docs.python.org/3.14/library/functions.html#open)[`ord()`](https://docs.python.org/3.14/library/functions.html#ord) **P**[`pow()`](https://docs.python.org/3.14/library/functions.html#pow)[`print()`](https://docs.python.org/3.14/library/functions.html#print)[`property()`](https://docs.python.org/3.14/library/functions.html#property) | **R**[`range()`](https://docs.python.org/3.14/library/functions.html#func-range)[`repr()`](https://docs.python.org/3.14/library/functions.html#repr)[`reversed()`](https://docs.python.org/3.14/library/functions.html#reversed)[`round()`](https://docs.python.org/3.14/library/functions.html#round) **S**[`set()`](https://docs.python.org/3.14/library/functions.html#func-set)[`setattr()`](https://docs.python.org/3.14/library/functions.html#setattr)[`slice()`](https://docs.python.org/3.14/library/functions.html#slice)[`sorted()`](https://docs.python.org/3.14/library/functions.html#sorted)[`staticmethod()`](https://docs.python.org/3.14/library/functions.html#staticmethod)[`str()`](https://docs.python.org/3.14/library/functions.html#func-str)[`sum()`](https://docs.python.org/3.14/library/functions.html#sum)[`super()`](https://docs.python.org/3.14/library/functions.html#super) **T**[`tuple()`](https://docs.python.org/3.14/library/functions.html#func-tuple)[`type()`](https://docs.python.org/3.14/library/functions.html#type) **V**[`vars()`](https://docs.python.org/3.14/library/functions.html#vars) **Z**[`zip()`](https://docs.python.org/3.14/library/functions.html#zip) **_**[`__import__()`](https://docs.python.org/3.14/library/functions.html#import__) |
 
 Built-in Functions: https://docs.python.org/3.14/library/functions.html
@@ -299,13 +299,13 @@ d.clear()              # 清空整个字典
 
 ```python
 for key in d.keys():
-    print(key)
+  print(key)
 
 for value in d.values():
-    print(value)
+  print(value)
 
 for key, value in d.items():
-    print(f"{key}: {value}")
+  print(f"{key}: {value}")
 ```
 
 ------
@@ -338,9 +338,9 @@ squares = {x: x**2 for x in range(5)}
 
 ```python
 student = {
-    'name': 'Bob',
-    'grades': [85, 90, 78],
-    'active': True
+  'name': 'Bob',
+  'grades': [85, 90, 78],
+  'active': True
 }
 
 # 安全获取平均分（如果 grades 存在）
@@ -369,7 +369,7 @@ print(f"Average grade: {avg:.2f}")
 
 ```python
 with context_manager as variable:
-    # 在此代码块中使用 variable
+  # 在此代码块中使用 variable
 ```
 
 其中 `context_manager` 是一个**上下文管理器对象**，它必须实现两个特殊方法：
@@ -393,7 +393,7 @@ f.close()  # 如果中间出错，可能不会执行到这行！
 
 ```python
 with open('file.txt', 'r') as f:
-    data = f.read()
+  data = f.read()
 # 文件会自动关闭，即使读取过程中发生异常
 ```
 
@@ -409,17 +409,17 @@ with open('file.txt', 'r') as f:
 
 ```python
 class MyContext:
-    def __enter__(self):
-        print("进入上下文")
-        return self
+  def __enter__(self):
+    print("进入上下文")
+    return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("退出上下文")
-        # 返回 True 可以抑制异常（一般不建议）
-        return False
+  def __exit__(self, exc_type, exc_val, exc_tb):
+    print("退出上下文")
+    # 返回 True 可以抑制异常（一般不建议）
+    return False
 
 with MyContext() as mc:
-    print("在 with 块中")
+  print("在 with 块中")
 ```
 
 输出：
@@ -437,14 +437,14 @@ from contextlib import contextmanager
 
 @contextmanager
 def my_context():
-    print("进入")
-    try:
-        yield "some resource"
-    finally:
-        print("退出")
+  print("进入")
+  try:
+    yield "some resource"
+  finally:
+    print("退出")
 
 with my_context() as res:
-    print(f"使用 {res}")
+  print(f"使用 {res}")
 ```
 
 输出：

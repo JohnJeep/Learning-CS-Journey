@@ -127,11 +127,11 @@ auto node = std::make_shared<MyNode>(options);
 // 创建发布者和订阅者
 auto pub = node->create_publisher<std_msgs::msg::String>("topic", 10);
 auto sub = node->create_subscription<std_msgs::msg::String>(
-    "topic", 
-    10, 
-    [](std_msgs::msg::String::UniquePtr msg) { // 注意：使用UniquePtr
-        // 处理消息
-    });
+  "topic", 
+  10, 
+  [](std_msgs::msg::String::UniquePtr msg) { // 注意：使用UniquePtr
+    // 处理消息
+  });
 ```
 
 **效果**：**完全消除**了进程内节点间的序列化/反序列化，网络延迟的开销，从而降低延迟和提高吞吐量。
@@ -190,23 +190,23 @@ ROS2 的底层中间件（默认是 Fast DDS）可以配置为使用共享内存
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastrtps_profiles">
-    <transport_descriptors>
-        <!-- 定义共享内存传输器 -->
-        <transport_descriptor>
-            <transport_id>shm</transport_id>
-            <type>SHM</type>
-            <segment_size>134217728</segment_size> <!-- 128MB -->
-        </transport_descriptor>
-    </transport_descriptors>
+  <transport_descriptors>
+    <!-- 定义共享内存传输器 -->
+    <transport_descriptor>
+      <transport_id>shm</transport_id>
+      <type>SHM</type>
+      <segment_size>134217728</segment_size> <!-- 128MB -->
+    </transport_descriptor>
+  </transport_descriptors>
 
-    <participant profile_name="shm_participant" is_default_profile="true">
-        <rtps>
-            <userTransports>
-                <transport_id>shm</transport_id>
-            </userTransports>
-            <useBuiltinTransports>false</useBuiltinTransports>
-        </rtps>
-    </participant>
+  <participant profile_name="shm_participant" is_default_profile="true">
+    <rtps>
+      <userTransports>
+        <transport_id>shm</transport_id>
+      </userTransports>
+      <useBuiltinTransports>false</useBuiltinTransports>
+    </rtps>
+  </participant>
 </profiles>
 ```
 
@@ -306,20 +306,20 @@ publisher->publish(std::move(loaned_msg));
 ```cpp
 // 不佳：每收到一个数据点就发布一次
 void sensor_callback(const SensorData& data) {
-    auto msg = std::make_unique<std_msgs::msg::Float64>();
-    msg->data = data.value;
-    publisher_->publish(std::move(msg));
+  auto msg = std::make_unique<std_msgs::msg::Float64>();
+  msg->data = data.value;
+  publisher_->publish(std::move(msg));
 }
 
 // 更优：积累后批量发布
 void sensor_callback(const SensorData& data) {
-    buffer_.push_back(data.value);
-    if (buffer_.size() >= BATCH_SIZE) {
-        auto msg = std::make_unique<std_msgs::msg::Float64MultiArray>();
-        msg->data = std::move(buffer_);  // 移动语义，避免拷贝
-        publisher_->publish(std::move(msg));
-        buffer_.clear();
-    }
+  buffer_.push_back(data.value);
+  if (buffer_.size() >= BATCH_SIZE) {
+    auto msg = std::make_unique<std_msgs::msg::Float64MultiArray>();
+    msg->data = std::move(buffer_);  // 移动语义，避免拷贝
+    publisher_->publish(std::move(msg));
+    buffer_.clear();
+  }
 }
 ```
 

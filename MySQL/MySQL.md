@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2019-08-02 22:17:14
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:35:37
+ * @LastEditTime: 2026-08-09 13:52:06
  * @Description: mysql usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. MySQL 介绍
@@ -74,12 +74,12 @@
 
   ```sql
   ALTER user 'root'@'localhost' IDENTIFIED BY '你的密码';
-  
+
 // 例子
   mysql> ALTER user 'root'@'localhost' IDENTIFIED BY '123456';
 mysql> FLUSH PRIVILEGES;
   ```
-  
+
 
 ## 1.6. 权限管理
 
@@ -695,7 +695,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 - from 型子查询：内层 SQL 查询的结果当成一张临时表，供外层的 SQL 再次查询。
 - exist 型子查询：把外层 SQL 查询的结果拿到内层 SQL 中去测试，如果内层 SQL 成立，则该行取出。
 - <font color=red> NULL 说用 </font>
-  
+
   > null 是一种类型，比较时只能用 `is null` 或 `is not null`; 碰见运算符时，一律返回为 null。使用 null
   > 效率不高，影响索引的效果
 
@@ -923,13 +923,13 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
 ## 10.1. 基础导入与导出
 `mysqldump` 导出固定条件的数据库
   - 导出整个数据库: `mysqldump -u 用户名 -p 数据库名 > 导出的文件名 `
-    
+
     > mysqldump -u wcnc -p smgp_apps_wcnc > wcnc.sql
   - 导出一个表: `mysqldump -u 用户名 -p 数据库名 表名 > 导出的文件名 `
-    
+
     > mysqldump -u wcnc -p smgp_apps_wcnc users> wcnc_users.sql
   - 导出一个数据库结构: `mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql`
-    
+
     > #-d 不导出数据只导出结构 --add-drop-table 在每个 create 语句之前增加一个 drop table
   - 批量导出多个数据库：`mysqldump  -u root -p --databases db_1 db_2`
 
@@ -940,7 +940,7 @@ CHAR 是固定长度的，所以它的处理速度比 VARCHAR 快得多，但是
   mysql -u root -p
   mysql>use 数据库
   mysql>set names utf8; （先确认编码，如果不设置可能会出现乱码，注意不是 UTF-8）
-  
+
   #然后使用 source 命令，后面参数为脚本文件（如这里用到的. sql）
   mysql>source d:\wcnc_db.sql
   ```

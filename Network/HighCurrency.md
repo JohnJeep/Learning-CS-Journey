@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 21:22:08
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:44:49
+ * @LastEditTime: 2026-08-09 13:51:48
  * @Description: network high currency
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 高并发
@@ -27,7 +27,7 @@
 
 UDP 和 TCP 最基本的责任是: 将两个端系统间 IP 的传递服务扩展为运行在端系统上的两个进程之间的传递服务。将主机间传递扩展
 到进程间传递被称为传输层的多路复用 (transport-layer multiplexing)
-与多路分解 (demultiplexing) 
+与多路分解 (demultiplexing)
 
 - 多路 IO 转接模型原理：不再由应用程序(服务器)直接监听客户端，而是通过**内核**替代**应用程序**进行监听文件。
 - 查看一个进程可以打开 sock 文件描述符的上限值 `cat /proc/sys/fs/file-max`
@@ -73,14 +73,14 @@ select 和 poll 都是 UNIX/Linux 系统中的 I/O 多路复用机制，用于�
 3. 重复初始化：
    - select 会修改传入的 `fd_set`，因此每次调用前都需要重新初始化
 4. 缺点
-    - Linux 中 select 监听文件描述符的的最大值为 1024 
+    - Linux 中 select 监听文件描述符的的最大值为 1024
     - 需要自定一个数据结构(数组)去遍历哪些文件描述符满足条件。
     - 每次进行操作的时候，需要将监听的集合和满足条件监听的集合进行保存，因为每次的操作会修改原有集合的值。
 5. 四个辅助函数
   - `void FD_ZERO(fd_set *set)` 将 set 清 0
   - `void FD_CLR(int fd, fd_set *set)` 将 fd 从 set 中清除出去
   - `void FD_SET(int fd, fd_set *set)` 将 fd 设置到 set 集合中去
-  - `int FD_ISSET(int fd, fd_set *set)` 判断 fd 是否在 set 集合中 
+  - `int FD_ISSET(int fd, fd_set *set)` 判断 fd 是否在 set 集合中
 
 ### poll
 
@@ -112,7 +112,7 @@ select 和 poll 都是 UNIX/Linux 系统中的 I/O 多路复用机制，用于�
    int poll(struct pollfd *fds, nfds_t nfds, int timeout);
    ```
 
-   - `fds` 数组的首地址  
+   - `fds` 数组的首地址
    - `nfds` 数组中元素的个数
    - `timeout` 超时时间(单位为 ms 级别)
      - `-1` 阻塞等待
@@ -172,8 +172,8 @@ select 和 poll 都是 UNIX/Linux 系统中的 I/O 多路复用机制，用于�
      ```c
      // 等待所有监控文件描述符上事件的产生，即监听epoll红黑树上事件的发生。
      // struct epoll_event *event: event为传出参数，是一个数组。
-     // int maxevents: 数组的最大值  
-     epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout); 
+     // int maxevents: 数组的最大值
+     epoll_wait(int epfd, struct epoll_event *event, int maxevents, int timeout);
      ```
 
 **工作流程**
@@ -278,7 +278,7 @@ epoll 反应堆模型
 - `open()` 函数，在 socket 套接字中不适用。
 - 结合 `fcntl()` 函数和 `readn()` 函数一起使用。 `readn()` 一次性读取 `n` 个字节后才返回。
 - 如何使用？
-  - 使用边沿触发方式 
+  - 使用边沿触发方式
   - 执行过程中使用 `while(read())`
   - 调用 `fcntl(0_NOBLOCK)`
 

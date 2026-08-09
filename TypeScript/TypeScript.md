@@ -254,18 +254,18 @@ object: 包含 Array, Function, Date, Error
       `undefined`。`void`：是一个**语义类型**，专门用来描述"函数没有有意义的返回值"，是关于**意图**的类型，不是关于值
       的类型。
       ```typescript
-      let a: undefined = undefined;  // ✅ 只能赋值 undefined
-      let b: void = undefined;       // ✅ 也可以，因为 undefined 是 void 的子类型
-      let c: void = 5;               // ❌ 报错，void 不能是别的值
-      
-      function f1(): undefined {
-          return undefined;  // 必须显式返回 undefined
-      }
-      
-      function f2(): void {
-          // 什么都不返回也行，返回 undefined 也行
-          console.log("hi");
-      }
+  let a: undefined = undefined;  // ✅ 只能赋值 undefined
+  let b: void = undefined;       // ✅ 也可以，因为 undefined 是 void 的子类型
+  let c: void = 5;               // ❌ 报错，void 不能是别的值
+  
+  function f1(): undefined {
+    return undefined;  // 必须显式返回 undefined
+  }
+  
+  function f2(): void {
+    // 什么都不返回也行，返回 undefined 也行
+    console.log("hi");
+  }
       ```
   - tuple
   - enum

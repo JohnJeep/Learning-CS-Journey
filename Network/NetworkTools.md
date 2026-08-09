@@ -2,19 +2,19 @@
  * @Author: JohnJeep
  * @Date: 2025-03-26 11:31:13
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-26 15:28:31
+ * @LastEditTime: 2026-08-09 13:50:23
  * @Description: How to use network tools
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # Network Tools
 
 
-## mtr 
+## mtr
 
 mtr 网络侦测工具
 
-## traceroute 
+## traceroute
 
 
 
@@ -48,44 +48,44 @@ mtr 网络侦测工具
 #### 1. 基本命令格式
 
 ```bash
-TCPDUMP(8)          System Manager's Manual                                       
+TCPDUMP(8)          System Manager's Manual
 
 NAME
-       tcpdump - dump traffic on a network
+  tcpdump - dump traffic on a network
 
 SYNOPSIS
-       tcpdump [ -AbdDefhHIJKlLnNOpqStuUvxX# ] [ -B buffer_size ]
-               [ -c count ] [ --count ] [ -C file_size ]
-               [ -E spi@ipaddr algo:secret,...  ]
-               [ -F file ] [ -G rotate_seconds ] [ -i interface ]
-               [ --immediate-mode ] [ -j tstamp_type ] [ -m module ]
-               [ -M secret ] [ --number ] [ --print ] [ -Q in|out|inout ]
-               [ -r file ] [ -s snaplen ] [ -T type ] [ --version ]
-               [ -V file ] [ -w file ] [ -W filecount ] [ -y datalinktype ]
-               [ -z postrotate-command ] [ -Z user ]
-               [ --time-stamp-precision=tstamp_precision ]
-               [ --micro ] [ --nano ]
-               [ expression ]
+  tcpdump [ -AbdDefhHIJKlLnNOpqStuUvxX# ] [ -B buffer_size ]
+    [ -c count ] [ --count ] [ -C file_size ]
+    [ -E spi@ipaddr algo:secret,...  ]
+    [ -F file ] [ -G rotate_seconds ] [ -i interface ]
+    [ --immediate-mode ] [ -j tstamp_type ] [ -m module ]
+    [ -M secret ] [ --number ] [ --print ] [ -Q in|out|inout ]
+    [ -r file ] [ -s snaplen ] [ -T type ] [ --version ]
+    [ -V file ] [ -w file ] [ -W filecount ] [ -y datalinktype ]
+    [ -z postrotate-command ] [ -Z user ]
+    [ --time-stamp-precision=tstamp_precision ]
+    [ --micro ] [ --nano ]
+    [ expression ]
 
 tcpdump [选项] [过滤表达式]
 ```
 
 #### 2. 常用选项
 
-| 选项                | 全称              | 说明                                                         |
-| :------------------ | :---------------- | :----------------------------------------------------------- |
-| `-i any`            | --interface       | 监听**所有**可用的网络接口。                                 |
-| `-i eth0`           | --interface       | 监听指定的网络接口，如 `eth0`, `en0`（Mac）, `wlan0`等。     |
-| `-n`                |                   | **不**将地址（如 IP）转换为主机名。禁用 DNS 解析，能显著提高抓包速度并显示 IP 本身。 |
-| `-nn`               |                   | 在 `-n` 的基础上，**不**将端口号转换为服务名称（如不把 80 端口显示为`http`）。 |
-| `-c 10`             | --count           | 只捕获指定数量的数据包（如 10 个），然后自动停止。             |
-| `-A`                |                   | 以 ASCII 格式打印每个数据包的内容（不包括链路层头部）。适用于查看文本协议（如 HTTP）。 |
-| `-X`                |                   | 同时以**十六进制**和**ASCII**格式打印数据包的内容。非常适合查看协议细节和二进制数据。 |
-| `-v`, `-vv`, `-vvv` | --verbose         | 显示更详细（冗余）的信息。例如，`-vvv` 会显示最全面的信息。  |
+| 选项                | 全称              | 说明                                                                                             |
+| :------------------ | :---------------- | :----------------------------------------------------------------------------------------------- |
+| `-i any`            | --interface       | 监听**所有**可用的网络接口。                                                                     |
+| `-i eth0`           | --interface       | 监听指定的网络接口，如 `eth0`, `en0`（Mac）, `wlan0`等。                                         |
+| `-n`                |                   | **不**将地址（如 IP）转换为主机名。禁用 DNS 解析，能显著提高抓包速度并显示 IP 本身。             |
+| `-nn`               |                   | 在 `-n` 的基础上，**不**将端口号转换为服务名称（如不把 80 端口显示为`http`）。                   |
+| `-c 10`             | --count           | 只捕获指定数量的数据包（如 10 个），然后自动停止。                                               |
+| `-A`                |                   | 以 ASCII 格式打印每个数据包的内容（不包括链路层头部）。适用于查看文本协议（如 HTTP）。           |
+| `-X`                |                   | 同时以**十六进制**和**ASCII**格式打印数据包的内容。非常适合查看协议细节和二进制数据。            |
+| `-v`, `-vv`, `-vvv` | --verbose         | 显示更详细（冗余）的信息。例如，`-vvv` 会显示最全面的信息。                                      |
 | `-s 0`              | --snapshot-length | 设置抓取数据包的**快照长度**。`-s 0` 会抓取完整的数据包（最大 65535 字节），确保你不会丢失信息。 |
-| `-w file.pcap`      | --write           | **将原始数据包写入文件**，而不是在屏幕上显示。文件后缀通常是 `.pcap`。 |
-| `-r file.pcap`      | --read            | **从文件中读取**数据包，而不是从网络接口。用于分析之前保存的抓包文件。 |
-| `-q`                | --quiet           | 安静模式，打印更少的协议信息，输出更简洁。                   |
+| `-w file.pcap`      | --write           | **将原始数据包写入文件**，而不是在屏幕上显示。文件后缀通常是 `.pcap`。                           |
+| `-r file.pcap`      | --read            | **从文件中读取**数据包，而不是从网络接口。用于分析之前保存的抓包文件。                           |
+| `-q`                | --quiet           | 安静模式，打印更少的协议信息，输出更简洁。                                                       |
 
 #### 3. 过滤表达式
 
@@ -93,13 +93,13 @@ tcpdump [选项] [过滤表达式]
 
 **常见限定词：**
 
-| 类型     | 限定词                 | 例子                             | 说明                                     |
-| :------- | :--------------------- | :------------------------------- | :--------------------------------------- |
+| 类型     | 限定词                 | 例子                             | 说明                                      |
+| :------- | :--------------------- | :------------------------------- | :---------------------------------------- |
 | **主机** | `host`                 | `host 192.168.1.1`               | 过滤与特定主机（IP 或主机名）相关的流量。 |
-| **网络** | `net`                  | `net 192.168.1.0/24`             | 过滤整个网段的流量。                     |
-| **端口** | `port`                 | `port 80`                        | 过滤特定端口的流量。                     |
-| **协议** | `tcp`, `udp`, `icmp`等 | `tcp`                            | 过滤特定协议的流量。                     |
-| **方向** | `src`, `dst`           | `src 192.168.1.1`, `dst port 53` | 过滤源（src）或目标（dst）。             |
+| **网络** | `net`                  | `net 192.168.1.0/24`             | 过滤整个网段的流量。                      |
+| **端口** | `port`                 | `port 80`                        | 过滤特定端口的流量。                      |
+| **协议** | `tcp`, `udp`, `icmp`等 | `tcp`                            | 过滤特定协议的流量。                      |
+| **方向** | `src`, `dst`           | `src 192.168.1.1`, `dst port 53` | 过滤源（src）或目标（dst）。              |
 
 **逻辑运算符：**
 
@@ -227,17 +227,17 @@ Wireshark 配合使用，以达到最佳的分析效果。
 
 ## ipconfig
 
--  `ipconfig /all` 显示完整配置信息 
+-  `ipconfig /all` 显示完整配置信息
 
 
 ## nc
 
-`nc` 是 netcat 的缩写，从命令行跨网络读取和写入数据。 
+`nc` 是 netcat 的缩写，从命令行跨网络读取和写入数据。
 - 用途
   - 侦听任意端口，以 TCP/UDP 方式
   - 端口扫描
   - 传输文件
-  - 测速  
+  - 测速
 
 
 ## ab
@@ -253,7 +253,7 @@ ab 命令全称为：Apache bench，是 Apache 自带的压力测试工具，也
 示例
 ```shell
 # 每次发送1000并发的请求数，请求数总数为5000。
-ab -n 1000 -c 5000 http://127.0.0.1/ 
+ab -n 1000 -c 5000 http://127.0.0.1/
 ```
 
 测试前需要安装 `sudo apt install apache2-utils`

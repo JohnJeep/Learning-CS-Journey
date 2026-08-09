@@ -141,7 +141,7 @@ colcon build
 ```dockerfile
 COPY src/ /ros2_ws/src/
 RUN rosdep update && \
-    rosdep install --from-paths /ros2_ws/src --ignore-src -r -y
+  rosdep install --from-paths /ros2_ws/src --ignore-src -r -y
 ```
 
 **注意顺序**：一定要先 `COPY` 源码（保证 `package.xml` 都在），再跑 `rosdep install`，最后再 `colcon build`。

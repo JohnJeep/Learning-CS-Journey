@@ -98,7 +98,7 @@ Start:             Nov 1 2024 10:30:15.123
 End:               Nov 1 2024 10:30:60.345
 Messages:          1350
 Topic information: Topic: /camera/image_raw | Type: sensor_msgs/msg/Image | Count: 900 | Serialization Format: cdr
-                   Topic: /scan | Type: sensor_msgs/msg/LaserScan | Count: 450 | Serialization Format: cdr
+  Topic: /scan | Type: sensor_msgs/msg/LaserScan | Count: 450 | Serialization Format: cdr
 ```
 
 #### 5.3. 回放数据

@@ -64,30 +64,30 @@ mysqldump --set-gtid-purged=OFF -u username -p source_db > source_db.sql
 
 # 查看所有数据库的排序规则 
 SELECT 
-    SCHEMA_NAME, 
-    DEFAULT_CHARACTER_SET_NAME, 
-    DEFAULT_COLLATION_NAME
+  SCHEMA_NAME, 
+  DEFAULT_CHARACTER_SET_NAME, 
+  DEFAULT_COLLATION_NAME
 FROM 
-    information_schema.SCHEMATA;
-    
+  information_schema.SCHEMATA;
+  
 # 查看当前数据库的排序规则
 SELECT 
-    SCHEMA_NAME, 
-    DEFAULT_CHARACTER_SET_NAME, 
-    DEFAULT_COLLATION_NAME
+  SCHEMA_NAME, 
+  DEFAULT_CHARACTER_SET_NAME, 
+  DEFAULT_COLLATION_NAME
 FROM 
-    information_schema.SCHEMATA
+  information_schema.SCHEMATA
 WHERE 
-    SCHEMA_NAME = 'your_database_name';
+  SCHEMA_NAME = 'your_database_name';
 
 # 查看某个库中所有表的排序规则
 SELECT 
-    TABLE_NAME,
-    TABLE_COLLATION
+  TABLE_NAME,
+  TABLE_COLLATION
 FROM 
-    information_schema.TABLES
+  information_schema.TABLES
 WHERE 
-    TABLE_SCHEMA = 'database_name';
+  TABLE_SCHEMA = 'database_name';
 
 
 # 查看某个表的排序规则

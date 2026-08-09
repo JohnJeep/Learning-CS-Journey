@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:25:13
+ * @LastEditTime: 2026-08-09 13:54:29
  * @Description:  linux open-files
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 为什么要修改可打开的文件描述符的数量
@@ -54,7 +54,7 @@ file locks                      (-x) unlimited
 
 在 root 用户修改为 65536 后，用其他用户登录服务器检测`ulimit -n` 还是 1024。那么就是该用户未生效。
 
-修改 `/etc/ssh/sshd_config` 中配置，将 UsePAM 项值设置为 yes，表示使用 PAM 模块来加载。 
+修改 `/etc/ssh/sshd_config` 中配置，将 UsePAM 项值设置为 yes，表示使用 PAM 模块来加载。
 
 ```
 # UsePAM no
@@ -76,9 +76,9 @@ service sshd restart
 ```sh
 直接在 shell 中修改参数值，比如
 1. 修改 core 文件大小
-	[root@KF-CFT-AP2 ~]# ulimit -c unlimited
+  [root@KF-CFT-AP2 ~]# ulimit -c unlimited
 2. 修改文件打开的个数 open files
-	[root@KF-CFT-AP2 ~]# ulimit -n 2000
+  [root@KF-CFT-AP2 ~]# ulimit -n 2000
 
 其它的参数同理修改
 ```
@@ -160,15 +160,15 @@ limit 的值，但是不能提高它，只有 root 用户才能提高 hard limit
 [kf@ZHCS-AP1 ~]$ cat /proc/sys/kernel/threads-max
 128108
 
-# 计算公式为: 
+# 计算公式为:
 default_nproc = max_threads / 2;
 # 其中, max_threads = mempages / (8 * THREAD_SIZE / PAGE_SIZE);
-# mempages是机器的物理页面个数, THREAD_SIZE=8K, 所以, 计算公式为: 
-default_nproc = max_threads / 2 
-              = (mempages * PAGE_SIZE) / ( 2 * 8 *THREAD_SIZE ) 
+# mempages是机器的物理页面个数, THREAD_SIZE=8K, 所以, 计算公式为:
+default_nproc = max_threads / 2
+              = (mempages * PAGE_SIZE) / ( 2 * 8 *THREAD_SIZE )
               = total_memory / 128K;
-              
-# 计算本机默认nproc配置: 
+
+# 计算本机默认nproc配置:
 cat /proc/meminfo | grep MemTotal
 MemTotal:       115571480 kB
 
@@ -177,18 +177,18 @@ echo "115571480 / 128" | bc
 
 ulimit -u
 902682
-# 算出来default_nproc = 902902, 和实际的902682很接近, 
+# 算出来default_nproc = 902902, 和实际的902682很接近,
 # 因为物理页面会存储一些关键数据, 所以实际的比计算出来的要小一些.
 ```
 
 ------------------
 
-用户登录的时候执行 sh 脚本的顺序： 
-    /etc/profile.d/file 
-    /etc/profile 
-    /etc/bashrc 
-    /mingjie/.bashrc 
-    /mingjie/.bash_profile 
+用户登录的时候执行 sh 脚本的顺序：
+    /etc/profile.d/file
+    /etc/profile
+    /etc/bashrc
+    /mingjie/.bashrc
+    /mingjie/.bash_profile
 
     由于 ulimit -n 的脚本命令加载在第二部分，用户登录时由于权限原因在第二步还不能完成 ulimit 的修改，所以 ulimit
     的值还是系统默认的 1024。
@@ -196,7 +196,7 @@ ulimit -u
 
 
 
-参考：
+# References
 
 - [/etc/security/limits.conf 详解与配置](https://www.cnblogs.com/operationhome/p/11966041.html)
 - [Linux-PAM 官方文档](http://www.linux-pam.org/)

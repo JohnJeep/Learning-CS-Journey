@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 20:13:06
  * @Description: Makefile usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. 什么是 Makefile
@@ -13,7 +13,7 @@
 
 ## 2. 什么是 Make 和 configure
 
-make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？ 
+make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
 
 通常软件开发商都会写一个检测程序来侦测使用户的操作环境， 以及操作环境是否有软件开发商所需要的其他功能，
 该检测程序检测完毕后， 就会主动的建立这个 Makefile 的规则文件， 通常这个检测程序的文件名为 configure 或者是 config 。
@@ -45,13 +45,13 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
 - 依赖
 - 命令
 
-<div align="center"> 
+<div align="center">
   <img width="80%" height="80%" src="../figures/makefile_three_elements.png" />
 </div>
 <div align="center">
   <img width="80%" height="80%" src="../figures/makefile-working-principle-1.png" />
 </div>
-<div align="center"> 
+<div align="center">
   <img width="80%" height="80%" src="../figures/makefile-working-principle-2.png" />
 </div>
 
@@ -72,7 +72,7 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
     - `$<` 规则中的第一个依赖
     - `$@` 规则中的目标
     - `$^` 规则中的所有依赖
-  - 系统维护的变量(一般为大写字符) 
+  - 系统维护的变量(一般为大写字符)
     - `CPPFLAGS` 预处理所需要的的选项。如：`-I`
     - `CFLAGS  ` 编译时使用的参数。`-Wall, -g, -c`
     - `LDFLAGS ` 链接库使用的选项。`-L -l(小写)`
@@ -81,9 +81,9 @@ make 是一个程序，会去找 Makefile ，那 Makefile 怎么写？
   ```makefile
   # 显示的告诉 make clean 是一个伪目标
   .PHONY: clean
-  
+
   clean
-  	rm *.o -rf
+    rm *.o -rf
   ```
   `-` 表示当前指令执行不成功则忽略当前指令。
 - 模式规则
@@ -127,22 +127,22 @@ CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
 # The final build step.
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
-	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+  $(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c
-	mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+  mkdir -p $(dir $@)
+  $(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 # Build step for C++ source
 $(BUILD_DIR)/%.cpp.o: %.cpp
-	mkdir -p $(dir $@)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+  mkdir -p $(dir $@)
+  $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 
 .PHONY: clean
 clean:
-	rm -r $(BUILD_DIR)
+  rm -r $(BUILD_DIR)
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
 # Makefiles. Initially, all the .d files will be missing, and we don't want those

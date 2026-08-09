@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-05 22:07:57
- * @LastEditTime: 2026-05-31 20:17:21
+ * @LastEditTime: 2026-08-09 13:58:36
  * @LastEditors: JohnJeep
  * @Description: Valgrind 工具使用
  * Copyright (c) 2023 by John Jeep, All Rights Reserved.
@@ -26,20 +26,20 @@ Valgrind 是 Linux 下进行内存泄露检测和性能分析的工具。
   8. BBV：是一个实验性的 SimPoint 基本的 vector 产生器(generator)。可以做电脑架构的研究和开发。
   9. Lackey：是一个很小的 example tool，阐述了一些基本的指令。
   10. Nulgrind：是 Valgrind 中最小的工具，不能分析(analysis)或 仪器测量(instrumentation)，只能用于测试。
-  
+
   > Valgrind 中使用不同的工具，则是通过命令：`valgrand --tool=name` 来指定调用， `name` 为工具的名称，当不指定 tool
   > 参数时默认是 `--tool=memcheck`。
-  
+
 
 ## 2.1. Valgrind 工具详解
 * Memcheck
-  
+
   Memcheck 是最常用的工具，用来检测程序中出现的内存问题，所有对内存的读写都会被检测到，一切对
   malloc、free、new、delete 的调用都会被捕获，但是它也不能检测静态分配或 stack 上 超出数组
   read/write 的范围(`Memcheck cannot detect every memory error your program has. For example, it can't detect
   out-of-range reads or writes to arrays that are allocated statically or on the stack. But it should detect many
   errors that could crash your program (eg. cause a segmentation fault)`)。所以，它能检测以下问题：
-  
+
   1. Use of uninitialised memory：使用未初始化的内存。
   2. Reading/writing memory after it has been free ：读/写释放后的内存块 。
   3. Reading/writing off the end of malloc blocks：读/写超出 malloc 分配的内存块。
@@ -47,35 +47,35 @@ Valgrind 是 Linux 下进行内存泄露检测和性能分析的工具。
   5. Memory leaks – where pointers to malloc blocks are lost forever：内存泄漏，指向一块内存的指针永远丢失。
   6. Mismatched use of malloc/new/new [] vs free/delete/delete [] ：不正确的 malloc/free 或 new/delete 匹配。
   7. Overlapping src and dst pointers in memcpy() and related functions)： memcpy() 相关函数中的 dst 和 src 指针重叠。
-  
+
   > The stack trace tells you where the leaked memory was allocated. Memcheck cannot tell you why the memory leaked,
-  > unfortunately. 
-  
+  > unfortunately.
+
   - 这些问题往往是 C/C++ 程序员最头疼的问题，Memcheck 能在这里帮上大忙。例如：
-    
+
     ```c
-    #include <stdlib.h>  
-    #include <malloc.h>  
-    #include <string.h>  
-    
-    void test()  
-    {  
-        int *ptr = malloc(sizeof(int)*10);  
-        ptr[10] = 7; // 内存越界  
-        memcpy(ptr +1, ptr, 5); // 踩内存  
-    
-        free(ptr);   
-        free(ptr);// 重复释放  
-    
-        int *p1;  
-        *p1 = 1; // 非法指针  
-    }  
-    
-    int main(void)  
-    {  
-        test();  
-        return 0;  
-    }  
+    #include <stdlib.h>
+    #include <malloc.h>
+    #include <string.h>
+
+    void test()
+    {
+        int *ptr = malloc(sizeof(int)*10);
+        ptr[10] = 7; // 内存越界
+        memcpy(ptr +1, ptr, 5); // 踩内存
+
+        free(ptr);
+        free(ptr);// 重复释放
+
+        int *p1;
+        *p1 = 1; // 非法指针
+    }
+
+    int main(void)
+    {
+        test();
+        return 0;
+    }
     ```
 
 valgrind 的检测信息将内存泄漏分为如下几类：
@@ -88,6 +88,7 @@ valgrind 的检测信息将内存泄漏分为如下几类：
 
 
 # 3. Options
+
 ```sh
 - --track-origins=yes 生成更多的信息，找到条件跳转或move 指令 问题的原始出处
 - --num-callers  让stack trace 范围更大

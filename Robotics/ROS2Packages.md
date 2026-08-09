@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2026-03-09 18:54:36
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:47:25
+ * @LastEditTime: 2026-08-09 13:38:15
  * @Description: ROS2 packages Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -95,9 +95,9 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 
 1. 基本 spin (最常用)
 
-   ```cpp
-   rclcpp::spin(node);
-   ```
+  ```cpp
+  rclcpp::spin(node);
+  ```
 
 2. 单线程多个 node
 
@@ -170,7 +170,7 @@ rclcpp::spin(node);  // 这个调用会阻塞，直到：
 
    ```cpp
    // 只运行10秒然后退出
-   rclcpp::spin_until_future_complete(node, 
+   rclcpp::spin_until_future_complete(node,
        std::chrono::seconds(10));
    ```
 

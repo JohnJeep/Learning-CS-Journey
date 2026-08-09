@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:25:33
+ * @LastEditTime: 2026-08-09 13:53:58
  * @Description: ssh learning
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # SSH 配置
@@ -38,7 +38,7 @@ Tips：
 # default value.
 
 ################# SSH Server 的整体设定 ######################
-#Port 22                    # 设置 sshd 监听的端口，出于安全考虑，端口指定为小于等于 65535，并且非 22     
+#Port 22                    # 设置 sshd 监听的端口，出于安全考虑，端口指定为小于等于 65535，并且非 22
 #AddressFamily any
 #ListenAddress 0.0.0.0      # 设设置 sshd 监听（绑定）的IP地址，0.0.0.0 表示监听所有IPv4的地址，出于安全考虑，设置为指定IP地址，而非所有地址
 #ListenAddress ::           # IPV6 的地址
@@ -64,7 +64,7 @@ Protocol 2                          # 设置协议版本为SSH1或SSH2，SSH1 �
 
 # Logging
 # obsoletes QuietMode and FascistLogging
-#SyslogFacility AUTH 
+#SyslogFacility AUTH
 SyslogFacility AUTHPRIV              # 当有人使用 ssh 登录系统时，ssh 会记录信息，记录类型为AUTHPRIV，sshd 服务日志存放在/var/log/secure
 #LogLevel INFO                       # sshd 日志信息的级别
 
@@ -73,7 +73,7 @@ SyslogFacility AUTHPRIV              # 当有人使用 ssh 登录系统时，ssh
 
 #LoginGraceJohne 2m        # 设置指定时间内没有成功登录，将会断开连接，默认单位为 秒
 #PermitRootLogin yes      # 是否允许他人远程 ssh 登录 root 用户，默认是允许的
-#StrictModes yes          # 设置ssh在接收登录请求之前是否检查用户根目录和rhosts文件的权限和所有权，                           
+#StrictModes yes          # 设置ssh在接收登录请求之前是否检查用户根目录和rhosts文件的权限和所有权，
                           # 建议使用默认值"yes"来预防可能出现的低级错误。
 #MaxAuthTries 6
 #MaxSessions 10
@@ -88,21 +88,21 @@ PubkeyAuthentication yes
 ############################# 安全验证 #######################
 # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
 #RhostsRSAAuthentication no   # 是否使用强可信主机认证(通过检查远程主机名和关联的用户名进行认证)。
-                              # 仅用于SSH-1。这是通过在RSA认证成功后再检查 ~/.rhosts 或                                       
+                              # 仅用于SSH-1。这是通过在RSA认证成功后再检查 ~/.rhosts 或
                               # /etc/hosts.equiv 进行认证的。出于安全考虑，建议使用默认值"no"
-                              
+
 # similar for protocol version 2
 #HostbasedAuthentication no   # 与 RhostsRSAAuthentication 类似，但是仅可以用于SSH-2
 # Change to yes if you don't trust ~/.ssh/known_hosts for
 # RhostsRSAAuthentication and HostbasedAuthentication
-#IgnoreUserKnownHosts no      # 设置ssh在进行RhostsRSAAuthentication安全验证时是否忽略用户                                  
+#IgnoreUserKnownHosts no      # 设置ssh在进行RhostsRSAAuthentication安全验证时是否忽略用户
                               # 的“/$HOME/.ssh/known_hosts”文件
 # Don't read the user's ~/.rhosts and ~/.shosts files
 #IgnoreRhosts yes             # 验证的时候是否使用“~/.rhosts”和“~/.shosts”文件
 
 # To disable tunneled clear text passwords, change to no here!
 #PasswordAuthentication yes   # 是否开启密码验证机制，如果用密码登录系统，则设置yes
-PasswordAuthentication yes  
+PasswordAuthentication yes
 #PermitEmptyPasswords no      # 是否允许空密码登录系统，设置为 no，不允许
 
 # Change to no to disable s/key passwords
@@ -125,8 +125,8 @@ GSSAPICleanupCredentials yes
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
-# Set this to 'yes' to enable PAM authentication, account processing, 
-# and session processing. If this is enabled, PAM authentication will 
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
 # be allowed through the ChallengeResponseAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via ChallengeResponseAuthentication may bypass
@@ -144,21 +144,21 @@ AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
 AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
 AcceptEnv XMODIFIERS
 
-#AllowAgentForwarding yes    
+#AllowAgentForwarding yes
 #AllowTcpForwarding yes    # 是否允许允许tcp端口转发，默认为 yes，保护其他的tcp连接
 #GatewayPorts no           # 是否允许远程客户端使用本地主机的端口转发功能，出于安全考虑，建议禁止
 
 ################### X-Window下的使用 ###############################
 #X11Forwarding no           # 是否允许X11转发
 #X11DisplayOffset 10        # 指定X11 转发的第一个可用的显示区(display)数字。默认值是 10
-                            #  防止 sshd 占用了真实的 X11 服务器显示区，从而发生混淆。
+  #  防止 sshd 占用了真实的 X11 服务器显示区，从而发生混淆。
 #X11UseLocalhost yes
 
 ################# 登入后的设置 ####################################
 #PrintMotd yes         # 打印登录提示信息，提示信息存储在 /etc/moed 文件中
 #PrintLastLog yes      # 是否显示上次登录信息，默认为 yes
 #TCPKeepAlive yes      # 是否持续连接，设置yes可以防止死连接
-                       # 这种消息可以检测到死连接、连接不当关闭、客户端崩溃等异常。在这个情况下，任何                       
+                       # 这种消息可以检测到死连接、连接不当关闭、客户端崩溃等异常。在这个情况下，任何
                        # 一端死掉后， SSH 可以立刻知道，而不会有僵尸程序的发生！
 #UseLogin no           # 是否在交互式会话的登录过程中使用，默认值是"no"。
 #UsePrivilegeSeparation yes  # 设置使用者的权限
@@ -174,7 +174,7 @@ AcceptEnv XMODIFIERS
 #ShowPatchLevel no
 #UseDNS yes                   # 是否禁止DNS反向解析，默认是 yes，一般会注释
 #PidFile /var/run/sshd.pid    # 存放 sshd 守护进程的进程号文件，默认是：/var/run/sshd.pid
-#MaxStartups 10               # 设置同时允许几个尚未登入的联机，当用户连上ssh但并未输入密码即为所谓                               
+#MaxStartups 10               # 设置同时允许几个尚未登入的联机，当用户连上ssh但并未输入密码即为所谓
                               # 的联机，这个联机中，为了保护主机，所以需要设置最大值，预设为10个，
                               # 而已经建立联机的不计算入内。
 #PermitTunnel no
@@ -244,7 +244,7 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本 SSH，而 CentOS6 默认安装�
    -rw------- 1 tim tim 1671 5月  14 12:36 id_rsa
    -rw-r--r-- 1 tim tim  396 5月  14 12:36 id_rsa.pub
    [tim@KF ~]$
-   
+
    ```
 
 2. 将本地主机公钥 `id_rsa.pub` 中的内容拷贝到远程目标机器的 `.ssh/authorized_keys` 文件中，若远程机器 `.ssh`
@@ -288,7 +288,6 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本 SSH，而 CentOS6 默认安装�
 
 - `～/.ssh` 目录权限必须是 700
 - 非 root 用户的 home 目录权限必须是 700，比如 `/home/John` 目录权限必须是 700
-
 - `～/.ssh/authorized_keys `文件的权限必须是 600
 
 只有上面各个文件的权限设置对以后，ssh 远程免密钥登录普通用户才能成功，否则是登录时还是要输入密码，没有设置对。
@@ -302,4 +301,3 @@ CentOS7 默认安装的是 OpenSSH_7.4p1 版本 SSH，而 CentOS6 默认安装�
 - [SSH 远程登录配置文件 sshd_config 详解](https://blog.csdn.net/field_yang/article/details/51568861)
 - [CentOS6.9 下升级默认的 OpenSSH 操作记录（升级到 OpenSSH_7.6p1）](https://cloud.tencent.com/developer/article/1193007)
 - SSH 教程: https://wangdoc.com/ssh/key
-

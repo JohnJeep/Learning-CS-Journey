@@ -251,30 +251,30 @@ int dup2(int oldfd, int newfd); // 将 newfd 对应的文件表指针修改为 o
 #include <errno.h>
 
 int main() {
-    int fd1, fd2;
+  int fd1, fd2;
 
-    // 打开一个文件，获取文件描述符 fd1
-    fd1 = open("file.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    if (fd1 < 0) {
-        perror("open");
-        return 1;
-    }
+  // 打开一个文件，获取文件描述符 fd1
+  fd1 = open("file.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  if (fd1 < 0) {
+    perror("open");
+    return 1;
+  }
 
-    // 复制文件描述符 fd1 到文件描述符 fd2
-    fd2 = dup2(fd1, 42);
-    if (fd2 < 0) {
-        perror("dup2");
-        return 1;
-    }
+  // 复制文件描述符 fd1 到文件描述符 fd2
+  fd2 = dup2(fd1, 42);
+  if (fd2 < 0) {
+    perror("dup2");
+    return 1;
+  }
 
-    // 使用 fd2 进行文件操作
-    write(fd2, "Hello, dup2!", 13);
+  // 使用 fd2 进行文件操作
+  write(fd2, "Hello, dup2!", 13);
 
-    // 关闭文件描述符
-    close(fd1);
-    close(fd2);
+  // 关闭文件描述符
+  close(fd1);
+  close(fd2);
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -409,19 +409,19 @@ PID 相关的函数
 
 if (WIFEXITED(wstatus))         // 进程正常结束
 {
-    printf("exited, status=%d\n", WEXITSTATUS(wstatus));
+  printf("exited, status=%d\n", WEXITSTATUS(wstatus));
 }
 else if (WIFSIGNALED(wstatus))  // 进程异常终止
 {
-    printf("killed by signal %d\n", WTERMSIG(wstatus));
+  printf("killed by signal %d\n", WTERMSIG(wstatus));
 }
 else if (WIFSTOPPED(wstatus))   // 进程处于暂停状态
 {
-    printf("stopped by signal %d\n", WSTOPSIG(wstatus));
+  printf("stopped by signal %d\n", WSTOPSIG(wstatus));
 }
 else if (WIFCONTINUED(wstatus))
 {
-    printf("continued\n");
+  printf("continued\n");
 }
 ```
 
@@ -471,24 +471,24 @@ else if (WIFCONTINUED(wstatus))
 #include <stdlib.h>
 
 int main() {
-    pid_t pid = fork();
+  pid_t pid = fork();
 
-    if (pid == 0) {
-        // 子进程
-        exit(42);  // 正常退出，退出码为 42
-    } else if (pid > 0) {
-        // 父进程
-        int status;
-        waitpid(pid, &status, 0);
+  if (pid == 0) {
+    // 子进程
+    exit(42);  // 正常退出，退出码为 42
+  } else if (pid > 0) {
+    // 父进程
+    int status;
+    waitpid(pid, &status, 0);
 
-        if (WIFEXITED(status)) {
-            printf("子进程正常退出，退出码：%d\n", WEXITSTATUS(status));
-        } else if (WIFSIGNALED(status)) {
-            printf("子进程被信号 %d 终止\n", WTERMSIG(status));
-        }
+    if (WIFEXITED(status)) {
+      printf("子进程正常退出，退出码：%d\n", WEXITSTATUS(status));
+    } else if (WIFSIGNALED(status)) {
+      printf("子进程被信号 %d 终止\n", WTERMSIG(status));
     }
+  }
 
-    return 0;
+  return 0;
 }
 ```
 

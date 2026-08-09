@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-13 10:25:24
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:09:21
+ * @LastEditTime: 2026-08-09 13:47:35
  * @Description: Interlude-Memory-API
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 ## 动态分配内存常见误区
@@ -25,7 +25,6 @@
    ```
 
 - 忘记初始化分配的内存。忘记在新申请的数据类型中填充一些值，导致程序最终会遇到未初始化的读取，从堆中读取一些未知的数据
-  。        
 - 忘记释放内存，即内存泄露（memory leak）。如果仍然拥有对某块内存的引用，那么垃圾收集器就不会释放它。
 - 在用完之前释放内存，这种错误称为悬挂指针（dangling pointer）。可能会导致程序崩溃或者覆盖有效的内存。
 - 反复释放内存（Freeing Memory Repeatedly），也被称为重复释放（double free）。导致结果未定义。

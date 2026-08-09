@@ -4,9 +4,9 @@
 
 ```
 TypeScript      →    让你写代码时更安全（可选）
-    ↓
+  ↓
 React           →    决定界面怎么构建（核心）
-    ↓
+  ↓
 Vite            →    把代码变成浏览器能跑的东西（工具）
 ```
 
@@ -60,6 +60,6 @@ src/
 ├── api/
 │   └── user.ts          ← 请求函数，没有 JSX
 └── types/
-    └── index.ts         ← 类型定义，没有 JSX
+  └── index.ts         ← 类型定义，没有 JSX
 ```
 
