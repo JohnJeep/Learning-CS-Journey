@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-01-12 18:25:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 21:53:16
+ * @LastEditTime: 2026-08-09 14:08:58
  * @Description: 泛型编程
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. Generic Programming(泛型编程)
@@ -17,7 +17,7 @@ Generic Programming(泛型编程): 操作(operations)使用相同的接口，但
 模板是泛型编程的基础。C++语言既有类模板（class template），也有函数模板（function template），
 只有对 C++语言有了相当深入的理解后才能写出模板。
 **模板本身不是类或函数，可以将模板看作是：编译器为生成类或函数编写的一份说明，或认为一个模板就是为创建类或函数的公式。
-** 
+**
 编译器根据模板创建类或函数的过程称为实例化（Instantiation），当使用模板时，编译器需要明确应该吧类或函数实例化成何种类
 型。
 
@@ -49,7 +49,7 @@ Generic Programming(泛型编程): 操作(operations)使用相同的接口，但
 实例一：
 
 ```cpp
-template <typename T> 
+template <typename T>
   void Show(T arrNum[], int len);
 ```
 
@@ -87,7 +87,7 @@ func(x, y);           // 调用时自动类型推导，不需要写出具体的�
   - 编译器会对 `函数模板进行两次编译`。`第一次在声明` 的地方对模板进行编译，`第二次在实际调用`
     的地方将参数替换后，再对代码进行编译。
 
-- 函数模板当函数参数与函数指针当函数参数的情况类似。 
+- 函数模板当函数参数与函数指针当函数参数的情况类似。
 
 ## 5. Class Template(类模板)
 
@@ -98,7 +98,7 @@ func(x, y);           // 调用时自动类型推导，不需要写出具体的�
 
 为什么要使用类模板？
 
-- 让 `算法` 和 `数据类型` 进行各自的分离。 
+- 让 `算法` 和 `数据类型` 进行各自的分离。
 
 代码示例：
 
@@ -133,16 +133,16 @@ private:
 
 - 单个类中的类模板
 
-  - 模板类型参数化  
+  - 模板类型参数化
 
 - 继承中的类模板
 
-  - 从模板类派生普通的类时，需要具体化模板类（即指定类的参数类型），C++编译器需要知道父类的数据类型具体是怎样的。 
+  - 从模板类派生普通的类时，需要具体化模板类（即指定类的参数类型），C++编译器需要知道父类的数据类型具体是怎样的。
   - 类模板可以派生 `类模板`
 
 - 注意
 
-  - 一个类模板的每个实例都形成一个独立的类。 
+  - 一个类模板的每个实例都形成一个独立的类。
 
 ### 5.1. Specialization(模板特化)
 
@@ -212,4 +212,4 @@ template <typename T>
 
 ## 8. References
 
-- [【C++】template template argument 模板参数模板](https://www.cnblogs.com/visayafan/archive/2011/11/29/2268041.html) 
+- [【C++】template template argument 模板参数模板](https://www.cnblogs.com/visayafan/archive/2011/11/29/2268041.html)

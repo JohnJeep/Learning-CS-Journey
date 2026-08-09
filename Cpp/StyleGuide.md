@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2019-01-04 10:57:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-07 17:14:33
+ * @LastEditTime: 2026-08-09 14:07:23
  * @Description: cpp style guide
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 C++ 编码规范约定
@@ -22,11 +22,11 @@ C++ 编码规范约定
 
 - 匈牙利法
   - 开头字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，要求单词第一个字母大写。
-  - `int iMyAge;` “i”是 int 类型的缩写； 
+  - `int iMyAge;` “i”是 int 类型的缩写；
   - `char cMyName[10];` “c”是 char 类型的缩写；
 - 驼峰式法
   - 第一个单词首字母小写，后面其他单词首字母大写。
-  - `int myAge;` 
+  - `int myAge;`
   - `char myName[10]; `
 - 帕斯卡法
   - 每个单词的第一个字母都大写
@@ -88,7 +88,7 @@ C++ 编码规范约定
   - 例子：枚举名字为 `ProcessStatusEnum` 的成员名称： `SUCCESS / UNKNOWN_REASON`
 - 嵌入式单片机中，包含有外围设备的变量每个字母大写，后面加`_`，下划线后面每个单词的首字母大写，结构体结尾添加
   `_TypeDef`，
-  枚举结尾添加 `_Type`。 例如：` CAN_TxMailBox_TypeDef`  ` IRQn_Type`  
+  枚举结尾添加 `_Type`。 例如：` CAN_TxMailBox_TypeDef`  ` IRQn_Type`
 
 
 # 7. 方法名（函数名）
@@ -102,7 +102,7 @@ C++ 编码规范约定
   ibrationStatus()`
 
 
-# 8. 类名（class） 
+# 8. 类名（class）
 
 - 类型命名每个单词以大写字母开头，不包含下划线 `MyExcitingClass、 MyExcitingEnum`
 - 如果模块、 接口、类、方法使用了设计模式，在命名时需体现出具体模式。
@@ -112,7 +112,7 @@ C++ 编码规范约定
 # 9. 抽象类、异常、测试名
 
 - 抽象类命名使用 `Abstract` 或 `Base` 开头；
-- 异常类命名使用 `Exception` 结尾； 
+- 异常类命名使用 `Exception` 结尾；
 - 测试类命名以它要测试的类的名称开始，以 `Test` 结尾。
 
 
@@ -120,7 +120,7 @@ C++ 编码规范约定
 
 - 统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。
 - 包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式。
-- 应用工具类包名为 `com.alibaba.ei.kunlun.aap.util`、类名为 `MessageUtils`（此规则参考 spring 的框架结构）  
+- 应用工具类包名为 `com.alibaba.ei.kunlun.aap.util`、类名为 `MessageUtils`（此规则参考 spring 的框架结构）
 
 
 # 11. Include 与 Define
@@ -146,7 +146,7 @@ C++ 编码规范约定
     的顺序，按照稳定性从高到低排列。
 
 
-# 12. OOP 规约(Object Oriented Programming) 
+# 12. OOP 规约(Object Oriented Programming)
 
 - 任何货币金额，均以最小货币单位且 **整型类型** 来进行存储
 - 浮点数之间的等值判断，基本数据类型不能用 `==`来比较，计算机在内部进行差值计算的时候，因为精度的问题，导致判断的两个

@@ -1,7 +1,7 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-28 21:24:43
- * @LastEditTime: 2026-03-21 13:29:24
+ * @LastEditTime: 2026-08-09 14:08:46
  * @LastEditors: JohnJeep
  * @Description: enable_shared_from_this usage
 -->
@@ -10,7 +10,7 @@
 
 `enable_shared_from_this` 是一个模板类，从 C++11 开始支持，定义在头文件 `<memory>`。
 
-其原型为： 
+其原型为：
 ```cpp
 template< class T > class enable_shared_from_this;
 ```
@@ -39,16 +39,16 @@ std::shared_ptr<T> 类对象管理时，调用 T::shared_from_this 成员函数�
 ```cpp
 class Widget {
 public:
-    void process() {
-        // 错误！这会创建新的控制块，导致重复计数
-        auto self_ptr = std::shared_ptr<Widget>(this);
-        // 使用 self_ptr...
-    }
+  void process() {
+    // 错误！这会创建新的控制块，导致重复计数
+    auto self_ptr = std::shared_ptr<Widget>(this);
+    // 使用 self_ptr...
+  }
 };
 
 int main() {
-    auto widget = std::make_shared<Widget>();
-    widget->process();  // 会导致未定义行为
+  auto widget = std::make_shared<Widget>();
+  widget->process();  // 会导致未定义行为
 }
 ```
 
@@ -60,25 +60,25 @@ int main() {
 ```cpp
 class Widget : public std::enable_shared_from_this<Widget> {
 public:
-    void process() {
-        // 正确！共享现有的控制块
-        auto self_ptr = shared_from_this();
-        // 安全地使用 self_ptr...
-        
-        // 也可以获取 weak_ptr
-        auto weak_self = weak_from_this();
-    }
-    
-    std::shared_ptr<Widget> get_shared() {
-        return shared_from_this();
-    }
+  void process() {
+    // 正确！共享现有的控制块
+    auto self_ptr = shared_from_this();
+    // 安全地使用 self_ptr...
+
+    // 也可以获取 weak_ptr
+    auto weak_self = weak_from_this();
+  }
+
+  std::shared_ptr<Widget> get_shared() {
+    return shared_from_this();
+  }
 };
 
 int main() {
-    auto widget = std::make_shared<Widget>();
-    widget->process();  // 安全，共享同一个控制块
-    
-    auto another_ptr = widget->get_shared();  // 也安全
+  auto widget = std::make_shared<Widget>();
+  widget->process();  // 安全，共享同一个控制块
+
+  auto another_ptr = widget->get_shared();  // 也安全
 }
 ```
 
@@ -104,19 +104,19 @@ shared_ptr`的控制块是分离的，会导致同一个对象被多个控制块
 ```cpp
 class Connection : public std::enable_shared_from_this<Connection> {
 public:
-    void start_async_operation() {
-        auto self = shared_from_this();
-        
-        // 在回调中捕获 shared_ptr，确保对象存活
-        async_operation([self]() {
-            self->handle_completion();
-        });
-    }
-    
+  void start_async_operation() {
+    auto self = shared_from_this();
+
+    // 在回调中捕获 shared_ptr，确保对象存活
+    async_operation([self]() {
+      self->handle_completion();
+    });
+  }
+
 private:
-    void handle_completion() {
-        // 处理完成
-    }
+  void handle_completion() {
+    // 处理完成
+  }
 };
 ```
 
@@ -125,16 +125,16 @@ private:
 
 ```cpp
 class Node : public std::enable_shared_from_this<Node> {
-    std::vector<std::shared_ptr<Node>> children;
-    
+  std::vector<std::shared_ptr<Node>> children;
+
 public:
-    void add_child() {
-        auto child = std::make_shared<Node>();
-        children.push_back(child);
-        
-        // 父节点也需要在子节点中存储
-        child->parent = shared_from_this();  // 假设 parent 是 weak_ptr<Node>
-    }
+  void add_child() {
+    auto child = std::make_shared<Node>();
+    children.push_back(child);
+
+    // 父节点也需要在子节点中存储
+    child->parent = shared_from_this();  // 假设 parent 是 weak_ptr<Node>
+  }
 };
 ```
 
@@ -144,15 +144,15 @@ public:
 ```cpp
 class Builder : public std::enable_shared_from_this<Builder> {
 public:
-    std::shared_ptr<Builder> set_name(const std::string& name) {
-        this->name = name;
-        return shared_from_this();
-    }
-    
-    std::shared_ptr<Builder> set_value(int value) {
-        this->value = value;
-        return shared_from_this();
-    }
+  std::shared_ptr<Builder> set_name(const std::string& name) {
+    this->name = name;
+    return shared_from_this();
+  }
+
+  std::shared_ptr<Builder> set_value(int value) {
+    this->value = value;
+    return shared_from_this();
+  }
 };
 ```
 
@@ -183,9 +183,9 @@ widget->shared_from_this();  // 安全
 ```cpp
 class Widget : public std::enable_shared_from_this<Widget> {
 public:
-    Widget() {
-        // shared_from_this();  // 错误！在构造函数中不能使用
-    }
+  Widget() {
+    // shared_from_this();  // 错误！在构造函数中不能使用
+  }
 };
 ```
 
@@ -200,15 +200,15 @@ class Derived : public std::enable_shared_from_this<Derived> {};
 // 如果需要多态，使用 CRTP 的变体
 class Base : public std::enable_shared_from_this<Base> {
 public:
-    virtual ~Base() = default;
+  virtual ~Base() = default;
 };
 
 class Derived : public Base {
 public:
-    std::shared_ptr<Derived> shared_from_this() {
-        return std::static_pointer_cast<Derived>(
-            Base::shared_from_this());
-    }
+  std::shared_ptr<Derived> shared_from_this() {
+    return std::static_pointer_cast<Derived>(
+      Base::shared_from_this());
+  }
 };
 ```
 
@@ -267,18 +267,18 @@ enable_shared_from_this 提供安全的替用方案，以替代 std::shared_ptr<
 
     private:
       template<typename _Tp0>
-	void
-	_M_weak_assign(_Tp0* __p, const __shared_count<>& __n) const noexcept
-	{ _M_weak_this._M_assign(__p, __n); }
+  void
+  _M_weak_assign(_Tp0* __p, const __shared_count<>& __n) const noexcept
+  { _M_weak_this._M_assign(__p, __n); }
 
       // Found by ADL when this is an associated class.
       friend const enable_shared_from_this*
       __enable_shared_from_this_base(const __shared_count<>&,
-				     const enable_shared_from_this* __p)
+             const enable_shared_from_this* __p)
       { return __p; }
 
       template<typename, _Lock_policy>
-	friend class __shared_ptr;
+  friend class __shared_ptr;
 
       mutable weak_ptr<_Tp>  _M_weak_this;
     };
@@ -314,25 +314,25 @@ struct Bad
     }
     ~Bad() { std::cout << "Bad::~Bad() called\n"; }
 };
- 
+
 int main()
 {
     // 正确的用法: 两个 shared_ptr 共享同一个对象
     std::shared_ptr<Good> gp1 = std::make_shared<Good>();
     std::shared_ptr<Good> gp2 = gp1->getptr();
     std::cout << "gp2.use_count() = " << gp2.use_count() << '\n';
- 
-    // 错误的用法: 调用 shared_from_this 但其没有被 std::shared_ptr 占有 
+
+    // 错误的用法: 调用 shared_from_this 但其没有被 std::shared_ptr 占有
     try {
         Good not_so_good;
         std::shared_ptr<Good> gp1 = not_so_good.getptr();
-    } 
+    }
     catch(std::bad_weak_ptr& e) {
         // 在 C++17 之前，编译器不能捕获 enable_shared_from_this 抛出的std::bad_weak_ptr 异常
         // 这是在C++17之后才有的特性
-        std::cout << e.what() << '\n';    
+        std::cout << e.what() << '\n';
     }
- 
+
     // 错误的用法，每个 shared_ptr 都认为自己是对象的唯一拥有者
     // 调用错误的用法，会导致两次析构 Bad的对象，第二次析构时，指针指向的空间已经被析构，
     // 会导致程序出错
@@ -341,11 +341,11 @@ int main()
     std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
 
     return 0;
-}  
+}
 ```
 
 
 # 6. References
 
-- [cpp reference 解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this) 
+- [cpp reference 解释其用法](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this)
 - [enable_shared_from_this 用法分析](https://bbs.huaweicloud.com/blogs/136193)

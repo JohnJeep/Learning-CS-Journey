@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-01-03 15:08:43
+ * @LastEditTime: 2026-08-09 14:07:06
  * @Description: 智能指针用法
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. smart pointer(智能指针)
@@ -55,7 +55,7 @@
 
 ## 3.1. 为什么要用 unique_ptr
 
-它对于避免资源泄露，例如以 `new` 创建对象后因为发生异常而忘记调用 `delete`特别有用。 
+它对于避免资源泄露，例如以 `new` 创建对象后因为发生异常而忘记调用 `delete`特别有用。
 
 
 ## 3.2. 初始化
@@ -67,20 +67,20 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
   ```cpp
   // initialize a unique_ptr with a new object
   std::unique_ptr<ClassA> up1(new ClassA);
-  
+
   // copy the unique_ptr
   std::unique_ptr<ClassA> up2(up1);  // ERROR
-  
+
   // assign the unique_ptr, transfer ownership from up1 to up3
   std::unique_ptr<ClassA> up3(std::move(up1));    // OK
   ```
 - 当程序试图将一个 `unique_ptr` 赋值给另一个时，如果源 `unique_ptr` 是个临时右值，编译器允许这么做；如果源
   `unique_ptr` 将存在一段时间，编译器将禁止这么做。
   ```CPP
-    unique_ptr<string> pu1(new string ("hello world")); 
-    unique_ptr<string> pu2; 
+    unique_ptr<string> pu1(new string ("hello world"));
+    unique_ptr<string> pu2;
     pu2 = pu1;                                      // 不允许拷贝构造
-    unique_ptr<string> pu3; 
+    unique_ptr<string> pu3;
     pu3 = unique_ptr<string>(new string ("You"));   // 允许
   ```
 - 想要执行 ` pu2 = pu1;` 的操作，又要保证指针的安全。可以用 C++有一个标准库函数 `std::move()`，让你能够将一个
@@ -88,8 +88,8 @@ unique_ptr 智能指针提供三种方式进行对象的初始化。构造函数
   尽管转移所有权后 还是有可能出现原有指针调用（调用就崩溃）的情况。但是这个语法能强调你是在
   `转移所有权`，让你清晰的知道自己在做什么，从而`不乱调用原有指针`。
   ```CPP
-    unique_ptr<string> pu1(new string ("hello world")); 
-    unique_ptr<string> pu2; 
+    unique_ptr<string> pu1(new string ("hello world"));
+    unique_ptr<string> pu2;
     pu2 = std::move(pu1);   // 转移所有权
   ```
 - `unique_ptr` 可以转移对象的拥有权。使`unique_ptr` 不必一定拥有对象，它也可以是
@@ -116,13 +116,13 @@ unique_ptr 也有自己的 删除器(deleter)。
 ```cpp
 // lambda 表达式中没有写捕获参数时，要实现自己的删除器，需要在模板参数中指定其参数类型
 using func = void(*)(Stu*);    // void 类型的函数指针
-unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){    
+unique_ptr<Stu, func> s1(new Stu(100), [](Stu* p){
   delete p;
 });
 
 
 // 有捕获参数时，unique_ptr 模板参数类型为 仿函数的返回类型
-unique_ptr<Stu, std::function<void (Stu*)>> s2(new Stu(200), [&](Stu* p){    
+unique_ptr<Stu, std::function<void (Stu*)>> s2(new Stu(200), [&](Stu* p){
   delete p;
 });
 
@@ -137,13 +137,13 @@ unique_ptr<Stu[]> ptr1(new Stu[3]);
 
 C++11 中 shared_ptr 不支持下面的语法，自 C++11 之后的版本，开始支持下面的语法。
 ```cpp
-shared_ptr<Stu[]> ptr1(new Stu[3]); 
+shared_ptr<Stu[]> ptr1(new Stu[3]);
 ```
 
 ## 3.5. 注意点
 
 `unique_ptr` 智能指针创建对象时，在 C++11 版本没有提供 `std::make_unique()` 的方式去创建对象，只能用 `new`
-关键字创建对象。 
+关键字创建对象。
 
 ```cpp
 std::unique<Employee> employee(new Employee);
@@ -177,7 +177,7 @@ std::unique_ptr<T> make_unique(Args&& ...args) {
 ## 4.1. 为什么要用 shared_ptr
 
 shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr
-是独占的)，在使用引用计数的机制上提供了可以共享所有权的智能指针。  
+是独占的)，在使用引用计数的机制上提供了可以共享所有权的智能指针。
 
 ## 4.2. 成员函数
 
@@ -213,7 +213,7 @@ shared_ptr 是为了解决 auto_ptr 在对象所有权上的局限性(auto_ptr
 
 4. 通过 `make_shared` 初始化。用 `shared_ptr` 进行初始化时，不能将一个普通指针直接赋值给智能指针，因为一个是指针，一个
    是类。但可以通过 `make_shared`
-   函数或者通过构造函数传入普通指针，并可以通过 `get()` 函数获得普通指针。 
+   函数或者通过构造函数传入普通指针，并可以通过 `get()` 函数获得普通指针。
 
   ```cpp
   shared_ptr<string> p = new string("hello");               // ERROR
@@ -247,7 +247,7 @@ shared_ptr 默认的删除器函数(deleter)不能自动析构申请的是数组
 
 ```cpp
 shared_ptr<Stu> st(new Stu(10), [](Stu* p){
-    delete p;
+  delete p;
 });
 ```
 
@@ -257,16 +257,16 @@ shared_ptr<Stu> st(new Stu(10), [](Stu* p){
 ```cpp
 // 定义一个自己的删除器：deleter,可以选择自己不手动实现
 shared_ptr<string> str(new string("Implement my deleter"),
-                       [](string* p) {
-                           cout << "deleter: " << *p << endl;
-                           delete p;
-                       });
+            [](string* p) {
+              cout << "deleter: " << *p << endl;
+              delete p;
+            });
 str = nullptr;
 
 // 必须要手动实现删除器
 // shared_ptr<Stu> St7(new Stu[5]);   // 执行 5 次 构造函数，析构函数执行一次，造成内存泄漏
 shared_ptr<Stu> St7(new Stu[5], [](Stu* t){  // 改进版
-    delete []t;
+  delete []t;
 });
 ```
 
@@ -284,13 +284,13 @@ shared_ptr<Stu> st8(new Stu(5), default_delete<Stu>());
 template<typename T>
 shared_ptr<T> make_shared_array(size_t len)
 {
-    return shared_ptr<T>(new T[len], default_delete<T[]>());
+  return shared_ptr<T>(new T[len], default_delete<T[]>());
 }
 
 void test05()
 {
-    shared_ptr<Stu> t = make_shared_array<Stu>(4);
-    cout << t.use_count() << endl;
+  shared_ptr<Stu> t = make_shared_array<Stu>(4);
+  cout << t.use_count() << endl;
 }
 ```
 
@@ -322,9 +322,9 @@ void test05()
    ```cpp
    std::shared_ptr<int> p1(new int(10));
    std::weak_ptr<int> wp = p1; // shared_ptr直接赋值给weak_ptr
-   
+
    // weak_ptr通过调用lock()获得 shared_ptr
-   std::shared_ptr<int> sp = wp.lock(); 
+   std::shared_ptr<int> sp = wp.lock();
    ```
 
 ## 5.2. 初始化

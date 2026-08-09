@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-01-10 18:25:09
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 21:54:51
+ * @LastEditTime: 2026-08-09 14:06:39
  * @Description: cpp STL learning
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Thinking
@@ -29,7 +29,7 @@ STL 学习境界：会用，明理，能扩展。
 
 - 会用：熟练使用 STL 的各种 API 接口。
 - 明理：明白 STL 设计的思想，各种 API 的底层实现原理。
-- 能扩展：对 STL 添加自己实现的各种接口，扩充 STL 的功能。 
+- 能扩展：对 STL 添加自己实现的各种接口，扩充 STL 的功能。
 
 ---------------------------
 
@@ -79,14 +79,14 @@ STL 的核心思想：算法和数据结构的实现是分离的。
 
 STL 六大部件
 
-| 组件                         | 描述                                                         |
-| ---------------------------- | ------------------------------------------------------------ |
+| 组件                         | 描述                                                                                                                                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 容器（Containers）           | 容器是 STL 中最基本的组件之一，提供了各种数据结构，包括向量（vector）、链表（list）、队列（queue）、栈（stack）、集合（set）、映射（map）等。这些容器具有不同的特性和用途，可以根据实际需求选择合适的容器。 |
-| 算法（Algorithms）           | STL 提供了大量的算法，用于对容器中的元素进行各种操作，包括排序、搜索、复制、移动、变换等。这些算法在使用时不需要关心容器的具体类型，只需要指定要操作的范围即可。 |
-| 迭代器（iterators）          | 迭代器用于遍历容器中的元素，允许以统一的方式访问容器中的元素，而不用关心容器的内部实现细节。STL 提供了多种类型的迭代器，包括随机访问迭代器、双向迭代器、前向迭代器和输入输出迭代器等。 |
-| 函数对象（Function Objects） | 函数对象是可以像函数一样调用的对象，可以用于算法中的各种操作。STL 提供了多种函数对象，包括一元函数对象、二元函数对象、谓词等，可以满足不同的需求。 |
-| 适配器（Adapters）           | 适配器用于将一种容器或迭代器适配成另一种容器或迭代器，以满足特定的需求。STL 提供了多种适配器，包括栈适配器（stack adapter）、队列适配器（queue adapter）和优先队列适配器（priority queue adapter）等。 |
-| 分配器（Allocator）           | 分配器用于管理容器的内存分配和释放，提供了一种抽象的方式来控制内存的分配策略。 |
+| 算法（Algorithms）           | STL 提供了大量的算法，用于对容器中的元素进行各种操作，包括排序、搜索、复制、移动、变换等。这些算法在使用时不需要关心容器的具体类型，只需要指定要操作的范围即可。                                            |
+| 迭代器（iterators）          | 迭代器用于遍历容器中的元素，允许以统一的方式访问容器中的元素，而不用关心容器的内部实现细节。STL 提供了多种类型的迭代器，包括随机访问迭代器、双向迭代器、前向迭代器和输入输出迭代器等。                      |
+| 函数对象（Function Objects） | 函数对象是可以像函数一样调用的对象，可以用于算法中的各种操作。STL 提供了多种函数对象，包括一元函数对象、二元函数对象、谓词等，可以满足不同的需求。                                                          |
+| 适配器（Adapters）           | 适配器用于将一种容器或迭代器适配成另一种容器或迭代器，以满足特定的需求。STL 提供了多种适配器，包括栈适配器（stack adapter）、队列适配器（queue adapter）和优先队列适配器（priority queue adapter）等。      |
+| 分配器（Allocator）          | 分配器用于管理容器的内存分配和释放，提供了一种抽象的方式来控制内存的分配策略。                                                                                                                              |
 
 从语言实现的层面分析，Algorithm 采用 function template 实现的，而 Container、Iterator、Functor、Adaptor、Allocator
 都是采用 class template 实现的。
@@ -97,7 +97,7 @@ STL 六大部件
     iterator，可以把 Iterator 看做是算法与容器之间沟通的桥梁；
   - Functor 协助 Algorithm 完成不同的策略变化；
   - Adaptor 修饰或套接 Functor；
-    
+
     <img src="./figures/stl-component.png">
 
 使用六大部件的例子
@@ -169,7 +169,7 @@ Array 会把元素复制到其内部的 static C-style array 中。这些元素�
 
 #### 4.1.1.1. 优点
 
-支持 `[]` 和 `at()` 操作。`at()` 函数带范围检查，超出范围，就会抛出 `range-error`异常；而 `[]` 操作是不做范围检查的。 
+支持 `[]` 和 `at()` 操作。`at()` 函数带范围检查，超出范围，就会抛出 `range-error`异常；而 `[]` 操作是不做范围检查的。
 
 #### 4.1.1.2. 缺点
 
@@ -208,15 +208,15 @@ vector 是 C++ 标准模板库中的部分内容，它是一个多功能的，�
 // GCC libstdc++ 中的大致实现
 template<typename _Tp, typename _Alloc>
 void vector<_Tp, _Alloc>::_M_realloc_insert(iterator __position, const _Tp& __x) {
-    const size_type __len = _M_check_len(size_type(1), "vector::_M_realloc_insert");
-    pointer __new_start = _M_allocate(__len);          // 分配新内存
-    pointer __new_finish = __new_start;
-    // ... 拷贝原有元素和插入新元素 ...
-    _M_deallocate(_M_impl._M_start, _M_impl._M_end_of_storage - _M_impl._M_start);
-    // 更新指针
-    _M_impl._M_start = __new_start;
-    _M_impl._M_finish = __new_finish;
-    _M_impl._M_end_of_storage = __new_start + __len;
+  const size_type __len = _M_check_len(size_type(1), "vector::_M_realloc_insert");
+  pointer __new_start = _M_allocate(__len);          // 分配新内存
+  pointer __new_finish = __new_start;
+  // ... 拷贝原有元素和插入新元素 ...
+  _M_deallocate(_M_impl._M_start, _M_impl._M_end_of_storage - _M_impl._M_start);
+  // 更新指针
+  _M_impl._M_start = __new_start;
+  _M_impl._M_finish = __new_finish;
+  _M_impl._M_end_of_storage = __new_start + __len;
 }
 ```
 
@@ -224,13 +224,13 @@ void vector<_Tp, _Alloc>::_M_realloc_insert(iterator __position, const _Tp& __x)
 
 ```cpp
 size_type
-    _M_check_len(size_type __n, const char* __s) const
+  _M_check_len(size_type __n, const char* __s) const
 {
-    if (max_size() - size() < __n)
-        __throw_length_error(__N(__s));
+  if (max_size() - size() < __n)
+    __throw_length_error(__N(__s));
 
-    const size_type __len = size() + (std::max)(size(), __n);
-    return (__len < size() || __len > max_size()) ? max_size() : __len;
+  const size_type __len = size() + (std::max)(size(), __n);
+  return (__len < size() || __len > max_size()) ? max_size() : __len;
 }
 ```
 
@@ -329,7 +329,7 @@ __throw_length_error(__N(__s));
   std::vector<std::unique_ptr<Resource>> resources;
   // 潜在问题：如果emplace_back中途抛出异常，内存可能泄漏
   resources.emplace_back(new Resource);  // new可能成功，但emplace_back可能失败
-  
+
   // 更安全的方式：使用make_unique + push_back
   resources.push_back(std::make_unique<Resource>());  // 异常安全
   ```
@@ -518,7 +518,7 @@ Post。可以不分配固定的内存大小，方便的进行添加和删除操�
 - `clear()` 移除容器中所有的数据
 - `erase(begin, end)` 删除区间 `[begin, end)` 的数据，返回下一个元素的位置。
 - `erase(pos)` 删除指定 pos 位置的数据，返回下一个元素的位置。
-- `remove(element)` 删除容器中所有与 element 值匹配的数据。 
+- `remove(element)` 删除容器中所有与 element 值匹配的数据。
 
 #### 4.1.4.3. 内部结构图
 
@@ -543,20 +543,20 @@ Post。可以不分配固定的内存大小，方便的进行添加和删除操�
 #### 4.1.4.7. 源码分析
 
 ```cpp
-    _Self&
-    operator++() _GLIBCXX_NOEXCEPT      // 前置++
-    {
+  _Self&
+  operator++() _GLIBCXX_NOEXCEPT      // 前置++
+  {
 _M_node = _M_node->_M_next;             // 移动结点
 return *this;
-    }
+  }
 
-    _Self
-    operator++(int) _GLIBCXX_NOEXCEPT   // 后置++
-    {
+  _Self
+  operator++(int) _GLIBCXX_NOEXCEPT   // 后置++
+  {
 _Self __tmp = *this;                    // 记录原值
 _M_node = _M_node->_M_next;             // 执行操作
 return __tmp;                           // 返回原值，执行的是拷贝构造
-    }
+  }
 ```
 
 通过两者传入的参数值不同来区分是前置++还是后置++。
@@ -591,9 +591,9 @@ template` 。
 
 ```cpp
 namespace std {
-    template <typename T,
-              typename Allocator = allocator<T> >
-    class forward_list;
+  template <typename T,
+        typename Allocator = allocator<T> >
+  class forward_list;
 }
 ```
 
@@ -624,13 +624,13 @@ forword list 不提供 `size()`操作。原因是不可能在固定的时间内�
 $include <iostream>
 #include <forward_list>
 #include <iterator>
-    
-int main () 
-{
-    std::forward_list<int> l;
 
-    std::cout << "l.size(): " << std::distance(l.begin(),l.end())
-    << std::endl;
+int main ()
+{
+  std::forward_list<int> l;
+
+  std::cout << "l.size(): " << std::distance(l.begin(),l.end())
+  << std::endl;
 }
 ```
 
@@ -657,13 +657,13 @@ set 是一个 `集合` 容器，包含的元素是唯一的，集合中的元素
 #### 4.2.1.2. API 接口
 
 - `insert()` 函数的返回值类型为 `pair<iterator, bool>`，结果是一对数据类型。
-  
+
   ```cpp
   pair<T1, T2> 存放两个不同类型的数值
   ```
 
 - set 查找接口
-  
+
   - `find()` 返回查找元素的迭代器，查找的元素默认是区分大小写的。
   - `count()` 返回容器中查找元素的个数
   - `upper_bound` 返回容器中大于查找元素的迭代器位置
@@ -711,7 +711,7 @@ mp[104] = "张飞";                                            // 法四
 // 采用法四向容器中插入相同的键值时，会覆盖原先相同键值的数据。
 ```
 
-<font color=red>注意:</font> 
+<font color=red>注意:</font>
 
 - map 的查找操作需要做异常判断处理
 - key 与 value 两个值必须是可拷贝的(copyable)和可移动的(movable)。
@@ -728,7 +728,7 @@ mp[104] = "张飞";                                            // 法四
 
 #### 4.2.4.4. 优点
 
-插入键值的元素不允许重复，只对元素的键值进行比较，元素的各项数据可以通过 key 值进行检索。 
+插入键值的元素不允许重复，只对元素的键值进行比较，元素的各项数据可以通过 key 值进行检索。
 
 #### 4.2.4.5. 缺点
 
@@ -771,10 +771,10 @@ STL 无序容器存储状态，hash 表存储结构图
 
 ```cpp
 template<typename _Value,                        // 容器中存储元素的类型
-        typename _Hash = hash<_Value>,           // 确定元素存储位置的哈希函数
-        typename _Pred = std::equal_to<_Value>,  // 判断各个元素是否相等
-        typename _Alloc = std::allocator<_Value>, // 指定分配器对象的类型
-        typename _Tr = __uset_traits<__cache_default<_Value, _Hash>::value>>
+  typename _Hash = hash<_Value>,           // 确定元素存储位置的哈希函数
+  typename _Pred = std::equal_to<_Value>,  // 判断各个元素是否相等
+  typename _Alloc = std::allocator<_Value>, // 指定分配器对象的类型
+  typename _Tr = __uset_traits<__cache_default<_Value, _Hash>::value>>
 ```
 
 - 注意：此容器模板类中没有重载 `[]` 运算符，也没有提供 `at()` 成员方法，`unordered_set`
@@ -828,7 +828,7 @@ pair，其次，`map` 可作为关联式数组(associative array)来使用。
 
 简单选择容器的准则
 
-1. 若需要高效的随机存取，而不在乎插入和删除的效率，使用 `vector`。 
+1. 若需要高效的随机存取，而不在乎插入和删除的效率，使用 `vector`。
 2. 经常需要元素大量的插入、删除和移动，而不关心随机存取，则应使用 `list`。
 3. 若需要随机存取，而且经常在两端对数据进行插入和删除，则应使用
    `deque`；若希望元素从容器中被移除时，容器能自动缩减内部的内存用量，那么也用 `deque`。
@@ -875,7 +875,7 @@ pair，其次，`map` 可作为关联式数组(associative array)来使用。
 #### 4.5.3.2. 标准库接口
 
 ```cpp
-// 最大或最小优先级队列变量的声明 
+// 最大或最小优先级队列变量的声明
 
 priority_queue<int> g_priq;                            // 默认为最大值优先队列
 priority_queue<int, vector<int>, greater<int>> l_priq; // 最小值优先队列
@@ -1003,8 +1003,8 @@ enum { _S_local_capacity = 15 / sizeof(_CharT) };
 
 union
 {
-    _CharT           _M_local_buf[_S_local_capacity + 1];
-    size_type        _M_allocated_capacity;
+  _CharT           _M_local_buf[_S_local_capacity + 1];
+  size_type        _M_allocated_capacity;
 };
 
 ```
@@ -1035,7 +1035,7 @@ union
 
 仿函数(Functor)也叫函数对象(Function object)或者叫伪函数。它是在 `struct` 结构体中定义一种新的函数，它只为算法
 (Algorithms) 服务。从实现的角度看，仿函数是一种重载了
-`operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。 
+`operator()` 的 `class` 或 `class template`，让对象也具有像函数一样的功能。一般函数指针可视为狭义的仿函数。
 
 <img src="./figures/functors.png">
 
@@ -1049,46 +1049,46 @@ union
 按功能划分
 
 - 算术运算 (Arithmetic)
-  
+
   - 加：plus<T>
-  
+
   - 减: minus<T>
-  
+
   - 乘: multiplies<T>
-  
+
   - 除: divides<T>
-  
-  - 取模: modulus<T>  
-  
-  - 否定: negate<T> 
-    
+
+  - 取模: modulus<T>
+
+  - 否定: negate<T>
+
     > negate 属于一元运算，其余的都属于二元运算。
 
 - 关系运算 (Ratioanl)
-  
-  - 等于: equal_to<T> 
-  
+
+  - 等于: equal_to<T>
+
   - 不等于: not_equal_to<T>
-  
+
   - 大于: greater<T>
-  
+
   - 大于等于: greater_equal<T>
-  
+
   - 小于: less<T>
-  
+
   - 小于等于: less_equal<T>
-    
-    > 六种都属于二元运算。 
+
+    > 六种都属于二元运算。
 
 - 逻辑运算 (Logical)
-  
-  - 逻辑 And: logical_and<T> 
-  
+
+  - 逻辑 And: logical_and<T>
+
   - 逻辑 Or: logical_or<T>
-  
+
   - 逻辑 Not: logical_not<T>
-    
-    > And, Or 属于二元运算，Not 属于一元运算。 
+
+    > And, Or 属于二元运算，Not 属于一元运算。
 
 ## 6.3. 可调用对象
 
@@ -1101,12 +1101,12 @@ union
 
 ## 6.4. 函数对象调用
 
-- 函数对象可以做函数参数。 
+- 函数对象可以做函数参数。
 
-- 函数对象可以做返回值。 
+- 函数对象可以做返回值。
 
-- 函数对象的调用与 `回调函数` 的调用类似。 
-  
+- 函数对象的调用与 `回调函数` 的调用类似。
+
   ```cpp
   class Stu
   {
@@ -1163,12 +1163,12 @@ std::bind()
 
 - 选择函数(selection_function)，标准库 `stl_function.h` 中用 `select1st` 和 `select2nd` 来指定 RB-tree 所需的
   KeyOfValue。
-  
+
   - select1st: 接受一个 pair，传回它的第一个元素。
   - select2nd: 接受一个 pair，传回它的第二个元素。
 
 - 投射函数
-  
+
   - project1st: 传回第一参数，忽略第二参数。
   - project2nd: 传回第二参数，忽略第 1 参数。
 
@@ -1199,9 +1199,9 @@ heap（堆）的 STL 库中函数
 - `std::for_each()` 遍历容器中的所有元素。
 
 - `std::transform()` 将容器中的数据进行某种转换的运算。
-  
+
   > 两个算法的区别
-  > 
+  >
   > - `std::for_each()` 使用的函数对象可以没有 `返回值`，参数一般传 `reference`，因此速度较快，不是很灵活。
   > - `std::transform()` 使用的函数对象必须要有 `返回值`，参数一般传 `value`，因此速度较慢，但是很灵活。
 
@@ -1215,9 +1215,9 @@ heap（堆）的 STL 库中函数
 
 - `std::count_if()` 使用 `谓词` 计数容器中指定条件元素的个数。
 
-- `std::find()` 
+- `std::find()`
 
-- `std::find_if()` 
+- `std::find_if()`
 
 - `std::merge()`  合并两个有序的序列，并存放到另一个序列中。
 
@@ -1240,12 +1240,12 @@ heap（堆）的 STL 库中函数
 
 - `std::stable_partition()`
 
-- `std::upper_bound()` 
+- `std::upper_bound()`
 
-- `std::lower_bound()` 
+- `std::lower_bound()`
 
-- `std::floor()` 和 `std::ceil()`都是对变量进行四舍五入，只不过四舍五入的方向不同。 
-  
+- `std::floor()` 和 `std::ceil()`都是对变量进行四舍五入，只不过四舍五入的方向不同。
+
   - `std::floor()` -->向下取整数。`5.88   std::floor(5.88) = 5;`
   - `std::ceil()` -->向上取整数。`std::ceil(5.88)   = 6;`
 
@@ -1377,7 +1377,7 @@ container. This concept exists. Objects that fulfill this concept are called ite
 - `operator *`: 返回当前位置上元素的值。
 - `operator ++ 或 operator --`: 让迭代器指向下一个或上一个元素。
 - `operator == 或 operator !=`: 判断两个迭代器是否指向同一个位置。
-- `operator =`: 赋值给迭代器  
+- `operator =`: 赋值给迭代器
 
 不同的迭代器也许是 `smart pointers`，具有遍历复杂数据结构的能力，其内部运作机制取决于所遍历的数据结构。每一种容器都必
 须提供自己的迭代器。事实上每一种容器的确都将其迭代器以嵌套方式定义与 class
@@ -1466,9 +1466,9 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 ## 10.7. 迭代器失效
 
 - 为什么迭代器会失效？
-  
+
   STL 容器中元素整体“迁移”导致存放原容器元素的空间不再有效，使原本指向某元素的迭代器不再指向希望指向的元素，从而使得指
-  向原空间的迭代器失效。 
+  向原空间的迭代器失效。
 
 - 对于序列式容器，比如 vector，删除当前的 iterator 会使后面所有元素的 iterator
   都失效。因为序列式容器中内存是连续分配的（分配一个数组作为内存），删除一个元素导致后面所有的元素会向前移动一个位置。
@@ -1479,11 +1479,11 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 - 数组型数据结构的元素是分配在连续的内存中，`insert` 和 `erase`
   操作，会使删除点和插入点之后的元素挪位置。所以，插入点和删除掉之后的迭代器全部失效，也就是说
   `insert(*iter)(或erase(*iter))`，然后再 `iter++`，是没有意义的。
-  
+
   - 解决方法：`erase(*iter)`的返回值是下一个有效迭代器的值 `iter =cont.erase(iter);`
 
 - list 型的数据结构，使用了不连续分配的内存，删除运算使指向删除位置的迭代器失效，但是不会失效其他迭代器。
-  
+
   - 解决办法两种，`erase(*iter)` 会返回下一个有效迭代器的值，或者`erase(iter++)`。
 
 - 红黑树存储的数据，插入操作不会使任何迭代器失效；删除操作使指向删除位置的迭代器失效，但不会失效其他迭代器。`erase`
@@ -1495,7 +1495,7 @@ struct random_access_iterator_tag : public bidirectional_iterator_tag { };
 
 参考
 
-- [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763) 
+- [迭代器失效的几种情况总结](https://blog.csdn.net/lujiandong1/article/details/49872763)
 - [聊聊 map 和 vector 的迭代器失效问题](https://blog.csdn.net/stpeace/article/details/46507451?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=2cff67d7-d841-4421-bbca-7f85ba6e0330&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
 - [C++ STL 迭代器失效问题](https://www.cnblogs.com/qiaoconglovelife/p/5370396.html)
 
@@ -1543,8 +1543,8 @@ allocator 底层的操作都是采用 `malloc()` 和 `free()`来分配和释放�
 
 ## 11.3. Allocator 标准接口
 
-1. `allocator::value_type` 
-   - The type of the elements. 
+1. `allocator::value_type`
+   - The type of the elements.
    - It is usually equivalent to T for an `allocator<T>`，传递一个模板参数类型。
 2. `allocator::size_type`
 3. `allocator::difference_type`
@@ -1563,10 +1563,10 @@ allocator 底层的操作都是采用 `malloc()` 和 `free()`来分配和释放�
 15. `allocator::allocator (const allocator& a)`
 16. `allocator::allocator (allocator&& a)`
 17. `allocator::˜allocator ()`
-18. `pointer allocator::address (reference value)` 
+18. `pointer allocator::address (reference value)`
 19. `const_pointer allocator::address (const_reference value)`
 20. `size_type allocator::max_size ()`
-21. `pointer allocator::allocate (size_type num)` 
+21. `pointer allocator::allocate (size_type num)`
 22. `pointer allocator::allocate (size_type num, allocator::const_pointer hint)`
 23. `void allocator::deallocate (pointer p, size_type num)`
 24. `void allocator::construct (U* p, Args&&... args)`

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-10-22 11:13:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 21:53:51
+ * @LastEditTime: 2026-08-09 14:08:17
  * @Description: new/delete 底层是怎样用的？
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. 整体概括
@@ -112,7 +112,7 @@ operator new (std::size_t sz) _GLIBCXX_THROW (std::bad_alloc)
     {
       new_handler handler = std::get_new_handler ();
       if (! handler)
-	_GLIBCXX_THROW_OR_ABORT(bad_alloc());
+  _GLIBCXX_THROW_OR_ABORT(bad_alloc());
       handler ();
     }
 
@@ -174,23 +174,23 @@ munmap`返还给系统。
 ```c
 // 根据大小选择分配策略
 void* malloc(size_t size) {
-    if (size < 128 * 1024) {
-        // 小内存：使用 brk 管理的堆
-        return tcache_allocate(size);  // 线程缓存
-    } else {
-        // 大内存：直接使用 mmap
-        return mmap_allocate(size);
-    }
+  if (size < 128 * 1024) {
+    // 小内存：使用 brk 管理的堆
+    return tcache_allocate(size);  // 线程缓存
+  } else {
+    // 大内存：直接使用 mmap
+    return mmap_allocate(size);
+  }
 }
 
 void free(void* ptr) {
-    if (is_mmap_chunk(ptr)) {
-        // mmap 分配的直接 munmap
-        munmap(ptr, get_chunk_size(ptr));
-    } else {
-        // brk 管理的放回相应 bin
-        tcache_free(ptr);
-    }
+  if (is_mmap_chunk(ptr)) {
+    // mmap 分配的直接 munmap
+    munmap(ptr, get_chunk_size(ptr));
+  } else {
+    // brk 管理的放回相应 bin
+    tcache_free(ptr);
+  }
 }
 ```
 
@@ -241,8 +241,8 @@ void free(void* ptr) {
 // glibc 2.26+ 引入的每线程缓存
 typedef struct tcache_perthread_struct
 {
-    char counts[TCACHE_MAX_BINS];
-    tcache_entry *entries[TCACHE_MAX_BINS];
+  char counts[TCACHE_MAX_BINS];
+  tcache_entry *entries[TCACHE_MAX_BINS];
 } tcache_perthread_struct;
 ```
 
@@ -353,11 +353,11 @@ brk(current + 4096);            // 直接设置新 brk
 
 ```c
 void *sbrk(intptr_t increment) {
-    void *old_break = sbrk(0);  // 获取当前堆结束地址
-    if (brk((char *)old_break + increment) == -1) {
-        return (void *)-1;      // 失败
-    }
-    return old_break;           // 返回之前的地址
+  void *old_break = sbrk(0);  // 获取当前堆结束地址
+  if (brk((char *)old_break + increment) == -1) {
+    return (void *)-1;      // 失败
+  }
+  return old_break;           // 返回之前的地址
 }
 ```
 
@@ -368,12 +368,12 @@ void *sbrk(intptr_t increment) {
 ```c
 // glibc 中小内存分配使用 brk
 void* small_malloc(size_t size) {
-    if (size < 128 * 1024) {  // 小于128KB
-        // 使用 brk 管理的堆内存
-        return allocate_from_heap(size);
-    }
-    // 大内存使用 mmap
-    return mmap_alloc(size);
+  if (size < 128 * 1024) {  // 小于128KB
+    // 使用 brk 管理的堆内存
+    return allocate_from_heap(size);
+  }
+  // 大内存使用 mmap
+  return mmap_alloc(size);
 }
 ```
 
@@ -411,11 +411,11 @@ int munmap(void *addr, size_t length);
 ```c
 // 分配 1MB 匿名内存（不关联文件）
 void* memory = mmap(NULL,                   // 由系统选择地址
-                    1024 * 1024,           // 1MB
-                    PROT_READ | PROT_WRITE, // 可读可写
-                    MAP_PRIVATE | MAP_ANONYMOUS, // 私有匿名映射
-                    -1,                     // 文件描述符（匿名映射用-1）
-                    0);                     // 偏移量
+  1024 * 1024,           // 1MB
+  PROT_READ | PROT_WRITE, // 可读可写
+  MAP_PRIVATE | MAP_ANONYMOUS, // 私有匿名映射
+  -1,                     // 文件描述符（匿名映射用-1）
+  0);                     // 偏移量
 
 // 使用后释放
 munmap(memory, 1024 * 1024);
@@ -426,7 +426,7 @@ munmap(memory, 1024 * 1024);
 ```c
 // 1. 大内存分配
 void* large_mem = mmap(NULL, 10 * 1024 * 1024, PROT_READ | PROT_WRITE,
-                      MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
 // 2. 文件映射（内存映射文件）
 int fd = open("large_file.dat", O_RDONLY);
@@ -434,11 +434,11 @@ void* file_mem = mmap(NULL, file_size, PROT_READ, MAP_PRIVATE, fd, 0);
 
 // 3. 共享内存
 void* shared_mem = mmap(NULL, size, PROT_READ | PROT_WRITE,
-                       MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
 // 4. 分配栈内存（某些线程实现）
 void* thread_stack = mmap(NULL, stack_size, PROT_READ | PROT_WRITE,
-                         MAP_PRIVATE | MAP_ANONYMOUS | MAP_STACK, -1, 0);
+  MAP_PRIVATE | MAP_ANONYMOUS | MAP_STACK, -1, 0);
 ```
 
 ### 5.3. 拓展
@@ -448,21 +448,21 @@ void* thread_stack = mmap(NULL, stack_size, PROT_READ | PROT_WRITE,
 ```c
 // brk 分配 - 开销较小
 void brk_allocation() {
-    void* start = sbrk(0);
-    // 多次小分配可能只涉及一次 brk 调用
-    for (int i = 0; i < 1000; i++) {
-        // 在已扩展的堆内部分配，无需系统调用
-        allocate_from_heap(128);
-    }
+  void* start = sbrk(0);
+  // 多次小分配可能只涉及一次 brk 调用
+  for (int i = 0; i < 1000; i++) {
+    // 在已扩展的堆内部分配，无需系统调用
+    allocate_from_heap(128);
+  }
 }
 
 // mmap 分配 - 每次都有系统调用开销
 void mmap_allocation() {
-    for (int i = 0; i < 1000; i++) {
-        // 每次都需要 mmap 系统调用
-        mmap(NULL, 4096, PROT_READ | PROT_WRITE, 
-             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    }
+  for (int i = 0; i < 1000; i++) {
+    // 每次都需要 mmap 系统调用
+    mmap(NULL, 4096, PROT_READ | PROT_WRITE,
+      MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  }
 }
 ```
 
@@ -473,23 +473,23 @@ void mmap_allocation() {
 ```c
 // brk - 容易产生碎片
 void brk_fragmentation() {
-    void* p1 = malloc(1024);  // 分配块1
-    void* p2 = malloc(2048);  // 分配块2  
-    void* p3 = malloc(1024);  // 分配块3
-    
-    free(p2);  // 释放中间块，产生碎片
-    // 现在堆布局：[使用][空闲][使用]
-    // 后续只能分配 <= 2048 的块到这个空隙
+  void* p1 = malloc(1024);  // 分配块1
+  void* p2 = malloc(2048);  // 分配块2
+  void* p3 = malloc(1024);  // 分配块3
+
+  free(p2);  // 释放中间块，产生碎片
+  // 现在堆布局：[使用][空闲][使用]
+  // 后续只能分配 <= 2048 的块到这个空隙
 }
 
 // mmap - 无外部碎片
 void mmap_no_fragmentation() {
-    void* p1 = mmap_alloc(1024);  // 独立映射
-    void* p2 = mmap_alloc(2048);  // 独立映射
-    void* p3 = mmap_alloc(1024);  // 独立映射
-    
-    munmap(p2, 2048);  // 完全释放，无碎片
-    // 每个映射都是独立的，释放后空间完全可用
+  void* p1 = mmap_alloc(1024);  // 独立映射
+  void* p2 = mmap_alloc(2048);  // 独立映射
+  void* p3 = mmap_alloc(1024);  // 独立映射
+
+  munmap(p2, 2048);  // 完全释放，无碎片
+  // 每个映射都是独立的，释放后空间完全可用
 }
 ```
 
@@ -502,13 +502,13 @@ brk 的限制
 ```c
 // 堆大小有限制
 void check_brk_limits() {
-    void* current = sbrk(0);
-    void* max_heap = (void*)0x...;  // 系统定义的堆上限
-    
-    if (current + requested_size > max_heap) {
-        // 无法继续扩展堆，需要改用 mmap
-        return mmap_alloc(requested_size);
-    }
+  void* current = sbrk(0);
+  void* max_heap = (void*)0x...;  // 系统定义的堆上限
+
+  if (current + requested_size > max_heap) {
+    // 无法继续扩展堆，需要改用 mmap
+    return mmap_alloc(requested_size);
+  }
 }
 ```
 
@@ -517,11 +517,11 @@ mmap 的限制
 ```c
 // 虚拟地址空间限制
 void check_mmap_limits() {
-    // 32位系统：~3GB 用户空间
-    // 64位系统：巨大的地址空间
-    
-    // 映射数量限制
-    // cat /proc/sys/vm/max_map_count
+  // 32位系统：~3GB 用户空间
+  // 64位系统：巨大的地址空间
+
+  // 映射数量限制
+  // cat /proc/sys/vm/max_map_count
 }
 ```
 
@@ -609,18 +609,18 @@ int* arr = new int[1000];  // 分配 4000 字节
 
 // 编译后的近似代码：
 void* operator_new_array(size_t size) {
-    // 1. 调用 malloc
-    void* ptr = malloc(4000);
-    if (!ptr) {
-        // 处理分配失败，可能调用 new_handler
-        std::new_handler handler = std::get_new_handler();
-        if (handler) {
-            handler();
-            return operator_new_array(size);  // 重试
-        }
-        throw std::bad_alloc();
+  // 1. 调用 malloc
+  void* ptr = malloc(4000);
+  if (!ptr) {
+    // 处理分配失败，可能调用 new_handler
+    std::new_handler handler = std::get_new_handler();
+    if (handler) {
+      handler();
+      return operator_new_array(size);  // 重试
     }
-    return ptr;
+    throw std::bad_alloc();
+  }
+  return ptr;
 }
 ```
 
@@ -635,26 +635,26 @@ SYSCALL_DEFINE1(brk) -> do_brk_flags()
 
 // 3. 虚拟内存扩展
 do_brk_flags() {
-    - 检查参数和权限
-    - 页面对齐 (4000 -> 4096)
-    - 创建或扩展 VMA
-    - 更新进程的 mm_struct
-    - 返回新的堆顶地址
+  - 检查参数和权限
+  - 页面对齐 (4000 -> 4096)
+  - 创建或扩展 VMA
+  - 更新进程的 mm_struct
+  - 返回新的堆顶地址
 }
 
 // 4. 用户程序访问内存
 // 当程序实际访问新分配的堆内存时，触发缺页中断
 for (int i = 0; i < 1000; i++) {
-    arr[i] = i;  // 触发缺页中断
+  arr[i] = i;  // 触发缺页中断
 }
 
 // 5. 缺页中断处理
 handle_mm_fault() {
-    - 遍历页表 (PGD -> P4D -> PUD -> PMD -> PTE)
-    - 发现 PTE 不存在
-    - 调用 alloc_page() 分配物理页
-    - 建立页表映射
-    - 返回用户态继续执行
+  - 遍历页表 (PGD -> P4D -> PUD -> PMD -> PTE)
+  - 发现 PTE 不存在
+  - 调用 alloc_page() 分配物理页
+  - 建立页表映射
+  - 返回用户态继续执行
 }
 ```
 
@@ -670,19 +670,19 @@ handle_mm_fault() {
    {
        struct mm_struct *mm = current->mm;
        unsigned long newbrk, oldbrk;
-       
+
        // 1. 边界检查和权限验证
        if (brk < mm->end_data)
            goto out;
-       
+
        // 2. 页面对齐
        newbrk = PAGE_ALIGN(brk);
        oldbrk = PAGE_ALIGN(mm->brk);
-       
+
        // 3. 如果 brk 没有变化，直接返回
        if (oldbrk == newbrk)
            goto set_brk;
-       
+
        // 4. 处理堆的收缩或扩展
        if (brk <= mm->brk) {
            // 收缩堆 - 释放内存
@@ -692,12 +692,12 @@ handle_mm_fault() {
            // 扩展堆 - 分配新内存
            if (find_vma_intersection(mm, oldbrk, newbrk+PAGE_SIZE))
                goto out;
-           
+
            // 核心：扩展堆内存区域
            if (do_brk_flags(oldbrk, newbrk - oldbrk, 0, NULL) < 0)
                goto out;
        }
-   
+
    set_brk:
        mm->brk = brk;
    out:
@@ -708,48 +708,48 @@ handle_mm_fault() {
 2. 虚拟内存扩展 - do_brk_flags
 
    ```c
-   unsigned long do_brk_flags(unsigned long addr, unsigned long len, 
+   unsigned long do_brk_flags(unsigned long addr, unsigned long len,
                              unsigned long flags, struct list_head *uf)
    {
        struct mm_struct *mm = current->mm;
        struct vm_area_struct *vma;
        unsigned long new_addr = addr;
-       
+
        // 1. 参数检查
        len = PAGE_ALIGN(len);
        if (!len)
            return addr;
-       
+
        // 2. 查找或合并相邻的 VMA
        vma = find_vma(mm, addr);
        if (vma && vma->vm_start < addr + len) {
            // 处理重叠情况
            return -ENOMEM;
        }
-       
+
        // 3. 检查虚拟地址空间限制
        if (mm->map_count > sysctl_max_map_count)
            return -ENOMEM;
-       
+
        // 4. 扩展现有的 VMA 或创建新的 VMA
        vma = vma_merge(mm, prev, addr, addr + len, flags,
                       NULL, NULL, pgoff, NULL, NULL_VM_UFFD_CTX);
        if (vma)
            goto out;
-       
+
        // 5. 创建新的 VMA
        vma = vm_area_alloc(mm);
        if (!vma)
            return -ENOMEM;
-       
+
        vma->vm_start = addr;
        vma->vm_end = addr + len;
        vma->vm_flags = flags;
        vma->vm_page_prot = vm_get_page_prot(flags);
-       
+
        // 6. 插入到进程的 VMA 红黑树中
        vma_link(mm, vma, prev, rb_link, rb_parent);
-       
+
    out:
        return new_addr;
    }
@@ -767,28 +767,28 @@ handle_mm_fault() {
        pud_t *pud;
        pmd_t *pmd;
        pte_t *pte;
-       
+
        // 1. 多级页表遍历
        pgd = pgd_offset(mm, address);
        p4d = p4d_alloc(mm, pgd, address);
        pud = pud_alloc(mm, p4d, address);
        pmd = pmd_alloc(mm, pud, address);
-       
+
        // 2. 处理页表项
        if (pmd_none(*pmd) {
            // 中间页表不存在，需要分配
            if (pmd_alloc_huge(mm, pmd, address))
                return VM_FAULT_OOM;
        }
-       
+
        // 3. 获取页表项
        pte = pte_offset_map(pmd, address);
-       
+
        // 4. 检查页表项状态
        if (!pte_present(*pte)) {
            // 页面不存在，需要分配物理页
            struct page *page;
-           
+
            // 分配零页或新页面
            if (vma->vm_flags & VM_SHARED) {
                page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, address);
@@ -796,15 +796,15 @@ handle_mm_fault() {
                // 对于堆内存，通常分配新页面
                page = alloc_zeroed_user_highpage_movable(vma, address);
            }
-           
+
            if (!page)
                return VM_FAULT_OOM;
-           
+
            // 建立页表映射
            entry = mk_pte(page, vma->vm_page_prot);
            set_pte_at(mm, address, pte, entry);
        }
-       
+
        return VM_FAULT_NOPAGE;
    }
    ```
@@ -817,26 +817,26 @@ handle_mm_fault() {
 // 内核物理页分配
 struct page *alloc_pages(gfp_t gfp_mask, unsigned int order)
 {
-    struct page *page;
-    
-    // 1. 尝试从每CPU页面缓存分配
-    page = __alloc_pages_fastpath(gfp_mask, order);
-    if (page)
-        goto out;
-    
-    // 2. 慢路径分配
-    page = __alloc_pages_slowpath(gfp_mask, order);
-    
+  struct page *page;
+
+  // 1. 尝试从每CPU页面缓存分配
+  page = __alloc_pages_fastpath(gfp_mask, order);
+  if (page)
+    goto out;
+
+  // 2. 慢路径分配
+  page = __alloc_pages_slowpath(gfp_mask, order);
+
 out:
-    // 3. 页面初始化
-    if (page) {
-        prep_new_page(page, order, gfp_mask);
-        // 对于用户页面，需要清零
-        if (gfp_mask & __GFP_ZERO)
-            clear_highpage(page);
-    }
-    
-    return page;
+  // 3. 页面初始化
+  if (page) {
+    prep_new_page(page, order, gfp_mask);
+    // 对于用户页面，需要清零
+    if (gfp_mask & __GFP_ZERO)
+      clear_highpage(page);
+  }
+
+  return page;
 }
 ```
 
@@ -846,30 +846,30 @@ out:
 // 建立页表映射
 static int __handle_pte_fault(struct vm_fault *vmf)
 {
-    pte_t entry;
-    
-    // 1. 检查是否应该使用零页
-    if (!vma->vm_ops || !vma->vm_ops->fault) {
-        // 匿名映射（如堆内存）
-        
-        // 2. 分配物理页面
-        vmf->page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, vmf->address);
-        if (!vmf->page)
-            return VM_FAULT_OOM;
-        
-        // 3. 初始化页面内容为零
-        clear_user_highpage(vmf->page, vmf->address);
-        
-        // 4. 创建页表项
-        entry = mk_pte(vmf->page, vma->vm_page_prot);
-        entry = pte_mkyoung(entry);
-        entry = pte_mkdirty(entry);
-        
-        // 5. 设置页表项
-        set_pte_at(vma->vm_mm, vmf->address, vmf->pte, entry);
-    }
-    
-    return VM_FAULT_NOPAGE;
+  pte_t entry;
+
+  // 1. 检查是否应该使用零页
+  if (!vma->vm_ops || !vma->vm_ops->fault) {
+    // 匿名映射（如堆内存）
+
+    // 2. 分配物理页面
+    vmf->page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, vmf->address);
+    if (!vmf->page)
+      return VM_FAULT_OOM;
+
+    // 3. 初始化页面内容为零
+    clear_user_highpage(vmf->page, vmf->address);
+
+    // 4. 创建页表项
+    entry = mk_pte(vmf->page, vma->vm_page_prot);
+    entry = pte_mkyoung(entry);
+    entry = pte_mkdirty(entry);
+
+    // 5. 设置页表项
+    set_pte_at(vma->vm_mm, vmf->address, vmf->pte, entry);
+  }
+
+  return VM_FAULT_NOPAGE;
 }
 ```
 
@@ -883,31 +883,31 @@ static int __handle_pte_fault(struct vm_fault *vmf)
 // 处理写时复制缺页
 static int do_wp_page(struct vm_fault *vmf)
 {
-    struct page *old_page = vmf->page;
-    struct page *new_page;
-    
-    // 1. 检查是否真的需要复制
-    if (page_mapcount(old_page) == 1) {
-        // 只有一个映射，直接标记可写
-        pte_t entry = pte_mkyoung(pte_mkdirty(vmf->orig_pte));
-        set_pte_at(vma->vm_mm, vmf->address, vmf->pte, entry);
-        return VM_FAULT_WRITE;
-    }
-    
-    // 2. 需要复制页面
-    new_page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, vmf->address);
-    if (!new_page)
-        return VM_FAULT_OOM;
-    
-    // 3. 复制页面内容
-    copy_user_highpage(new_page, old_page, vmf->address, vma);
-    
-    // 4. 建立新的页表映射
-    pte_t entry = mk_pte(new_page, vma->vm_page_prot);
-    entry = pte_mkyoung(pte_mkdirty(entry));
+  struct page *old_page = vmf->page;
+  struct page *new_page;
+
+  // 1. 检查是否真的需要复制
+  if (page_mapcount(old_page) == 1) {
+    // 只有一个映射，直接标记可写
+    pte_t entry = pte_mkyoung(pte_mkdirty(vmf->orig_pte));
     set_pte_at(vma->vm_mm, vmf->address, vmf->pte, entry);
-    
     return VM_FAULT_WRITE;
+  }
+
+  // 2. 需要复制页面
+  new_page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, vmf->address);
+  if (!new_page)
+    return VM_FAULT_OOM;
+
+  // 3. 复制页面内容
+  copy_user_highpage(new_page, old_page, vmf->address, vma);
+
+  // 4. 建立新的页表映射
+  pte_t entry = mk_pte(new_page, vma->vm_page_prot);
+  entry = pte_mkyoung(pte_mkdirty(entry));
+  set_pte_at(vma->vm_mm, vmf->address, vmf->pte, entry);
+
+  return VM_FAULT_WRITE;
 }
 ```
 
@@ -917,24 +917,24 @@ static int do_wp_page(struct vm_fault *vmf)
 // 尝试使用大页处理缺页
 static int do_huge_pmd_anonymous_page(struct vm_fault *vmf)
 {
-    // 检查是否适合使用大页
-    if (transparent_hugepage_enabled(vma) &&
-        !vma->vm_ops &&
-        (vma->vm_flags & VM_HUGEPAGE)) {
-        
-        // 分配大页 (2MB)
-        page = alloc_hugepage_vma(TRANSPARENT_HUGEPAGE_ORDER, vma,
-                                 vmf->address, numa_node_id(), 0);
-        if (page) {
-            // 建立大页映射
-            set_huge_pte_at(vma->vm_mm, vmf->address, vmf->pmd,
-                           mk_huge_pte(page, vma->vm_page_prot));
-            return VM_FAULT_NOPAGE;
-        }
+  // 检查是否适合使用大页
+  if (transparent_hugepage_enabled(vma) &&
+    !vma->vm_ops &&
+    (vma->vm_flags & VM_HUGEPAGE)) {
+
+    // 分配大页 (2MB)
+    page = alloc_hugepage_vma(TRANSPARENT_HUGEPAGE_ORDER, vma,
+                vmf->address, numa_node_id(), 0);
+    if (page) {
+      // 建立大页映射
+      set_huge_pte_at(vma->vm_mm, vmf->address, vmf->pmd,
+              mk_huge_pte(page, vma->vm_page_prot));
+      return VM_FAULT_NOPAGE;
     }
-    
-    // 回退到普通页面
-    return do_anonymous_page(vmf);
+  }
+
+  // 回退到普通页面
+  return do_anonymous_page(vmf);
 }
 ```
 
@@ -943,35 +943,35 @@ static int do_huge_pmd_anonymous_page(struct vm_fault *vmf)
 ```c
 // 页面回收
 static unsigned long shrink_page_list(struct list_head *page_list,
-                                     struct pglist_data *pgdat,
-                                     struct scan_control *sc)
+                  struct pglist_data *pgdat,
+                  struct scan_control *sc)
 {
-    LIST_HEAD(ret_pages);
-    LIST_HEAD(free_pages);
-    
-    while (!list_empty(page_list)) {
-        struct page *page = lru_to_page(page_list);
-        
-        // 检查页面状态
-        if (PageDirty(page)) {
-            // 脏页需要写回
-            if (pageout(page, mapping, sc))
-                goto activate_page;
-        }
-        
-        if (PageAnon(page)) {
-            // 匿名页（如堆内存）可能被交换到swap
-            if (!add_to_swap(page))
-                goto activate_page;
-        }
-        
-        // 可以回收的页面
-        list_move(&page->lru, &free_pages);
+  LIST_HEAD(ret_pages);
+  LIST_HEAD(free_pages);
+
+  while (!list_empty(page_list)) {
+    struct page *page = lru_to_page(page_list);
+
+    // 检查页面状态
+    if (PageDirty(page)) {
+      // 脏页需要写回
+      if (pageout(page, mapping, sc))
+        goto activate_page;
     }
-    
-    // 释放页面
-    free_unref_page_list(&free_pages);
-    return nr_reclaimed;
+
+    if (PageAnon(page)) {
+      // 匿名页（如堆内存）可能被交换到swap
+      if (!add_to_swap(page))
+        goto activate_page;
+    }
+
+    // 可以回收的页面
+    list_move(&page->lru, &free_pages);
+  }
+
+  // 释放页面
+  free_unref_page_list(&free_pages);
+  return nr_reclaimed;
 }
 ```
 
@@ -989,32 +989,32 @@ static unsigned long shrink_page_list(struct list_head *page_list,
 
 ```
 C++ 代码:
-    new MyClass()
-        ↓
+  new MyClass()
+    ↓
 编译器:
-    operator new(sizeof(MyClass))
-        ↓
+  operator new(sizeof(MyClass))
+    ↓
 libstdc++:
-    malloc(size)
-        ↓
+  malloc(size)
+    ↓
 glibc malloc:
-    __libc_malloc() → _int_malloc() → sysmalloc()
-        ↓
+  __libc_malloc() → _int_malloc() → sysmalloc()
+    ↓
 分配策略判断:
-    if (size < 128KB): 使用 brk 扩展堆
-    else: 使用 mmap 创建新映射
-        ↓
+  if (size < 128KB): 使用 brk 扩展堆
+  else: 使用 mmap 创建新映射
+    ↓
 系统调用:
-    brk() 或 mmap()
-        ↓
+  brk() 或 mmap()
+    ↓
 Linux 内核:
-    sys_brk() 或 sys_mmap()
-        ↓
+  sys_brk() 或 sys_mmap()
+    ↓
 内核内存管理:
-    do_brk() 或 do_mmap()
-        ↓
+  do_brk() 或 do_mmap()
+    ↓
 物理内存管理:
-    页表操作、缺页异常处理等
+  页表操作、缺页异常处理等
 ```
 
 这个过程体现了现代操作系统内存管理的核心思想：**虚拟内存与物理内存分离**、**按需分配**、**延迟绑定**，既提供了安全隔离
