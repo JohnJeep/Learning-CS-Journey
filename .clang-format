@@ -1,0 +1,78 @@
+# 基于 Google C++ Style Guide 的团队 clang-format 配置
+# 官方文档: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# 用法: clang-format -i --style=file 目标文件.cc
+
+BasedOnStyle: Google
+Language: Cpp
+Standard: c++17
+
+# --- 以下为团队在 Google 默认基础上的常见微调，按需删改 ---
+
+# Google 默认 80 列；很多团队实际用 100，按团队讨论结果二选一
+ColumnLimit: 108
+
+# 缩进宽度（Google 默认即为 2，这里显式写出方便团队看到并达成共识）
+IndentWidth: 2
+AccessModifierOffset: -1
+ContinuationIndentWidth: 4
+
+# 指针/引用的 * & 靠左：int* p 而不是 int *p（Google 默认）
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# 头文件自动分组排序：本文件对应头 > C 系统头 > C++ 系统头 > 第三方 > 本项目其他头
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<[a-z_]+\.h>' # C 系统头，如 <stdio.h>
+    Priority: 1
+  - Regex: "^<.*>" # C++ 标准库 / 系统头
+    Priority: 2
+  - Regex: ".*" # 项目内头文件
+    Priority: 3
+
+# 短函数是否允许写在一行：只允许空函数体
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# --- 团队规则 1：if / for / while 等语句体只有一行也必须加 {} ---
+# 需要 clang-format >= 15。低于 15 的版本这个选项不生效，
+# 这种情况必须靠下面 .clang-tidy 里的 readability-braces-around-statements
+# 做检查 + 自动修复（clang-tidy --fix），两者配合才能保证老版本工具链也能落地。
+InsertBraces: true
+
+# --- 团队规则 2：函数定义体的左大括号换行，其余位置维持 Google 默认贴行 ---
+# Google 默认 BreakBeforeBraces: Attach（全部贴行），这里改成 Custom
+# 只把函数体的 { 换到下一行，if/for/class/namespace/enum 等仍然贴行不变。
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true # 函数体 { 换行：void Foo() \n {
+  AfterControlStatement: false # if/for/while 的 { 仍贴行：if (x) {
+  AfterClass: false
+  AfterStruct: false
+  AfterEnum: false
+  AfterUnion: false
+  AfterNamespace: false
+  AfterExternBlock: false
+  BeforeElse: false
+  BeforeCatch: false
+  BeforeLambdaBody: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# 单参数/多参数构造函数换行策略跟随 Google
+BinPackArguments: true
+BinPackParameters: true
+
+# 命名空间内代码不额外缩进（Google 风格）
+NamespaceIndentation: None
+
+# 尾随逗号在多行初始化列表中的处理，交给 clang-format 决定即可
+Cpp11BracedListStyle: true
+
+# 每次 include 排序/格式化都保留一个空行分隔逻辑分组
+SeparateDefinitionBlocks: Always

@@ -1,0 +1,29 @@
+# EditorConfig 用于统一各种编辑器（VS Code / Vim / CLion / ...）都支持的最基础规则
+# clang-format 管代码格式，这个文件管编辑器行为
+# VS Code 需装 EditorConfig for VS Code 插件；Vim 需装 editorconfig-vim 插件。
+
+# root = true 表示这是项目最顶层的 EditorConfig 配置。
+# 编辑器会从文件所在目录逐级向上查找 .editorconfig，遇到 root = true 就停止，
+# 避免被上级目录（如 $HOME）的配置覆盖，确保项目内的配置是最终生效的。
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.{cc,cpp,cxx,h,hpp,hxx,cuh,cu}]
+indent_size = 2
+max_line_length = 100
+
+[*.{yml,yaml,json}]
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+
+[*.md]
+trim_trailing_whitespace = false
