@@ -9,7 +9,8 @@
 
 # Introduction
 
-rootfs 是 Linux 系统的根文件系统，包含了 Linux 系统运行所需的所有文件和目录结构。它是 Linux 系统的核心组成部分之一，提供了操作系统的基本功能和服务。
+rootfs 是 Linux 系统的根文件系统，包含了 Linux 系统运行所需的所有文件和目录结构。它是 Linux
+系统的核心组成部分之一，提供了操作系统的基本功能和服务。
 
 
 # References

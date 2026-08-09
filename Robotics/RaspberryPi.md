@@ -67,15 +67,17 @@ ARMv7 架构；
 
 
 
-## 1.3. 交叉构建Buildroot
+## 1.3. 交叉构建 Buildroot
 
 |                     | Pi 3B+                                       | Pi Zero W                 |
 | ------------------- | -------------------------------------------- | ------------------------- |
-| CPU                 | 四核 Cortex-A53 (armv7代码兼容，实际是armv8) | 单核 ARM11 (armv6)        |
+| CPU                 | 四核 Cortex-A53 (armv7 代码兼容，实际是 armv8) | 单核 ARM11 (armv6)        |
 | Buildroot defconfig | `raspberrypi3_defconfig`                     | `raspberrypi0w_defconfig` |
-| 架构差异            | armv7 (32位常用配置)                         | **armv6**，工具链不通用   |
+| 架构差异            | armv7 (32 位常用配置)                         | **armv6**，工具链不通用   |
 
-**关键点**：Pi Zero W 用的是 ARM1176（armv6），跟 Pi 3B+ 的 Cortex-A53（armv7/v8）指令集不完全兼容。你不能编译一份镜像烧两块板子，**必须为每块板子单独跑一次 Buildroot 配置和编译**，产出两个独立的 `sdcard.img`。
+**关键点**：Pi Zero W 用的是 ARM1176（armv6），跟 Pi 3B+ 的
+Cortex-A53（armv7/v8）指令集不完全兼容。你不能编译一份镜像烧两块板子，**必须为每块板子单独跑一次 Buildroot
+配置和编译**，产出两个独立的 `sdcard.img`。
 
 1、构建 Dockerfile
 
@@ -120,7 +122,7 @@ rpi-build/
 └── output-zerow/
 ```
 
-3、分别启动不同的容器，给2块板子执行构建流程
+3、分别启动不同的容器，给 2 块板子执行构建流程
 
 Pi 3B+：
 
@@ -156,11 +158,15 @@ make -j$(nproc)
 
 **关键注意点**
 
-1. **`useradd builder` 这一步是必须的**——Buildroot 官方明确不允许以 root 用户执行编译，容器默认是 root，会直接报错退出。这是最容易踩的坑。
-2. **`-j$(nproc)` 用的是容器可见的核数**，如果 Docker Desktop（Mac/Windows）限制了容器CPU数，编译会变慢，可以在 Docker 设置里调高。
+1. **`useradd builder` 这一步是必须的**——Buildroot 官方明确不允许以 root 用户执行编译，容器默认是
+   root，会直接报错退出。这是最容易踩的坑。
+2. **`-j$(nproc)` 用的是容器可见的核数**，如果 Docker Desktop（Mac/Windows）限制了容器 CPU 数，编译会变慢，可以在
+   Docker 设置里调高。
 3. **持久化 dl 目录**（Buildroot 下载源码包的缓存目录），避免每次重新 build 容器都要重新下载全部源码;
-4. **网络问题**：Buildroot 编译过程要从 kernel.org、各个开源项目的服务器下载源码，如果你的 Docker 环境网络受限（比如公司代理），需要在 Dockerfile 或 `docker run` 里配置好 `http_proxy`/`https_proxy`。
-5. **写卡这一步必须在宿主机上做**，不要试图在容器里操作 `/dev/sdX`——除非用 `--privileged` 且映射设备进去，一般没这个必要，直接容器外 `dd` 更简单安全。
+4. **网络问题**：Buildroot 编译过程要从 kernel.org、各个开源项目的服务器下载源码，如果你的 Docker
+   环境网络受限（比如公司代理），需要在 Dockerfile 或 `docker run` 里配置好 `http_proxy`/`https_proxy`。
+5. **写卡这一步必须在宿主机上做**，不要试图在容器里操作 `/dev/sdX`——除非用 `--privileged`
+   且映射设备进去，一般没这个必要，直接容器外 `dd` 更简单安全。
 
 4、将构建好的产物烧录到板子上；
 

@@ -151,7 +151,8 @@ export HTTPS_PROXY="http://${WIN_IP}:7897"
 
 ### 2.2. ubuntu Container Proxy
 
-Clash Verge 在 Windows 上通常监听 `127.0.0.1:7897`（HTTP/SOCKS5 混合端口，具体看你 Clash Verge 的端口设置）。容器要访问这个代理，需要用宿主机的地址而不是 `127.0.0.1`（容器里的 `127.0.0.1` 指向容器自己）。
+Clash Verge 在 Windows 上通常监听 `127.0.0.1:7897`（HTTP/SOCKS5 混合端口，具体看你 Clash Verge
+的端口设置）。容器要访问这个代理，需要用宿主机的地址而不是 `127.0.0.1`（容器里的 `127.0.0.1` 指向容器自己）。
 
 **第一步：确认 Clash Verge 端口和监听地址**
 
@@ -203,7 +204,8 @@ EOF
 
 ---
 
-**如果 `host.docker.internal` 不可用**（某些网络模式下可能没有），备选方案是查看 `eth0` 的网关地址，Docker bridge 网络下网关通常就是宿主机在该虚拟网络里的地址：
+**如果 `host.docker.internal` 不可用**（某些网络模式下可能没有），备选方案是查看 `eth0` 的网关地址，Docker bridge
+网络下网关通常就是宿主机在该虚拟网络里的地址：
 
 ```bash
 ip route | grep default
@@ -546,4 +548,5 @@ Claude Code 的客户端是用 **TypeScript** 开发的，运行在 **Node.js / 
 
 Claude Code 的终端界面相当复杂（流式输出、多面板、交互操作），而 [Ink](https://github.com/vadimdemedes/ink) 允许用 React 组件写 TUI（Terminal UI）。TypeScript 天然支持 JSX/TSX，这个技术栈几乎没有其他语言能直接替代。
 
-Anthropic 官方的 `@anthropic-ai/sdk` 本身是 TypeScript 写的，Claude Code 调用自家 API 时可以直接获得完整的类型提示和 IntelliSense，开发效率更高。
+Anthropic 官方的 `@anthropic-ai/sdk` 本身是 TypeScript 写的，Claude Code 调用自家 API 时可以直接获得完整的类型提示和
+IntelliSense，开发效率更高。

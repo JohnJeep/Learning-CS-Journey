@@ -28,7 +28,7 @@ TypeScript 包含所有 JavaScript 关键字，并在此基础上增加了自己
 
 ------
 
-## 第一类：JavaScript 保留关键字（45个）
+## 第一类：JavaScript 保留关键字（45 个）
 
 这些在 TS 中完全继承，**不可用作标识符**：
 
@@ -44,9 +44,10 @@ TypeScript 包含所有 JavaScript 关键字，并在此基础上增加了自己
 
 ------
 
-## 第二类：TypeScript 专有关键字（17个）
+## 第二类：TypeScript 专有关键字（17 个）
 
-这些是 TypeScript 在 JavaScript 基础上新增的关键字：`abstract`、`any`、`async`、`await`、`constructor`、`declare`、`from`、`get`、`is`、`module`、`namespace`、`never`、`require`、`set`、`type`、`unknown`、`readonly`。
+这些是 TypeScript 在 JavaScript 基础上新增的关键字：`abstract`、`any`、`async`、`await`、`constructor`、`declare`、`fr
+om`、`get`、`is`、`module`、`namespace`、`never`、`require`、`set`、`type`、`unknown`、`readonly`。
 
 对 C++ 开发者而言，其中最重要的几个：
 
@@ -63,9 +64,10 @@ TypeScript 包含所有 JavaScript 关键字，并在此基础上增加了自己
 
 
 
-## 第三类：上下文关键字（4个）
+## 第三类：上下文关键字（4 个）
 
-这些词在特定上下文中有特殊含义，但并非保留字，可以在其他地方用作变量名：`of`（用于 `for...of` 循环）、`asserts`（类型断言）、`infer`（条件类型中推断）、`keyof`（获取类型的键联合）。
+这些词在特定上下文中有特殊含义，但并非保留字，可以在其他地方用作变量名：`of`（用于 `for...of`
+循环）、`asserts`（类型断言）、`infer`（条件类型中推断）、`keyof`（获取类型的键联合）。
 
 ```typescript
 // keyof 示例：获取对象所有 key 组成的联合类型
@@ -77,9 +79,10 @@ type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never
 
 ------
 
-## 第四类：内置基础类型名（7个）
+## 第四类：内置基础类型名（7 个）
 
-虽然严格来说不算关键字，但这些是 TypeScript 的内置类型：`boolean`、`number`、`string`、`symbol`、`object`、`undefined`、`bigint`。它们可以用作变量名（但强烈不建议），这是和 C++ 内置类型的一个区别。
+虽然严格来说不算关键字，但这些是 TypeScript 的内置类型：`boolean`、`number`、`string`、`symbol`、`object`、`undefined`
+、`bigint`。它们可以用作变量名（但强烈不建议），这是和 C++ 内置类型的一个区别。
 
 ```typescript
 // 这在 TS 里合法（但是坏习惯）
@@ -101,8 +104,9 @@ let number = 42        // ⚠️ 同上
 
 ------
 
-作为有 C++/Go 基础的开发者，大多数关键字一看就懂。真正需要重点理解的是 TS 专有的那17个，
-尤其是 `type`、`interface`、`declare`、`readonly`、`never`、`unknown`、`is`、`infer`、`keyof` 这9个——它们才是 TypeScript 类型系统的核心武器。
+作为有 C++/Go 基础的开发者，大多数关键字一看就懂。真正需要重点理解的是 TS 专有的那 17 个，
+尤其是 `type`、`interface`、`declare`、`readonly`、`never`、`unknown`、`is`、`infer`、`keyof` 这 9 个——它们才是
+TypeScript 类型系统的核心武器。
 
 
 
@@ -246,7 +250,9 @@ object: 包含 Array, Function, Date, Error
   - void
     - 用于函数的返回值, 表示没有返回值;
     - `void` 包含了 `undefined`，但 `undefined` 不一定是 `void`;
-    - void 与 undefined 的区别：**`undefined`**：是一个具体的**值类型**，只有一个值 `undefined`。`void`：是一个**语义类型**，专门用来描述"函数没有有意义的返回值"，是关于**意图**的类型，不是关于值的类型。
+    - void 与 undefined 的区别：**`undefined`**：是一个具体的**值类型**，只有一个值
+      `undefined`。`void`：是一个**语义类型**，专门用来描述"函数没有有意义的返回值"，是关于**意图**的类型，不是关于值
+      的类型。
       ```typescript
       let a: undefined = undefined;  // ✅ 只能赋值 undefined
       let b: void = undefined;       // ✅ 也可以，因为 undefined 是 void 的子类型
@@ -431,7 +437,8 @@ numStack.push(1)
 
 # 多线程
 
-C++ 中并发靠 `std::thread`，TypeScript 是**单线程 + 事件循环**，并发靠 `async/await` + `Promise`，更像 Go 的 goroutine 但只有一个线程。
+C++ 中并发靠 `std::thread`，TypeScript 是**单线程 + 事件循环**，并发靠 `async/await` + `Promise`，更像 Go 的
+goroutine 但只有一个线程。
 
 ```typescript
 // Promise（类比 C++ std::future，但用法完全不同）

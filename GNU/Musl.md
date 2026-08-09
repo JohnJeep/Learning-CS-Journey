@@ -9,9 +9,12 @@
 
 ## musl 是什么
 
-**musl** 是一个轻量级、快速、简洁、注重标准兼容性的 **C 标准库**（libc）实现，用来替代 glibc（GNU C Library）或 uClibc。
+**musl** 是一个轻量级、快速、简洁、注重标准兼容性的 **C 标准库**（libc）实现，用来替代 glibc（GNU C Library）或
+uClibc。
 
-C 标准库是 Linux 系统中最底层的基础库之一——任何用 C/C++ 写的程序（包括 shell、BusyBox、内核工具链本身）在运行时都要链接某个 libc，来提供 `malloc`、`printf`、`open`、`pthread` 之类的系统调用封装和标准函数。musl 就是 glibc 的一个"轻量替代品"。
+C 标准库是 Linux 系统中最底层的基础库之一——任何用 C/C++ 写的程序（包括
+shell、BusyBox、内核工具链本身）在运行时都要链接某个 libc，来提供 `malloc`、`printf`、`open`、`pthread`
+之类的系统调用封装和标准函数。musl 就是 glibc 的一个"轻量替代品"。
 
 
 ### musl vs glibc 的核心区别
