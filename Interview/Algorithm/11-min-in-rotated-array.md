@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-01-14 23:31:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:43:07
+ * @LastEditTime: 2026-08-09 17:02:31
  * @Description: 11-min-in-rotated-array
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 第 11 题：旋转数组的最小数字
@@ -56,31 +56,30 @@
 ```c++
 class Solution {
 public:
-    int minNumberInRotateArray(vector<int> rotateArray) {
-        if (rotateArray.size() == 0) {
-            return 0;
-        }
-        int low = 0;
-        int high = rotateArray.size() - 1;
-        while (low < high) {
-            // 处理特殊的情况，两边不是递增的序列
-            if (rotateArray[low] < rotateArray[high]) {
-                return rotateArray[low];
-            }
-            
-            int mid = (low + high) / 2;
-            if (rotateArray[mid] > rotateArray[low]) {  
-                low = mid + 1;   // 左边是递增的序列，取右边的第一个值
-            }
-            else if (rotateArray[mid] < rotateArray[high]) { 
-                high = mid;      // 右边有序列，取右边最小值
-            }
-            else {               // 前面两个相等的时候，low加一继续
-                low++;
-            }
-        }
-        return rotateArray[low];
+  int minNumberInRotateArray(vector<int> rotateArray) {
+    if (rotateArray.size() == 0) {
+      return 0;
     }
+    int low = 0;
+    int high = rotateArray.size() - 1;
+    while (low < high) {
+      // 处理特殊的情况，两边不是递增的序列
+      if (rotateArray[low] < rotateArray[high]) {
+        return rotateArray[low];
+      }
+
+      int mid = (low + high) / 2;
+      if (rotateArray[mid] > rotateArray[low]) {
+        low = mid + 1;   // 左边是递增的序列，取右边的第一个值
+      }
+      else if (rotateArray[mid] < rotateArray[high]) {
+        high = mid;      // 右边有序列，取右边最小值
+      }
+      else {               // 前面两个相等的时候，low加一继续
+        low++;
+      }
+    }
+    return rotateArray[low];
+  }
 };
 ```
-

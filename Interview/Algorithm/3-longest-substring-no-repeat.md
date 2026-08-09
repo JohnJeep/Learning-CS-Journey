@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-04-19 20:38:31
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:34:35
+ * @LastEditTime: 2026-08-09 17:02:10
  * @Description: 3-longest-substring-no-repeat
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 
@@ -16,7 +16,7 @@
 示例 1:
 ```
 输入: s = "abcabcbb"
-输出: 3 
+输出: 3
 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 ```
 
@@ -52,21 +52,21 @@
 ```cpp
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-        int res = 0; // 记录最长无重复子串的长度
-        int left = -1; // 指向该无重复子串左边的起始位置的前一个
-        unordered_map<int, int> m;
-        for (int i = 0; i < s.size(); ++i) {            
-            // 判断当前字符是否在HashMap中已存在
-            // 若当前字符已在HashMap中，且映射值大于left的话，更新 left 为当前映射值
-            if (m.count(s[i]) && m[s[i]] > left) {
-                left = m[s[i]];  // 若存在，移除之前在窗口出现的字符
-            }            
-            m[s[i]] = i;  // 更新映射值为当前坐标i,这样保证了 left 始终为当前边界的前一个位置
-            res = max(res, i - left);   // 计算窗口长度         
-        }
-        return res;
+  int lengthOfLongestSubstring(string s) {
+    int res = 0; // 记录最长无重复子串的长度
+    int left = -1; // 指向该无重复子串左边的起始位置的前一个
+    unordered_map<int, int> m;
+    for (int i = 0; i < s.size(); ++i) {
+      // 判断当前字符是否在HashMap中已存在
+      // 若当前字符已在HashMap中，且映射值大于left的话，更新 left 为当前映射值
+      if (m.count(s[i]) && m[s[i]] > left) {
+        left = m[s[i]];  // 若存在，移除之前在窗口出现的字符
+      }
+      m[s[i]] = i;  // 更新映射值为当前坐标i,这样保证了 left 始终为当前边界的前一个位置
+      res = max(res, i - left);   // 计算窗口长度
     }
+    return res;
+  }
 };
 ```
 
@@ -77,6 +77,7 @@ public:
 
 
 # 参考
+
 - [无重复字符的最长子串 c++实现三种解法 多重循环，hashmap 优化，桶优化](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-cshi-xian-/)
 - [滑动窗口](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/)
 - [[LeetCode] 3. Longest Substring Without Repeating Characters](https://github.com/grandyang/leetcode/issues/3)

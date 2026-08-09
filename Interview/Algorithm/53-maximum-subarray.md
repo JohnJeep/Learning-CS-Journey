@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-04-21 21:38:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:40:59
+ * @LastEditTime: 2026-08-09 17:03:33
  * @Description: 53-maximum-subarray
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 53-最大子序和
@@ -53,22 +53,22 @@
 ```cpp
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        if (nums.size() == 1) {
-            return nums[0];
-        }
-        int max = INT_MIN;   // 理论上的最小值
-        for (int i = 0; i < nums.size(); i++) {
-            int sum = 0;
-            for (int j = i; j < nums.size(); j++) {
-                sum += nums[j];
-                if (sum > max) {
-                    max = sum;
-                }
-            }
-        }
-        return max;
+  int maxSubArray(vector<int>& nums) {
+    if (nums.size() == 1) {
+      return nums[0];
     }
+    int max = INT_MIN;   // 理论上的最小值
+    for (int i = 0; i < nums.size(); i++) {
+      int sum = 0;
+      for (int j = i; j < nums.size(); j++) {
+        sum += nums[j];
+        if (sum > max) {
+          max = sum;
+        }
+      }
+    }
+    return max;
+  }
 };
 ```
 
@@ -86,19 +86,19 @@ $\Omicron(1)$
 ```cpp
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        int resultMax = INT_MIN; 
-        int len = nums.size();
-        vector<int> arr(len);
-        
-        arr[0] = nums[0];
-        resultMax = arr[0];
-        for (int i = 1; i < len; i++) {
-            arr[i] = max(arr[i - 1] + nums[i], nums[i]);
-            resultMax = max(resultMax, arr[i]);
-        }
-        return resultMax;
+  int maxSubArray(vector<int>& nums) {
+    int resultMax = INT_MIN;
+    int len = nums.size();
+    vector<int> arr(len);
+
+    arr[0] = nums[0];
+    resultMax = arr[0];
+    for (int i = 1; i < len; i++) {
+      arr[i] = max(arr[i - 1] + nums[i], nums[i]);
+      resultMax = max(resultMax, arr[i]);
     }
+    return resultMax;
+  }
 };
 ```
 
@@ -115,15 +115,15 @@ $\Omicron(n)$
 ```cpp
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        int maxSum = nums[0];
-        int arr = 0;  // 用于存储数组中前 i-1 个变量的子数组之和
-        for (const auto& num : nums) {
-            arr = max(arr + num, num);
-            maxSum = max(arr, maxSum);
-        }
-        return maxSum;
+  int maxSubArray(vector<int>& nums) {
+    int maxSum = nums[0];
+    int arr = 0;  // 用于存储数组中前 i-1 个变量的子数组之和
+    for (const auto& num : nums) {
+      arr = max(arr + num, num);
+      maxSum = max(arr, maxSum);
     }
+    return maxSum;
+  }
 };
 ```
 
@@ -140,4 +140,5 @@ $\Omicron(n)$
 
 
 # 参考
+
 [最大子序和 c++实现四种解法 暴力法、动态规划、贪心法和分治法 图示讲解](https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-he-cshi-xian-si-chong-jie-fa-bao-li-f/)

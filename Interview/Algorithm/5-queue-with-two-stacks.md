@@ -1,10 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-01-11 22:23:18
- * @LastEditTime: 2026-05-31 20:43:34
+ * @LastEditTime: 2026-08-09 17:02:24
  * @LastEditors: JohnJeep
  * @Description: 5-queue-with-two-stacks
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 #  第 5 题：用两个栈实现队列
@@ -24,25 +24,25 @@
 class Solution
 {
 public:
-    void push(int node) {
-        stack1.push(node);
-    }
+  void push(int node) {
+    stack1.push(node);
+  }
 
-    int pop() {
-        if (stack2.empty()) {
-            while(!stack1.empty()){
-                stack2.push(stack1.top());
-                stack1.pop();
-            }
-        }
-        int ret = stack2.top();
-        stack2.pop();
-        return ret;
+  int pop() {
+    if (stack2.empty()) {
+      while(!stack1.empty()){
+        stack2.push(stack1.top());
+        stack1.pop();
+      }
     }
+    int ret = stack2.top();
+    stack2.pop();
+    return ret;
+  }
 
 private:
-    stack<int> stack1;
-    stack<int> stack2;
+  stack<int> stack1;
+  stack<int> stack2;
 };
 ```
 

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-09-07 22:15:35
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:36:02
+ * @LastEditTime: 2026-08-09 17:03:52
  * @Description: find-element-greater-than-left-less-than-right
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 题目
@@ -33,31 +33,31 @@ using namespace std;
 
 vector<int> func(int data[], int len)
 {
-    vector<int> vec;
-    int* right_min = new int[len];       // 定义一个辅助数组存右侧最小值
-    right_min[len - 1] = data[len - 1];  // 数组的最后一位存最右侧值，设初值
+  vector<int> vec;
+  int* right_min = new int[len];       // 定义一个辅助数组存右侧最小值
+  right_min[len - 1] = data[len - 1];  // 数组的最后一位存最右侧值，设初值
 
-    for (int i = len - 2; i >= 0; --i) {
-        right_min[i] = std::min(data[i], data[i+1]);
+  for (int i = len - 2; i >= 0; --i) {
+    right_min[i] = std::min(data[i], data[i+1]);
+  }
+
+  int left_max = 0;
+  for (int i = 0; i < len; ++i) {
+    left_max = std::max(data[i], left_max);
+    if (left_max == right_min[i]) {
+      vec.push_back(left_max);
     }
-    
-    int left_max = 0;
-    for (int i = 0; i < len; ++i) {
-        left_max = std::max(data[i], left_max);
-        if (left_max == right_min[i]) {
-            vec.push_back(left_max);
-        }
-    }
-    return vec;
+  }
+  return vec;
 }
 
-int main() 
+int main()
 {
-    int array[] = {1, 2, 4, 3, 9, 5, 6, 12, 15};
-    int length = sizeof(array)/sizeof(int);
+  int array[] = {1, 2, 4, 3, 9, 5, 6, 12, 15};
+  int length = sizeof(array)/sizeof(int);
 
-    func(array, length);
+  func(array, length);
 
-    return 0;
+  return 0;
 }
 ```

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-04-21 21:38:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:41:21
+ * @LastEditTime: 2026-08-09 17:03:16
  * @Description: 40-smallest-k-numbers
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 第 40 题：最小的 K 个数
@@ -29,14 +29,14 @@
 
 ```cpp
 vector<int> getLeastNumbers(vector<int>& arr, int k) {
-    sort(arr.begin(), arr.end());
-    vector<int> v(k, 0);
-    for (int i = 0; i < k; ++i) {
-        v[i] = arr[i];
-    }
-    return v;
+  sort(arr.begin(), arr.end());
+  vector<int> v(k, 0);
+  for (int i = 0; i < k; ++i) {
+    v[i] = arr[i];
+  }
+  return v;
 }
-```    
+```
 复杂度分析
 
 - 时间复杂度：`O(n*log n)`，其中 n 是数组 arr 的长度。算法的时间复杂度即排序的时间复杂度。
@@ -51,53 +51,53 @@ vector<int> getLeastNumbers(vector<int>& arr, int k) {
 ```cpp
 class Solution {
 public:
-    int partition(vector<int>& array, int low, int high)
-    {
-        int piv = array[low];
-        while (low < high) {
-            while ((low < high) && (array[high] >= piv)) {
-                high--;
-            }
-            array[low] = array[high];
+  int partition(vector<int>& array, int low, int high)
+  {
+    int piv = array[low];
+    while (low < high) {
+      while ((low < high) && (array[high] >= piv)) {
+        high--;
+      }
+      array[low] = array[high];
 
-            while ((low < high) && (array[low] <= piv)) {
-                low++;
-            }
-            array[high] = array[low];
-        }
-        array[low] = piv;
-        return low;
+      while ((low < high) && (array[low] <= piv)) {
+        low++;
+      }
+      array[high] = array[low];
     }
-    
-    void quickSort(vector<int>& input, int low, int high, int k)
-    {
-        int pivot = partition(input, low, high);
-        
-        if (pivot == k) {
-            return;
-        }
-        else if (pivot > k) {
-            quickSort(input, 0, pivot-1, k);
-        }
-        else {
-            quickSort(input, pivot+1, high, k);
-        }
+    array[low] = piv;
+    return low;
+  }
+
+  void quickSort(vector<int>& input, int low, int high, int k)
+  {
+    int pivot = partition(input, low, high);
+
+    if (pivot == k) {
+      return;
     }
-    
-    vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
-    {
-        vector<int> ret;
-        if (k == 0 || k > input.size()) {
-            return ret;
-        }
-        int low = 0;
-        int high = input.size() - 1;
-        quickSort(input, low, high, k);
-        for (int i=0; i<k; i++){
-            ret.push_back(input[i]);
-        }
-        return ret;
+    else if (pivot > k) {
+      quickSort(input, 0, pivot-1, k);
     }
+    else {
+      quickSort(input, pivot+1, high, k);
+    }
+  }
+
+  vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
+  {
+    vector<int> ret;
+    if (k == 0 || k > input.size()) {
+      return ret;
+    }
+    int low = 0;
+    int high = input.size() - 1;
+    quickSort(input, low, high, k);
+    for (int i=0; i<k; i++){
+      ret.push_back(input[i]);
+    }
+    return ret;
+  }
 };
 ```
 
@@ -116,53 +116,53 @@ public:
 ```cpp
 class Solution {
 public:
-    void adjustHeap(vector<int>& input, int i, int length) 
-    {
-        int left = 2 * i + 1;  // i节点的左孩子，i从 0 开始
-        int right = 2 * i + 2; // i节点的右孩子
-        int max = i;           // 先设置父节点和子节点三个节点中最大值的位置为父节点下标
-        if (left < length && input[left] > input[max]) {
-            max = left;
-        }
-        if (right < length && input[right] > input[max]) {
-            max = right;
-        }
-        
-        //最大值不是父节点，则进行交换
-        if (max != i) {
-            int temp;
-            temp = input[i];
-            input[i] = input[max];
-            input[max] = temp;
-            adjustHeap(input, max, length); //递归调用，保证子树也是最大堆
-        }
+  void adjustHeap(vector<int>& input, int i, int length)
+  {
+    int left = 2 * i + 1;  // i节点的左孩子，i从 0 开始
+    int right = 2 * i + 2; // i节点的右孩子
+    int max = i;           // 先设置父节点和子节点三个节点中最大值的位置为父节点下标
+    if (left < length && input[left] > input[max]) {
+      max = left;
+    }
+    if (right < length && input[right] > input[max]) {
+      max = right;
     }
 
-    vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
-    {
-        if (input.empty() || k == 0 || k > input.size()) {
-            return vector<int>{};
-        }
-
-        vector<int> result;
-        //建立堆
-        for (int i = input.size() / 2 - 1; i >= 0; i--) {
-            adjustHeap(input, i, k); //堆的大小为k
-        }
-        //将后面的数依次和K个数的最大值比较
-        for (int i = k; i < input.size(); i++) {
-            if (input[0] > input[i]) {
-                int temp = input[i];
-                input[i] = input[0];
-                input[0] = temp;
-                adjustHeap(input, 0, k);
-            }
-        }
-        for (int i = 0; i < k; i++) {
-            result.push_back(input[i]);
-        }
-        return result;
+    //最大值不是父节点，则进行交换
+    if (max != i) {
+      int temp;
+      temp = input[i];
+      input[i] = input[max];
+      input[max] = temp;
+      adjustHeap(input, max, length); //递归调用，保证子树也是最大堆
     }
+  }
+
+  vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
+  {
+    if (input.empty() || k == 0 || k > input.size()) {
+      return vector<int>{};
+    }
+
+    vector<int> result;
+    //建立堆
+    for (int i = input.size() / 2 - 1; i >= 0; i--) {
+      adjustHeap(input, i, k); //堆的大小为k
+    }
+    //将后面的数依次和K个数的最大值比较
+    for (int i = k; i < input.size(); i++) {
+      if (input[0] > input[i]) {
+        int temp = input[i];
+        input[i] = input[0];
+        input[0] = temp;
+        adjustHeap(input, 0, k);
+      }
+    }
+    for (int i = 0; i < k; i++) {
+      result.push_back(input[i]);
+    }
+    return result;
+  }
 };
 ```
 
@@ -177,4 +177,5 @@ public:
 
 
 # 参考
+
 [LeetCode 解题思路](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/solution/zui-xiao-de-kge-shu-by-leetcode-solution/)
