@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-21 12:09:45
+ * @LastEditTime: 2026-08-09 14:05:49
  * @Description: C++ 基础
- * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
+ * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
 
 # 1. concept(概念)
@@ -12,8 +12,8 @@
 c++ 是一种倾向于系统编程的通用编程语言，在 C 语言的基础上发展起来的，支持的特性。
 - supports data abstraction
 - supports object-oriented programming
-- supports generic programming  
-- Compile-Time (constexpr and template metaprogramming)  
+- supports generic programming
+- Compile-Time (constexpr and template metaprogramming)
 
 
 # 2. c++ basics(C++基础)
@@ -27,7 +27,7 @@ c++ 是一种倾向于系统编程的通用编程语言，在 C 语言的基础�
 - `char`：8 个 bit，占一个字节（byte）空间
 - 取模场景
   - 取一个数的个位数
-  - 多少天是一个月的第几天 
+  - 多少天是一个月的第几天
 - `<<` 左移运算符：右侧空位补 0
 - `>>` 右移运算符：左侧空位补符号位，符号位正数部 0，符号位为负数补 1。
 - `switch` 语句后的表达式只能为整型或字符类型。`break` 语句：执行循环体后，调出循环。可用于 `switch`
@@ -38,24 +38,24 @@ c++ 是一种倾向于系统编程的通用编程语言，在 C 语言的基础�
   case /* constant-expression */:
       /* code */
       break;
-  
+
   default:
       break;
-  } 
+  }
   ```
 - continue：只能用于循环结构，调出循环。
 - 计算数组大小：对基本类型（不包括 `String` 类型）
   ```cpp
   sizeof(array_var) / sizeof(array_type)
-  
-  sizeof(nums) / sizeof(int) 
+
+  sizeof(nums) / sizeof(int)
   ```
 
 - 指针
   - 所有的指针都要初始化
   - `int *ptr`  整型指针，结果是一个值
   - `int *ptr  int*`：指向整型的指针，结果是一个地址
-  - `void* ` 指针存放的是一个内存地址，地址的内容是什么类型不能确定 
+  - `void* ` 指针存放的是一个内存地址，地址的内容是什么类型不能确定
 
 
 # 3. namespace(命名空间)
@@ -81,12 +81,12 @@ C++的命名空间
   - 只打开标准库的部分内容。
     ```cpp
     using std::cout;
-    
+
     int main()
     {
       cout << ...;
       std::cin >> ...;
-    
+
       return 0;
     }
     ```
@@ -96,7 +96,7 @@ C++的命名空间
     {
       std::cout << ...;
       std::cin  >> ...;
-    
+
       return 0;
     }
     ```
@@ -104,7 +104,7 @@ C++的命名空间
   ```cpp
   using uint64 = unsigned long long;
   ```
-  
+
 
 C++编译器不支持使用 `typedef` 关键词为**模板类**设置别名，但是使用 `using` 的方式声明一个关键词却是允许的，只是这个是
 C++11 标准才有的，如果在编译时不加上 `--std=c++11`
@@ -117,7 +117,7 @@ C++11 标准才有的，如果在编译时不加上 `--std=c++11`
 
 # 4. header file(头文件)
 
-头文件采用防御式声明 
+头文件采用防御式声明
 
 ```cpp
 #ifndef __TEST_H
@@ -159,15 +159,15 @@ int* const __ref = &num; // 一个指向num的常量指针
   ```cpp
   #include <iostream>
   using namespace std;
-  
+
   int main() {
       int x = 10;
       int& ref = x;
-  
+
       cout << "x的地址: " << &x << endl;
       cout << "ref的地址: " << &ref << endl; // 输出和x一样，因为&ref被解释为&(*__ref)，即&x
       cout << "引用变量ref本身的地址: " << (void*)&ref << endl; // 错误！不能这样做
-  
+
       // 正确的方法：通过观察编译器生成的汇编代码，或者将其放入一个结构体中来观察大小
       struct Test {
           int& r;
@@ -197,7 +197,7 @@ int* const __ref = &num; // 一个指向num的常量指针
 
 - 传引用的效率比指针高，传递的直接是对象，而不是把对象复制。
 - 函数内部的引用参数值可能会改变，一般需要加 `const` 解决。
-- 不要返回局部变量的引用，全局变量和静态变量可以作为返回值的引用。 
+- 不要返回局部变量的引用，全局变量和静态变量可以作为返回值的引用。
 - C++编译器在编译时使用一个常量指针作为引用的内部实现。因此，引用占用的内存空间大小与指针占用空间大小相同。`type&
   name <==> type* const name`
 
@@ -211,12 +211,12 @@ int* const __ref = &num; // 一个指向num的常量指针
 
 ```cpp
 int x = 10;
-const int &y = x;   // 不能通过y去修改x的值 
+const int &y = x;   // 不能通过y去修改x的值
 ```
 
 初始化
 - 用变量初始化常引用。`int x = 10; const int &y = x;`
-- 用自变量初始化常引用。`const int &a = 100;` 
+- 用自变量初始化常引用。`const int &a = 100;`
 - 使用常量引用进行初始化时，C++ 编译器会为常量值分配空间，并将引用名作为当前分配空间的别名。
 
 ## 5.3. 指针的引用(reference to pointer)
@@ -238,14 +238,14 @@ int*& ref_ptr = ptr;   // ref_ptr是指针ptr的引用（别名）
 
 ```cpp
 void allocateMemory(int* p) {
-    p = new int(100); // 这里只修改了局部副本，外部的ptr不受影响
+  p = new int(100); // 这里只修改了局部副本，外部的ptr不受影响
 }
 
 int main() {
-    int* ptr = nullptr;
-    allocateMemory(ptr);
-    // ptr仍然是nullptr！内存泄漏了！
-    delete ptr;
+  int* ptr = nullptr;
+  allocateMemory(ptr);
+  // ptr仍然是nullptr！内存泄漏了！
+  delete ptr;
 }
 ```
 
@@ -253,14 +253,14 @@ int main() {
 
 ```cpp
 void allocateMemory(int*& p) {
-    p = new int(100); // 直接修改外部指针的指向
+  p = new int(100); // 直接修改外部指针的指向
 }
 
 int main() {
-    int* ptr = nullptr;
-    allocateMemory(ptr);
-    cout << *ptr << endl; // 输出100
-    delete ptr;
+  int* ptr = nullptr;
+  allocateMemory(ptr);
+  cout << *ptr << endl; // 输出100
+  delete ptr;
 }
 ```
 
@@ -270,23 +270,23 @@ int main() {
 
 ```cpp
 struct ListNode {
-    int data;
-    ListNode* next;
-    ListNode(int val) : data(val), next(nullptr) {}
+  int data;
+  ListNode* next;
+  ListNode(int val) : data(val), next(nullptr) {}
 };
 
 // 在链表头部插入新节点
 void insertAtHead(ListNode*& head, int value) {
-    ListNode* newNode = new ListNode(value);
-    newNode->next = head;  // 新节点指向原头节点
-    head = newNode;        // 修改头指针指向新节点
+  ListNode* newNode = new ListNode(value);
+  newNode->next = head;  // 新节点指向原头节点
+  head = newNode;        // 修改头指针指向新节点
 }
 
 int main() {
-    ListNode* head = nullptr;
-    insertAtHead(head, 1);  // head从nullptr变为指向新节点
-    insertAtHead(head, 2);  // head再次被更新
-    // 现在链表：2 -> 1 -> nullptr
+  ListNode* head = nullptr;
+  insertAtHead(head, 1);  // head从nullptr变为指向新节点
+  insertAtHead(head, 2);  // head再次被更新
+  // 现在链表：2 -> 1 -> nullptr
 }
 ```
 
@@ -294,18 +294,18 @@ int main() {
 
 ```cpp
 void swapPointers(int*& p1, int*& p2) {
-    int* temp = p1;
-    p1 = p2;
-    p2 = temp;
+  int* temp = p1;
+  p1 = p2;
+  p2 = temp;
 }
 
 int main() {
-    int a = 10, b = 20;
-    int* ptr1 = &a;
-    int* ptr2 = &b;
-    
-    swapPointers(ptr1, ptr2);
-    // 现在ptr1指向b，ptr2指向a
+  int a = 10, b = 20;
+  int* ptr1 = &a;
+  int* ptr2 = &b;
+
+  swapPointers(ptr1, ptr2);
+  // 现在ptr1指向b，ptr2指向a
 }
 ```
 
@@ -317,13 +317,13 @@ int main() {
 
 ```cpp
 void createArray(int** arr, int size) {
-    *arr = new int[size];
+  *arr = new int[size];
 }
 
 int main() {
-    int* myArray;
-    createArray(&myArray, 10);
-    delete[] myArray;
+  int* myArray;
+  createArray(&myArray, 10);
+  delete[] myArray;
 }
 ```
 
@@ -331,13 +331,13 @@ int main() {
 
 ```cpp
 void createArray(int*& arr, int size) {
-    arr = new int[size];
+  arr = new int[size];
 }
 
 int main() {
-    int* myArray;
-    createArray(myArray, 10); // 不需要取地址，更直观
-    delete[] myArray;
+  int* myArray;
+  createArray(myArray, 10); // 不需要取地址，更直观
+  delete[] myArray;
 }
 ```
 
@@ -346,18 +346,18 @@ int main() {
 ```cpp
 class ResourceManager {
 private:
-    Resource* resource;
+  Resource* resource;
 public:
-    // 获取资源指针的引用，允许外部修改
-    Resource*& getResourceRef() {
-        return resource;
-    }
-    
-    // 安全的资源替换
-    void replaceResource(Resource*& oldResource, Resource* newRes) {
-        delete oldResource;      // 删除旧资源
-        oldResource = newRes;    // 指向新资源
-    }
+  // 获取资源指针的引用，允许外部修改
+  Resource*& getResourceRef() {
+    return resource;
+  }
+
+  // 安全的资源替换
+  void replaceResource(Resource*& oldResource, Resource* newRes) {
+    delete oldResource;      // 删除旧资源
+    oldResource = newRes;    // 指向新资源
+  }
 };
 ```
 
@@ -389,7 +389,7 @@ public:
    - 希望调用者对传递的数据不能进行修改，在数据前加 `const` 限制。
 3. 参数传递时：在能使用传 reference 的前提下，一般优先使用 `传引用` 而尽量少使用传值，并不是必须的。`传引用` 的速度比
    `传值` 速度快。
-4. 函数返回 `值传递` 时：在能使用传 reference 的前提下，一般优先使用 `传引用` 而尽量少使用传值，并不是必须的。 
+4. 函数返回 `值传递` 时：在能使用传 reference 的前提下，一般优先使用 `传引用` 而尽量少使用传值，并不是必须的。
 5. 什么情况下不能使用 `引用传递（reference）`？
    - 当一个函数参数的变量为局部变量时，不能使用传引用。因为变量在函数结束时，变量就被销毁了，不存在，若再传递引用，调
      用者则不能得到值，会出错。
@@ -401,7 +401,7 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 ## 7.1. inline(内联函数)
 函数定义时，加 `inline` 关键字，例如 `inline void func(){}`。内联函数的关键字 `inline`
-与函数体的实现在一起，不需额外的声明。 
+与函数体的实现在一起，不需额外的声明。
 
 
 实现机制：C++编译器直接将函数体插入函数调用的地方。
@@ -410,7 +410,7 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 什么时候可以用 `inline`？
 - 函数体不能过大。
 - 函数声明必须在调用之前声明。
-- 不能对函数进行取值地址操作。 
+- 不能对函数进行取值地址操作。
 - 不能存在任何形式的循环语句（for、while）。
 - 内联函数省去了普通函数调用时的压栈、跳转、返回操作。
 
@@ -461,10 +461,10 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 1. 确定函数名称
 2. 确定函数参数
-3. 根据业务，确定函数的返回值类型（是返回引用还是返回值？）以及函数体的实现。  
+3. 根据业务，确定函数的返回值类型（是返回引用还是返回值？）以及函数体的实现。
 
 `=` 赋值操作符重载。`=` 赋值操作只是将成员变量的值相应复制。若对象内包含指针，将造成不良后果：指针的值被丢弃了，但指针
-指向的内容并未释放。 
+指向的内容并未释放。
 
 # 9. Special member function (特别成员函数)
 
@@ -472,8 +472,8 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 
 ### 9.1.1. 为什么要用构造函数
 
-- 被用来初始化类的对象。  
-- 类对象被创建时，编译器为对象(object)分配内存空间，并自动调用构造函数，完成成员的初始化 
+- 被用来初始化类的对象。
+- 类对象被创建时，编译器为对象(object)分配内存空间，并自动调用构造函数，完成成员的初始化
 
 ### 9.1.2. 构造函数特征
 
@@ -487,10 +487,10 @@ C++ 对函数的检查更严格。C++ 支持 bool 类型：C++中的 `bool`，�
 class Stu
 {
 public:
-    Stu() {}  // constructor
-    ~Stu() {}
+  Stu() {}  // constructor
+  ~Stu() {}
 private:
-    string name;
+  string name;
 };
 
 ```
@@ -534,11 +534,11 @@ private:
          ~Stu() {} // destructor
          virtual int add(int x, int y) = 0; // pure virtual function
          virtual void setName(string name) { this->name = name; }
-     
+
      private:
          string name;
      };
-     
+
      ```
 
 
@@ -581,7 +581,7 @@ private:
    class MyClass {
    public:
        MyClass() : MyClass(0) {}  // 委托给下面的构造函数
-       
+
        MyClass(int v) : value(v) {}
    private:
        int value;
@@ -592,26 +592,26 @@ private:
 
    构造函数与父类的其它成员(成员变量和成员方法)不同，它不能被子类继承。因此，在创建子类对象时，为了初始化从父类中继承
    来的成员变量，编译器需要调用其父类的构造函数。如果子类的构造函数没有显示地调用父类的构造函数，则默认调用父类的无参
-   构造函数。 
+   构造函数。
 
-1. 子类与父类均没有声明构造函数时，C++编译器会默认生成构造函数去调用。 
+1. 子类与父类均没有声明构造函数时，C++编译器会默认生成构造函数去调用。
 
    ```cpp
    #include <iostream>
    using namespace std;
-   
+
    class Parent {
    public:
        // 没有声明任何构造函数
        void show() { cout << "Parent class" << endl; }
    };
-   
+
    class Child : public Parent {
    public:
        // 没有声明任何构造函数
        void display() { cout << "Child class" << endl; }
    };
-   
+
    int main() {
        Child obj;  // 编译器自动生成默认构造函数
        obj.show();    // 输出: Parent class
@@ -625,42 +625,42 @@ private:
    ```cpp
    #include <iostream>
    using namespace std;
-   
+
    class Parent {
    public:
        Parent() {
            cout << "Parent无参构造函数被调用" << endl;
        }
-       
-       void show() { 
-           cout << "Parent方法" << endl; 
+
+       void show() {
+           cout << "Parent方法" << endl;
        }
    };
-   
+
    class Child : public Parent {
    public:
        // 子类无参构造函数
        Child() {
            cout << "Child无参构造函数被调用" << endl;
        }
-       
+
        // 子类有参构造函数
        Child(int x) {
            cout << "Child有参构造函数被调用，参数: " << x << endl;
        }
-       
-       void display() { 
-           cout << "Child方法" << endl; 
+
+       void display() {
+           cout << "Child方法" << endl;
        }
    };
-   
+
    int main() {
        cout << "创建无参子类对象:" << endl;
        Child obj1;  // 自动调用Parent() → Child()
-       
+
        cout << "\n创建有参子类对象:" << endl;
        Child obj2(10);  // 自动调用Parent() → Child(10)
-       
+
        return 0;
    }
    ```
@@ -672,7 +672,7 @@ private:
    ```cpp
    #include <iostream>
    using namespace std;
-   
+
    class Parent {
    public:
        // 有参构造函数，但有默认值
@@ -680,19 +680,19 @@ private:
            cout << "Parent有参构造函数: x=" << x << ", str=" << str << endl;
        }
    };
-   
+
    class Child : public Parent {
    public:
        // 不需要显式调用父类构造函数
        Child() {
            cout << "Child无参构造函数" << endl;
        }
-       
+
        Child(int y) {
            cout << "Child有参构造函数: y=" << y << endl;
        }
    };
-   
+
    int main() {
        cout << "创建子类对象:" << endl;
        Child obj1;      // 自动调用Parent(100, "默认文本")
@@ -707,7 +707,7 @@ private:
    ```cpp
    #include <iostream>
    using namespace std;
-   
+
    class Parent {
    public:
        // 有参构造函数，没有默认值
@@ -715,19 +715,19 @@ private:
            cout << "Parent 有参构造函数: x=" << x << ", str=" << str << endl;
        }
    };
-   
+
    class Child : public Parent {
    public:
        // 必须显式调用父类构造函数
        Child() : Parent(0, "默认") {
            cout << "Child 无参构造函数" << endl;
        }
-       
+
        Child(int y, string msg) : Parent(y * 2, msg + "_parent") {
            cout << "Child 有参构造函数: y=" << y << ", msg=" << msg << endl;
        }
    };
-   
+
    int main() {
        cout << "创建子类对象:" << endl;
        Child obj1;              // 显式调用 Parent(0, "默认")
@@ -742,52 +742,52 @@ private:
    ```cpp
    #include <iostream>
    using namespace std;
-   
+
    class Parent {
    public:
        // 无参构造函数
        Parent() {
            cout << "Parent无参构造函数" << endl;
        }
-       
+
        // 有参构造函数
        Parent(int x) {
            cout << "Parent有参构造函数: x=" << x << endl;
        }
-       
+
        Parent(string str) {
            cout << "Parent字符串构造函数: str=" << str << endl;
        }
    };
-   
+
    class Child : public Parent {
    public:
        // 必须显式指定调用哪个父类构造函数
        Child() : Parent() {  // 显式调用无参构造函数
            cout << "Child无参构造函数" << endl;
        }
-       
+
        Child(int x) : Parent(x) {  // 显式调用有参构造函数
            cout << "Child有参构造函数: x=" << x << endl;
        }
-       
+
        Child(string str) : Parent(str) {  // 显式调用字符串构造函数
            cout << "Child字符串构造函数: str=" << str << endl;
        }
-       
+
        // 调用不同的父类构造函数
        Child(int x, string str) : Parent(str) {
            cout << "Child混合构造函数: x=" << x << ", str=" << str << endl;
        }
    };
-   
+
    int main() {
        cout << "测试不同情况:" << endl;
        Child obj1;              // 调用Parent()
        Child obj2(100);         // 调用Parent(100)
        Child obj3("Hello");     // 调用Parent("Hello")
        Child obj4(200, "World");// 调用Parent("World")
-       
+
        return 0;
    }
    ```
@@ -805,7 +805,7 @@ private:
    private:
        int value;
    };
-   
+
    // MyClass obj = 5;  // 错误：不能隐式转换
    MyClass obj(5);      // 正确：显式调用
    ```
@@ -817,15 +817,15 @@ private:
 ```cpp
 class MyClass {
 public:
-    constexpr MyClass(int v) : value(v) {}
+  constexpr MyClass(int v) : value(v) {}
 private:
-    int value;
+  int value;
 };
 
 constexpr MyClass obj(10);  // 编译时常量
 ```
 
-  
+
 
 总结
 
@@ -835,7 +835,7 @@ constexpr MyClass obj(10);  // 编译时常量
   4. **无默认值的参数**：必须在子类构造函数初始化列表中显式调用
   5. **多个构造函数**：必须显式指定要调用哪个父类构造函数
 
-  
+
 
 ### 9.1.6. Initialization(初始化)
 
@@ -845,28 +845,28 @@ constexpr MyClass obj(10);  // 编译时常量
 // 没有初始化
 struct Widget
 {
-    int a;        // 没有初始化，获得一个任意的值
-    string s;     // 默认初始化为 empty string
-    int* ptr;     // 没有初始化，指向任意的地址
+  int a;        // 没有初始化，获得一个任意的值
+  string s;     // 默认初始化为 empty string
+  int* ptr;     // 没有初始化，指向任意的地址
 };
 
 int main(int argc, char *argv[]) {
-    Widget w;
-    return 0;
+  Widget w;
+  return 0;
 }
 ```
 
 ```cpp
 struct Widget
 {
-    int a;        // 初始化为 0
-    string s;     // 默认初始化为 empty string
-    int* ptr;     // 初始化为 n
+  int a;        // 初始化为 0
+  string s;     // 默认初始化为 empty string
+  int* ptr;     // 初始化为 n
 };
 
 int main(int argc, char *argv[]) {
-    Widget w{};
-    return 0;
+  Widget w{};
+  return 0;
 }
 ```
 
@@ -874,16 +874,16 @@ int main(int argc, char *argv[]) {
 // 构造函数中初始化
 struct Widget
 {
-    Widget()
-    {
-        // 下面是 赋值操作 assignment operator
-        a = 10;
-        s = "hello";
-        ptr = nullptr;
-    }
-    int a;        
-    string s;     
-    int* ptr;     
+  Widget()
+  {
+    // 下面是 赋值操作 assignment operator
+    a = 10;
+    s = "hello";
+    ptr = nullptr;
+  }
+  int a;
+  string s;
+  int* ptr;
 };
 ```
 
@@ -909,21 +909,21 @@ struct Widget
 ```cpp
 class String {
 private:
-    char* str;
+  char* str;
 public:
-    String(const char* s = "") {
-        str = new char[strlen(s) + 1];
-        strcpy(str, s);
-    }
+  String(const char* s = "") {
+    str = new char[strlen(s) + 1];
+    strcpy(str, s);
+  }
 
-    // 默认拷贝构造函数（浅拷贝）
-    String(const String& other)  {
-        str = other.str; // 危险：两个对象共享同一块内存，仅仅 copy 的是指针
-    }
+  // 默认拷贝构造函数（浅拷贝）
+  String(const String& other)  {
+    str = other.str; // 危险：两个对象共享同一块内存，仅仅 copy 的是指针
+  }
 
-    ~String() {
-        delete[] str; // 如果两个对象共享同一块内存，会导致重复释放
-    }
+  ~String() {
+    delete[] str; // 如果两个对象共享同一块内存，会导致重复释放
+  }
 };
 ```
 
@@ -939,32 +939,32 @@ public:
 ```cpp
 class String {
 private:
-    char* str;
+  char* str;
 public:
-    String(const char* s = "") {
-        str = new char[strlen(s) + 1];
-        strcpy(str, s);
-    }
+  String(const char* s = "") {
+    str = new char[strlen(s) + 1];
+    strcpy(str, s);
+  }
 
-    // 自定义拷贝构造函数（深拷贝）
-    String(const String& other) {
-        str = new char[strlen(other.str) + 1];
-        strcpy(str, other.str);
-    }
+  // 自定义拷贝构造函数（深拷贝）
+  String(const String& other) {
+    str = new char[strlen(other.str) + 1];
+    strcpy(str, other.str);
+  }
 
-    // 赋值操作符也应该重载以实现深拷贝
-    String& operator=(const String& other) {
-        if (this != &other) { // 防止自赋值
-            delete[] str; // 释放原有内存
-            str = new char[strlen(other.str) + 1];
-            strcpy(str, other.str);
-        }
-        return *this;
+  // 赋值操作符也应该重载以实现深拷贝
+  String& operator=(const String& other) {
+    if (this != &other) { // 防止自赋值
+      delete[] str; // 释放原有内存
+      str = new char[strlen(other.str) + 1];
+      strcpy(str, other.str);
     }
+    return *this;
+  }
 
-    ~String() {
-        delete[] str;
-    }
+  ~String() {
+    delete[] str;
+  }
 };
 ```
 
@@ -992,7 +992,7 @@ public:
     char* getStr() const {return m_data;}
 };
 
-MyString& MyString::operator=(const MyString& str) 
+MyString& MyString::operator=(const MyString& str)
 {
   if (this == &str)   // 进行自我赋值检测
   {
@@ -1085,23 +1085,23 @@ public:
 
 # 12. new && delete
 
-windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则填充为最靠近 16 的倍数的大小。 
+windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则填充为最靠近 16 的倍数的大小。
 
-`new` 动态分配内存 
+`new` 动态分配内存
 
-- 先分配 memory，再调用构造函数 
+- 先分配 memory，再调用构造函数
 
 - new 创建一维动态数据
-  
+
   ```cpp
   // 普通类型
   根据哪种数据类型来分配内存？根据数据类型来确定分配多少内存？找到这样的内存，并返回其地址。
-  格式：typeName* pointer_name = new typeName 
+  格式：typeName* pointer_name = new typeName
   例如：int *p = new int;
-  
-  指针 p 指向的内存没有名称，那么要如何称呼它呢？我们说指针 p 指向一个数据对象， 这里的“对象”不是“面向对象编程”中的对象， 而是一种“东西”，它指的是为数据项分配的内存块。 
+
+  指针 p 指向的内存没有名称，那么要如何称呼它呢？我们说指针 p 指向一个数据对象， 这里的“对象”不是“面向对象编程”中的对象， 而是一种“东西”，它指的是为数据项分配的内存块。
   数据对象：可以是复杂的结构类型，也可以是基本类型。
-  
+
   // 一维数组
   typeName* pointer_name = new typeName[num_elements];
   例如：int *p = new int[10];
@@ -1109,7 +1109,7 @@ windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则�
   ```
 
 - 创建二维数组
-  
+
   ```cpp
   格式：typeName (*ptr)[col_num] = new typeName[row_num][col_num];
   例子：int (*ptr)[2] = new int[4][2];
@@ -1120,13 +1120,13 @@ windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则�
   {
     ...
   }
-  
+
   Airplane *ap = new Airplane;
   ```
 
 `delete` 释放内存，与 new 配对使用。
 
-- 先调用析构函数，再释放 memory  
+- 先调用析构函数，再释放 memory
 - 注意
   - 不要使用 delete 释放同一个内存块两次。
   - 不是用 new 分配的动态内存空间，不能用 delete 释放
@@ -1140,13 +1140,13 @@ windows 下内存显示总是 `16` 的倍数，若果不是 16 的倍数，则�
 ---
 
 - class member operator new()
-  
+
   <img src="./figures/placement-new-delete-1.png">
   <img src="./figures/placement-new-delete-2.png">
   <img src="./figures/placement-new-delete-3.png">
 
-  
-  
+
+
 - 标准库中使用 `placement arguments new` 的例子 <br>
   <img src="./figures/basic-string-new.png">
 
@@ -1181,191 +1181,191 @@ using namespace std;
 // 示例1：参数类型不同的重载
 class Calculator {
 public:
-    // 整数相加
-    int add(int a, int b) {
-        cout << "调用 add(int, int): ";
-        return a + b;
-    }
-    
-    // 浮点数相加
-    double add(double a, double b) {
-        cout << "调用 add(double, double): ";
-        return a + b;
-    }
-    
-    // 三个整数相加
-    int add(int a, int b, int c) {
-        cout << "调用 add(int, int, int): ";
-        return a + b + c;
-    }
-    
-    // 字符串连接
-    string add(const string& a, const string& b) {
-        cout << "调用 add(string, string): ";
-        return a + b;
-    }
+  // 整数相加
+  int add(int a, int b) {
+    cout << "调用 add(int, int): ";
+    return a + b;
+  }
+
+  // 浮点数相加
+  double add(double a, double b) {
+    cout << "调用 add(double, double): ";
+    return a + b;
+  }
+
+  // 三个整数相加
+  int add(int a, int b, int c) {
+    cout << "调用 add(int, int, int): ";
+    return a + b + c;
+  }
+
+  // 字符串连接
+  string add(const string& a, const string& b) {
+    cout << "调用 add(string, string): ";
+    return a + b;
+  }
 };
 
 // 示例2：参数顺序不同的重载
 class Printer {
 public:
-    void print(int a, double b) {
-        cout << "整数: " << a << ", 浮点数: " << b << endl;
-    }
-    
-    void print(double a, int b) {
-        cout << "浮点数: " << a << ", 整数: " << b << endl;
-    }
+  void print(int a, double b) {
+    cout << "整数: " << a << ", 浮点数: " << b << endl;
+  }
+
+  void print(double a, int b) {
+    cout << "浮点数: " << a << ", 整数: " << b << endl;
+  }
 };
 
 // 示例3：构造函数重载
 class Person {
 private:
-    string name;
-    int age;
-    string occupation;
-    
+  string name;
+  int age;
+  string occupation;
+
 public:
-    // 默认构造函数
-    Person() {
-        name = "未知";
-        age = 0;
-        occupation = "无";
-        cout << "调用默认构造函数" << endl;
-    }
-    
-    // 带参数的构造函数
-    Person(string n, int a) {
-        name = n;
-        age = a;
-        occupation = "无";
-        cout << "调用 Person(string, int) 构造函数" << endl;
-    }
-    
-    // 三个参数的构造函数
-    Person(string n, int a, string o) {
-        name = n;
-        age = a;
-        occupation = o;
-        cout << "调用 Person(string, int, string) 构造函数" << endl;
-    }
-    
-    void display() {
-        cout << "姓名: " << name << ", 年龄: " << age << ", 职业: " << occupation << endl;
-    }
+  // 默认构造函数
+  Person() {
+    name = "未知";
+    age = 0;
+    occupation = "无";
+    cout << "调用默认构造函数" << endl;
+  }
+
+  // 带参数的构造函数
+  Person(string n, int a) {
+    name = n;
+    age = a;
+    occupation = "无";
+    cout << "调用 Person(string, int) 构造函数" << endl;
+  }
+
+  // 三个参数的构造函数
+  Person(string n, int a, string o) {
+    name = n;
+    age = a;
+    occupation = o;
+    cout << "调用 Person(string, int, string) 构造函数" << endl;
+  }
+
+  void display() {
+    cout << "姓名: " << name << ", 年龄: " << age << ", 职业: " << occupation << endl;
+  }
 };
 
 // 示例4：带有virtual关键字的函数重载
 class Base {
 public:
-    virtual void show(int x) {
-        cout << "Base::show(int): " << x << endl;
-    }
-    
-    virtual void show(double x) {
-        cout << "Base::show(double): " << x << endl;
-    }
-    
-    void display(string msg) {
-        cout << "Base::display(string): " << msg << endl;
-    }
-    
-    // 注意：仅返回值不同不能构成重载
-    // int display(string msg) { return 0; } // 错误！编译不通过
+  virtual void show(int x) {
+    cout << "Base::show(int): " << x << endl;
+  }
+
+  virtual void show(double x) {
+    cout << "Base::show(double): " << x << endl;
+  }
+
+  void display(string msg) {
+    cout << "Base::display(string): " << msg << endl;
+  }
+
+  // 注意：仅返回值不同不能构成重载
+  // int display(string msg) { return 0; } // 错误！编译不通过
 };
 
 class Derived : public Base {
 public:
-    // 子类重写父类的虚函数
-    virtual void show(int x) override {
-        cout << "Derived::show(int): " << x << endl;
-    }
-    
-    // 注意：子类无法重载父类的函数，会发生名称隐藏
-    void display(int x) {
-        cout << "Derived::display(int): " << x << endl;
-    }
-    
-    // 如果想要在子类中访问父类的被覆盖函数，需要使用作用域解析符
-    void callBaseDisplay(string msg) {
-        Base::display(msg);  // 明确调用父类的display函数
-    }
+  // 子类重写父类的虚函数
+  virtual void show(int x) override {
+    cout << "Derived::show(int): " << x << endl;
+  }
+
+  // 注意：子类无法重载父类的函数，会发生名称隐藏
+  void display(int x) {
+    cout << "Derived::display(int): " << x << endl;
+  }
+
+  // 如果想要在子类中访问父类的被覆盖函数，需要使用作用域解析符
+  void callBaseDisplay(string msg) {
+    Base::display(msg);  // 明确调用父类的display函数
+  }
 };
 
 // 示例5：返回值不同的情况（但参数必须不同）
 class Converter {
 public:
-    int toNumber(string str) {
-        cout << "调用 toNumber(string): ";
-        return stoi(str);
-    }
-    
-    double toNumber(double str) {  // 参数类型不同，可以重载
-        cout << "调用 toNumber(double): ";
-        return str;
-    }
+  int toNumber(string str) {
+    cout << "调用 toNumber(string): ";
+    return stoi(str);
+  }
+
+  double toNumber(double str) {  // 参数类型不同，可以重载
+    cout << "调用 toNumber(double): ";
+    return str;
+  }
 };
 
 int main() {
-    cout << "=== 函数重载示例演示 ===" << endl << endl;
-    
-    // 1. 参数类型不同的重载演示
-    cout << "1. 参数类型不同的重载:" << endl;
-    Calculator calc;
-    cout << calc.add(5, 3) << endl;
-    cout << calc.add(5.5, 3.3) << endl;
-    cout << calc.add(1, 2, 3) << endl;
-    cout << calc.add("Hello", " World") << endl;
-    cout << endl;
-    
-    // 2. 参数顺序不同的重载演示
-    cout << "2. 参数顺序不同的重载:" << endl;
-    Printer printer;
-    printer.print(10, 20.5);
-    printer.print(20.5, 10);
-    cout << endl;
-    
-    // 3. 构造函数重载演示
-    cout << "3. 构造函数重载:" << endl;
-    Person p1;                    // 调用默认构造函数
-    Person p2("张三", 25);        // 调用两个参数的构造函数
-    Person p3("李四", 30, "工程师"); // 调用三个参数的构造函数
-    
-    p1.display();
-    p2.display();
-    p3.display();
-    cout << endl;
-    
-    // 4. 继承中的函数重载演示
-    cout << "4. 继承中的函数重载:" << endl;
-    Base base;
-    Derived derived;
-    
-    cout << "Base对象调用:" << endl;
-    base.show(10);
-    base.show(10.5);
-    base.display("Hello Base");
-    
-    cout << "Derived对象调用:" << endl;
-    derived.show(20);           // 调用子类重写的函数
-    derived.show(20.5);         // 调用父类的函数（子类没有重写）
-    // derived.display("Hello"); // 错误！子类的display(int)覆盖了父类的display(string)
-    derived.display(100);       // 调用子类的display函数
-    derived.callBaseDisplay("Hello from Derived"); // 通过辅助函数调用父类函数
-    
-    cout << "通过Base指针调用:" << endl;
-    Base* ptr = &derived;
-    ptr->show(30);             // 多态：调用子类的函数
-    ptr->show(30.5);           // 调用父类的函数，父类有 double
-    ptr->display("Hello from Base pointer"); // 不是虚函数，则调用的是父类。非虚函数在编译时根据指针的静态类型（Base*）决定调用哪个函数。 
-    
-    // 5. 返回值不同的重载演示
-    cout << endl << "5. 返回值不同但参数不同的重载:" << endl;
-    Converter conv;
-    cout << conv.toNumber("123") << endl;
-    cout << conv.toNumber(45.67) << endl;
-    
-    return 0;
+  cout << "=== 函数重载示例演示 ===" << endl << endl;
+
+  // 1. 参数类型不同的重载演示
+  cout << "1. 参数类型不同的重载:" << endl;
+  Calculator calc;
+  cout << calc.add(5, 3) << endl;
+  cout << calc.add(5.5, 3.3) << endl;
+  cout << calc.add(1, 2, 3) << endl;
+  cout << calc.add("Hello", " World") << endl;
+  cout << endl;
+
+  // 2. 参数顺序不同的重载演示
+  cout << "2. 参数顺序不同的重载:" << endl;
+  Printer printer;
+  printer.print(10, 20.5);
+  printer.print(20.5, 10);
+  cout << endl;
+
+  // 3. 构造函数重载演示
+  cout << "3. 构造函数重载:" << endl;
+  Person p1;                    // 调用默认构造函数
+  Person p2("张三", 25);        // 调用两个参数的构造函数
+  Person p3("李四", 30, "工程师"); // 调用三个参数的构造函数
+
+  p1.display();
+  p2.display();
+  p3.display();
+  cout << endl;
+
+  // 4. 继承中的函数重载演示
+  cout << "4. 继承中的函数重载:" << endl;
+  Base base;
+  Derived derived;
+
+  cout << "Base对象调用:" << endl;
+  base.show(10);
+  base.show(10.5);
+  base.display("Hello Base");
+
+  cout << "Derived对象调用:" << endl;
+  derived.show(20);           // 调用子类重写的函数
+  derived.show(20.5);         // 调用父类的函数（子类没有重写）
+  // derived.display("Hello"); // 错误！子类的display(int)覆盖了父类的display(string)
+  derived.display(100);       // 调用子类的display函数
+  derived.callBaseDisplay("Hello from Derived"); // 通过辅助函数调用父类函数
+
+  cout << "通过Base指针调用:" << endl;
+  Base* ptr = &derived;
+  ptr->show(30);             // 多态：调用子类的函数
+  ptr->show(30.5);           // 调用父类的函数，父类有 double
+  ptr->display("Hello from Base pointer"); // 不是虚函数，则调用的是父类。非虚函数在编译时根据指针的静态类型（Base*）决定调用哪个函数。
+
+  // 5. 返回值不同的重载演示
+  cout << endl << "5. 返回值不同但参数不同的重载:" << endl;
+  Converter conv;
+  cout << conv.toNumber("123") << endl;
+  cout << conv.toNumber(45.67) << endl;
+
+  return 0;
 }
 ```
 
@@ -1396,115 +1396,115 @@ using namespace std;
 // 基类
 class Animal {
 private:
-    string name;
+  string name;
 
 public:
-    Animal(const string& n) : name(n) {}
-    
-    // 虚函数 - 将在派生类中被重写
-    virtual void makeSound() const {
-        cout << name << " makes a generic animal sound." << endl;
-    }
-    
-    // 私有虚函数 - 仍然可以在派生类中被重写
-    virtual void privateBehavior() const {
-        cout << name << " has private animal behavior." << endl;
-    }
-    
-    // 非虚函数 - 不能被重写，只能被重定义
-    void eat() const {
-        cout << name << " is eating." << endl;
-    }
-    
-    // 通过公有函数访问私有虚函数
-    void showPrivateBehavior() const {
-        privateBehavior();
-    }
-    
-    virtual ~Animal() = default;  // 虚析构函数
+  Animal(const string& n) : name(n) {}
+
+  // 虚函数 - 将在派生类中被重写
+  virtual void makeSound() const {
+    cout << name << " makes a generic animal sound." << endl;
+  }
+
+  // 私有虚函数 - 仍然可以在派生类中被重写
+  virtual void privateBehavior() const {
+    cout << name << " has private animal behavior." << endl;
+  }
+
+  // 非虚函数 - 不能被重写，只能被重定义
+  void eat() const {
+    cout << name << " is eating." << endl;
+  }
+
+  // 通过公有函数访问私有虚函数
+  void showPrivateBehavior() const {
+    privateBehavior();
+  }
+
+  virtual ~Animal() = default;  // 虚析构函数
 };
 
 // 派生类 Dog
 class Dog : public Animal {
 public:
-    Dog(const string& n) : Animal(n) {}
-    
-    // 重写基类的虚函数 - 函数原型完全相同
-    void makeSound() const override {  // C++11 引入的 override 关键字
-        cout << "Woof! Woof!" << endl;
-    }
-    
-    // 重写基类的私有虚函数 - 访问修饰符可以不同
-    void privateBehavior() const override {
-        cout << "Dog is wagging its tail happily!" << endl;
-    }
-    
-    // 重定义基类的非虚函数 - 这不是重写
-    void eat() const {
-        cout << "Dog is eating dog food." << endl;
-    }
+  Dog(const string& n) : Animal(n) {}
+
+  // 重写基类的虚函数 - 函数原型完全相同
+  void makeSound() const override {  // C++11 引入的 override 关键字
+    cout << "Woof! Woof!" << endl;
+  }
+
+  // 重写基类的私有虚函数 - 访问修饰符可以不同
+  void privateBehavior() const override {
+    cout << "Dog is wagging its tail happily!" << endl;
+  }
+
+  // 重定义基类的非虚函数 - 这不是重写
+  void eat() const {
+    cout << "Dog is eating dog food." << endl;
+  }
 };
 
 // 派生类 Cat
 class Cat : public Animal {
 public:
-    Cat(const string& n) : Animal(n) {}
-    
-    // 重写基类的虚函数
-    void makeSound() const override {
-        cout << "Meow! Meow!" << endl;
-    }
-    
-    // 重写基类的私有虚函数 - 使用 public 访问修饰符
-    void privateBehavior() const override {
-        cout << "Cat is purring softly." << endl;
-    }
-    
-    // 注意：这里没有重定义 eat() 函数
+  Cat(const string& n) : Animal(n) {}
+
+  // 重写基类的虚函数
+  void makeSound() const override {
+    cout << "Meow! Meow!" << endl;
+  }
+
+  // 重写基类的私有虚函数 - 使用 public 访问修饰符
+  void privateBehavior() const override {
+    cout << "Cat is purring softly." << endl;
+  }
+
+  // 注意：这里没有重定义 eat() 函数
 };
 
 // 演示多态性的函数
 void demonstratePolymorphism(Animal* animal) {
-    animal->makeSound();           // 多态调用
-    animal->showPrivateBehavior(); // 间接调用私有虚函数
-    animal->eat();                 // 非虚函数调用 - 静态绑定
-    cout << "-------------------" << endl;
+  animal->makeSound();           // 多态调用
+  animal->showPrivateBehavior(); // 间接调用私有虚函数
+  animal->eat();                 // 非虚函数调用 - 静态绑定
+  cout << "-------------------" << endl;
 }
 
 int main() {
-    // 创建对象
-    Animal genericAnimal("Generic Animal");
-    Dog dog("Buddy");
-    Cat cat("Whiskers");
-    
-    cout << "=== 直接调用 ===" << endl;
-    genericAnimal.makeSound();
-    dog.makeSound();
-    cat.makeSound();
-    cout << "-------------------" << endl;
-    
-    cout << "\n=== 多态演示 ===" << endl;
-    // 使用基类指针指向不同对象
-    Animal* animals[] = {&genericAnimal, &dog, &cat};
-    
-    for (Animal* animal : animals) {
-        demonstratePolymorphism(animal);
-    }
-    
-    cout << "\n=== 重定义演示 ===" << endl;
-    // 演示重定义（非虚函数）的行为
-    Animal* animalPtr = &dog;
-    animalPtr->eat();  // 调用基类的 eat() - 静态绑定
-    dog.eat();         // 调用派生类的 eat() - 重定义
-    
-    return 0;
+  // 创建对象
+  Animal genericAnimal("Generic Animal");
+  Dog dog("Buddy");
+  Cat cat("Whiskers");
+
+  cout << "=== 直接调用 ===" << endl;
+  genericAnimal.makeSound();
+  dog.makeSound();
+  cat.makeSound();
+  cout << "-------------------" << endl;
+
+  cout << "\n=== 多态演示 ===" << endl;
+  // 使用基类指针指向不同对象
+  Animal* animals[] = {&genericAnimal, &dog, &cat};
+
+  for (Animal* animal : animals) {
+    demonstratePolymorphism(animal);
+  }
+
+  cout << "\n=== 重定义演示 ===" << endl;
+  // 演示重定义（非虚函数）的行为
+  Animal* animalPtr = &dog;
+  animalPtr->eat();  // 调用基类的 eat() - 静态绑定
+  dog.eat();         // 调用派生类的 eat() - 重定义
+
+  return 0;
 }
 ```
 
 override 是 C++ 面向对象编程的核心特性，它使得程序能够根据对象的实际类型来调用相应的函数，实现了真正的多态行为。
 
 <p>
-<font color=red> 
+<font color=red>
     重载与重写的区别</br>
 1. 作用域不同：overload 是在同一作用域，子类无法重载父类，父类同名函数的将被覆盖，override 是在父类与子类之间。</br>
 2. overload 是静态多态性，在编译期间确定执行的函数或运算符。</br>
@@ -1558,7 +1558,7 @@ public:
 };
 ```
 
-<font color="red"> 
+<font color="red">
 注意：void test() const {}; 这样定义的函数只能作为类的成员函数，不能作为一个全局的函数，即非类的外部这样使用，编译器会
 报错。
 </font>
@@ -1612,13 +1612,13 @@ const 定义常量从汇编的角度来看，只是给出了对应的内存地�
 ```cpp
 #define PI 3.14159       // 常量宏，作用域为全局
 const doulbe Pi=3.14159; // 此时并未将Pi放入ROM中
-double i=Pi;             // 调用 const 常量，此时为Pi分配内存，以后不再分配 
-double I=PI;             // 调用宏，编译期间进行宏替换，分配内存 
-double j=Pi;             // 调用 const 常量，没有内存分配 
+double i=Pi;             // 调用 const 常量，此时为Pi分配内存，以后不再分配
+double I=PI;             // 调用宏，编译期间进行宏替换，分配内存
+double j=Pi;             // 调用 const 常量，没有内存分配
 double J=PI;             // 调用宏，再进行宏替换，又一次分配内存
 ```
 
-（6） 提高了效率。 
+（6） 提高了效率。
 
 编译器通常不为普通 `const常量` 分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读
 内存的操作，使得它的效率也很高。
@@ -1683,8 +1683,8 @@ static 修饰的成员函数是属于 class 本身，在类加载的时候就会
 
 - 静态的函数没有 `this` pointer，只能去处理静态的数据
   ```cpp
-  如何去调用？ 
-  
+  如何去调用？
+
   1、使用 object 调用。Account a.state(10);
   2、通过 class name 来调用。Account::state(10);
   ```
@@ -1729,12 +1729,12 @@ void func(TT *this, int a, int b) const
 class Complex
 {
 public:
-    // 主要放置函数
-    ........
+  // 主要放置函数
+  ........
 
 private:
-    // 定义数据
-    ........
+  // 定义数据
+  ........
 }
 
 // 调用临时对象
@@ -1767,12 +1767,12 @@ mutable std::mutex m; // mutable 和 mutex 用在一起情况
 int data = 0;
 public:
 int get() const {
-    std::lock_guard<std::mutex> lk(m);
-    return data;
+  std::lock_guard<std::mutex> lk(m);
+  return data;
 }
 void inc() {
-    std::lock_guard<std::mutex> lk(m);
-    ++data;
+  std::lock_guard<std::mutex> lk(m);
+  ++data;
 }
 };
 ```
@@ -1800,9 +1800,9 @@ mutable const int test;         // 编译出错
 
 ## 18.4. 常函数
 
-- 什么是常函数？   
+- 什么是常函数？
   常函数就是带 `const` 修饰的函数。
-- 为什么要有常函数这个概念？   
+- 为什么要有常函数这个概念？
   为了封装的良好性，有时我们用到的一些函数并不需要我们去改变类中的参数和成员变量，仅仅只是为了显示和输出的作用，因此才
   引进常函数。
 
@@ -1850,7 +1850,7 @@ mutable const int test;         // 编译出错
 // 函数定义：
 int func(const complex& param)
 {
-    return param.value;
+  return param.value;
 }
 
 // 声明对象:
@@ -1885,7 +1885,7 @@ c2.func(c1);   // 采用友元的方式实现，通过对象参数访问私有�
 template<typename T>
 void show(const T& var)
 {
-    T::const_iterator iter(var.begin());  // T::const_iterator 为从属名称
+  T::const_iterator iter(var.begin());  // T::const_iterator 为从属名称
 }
 ```
 
@@ -1901,7 +1901,7 @@ C++解析的人员必须要考虑到所有可能出现的问题，因此引入�
 template<typename T>
 void show(const T& var)
 {
-    T::const_iterator* x;
+  T::const_iterator* x;
 }
 ```
 
@@ -1927,7 +1927,7 @@ void show(const T& var)
 {
   if (var.size() >= 2){
     // 默认情况下编译器认为 T::const_iterator 这个不是类型名，可能是个变量
-    T::const_iterator iter(var.begin());    
+    T::const_iterator iter(var.begin());
   }
 }
 
@@ -1936,7 +1936,7 @@ template<typename T>
 void show(const T& var)
 {
   if (var.size() >= 2){
-    typename T::const_iterator iter(var.begin());    
+    typename T::const_iterator iter(var.begin());
   }
 }
 ```
@@ -1949,16 +1949,16 @@ void show(const T& var)
 ```cpp
 template<typename T>
 class Derived : public Base<T>::Nested {  // base class list 中不允许 typename
-    public:
-    explicit Derived (int x)
-        : Base<T>::Nested(x)                    // mem.init.list中不允许typename
-        {
-            // 嵌套从属类型名称既不在base class list 中也不在 mem.init.list 中，
-            // 作为一个 base class 修饰符则需要加上 typename
-            typename Base<T>::Nested temp;       
-            ...
+  public:
+  explicit Derived (int x)
+    : Base<T>::Nested(x)                    // mem.init.list中不允许typename
+    {
+      // 嵌套从属类型名称既不在base class list 中也不在 mem.init.list 中，
+      // 作为一个 base class 修饰符则需要加上 typename
+      typename Base<T>::Nested temp;
+      ...
 
-        }
+    }
 };
 ```
 
@@ -1975,7 +1975,7 @@ C++中的类型转换有 4 种。
 static_cast<>()，
 例如：
 double a1 = 12.0;
-int a2 = static_cast<int>(a1);  
+int a2 = static_cast<int>(a1);
 ```
 
 
@@ -1997,13 +1997,13 @@ C++ 中使用 `throw` 抛出异常，`try...catch` 等关键字来捕获异常�
 ```cpp
 // 语法
 try {
-    program-statements
+  program-statements
 }
 catch (exception-declaration) {
-    handler-statements
+  handler-statements
 }
 catch (exception-declaration) {
-    handler-statements
+  handler-statements
 }
 
 // throw语法
@@ -2030,7 +2030,7 @@ throw 需要处理的表达式;
 ## 22.2. 异常的层次结构
 标准库中常常在继承中处理。按照 `引用` 传递异常，在异常中使用虚函数。
 
-标准程序库中所有基类的异常为 `Exception()` 
+标准程序库中所有基类的异常为 `Exception()`
 
 <img src="./figures/exception.png">
 
@@ -2044,12 +2044,11 @@ throw 需要处理的表达式;
     作为一个类，可以拥有自己的成员，这些成员就可以传递足够的信息。
   - 异常处理可以在调用时跳级。这是一个代码编写时的问题：假设在有多个函数的调用栈中出现了某个错误，使用整型返回码要求你
     在每一级函数中都要进行处理。而使用异常处理的栈展开机制，只需要在一处进行处理就可以了，不需要每级函数都处理。
-
 - 缺点
   - C++没有垃圾回收机制，资源需要自己管理。C++中异常经常会导致资源泄漏的问题，比如在 new 和 delete
     中抛出了异常，导致内存泄漏，在 lock 和 unlock 之间抛出了异常导致死锁。
   - 异常会在程序运行出错时抛出异常，程序会乱跳，导致调试程序比较困难。
-  - 异常会有一些性能的开销。 
+  - 异常会有一些性能的开销。
   - 构造函数中不能抛异常，抛异常可能导致对象定义不完整。析构函数不能抛异常，可能导致内存泄漏。
 
 
@@ -2088,9 +2087,9 @@ throw 需要处理的表达式;
 8. [cpprocks.com](https://cpprocks.com/c11-compiler-support-shootout-visual-studio-gcc-clang-intel/)：查看C++11支持哪些编译，里面还有许多优质的东西，值得挖掘。
 9. [stroustrup.com](https://www.stroustrup.com/index.html): C++之父的主页，确定不来看看吗？好东西贼多。
 10. http://scottmeyers.blogspot.com/：Scott Meyers 个人博客网址，长期更新，从 1999 年开始，每年都有文章更新，一直坚持到现在。
-11. [**C++ Weekly With Jason Turner**](https://www.youtube.com/@cppweekly) 
+11. [**C++ Weekly With Jason Turner**](https://www.youtube.com/@cppweekly)
 12. [Microsoft C++ 语言文档](https://docs.microsoft.com/zh-cn/cpp/cpp/?view=msvc-160): 微软官方写的 C++参考技术文档，用于 Visual Studio 中。
-13. [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软 C++团队的博客，没事的话也可以看看。 
+13. [microsoft cppblog](https://devblogs.microsoft.com/cppblog/): 微软 C++团队的博客，没事的话也可以看看。
 14. [geeksforgeeks.org](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/): GeeksforGeeks 是一个主要专注于计算机科学的网站。 它有大量的算法，解决方案和编程问题。
 15. [reddit cpp 版块](https://www.reddit.com/r/cpp): reddit 的 cpp 版块也不错，可以了解最新的 C++消息，也可以提问题，也有人在这里写一些文章教程。
 16. [herbsutter.com](https://herbsutter.com/): Herb Sutter 的博客，Herb Sutter 是 C++核心人物之一，早期 The Free Lunch Is Over 这篇文章就出自他手，他还写过 Exceptional 系列 C++图书.
@@ -2102,8 +2101,7 @@ throw 需要处理的表达式;
 22. [TutorialsPoint](https://www.tutorialspoint.com/index.htm): 网站上有许多关于编程语言学习的教程，可以看看。
 23. [C++ shell](http://cpp.sh/): 在线的 C++编译器，在线编辑代码。
 24. [herbsutter](https://herbsutter.com/): ISO C++标准委员会主席，C++/CLI 首席架构师 的个人主页。
-25. [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) 
+25. [cppreference 列出的 C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support)
 26. [官方在线 The GNU C++ Library 文档](https://gcc.gnu.org/onlinedocs/libstdc++/)
 27. [open source C++ libraries](https://en.cppreference.com/w/cpp/links/libs)：cppreference 官方列出的一些开源的 C++ 库。
 28. https://www.fluentcpp.com：博客作者Jonathan Boccara 是 C++软件工程负责人、博客作者和作家，专注于如何使代码具有表现力，顶级 C++高手。
-

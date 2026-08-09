@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-08-22 00:01:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-04-08 01:09:50
+ * @LastEditTime: 2026-08-09 14:06:06
  * @Description: cpp optimize
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. C++ Optimize
@@ -29,7 +29,7 @@ C++ 优化的核心在于编写高效的算法、避免不必要的计算和步�
 - 选择恰当的优化设计策略。
 
 
-# 4. 虚函数性能开销 
+# 4. 虚函数性能开销
 
 虚函数会带来一定的效率损失，但在绝大多数情况下可以忽略不计，只有在极其苛刻的性能场景（如游戏引擎核心循环、高频调用的底
 层库）中才需要重点关注。
@@ -91,4 +91,3 @@ perf report --stdio | grep virtualFunc
 - 《Effective STL》
 - 《Effective C++》
 - 《Effective Modern C++》
-

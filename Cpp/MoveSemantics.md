@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-27 10:12:26
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-11-20 11:43:31
+ * @LastEditTime: 2026-08-09 14:09:19
  * @Description: 移动语义用法
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. Move Semantics(移动语义)
@@ -90,28 +90,28 @@ Move constructor 是 C++11 引入的重要特性，它是一种特殊的构造�
 ```cpp
 class MyString {
 private:
-    char* data;
-    size_t size;
-    
+  char* data;
+  size_t size;
+
 public:
-    // 移动构造函数
-    MyString(MyString&& other) noexcept 
-        : data(other.data), size(other.size) {
-        // 将原对象置于可析构状态
-        other.data = nullptr;
-        other.size = 0;
-    }
-    
-    // 拷贝构造函数（作为对比）
-    MyString(const MyString& other) 
-        : size(other.size) {
-        data = new char[size];
-        std::copy(other.data, other.data + size, data);
-    }
-    
-    ~MyString() {
-        delete[] data;
-    }
+  // 移动构造函数
+  MyString(MyString&& other) noexcept
+    : data(other.data), size(other.size) {
+    // 将原对象置于可析构状态
+    other.data = nullptr;
+    other.size = 0;
+  }
+
+  // 拷贝构造函数（作为对比）
+  MyString(const MyString& other)
+    : size(other.size) {
+    data = new char[size];
+    std::copy(other.data, other.data + size, data);
+  }
+
+  ~MyString() {
+    delete[] data;
+  }
 };
 ```
 
@@ -130,7 +130,7 @@ public:
 
 ```cpp
 MyClass createObject() {
-    return MyClass(); // 返回一个临时对象
+  return MyClass(); // 返回一个临时对象
 }
 
 MyClass obj = createObject(); // 这里会调用移动构造函数（如果存在）
@@ -190,29 +190,29 @@ class_name& operator=(class_name&& other) noexcept; // 典型声明
 ```cpp
 class MyVector {
 private:
-    int* m_data;
-    size_t m_size;
+  int* m_data;
+  size_t m_size;
 
 public:
-    // ... 构造函数，析构函数，拷贝操作等 ...
+  // ... 构造函数，析构函数，拷贝操作等 ...
 
-    // 移动赋值操作符
-    MyVector& operator=(MyVector&& other) noexcept {
-        // 1. 检查自赋值
-        if (this != &other) {
-            // 2. 释放当前对象的资源
-            delete[] m_data;
+  // 移动赋值操作符
+  MyVector& operator=(MyVector&& other) noexcept {
+    // 1. 检查自赋值
+    if (this != &other) {
+      // 2. 释放当前对象的资源
+      delete[] m_data;
 
-            // 3. 窃取源对象的资源
-            m_data = other.m_data;
-            m_size = other.m_size;
+      // 3. 窃取源对象的资源
+      m_data = other.m_data;
+      m_size = other.m_size;
 
-            // 4. 将源对象置于可析构状态
-            other.m_data = nullptr;
-            other.m_size = 0;
-        }
-        return *this;
+      // 4. 将源对象置于可析构状态
+      other.m_data = nullptr;
+      other.m_size = 0;
     }
+    return *this;
+  }
 };
 ```
 
@@ -281,7 +281,7 @@ c = std::move(b); // 移动赋值运算符：将b的值移动给c，b被移动�
 ```cpp
 template<typename T>
 constexpr std::remove_reference_t<T>&& move(T&& arg) noexcept {
-    return static_cast<std::remove_reference_t<T>&&>(arg);
+  return static_cast<std::remove_reference_t<T>&&>(arg);
 }
 ```
 
@@ -331,9 +331,9 @@ s2，然后将 s1 的指针设置为 nullptr。这样，s1 就不再拥有原来
 3. **启用移动语义** - 让不支持拷贝的类型（如 unique_ptr）能够转移所有权
 4. **与只能移动的类型交互** - 如 std::unique_ptr, std::thread 等
 
+
 ### 6.6. 关键点
 
 - `std::move` 只是类型转换，不执行实际移动。移动只是指针交换，而没有内存分配。
 - 移动后源对象不应再被使用，除非重新赋值。
 - 在适当的地方使用 `std::move` 可以显著提升性能。
-

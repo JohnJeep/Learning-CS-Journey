@@ -3,9 +3,9 @@
  * @Author: JohnJeep
  * @Date: 2020-06-15 08:48:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:32:05
+ * @LastEditTime: 2026-08-09 14:03:58
  * @Description: C++ object oriented programming
- * Copyright (c) 2022 by johnjeep, All Rights Reserved. 
+ * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
 
 Object Oriented Programming(OOP)叫面向对象编程。 class without pointer members(类中的成员不带有指针)。 class with
@@ -22,7 +22,7 @@ C++ 中对类的设计时，封装了属性和方法。若直接访问类的数�
 
 - `public`  修饰类的成员变量和函数，既能在 类的内部 使用又能在 类的外部 使用
 - `private` 修饰类的成员变量和函数，只能在 类的内部 使用，不能在 类的外部 使用
-- `protect` 修饰类的成员变量和函数，只能在 类的内部 使用，不能在 类的外部 使用，可以在 继承的子类 中使用。    
+- `protect` 修饰类的成员变量和函数，只能在 类的内部 使用，不能在 类的外部 使用，可以在 继承的子类 中使用。
 
 C++ 中类与类之间的关系主要归为三大类：复合、委托、继承。
 
@@ -53,7 +53,7 @@ class queue {
 - 构造（由内而外）：编译器默认先调用当前类中包含的类的默认构造函数，然后再调用当前类的构造函数。
 
 - 析构（由外而内）：编译器默认先调用调用当前类的析构函数，然后再调用当前类中包含的类的析构函数。
-  
+
   <p>
   <img src="./figures/composition-memory.png">
   </p>
@@ -75,20 +75,20 @@ class queue {
 class MyString
 {
 private:
-    Stu* st;       // 采用委托的方式
+  Stu* st;       // 采用委托的方式
 public:
-    MyString(/* args */) {}
-    ~MyString() {}
+  MyString(/* args */) {}
+  ~MyString() {}
 };
 
 class Stu
 {
 private:
-    char* m_data;
-    int n;
+  char* m_data;
+  int n;
 public:
-    Stu(/* args */) {}
-    ~Stu() {}
+  Stu(/* args */) {}
+  ~Stu() {}
 };
 ```
 
@@ -124,7 +124,7 @@ Iterm 22 条的对 `Pimpl Idiom` 的用法做了非常详细的解释说明。
 - The Pimpl Idiom decreases build times by reducing compilation dependencies between class clients and class
   implementations.
 - For std::unique_ptr pImpl pointers, declare special member functions in the class header, but implement them in the
-  implementation file. Do this even if the default function implementations are acceptable. 
+  implementation file. Do this even if the default function implementations are acceptable.
 - The above advice applies to std::unique_ptr, but not to std::shared_ptr.
 
 ## 4. Inheritance(继承)
@@ -139,39 +139,39 @@ A 称为 “B 的父类” 也可以称 “A 是 B
 
 C++中常见的三种继承方式：public、private、protected。也支持多继承的方式。
 
-`public继承`  
+`public继承`
 
 - 父类成员在子类中保持原有的访问级别。
 - 类的对象的公共数据成员可以使用直接成员访问运算符 `.` 来访问；但私有的成员和受保护的成员不能使用直接成员访问运算符
   `.` 来直接访问。
 
-`protected继承` 
+`protected继承`
 
 - 父类中为 `public` 成员属性，在子类中变为 `protected`
 - 父类中为 `protected` 成员属性，在子类中仍为 `protected`
 - 父类中为 `private` 成员属性，在子类中仍为 `private`
 
-`private继承` 
+`private继承`
 
 - 父类成员在子类中的访问级别都变为 `private`
-  
+
   > 子类无法访问父类中 private 属性的成员。
 
 public、protect、private 三个关键字的访问范围
 
 - public: 能被类成员函数、子类函数、友元、类的对象访问。
 
-- protected: 只能被类成员函数、子类函数及友元访问，不能被其它任何的数据访问，本身的类对象也没有访问权限。  
-  
+- protected: 只能被类成员函数、子类函数及友元访问，不能被其它任何的数据访问，本身的类对象也没有访问权限。
+
   - 为什么要引入 protected 访问权限？
-    
+
     > 引入 protected 成员的理由：基类的成员本来就是派生类的成员，对于那些隐藏的、不宜设为公有的，但又确实需要在派生类
     > 的成员函数中经常访问的基类成员，则将它们设置为 protected 成员，既能起到 隐藏
-    > 的目的，又避免了派生类成员函数要访问它们时只能间接访问所带来的麻烦。 
-  
+    > 的目的，又避免了派生类成员函数要访问它们时只能间接访问所带来的麻烦。
+
   - 子类（派生类）的成员函数只能访问所作用的那个对象（即 this 指针指向的对象）的基类 protected
-    成员，不能访问其他基类对象的父类 protected 成员。  
-    
+    成员，不能访问其他基类对象的父类 protected 成员。
+
     > 类的对象只能调用其 public 部分的成员，而不能调用 protected 和 private 部分的成员。
 
 - private: 只能被类成员函数及友元访问，不能被其它任何的数据访问，本身的类对象也没有访问权限。
@@ -193,28 +193,28 @@ public、protect、private 三个关键字的访问范围
 
 - 看类的调用语句，是在类的内部还是在类的外部？
 - 看子类如何从父类中继承？
-- 看父类的访问级别？ 
+- 看父类的访问级别？
 
 ### 4.1. 父类与子类的关系
 
 - 子类是特殊的父类。
 
 - 基类(base)的指针或引用 `直接指向` 子类(derived)的对象。
-  
+
   - 指针做函数参数
-    
+
     ```cpp
     class Parent
     {}
-    
+
     class Child
     {}
-    
+
     Parent *p1 = NUll;
     Child c1;
     p = &c1;     // 父类的指针直接指向子类的对象
     ```
-  
+
   - 引用做函数参数
 
 - 子类对象直接`初始化` 父类对象。
@@ -242,15 +242,15 @@ public、protect、private 三个关键字的访问范围
 class Parent
 {
 public:
-    int m;
-    void shoe();
+  int m;
+  void shoe();
 }
 
 class child
 {
 public:
-    int m;
-    void shoe();
+  int m;
+  void shoe();
 }
 
 Parent p1;
@@ -266,7 +266,7 @@ c1.Child::shoe();
 ### 4.4. Composite, Inheritance, Delegation 对比
 
 - 继承
-  
+
   - 类继承允许你根据其他类的实现来定义一个类的实现。在继承方式中，父类的内部细节对子类可见。
   - 类继承是在编译时刻静态定义的，且可直接使用，因为程序设计语言直接支持类继承。类继承可以较方便地改变被复用的实现。当
     一个子类重定义一些而不是全部操作时，它也能影响它所继承的操作，只要在这些操作中调用了被重定义的操作。
@@ -278,8 +278,8 @@ c1.Child::shoe();
     对象。
 
 - 组合
-  
-  - 对象组合要求被组合 的对象具有良好定义的接口，对象的内部细节是不可见的。  
+
+  - 对象组合要求被组合 的对象具有良好定义的接口，对象的内部细节是不可见的。
   - 对象组合是通过获得对其他对象的引用而在运行时刻动态定义的。组合要求对象遵守彼此的接口约定，进而要求更仔细地定义接口
     ，而这些接口并不妨碍你将一个对象和其他对象一起使用。这还会产生良好的结果：因为对象只能通过接口访问，所以我们并不破
     坏封装性；只要类型一致，运行时刻还可以用一个对象来替代另一个对象；更进一步，因为对象的实现是基于接口写的，所以实现
@@ -289,7 +289,7 @@ c1.Child::shoe();
     (而有较少的类)，且系统的行为将依赖于对象间的关系而不是被定义在某个类中。
 
 - 委托
-  
+
   - 委托(delegation)是一种组合方法，它使组合具有与继承同样的复用能力。在委托方式下，有两个对象参与处理一个请求，接受请
     求的对象将操作委托给它的代理者(delegate)。类似于子类将请求交给它的父类处理。
   - 优缺点
@@ -305,7 +305,7 @@ c1.Child::shoe();
 
 为什么会有虚继承
 
-- 解决多个继承可能产生的二义性。 
+- 解决多个继承可能产生的二义性。
 - 二义性：若果一个派生类（子类）由多个基类（父类）继承，这些基类都有一个共同的基类，则在对该基类中声明的变量进行访问时
   ，可能会出现二义性。
 
@@ -313,7 +313,7 @@ c1.Child::shoe();
 
 - 相同的接口，实现不同的功能。
 - 有了虚函数，程序能够调用编译期还不存在的函数。
-- 虚函数是动态生成的，普通成员函数是静态生成的。  
+- 虚函数是动态生成的，普通成员函数是静态生成的。
 
 几种混淆的 virtual function
 
@@ -379,7 +379,7 @@ class People
 {
 private:
   ....
-public: 
+public:
   ....
 
 virtual int func(int a) = 0;
@@ -410,9 +410,9 @@ virtual ~People()
 ```cpp
 class Base {
 public:
-    virtual void func1() { cout << "Base::func1" << endl; }
-    virtual void func2() { cout << "Base::func2" << endl; }
-    int data;
+  virtual void func1() { cout << "Base::func1" << endl; }
+  virtual void func2() { cout << "Base::func2" << endl; }
+  int data;
 };
 
 // 内存布局示意：
@@ -462,7 +462,7 @@ vtable 注意点
 
 - C++中采用抽象类，提前布局 `vptr` 指针，虚函数表，调用动态链编，实现与第三方产品的解耦合。
 - 动态库-----函数的首地址----调用函数指针----调用函数
-- 常常采用函数指针将任务的调用者与任务的实现者进行分开，两者互不依赖。  
+- 常常采用函数指针将任务的调用者与任务的实现者进行分开，两者互不依赖。
 
 ## 7. Aggregation: 聚合
 
@@ -476,7 +476,7 @@ C++中，聚合可以通过定义表示真正实例的成员变量来实现，�
 相识意味着一个对象仅仅知道另一个对象。有时相识也被称为“关联”或“引用”关系。相识的对象可能请求彼此的操作，但是它们不为对
 方负责。相识是一种比聚合要弱的关系，它只标识了对象间较松散的耦合关系。
 
-通过指针或引用来实现。 
+通过指针或引用来实现。
 
 聚合关系使用较少且比相识关系更持久；而相识关系则出现频率较高，但有时只存在于一个操作期间，相识也更具动态性，使得它在源
 代码中更难被辨别出来。
@@ -485,7 +485,4 @@ C++中，聚合可以通过定义表示真正实例的成员变量来实现，�
 
 - [Stack Overflow: Difference between private, public, and protected inheritance](https://stackoverflow.com/questions/860339/difference-between-private-public-and-protected-inheritance)
 - [Public, Protected and Private Inheritance in C++ Programming](https://www.programiz.com/cpp-programming/public-protected-private-inheritance)
-- [C++：继承访问属性（public/protected/private）](https://www.cnblogs.com/duwenxing/p/7476469.html) 
-
-
-
+- [C++：继承访问属性（public/protected/private）](https://www.cnblogs.com/duwenxing/p/7476469.html)
