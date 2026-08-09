@@ -136,6 +136,82 @@ def _should_wrap(line: str) -> bool:
     if re.search(r'https?://', stripped):              return False  # URL present
     return True
 
+# ── Convention 3: Code-block indent normalization ────────────────────────────
+
+def _normalize_code_block(block_lines: list) -> list:
+    """Normalize indentation inside a fenced code block.
+
+    - Tab → space (1 tab = 2 spaces, matching .editorconfig indent_size)
+    - Strip common leading whitespace shared by all lines (e.g. Markdown list indent
+      that bled into the code block), then scale the remaining code indent to 2-space.
+    """
+    # Step 1: Tab → space (leading whitespace only — preserves tabs in content)
+    result = []
+    for line in block_lines:
+        m = re.match(r'^([ \t]*)(.*)', line)
+        if m and '\t' in m.group(1):
+            leading = m.group(1).replace('\t', '  ')
+            result.append(leading + m.group(2))
+        else:
+            result.append(line)
+
+    # Step 2: Find the common indentation prefix across ALL non-blank lines.
+    # A line with zero leading spaces contributes 0 → common_indent stays 0.
+    all_prefixes = []
+    for line in result:
+        if line.strip() == '':
+            continue
+        m = re.match(r'^( *)', line)  # * not + — captures zero spaces too
+        all_prefixes.append(len(m.group(1)))
+
+    if not all_prefixes:
+        return result
+
+    common_indent = min(all_prefixes)
+    if common_indent > 0:
+        stripped = []
+        for line in result:
+            if line.strip() == '':
+                stripped.append(line)  # blank line — keep as-is
+            else:
+                m = re.match(r'^( *)', line)
+                spaces = len(m.group(1)) if m else 0
+                if spaces >= common_indent:
+                    stripped.append(line[common_indent:])
+                else:
+                    stripped.append(line.lstrip())
+        result = stripped
+
+    # Step 3: Detect indent unit in the remaining content and scale to 2-space
+    code_indents = []
+    for line in result:
+        m = re.match(r'^( +)', line)
+        if m:
+            code_indents.append(len(m.group(1)))
+
+    if not code_indents:
+        return result
+
+    min_code_indent = min(code_indents)
+    if min_code_indent <= 2:
+        return result  # already at target (2) or smaller
+
+    scale = 2.0 / min_code_indent
+
+    scaled = []
+    for line in result:
+        m = re.match(r'^( +)', line)
+        if m:
+            spaces = len(m.group(1))
+            # Round to nearest multiple of 2 to keep alignment clean
+            new_spaces = round(spaces * scale / 2) * 2
+            if spaces > 0 and new_spaces == 0:
+                new_spaces = 2
+            line = ' ' * new_spaces + line[len(m.group(1)):]
+        scaled.append(line)
+
+    return scaled
+
 # ── Markdown processor ─────────────────────────────────────────────────────────
 
 def process(content: str) -> str:
@@ -143,6 +219,7 @@ def process(content: str) -> str:
     result   = []
     in_code  = False
     in_front = False
+    code_buf = []  # buffer lines inside a fenced code block
 
     for i, line in enumerate(lines):
         # YAML frontmatter
@@ -160,12 +237,16 @@ def process(content: str) -> str:
         m = _RE_FENCE.match(line.strip())
         if not in_code and m:
             in_code = True
-            result.append(line)
+            code_buf = []
+            result.append(line)  # opening fence — never modified
             continue
         if in_code:
             if m:
                 in_code = False
-            result.append(line)
+                result.extend(_normalize_code_block(code_buf))
+                result.append(line)  # closing fence
+            else:
+                code_buf.append(line)
             continue
 
         # Apply spacing, then wrap if needed
