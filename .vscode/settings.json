@@ -41,5 +41,8 @@
   "// compile_commands.json": "IntelliSense 精确解析头文件路径/宏定义需要这个文件，见 c_cpp_properties.json 里的 compileCommands 字段",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "editorconfig.generateAuto": false
+  "editorconfig.generateAuto": false,
+  "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+    "readability-duplicate-include"
+  ]
 }

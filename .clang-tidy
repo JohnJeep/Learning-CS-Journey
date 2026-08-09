@@ -1,0 +1,69 @@
+# clang-tidy 配置：负责 clang-format 管不到的部分——命名规范、
+# 现代 C++ 用法、常见 bug 模式、性能反模式。
+# 用法: clang-tidy --config-file=.clang-tidy 目标文件.cc -- -std=c++17
+
+Checks: >
+  -*,
+  google-*,
+  readability-*,
+  modernize-*,
+  performance-*,
+  bugprone-*,
+  cppcoreguidelines-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -readability-identifier-length
+
+# 团队规则 1（if/for 单行也必须加 {}）由 readability-braces-around-statements
+# 检查，已包含在上面的 readability-* 通配符里，无需单独开启。
+# 老代码库存量违规可批量修复：
+#   clang-tidy --fix --fix-errors -checks='-*,readability-braces-around-statements' 文件.cc -- -std=c++17
+
+# 是否把警告当错误。团队初期建议先 false 观察噪音，稳定后再收紧到具体 check 名单
+WarningsAsErrors: ""
+
+# 只对项目自己的头文件报告问题，第三方/系统头不管
+HeaderFilterRegex: "^(?!.*(third_party|external|build)/).*"
+
+FormatStyle: file
+
+# --- 命名规范：对齐 Google C++ Style Guide ---
+CheckOptions:
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  - key: readability-identifier-naming.VariableCase
+    value: lower_case
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: "_"
+  - key: readability-identifier-naming.ProtectedMemberSuffix
+    value: "_"
+  - key: readability-identifier-naming.ConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConstantPrefix
+    value: "k"
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: "k"
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: "k"
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.TemplateParameterCase
+    value: CamelCase
