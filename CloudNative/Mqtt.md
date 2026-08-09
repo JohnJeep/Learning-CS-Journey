@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-03-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-03-11 16:21:43
+ * @LastEditTime: 2026-08-09 17:27:20
  * @Description: MQTT Usage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 - [1. EMQX](#1-emqx)
@@ -248,7 +248,7 @@ ClientID 是 MQTT 连接的唯一标识符。在 IoTCore 中，不同实例之�
   - **`retain = true`**：消息被保留，新的订阅者会立即收到此消息。
   - **`retain = false`**：消息不被保留，新的订阅者不会收到过去发布的消息。
 
-### 1.6.2. retainHandling 
+### 1.6.2. retainHandling
 
 - **作用**：控制 MQTT 客户端在订阅时如何处理保留消息。
 - **范围**：仅在订阅消息时有效。

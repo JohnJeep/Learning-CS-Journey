@@ -2,7 +2,7 @@
  * @Author: johnjeep
  * @Date: 2022-12-27 20:41:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:29:09
+ * @LastEditTime: 2026-08-09 17:39:09
  * @Description: Go 标准库学习
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
@@ -66,30 +66,30 @@ func (w WriterType) Write(p []byte) (n int, err error)
 package main
 
 import (
-    "io"
-    "os"
+  "io"
+  "os"
 )
 
 func main() {
-    // 打开文件进行写入
-    file, err := os.Create("example.txt")
-    if err != nil {
-        panic(err)
-    }
-    defer file.Close()
+  // 打开文件进行写入
+  file, err := os.Create("example.txt")
+  if err != nil {
+    panic(err)
+  }
+  defer file.Close()
 
-    // 创建一个 io.Writer
-    writer := io.Writer(file)
+  // 创建一个 io.Writer
+  writer := io.Writer(file)
 
-    // 写入数据
-    data := []byte("Hello, World!\n")
-    n, err := writer.Write(data)
-    if err != nil {
-        panic(err)
-    }
+  // 写入数据
+  data := []byte("Hello, World!\n")
+  n, err := writer.Write(data)
+  if err != nil {
+    panic(err)
+  }
 
-    // 打印写入的字节数
-    println(n) // 输出：13
+  // 打印写入的字节数
+  println(n) // 输出：13
 }
 ```
 
@@ -99,36 +99,36 @@ func main() {
 package main
 
 import (
-    "bytes"
-    "io"
-    "os"
+  "bytes"
+  "io"
+  "os"
 )
 
 func main() {
-    // 创建一个 bytes.Buffer 作为 io.Writer
-    var buf bytes.Buffer
+  // 创建一个 bytes.Buffer 作为 io.Writer
+  var buf bytes.Buffer
 
-    // 写入数据
-    data := []byte("Hello, World!\n")
-    n, err := buf.Write(data)
-    if err != nil {
-        panic(err)
-    }
+  // 写入数据
+  data := []byte("Hello, World!\n")
+  n, err := buf.Write(data)
+  if err != nil {
+    panic(err)
+  }
 
-    // 打印写入的字节数
-    println(n) // 输出：13
+  // 打印写入的字节数
+  println(n) // 输出：13
 
-    // 将数据写入文件
-    file, err := os.Create("example.txt")
-    if err != nil {
-        panic(err)
-    }
-    defer file.Close()
+  // 将数据写入文件
+  file, err := os.Create("example.txt")
+  if err != nil {
+    panic(err)
+  }
+  defer file.Close()
 
-    _, err = io.Copy(file, &buf)
-    if err != nil {
-        panic(err)
-    }
+  _, err = io.Copy(file, &buf)
+  if err != nil {
+    panic(err)
+  }
 }
 ```
 
@@ -162,29 +162,29 @@ func ReadFull(r Reader, buf []byte) (n int, err error)
 package main
 
 import (
-	"fmt"
-	"io"
-	"os"
+  "fmt"
+  "io"
+  "os"
 )
 
 func main() {
-	// 打开一个文件作为输入流
-	file, err := os.Open("example.txt")
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-	defer file.Close()
+  // 打开一个文件作为输入流
+  file, err := os.Open("example.txt")
+  if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
+  defer file.Close()
 
-	// 读取 10 个字节的数据
-	data := make([]byte, 10)
-	n, err := io.ReadFull(file, data)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
+  // 读取 10 个字节的数据
+  data := make([]byte, 10)
+  n, err := io.ReadFull(file, data)
+  if err != nil {
+    fmt.Println("Error:", err)
+    return
+  }
 
-	fmt.Printf("Read %d bytes: %s\n", n, data)
+  fmt.Printf("Read %d bytes: %s\n", n, data)
 }
 ```
 
@@ -223,7 +223,7 @@ Logger 类型的函数
 
 ```go
 func New(out io.Writer, prefix string, flag int) *Logger {
-	return &Logger{out: out, prefix: prefix, flag: flag}
+  return &Logger{out: out, prefix: prefix, flag: flag}
 }
 
 // 功能
@@ -287,8 +287,6 @@ Go 语言中，Marshal（编组）是指将数据结构或对象转换为字节�
 
 - Go 标准库 Context: https://www.liwenzhou.com/posts/Go/context/
 
-  
-
 # 7. sql
 
 - [在 Go 中如何使用 database/sql 来操作数据库](https://jianghushinian.cn/2023/06/05/how-to-use-database-sql-to-operate-database-in-go)
@@ -315,13 +313,9 @@ Go 语言中，Marshal（编组）是指将数据结构或对象转换为字节�
 - **`String()`**：把 `strings.Builder` 中的内容转换为字符串。
 
 
-
-
-
 # 9. References
 
 - Go Standard library: https://pkg.go.dev/std
 - Go 语言中文网：https://studygolang.com/pkgdoc
 - Mastering GO 中文翻译：https://wskdsgcf.gitbook.io/mastering-go-zh-cn/
 - Go 语言标准库 Example: https://books.studygolang.com/The-Golang-Standard-Library-by-Example/
-

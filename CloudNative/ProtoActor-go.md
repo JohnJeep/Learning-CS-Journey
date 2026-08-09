@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-11-27 11:11:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-03-19 16:16:26
+ * @LastEditTime: 2026-08-09 17:28:03
  * @Description: Actor 模型研究
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## Actor
@@ -14,36 +14,36 @@
 ```go
 // Context contains contextual information for actors
 type Context interface {
-	infoPart
-	basePart
-	messagePart
-	senderPart
-	receiverPart
-	spawnerPart
-	stopperPart
-	extensionPart
+  infoPart
+  basePart
+  messagePart
+  senderPart
+  receiverPart
+  spawnerPart
+  stopperPart
+  extensionPart
 }
 
 type ExtensionContext interface {
-	extensionPart
+  extensionPart
 }
 
 type SenderContext interface {
-	infoPart
-	senderPart
-	messagePart
+  infoPart
+  senderPart
+  messagePart
 }
 
 type ReceiverContext interface {
-	infoPart
-	receiverPart
-	messagePart
-	extensionPart
+  infoPart
+  receiverPart
+  messagePart
+  extensionPart
 }
 
 type SpawnerContext interface {
-	infoPart
-	spawnerPart
+  infoPart
+  spawnerPart
 }
 ```
 
@@ -56,7 +56,7 @@ type SpawnerContext interface {
 //
 // Receive is sent messages to be processed from the mailbox associated with the instance of the actor
 type Actor interface {
-	Receive(c Context)
+  Receive(c Context)
 }
 ```
 
@@ -73,14 +73,14 @@ Actor 的 Receive 方法。**
 
 
 
-### `dispatcher.go` 
+### `dispatcher.go`
 
 消息调度器
 
 ```go
 type Dispatcher interface {
-	Schedule(fn func())
-	Throughput() int
+  Schedule(fn func())
+  Throughput() int
 }
 ```
 
@@ -90,9 +90,9 @@ TimerScheduler
 
 ```go
 func (s *TimerScheduler) SendRepeatedly(initial, interval time.Duration, pid *actor.PID, message interface{}) CancelFunc {
-	return startTimer(initial, interval, func() {
-		s.ctx.Send(pid, message)
-	})
+  return startTimer(initial, interval, func() {
+    s.ctx.Send(pid, message)
+  })
 }
 ```
 
@@ -131,19 +131,10 @@ code，这个常量是一个模板，用于生成服务的代码。
 这个模板主要包含以下部分：
 
 1. **包的导入和日志设置**：这部分代码导入了一些必要的包，并设置了日志的级别。
-
 2. **服务工厂的设置和获取**：对于每一个服务，都生成了一个工厂函数的设置和获取方法。工厂函数用于生成服务的实例。
-
-3. **GrainClient 的获取**：对于每一个服务，都生成了一个获取 GrainClient 的方法。GrainClient
-   是用于与服务进行通信的客户端。
-
+3. **GrainClient 的获取**：对于每一个服务，都生成了一个获取 GrainClient 的方法。GrainClient 是用于与服务进行通信的客户端。
 4. **Kind 的获取**：对于每一个服务，都生成了一个获取 Kind 的方法。Kind 是用于在集群中注册服务的类型。
-
 5. **服务接口的定义**：对于每一个服务，都生成了一个接口。这个接口定义了服务的所有方法。
-
-6. **GrainClient 的定义和方法**：对于每一个服务，都生成了一个 GrainClient
-   的结构体和对应的方法。这些方法用于向服务发送请求。
-
+6. **GrainClient 的定义和方法**：对于每一个服务，都生成了一个 GrainClient 的结构体和对应的方法。这些方法用于向服务发送请求。
 7. **Actor 的定义和方法**：对于每一个服务，都生成了一个 Actor 的结构体和对应的方法。这些方法用于处理接收到的消息。
-
 这个模板的主要作用是根据 protobuf 文件生成对应的 Go 语言代码，这些代码可以用于创建服务、处理请求等。

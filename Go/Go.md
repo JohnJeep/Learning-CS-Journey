@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2023-09-05 23:49:23
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:30:21
+ * @LastEditTime: 2026-08-09 17:38:19
  * @Description: Go 语言学习
  * Copyright (c) 2022 by John Jeep, All Rights Reserved.
 -->
@@ -47,64 +47,64 @@ Go is a tool for managing Go source code.
 
 Usage:
 
-        go <command> [arguments]
+  go <command> [arguments]
 
 The commands are:
 
-        bug         start a bug report
-        build       compile packages and dependencies
-        clean       remove object files and cached files
-        doc         show documentation for package or symbol
-        env         print Go environment information
-        fix         update packages to use new APIs
-        fmt         gofmt (reformat) package sources
-        generate    generate Go files by processing source
-        get         add dependencies to current module and install them
-        install     compile and install packages and dependencies
-        list        list packages or modules
-        mod         module maintenance
-        work        workspace maintenance
-        run         compile and run Go program
-        test        test packages
-        tool        run specified go tool
-        version     print Go version
-        vet         report likely mistakes in packages
+  bug         start a bug report
+  build       compile packages and dependencies
+  clean       remove object files and cached files
+  doc         show documentation for package or symbol
+  env         print Go environment information
+  fix         update packages to use new APIs
+  fmt         gofmt (reformat) package sources
+  generate    generate Go files by processing source
+  get         add dependencies to current module and install them
+  install     compile and install packages and dependencies
+  list        list packages or modules
+  mod         module maintenance
+  work        workspace maintenance
+  run         compile and run Go program
+  test        test packages
+  tool        run specified go tool
+  version     print Go version
+  vet         report likely mistakes in packages
 
 Use "go help <command>" for more information about a command.
 
 Additional help topics:
 
-        buildconstraint build constraints
-        buildmode       build modes
-        c               calling between Go and C
-        cache           build and test caching
-        environment     environment variables
-        filetype        file types
-        go.mod          the go.mod file
-        gopath          GOPATH environment variable
-        gopath-get      legacy GOPATH go get
-        goproxy         module proxy protocol
-        importpath      import path syntax
-        modules         modules, module versions, and more
-        module-get      module-aware go get
-        module-auth     module authentication using go.sum
-        packages        package lists and patterns
-        private         configuration for downloading non-public code
-        testflag        testing flags
-        testfunc        testing functions
-        vcs             controlling version control with GOVCS
+  buildconstraint build constraints
+  buildmode       build modes
+  c               calling between Go and C
+  cache           build and test caching
+  environment     environment variables
+  filetype        file types
+  go.mod          the go.mod file
+  gopath          GOPATH environment variable
+  gopath-get      legacy GOPATH go get
+  goproxy         module proxy protocol
+  importpath      import path syntax
+  modules         modules, module versions, and more
+  module-get      module-aware go get
+  module-auth     module authentication using go.sum
+  packages        package lists and patterns
+  private         configuration for downloading non-public code
+  testflag        testing flags
+  testfunc        testing functions
+  vcs             controlling version control with GOVCS
 
 Use "go help <topic>" for more information about that topic.
 ```
 
 `go get` 和 `go install` 是 Go 语言中的两个不同命令，它们的主要区别在于功能和用途。
 
-1. `go get` 
+1. `go get`
    - 功能：用于获取和安装远程包（外部依赖）。
    - 用途：主要用于在你的代码中引入其他人或团队编写的包，以便在你的项目中使用它们。
    - 示例：`go get github.com/example/package`。此命令会下载指定的远程包并将其安装到你的 Go
      语言环境中的工作目录（通常是 `$GOPATH/src` 目录）或模块缓存（Go Modules）。
-2. `go install` 
+2. `go install`
    - 功能：用于编译并安装可执行文件或库。
    - 用途：主要用于构建和安装你自己的 Go 项目或库，以便在本地使用或分享给其他人。
    - 示例：`go install github.com/your-username/your-package`。此命令会编译指定的包，并将生成的可执行文件或库安装到你
@@ -158,7 +158,7 @@ Go mod 还支持语义版本控制，使开发人员能够定义依赖项的最�
 
 使用这个命令的基本格式是在你的项目目录中运行 `go mod tidy`。
 
-### 2.2.2. go run 
+### 2.2.2. go run
 
 `go run`：这是 Go 语言的一个命令，用于编译并运行 Go 代码。它会先编译代码，然后立即运行编译后的程序。
 
@@ -236,7 +236,7 @@ go env -w GO111MODULE=on
 # 设置七牛云镜像加速
 go env -w GOPROXY=https://goproxy.cn,direct
 
-# 设置国内的能访问到的 GOSUMDB 
+# 设置国内的能访问到的 GOSUMDB
 go env -w GOSUMDB=sum.golang.org
 ```
 
@@ -324,11 +324,11 @@ Go 语言规范（The Go Programming Language Specification）
 
 ```tex
 Precedence    Operator
-    5             *  /  %  <<  >>  &  &^
-    4             +  -  |  ^
-    3             ==  !=  <  <=  >  >=
-    2             &&
-    1             ||
+  5             *  /  %  <<  >>  &  &^
+  4             +  -  |  ^
+  3             ==  !=  <  <=  >  >=
+  2             &&
+  1             ||
 ```
 
 
@@ -472,7 +472,7 @@ a := new(int)
 ```go
 // 只要实现了 Error() 函数，返回值为 String 的都实现了 err 接口
 type error interface {
-	Error()    String
+  Error()    String
 }
 ```
 
@@ -517,10 +517,10 @@ var isOk
 
 ```go
 var (
-    a string
-    b int
-    c bool
-    d float32
+  a string
+  b int
+  c bool
+  d float32
 )
 ```
 
@@ -572,12 +572,12 @@ type Fahrenheit float64 // 华氏温度
 type ThingInnerServiceName string
 
 func (t ThingInnerServiceName) Print() {
-    fmt.Println("ThingInnerServiceName is: " + string(t))
+  fmt.Println("ThingInnerServiceName is: " + string(t))
 }
 
 func main() {
-    var name ThingInnerServiceName = "MyService"
-    name.Print()  // 输出：ThingInnerServiceName is: MyService
+  var name ThingInnerServiceName = "MyService"
+  name.Print()  // 输出：ThingInnerServiceName is: MyService
 }
 ```
 
@@ -589,7 +589,7 @@ func main() {
 
 
 
- 
+
 
 ## 4.9. Unicode
 
@@ -629,11 +629,11 @@ const pi = 3.14
 ```go
 // 多个常量声明
 const (
-	// 同时声明多个常量时，如果省略了值则表示和上面一行的值相同
-	// n1 n2 n3 的值都为 100
-	n1 = 100
-	n2
-	n3
+  // 同时声明多个常量时，如果省略了值则表示和上面一行的值相同
+  // n1 n2 n3 的值都为 100
+  n1 = 100
+  n2
+  n3
 )
 ```
 
@@ -648,41 +648,41 @@ const (
 // 位于内部第一行被置为 0，每新增一行 iota 引用次数加 1
 // 常用于枚举中
 const (
-	t1 = iota // 0
-	t2        // 1
-	_         // 跳过 2
-	t4        // 3
-	t5 = iota // 中间插入 iota，4
-	t6        // 5
+  t1 = iota // 0
+  t2        // 1
+  _         // 跳过 2
+  t4        // 3
+  t5 = iota // 中间插入 iota，4
+  t6        // 5
 )
 
 func PrintConstIota() {
-	fmt.Println(t1, t2, t4, t5, t6)
+  fmt.Println(t1, t2, t4, t5, t6)
 }
 
 // 定义数量级
 const (
-	_  = iota
-	KB = 1 <<(10 * iota)
-	MB = 1 <<(10 * iota)
-	GB = 1 <<(10 * iota)
-	TB = 1 <<(10 * iota)
-	PB = 1 <<(10 * iota)
+  _  = iota
+  KB = 1 <<(10 * iota)
+  MB = 1 <<(10 * iota)
+  GB = 1 <<(10 * iota)
+  TB = 1 <<(10 * iota)
+  PB = 1 <<(10 * iota)
 )
 
 func PrintConstIotaShift() {
-	fmt.Println(KB, MB, GB, TB, PB)
+  fmt.Println(KB, MB, GB, TB, PB)
 }
 
 // 多个 iot 定义在一行
 const (
-	a, b = iota + 1, iota + 2 // a=0+1, b=0+2
-	c, d                      // c=1+1, c=1+2
-	e, f                      // e=2+1, f=2+2
+  a, b = iota + 1, iota + 2 // a=0+1, b=0+2
+  c, d                      // c=1+1, c=1+2
+  e, f                      // e=2+1, f=2+2
 )
 
 func PrintConstIotaMulti() {
-	fmt.Println(a, b, c, d, e, f)
+  fmt.Println(a, b, c, d, e, f)
 }
 ```
 
@@ -788,7 +788,7 @@ func TrimSuffix(s, suffix string) string
 5. 字符串转 []byte
 
    ```go
-   var bytes = []byte("hello")
+  var bytes = []byte("hello")
    ```
 
 6. []byte 转 字符串
@@ -833,14 +833,14 @@ func TrimSuffix(s, suffix string) string
 12. 将字符串左右两边的空格去掉
     ```go
     func TrimSpace(s string) string
-    
+
     // fmt.Println(strings.TrimSpace("\t\n Hello, Gophers \n\t\r\n"))
     ```
 
 13. 将字符串左右两边指定的字符串去掉
     ```go
     func Trim(s, cutset string) string
-    
+
     // fmt.Print(strings.Trim("¡¡¡Hello, Gophers!!!", "!¡"))
     // 输出：Hello, Gophers
     ```
@@ -891,7 +891,7 @@ type any = interface{}
   var array [5]int
   ```
 -  **Declaring an array using an array literal**
-   
+
     ```go
     // Declare an integer array of five elements.
     // Initialize each element with a specific value.
@@ -987,8 +987,8 @@ m := make(map[string]int)
 
 ```go
 m := map[string]int {
-	"John": 10,
-	"Anna": 20
+  "John": 10,
+  "Anna": 20
 }
 ```
 
@@ -1024,8 +1024,8 @@ dict := map[int][]string{}
 
 ```go
 type 结构体名称 struct {
-	field1 type
-	field2 type
+  field1 type
+  field2 type
 }
 
 // 示例
@@ -1050,16 +1050,16 @@ type Stu struct {
 
 ```go
 func showMyCar() {
-    newCar := struct {
-        make    string
-        model   string
-        mileage int
-    }{
-        make:    "Ford",
-        model:   "Taurus",
-        mileage: 200000,
-    }
-    fmt.Printlb(newCar.mode)
+  newCar := struct {
+    make    string
+    model   string
+    mileage int
+  }{
+    make:    "Ford",
+    model:   "Taurus",
+    mileage: 200000,
+  }
+  fmt.Printlb(newCar.mode)
 }
 ```
 
@@ -1074,26 +1074,26 @@ func showMyCar() {
   ```go
   // 结构体 A 可以转化为结构体 B
   type A struct {
-  	Num int
+    Num int
   }
-  
+
   type B type {
-  	Num int
+    Num int
   }
   ```
 - 结构体进行 type 重定义（相当于取别名），Golang 认为是新的数据类型，二者之间可以强转。
   ```go
   type Teacher struct {
-  	ID   int
-  	Name string
+    ID   int
+    Name string
   }
-  
+
   type YuanDing Teacher // Golang 认为 YuanDing 是一种新的数据类型
   var t1 Teacher
   var y1 YuanDing
   // t1 = y1 // error：y1 与 t1 之间不能互转
   t1 = Teacher(y1) // 强转
-  
+
   fmt.Println("t1:", t1, "y1:", y1)
   ```
 - `struct` 的每个字段上，可以写一个 `tag`，该 `tag` 可以通过 **反射机制** 获取。常见的场景就是序列化和反序列化。
@@ -1113,7 +1113,7 @@ func showMyCar() {
 
 ```go
 func name(parameter-list) (result-list) {
-	body
+  body
 }
 ```
 
@@ -1164,7 +1164,7 @@ Go 语言中也支持自定义错误，使用内置的 `errors.New()` 和 内置
 
 - `errors.New("错误说明")`：返回一个 error 类型的值，表示一个错误。内置的 error 是接口类型。可能是 nil 或者 non-nil。
   nil 表示函数运行成功， non-nil 表示失败。
--  `panic()` 函数：接收一个 `error` 类型的的变量，输出错误信息，并退出程序。因为 `panic(v interface{})`
+- `panic()` 函数：接收一个 `error` 类型的的变量，输出错误信息，并退出程序。因为 `panic(v interface{})`
    函数的参数类型为空接口（`interface{}`），任何一个变量都可以赋值给空接口。
 
 
@@ -1185,7 +1185,6 @@ Go 语言中也支持自定义错误，使用内置的 `errors.New()` 和 内置
 - 多个 `defer` 语句执行顺序：按 **先进后出** 的方式。
 
 - `defer` 语句中的变量，在 `defer` 声明时就决定了。
-
   ```go
   func Test() {
   var n1, n2 = 10, 20
@@ -1246,7 +1245,7 @@ func functionName(参数列表)(返回值列表){
 
 // 方法
 func (recevier type) methodName(参数列表)(返回值列表){
-	方法体
+  方法体
     return 返回值
 }
 ```
@@ -1270,13 +1269,13 @@ Go 语言的面向对象机制与一般语言不同。它没有类层次结构�
   ```go
   // 重写 String() 方法
   type Student struct {
-  	Name  string
-  	Score int
+    Name  string
+    Score int
   }
-  
+
   func (stu *Student) String() string {
-  	str := fmt.Sprintf("Name=%s, Score=%d", stu.Name, stu.Score)
-  	return str
+    str := fmt.Sprintf("Name=%s, Score=%d", stu.Name, stu.Score)
+    return str
   }
   ```
 
@@ -1309,13 +1308,13 @@ Go 语言的面向对象机制与一般语言不同。它没有类层次结构�
 
 ```go
 type Goods struct {
-	Name  string
-	Price float64
+  Name  string
+  Price float64
 }
 
 type Books struct {
-	Goods // 嵌套的匿名结构体
-	Color string
+  Goods // 嵌套的匿名结构体
+  Color string
 }
 ```
 
@@ -1433,9 +1432,9 @@ Go 语言的接口（interface）是一种抽象的 **类型**，interface 是�
 ```go
 type 接口类型名 interface{
     // 声明的方法不需要实现，在外部去实现所有的方法
-	方法名 1(参数列表 1) 返回值列表 1
-	方法名 2(参数列表 2) 返回值列表 2
-	…
+  方法名 1(参数列表 1) 返回值列表 1
+  方法名 2(参数列表 2) 返回值列表 2
+  …
 }
 ```
 
@@ -1443,9 +1442,9 @@ type 接口类型名 interface{
 ```go
 // 示例
 type usb interface {
-	// 两个方法
-	Start()
-	Stop()
+  // 两个方法
+  Start()
+  Stop()
 }
 ```
 
@@ -1465,21 +1464,21 @@ type usb interface {
 
   ```go
   type Writer interface {
-  	Write(p []byte) (n int, err error)
+    Write(p []byte) (n int, err error)
   }
-  
+
   type Reader interface {
-  	Read(p []byte) (n, int, err error)
+    Read(p []byte) (n, int, err error)
   }
-  
+
   type Closer interface {
-  	Close() error
+    Close() error
   }
-  
+
   type ReadWriteCloser interface {
-  	Reader
-  	Writer
-  	Closer
+    Reader
+    Writer
+    Closer
   }
   ```
 
@@ -1489,8 +1488,8 @@ type usb interface {
 - Golang 的接口里面不能有任何的变量。
   ```go
   type Say interface {
-  	MyPrint() // ok
-  	Name string // error
+    MyPrint() // ok
+    Name string // error
   }
   ```
 
@@ -1500,11 +1499,11 @@ type usb interface {
   type A interface {
       Test01()
   }
-  
+
   type B interface {
       Test02()
   }
-  
+
   // C 接口中继承了两个接口
   type C interface {
       Test03()
@@ -1512,27 +1511,27 @@ type usb interface {
       B
   }
   ```
-  
+
 - **interface 类型默认是一个指针（引用类型）**，若没有初始化 interface 就是用，那么默认值为 `nil`。
 
 - **空接口中没有任何的方法，所有的类型都实现了空接口**。即任何一个变量都可以赋值给空接口。（**很常用**）
-  
+
   ```go
   type Stu struct {
-  	Name string
+    Name string
   }
-  
+
   // 空接口
   type T interface {}
-  
+
   // 调用
   var stu = Stu
   var t1 T = stu   // 赋结构体类型
-  
+
   f := 3.14
   var t2 interface{} = f // 赋基础类型
   ```
-  
+
   尽量减少将空接口（`interface{}`）作为函数的参数类型，因为空接口类型编译时会逃过编译器的类型安全检查。需要编程者自己
   去检查传入参数的错误信息，并且直到运行时才能发现错误。
 
@@ -1577,7 +1576,7 @@ interface 赋值的过程，即为 iface、eface 生成的过程。如果编译�
 
 1. 单个值的类型断言：
    ```go
-   value, ok := x.(T)
+  value, ok := x.(T)
    ```
    这种形式的类型断言用于从接口值 `x` 中提取出具体的值，并将其转换为类型 `T`。如果 `x` 的类型可以转换为
    `T`，则断言成功，`value` 将接收转换后的值，`ok` 的值为 `true`。如果断言失败，即 `x`
@@ -1585,7 +1584,7 @@ interface 赋值的过程，即为 iface、eface 生成的过程。如果编译�
 
 2. 类型检查的类型断言：
    ```go
-   _, ok := x.(T)
+  _, ok := x.(T)
    ```
     这种形式的类型断言只关注接口值 `x` 的类型是否可以转换为类型 `T`。如果可以转换，`ok` 的值为 `true`，否则为
     `false`。这种形式的类型断言通常用于 **判断某个接口值是否满足特定的接口类型**。
@@ -1600,9 +1599,9 @@ var x interface{} = "Hello"
 
 value, ok := x.(string)
 if ok {
-    fmt.Println("Value:", value)
+  fmt.Println("Value:", value)
 } else {
-    fmt.Println("Type assertion failed")
+  fmt.Println("Type assertion failed")
 }
 ```
 
@@ -1620,18 +1619,18 @@ package main
 import "fmt"
 
 type Point struct {
-	x int
-	y int
+  x int
+  y int
 }
 
 func main() {
-	var a interface{}
-	var p1 Point = Point{10, 20}
-	a = p1 // ok
-	var p2 Point
-	// p2 = a // error
-	p2 = a.(Point) // 使用类型断言
-	fmt.Println(p2)
+  var a interface{}
+  var p1 Point = Point{10, 20}
+  a = p1 // ok
+  var p2 Point
+  // p2 = a // error
+  p2 = a.(Point) // 使用类型断言
+  fmt.Println(p2)
 }
 ```
 
@@ -1657,8 +1656,7 @@ func main() {
    集中处理对象的初始化逻辑，减少重复代码。
 2. 隐藏内部实现：模拟构造函数可以帮助隐藏对象的内部实现细节，将对象的创建过程与外部调用代码分离。这样，外部代码只需要
    关注如何使用对象，而无需了解其创建和初始化的具体细节。
-3. 提供参数化初始化：构造函数的模拟可以接收参数，并根据不同的参数值创建不同的对象实例。这样可以在创建对象时根据需要进
-   行个性化的初始化。
+3. 提供参数化初始化：构造函数的模拟可以接收参数，并根据不同的参数值创建不同的对象实例。这样可以在创建对象时根据需要进行个性化的初始化。
 4. 简化对象的创建：通过构造函数的模拟，可以简化对象的创建过程，尤其是在需要进行多个初始化步骤或依赖注入时。它可以封装
    复杂的初始化逻辑，使代码更易于维护和扩展。
 
@@ -1681,9 +1679,9 @@ func main() {
 以下是一个示例函数，展示了如何在 Go 语言中定义带有泛型参数的函数：
 ```go
 codefunc PrintSlice[T any](slice []T) {
-    for _, element := range slice {
-        fmt.Println(element)
-    }
+  for _, element := range slice {
+    fmt.Println(element)
+  }
 }
 ```
 
@@ -1736,8 +1734,8 @@ Go 并发采用 `goroutines` 和 `channel` 去处理并发编程。
 
 ```go
 func gt() {
-	// 函数体
-	...
+  // 函数体
+  ...
 }
 
 // 调用
@@ -1959,12 +1957,12 @@ select {
 intChan := make(chan int, 10) // 定义一个 int 类型的管道，其容量为 10，并创建
 stringChan := make(chan string, 10)
 select {
-    case v1 := <-intchan:
-   		fmt.Println(v1)
-    case v2 := <-stringchan:
-    	fmt.Println(v2)
-    default:
-    	fmt.Println("nothing...")
+  case v1 := <-intchan:
+    fmt.Println(v1)
+  case v2 := <-stringchan:
+    fmt.Println(v2)
+  default:
+    fmt.Println("nothing...")
 }
 ```
 
@@ -1981,7 +1979,7 @@ select {
    ```go
    ch1 := make(chan string)
    ch2 := make(chan string)
-   
+
    go func() {
        time.Sleep(1 * time.Second)
        ch1 <- "one"
@@ -1990,7 +1988,7 @@ select {
        time.Sleep(2 * time.Second)
        ch2 <- "two"
    }()
-   
+
    select {
    case msg := <-ch1:
        fmt.Println(msg) // 输出 "one"（更快就绪）
@@ -2036,7 +2034,7 @@ select {
            }
        }
    }()
-   
+
    // 触发退出
    close(done)
    ```
@@ -2079,11 +2077,11 @@ select {
 
 ```go
 func incCountAtomic() {
-	defer wg111.Done()
-	for i := 0; i < 2; i++ {
-		atomic.AddInt32(&count, 1)
-		runtime.Gosched()
-	}
+  defer wg111.Done()
+  for i := 0; i < 2; i++ {
+    atomic.AddInt32(&count, 1)
+    runtime.Gosched()
+  }
 }
 ```
 
@@ -2108,15 +2106,15 @@ Go 提供了另外一个 sync 包，用对代码段加锁解锁的办法来解�
 
 ```go
 func incCountSync() {
-	defer wg111.Done()
-	for i := 0; i < 2; i++ {
-		mutex.Lock()
-		value := count
-		runtime.Gosched()
-		value++
-		count = value
-		mutex.Unlock()
-	}
+  defer wg111.Done()
+  for i := 0; i < 2; i++ {
+    mutex.Lock()
+    value := count
+    runtime.Gosched()
+    value++
+    count = value
+    mutex.Unlock()
+  }
 }
 ```
 
@@ -2131,9 +2129,9 @@ func incCountSync() {
 var mu sync.RWMutex
 var balance int
 func Balance() int {
-	mu.RLock()
-	defer mu.RUnlock()
-	return balance
+  mu.RLock()
+  defer mu.RUnlock()
+  return balance
 }
 ```
 
@@ -2162,8 +2160,7 @@ Go 以包的形式来管理文件和项目目录结构的。所有的 go 代码�
 
 在同一个源文件中声明的 init 函数将按从上到下的顺序被调用执行。 对于声明在同一个包中的 两个不同源文件中的两个 init
 函数，Go 语言白皮书推荐（但不强求）按照它们所处于的源文件的
-名称的词典序列（对英文来说，即字母顺序）来调用。 所以最好不要让声明在同一个包中的两个 不同源文件中的两个 init
-函数存在依赖关系。 
+名称的词典序列（对英文来说，即字母顺序）来调用。 所以最好不要让声明在同一个包中的两个 不同源文件中的两个 init 函数存在依赖关系。
 
 在加载一个代码包的时候，此代码包中声明的所有包级变量都将在此包中的任何一个 init 函数执 行之前初始化完毕。
 
@@ -2184,7 +2181,7 @@ Go 以包的形式来管理文件和项目目录结构的。所有的 go 代码�
 - 访问其它的包函数或变量时，其语法格式是：
   ```go
   包名. 函数名
-  
+
   包名. 变量名
   ```
 - 在同一个包下不能有相同的两个函数名，否则会报重复定义。
@@ -2228,7 +2225,7 @@ import "fmt"
 
 // 导入多个包
 import (
-	"fmt"
+  "fmt"
     "os"
 )
 
@@ -2366,7 +2363,7 @@ log
 - slog：Go 官方版结构化日志包：https://tonybai.com/2022/10/30/first-exploration-of-slog/
 
 ------------------------------------------------------------------------
-Community skills sharing 
+Community skills sharing
 - [LeetCode-Go](https://github.com/halfrost/LeetCode-Go): GO 语言题解 LeetCode，比较全面，使用 GO 语言时值得参考。
 - [Halfrost-Field 冰霜之地](https://github.com/halfrost/Halfrost-Field)：Github 上的一位作者记录了学习 GO 语言的一些方法和经验。
 - [Go 语言问题集 (Go Questions)](https://www.bookstack.cn/read/qcrao-Go-Questions/README.md)：作者学习 Go 语言的笔记
@@ -2389,11 +2386,11 @@ Github excellent open source project
 - **go-awesome**: https://github.com/shockerli/go-awesome
 - **国外 awesome-go**: https://github.com/avelino/awesome-go
 - **Go 夜读：**
-  - **https://github.com/talkgo/read**  
+  - **https://github.com/talkgo/read**
   - https://github.com/talkgo/night
 
 ------------------------------------------------------------------------
 Tools
-- https://colobu.com/gotips/041.html 
+- https://colobu.com/gotips/041.html
 - 技术文章摘抄：https://learn.lianglianglee.com/
 - GO 命令教程: https://www.topgoer.cn/docs/go_command_tutorial/go_command_tutorial-1d9eko78f5vkq

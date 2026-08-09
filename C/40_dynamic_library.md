@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:36
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 17:03:46
+ * @LastEditTime: 2026-08-09 17:11:58
  * @Description: 动态库学习
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 # 动态库
@@ -17,15 +17,12 @@
 
 ```cpp
 FARPROC GetProcAddress(
-    HMODULE hModule, // DLL模块句柄
-    LPCSTR lpProcName // 函数名
+  HMODULE hModule, // DLL模块句柄
+  LPCSTR lpProcName // 函数名
 );
 ```
 
-
-
 ### FreeLibrary()
-
 
 
 ## Linux
@@ -123,22 +120,22 @@ void* dlsym(void*handle, const char*symbol);
 #include <dlfcn.h>
 
 int main() {
-    void* handle = dlopen("libtest.so", RTLD_NOW);
-    if (!handle) {
-        printf("dlopen error: %s\n", dlerror());
-        return -1;
-    }
-    
-    void (*test_func)() = (void (*)())dlsym(handle, "test");
-    if (!test_func) {
-        printf("dlsym error: %s\n", dlerror());
-        return -1;
-    }
-    
-    test_func();
-    
-    dlclose(handle);
-    return 0;
+  void* handle = dlopen("libtest.so", RTLD_NOW);
+  if (!handle) {
+    printf("dlopen error: %s\n", dlerror());
+    return -1;
+  }
+
+  void (*test_func)() = (void (*)())dlsym(handle, "test");
+  if (!test_func) {
+    printf("dlsym error: %s\n", dlerror());
+    return -1;
+  }
+
+  test_func();
+
+  dlclose(handle);
+  return 0;
 }
 ```
 

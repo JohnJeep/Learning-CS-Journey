@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2022-03-09 17:36:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 17:04:47
+ * @LastEditTime: 2026-08-09 17:12:15
  * @Description:  fopen 函数与 open 函数的区别
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 ## open() 函数
@@ -81,7 +81,7 @@ struct _IO_FILE {
 ```cpp
 typedef struct _iobuf
 {
-    void* _Placeholder;
+  void* _Placeholder;
 } FILE;
 ```
 
@@ -118,24 +118,24 @@ FILE *fopen(const char *path, const char *mode);
 
 int main(void)
 {
-    FILE* fp = fopen("test.txt", "r");
-    if(!fp) {
-        perror("File opening failed");
-        return EXIT_FAILURE;
-    }
+  FILE* fp = fopen("test.txt", "r");
+  if(!fp) {
+    perror("File opening failed");
+    return EXIT_FAILURE;
+  }
 
-    int c; // 注意：int，非char，要求处理EOF
-    while ((c = fgetc(fp)) != EOF) { // 标准C I/O读取文件循环
-       putchar(c);
-    }
+  int c; // 注意：int，非char，要求处理EOF
+  while ((c = fgetc(fp)) != EOF) { // 标准C I/O读取文件循环
+    putchar(c);
+  }
 
-    if (ferror(fp)) {
-        puts("I/O error when reading");
-    }
-    else if (feof(fp)) {
-        puts("End of file reached successfully");
-    }
-    fclose(fp);
+  if (ferror(fp)) {
+    puts("I/O error when reading");
+  }
+  else if (feof(fp)) {
+    puts("End of file reached successfully");
+  }
+  fclose(fp);
 }
 ```
 

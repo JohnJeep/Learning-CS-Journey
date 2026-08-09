@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2019-09-20 15:05:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:27:01
+ * @LastEditTime: 2026-08-09 17:07:18
  * @Description: deep understanding of pointer
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 概念
@@ -27,7 +27,7 @@
 - `指针变量名`：表示指向另一个数据地址的变量，本质是一个地址变量。
 - `*指针变量名`：表示指向另一个数据地址里面的值，本质是一个数据值变量。
 - ` * `：取内容运算符；取出指针变量所指向地址的内容
-- ` & `：取地址运算符；获取变量在计算机内存中的存储地址。取地址运算符的操作对象（变量）一定是定义过的变量或数组元素。 
+- ` & `：取地址运算符；获取变量在计算机内存中的存储地址。取地址运算符的操作对象（变量）一定是定义过的变量或数组元素。
 
 # 3. 指针关键注意点
 
@@ -49,8 +49,8 @@
   - 例如：`int* p = NULL;` 指针 p 为一个空指针。
   - C 语言中使用宏 NULL 表示空指针常量：`#define  NULL  ((void *)0)`
   - 系统保证空指针不指向任何对象或函数。
-- 初始化：` 数据类型 *指针变量名=内存地址； ` 
-  - “内存地址”是地址常量或对变量取地址的运算表达式。 
+- 初始化：` 数据类型 *指针变量名=内存地址； `
+  - “内存地址”是地址常量或对变量取地址的运算表达式。
 
 # 4. 初始化
 
@@ -91,7 +91,7 @@ int* p1 = new int(200);    // 类似于 int x(200);
 // 对于类类型
 class MyClass {
 public:
-    MyClass(int value) { /* ... */ }
+  MyClass(int value) { /* ... */ }
 };
 
 MyClass* obj = new MyClass(100);  // 调用构造函数 MyClass(100)
@@ -132,21 +132,22 @@ MyClass* obj = new MyClass(100);  // 调用构造函数
 #include <iostream>
 using namespace std;
 
-int main() {
-    // 各种初始化方式
-    int* uninitialized = new int;           // 值未定义
-    int* zero = new int();                  // 值初始化为0 (C++特性)
-    int* with_value = new int(200);         // 初始化为200
-    
-    cout << "未初始化: " << *uninitialized << endl;  // 随机值
-    cout << "零初始化: " << *zero << endl;           // 输出0
-    cout << "指定值: " << *with_value << endl;       // 输出200
-    
-    delete uninitialized;
-    delete zero;
-    delete with_value;
-    
-    return 0;
+int main()
+{
+  // 各种初始化方式
+  int* uninitialized = new int;           // 值未定义
+  int* zero = new int();                  // 值初始化为0 (C++特性)
+  int* with_value = new int(200);         // 初始化为200
+
+  cout << "未初始化: " << *uninitialized << endl;  // 随机值
+  cout << "零初始化: " << *zero << endl;           // 输出0
+  cout << "指定值: " << *with_value << endl;       // 输出200
+
+  delete uninitialized;
+  delete zero;
+  delete with_value;
+
+  return 0;
 }
 ```
 
@@ -157,56 +158,61 @@ int main() {
 ### 4.2.1. 指向栈上变量（最常见）
 
 ```cpp
-int main() {
-    int x = 100;           // 栈上分配的整型变量
-    int* ptr = &x;         // 指针指向栈上的变量x
-    
-    cout << *ptr << endl;  // 输出100
-    // 不需要手动释放，main函数结束时x和ptr自动销毁
+int main()
+{
+  int x = 100;           // 栈上分配的整型变量
+  int* ptr = &x;         // 指针指向栈上的变量x
+
+  cout << *ptr << endl;  // 输出100
+  // 不需要手动释放，main函数结束时x和ptr自动销毁
 }
 ```
 
 ### 4.2.2. 指向其他指针
 
 ```cpp
-int main() {
-    int x = 100;
-    int* ptr1 = &x;
-    int* ptr2 = ptr1;      // ptr2也指向x
-    
-    cout << *ptr2 << endl; // 输出100
+int main()
+{
+  int x = 100;
+  int* ptr1 = &x;
+  int* ptr2 = ptr1;      // ptr2也指向x
+
+  cout << *ptr2 << endl; // 输出100
 }
 ```
 
 ### 4.2.3. 指向数组（栈上数组）
 
 ```cpp
-int main() {
-    int arr[5] = {1, 2, 3, 4, 5};  // 栈上数组
-    int* ptr = arr;                 // 指向数组首元素
-    
-    for(int i = 0; i < 5; i++) {
-        cout << ptr[i] << " ";      // 输出1 2 3 4 5
-    }
+int main()
+{
+  int arr[5] = {1, 2, 3, 4, 5};  // 栈上数组
+  int* ptr = arr;                 // 指向数组首元素
+
+  for(int i = 0; i < 5; i++) {
+    cout << ptr[i] << " ";      // 输出1 2 3 4 5
+  }
 }
 ```
 
 ### 4.2.4. 指向字符串常量
 
 ```cpp
-int main() {
-    const char* str = "Hello World";  // 指向字符串常量
-    cout << str << endl;              // 输出Hello World
+int main()
+{
+  const char* str = "Hello World";  // 指向字符串常量
+  cout << str << endl;              // 输出Hello World
 }
 ```
 
 ### 4.2.5. 空指针或野指针
 
 ```cpp
-int main() {
-    int* ptr1 = nullptr;    // 空指针（推荐）
-    int* ptr2 = NULL;       // 空指针（传统C风格）
-    int* ptr3;              // 未初始化，野指针（危险！）
+int main()
+{
+  int* ptr1 = nullptr;    // 空指针（推荐）
+  int* ptr2 = NULL;       // 空指针（传统C风格）
+  int* ptr3;              // 未初始化，野指针（危险！）
 }
 ```
 
@@ -217,14 +223,15 @@ int main() {
 ```cpp
 int global_var = 100;
 
-int main() {
-    int *p = &global_var;   // p指向全局变量global_var
+int main()
+{
+  int *p = &global_var;   // p指向全局变量global_var
 
-    // 使用p
+  // 使用p
 
-    // 不需要手动释放，因为global_var的生命周期是整个程序
+  // 不需要手动释放，因为global_var的生命周期是整个程序
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -234,10 +241,12 @@ int main() {
 - 堆上分配：使用 new 初始化指针，必须使用 delete 释放。
 - 静态存储区：使用全局变量或静态变量的地址初始化指针，无需手动释放。
 
+
 # 5. 应用
 
 - 指针为形参，作为函数的参数，给变量间接赋值。
 - 通过形参来改变实参的内容，必须地址传递
+
 
 # 6. Wild Pointer(野指针)
 
@@ -245,16 +254,14 @@ int main() {
 
 **定义**：未被初始化或指向未知内存地址的指针。
 
-- 野指针通常指的是未被初始化的指针。也就是说，这个指针变量被声明了，但没有被赋予一个明确的地址值。它可能指向任意内存地
-  址，可能是随机的、不确定的。
-
+- 野指针通常指的是未被初始化的指针。也就是说，这个指针变量被声明了，但没有被赋予一个明确的地址值。它可能指向任意内存地 址，可能是随机的、不确定的。
 - 使用野指针会导致未定义行为，因为它可能指向不可访问的内存区域（如系统保护区），或者意外地修改了其他重要数据。
 
   ```cpp
   // 示例1：未初始化的指针
   int* wildPtr;  // 野指针 - 指向随机内存地址
   *wildPtr = 10; // 未定义行为！
-  
+
   // 示例2：指向已释放内存但未置空的指针
   int* ptr = new int(5);
   delete ptr;    // 内存已被释放
@@ -269,7 +276,7 @@ int main() {
 
 ## 6.3. 如何避免野指针
 
-- 将指针初始化为  `nullptr`。 
+- 将指针初始化为  `nullptr`。
 - 用已有合法的可访问的内存地址对指针初始化
   ```c
   char num[ 30] = {0};
@@ -278,7 +285,7 @@ int main() {
 - 使用 malloc 分配内存。（在堆空间内分配）分配后要进行检查是否分配成功，最后要进行释放内存。malloc
   函数分配完内存后需注意：
   - 检查是否分配成功（若分配成功，返回内存的首地址；分配不成功，返回 NULL。可以通过 if 语句来判断）
-  - 清空内存中的数据（malloc 分配的空间里可能存在垃圾值，用 memset 或 bzero 函数清空内存）     
+  - 清空内存中的数据（malloc 分配的空间里可能存在垃圾值，用 memset 或 bzero 函数清空内存）
 
 # 7. Dangling Pointer(悬挂指针)
 
@@ -286,9 +293,10 @@ int main() {
 
 ```cpp
 // 示例1：指向局部变量的指针
-int* createDanglingPointer() {
-    int localVar = 42;
-    return &localVar;  // 返回局部变量的地址
+int* createDanglingPointer()
+{
+  int localVar = 42;
+  return &localVar;  // 返回局部变量的地址
 } // localVar 生命周期结束
 
 int* danglingPtr = createDanglingPointer();
@@ -319,9 +327,10 @@ delete ptr;
 ptr = nullptr;
 
 // 3. 避免返回局部变量的地址
-int* safeFunction() {
-    static int value = 42;  // 静态变量或动态分配
-    return &value;
+int* safeFunction()
+{
+  static int value = 42;  // 静态变量或动态分配
+  return &value;
 }
 
 // 4. 使用智能指针（推荐）
@@ -338,10 +347,8 @@ ptr1 = nullptr;
 ```
 
 
-
 # 8. 零值指针和 NULL 指针的区别
 
 - 零值指针，是值为 0 的指针，可以是任何一种指针类型，可以是通用变体类型 void* 也可以是 char*，int*等。
 - 空指针，其实空指针只是一种编程概念，就如一个容器可能有空和非空两种基本状态，而在非空时可能里面存储了一个数值是
   0，因此空指针是人为认为的指针不提供任何地址讯息。
-

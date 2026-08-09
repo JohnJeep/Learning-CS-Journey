@@ -2,12 +2,13 @@
  * @Author: JohnJeep
  * @Date: 2021-04-06 14:33:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:57:42
+ * @LastEditTime: 2026-08-09 17:11:30
  * @Description: static keyword usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 #  static 关键字
+
 `static` 修饰的全局变量和函数只能在本模块中使用，不能在其它的模块中使用。因此，当一个函数或变量只能在本模块中使用时，
 不能用 `extern “C”` 关键字修饰，用在其它的文件中调用。
 
@@ -37,21 +38,23 @@ static 修饰的变量在函数体内定义时，表明它的申请的内存是�
 
 
 static 变量在函数体内使用情况
+
 ```c
 #include <stdio.h>
 #include <string.h>
 
 int sub()
 {
-    static int count = 10;   // count变量在内存中位于全局区域，直到程序结束时，该变量才会被释放
-    // int count = 10;       // count变量申请的内存空间位于栈区，当前函数体执行完成后，变量就被释放了
-    return count--;
+  static int count = 10;   // count变量在内存中位于全局区域，直到程序结束时，该变量才会被释放
+  // int count = 10;       // count变量申请的内存空间位于栈区，当前函数体执行完成后，变量就被释放了
+  return count--;
 }
 
 int main(int argc, char *argv[])
 {
-    for (int i = 0; i < 10; i++) {
-        printf("%d\n",sub()); 
-    }
-    return 0;
+  for (int i = 0; i < 10; i++) {
+    printf("%d\n",sub());
+  }
+  return 0;
+}
 ```

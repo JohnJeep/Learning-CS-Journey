@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-10-12 10:38:01
  * @LastEditors: JohnJeep
- * @LastEditTime: 2024-12-02 16:39:19
+ * @LastEditTime: 2026-08-09 17:24:57
  * @Description: Docker 安装教程
- * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved.
 -->
 
 # Linux 换源
@@ -137,7 +137,7 @@ Docker 并非一个通用的容器工具，它依赖于已存在并运行的 Lin
 CentOS Linux release 7.9.2009 (Core)
 
 // 查看内核版本、硬件架构、主机名称、操作系统类型等信息
-[root@redis_181 ~]# uname -a    
+[root@redis_181 ~]# uname -a
 Linux redis_181 3.10.0-1160.49.1.el7.x86_64 #1 SMP Tue Nov 30 15:51:32 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 

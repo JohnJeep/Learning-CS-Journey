@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:36:40
+ * @LastEditTime: 2026-08-09 17:31:57
  * @Description: Git Usage
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
@@ -78,7 +78,7 @@ Git tag 有两种类型。
 - `git push <remote> :refs/tags/<tagname> ` 更新并删除远程仓库标签
 - `git tag` 查看历史 tag 记录
 - `git checkout v1.0` 切换到某个 tag，查看某个标签所指向的文件版本。
-  
+
   > 注意： 会导致仓库处于分离头指针 (detacthed HEAD) 状态. 在 “分离头指针”
   > 状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的
   > 提交哈希。
@@ -93,13 +93,13 @@ Git tag 有两种类型。
 - `git checkout  <new_branch_name>`   切换到 new_branch_name 分支下
 - `git branch Develop`  新建 Develop 分支
 - `git checkout -b <new_branch_name>`   创建 new_branch_new 分支，并切换到当前分支
-  
+
   > Git 2.23 版本之后，使用 `git switch` 替代原先的 `git chechout`。切换到已存在的分支: `git switch testing-branch`;
   > 创建一个新分支并切换到当前分支: `git
   > switch -c new-branch`; 返回到你 checkout 之前的分支: `git switch -`
 - `git checkout -b <new_branch_name> origin/feature` 从远程已存在的 `feature` 分支上拉取代码到本地新建的分支
   `new_branch_name`，同时切换到新创建的分支上。
-  
+
 
 用暂存区或者指定 commit 提交内容覆盖工作区内容
 - 用暂存区内容覆盖工作区内容
@@ -379,7 +379,7 @@ git blame <file>
 
 ### 1.17.1. remove
 - `rm` 删除命令，指令前面不加 `git`
-  
+
   删除本地目录文件，不会删除提交到暂存区的文件。例如：`rm filename`
 - `git rm` 是 git 中封装的 `rm` 命令。
   - `git rm filename`：，删除已经提交到本地版本库中的内容，同时删除暂存区中的内容。
@@ -550,14 +550,14 @@ Git 创建一个分支很快，因为除了增加一个 `testing` 指针，改�
 
 `git rebase` 命令的作用是把当前分支的提交“重新定位”到另一个分支的最新提交之后，保持线性、整洁的提交历史。
 
-| 命令                     | 作用                                                         | 适用场景                                        |
-| ------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| `git rebase <branch>`    | 将当前分支的提交 **重新应用** 到 `<branch>` 最新提交之后     | 保持提交历史直线化，避免出现多余的 merge commit |
+| 命令                     | 作用                                                                    | 适用场景                                        |
+| ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------- |
+| `git rebase <branch>`    | 将当前分支的提交 **重新应用** 到 `<branch>` 最新提交之后                | 保持提交历史直线化，避免出现多余的 merge commit |
 | `git rebase -i <commit>` | 进入交互式 rebase，可以 **合并(squash)、修改(reword)、删除(drop)** 提交 | 精简提交历史，整理 commit message               |
-| `git rebase --continue`  | 解决冲突后继续 rebase 流程                                   | 遇到冲突时处理完再继续 rebase                   |
-| `git rebase --abort`     | 放弃 rebase，恢复到 rebase 前的状态                          | rebase 出现复杂冲突，不想继续时使用             |
-| `git rebase --skip`      | 跳过当前有冲突的提交，继续 rebase 后续提交                   | 某个提交不需要保留时使用                        |
-| `git rebase origin/main` | 把当前分支的提交基于远程 `main` 最新代码之上                 | 在合并 PR 之前，保持基于最新主干                |
+| `git rebase --continue`  | 解决冲突后继续 rebase 流程                                              | 遇到冲突时处理完再继续 rebase                   |
+| `git rebase --abort`     | 放弃 rebase，恢复到 rebase 前的状态                                     | rebase 出现复杂冲突，不想继续时使用             |
+| `git rebase --skip`      | 跳过当前有冲突的提交，继续 rebase 后续提交                              | 某个提交不需要保留时使用                        |
+| `git rebase origin/main` | 把当前分支的提交基于远程 `main` 最新代码之上                            | 在合并 PR 之前，保持基于最新主干                |
 
 `git rebase` 和 `git merge` 都可以用于分支的合并，但使用 `git rebase`
 合并的分支，提交（commit）信息是线性的，因为它会清除当前分支提交（commit）的版本历史信息，只选择保留最后一次的提交
@@ -568,7 +568,7 @@ Git 创建一个分支很快，因为除了增加一个 `testing` 指针，改�
 1. 压缩提交的记录。
 2. 分支合并时，让合并的分支更简洁，只选择保留最后一次的提交信息，线性显示提交的记录，观察起来更优美。
 
-<font color="red"> 注意: </font> 
+<font color="red"> 注意: </font>
 已经推送到 github 远程仓库的文件（多人开发的重要分支）不要使用 `git
 rebase`，否则远程仓库的分支记录会被修改，别人就不能正常的提交了。
 
@@ -635,7 +635,7 @@ resolve
 | `git merge --no-commit <branch>` | 合并但不自动生成提交                   | 想先检查/修改合并结果再提交      |
 | `git merge --stat <branch>`      | 显示合并统计信息                       | 查看合并影响的文件数量和改动规模 |
 
-## 2.5. 
+## 2.5.
 
 
 # 3. Git Area
@@ -673,7 +673,7 @@ Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你�
 1. Git 清空暂存区
 - 暂存区实质是 `.git` 目录下的 `index` 文件，只要将此文件删除，那么暂存区就被清空。可用这条命令来将暂存区中的内容清空
   `rm .git /index` 。
-  
+
   暂存区存在的必要性
    - 有些朋友感觉暂存区多余，其实并非如此，通过这个过渡性区域可以使提交更加条理，避免无用琐碎提交。
    - 暂存区就如同一个临时性仓库，可以将来自工作区的新文件或者修改文件暂时存放起来，然后统一提交到分支中的版本库中。
@@ -681,7 +681,7 @@ Workspace (工作区) 也可以称为 Working Directory (工作目录)，是你�
 2. `git ls-files` 查看暂存区里所有的内容，后面可加下面任意的选项参数。
    ```shell
    git ls-files 命令的默认参数是 --cached(-c)，默认情况下默认参数没有显示。
-   
+
    - --cached(-c) 显示暂存区中的文件
    - --deleted(-d) 显示删除的文件
    - --modified(-m) 显示修改过的文件
@@ -701,8 +701,7 @@ ch`）。
 
 将文件最终提交到版本库基本流程如下：
 - `git add`    将工作区未跟踪和修改文件提交到暂存区。
-- `git commit` 将暂存区内容提交到版本库中，并执行更新 HEAD 指向的指针，这样就完成了引用与提交、提交与改动快照的——对应
-  了。
+- `git commit` 将暂存区内容提交到版本库中，并执行更新 HEAD 指向的指针，这样就完成了引用与提交、提交与改动快照的——对应了。
 
 <img width="50%" hight="50%" src="./figures/.git.png"/>
 
@@ -718,16 +717,16 @@ Git 清空版本库
 `git remote` 命令用于管理本地仓库与远程仓库的连接关系。 简单来说，它让你查看、添加、修改或删除远程仓库的别名（如常见的
 `origin`）。
 
-| 命令                                | 作用                                                         | 适用场景                                                     |
-| ----------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `git remote`                        | 列出已配置的远程仓库名                                       | 想知道当前仓库关联了哪些远程                                 |
-| `git remote -v`                     | 列出远程仓库及其对应的 URL                                   | 检查远程仓库地址，常用                                       |
-| `git remote show remote_name`       | 查看某个远程仓库                                             |                                                              |
-| `git remote add <alias_name> <url>` | 添加一个远程仓库                                             | 用于新增一个远程仓库                                         |
-| `git remote remove <name>`          | 删除一个远程仓库                                             | 不再使用某个远程时                                           |
-| `git remote rename <old> <new>`     | 重命名远程仓库                                               | 想把 `origin` 改成 `upstream` `等`                           |
-| `git remote set-url <name> <url>`   | 修改远程仓库 URL                                             | 远程地址变更（如 HTTP 改成 SSH）                             |
-| `git remote prune origin`           | 清理特定的远程过时分支 origin                                |                                                              |
+| 命令                                | 作用                                                                             | 适用场景                                                                   |
+| ----------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `git remote`                        | 列出已配置的远程仓库名                                                           | 想知道当前仓库关联了哪些远程                                               |
+| `git remote -v`                     | 列出远程仓库及其对应的 URL                                                       | 检查远程仓库地址，常用                                                     |
+| `git remote show remote_name`       | 查看某个远程仓库                                                                 |                                                                            |
+| `git remote add <alias_name> <url>` | 添加一个远程仓库                                                                 | 用于新增一个远程仓库                                                       |
+| `git remote remove <name>`          | 删除一个远程仓库                                                                 | 不再使用某个远程时                                                         |
+| `git remote rename <old> <new>`     | 重命名远程仓库                                                                   | 想把 `origin` 改成 `upstream` `等`                                         |
+| `git remote set-url <name> <url>`   | 修改远程仓库 URL                                                                 | 远程地址变更（如 HTTP 改成 SSH）                                           |
+| `git remote prune origin`           | 清理特定的远程过时分支 origin                                                    |                                                                            |
 | `git remote update --prune`         | 从所有远程仓库拉取最新的分支和标签信息,删除本地所有已过时的远程跟踪分支（prune） | 远程分支早被删除，但本地仓库还在。删除远程服务器上不再存在的远程分支引用。 |
 
 **详细对比**
@@ -868,7 +867,7 @@ rm ~/.git-credentials
 有如下规则：
 
 - `#`符号开头为注释。
-- 可以使用 Linux 通配符。 
+- 可以使用 Linux 通配符。
   - 星号（`*`）代表任意多个字符，
   - 问号（`？`）代表一个字符，
   - 方括号（`[abc]`）代表可选字符范围，

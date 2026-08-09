@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-06-13 11:19:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-18 15:27:07
+ * @LastEditTime: 2026-08-09 17:41:30
  * @Description: Golang 第三方包用法学习
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Kratos
@@ -52,32 +52,32 @@ zerolog 是一个高性能、零内存分配的 Go 日志库，结构化日志�
 package main
 
 import (
-	"os"
+  "os"
 
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
+  "github.com/rs/zerolog"
+  "github.com/rs/zerolog/log"
 )
 
 func main() {
-	// 配置zerolog
-	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	logLevel := zerolog.InfoLevel
-	logFormat := "2006-01-02 15:04:05.000"
+  // 配置zerolog
+  zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
+  logLevel := zerolog.InfoLevel
+  logFormat := "2006-01-02 15:04:05.000"
 
-	// 创建Logger实例
-	logger := log.Output(zerolog.ConsoleWriter{Out: os.Stdout}).Level(logLevel).With().Timestamp().Logger().Format(logFormat)
+  // 创建Logger实例
+  logger := log.Output(zerolog.ConsoleWriter{Out: os.Stdout}).Level(logLevel).With().Timestamp().Logger().Format(logFormat)
 
-	// 记录日志
-	logger.Info().Str("event", "start").Msg("Application started")
-	logger.Warn().Str("event", "warning").Msg("Something unexpected happened")
-	logger.Error().Str("event", "error").Msg("An error occurred")
+  // 记录日志
+  logger.Info().Str("event", "start").Msg("Application started")
+  logger.Warn().Str("event", "warning").Msg("Something unexpected happened")
+  logger.Error().Str("event", "error").Msg("An error occurred")
 
-	// 添加字段和上下文
-	logger = logger.With().Str("userID", "123").Logger()
-	logger.Info().Msg("User logged in")
+  // 添加字段和上下文
+  logger = logger.With().Str("userID", "123").Logger()
+  logger.Info().Msg("User logged in")
 
-	// 输出日志
-	logger.Info().Msg("Logging complete")
+  // 输出日志
+  logger.Info().Msg("Logging complete")
 }
 ```
 
@@ -134,9 +134,10 @@ func main() {
 
 
 ## 2.4. References
+
 - Go packages: https://pkg.go.dev/github.com/rs/zerolog
 - Github: https://github.com/rs/zerolog
-- Better Stack 教程：https://betterstack.com/community/guides/logging/zerolog/ 
+- Better Stack 教程：https://betterstack.com/community/guides/logging/zerolog/
 
 
 文档页面排版很好看，图标配色好看，很值得自己学习！！！
@@ -165,7 +166,7 @@ Wire 通过读取 Go 代码中的注释和类型信息，生成依赖注入相�
 
 
 ## 3.3. Reference
-- Go packages: https://pkg.go.dev/github.com/google/wire 
+- Go packages: https://pkg.go.dev/github.com/google/wire
 - Github: https://github.com/google/wire
 - Compile-time Dependency Injection With Go Cloud's Wire: https://go.dev/blog/wire
 - Go 工程化 - 依赖注入: https://go-kratos.dev/blog/go-project-wire/
@@ -340,22 +341,22 @@ Context。
 ### 12.2.1. 🧬 内置中间件
 以下为`fiber`框架的内置中间件：
 
-| 中间件                                                       | 描述                                                     |
-| :----------------------------------------------------------- | :------------------------------------------------------- |
-| [basicauth](https://github.com/gofiber/fiber/tree/master/middleware/basicauth) | basicauth 中间件提供 HTTP 基本身份验证                      |
-| [compress](https://github.com/gofiber/fiber/tree/master/middleware/compress) | Fiber 的压缩中间件，它支持 deflate，gzip 和 brotli（默认） |
-| [cache](https://github.com/gofiber/fiber/tree/master/middleware/cache) | 拦截和响应缓存                                           |
-| [cors](https://github.com/gofiber/fiber/tree/master/middleware/cors) | 跨域处理                                                 |
-| [csrf](https://github.com/gofiber/fiber/tree/master/middleware/csrf) | CSRF 攻击防护                                             |
-| [filesystem](https://github.com/gofiber/fiber/tree/master/middleware/filesystem) | Fiber 的文件系统中间件                                    |
-| [favicon](https://github.com/gofiber/fiber/tree/master/middleware/favicon) | favicon 图标                                              |
-| [limiter](https://github.com/gofiber/fiber/tree/master/middleware/limiter) | `请求频率限制`中间件，用于控制 API 请求频率                |
-| [logger](https://github.com/gofiber/fiber/tree/master/middleware/logger) | HTTP 请求与响应日志记录器                                 |
-| [pprof](https://github.com/gofiber/fiber/tree/master/middleware/pprof) | pprof 中间件                                             |
-| [proxy](https://github.com/gofiber/fiber/tree/master/middleware/proxy) | 请求代理                                                 |
-| [requestid](https://github.com/gofiber/fiber/tree/master/middleware/requestid) | 为每个请求添加一个 requestid。                            |
-| [recover](https://github.com/gofiber/fiber/tree/master/middleware/recover) | `Recover`中间件将程序从`panic`状态中恢复过来             |
-| [timeout](https://github.com/gofiber/fiber/tree/master/middleware/timeout) | 添加请求的最大时间，如果超时，则转发给 ErrorHandler。     |
+| 中间件                                                                           | 描述                                                       |
+| :------------------------------------------------------------------------------- | :--------------------------------------------------------- |
+| [basicauth](https://github.com/gofiber/fiber/tree/master/middleware/basicauth)   | basicauth 中间件提供 HTTP 基本身份验证                     |
+| [compress](https://github.com/gofiber/fiber/tree/master/middleware/compress)     | Fiber 的压缩中间件，它支持 deflate，gzip 和 brotli（默认） |
+| [cache](https://github.com/gofiber/fiber/tree/master/middleware/cache)           | 拦截和响应缓存                                             |
+| [cors](https://github.com/gofiber/fiber/tree/master/middleware/cors)             | 跨域处理                                                   |
+| [csrf](https://github.com/gofiber/fiber/tree/master/middleware/csrf)             | CSRF 攻击防护                                              |
+| [filesystem](https://github.com/gofiber/fiber/tree/master/middleware/filesystem) | Fiber 的文件系统中间件                                     |
+| [favicon](https://github.com/gofiber/fiber/tree/master/middleware/favicon)       | favicon 图标                                               |
+| [limiter](https://github.com/gofiber/fiber/tree/master/middleware/limiter)       | `请求频率限制`中间件，用于控制 API 请求频率                |
+| [logger](https://github.com/gofiber/fiber/tree/master/middleware/logger)         | HTTP 请求与响应日志记录器                                  |
+| [pprof](https://github.com/gofiber/fiber/tree/master/middleware/pprof)           | pprof 中间件                                               |
+| [proxy](https://github.com/gofiber/fiber/tree/master/middleware/proxy)           | 请求代理                                                   |
+| [requestid](https://github.com/gofiber/fiber/tree/master/middleware/requestid)   | 为每个请求添加一个 requestid。                             |
+| [recover](https://github.com/gofiber/fiber/tree/master/middleware/recover)       | `Recover`中间件将程序从`panic`状态中恢复过来               |
+| [timeout](https://github.com/gofiber/fiber/tree/master/middleware/timeout)       | 添加请求的最大时间，如果超时，则转发给 ErrorHandler。      |
 
 
 
@@ -365,11 +366,11 @@ Context。
 | 中间件                                            | 描述                                      |
 | :------------------------------------------------ | :---------------------------------------- |
 | [adaptor](https://github.com/gofiber/adaptor)     | `net/http` 与 `Fiber`请求的相互转换适配器 |
-| [helmet](https://github.com/gofiber/helmet)       | 可设置各种 HTTP Header 来保护您的应用       |
+| [helmet](https://github.com/gofiber/helmet)       | 可设置各种 HTTP Header 来保护您的应用     |
 | [jwt](https://github.com/gofiber/jwt)             | JSON Web Token (JWT) 中间件               |
 | [keyauth](https://github.com/gofiber/keyauth)     | 提供基于密钥的身份验证                    |
-| [rewrite](https://github.com/gofiber/rewrite)     | URL 路径重写                               |
-| [session](https://github.com/gofiber/session)     | Session 中间件                             |
+| [rewrite](https://github.com/gofiber/rewrite)     | URL 路径重写                              |
+| [session](https://github.com/gofiber/session)     | Session 中间件                            |
 | [template](https://github.com/gofiber/template)   | 模板引擎                                  |
 | [websocket](https://github.com/gofiber/websocket) | Fasthttp WebSocket 中间件                 |
 
@@ -653,9 +654,9 @@ packages:
     path: "./db"
     queries: "./query.sql"
     schema: "./schema.sql"
-    emit_json_tags: false  #默认为false，设置该字段为true可以为生成的模型对象结构添加JSON标签 
-		emit_prepared_queries: false #默认为false，设置该字段为true，会为 SQL 生成对应的prepared statement
-		emit_interface: false #默认为false，设置该字段为true，会为查询结构生成一个接口。最终生成的代码会多出一个文件querier.go
+    emit_json_tags: false  #默认为false，设置该字段为true可以为生成的模型对象结构添加JSON标签
+    emit_prepared_queries: false #默认为false，设置该字段为true，会为 SQL 生成对应的prepared statement
+    emit_interface: false #默认为false，设置该字段为true，会为查询结构生成一个接口。最终生成的代码会多出一个文件querier.go
 
 
 version：版本；

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-12-31 21:17:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:02:17
+ * @LastEditTime: 2026-08-09 17:08:42
  * @Description: sizeof & strlen difference
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 在 C++中，`sizeof`和`strlen`都是用于获取长度的操作，但它们的工作方式和应用场景有显著的不同。
@@ -27,12 +27,13 @@
 #include <iostream>
 #include <cstring>
 
-int main() {
-    char str[] = "Hello";
-    std::cout << "sizeof(str): " << sizeof(str) << std::endl; // 输出6，因为包括空字符，数组大小为6个字符（每个1字节）
-    std::cout << "strlen(str): " << strlen(str) << std::endl; // 输出5，因为直到空字符前的字符数
+int main()
+{
+  char str[] = "Hello";
+  std::cout << "sizeof(str): " << sizeof(str) << std::endl; // 输出6，因为包括空字符，数组大小为6个字符（每个1字节）
+  std::cout << "strlen(str): " << strlen(str) << std::endl; // 输出5，因为直到空字符前的字符数
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -42,12 +43,13 @@ int main() {
 #include <iostream>
 #include <cstring>
 
-int main() {
-    const char* str = "Hello";
-    std::cout << "sizeof(str): " << sizeof(str) << std::endl; // 输出指针的大小，通常是4或8
-    std::cout << "strlen(str): " << strlen(str) << std::endl; // 输出5
+int main()
+{
+  const char* str = "Hello";
+  std::cout << "sizeof(str): " << sizeof(str) << std::endl; // 输出指针的大小，通常是4或8
+  std::cout << "strlen(str): " << strlen(str) << std::endl; // 输出5
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -57,16 +59,17 @@ int main() {
 #include <iostream>
 #include <cstring>
 
-int main() {
-    char str1[] = "Hello"; // 数组
-    const char* str2 = "Hello"; // 指针
+int main()
+{
+  char str1[] = "Hello"; // 数组
+  const char* str2 = "Hello"; // 指针
 
-    std::cout << "sizeof(str1): " << sizeof(str1) << std::endl; // 6
-    std::cout << "sizeof(str2): " << sizeof(str2) << std::endl; // 4或8
-    std::cout << "strlen(str1): " << strlen(str1) << std::endl; // 5
-    std::cout << "strlen(str2): " << strlen(str2) << std::endl; // 5
+  std::cout << "sizeof(str1): " << sizeof(str1) << std::endl; // 6
+  std::cout << "sizeof(str2): " << sizeof(str2) << std::endl; // 4或8
+  std::cout << "strlen(str1): " << strlen(str1) << std::endl; // 5
+  std::cout << "strlen(str2): " << strlen(str2) << std::endl; // 5
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -75,19 +78,19 @@ int main() {
 ```cpp
 #include <iostream>
 
-int main() {
-    int arr[] = {1, 2, 3, 4, 5};
-    std::cout << "sizeof(arr): " << sizeof(arr) << std::endl; // 20（假设int为4字节，5个元素）
-    // strlen(arr); // 错误！strlen只能用于以空字符结尾的字符串，这里使用会导致未定义行为。
-    
-    std::cout << sizeof(arr) / sizeof(int) << std::endl; // 取数组的长度
+int main()
+{
+  int arr[] = {1, 2, 3, 4, 5};
+  std::cout << "sizeof(arr): " << sizeof(arr) << std::endl; // 20（假设int为4字节，5个元素）
+  // strlen(arr); // 错误！strlen只能用于以空字符结尾的字符串，这里使用会导致未定义行为。
 
-    return 0;
+  std::cout << sizeof(arr) / sizeof(int) << std::endl; // 取数组的长度
+
+  return 0;
 }
 ```
 
 **总结**
-
 - **sizeof**：获取内存占用大小，编译时确定
 - **strlen**：获取字符串长度，运行时计算
 - **sizeof** 包含结尾的'\0'，**strlen** 不包含

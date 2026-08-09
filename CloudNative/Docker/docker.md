@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-03-30 15:33:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-07 17:34:11
+ * @LastEditTime: 2026-08-09 17:24:33
  * @Description: Docker learning
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 为什么会出现 Docker？
@@ -68,7 +68,7 @@ Docker 利用的是宿主机的内核，不需要加载操作系统的内核。\
 当新建一个容器时，Docker 不需要和虚拟机一样加载一个操作系统的内核，而是利用的是宿主机的内核，避免了操作系统的加载、寻
 址、\
 系统内核返回等比较费时、费资源的过程。当新建一个虚拟机时，虚拟机软件需要先加载操作系统，然后再返回 ，\
-这个过程是非常耗时的，分钟级别的，而 Docker 则是直接省略了这一过程，新建一个 Docker 容器只需要几秒钟，非常的快。 
+这个过程是非常耗时的，分钟级别的，而 Docker 则是直接省略了这一过程，新建一个 Docker 容器只需要几秒钟，非常的快。
 
 
 **Docker 优点**
@@ -156,7 +156,7 @@ Docker 镜像层是 **只读** 的，容器层是 **可写** 的。当容器启�
 
 ![](../figures/container-layers.jpg)
 
-Docker 镜像分层的优点：资源共享、方便复制迁移。比如：有多个镜像都是从相同的基类镜像（base）构建而来，那么 docker Host 
+Docker 镜像分层的优点：资源共享、方便复制迁移。比如：有多个镜像都是从相同的基类镜像（base）构建而来，那么 docker Host
 只需在磁盘上保存一份 base 镜像，同时内存中也只需要加载一份 base 镜像，就可以为所有的容器服务了。
 
 ![](../figures/container-base-images.png)
@@ -196,7 +196,7 @@ Docker 是一个 Client-Server 结构的系统，Docker 守护进程（daemon）
 运行 Docker 的格式：`docker [OPTIONS] COMMAND`
 
 说明：
-- `docker` 为 docker 引擎的前缀，表示通过 docker 来执行命令。 
+- `docker` 为 docker 引擎的前缀，表示通过 docker 来执行命令。
 - 带有 `[]` 部分是可选项，这部分可要可不要，根据具体情况来定。
 - `COMMAND` 是必须的，要运行的 Docker  命令。
 
@@ -232,7 +232,7 @@ docker info
 docker --help
 
 # 查看 Docker 命令帮助文档，command 指具体的命令
-docker command --help 
+docker command --help
 ```
 
 其它
@@ -438,7 +438,7 @@ OPTIONS:
     docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 
 [OPTIONS]:
-  -d, --detach 在容器中后台执行命令； 
+  -d, --detach 在容器中后台执行命令；
   -i, --interactive=true | false ：打开标准输入接受用户输入命令
 ```
 
@@ -447,7 +447,7 @@ OPTIONS:
 ```bash
 docker exec -it <容器ID> /bin/bash
 
-# 使用 /bin/bash 命令前台交互的重新进入到容器内部 
+# 使用 /bin/bash 命令前台交互的重新进入到容器内部
 [root@redis_181 ~]# docker exec -it 77e61214ea8c /bin/bash
 root@77e61214ea8c:/data#
 ```
@@ -468,14 +468,14 @@ OPTIONS:
 注意：`docker exec` 与 `docker attach` 的区别
 
 - `docker attach`  直接进入容器命令行的终端，不会启动新的进程，用 `exit` 命令退出容器时，会导致容器停止。
-  
+
   外部终端查看 docker 容器的 ID
   ```sh
   [root@CentOS7 ~]# docker ps
   CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
   86fcdb251eb9   ubuntu    "/bin/bash"   6 minutes ago   Up 6 minutes             romantic_murdock
   ```
-  
+
   指定容器 ID，进入 docker 容器内部
   ```sh
   [root@CentOS7 ~]# docker attach 86fcdb251eb9
@@ -483,7 +483,7 @@ OPTIONS:
   root@86fcdb251eb9:/# ls
   bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
   ```
-  
+
   执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器没有跑起来，已经停止运行了。
   ```bash
   root@86fcdb251eb9:/# exit
@@ -493,21 +493,21 @@ OPTIONS:
   ```
 
 - 执行 `docker exec` 是在容器内部打开新的终端，并且可以启动新的进程，用 `exit` 命令退出容器时，不会导致容器停止。
-  
+
   外部终端查看 docker 容器的 ID
   ```bash
   [root@CentOS7 ~]# docker ps
   CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES
   178c5e88904a   ubuntu    "/bin/bash"   20 seconds ago   Up 19 seconds             eager_ellisS
   ```
-  
+
   指定容器 ID 和命令，比如指定 ID 为 `178c5e88904a` 的容器，以交互式的方式重新打开一个伪终端后进入容器内部。
-  
+
   ```bash
   [root@CentOS7 ~]# docker exec -it 178c5e88904a  /bin/bash
   root@178c5e88904a:/#
   ```
-  
+
   执行 `exit` 命令退出容器后，再次查看容器的进程，发现容器还在后台运行，并没有停止。
   ```bash
   root@178c5e88904a:/# exit
@@ -570,10 +570,10 @@ bdbd7d438f8f   hello-world "/hello"               2 days ago       Exited (0) 2 
 
 # 下面两种方式是等效的
 [root@redis_181 ~]# docker export bdbd7d438f8f > hello.tar
-                    hello.tar 
+                    hello.tar
 
 [root@redis_181 ~]# docker export -o="hw.tar" bdbd7d438f8f
-                    hw.tar  
+                    hw.tar
 ```
 
 ### 9.2.16. docker import
@@ -757,7 +757,7 @@ Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
 # 使用脚本：删除以myapp开头的所有镜像
 #!/bin/bash
 for image in $(docker images | grep '^myapp' | awk '{print $3}'); do
-    docker rmi -f $image
+  docker rmi -f $image
 done
 ```
 
@@ -785,7 +785,7 @@ Build Cache     0         0         0B        0B
 可选项
 	# 清理磁盘，删除关闭的容器、无用的数据卷和网络，以及无tag的镜像
 	docker system prune
-	
+
 	# 清理掉所有的 Docker 镜像，包括你暂时关闭的容器，以及暂时没有使用的 docker 镜像
 	docker system prune -a
 ```
@@ -799,7 +799,7 @@ Build Cache     0         0         0B        0B
 
 ### 9.3.6. docker save
 
-保存一个或多个镜像到 `tar` 包中，默认是通过标准输出流。 
+保存一个或多个镜像到 `tar` 包中，默认是通过标准输出流。
 
 ```bash
 Usage:
@@ -999,7 +999,7 @@ Dockerfile 是一个文本文件，其内包含了一条条的 **指令(Instruct
 docker builder prune -a -f
 ```
 
-从 `Docker 17.05` 版本起， `Docker` 才开始支持容器镜像的多阶段构建(multi-stage build)，所以使用 `docker` 
+从 `Docker 17.05` 版本起， `Docker` 才开始支持容器镜像的多阶段构建(multi-stage build)，所以使用 `docker`
 版本必须高于 `17.05` （多阶段构建的意思就是把编译的过程也放同一个 `Dockerfile` 里，
 不用在自己的开发机或服务器上编译，再把编译出的二进制程序打入镜像）。
 
@@ -1118,7 +1118,7 @@ WORKDIR 工作目录路径
 使用 `WORKDIR` 指令可以来指定工作目录（或者称为当前目录），以后各层的当前目录就被改为指定的目录，如该目录不存在，`WORK
 DIR` 会帮你建立目录。
 
-不同层之间的执行环境是不一样的，是两个完全不同的容器。`WORKDIR` 的作用有效范围在当前层中，即下一个 `RUN` 执行之前。 
+不同层之间的执行环境是不一样的，是两个完全不同的容器。`WORKDIR` 的作用有效范围在当前层中，即下一个 `RUN` 执行之前。
 
 ### 12.3.6. USER
 
@@ -1190,7 +1190,7 @@ RUN sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/ap
   > Alpine 是一个基于 musl libc 和 busybox 的面向安全的轻量级 Linux 发行版。
 
   注意点：
-  
+
   > 基于 Alpine 基础镜像构建容器可能会导致非预期的行为，因为标准 C 库是不一样的。
 
 
@@ -1230,7 +1230,6 @@ container 将不会获得一个独立的 Network namespace ，而是和宿主机
 # 14. 面试问题
 
 1. 解释 Docker 的虚悬镜像是什么？
-   
     仓库命、标签命都是 `none` 的镜像，俗称为虚悬镜像(dangling image)。
 
 
