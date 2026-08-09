@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2022-05-10 09:36:06
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-27 21:55:50
+ * @LastEditTime: 2026-08-09 14:01:42
  * @Description: curl usage
- * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Curl
@@ -101,7 +101,8 @@ Easy 接口使用的步骤：
   参数:
   1 CURL 类型的指针
   2 各种 CURLoption 类型的选项.(都在 curl.h 库里有定义,man 也可以查看到)
-  3 parameter 这个参数 既可以是个函数的指针,也可以是某个对象的指针,也可以是个 long 型的变量.它用什么这取决于第二个参数。
+  3 parameter 这个参数 既可以是个函数的指针,也可以是某个对象的指针,也可以是个 long
+  型的变量.它用什么这取决于第二个参数。
 
   CURLoption 这个参数的取值很多.具体的可以查看 man 手册。
 
@@ -120,19 +121,12 @@ Easy 接口使用的步骤：
 接口使用的步骤
 
 1. Create easy handles for transfers
-
 2. Set options for transfers
-
 3. Create multi handle
-
 4. Set multi handle options
-
 5. Drive all transfers if not all are completed
-
 6. Wait for something to happen, goto(5)
-
 7. Cleanup after transfer
-
 
 
 # 6. multi-socket interface
@@ -146,4 +140,3 @@ Easy 接口使用的步骤：
 - [libcurl - programming tutorial](https://curl.se/libcurl/c/libcurl-tutorial.html)
 - [curl_easy_setopt 的基本选项解析 ](https://blog.csdn.net/whui19890911/article/details/79247062)
 - [curl 学习篇 3：curl API 简介](https://blog.csdn.net/weixin_42645653/article/details/120200661)
-

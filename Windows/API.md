@@ -22,12 +22,12 @@
 
 ```cpp
 unsigned long _beginthreadex(
-    void *security,    // 安全属性， 为NULL时表示默认安全性
-    unsigned stack_size,    // 线程的堆栈大小， 一般默认为0
-    unsigned(_stdcall *start_address)(void *),    // 所要启动的线程函数
-    void *argilist, // 线程函数的参数， 是一个void*类型， 传递多个参数时用结构体
-    unsigned initflag, // 新线程的初始状态，0表示立即执行，CREATE_SUSPENDED表示创建之后挂起
-    unsigned *threaddr    // 用来接收线程ID
+  void *security,    // 安全属性， 为NULL时表示默认安全性
+  unsigned stack_size,    // 线程的堆栈大小， 一般默认为0
+  unsigned(_stdcall *start_address)(void *),    // 所要启动的线程函数
+  void *argilist, // 线程函数的参数， 是一个void*类型， 传递多个参数时用结构体
+  unsigned initflag, // 新线程的初始状态，0表示立即执行，CREATE_SUSPENDED表示创建之后挂起
+  unsigned *threaddr    // 用来接收线程ID
 );
 
 返回值 : // 成功返回新线程句柄， 失败返回0
@@ -80,10 +80,10 @@ WAIT_TIMEOUT。传入参数有错误将返回 WAIT_FAILED
 
 ```
 WaitForMultipleObjects(
-    _In_ DWORD nCount,    		// 要监测的句柄的组的句柄的个数
-    _In_reads_(nCount) CONST HANDLE* lpHandles,   //要监测的句柄的组
-    _In_ BOOL bWaitAll,  		// TRUE 等待所有的内核对象发出信号， FALSE 任意一个内核对象发出信号
-    _In_ DWORD dwMilliseconds 	//等待时间
+  _In_ DWORD nCount,    		// 要监测的句柄的组的句柄的个数
+  _In_reads_(nCount) CONST HANDLE* lpHandles,   //要监测的句柄的组
+  _In_ BOOL bWaitAll,  		// TRUE 等待所有的内核对象发出信号， FALSE 任意一个内核对象发出信号
+  _In_ DWORD dwMilliseconds 	//等待时间
 );
 
 功能： 阻塞多个线程句柄，直到子线程运行完毕，主线程才会往下走

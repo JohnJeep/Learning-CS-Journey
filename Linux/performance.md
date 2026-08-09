@@ -5,9 +5,9 @@
  * @UpdateDate: 2023-07-25 15:06:11
  * @UpdateTime: 2023-05-27 15:41:12
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:17:38
+ * @LastEditTime: 2026-08-09 13:59:14
  * @Description: linux performance analysis
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Performance optimization
@@ -110,17 +110,17 @@ Top 是 linux 下动态监控各个进程资源占用状况的工具，默认按
 
 ```sh
 参数项：
-    %us 用户空间程序的 cpu 使用率（没有通过 nice 调度）
-    %sy 系统空间的 cpu 使用率，主要是内核程序。
-    %ni 用户空间且通过 nice 调度过的程序的 cpu 使用率。
-    %id 空闲cpu
-    %wa cpu运行时在等待io的时间
-    %hi cpu处理硬中断的数量
-    %si cpu处理软中断的数量
-    %st 被虚拟机偷走的cpu 
+  %us 用户空间程序的 cpu 使用率（没有通过 nice 调度）
+  %sy 系统空间的 cpu 使用率，主要是内核程序。
+  %ni 用户空间且通过 nice 调度过的程序的 cpu 使用率。
+  %id 空闲cpu
+  %wa cpu运行时在等待io的时间
+  %hi cpu处理硬中断的数量
+  %si cpu处理软中断的数量
+  %st 被虚拟机偷走的cpu
 
 例子：
-    top -bn 1 -i -c
+  top -bn 1 -i -c
 ```
 
 利用一张图来解释各个参数的用法。
@@ -176,10 +176,10 @@ pidstat 是进程性能分析工具，监视当前被 Linux 内核管理的单�
 
 ```sh
 参数项
-    -u 输出 CPU 的利用率，utilization 缩写为 u
-    -t 显示所选线程的统计信息，很常用，thread 缩写为 t
-    -r 显示缺页错误（page faults）和内存利用信息
-    -w 任务活动切换的信息，只有在 Linux kernels 大于等于 2.6.23 才有效
+  -u 输出 CPU 的利用率，utilization 缩写为 u
+  -t 显示所选线程的统计信息，很常用，thread 缩写为 t
+  -r 显示缺页错误（page faults）和内存利用信息
+  -w 任务活动切换的信息，只有在 Linux kernels 大于等于 2.6.23 才有效
 
 // 每隔 5 秒输出一组数据
 [root@CentOS7 ~]# pidstat -u 5 1
@@ -265,7 +265,7 @@ mpstat 是多核 CPU 性能分析工具，用来实时查看每个 CPU 的性能
 
 ```sh
 参数项
-    -P: 输出哪个处理器的数据，后面跟 CPU 的数字号码或者是 ON 或 ALL；ON 表示输出统计每个在运行的处理器；ALL 表示输出统计所有的处理器
+  -P: 输出哪个处理器的数据，后面跟 CPU 的数字号码或者是 ON 或 ALL；ON 表示输出统计每个在运行的处理器；ALL 表示输出统计所有的处理器
 
 // 监控所有 CPU，每隔5秒输出一组数据
 [root@CentOS7 ~]# mpstat -P ALL 5
@@ -326,15 +326,15 @@ vmstat [-V]
 -s：显示内存相关统计信息及多种系统活动数量。
 
 delay：刷新时间间隔。如果不指定，只显示一条结果。
-  
+
 count：刷新次数。如果不指定刷新次数，但指定了刷新时间间隔，这时刷新次数为无穷。
-  
+
 -d：显示磁盘相关统计信息。
-  
+
 -p：显示指定磁盘分区统计信息
-  
+
 -S：使用指定单位显示。参数有 k 、K 、m 、M ，分别代表1000、1024、1000000、1048576字节（byte）。默认单位为K（1024 bytes）
-  
+
 -V：显示vmstat版本信息。
 ```
 
@@ -362,10 +362,10 @@ procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
 - swap
   - si：从磁盘交换进来和交换出去的内存数。
   - so：从磁盘交换出去的内存数。
-- IO 
+- IO
   - bo： 每秒钟发送到块设备的块数目，单位：blocks/s。
   - bi  每秒钟从块设备收到的块数目，单位：blocks/s。
-- system 
+- system
   - in：每秒钟的系统中断数，包括时钟中断（clock）。
   - cs：每秒钟上下文切换的数。
 - cpu
@@ -466,8 +466,8 @@ OPTIONS
 
 ## 4.4. 内存泄漏检测工具
 
-- valgrind 
-  [valgrind.md](valgrind.md) 
+- valgrind
+  [valgrind.md](valgrind.md)
 - mtrace
 - AddressSanitizer(ASan) : 该工具为 gcc 自带，4.8 以上版本都可以使用，支持 Linux、OS、Android
   等多种平台，不止可以检测内存泄漏，它其实是一个内存错误检测具，可以检测的问题有：内存泄漏、堆栈和全局内存越界访问、fr
@@ -486,7 +486,7 @@ $ iostat -xz 1
 Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_        (4 CPU)
 
 avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           1.34    0.00    0.79    0.02    0.00   97.86
+  1.34    0.00    0.79    0.02    0.00   97.86
 
 Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
 sda               0.02     2.91    0.13    1.49     6.62    35.20    25.74     0.00    2.22   0.69   0.11
@@ -495,7 +495,7 @@ dm-0              0.00     0.00    0.24    5.49     9.06    43.93     9.24     0
 dm-1              0.00     0.00    0.00    0.00     0.00     0.01     8.00     0.00    3.74   0.28   0.00
 
 avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           3.31    0.00    2.54    0.00    0.00   94.15
+  3.31    0.00    2.54    0.00    0.00   94.15
 
 Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
 sdb               0.00     0.00    0.00    3.00     0.00    24.00     8.00     0.01    4.00   4.00   1.20
@@ -583,7 +583,7 @@ Linux 中查看内核中设置的 `TIME_WAIT` 时间：
 sysctl net.ipv4.tcp_fin_timeout
 ```
 
-在大多数 Linux 发行版中，TIME_WAIT 时间的默认值通常为 60 秒。 
+在大多数 Linux 发行版中，TIME_WAIT 时间的默认值通常为 60 秒。
 
 ## 6.2. stress
 
@@ -592,9 +592,9 @@ stress 是 linux 下的压力测试小工具，可以用来模拟 CPU、IO、内
 
 ```sh
 参数项
-    -t: 等同于 --timeout N，在 N 秒后超时
-    -c: 等同于 --cpu N，产生 N 个 CPU 工作
-    -i: 等同于 --io N，产生 N 个 IO 工作
+  -t: 等同于 --timeout N，在 N 秒后超时
+  -c: 等同于 --cpu N，产生 N 个 CPU 工作
+  -i: 等同于 --io N，产生 N 个 IO 工作
 
 // 模拟 CPU1 使用率为 100% 的情况
 [root@CentOS7 ~]# stress --cpu 1 --timeout 600
@@ -682,7 +682,6 @@ Linux 2.6.32-358.el6.x86_64 (KF-CFT-AP2)        2022年01月27日  _x86_64_     
   程序员、数据库管理员和分析人员等，它支持任何具有 JDBC 驱动程序的数据库，EE 版本还支持非 JDBC
   数据源（MongoDB，Cassandra，Redis，DynamoDB 等）。
 - SysMonTask: 可视化的任务管理器。
-
 
 
 

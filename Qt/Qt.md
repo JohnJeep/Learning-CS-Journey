@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-09-07 09:18:32
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:50:36
+ * @LastEditTime: 2026-08-09 13:45:50
  * @Description: Qt Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 信号与槽函数
@@ -27,7 +27,7 @@
     - 早期 Qt 版本必须写到 public slots 下，现在高级版本可以直接写在 public 下
     - 返回值为 void，需要声明，也需要实现
     - 可以有参数，可以重载
-  - 标准的槽函数 
+  - 标准的槽函数
 
 - <font color=red> 注意点 </font>
   - 信号可以连接信号
@@ -149,7 +149,7 @@ qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现�
   ```cpp  两种方法
     1. 先转为std::string，再转为char *，如上所示
     2. 先转为QByteArray，再转为char *
-    
+
   QString ss("Flying without wings");
   QByteArray sr=ss.toLocal8Bit();
   char ch[10];
@@ -160,19 +160,19 @@ qstr=QString::fromLocal8bit(str.c_str());　　//　中文字符串避免出现�
 - char *转为 QString
   ```cpp
   char *ch="westlife";
-  QString str(ch);   // Qt5     
+  QString str(ch);   // Qt5
   QString str = QString::fromUtf8(ch);    //  Qt4
   ```
 
 
 # 10. Qt 常用类
 
-## 10.1. QFrame 
+## 10.1. QFrame
 
 - QFrame 与 QWidget 的区别：
   - QWidget 类是所有用户界面对象的基类。QFrame 是基本控件的基类，QWidget 是 QFrame 基类。其关系如下
     `QPushButton,QLabel… -> QFrame ->QWidget`
-  
+
   - Widget 是用户界面的基本单元：它从窗口系统接收鼠标，键盘和其他事件，并在屏幕上绘制自己。每个 Widget
     都是矩形的，它们按照 Z-order 进行排序。
 
@@ -238,7 +238,7 @@ void QAbstractSocket::close()
 void QAbstractSocket::abort()
 
 
-TCP Server 接口 
+TCP Server 接口
 
 
 
@@ -266,7 +266,7 @@ readyRead()来判断是否有数据传入，当客户端向服务端成功发送
 - `F1`  查看帮助
 - `F2`  跳转到函数定义（和 Ctrl+鼠标左键一样的效果）
 - `Shift+F2`    声明和定义之间切换
-- `F4`: 同名.h 与.cpp 文件之间快速的切换 
+- `F4`: 同名.h 与.cpp 文件之间快速的切换
 - `ctrl + shift + ↑或↓`: 整行向上或向下移动
 - `ctrl + alt + ↑或↓`: 将当前行整行向上或向下复制
 - `shift + F5`:   停止调试
@@ -275,7 +275,7 @@ readyRead()来判断是否有数据传入，当客户端向服务端成功发送
 - `Ctrl+2`        编辑模式
 - `Ctrl+3`        调试模式
 - `Ctrl+4`        项目设置模式
-- `Ctrl+5`        帮助模式    
+- `Ctrl+5`        帮助模式
 - `Ctrl+6`        输出模式
 - `ESc`           切换到编辑模式
 - `Ctrl+B`        编译工程

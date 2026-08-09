@@ -109,7 +109,7 @@ macro_rules   union   'static   dyn
 
 ```rust
 union MyUnion {  // 这里 union 是关键字
-    f1: u32,
+  f1: u32,
 }
 
 let union = 5;  // 这里 union 可以正常当变量名

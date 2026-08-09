@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 19:56:19
  * @Description: thread lock
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 ## 什么是锁(lock)?
@@ -84,9 +84,9 @@ void lock(lock_t *lock) {
 - 采用 `Fetch-And-Add` 指令能够保证所有的线程都能抢到锁
 ```
 int FetchAndAdd(int *ptr) {
-    int old = *ptr;
-    *ptr = old + 1;
-    return old;
+  int old = *ptr;
+  *ptr = old + 1;
+  return old;
 }
 ```
 
@@ -99,7 +99,7 @@ int FetchAndAdd(int *ptr) {
     ady），从而使其它的线程运行。
   - 在单 CPU 上使用 `yield()` 运行多线程的方式很有效。当一个线程调用 `lock()` 时，发现锁被占用，让出
     CPU，让另外的线程运行，并完成临界区。
-  
+
 - 缺点
   - 这种方法不能用在多个线程反复竞争（contending）一把锁的情况。因为没有解决线程或饿死的问题，一个线程可能会无限的处在
     `让出CPU的循环`，而其它的线程会反复地进入和推出临界区。
@@ -116,7 +116,7 @@ int FetchAndAdd(int *ptr) {
 - 在 Solaris 系统中共采用 `setpark()` 解决唤醒/等待竞争（wakeup/waiting race）问题。
 
 
-- Linux 操作系统支持 
+- Linux 操作系统支持
   - 提供了 `futex` 接口，让每个 `futex`都关联一个特定的物理内存位置。
   - `futex wait(address, expected)` 当 `address`中的值等于 `expected`
     中的值时，让被调用的线程休眠（sleep），如果两者不相等，则调用立刻返回。

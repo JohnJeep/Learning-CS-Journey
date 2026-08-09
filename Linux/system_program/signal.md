@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 20:24:19
  * @Description: Linux 下常用信号解释
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. Linux 下常用信号解释
@@ -16,58 +16,58 @@ $man 7 signal
 SIGNAL(7)                 Linux Programmer's Manual                 SIGNAL(7)
 
 NAME
-       signal - overview of signals
+    signal - overview of signals
 
 DESCRIPTION
-       Linux supports both POSIX reliable signals (hereinafter "standard sig‐
-       nals") and POSIX real-time signals.
+    Linux supports both POSIX reliable signals (hereinafter "standard sig‐
+    nals") and POSIX real-time signals.
 
-   Signal dispositions
-       Each signal has  a  current  disposition,  which  determines  how  the
-       process behaves when it is delivered the signal.
+  Signal dispositions
+    Each signal has  a  current  disposition,  which  determines  how  the
+    process behaves when it is delivered the signal.
 
-       The  entries  in  the  "Action" column of the tables below specify the
-       default disposition for each signal, as follows:
+    The  entries  in  the  "Action" column of the tables below specify the
+    default disposition for each signal, as follows:
 
-       Term   Default action is to terminate the process.
+    Term   Default action is to terminate the process.
 
-       Ign    Default action is to ignore the signal.
+    Ign    Default action is to ignore the signal.
 
-       Core   Default action is to terminate the process and dump  core  (see
-              core(5)).
+    Core   Default action is to terminate the process and dump  core  (see
+          core(5)).
 
-       Stop   Default action is to stop the process.
+    Stop   Default action is to stop the process.
 
-       Cont   Default  action  is  to continue the process if it is currently
-              stopped.
-			......
-		       First the signals described in the original POSIX.1-1990 standard.
+    Cont   Default  action  is  to continue the process if it is currently
+          stopped.
+    ......
+        First the signals described in the original POSIX.1-1990 standard.
 
-       Signal     Value     Action   Comment
-       ──────────────────────────────────────────────────────────────────────
-       SIGHUP        1       Term    Hangup detected on controlling terminal
-                                     or death of controlling process
-       SIGINT        2       Term    Interrupt from keyboard
-       SIGQUIT       3       Core    Quit from keyboard
-       SIGILL        4       Core    Illegal Instruction
-       SIGABRT       6       Core    Abort signal from abort(3)
-       SIGFPE        8       Core    Floating point exception
-       SIGKILL       9       Term    Kill signal
-       SIGSEGV      11       Core    Invalid memory reference
-       SIGPIPE      13       Term    Broken pipe: write to pipe with no
-                                     readers
-       SIGALRM      14       Term    Timer signal from alarm(2)
-       SIGTERM      15       Term    Termination signal
-       SIGUSR1   30,10,16    Term    User-defined signal 1
-       SIGUSR2   31,12,17    Term    User-defined signal 2
-       SIGCHLD   20,17,18    Ign     Child stopped or terminated
-       SIGCONT   19,18,25    Cont    Continue if stopped
-       SIGSTOP   17,19,23    Stop    Stop process
-       SIGTSTP   18,20,24    Stop    Stop typed at terminal
-       SIGTTIN   21,21,26    Stop    Terminal input for background process
-       SIGTTOU   22,22,27    Stop    Terminal output for background process
+    Signal     Value     Action   Comment
+    ──────────────────────────────────────────────────────────────────────
+    SIGHUP        1       Term    Hangup detected on controlling terminal
+                        or death of controlling process
+    SIGINT        2       Term    Interrupt from keyboard
+    SIGQUIT       3       Core    Quit from keyboard
+    SIGILL        4       Core    Illegal Instruction
+    SIGABRT       6       Core    Abort signal from abort(3)
+    SIGFPE        8       Core    Floating point exception
+    SIGKILL       9       Term    Kill signal
+    SIGSEGV      11       Core    Invalid memory reference
+    SIGPIPE      13       Term    Broken pipe: write to pipe with no
+                        readers
+    SIGALRM      14       Term    Timer signal from alarm(2)
+    SIGTERM      15       Term    Termination signal
+    SIGUSR1   30,10,16    Term    User-defined signal 1
+    SIGUSR2   31,12,17    Term    User-defined signal 2
+    SIGCHLD   20,17,18    Ign     Child stopped or terminated
+    SIGCONT   19,18,25    Cont    Continue if stopped
+    SIGSTOP   17,19,23    Stop    Stop process
+    SIGTSTP   18,20,24    Stop    Stop typed at terminal
+    SIGTTIN   21,21,26    Stop    Terminal input for background process
+    SIGTTOU   22,22,27    Stop    Terminal output for background process
 
-       The signals SIGKILL and SIGSTOP cannot be caught, blocked, or ignored.
+    The signals SIGKILL and SIGSTOP cannot be caught, blocked, or ignored.
 
 ```
 
@@ -88,7 +88,7 @@ SIGINT 是一个重要的操作系统信号，它表示"中断"信号（Interrup
    `SIGKILL`（也称为"杀死信号"），该信号会立即终止进程而无需进一步处理。
 
 
-## 3. SIGTERM 
+## 3. SIGTERM
 `SIGTERM` 是一个重要的操作系统信号，它表示"终止"或"终止信号"（Terminate Signal）。`SIGTERM`
 信号用于请求进程正常终止，它向进程发送一个通知，告知进程需要关闭并退出。
 

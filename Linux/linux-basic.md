@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-04-04 09:46:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:20:24
+ * @LastEditTime: 2026-08-09 14:00:41
  * @Description: Linux CLI usage
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Linux Basic
@@ -19,7 +19,7 @@
 # 2. Hardware
 
 磁盘阵列（RAID）：利用硬件技术将数个硬盘整合成为一个大硬盘的方法， 操作系统只会看到最后被整合起来的大硬盘。
-由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。 
+由于磁盘阵列是由多个硬盘组成， 所以可以达成速度性能、 备份等任务。
 
 ## 2.1. MBR
 
@@ -29,8 +29,8 @@ MBR(Master Boot Record): 主引导记录
 
 - 446 字节的**MBR**安装启动引导程序，64 字节的**分区表**记录整块硬盘分区的状态。
 
-- 由于分区表所在区块仅有 64 Bytes 容量， 因此最多仅能有四组记录区，每组记录区记录了该区段的启始与结束的柱面号码。 
-  
+- 由于分区表所在区块仅有 64 Bytes 容量， 因此最多仅能有四组记录区，每组记录区记录了该区段的启始与结束的柱面号码。
+
   > 引导启动程序的作用：加载内核文件。
 1. 其实所谓的“分区”只是针对那个 64 Bytes 的分区表进行设置而已！
 
@@ -40,7 +40,7 @@ MBR(Master Boot Record): 主引导记录
 
 4. 分区的最小单位“通常”为柱面（ cylinder）
 
-5. 当系统要写入磁盘时， 一定会参考磁盘分区表， 才能针对某个分区进行数据的处理 
+5. 当系统要写入磁盘时， 一定会参考磁盘分区表， 才能针对某个分区进行数据的处理
 
 扩展分区
 
@@ -71,7 +71,7 @@ LBA(Logical Block Address): 逻辑区块位址
 - LBA0(MBR 兼容区块)：储存了第一阶段的启动引导程序。
 - LBA1(GPT 表头记录)：记录了分区表本身的位置与大小， 同时记录了备份用的 GPT 分区（在最后 34 个 LBA
   区块）放置的位置，同时放置了分区表的检验机制码（ CRC32），操作系统可以根据这个检验码来判断 GPT
-  是否正确。 
+  是否正确。
 - LBA2-33（实际记录分区的信息地方）：从 LBA2 区块开始，每个 LBA 都可以记录 4
   组分区记录，所以在默认的情况下，总共可以有 4*32 = 128 组分区记录。 因为每个 LBA 有 512Bytes，
   因此每组记录用到 128Bytes 的空间， 除了每组记录所需要的识别码与相关的记录之外， GPT 在每组记录中分别提供了 64bits
@@ -82,7 +82,7 @@ GPT 分区已经没有所谓的主、 扩展、 逻辑分区的概念，既然�
 
 ## 2.3. BIOS 与 UEFI
 
-BIOS：是一个写入到主板上的一个软件程序（仅有 16 位），采用汇编语言编写的。 
+BIOS：是一个写入到主板上的一个软件程序（仅有 16 位），采用汇编语言编写的。
 
 Boot loader 的主要任务
 
@@ -91,7 +91,7 @@ Boot loader 的主要任务
 - 加载内核文件：直接指向可使用的程序区段，来启动操作系统。
 
 - 转交其它启动引导程序：将启动管理功能转交给其它引导程序负责。
-  
+
   > 每个分区都有自己的启动扇区(boot sector)。启动引导程序只会认识自己的系统分区内的可开机核心文件，
   > 以及其它启动引导程序而已；
 
@@ -107,7 +107,7 @@ Boot loader 的主要任务
 UEFI(Unified Extensible Firmware Interface): 统一可扩展固件接口，采用 C 语言编写的。其中 UEFI 可以直接获取 GPT
 的分区表。
 
-为什么在安装系统时，需要将 UEFI 的 secure boot 关闭？ 
+为什么在安装系统时，需要将 UEFI 的 secure boot 关闭？
 
 > 因为使用 secure boot 会使将要启动的操作系统，必须要被 UEFI 验证，否则就无法启动。
 
@@ -208,7 +208,7 @@ ls 命令列出文件夹中的内容
 例子 1：
 
 ```
-ls -al: 查看所有隐藏的文件  
+ls -al: 查看所有隐藏的文件
 ls -l | grep "*-" | wc -l 查看当前目录下的文件夹目录个数（不包含子目录中的目录）。
 ls | wc -l 统计当前目录下总共有多少行
 ```
@@ -255,7 +255,7 @@ du(disk usage)：显示指定的目录或文件所占用的磁盘空间大小。
 ```
 示例：
 显示指定路径下文件的大小
-[root@localhost ~]# du -sh 路径名 
+[root@localhost ~]# du -sh 路径名
 
 统计 `~/` 路径下每个文件的大小
 [root@localhost ~]# du -sh ~/*
@@ -285,7 +285,7 @@ fdisk 操作磁盘分区表
 
 ## 3.11. df
 
-df(disk free): 显示 Linux 系统上文件系统的磁盘使用情况 
+df(disk free): 显示 Linux 系统上文件系统的磁盘使用情况
 
 ```sh
 参数项：
@@ -300,12 +300,12 @@ mount 挂载命令
 
 ```sh
 语法形式
-  mount 设备名字 挂在目录  
+  mount 设备名字 挂在目录
   mount –t type dev dir
 
 参数：
   –t type ：是需要挂载的文件系统类型，光盘文件系统类型是：iso9660；
-  dev：挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom; 
+  dev：挂载文件系统的设备名称，光盘驱动器的设备名称是/dev/cdrom;
   dir：挂载点，即挂载到的文件目录路径
 
 示例：
@@ -343,7 +343,7 @@ whereis: 查找系统中包含可以找到的所有文件
 
 hostname 是 Linux 的主机名。而 Linux 的 hostname 位于 `/etc/hostname` 下，修改此路径下的文件是永久有效的。
 
-若直接在终端使用命令 `hostname xxx` 修改，修改后仅仅是本次有效，重启后就失效了。 
+若直接在终端使用命令 `hostname xxx` 修改，修改后仅仅是本次有效，重启后就失效了。
 
 # 4. 系统相关
 
@@ -364,7 +364,7 @@ cat(concatenate)：从第一行开始显示文件内容，将要显示的内容�
   - n 显示行号
 
 示例：
-  cat < hello.txt > hello2.txt   # 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 cp 指令的一个副本。  
+  cat < hello.txt > hello2.txt   # 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 cp 指令的一个副本。
 ```
 
 ## 5.2. tac
@@ -394,14 +394,14 @@ less 一页一页的显示文件内容，既可以往后翻又可以往前翻，
 
 ```bash
 快捷键
-    空格键：向下翻一页。一般使用上下箭头进行翻页。
-    /字符串：向下查找字符串。
-    ?字符串：向上查找字符串。
-    n：重复前一个查找。
-    N：反向重复前一个查找。
-    g：进到这个数据的第一行。
-    G：进到这个数据的最后一行。
-    q：退出less程序。
+  空格键：向下翻一页。一般使用上下箭头进行翻页。
+  /字符串：向下查找字符串。
+  ?字符串：向上查找字符串。
+  n：重复前一个查找。
+  N：反向重复前一个查找。
+  g：进到这个数据的第一行。
+  G：进到这个数据的最后一行。
+  q：退出less程序。
 ```
 
 ## 5.6. od
@@ -437,12 +437,12 @@ od(Octal Dump)：默认以二进制的方式读取文件内容。将指定文件
   echo abc | od -t dCc   # 查看字符的 ASCII 表
 ```
 
-## 5.7. head 
+## 5.7. head
 
 head、tail：取出文件前几行或最后几行的数据。
 
 ```bash
-# 在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。 
+# 在屏幕上列出 /etc/man_db.conf 文件中的第11行到22行之间的内容，并且显示行号。
 cat -n /etc/man_db.conf | head -n 20 | tail -n 10
 ```
 
@@ -497,7 +497,7 @@ CentOS 使用的是 `xfs` 作为默认的文件系统。
 - w: 具有改动该目录结构列表的权限。
 
 - x: 目录不能被执行，x 表示用户能否进入该目录并且成为工作目录。
-  
+
   > 通常一个用户给其它的用户开放目录，至少要具备 `rx` 权限，其它的用户才能访问当前用户的目录。
 
 ## 6.2. umask
@@ -505,13 +505,13 @@ CentOS 使用的是 `xfs` 作为默认的文件系统。
 - umask: 指定目前用户在建立文件或目录时的默认权限值。
 
 - 查看当前系统的 umask 值：`0002` ;第一个数值为特殊权限值，后面三个分别对应为 `rwx` 的值。
-  
+
   > 一般文件通常用于记录数据，则用户建立的文件默认没有 `x` 可执行权限，只有 `rw` 权限，即 `-rw-rw-rw-`
-  
+
   > 用户建立目录 时，默认的权限均开放，即 `drwxrwxrwx`
-  
+
   > 使用 `ls -l` 查看的文件或目录权限值为：文件或目录的默认值减去 umask 的值。
-  
+
   ```bash
   例如：umask值为 003
   文件：(-rw-rw-rw-)  - (-------wx)  = -rw-rw-r
@@ -557,11 +557,11 @@ u ： 与 s 相反的， 当使用 u 来设置文件时， 如果该文件被删
 
 ## 6.4. 用户与用户组
 
-| 说明  | 用户(owner) | 用户组(group) | 其它用户(other) |
-| --- | --------- | ---------- | ----------- |
-| 权限  | 读  写  执行  | 读  写  执行   | 读  写  执行    |
-| 符号  | r  w  x   | r  w  x    | r  w  x     |
-| 权值  | 4 2 1     | 4 2 1      | 4 2 1       |
+| 说明 | 用户(owner)  | 用户组(group) | 其它用户(other) |
+| ---- | ------------ | ------------- | --------------- |
+| 权限 | 读  写  执行 | 读  写  执行  | 读  写  执行    |
+| 符号 | r  w  x      | r  w  x       | r  w  x         |
+| 权值 | 4 2 1        | 4 2 1         | 4 2 1           |
 
 `ls -l`： 查看目录下文件属性的所有信息，每一栏说明如下：
 
@@ -675,7 +675,7 @@ gpasswd -d user group
 
 <font color=red>但是这个时候需要保证 group 不是 user 的主组。</font>
 
-​    
+​
 
 参考： https://cnzhx.net/blog/linux-add-user-to-group/
 
@@ -692,10 +692,10 @@ SUID(Set UID)，简写：s，数字：4
 - 本权限仅在执行该程序的过程中有效 （ run-time）；
 
 - 执行者将具有该程序拥有者 （ owner） 的权限。
-  
+
   > 注意：SUID 仅可用在二进制程序上，不能用在 shell 脚本上面，因为 shell
   > 脚本只是将很多的二进制可执行文件调用执行。也不能用在目录上面。
-  
+
   ```
   例如：
   ```
@@ -713,24 +713,24 @@ SGID(Set GID)，简写：s，数字：2
 - 可以针对文件或目录操作。
 
 - 对文件具备的功能
-  
+
   - 仅对二进制程序有用。
   - 程序执行者对于该程序来说，需具备 x 的权限；
   - 执行者在执行的过程中将会获得该程序群组的支持！
 
 - 对目录的功能
-  
+
   - 使用者若对于此目录具有 r 与 x 的权限时， 该使用者能够进入此目录；
   - 使用者在此目录下的有效群组（ effective group） 将会变成该目录的群组；
   - 用途： 若使用者在此目录下具有 w 的权限（ 可以新建文件） ， 则使用者所创建的新文件，
-    该新文件的群组与此目录的群组相同。 
+    该新文件的群组与此目录的群组相同。
 
 - SBIT(Sticky BIT)：简写：t，数字：1
-  
+
   - 仅仅只针对目录有作用，对文件没有作用。
   - 对目录的功能
     - 用户对目录具有 w、x 权限时，即具有写入的权限。
-    - 当用户在该目录建立文件或目录时，仅有自己与 root 才有删除该文件，其他人如法操作。 
+    - 当用户在该目录建立文件或目录时，仅有自己与 root 才有删除该文件，其他人如法操作。
 
 > 利用数字的方式修改文件权限：将一个文件的权限改为 `-rwsr-xr-x`，命令为：`chmod 4755 filename`
 
@@ -740,14 +740,14 @@ SGID(Set GID)，简写：s，数字：2
 
 ## 6.7. 文件类型
 
-| 类型符号 | 文件类型                     | 分类               |
-| ---- | ------------------------ | ---------------- |
-| \-   | 一般文件(regular)            | 纯文本文件、二进制文件、数据文件 |
-| d    | 目录文件(directory)          | null             |
-| c    | 字符设备文件(character device) | null             |
-| l    | 符号链接文件(symbolic link)    | null             |
-| p, f | 数据传输文件(pipe, FIFO)       | null             |
-| s    | 套接文件(socket)             | null             |
+| 类型符号 | 文件类型                       | 分类                             |
+| -------- | ------------------------------ | -------------------------------- |
+| \-       | 一般文件(regular)              | 纯文本文件、二进制文件、数据文件 |
+| d        | 目录文件(directory)            | null                             |
+| c        | 字符设备文件(character device) | null                             |
+| l        | 符号链接文件(symbolic link)    | null                             |
+| p, f     | 数据传输文件(pipe, FIFO)       | null                             |
+| s        | 套接文件(socket)               | null                             |
 
 Linux 下文件的最大长度：单一文件或目录的最大允许文件名为 255 bytes，以一个 ASCII 英文占用一个字节来说，则可达 255 个
 字符长度，每个汉字占用  2 个字节，则最大的文件名大约在 128 个汉字之间。
@@ -843,7 +843,7 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
 
 -c(Create): 打包文件
 -t(lisT): 察看打包文件的内容含有哪些文件名
--x(eXtract): 解压打包文件 
+-x(eXtract): 解压打包文件
   注意：-c, -t, -x 不可同时出现在一串命令行中。
 -v(Verbose): 在压缩/解压缩的过程中，将正在处理的文件名显示出来
 -f(Filename):  后面要立刻接要被处理的文件名！
@@ -859,13 +859,13 @@ tar 命令用于的文件的打包和解压。 tar 支持的压缩文件类型�
 ## 7.2. 打包文件或目录
 
 - 将当前目录下的  anaconda-ks.cfg 文件打包成 A.tar
-  
+
   ```bash
-  tar -cvf A.tar anaconda-ks.cfg 
+  tar -cvf A.tar anaconda-ks.cfg
   ```
 
 - 打包多个文件或目录，中间需要用空格分开
-  
+
   ```bash
   tar -cvf B.tar anaconda-ks.cfg /tmp/
   ```
@@ -889,20 +889,20 @@ tar -xvf test.tar -C /tmp
 ## 7.4. 打包并压缩
 
 - 打包压缩所有文件
-  
+
   `tar -zcvf 自己创建的文件名(xxx.tar.gz)  要打包压缩的路径(/etc/)`: 这样压缩的文件连要压缩文件的目录也一起给压缩了。
 
 - 打包压缩所有文件不包含打包文件的路径
-  
+
   `tar -zcvf tmp4.tar.gz -C etc/ .`    将 etc 下所有文件打包为 tmp4.tar.gz 不包含 etc 包的路径。
 
 - 打包并压缩一个目录，但不含该目录下的某些文件
-  
+
     `tar -zcvf bb.tar.gz --exclude=etc/apt etc`   将 etc 目录下除去 apt 文件的所有文件打包压缩为
     bb.tar.gz，打包压缩时包含 etc 的路径。
-  
+
   1.  一定要注意排除目录的最后不要带 `/`，否则 `exclude` 目录将不起作用
-  2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径 
+  2.  压缩目录和排除目录都需要采用同样的格式，如都采用绝对路径或者相对路径
 
 ## 7.5. 解压缩包
 
@@ -937,25 +937,25 @@ zip 是压缩指令，unzip 是解压指令。zip 指令既可以压缩文件，
 
 ```bash
 // 将demo.txt文件和目录mydir压缩成压缩文件yasuo.zip，选项-r表示递归
-zip -r yasuo.zip demo.txt mydir  
+zip -r yasuo.zip demo.txt mydir
 
 // 压缩当前目录下的子目录mydir
-zip -r  mydir.zip  mydir         
+zip -r  mydir.zip  mydir
 
 // 解压yasuo.zip文件到当前目录
-unzip   yasuo.zip                
+unzip   yasuo.zip
 
 // 把压缩文件解压到指定的mydir目录
-unzip -d /mydir yasuo.zip        
+unzip -d /mydir yasuo.zip
 
 // 检查压缩文件是否损坏
-unzip -t  yasuo.zip              
+unzip -t  yasuo.zip
 
 // 显示demo.zip压缩包中有哪些文件，不进行解压
-unzip  -l  demo.zip              
+unzip  -l  demo.zip
 
 // 解压时不覆盖已存在的文件
-unzip  -n  demo.zip              
+unzip  -n  demo.zip
 ```
 
 <font color=red>注意：直接使用 unzip 指令（不带选项）解压文件时，如果解压文件中包含有文件与当前目录下的某个文件重名，
@@ -974,7 +974,7 @@ Linux 下用 `ln` 来执行链接。`ln` 后面不加 `-s` 参数表示进行硬
 
 ```bash
 // 建立硬链接
-ln 原文件 新文件 
+ln 原文件 新文件
 ```
 
 ## 10.2. symbolic links
@@ -986,7 +986,7 @@ ln 原文件 新文件
 
 ```bash
 // 建立软连接
-ln -s source  destination 
+ln -s source  destination
 ```
 
 # 11. pipe
@@ -998,7 +998,7 @@ pipe 中文翻译过来是管道的意思，用 `|` 表示。
 & 和 &&  | 和 || 四者区别
 
 - `& `: 表示将当前任务放在后台执行，如要在后台运行 redis-server，则有  redis-server &
-- `&&`: 表示前一条命令执行成功时，才执行后一条命令，如 echo 'hello‘ && echo 'world'    
+- `&&`: 表示前一条命令执行成功时，才执行后一条命令，如 echo 'hello‘ && echo 'world'
 - `| `: 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'hello' | wc -l
 - `||`: 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "failed"
 
@@ -1052,21 +1052,21 @@ VSZ：该进程使用的虚拟內存量（KB）
 RSS：该进程占用的固定內存量（KB）（驻留中页的数量）
 TTY：表示该进程在那个终端上运行，若与终端无关，则显示? 若为pts/n，则表示由网络连接进入主机的进程，tty1-tty6 表示是本机上面的登录进程。
 STAT：进程当前的状态
-    D(uninterruptible sleep) 不可中断的休眠状态（通常 IO 相关的进程）
-    I(idle)                  空闲的内核线程      
-    R(running or runnable)   在运行队列中进程状态未：正在运行态或可运行状态
-    S(大写：sleep)            可中断睡眠状态（等待一个事件完成）
-    T(stopped)               停止状态（stopped by job control signal）
-    t                        调试追踪过程中被停止的状态（stopped by debugger during the tracing）
-    W（paging）               进入内存交换 （从内核2.6开始无效）
-    X(dead)                  死掉的进程 （基本很少看见）
-    Z(zombie)                僵尸状态，进程已被终止，但无法被删除
-    <                        高优先级进程（not nice to other users）
-    N                        低优先级的进程（nice to other users）
-    L                        页被锁进内存
-    s                        该进程含有子进程
-    l                        多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）
-    +                        位于前台的进程组（foreground process group）
+  D(uninterruptible sleep) 不可中断的休眠状态（通常 IO 相关的进程）
+  I(idle)                  空闲的内核线程
+  R(running or runnable)   在运行队列中进程状态未：正在运行态或可运行状态
+  S(大写：sleep)            可中断睡眠状态（等待一个事件完成）
+  T(stopped)               停止状态（stopped by job control signal）
+  t                        调试追踪过程中被停止的状态（stopped by debugger during the tracing）
+  W（paging）               进入内存交换 （从内核2.6开始无效）
+  X(dead)                  死掉的进程 （基本很少看见）
+  Z(zombie)                僵尸状态，进程已被终止，但无法被删除
+  <                        高优先级进程（not nice to other users）
+  N                        低优先级的进程（nice to other users）
+  L                        页被锁进内存
+  s                        该进程含有子进程
+  l                        多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）
+  +                        位于前台的进程组（foreground process group）
 
 START：该进程被触发启动的时间
 TIME：该进程实际使用CPU运行的时间
@@ -1078,14 +1078,14 @@ C：CPU使用率，单位为百分比
 STIME：进程启动到现在的时间
 PRI(priority)：进程被CPU执行的优先级，数值越小，代表该进程被CPU执行的越快。这个值由内核动态调整，用户无法直接调整PRI的值。
 NI(nice)：调整进程的优先级。
-    nice值的可调整的范围在 -20~19 之间。
-    root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
-    一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
-    PRI与NI之间的关系：PRI(new) = PRI(old) + nice
-    nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
-    如何调整nice值？
-      1. 进程刚开始时就给指定一个特定的nice值。nice -n -5 vim & 启动vim时，给定一个nice值，并将vim放在后台执行。
-      2. 调整已存在的进程的nice值，需要用 renice 命令：renice 4 2366 将PID=2366 进程的nice值调整为4
+  nice值的可调整的范围在 -20~19 之间。
+  root用户可以随意调整自己或其它用户进程的 nice值，且范围范围在 -20~19 之间。
+  一般用户只能调整自己进程的nice值，范围仅为 0-19，避免一般用户去抢占系统的资源。
+  PRI与NI之间的关系：PRI(new) = PRI(old) + nice
+  nice值有正负，当nice值为负数时，那么该进程会降低PRI的值，会变得较优先处理。
+  如何调整nice值？
+    1. 进程刚开始时就给指定一个特定的nice值。nice -n -5 vim & 启动vim时，给定一个nice值，并将vim放在后台执行。
+    2. 调整已存在的进程的nice值，需要用 renice 命令：renice 4 2366 将PID=2366 进程的nice值调整为4
 
 ADDR：是内核函数，指出该进程在内存中的哪个部分；如果是个running的进程，一般用 - 表示
 SZ：此进程用掉多少内存
@@ -1094,8 +1094,8 @@ WCHAN：目前进程是否在运行，如果为 -，则表示正在运行。
 
 常见参数命令组合
 
-- `ps –ef|grep 程序名称`：查看一个程序是否运行 
-- `ps -Lf 端口号|wc -l `：查看线程个数  
+- `ps –ef|grep 程序名称`：查看一个程序是否运行
+- `ps -Lf 端口号|wc -l `：查看线程个数
 - `ps -l`：查看当前用户的 bash 进程
 - `ps aux`：查看系统运行的所有进程，默认按照 PID 的顺序排序。
 - `ps axjf`：查看系统运行的所有进程，并带有 PPID 项
@@ -1104,7 +1104,7 @@ WCHAN：目前进程是否在运行，如果为 -，则表示正在运行。
 
 ```shell
 john@ubuntu:~$ ps -p 3578 -o lstart,etime
-               STARTED     ELAPSED
+  STARTED     ELAPSED
 Thu Jun 10 08:33:04 2021       33:48
 ```
 
@@ -1165,18 +1165,18 @@ nohup 命令让程序在后台执行，一般常与 & 符号结合使用。
 ```bash
 $ pstree
 init─┬─NetworkManager
-     ├─abrtd
-     ├─acpid
-     ├─atd
-     ├─automount───4*[{automount}]
-     ├─certmonger
-     ├─crond
-     ├─cupsd
-     ├─dbus-daemon
-     ├─hald───hald-runner─┬─hald-addon-acpi
-     │                    └─hald-addon-inpu
-     ├─irqbalance
-     ├─master─┬─bounce
+  ├─abrtd
+  ├─acpid
+  ├─atd
+  ├─automount───4*[{automount}]
+  ├─certmonger
+  ├─crond
+  ├─cupsd
+  ├─dbus-daemon
+  ├─hald───hald-runner─┬─hald-addon-acpi
+  │                    └─hald-addon-inpu
+  ├─irqbalance
+  ├─master─┬─bounce
 ```
 
 ```bash
@@ -1184,14 +1184,14 @@ init─┬─NetworkManager
 // 圆括号() 中的内容表示线程ID或进程ID
 pstree -p 15821
 a.out(15821)─┬─{a.out}(15835)
-             ├─{a.out}(15836)
-             ├─{a.out}(15837)
-             ├─{a.out}(15838)
-             ├─{a.out}(15839)
-             ├─{a.out}(15840)
-             ├─{a.out}(15841)
-             ├─{a.out}(15843)
-             ├─{a.out}(15844)
+  ├─{a.out}(15836)
+  ├─{a.out}(15837)
+  ├─{a.out}(15838)
+  ├─{a.out}(15839)
+  ├─{a.out}(15840)
+  ├─{a.out}(15841)
+  ├─{a.out}(15843)
+  ├─{a.out}(15844)
 ```
 
 # 18. ltrace
@@ -1272,7 +1272,7 @@ SYS_access(0x304c01dac0, 4, 6, 4, 0x2f7362694c2f564f)                           
 SYS_open("tls/x86_64/libstdc++.so.6", 524288, 011410421010)                                   = -2
 SYS_open("tls/libstdc++.so.6", 524288, 011410421010)                                          = -2
 SYS_open("x86_64/libstdc++.so.6", 524288, 011410421010)                                       = -2
-SYS_open("libstdc++.so.6", 524288, 011410421010)                                              = -2   
+SYS_open("libstdc++.so.6", 524288, 011410421010)                                              = -2
 ...........
 SYS_munmap(0x7f16eaa16000, 59833)                                                             = 0
 __libc_start_main(0x400898, 1, 0x7fff976dc088, 0x400920, 0x400990 <unfinished ...>
@@ -1309,63 +1309,63 @@ strace 跟踪一个进程的系统调用或信号产生的信息。（strace  - 
 ```bash
 参数项
 
--c 统计每一系统调用的所执行的时间，次数和出错的次数等。 
--d 输出strace关于标准错误的调试信息。 
--f 跟踪由fork调用所产生的子进程。 
--ff 如果提供-o filename，则所有进程的跟踪结果输出到相应的filename 
--F 尝试跟踪vfork调用。在-f时，vfork不被跟踪。 
--h 输出简要的帮助信息。 
--i 输出系统调用的入口指针。 
--q 禁止输出关于脱离的消息。 
--r 打印出相对时间关于，每一个系统调用。 
--t 在输出中的每一行前加上时间信息。 
--tt 在输出中的每一行前加上时间信息，微秒级。 
--ttt 微秒级输出，以秒了表示时间。 
--T 显示每一调用所耗的时间。 
--v 输出所有的系统调用。一些调用关于环境变量，状态，输入输出等调用由于使用频繁，默认不输出。 
--V 输出strace的版本信息。 
--x 以十六进制形式输出非标准字符串 
--xx 所有字符串以十六进制形式输出。 
--a column 设置返回值的输出位置。默认 为40。 
+-c 统计每一系统调用的所执行的时间，次数和出错的次数等。
+-d 输出strace关于标准错误的调试信息。
+-f 跟踪由fork调用所产生的子进程。
+-ff 如果提供-o filename，则所有进程的跟踪结果输出到相应的filename
+-F 尝试跟踪vfork调用。在-f时，vfork不被跟踪。
+-h 输出简要的帮助信息。
+-i 输出系统调用的入口指针。
+-q 禁止输出关于脱离的消息。
+-r 打印出相对时间关于，每一个系统调用。
+-t 在输出中的每一行前加上时间信息。
+-tt 在输出中的每一行前加上时间信息，微秒级。
+-ttt 微秒级输出，以秒了表示时间。
+-T 显示每一调用所耗的时间。
+-v 输出所有的系统调用。一些调用关于环境变量，状态，输入输出等调用由于使用频繁，默认不输出。
+-V 输出strace的版本信息。
+-x 以十六进制形式输出非标准字符串
+-xx 所有字符串以十六进制形式输出。
+-a column 设置返回值的输出位置。默认 为40。
 
--e expr  指定一个表达式，用来控制如何跟踪。格式如下: 
-    [qualifier=][!]value1[，value2]。。。 
-    qualifier只能是 trace，abbrev，verbose，raw，signal，read，write其中之一。
-    value是用来限定的符号或数字。默认的 qualifier是 trace。感叹号是否定符号。
-    例如: -eopen等价于 -e trace=open，表示只跟踪open调用。
-    而-etrace!=open表示跟踪除了open以外的其他调用。有两个特殊的符号 all 和 none。 
+-e expr  指定一个表达式，用来控制如何跟踪。格式如下:
+  [qualifier=][!]value1[，value2]。。。
+  qualifier只能是 trace，abbrev，verbose，raw，signal，read，write其中之一。
+  value是用来限定的符号或数字。默认的 qualifier是 trace。感叹号是否定符号。
+  例如: -eopen等价于 -e trace=open，表示只跟踪open调用。
+  而-etrace!=open表示跟踪除了open以外的其他调用。有两个特殊的符号 all 和 none。
 
 -e trace=set 只跟踪指定的系统 调用。
-             例如:-e trace=open，close，rean，write表示只跟踪这四个系统调用。默认的为set=all。
+      例如:-e trace=open，close，rean，write表示只跟踪这四个系统调用。默认的为set=all。
 
--e trace=file 只跟踪有关文件操作的系统调用。 
+-e trace=file 只跟踪有关文件操作的系统调用。
 
--e trace=process 只跟踪有关进程控制的系统调用。 
+-e trace=process 只跟踪有关进程控制的系统调用。
 
 -e trace=network 跟踪与网络有关的所有系统调用。
 
--e strace=signal 跟踪所有与系统信号有关的 系统调用 
+-e strace=signal 跟踪所有与系统信号有关的 系统调用
 
--e trace=ipc 跟踪所有与进程通讯有关的系统调用 
+-e trace=ipc 跟踪所有与进程通讯有关的系统调用
 
 -e abbrev=set 设定 strace输出的系统调用的结果集
 
--e raw=set 将指定的系统调用的参数以十六进制显示。 
+-e raw=set 将指定的系统调用的参数以十六进制显示。
 
 -e signal=set 指定跟踪的系统信号。默认为all。
-              如 signal=!SIGIO(或者signal=!io)，表示不跟踪SIGIO信号。 
+        如 signal=!SIGIO(或者signal=!io)，表示不跟踪SIGIO信号。
 
--e read=set  输出从指定文件中读出 的数据。例如: 
+-e read=set  输出从指定文件中读出 的数据。例如:
 
--e read=3，5 
+-e read=3，5
 
--e write=set 输出写入到指定文件中的数据。 
+-e write=set 输出写入到指定文件中的数据。
 
--o filename 将strace的输出写入文件filename 
+-o filename 将strace的输出写入文件filename
 
--p pid 跟踪指定的进程pid。 
+-p pid 跟踪指定的进程pid。
 
--s strsize 指定输出的字符串的最大长度，默认为32。 
+-s strsize 指定输出的字符串的最大长度，默认为32。
 
 -u username 以username 的UID和GID执行被跟踪的命令
 ```
@@ -1376,7 +1376,7 @@ pstack 打印正在运行的进程的堆栈信息。
 
 # 21. find
 
-find 命令：在指定的目录中共去查找文件。 
+find 命令：在指定的目录中共去查找文件。
 
 ```bash
 格式
@@ -1396,16 +1396,16 @@ find 命令：在指定的目录中共去查找文件。
     例子：find /usr/src -size +10M -size -20M 查找大于10M小于20M的文件
     例子：find /usr/src -size +10k -size -20k
 
--maxdepth: 
-    例子：统计 /usr 目录下深度为2的所有目录文件 
-    find /usr -maxdepth 2 -type d | wc -l  
+-maxdepth:
+    例子：统计 /usr 目录下深度为2的所有目录文件
+    find /usr -maxdepth 2 -type d | wc -l
 
     例子：查找 /usr 路径下深度为 2 除开类型为目录的所有文件
-    find /usr -maxdepth 2 ! -type d 
+    find /usr -maxdepth 2 ! -type d
 
 -exec
     例子： 列出当前目录下所有的 .sh 文件，并执行ls -l 命令
-    find ./ -name "*.sh" -exec ls -l {} \;  
+    find ./ -name "*.sh" -exec ls -l {} \;
 
 -print: 将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有 ./ 字符串；
 
@@ -1413,7 +1413,7 @@ find 命令：在指定的目录中共去查找文件。
 
 -atime(access time): 访问时间， +7 超过七天被访问的文件；-7 七天以内访问过的文件; 7 恰好在七天前被访问的文件（那个时间点）
     例子；查找当前路径下恰好在七天前被访问的文件
-    find . atime -7 
+    find . atime -7
 
 -amin: 访问时间（按照分钟）
 
@@ -1446,7 +1446,7 @@ find 命令：在指定的目录中共去查找文件。
     从根目录开始查找所有扩展名为 .log 的文本文件，并找出包含 "flower" 的行：
     $ find / -type f -name "*.log" | xargs grep "flower"
 
-    从当前目录开始查找所有扩展名为 .ini 的文本文件，并找出包含 "dog" 的行：    
+    从当前目录开始查找所有扩展名为 .ini 的文本文件，并找出包含 "dog" 的行：
     find . -name "*.ini" | xargs grep "dog"
 ```
 
@@ -1515,7 +1515,7 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
 
 # 23. grep
 
-`grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行 
+`grep(global search regular expression and print out the line)` 全面搜索正则表达式和打印输出行
 
 三种形式的 grep 命令
 
@@ -1528,11 +1528,11 @@ xargs 又称管道命令。是给命令传递参数的一个过滤器，也是�
   grep [OPTIONS] PATTERN [FILE...]
   grep [OPTIONS] [-e PATTERN | -f FILE] [FILE...]
 
-OPTIONS: 
+OPTIONS:
   通用程序信息（Generic Program Information）
     --help 输出帮助信息后退出
 
-    -V, --version 
+    -V, --version
            输出 grep 版本号后退出
 
   模式语法（Pattern Syntax）
@@ -1569,23 +1569,23 @@ OPTIONS:
          只输出匹配行的数量
 
    -l, --files-with-matches
-         只列出符合匹配的文件名，不列出具体的匹配行  
+         只列出符合匹配的文件名，不列出具体的匹配行
 
-   -q, --quiet, --silent 
+   -q, --quiet, --silent
          退出：不写任何的东西到标准输入中。如果找到任何匹配项，立即退出，状态为零，即使检测到错误也是如此。
 
-  -s, --no-message 
-        不显示不存在、没有匹配文本的错误信息  
+  -s, --no-message
+        不显示不存在、没有匹配文本的错误信息
 
-   -o, --only-matching     
+   -o, --only-matching
          与-b结合使用，打印匹配的词据文件头部的偏移量，以字节为单位
 
 输出行前缀控制（Output Line Prefix Control）
   -b, --byte-offset
         打在每行输出之前打印输入文件中从 0 开始的字节偏移量。
 
-  -h, --no-filename 
-      查询多文件时不显示文件名      
+  -h, --no-filename
+      查询多文件时不显示文件名
 
   -n, --line-number
         列出所有的匹配行，显示行号
@@ -1596,10 +1596,10 @@ OPTIONS:
           例子： 搜索压缩文件中的 open files 关键字
           $ zcat Server_log/20220118.tar.gz  | grep -a "open files"
 
-    -r, --recursive 
+    -r, --recursive
     递归搜索
       例子： 搜索 /usr/src/ 路径下包含 task_struct { 的字符，并显示字符所在的行号
-      grep -r  "task_struct {" /usr/src/  -n 
+      grep -r  "task_struct {" /usr/src/  -n
 ```
 
 查询生产环境下以压缩归档的日志，在不用解压文件的前提下直接进行查询日志，其中压缩的文件格式为 `.gz`
@@ -1621,7 +1621,7 @@ pidof program_name  找出某个正在执行的进程的PID
 pgrep bash
 3528
 
-pidof bash 
+pidof bash
 3528
 ```
 
@@ -1629,7 +1629,7 @@ pidof bash
 
 - `ps aux | grep xxx(程序名称)`  显示某个进程的全部信息，包括 PID
 - `ps ajx` 显示进程组 ID
-- `ulimit -a` 查看资源的上限大小 
+- `ulimit -a` 查看资源的上限大小
 
 # 26. dd
 
@@ -1651,7 +1651,7 @@ ss 是用于调查套接字的另一个实用程序。
 同 `netstat` 命令一样，但比它更好用。
 
 ```bash
-ss 检查端口： 
+ss 检查端口：
 
 示例：过滤 80 端口
   ss -tunlp | grep :80
@@ -1680,7 +1680,7 @@ lsof(list open files) 列出整个 Linux 系统打开的所有文件描述符。
 
 
 示例：
-  lsof -nP -iTCP -sTCP:LISTEN 获取所有侦听 TCP 端口的列表 
+  lsof -nP -iTCP -sTCP:LISTEN 获取所有侦听 TCP 端口的列表
 ```
 
 lsof 命令输出各列信息的意义如下：
@@ -1707,7 +1707,7 @@ netcat（通常缩写为 nc）是一种计算机联网实用程序，用于使�
 
 # 30. socat
 
-Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat 的官方网站： http://www.dest-unreach.org/socat/ 
+Socat 是 Linux 下的一个多功能的网络工具，名字来由是 「Socket CAT」。其功能与有瑞士军刀之称的 Netcat 类似，可以看做是 Netcat 的加强版。socat 的官方网站： http://www.dest-unreach.org/socat/
 
 Socat 的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。如 IP、TCP、
 UDP、IPv6、PIPE、EXEC、System、Open、Proxy、Openssl、Socket 等。
@@ -1757,34 +1757,34 @@ whatis (1)           - display one-line manual page descriptions
 
 - man 手册中的一些关键字
 
-| 英文描述          | 中文描述           |
-| ------------- | -------------- |
-| NAME          | 命令名            |
-| SYNOPSIS      | 使用方法大纲         |
-| CONFIGURATION | 配置 xxx          |
-| DESCRIPTION   | 功能说明           |
-| OPTIONS       | 可选参数说明         |
-| EXAMPLE       | 实例             |
+| 英文描述      | 中文描述                     |
+| ------------- | ---------------------------- |
+| NAME          | 命令名                       |
+| SYNOPSIS      | 使用方法大纲                 |
+| CONFIGURATION | 配置 xxx                     |
+| DESCRIPTION   | 功能说明                     |
+| OPTIONS       | 可选参数说明                 |
+| EXAMPLE       | 实例                         |
 | EXIT STATUS   | 退出状态（返回给父进程的值） |
-| RETURN VALUE  | 返回值            |
-| ERRORS        | 错误类型           |
-| ENVIRONMENT   | 环境变量           |
-| FILES         | 相关配置文件         |
-| VERSIONS      | 版本             |
-| CONFORMING TO | 符合的规范          |
-| NOTES         | 注意事项           |
-| BUGS          | 已经发现的 bug      |
-| AUTHORS       | 作者             |
-| SEE ALSO      | 与之功能相近的其它命令    |
+| RETURN VALUE  | 返回值                       |
+| ERRORS        | 错误类型                     |
+| ENVIRONMENT   | 环境变量                     |
+| FILES         | 相关配置文件                 |
+| VERSIONS      | 版本                         |
+| CONFORMING TO | 符合的规范                   |
+| NOTES         | 注意事项                     |
+| BUGS          | 已经发现的 bug               |
+| AUTHORS       | 作者                         |
+| SEE ALSO      | 与之功能相近的其它命令       |
 
 - man 中的快捷
 
-| 名称      | 用法               |
-| ------- | ---------------- |
+| 名称    | 用法                       |
+| ------- | -------------------------- |
 | /string | 向“下”搜寻 string 这个字串 |
 | ?string | 向“上”搜寻 string 这个字串 |
-| n       | 继续下一个搜寻          |
-| N       | 反向查询             |
+| n       | 继续下一个搜寻             |
+| N       | 反向查询                   |
 
 与 man 相似的命令是 info，而`info` 手册页按照节点（node）组织的，每个手册页文件是一个节点，手册页内支持链接到其它节点
 ，如此组织犹如一张网，和网页类似。
@@ -1818,21 +1818,21 @@ ntsysv 是 CentOS 下图形界面查看系统中有哪些启动的项。
   MD5（更早之前被广为使用的杂凑函数）的后继者。
 
 - 生成 hash 校验: `sha1sum filename`
-  
+
   ```bash
   #  直接生成 hash 校验后的结果
-  Tim@computer:~/Downloads$ sha1sum feeds-master.zip 
+  Tim@computer:~/Downloads$ sha1sum feeds-master.zip
   751420b576570fcbfb24e80e47e18168342541e0  feeds-master.zip
   ```
-  
+
   feeds-master.zip 文件生成的 hash1 校验码为 `751420b576570fcbfb24e80e47e18168342541e0`。
 
 - 为了检验 hash 结果的值是否真确，需要对 hash 结果进行校验。可以将生成 hash
   的校验值存入到一个文件中，方便校验，对生成的结果进行校验时，需要加 `-c(check)` 参数。
-  
+
   ```bash
   Tim@computer:~/Downloads$ sha1sum feeds-master.zip > a.txt
-  Tim@computer:~/Downloads$ sha1sum -c a.txt 
+  Tim@computer:~/Downloads$ sha1sum -c a.txt
   feeds-master.zip: OK
   ```
 
@@ -1846,9 +1846,9 @@ MD5 校验的用法与 SHA 校验的用法一样。下面是 MD5 校验的用法
 
 ```bash
 Tim@computer:~/Downloads$ md5sum feeds-master.zip > md.txt
-Tim@computer:~/Downloads$ cat md.txt 
+Tim@computer:~/Downloads$ cat md.txt
 f273a8295e2c28e598764ed04898a742  feeds-master.zip
-Tim@computer:~/Downloads$ md5sum -c md.txt 
+Tim@computer:~/Downloads$ md5sum -c md.txt
 feeds-master.zip: OK
 ```
 
@@ -1870,23 +1870,23 @@ ldconfig 是一个动态链接库管理命令，其目的为了让动态链接�
 
 ```bash
 [root@zk_190 etc]# ldd -v /usr/bin/cat
-        linux-vdso.so.1 =>  (0x00007ffe11572000)
-        libc.so.6 => /lib64/libc.so.6 (0x00007f8996748000)
-        /lib64/ld-linux-x86-64.so.2 (0x00007f8996b16000)
+  linux-vdso.so.1 =>  (0x00007ffe11572000)
+  libc.so.6 => /lib64/libc.so.6 (0x00007f8996748000)
+  /lib64/ld-linux-x86-64.so.2 (0x00007f8996b16000)
 
-        Version information:
-        /usr/bin/cat:
-                libc.so.6 (GLIBC_2.3) => /lib64/libc.so.6
-                libc.so.6 (GLIBC_2.3.4) => /lib64/libc.so.6
-                libc.so.6 (GLIBC_2.14) => /lib64/libc.so.6
-                libc.so.6 (GLIBC_2.4) => /lib64/libc.so.6
-                libc.so.6 (GLIBC_2.2.5) => /lib64/libc.so.6
-        /lib64/libc.so.6:
-                ld-linux-x86-64.so.2 (GLIBC_2.3) => /lib64/ld-linux-x86-64.so.2
-                ld-linux-x86-64.so.2 (GLIBC_PRIVATE) => /lib64/ld-linux-x86-64.so.2
-        /lib64/ld-linux-x86-64.so.2 (0x00007faf69eef000)
+  Version information:
+  /usr/bin/cat:
+      libc.so.6 (GLIBC_2.3) => /lib64/libc.so.6
+      libc.so.6 (GLIBC_2.3.4) => /lib64/libc.so.6
+      libc.so.6 (GLIBC_2.14) => /lib64/libc.so.6
+      libc.so.6 (GLIBC_2.4) => /lib64/libc.so.6
+      libc.so.6 (GLIBC_2.2.5) => /lib64/libc.so.6
+  /lib64/libc.so.6:
+      ld-linux-x86-64.so.2 (GLIBC_2.3) => /lib64/ld-linux-x86-64.so.2
+      ld-linux-x86-64.so.2 (GLIBC_PRIVATE) => /lib64/ld-linux-x86-64.so.2
+  /lib64/ld-linux-x86-64.so.2 (0x00007faf69eef000)
 
-      # 参数 -v 表示该函数来自于哪一个软件
+  # 参数 -v 表示该函数来自于哪一个软件
 ```
 
 # 39. chkconfig
@@ -1932,7 +1932,7 @@ SCP(secure copy) 是基于 ssh 协议的安全拷贝，用于将文件/目录安
 yum -y install openssh-clients
 
 // Ubuntu
-apt-get install openssh-client 
+apt-get install openssh-client
 ```
 
 - 复制文件/目录到远程主机
@@ -1940,8 +1940,8 @@ apt-get install openssh-client
 ```bash
 // 复制文件
 scp source_file_name user@destination_host:destination_folder
-//复制目录 
-scp -r source_directory user@destination_host:destination_folder 
+//复制目录
+scp -r source_directory user@destination_host:destination_folder
 
 [root@Client ~]# scp text.txt root@192.168.20.40:/root
 ```
@@ -1950,13 +1950,13 @@ scp -r source_directory user@destination_host:destination_folder
 
 ```bash
 // 复制文件
-scp user@source_host:source_file_name local_destination_folder 
+scp user@source_host:source_file_name local_destination_folder
  // 复制目录
 scp -r user@source_host:source_file_name local_destination_folder
 
 [root@Client ~]# scp root@192.168.20.40:/root/test40.txt /root
-root@192.168.20.40's password: 
-test40.txt                                                                                                                   100%   12     4.2KB/s   00:00    
+root@192.168.20.40's password:
+test40.txt                                                                                                                   100%   12     4.2KB/s   00:00
 [root@Client ~]# ll | grep test40.txt
 -rw-r--r--   1 root    root          12 7月   6 09:41 test40.txt
 ```
@@ -1974,20 +1974,20 @@ Rsync (remote synchronize) 实现同步本地主机和远程主机的文件/目�
 yum install rsync
 
 // Ubuntu
-apt-get install rsync  
+apt-get install rsync
 ```
 
 参数项
 
-| 参数          | 功能                                                           |
-| ----------- | ------------------------------------------------------------ |
-| -t          | 将源文件的修改时间(modify time)同步到目标机器                                |
-| -I          | --ignore-times，不跳过时间和大小都匹配的文件，也就是不检查是否有改动，直接复制               |
-| -r          | 递归，用于目录复制                                                    |
+| 参数        | 功能                                                                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| -t          | 将源文件的修改时间(modify time)同步到目标机器                                                           |
+| -I          | --ignore-times，不跳过时间和大小都匹配的文件，也就是不检查是否有改动，直接复制                          |
+| -r          | 递归，用于目录复制                                                                                      |
 | -a(archive) | 存档模式，保存所有的元数据，比如修改时间（modification time）、权限、所有者等，并且软链接也会同步过去。 |
-| -v          | 打印复制过程                                                       |
-| -l          | 拷贝符号连接                                                       |
-| --delete    | 删除目标目录中多余的文件，也就是保持两个目录相同，使得目标目录成为源目录的镜像副本                    |
+| -v          | 打印复制过程                                                                                            |
+| -l          | 拷贝符号连接                                                                                            |
+| --delete    | 删除目标目录中多余的文件，也就是保持两个目录相同，使得目标目录成为源目录的镜像副本                      |
 
 - 复制文件/目录到远程主机。如果复制的目标目录不存在，会自动创建，语法格式和 SCP 一样：
 
@@ -1996,13 +1996,13 @@ apt-get install rsync
 rsync source_file_name/ user@destination_host:destination_folder
 
 // 复制目录
-rsync -r source_file_name/ user@destination_host:destination_folder 
+rsync -r source_file_name/ user@destination_host:destination_folder
 
 [root@Client ~]# rsync test.txt root@192.168.20.40:/root
-root@192.168.20.40's password: 
-[root@Client ~]# 
+root@192.168.20.40's password:
+[root@Client ~]#
 [root@Client ~]# rsync -rvl test/ root@192.168.20.40:/root/test222
-root@192.168.20.40's password: 
+root@192.168.20.40's password:
 sending incremental file list
 created directory /root/test222
 ./
@@ -2017,13 +2017,13 @@ total size is 12  speedup is 0.04
 
 ```bash
 // 复制文件
-rsync user@source_host:source_file_name local_destination_folder 
+rsync user@source_host:source_file_name local_destination_folder
 
 // 复制目录
-rsync -r user@source_host:source_file_name local_destination_folder 
+rsync -r user@source_host:source_file_name local_destination_folder
 
 [root@Client ~]# rsync root@192.168.20.40:/root/test40.txt /root
-root@192.168.20.30's password: 
+root@192.168.20.30's password:
 [root@Client ~]# ll test40.txt
 -rw-r--r-- 1 root root 12 7月   8 11:11 test40.txt
 ```
@@ -2062,8 +2062,8 @@ CentOS7 下默认的防火墙为 `firewalld`
 firwall-cmd：是 Linux 提供的操作 firewall 的一个工具
 
 参数项：
-    –-permanent：表示设置为持久；
-    –-add-port：标识添加的端口
+  –-permanent：表示设置为持久；
+  –-add-port：标识添加的端口
 ```
 
 - 启动： systemctl start firewalld
@@ -2138,7 +2138,7 @@ enca -L zh_CN -x utf-8 file_name
 转化某个文件但如果不想覆盖原文件可以这样
 
 ```bash
-enca -L zh_CN -x UTF-8 < file1 > file2 
+enca -L zh_CN -x UTF-8 < file1 > file2
 ```
 
 查看当前目录下的文件编码
@@ -2160,8 +2160,7 @@ enca -L zh_CN -x utf-8 *
 
 - [Github 上 Linux 工具快速教程](https://github.com/me115/linuxtools_rst) ：这本书专注于 Linux 工具的最常用用法，以便读者能以最快时间掌握，并在工作中应用
 - [如何在 centos 上安装 clang-tidy](https://developers.redhat.com/blog/2017/11/01/getting-started-llvm-toolset/)
-- [CentOS 8 发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html) 
+- [CentOS 8 发布下载，附新功能/新特性介绍](https://ywnz.com/linuxxz/5941.html)
 - linux ldconfig 命令,环境变量文件配置详解: https://blog.csdn.net/winycg/article/details/80572735
 - Linux 基础用法总结: https://mp.weixin.qq.com/s/ioLF8ocrWuASlZRCUqo7KA 自己酌情裁剪，吸收写的好的地方。
 - 修复 apt-key deprecated 警告：https://taoshu.in/unix/apt-key-deprecated.html
-

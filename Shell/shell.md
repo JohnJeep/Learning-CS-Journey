@@ -256,9 +256,9 @@ anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
 
 2. `$()` 格式：`$(commmand)` 执行括号里面的命令功能。例如：`$(data)`
    ```sh
-   [root@KF-CFT-mongdb3 ~]# test=$(date)
-   [root@KF-CFT-mongdb3 ~]# echo $test   
-   2021年 11月 08日 星期一 10:52:12 CST
+  [root@KF-CFT-mongdb3 ~]# test=$(date)
+  [root@KF-CFT-mongdb3 ~]# echo $test   
+  2021年 11月 08日 星期一 10:52:12 CST
    ```
    
    shell 先运行括号中的命令，然后将输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
@@ -426,11 +426,11 @@ fi
 echo "Is it morning? Please answer yes or no."
 read YES_OR_NO
 if [ "$YES_OR_NO" = "yes" ]; then          # 取值必须使用 ""
-    echo "Good moning!"
+  echo "Good moning!"
 elif [ "$YES_OR_NO" = "no" ]; then         # 嵌套 if
-    echo "Good afternoon!"
+  echo "Good afternoon!"
 else
-    echo "Sorry, $YES_OR_NO not recognized. Enter yes or no."
+  echo "Sorry, $YES_OR_NO not recognized. Enter yes or no."
 fi
 ```
 

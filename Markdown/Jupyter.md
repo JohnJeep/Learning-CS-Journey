@@ -2,13 +2,13 @@
  * @Author: JohnJeep
  * @Date: 2022-01-27 17:21:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:33:42
+ * @LastEditTime: 2026-08-09 13:52:27
  * @Description: Jupyter use and tips
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 # 1. jupyter 基础
- 
+
 
 ## 1.1. 命令模式下的单元格操作
 1. L: 显示代码的行号
@@ -47,7 +47,7 @@
 14. 单独占一行的数学公式使用  ` $$ `括起
 
 
-## 1.3. 操作运算核   
+## 1.3. 操作运算核
 1. 如果进入了 Python 的死循环，可以在命令模式下按两下 **i** 按键终止循环。
 2. 如果 i 按键不能终止编译代码中的死循环，可以按两次** 0**（是零不是
    o）按键重新启动运算核心，当前运行环境中的所有对象都将消失
@@ -111,7 +111,7 @@ print(work)
 
 
 ## 3.1. 本地导入 python 代
-- %load+文件路径（文件的路径可以是相对地址也可以是绝对地址） 
+- %load+文件路径（文件的路径可以是相对地址也可以是绝对地址）
 ![地址](https://pic1.zhimg.com/v2-a5d596dc1ccbc2dd8389f8eb4f80a400_r.jpg)
 
 `%load 蟒蛇图形绘制。py`
@@ -128,8 +128,8 @@ turtle.pensize(25)
 turtle.pencolor("green")
 turtle.seth(-40)                #改变海龟（面对方向）的行进方向，但不行进
 for i in range(4):
-    turtle.circle(40,80)
-    turtle.circle(-40,80)
+  turtle.circle(40,80)
+  turtle.circle(-40,80)
 
 turtle.circle(40,80/2)
 turtle.fd(40)
@@ -140,7 +140,7 @@ turtle.done
 
 
 ## 3.2. 网络导入代码
-从网络中导入 python 代码，使用`%load` 网址   
+从网络中导入 python 代码，使用`%load` 网址
 
 
 # 4. jupyter 中运行 python 文件
@@ -216,12 +216,12 @@ plt.plot(x,y)
     %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run
     %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos
     %xdel  %xmode
-    
+
     Available cell magics:
     %%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown
     %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time
     %%timeit  %%writefile
-    
+
     Automagic is ON, % prefix IS NOT needed for line magics.
 
 ```python
@@ -293,7 +293,7 @@ np.add
 
 # 9. Jupyter notebook 其它工具结合
 - [IPython 与 Jupyter notebook 安装与配置，插件扩展，主题，PDF 输出](http://www.cnblogs.com/McKean/p/6249112.html)
-- [jupyter notebook 转化为 pdf](http://blog.juliusschulz.de/blog/ultimate-ipython-notebook) 
+- [jupyter notebook 转化为 pdf](http://blog.juliusschulz.de/blog/ultimate-ipython-notebook)
 
 
 # 10. References

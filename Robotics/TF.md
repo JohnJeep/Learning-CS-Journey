@@ -190,21 +190,21 @@ TF2 使用 `geometry_msgs/msg/TransformStamped` 传递变换信息：
 
 ```
 std_msgs/Header header
-    builtin_interfaces/Time stamp   # 变换对应的时间戳
-    string frame_id                 # 父坐标系 ID
+  builtin_interfaces/Time stamp   # 变换对应的时间戳
+  string frame_id                 # 父坐标系 ID
 
 string child_frame_id               # 子坐标系 ID
 
 geometry_msgs/Transform transform
-    geometry_msgs/Vector3 translation
-        float64 x
-        float64 y
-        float64 z
-    geometry_msgs/Quaternion rotation
-        float64 x
-        float64 y
-        float64 z
-        float64 w
+  geometry_msgs/Vector3 translation
+    float64 x
+    float64 y
+    float64 z
+  geometry_msgs/Quaternion rotation
+    float64 x
+    float64 y
+    float64 z
+    float64 w
 ```
 
 ## 6.3. 静态变换 vs 动态变换
@@ -263,8 +263,8 @@ q.setRPY(0.0, 0.0, 1.57);  // roll, pitch, yaw（弧度）
 ```cpp
 // 设置缓存时间为 30 秒
 auto tf_buffer = std::make_shared<tf2_ros::Buffer>(
-    this->get_clock(),
-    tf2::durationFromSec(30.0)
+  this->get_clock(),
+  tf2::durationFromSec(30.0)
 );
 ```
 
@@ -280,9 +280,9 @@ tf_buffer_->lookupTransform("map", "base_link", query_time);
 
 // 查询特定时刻，并设置等待超时
 tf_buffer_->lookupTransform(
-    "map", "base_link",
-    query_time,
-    tf2::durationFromSec(1.0)  // 最多等待 1 秒
+  "map", "base_link",
+  query_time,
+  tf2::durationFromSec(1.0)  // 最多等待 1 秒
 );
 ```
 
@@ -294,7 +294,7 @@ tf_buffer_->lookupTransform(
 // 查询 1 秒前 laser_frame 在 map 中的位姿（适合延迟处理传感器数据）
 rclcpp::Time past_time = this->now() - rclcpp::Duration(1, 0);
 tf_buffer_->lookupTransform("map", "laser_frame", past_time,
-    tf2::durationFromSec(0.5));
+  tf2::durationFromSec(0.5));
 ```
 
 典型应用：传感器数据有处理延迟，需要用数据采集时刻的坐标变换，而不是当前时刻。
@@ -310,11 +310,11 @@ TF2 用一棵有向树来表示所有坐标系之间的关系。树中每条边�
 ```
 map
 └── odom
-    └── base_link
-        ├── base_footprint
-        ├── laser_frame
-        ├── camera_frame
-        └── imu_frame
+  └── base_link
+    ├── base_footprint
+    ├── laser_frame
+    ├── camera_frame
+    └── imu_frame
 ```
 
 - 每个节点是一个坐标系（frame），用字符串 ID 标识
@@ -366,14 +366,14 @@ ros2 run tf2_ros static_transform_publisher \
 from launch_ros.actions import Node
 
 static_tf = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    arguments=[
-        '--x', '0.1', '--y', '0.0', '--z', '0.2',
-        '--roll', '0.0', '--pitch', '0.0', '--yaw', '0.0',
-        '--frame-id', 'base_link',
-        '--child-frame-id', 'laser_frame',
-    ],
+  package='tf2_ros',
+  executable='static_transform_publisher',
+  arguments=[
+    '--x', '0.1', '--y', '0.0', '--z', '0.2',
+    '--roll', '0.0', '--pitch', '0.0', '--yaw', '0.0',
+    '--frame-id', 'base_link',
+    '--child-frame-id', 'laser_frame',
+  ],
 )
 ```
 
@@ -388,45 +388,45 @@ static_tf = Node(
 class StaticFramePublisher : public rclcpp::Node
 {
 public:
-    StaticFramePublisher() : Node("static_tf_publisher")
-    {
-        broadcaster_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(this);
-        publish_static_transform();
-    }
+  StaticFramePublisher() : Node("static_tf_publisher")
+  {
+    broadcaster_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(this);
+    publish_static_transform();
+  }
 
 private:
-    void publish_static_transform()
-    {
-        geometry_msgs::msg::TransformStamped t;
-        t.header.stamp = this->get_clock()->now();
-        t.header.frame_id = "base_link";      // 父坐标系
-        t.child_frame_id = "laser_frame";     // 子坐标系
+  void publish_static_transform()
+  {
+    geometry_msgs::msg::TransformStamped t;
+    t.header.stamp = this->get_clock()->now();
+    t.header.frame_id = "base_link";      // 父坐标系
+    t.child_frame_id = "laser_frame";     // 子坐标系
 
-        // 平移：激光雷达安装在机器人前方 0.1m、上方 0.2m
-        t.transform.translation.x = 0.1;
-        t.transform.translation.y = 0.0;
-        t.transform.translation.z = 0.2;
+    // 平移：激光雷达安装在机器人前方 0.1m、上方 0.2m
+    t.transform.translation.x = 0.1;
+    t.transform.translation.y = 0.0;
+    t.transform.translation.z = 0.2;
 
-        // 旋转：无旋转（单位四元数）
-        tf2::Quaternion q;
-        q.setRPY(0.0, 0.0, 0.0);
-        t.transform.rotation.x = q.x();
-        t.transform.rotation.y = q.y();
-        t.transform.rotation.z = q.z();
-        t.transform.rotation.w = q.w();
+    // 旋转：无旋转（单位四元数）
+    tf2::Quaternion q;
+    q.setRPY(0.0, 0.0, 0.0);
+    t.transform.rotation.x = q.x();
+    t.transform.rotation.y = q.y();
+    t.transform.rotation.z = q.z();
+    t.transform.rotation.w = q.w();
 
-        broadcaster_->sendTransform(t);
-    }
+    broadcaster_->sendTransform(t);
+  }
 
-    std::shared_ptr<tf2_ros::StaticTransformBroadcaster> broadcaster_;
+  std::shared_ptr<tf2_ros::StaticTransformBroadcaster> broadcaster_;
 };
 
 int main(int argc, char * argv[])
 {
-    rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<StaticFramePublisher>());
-    rclcpp::shutdown();
-    return 0;
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<StaticFramePublisher>());
+  rclcpp::shutdown();
+  return 0;
 }
 ```
 
@@ -440,34 +440,34 @@ from geometry_msgs.msg import TransformStamped
 from tf_transformations import quaternion_from_euler
 
 class StaticTFPublisher(Node):
-    def __init__(self):
-        super().__init__('static_tf_publisher')
-        self.br = StaticTransformBroadcaster(self)
-        self.publish_static_transform()
+  def __init__(self):
+    super().__init__('static_tf_publisher')
+    self.br = StaticTransformBroadcaster(self)
+    self.publish_static_transform()
 
-    def publish_static_transform(self):
-        t = TransformStamped()
-        t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'base_link'
-        t.child_frame_id = 'laser_frame'
+  def publish_static_transform(self):
+    t = TransformStamped()
+    t.header.stamp = self.get_clock().now().to_msg()
+    t.header.frame_id = 'base_link'
+    t.child_frame_id = 'laser_frame'
 
-        t.transform.translation.x = 0.1
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.2
+    t.transform.translation.x = 0.1
+    t.transform.translation.y = 0.0
+    t.transform.translation.z = 0.2
 
-        q = quaternion_from_euler(0.0, 0.0, 0.0)
-        t.transform.rotation.x = q[0]
-        t.transform.rotation.y = q[1]
-        t.transform.rotation.z = q[2]
-        t.transform.rotation.w = q[3]
+    q = quaternion_from_euler(0.0, 0.0, 0.0)
+    t.transform.rotation.x = q[0]
+    t.transform.rotation.y = q[1]
+    t.transform.rotation.z = q[2]
+    t.transform.rotation.w = q[3]
 
-        self.br.sendTransform(t)
+    self.br.sendTransform(t)
 
 def main():
-    rclpy.init()
-    node = StaticTFPublisher()
-    rclpy.spin(node)
-    rclpy.shutdown()
+  rclpy.init()
+  node = StaticTFPublisher()
+  rclpy.spin(node)
+  rclpy.shutdown()
 ```
 
 
@@ -487,43 +487,43 @@ def main():
 class DynamicTFPublisher : public rclcpp::Node
 {
 public:
-    DynamicTFPublisher() : Node("dynamic_tf_publisher"), x_(0.0), theta_(0.0)
-    {
-        broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
-        // 50Hz 发布里程计坐标系变换
-        timer_ = this->create_wall_timer(
-            std::chrono::milliseconds(20),
-            std::bind(&DynamicTFPublisher::publish_transform, this));
-    }
+  DynamicTFPublisher() : Node("dynamic_tf_publisher"), x_(0.0), theta_(0.0)
+  {
+    broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+    // 50Hz 发布里程计坐标系变换
+    timer_ = this->create_wall_timer(
+      std::chrono::milliseconds(20),
+      std::bind(&DynamicTFPublisher::publish_transform, this));
+  }
 
 private:
-    void publish_transform()
-    {
-        geometry_msgs::msg::TransformStamped t;
-        t.header.stamp = this->get_clock()->now();
-        t.header.frame_id = "odom";
-        t.child_frame_id = "base_link";
+  void publish_transform()
+  {
+    geometry_msgs::msg::TransformStamped t;
+    t.header.stamp = this->get_clock()->now();
+    t.header.frame_id = "odom";
+    t.child_frame_id = "base_link";
 
-        t.transform.translation.x = x_;
-        t.transform.translation.y = 0.0;
-        t.transform.translation.z = 0.0;
+    t.transform.translation.x = x_;
+    t.transform.translation.y = 0.0;
+    t.transform.translation.z = 0.0;
 
-        tf2::Quaternion q;
-        q.setRPY(0.0, 0.0, theta_);
-        t.transform.rotation.x = q.x();
-        t.transform.rotation.y = q.y();
-        t.transform.rotation.z = q.z();
-        t.transform.rotation.w = q.w();
+    tf2::Quaternion q;
+    q.setRPY(0.0, 0.0, theta_);
+    t.transform.rotation.x = q.x();
+    t.transform.rotation.y = q.y();
+    t.transform.rotation.z = q.z();
+    t.transform.rotation.w = q.w();
 
-        broadcaster_->sendTransform(t);
+    broadcaster_->sendTransform(t);
 
-        // 模拟机器人前进
-        x_ += 0.001;
-    }
+    // 模拟机器人前进
+    x_ += 0.001;
+  }
 
-    std::shared_ptr<tf2_ros::TransformBroadcaster> broadcaster_;
-    rclcpp::TimerBase::SharedPtr timer_;
-    double x_, theta_;
+  std::shared_ptr<tf2_ros::TransformBroadcaster> broadcaster_;
+  rclcpp::TimerBase::SharedPtr timer_;
+  double x_, theta_;
 };
 ```
 
@@ -537,32 +537,32 @@ from geometry_msgs.msg import TransformStamped
 import math
 
 class OdomTFPublisher(Node):
-    def __init__(self):
-        super().__init__('odom_tf_publisher')
-        self.br = TransformBroadcaster(self)
-        self.x = 0.0
-        self.y = 0.0
-        self.theta = 0.0
-        # 50Hz 发布变换
-        self.timer = self.create_timer(0.02, self.publish_transform)
+  def __init__(self):
+    super().__init__('odom_tf_publisher')
+    self.br = TransformBroadcaster(self)
+    self.x = 0.0
+    self.y = 0.0
+    self.theta = 0.0
+    # 50Hz 发布变换
+    self.timer = self.create_timer(0.02, self.publish_transform)
 
-    def publish_transform(self):
-        t = TransformStamped()
-        t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'odom'
-        t.child_frame_id = 'base_link'
+  def publish_transform(self):
+    t = TransformStamped()
+    t.header.stamp = self.get_clock().now().to_msg()
+    t.header.frame_id = 'odom'
+    t.child_frame_id = 'base_link'
 
-        t.transform.translation.x = self.x
-        t.transform.translation.y = self.y
-        t.transform.translation.z = 0.0
+    t.transform.translation.x = self.x
+    t.transform.translation.y = self.y
+    t.transform.translation.z = 0.0
 
-        # 仅绕 Z 轴旋转（2D 平面机器人）
-        t.transform.rotation.x = 0.0
-        t.transform.rotation.y = 0.0
-        t.transform.rotation.z = math.sin(self.theta / 2)
-        t.transform.rotation.w = math.cos(self.theta / 2)
+    # 仅绕 Z 轴旋转（2D 平面机器人）
+    t.transform.rotation.x = 0.0
+    t.transform.rotation.y = 0.0
+    t.transform.rotation.z = math.sin(self.theta / 2)
+    t.transform.rotation.w = math.cos(self.theta / 2)
 
-        self.br.sendTransform(t)
+    self.br.sendTransform(t)
 ```
 
 同时广播多个变换（一次 sendTransform 调用）：
@@ -571,12 +571,12 @@ class OdomTFPublisher(Node):
 # 一次性发布多个变换（减少消息数量）
 transforms = []
 for i, frame_id in enumerate(['arm_link1', 'arm_link2', 'arm_link3']):
-    t = TransformStamped()
-    t.header.stamp = self.get_clock().now().to_msg()
-    t.header.frame_id = f'arm_link{i}' if i > 0 else 'base_link'
-    t.child_frame_id = frame_id
-    # ... 设置 translation 和 rotation
-    transforms.append(t)
+  t = TransformStamped()
+  t.header.stamp = self.get_clock().now().to_msg()
+  t.header.frame_id = f'arm_link{i}' if i > 0 else 'base_link'
+  t.child_frame_id = frame_id
+  # ... 设置 translation 和 rotation
+  transforms.append(t)
 
 self.br.sendTransform(transforms)
 ```
@@ -605,42 +605,42 @@ self.br.sendTransform(transforms)
 class TFListener : public rclcpp::Node
 {
 public:
-    TFListener() : Node("tf_listener")
-    {
-        tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
-        tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
-        timer_ = this->create_wall_timer(
-            std::chrono::milliseconds(100),
-            std::bind(&TFListener::on_timer, this));
-    }
+  TFListener() : Node("tf_listener")
+  {
+    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    timer_ = this->create_wall_timer(
+      std::chrono::milliseconds(100),
+      std::bind(&TFListener::on_timer, this));
+  }
 
 private:
-    void on_timer()
-    {
-        try {
-            // lookupTransform(target_frame, source_frame, time)
-            // 含义：source_frame 原点在 target_frame 中的坐标和姿态
-            geometry_msgs::msg::TransformStamped tf =
-                tf_buffer_->lookupTransform(
-                    "map",              // target frame
-                    "base_link",        // source frame
-                    tf2::TimePointZero  // 最新可用时刻
-                );
+  void on_timer()
+  {
+    try {
+      // lookupTransform(target_frame, source_frame, time)
+      // 含义：source_frame 原点在 target_frame 中的坐标和姿态
+      geometry_msgs::msg::TransformStamped tf =
+        tf_buffer_->lookupTransform(
+          "map",              // target frame
+          "base_link",        // source frame
+          tf2::TimePointZero  // 最新可用时刻
+        );
 
-            RCLCPP_INFO(this->get_logger(),
-                "Robot in map: x=%.2f, y=%.2f",
-                tf.transform.translation.x,
-                tf.transform.translation.y);
+      RCLCPP_INFO(this->get_logger(),
+        "Robot in map: x=%.2f, y=%.2f",
+        tf.transform.translation.x,
+        tf.transform.translation.y);
 
-        } catch (const tf2::TransformException & ex) {
-            RCLCPP_WARN(this->get_logger(),
-                "Transform not available: %s", ex.what());
-        }
+    } catch (const tf2::TransformException & ex) {
+      RCLCPP_WARN(this->get_logger(),
+        "Transform not available: %s", ex.what());
     }
+  }
 
-    std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-    std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
-    rclcpp::TimerBase::SharedPtr timer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+  rclcpp::TimerBase::SharedPtr timer_;
 };
 ```
 
@@ -653,26 +653,26 @@ from tf2_ros import Buffer, TransformListener, TransformException
 from rclpy.duration import Duration
 
 class TFListenerNode(Node):
-    def __init__(self):
-        super().__init__('tf_listener')
-        self.tf_buffer = Buffer()
-        self.tf_listener = TransformListener(self.tf_buffer, self)
-        self.timer = self.create_timer(0.1, self.on_timer)
+  def __init__(self):
+    super().__init__('tf_listener')
+    self.tf_buffer = Buffer()
+    self.tf_listener = TransformListener(self.tf_buffer, self)
+    self.timer = self.create_timer(0.1, self.on_timer)
 
-    def on_timer(self):
-        try:
-            tf = self.tf_buffer.lookup_transform(
-                'map',              # target frame
-                'base_link',        # source frame
-                rclpy.time.Time(),  # 最新可用时刻
-                timeout=Duration(seconds=1.0),
-            )
-            self.get_logger().info(
-                f'Robot in map: x={tf.transform.translation.x:.2f}, '
-                f'y={tf.transform.translation.y:.2f}'
-            )
-        except TransformException as e:
-            self.get_logger().warn(f'Transform error: {e}')
+  def on_timer(self):
+    try:
+      tf = self.tf_buffer.lookup_transform(
+        'map',              # target frame
+        'base_link',        # source frame
+        rclpy.time.Time(),  # 最新可用时刻
+        timeout=Duration(seconds=1.0),
+      )
+      self.get_logger().info(
+        f'Robot in map: x={tf.transform.translation.x:.2f}, '
+        f'y={tf.transform.translation.y:.2f}'
+      )
+    except TransformException as e:
+      self.get_logger().warn(f'Transform error: {e}')
 ```
 
 
@@ -690,28 +690,28 @@ from geometry_msgs.msg import PointStamped
 import rclpy
 
 class PointTransformer(Node):
-    def __init__(self):
-        super().__init__('point_transformer')
-        self.tf_buffer = Buffer()
-        self.tf_listener = TransformListener(self.tf_buffer, self)
+  def __init__(self):
+    super().__init__('point_transformer')
+    self.tf_buffer = Buffer()
+    self.tf_listener = TransformListener(self.tf_buffer, self)
 
-    def transform_point(self, x, y, z, from_frame, to_frame):
-        point = PointStamped()
-        point.header.frame_id = from_frame
-        point.header.stamp = self.get_clock().now().to_msg()
-        point.point.x = x
-        point.point.y = y
-        point.point.z = z
+  def transform_point(self, x, y, z, from_frame, to_frame):
+    point = PointStamped()
+    point.header.frame_id = from_frame
+    point.header.stamp = self.get_clock().now().to_msg()
+    point.point.x = x
+    point.point.y = y
+    point.point.z = z
 
-        try:
-            tf = self.tf_buffer.lookup_transform(
-                to_frame, from_frame, rclpy.time.Time()
-            )
-            transformed = do_transform_point(point, tf)
-            return transformed.point
-        except Exception as e:
-            self.get_logger().warn(f'Transform failed: {e}')
-            return None
+    try:
+      tf = self.tf_buffer.lookup_transform(
+        to_frame, from_frame, rclpy.time.Time()
+      )
+      transformed = do_transform_point(point, tf)
+      return transformed.point
+    except Exception as e:
+      self.get_logger().warn(f'Transform failed: {e}')
+      return None
 ```
 
 ## 12.2. 坐标点变换（C++）
@@ -729,13 +729,13 @@ point_in_laser.point.y = 0.5;
 point_in_laser.point.z = 0.0;
 
 try {
-    geometry_msgs::msg::PointStamped point_in_map;
-    tf_buffer_->transform(point_in_laser, point_in_map, "map");
-    RCLCPP_INFO(this->get_logger(),
-        "Point in map: x=%.2f, y=%.2f",
-        point_in_map.point.x, point_in_map.point.y);
+  geometry_msgs::msg::PointStamped point_in_map;
+  tf_buffer_->transform(point_in_laser, point_in_map, "map");
+  RCLCPP_INFO(this->get_logger(),
+    "Point in map: x=%.2f, y=%.2f",
+    point_in_map.point.x, point_in_map.point.y);
 } catch (const tf2::TransformException & ex) {
-    RCLCPP_WARN(this->get_logger(), "%s", ex.what());
+  RCLCPP_WARN(this->get_logger(), "%s", ex.what());
 }
 ```
 
@@ -773,18 +773,18 @@ static_broadcaster_->sendTransform(tool_frame);
 ```cpp
 // C++：等待最多 1 秒直到变换可用
 tf_buffer_->lookupTransform(
-    "map", "base_link",
-    tf2::TimePointZero,
-    tf2::durationFromSec(1.0)  // timeout
+  "map", "base_link",
+  tf2::TimePointZero,
+  tf2::durationFromSec(1.0)  // timeout
 );
 ```
 
 ```python
 # Python：等待最多 1 秒
 tf = self.tf_buffer.lookup_transform(
-    'map', 'base_link',
-    rclpy.time.Time(),
-    timeout=Duration(seconds=1.0)
+  'map', 'base_link',
+  rclpy.time.Time(),
+  timeout=Duration(seconds=1.0)
 )
 ```
 
@@ -797,14 +797,14 @@ tf = self.tf_buffer.lookup_transform(
 ```cpp
 // 等待 map→base_link 变换可用（最多等 5 秒）
 while (rclcpp::ok()) {
-    try {
-        tf_buffer_->lookupTransform("map", "base_link",
-            tf2::TimePointZero, tf2::durationFromSec(1.0));
-        RCLCPP_INFO(this->get_logger(), "TF available, starting...");
-        break;
-    } catch (const tf2::TransformException &) {
-        RCLCPP_WARN(this->get_logger(), "Waiting for TF...");
-    }
+  try {
+    tf_buffer_->lookupTransform("map", "base_link",
+      tf2::TimePointZero, tf2::durationFromSec(1.0));
+    RCLCPP_INFO(this->get_logger(), "TF available, starting...");
+    break;
+  } catch (const tf2::TransformException &) {
+    RCLCPP_WARN(this->get_logger(), "Waiting for TF...");
+  }
 }
 ```
 

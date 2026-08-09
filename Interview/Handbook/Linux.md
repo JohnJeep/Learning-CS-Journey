@@ -4,7 +4,7 @@
  * @LastEditTime: 2026-05-31 20:32:50
  * @LastEditors: JohnJeep
  * @Description: Linux 基础面试
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 
@@ -18,7 +18,7 @@
 
 
 # 1. gdb 调试：如何检查程序出现 bug
-# 2. pthread_detach 的作用 
+# 2. pthread_detach 的作用
     ○ int pthread_detach(pthread_t tid);
     ○ pthread_detach()即主线程与子线程分离，子线程结束后，资源自动回收。pthread_join()即是子线程合入主线程，主线程阻塞
     等待子线程结束，然后回收子线程资源。
@@ -31,15 +31,15 @@
 
 
 # 5. 僵尸进程和孤儿进程
-# 6. 进程同步的方法？用过哪几种？ 
-# 7. 进程同步里共享内存的底层实现？ 
+# 6. 进程同步的方法？用过哪几种？
+# 7. 进程同步里共享内存的底层实现？
 # 8. 网络编程了解么？服务端的 socket 过程是什么？
-# 9. 熟悉 windows 还是 linux？既然熟悉 windows，windows 下进程同步编程做过么，说说。 
-# 10. 讲一下进程之间的通信方式。 
+# 9. 熟悉 windows 还是 linux？既然熟悉 windows，windows 下进程同步编程做过么，说说。
+# 10. 讲一下进程之间的通信方式。
 # 11. 线程锁（说了自旋锁，信号量，解释了下 cas，顺序锁和实现）
 # 12. 什么时候选用自旋锁，什么时候用信号量（io 密集型用自旋，cpu 密集型操作用信号量）
 # 13. 父进程如何回收子进程
-# 14. 多线程编程的一些函数 join，detach 作用 
+# 14. 多线程编程的一些函数 join，detach 作用
 # 15. 线程阻塞，他是怎么阻塞的，怎么从阻塞态到运行态的
 # 16. 进程通信 方式，哪个效率高
 # 17. 管道 通信原理？（没弄清问题，就把知道的一点相关的全说了）
@@ -60,13 +60,13 @@
 （4）若问题可以复现，可以利用 gdb 调试系统，但若不确定问题是否可以复现，则推荐不要使用 gdb，
  因为会破坏问题产生的环境，gdb 在一定程度上会影响系统运行导致卡住的因素由成立变成不成立。
 
-来自 <https://www.cnblogs.com/LyndonYoung/articles/7364165.html> 
-来自 <https://www.cnblogs.com/xingmuxin/p/9712113.html> 
-    
+来自 <https://www.cnblogs.com/LyndonYoung/articles/7364165.html>
+来自 <https://www.cnblogs.com/xingmuxin/p/9712113.html>
+
 # 24. 怎么查看 CPU 的占用情况？
 top 命令
-    
-    
+
+
 # 25. 某一个线程占用很大的内存，怎么解决？
 
 # 26. Linux 下， 获取文件大小（文件可能很大，很小），接口函数使用
@@ -76,36 +76,36 @@ top 命令
 ```c
 void create_daemon()
 {
-    int fd;
-    pid_t pid, sid;
-    // 1、创建子进程，父进程退出
-    pid = fork();
-    if (pid == -1){
-        perror("fork error.\n");
-        exit(1);
-    }
-    if (pid > 0){
-        exit(1);
-    }
-    // 2、子进程创建会话、
-    sid = setsid();
-    if ((sid == -1) ){
-        perror("setsid error.\n");
-        exit(1);
-    }
-    // 3、改变当前目录为根目录
-    fd = chdir("/home/steve");
-    if (fd == -1) {
-        perror("chdir error.\n");
-        exit(1);
-    }
-    // 4、重设文件权限掩码
-    umask(0022);
-    // 5、关闭重定向文件描述符
-    close(STDIN_FILENO);
-    open("/dev/null", O_RDWR);
-    dup2(0, STDOUT_FILENO);
-    dup2(0, STDERR_FILENO);
+  int fd;
+  pid_t pid, sid;
+  // 1、创建子进程，父进程退出
+  pid = fork();
+  if (pid == -1){
+    perror("fork error.\n");
+    exit(1);
+  }
+  if (pid > 0){
+    exit(1);
+  }
+  // 2、子进程创建会话、
+  sid = setsid();
+  if ((sid == -1) ){
+    perror("setsid error.\n");
+    exit(1);
+  }
+  // 3、改变当前目录为根目录
+  fd = chdir("/home/steve");
+  if (fd == -1) {
+    perror("chdir error.\n");
+    exit(1);
+  }
+  // 4、重设文件权限掩码
+  umask(0022);
+  // 5、关闭重定向文件描述符
+  close(STDIN_FILENO);
+  open("/dev/null", O_RDWR);
+  dup2(0, STDOUT_FILENO);
+  dup2(0, STDERR_FILENO);
 }
 ```
 
@@ -115,56 +115,56 @@ void create_daemon()
 
 # 29. 正在运行的代码，出现性能瓶颈怎么排查（strace 等工具）
 
-# 30. 系统调用与函数调用 
+# 30. 系统调用与函数调用
 Linux 下对文件操作有两种方式：系统调用(system call)和库函数调用(Library
 functions)。系统调用实际上就是指最底层的一个调用，在 linux
 程序设计里面就是底层调用的意思。面向的是硬件。而库函数调用则面向的是应用开发的，相当于应用程序的
 api,采用这样的方式有很多种原因，第一：双缓冲技术的实现。第二，可移植性。第三，底层调用本身的一些性能方面的缺陷。第四：
 让 api
-也可以有了级别和专门的工作面向。 
+也可以有了级别和专门的工作面向。
 
 
-# 31. linux 信号有哪些 
+# 31. linux 信号有哪些
 常用信号
-信号    值    动作解释 
-SIGHUP    1    终端线路挂断 
-SIGINT    2    Term 键盘输入的中断命令，从终端输入 Ctrl-C 时发生 
-SIGQUIT    3    Core 键盘输入的退出命令 
-SIGILL    4    Core 错误指令 
-SIGABRT    6    Coreabort(3)发出的中止信号 
-SIGFPE    8    Core 浮点数异常 
-SIGKILL    9    TermKILL 信号 
-SIGSEGV    11    Core 非法内存访问 
-SIGPIPE    13    Term 管道断开 
-SIGALRM    14    Termalarm(2)发出的中止信号 
-SIGTERM    15    Term 强制中止信号 
-SIGUSR    130,10,16    Term 用户自定义信号 1 
-SIGUSR    231,12,17    Term 用户自定义信号 2 
-SIGCHLD    20,17,18    Ign 子进程中止信号 
-SIGCONT    19,18,25    Cont 继续执行一个停止的进程 
-SIGSTOP    17,19,23    Stop 非终端来的停止信号 
-SIGTSTP    18,20,24    Stop 终端来的停止信号 
-SIGTTIN    21,21,26    Stop 后台进程读终端 
-SIGTTOU    22,22,27    Stop 后台进程写终端 
+信号    值    动作解释
+SIGHUP    1    终端线路挂断
+SIGINT    2    Term 键盘输入的中断命令，从终端输入 Ctrl-C 时发生
+SIGQUIT    3    Core 键盘输入的退出命令
+SIGILL    4    Core 错误指令
+SIGABRT    6    Coreabort(3)发出的中止信号
+SIGFPE    8    Core 浮点数异常
+SIGKILL    9    TermKILL 信号
+SIGSEGV    11    Core 非法内存访问
+SIGPIPE    13    Term 管道断开
+SIGALRM    14    Termalarm(2)发出的中止信号
+SIGTERM    15    Term 强制中止信号
+SIGUSR    130,10,16    Term 用户自定义信号 1
+SIGUSR    231,12,17    Term 用户自定义信号 2
+SIGCHLD    20,17,18    Ign 子进程中止信号
+SIGCONT    19,18,25    Cont 继续执行一个停止的进程
+SIGSTOP    17,19,23    Stop 非终端来的停止信号
+SIGTSTP    18,20,24    Stop 终端来的停止信号
+SIGTTIN    21,21,26    Stop 后台进程读终端
+SIGTTOU    22,22,27    Stop 后台进程写终端
 
-# 32. 可重入函数，线程安全 
+# 32. 可重入函数，线程安全
 主要用于多任务环境中，一个可重入的函数简单来说就是可以被中断的函数，也就是说，可以在这个函数执行的任何时刻中断它，转入
 OS
 调度下去执行另外一段代码，而返回控制时不会出现什么错误；而不可重入的函数由于使用了一些系统资源，比如全局变量区，中断向
-量表等，所以它如果被中断的话，可能会出现问题，这类函数是不能运行在多任务环境下的。 
+量表等，所以它如果被中断的话，可能会出现问题，这类函数是不能运行在多任务环境下的。
 也可以这样理解，重入即表示重复进入，首先它意味着这个函数可以被中断，其次意味着它除了使用自己栈上的变量以外不依赖于任何
 环境（包括 static），这样的函数就是
 purecode（纯代码）可重入，可以允许有该函数的多个副本在运行，由于它们使用的是分离的栈，所以不会互相干扰。如果确实需要访
 问全局变量（包括
-static），一定要注意实施互斥手段。可重入函数在并行运行环境中非常重要，但是一般要为访问全局变量付出一些性能代价。 
+static），一定要注意实施互斥手段。可重入函数在并行运行环境中非常重要，但是一般要为访问全局变量付出一些性能代价。
 
 
-# 33. 阻塞与非阻塞 
+# 33. 阻塞与非阻塞
 阻塞是指在函数执行时如果条件不满足,程序将永远停在那条函数那里不在往下执行,而非阻塞则是函数不管条件是否满足都会往下执行
-. 
+.
 
 
-# 34. 可变参数函数的定义及实现 
+# 34. 可变参数函数的定义及实现
 通常我们使用的 C 函数的参数个数都是固定的，但也有不固定的，参数个数由使用者确定的即可变参数函数
 
 # 35. 简单说一下进程和线程的区别
@@ -178,7 +178,7 @@ static），一定要注意实施互斥手段。可重入函数在并行运行�
 1. 管道（最简单）
 2. 信号（开销最小）
 3. 共享映射区（无血缘关系）
-4. 本地套接字（最稳定）    
+4. 本地套接字（最稳定）
 5. 消息队列
 6. 信号量(semaphore)
 
@@ -205,7 +205,7 @@ static），一定要注意实施互斥手段。可重入函数在并行运行�
 5. violate 全局变量-共享内存
 
 - 参考
-  - [进程间通信和线程间通信总结](https://blog.csdn.net/J080624/article/details/87454764)     
+  - [进程间通信和线程间通信总结](https://blog.csdn.net/J080624/article/details/87454764)
 
 
 # 39. <font color=red> 如何避免死锁？</font>
@@ -224,7 +224,7 @@ static），一定要注意实施互斥手段。可重入函数在并行运行�
 - 循环等待(Circular wait)：线程之间存在一个环路，环路上每个线程都持有一个或多个资源（locks），而这个资源又是下一个线程
   要申请的（requested）。
 
-> 上述 4 个条件中的任何一个没有满足，死锁（deadlock）都不会发生。 
+> 上述 4 个条件中的任何一个没有满足，死锁（deadlock）都不会发生。
 
 
 ## 39.2. 怎样阻止死锁的发生？
@@ -232,11 +232,11 @@ static），一定要注意实施互斥手段。可重入函数在并行运行�
   - 简单的系统中采取 `全序（total ordering）` 方式解决。
   - 复杂的系统采取 `偏序（partial ordering ）` 方式解决。
   > 技巧：可以通过获取锁的地址来获取锁的顺序（lock ordering）。
-  
+
 - 锁在持有和等待时，通过原子性的方式避免。
   - 这种方式不能适用与封装（encapsulation），需要准确的知道要持有（held）哪些琐，并且要提前获得（acquire）。
     采取这种方式降低了并发。
-  
+
 - 其它的线程获得锁之前，先释放之前得到的锁。
   - 实现过程中可能会产生活锁（livelock）问题
     - 两个线程可能一直重复地释放锁，又同时都获得锁失败，系统一直的在运行，但不会有任何的进展。

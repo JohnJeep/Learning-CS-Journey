@@ -53,31 +53,31 @@ LPCWSTR，PCWSTR，LPWSTR，PWSTR
 //unicode转为ascii
 std::string UnicodeToAscii( const std::wstring& in_str )
 {
-	int nNeedChars = WideCharToMultiByte( CP_ACP, 0, in_str.c_str(), -1, 0, 0, 0, 0 );
-	if (nNeedChars > 0)//再次判断一下
-	{	
-		std::string temp;
-		temp.resize(nNeedChars);
-		::WideCharToMultiByte( CP_ACP, 0, in_str.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
-		return temp;
-	}
+  int nNeedChars = WideCharToMultiByte( CP_ACP, 0, in_str.c_str(), -1, 0, 0, 0, 0 );
+  if (nNeedChars > 0)//再次判断一下
+  {	
+    std::string temp;
+    temp.resize(nNeedChars);
+    ::WideCharToMultiByte( CP_ACP, 0, in_str.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
+    return temp;
+  }
  
-	return std::string();
+  return std::string();
 }
  
 //ascii转为unicode
 std::wstring AsciiToUnicode( const std::string& in_str )
 {
-	int nNeedWchars = MultiByteToWideChar( CP_ACP, 0, in_str.c_str(), -1, NULL, 0 );
-	if (nNeedWchars > 0)
-	{
-		std::wstring temp;
-		temp.resize(nNeedWchars);
-		::MultiByteToWideChar( CP_ACP, 0, in_str.c_str(), -1, &temp[0], nNeedWchars );
-		return temp;
-	}
+  int nNeedWchars = MultiByteToWideChar( CP_ACP, 0, in_str.c_str(), -1, NULL, 0 );
+  if (nNeedWchars > 0)
+  {
+    std::wstring temp;
+    temp.resize(nNeedWchars);
+    ::MultiByteToWideChar( CP_ACP, 0, in_str.c_str(), -1, &temp[0], nNeedWchars );
+    return temp;
+  }
  
-	return std::wstring();
+  return std::wstring();
 }
 ```
 
@@ -87,31 +87,31 @@ std::wstring AsciiToUnicode( const std::string& in_str )
 //utf8转为unicode
 std::wstring UTF8ToUnicode( const std::string& in_utf8Str )
 {
-	int nNeedWchars = MultiByteToWideChar( CP_UTF8, 0, in_utf8Str.c_str(), -1, NULL, 0 );
-	if (nNeedWchars > 0)
-	{
-		std::wstring temp;
-		temp.resize(nNeedWchars);
-		::MultiByteToWideChar( CP_UTF8, 0, in_utf8Str.c_str(), -1, &temp[0], nNeedWchars );
-		return temp;
-	}
+  int nNeedWchars = MultiByteToWideChar( CP_UTF8, 0, in_utf8Str.c_str(), -1, NULL, 0 );
+  if (nNeedWchars > 0)
+  {
+    std::wstring temp;
+    temp.resize(nNeedWchars);
+    ::MultiByteToWideChar( CP_UTF8, 0, in_utf8Str.c_str(), -1, &temp[0], nNeedWchars );
+    return temp;
+  }
  
-	return std::wstring();
+  return std::wstring();
 }
  
 //unicode转为utf8
 std::string UnicodeToUTF8( const std::wstring& in_wStr )
 {
-	int nNeedChars = WideCharToMultiByte( CP_UTF8, 0, in_wStr.c_str(), -1, 0, 0, 0, 0 );
-	if (nNeedChars > 0)//再次判断一下
-	{	
-		std::string temp;
-		temp.resize(nNeedChars);
-		::WideCharToMultiByte( CP_UTF8, 0, in_wStr.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
-		return temp;
-	}
+  int nNeedChars = WideCharToMultiByte( CP_UTF8, 0, in_wStr.c_str(), -1, 0, 0, 0, 0 );
+  if (nNeedChars > 0)//再次判断一下
+  {	
+    std::string temp;
+    temp.resize(nNeedChars);
+    ::WideCharToMultiByte( CP_UTF8, 0, in_wStr.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
+    return temp;
+  }
  
-	return std::string();
+  return std::string();
 }
 ```
 
@@ -121,13 +121,13 @@ std::string UnicodeToUTF8( const std::wstring& in_wStr )
  //ascii转为utf8
 std::string AsciiToUTF8(const std::string& in_asciiStr)
 {
-	return UnicodeToUTF8(AsciiToUnicode(in_asciiStr));
+  return UnicodeToUTF8(AsciiToUnicode(in_asciiStr));
 }
  
 //utf8转为ascii
 std::string UTF8ToAscii(const std::string& in_utf8Str)
 {
-	return UnicodeToAscii(UTF8ToUnicode(in_utf8Str));
+  return UnicodeToAscii(UTF8ToUnicode(in_utf8Str));
 }
 ```
 
@@ -138,34 +138,34 @@ std::string UTF8ToAscii(const std::string& in_utf8Str)
 //BIG5 转换成 Unicode：
 std::wstring BIG5ToUnicode(const std::string& strBIG5String)
 {
-	UINT nCodePage = 950; //BIG5
-	int nNeedWchars = MultiByteToWideChar(nCodePage, 0, strBIG5String.c_str(), -1, NULL, 0);
-	if (nNeedWchars > 0)
-	{
-		std::wstring temp;
-		temp.resize(nNeedWchars);
-		::MultiByteToWideChar( nCodePage, 0, strBIG5String.c_str(), -1, &temp[0], nNeedWchars );
-		return temp;
-	}
+  UINT nCodePage = 950; //BIG5
+  int nNeedWchars = MultiByteToWideChar(nCodePage, 0, strBIG5String.c_str(), -1, NULL, 0);
+  if (nNeedWchars > 0)
+  {
+    std::wstring temp;
+    temp.resize(nNeedWchars);
+    ::MultiByteToWideChar( nCodePage, 0, strBIG5String.c_str(), -1, &temp[0], nNeedWchars );
+    return temp;
+  }
  
-	return std::wstring();
+  return std::wstring();
 }
  
 //Unicode 转换成 BIG5：
 std::string UnicodeToBIG5(const std::wstring& strUnicodeString)
 {
-	UINT nCodePage = 950; //BIG5
-	int nNeedChars = WideCharToMultiByte(nCodePage, 0, strUnicodeString.c_str(), -1, NULL, 0, NULL, NULL);
-	//再次判断一下
-	if (nNeedChars > 0)
-	{
-		std::string temp;
-		temp.resize(nNeedChars);
-		::WideCharToMultiByte( nCodePage, 0, strUnicodeString.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
-		return temp;
-	}
+  UINT nCodePage = 950; //BIG5
+  int nNeedChars = WideCharToMultiByte(nCodePage, 0, strUnicodeString.c_str(), -1, NULL, 0, NULL, NULL);
+  //再次判断一下
+  if (nNeedChars > 0)
+  {
+    std::string temp;
+    temp.resize(nNeedChars);
+    ::WideCharToMultiByte( nCodePage, 0, strUnicodeString.c_str(), -1, &temp[0], nNeedChars, 0, 0 );
+    return temp;
+  }
  
-	return std::string();
+  return std::string();
 }
 ```
 

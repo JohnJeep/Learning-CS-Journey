@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2019-09-11 13:46:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-07-21 17:32:46
+ * @LastEditTime: 2026-08-09 13:35:52
  * @Description: VSCode 使用说明
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 - [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts 快捷键)
@@ -48,7 +48,7 @@
 - Ctrl Shift ` ：新建集成终端
 - `Ctrl pageUp` ：切换到上一个终端
 - `Ctrl pageDown` ：切换到下一个终端
-- `Ctrl Shift 5`：拆分终端 
+- `Ctrl Shift 5`：拆分终端
 
 
 ## 1.3. Edition
@@ -120,16 +120,16 @@ VS Code 环境修改支持两种方式：
    "editor.lineNumbers": "relative",        // 控制整个行号显示与否及如何显示；relative 表示相对显示行号，
    "files.eol": "\n",                       // 文件的换行符
    "C_Cpp.clang_format_style": "Webkit",    // C++ 代码风格
-   
+
    "terminal.integrated.defaultProfile.windows": "Ubuntu-20.04 (WSL)",  // 默认打开终端
-   
+
    // 新增外部终端配置；新增一个Git 终端
    "terminal.integrated.profiles.windows": {
        "Git-bash": {
            "path": "C:/Data/Git/bin/bash.exe"
        },
    },
-   
+
    // Vim 按键绑定配置
    "vim.handleKeys": {
        "<C-a>": false,
@@ -148,46 +148,46 @@ VS Code 环境修改支持两种方式：
 
 ### 2.1.1. 📁 通用路径相关变量
 
-| 变量                         | 含义                                                         |
-| ---------------------------- | ------------------------------------------------------------ |
-| `${workspaceFolder}`         | 当前打开的工作区根目录的完整路径（若未打开文件夹，则为空）。 |
-| `${workspaceFolderBasename}` | 工作区文件夹的名称（不含路径）。                             |
-| `${file}`                    | 当前打开文件的完整路径。                                     |
-| `${fileWorkspaceFolder}`     | 当前文件所在的工作区文件夹路径（适用于多根工作区）。         |
-| `${relativeFile}`            | 相对于工作区根目录的当前文件路径。                           |
-| `${relativeFileDirname}`     | 相对于工作区根目录的当前文件所在目录路径。                   |
-| `${fileBasename}`            | 当前文件名（含扩展名），例如 `example.txt`。                 |
-| `${fileBasenameNoExtension}` | 当前文件名（不含扩展名），例如 `example`。                   |
-| `${fileExtname}`             | 当前文件的扩展名（含点），例如 `.txt`。                      |
-| `${fileDirname}`             | 当前文件所在目录的完整路径。                                 |
+| 变量                         | 含义                                                                |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `${workspaceFolder}`         | 当前打开的工作区根目录的完整路径（若未打开文件夹，则为空）。        |
+| `${workspaceFolderBasename}` | 工作区文件夹的名称（不含路径）。                                    |
+| `${file}`                    | 当前打开文件的完整路径。                                            |
+| `${fileWorkspaceFolder}`     | 当前文件所在的工作区文件夹路径（适用于多根工作区）。                |
+| `${relativeFile}`            | 相对于工作区根目录的当前文件路径。                                  |
+| `${relativeFileDirname}`     | 相对于工作区根目录的当前文件所在目录路径。                          |
+| `${fileBasename}`            | 当前文件名（含扩展名），例如 `example.txt`。                        |
+| `${fileBasenameNoExtension}` | 当前文件名（不含扩展名），例如 `example`。                          |
+| `${fileExtname}`             | 当前文件的扩展名（含点），例如 `.txt`。                             |
+| `${fileDirname}`             | 当前文件所在目录的完整路径。                                        |
 | `${cwd}`                     | 启动任务或调试器时的当前工作目录（通常等于 `${workspaceFolder}`）。 |
 
 ### 2.1.2. 🕒 时间与日期变量（仅限部分上下文，如任务/调试）
 
-| 变量          | 含义                                                         |
-| ------------- | ------------------------------------------------------------ |
+| 变量          | 含义                                                             |
+| ------------- | ---------------------------------------------------------------- |
 | `${datetime}` | 当前日期和时间，格式如：`2025-12-16T23:08:00.000Z`（ISO 格式）。 |
-| `${date}`     | 当前日期，格式如：`2025-12-16`。                             |
-| `${time}`     | 当前时间，格式如：`23:08:00`。                               |
+| `${date}`     | 当前日期，格式如：`2025-12-16`。                                 |
+| `${time}`     | 当前时间，格式如：`23:08:00`。                                   |
 
 > ⚠️ 注意：`${datetime}`、`${date}`、`${time}` 在较新版本的 VS Code 中才支持（通常用于 `tasks.json` 的 `label` 或
 > `args` 中）。
 
 ### 2.1.3. 🔢 行号与光标位置（主要用于调试配置）
 
-| 变量              | 含义                                                         |
-| ----------------- | ------------------------------------------------------------ |
+| 变量              | 含义                                                                            |
+| ----------------- | ------------------------------------------------------------------------------- |
 | `${lineNumber}`   | 当前行号（需在支持上下文的位置使用，如调试配置中的 `stopAtEntry` 或某些扩展）。 |
-| `${selectedText}` | 编辑器中当前选中的文本（部分扩展或调试器支持）。             |
+| `${selectedText}` | 编辑器中当前选中的文本（部分扩展或调试器支持）。                                |
 
 ------
 
 ### 2.1.4. 🧩 其他变量
 
-| 变量                                   | 含义                                                         |
-| -------------------------------------- | ------------------------------------------------------------ |
-| `${execPath}`                          | VS Code 可执行文件的路径。                                   |
-| `${pathSeparator}`                     | 路径分隔符（Windows 为 `\`，macOS/Linux 为 `/`）。           |
+| 变量                                   | 含义                                                                        |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `${execPath}`                          | VS Code 可执行文件的路径。                                                  |
+| `${pathSeparator}`                     | 路径分隔符（Windows 为 `\`，macOS/Linux 为 `/`）。                          |
 | `${extensionInstallLocation:<ext-id>}` | 某个扩展的安装路径（例如 `${extensionInstallLocation:ms-python.python}`）。 |
 
 - VS Code Variables Reference: https://code.visualstudio.com/docs/reference/variables-reference
@@ -223,21 +223,21 @@ VS Code 环境修改支持两种方式：
 ```json
 // 工作区光标样式
 {
-    "editor.cursorBlinking": "solid", // 光标固定不闪烁
-    "editor.cursorStyle": "line",     // 光标样式为竖线
-    "editor.cursorWidth": 2,          // 光标宽度（可选，单位是像素）
-    "workbench.colorCustomizations": {
-        "editorCursor.foreground": "00ffff" // 光标设置为青色，可以设置为任何你喜欢的颜色值
-    }
+  "editor.cursorBlinking": "solid", // 光标固定不闪烁
+  "editor.cursorStyle": "line",     // 光标样式为竖线
+  "editor.cursorWidth": 2,          // 光标宽度（可选，单位是像素）
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "00ffff" // 光标设置为青色，可以设置为任何你喜欢的颜色值
+  }
 }
 
 // 集成终端光标样式
 {
-    "workbench.colorCustomizations": {
-        "terminalCursor.background": "#ffffff", // 设置光标背景色，与终端背景色一致
-        "terminalCursor.foreground": "#000000", // 设置光标前景色，与终端前景色一致
-        "terminalCursor.animation": "solid"     // 将光标设置为固定不闪烁
-    }
+  "workbench.colorCustomizations": {
+    "terminalCursor.background": "#ffffff", // 设置光标背景色，与终端背景色一致
+    "terminalCursor.foreground": "#000000", // 设置光标前景色，与终端前景色一致
+    "terminalCursor.animation": "solid"     // 将光标设置为固定不闪烁
+  }
 }
 ```
 
@@ -310,68 +310,68 @@ Node.js 进程，Node.js 版本就是你使用的 Electron 中的 Node.js 。
 查看 VS Code 中所有 Go 内建(built-in)的 snippets，按下快捷键 `Ctrl Shift P`  打开面板，弹出的面板中输入 `Insert
 Snippet`，就可以看到所有内置的代码片段了。
 
-| Abbreviation | Description                                                  |
-| ------------ | ------------------------------------------------------------ |
-| im           | Snippet for import statement                                 |
-| ims          | Snippet for a import block                                   |
-| co           | Snippet for a constant                                       |
-| cos          | Snippet for a constant block                                 |
-| tyi          | Snippet for a type interface                                 |
-| tys          | Snippet for a struct declaration                             |
-| pkgm         | Snippet for main package & function                          |
-| func         | Snippet for function declaration                             |
-| meth         | Snippet for method declaration                               |
-| var          | Snippet for a single variable                                |
-| vars         | Snippet for a multiple variable                              |
-| finit        | Snippet for init function                                    |
-| fmain        | Snippet for main function                                    |
-|              |                                                              |
-| ch           | Snippet for a channel                                        |
-| map          | Snippet for a map                                            |
-| make         | Snippet for make statement                                   |
-| in           | Snippet for empty interface                                  |
-| new          | Snippet for new statement                                    |
-| pn           | Snippet for panic                                            |
-|              |                                                              |
-| switch       | Snippet for switch statement                                 |
-| sel          | Snippet for select statement                                 |
-| cs           | Snippet for case clause                                      |
-| for          | Snippet for a for loop                                       |
-| forr         | Snippet for a for range loop                                 |
-|              |                                                              |
-| if           | Snippet for if statement                                     |
-| el           | Snippet for else branch                                      |
-| ie           | Snippet for if else                                          |
-| iferr        | Snippet for if err != nil                                    |
-|              |                                                              |
-| fp           | Snippet for fmt.Println()                                    |
-| ff           | Snippet for fmt.Printf()                                     |
-| lp           | Snippet for log.Println()                                    |
-| lf           | Snippet for log.Printf()                                     |
-| lv           | Snippet for log.Printf() with variable content               |
-|              |                                                              |
-| tl           | Snippet for t.Log()                                          |
-| tlf          | Snippet for t.Logf()                                         |
-| tlv          | Snippet for t.Logf() with variable content                   |
-|              |                                                              |
-| wr           | Snippet for http Response                                    |
-| hf           | Snippet for http.HandleFunc()                                |
-| hand         | Snippet for http handler declaration                         |
-| rd           | Snippet for http.Redirect()                                  |
-| herr         | Snippet for http.Error()                                     |
-| las          | Snippet for http.ListenAndServe                              |
-| sv           | Snippet for http.Serve                                       |
-|              |                                                              |
-| go           | Snippet for anonymous goroutine declaration                  |
-| gf           | Snippet for goroutine declaration                            |
-| df           | Snippet for defer statement                                  |
-|              |                                                              |
-| tf           | Snippet for Test function                                    |
-| bf           | Snippet for Benchmark function                               |
-| ef           | Snippet for Example function                                 |
-| tdt          | Snippet for table driven test                                |
-|              |                                                              |
-| helloweb     | Snippet for sample hello world webapp                        |
+| Abbreviation | Description                                                                     |
+| ------------ | ------------------------------------------------------------------------------- |
+| im           | Snippet for import statement                                                    |
+| ims          | Snippet for a import block                                                      |
+| co           | Snippet for a constant                                                          |
+| cos          | Snippet for a constant block                                                    |
+| tyi          | Snippet for a type interface                                                    |
+| tys          | Snippet for a struct declaration                                                |
+| pkgm         | Snippet for main package & function                                             |
+| func         | Snippet for function declaration                                                |
+| meth         | Snippet for method declaration                                                  |
+| var          | Snippet for a single variable                                                   |
+| vars         | Snippet for a multiple variable                                                 |
+| finit        | Snippet for init function                                                       |
+| fmain        | Snippet for main function                                                       |
+|              |                                                                                 |
+| ch           | Snippet for a channel                                                           |
+| map          | Snippet for a map                                                               |
+| make         | Snippet for make statement                                                      |
+| in           | Snippet for empty interface                                                     |
+| new          | Snippet for new statement                                                       |
+| pn           | Snippet for panic                                                               |
+|              |                                                                                 |
+| switch       | Snippet for switch statement                                                    |
+| sel          | Snippet for select statement                                                    |
+| cs           | Snippet for case clause                                                         |
+| for          | Snippet for a for loop                                                          |
+| forr         | Snippet for a for range loop                                                    |
+|              |                                                                                 |
+| if           | Snippet for if statement                                                        |
+| el           | Snippet for else branch                                                         |
+| ie           | Snippet for if else                                                             |
+| iferr        | Snippet for if err != nil                                                       |
+|              |                                                                                 |
+| fp           | Snippet for fmt.Println()                                                       |
+| ff           | Snippet for fmt.Printf()                                                        |
+| lp           | Snippet for log.Println()                                                       |
+| lf           | Snippet for log.Printf()                                                        |
+| lv           | Snippet for log.Printf() with variable content                                  |
+|              |                                                                                 |
+| tl           | Snippet for t.Log()                                                             |
+| tlf          | Snippet for t.Logf()                                                            |
+| tlv          | Snippet for t.Logf() with variable content                                      |
+|              |                                                                                 |
+| wr           | Snippet for http Response                                                       |
+| hf           | Snippet for http.HandleFunc()                                                   |
+| hand         | Snippet for http handler declaration                                            |
+| rd           | Snippet for http.Redirect()                                                     |
+| herr         | Snippet for http.Error()                                                        |
+| las          | Snippet for http.ListenAndServe                                                 |
+| sv           | Snippet for http.Serve                                                          |
+|              |                                                                                 |
+| go           | Snippet for anonymous goroutine declaration                                     |
+| gf           | Snippet for goroutine declaration                                               |
+| df           | Snippet for defer statement                                                     |
+|              |                                                                                 |
+| tf           | Snippet for Test function                                                       |
+| bf           | Snippet for Benchmark function                                                  |
+| ef           | Snippet for Example function                                                    |
+| tdt          | Snippet for table driven test                                                   |
+|              |                                                                                 |
+| helloweb     | Snippet for sample hello world webapp                                           |
 | sort         | Snippet for a custom sort.Sort interface implementation, for a given slice type |
 
 

@@ -3,9 +3,9 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-07-05 14:54:42
+ * @LastEditTime: 2026-08-09 13:40:26
  * @Description: ROS2 Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. ROS2 Introduction
@@ -53,17 +53,17 @@ ROS 目前推出了 ROS1 和 ROS2 两个版本。ROS 具有如下局限性
 
 ROS 1 和 ROS 2 的特性对比如下：
 
-| ROS 1                                                         | ROS 2                                                        |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 使用 TCPROS （ TCP/IP 的自定义版本）通信协议                 | 使用 DDS （数据分发系统）进行通信                            |
+| ROS 1                                                                                | ROS 2                                                                               |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 使用 TCPROS （ TCP/IP 的自定义版本）通信协议                                         | 使用 DDS （数据分发系统）进行通信                                                   |
 | 使用 ROS Master 进行集中式发现和注册。如果主节点发生故障，完整的通信管道容易发生故障 | 使用 DDS 分布式发现机制。 ROS 2 提供了一个自定义 API 来获取有关节点和主题的所有信息 |
-| ROS 只能在 Ubuntu OS 上运行                                  | ROS 2 与 Ubuntu 、 Windows 10 和 OS X 兼容                   |
-| 使用 C++ 03 和 Python2                                       | 使用 C++ 11 （可能可升级）和 Python3                         |
-| ROS 仅使用 CMake 构建系统                                    | ROS 2 提供了使用其他构建系统的选项                           |
-| 是否具有使用单个 CMakeLists 调用的多个包的组合生成 .txt      | 支持包的独立构建，以更好地处理包间依赖关系                   |
-| 消息文件中的数据类型不支持默认值                             | 消息文件中的数据类型现在可以在初始化时具有默认值             |
-| roslaunch 文件是用 XML 编写的，但功能有限                    | roslaunch 文件是用 Python 编写的，以支持更可配置和有条件的执行 |
-| 即使使用实时操作系统，也无法确定性地支持实时行为             | 支持通过 RTPREEMPT 等                                        |
+| ROS 只能在 Ubuntu OS 上运行                                                          | ROS 2 与 Ubuntu 、 Windows 10 和 OS X 兼容                                          |
+| 使用 C++ 03 和 Python2                                                               | 使用 C++ 11 （可能可升级）和 Python3                                                |
+| ROS 仅使用 CMake 构建系统                                                            | ROS 2 提供了使用其他构建系统的选项                                                  |
+| 是否具有使用单个 CMakeLists 调用的多个包的组合生成 .txt                              | 支持包的独立构建，以更好地处理包间依赖关系                                          |
+| 消息文件中的数据类型不支持默认值                                                     | 消息文件中的数据类型现在可以在初始化时具有默认值                                    |
+| roslaunch 文件是用 XML 编写的，但功能有限                                            | roslaunch 文件是用 Python 编写的，以支持更可配置和有条件的执行                      |
+| 即使使用实时操作系统，也无法确定性地支持实时行为                                     | 支持通过 RTPREEMPT 等                                                               |
 
 ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传递实时性更佳，因此 ROS2 更适合应用在工业生产环境。
 基于 ROS2 的以上特点，该框架被广泛应用与工厂 AGV 作业机器人、智能立体仓库、送餐及快递等服务机器人、自动驾驶、机械手智
@@ -162,7 +162,7 @@ Parameter 是 ROS 2 中用于动态配置节点(node)的键值对。它们可以
 3. **读取参数**：节点在运行过程中读取参数值。
 4. **监视参数变化**：节点可以设置回调函数来响应参数变化。
 
-总结：**Topic 用于数据流，Service 用于即时操作，Action 用于长期任务，Parameter 用于配置。** 
+总结：**Topic 用于数据流，Service 用于即时操作，Action 用于长期任务，Parameter 用于配置。**
 
 
 ## 4.3. Executor
@@ -239,35 +239,35 @@ message 定义文件格式
 # fieldtype fieldname
 ```
 
-built-in message types supported 
+built-in message types supported
 
 | ype name | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| bool     | bool                                                         | builtins.bool                                                | boolean                                                      |
-| byte     | uint8_t                                                      | builtins.bytes*                                              | octet                                                        |
-| char     | char                                                         | builtins.int*                                                | char                                                         |
-| float32  | float                                                        | builtins.float*                                              | float                                                        |
-| float64  | double                                                       | builtins.float*                                              | double                                                       |
-| int8     | int8_t                                                       | builtins.int*                                                | octet                                                        |
-| uint8    | uint8_t                                                      | builtins.int*                                                | octet                                                        |
-| int16    | int16_t                                                      | builtins.int*                                                | short                                                        |
-| uint16   | uint16_t                                                     | builtins.int*                                                | unsigned short                                               |
-| int32    | int32_t                                                      | builtins.int*                                                | long                                                         |
-| uint32   | uint32_t                                                     | builtins.int*                                                | unsigned long                                                |
-| int64    | int64_t                                                      | builtins.int*                                                | long long                                                    |
-| uint64   | uint64_t                                                     | builtins.int*                                                | unsigned long long                                           |
-| string   | std::string                                                  | builtins.str                                                 | string                                                       |
-| wstring  | std::u16string                                               | builtins.str                                                 | wstring                                                      |
+| -------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| bool     | bool                                                                  | builtins.bool                                                               | boolean                                                             |
+| byte     | uint8_t                                                               | builtins.bytes*                                                             | octet                                                               |
+| char     | char                                                                  | builtins.int*                                                               | char                                                                |
+| float32  | float                                                                 | builtins.float*                                                             | float                                                               |
+| float64  | double                                                                | builtins.float*                                                             | double                                                              |
+| int8     | int8_t                                                                | builtins.int*                                                               | octet                                                               |
+| uint8    | uint8_t                                                               | builtins.int*                                                               | octet                                                               |
+| int16    | int16_t                                                               | builtins.int*                                                               | short                                                               |
+| uint16   | uint16_t                                                              | builtins.int*                                                               | unsigned short                                                      |
+| int32    | int32_t                                                               | builtins.int*                                                               | long                                                                |
+| uint32   | uint32_t                                                              | builtins.int*                                                               | unsigned long                                                       |
+| int64    | int64_t                                                               | builtins.int*                                                               | long long                                                           |
+| uint64   | uint64_t                                                              | builtins.int*                                                               | unsigned long long                                                  |
+| string   | std::string                                                           | builtins.str                                                                | string                                                              |
+| wstring  | std::u16string                                                        | builtins.str                                                                | wstring                                                             |
 
 
 每个 built-in-type 可用于定义 array
 
 | Type name               | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
-| ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| static array            | std::array<T, N>                                             | builtins.list*                                               | T[N]                                                         |
-| unbounded dynamic array | std::vector                                                  | builtins.list                                                | sequence                                                     |
-| bounded dynamic array   | custom_class<T, N>                                           | builtins.list*                                               | sequence<T, N>                                               |
-| bounded string          | std::string                                                  | builtins.str*                                                | string                                                       |
+| ----------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| static array            | std::array<T, N>                                                      | builtins.list*                                                              | T[N]                                                                |
+| unbounded dynamic array | std::vector                                                           | builtins.list                                                               | sequence                                                            |
+| bounded dynamic array   | custom_class<T, N>                                                    | builtins.list*                                                              | sequence<T, N>                                                      |
+| bounded string          | std::string                                                           | builtins.str*                                                               | string                                                              |
 
 
 
@@ -406,17 +406,17 @@ QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质
 
 ### 5.4.1. 核心策略
 
-| 策略 | 选项 | 说明 |
-|---|---|---|
-| **Reliability** | `RELIABLE` | 保证消息必达，有重传机制 |
-| | `BEST_EFFORT` | 尽力投递，允许丢包，延迟更低 |
-| **Durability** | `VOLATILE` | 只有订阅者已连接时才投递消息 |
-| | `TRANSIENT_LOCAL` | 新订阅者加入时，发布者会重发历史消息 |
-| **History** | `KEEP_LAST(N)` | 只保留最近 N 条消息（默认 N=10） |
-| | `KEEP_ALL` | 保留所有消息（受系统资源限制） |
-| **Deadline** | 时间间隔 | 发布者必须在此间隔内至少发送一条消息 |
-| **Liveliness** | `AUTOMATIC` / `MANUAL` | 检测发布者是否仍然存活 |
-| **Lifespan** | 时间间隔 | 消息超过此时间未被订阅则丢弃 |
+| 策略            | 选项                   | 说明                                 |
+| --------------- | ---------------------- | ------------------------------------ |
+| **Reliability** | `RELIABLE`             | 保证消息必达，有重传机制             |
+|                 | `BEST_EFFORT`          | 尽力投递，允许丢包，延迟更低         |
+| **Durability**  | `VOLATILE`             | 只有订阅者已连接时才投递消息         |
+|                 | `TRANSIENT_LOCAL`      | 新订阅者加入时，发布者会重发历史消息 |
+| **History**     | `KEEP_LAST(N)`         | 只保留最近 N 条消息（默认 N=10）     |
+|                 | `KEEP_ALL`             | 保留所有消息（受系统资源限制）       |
+| **Deadline**    | 时间间隔               | 发布者必须在此间隔内至少发送一条消息 |
+| **Liveliness**  | `AUTOMATIC` / `MANUAL` | 检测发布者是否仍然存活               |
+| **Lifespan**    | 时间间隔               | 消息超过此时间未被订阅则丢弃         |
 
 兼容性规则（发布者与订阅者 QoS 必须兼容）：
 - Reliability：发布者 `RELIABLE` 兼容订阅者 `RELIABLE` 或 `BEST_EFFORT`；发布者 `BEST_EFFORT` 只兼容订阅者
@@ -427,13 +427,13 @@ QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质
 
 ROS2 内置了几种常用 QoS 配置：
 
-| Profile | Reliability | Durability | History | 典型用途 |
-|---|---|---|---|---|
-| `SensorDataQoS` | BEST_EFFORT | VOLATILE | KEEP_LAST(5) | 激光雷达、IMU 等传感器 |
-| `ServicesQoS` | RELIABLE | VOLATILE | KEEP_LAST(10) | Service 通信（默认） |
-| `ParametersQoS` | RELIABLE | VOLATILE | KEEP_LAST(1000) | 参数服务器 |
-| `ClockQoS` | BEST_EFFORT | VOLATILE | KEEP_LAST(1) | 时钟话题 |
-| `SystemDefaultsQoS` | RELIABLE | VOLATILE | KEEP_LAST(10) | 默认配置 |
+| Profile             | Reliability | Durability | History         | 典型用途               |
+| ------------------- | ----------- | ---------- | --------------- | ---------------------- |
+| `SensorDataQoS`     | BEST_EFFORT | VOLATILE   | KEEP_LAST(5)    | 激光雷达、IMU 等传感器 |
+| `ServicesQoS`       | RELIABLE    | VOLATILE   | KEEP_LAST(10)   | Service 通信（默认）   |
+| `ParametersQoS`     | RELIABLE    | VOLATILE   | KEEP_LAST(1000) | 参数服务器             |
+| `ClockQoS`          | BEST_EFFORT | VOLATILE   | KEEP_LAST(1)    | 时钟话题               |
+| `SystemDefaultsQoS` | RELIABLE    | VOLATILE   | KEEP_LAST(10)   | 默认配置               |
 
 ### 5.4.3. 使用示例
 
@@ -452,7 +452,7 @@ rclcpp::QoS custom_qos(10);  // history depth = 10
 custom_qos.reliability(RMW_QOS_POLICY_RELIABILITY_RELIABLE);
 custom_qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
 auto sub = node->create_subscription<std_msgs::msg::String>(
-    "/topic", custom_qos, callback);
+  "/topic", custom_qos, callback);
 ```
 
 **Python**
@@ -466,10 +466,10 @@ self.pub = self.create_publisher(LaserScan, '/scan', qos_profile_sensor_data)
 
 # 自定义 QoS
 qos = QoSProfile(
-    reliability=ReliabilityPolicy.RELIABLE,
-    durability=DurabilityPolicy.TRANSIENT_LOCAL,
-    history=HistoryPolicy.KEEP_LAST,
-    depth=10,
+  reliability=ReliabilityPolicy.RELIABLE,
+  durability=DurabilityPolicy.TRANSIENT_LOCAL,
+  history=HistoryPolicy.KEEP_LAST,
+  depth=10,
 )
 self.sub = self.create_subscription(String, '/topic', self.callback, qos)
 ```
@@ -519,38 +519,38 @@ source ~/ros2_ws/install/setup.bash
    ```cmake
    cmake_minimum_required(VERSION 3.8)
    project(cpp_hello_world)
-   
+
    # 查找依赖
    find_package(ament_cmake REQUIRED)
    find_package(rclcpp REQUIRED)
-   
+
    # 创建可执行文件
    add_executable(hello_world src/hello_world.cpp)
    # 添加依赖
    ament_target_dependencies(hello_world rclcpp)
-   
+
    # 安装可执行文件
    install(TARGETS
      hello_world
      DESTINATION lib/${PROJECT_NAME}
    )
-   
+
    # 导出依赖
    ament_export_dependencies(rclcpp)
-   
+
    # 生成包配置
    ament_package()
    ```
 5. 编译包
    ```bash
    cd ~/ros2_ws
-   
+
    # 安装依赖（首次需要）
    rosdep install -i --from-path src --rosdistro humble -y
-   
+
    # 编译包
    colcon build --packages-select cpp_hello_world
-   
+
    # 加载工作空间环境
    source install/setup.bash
    ```
@@ -558,7 +558,7 @@ source ~/ros2_ws/install/setup.bash
    ```bash
    # 方法1：直接运行
    ros2 run cpp_hello_world hello_world
-   
+
    # 方法2：启动并在后台运行
    ros2 run cpp_hello_world hello_world &
    ```
@@ -566,10 +566,10 @@ source ~/ros2_ws/install/setup.bash
    ```bash
    # 查看运行的节点
    ros2 node list
-   
+
    # 查看节点信息
    ros2 node info /hello_world_node
-   
+
    # 查看节点输出
    ros2 topic echo /rosout
    ```
@@ -615,9 +615,9 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    return LaunchDescription([
-        # 在这里放节点、参数声明、包含其他 launch 文件等
-    ])
+  return LaunchDescription([
+    # 在这里放节点、参数声明、包含其他 launch 文件等
+  ])
 ```
 
 ### 7.2.2. 启动节点
@@ -627,21 +627,21 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    return LaunchDescription([
-        Node(
-            package='my_pkg',           # 包名
-            executable='my_node',       # 可执行文件名
-            name='custom_node_name',    # 节点名（可选，默认用可执行文件名）
-            namespace='my_ns',          # 命名空间（可选）
-            output='screen',            # 输出到终端
-            parameters=[                # 参数（列表，每项为字典或 yaml 文件路径）
-                {'max_speed': 1.0, 'use_sim_time': False}
-            ],
-            remappings=[                # 话题重映射 [(原名, 新名)]
-                ('/cmd_vel', '/robot/cmd_vel'),
-            ],
-        ),
-    ])
+  return LaunchDescription([
+    Node(
+      package='my_pkg',           # 包名
+      executable='my_node',       # 可执行文件名
+      name='custom_node_name',    # 节点名（可选，默认用可执行文件名）
+      namespace='my_ns',          # 命名空间（可选）
+      output='screen',            # 输出到终端
+      parameters=[                # 参数（列表，每项为字典或 yaml 文件路径）
+        {'max_speed': 1.0, 'use_sim_time': False}
+      ],
+      remappings=[                # 话题重映射 [(原名, 新名)]
+        ('/cmd_vel', '/robot/cmd_vel'),
+      ],
+    ),
+  ])
 ```
 
 ### 7.2.3. 传递 Launch 参数
@@ -655,20 +655,20 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    use_sim_time_arg = DeclareLaunchArgument(
-        'use_sim_time',
-        default_value='false',
-        description='Use simulation (Gazebo) clock if true',
-    )
+  use_sim_time_arg = DeclareLaunchArgument(
+    'use_sim_time',
+    default_value='false',
+    description='Use simulation (Gazebo) clock if true',
+  )
 
-    return LaunchDescription([
-        use_sim_time_arg,
-        Node(
-            package='my_pkg',
-            executable='my_node',
-            parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        ),
-    ])
+  return LaunchDescription([
+    use_sim_time_arg,
+    Node(
+      package='my_pkg',
+      executable='my_node',
+      parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    ),
+  ])
 ```
 
 命令行传入参数：
@@ -687,17 +687,17 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
-    nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory('nav2_bringup'),
-                'launch', 'navigation_launch.py',
-            )
-        ),
-        launch_arguments={'use_sim_time': 'true'}.items(),
-    )
+  nav2_launch = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource(
+      os.path.join(
+        get_package_share_directory('nav2_bringup'),
+        'launch', 'navigation_launch.py',
+      )
+    ),
+    launch_arguments={'use_sim_time': 'true'}.items(),
+  )
 
-    return LaunchDescription([nav2_launch])
+  return LaunchDescription([nav2_launch])
 ```
 
 ### 7.2.5. 条件启动
@@ -710,9 +710,9 @@ from launch.substitutions import LaunchConfiguration
 enable_rviz_arg = DeclareLaunchArgument('enable_rviz', default_value='true')
 
 rviz_node = Node(
-    package='rviz2',
-    executable='rviz2',
-    condition=IfCondition(LaunchConfiguration('enable_rviz')),  # 仅在 enable_rviz=true 时启动
+  package='rviz2',
+  executable='rviz2',
+  condition=IfCondition(LaunchConfiguration('enable_rviz')),  # 仅在 enable_rviz=true 时启动
 )
 ```
 
@@ -742,18 +742,18 @@ ros2 run <package_name> <executable_name>
 ```bash
 # 创建包含依赖的包
 ros2 pkg create --build-type ament_cmake \
-                --node-name my_node \
-                --dependencies rclcpp std_msgs geometry_msgs \
-                my_advanced_pkg
+  --node-name my_node \
+  --dependencies rclcpp std_msgs geometry_msgs \
+  my_advanced_pkg
 
 # 创建库包（无节点）
 ros2 pkg create --build-type ament_cmake my_library_pkg
 
 # 创建包含特定许可证的包
 ros2 pkg create --build-type ament_cmake \
-                --node-name my_node \
-                --license Apache-2.0 \
-                my_licensed_pkg
+  --node-name my_node \
+  --license Apache-2.0 \
+  my_licensed_pkg
 ```
 
 ## 8.3. node

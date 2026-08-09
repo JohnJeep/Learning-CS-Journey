@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2026-05-19 20:58:43
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-19 21:01:02
+ * @LastEditTime: 2026-08-09 13:37:09
  * @Description: awk usage in engineering practice
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # awk 工程实战指南
@@ -17,10 +17,10 @@
 
 - 格式
   - `awk 参数 '脚本语句' 带操作文件`。例子：`ps aux | awk '{print $3}'` 打印进程信息中的第三列
-  - `awk 参数 -f '脚本文件' 带操作文件` 
+  - `awk 参数 -f '脚本文件' 带操作文件`
 - 变量
   - `print`: 打印输出变量，默认打印数据后自动会换行。
-  - `printf`: 类似于 C 语言中的 printf 函数用法。  
+  - `printf`: 类似于 C 语言中的 printf 函数用法。
   - 两个特殊的条件：BEGIN、END。例子：统计一个文件中的所有空格数 `awk '/^ *$/ {count=count+1} END {print count}'
     test.txt`
   - 常用内建变量
@@ -41,7 +41,7 @@
     #列出了当前主机中运行的进程中包含firefox关键字的进程
     ps -ef | grep firefox | grep -v grep
 
-    #列出了要kill掉这些进程的命令，并将之打印在了屏幕上 
+    #列出了要kill掉这些进程的命令，并将之打印在了屏幕上
     ps -ef | grep firefox | grep -v grep | awk '{print "kill -9 "$2}'
 
     #后面加上|sh后，则执行这些命令，进而杀掉了这些进程
@@ -174,9 +174,9 @@ ORS # 输出记录分隔符（默认换行）
 # BEGIN：处理第一行前执行（设置分隔符、打印表头）
 # END：处理最后一行后执行（打印统计）
 
-awk 'BEGIN {FS=","; print "=== Report ==="} 
-     {total += $3} 
-     END {print "Total:", total; print "Lines:", NR}' data.csv
+awk 'BEGIN {FS=","; print "=== Report ==="}
+  {total += $3}
+  END {print "Total:", total; print "Lines:", NR}' data.csv
 ```
 
 ## 四、真实工程案例
@@ -199,8 +199,8 @@ awk '{code[$9]++} END {for(c in code) print c, code[c]}' access.log
 top -bn1 | awk '/%Cpu/ {print "CPU User:", $2, "% System:", $4}'
 
 # 内存使用（从 /proc/meminfo）
-awk '/MemTotal/ {total=$2} /MemAvailable/ {avail=$2} 
-     END {printf "Used: %.1f%%\n", (total-avail)/total*100}' /proc/meminfo
+awk '/MemTotal/ {total=$2} /MemAvailable/ {avail=$2}
+  END {printf "Used: %.1f%%\n", (total-avail)/total*100}' /proc/meminfo
 ```
 
 ### 案例 3：处理多行记录

@@ -85,9 +85,9 @@ Cortex-A53（armv7/v8）指令集不完全兼容。你不能编译一份镜像�
 FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y \
-    git build-essential libncurses-dev bc bison flex \
-    libssl-dev cpio rsync unzip wget file python3 sudo \
-    && rm -rf /var/lib/apt/lists/*
+  git build-essential libncurses-dev bc bison flex \
+  libssl-dev cpio rsync unzip wget file python3 sudo \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash builder
 USER builder

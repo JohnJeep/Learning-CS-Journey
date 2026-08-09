@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-03-31 09:00:04
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-10 11:13:43
+ * @LastEditTime: 2026-08-09 13:46:53
  * @Description: 欧姆龙协议
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Product Overview
@@ -13,19 +13,19 @@
 
 ```bash
 欧姆龙PLC产品树
-├── 大型PLC  
-│   ├── CV系列（1990s，已停产）  
-│   └── CS系列（2000s，已逐步淘汰）  
-├── 中型PLC  
-│   ├── C200H系列（1990s）  
-│   ├── CJ系列（2000s-至今）  
-│   └── NJ/NX系列（2010s-至今，运动控制核心）  
-├── 小型PLC  
-│   ├── CQM1系列（1990s）  
-│   ├── CP系列（2000s-至今）  
-│   └── CP2E系列（2020s）  
-└── 专用控制器  
-    ├── Sysmac平台（NJ/NX + HMI +视觉）  
+├── 大型PLC
+│   ├── CV系列（1990s，已停产）
+│   └── CS系列（2000s，已逐步淘汰）
+├── 中型PLC
+│   ├── C200H系列（1990s）
+│   ├── CJ系列（2000s-至今）
+│   └── NJ/NX系列（2010s-至今，运动控制核心）
+├── 小型PLC
+│   ├── CQM1系列（1990s）
+│   ├── CP系列（2000s-至今）
+│   └── CP2E系列（2020s）
+└── 专用控制器
+    ├── Sysmac平台（NJ/NX + HMI +视觉）
     └── NX1机器控制器（高速精密控制）
 ```
 

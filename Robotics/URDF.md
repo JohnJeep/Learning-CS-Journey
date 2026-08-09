@@ -121,11 +121,11 @@ joint 的类型决定运动方式。
 
 ```text
 base_link
-   ├── front_left_wheel (via joint "fl_wheel_joint")
-   ├── front_right_wheel (via joint "fr_wheel_joint")
-   └── arm_base
-        └── arm_link_1 (via joint "shoulder")
-             └── arm_link_2 (via joint "elbow")
+  ├── front_left_wheel (via joint "fl_wheel_joint")
+  ├── front_right_wheel (via joint "fr_wheel_joint")
+  └── arm_base
+      └── arm_link_1 (via joint "shoulder")
+        └── arm_link_2 (via joint "elbow")
 ```
 
 **关键关系总结**

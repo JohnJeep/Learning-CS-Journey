@@ -14,14 +14,14 @@
 把下面的代码放在 `.bashrc` 终端后面
 ```sh
 function ccat() {
-    local style="monokai"
-    if [ $# -eq 0 ]; then
-        pygmentize -P style=$style -P tabsize=4 -f terminal256 -g
-    else
-        for NAME in $@; do
-            pygmentize -P style=$style -P tabsize=4 -f terminal256 -g "$NAME"
-        done
-    fi
+  local style="monokai"
+  if [ $# -eq 0 ]; then
+    pygmentize -P style=$style -P tabsize=4 -f terminal256 -g
+  else
+    for NAME in $@; do
+      pygmentize -P style=$style -P tabsize=4 -f terminal256 -g "$NAME"
+    done
+  fi
 }
 ```
 

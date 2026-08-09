@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2020-05-21 19:19:20
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:22:29
+ * @LastEditTime: 2026-08-09 14:02:11
  * @Description: Compile and Link
- * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
+ * Copyright (c) 2022 by JohnJeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -130,7 +130,7 @@ hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hell
     ```cmake
     target_link_libraries(${PROJECT_NAME} PRIVATE
       behaviortree_cpp::behaviortree_cpp
-      # behaviortree_cpp 
+      # behaviortree_cpp
     )
     ```
     注意 target 的命名空间。
@@ -138,12 +138,12 @@ hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hell
 
 ## 2.5. Toolchain Combination
 
-| 编译器    | 链接器    | 平台    | 特点          |
+| 编译器    | 链接器   | 平台    | 特点          |
 | :-------- | :------- | :------ | :------------ |
 | GCC (g++) | GNU ld   | Linux   | 传统组合      |
-| Clang     | lld      | 跨平台  | LLVM 生态      |
+| Clang     | lld      | 跨平台  | LLVM 生态     |
 | MSVC      | link.exe | Windows | Visual Studio |
-| ICC       | XILK     | Linux   | Intel 工具链   |
+| ICC       | XILK     | Linux   | Intel 工具链  |
 
 
 ## 2.6. Loader
@@ -184,7 +184,7 @@ hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hell
   - 程序加载到内存的时候由操作系统分配，程序结束时由操作系统释放。这部分区域的大小在程序运行前就已经确定，这块内存在程
     序运行期间是不变的，通常属于只能读，不能写，因为防止程序被指令意外的修改。
   - 代码段是共享的，共享的目的是为了频繁执行的程序，在内存中仅有一份代码的拷贝。
-  - 函数也是代码的一部分，故函数都被放在代码段，包括 main 函数。 
+  - 函数也是代码的一部分，故函数都被放在代码段，包括 main 函数。
 - 数据段(data segment)
   - 用来存放程序中已初始化的 global 变量和 static 变量的一块内存区域。
   - 分配优先于 main 函数，生存期与程序共存亡。
@@ -205,13 +205,13 @@ hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hell
   - 栈分配与释放消耗 CPU 资源，只能存储少量的数据。
 - 堆(heap)
   - 堆区由操作系统分配给每个进程，动态内存从堆中获取，调用 malloc()、calloc()、realloc()函数分配动态内存。
-  - 堆区分配的内存仅能通过指针访问。 
+  - 堆区分配的内存仅能通过指针访问。
   - 调用 free()函数将内存还给堆。
   - 堆内存用完不释放，可能会导致内存泄漏。
   - `malloc` 和 `free` 函数底层函数是采用全局指针实现的。
 
 什么时候用堆和栈？
-- 如果明确知道数据占用多少内存，那么数据量较小时用栈，较大时用堆 
+- 如果明确知道数据占用多少内存，那么数据量较小时用栈，较大时用堆
 - 如果不知道数据量大小(可能需要占用较大内存)，最好用堆(因为这样保险些)
 - 如果需要动态创建数组，则用堆
 
@@ -233,7 +233,7 @@ hello.cpp->>hello.ii(预处理)->>hello.s(汇编)->>hello.o(目标文件)->>hell
   一个符号表(symbol table)，它存放在程序中被定义和引用的函数和全局变量的信息。
   一些程序员错误地认为必须通过 -g 选项来编译一个程序，得到符号表信息。实际上，每个可重定位目标文件在 .symtab 中都有一张符号表。然而，和编译器中的符号表不同，.symtab 符号表不包含局部变量的表目。
 
-.comment 
+.comment
   存放编译器版本信息的字符串表。
 
 .dynamic
@@ -302,7 +302,7 @@ Linux 内核提供的库函数大多数放在 `/usr/include`、`/usr/lib`、`/us
 library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而 Windows 下以 `.lib` 后缀。
 
 命名规则
-- Linux 中以 `.a` 结尾。形如：`lib + 库的名字 + .a` 
+- Linux 中以 `.a` 结尾。形如：`lib + 库的名字 + .a`
 - `libtest.a` 静态库为 test
 
 
@@ -310,7 +310,7 @@ library)，它可作为链接器的输入。Linux 系统下以 `.a` 后缀，而
 - 由`.c` 文件生成 `.o` 文件。   例如：`gcc *.c -Wall -I ./include/`
 - 将 `.o` 文件打包。使用 `ar` 命令，参数为 `rcs`。
   ```bash
-  基本格式为: ar rcs 静态库的名字(libtest.a) 所有的.o文件 
+  基本格式为: ar rcs 静态库的名字(libtest.a) 所有的.o文件
   ar rcs libstatic_1.a *.o
   ```
 - 另外一种写法：例子：`gcc main.c -I ./include -L lib -l mylib -o main.out`
@@ -352,10 +352,10 @@ linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下
   - `gcc main.c -L ./lib -l mytest -o main.out -I ./include`    这种方式实现，需要在系统中配置动态链接库的环境变量。
 
 - `ldd` 查看可执行文件 (.out) 在动态执行过程中所依赖的所有动态库。
-  
+
   在 `ldd` 执行的结果中，`=>` 左边的表示该程序需要连接共享库的名称，右边表示由 Linux
   的共享库系统找到对应的共享库，在文件系统中的具体位置。
-  
+
   ```bash
   [root@redis_181 lib64]# ldd libselinux.so.1
           linux-vdso.so.1 =>  (0x00007ffe5ec63000)
@@ -375,7 +375,7 @@ linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下
 
 ② 直接在 `.bashrc`文件中去配置 `export  LD_LIBRARY_PATH = 制作的动态链接库路径`。每次打开终端都会去读取配置的文件。
 
-③ 比较常用的方法 
+③ 比较常用的方法
 
 - 查找动态连接器的配置文件。查找 `/etc` 目录下的 `ld.so.conf`文件
 - 将自己制作的动态链接库路径写到配置文件中。要使用绝对路径，完整的动态库位置。
@@ -384,12 +384,12 @@ linker)的程序来执行的。Linux 系统下以 `.so` 后缀，而 Windows 下
 优点
 
 - 执行程序的体积较小。
-- 在程序的接口没有发生改变之前，不需要重新编译程序。 
+- 在程序的接口没有发生改变之前，不需要重新编译程序。
 
-缺点 
+缺点
 
 - 发布程序的时候，需要将动态库发布给用户。
-- 加载的速度相对静态库比较慢。 
+- 加载的速度相对静态库比较慢。
 
 
 ### 4.2.2. Windows 平台
@@ -418,7 +418,7 @@ readelf -s main.o
 - 原生(native)编译构建，即编译构建命令所运行(host)的系统环境和编译构建输出目标(target)的系统环境一致；
 - 交叉(cross)编译构建，上述 target 和 host 不一致，即在 A 系统环境构建出在 B
   系统上运行的目标，这在嵌入式开发中尤为多见。
-  
+
 系统环境：GNU 的构建工具链中使用 CPU 指令集架构、厂商、系统内核的三元组合来指示系统环境
 
 

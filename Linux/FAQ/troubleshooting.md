@@ -2,16 +2,16 @@
  * @Author: JohnJeep
  * @Date: 2021-05-19 12:17:57
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:25:46
+ * @LastEditTime: 2026-08-09 13:53:16
  * @Description: linux 中常见问题排查
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. linux 日志
 
 ## 1.1. 分类
 
-- 内核日志: 
+- 内核日志:
   由系统服务 `syslog` 或 `rsyslog` 同一管理，根据配置文件 `/etc/syslog.conf` 或  `/etc/rsyslog.conf`
   中的内容，决定将内核消息和各种系统程序的信息记录什么位置。
 - 用户日志:
@@ -54,15 +54,10 @@ Linux 系统本身和大部分服务器程序的日志文件默认情况下都�
   命令可查看本次系统启动时与使件有关的信息，以及内核缓冲信息。
 
 - `/var/log/mailog`：记录进入或发出系统的电子邮件的信息。
-
 - `/var/log/boot.log`：记录系统启动时的软件日志信息。
-
 - `/var/log/secure`：记录用户远程登录、认证过程中的信息。
-
 - `/var/log/wtmp`：记录系统所有登录和登出纪录，可用 `last` 命令查看。
-
 - `/var/log/btmp` ：记录错误登录系统的日志信息，可用 `lastb` 命令查看。
-
 - `/var/log/lastlog` ：记录最近成功登录的事件和最后一次不成功的登录事件，可用 `lastlog` 命令查看。
 
 
@@ -78,22 +73,22 @@ Linux 系统本身和大部分服务器程序的日志文件默认情况下都�
 ```
 [root@CentOS7 ~]# ifconfig
 ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.0.180  netmask 255.255.255.0  broadcast 192.168.0.255
-        inet6 fe80::675b:99f5:ced9:26fa  prefixlen 64  scopeid 0x20<link>
-        ether 00:0c:29:cc:b7:5e  txqueuelen 1000  (Ethernet)
-        RX packets 12028  bytes 2033103 (1.9 MiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1832  bytes 473741 (462.6 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+  inet 192.168.0.180  netmask 255.255.255.0  broadcast 192.168.0.255
+  inet6 fe80::675b:99f5:ced9:26fa  prefixlen 64  scopeid 0x20<link>
+  ether 00:0c:29:cc:b7:5e  txqueuelen 1000  (Ethernet)
+  RX packets 12028  bytes 2033103 (1.9 MiB)
+  RX errors 0  dropped 0  overruns 0  frame 0
+  TX packets 1832  bytes 473741 (462.6 KiB)
+  TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10<host>
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 32  bytes 2592 (2.5 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 32  bytes 2592 (2.5 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+  inet 127.0.0.1  netmask 255.0.0.0
+  inet6 ::1  prefixlen 128  scopeid 0x10<host>
+  loop  txqueuelen 1000  (Local Loopback)
+  RX packets 32  bytes 2592 (2.5 KiB)
+  RX errors 0  dropped 0  overruns 0  frame 0
+  TX packets 32  bytes 2592 (2.5 KiB)
+  TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
 可以看到 第一个就是网卡的名称，叫 `ens33`。
@@ -102,35 +97,35 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 // 查看 网卡 ens33 的状态
 [root@CentOS7 ~]# ethtool ens33
 Settings for ens33:
-        Supported ports: [ TP ]
-        Supported link modes:   10baseT/Half 10baseT/Full
-                                100baseT/Half 100baseT/Full
-                                1000baseT/Full
-        Supported pause frame use: No
-        Supports auto-negotiation: Yes
-        Supported FEC modes: Not reported
-        Advertised link modes:  10baseT/Half 10baseT/Full
-                                100baseT/Half 100baseT/Full
-                                1000baseT/Full
-        Advertised pause frame use: No
-        Advertised auto-negotiation: Yes
-        Advertised FEC modes: Not reported
-        Speed: 1000Mb/s
-        Duplex: Full
-        Port: Twisted Pair
-        PHYAD: 0
-        Transceiver: internal
-        Auto-negotiation: on
-        MDI-X: off (auto)
-        Supports Wake-on: d
-        Wake-on: d
-        Current message level: 0x00000007 (7)
-                               drv probe link
-        Link detected: yes
+  Supported ports: [ TP ]
+  Supported link modes:   10baseT/Half 10baseT/Full
+        100baseT/Half 100baseT/Full
+        1000baseT/Full
+  Supported pause frame use: No
+  Supports auto-negotiation: Yes
+  Supported FEC modes: Not reported
+  Advertised link modes:  10baseT/Half 10baseT/Full
+        100baseT/Half 100baseT/Full
+        1000baseT/Full
+  Advertised pause frame use: No
+  Advertised auto-negotiation: Yes
+  Advertised FEC modes: Not reported
+  Speed: 1000Mb/s
+  Duplex: Full
+  Port: Twisted Pair
+  PHYAD: 0
+  Transceiver: internal
+  Auto-negotiation: on
+  MDI-X: off (auto)
+  Supports Wake-on: d
+  Wake-on: d
+  Current message level: 0x00000007 (7)
+        drv probe link
+  Link detected: yes
 
 ```
 
- 
+
 
 ## 2.2. 检查网卡状态
 
