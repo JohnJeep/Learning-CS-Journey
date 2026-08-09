@@ -2,10 +2,10 @@
 
  * @Author: JohnJeep
  * @Date: 2020-08-06 22:20:12
- * @LastEditTime: 2026-05-31 18:33:30
+ * @LastEditTime: 2026-08-09 17:29:30
  * @LastEditors: JohnJeep
  * @Description: Design pattern notes
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Thinking
@@ -40,20 +40,20 @@
 三大类型设计模式，共 23 种。按照目的准则可将设计模式分为下面三大类。
 
 - 创建型模式(Creational patterns)：共 5 种；
-  
+
   > 提供对象创建机制，以提高灵活性和现有代码的重用性，在系统的某个地方实例化具体的类。通过抽象对象的创建过程，创建型模
   > 式提供不同的方式在实例化时建立接口和实现的透明连接。创建型模式确保你的系统是针对接口的方式书写的，而不是针对实现而
   > 书写的。
-  
+
   - 工厂方法模式（factory method pattern）
   - 抽象工厂模式（abstract factory pattern）
   - 建造者模式（builder pattern）
   - 单例模式（singleton pattern）
-  - 原型模式（prototype pattern） 
+  - 原型模式（prototype pattern）
 
 - 结构型模式(Structural patterns)：如何将对象和类组装为更大的结构，同时保持结构的灵活性和效率，共 7 种。
-  
-  - 代理模式（proxy pattern）  
+
+  - 代理模式（proxy pattern）
   - 装饰者模式（decorator pattern）
   - 适配器模式（adapter pattern）
   - 桥接模式（bridge pattern）
@@ -62,8 +62,8 @@
   - 享元模式（flyweight pattern）
 
 - 行为型模式(Behavioural patterns)：对类或对象怎样交互和怎样分配职责，共 11 种。
-  
-  - 模板方法模式（template method pattern） 
+
+  - 模板方法模式（template method pattern）
   - 命令模式（command pattern）
   - 责任链模式（chain of responsibility pattern）
   - 策略模式（strategy pattern）
@@ -87,7 +87,7 @@
 
 - 迪米特原则（LOD：low of demeter）：一个对象应该对其它的对象尽可能少的了解，从而降低各个对象之间的耦合，提高系统的可
   维护性。
-  
+
   > 例如：在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现，使其它的模块不需要了解另一个模块的内部
   > 实现，这样当一个模块发生改变时，其它的模块不会受到影响。
 
@@ -104,7 +104,7 @@
   现层次间的松耦合。
 
 - 针对接口编程，而不是针对实现编程。
-  
+
   * 不将变量类型声明为某个特定的具体类，而是声明为某个接口。
   * 客户程序无需获知对象的具体类型，只需要知道对象所具有的接口。
   * 减少系统中各部分的依赖关系，从而实现“高内聚、松耦合”的类型设计方案。
@@ -131,16 +131,16 @@
 class Singleton
 {
 public:
-    static Singleton* getInstance();                 // 提供一个全局的静态方法
+  static Singleton* getInstance();                 // 提供一个全局的静态方法
 
 private:
-    static Singleton* m_Instance;                    // 静态指针 
-    Singleton();                                     // 构造函数私有化，禁止他人创建
-    ~Singleton();
+  static Singleton* m_Instance;                    // 静态指针
+  Singleton();                                     // 构造函数私有化，禁止他人创建
+  ~Singleton();
 };
 
 // 类外部初始化静态变量
-Singleton* Singleton::m_Instance = nullptr   
+Singleton* Singleton::m_Instance = nullptr
 ```
 
 注意代码中 `getInstance()` 方法的修饰符：`public` 和 `static`。`public`
@@ -171,58 +171,58 @@ using namespace std;
 class Singleton
 {
 public:
-    static Singleton* getInstance();                 // 提供一个全局的静态方法
-    static Singleton* freeInstance();                // 释放内存
+  static Singleton* getInstance();                 // 提供一个全局的静态方法
+  static Singleton* freeInstance();                // 释放内存
 
 private:
-    static Singleton* m_Instance;                    // 静态指针 
-    Singleton();                                     // 构造函数私有化，禁止他人创建
-    ~Singleton();
+  static Singleton* m_Instance;                    // 静态指针
+  Singleton();                                     // 构造函数私有化，禁止他人创建
+  ~Singleton();
 };
 
 Singleton* Singleton::m_Instance = new Singleton;    // 静态全局变量创建对象
 
 Singleton::Singleton()
 {
-    cout << "执行构造函数" << endl;
+  cout << "执行构造函数" << endl;
 }
 
 Singleton::~Singleton()
 {
-    cout << "执行析构函数" << endl;
+  cout << "执行析构函数" << endl;
 }
 
 Singleton* Singleton::getInstance()
 {
-    return m_Instance;
+  return m_Instance;
 }
 
 Singleton* Singleton::freeInstance()
 {
-    if (m_Instance != nullptr) {
-        delete m_Instance;
-        m_Instance = nullptr;
-        cout << "释放对象内存" << endl;
-    }
-    return m_Instance;
+  if (m_Instance != nullptr) {
+    delete m_Instance;
+    m_Instance = nullptr;
+    cout << "释放对象内存" << endl;
+  }
+  return m_Instance;
 }
 
 int main(int argc, char *argv[])
 {
-    cout << "执行饿汉式的单例模式" << endl;
+  cout << "执行饿汉式的单例模式" << endl;
 
-    Singleton *s1 = Singleton::getInstance();
-    Singleton *s2 = Singleton::getInstance();
-    if (s1 == s2) {
-        cout << "是同一个对象" << endl;
-    }
-    else {
-        cout << "不是同一个对象" << endl;
-    }
+  Singleton *s1 = Singleton::getInstance();
+  Singleton *s2 = Singleton::getInstance();
+  if (s1 == s2) {
+    cout << "是同一个对象" << endl;
+  }
+  else {
+    cout << "不是同一个对象" << endl;
+  }
 
-    Singleton::freeInstance();
+  Singleton::freeInstance();
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -262,30 +262,30 @@ using namespace std;
 class Singleton
 {
 public:
-    static Singleton* getInstance() {
-        if (m_Instance == nullptr) {
-            m_Instance = new Singleton;     
-        }
-        return m_Instance;
+  static Singleton* getInstance() {
+    if (m_Instance == nullptr) {
+      m_Instance = new Singleton;
     }
+    return m_Instance;
+  }
 
-    // 手动释放内存
-    static Singleton* freeInstance() {
-        if (m_Instance != nullptr) {
-            delete m_Instance;
-            m_Instance = nullptr;
-            cout << "Free instance memory." << endl;
-        }
-        return m_Instance;
+  // 手动释放内存
+  static Singleton* freeInstance() {
+    if (m_Instance != nullptr) {
+      delete m_Instance;
+      m_Instance = nullptr;
+      cout << "Free instance memory." << endl;
     }
+    return m_Instance;
+  }
 private:
-    Singleton() { cout << "Execute constructor." << endl; }
-    ~Singleton() { cout << "Execute destructor." << endl; }
-    static Singleton* m_Instance;           // 静态指针    
+  Singleton() { cout << "Execute constructor." << endl; }
+  ~Singleton() { cout << "Execute destructor." << endl; }
+  static Singleton* m_Instance;           // 静态指针
 };
 
 // 静态全局变量初始化
-Singleton* Singleton::m_Instance = nullptr; 
+Singleton* Singleton::m_Instance = nullptr;
 ```
 
 这种以时间换空间的方式，节约了效率，但最重要的问题是：在多线程访问时单例模式可能存在线程安全的问题。
@@ -305,27 +305,27 @@ using namespace std;
 class Singleton
 {
 public:
-    static Singleton* getInstace(const std::string& value);
+  static Singleton* getInstace(const std::string& value);
 
-    /**
-     * Singletons should not be cloneable.
-     */
-    Singleton(Singleton& other) = delete;
+  /**
+  * Singletons should not be cloneable.
+  */
+  Singleton(Singleton& other) = delete;
 
-    /**
-     * Singletons should not be assignable.
-     */
-    void operator=(const Singleton&) = delete;
+  /**
+  * Singletons should not be assignable.
+  */
+  void operator=(const Singleton&) = delete;
 
-    std::string getValue() {
-        return m_value;
-    }
+  std::string getValue() {
+    return m_value;
+  }
 
 private:
-    Singleton(const std::string value);     // constructor
-    ~Singleton();                           // destructor
-    static Singleton* m_singleton;          // 静态成员指针
-    std::string m_value;
+  Singleton(const std::string value);     // constructor
+  ~Singleton();                           // destructor
+  static Singleton* m_singleton;          // 静态成员指针
+  std::string m_value;
 };
 
 // 静态变量外部初始化
@@ -334,14 +334,14 @@ Singleton* Singleton::m_singleton = nullptr;
 // 没有加锁，存在多个线程访问时资源竞争的问题
 Singleton* Singleton::getInstace(const std::string& value)
 {
-    if (m_singleton == nullptr) {
-        m_singleton = new Singleton(value);
-    }
-    return m_singleton;
+  if (m_singleton == nullptr) {
+    m_singleton = new Singleton(value);
+  }
+  return m_singleton;
 }
 
 Singleton::Singleton(const std::string value)
-    : m_value(value)
+  : m_value(value)
 {
 }
 
@@ -352,27 +352,27 @@ Singleton::~Singleton()
 // 第一个线程处理函数
 void ThreadFirst()
 {
-    std::this_thread::sleep_for(chrono::milliseconds(1000));
-    Singleton* singleton = Singleton::getInstace("First");
-    std::cout << singleton->getValue() << std::endl;
+  std::this_thread::sleep_for(chrono::milliseconds(1000));
+  Singleton* singleton = Singleton::getInstace("First");
+  std::cout << singleton->getValue() << std::endl;
 }
 
 // 第二个线程处理函数
 void ThreadSecond()
 {
-    std::this_thread::sleep_for(chrono::milliseconds(1000));
-    Singleton* singleton = Singleton::getInstace("Second");
-    std::cout << singleton->getValue() << std::endl;
+  std::this_thread::sleep_for(chrono::milliseconds(1000));
+  Singleton* singleton = Singleton::getInstace("Second");
+  std::cout << singleton->getValue() << std::endl;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
-    std::thread t1(ThreadFirst);
-    std::thread t2(ThreadSecond);
-    t1.join();                          // 回收创建的线程，避免资源浪费
-    t2.join();
+  std::thread t1(ThreadFirst);
+  std::thread t2(ThreadSecond);
+  t1.join();                          // 回收创建的线程，避免资源浪费
+  t2.join();
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -408,32 +408,32 @@ First
   condition）的问题。那么就给线程加把锁，让每个线程每次访问的时候，同一时间内只有一个线程在创建对象，其它的线程需要等
   锁的资源被
   释放后，才能工作。这样就保证了多个线程访问时，线程是安全的。
-  
+
   首先我们在实例是否被创建之前就去加锁。
-  
+
   ```cpp
   #include <iostream>
   #include <stdlib.h>
   #include <pthread.h>
   #include <mutex>
   #include <unistd.h>
-  
+
   using namespace std;
   std::mutex m_mutex;
-  
+
   class Singleton
   {
   public:
       static Singleton* getInstance() {
           m_mutex.lock();
           if (m_Instance == nullptr) {
-              m_Instance = new Singleton;     
+              m_Instance = new Singleton;
           }
           m_mutex.unlock();
           return m_Instance;
       }
-  
-      // 手动释放内存    
+
+      // 手动释放内存
       static Singleton* freeInstance() {
           if (m_Instance != nullptr) {
               delete m_Instance;
@@ -445,51 +445,51 @@ First
   private:
       Singleton() { cout << "Execute constructor." << endl; }
       ~Singleton() { cout << "Execute destructor." << endl; }
-      static Singleton* m_Instance;           // 静态指针    
+      static Singleton* m_Instance;           // 静态指针
   };
-  
+
   // 静态全局变量初始化
-  Singleton* Singleton::m_Instance = nullptr; 
+  Singleton* Singleton::m_Instance = nullptr;
   ```
-  
+
   上述代码虽然解决了线程安全问题，但是每次调用 `getInstance()` 时都需要进行锁的判断。假设当线程 1 在执行 `m_instance
   = new Singleton()` 的时候，线程 2 也在调用
   `getInstance()`，线程 2 一定会被阻塞在加锁处，等待线程 1 执行结束后释放这个锁，最后再去执行线程
   2。在多线程高并发访问环境中，频繁的进行加锁和解锁，将会导致系统性能大大降低，因为加锁和解锁都是一个耗时的过程。
-  
+
   那如何既解决线程安全问题又不影响系统性能呢？下面我们继续对懒汉式单例进行改进。
-  
+
   ```cpp
   static Singleton* getInstance() {
       if (m_Instance == nullptr) {
           m_mutex.lock();              // 加锁
           if (m_Instance == nullptr) {
-              m_Instance = new Singleton;     
+              m_Instance = new Singleton;
           }
           m_mutex.unlock();
       }
       return m_Instance;
   }
   ```
-  
+
   加锁和解锁的步骤只有在第一次执行 `new Singleton()` 才是有必要的，只要 `m_instance`
   实例被创建出来了，就没必要加锁解锁了，直接返回这个对象的指针。以后不管多少线程同时访问，使用 `if
   (m_instance == nullptr) `进行判断就行了（只是读操作，不需要加锁），没有线程安全问题，加了锁之后反而存在性能问题。因
   此我们在加锁之前再进行一次实例是否存在的判断。两次进行加锁判断的这种方式称为**双重检查锁定
   (Double Check Locking)**。
-  
+
   是不是觉得这样就完美啦？其实在一段时间内，大家都以为这是正确的、有效的做法。实际上却不是这样的。幸运的是，后来有大牛
   们发现了 DCL
   中的问题，避免了这样错误的写法在更多的程序代码中出现。原因是内存读写的乱序执行造成的（编译器的问题）。
-  
+
   那么到底错在哪里？
-  
+
   我们看 `m_instance = new Singleton()` 这句话，是创建对象的过程。其实这个过程可以分成三个步骤来执行：
-  
+
   1. 分配了一个 `Singleton` 类型对象所需要的内存。
   2. 在分配的内存处构造 `Singleton` 类型的对象。
   3. 把分配的内存的地址赋给指针 `m_instance`。
-  
+
   主观上，我们会觉得计算机在会按照 1、2、3 的步骤来执行的，但是问题就出在这。实际上只能确定步骤 1 最先执行，而步骤
   2、3 的执行顺序却是不一定的。假如某个线程 A 在调用执行`m_instance = new
   Singleton()` 的时候是按照 `1, 3, 2` 的顺序的，那那么当刚刚执行完步骤 3
@@ -500,11 +500,11 @@ First
   返回的对象还没有被构造就被拿去使用了！这样就会发生一些难以 debug 的灾难问题。
 
 - 加锁的过程中，需要思考的问题？
-  
+
   **类中资源的初始化可能有顺序问题，一些资源依赖于其他资源的初始化，可能会导致一些资源释放的问题。**
 
 - 第三种：静态局部变量。
-  
+
   `java` 和 `c#` 发现这个问题后，就加了一个关键字 `volatile`，在声明
   `m_instance`变量的时候，要加上`volatile`修饰，编译器看到之后，就知道这个地方不能够
   reorder（一定要先分配内存，在执行构造器，都完成之后再赋值）。而对于 `c++` 标准却一直没有改正，所以 `VC++` 在 `2005`
@@ -513,33 +513,33 @@ First
   个步骤的时候不会发生线程切换，相当这个初始化过程是“原子性”的的操作，DCL 又可以正确使用了。不过在 C++11
   下却有更简洁的多线程
   Singleton 写法了，比如用局部静态变量（local static variable）。
-  
+
    C++11 以上，其设置为 `static`，再将该单例对象这样运行时确保只调用一次静态构造函数，实现的代码量不仅少。
-  
+
   ```cpp
   #include <iostream>
   #include <unistd.h>
-  
+
   using namespace std;
-  
+
   class Singleton
   {
   public:
       static Singleton& getInstance() {
           static Singleton instance;
           return instance;
-      }  
-  
+      }
+
   private:
       Singleton() { cout << "Execute constructor." << endl; }
-      ~Singleton() { cout << "Execute destructor." << endl; } 
+      ~Singleton() { cout << "Execute destructor." << endl; }
   };
   ```
-  
+
   原因在于在 C++11 之前的标准中并没有规定 local static 变量的内存模型，所以很多编译器在实现 local static
   变量的时候仅仅是进行了一次 check，但是在 C++11 却是线程安全的，这是因为新的
   C++标准规定了当一个线程正在初始化一个变量的时候，其他线程必须得等到该初始化完成以后才能访问它。
-  
+
   不过有些编译器在 C++11 之前的版本就支持这种模型，例如 g++，从 g++4.0 开始，meyers singleton 就是线程安全的，不需要
   C++11。其他的编译器就需要具体的去查相关的官方手册了。
 
@@ -553,16 +553,16 @@ First
 单例模式中释放用 new 申请的内存，有两种方式可以实现。
 
 第一种：在类中定义一个属性为 `public` 的内存销毁的方，使用 `delete`
-关键字实现去释放内存。给外部类提供接口，去销毁对象。 
+关键字实现去释放内存。给外部类提供接口，去销毁对象。
 
 ```cpp
 static Singleton* freeInstance() {
-    if (m_Instance != nullptr) {
-        delete m_Instance;
-        m_Instance = nullptr;
-        cout << "Free instance memory." << endl;
-    }
-    return m_Instance;
+  if (m_Instance != nullptr) {
+    delete m_Instance;
+    m_Instance = nullptr;
+    cout << "Free instance memory." << endl;
+  }
+  return m_Instance;
 }
 ```
 
@@ -577,88 +577,88 @@ static Singleton* freeInstance() {
 class Singleton
 {
 public:
-    static Singleton* getInstace(const std::string& value);               // 懒汉式
-    Singleton(Singleton& other) = delete;                                 // 禁止拷贝操作
-    const Singleton& operator=(const Singleton&) = delete;                // 禁止赋值操作
+  static Singleton* getInstace(const std::string& value);               // 懒汉式
+  Singleton(Singleton& other) = delete;                                 // 禁止拷贝操作
+  const Singleton& operator=(const Singleton&) = delete;                // 禁止赋值操作
 
-    std::string getValue() {
-        return m_value;
+  std::string getValue() {
+    return m_value;
+  }
+
+private:
+  // GC 类：程序结束时，进入析构函数销毁 Singleton 类的实例
+  class GC
+  {
+  public:
+    GC() {}
+    ~GC() {
+      if (m_Instance != nullptr) {
+        delete m_Instance;
+        m_Instance = nullptr;
+        cout << "Exec GC dector, delete m_Instance.\n";
+      }
     }
+  };
+
+  static GC gc;                           // 定义静态成员变量，当程序结束时，会调用 GC 类的析构函数
 
 private:
-    // GC 类：程序结束时，进入析构函数销毁 Singleton 类的实例
-    class GC
-    {
-    public:
-        GC() {}
-        ~GC() {
-            if (m_Instance != nullptr) {
-                delete m_Instance;
-                m_Instance = nullptr;
-                cout << "Exec GC dector, delete m_Instance.\n";
-            }
-        }
-    };
+  Singleton(const std::string value);     // constructor
+  ~Singleton();                           // destructor
 
-    static GC gc;                           // 定义静态成员变量，当程序结束时，会调用 GC 类的析构函数
-
-private:
-    Singleton(const std::string value);     // constructor
-    ~Singleton();                           // destructor
-
-    static Singleton* m_Instance;           // 静态成员指针
-    std::string m_value;
+  static Singleton* m_Instance;           // 静态成员指针
+  std::string m_value;
 };
 
 // 静态变量外部初始化
-Singleton::GC Singleton::gc; 
+Singleton::GC Singleton::gc;
 Singleton* Singleton::m_Instance = nullptr;
 
 Singleton::Singleton(const std::string value)
-    : m_value(value)
+  : m_value(value)
 {
-    cout << "Exec Singleton ctor.\n";
+  cout << "Exec Singleton ctor.\n";
 }
 
 Singleton::~Singleton()
 {
-    cout << "Exec Singleton dector.\n";
+  cout << "Exec Singleton dector.\n";
 }
 
 // 懒汉式单例，存在多个线程访问时资源竞争的问题
 Singleton* Singleton::getInstace(const std::string& value)
 {
-    if (m_Instance == nullptr) {
-        m_Instance = new Singleton(value);
-    }
-    return m_Instance;
+  if (m_Instance == nullptr) {
+    m_Instance = new Singleton(value);
+  }
+  return m_Instance;
 }
 
 
 // 第一个线程处理函数
 void ThreadFirst()
 {
-    std::this_thread::sleep_for(chrono::milliseconds(1000));
-    Singleton* singleton = Singleton::getInstace("First");
-    std::cout << singleton->getValue() << std::endl;
+  std::this_thread::sleep_for(chrono::milliseconds(1000));
+  Singleton* singleton = Singleton::getInstace("First");
+  std::cout << singleton->getValue() << std::endl;
 }
 
 // 第二个线程处理函数
 void ThreadSecond()
 {
-    std::this_thread::sleep_for(chrono::milliseconds(1000));
-    Singleton* singleton = Singleton::getInstace("Second");
-    std::cout << singleton->getValue() << std::endl;
+  std::this_thread::sleep_for(chrono::milliseconds(1000));
+  Singleton* singleton = Singleton::getInstace("Second");
+  std::cout << singleton->getValue() << std::endl;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
-    std::thread t1(ThreadFirst);
-    std::thread t2(ThreadSecond);
-    t1.join();                          // 回收创建的线程，避免资源浪费
-    t2.join();
+  std::thread t1(ThreadFirst);
+  std::thread t2(ThreadSecond);
+  t1.join();                          // 回收创建的线程，避免资源浪费
+  t2.join();
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -707,13 +707,13 @@ Exec GC dector, delete m_Instance.
   输入参数``Type``来生产不同的产品。
 
 - 优点
-  
+
   * 使用者只需要给工厂类传入一个正确的约定好的参数，就可以获取你所需要的对象，而不需要知道其创建细节，一定程度上减少系
     统的耦合。
     * 客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，减少开发者的记忆成本。
 
 - 缺点
-  
+
   * 如果业务上添加新产品的话，就需要修改工厂类原有的判断逻辑，这其实是违背了开闭原则的。
   * 在产品类型较多时，有可能造成工厂逻辑过于复杂。所以简单工厂模式比较适合产品种类比较少而且增多的概率很低的情况。
 
@@ -1148,7 +1148,7 @@ Subject 的状态发生改变 , 所有的 Observer 都得到通知。作为对�
 
 - 在得到一个具体观察目标的改变通知后, ConcreteObserver 对象可向观察目标对象查询信息。ConcreteObserver
   使用这些信息让它的状态与观察目标对象的状态一致。
-  
+
   <img src="./figures/ObserverPatternConcrete.jpg">
 
 > 注意发出改变请求的 Observer 对象并不立即更新 ,而是将其推迟到它从目标得到一个通知之后。Notify
@@ -1162,7 +1162,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
 - 观察目标和观察者间的抽象耦合。一个观察目标所知道的仅仅是它有一系列观察者, 每个都符合抽象 Observer
   类的简单接口，观察目标并不知道任何一个观察者是属于哪一个具体的类，这样观察目标和观察者之间的耦合是抽象的、也是最小的
   。
-  
+
   > 因为观察目标和观察者不是紧密耦合的, 它们属于一个系统中的不同抽象层次。一个处于较低层次的观察目标对象可与一个处于较
   > 高层次的观察者通信并通知它, 这样就保持了系统层次的完整性。如果观察目标和观察者混在一块 ,
   > 那么得到的对象要么横贯两个层次 (违反了层次性), 要么必须放在这两层的某一层中(这可能会损害层次抽象)。
@@ -1175,7 +1175,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
 
 - 意外的更新。一个观察者并不知道还有其它的观察者存在, 它可能对改变观察目标的最终代价一无所知。在观察目标上一个看似无害
   的的操作可能会引起一系列对观察者以及依赖于这些观察者的那些对象的更新。如果依赖准则的定义或维护不当，常常会引起错误
-  的更新, 这种错误通常很难捕捉。 
+  的更新, 这种错误通常很难捕捉。
 - 如果一个观察目标对象有很多直接和间接观察者，将所有的观察者都通知到会花费很多时间。
 - 如果在观察者和观察目标之间存在循环依赖，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。
 - 观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。
@@ -1193,7 +1193,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
   让观察者知道应去检查哪一个观察目标。
 
 - 谁触发更新。 观察目标和它的观察者依赖于通知机制来保持一致。但到底哪一个对象调用 Notify 来触发更新? 此时有两个选择:
-  
+
   - 由观察目标对象的状态设定操作在改变观察目标对象的状态后自动调用
     Notify。这种方法的优点是客户不需要记住要在观察目标对象上调用 Notify，缺点是多个连续的操作会产生多次连续的更新,
     可能效率较低。
@@ -1209,7 +1209,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
 
 - 避免特定于观察者的更新协议：推/拉模型。观察者模式的实现经常需要让观察目标广播关于其改变的其他一些信息。观察目标将这
   些信息作为 Update 操作一个参数传递出去。这些信息的量可能很小，也可能很大。
-  
+
   - 一个极端情况是，观察目标向观察者发送关于改变的详细信息, 而不管它们需要与否，我们称之为推模型(push
     model)。另一个极端是拉模型(pull model)： 观察目标除最小通知外什么也不送出
     ,而在此之后由观察者显式地向目标询问细节。
@@ -1231,7 +1231,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
   标的状态变化所需的工作量。例如,
   如果一个操作涉及到对几个相互依赖的目标进行改动, 就必须保证仅在所有的观察目标都已更改完毕后，才一次性地通知它们的观察
   者 ,而不是每个观察目标都通知观察者。ChangeManager 有三个责任:
-  
+
   - 它将一个观察目标映射到它的观察者并提供一个接口来维护这个映射。这就不需要由观察目标来维护对其观察者的引用,
     反之亦然。
   - 它定义一个特定的更新策略。
@@ -1241,7 +1241,7 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
 
 - Chain of Responsibility(责任链模式)、 Command(命令模式)、 Mediator(中介者模式)和
   Observer(观察者模式)用于处理请求发送者和接收者之间的不同连接方式：
-  
+
   - 责任链按照顺序将请求动态传递给一系列的潜在接收者， 直至其中一名接收者对请求进行处理。
   - 命令在发送者和请求者之间建立单向连接。
   - 中介者清除了发送者和请求者之间的直接连接， 强制它们通过一个中介对象进行间接沟通。
@@ -1249,16 +1249,16 @@ Observer 模式允许你独立的改变目标和观察者。你可以单独复�
 
 - 中介者和观察者之间的区别往往很难记住。 在大部分情况下， 你可以使用其中一种模式， 而有时可以同时使用。
   让我们来看看如何做到这一点。
-  
+
   - 中介者的主要目标是消除一系列系统组件之间的相互依赖。 这些组件将依赖于同一个中介者对象。
     观察者的目标是在对象之间建立动态的单向连接， 使得部分对象可作为其他对象的附属发挥作用。
-  
+
   - 有一种流行的中介者模式实现方式依赖于观察者。 中介者对象担当发布者的角色， 其他组件则作为订阅者，
     可以订阅中介者的事件或取消订阅。 当中介者以这种方式实现时， 它可能看上去与观察者非常相似。
-  
+
   - 当你感到疑惑时， 记住可以采用其他方式来实现中介者。 例如， 你可永久性地将所有组件链接到同一个中介者对象。
     这种实现方式和观察者并不相同， 但这仍是一种中介者模式。
-  
+
   - 假设有一个程序， 其所有的组件都变成了发布者， 它们之间可以相互建立动态连接。 这样程序中就没有中心化的中介者对象，
     而只有一些分布式的观察者。
 

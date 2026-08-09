@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-07-10 09:54:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:29:58
+ * @LastEditTime: 2026-08-09 17:38:39
  * @Description: golang internal fundamental
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # Introduction
@@ -270,4 +270,4 @@ Golang 使用系列---- Net/Http 应用层: https://kingjcy.github.io/post/golan
 
 - Go 标准库-双向链表 (container/list) 源码解析: https://blog.csdn.net/eight_eyes/article/details/121068799
 - 链表: 深入理解 container/list&LRU 缓存的实现: https://lailin.xyz/post/list.html
-- 极客书房 Go 数据结构和算法篇（一）链表: https://study.geekai.co/posts/go-data-structure-linked-list 
+- 极客书房 Go 数据结构和算法篇（一）链表: https://study.geekai.co/posts/go-data-structure-linked-list

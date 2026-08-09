@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-09-15 11:03:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:26:49
+ * @LastEditTime: 2026-08-09 17:26:22
  * @Description: 分布式 Actor 学习
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Actor Model
@@ -50,7 +50,7 @@ Actors 可以发送消息给其他 Actors，也可以发送消息给自己。当
 - **位置透明性（Location Transparency）：** 发送消息时，发送者无需知道接收者 Actor 的具体位置，只需知道接收者的 PID
   即可。
 
-  
+
 
 ### 1.1.2. 它们是如何并发地工作的？
 
@@ -126,11 +126,11 @@ pid, err := actor.Spawn(props) // 通过Props对象生成一个新的Actor实例
 
 ```go
 props := actor.PropsFromFunc(func(ctx actor.Context) {
-    // 消息处理逻辑
-    switch msg := ctx.Message().(type) {
-    case string:
-        ctx.Respond("Received: " + msg)
-    }
+  // 消息处理逻辑
+  switch msg := ctx.Message().(type) {
+  case string:
+    ctx.Respond("Received: " + msg)
+  }
 })
 
 pid, err := actor.Spawn(props)
@@ -200,47 +200,47 @@ ReceiveDefault 方法。
 package main
 
 import (
-	"fmt"
-	"time"
+  "fmt"
+  "time"
 
-	console "github.com/asynkron/goconsole"
-	"github.com/asynkron/protoactor-go/actor"
+  console "github.com/asynkron/goconsole"
+  "github.com/asynkron/protoactor-go/actor"
 )
 
 type (
-	hello      struct{ Who string }
-	helloActor struct{}
+  hello      struct{ Who string }
+  helloActor struct{}
 )
 
 func (state *helloActor) Receive(context actor.Context) {
-	switch msg := context.Message().(type) {
-	case *actor.Started:
-		fmt.Println("Started, initialize actor here")
-	case *actor.Stopping:
-		fmt.Println("Stopping, actor is about shut down")
-	case *actor.Stopped:
-		fmt.Println("Stopped, actor and its children are stopped")
-	case *actor.Restarting:
-		fmt.Println("Restarting, actor is about restart")
-	case *hello:
-		fmt.Printf("Hello %v\n", msg.Who)
-	}
+  switch msg := context.Message().(type) {
+  case *actor.Started:
+    fmt.Println("Started, initialize actor here")
+  case *actor.Stopping:
+    fmt.Println("Stopping, actor is about shut down")
+  case *actor.Stopped:
+    fmt.Println("Stopped, actor and its children are stopped")
+  case *actor.Restarting:
+    fmt.Println("Restarting, actor is about restart")
+  case *hello:
+    fmt.Printf("Hello %v\n", msg.Who)
+  }
 }
 
 func main() {
-	system := actor.NewActorSystem()
-	props := actor.PropsFromProducer(func() actor.Actor { return &helloActor{} })
-	pid := system.Root.Spawn(props)
-	system.Root.Send(pid, &hello{Who: "Roger"})
+  system := actor.NewActorSystem()
+  props := actor.PropsFromProducer(func() actor.Actor { return &helloActor{} })
+  pid := system.Root.Spawn(props)
+  system.Root.Send(pid, &hello{Who: "Roger"})
 
-	// why wait?
-	// Stop is a system message and is not processed through the user message mailbox
-	// thus, it will be handled _before_ any user message
-	// we only do this to show the correct order of events in the console
-	time.Sleep(1 * time.Second)
-	system.Root.Stop(pid)
+  // why wait?
+  // Stop is a system message and is not processed through the user message mailbox
+  // thus, it will be handled _before_ any user message
+  // we only do this to show the correct order of events in the console
+  time.Sleep(1 * time.Second)
+  system.Root.Stop(pid)
 
-	_, _ = console.ReadLine()
+  _, _ = console.ReadLine()
 }
 
 ```
@@ -254,11 +254,11 @@ RoundRobin（轮询）、Random（随机）等。
 package main
 
 import (
-	"log"
+  "log"
 
-	console "github.com/asynkron/goconsole"
-	"github.com/asynkron/protoactor-go/actor"
-	"github.com/asynkron/protoactor-go/router"
+  console "github.com/asynkron/goconsole"
+  "github.com/asynkron/protoactor-go/actor"
+  "github.com/asynkron/protoactor-go/router"
 )
 
 type workItem struct{ i int }
@@ -266,19 +266,19 @@ type workItem struct{ i int }
 const maxConcurrency = 5
 
 func doWork(ctx actor.Context) {
-	if msg, ok := ctx.Message().(*workItem); ok {
-		// this is guaranteed to only execute with a max concurrency level of `maxConcurrency`
-		log.Printf("%v got message %d", ctx.Self(), msg.i)
-	}
+  if msg, ok := ctx.Message().(*workItem); ok {
+    // this is guaranteed to only execute with a max concurrency level of `maxConcurrency`
+    log.Printf("%v got message %d", ctx.Self(), msg.i)
+  }
 }
 
 func main() {
-	system := actor.NewActorSystem()
-	pid := system.Root.Spawn(router.NewRoundRobinPool(maxConcurrency).Configure(actor.WithFunc(doWork)))
-	for i := 0; i < 1000; i++ {
-		system.Root.Send(pid, &workItem{i})
-	}
-	_, _ = console.ReadLine()
+  system := actor.NewActorSystem()
+  pid := system.Root.Spawn(router.NewRoundRobinPool(maxConcurrency).Configure(actor.WithFunc(doWork)))
+  for i := 0; i < 1000; i++ {
+    system.Root.Send(pid, &workItem{i})
+  }
+  _, _ = console.ReadLine()
 }
 
 ```
@@ -300,64 +300,64 @@ Actor，然后在另一个节点上通过 PID 发送消息给它。
 package main
 
 import (
-	"fmt"
-	"log"
-	"runtime"
-	"sync"
-	"time"
+  "fmt"
+  "log"
+  "runtime"
+  "sync"
+  "time"
 
-	"remoterouting/messages"
+  "remoterouting/messages"
 
-	console "github.com/asynkron/goconsole"
-	"github.com/asynkron/protoactor-go/actor"
-	"github.com/asynkron/protoactor-go/remote"
-	"github.com/asynkron/protoactor-go/router"
+  console "github.com/asynkron/goconsole"
+  "github.com/asynkron/protoactor-go/actor"
+  "github.com/asynkron/protoactor-go/remote"
+  "github.com/asynkron/protoactor-go/router"
 )
 
 var (
-	system      = actor.NewActorSystem()
-	rootContext = system.Root
+  system      = actor.NewActorSystem()
+  rootContext = system.Root
 )
 
 func main() {
-	cfg := remote.Configure("127.0.0.1", 8100)
-	r := remote.NewRemote(system, cfg)
-	r.Start()
+  cfg := remote.Configure("127.0.0.1", 8100)
+  r := remote.NewRemote(system, cfg)
+  r.Start()
 
-	runtime.GOMAXPROCS(runtime.NumCPU())
-	runtime.GC()
+  runtime.GOMAXPROCS(runtime.NumCPU())
+  runtime.GC()
 
-	p1 := actor.NewPID("127.0.0.1:8101", "remote")
-	p2 := actor.NewPID("127.0.0.1:8102", "remote")
+  p1 := actor.NewPID("127.0.0.1:8101", "remote")
+  p2 := actor.NewPID("127.0.0.1:8102", "remote")
 
-	remotePID := rootContext.Spawn(router.NewConsistentHashGroup(p1, p2))
+  remotePID := rootContext.Spawn(router.NewConsistentHashGroup(p1, p2))
 
-	messageCount := 1000000
+  messageCount := 1000000
 
-	var wgStop sync.WaitGroup
+  var wgStop sync.WaitGroup
 
-	props := actor.
-		PropsFromProducer(newLocalActor(&wgStop, messageCount),
-			actor.WithMailbox(actor.Bounded(10000)))
+  props := actor.
+    PropsFromProducer(newLocalActor(&wgStop, messageCount),
+      actor.WithMailbox(actor.Bounded(10000)))
 
-	pid := rootContext.Spawn(props)
+  pid := rootContext.Spawn(props)
 
-	log.Println("Starting to send")
+  log.Println("Starting to send")
 
-	t := time.Now()
+  t := time.Now()
 
-	for i := 0; i < messageCount; i++ {
-		message := &messages.Ping{User: fmt.Sprintf("User_%d", i)}
-		rootContext.RequestWithCustomSender(remotePID, message, pid)
-	}
+  for i := 0; i < messageCount; i++ {
+    message := &messages.Ping{User: fmt.Sprintf("User_%d", i)}
+    rootContext.RequestWithCustomSender(remotePID, message, pid)
+  }
 
-	wgStop.Wait()
+  wgStop.Wait()
 
-	rootContext.Stop(pid)
+  rootContext.Stop(pid)
 
-	fmt.Printf("elapsed: %v\n", time.Since(t))
+  fmt.Printf("elapsed: %v\n", time.Since(t))
 
-	console.ReadLine()
+  console.ReadLine()
 }
 
 ```
@@ -370,72 +370,72 @@ Scheduler 是 ProtoActor 的定时任务组件，它可以让你在指定的时�
 package main
 
 import (
-	"log"
-	"math/rand"
-	"sync"
-	"time"
+  "log"
+  "math/rand"
+  "sync"
+  "time"
 
-	console "github.com/asynkron/goconsole"
-	"github.com/asynkron/protoactor-go/actor"
-	"github.com/asynkron/protoactor-go/scheduler"
+  console "github.com/asynkron/goconsole"
+  "github.com/asynkron/protoactor-go/actor"
+  "github.com/asynkron/protoactor-go/scheduler"
 )
 
 var HelloMessages = []string{
-	"Hello",
-	"Bonjour",
-	"Hola",
-	"Zdravstvuyte",
-	"Nǐn hǎo",
-	"Salve",
-	"Konnichiwa",
-	"Olá",
+  "Hello",
+  "Bonjour",
+  "Hola",
+  "Zdravstvuyte",
+  "Nǐn hǎo",
+  "Salve",
+  "Konnichiwa",
+  "Olá",
 }
 
 func main() {
-	var wg sync.WaitGroup
-	wg.Add(5)
+  var wg sync.WaitGroup
+  wg.Add(5)
 
-	rand.Seed(time.Now().UnixMicro())
-	system := actor.NewActorSystem()
+  rand.Seed(time.Now().UnixMicro())
+  system := actor.NewActorSystem()
 
-	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
+  log.SetFlags(log.LstdFlags | log.Lmicroseconds)
 
-	count := 0
-	props := actor.PropsFromFunc(func(ctx actor.Context) {
-		switch t := ctx.Message().(type) {
-		case []string:
-			count++
-			log.Printf("\t%s, counter value: %d", t[rand.Intn(len(t))], count)
-			wg.Done()
-		case string:
-			log.Printf("\t%s\n", t)
-		}
-	})
+  count := 0
+  props := actor.PropsFromFunc(func(ctx actor.Context) {
+    switch t := ctx.Message().(type) {
+    case []string:
+      count++
+      log.Printf("\t%s, counter value: %d", t[rand.Intn(len(t))], count)
+      wg.Done()
+    case string:
+      log.Printf("\t%s\n", t)
+    }
+  })
 
-	pid := system.Root.Spawn(props)
+  pid := system.Root.Spawn(props)
 
-	s := scheduler.NewTimerScheduler(system.Root)
-	cancel := s.SendRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
+  s := scheduler.NewTimerScheduler(system.Root)
+  cancel := s.SendRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
 
-	wg.Wait()
-	cancel()
+  wg.Wait()
+  cancel()
 
-	wg.Add(100) // add 100 to our waiting group
-	cancel = s.RequestRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
+  wg.Add(100) // add 100 to our waiting group
+  cancel = s.RequestRepeatedly(1*time.Millisecond, 1*time.Millisecond, pid, HelloMessages)
 
-	// the following timer will fire before the
-	// wait group is consumed and will stop the scheduler
-	time.Sleep(10 * time.Millisecond)
-	cancel()
+  // the following timer will fire before the
+  // wait group is consumed and will stop the scheduler
+  time.Sleep(10 * time.Millisecond)
+  cancel()
 
-	s.SendOnce(1*time.Millisecond, pid, "Hello Once")
+  s.SendOnce(1*time.Millisecond, pid, "Hello Once")
 
-	// this message will never show as we cancel it before it can be fired
-	cancel = s.RequestOnce(500*time.Millisecond, pid, "Hello Once Again")
-	time.Sleep(250 * time.Millisecond)
-	cancel()
+  // this message will never show as we cancel it before it can be fired
+  cancel = s.RequestOnce(500*time.Millisecond, pid, "Hello Once Again")
+  time.Sleep(250 * time.Millisecond)
+  cancel()
 
-	_, _ = console.ReadLine()
+  _, _ = console.ReadLine()
 }
 
 ```
@@ -446,29 +446,29 @@ func main() {
 package plugin
 
 import (
-	"github.com/asynkron/protoactor-go/actor"
+  "github.com/asynkron/protoactor-go/actor"
 )
 
 type plugin interface {
-	OnStart(actor.ReceiverContext)
-	OnOtherMessage(actor.ReceiverContext, *actor.MessageEnvelope)
+  OnStart(actor.ReceiverContext)
+  OnOtherMessage(actor.ReceiverContext, *actor.MessageEnvelope)
 }
 
 func Use(plugin plugin) func(next actor.ReceiverFunc) actor.ReceiverFunc {
-	return func(next actor.ReceiverFunc) actor.ReceiverFunc {
-		fn := func(context actor.ReceiverContext, env *actor.MessageEnvelope) {
-			switch env.Message.(type) {
-			case *actor.Started:
-				plugin.OnStart(context)
-			default:
-				plugin.OnOtherMessage(context, env)
-			}
+  return func(next actor.ReceiverFunc) actor.ReceiverFunc {
+    fn := func(context actor.ReceiverContext, env *actor.MessageEnvelope) {
+      switch env.Message.(type) {
+      case *actor.Started:
+        plugin.OnStart(context)
+      default:
+        plugin.OnOtherMessage(context, env)
+      }
 
-			next(context, env)
-		}
+      next(context, env)
+    }
 
-		return fn
-	}
+    return fn
+  }
 }
 
 ```
@@ -499,51 +499,51 @@ Actor，并通过网络进行通信。集群的主要目标是提供高可用性
 package main
 
 import (
-	"log"
-	"time"
+  "log"
+  "time"
 
-	"github.com/asynkron/protoactor-go/actor"
-	"github.com/asynkron/protoactor-go/cluster"
-	"github.com/asynkron/protoactor-go/remote"
+  "github.com/asynkron/protoactor-go/actor"
+  "github.com/asynkron/protoactor-go/cluster"
+  "github.com/asynkron/protoactor-go/remote"
 )
 
 type HelloActor struct{}
 
 func (state *HelloActor) Receive(ctx actor.Context) {
-	switch msg := ctx.Message().(type) {
-	case *actor.Started:
-		log.Println("Started, initialize actor here")
-	case *actor.Stopping:
-		log.Println("Stopping, actor is about shut down")
-	case *actor.Stopped:
-		log.Println("Stopped, actor and its children are stopped")
-	case *actor.Restarting:
-		log.Println("Restarting, actor is about restart")
-	case string:
-		log.Printf("Hello %v\n", msg)
-	}
+  switch msg := ctx.Message().(type) {
+  case *actor.Started:
+    log.Println("Started, initialize actor here")
+  case *actor.Stopping:
+    log.Println("Stopping, actor is about shut down")
+  case *actor.Stopped:
+    log.Println("Stopped, actor and its children are stopped")
+  case *actor.Restarting:
+    log.Println("Restarting, actor is about restart")
+  case string:
+    log.Printf("Hello %v\n", msg)
+  }
 }
 
 func main() {
-	system := actor.NewActorSystem()
-	remoteConfig := remote.Configure("localhost", 8080)
-	remote := remote.NewRemote(system, remoteConfig)
-	remote.Start()
+  system := actor.NewActorSystem()
+  remoteConfig := remote.Configure("localhost", 8080)
+  remote := remote.NewRemote(system, remoteConfig)
+  remote.Start()
 
-	clusterConfig := cluster.Configure("mycluster", remote, nil)
-	c := cluster.NewCluster(system, clusterConfig)
-	c.Start("node1", "localhost:8080")
+  clusterConfig := cluster.Configure("mycluster", remote, nil)
+  c := cluster.NewCluster(system, clusterConfig)
+  c.Start("node1", "localhost:8080")
 
-	props := actor.PropsFromProducer(func() actor.Actor { return &HelloActor{} })
-	pid, err := c.SpawnNamed(props, "hello")
-	if err != nil {
-		log.Fatalf("Failed to spawn named actor: %v", err)
-	}
+  props := actor.PropsFromProducer(func() actor.Actor { return &HelloActor{} })
+  pid, err := c.SpawnNamed(props, "hello")
+  if err != nil {
+    log.Fatalf("Failed to spawn named actor: %v", err)
+  }
 
-	c.PID("hello").Tell("Hello World")
+  c.PID("hello").Tell("Hello World")
 
-	time.Sleep(1 * time.Second)
-	c.Shutdown(true)
+  time.Sleep(1 * time.Second)
+  c.Shutdown(true)
 }
 ```
 
@@ -716,11 +716,6 @@ Actor 的地址（Address）、ID 等。你可以使用 `actor.PID` 来发送消
 ### 1.6.7. autoMangment
 
 
-
-
-
--------------
-
 Actor kind 是一种 actor 的类型，它定义了 actor 处理消息的方式。
 
 > `Kind` 表示一个集群可以管理的 Actor 种类。
@@ -755,4 +750,3 @@ Actor kind 是一种 actor 的类型，它定义了 actor 处理消息的方式�
 - 知乎深入解析 actor 模型（二)： actor 在 go 实践 proto.Actor 源码解析：https://zhuanlan.zhihu.com/p/427817175
 - Chat Example Using Proto.Actor: https://aneshas.medium.com/chat-example-using-proto-actor-5b42864c2d70
 - 微软 Orleans 教程：https://orleans.azurewebsites.net/docs/index.html
-

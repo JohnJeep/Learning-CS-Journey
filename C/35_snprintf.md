@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-01-25 21:25:38
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:59:23
+ * @LastEditTime: 2026-08-09 17:09:34
  * @Description: snprintf() usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 snprintf() 函数
@@ -23,23 +23,23 @@ snprintf() 函数
   - 若出错则返回 `负值`。
 
 ```C
-#include <stdio.h> 
-  
-int main() 
-{ 
-    char buffer[50]; 
-    char* s = "geeksforgeeks"; 
-  
-    // Counting the character and storing  
-    // in buffer using snprintf 
-    int j = snprintf(buffer, 6, "%s\n", s); 
-  
-    // Print the string stored in buffer and 
-    // character count 
-    printf("string:\n%s\ncharacter count = %d\n", buffer, j); 
-  
-    return 0; 
-} 
+#include <stdio.h>
+
+int main()
+{
+    char buffer[50];
+    char* s = "geeksforgeeks";
+
+    // Counting the character and storing
+    // in buffer using snprintf
+    int j = snprintf(buffer, 6, "%s\n", s);
+
+    // Print the string stored in buffer and
+    // character count
+    printf("string:\n%s\ncharacter count = %d\n", buffer, j);
+
+    return 0;
+}
 ```
 
 ```C++
@@ -50,20 +50,20 @@ using namespace std;
 
 int main()
 {
-    char buffer[100];
-    int retVal, buf_size = 100;
-    char name[] = "Max";
-    int age = 23;
+  char buffer[100];
+  int retVal, buf_size = 100;
+  char name[] = "Max";
+  int age = 23;
 
-    retVal = snprintf(buffer, buf_size, "Hi, I am %s and I am %d years old", name, age);
-    if (retVal > 0 && retVal < buf_size) {
-        cout << buffer << endl;
-        cout << "Number of characters written = " << retVal << endl;
-    }
-    else {
-        cout << "Error writing to buffer" << endl;
-    }
-    
-    return 0;
+  retVal = snprintf(buffer, buf_size, "Hi, I am %s and I am %d years old", name, age);
+  if (retVal > 0 && retVal < buf_size) {
+    cout << buffer << endl;
+    cout << "Number of characters written = " << retVal << endl;
+  }
+  else {
+    cout << "Error writing to buffer" << endl;
+  }
+
+  return 0;
 }
 ```

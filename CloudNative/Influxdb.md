@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-09-15 11:03:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:27:56
+ * @LastEditTime: 2026-08-09 17:26:58
  * @Description: InfluxDB Use and Development
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. InfluxDB
@@ -260,7 +260,7 @@ SELECT value FROM temperature WHERE location='office' AND time > now() - 1h
    ```sql
    -- 从最早到最新
    SELECT * FROM temperature ORDER BY time ASC
-   
+
    -- 从最新到最早
    SELECT * FROM temperature ORDER BY time DESC
    ```
@@ -329,4 +329,3 @@ SHOW TAG KEYS FROM measurement_name
 # References
 
 - [InfluxDB（一）初探时序数据库](https://exceting.github.io/2019/06/21/InfluxDB%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E6%8E%A2%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/)
-

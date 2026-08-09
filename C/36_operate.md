@@ -2,13 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2021-02-26 10:15:21
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:58:53
+ * @LastEditTime: 2026-08-09 17:09:45
  * @Description: operator precedence
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 在项目中遇见了 `*p++` 这种操作，但不明白在 `*p++`中 `++` 和 `*` 是怎样执行的？现在我们来一一剖析它的运算过程。
-
 
 - C 语言中取值运算符 `*` 与前置自增运算符`++`、后置自增运算符`++`都属于单目运算符，运算符的优先级顺序同为第 2
   级，结合方向为 `右到左`。其中，`*` 使用形式为：`*p`，用于指针变量，前置自增使用形式为
@@ -28,12 +27,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    char ch[] = "hello";
-    char* p = ch;
+  char ch[] = "hello";
+  char* p = ch;
 
-    cout << *p++ << " ";
-    
-    return 0;
+  cout << *p++ << " ";
+
+  return 0;
 }
 ```
 运行调试过程：执行 `cout << *p++ << " ";` 这条语句时（不考虑标准库中 cout 的调用过程），开始时指针 p 指向字符串
@@ -49,4 +48,5 @@ int main(int argc, char *argv[])
 
 
 # References
- - [百度百科解释运算符优先级](https://baike.baidu.com/item/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/4752611?fr=aladdin)  
+
+ - [百度百科解释运算符优先级](https://baike.baidu.com/item/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/4752611?fr=aladdin)

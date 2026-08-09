@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-06-12 17:49:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-01 21:34:29
+ * @LastEditTime: 2026-08-09 17:39:56
  * @Description: golang map
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # Introduction
@@ -21,11 +21,11 @@ Swiss Table 是由 Google 工程师于 2017 年开发的一种高效哈希表实
 
 ## Go `map` 优化的版本演进
 
-| 版本        | 变更内容                                                     | 状态           |
-| :---------- | :----------------------------------------------------------- | :------------- |
-| **Go 1.19** | 开始引入 SwissTable 的部分优化（如元数据数组），但默认仍使用旧哈希表 | **实验性优化** |
-| **Go 1.20** | 进一步优化内存布局，减少冲突概率                             | **部分启用**   |
-| **Go 1.23** | 在开发分支中默认启用新实现（[CL 515335](https://go-review.googlesource.com/c/go/+/515335)） | **默认开启**   |
+| 版本        | 变更内容                                                                                         | 状态           |
+| :---------- | :----------------------------------------------------------------------------------------------- | :------------- |
+| **Go 1.19** | 开始引入 SwissTable 的部分优化（如元数据数组），但默认仍使用旧哈希表                             | **实验性优化** |
+| **Go 1.20** | 进一步优化内存布局，减少冲突概率                                                                 | **部分启用**   |
+| **Go 1.23** | 在开发分支中默认启用新实现（[CL 515335](https://go-review.googlesource.com/c/go/+/515335)）      | **默认开启**   |
 | **Go 1.24** | 完全移除旧版哈希表代码，SwissTable 成为唯一实现（[官方公告](https://tip.golang.org/doc/go1.24)） | **完全稳定**   |
 
 ------
@@ -49,10 +49,10 @@ Swiss Table 是由 Google 工程师于 2017 年开发的一种高效哈希表实
 
 ```go
 func BenchmarkMapInsert(b *testing.B) {
-    m := make(map[int]int)
-    for i := 0; i < b.N; i++ {
-        m[i] = i
-    }
+  m := make(map[int]int)
+  for i := 0; i < b.N; i++ {
+    m[i] = i
+  }
 }
 ```
 
@@ -195,7 +195,7 @@ Swiss table 在 Go 语言中的具体实现主要涉及多个文件，以下为�
   func (t *table) grow(typ *abi.SwissMapType, m *Map, newCapacity uint16) {
       // ...
   }
-  
+
   // modified.
   func (t *table) rehash(typ *abi.SwissMapType, m *Map) {
       // ...
@@ -212,7 +212,7 @@ Swiss table 在 Go 语言中的具体实现主要涉及多个文件，以下为�
 
 ```go
 func (d *dwctxt) synthesizemaptypesSwiss(ctxt *Link, die *dwarf.DWDie) {
-    // ...
+  // ...
 }
 ```
 
@@ -221,7 +221,7 @@ func (d *dwctxt) synthesizemaptypesSwiss(ctxt *Link, die *dwarf.DWDie) {
 
 ```python
 def swiss_map_children(self):
-    # ...
+  # ...
 ```
 
 - **`go/src/internal/runtime/maps/map_swiss_test.go`**：该文件包含了对 Swiss table 实现的单元测试，用于验证不同大小的
@@ -229,7 +229,7 @@ def swiss_map_children(self):
 
 ```go
 func TestTableGroupCount(t *testing.T) {
-    // ...
+  // ...
 }
 ```
 
@@ -238,7 +238,7 @@ func TestTableGroupCount(t *testing.T) {
 
 ------
 
-## 为什么 SwissTable 更快？
+## 为什么 SwissTable 更快
 
 1. **SIMD 并行匹配**：单条指令比较多个元数据，减少分支预测失败。
 2. **缓存友好**：紧凑存储减少 CPU 缓存行失效。
@@ -246,8 +246,6 @@ func TestTableGroupCount(t *testing.T) {
 
 `Swiss Table` 在查询、插入和删除操作上均提升了 20%至 50%的性能，尤其是在处理大 `hashmap`
 时表现尤为突出；迭代性能提升了 10%；内存使用减少了 0%至 25%，并且不再消耗额外内存。
-
-
 
 
 # References

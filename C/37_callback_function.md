@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2021-04-05 16:08:47
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:58:23
+ * @LastEditTime: 2026-08-09 17:10:28
  * @Description: callback function
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 什么是回调函数？
@@ -61,35 +61,35 @@ windows 系统中外部应用程序与系统库函数之间通过 `callback` 函
 #include <time.h>
 
 /* The calling function takes a single callback as a parameter. */
-void PrintTwoNumbers(int (*numberSource)(void)) 
+void PrintTwoNumbers(int (*numberSource)(void))
 {
-    int val1 = numberSource();
-    int val2 = numberSource();
-    printf("%d and %d\n", val1, val2);
+  int val1 = numberSource();
+  int val2 = numberSource();
+  printf("%d and %d\n", val1, val2);
 }
 
 /* A possible callback */
-int overNineThousand(void) 
+int overNineThousand(void)
 {
-    return (rand()%1000) + 9001;
+  return (rand()%1000) + 9001;
 }
 
 /* Another possible callback. */
-int meaningOfLife(void) 
+int meaningOfLife(void)
 {
-    return 42;
+  return 42;
 }
 
 /* Here we call PrintTwoNumbers() with three different callbacks. */
-int main(void) 
+int main(void)
 {
-    time_t t;
-    srand((unsigned)time(&t)); // Init seed for random function
-    PrintTwoNumbers(&rand);
-    PrintTwoNumbers(&overNineThousand);
-    PrintTwoNumbers(&meaningOfLife);
+  time_t t;
+  srand((unsigned)time(&t)); // Init seed for random function
+  PrintTwoNumbers(&rand);
+  PrintTwoNumbers(&overNineThousand);
+  PrintTwoNumbers(&meaningOfLife);
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -99,18 +99,18 @@ int main(void)
 #include <string.h>
 
 typedef struct _MyMsg {
-    int id;
-    char name[32];
+  int id;
+  char name[32];
 } MyMsg;
 
 void myfunc(MyMsg *msg)
 {
-    if (strlen(msg->name) > 0 ) {
-        printf("id = %d \name = %s \n",msg->id, msg->name);
-    }
-    else {
-        printf("id = %d \name = No name\n",msg->id);
-    }
+  if (strlen(msg->name) > 0 ) {
+    printf("id = %d \name = %s \n",msg->id, msg->name);
+  }
+  else {
+    printf("id = %d \name = No name\n",msg->id);
+  }
 }
 
 /*
@@ -120,22 +120,22 @@ void (*callback)(MyMsg*);
 
 int main(void)
 {
-    MyMsg msg1;
-    msg1.id = 100;
-    strcpy(msg1.name, "This is a test\n");
+  MyMsg msg1;
+  msg1.id = 100;
+  strcpy(msg1.name, "This is a test\n");
 
-    /*
-     * Assign the address of the function "myfunc" to the function
-     * pointer "callback" (may be also written as "callback = &myfunc;")
-     */
-    callback = myfunc;
+  /*
+    * Assign the address of the function "myfunc" to the function
+    * pointer "callback" (may be also written as "callback = &myfunc;")
+    */
+  callback = myfunc;
 
-    /*
-     * Call the function (may be also written as "(*callback)(&msg1);")
-     */
-    callback(&msg1);
+  /*
+    * Call the function (may be also written as "(*callback)(&msg1);")
+    */
+  callback(&msg1);
 
-    return 0;
+  return 0;
 }
 ```
 

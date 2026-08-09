@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 19:25:07
  * @Description: struct and byte-aligned in C language
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 结构体定义（3 种）
@@ -17,7 +17,7 @@
 ```
 struct 结构体标识符
 {
-    成员变量列表;
+  成员变量列表;
 }变量名列表;
 ```
 
@@ -25,7 +25,7 @@ struct 结构体标识符
 ```
 struct
 {
-    成员变量列表;
+  成员变量列表;
 }变量名列表;
 ```
 
@@ -33,7 +33,7 @@ struct
 ```
 struct 结构体标识符
 {
-    成员变量列表;
+  成员变量列表;
 };
 struct 结构体标识符 变量名列表;
 ```
@@ -54,7 +54,7 @@ struct 结构体标识符 变量名列表;
   变量。</font>
 - 声明结构体变量后，单独初始化每个成员
 - 通过集合符号对结构体变量进行初始化，使用花括号。变量之间用逗号隔开，成员字段按指定顺序查值并初始化。
-- 使用结构体指针之前，必须对其进行初始化 
+- 使用结构体指针之前，必须对其进行初始化
 - <font color="red">结构体只是一种 `类型`，不是变量。 </font>
 
 
@@ -63,33 +63,33 @@ struct 结构体标识符 变量名列表;
 - 一个结构体成员列表中嵌套另外一种数据类型的结构体，并声明该结构体类型的变量
 ```C
 struct Student{
-    char name[20];
-    char sex;
-    int age;
-    struct Teacher{
-                    int num;
-                    char subject[20];
-                    char address[30];
-                }teacher;
-            }Stu;
+  char name[20];
+  char sex;
+  int age;
+  struct Teacher{
+          int num;
+          char subject[20];
+          char address[30];
+        }teacher;
+      }Stu;
 
 ```
 - 定义一个结构体数据类型时候，成员列表中可以定义若干个其他数据类型的结构体，并同时声明该类型的结构体变量
 ```C
 struct Student{
-                char name[20];
-                char sex;
-                int age;
-                struct Teacher{
-                                int num;
-                                char subject[20];
-                                char address[30];
-                                struct unit{
-                                            char company[30];
-                                            char company_addr[30];
-                                           }units;
-                              }teacher;
-              }Stu;
+  char name[20];
+  char sex;
+  int age;
+  struct Teacher{
+    int num;
+    char subject[20];
+    char address[30];
+    struct unit{
+      char company[30];
+      char company_addr[30];
+      }units;
+    }teacher;
+  }Stu;
 ```
 
 

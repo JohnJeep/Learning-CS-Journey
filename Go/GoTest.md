@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-12-18 14:05:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:17:58
+ * @LastEditTime: 2026-08-09 17:39:39
  * @Description: Go 测试用法
- * Copyright (c) 2024 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2024 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Testing(测试)
@@ -57,25 +57,25 @@ go test 命令执行原理
   // 若运行正确，则无日志；若运行错误，则有日志
   // go test 后面没有参数指定包，那么将默认采用当前目录对应的包
   go test
-  
+
   // 无论运行是正确还是错误，都有日志输出
   // 参数 -v: 显示每个测试用例的结果和运行时间
   go test -v
-  
+
   // 测试单个文件
   go test -v socket_test.go socket.go
-  
+
   // 测试单个方法
   go test -v -test.run TestAdd
-  
+
   // CPU 剖析数据标识了最耗 CPU 时间的函数。 在每个 CPU 上运行的线程在每隔几毫秒都会遇到
   // 操作系统的中断事件， 每次中断时都会记录一个剖析数据然后恢复正常的运行。
   go test -cpuprofile=cpu.out
-  
+
   // 堆剖析则标识了最耗内存的语句。剖析库会记录调用内部内存分配的操作，
   // 平均每 512KB 的内存申请会触发一个剖析数据。
   go test -memprofile=mem.out
-  
+
   // 阻塞剖析则记录阻塞 goroutine 最久的操作， 例如系统调用、 管道发送和接收，
   // 还有获取锁等。 每当 goroutine 被这些操作阻塞时， 剖析库都会记录相应的事件。
   go test -blockprofile=block.out
@@ -107,9 +107,9 @@ import "testing"
 
 // 循环中执行 N 次
 func BenchmarkSum(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Sum("A man, a plan, a canal: Panama")
-	}
+  for i := 0; i < b.N; i++ {
+    Sum("A man, a plan, a canal: Panama")
+  }
 }
 ```
 
@@ -272,4 +272,3 @@ go tool cover -html=c.out
 
 - [腾讯工作 13 年之所思所想，那些优秀程序员的共性特征](https://mp.weixin.qq.com/s/FKRedldguFVPred7johg8A)
 - [腾讯 13 年，我所总结的 Code Review 终极大法](https://mp.weixin.qq.com/s/HoFSNCd1U3eoUqYaQiEgwQ)
-

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-05-27 16:55:08
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:56:45
+ * @LastEditTime: 2026-08-09 17:12:57
  * @Description: statistic memory usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 ## 背景
@@ -59,33 +59,31 @@ struct rusage {
 // 获取当前进程的内存使用情况，并打印相关信息
 void PrintMemoryUsage()
 {
-    struct rusage usage;
-    if (getrusage(RUSAGE_SELF, &usage) == 0)
-    {
-        std::cout << "内存使用情况：" << std::endl;
-        std::cout << "最大常驻内存集：" << usage.ru_maxrss << " KB" << std::endl;
-        std::cout << "页面错误次数：" << usage.ru_majflt << std::endl;
-        std::cout << "不可恢复的页面错误次数：" << usage.ru_minflt << std::endl;
-    }
-    else
-    {
-        std::cerr << "无法获取内存使用情况" << std::endl;
-    }
+  struct rusage usage;
+  if (getrusage(RUSAGE_SELF, &usage) == 0) {
+    std::cout << "内存使用情况：" << std::endl;
+    std::cout << "最大常驻内存集：" << usage.ru_maxrss << " KB" << std::endl;
+    std::cout << "页面错误次数：" << usage.ru_majflt << std::endl;
+    std::cout << "不可恢复的页面错误次数：" << usage.ru_minflt << std::endl;
+  }
+  else {
+    std::cerr << "无法获取内存使用情况" << std::endl;
+  }
 }
 
 int main()
 {
-    // 在合适的位置调用 PrintMemoryUsage() 来记录内存使用情况
+  // 在合适的位置调用 PrintMemoryUsage() 来记录内存使用情况
 
-    // 示例：打印程序开始时的内存使用情况
-    PrintMemoryUsage();
+  // 示例：打印程序开始时的内存使用情况
+  PrintMemoryUsage();
 
-    // 在这里添加你的代码
+  // 在这里添加你的代码
 
-    // 示例：打印程序结束时的内存使用情况
-    PrintMemoryUsage();
+  // 示例：打印程序结束时的内存使用情况
+  PrintMemoryUsage();
 
-    return 0;
+  return 0;
 }
 ```
 
@@ -123,15 +121,15 @@ struct mallinfo {
 
 int main()
 {
-    // 调用 mallinfo() 函数获取堆内存的使用情况
-    struct mallinfo info = mallinfo();
+  // 调用 mallinfo() 函数获取堆内存的使用情况
+  struct mallinfo info = mallinfo();
 
-    std::cout << "总分配空间：" << info.arena << " bytes" << std::endl;
-    std::cout << "空闲空间：" << info.fordblks << " bytes" << std::endl;
-    std::cout << "空闲块数量：" << info.ordblks << std::endl;
-    // 其他字段...
+  std::cout << "总分配空间：" << info.arena << " bytes" << std::endl;
+  std::cout << "空闲空间：" << info.fordblks << " bytes" << std::endl;
+  std::cout << "空闲块数量：" << info.ordblks << std::endl;
+  // 其他字段...
 
-    return 0;
+  return 0;
 }
 ```
 

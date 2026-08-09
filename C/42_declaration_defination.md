@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-05-27 16:55:08
  * @LastEditors: JohnJeep
- * @LastEditTime: 2023-05-27 17:05:33
+ * @LastEditTime: 2026-08-09 17:12:25
  * @Description: declaration 与 definition 区别
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 
@@ -12,7 +12,7 @@
 
 ## 声明(declaration)
 
-告诉编译器某个东西的类型和名称，即不提供存储的位置和具体实现的细节。 
+告诉编译器某个东西的类型和名称，即不提供存储的位置和具体实现的细节。
 
 ```c++
 extern int x;                   // 变量声明
@@ -36,7 +36,7 @@ std::size_t func(int num)
   std::size_t a;
   return (a + 10);
 }
-	
+
 // class 定义
 class Widget
 {
@@ -47,12 +47,12 @@ public:
 };
 
 // 模板定义
-template<typename T>            
+template<typename T>
 class Student
 {
 public:
-  Student();    
-  ~Student();    
+  Student();
+  ~Student();
 };
 ```
 

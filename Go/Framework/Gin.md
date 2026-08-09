@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-04-18 15:16:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-23 17:31:24
+ * @LastEditTime: 2026-08-09 17:33:46
  * @Description: Gin framework usage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -12,7 +12,7 @@
 Gin 是一个用 Go (Golang) 编写的 Web 框架。 它具有类似 martini 的 API，性能要好得多，多亏了 `httprouter`，速度提高了
 40 倍。 如果您需要性能和良好的生产力，您一定会喜欢 Gin。
 
-基于官方 net/http 内建标准库封装的。 
+基于官方 net/http 内建标准库封装的。
 
 # 2. Fundamental
 
@@ -30,11 +30,11 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
 
   ```go
   package main
-  
+
   import (
       "github.com/gin-gonic/gin"
   )
-  
+
   func main() {
       r := gin.Default() // 默认使用 Logger 和 Recovery 中间件
       r.GET("/", func(c *gin.Context) {
@@ -57,12 +57,12 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
 
   ```go
   package main
-  
+
   import (
       "github.com/gin-gonic/gin"
       "github.com/gin-gonic/gin/middleware"
   )
-  
+
   func main() {
       r := gin.Default()
       r.Use(middleware.Gzip(middleware.DefaultCompression))
@@ -81,12 +81,12 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
 
   ```go
   package main
-  
+
   import (
       "github.com/gin-gonic/gin"
       "net/http"
   )
-  
+
   func authMiddleware() gin.HandlerFunc {
       return func(c *gin.Context) {
           // 模拟身份验证逻辑
@@ -101,7 +101,7 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
           c.Next()
       }
   }
-  
+
   func main() {
       r := gin.Default()
       r.GET("/public", func(c *gin.Context) {
@@ -154,15 +154,15 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
     	ctx.JSON(200, param)
     })
     ```
-- API 
+- API
   - 路由分组：Group()
   - 参数查询
     - `Query()` 查询普通的参数
     - `GetQuery()` 判断指定的参数是否存在
     - `DefaultQuery()` 指定的参数不存在，给定个默认值
-    - `BindQuery()` 
+    - `BindQuery()`
     - `ShouldBindQuery()`  相比 `BindQuery()`  报错后不影响。
-      
+
       > map 类型请求参数不支持。
 
 ## 2.2. set mode
@@ -171,15 +171,15 @@ Gin 是一个高性能的 HTTP 框架，核心可能包括路由、中间件、�
 var mode string = gin.DebugMode
 
 func init() {
-	switch mode {
-	case gin.DebugMode:
-	case gin.ReleaseMode:
-	case gin.TestMode:
-	default:
-		mode = gin.DebugMode
-	}
+  switch mode {
+  case gin.DebugMode:
+  case gin.ReleaseMode:
+  case gin.TestMode:
+  default:
+    mode = gin.DebugMode
+  }
 
-	gin.SetMode(mode)
+  gin.SetMode(mode)
 }
 ```
 
@@ -191,5 +191,3 @@ func init() {
 - Go packages: https://pkg.go.dev/github.com/gin-gonic/gin
 - official example: https://github.com/gin-gonic/examples
 - gin 框架源码解析：https://www.liwenzhou.com/posts/Go/gin-sourcecode/
-
-

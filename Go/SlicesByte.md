@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-05-10 17:49:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-01 21:34:01
+ * @LastEditTime: 2026-08-09 17:40:55
  * @Description: golang slices bytes
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # [] byte 字节切片
@@ -41,17 +41,17 @@
 
 1. 创建 `[]byte`
    - 使用字符串字面量初始化
-   
+
   ```go
      data := []byte("hello")
      ```
-   
+
      使用 `make` 函数创建指定长度的空切片
-   
+
      ```go
      data := make([]byte, 10)`
      ```
-   
+
 2. 获取 `[]byte` 长度
 
    - 使用 `len` 函数获取切片的长度：`length := len(data)`。
@@ -112,23 +112,23 @@
      ```
 
    - 用 `encoding/base64` 包进行 `[]byte` 的 Base64 编码和解码。
-   
+
      ```go
      package main
-     
+
      import (
      	"encoding/base64"
      	"fmt"
      )
-     
+
      func main() {
      	// 要编码的原始数据
      	originalData := []byte("Hello, World!")
-     
+
      	// 进行Base64编码
      	encodedData := base64.StdEncoding.EncodeToString(originalData)
      	fmt.Println("Base64 编码结果:", encodedData)
-     
+
      	// 进行Base64解码
      	decodedData, err := base64.StdEncoding.DecodeString(encodedData)
      	if err != nil {
@@ -143,6 +143,7 @@
 
 
 ## 一、[]byte 表示的数值范围是多少
+
 在 Go 语言中，`[]byte` 切片表示的数值范围是 0 到 255。`byte` 类型实际上是 `uint8` 类型的别名，它是一个无符号的 8
 位整数类型。
 
@@ -152,7 +153,9 @@
 需要注意的是，虽然 `byte` 类型的底层表示是无符号的，但在进行运算时，它会被视为一个 8
 位的无符号整数。这意味着在进行加法、减法或其他算术运算时，会按照无符号整数的规则进行计算。
 
+
 ## 二、编译器将 data := []byte("hello") 解释成什么
+
 程序中写了一行下面的代码，将字符串转化为字节切片
 
 ```go
@@ -176,6 +179,7 @@ data := []byte("hello")
 
 
 ## 三、字符串 "hello" 按照 UTF-8 编码转换为字节序列后，转换后的字节序列是什么？
+
 当字符串 `"hello"` 按照 UTF-8 编码转换为字节序列后，转换后的字节序列如下所示：
 
 ```go
@@ -186,6 +190,7 @@ data := []byte("hello")
 编码。这些数字就是 ASCII 值。
 
 **为什么是一个数字是一个字节？**
+
 >  根据 UTF-8 编码规则，英文字母和常见符号通常使用一个字节表示。
 
 解读转换后的字节序列：
@@ -197,6 +202,7 @@ data := []byte("hello")
 
 
 ## 四、data := []byte("hello") 在编译器和内存中存储的格式是什么
+
 在编译器和内存中，`data := []byte("hello")` 所表示的数据格式如下：
 
 1. 编译器处理：
@@ -215,4 +221,5 @@ data := []byte("hello")
 
 
 ## References
+
 - ASCII 值常用对照表：https://tool.oschina.net/commons?type=4

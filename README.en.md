@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-04-19
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-13 16:42:09
+ * @LastEditTime: 2026-08-09 17:43:53
  * @Description: English project overview
  * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
@@ -49,21 +49,21 @@ with a strong focus on understanding both how things work and why they work.
 ## Knowledge Map
 
 ```
-                        ┌──────────────────────┐
-                        │   Learning CS Journey │
-                        └──────────┬───────────┘
-           ┌───────────────┬───────┴───────┬───────────────┐
-           ▼               ▼               ▼               ▼
-    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-    │ Hardware     │ │ Programming  │ │ Systems &    │ │ Applications │
-    │ Foundations  │ │ Languages    │ │ Networking   │ │ & Frontiers  │
-    └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-           │               │               │               │
-    Architecture     C / C++          OS (MIT/THU)   Cloud Native
-    Assembly         Go               Linux           Distributed
-    Embedded         Python           Network(CS144)  AI / AIGC
-    GNU              Shell/JS/TS      MySQL / Redis   Robotics (ROS2)
-                                      Nginx           AutoDrive
+            ┌──────────────────────┐
+            │   Learning CS Journey │
+            └──────────┬───────────┘
+      ┌───────────────┬───────┴───────┬───────────────┐
+      ▼               ▼               ▼               ▼
+  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+  │ Hardware     │ │ Programming  │ │ Systems &    │ │ Applications │
+  │ Foundations  │ │ Languages    │ │ Networking   │ │ & Frontiers  │
+  └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+      │               │               │               │
+  Architecture     C / C++          OS (MIT/THU)   Cloud Native
+  Assembly         Go               Linux           Distributed
+  Embedded         Python           Network(CS144)  AI / AIGC
+  GNU              Shell/JS/TS      MySQL / Redis   Robotics (ROS2)
+                    Nginx           AutoDrive
 ```
 
 ---
@@ -81,8 +81,7 @@ with a strong focus on understanding both how things work and why they work.
     - [Embedded Development](#embedded-development)
     - [GNU Toolchain](#gnu-toolchain)
   - [Programming Languages](#programming-languages)
-    - [C](#c)
-    - [C++](#c-1)
+    - [Cpp](#cpp)
     - [Go](#go)
     - [Other Languages](#other-languages)
   - [Operating Systems](#operating-systems)
@@ -139,7 +138,7 @@ Core GNU ecosystem topics such as GCC, glibc, and ABI details.
 
 ## Programming Languages
 
-### C
+### Cpp
 
 Systematic notes from fundamentals to modern C++ features, STL internals, memory management, and concurrency.
 
@@ -164,14 +163,14 @@ Comprehensive coverage from language basics to runtime internals.
 
 ### Other Languages
 
-| Language | Directory | Description |
-|------|------|------|
-| Python | `Python/` | Python basics and standard library |
-| JavaScript | `JavaScript/` | JavaScript language notes |
-| TypeScript | `TypeScript/` | TypeScript setup and usage |
-| Node.js | `node.js/` | Runtime and package ecosystem |
-| Shell | `Shell/` | Shell scripting, tmux, and crontab |
-| Qt | `Qt/` | Qt components and GUI development |
+| Language   | Directory     | Description                        |
+| ---------- | ------------- | ---------------------------------- |
+| Python     | `Python/`     | Python basics and standard library |
+| JavaScript | `JavaScript/` | JavaScript language notes          |
+| TypeScript | `TypeScript/` | TypeScript setup and usage         |
+| Node.js    | `node.js/`    | Runtime and package ecosystem      |
+| Shell      | `Shell/`      | Shell scripting, tmux, and crontab |
+| Qt         | `Qt/`         | Qt components and GUI development  |
 
 ---
 
@@ -229,11 +228,11 @@ A structured OS learning path combining top courses and classic references.
 
 ## Databases
 
-| Database | Content |
-|------|------|
-| MySQL | [MySQL Fundamentals](MySQL/MySQL.md): SQL tuning, connection pools, architecture |
-| Redis | [Redis Fundamentals](Redis/Redis.md): data structures, cluster topics, source-level notes |
-| Nginx | [Nginx Basics](Nginx/Nginx.md): configuration, reverse proxy, load balancing |
+| Database | Content                                                                                   |
+| -------- | ----------------------------------------------------------------------------------------- |
+| MySQL    | [MySQL Fundamentals](MySQL/MySQL.md): SQL tuning, connection pools, architecture          |
+| Redis    | [Redis Fundamentals](Redis/Redis.md): data structures, cluster topics, source-level notes |
+| Nginx    | [Nginx Basics](Nginx/Nginx.md): configuration, reverse proxy, load balancing              |
 
 ---
 
@@ -241,13 +240,13 @@ A structured OS learning path combining top courses and classic references.
 
 ### Cloud Native
 
-| Stack | Notes |
-|------|------|
-| Containerization | Docker, Kubernetes |
-| Service Communication | [gRPC](CloudNative/gRPC/), [Protobuf](CloudNative/Probobuf/), [MQTT](CloudNative/Mqtt.md) |
-| Messaging | [Kafka](CloudNative/Kafka/)<br>[RocketMQ](CloudNative/RocketMQ/) |
-| Governance | [Zookeeper](CloudNative/Zookeeper/)<br>[Actor Model](CloudNative/Actor.md) |
-| Observability and CI/CD | [InfluxDB](CloudNative/Influxdb.md)<br>[Jenkins](CloudNative/Jenkins/) |
+| Stack                   | Notes                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------- |
+| Containerization        | Docker, Kubernetes                                                                        |
+| Service Communication   | [gRPC](CloudNative/gRPC/), [Protobuf](CloudNative/Probobuf/), [MQTT](CloudNative/Mqtt.md) |
+| Messaging               | [Kafka](CloudNative/Kafka/)<br>[RocketMQ](CloudNative/RocketMQ/)                          |
+| Governance              | [Zookeeper](CloudNative/Zookeeper/)<br>[Actor Model](CloudNative/Actor.md)                |
+| Observability and CI/CD | [InfluxDB](CloudNative/Influxdb.md)<br>[Jenkins](CloudNative/Jenkins/)                    |
 
 ### Distributed Systems
 
@@ -308,14 +307,14 @@ Covers Modbus, Omron, Siemens, Beckhoff, Fanuc, WebRTC, SMTP, and related protoc
 
 ### Useful Tools
 
-| Tool | Link |
-|------|------|
-| VS Code | [Shortcuts and tips](StudyTool/VSCode.md) |
-| JetBrains | [Plugins and usage](StudyTool/JetbrainsPlugins.md) |
-| draw.io | [Shortcuts](StudyTool/draw.io.md) |
-| Windows Productivity | [Windows shortcuts](StudyTool/Windows10.md) |
-| Tablet Tooling | [iPad tools list](StudyTool/iPad-tools.md) |
-| Learning Resources | [Useful websites](StudyTool/WebsiteReferences.md) |
+| Tool                 | Link                                               |
+| -------------------- | -------------------------------------------------- |
+| VS Code              | [Shortcuts and tips](StudyTool/VSCode.md)          |
+| JetBrains            | [Plugins and usage](StudyTool/JetbrainsPlugins.md) |
+| draw.io              | [Shortcuts](StudyTool/draw.io.md)                  |
+| Windows Productivity | [Windows shortcuts](StudyTool/Windows10.md)        |
+| Tablet Tooling       | [iPad tools list](StudyTool/iPad-tools.md)         |
+| Learning Resources   | [Useful websites](StudyTool/WebsiteReferences.md)  |
 
 ### Documentation and Knowledge Management
 
@@ -343,12 +342,12 @@ Root directory:
 
 ### Recommended Books
 
-| Area | Books |
-|------|------|
-| Computer Systems | CSAPP, systems programming and linking references |
-| Operating Systems | Operating Systems: Three Easy Pieces |
-| Computer Networks | Computer Networking: A Top-Down Approach |
-| Distributed Systems | Designing Data-Intensive Applications |
+| Area                | Books                                             |
+| ------------------- | ------------------------------------------------- |
+| Computer Systems    | CSAPP, systems programming and linking references |
+| Operating Systems   | Operating Systems: Three Easy Pieces              |
+| Computer Networks   | Computer Networking: A Top-Down Approach          |
+| Distributed Systems | Designing Data-Intensive Applications             |
 
 ---
 

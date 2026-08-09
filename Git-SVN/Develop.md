@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-06-05 17:46:37
+ * @LastEditTime: 2026-08-09 17:31:28
  * @Description: Git develop flow
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # Develop Workflow
@@ -12,7 +12,7 @@
 1. 克隆仓库，拉取最新代码
    ```shell
    cd workspace
-   
+
    git clone <remote_repository_url>
    ```
 2. 创建分支并切换到要拉取代码的新分支
@@ -21,7 +21,7 @@
    ```
 3. 功能开发，提交 commit
    ```shell
-   git add 
+   git add
    git commit
    ```
 
@@ -31,44 +31,44 @@
    ```bash
    // feature分支下
    git pull origin dev
-   
+
    //本地 Git 库与远程的仓库关联
-   git remote add origin git@github.com:liao/learngit.git  
-   
+   git remote add origin git@github.com:liao/learngit.git
+
    // 第一次推送远程feature
    git push --set-upstream origin feature
-   
+
    // 非第一次推送远程feature
    git push origin feature   // 或直接 git push
-   
+
    git switch dev
    git merge feature
-   
+
    git push origin dev
    ```
-   
+
    采用 rebase 方式：
-   
+
    ```bash
    // feature分支下未做任何的提交
    git pull origin dev
-   
+
    // feature分支下有commit历史
    // 拉取远程最新的提交到本地feature分支下，并将本地之前feature的提交记录放到当前记录的最后
-   git pull origin dev --rebase 
-   
+   git pull origin dev --rebase
+
    // 继续开发
-   git add 
+   git add
    git commit
-   
+
    // 开发完成后，切换到dev分支下，采用merge方式，为了保存合并记录
    git switch dev
    git merge feature
-   
+
    // 本地dev分支下提交到远程dev分支
    git push origin dev
    ```
-   
+
 
 # Git CLI
 

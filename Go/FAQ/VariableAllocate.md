@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-05-11 17:49:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:31:15
+ * @LastEditTime: 2026-08-09 17:33:22
  * @Description: variable allocate
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # How do I know whether a variable is allocated on the heap or the stack?
@@ -25,14 +25,14 @@ package main
 import "fmt"
 
 func fun() *int {    //int类型指针函数
-    var tmp := 1
-    return &tmp      //返回局部变量tmp的地址
+  var tmp := 1
+  return &tmp      //返回局部变量tmp的地址
 }
 
 func main() {
-    var p *int
-    p = fun()
-    fmt.Printf("%d\n", *p) //这里不会像C，报错段错误提示，而是成功返回变量V的值1
+  var p *int
+  p = fun()
+  fmt.Printf("%d\n", *p) //这里不会像C，报错段错误提示，而是成功返回变量V的值1
 }
 ```
 
@@ -63,4 +63,3 @@ leak，因为 GO 语言有强大的垃圾回收机制。go 语言声称这样可
 
 - Go FAQ: https://go.dev/doc/faq#stack_or_heap
 - CSDN Go 语言---函数返回局部变量地址：https://blog.csdn.net/li_101357/article/details/80209413
-

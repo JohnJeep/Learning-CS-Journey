@@ -44,20 +44,20 @@
 ## 🗺️ 知识图谱
 
 ```
-                        ┌──────────────────────┐
-                        │   Learning CS Journey │
-                        └──────────┬───────────┘
-           ┌───────────────┬───────┴───────┬───────────────┐
-           ▼               ▼               ▼               ▼
-    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-    │  硬件 & 底层  │ │  编程语言     │ │  系统 & 网络  │ │  应用 & 前沿  │
-    └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-           │               │               │               │
-    Architecture     C / C++          OS (MIT/THU)   Cloud Native
-    Assembly         Go               Linux           Distributed
-    Embedded         Python           Network(CS144)  AI / AIGC
-    GNU              Shell/JS/TS      MySQL / Redis   Robotics (ROS2)
-                                      Nginx           AutoDrive
+            ┌──────────────────────┐
+            │   Learning CS Journey │
+            └──────────┬───────────┘
+      ┌───────────────┬───────┴───────┬───────────────┐
+      ▼               ▼               ▼               ▼
+  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+  │  硬件 & 底层  │ │  编程语言     │ │  系统 & 网络  │ │  应用 & 前沿  │
+  └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+      │               │               │               │
+  Architecture     C / C++          OS (MIT/THU)   Cloud Native
+  Assembly         Go               Linux           Distributed
+  Embedded         Python           Network(CS144)  AI / AIGC
+  GNU              Shell/JS/TS      MySQL / Redis   Robotics (ROS2)
+                    Nginx           AutoDrive
 ```
 
 ---

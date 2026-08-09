@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2019-08-29 21:45:27
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:18:09
+ * @LastEditTime: 2026-08-09 17:04:56
  * @Description: basic knowledgement
  * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
@@ -39,7 +39,7 @@ while ( expression )
 
 ```C
 do {
-    statement;
+  statement;
 } while (expresion);
 ```
 - 先执行后判断，为真则执行，为假则跳出
@@ -68,7 +68,7 @@ else {
 
 # 7. 文件流
 
-- C 语言处理的是流(stream),不直接处理文件。流（stream） 是一个实际输入或输出映射的理想化数据流。 
+- C 语言处理的是流(stream),不直接处理文件。流（stream） 是一个实际输入或输出映射的理想化数据流。
 - windows 操作系统可以使用内嵌的` Ctrl+Z `字符来标记文件结尾。而 Linux 中的文件结尾结尾标志为：`Ctrl+D`
 - 用` getchar()`读取文件检测到文件结尾时将返回一个特殊的值， 即 EOF（end of file）,在 C 语言中定义为` EOF=-1 `
 - ` scanf() `函数检测到文件结尾时也返回 EOF。
@@ -86,18 +86,18 @@ else {
 - #if
 ```C
 #if 表达式
-    程序段1
+  程序段1
 [# else
-    程序段2]
+  程序段2]
 #enif
 ```
 
 - #ifndef
 ```C
 #ifndef 标识符
-    程序段1
+  程序段1
 [# else
-    程序段2]
+  程序段2]
 #enif
 ```
 
@@ -112,11 +112,11 @@ else {
 - 单引号` ' ` :  代表一个整数，数值对应于该字符在 ASCII 字符集中的序列值；一个字符就是一个字节。
 - 双引号` " `: 表示一个字符串，进行指针运算，代表字符指针；
 其中一个字符也是一个字符串，大小为两个字节(后面为\0)。
-- <font color=red> 注意: </font> 
+- <font color=red> 注意: </font>
   - C 编译器接受字符和字符串的比较，无任何意义
   - C 编译器允许字符串对字符变量赋值，只能得到错误
 
-# 11. 其它知识点 
+# 11. 其它知识点
 
 b = ++a 先对 a 加一后赋值为 b
 

@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2023-09-15 11:03:37
  * @LastEditors: JohnJeep
- * @LastEditTime: 2025-04-04 19:26:59
+ * @LastEditTime: 2026-08-09 17:25:28
  * @Description: zookeeper learning
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 # 1. 概念
 
@@ -46,14 +46,14 @@ ZooKeeper 适用于存储和协同相关的关键数据，不适合用于大数�
 3） 全局数据一致：每个 Server 保存一份相同的数据副本， Client 无论连接到哪个 Server， 数据都是一致的。
 4） 更新请求顺序执行， 来自同一个 Client 的更新请求按其发送顺序依次执行。
 5） 数据更新原子性， 一次数据更新要么成功， 要么失败。
-6） 实时性， 在一定时间范围内， Client 能读到最新数据。  
+6） 实时性， 在一定时间范围内， Client 能读到最新数据。
 
 # 5. 数据模型（Data Model）
 
 ![img](https://zookeeper.readthedocs.io/zh/latest/_images/zkservice.jpg)
 
 ZooKeeper 数据模型的结构与 Unix 文件系统很类似，整体上可以看作是一棵树，每个节点称做一个 ZNode。每一个 ZNode
-默认能够存储 **1MB** 的数据，每个 ZNode 都可以通过其路径唯一标识。  
+默认能够存储 **1MB** 的数据，每个 ZNode 都可以通过其路径唯一标识。
 
 ZooKeeper 的数据模型是层次模型。层次模型常见于文件系统。层次模型和 key-value 模型是两种主流的数据模型。ZooKeeper
 使用文件系统模型主要基于以下两点考虑：
@@ -96,10 +96,10 @@ zxid 先发生。
 
 
 
-1. SID： 服务器 ID。 用来唯一标识一台 ZooKeeper 集群中的机器，每台机器不能重复， 和 myid 一致。  
+1. SID： 服务器 ID。 用来唯一标识一台 ZooKeeper 集群中的机器，每台机器不能重复， 和 myid 一致。
 2. ZXID：事务 ID。 ZXID 是一个事务 ID，用来标识一次服务器状态的变更。 在某一时刻，集群中的每台机器的 ZXID
-   值不一定完全一致，这和 ZooKeeper 服务器对于客户端“更新请求”的处理逻辑有关。  
-3. Epoch： 每个 Leader 任期的代号。没有 Leader 时同一轮投票过程中的逻辑时钟值是相同的。每投完一次票这个数据就会增加  
+   值不一定完全一致，这和 ZooKeeper 服务器对于客户端“更新请求”的处理逻辑有关。
+3. Epoch： 每个 Leader 任期的代号。没有 Leader 时同一轮投票过程中的逻辑时钟值是相同的。每投完一次票这个数据就会增加
 
 # 9. Zookeeper 的角色
 
@@ -126,16 +126,16 @@ zxid 先发生。
    ls /
    ```
 
-   
+
 
 2. 创建一个新的 Znode 创建成功以后我们可以使用 `ls /`查看我们创建的内容
 
    ```
    create /zkMxn muxiaonong
-   
+
     ls /
    [zkMxn, zookeeper]
-   
+
    ```
 
 3. 获取创建 Znode 的内容
@@ -168,7 +168,7 @@ zxid 先发生。
 3） 通过 connect 线程将注册的监听事件发送给 Zookeeper。
 4） 在 Zookeeper 的注册监听器列表中将注册的监听事件添加到列表中。
 5） Zookeeper 监听到有数据或路径变化， 就会将这个消息发送给 listener 线程。
-6） listener 线程内部调用了 process()方法。  
+6） listener 线程内部调用了 process()方法。
 
 ![image-20211121214454971](figures/zk-client-server.png)
 
@@ -203,30 +203,30 @@ WATCHER::
 WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/Yongheng
 ```
 
-<font color=red>注意：</font> 无论是节点中的数据还是节点的变化，注册一次，只能监听一次。想再次监听，需要再次注册。  
+<font color=red>注意：</font> 无论是节点中的数据还是节点的变化，注册一次，只能监听一次。想再次监听，需要再次注册。
 
 
 
-# Ensemble 
+# Ensemble
 
 Zookeeper 中的集群不叫 cluster，而是叫 ensemble。
 
 Zookeeper 使用的是一致性协议（consensus protocol），所以推荐每个 ensemble 里应该包含奇数（odd）个节点（比如 3 个、 5
 个等），因为只有当 ensemble 里的大多数节点处于可用状态，
 Zookeeper 才能处理外部的请求。也就是说，如果有一个包含 3 个节点的 ensemble，那么它允许一个节点失效。如果 ensemble
-包含 5 个节点，那么它允许 2 个节点失效。  
+包含 5 个节点，那么它允许 2 个节点失效。
 
 ## 集群中节点个数的选择
 
 假设有一个包含 5 个节点的集群（ensemble），为了将修改的配置（包括交换节点）文件写入到集群，你需要重启每一个节点。如果
 你的集群无法容忍多个节点失效，那么在进行集群维护时就会存在风险。不过，也不建议一个集群包含超过 7
-个节点，因为 Zookeeper 使用了一致性协议，节点过多会降低整个集群的性能。  
+个节点，因为 Zookeeper 使用了一致性协议，节点过多会降低整个集群的性能。
 
 ## 集群配置
 
 为了将 zookeeper 的服务器配置成集群（ensemble），需要一个公共的配置，列出所有的服务器。每台服务器在数据目录（data
 directory）中创建一个 myid 文件，用 于指明自己的 ID。  如果集群里服务器的
-hostnames  是 `zoo!.example.com, zoo2.example.com, zoo3 .example.com` ，那么配置文件可能是下面这样的：  
+hostnames  是 `zoo!.example.com, zoo2.example.com, zoo3 .example.com` ，那么配置文件可能是下面这样的：
 
 ```
 tickTime=2000
@@ -241,11 +241,11 @@ server.3=zoo3.example.com:2888:3888
 
 - clientPort：客户端端口号
 - initLimit：表示 followers  连接到 leader 之间建立初始化连接的时间上限。
-- syncLimit：表示允许从节点（followers）与主节点（leader）处于不同步状态的时间上限。  
-  
+- syncLimit：表示允许从节点（followers）与主节点（leader）处于不同步状态的时间上限。
+
   > initLimit 和 syncLimit 单位时间是 tickTime。比如：initLimit 的值为 20，表示的时间为：20*2000ms=40s
 
-配置里还列出了集群中所有服务器的地址，服务器地址遵循的格式 `server.X=hostname:peerPort:leaderPort`各个参数说明如下：  
+配置里还列出了集群中所有服务器的地址，服务器地址遵循的格式 `server.X=hostname:peerPort:leaderPort`各个参数说明如下：
 
 - X：服务的 ID 号，必须是一个整数（integer），不需要从 0 开始或不要求是连续的。
 - hostname：服务器的主机名（hostname）或 IP 地址。
@@ -253,11 +253,11 @@ server.3=zoo3.example.com:2888:3888
 - leaderPort：leader 选择执行的 TCP 端口号。
 
 客户端只需要通过 clientPort 就能连接到集群，而集群节点间的通信则需要同时用到这 3 个
-端口（ peerPort 、 leaderPort 、 clientPort ）。  
+端口（ peerPort 、 leaderPort 、 clientPort ）。
 
 除了公共的配置文件外，每个服务器都必须在 `data Dir` 目录中创建一个叫作 `myid` 的文件，文件里要包含服务器 ID ， 这个
 ID 要与配置文件里配置的 ID
-保持一致。完成这些步骤后，就可以启动服务器，让它们彼此间进行通信了。  
+保持一致。完成这些步骤后，就可以启动服务器，让它们彼此间进行通信了。
 
 # 12. 面试
 
@@ -268,7 +268,7 @@ ID 要与配置文件里配置的 ID
 （2）第二次启动选举规则：
   - EPOCH 大的直接胜出
   - EPOCH 相同，事务 id 大的胜出
-  - 事务 id 相同，服务器 id 大的胜出  
+  - 事务 id 相同，服务器 id 大的胜出
 
 
 ## 12.2. 生产集群安装多少 zk 合适？
@@ -280,7 +280,7 @@ ID 要与配置文件里配置的 ID
 - 100 台服务器： 11 台 zk；
 -  200 台服务器： 11 台 zk
 
-服务器台数多：好处，提高可靠性；坏处：提高通信延时  
+服务器台数多：好处，提高可靠性；坏处：提高通信延时
 
 # 13. References
 

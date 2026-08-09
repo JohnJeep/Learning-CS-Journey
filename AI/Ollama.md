@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-12-18 16:25:50
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 19:39:53
+ * @LastEditTime: 2026-08-09 17:23:35
  * @Description: Ollama Usage
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 # Introduction
@@ -62,11 +62,11 @@ ctrl C 优雅退出
 signals := make(chan os.Signal, 1)
 signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 go func() {
-   <-signals
-   srvr.Close()
-   schedDone()
-   sched.unloadAllRunners()
-   done()
+  <-signals
+  srvr.Close()
+  schedDone()
+  sched.unloadAllRunners()
+  done()
 }()
 ```
 
@@ -78,7 +78,7 @@ err = srvr.Serve(ln)
 // If server is closed from the signal handler, wait for the ctx to be done
 // otherwise error out quickly
 if !errors.Is(err, http.ErrServerClosed) {
-   return err
+  return err
 }
 <-ctx.Done()
 ```
@@ -86,21 +86,20 @@ if !errors.Is(err, http.ErrServerClosed) {
 http handler error code
 ```go
 func handleScheduleError(c *gin.Context, name string, err error) {
-	switch {
-	case errors.Is(err, errCapabilities), errors.Is(err, errRequired):
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	case errors.Is(err, context.Canceled):
-		c.JSON(499, gin.H{"error": "request canceled"})
-	case errors.Is(err, ErrMaxQueue):
-		c.JSON(http.StatusServiceUnavailable, gin.H{"error": err.Error()})
-	case errors.Is(err, os.ErrNotExist):
-		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("model %q not found, try pulling it first", name)})
-	default:
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-	}
+  switch {
+  case errors.Is(err, errCapabilities), errors.Is(err, errRequired):
+    c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+  case errors.Is(err, context.Canceled):
+    c.JSON(499, gin.H{"error": "request canceled"})
+  case errors.Is(err, ErrMaxQueue):
+    c.JSON(http.StatusServiceUnavailable, gin.H{"error": err.Error()})
+  case errors.Is(err, os.ErrNotExist):
+    c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("model %q not found, try pulling it first", name)})
+  default:
+    c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+  }
 }
 ```
-
 
 
 # References
