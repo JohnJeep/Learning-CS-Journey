@@ -9,7 +9,8 @@
 
 # Introduction
 
-Buildroot 是一个开源的工具，主要用于为嵌入式 Linux 系统创建自定义的根文件系统（root filesystem）、内核映像和引导加载程序。
+Buildroot 是一个开源的工具，主要用于为嵌入式 Linux 系统创建自定义的根文件系统（root
+filesystem）、内核映像和引导加载程序。
 它提供了一种简化的方式来构建适合特定硬件平台的 Linux 系统。
 
 

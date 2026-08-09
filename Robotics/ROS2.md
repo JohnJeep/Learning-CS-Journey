@@ -73,14 +73,18 @@ ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传
 
 ## 3.1. 通信架构：中心化 vs 去中心化
 
-**ROS1**：依赖一个中心节点 `roscm master`。所有节点启动时向 master 注册，通过它做名字解析和发现。这意味着 master 是单点故障——它一挂，整个系统的节点发现机制就瘫痪了（虽然已建立的连接还能跑）。
+**ROS1**：依赖一个中心节点 `roscm master`。所有节点启动时向 master 注册，通过它做名字解析和发现。这意味着 master
+是单点故障——它一挂，整个系统的节点发现机制就瘫痪了（虽然已建立的连接还能跑）。
 
-**ROS2**：完全去中心化，底层用 **DDS**（Data Distribution Service，一种工业级的发布订阅中间件标准，比如常见实现有 Fast DDS、Cyclone DDS）。节点之间通过 DDS 的自动发现机制直接找到彼此，没有 master 这个概念。
+**ROS2**：完全去中心化，底层用 **DDS**（Data Distribution Service，一种工业级的发布订阅中间件标准，比如常见实现有
+Fast DDS、Cyclone DDS）。节点之间通过 DDS 的自动发现机制直接找到彼此，没有 master 这个概念。
 
 ## 3.2. 实时性与嵌入式支持
 
 - **ROS1** 通信基于 TCP（TCPROS），延迟和抖动都不太可控，本质上不是为硬实时设计的。
-- **ROS2** 通过 DDS 支持 QoS（服务质量）策略配置，比如可靠性（reliable/best-effort）、历史深度、超时等，这让它更适合对时序敏感的机器人控制场景。同时 ROS2 有 **micro-ROS**，专门面向资源受限的 MCU（比如你做的 aarch64/嵌入式栈），可以直接跑在裸机或 RTOS 上。
+- **ROS2** 通过 DDS 支持 QoS（服务质量）策略配置，比如可靠性（reliable/best-effort）、历史深度、超时等，这让它更适合对
+  时序敏感的机器人控制场景。同时 ROS2 有 **micro-ROS**，专门面向资源受限的 MCU（比如你做的
+  aarch64/嵌入式栈），可以直接跑在裸机或 RTOS 上。
 
 ##  3.3. 平台与语言支持
 
@@ -89,7 +93,8 @@ ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传
 
 ## 3.4. 生命周期管理
 
-**ROS2** 引入了"托管节点"（managed/lifecycle nodes）的概念，节点有明确的状态机（unconfigured → inactive → active → finalized）。
+**ROS2** 引入了"托管节点"（managed/lifecycle nodes）的概念，节点有明确的状态机（unconfigured → inactive → active →
+finalized）。
 
 ## 3.5. 安全性
 
@@ -98,7 +103,8 @@ ROS1 基本没有内建安全机制。ROS2 借助 DDS-Security 规范，支持�
 ## 3.6. 构建系统
 
 - ROS1：`catkin`
-- ROS2：`ament` + `colcon`，更接近现代 CMake 的最佳实践，包之间的隔离和依赖管理更清晰（这点如果你在处理 CI 里 `cv_task_msgs` 这类 CMake 依赖问题，会有直接体感）。
+- ROS2：`ament` + `colcon`，更接近现代 CMake 的最佳实践，包之间的隔离和依赖管理更清晰（这点如果你在处理 CI 里
+  `cv_task_msgs` 这类 CMake 依赖问题，会有直接体感）。
 
 
 
@@ -413,7 +419,8 @@ QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质
 | **Lifespan** | 时间间隔 | 消息超过此时间未被订阅则丢弃 |
 
 兼容性规则（发布者与订阅者 QoS 必须兼容）：
-- Reliability：发布者 `RELIABLE` 兼容订阅者 `RELIABLE` 或 `BEST_EFFORT`；发布者 `BEST_EFFORT` 只兼容订阅者 `BEST_EFFORT`
+- Reliability：发布者 `RELIABLE` 兼容订阅者 `RELIABLE` 或 `BEST_EFFORT`；发布者 `BEST_EFFORT` 只兼容订阅者
+  `BEST_EFFORT`
 - Durability：发布者 `TRANSIENT_LOCAL` 兼容任何订阅者；发布者 `VOLATILE` 只兼容订阅者 `VOLATILE`
 
 ### 5.4.2. 常用预定义 QoS Profile
@@ -594,7 +601,8 @@ colcon 的详细用法：[colcon](./Colcon.md)
 
 ## 7.2. launch
 
-ROS2 系统中用于同时启动多个节点、设置参数、配置命名空间和话题重映射的脚本机制。ROS2 的 launch 文件使用 **Python** 编写（ROS1 用 XML），拥有完整的编程能力。
+ROS2 系统中用于同时启动多个节点、设置参数、配置命名空间和话题重映射的脚本机制。ROS2 的 launch 文件使用 **Python**
+编写（ROS1 用 XML），拥有完整的编程能力。
 
 launch 文件通常放在包的 `launch/` 目录下，命名约定为 `xxx_launch.py`。
 

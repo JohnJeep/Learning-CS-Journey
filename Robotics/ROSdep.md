@@ -9,7 +9,8 @@
 
 # 1. rosdep 是做什么的？
 
-`rosdep` 是 ROS/ROS2 生态里的**系统依赖管理工具**。它本身不管理 ROS 包之间的依赖（那是 `colcon`/`ament` 和 `package.xml` 里的 `<depend>` 标签负责的事），而是专门解决一个问题：
+`rosdep` 是 ROS/ROS2 生态里的**系统依赖管理工具**。它本身不管理 ROS 包之间的依赖（那是 `colcon`/`ament` 和
+`package.xml` 里的 `<depend>` 标签负责的事），而是专门解决一个问题：
 
 **你的 ROS 包依赖的那些"系统级"第三方库（比如 Boost、OpenCV、Eigen、某个 apt 包），在当前这台机器上要怎么装？**
 
@@ -23,9 +24,11 @@
 <exec_depend>python3-numpy</exec_depend>
 ```
 
-这里的 `eigen`、`libopencv-dev` 是**rosdep key**（一种抽象名字），不是具体某个发行版的包名。因为同一个依赖在 Ubuntu 上叫 `libeigen3-dev`，在 Fedora 上可能叫别的名字，在 macOS 上用 brew 装又是另一个名字。
+这里的 `eigen`、`libopencv-dev` 是**rosdep key**（一种抽象名字），不是具体某个发行版的包名。因为同一个依赖在 Ubuntu
+上叫 `libeigen3-dev`，在 Fedora 上可能叫别的名字，在 macOS 上用 brew 装又是另一个名字。
 
-`rosdep` 维护了一份**映射表**（rosdep 数据库，来自 `rosdistro` 仓库），把这些抽象 key 翻译成具体操作系统上的具体包管理器命令。
+`rosdep` 维护了一份**映射表**（rosdep 数据库，来自 `rosdistro` 仓库），把这些抽象 key
+翻译成具体操作系统上的具体包管理器命令。
 
 
 
@@ -44,7 +47,8 @@ sudo apt install python3-rosdep
 sudo rosdep init
 ```
 
-这会在 `/etc/ros/rosdep/sources.list.d/20-default.list` 写入默认的数据源配置（指向官方 `rosdistro` 仓库）。如果已经初始化过会提示已存在，忽略即可。
+这会在 `/etc/ros/rosdep/sources.list.d/20-default.list` 写入默认的数据源配置（指向官方 `rosdistro`
+仓库）。如果已经初始化过会提示已存在，忽略即可。
 
 ## 2.3. 更新数据库（建议定期做）
 
@@ -52,7 +56,8 @@ sudo rosdep init
 rosdep update
 ```
 
-这会从网络拉取最新的 rosdep key 映射表，缓存到 `~/.ros/rosdep/`。**每次系统依赖表有更新，或者换了新机器，都要重新跑这个。**
+这会从网络拉取最新的 rosdep key 映射表，缓存到 `~/.ros/rosdep/`。**每次系统依赖表有更新，或者换了新机器，都要重新跑这
+个。**
 
 ## 2.4. 核心用法：安装依赖
 
@@ -101,7 +106,8 @@ rosdep resolve eigen
 
 ## 2.6. 自定义依赖映射（遇到私有/内部包时用）
 
-如果你的 `package.xml` 里声明的依赖是公司内部的，官方 rosdep 数据库里当然查不到，会报错类似 `Cannot locate rosdep definition for [xxx]`。
+如果你的 `package.xml` 里声明的依赖是公司内部的，官方 rosdep 数据库里当然查不到，会报错类似 `Cannot locate rosdep
+definition for [xxx]`。
 
 解决办法是自己写一个 yaml 映射文件，比如 `my_rosdep.yaml`：
 
