@@ -1,42 +1,38 @@
 /*
- * @Author: your name
+ * @Author: JohnJeep
  * @Date: 2021-05-15 18:23:25
- * @LastEditTime: 2021-05-16 13:43:35
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Learning-Computer-Science-Journey\69_for_each.cpp
+ * @LastEditors: JohnJeep
+ * @LastEditTime: 2026-08-09 17:56:17
+ * @Description: for_each usage
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
  */
-#include <iostream>
-#include <cstdlib>
-#include <vector>
+
 #include <algorithm>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-class PrintInt
-{
-private:
-    /* data */
-public:
-    PrintInt(/* args */) {}
-    ~PrintInt() {}
-    
-    void operator() (int elem) const
-    {
-        cout << elem << " ";
-    }
+class PrintInt {
+ public:
+  PrintInt(/* args */) {}
+
+  ~PrintInt() {}
+
+  void operator()(int elem) const { cout << elem << " "; }
 };
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    vector<int> coll;
+  vector<int> coll;
 
-    for (int i=1; i<=9; ++i) {
-        coll.push_back(i);
-    }    
+  for (int i = 1; i <= 9; ++i) {
+    coll.push_back(i);
+  }
 
-    for_each (coll.begin(), coll.end(), PrintInt()); // PrintInt() 是一个 function object
-    cout << endl;
-    
-    return 0;
+  for_each(coll.begin(), coll.end(), PrintInt());  // PrintInt() 是一个 function object
+  cout << endl;
+
+  return 0;
 }
