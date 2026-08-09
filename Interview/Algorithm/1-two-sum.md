@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 20:33:57
  * @Description: two sum
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1-两数之和
@@ -43,17 +43,17 @@
 ```cpp
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        int len = nums.size();
-        for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
-            }
+  vector<int> twoSum(vector<int>& nums, int target) {
+    int len = nums.size();
+    for (int i = 0; i < len; i++) {
+      for (int j = i + 1; j < len; j++) {
+        if (nums[i] + nums[j] == target) {
+          return {i, j};
         }
-        return {};
+      }
     }
+    return {};
+  }
 ```
 算法复杂
 时间复杂度：$\Omicron(n^2)$
@@ -69,19 +69,19 @@ hashtable 中，若存在，就将各自对应的下标值输出。
 ```cpp
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> mp;
-        vector<int>result;
-        for (int i = 0; i < nums.size(); i++) {
-            // mp[nums[i]] = i;
-            auto it = mp.find(target - nums[i]);
-            if (it != mp.end()) {
-                result = {{it->second, i}}; 
-            }
-            mp[nums[i]] = i; 
-        }
-        return result;
+  vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> mp;
+    vector<int>result;
+    for (int i = 0; i < nums.size(); i++) {
+      // mp[nums[i]] = i;
+      auto it = mp.find(target - nums[i]);
+      if (it != mp.end()) {
+        result = {{it->second, i}};
+      }
+      mp[nums[i]] = i;
     }
+    return result;
+  }
 };
 ```
 算法复杂

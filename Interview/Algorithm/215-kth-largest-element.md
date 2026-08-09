@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 20:38:47
  * @Description: 215-kth-largest-element
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 题目：数组中的第 K 个最大元素
@@ -59,41 +59,41 @@
 # 代码实现
 ```cpp
 // 调整堆
-void adjustHeap(vector<int>& input, int i, int length) 
+void adjustHeap(vector<int>& input, int i, int length)
 {
-    int left = 2 * i + 1;  // i节点的左孩子，i从 0 开始
-    int right = 2 * i + 2; // i节点的右孩子
-    int max = i;           // 先设置父节点和子节点三个节点中最大值的位置为父节点下标
-    if (left < length && input[left] > input[max])
-    {
-        max = left;  // 如果左孩子存在且大于最大值，更新最大值索引
-    }
-    if (right < length && input[right] > input[max]) 
-    {
-        max = right;  //如果右孩子存在且大于最大值，更新最大值索引
-    }
-    if (max != i) //最大值不是父节点，则进行交换
-    {
-        // int temp = input[i];
-        // input[i] = input[max];
-        // input[max] = temp;
-        swap(input[i], input[max]);     // 交换对应索引位置的节点值
-        adjustHeap(input, max, length); // 从最大值索引位置向下进行递归调用，保证子树也是最大堆
-    }
+  int left = 2 * i + 1;  // i节点的左孩子，i从 0 开始
+  int right = 2 * i + 2; // i节点的右孩子
+  int max = i;           // 先设置父节点和子节点三个节点中最大值的位置为父节点下标
+  if (left < length && input[left] > input[max])
+  {
+    max = left;  // 如果左孩子存在且大于最大值，更新最大值索引
+  }
+  if (right < length && input[right] > input[max])
+  {
+    max = right;  //如果右孩子存在且大于最大值，更新最大值索引
+  }
+  if (max != i) //最大值不是父节点，则进行交换
+  {
+    // int temp = input[i];
+    // input[i] = input[max];
+    // input[max] = temp;
+    swap(input[i], input[max]);     // 交换对应索引位置的节点值
+    adjustHeap(input, max, length); // 从最大值索引位置向下进行递归调用，保证子树也是最大堆
+  }
 }
 
 int findKthLargest(vector<int>& nums, int k) {
-    // 只需要建立一次最大堆，后面再调整最大堆
-    for (int i =  nums.size() / 2; i >= 0; i--) {  
-        adjustHeap(nums, i,  nums.size());  // 从堆树第一个非叶子节点开始调整
-    }
+  // 只需要建立一次最大堆，后面再调整最大堆
+  for (int i =  nums.size() / 2; i >= 0; i--) {
+    adjustHeap(nums, i,  nums.size());  // 从堆树第一个非叶子节点开始调整
+  }
 
-    int heapSize = nums.size();
-    for (int i = nums.size() - 1; i >= nums.size() - k + 1; i--) {
-        swap(nums[0], nums[i]);  //将末尾结点补充到堆顶进行调整
-        --heapSize;
-        adjustHeap(nums, 0, heapSize);
-    }
-    return nums[0];
+  int heapSize = nums.size();
+  for (int i = nums.size() - 1; i >= nums.size() - k + 1; i--) {
+    swap(nums[0], nums[i]);  //将末尾结点补充到堆顶进行调整
+    --heapSize;
+    adjustHeap(nums, 0, heapSize);
+  }
+  return nums[0];
 }
 ```

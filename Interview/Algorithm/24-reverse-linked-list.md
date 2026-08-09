@@ -1,10 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-07 16:09:27
- * @LastEditTime: 2026-05-31 20:42:00
+ * @LastEditTime: 2026-08-09 17:03:03
  * @LastEditors: JohnJeep
  * @Description: 24-reverse-linked-list
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 题目：反转链表
@@ -67,15 +67,15 @@ head.next.next = head
 # 代码实现
 ```c++
 struct ListNode {
-	int val;
-	struct ListNode *next;
-	ListNode(int x) :
-			val(x), next(NULL) {
-	}
+  int val;
+  struct ListNode *next;
+  ListNode(int x) :
+      val(x), next(NULL) {
+  }
 };
 
 // 迭代法实现
-ListNode* ReverseList(ListNode* pHead) 
+ListNode* ReverseList(ListNode* pHead)
 {
     ListNode* pre = nullptr;
     ListNode* cur = head;
@@ -91,4 +91,5 @@ ListNode* ReverseList(ListNode* pHead)
 ```
 
 # 参考
+
 [动画演示+多种解法 206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/)

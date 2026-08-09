@@ -1,10 +1,10 @@
 <!--
  * @Author: JohnJeep
  * @Date: 2021-04-20 21:37:13
- * @LastEditTime: 2026-05-31 20:42:27
+ * @LastEditTime: 2026-08-09 17:02:55
  * @LastEditors: JohnJeep
  * @Description: 21-merge-two-sorted-lists
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 21-合并两个有序链表
@@ -44,22 +44,22 @@
 ```cpp
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if (l1 == nullptr) {
-            return l2;
-        }
-        if (l2 == nullptr) {
-            return l1;
-        }
-        if (l1->val  < l2->val) {
-            l1->next = mergeTwoLists(l1->next, l2);
-            return l1;
-        }
-        else {
-            l2->next = mergeTwoLists(l1, l2->next);
-            return l2;
-        }
+  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    if (l1 == nullptr) {
+      return l2;
     }
+    if (l2 == nullptr) {
+      return l1;
+    }
+    if (l1->val  < l2->val) {
+      l1->next = mergeTwoLists(l1->next, l2);
+      return l1;
+    }
+    else {
+      l2->next = mergeTwoLists(l1, l2->next);
+      return l2;
+    }
+  }
 };
 ```
 
@@ -97,25 +97,25 @@ l1 当前节点的值小于等于 l2 ，我们就把 l1 当前的节点接在 pr
 ```cpp
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode* preHead = new ListNode(-1);
-        ListNode* prev = preHead;
-        while (l1 != nullptr && l2 != nullptr) {
-            if (l1->val < l2->val) {
-                prev->next = l1;  // 把 l1 当前的节点接在 prev 节点的后面
-                l1 = l1->next;    //将 l1 指针往后移一位
-            } else {
-                prev->next = l2;
-                l2 = l2->next;
-            }
-            prev = prev->next;  // 移动prev指针
-        }
-
-        // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
-        prev->next = l1 == nullptr ? l2 : l1;
-
-        return preHead->next;  // 返回合并后的链表
+  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* preHead = new ListNode(-1);
+    ListNode* prev = preHead;
+    while (l1 != nullptr && l2 != nullptr) {
+      if (l1->val < l2->val) {
+        prev->next = l1;  // 把 l1 当前的节点接在 prev 节点的后面
+        l1 = l1->next;    //将 l1 指针往后移一位
+      } else {
+        prev->next = l2;
+        l2 = l2->next;
+      }
+      prev = prev->next;  // 移动prev指针
     }
+
+    // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
+    prev->next = l1 == nullptr ? l2 : l1;
+
+    return preHead->next;  // 返回合并后的链表
+  }
 };
 ```
 
@@ -127,4 +127,6 @@ public:
 空间复杂度：O(1)。我们只需要常数的空间存放若干变量。
 
 # 参考
+
 [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/he-bing-liang-ge-you-xu-lian-biao-by-leetcode-solu)
+
