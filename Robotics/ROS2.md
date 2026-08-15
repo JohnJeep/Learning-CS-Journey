@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-09 13:40:26
+ * @LastEditTime: 2026-08-16 00:24:03
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -241,23 +241,23 @@ message 定义文件格式
 
 built-in message types supported
 
-| ype name | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
-| -------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| bool     | bool                                                                  | builtins.bool                                                               | boolean                                                             |
-| byte     | uint8_t                                                               | builtins.bytes*                                                             | octet                                                               |
-| char     | char                                                                  | builtins.int*                                                               | char                                                                |
-| float32  | float                                                                 | builtins.float*                                                             | float                                                               |
-| float64  | double                                                                | builtins.float*                                                             | double                                                              |
-| int8     | int8_t                                                                | builtins.int*                                                               | octet                                                               |
-| uint8    | uint8_t                                                               | builtins.int*                                                               | octet                                                               |
-| int16    | int16_t                                                               | builtins.int*                                                               | short                                                               |
-| uint16   | uint16_t                                                              | builtins.int*                                                               | unsigned short                                                      |
-| int32    | int32_t                                                               | builtins.int*                                                               | long                                                                |
-| uint32   | uint32_t                                                              | builtins.int*                                                               | unsigned long                                                       |
-| int64    | int64_t                                                               | builtins.int*                                                               | long long                                                           |
-| uint64   | uint64_t                                                              | builtins.int*                                                               | unsigned long long                                                  |
-| string   | std::string                                                           | builtins.str                                                                | string                                                              |
-| wstring  | std::u16string                                                        | builtins.str                                                                | wstring                                                             |
+| type name | [C++](https://design.ros2.org/articles/generated_interfaces_cpp.html) | [Python](https://design.ros2.org/articles/generated_interfaces_python.html) | [DDS type](https://design.ros2.org/articles/mapping_dds_types.html) |
+| --------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| bool      | bool                                                                  | builtins.bool                                                               | boolean                                                             |
+| byte      | uint8_t                                                               | builtins.bytes*                                                             | octet                                                               |
+| char      | char                                                                  | builtins.int*                                                               | char                                                                |
+| float32   | float                                                                 | builtins.float*                                                             | float                                                               |
+| float64   | double                                                                | builtins.float*                                                             | double                                                              |
+| int8      | int8_t                                                                | builtins.int*                                                               | octet                                                               |
+| uint8     | uint8_t                                                               | builtins.int*                                                               | octet                                                               |
+| int16     | int16_t                                                               | builtins.int*                                                               | short                                                               |
+| uint16    | uint16_t                                                              | builtins.int*                                                               | unsigned short                                                      |
+| int32     | int32_t                                                               | builtins.int*                                                               | long                                                                |
+| uint32    | uint32_t                                                              | builtins.int*                                                               | unsigned long                                                       |
+| int64     | int64_t                                                               | builtins.int*                                                               | long long                                                           |
+| uint64    | uint64_t                                                              | builtins.int*                                                               | unsigned long long                                                  |
+| string    | std::string                                                           | builtins.str                                                                | string                                                              |
+| wstring   | std::u16string                                                        | builtins.str                                                                | wstring                                                             |
 
 
 每个 built-in-type 可用于定义 array
