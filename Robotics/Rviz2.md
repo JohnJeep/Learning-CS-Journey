@@ -2,14 +2,14 @@
  * @Author: JohnJeep
  * @Date: 2025-11-23 21:29:52
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:46:45
+ * @LastEditTime: 2026-08-29 23:06:44
  * @Description: Rviz2 Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
 
-Rviz（ROS Visualization Tool）是 ROS 的 3D 可视化工具。
+Rviz（ROS Visualization Tool）是 一款  3 维可视化的数据显示工具。
 
 **用途**
 
@@ -20,7 +20,15 @@ Rviz（ROS Visualization Tool）是 ROS 的 3D 可视化工具。
 - 用于 **感知、定位、导航、SLAM 等高级功能的可视化**
 
 
+# 2. Command
 
-# 2. References
+```bash
+# 启动 rviz
+ros2 run rviz2 rviz2
+
+```
+
+
+# 3. References
 
 - humble RViz User Guide: https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html
