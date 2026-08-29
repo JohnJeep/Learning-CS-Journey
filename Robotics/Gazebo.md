@@ -2,25 +2,25 @@
  * @Author: JohnJeep
  * @Date: 2025-11-02 16:38:43
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:48:11
+ * @LastEditTime: 2026-08-29 23:03:11
  * @Description: Gazebo Usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Gazebo
 
-Gazebo 是一个仿真工具，提供逼真的仿真环境。
+**Gazebo 是一个仿真工具，提供逼真的仿真环境，创造模拟真实硬件的数据。**
 
 
 ## 1.1. 版本
 
-| Platform           | Gazebo Versions                                              |
-| ------------------ | ------------------------------------------------------------ |
+| Platform           | Gazebo Versions                                                                                                                                                                                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ubuntu 24.04 Noble | [Gazebo Jetty](https://gazebosim.org/docs/jetty/install_ubuntu) (recommended), [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_ubuntu) (recommended if using ROS 2 Jazzy) and [Gazebo Ionic](https://gazebosim.org/docs/ionic/install_ubuntu) |
-| Ubuntu 22.04 Jammy | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_ubuntu) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_ubuntu) (recommended if using ROS 2 Humble) |
-| Mac Ventura        | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_osx) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_osx) |
-| Mac Monterey       | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_osx) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_osx) |
-| Windows            | Support via Conda-Forge is not fully functional, as there are known runtime issues [see this issue for details](https://github.com/gazebosim/gz-sim/issues/168). |
+| Ubuntu 22.04 Jammy | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_ubuntu) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_ubuntu) (recommended if using ROS 2 Humble)                                                           |
+| Mac Ventura        | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_osx) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_osx)                                                                                                     |
+| Mac Monterey       | [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/install_osx) (recommended) and [Gazebo Fortress](https://gazebosim.org/docs/fortress/install_osx)                                                                                                     |
+| Windows            | Support via Conda-Forge is not fully functional, as there are known runtime issues [see this issue for details](https://github.com/gazebosim/gz-sim/issues/168).                                                                                            |
 
 [SDFormat](http://sdformat.org/) (Simulation Description Format), sometimes abbreviated as SDF, is an XML format that describes objects and environments for robot simulators, visualization, and control.
 
@@ -93,6 +93,8 @@ sudo apt remove gz-harmonic && sudo apt autoremove
 - 每个 `.world` 文件只能有一个 `<world>` 标签：
 
 
+
+
 ## 2.2. 为什么只能有一个 world？
 
 - **设计原则**：每个 SDF 文件代表一个完整的仿真环境
@@ -101,6 +103,8 @@ sudo apt remove gz-harmonic && sudo apt autoremove
 
 一个 world 可以包含多个模型（model），但是一个 SDF 文件通常只包含一个世界。在 SDF
 的顶层结构中，我们使用一个`<world>`标签来定义一个世界，然后在这个世界中可以包含多个模型。
+
+
 
 
 # 3. References
