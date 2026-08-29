@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-16 00:24:03
+ * @LastEditTime: 2026-08-29 23:05:31
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -49,7 +49,94 @@ ROS 目前推出了 ROS1 和 ROS2 两个版本。ROS 具有如下局限性
 
 
 
-# 3. ROS1 ROS2 Compare
+# 3. 如何学习 ROS2
+
+必须掌握：<font color="#00b0f0">带着问题去学，不没有目的的学效率高很多。</font>机器人岗位：重点关注 <font color="#ff0000">ROS2、运动控制、传感器处理</font>
+
+1. 机器人操作系统（ROS2）
+   1. ROS2 开发工具链是怎样的？colcon 构建系统、cli 命令行、rqt 可视化、bag 录制工具
+   2. 常用 ROS 库：rclcpp, rclpy, nav2, moveit,
+2. 底层通信机制：DDS。
+   1. ROS2 是如何与 DDS 交互的？怎样集成的？
+   2. 如何从网络通信层优化 ROS？
+   3. CyberRT 是什么？（可选）
+3. Node
+   1. 讲清楚节点是做什么的？
+   2. node 与 node 是如何通信的？
+4. 解释下 Topic, Service, Action, executor
+
+
+<font color="#ff0000">人形机器人设计的技术</font>
+
+1. 算法。大脑、小脑（动作的灵活度）算法的设计。
+2. 轻量化材料（皮肤）
+  1. 光学动捕精度的电磁动捕手套
+  2. 新材料 PEEK（聚醚醚酮， 一种高端特种工程塑料）+碳纤维复合 骨架，全新设计的轻量化结构动力组
+     件，实现机器狗有效减重 30%以上，在 负载情况下的续航时间可提升 40%左 右，可在-30℃至 120℃情况下稳定运
+     行。PEEK 新材料的运用，让机器狗更 轻、更耐用、更灵活、适用范围更广，加 上搭载的集群组网模型、多模态感知系
+     统等，可以让它们在 AI 编排算法下适应 复杂环境，实现多机协同作业。
+3. 算力
+4. 硬件的灵活度 ----推理芯片
+5. 续航   ----电池
+   > 好电池考虑的指标：能量密度、安全性
+   1. 液态锂离子电池：主要有 4 个组件构成，正极、负极材料，隔膜、电解液。
+   2. 固态电池
+6. 数据
+
+
+## 3.1. 感知-规划-控制-反馈
+
+这是机器人学的经典框架。
+
+- **感知**：了解激光雷达（Lidar）、摄像头、IMU 等传感器，以及 SLAM（同步定位与建图）的基本概念。
+- **规划**：了解路径规划（如 A*、RRT 等算法）和运动规划。
+- **控制**：了解 PID 控制、运动学（正/逆运动学）。你的 C++背景在这里尤其有用，因为控制算法对实时性和性能要求很高。
+
+语言：C++, Python
+理论
+
+1. 机器人运动学
+2. 动力学建模
+3. 机器人相关算法
+4. 定位导航算法
+5. SLAM(同步定位与地图构建 Simultaneous Localization And Mapping)
+6. 人机交互
+
+
+
+## 3.2. 性能优化
+
+1. 性能问题：callback 处理不及时？
+2. 如何优化节点性能？
+3. 处理多个回调时，如何解决阻塞和延迟？
+
+
+性能优化策略
+
+1. **延迟优化**：零拷贝消息传递、内存池、QoS 配置
+2. **吞吐量优化**：多线程处理、批量操作、队列管理
+3. **资源管理**：CPU 亲和性、线程优先级、内存优化
+4. **网络优化**：传输参数调优、批量传输
+5. **监控和测试**：性能监控、基准测试
+
+> https://code-bai.com/2025/01/19/ros2-performance-optimization/
+
+
+
+
+
+## 3.3. 通信协议
+
+1. EtherCAT 主站配置
+2. CANopen 协议栈
+3. ADs
+4. gRPC
+
+
+
+
+
+# 4. ROS1 ROS2 Compare
 
 ROS 1 和 ROS 2 的特性对比如下：
 
@@ -71,7 +158,7 @@ ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传
 
 
 
-## 3.1. 通信架构：中心化 vs 去中心化
+## 4.1. 通信架构：中心化 vs 去中心化
 
 **ROS1**：依赖一个中心节点 `roscm master`。所有节点启动时向 master 注册，通过它做名字解析和发现。这意味着 master
 是单点故障——它一挂，整个系统的节点发现机制就瘫痪了（虽然已建立的连接还能跑）。
@@ -79,28 +166,28 @@ ROS2 相较 ROS1 运行更可靠，持续性更好，更节省资源，消息传
 **ROS2**：完全去中心化，底层用 **DDS**（Data Distribution Service，一种工业级的发布订阅中间件标准，比如常见实现有
 Fast DDS、Cyclone DDS）。节点之间通过 DDS 的自动发现机制直接找到彼此，没有 master 这个概念。
 
-## 3.2. 实时性与嵌入式支持
+## 4.2. 实时性与嵌入式支持
 
 - **ROS1** 通信基于 TCP（TCPROS），延迟和抖动都不太可控，本质上不是为硬实时设计的。
 - **ROS2** 通过 DDS 支持 QoS（服务质量）策略配置，比如可靠性（reliable/best-effort）、历史深度、超时等，这让它更适合对
   时序敏感的机器人控制场景。同时 ROS2 有 **micro-ROS**，专门面向资源受限的 MCU（比如你做的
   aarch64/嵌入式栈），可以直接跑在裸机或 RTOS 上。
 
-##  3.3. 平台与语言支持
+##  4.3. 平台与语言支持
 
 - **ROS1**：主要为 Ubuntu/Linux 设计，官方对 Windows、实时系统、macOS 的支持有限。
 - **ROS2**：跨平台设计之初就考虑了 Linux、Windows、macOS，也更好地支持了实时内核。
 
-## 3.4. 生命周期管理
+## 4.4. 生命周期管理
 
 **ROS2** 引入了"托管节点"（managed/lifecycle nodes）的概念，节点有明确的状态机（unconfigured → inactive → active →
 finalized）。
 
-## 3.5. 安全性
+## 4.5. 安全性
 
 ROS1 基本没有内建安全机制。ROS2 借助 DDS-Security 规范，支持身份认证、访问控制和数据加密，这对工业/商用部署更友好。
 
-## 3.6. 构建系统
+## 4.6. 构建系统
 
 - ROS1：`catkin`
 - ROS2：`ament` + `colcon`，更接近现代 CMake 的最佳实践，包之间的隔离和依赖管理更清晰（这点如果你在处理 CI 里
@@ -108,9 +195,9 @@ ROS1 基本没有内建安全机制。ROS2 借助 DDS-Security 规范，支持�
 
 
 
-# 4. Basic Concepts
+# 5. Basic Concepts
 
-## 4.1. Node
+## 5.1. Node
 
 节点是 ROS2 中的基本执行单元。每个节点通常负责一个单一的、模块化的功能。
 例如，一个节点可以控制激光雷达，另一个节点可以处理激光雷达的数据，第三个节点可以负责运动规划。
@@ -133,7 +220,7 @@ ROS1 基本没有内建安全机制。ROS2 借助 DDS-Security 规范，支持�
 4. 每个节点都可以发布或订阅话题，也可以提供或使用服务(service)。
 
 
-## 4.2. Parameter
+## 5.2. Parameter
 
 Parameter 是 ROS 2 中用于动态配置节点(node)的键值对。它们可以在节点运行时动态修改，而不需要重新编译代码。
 
@@ -165,11 +252,11 @@ Parameter 是 ROS 2 中用于动态配置节点(node)的键值对。它们可以
 总结：**Topic 用于数据流，Service 用于即时操作，Action 用于长期任务，Parameter 用于配置。**
 
 
-## 4.3. Executor
+## 5.3. Executor
 
 **执行器（Executor）** 它负责让节点“活”起来，并决定节点如何响应外部世界。
 
-### 4.3.1. 核心思想：事件循环
+### 5.3.1. 核心思想：事件循环
 
 在 ROS2 中，节点可以通过订阅者、计时器、服务服务器、动作服务器等与外部通信。这些组件在创建后，并不会自动运行。它们只是
 在等待，就像一堆待办事项清单。
@@ -186,7 +273,7 @@ Parameter 是 ROS 2 中用于动态配置节点(node)的键值对。它们可以
 ------
 
 
-### 4.3.2. 为什么需要执行器？
+### 5.3.2. 为什么需要执行器？
 
 没有执行器，你的节点代码会像下面这样，什么也做不了：
 
@@ -213,7 +300,7 @@ executor.add_node(my_node)
 executor.spin() # 程序在这里进入无限循环，处理事件，永远不会退出（除非被中断）
 ```
 
-## 4.4. Callback Group
+## 5.4. Callback Group
 
 当使用 `MultiThreadedExecutor` 时，你可以通过 **回调组（Callback Group）**
 来更精细地控制回调的执行策略。主要有两种类型：
@@ -225,7 +312,7 @@ executor.spin() # 程序在这里进入无限循环，处理事件，永远不�
 
 
 
-# 5. ROS2 Communication
+# 6. ROS2 Communication
 
 ROS2 提供了多种通信机制，主要包括：**Topic**、**Service** 和 **Action**。每种机制适用于不同的通信场景。
 
@@ -271,7 +358,7 @@ built-in message types supported
 
 
 
-## 5.1. Topic
+## 6.1. Topic
 
 topic 是节点之间交换信息的一种通信机制。这种通信是单向的、异步的。发布者（Publisher）node 将消息发布到
 topic，订阅者（Subscriber）node 从 topic 订阅消息。
@@ -299,7 +386,7 @@ int32 y
 - 不适合需要即时响应的操作，因为它是异步的，订阅者可能会有延迟，无法保证及时处理发布者的消息。
 
 
-## 5.2. Service
+## 6.2. Service
 
 service 是节点之间另一种通信机制，这种通信是双向的、同步的。它采用请求(reruest-reponse)-响应模型：一个客户端（Client）
 节点发送请求，然后等待服务器（Server）节点处理请求并返回响应。
@@ -335,7 +422,7 @@ int64 sum
 - 不适合长时间运行的任务，因为它是同步的，客户端会被阻塞直到服务器处理完成并返回响应。
 
 
-## 5.3. Action
+## 6.3. Action
 
 Action 是 ROS 2 中用于处理 **长时间运行(long-running)、可抢占(preempt)、有反馈(feedback)** 的任务的通信机制。它采用
 **客户端-服务器** 模式，但比 Service 更复杂。
@@ -400,11 +487,11 @@ int state
 - 更复杂的非阻塞后台处理任务。
 
 
-## 5.4. QoS Policy
+## 6.4. QoS Policy
 
 QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质量控制机制。发布者和订阅者需要 QoS 兼容才能建立连接。
 
-### 5.4.1. 核心策略
+### 6.4.1. 核心策略
 
 | 策略            | 选项                   | 说明                                 |
 | --------------- | ---------------------- | ------------------------------------ |
@@ -423,7 +510,7 @@ QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质
   `BEST_EFFORT`
 - Durability：发布者 `TRANSIENT_LOCAL` 兼容任何订阅者；发布者 `VOLATILE` 只兼容订阅者 `VOLATILE`
 
-### 5.4.2. 常用预定义 QoS Profile
+### 6.4.2. 常用预定义 QoS Profile
 
 ROS2 内置了几种常用 QoS 配置：
 
@@ -435,7 +522,7 @@ ROS2 内置了几种常用 QoS 配置：
 | `ClockQoS`          | BEST_EFFORT | VOLATILE   | KEEP_LAST(1)    | 时钟话题               |
 | `SystemDefaultsQoS` | RELIABLE    | VOLATILE   | KEEP_LAST(10)   | 默认配置               |
 
-### 5.4.3. 使用示例
+### 6.4.3. 使用示例
 
 **C++**
 
@@ -475,9 +562,9 @@ self.sub = self.create_subscription(String, '/topic', self.callback, qos)
 ```
 
 
-# 6. Workflow
+# 7. Workflow
 
-## 6.1. Workspace 结构
+## 7.1. Workspace 结构
 
 ROS2 使用**工作空间（workspace）**来组织和构建代码。工作空间的标准目录结构如下：
 
@@ -506,7 +593,7 @@ source ~/ros2_ws/install/setup.bash
 叠加激活多个工作空间时，后 source 的优先级更高，会覆盖前一个工作空间中的同名包。
 
 
-## 6.2. 开发流程
+## 7.2. 开发流程
 
 1. 设置 ROS2 工作空间
 2. 用 `ros2 create` 创建一个 ROS2 包。
@@ -575,10 +662,10 @@ source ~/ros2_ws/install/setup.bash
    ```
 
 
-# 7. Tools
+# 8. Tools
 
 
-## 7.1. ament
+## 8.1. ament
 
 ament 是 ROS2 的构建系统和包管理工具。它类似于 ROS1 中的 catkin，但针对 ROS2 进行了优化和改进。
 
@@ -599,14 +686,14 @@ colcon 会自动调用 ament 来处理 ROS2 包的构建和安装。
 colcon 的详细用法：[colcon](./Colcon.md)
 
 
-## 7.2. launch
+## 8.2. launch
 
 ROS2 系统中用于同时启动多个节点、设置参数、配置命名空间和话题重映射的脚本机制。ROS2 的 launch 文件使用 **Python**
 编写（ROS1 用 XML），拥有完整的编程能力。
 
 launch 文件通常放在包的 `launch/` 目录下，命名约定为 `xxx_launch.py`。
 
-### 7.2.1. 基本结构
+### 8.2.1. 基本结构
 
 每个 launch 文件必须实现 `generate_launch_description()` 函数，返回一个 `LaunchDescription` 对象：
 
@@ -620,7 +707,7 @@ def generate_launch_description():
   ])
 ```
 
-### 7.2.2. 启动节点
+### 8.2.2. 启动节点
 
 ```python
 from launch import LaunchDescription
@@ -644,7 +731,7 @@ def generate_launch_description():
   ])
 ```
 
-### 7.2.3. 传递 Launch 参数
+### 8.2.3. 传递 Launch 参数
 
 通过 `DeclareLaunchArgument` 声明参数，`LaunchConfiguration` 读取参数值，实现 launch 文件的可配置化：
 
@@ -677,7 +764,7 @@ def generate_launch_description():
 ros2 launch my_pkg my_launch.py use_sim_time:=true
 ```
 
-### 7.2.4. 引入其他 Launch 文件
+### 8.2.4. 引入其他 Launch 文件
 
 ```python
 from launch import LaunchDescription
@@ -700,7 +787,7 @@ def generate_launch_description():
   return LaunchDescription([nav2_launch])
 ```
 
-### 7.2.5. 条件启动
+### 8.2.5. 条件启动
 
 ```python
 from launch.actions import DeclareLaunchArgument
@@ -716,7 +803,7 @@ rviz_node = Node(
 )
 ```
 
-### 7.2.6. CMakeLists.txt 安装 launch 文件
+### 8.2.6. CMakeLists.txt 安装 launch 文件
 
 launch 文件需要通过 CMake 安装才能被 `ros2 launch` 找到：
 
@@ -727,16 +814,16 @@ install(DIRECTORY launch/
 ```
 
 
-# 8. ROS2 Command
+# 9. ROS2 Command
 
-## 8.1. run
+## 9.1. run
 
 ```bash
 ros2 run <package_name> <executable_name>
 ```
 
 
-## 8.2. package
+## 9.2. package
 
 创建指令
 ```bash
@@ -756,7 +843,7 @@ ros2 pkg create --build-type ament_cmake \
   my_licensed_pkg
 ```
 
-## 8.3. node
+## 9.3. node
 
 ```bash
 # 列出当前所有运行的节点
@@ -767,7 +854,7 @@ ros2 node info /node_name
 ```
 
 
-## 8.4. topic
+## 9.4. topic
 
 ```bash
 # 列出当前所有话题
@@ -794,7 +881,7 @@ ros2 topic pub --rate 10 /cmd_vel geometry_msgs/msg/Twist \
 ```
 
 
-## 8.5. service
+## 9.5. service
 
 ```bash
 # 列出当前所有服务
@@ -815,7 +902,7 @@ ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts \
 ```
 
 
-## 8.6. action
+## 9.6. action
 
 ```bash
 # 列出当前所有 action
@@ -835,7 +922,7 @@ ros2 action send_goal --feedback /action_name action_type '{"goal_field": value}
 ```
 
 
-## 8.7. param
+## 9.7. param
 
 ```bash
 # 列出节点的所有参数
@@ -855,7 +942,7 @@ ros2 param load /node_name params.yaml
 ```
 
 
-## 8.8. interface
+## 9.8. interface
 
 ```bash
 # 列出所有可用接口（msg/srv/action）
@@ -876,7 +963,7 @@ ros2 interface package std_msgs
 ```
 
 
-## 8.9. launch
+## 9.9. launch
 
 ```bash
 # 启动 launch 文件
@@ -893,52 +980,40 @@ ros2 launch my_robot bringup_launch.py --show-args
 ```
 
 
-# 9. Hardware
+# 10. Hardware
 
-1. 应用处理器。用层可能只要毫秒级响应
-
-   一块像**树莓派**、**英伟达 Jetson** 或者普通**电脑主板**一样的东西。运行 Linux 系统。
-
+1. 应用处理器。用层可能只要毫秒级响应。一块像**树莓派**、**英伟达 Jetson** 或者普通**电脑主板**一样的东西。运行 Linux 系统。
    1. 多核 CPU：一般是 ARM 架构。
    2. GPU
    3. RAM
    4. Memory
-
-2. 运动控制器。运动控制需要微秒级的响应
-
-   一块嵌入在机器人身体里的**专用电路板**，比如基于 **STM32**、**DSP** 或 **FPGA** 的板卡。
-
+2. 运动控制器。运动控制需要微秒级的响应。一块嵌入在机器人身体里的**专用电路板**，比如基于 **STM32**、**DSP** 或 **FPGA** 的板卡。
    1. MCU：ST 系列
    2. Flash
    3. RAM：容量有限。
-
 3. 底盘
-
    1. 编码器电机：PID 算法。
    2. 摄像头：USB 摄像头、
    3. 方向轮（可选）
 
 4. 激光雷达
-
    一般观察指标：扫描频率、扫描角度、测距频率
-
 5. 姿态传感器
    1. 加速度
    2. 陀螺仪
    3. 角度输出（带卡尔曼滤波）
-
 6. 电池
 
 
 
-# 10. TF2 Transform Framework
+# 11. TF2 Transform Framework
 
 TF2 是 ROS2 中用于管理坐标系变换的核心库，涵盖坐标系树、静态/动态变换发布、坐标查询、坐标点转换等内容。
 
 详细内容见：[TF.md](./TF.md)
 
 
-# 11. References
+# 12. References
 
 - [Offical ROS2](https://ros.org/)
 - [ROS2 Document with jazzy](https://docs.ros.org/en/jazzy/index.html)
