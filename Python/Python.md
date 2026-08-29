@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-04-19 17:31:46
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:51:10
+ * @LastEditTime: 2026-08-29 23:00:53
  * @Description: Python Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -134,7 +134,7 @@ def introduce(name, age):
   print(f"My name is {name} and I am {age} years old.")
 
 introduce("Alice", 30)
-```
+   ```
 
 **关键字参数**：函数调用时，通过 `形参名=value` 的形式传递参数。
 
@@ -465,8 +465,6 @@ with my_context() as res:
 - 临时修改环境变量或配置
 - 测试中模拟（mock）对象
 
-
-
 ✅ **优点**：
 
 - 代码更简洁
@@ -475,16 +473,239 @@ with my_context() as res:
 
 📌 **记住**：只要一个对象支持上下文管理协议（即有 `__enter__` 和 `__exit__`），就可以用在 `with` 语句中。
 
+# 7. Exception
+
+Exception 是 Python 里处理"错误/异常"的核心语法。
+
+## 7.1. 为什么需要 try except
+
+写代码时，有些错误是**运行时才会发生**的，比如：
+
+```python
+num = int(input("请输入一个数字："))   # 如果用户输入的是"abc"，这里就会报错崩溃
+```
+
+如果不处理，程序会直接**崩溃退出**，报错信息类似：
+
+```
+ValueError: invalid literal for int() with base 10: 'abc'
+```
+
+`try except` 的作用就是：**"先试着跑一下这段代码，如果出错了，不要崩溃，按我说的方式处理"**
+
+## 7.2. 基本语法结构
+
+```python
+try:
+    # 可能会出错的代码，放这里"试"一下
+    可能出错的代码
+except:
+    # 如果上面出错了，就跑这里的代码
+    出错时执行的代码
+```
+
+- `try`：把可能出错的代码"圈起来"试跑
+- `except`：出错了怎么办（可以针对不同错误类型分别处理）
+- `else`：**没出错**时才执行（可选）
+- `finally`：**不管有没有出错都会执行**，通常用来做收尾/清理工作（比如关闭文件、串口、网络连接）
+
+**最简单的例子：**
+
+```python
+try:
+    num = int(input("请输入一个数字："))
+    print(f"你输入的数字是: {num}")
+except:
+    print("输入错误，这不是一个有效的数字！")
+```
+
+- 如果用户输入 `5`：正常走 `try` 里的代码，打印"你输入的数字是: 5"
+- 如果用户输入 `abc`：`try` 里的代码执行到 `int("abc")` 时**炸了**，Python立刻跳到 `except`，打印"输入错误..."，**程序不会崩溃，会继续往下走**
+
+## 7.3. 捕获具体的错误类型（推荐做法）
+
+上面写的 `except:`（不带任何类型）会捕获**所有**类型的错误，这其实是个坏习惯，因为你**分不清到底是哪里错了**。更好的写法是**指定具体的异常类型**：
+
+```python
+try:
+    num = int(input("请输入一个数字："))
+    result = 10 / num
+except ValueError:
+    print("你输入的不是数字！")
+except ZeroDivisionError:
+    print("不能除以0！")
+```
+
+- 如果输入 `abc` → 触发 `ValueError`，走第一个except
+- 如果输入 `0` → 触发 `ZeroDivisionError`，走第二个except
+- 每种错误对应各自的处理方式，**更精确、更好排查问题**
+
+### 7.3.1. 常见的异常类型
+
+| 异常类型            | 什么时候触发                                |
+| ------------------- | ------------------------------------------- |
+| `ValueError`        | 值的类型对，但内容不合法，比如 `int("abc")` |
+| `TypeError`         | 类型不匹配，比如字符串和数字相加 `"a" + 1`  |
+| `ZeroDivisionError` | 除以0                                       |
+| `IndexError`        | 列表下标越界，比如 `[1,2,3][10]`            |
+| `KeyError`          | 字典里没有这个key，比如 `{"a":1}["b"]`      |
+| `FileNotFoundError` | 打开一个不存在的文件                        |
+| `AttributeError`    | 调用了对象不存在的属性/方法                 |
+
+## 7.4. 拿到错误的具体信息：`as e`
+
+```python
+try:
+    num = int("abc")
+except ValueError as e:
+    print(f"出错了，原因是: {e}")
+```
+
+输出类似：
+
+```
+出错了，原因是: invalid literal for int() with base 10: 'abc'
+```
+
+`e` 就是Python给你的这次错误的"详细说明"，方便你打印日志、排查问题。`e`这个名字可以随便起，但约定俗成写`e`（error的缩写）。
+
+## 7.5. `else`：没出错的时候才执行
+
+```python
+try:
+    num = int(input("请输入一个数字："))
+except ValueError:
+    print("输入错误！")
+else:
+    print(f"输入成功，数字是: {num}")   # 只有try里完全没出错，才会走这里
+```
+
+`else` 不是必须的，加它的意义是：**把"正常情况下要做的事"和"try里为了防止出错而放进去的代码"分开**，可读性更好。
+
+## 7.6. `finally`：不管有没有出错，最后都会执行
+
+这是你问的重点，我详细讲：
+
+```python
+try:
+    print("尝试执行")
+    num = int("abc")     # 这里会报错
+except ValueError:
+    print("捕获到错误")
+finally:
+    print("不管有没有出错，我都会执行")
+```
+
+输出：
+
+```
+尝试执行
+捕获到错误
+不管有没有出错，我都会执行
+```
+
+`finally` 里的代码**无论如何都会跑一遍**，不管：
+
+- try里的代码顺利执行完了（没出错）
+- try里的代码出错了，并且被except成功捕获处理了
+- 甚至try里出错了，但是**没有对应的except能处理这个错误**（程序即将崩溃退出前），`finally`依然会执行，执行完之后程序才真正崩溃
+
+**`finally` 最典型的用途：释放资源**，比如关闭文件、断开网络连接、释放硬件占用——这些"收尾工作"不管程序是正常结束还是出错，都必须做，不然会造成资源泄漏。
+
+## 7.7. 完整结构总览（顺序固定，不能乱）
+
+```python
+try:
+    可能出错的代码
+except 异常类型1 as e1:
+    处理异常1
+except 异常类型2 as e2:
+    处理异常2
+else:
+    没有出错时，额外执行的代码
+finally:
+    不管有没有出错，最后都会执行的代码
+```
+
+顺序必须是：`try` → 若干个`except`（可以0个、1个或多个）→ `else`（可选）→ `finally`（可选）
+
+## 7.8.
+
+## 7.9. 常见的实用技巧
+
+**1. 一个except同时捕获多种类型：**
+
+```python
+except (ValueError, TypeError) as e:
+    print(f"值或类型错误: {e}")
+```
+
+**2. 主动抛出自己的错误（raise）：**
+
+```python
+def set_speed(speed):
+    if speed > 100:
+        raise ValueError("速度不能超过100")   # 主动报错，让调用者用try捕获
+```
+
+**3. 捕获所有异常但仍打印详细信息（调试时常用）：**
+
+```python
+import traceback
+try:
+    do_something()
+except Exception as e:
+    print(f"发生错误: {e}")
+    traceback.print_exc()   # 打印完整的错误堆栈，方便排查是哪一行出的问题
+```
 
 
-# 7. Class
 
-
+# 8. Class
 
 💡 装饰器常用于：日志记录、权限检查、缓存、计时、重试机制等。
 
-# 8. References
+
+
+# 9. Packages
+
+package：一个包就是一个文件夹，里面装了很多模块（`.py`文件），文件夹里通常有个 `__init__.py` 文件表明"这是个包"。默认情况下，只有 `__init__.py` 里写了的东西，才会在 `import 包名` 之后能直接用 `包名.xxx` 点出来。
+
+module：一个模块就是一个单独的 `.py` 文件；
+
+**用文件结构类比一下**
+
+```
+rclpy/                  <- 这是一个包（文件夹）
+├── __init__.py          <- import rclpy 时，只执行这个文件
+├── node.py               <- 定义了 class Node，但不会被自动加载！
+├── time.py               <- 定义了 class Time，也不会被自动加载！
+└── ...
+```
+
+当你写 `import rclpy` 时：
+
+- Python 只执行 `rclpy/__init__.py` 这一个文件
+- 如果 `__init__.py` 里**没有**写 `from . import node`，那么 `node.py` 这个文件根本**不会被读取、不会被执行**
+- 所以你此时写 `rclpy.node.Node` 会报错：`AttributeError: module 'rclpy' has no attribute 'node'`
+
+而你写 `from rclpy.node import Node` 的时候，Python会：
+
+1. 专门去打开 `rclpy/node.py` 这个文件，把它完整执行一遍（这一步之前没做过）
+2. 从执行完的结果里，把 `Node` 这个类抠出来给你用；
+
+**注意点：**
+
+- `import rclpy` 只加载了这个包的"总入口文件"(`__init__.py`)，并不会自动把所有子模块（`node.py`、`time.py`……）都加载并挂到 `rclpy` 上。想用某个子模块里的东西，必须**专门再写一行**去导入那个子模块（或其中的具体类），这不是重复劳动，而是"顶层功能"和"子模块具体功能"本来就是两码事，要分别导入。
+
+- `import xxx` 和 `from xxx import yyy` 在"底层加载多少东西"上没有任何区别，两者都会完整加载整个模块。唯一的区别是：前者要求你用的时候写前缀（如 `xxx.功能`），后者让你直接用抠出来的那个名字，不用写前缀。这纯粹是**代码可读性/书写便利性**的选择，跟性能、体积无关。
+- 包可以嵌套：包里面还可以有包；
+
+
+
+# 10. References
 
 1. offical: https://www.python.org/
 1. Python Package Index: https://pypi.org/
+1. exception: https://docs.python.org/3/library/exceptions.html
 
