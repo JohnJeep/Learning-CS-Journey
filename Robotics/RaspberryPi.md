@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2026-07-19 11:53:02
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-02 10:13:18
+ * @LastEditTime: 2026-09-05 21:51:44
  * @Description: Raspberry Pi related content for Robotics.
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Raspberry Pi
@@ -12,7 +12,6 @@
 ## 1.1. Raspberry Pi Zero W
 
 产品规格
-
 - **1GHz, single-core CPU Broadcom BCM2835, 512MB RAM**
 - 802.11 b/g/n wireless LAN
 - Bluetooth 4.1
@@ -24,23 +23,15 @@
 - CSI camera connector
 
 
-
 注意点
-
 - ARMv6 架构；
-
 - Pi Zero W 用的是 Broadcom BCM43438 无线芯片，**是个非开源二进制固件 + nvram 校准文件的组合**，缺一不可；
 
 
-
-
-
 场景：
-
 - Zero W 用于某个子系统的小控制节点；
-
-
-
+- 摄像头节点:装 libcamera + mjpg-streamer 或用 Python 的 picamera2 库做 WiFi 视频流；
+- 传感器节点:Python + paho-mqtt 库,把数据发到主控(3B+)上跑的 MQTT broker；
 
 
 ## 1.2. Raspberry Pi 3 Model B+
@@ -62,18 +53,13 @@ The Raspberry Pi 3 Model B+ is the final revision in the Raspberry Pi 3 range.
 - Power-over-Ethernet (PoE) support (requires separate PoE HAT)
 
 
-
-ARMv7 架构；
-
-
-
 ## 1.3. 交叉构建 Buildroot
 
-|                     | Pi 3B+                                       | Pi Zero W                 |
-| ------------------- | -------------------------------------------- | ------------------------- |
+|                     | Pi 3B+                                         | Pi Zero W                 |
+| ------------------- | ---------------------------------------------- | ------------------------- |
 | CPU                 | 四核 Cortex-A53 (armv7 代码兼容，实际是 armv8) | 单核 ARM11 (armv6)        |
-| Buildroot defconfig | `raspberrypi3_defconfig`                     | `raspberrypi0w_defconfig` |
-| 架构差异            | armv7 (32 位常用配置)                         | **armv6**，工具链不通用   |
+| Buildroot defconfig | `raspberrypi3_defconfig`                       | `raspberrypi0w_defconfig` |
+| 架构差异            | armv7 (32 位常用配置)                          | **armv6**，工具链不通用   |
 
 **关键点**：Pi Zero W 用的是 ARM1176（armv6），跟 Pi 3B+ 的
 Cortex-A53（armv7/v8）指令集不完全兼容。你不能编译一份镜像烧两块板子，**必须为每块板子单独跑一次 Buildroot
@@ -154,8 +140,6 @@ make -j$(nproc)
 
 编译完成后退出容器，宿主机的 `./output/images/sdcard.img` 就是最终产物。
 
-
-
 **关键注意点**
 
 1. **`useradd builder` 这一步是必须的**——Buildroot 官方明确不允许以 root 用户执行编译，容器默认是
@@ -167,8 +151,7 @@ make -j$(nproc)
    环境网络受限（比如公司代理），需要在 Dockerfile 或 `docker run` 里配置好 `http_proxy`/`https_proxy`。
 5. **写卡这一步必须在宿主机上做**，不要试图在容器里操作 `/dev/sdX`——除非用 `--privileged`
    且映射设备进去，一般没这个必要，直接容器外 `dd` 更简单安全。
-
-4、将构建好的产物烧录到板子上；
+4. 将构建好的产物烧录到板子上；
 
 
 ## 1.4. 烧录 img 到 SD 卡
@@ -185,11 +168,28 @@ sudo dd if=/home/john/Downloads/your_image.img of=/dev/sdd bs=4M status=progress
 - status=progress = 显示进度条
 
 
+## 配置 WIFI
+
+编辑文件： sudo vim /etc/netplan/50-cloud-init.yaml
+```yaml
+network:
+  version: 2
+  wifis:
+    wlan0:
+      dhcp4: true
+      optional: true
+      access-points:
+        "你的WiFi名称":
+          password: "你的WiFi密码"
+```
+
+编辑完后，应用配置
+```bash
+sudo netplan apply
+```
+
 # 2. References
 
 - https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
-
-```
-docker run -it --rm -v /i/ubuntu2404/workspace/rpi-build/output-3b:/home/builder/buildroot/output  -v /i/ubuntu2404/workspace/rpi-build/dl:/home/builder/buildroot/dl rpi-buildroot bash
-```
-
+- https://cdimage.ubuntu.com/ubuntu/releases/24.04/release/
+- https://dietpi.com/#download
