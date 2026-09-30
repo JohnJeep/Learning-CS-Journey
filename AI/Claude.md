@@ -431,6 +431,28 @@ Claude Code 内置的 subagents:
 
 
 
+## Prompt
+
+### Understand project architecture
+
+```
+explain the structure of this codebase and how the main components interact
+```
+
+Claude Code reads your files and provides an architectural overview, helping you or new team members understand project organization.
+
+
+
+### Analyze code quality
+
+```
+Review the authentication module for potential security issues
+```
+
+Claude Code examines the relevant code, identifies concerns like exposed credentials or insufficient validation, and suggests specific improvements.
+
+
+
 ## 9. Memory Hierarchy
 
 ![alt text](figures/claude_memory_hierarchy.png)
