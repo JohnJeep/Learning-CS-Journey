@@ -10,6 +10,7 @@
     "DataStructure",
     "DesignPattern",
     "Distributed",
+    "Embedded",
     "Financial",
     "Git-SVN",
     "GNU",
@@ -20,6 +21,7 @@
     "Linux",
     "Markdown",
     "Math",
+    "MongoDb",
     "MySQL",
     "Network",
     "Nginx",
@@ -47,6 +49,11 @@
     "Linux/vim/myvim/",
     "Go/proj-go/",
     "Robotics/code/"
+  ],
+  "include_file_paths": [
+    "Embedded/F207xx/README.md",
+    "Embedded/F407xx/00-bare-metal-template/F407ZGT6/README.md",
+    "Embedded/F407xx/00-uc-cos-iii-template/README.md"
   ],
   "exclude_file_names": [
     "README.md",
