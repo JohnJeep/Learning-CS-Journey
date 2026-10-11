@@ -179,7 +179,7 @@ C++ 知识体系庞大，从基础语法到现代 C++ 特性，从 STL 源码到
 | **Python** | `Python/` | Python 基础与标准库 |
 | **JavaScript** | `JavaScript/` | JavaScript 语言特性 |
 | **TypeScript** | `TypeScript/` | TypeScript 配置与开发 |
-| **Node.js** | `node.js/` | 运行时、npm 包管理 |
+| **Node.js** | `NodeJs/` | 运行时、npm 包管理 |
 | **Shell** | `Shell/` | [Shell 脚本](Shell/shell.md)、tmux、crontab |
 | **Qt** | `Qt/` | [Qt GUI 框架](Qt/Qt.md) 常见组件与用法 |
 
