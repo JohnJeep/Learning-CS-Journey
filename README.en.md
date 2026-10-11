@@ -168,7 +168,7 @@ Comprehensive coverage from language basics to runtime internals.
 | Python     | `Python/`     | Python basics and standard library |
 | JavaScript | `JavaScript/` | JavaScript language notes          |
 | TypeScript | `TypeScript/` | TypeScript setup and usage         |
-| Node.js    | `node.js/`    | Runtime and package ecosystem      |
+| Node.js    | `NodeJs/`    | Runtime and package ecosystem      |
 | Shell      | `Shell/`      | Shell scripting, tmux, and crontab |
 | Qt         | `Qt/`         | Qt components and GUI development  |
 

@@ -20,6 +20,7 @@
 ## 博客自动同步约定
 
 - 同步范围由 `.blog-sync.json` 白名单控制，仅同步指定目录中的 `.md` 文件。
+- `include_file_paths` 可显式保留白名单目录中被文件名规则排除的文档，例如嵌入式项目的 `README.md`；目录排除规则仍然生效。
 - 同步脚本为 `add_frontmatter.py`，产物目录为 `Blogs/source/_posts/synced`。
 - 分类规则：按源文件目录层级自动生成 `categories`。
 - 标签规则：按路径和文件名自动生成 `tags`。
