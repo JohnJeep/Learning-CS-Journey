@@ -8,7 +8,7 @@ import json
 import re
 import shutil
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
@@ -46,6 +46,7 @@ class SyncConfig:
     exclude_file_names: set[str]
     category_aliases: dict[str, str]
     output_subdir: str
+    include_file_paths: set[str] = field(default_factory=set)
 
 
 def load_config(repo_root: Path, config_path: Path) -> SyncConfig:
@@ -66,6 +67,7 @@ def load_config(repo_root: Path, config_path: Path) -> SyncConfig:
         include_roots=sorted(set(include_roots)),
         exclude_prefixes=[normalize_prefix(p) for p in merged.get("exclude_prefixes", [])],
         exclude_file_names=set(merged.get("exclude_file_names", [])),
+        include_file_paths=set(merged.get("include_file_paths", [])),
         category_aliases=dict(merged.get("category_aliases", {})),
         output_subdir=str(merged.get("output_subdir", DEFAULT_CONFIG["output_subdir"])),
     )
@@ -338,11 +340,13 @@ def build_frontmatter(
 
 
 def should_skip(rel_posix: str, file_name: str, config: SyncConfig) -> bool:
-    if file_name in config.exclude_file_names:
-        return True
     for prefix in config.exclude_prefixes:
         if rel_posix.startswith(prefix):
             return True
+    if rel_posix in config.include_file_paths:
+        return False
+    if file_name in config.exclude_file_names:
+        return True
     return False
 
 
