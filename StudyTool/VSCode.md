@@ -2,12 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2019-09-11 13:46:17
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-09 13:35:52
- * @Description: VSCode 使用说明
+ * @LastEditTime: 2026-10-17 10:17:51
+ * @Description: VSCode User Guide
  * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
-- [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts 快捷键)
+- [1. VS Code Shortcuts(快捷键)](#1-vs-code-shortcuts快捷键)
   - [1.1. Folder](#11-folder)
   - [1.2. Terminal](#12-terminal)
   - [1.3. Edition](#13-edition)
@@ -21,10 +21,11 @@
     - [2.1.3. 🔢 行号与光标位置（主要用于调试配置）](#213--行号与光标位置主要用于调试配置)
     - [2.1.4. 🧩 其他变量](#214--其他变量)
   - [2.2. Cursor](#22-cursor)
-- [3. Panel(面板)](#3-panel 面板)
-- [4. workspace(工作空间)](#4-workspace 工作空间)
-- [5. Debugging(调试)](#5-debugging 调试)
-- [6. Plugins(插件)](#6-plugins 插件)
+  - [2.3. files](#23-files)
+- [3. Panel(面板)](#3-panel面板)
+- [4. workspace(工作空间)](#4-workspace工作空间)
+- [5. Debugging(调试)](#5-debugging调试)
+- [6. Plugins(插件)](#6-plugins插件)
   - [6.1. Go](#61-go)
 - [7. References](#7-references)
 
@@ -240,6 +241,22 @@ VS Code 环境修改支持两种方式：
   }
 }
 ```
+
+## 2.3. files
+
+让 C/C++ 扩展在代码导航和 IntelliSense 中忽略 某些 目录，需在 `.vscode/settings.json` 中进行配置：
+```json
+{
+  "C_Cpp.files.exclude": {
+    "**/build*": true
+  }
+}
+```
+
+`C_Cpp.files.exclude` 用于指定哪些文件/目录不参与 C/C++ 扩展的处理，具体影响：
+- IntelliSense 索引（代码补全、跳转定义、符号搜索）
+- 代码导航（Go to Definition 等）
+- 文件监视（减少不必要的文件监听，节省资源）
 
 
 # 3. Panel(面板)
