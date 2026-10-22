@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2024-10-10 15:31:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:19:01
- * @Description: Linux 使用技巧
- * Copyright (c) 2025 by John Jeep, All Rights Reserved. 
+ * @LastEditTime: 2026-10-22 15:54:35
+ * @Description: Linux usage trick
+ * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
 
 ## 1. 系统
@@ -56,8 +56,15 @@
 ## 5. 进程
 
 ```shell
-# ps -ef         # 查看所有进程
-# top          # 实时显示进程状态
+# 通过 PID 查看进程的 PPID、用户、启动命令、启动时间、运行多久
+ps -p 1928 -o pid,ppid,user,cmd,lstart,etime
+  PID    PPID USER     CMD                                          STARTED     ELAPSED
+  1928    1919 walker   /usr/bin/pulseaudio --daemo Thu Oct 22 15:27:34 2026       16:23
+
+# 另外一种方式通过 PID 查看启动的命令
+ps -fp 1928
+  UID          PID    PPID  C STIME TTY          TIME CMD
+  walker      1928    1919  7 15:27 ?        00:00:46 /usr/bin/pulseaudio --daemonize=no --log-target=journal
 ```
 
 ## 6. 用户
@@ -84,48 +91,48 @@
 # rpm -qa        # 查看所有安装的软件包
 ```
 
-**查看 CPU 信息（型号）** 
+**查看 CPU 信息（型号）**
 
 ```shell
-# cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c 
-   8 Intel(R) Xeon(R) CPU      E5410  @ 2.33GHz 
-(看到有8个逻辑CPU, 也知道了CPU型号) 
+# cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+   8 Intel(R) Xeon(R) CPU      E5410  @ 2.33GHz
+(看到有8个逻辑CPU, 也知道了CPU型号)
 
-# cat /proc/cpuinfo | grep physical | uniq -c 
-   4 physical id   : 0 
-   4 physical id   : 1 
-(说明实际上是两颗4核的CPU) 
+# cat /proc/cpuinfo | grep physical | uniq -c
+   4 physical id   : 0
+   4 physical id   : 1
+(说明实际上是两颗4核的CPU)
 
-# getconf LONG_BIT 
-  32 
-(说明当前CPU运行在32bit模式下, 但不代表CPU不支持64bit) 
+# getconf LONG_BIT
+  32
+(说明当前CPU运行在32bit模式下, 但不代表CPU不支持64bit)
 
-# cat /proc/cpuinfo | grep flags | grep ' lm ' | wc -l 
-  8 
-(结果大于0, 说明支持64bit计算. lm指long mode, 支持lm则是64bit) 
+# cat /proc/cpuinfo | grep flags | grep ' lm ' | wc -l
+  8
+(结果大于0, 说明支持64bit计算. lm指long mode, 支持lm则是64bit)
 ```
 
-## 9. 内存信息 
+## 9. 内存信息
 
 ```shell
-# cat /proc/meminfo 
+# cat /proc/meminfo
 
-# uname -a 
-Linux euis1 2.6.9-55.ELsmp #1 SMP Fri Apr 20 17:03:35 EDT 2007 i686 i686 i386 GNU/Linux 
-(查看当前操作系统内核信息) 
+# uname -a
+Linux euis1 2.6.9-55.ELsmp #1 SMP Fri Apr 20 17:03:35 EDT 2007 i686 i686 i386 GNU/Linux
+(查看当前操作系统内核信息)
 
-# cat /etc/issue | grep Linux 
-Red Hat Enterprise Linux AS release 4 (Nahant Update 5) 
-(查看当前操作系统发行版信息) 
+# cat /etc/issue | grep Linux
+Red Hat Enterprise Linux AS release 4 (Nahant Update 5)
+(查看当前操作系统发行版信息)
 ```
 
 ## 10. 机器型号
 
 ```shell
-# dmidecode | grep "Product Name" 
+# dmidecode | grep "Product Name"
 ```
 
-## 11. 网卡信息 
+## 11. 网卡信息
 
 ```shell
 # dmesg | grep -i eth
