@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-04-19 17:31:46
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-29 23:00:53
+ * @LastEditTime: 2026-10-25 01:06:40
  * @Description: Python Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -663,7 +663,25 @@ except Exception as e:
 
 # 8. Class
 
-💡 装饰器常用于：日志记录、权限检查、缓存、计时、重试机制等。
+python 中四种常见的变量
+```python
+class Demo:
+    class_var = 100              # ① 类属性（类体里，函数外）
+
+    def __init__(self):
+        self.instance_var = 1    # ② 实例属性（函数内，self.xxx）
+        local_init = 2           # ③ 局部变量（函数内，无 self）
+
+    def method(self):
+        self.instance_var2 = 3   # ② 实例属性（可以在任意方法里创建）
+        local = 4                # ③ 局部变量
+        global g                 # ④ 全局变量（需声明）
+        g = 5
+        return local
+```
+
+---
+装饰器常用于：日志记录、权限检查、缓存、计时、重试机制等。
 
 
 
