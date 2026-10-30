@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2025-12-31 21:17:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 18:12:30
+ * @LastEditTime: 2026-10-29 23:18:25
  * @Description: ARM Usage and Development
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 ARM（Advanced RISC Machine）架构自 1985 年诞生以来，已经经历了多个重要的发展阶段：
@@ -79,7 +79,7 @@ CPU核心架构:
 GPU架构分类:
   Mali-G系列:
     - G31: 入门级，1-2个执行引擎
-    - G52: 中端，2-4个执行引擎  
+    - G52: 中端，2-4个执行引擎
     - G57: 高端，6-9个执行引擎
     - G610: 旗舰，10个执行引擎
 
@@ -93,7 +93,7 @@ AI加速器类型:
     - 专用神经网络加速器
     - 支持INT8/INT16/FP16精度
     - 算力单位: TOPS (万亿次运算/秒)
-  
+
   DSP (Digital Signal Processor):
     - 数字信号处理专用
     - 适合音频/图像处理
@@ -121,7 +121,7 @@ Ubuntu版本特性:
     - 特色: 容器化支持增强
 
   Ubuntu 22.04 LTS:
-    - 支持期: 2027年4月  
+    - 支持期: 2027年4月
     - 内核版本: 5.15
     - 特色: Wayland默认、更好的ARM支持
 
@@ -137,15 +137,16 @@ Ubuntu版本特性:
 **实时操作系统对比**
 
 | **RTOS 类型** | **最大延迟** | **内存占用** | **学习难度** | **适用场景** |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
-| FreeRTOS     | <10μs        | 4-10KB       | 中等         | 工业控制     |
-| RT-Thread    | <5μs         | 3-8KB        | 低           | 物联网设备   |
-| Zephyr       | <20μs        | 8-32KB       | 高           | 复杂嵌入式   |
-| QNX          | <3μs         | 150KB+       | 高           | 汽车电子     |
+| ------------- | ------------ | ------------ | ------------ | ------------ |
+| FreeRTOS      | <10μs        | 4-10KB       | 中等         | 工业控制     |
+| RT-Thread     | <5μs         | 3-8KB        | 低           | 物联网设备   |
+| Zephyr        | <20μs        | 8-32KB       | 高           | 复杂嵌入式   |
+| QNX           | <3μs         | 150KB+       | 高           | 汽车电子     |
 
 
+# References
 
-[机器人玩转之---嵌入式开发板基础知识到实战选型指南（包含 ORIN、RDK X5、Raspberry pi、RK 系列等）](https://www.guyuehome.com/detail?id=1929553545592373250)
-
-
-
+- [机器人玩转之---嵌入式开发板基础知识到实战选型指南（包含 ORIN、RDK X5、Raspberry pi、RK 系列等）](https://www.guyuehome.com/detail?id=1929553545592373250)
+- [Arm 架构参考手册 (Arm Architecture Reference Manual)](https://support.arm.com/documentation/ddi0487/md/)
+- [学习架构 - A 系列 指南](https://www.arm.com/zh-cn/architecture/learn-the-architecture/a-profile)
+- [ARM64指令简易手册](https://tenloy.github.io/2021/04/17/Arm64-Handbook.html)
