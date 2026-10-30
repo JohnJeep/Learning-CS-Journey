@@ -2,9 +2,9 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:55:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-07-06 00:59:54
+ * @LastEditTime: 2026-10-31 00:37:19
  * @Description: rust usage
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
@@ -114,3 +114,8 @@ union MyUnion {  // 这里 union 是关键字
 
 let union = 5;  // 这里 union 可以正常当变量名
 ```
+
+# 4. References
+
+- [rust learn getting started](https://rust-lang.org/learn/get-started/)
+- [Rust 程序设计语言 简体中文版](https://kaisery.github.io/trpl-zh-cn/foreword.html)
