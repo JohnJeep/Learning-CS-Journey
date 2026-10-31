@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2019-04-04 23:28:59
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-09 17:31:57
+ * @LastEditTime: 2026-10-31 18:39:47
  * @Description: Git Usage
  * Copyright (c) 2022 by johnjeep, All Rights Reserved.
 -->
@@ -773,30 +773,32 @@ Git 清空版本库
 
 # 4. Git Config
 
-- 配置项目或某个仓库的用户名和密码，该配置位于 `.git` 路径下的 `config` 文件中。
-  ```bash
-  git config --local user.name xxxxx
-  git config --local user.email xxxx@gmail.com
-  ```
+对 git 仓库用户的配置
+```bash
+# 配置项目或某个仓库的用户名和密码，该配置位于 `.git` 路径下的 `config` 文件中。
+git config --local user.name xxxxx
+git config --local user.email xxxx@gmail.com
 
-- 配置系统用户级别的用户名和密码，该配置位于用户家目录下的 `.gitconfig` 文件中。
-  ```bash
-  git config --global user.name xxxxx
-  git config --global user.email xxxx@gmail.com
-  ```
+# 配置系统用户级别的用户名和密码，该配置位于用户家目录下的 `.gitconfig` 文件中。
+git config --global user.name xxxxx
+git config --global user.email xxxx@gmail.com
 
-- 配置当前操作系统下，所有用户使用 git 的用户名和密码，一般不建议这么做，不太安全。
-  ```bash
-  git config --system user.name xxxxx
-  git config --system user.email xxxx@gmail.com
-  ```
+# 配置当前操作系统下，所有用户使用 git 的用户名和密码，一般不建议这么做，不太安全。
+git config --system user.name xxxxx
+git config --system user.email xxxx@gmail.com
+```
 
-- 关闭 `git branch` 的分页器（pager）
+常见的 git config 项
+```bash
+# 关闭 git branch 的分页器 pager
+git config --global pager.branch false
 
-  ```bash
-  git config --global pager.branch false
-  ```
+# pull rebase 为 true
+git config --global pull.rebase true
 
+# 配置 vim 为默认编辑器
+git config --global core.editor "vim"
+```
 
 
 ## 4.1. credential
@@ -814,7 +816,6 @@ git config --local credential.helper store
 设置了 `credential.helper` 为 `store` 后，Git 会将凭证信息**明文存储在本地文件中。**这样做存在安全风险，因为其他人可以
 访问到这些凭证信息。建议在安全的环境下使用 `store`
 凭证助手，或者考虑使用其他更安全的凭证助手，如 `cache` 或 `osxkeychain`，它们可以更加安全地存储凭证信息。
-
 
 
 **使用更安全的凭据**
