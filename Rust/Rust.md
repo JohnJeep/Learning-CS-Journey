@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:55:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-10-31 00:37:19
+ * @LastEditTime: 2026-10-31 17:28:40
  * @Description: rust usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -115,7 +115,30 @@ union MyUnion {  // 这里 union 是关键字
 let union = 5;  // 这里 union 可以正常当变量名
 ```
 
+
+# crate
+
+理解什么是 crate ?
+
+Crate = 一个 Rust 项目/库，就这么简单。
+
+- 你写一个程序或一个库，它就是一个 crate。
+- 它编译出来要么是可执行文件（有 main），要么是库（给别人用）。
+- 一个 crate 里可以有很多 `.rs` 文件、很多 `modules`，但整体算一个 crate。
+
+
+干什么用：
+
+- 写程序 → 你的项目就是一个 crate。
+- 用别人的库 → 别人的库也是一个 crate，你在 `Cargo.toml` 里写 `rand = "0.8"`，就是引入 rand 这个 crate
+
+标准库也是 crate： 叫 `std`，每个项目自动带上，不用你手动加。
+
+
+
 # 4. References
 
-- [rust learn getting started](https://rust-lang.org/learn/get-started/)
-- [Rust 程序设计语言 简体中文版](https://kaisery.github.io/trpl-zh-cn/foreword.html)
+- rust learn getting started: https://rust-lang.org/learn/get-started/
+- std library doc: https://doc.rust-lang.org/std/prelude/index.html
+- The Rust community’s crate registry: https://crates.io/
+- Rust 程序设计语言 简体中文版: https://kaisery.github.io/trpl-zh-cn/foreword.html
