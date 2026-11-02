@@ -3,7 +3,7 @@
  * @Author: JohnJeep
  * @Date: 2025-10-17 16:20:49
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-10-30 18:27:37
+ * @LastEditTime: 2026-11-02 17:54:31
  * @Description: ROS2 Usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -370,9 +370,32 @@ action server: 作为任务执行方。负责接受或拒绝目标、执行任�
 
 一个 Action Server 可以接受多个 Client 的请求，也可以管理多个 Goal。但如何调度多个目标、是否允许同时执行，由具体 Server 的实现决定。
 
+
+### API 接口
+
+- `rclcpp_action::create_client<ActionT>()`创建客户端，指定 Action 类型和名称
+- `wait_for_action_server(timeout)`在指定时间内等待服务端可用
+- `async_send_goal(goal, options)`异步发送目标
+- `SendGoalOptions::goal_response_callback`判断目标被接受还是拒绝
+- `SendGoalOptions::feedback_callback`接收执行进度
+- `SendGoalOptions::result_callback`处理最终结果
+- `async_cancel_goal(goal_handle)`请求取消指定目标
+- `async_get_result(goal_handle)`显式请求最终结果，返回 future
+- `action_server_is_ready()`立即检查服务端是否就绪
+- `goal_handle->get_goal_id()` / `get_status()`查看任务编号和客户端已知状态
+
+
+
 ### 5.3.1. 底层原理
 
-Action 最核心的设计：Action = 3 个 Service + 2 个 Topic
+目标：
+
+- 熟练掌握 API 调用
+- 清楚ROS2 Action 底层的实现机制
+
+----
+
+Action 最核心的设计：**Action = 3 个 Service + 2 个 Topic**
 
 ROS 2 的 Action 底层并不是一种全新的传输协议，而是由 3 个 Service 和 2 个 Topic 组合实现的。
 
@@ -459,7 +482,7 @@ QoS（Quality of Service，服务质量）是 ROS2 通过 DDS 提供的通信质
   `BEST_EFFORT`
 - Durability：发布者 `TRANSIENT_LOCAL` 兼容任何订阅者；发布者 `VOLATILE` 只兼容订阅者 `VOLATILE`
 
-### 5.4.2. 常用预定义 QoS Profile
+### 5.4.2. 预定义 QoS Profile
 
 ROS2 内置了几种常用 QoS 配置：
 
