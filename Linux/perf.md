@@ -2,12 +2,12 @@
  * @Author: JohnJeep
  * @Date: 2022-07-13 22:59:29
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-05-31 20:18:03
- * @Description: Linux perf 工具用法
- * Copyright (c) 2022 by JohnJeep, All Rights Reserved. 
+ * @LastEditTime: 2026-11-07 12:15:18
+ * @Description: Linux perf tools usage and examples
+ * Copyright (c) 2022 by JohnJeep, All Rights Reserved.
 -->
 
-# 1. perf
+# 1. Linux perf tools
 
 perf 有时叫 **perf_events** 或 **perf tools**，最初的名字是 PCL(Performance Counters for Linux)，是 Linux
 下的一个性能分析的工具(Performance
@@ -28,14 +28,37 @@ perf  使用时支持多个子命令。
 - trace
 
 
-## 1.2. 可选项参数
+## 1.2. option parameter
+
 - `-e`
 - `-a`
 - `-p`
 - `-t`
 
 
+## 1.3. Examples
+
+常用操作
+
+```bash
+#  按 PID 采样 15 秒
+sudo perf record -F 99 -g -p <PID> -- sleep 15
+
+# 查看分析结果
+sudo perf report
+
+
+# 按照 PID 采集 10秒目标进程数据
+sudo perf sched record -p <PID> -- sleep 10
+# 读取默认的 perf.data，分析调度时间线
+sudo perf sched timehist
+```
+
+
+
+
 # 2. References
+
 - brendangregg 博客 perf Examples: https://www.brendangregg.com/perf.html
 - Github 源码: https://github.com/brendangregg/perf-tools
 - Wikipedia 英文解释 perf (Linux)：https://en.wikipedia.org/wiki/Perf_(Linux)
