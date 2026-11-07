@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-04-19
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-08-09 17:43:53
+ * @LastEditTime: 2026-11-07 18:11:16
  * @Description: English project overview
  * Copyright (c) 2025 by John Jeep, All Rights Reserved.
 -->
@@ -24,7 +24,6 @@ notes, deep dives, and long-term growth.
 
 </div>
 
----
 
 ## Project Overview
 
@@ -44,7 +43,6 @@ with a strong focus on understanding both how things work and why they work.
 - Practice-oriented writing with code examples, configs, and debugging workflows.
 - Diagram-driven explanations using draw.io and mind maps.
 
----
 
 ## Knowledge Map
 
@@ -66,7 +64,6 @@ with a strong focus on understanding both how things work and why they work.
                     Nginx           AutoDrive
 ```
 
----
 
 ## Table of Contents
 
@@ -114,7 +111,6 @@ with a strong focus on understanding both how things work and why they work.
   - [Feedback](#feedback)
   - [License](#license)
 
----
 
 ## Hardware Foundations
 
@@ -134,8 +130,6 @@ STM32-focused notes and code (F103 / F207 / F407), including peripherals, driver
 
 Core GNU ecosystem topics such as GCC, glibc, and ABI details.
 
----
-
 ## Programming Languages
 
 ### Cpp
@@ -154,12 +148,9 @@ Systematic notes from fundamentals to modern C++ features, STL internals, memory
 
 Comprehensive coverage from language basics to runtime internals.
 
-- **Fundamentals**: [Go Basics](Go/Go.md), [Standard Library](Go/GoStandardLibrary.md),
-  [Coding Style](Go/GolangCodeConduct.md), [Testing](Go/GoTest.md)
-- **Advanced**: [CGO](Go/CGO.md), [Compiler](Go/Compiler.md), [Performance](Go/Performance.md),
-  [Third-party Packages](Go/ThirdPackages.md)
-- **Internals**: [Go Internals](Go/GoInternals.md), [GPM Scheduler](Go/GPM.md),
-  [Map](Go/Map.md), [Slice](Go/Slice.md)
+- **Fundamentals**: [Go Basics](Go/Go.md), [Standard Library](Go/GoStandardLibrary.md), [Coding Style](Go/GolangCodeConduct.md), [Testing](Go/GoTest.md)
+- **Advanced**: [CGO](Go/CGO.md), [Compiler](Go/Compiler.md), [Performance](Go/Performance.md), [Third-party Packages](Go/ThirdPackages.md)
+- **Internals**: [Go Internals](Go/GoInternals.md), [GPM Scheduler](Go/GPM.md), [Map](Go/Map.md), [Slice](Go/Slice.md)
 
 ### Other Languages
 
@@ -168,7 +159,7 @@ Comprehensive coverage from language basics to runtime internals.
 | Python     | `Python/`     | Python basics and standard library |
 | JavaScript | `JavaScript/` | JavaScript language notes          |
 | TypeScript | `TypeScript/` | TypeScript setup and usage         |
-| Node.js    | `NodeJs/`    | Runtime and package ecosystem      |
+| Node.js    | `NodeJs/`     | Runtime and package ecosystem      |
 | Shell      | `Shell/`      | Shell scripting, tmux, and crontab |
 | Qt         | `Qt/`         | Qt components and GUI development  |
 
@@ -198,7 +189,6 @@ A structured OS learning path combining top courses and classic references.
 - Linkers and Loaders related engineering notes
 - Practical systems-level books and reverse engineering references
 
----
 
 ## Computer Networks
 
@@ -212,19 +202,16 @@ A structured OS learning path combining top courses and classic references.
 - [CS 144 Course Site](https://cs144.github.io/)
 - Top-down networking references and Wireshark labs are included in the notes.
 
----
 
 ## Data Structures and Algorithms
 
 - [Data Structures and Algorithms Notes](DataStructure/DataStructure.md)
 
----
 
 ## Design Patterns
 
 - [23 Design Patterns in C++](DesignPattern/DesignPattern.md)
 
----
 
 ## Databases
 
@@ -234,7 +221,6 @@ A structured OS learning path combining top courses and classic references.
 | Redis    | [Redis Fundamentals](Redis/Redis.md): data structures, cluster topics, source-level notes |
 | Nginx    | [Nginx Basics](Nginx/Nginx.md): configuration, reverse proxy, load balancing              |
 
----
 
 ## Cloud Native and Distributed Systems
 
@@ -253,7 +239,6 @@ A structured OS learning path combining top courses and classic references.
 - MIT 6.824-related learning path and references.
 - Topics include microservices, API gateway, and high-availability practices.
 
----
 
 ## AI and Frontier Topics
 
@@ -276,7 +261,6 @@ ROS2-focused learning path from fundamentals to practical workflows:
 - Simulation (Gazebo), behavior trees, and ROSControl
 - URDF modeling and tf transformations
 
----
 
 ## Linux Systems
 
@@ -286,7 +270,6 @@ ROS2-focused learning path from fundamentals to practical workflows:
 - [CMake](Linux/CMake/cmake-tutorial.md), [Makefile](Linux/CMake/Makefile.md)
 - [inode](Linux/inode.md), [System Programming](Linux/system-program.md), [Tooling](Linux/linux-tools.md)
 
----
 
 ## Developer Tools and Productivity
 
@@ -331,7 +314,6 @@ Root directory:
 - [add_frontmatter.py](add_frontmatter.py): batch-add front matter metadata to documents.
 - [clean.bat](clean.bat): cleanup script for Windows environments.
 
----
 
 ## Recommended Resources
 
@@ -349,7 +331,6 @@ Root directory:
 | Computer Networks   | Computer Networking: A Top-Down Approach          |
 | Distributed Systems | Designing Data-Intensive Applications             |
 
----
 
 ## Feedback
 
@@ -362,7 +343,6 @@ Recommended reading for better questions:
 - [How To Ask Questions The Smart Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)
 - [How to Ask Questions in Open Source Communities](https://github.com/seajs/seajs/issues/545)
 
----
 
 ## License
 
