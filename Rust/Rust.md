@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:55:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-10-31 17:28:40
+ * @LastEditTime: 2026-11-08 23:15:09
  * @Description: rust usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -116,7 +116,7 @@ let union = 5;  // 这里 union 可以正常当变量名
 ```
 
 
-# crate
+# 4. crate
 
 理解什么是 crate ?
 
@@ -135,8 +135,31 @@ Crate = 一个 Rust 项目/库，就这么简单。
 标准库也是 crate： 叫 `std`，每个项目自动带上，不用你手动加。
 
 
+# 5. ecosystem
 
-# 4. References
+Rust 的生态系统主要由以下几个部分组成：
+- **Cargo**：Rust 的包管理器和构建工具，类似于 Python 的 pip 或 Node.js 的 npm。它可以帮助你管理依赖、构建项目、运行测试等。
+- **Crates.io**：Rust 的官方包注册中心，类似于 Python 的 PyPI 或 Node.js 的 npm registry。你可以在这里发布和查找 Rust 的开源库。
+- **Rustup**：Rust 的工具链管理器，类似于 Python 的 pyenv 或 Node.js 的 nvm。它可以帮助你安装和管理不同版本的 Rust 编译器和工具链。
+- **Rust Playground**：一个在线的 Rust 编程环境， 你可以在浏览器中编写、运行和分享 Rust 代码，类似于 Python 的 repl.it 或 Node.js 的 JSFiddle。
+- **Rust 文档**：Rust 官方文档和社区文档，提供了丰富的学习资源和参考资料，类似于 Python 的官方文档和 Stack Overflow。你可以在这里查找 Rust 的语法、标准库、第三方库等信息。
+- **Rust 社区**：Rust 有一个活跃的社区，提供了各种讨论、问答、博客、教程等资源，类似于 Python 的 Reddit 或 Node.js 的 Stack Overflow。你可以在这里与其他 Rust 开发者交流经验、解决问题、分享项目等。
+- **Rustc**：Rust 的编译器，负责将 Rust 代码编译成机器码。
+- rustfmt：Rust 的代码格式化工具，帮助你保持代码风格一致。
+- clippy：Rust 的静态分析工具，帮助你发现潜在的代码问题和改进建议。
+- rust-analyzer：Rust 的语言服务器，提供智能提示、代码补全、重构等功能，类似于 Python 的 Jedi 或 Node.js 的 Tern。
+- rustup: Rust 的工具链管理器，帮助你安装和管理不同版本的 Rust 编译器和工具链。
+
+
+
+
+# 6. Core
+
+- ownership（所有权）+ borrow（借用）+ lifetime（生命周期）是 Rust 的核心概念，Rust 的内存安全就是靠它们保证的。
+
+
+
+# 7. References
 
 - rust learn getting started: https://rust-lang.org/learn/get-started/
 - std library doc: https://doc.rust-lang.org/std/prelude/index.html
