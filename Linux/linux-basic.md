@@ -360,11 +360,11 @@ hostname 是 Linux 的主机名。而 Linux 的 hostname 位于 `/etc/hostname` 
 cat(concatenate)：从第一行开始显示文件内容，将要显示的内容一次性的输出在屏幕上。
 
 ```bash
-参数项
-  - n 显示行号
+-A 显示所有
+-n 显示行号
 
-示例：
-  cat < hello.txt > hello2.txt   # 将 hello.txt 文件内容重定向输出到 hello.txt 文件中，相当于 cp 指令的一个副本。
+# 将 hello.txt 文件内容重定向输出到 hello.txt 文件中
+cat < hello.txt > hello2.txt
 ```
 
 ## 5.2. tac
@@ -675,7 +675,6 @@ gpasswd -d user group
 
 <font color=red>但是这个时候需要保证 group 不是 user 的主组。</font>
 
-​
 
 参考： https://cnzhx.net/blog/linux-add-user-to-group/
 
