@@ -215,3 +215,4 @@ tmux source-file ~/.tmux.conf
 4. https://docs.hpc.sjtu.edu.cn/login/tmux.html
 5. https://github.com/tmux-plugins/tmux-yank
 6. https://github.com/tmux-plugins/tmux-resurrect
+7. 十分钟学会 tmux: https://www.cnblogs.com/kaiye/p/6275207.html
