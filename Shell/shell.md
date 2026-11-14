@@ -4,14 +4,14 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 18:44:29
  * @Description: Shell usage and tips
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. Introduction
 
 一旦启动了终端仿真软件包或者登录 Linux 虚拟控制台，你就会看到 shell CLI 提示符。提示符就是进入 shell
 世界的大门，是你输入 shell 命令的地方。默认 bash shell 提示符是美元符号（
-$），这个符号表明 shell 在等待用户输入。  
+$），这个符号表明 shell 在等待用户输入。
 
 Shell 命令分为三大类：
 - 内建命令(built-in)
@@ -138,7 +138,7 @@ Ctrl 开头的快捷键一般是针对字符的，而 Alt 开头的快捷键一�
   string="abcd"
   echo ${#string} # 输出 4
   ```
-  
+
 - 双引号里可以出现转义字符。
 - 双引号内的特殊字符可以保持原有的特性，比如 `$`。
   ```sh
@@ -152,7 +152,7 @@ Ctrl 开头的快捷键一般是针对字符的，而 Alt 开头的快捷键一�
   ```sh
   # 使用 echo $var 得到 lang is $LANG
   var='lang is $LANG'
-  
+
   其它示例：
     var=200      # =号两边不能有空格
     echo $var    # 200
@@ -191,7 +191,7 @@ date
 ```sh
 [root@DEV-ALWLPT-AP03 log]# path="/home"
 [root@DEV-ALWLPT-AP03 log]# ls $path
-data  emqx  emqx4  failed  go  
+data  emqx  emqx4  failed  go
 ```
 
 注意点：
@@ -256,11 +256,11 @@ anaconda-ks.cfg a.txt authorized_keys Desktop Documents Downloads
 
 2. `$()` 格式：`$(commmand)` 执行括号里面的命令功能。例如：`$(data)`
    ```sh
-  [root@KF-CFT-mongdb3 ~]# test=$(date)
-  [root@KF-CFT-mongdb3 ~]# echo $test   
-  2021年 11月 08日 星期一 10:52:12 CST
+    [root@KF-CFT-mongdb3 ~]# test=$(date)
+    [root@KF-CFT-mongdb3 ~]# echo $test
+    2021年 11月 08日 星期一 10:52:12 CST
    ```
-   
+
    shell 先运行括号中的命令，然后将输出赋给变量 test。注意，赋值等号和命令替换字符之间没有空格。
 
 
@@ -283,8 +283,8 @@ test.sh
 test
 ```
 
-- `$1`: 第一个参数 
-- `$2`: 第二个参数 
+- `$1`: 第一个参数
+- `$2`: 第二个参数
 - `$#`: 统计命令行参数的个数。
 - `$*`: 将 shell 的所有参数当成单个参数。
 - `$@`: 单独处理输入的每个参数。
@@ -299,7 +299,7 @@ test
   。
 
 
-## 4.5. basename 
+## 4.5. basename
 basename 是一个命令行中实用的小工具，可从给定的文件名中删除目录和后缀，并打印出来。
 
 在 Centos7 系统中，已经默认安装了 `basename` 命令了，该命令包含在 `coreutils` 安装包里。
@@ -363,8 +363,8 @@ IOT-Alert20230303_122511_663
 - 脚本中用 `exec` 命令告诉 shell 在脚本执行期间重定向某个特定文件描述符，可以重定向大量的数据。`exec 1>test`
 
 
-三个标准文件描述符 
-- `STDIN`: 标准输入 ，代码为 0，使用 > 或 >> 
+三个标准文件描述符
+- `STDIN`: 标准输入 ，代码为 0，使用 > 或 >>
 - `STDOUT`: 标准输出 ，代码为 1，使用 < 或 <<
 - `STDERR`: 标准错误，代码为 2，使用 2> 或 2>>
 
@@ -511,9 +511,9 @@ done
 ## 6.4. while 语句
 ```bash
 while [ ... ]
-do 
+do
   .....
-done 
+done
 ```
 
 
@@ -543,7 +543,7 @@ test 命令提供了在 if-then 语句中测试不同条件的途径。如果 te
   # 判断val1变量是否长度非0，而它的长度正好非0，所以then部分被执行了。
   if [ -n $val1 ]
   ```
-- `-z str1`: 检查 str1 的长度是否为 0 
+- `-z str1`: 检查 str1 的长度是否为 0
   ```bash
   # 判断val2变量是否长度为0，而它正好长度为0，所以then部分被执行了。
   if [ -z $var2 ]
@@ -561,13 +561,13 @@ test 命令提供了在 if-then 语句中测试不同条件的途径。如果 te
 - `-O file`: 检查 file 是否存在并属当前用户所有
 - `-G file`: 检查 file 是否存在并且默认组与当前用户相同
 - `file1 -nt file2`: 检查 file1 是否比 file2 新
-- `file1 -ot file2`: 检查 file1 是否比 file2 旧 
+- `file1 -ot file2`: 检查 file1 是否比 file2 旧
 
 
 ### 6.5.4. 逻辑比较
 - `expr1 -a expr2`: 逻辑与
 - `expr1 -o expr2`: 逻辑或
-- `expr1 ! expr2` : 逻辑非 
+- `expr1 ! expr2` : 逻辑非
 
 
 # 7. 函数
@@ -592,7 +592,7 @@ function name
 返回值
 - 默认情况下，函数的退出状态码是函数中最后一条命令返回的退出状态码。在函数执行结束后（即执行完最后一条命令），可以用标
   准变量 `$?` 来确定函数的退出状态码。
-- 语句执行成功，退出状态码为 `0`，没有执行成功退出状态码为 `1`；退出状态码的范围在 `0~255` 之间 
+- 语句执行成功，退出状态码为 `0`，没有执行成功退出状态码为 `1`；退出状态码的范围在 `0~255` 之间
 - 使用 `return` 命令来退出函数并返回特定的退出状态码。
 
 
@@ -669,7 +669,7 @@ shell 输出到 `null` 文件的任何数据都不会保存，全部都被丢掉
 ## 11.3. 位置限定符
 - `^xxx`: 匹配以 xxx 开始的行
 - `$xxx`: 匹配以 xxx 结束的行
-- `xxx\<`: 匹配以 xxx 字符开头的单词 
+- `xxx\<`: 匹配以 xxx 字符开头的单词
 - `xxx\>`: 匹配以 xxx 字符结尾的单词
 - `\b`: 匹配以 xxx 字符开始或结尾的单词
 - `\B`: 匹配不包含以 xxx 字符开始或结尾的单词。eg: `\Bth\B----->mythed`
@@ -699,27 +699,7 @@ shell 输出到 `null` 文件的任何数据都不会保存，全部都被丢掉
 - 默认情况下， tee 命令会在每次使用时覆盖输出文件内容。想将数据追加到文件中，必须用 `-a` 选项。
 
 
-# 13. sed
-sed 俗称做流编辑器，以行单位进行字符处理。
-
-- 格式
-  - `sed 参数 '脚本语句' 带操作文件`
-  - `sed 参数 -f '脚本文件' 带操作文件` 
-- 脚本语句参数
-  - `a(append)`：追加
-  - `i(insert)`：插入
-  - `d(delete)`：删除
-  - `s(substitution)` : ` sed -i 's/echo/printf/g' for_tmp.sh` 将 for_tmp.sh 脚本文件中的所有 echo 替换为
-    printf，使用 `-i`
-    参数并将修改的内容保存，而非仅仅输出显示到标准输出上。
-- 选项参数
-  - `-n`：默认情况下，脚本执行完后，自动打模式空间中的内容，使用 `-n` 可以屏蔽自动打印。
-  - `-i`: 将修改后的源文件保存
-  - `-E`：使用扩展正则表达式
-  - `-e`: 使用多个脚本语句替换 时，需要用 `-e` 选项。
-
-
-# 14. expect
+# 13. expect
 
 **Expect** 是[Unix](https://zh.wikipedia.org/wiki/Unix)系统中用来进行自动化控制和测试的软件工具，由[Don Libes](https://zh.wikipedia.org/w/index.php?title=Don_Libes&action=edit&redlink=1)制作，作为[Tcl](https://zh.wikipedia.org/wiki/Tcl)脚本语言的一个扩展，应用在交互式[软件](https://zh.wikipedia.org/wiki/软件)中如[telnet](https://zh.wikipedia.org/wiki/Telnet)，[ftp](https://zh.wikipedia.org/wiki/文件传输协议)，[Passwd](https://zh.wikipedia.org/wiki/Passwd)，[fsck](https://zh.wikipedia.org/wiki/Fsck)，[rlogin](https://zh.wikipedia.org/w/index.php?title=Rlogin&action=edit&redlink=1)，[tip](https://zh.wikipedia.org/w/index.php?title=Tip&action=edit&redlink=1)，[ssh](https://zh.wikipedia.org/wiki/Secure_Shell)等等。该工具利用Unix伪终端包装其子进程，允许任意程序通过终端接入进行自动化控制；也可利用[Tk](https://zh.wikipedia.org/wiki/Tk)工具，将交互程序包装在[X11](https://zh.wikipedia.org/wiki/X11)的[图形用户界面](https://zh.wikipedia.org/wiki/图形用户界面)中。
 
@@ -738,9 +718,8 @@ set timeout         设置超时时间
 ```
 
 
-# 15. References
+# 14. References
 
 - Bash 快捷键大全: https://linux.cn/article-5660-1.html
 - Terminator The robot future of terminals: https://gnometerminator.blogspot.com/p/introduction.html
 - 如何在 Qt 中使用正则表达式: https://blog.csdn.net/Hyc_cheng/article/details/112132963#t5
-- 十分钟学会 tmux: https://www.cnblogs.com/kaiye/p/6275207.html
