@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:52:51
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-10-30 23:10:24
+ * @LastEditTime: 2026-11-14 11:02:54
  * @Description: rust cargo usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -60,12 +60,57 @@ build`、`cargo run` 这两个命令就能覆盖大部分日常需求。
 
 
 核心文件：
-- `Cargo.toml`：项目配置 + 依赖声明（类似 package.json）
-- `Cargo.lock`：锁定精确版本（类似 package-lock.json）
+- `Cargo.toml`：项目配置 + 依赖声明（类似 package.json）。cargo 特有的项目数据描述文件。它存储了项目的所有元配置信息，如果 Rust 开发者希望 Rust 项目能够按照期望的方式进行构建、测试和运行，那么，必须按照合理的方式构建 Cargo.toml。
+- `Cargo.lock`：锁定精确版本（类似 package-lock.json）。是 cargo 工具根据同一项目的 toml 文件生成的项目依赖详细清单，因此我们一般不用修改它，只需要对着 Cargo.toml 文件撸就行了。
 
 关键点：`cargo build` 本质是 "读 Cargo.toml → 解析依赖 → 为每个 crate 调用 rustc → 链接"。你几乎不需要直接碰 rustc。
 
 cargo 背后自动调用了 rustc。
+
+
+常用 cargo 命令
+
+```bash
+# 创建一个新的 package
+cargo new <pkg_name>
+
+# 创建的 package 目录结构如下
+$ tree
+.
+├── .git
+├── .gitignore
+├── Cargo.toml
+└── src
+    └── main.rs
+
+# 创建一个新的 package，不带 git 版本控制
+cargo new <pkg_name> --vcs none
+
+# 构建包
+cargo build
+
+# 以 release 模式构建
+cargo build --release
+
+#运行包
+cargo run
+
+# 以 release 模式运行
+cargo run --release
+
+# 快速检查代码是否能编译通过
+cargo check
+
+# 引用其它 package 为依赖
+cargo add ferris-says
+
+# 格式化代码
+cargo fmt
+
+# 工程构建文档
+cargo doc
+
+```
 
 
 # 3. rustc
