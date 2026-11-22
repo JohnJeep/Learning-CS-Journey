@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2026-07-04 16:55:33
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-11-08 23:15:09
+ * @LastEditTime: 2026-11-14 11:18:00
  * @Description: rust usage
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -27,6 +27,16 @@ rust 是一门系统级编程语言，类似 C/C++，但更安全、更现代化
    - **C++**：你自己管（或用智能指针管），编译器不会拦着你犯错，出问题是运行时的事（悬垂指针、内存泄漏、data race）
    - **Rust**：编译器在**编译期**强制检查所有权和借用规则，你想犯的内存错误，很多时候代码根本编译不过
 3. trait、生命周期标注；
+
+要学好 Rust，你需要深入理解内存、堆栈、引用、变量作用域等这些其它高级语言往往不会深入接触的内容。另外，Rust 会通过语法、编译器和 clippy 这些静态检查工具半帮助半强迫的让你成为更优秀的程序员，写出更好的代码。
+
+同时，当你掌握 Rust 后，就会自发性的想要去做一些更偏底层的开发，这些都可以帮助你更加了解操作系统、网络、性能优化等底层知识，也会间接或者直接的接触到各种算法和数据结构的实现。
+
+慢慢的，你就在成为那个更好的程序员，也是更优秀的自己。
+
+
+运用 Rust 写出高质量、安全、高效的代码。
+
 
 
 # 2. Rustc
@@ -164,4 +174,9 @@ Rust 的生态系统主要由以下几个部分组成：
 - rust learn getting started: https://rust-lang.org/learn/get-started/
 - std library doc: https://doc.rust-lang.org/std/prelude/index.html
 - The Rust community’s crate registry: https://crates.io/
+- Rust 官方文档中文教程: https://rustwiki.org/
 - Rust 程序设计语言 简体中文版: https://kaisery.github.io/trpl-zh-cn/foreword.html
+- Rust 程序设计语言 英文版: https://doc.rust-lang.org/stable/book/
+- 交互式练习工具: https://github.com/rust-lang/rustlings
+- Rust 语言圣经: https://beatai.org/rust-course/about-book
+- Rust 命名规范：https://github.com/rust-lang/rfcs/blob/main/text/0430-finalizing-naming-conventions.md
