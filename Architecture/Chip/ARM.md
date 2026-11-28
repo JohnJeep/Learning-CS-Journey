@@ -2,7 +2,7 @@
  * @Author: JohnJeep
  * @Date: 2025-12-31 21:17:16
  * @LastEditors: JohnJeep
- * @LastEditTime: 2026-10-29 23:18:25
+ * @LastEditTime: 2026-11-28 22:52:00
  * @Description: ARM Usage and Development
  * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
@@ -146,7 +146,8 @@ Ubuntu版本特性:
 
 # References
 
-- [机器人玩转之---嵌入式开发板基础知识到实战选型指南（包含 ORIN、RDK X5、Raspberry pi、RK 系列等）](https://www.guyuehome.com/detail?id=1929553545592373250)
+- [古月居 机器人玩转之---嵌入式开发板基础知识到实战选型指南（包含 ORIN、RDK X5、Raspberry pi、RK 系列等）](https://www.guyuehome.com/detail?id=1929553545592373250)
 - [Arm 架构参考手册 (Arm Architecture Reference Manual)](https://support.arm.com/documentation/ddi0487/md/)
 - [学习架构 - A 系列 指南](https://www.arm.com/zh-cn/architecture/learn-the-architecture/a-profile)
 - [ARM64指令简易手册](https://tenloy.github.io/2021/04/17/Arm64-Handbook.html)
+- [在线工具 Compiler Explorer](https://godbolt.org/): 实时对照高级语言与汇编的映射关系
