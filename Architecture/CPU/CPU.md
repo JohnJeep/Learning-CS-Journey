@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 18:13:35
  * @Description: CPU Usage and Development
- * Copyright (c) 2023 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2023 by John Jeep, All Rights Reserved.
 -->
 
 Linux 终端下运行 `lscpu` 命令查看关于 CPU 架构的信息。
@@ -66,7 +66,4 @@ Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca 
 
 说明：
 
-1. 对 Socket 的理解：术语 "Socket" 在计算机网络中通常用于描述套接字（socket），表示网络通信的端点。套接字是一种应用程
-   序接口（API），用于在网络中建立通信连接。在 CPU 上指的是 CPU
-   插槽接口，英文名称为：CPU socket 或 CPU slot。是一种安装 CPU
-   的物理接口，提供了电力和信号连接，这些插槽通常具有特定的形状和布局，以适应特定类型的 CPU。
+对 Socket 的理解：术语 "Socket" 在计算机网络中通常用于描述套接字（socket），表示网络通信的端点。套接字是一种应用程 序接口（API），用于在网络中建立通信连接。在 CPU 上指的是 CPU 插槽接口，英文名称为：CPU socket 或 CPU slot。是一种安装 CPU 的物理接口，提供了电力和信号连接，这些插槽通常具有特定的形状和布局，以适应特定类型的 CPU。

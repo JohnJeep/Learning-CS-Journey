@@ -4,7 +4,7 @@
  * @LastEditors: JohnJeep
  * @LastEditTime: 2026-05-31 18:40:16
  * @Description: website references
- * Copyright (c) 2026 by John Jeep, All Rights Reserved. 
+ * Copyright (c) 2026 by John Jeep, All Rights Reserved.
 -->
 
 # 1. 博客和知识社区
@@ -109,7 +109,6 @@
 - [Librestock 免费优质素材](https://librestock.com/): LibreStock 网站致力于推荐高清、优质的图片，用户可以通过关键词来搜索想要的素材图片，筛选出来的图片列表可以预览，点击下载的时候会直接跳转到目标站点上。这个网站本身并不提供原创的图片素材，而是通过索引其他网站上的图片资源来达到站内搜索查询的目的。
 - [程序员的工具箱](https://tool.lu/)
 - [开源中国的在线工具箱](http://tool.oschina.net/)
-- [Compiler Explorer](https://godbolt.org/): 在线查看汇编代码
 - [onlinegdb](https://www.onlinegdb.com/): C/C++ 在线编译调试器, 支持在线 GDB 调试，控制台输入
 - [颜色常用对照表](http://tool.oschina.net/commons?type=3)：查看各种颜色的名称、RGB 值和 16 进制值
 - [任意 RGB 颜色和 16 进制互转](http://www.kqiqi.com/tools/RGB216/)
@@ -204,13 +203,13 @@
 2. [Booksee](http://en.booksee.org/): 下载最新的电子图书。
 3. [Library Genesis2M](http://gen.lib.rus.ec/) : 适合下载较新的论文, 只要是外文书籍和论文基本上都可以搜到并下载，最近几年的论文也可以下载 `
 4. [sci-hub](https://mg.scihub.ltd/): Sci-Hub 是一个在线数据库，其上提供 7600 万篇科学学术论文和文章.
-    
+
     > 适合下载最新的论文, 文献资源下载网站 https://scihub.org / 是哈萨克斯坦牛人 (Alexandra Elbakyan) 开发的可以下载任意谷歌上有电子版链接文献杂志的网站，只要输入你想要下载的文献链接就可以获取到该文献的真实地址并在线浏览，当然更重要的是可以下载。这个是俄罗斯的某黑客给弄的. 原理好像是类似于 RVPN, 借用有权限的学校的 IP 给我们下载相关文献. 适用于所有杂志, 只有极少数的还是不能下载
 5. [google 学术网](https://scholar.google.com/)
 6. [国内可以山寨访问 Google](https://github.com/greatfire/wiki)
 7. [中国版 sci-hub](http://www.sci-hub.ac.cn/): 国外文献免费下载，中国版 SCI-HUB 网址
 8.  [videolectures](http://videolectures.net/) : VideoLectures.net 是世界上最大的英文学术网络视频，中文最大的是超星学术视频，需要校园网权限，可以观看最新学术演讲或 PHD 答辩视频。
-    
+
     > 它的总部设在斯洛文尼亚的约瑟夫斯蒂芬研究所。网站最初是提供计算机科学的视频，后来拓宽到各类学科。自 2006
     > 年以来，已有 10763 个人的 14251
     > 视频讲座资源库。它提供众多免费教学视频，分类广阔，包括了各种自然科学（数学，物理，化学，生物、医学等）、社会科学
